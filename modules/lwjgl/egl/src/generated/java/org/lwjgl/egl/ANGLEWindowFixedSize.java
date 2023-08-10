@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_window_fixed_size.txt">ANGLE_window_fixed_size</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_window_fixed_size.txt">ANGLE_window_fixed_size</a> extension.
  * 
  * <p>This extension allows creating a window surface with a fixed size that is specified when it is created.</p>
  */

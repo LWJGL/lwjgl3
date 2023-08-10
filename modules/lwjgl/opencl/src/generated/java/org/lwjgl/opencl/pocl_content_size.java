@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/pocl/cl_pocl_content_size.txt">pocl_content_size</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/pocl/cl_pocl_content_size.txt">pocl_content_size</a> extension.
  * 
  * <p>This extension provides a way to to indicate a buffer which will hold the number of meaningful bytes in another buffer, after kernel execution.</p>
  * 

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c">https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c</a>).</p>
+ * <p>The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: <a href="https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c">https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c</a>).</p>
  * </div>
  * 
  * <h5>VK_KHR_display</h5>
@@ -40,8 +40,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>{@link KHRSurface VK_KHR_surface}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@cubanismo%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">cubanismo</a></li>
- * <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@FslNopper%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">FslNopper</a></li>
+ * <li>James Jones <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@cubanismo%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">cubanismo</a></li>
+ * <li>Norbert Nopper <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@FslNopper%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">FslNopper</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -484,7 +484,7 @@ public class KHRDisplay {
      * @param physicalDevice the physical device associated with {@code display}.
      * @param display        the display to create an additional mode for.
      * @param pCreateInfo    a pointer to a {@link VkDisplayModeCreateInfoKHR} structure describing the new mode to create.
-     * @param pAllocator     the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator     the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pMode          a pointer to a {@code VkDisplayModeKHR} handle in which the mode created is returned.
      */
     @NativeType("VkResult")
@@ -616,7 +616,7 @@ public class KHRDisplay {
      *
      * @param instance    the instance corresponding to the physical device the targeted display is on.
      * @param pCreateInfo a pointer to a {@link VkDisplaySurfaceCreateInfoKHR} structure specifying which mode, plane, and other parameters to use, as described below.
-     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface is returned.
      */
     @NativeType("VkResult")

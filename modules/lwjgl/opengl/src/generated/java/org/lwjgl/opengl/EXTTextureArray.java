@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_array.txt">EXT_texture_array</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_array.txt">EXT_texture_array</a> extension.
  * 
  * <p>This extension introduces the notion of one- and two-dimensional array textures. An array texture is a collection of one- and two-dimensional images of
  * identical size and format, arranged in layers. A one-dimensional array texture is specified using TexImage2D; a two-dimensional array texture is

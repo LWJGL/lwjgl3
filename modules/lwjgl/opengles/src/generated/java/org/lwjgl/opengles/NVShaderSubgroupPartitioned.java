@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_subgroup_partitioned.txt">NV_shader_subgroup_partitioned</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_subgroup_partitioned.txt">NV_shader_subgroup_partitioned</a> extension.
  * 
  * <p>This extension enables support for the {@code NV_shader_subgroup_partitioned} shading language extension in OpenGL.</p>
  * 

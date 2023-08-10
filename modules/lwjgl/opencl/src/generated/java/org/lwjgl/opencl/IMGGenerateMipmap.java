@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_generate_mipmap.txt">img_generate_mipmap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_generate_mipmap.txt">img_generate_mipmap</a> extension.
  * 
  * <p>This extension adds the functionality to generate mipmap images from a source image and thus avoid having to generate and import mipmapped images from
  * the host or through the {@code cl_khr_gl_sharing} extension.</p>

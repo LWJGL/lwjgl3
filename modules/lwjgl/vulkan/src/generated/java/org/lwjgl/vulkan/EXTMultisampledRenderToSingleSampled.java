@@ -27,10 +27,10 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} and {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_multisampled_render_to_single_sampled]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_multisampled_render_to_single_sampled%20extension*">syoussefi</a></li>
+ * <li>Shahbaz Youssefi <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_multisampled_render_to_single_sampled]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_multisampled_render_to_single_sampled%20extension*">syoussefi</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
- * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_multisampled_render_to_single_sampled.adoc">VK_EXT_multisampled_render_to_single_sampled</a></dd>
+ * <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_multisampled_render_to_single_sampled.adoc">VK_EXT_multisampled_render_to_single_sampled</a></dd>
  * </dl>
  * 
  * <h5>Other Extension Metadata</h5>

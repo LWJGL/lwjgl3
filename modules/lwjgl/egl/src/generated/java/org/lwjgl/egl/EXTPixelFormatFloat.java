@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_pixel_format_float.txt">EXT_pixel_format_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_pixel_format_float.txt">EXT_pixel_format_float</a> extension.
  * 
  * <p>This extensions aims to provide similar functionality as {@code GL_ARB_color_buffer_float}, {@code WGL_ARB_pixel_format_float} and
  * {@code GLX_ARB_fbconfig_float}. This extension allows exposing new {@code EGLConfigs} that support formats with floating-point RGBA components. This is

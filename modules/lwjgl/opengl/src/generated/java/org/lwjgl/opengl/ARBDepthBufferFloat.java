@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_buffer_float.txt">ARB_depth_buffer_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_buffer_float.txt">ARB_depth_buffer_float</a> extension.
  * 
  * <p>This extension provides new texture internal formats whose depth components are stored as 32-bit floating-point values, rather than the normalized
  * unsigned integers used in existing depth formats. Floating-point depth textures support all the functionality supported for fixed-point depth textures,

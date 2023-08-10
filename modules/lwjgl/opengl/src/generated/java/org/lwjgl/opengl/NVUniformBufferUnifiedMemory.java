@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_uniform_buffer_unified_memory.txt">NV_uniform_buffer_unified_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_uniform_buffer_unified_memory.txt">NV_uniform_buffer_unified_memory</a> extension.
  * 
  * <p>This extension provides a mechanism to specify uniform buffers
  * using GPU addresses.</p>

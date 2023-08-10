@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader5.txt">ARB_gpu_shader5</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader5.txt">ARB_gpu_shader5</a> extension.
  * 
  * <p>This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs, extending the
  * capabilities of version 1.50 of the OpenGL Shading Language. Shaders using the new functionality provided by this extension should enable this
@@ -52,7 +52,7 @@ package org.lwjgl.opengl;
  * <li>support for instanced geometry shaders, where a geometry shader may be run multiple times for each primitive, including a built-in
  * {@code gl_InvocationID} to identify the invocation number;</li>
  * <li>support for emitting vertices in a geometry program where each vertex emitted may be directed independently at a specified vertex stream (as
- * provided by <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback3.txt">ARB_transform_feedback3</a>), and where each shader output is associated with a stream;</li>
+ * provided by <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback3.txt">ARB_transform_feedback3</a>), and where each shader output is associated with a stream;</li>
  * <li>support for reading a mask of covered samples in a fragment shader; and</li>
  * <li>support for interpolating a fragment shader input at a programmable offset relative to the pixel center, a programmable sample number, or at the
  * centroid.</li>

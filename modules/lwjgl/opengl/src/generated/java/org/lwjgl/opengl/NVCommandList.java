@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_command_list.txt">NV_command_list</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_command_list.txt">NV_command_list</a> extension.
  * 
  * <p>This extension adds a few new features designed to provide very low overhead batching and replay of rendering commands and state changes:</p>
  * 

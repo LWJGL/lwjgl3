@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrInteractionProfileDpadBindingEXT} structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the {@code bindingModifications} array of the {@link XrBindingModificationsKHR} structure (See <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension).</p>
+ * <p>The {@link XrInteractionProfileDpadBindingEXT} structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the {@code bindingModifications} array of the {@link XrBindingModificationsKHR} structure (See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension).</p>
  * 
  * <p>Runtimes are free to ignore any of the fields when not obeying the bindings, but <b>may</b> use it for automatic rebindings of actions.</p>
  * 
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code wedgeAngle} outside the half-open range <code>[0, π)</code></li>
  * </ul>
  * 
- * <p>If more than one {@link XrInteractionProfileDpadBindingEXT} is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-action-creation">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.</p>
+ * <p>If more than one {@link XrInteractionProfileDpadBindingEXT} is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-action-creation">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.</p>
  * 
  * <p>For example, a Valve Index controller binding with a "Walking" action set can have a dpad on each of:</p>
  * 
@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTDpadBinding XR_EXT_dpad_binding} extension <b>must</b> be enabled prior to using {@link XrInteractionProfileDpadBindingEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code actionSet} <b>must</b> be a valid {@code XrActionSet} handle</li>
  * <li>If {@code onHaptic} is not {@code NULL}, {@code onHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>
  * <li>If {@code offHaptic} is not {@code NULL}, {@code offHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>

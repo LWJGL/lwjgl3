@@ -12,7 +12,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_pixel_data_range.txt">NV_pixel_data_range</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_pixel_data_range.txt">NV_pixel_data_range</a> extension.
  * 
  * <p>The vertex array range extension is intended to improve the efficiency of OpenGL vertex arrays. OpenGL vertex arrays' coherency model and ability to
  * access memory from arbitrary locations in memory prevented implementations from using DMA (Direct Memory Access) operations.</p>

@@ -1779,7 +1779,7 @@ public class LLVMCore {
     /**
      * Return an unique id given the name of a enum attribute, or 0 if no attribute by that name exists.
      * 
-     * <p>See <a target="_blank" href="https://llvm.org/docs/LangRef.html#parameter-attributes">https://llvm.org/docs/LangRef.html#parameter-attributes</a> and <a target="_blank" href="https://llvm.org/docs/LangRef.html#function-attributes">https://llvm.org/docs/LangRef.html#function-attributes</a> for the
+     * <p>See <a href="https://llvm.org/docs/LangRef.html#parameter-attributes">https://llvm.org/docs/LangRef.html#parameter-attributes</a> and <a href="https://llvm.org/docs/LangRef.html#function-attributes">https://llvm.org/docs/LangRef.html#function-attributes</a> for the
      * list of available attributes.</p>
      * 
      * <p>NB: Attribute names and/or id are subject to change without going through the C API deprecation cycle.</p>
@@ -1792,7 +1792,7 @@ public class LLVMCore {
     /**
      * Return an unique id given the name of a enum attribute, or 0 if no attribute by that name exists.
      * 
-     * <p>See <a target="_blank" href="https://llvm.org/docs/LangRef.html#parameter-attributes">https://llvm.org/docs/LangRef.html#parameter-attributes</a> and <a target="_blank" href="https://llvm.org/docs/LangRef.html#function-attributes">https://llvm.org/docs/LangRef.html#function-attributes</a> for the
+     * <p>See <a href="https://llvm.org/docs/LangRef.html#parameter-attributes">https://llvm.org/docs/LangRef.html#parameter-attributes</a> and <a href="https://llvm.org/docs/LangRef.html#function-attributes">https://llvm.org/docs/LangRef.html#function-attributes</a> for the
      * list of available attributes.</p>
      * 
      * <p>NB: Attribute names and/or id are subject to change without going through the C API deprecation cycle.</p>

@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_mesh_shader.txt">NV_mesh_shader</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_mesh_shader.txt">NV_mesh_shader</a> extension.
  * 
  * <p>This extension provides a new mechanism allowing applications to use two new programmable shader types -- the task and mesh shader -- to generate
  * collections of geometric primitives to be processed by fixed-function primitive assembly and rasterization logic. When the task and mesh shaders are

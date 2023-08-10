@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_fp64.txt">ARB_gpu_shader_fp64</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_fp64.txt">ARB_gpu_shader_fp64</a> extension.
  * 
  * <p>This extension allows GLSL shaders to use double-precision floating-point data types, including vectors and matrices of doubles. Doubles may be used as
  * inputs, outputs, and uniforms.</p>
@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension does not support interpolation of double-precision values; doubles used as fragment shader inputs must be qualified as "flat".
  * Additionally, this extension does not allow vertex attributes with 64-bit components. That support is added separately by
- * <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_vertex_attrib_64bit.txt">EXT_vertex_attrib_64bit</a>.</p>
+ * <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_vertex_attrib_64bit.txt">EXT_vertex_attrib_64bit</a>.</p>
  * 
  * <p>Requires {@link GL32 GL32} and GLSL 1.50. Promoted to core in {@link GL40 OpenGL 4.0}.</p>
  */

@@ -10,9 +10,9 @@ package org.lwjgl.vulkan;
  * 
  * <p>It extends the subgroup support in Vulkan 1.1 to allow an implementation to expose a varying subgroup size. Previously Vulkan exposed a single subgroup size per physical device, with the expectation that implementations will behave as if all subgroups have the same size. Some implementations <b>may</b> dispatch shaders with a varying subgroup size for different subgroups. As a result they could implicitly split a large subgroup into smaller subgroups or represent a small subgroup as a larger subgroup, some of whose invocations were inactive on launch.</p>
  * 
- * <p>To aid developers in understanding the performance characteristics of their programs, this extension exposes a minimum and maximum subgroup size that a physical device supports and a pipeline create flag to enable that pipeline to vary its subgroup size. If enabled, any {@code SubgroupSize} decorated variables in the SPIR-V shader modules provided to pipeline creation <b>may</b> vary between the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-minSubgroupSize">minimum</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxSubgroupSize">maximum</a> subgroup sizes.</p>
+ * <p>To aid developers in understanding the performance characteristics of their programs, this extension exposes a minimum and maximum subgroup size that a physical device supports and a pipeline create flag to enable that pipeline to vary its subgroup size. If enabled, any {@code SubgroupSize} decorated variables in the SPIR-V shader modules provided to pipeline creation <b>may</b> vary between the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-minSubgroupSize">minimum</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxSubgroupSize">maximum</a> subgroup sizes.</p>
  * 
- * <p>An implementation is also optionally allowed to support specifying a required subgroup size for a given pipeline stage. Implementations advertise which <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-requiredSubgroupSizeStages">stages support a required subgroup size</a>, and any pipeline of a supported stage can be passed a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} structure to set the subgroup size for that shader stage of the pipeline. For compute shaders, this requires the developer to query the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxComputeWorkgroupSubgroups">{@code maxComputeWorkgroupSubgroups}</a> and ensure that:</p>
+ * <p>An implementation is also optionally allowed to support specifying a required subgroup size for a given pipeline stage. Implementations advertise which <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-requiredSubgroupSizeStages">stages support a required subgroup size</a>, and any pipeline of a supported stage can be passed a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} structure to set the subgroup size for that shader stage of the pipeline. For compute shaders, this requires the developer to query the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxComputeWorkgroupSubgroups">{@code maxComputeWorkgroupSubgroups}</a> and ensure that:</p>
  * 
  * <p><code>s = { WorkGroupSize.x &times; WorkGroupSize.y &times; WorkgroupSize.z &le; SubgroupSize &times; maxComputeWorkgroupSubgroups }</code></p>
  * 
@@ -34,14 +34,14 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
+ * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_subgroup_size_control]%20@sheredom%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_subgroup_size_control%20extension*">sheredom</a></li>
+ * <li>Neil Henning <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_subgroup_size_control]%20@sheredom%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_subgroup_size_control%20extension*">sheredom</a></li>
  * </ul></dd>
  * </dl>
  * 

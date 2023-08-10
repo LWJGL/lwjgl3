@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://www.khronos.org/openxr/">OpenXR</a>.
+ * Contains bindings to <a href="https://www.khronos.org/openxr/">OpenXR</a>.
  * 
  * <p>OpenXR is a royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as
  * XR—platforms and devices.</p>

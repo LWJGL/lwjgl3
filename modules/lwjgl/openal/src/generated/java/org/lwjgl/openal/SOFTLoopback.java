@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_loopback.txt">SOFT_loopback</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_loopback.txt">SOFT_loopback</a> extension.
  * 
  * <p>This extension allows an application to read back OpenAL's rendered audio instead of having it output to an audio device on the system. Unextended
  * OpenAL will output audio to an audio device, with no mechanism to allow an application to divert the audio somewhere else.</p>

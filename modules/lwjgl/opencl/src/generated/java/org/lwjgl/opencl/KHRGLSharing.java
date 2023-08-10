@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
-/** Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_gl_sharing.txt">khr_gl_sharing</a> extension. */
+/** Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_gl_sharing.txt">khr_gl_sharing</a> extension. */
 public class KHRGLSharing {
 
     /**

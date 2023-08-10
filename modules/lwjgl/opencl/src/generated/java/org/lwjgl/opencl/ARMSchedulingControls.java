@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_scheduling_controls.txt">arm_scheduling_controls</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_scheduling_controls.txt">arm_scheduling_controls</a> extension.
  * 
  * <p>This extension gives applications explicit control over some aspects of work scheduling. It can be used for performance tuning or debugging.</p>
  * 

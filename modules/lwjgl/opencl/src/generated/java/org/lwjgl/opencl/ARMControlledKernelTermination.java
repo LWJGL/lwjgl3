@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_controlled_kernel_termination.txt">arm_controlled_kernel_termination</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_controlled_kernel_termination.txt">arm_controlled_kernel_termination</a> extension.
  * 
  * <p>This extension enables the controlled termination of kernels using a built-in function.</p>
  * 

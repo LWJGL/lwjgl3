@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_buffer_object.txt">ARB_clear_buffer_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_buffer_object.txt">ARB_clear_buffer_object</a> extension.
  * 
  * <p>Buffer objects are fundamental to the operation of OpenGL. Buffers are used as a source of data for vertices and indices, read through buffer textures
  * in shaders, used to transfer texture and image data into and out of textures and framebuffers, and may be written to by operations such as transform

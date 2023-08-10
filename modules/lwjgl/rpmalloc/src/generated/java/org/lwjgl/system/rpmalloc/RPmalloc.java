@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://github.com/mjansson/rpmalloc">rpmalloc</a> library. rpmalloc is a public domain cross platform lock free
+ * Native bindings to the <a href="https://github.com/mjansson/rpmalloc">rpmalloc</a> library. rpmalloc is a public domain cross platform lock free
  * thread caching 16-byte aligned memory allocator implemented in C.
  * 
  * <p>You are required to call these functions from your own code in order to initialize and finalize the allocator in your process and threads:</p>

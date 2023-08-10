@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_draw_buffers_blend.txt">AMD_draw_buffers_blend</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_draw_buffers_blend.txt">AMD_draw_buffers_blend</a> extension.
  * 
  * <p>This extension builds upon the ARB_draw_buffers and EXT_draw_buffers2 extensions. In ARB_draw_buffers (part of OpenGL 2.0), separate values could be
  * written to each color buffer. This was further enhanced by EXT_draw_buffers2 by adding in the ability to enable blending and to set color write masks

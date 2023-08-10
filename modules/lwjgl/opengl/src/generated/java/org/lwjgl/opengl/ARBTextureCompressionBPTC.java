@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression_bptc.txt">ARB_texture_compression_bptc</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression_bptc.txt">ARB_texture_compression_bptc</a> extension.
  * 
  * <p>This extension provides additional texture compression functionality specific to the BPTC and BPTC_FLOAT compressed texture formats (called BC7 and BC6H
  * respectively in Microsoft's DirectX API), subject to all the requirements and limitations described by the extension {@link ARBTextureCompression ARB_texture_compression}.</p>

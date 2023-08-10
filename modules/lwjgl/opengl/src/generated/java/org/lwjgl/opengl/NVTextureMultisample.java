@@ -8,9 +8,9 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_multisample.txt">NV_texture_multisample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_multisample.txt">NV_texture_multisample</a> extension.
  * 
- * <p>This specification extends <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> to support per-sample fetching from multisample textures described in
+ * <p>This specification extends <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> to support per-sample fetching from multisample textures described in
  * {@link ARBTextureMultisample ARB_texture_multisample}.</p>
  * 
  * <p>Requires {@link GL20 OpenGL 2.0}, {@link ARBTextureMultisample ARB_texture_multisample}.</p>

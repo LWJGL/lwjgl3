@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_compiled_vertex_array.txt">EXT_compiled_vertex_array</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_compiled_vertex_array.txt">EXT_compiled_vertex_array</a> extension.
  * 
  * <p>This extension defines an interface which allows static vertex array data to be cached or pre-compiled for more efficient rendering. This is useful for
  * implementations which can cache the transformed results of array data for reuse by several DrawArrays, ArrayElement, or DrawElements commands. It is

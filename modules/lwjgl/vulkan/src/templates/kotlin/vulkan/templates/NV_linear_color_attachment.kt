@@ -32,7 +32,7 @@ val NV_linear_color_attachment = "NVLinearColorAttachment".nativeClassVK("NV_lin
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>sourav parmar <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_linear_color_attachment]%20@souravpNV%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_linear_color_attachment%20extension*">souravpNV</a></li>
+                <li>sourav parmar <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_linear_color_attachment]%20@souravpNV%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_linear_color_attachment%20extension*">souravpNV</a></li>
             </ul></dd>
         </dl>
 

@@ -5,11 +5,11 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://www.opengl.org/">OpenGL</a> cross-platform 2D and 3D rendering API.
+ * Contains bindings to the <a href="https://www.opengl.org/">OpenGL</a> cross-platform 2D and 3D rendering API.
  * 
- * <p>The <a target="_blank" href="https://www.khronos.org/registry/OpenGL/index_gl.php">OpenGL registry</a> is a useful online resource that contains the OpenGL and OpenGL
+ * <p>The <a href="https://www.khronos.org/registry/OpenGL/index_gl.php">OpenGL registry</a> is a useful online resource that contains the OpenGL and OpenGL
  * Shading Language specifications, as well as specifications of OpenGL extensions.
- * The <a target="_blank" href="https://www.khronos.org/registry/OpenGL-Refpages/">OpenGL Reference Pages</a> is another convenient source of documentation.</p>
+ * The <a href="https://www.khronos.org/registry/OpenGL-Refpages/">OpenGL Reference Pages</a> is another convenient source of documentation.</p>
  * 
  * <p>The bindings of the core OpenGL functionality are contained in two distinct class hierarchies:</p>
  * 

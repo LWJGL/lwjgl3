@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_attribute_query.txt">intel_device_attribute_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_attribute_query.txt">intel_device_attribute_query</a> extension.
  * 
  * <p>This extension can be used to query additional information about Intel OpenCL devices. The additional information may be useful to tailor a specific
  * workload to the properties of the device.</p>

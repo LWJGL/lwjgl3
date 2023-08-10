@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/DMP/DMP_program_binary.txt">DMP_program_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/DMP/DMP_program_binary.txt">DMP_program_binary</a> extension.
  * 
  * <p>This extension enables loading precompiled program binaries compatible with chips designed by Digital Media Professionals Inc.</p>
  * 

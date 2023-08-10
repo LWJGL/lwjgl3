@@ -32,7 +32,7 @@ val KHR_android_surface = "KHRAndroidSurface".nativeClassVK("KHR_android_surface
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_android_surface]%20@critsec%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_android_surface%20extension*">critsec</a></li>
+                <li>Jesse Hall <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_android_surface]%20@critsec%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_android_surface%20extension*">critsec</a></li>
             </ul></dd>
         </dl>
 
@@ -139,7 +139,7 @@ val KHR_android_surface = "KHRAndroidSurface".nativeClassVK("KHR_android_surface
 
         VkInstance("instance", "the instance to associate the surface with."),
         VkAndroidSurfaceCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkAndroidSurfaceCreateInfoKHR structure containing parameters affecting the creation of the surface object."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSurfaceKHR.p("pSurface", "a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.")
     )
 }

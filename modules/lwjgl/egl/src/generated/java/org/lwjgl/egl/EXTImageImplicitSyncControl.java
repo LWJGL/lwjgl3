@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_image_implicit_sync_control.txt">EXT_image_implicit_sync_control</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_image_implicit_sync_control.txt">EXT_image_implicit_sync_control</a> extension.
  * 
  * <p>This extension allows a client to selectively use implicit or explicit synchronization mechanisms when addressing externally-imported
  * {@code EGLImages}. A new token is added to {@code EGLImage} creation which allows the client to select whether a platform's implicit synchronization

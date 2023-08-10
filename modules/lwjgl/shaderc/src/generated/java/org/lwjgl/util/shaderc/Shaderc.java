@@ -17,7 +17,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the libshaderc C API of the <a target="_blank" href="https://github.com/google/shaderc/">shaderc</a> library. */
+/** Native bindings to the libshaderc C API of the <a href="https://github.com/google/shaderc/">shaderc</a> library. */
 public class Shaderc {
 
     private static final SharedLibrary SHADERC = Library.loadNative(Shaderc.class, "org.lwjgl.shaderc", Configuration.SHADERC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc")), true);
@@ -567,7 +567,7 @@ public class Shaderc {
      * Returns a {@code shaderc_compiler_t} that can be used to compile modules.
      * 
      * <p>A return of {@code NULL} indicates that there was an error initializing the compiler. Any function operating on {@code shaderc_compiler_t} must offer the
-     * <a target="_blank" href="https://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/">basic thread-safety guarantee</a>. That is: concurrent
+     * <a href="https://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/">basic thread-safety guarantee</a>. That is: concurrent
      * invocation of these functions on DIFFERENT objects needs no synchronization; concurrent invocation of these functions on the SAME object requires
      * synchronization IF AND ONLY IF some of them take a non-const argument.</p>
      */
@@ -1212,7 +1212,7 @@ public class Shaderc {
     }
 
     /**
-     * Takes an assembly string of the format defined in the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Tools/blob/master/syntax.md">SPIRV-Tools project</a>,
+     * Takes an assembly string of the format defined in the <a href="https://github.com/KhronosGroup/SPIRV-Tools/blob/master/syntax.md">SPIRV-Tools project</a>,
      * assembles it into SPIR-V binary and a {@code shaderc_compilation_result_t} will be returned to hold the results. The assembling will pick options
      * suitable for assembling specified in the {@code additional_options} parameter. May be safely called from multiple threads without explicit
      * synchronization. If there was failure in allocating the compiler object, {@code NULL} will be returned.
@@ -1223,7 +1223,7 @@ public class Shaderc {
     }
 
     /**
-     * Takes an assembly string of the format defined in the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Tools/blob/master/syntax.md">SPIRV-Tools project</a>,
+     * Takes an assembly string of the format defined in the <a href="https://github.com/KhronosGroup/SPIRV-Tools/blob/master/syntax.md">SPIRV-Tools project</a>,
      * assembles it into SPIR-V binary and a {@code shaderc_compilation_result_t} will be returned to hold the results. The assembling will pick options
      * suitable for assembling specified in the {@code additional_options} parameter. May be safely called from multiple threads without explicit
      * synchronization. If there was failure in allocating the compiler object, {@code NULL} will be returned.

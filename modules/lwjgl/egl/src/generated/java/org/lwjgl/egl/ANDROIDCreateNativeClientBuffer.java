@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_create_native_client_buffer.txt">ANDROID_create_native_client_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_create_native_client_buffer.txt">ANDROID_create_native_client_buffer</a> extension.
  * 
  * <p>This extension allows creating an {@code EGLClientBuffer} backed by an Android window buffer ({@code struct ANativeWindowBuffer}) which can be later
  * used to create an {@code EGLImage}.</p>

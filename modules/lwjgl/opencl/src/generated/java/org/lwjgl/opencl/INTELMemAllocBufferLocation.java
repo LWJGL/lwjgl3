@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_alloc_buffer_location.txt">intel_mem_alloc_buffer_location</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_alloc_buffer_location.txt">intel_mem_alloc_buffer_location</a> extension.
  * 
  * <p>On some devices, global memory may be partitioned into disjoint regions. This may be to enable control over specific characteristics such as available
  * bandwidths on memory interfaces, or performance on types of access patterns.</p>

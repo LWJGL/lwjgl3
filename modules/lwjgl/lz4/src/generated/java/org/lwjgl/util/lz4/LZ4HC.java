@@ -13,7 +13,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the high-compression API of <a target="_blank" href="https://lz4.org/">LZ4</a>.
+ * Native bindings to the high-compression API of <a href="https://lz4.org/">LZ4</a>.
  * 
  * <h3>Streaming Compression - Bufferless synchronous API</h3>
  * 

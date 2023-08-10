@@ -89,7 +89,7 @@ public class KHRVisibilityMask {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #xrGetVisibilityMaskKHR GetVisibilityMaskKHR} retrieves the view mask for a given view. This function follows the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Specifically, if either {@code vertexCapacityInput} or {@code indexCapacityInput} is 0, the runtime <b>must</b> respond as if both fields were set to 0, returning the vertex count and index count through {@code vertexCountOutput} or {@code indexCountOutput} respectively. If a view mask for the specified view isn’t available, the returned vertex and index counts <b>must</b> be 0.</p>
+     * <p>{@link #xrGetVisibilityMaskKHR GetVisibilityMaskKHR} retrieves the view mask for a given view. This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Specifically, if either {@code vertexCapacityInput} or {@code indexCapacityInput} is 0, the runtime <b>must</b> respond as if both fields were set to 0, returning the vertex count and index count through {@code vertexCountOutput} or {@code indexCountOutput} respectively. If a view mask for the specified view isn’t available, the returned vertex and index counts <b>must</b> be 0.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

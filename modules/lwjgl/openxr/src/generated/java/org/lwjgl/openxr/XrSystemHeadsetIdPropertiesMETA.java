@@ -30,14 +30,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This is in contrast to the {@code systemName} field in {@link XrSystemProperties} which is not required to be consistent across product renames.</p>
  * 
- * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_META_headset_id">XR_META_headset_id</a> extension documentation for more details.</p>
+ * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_META_headset_id">XR_META_headset_id</a> extension documentation for more details.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>The {@link METAHeadsetId XR_META_headset_id} extension <b>must</b> be enabled prior to using {@link XrSystemHeadsetIdPropertiesMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

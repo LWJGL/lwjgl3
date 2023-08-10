@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_job_slot_selection.txt">arm_job_slot_selection</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_job_slot_selection.txt">arm_job_slot_selection</a> extension.
  * 
  * <p>On devices that support work submission via job slots, this extension provides a way of selecting the job slot that is used to submit work to the
  * device as well as a device info query to obtain a list of usable job slots.</p>

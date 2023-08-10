@@ -30,7 +30,7 @@ val EXTX_overlay = "EXTXOverlay".nativeClassXR("EXTX_overlay", type = "instance"
             <li>The ability for an overlay session to get information about what is going on with the main application</li>
         </ul>
 
-        To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
 
         To create an overlay session, an application <b>must</b> pass an ##XrSessionCreateInfoOverlayEXTX structure to #CreateSession() via the ##XrSessionCreateInfo structure’s {@code next} parameter.
 

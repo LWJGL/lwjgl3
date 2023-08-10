@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_context_priority_realtime.txt">NV_context_priority_realtime</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_context_priority_realtime.txt">NV_context_priority_realtime</a> extension.
  * 
  * <p>This extension allows an {@code EGLContext} to be created with one extra priority level in addition to three priority levels that are part of
  * {@code EGL_IMG_context_priority} extension.</p>

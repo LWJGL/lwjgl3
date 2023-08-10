@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups.txt">intel_subgroups</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups.txt">intel_subgroups</a> extension.
  * 
  * <p>The goal of this extension is to allow programmers to improve the performance of their applications by taking advantage of the fact that some work
  * items in a work group execute together as a group (a "subgroup"), and that work items in a subgroup can take advantage of hardware features that are

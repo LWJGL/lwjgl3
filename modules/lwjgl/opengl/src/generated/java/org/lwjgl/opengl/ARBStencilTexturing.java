@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_stencil_texturing.txt">ARB_stencil_texturing</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_stencil_texturing.txt">ARB_stencil_texturing</a> extension.
  * 
  * <p>This extension allows texturing of the stencil component of a packed depth stencil texture. Stencil values are returned as unsigned integers. It is not
  * possible to sample both depth and stencil values from the same texture, and this extension allows the app to select which is sampled for the bound

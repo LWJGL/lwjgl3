@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_persistent_id.txt">EXT_device_persistent_id</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_persistent_id.txt">EXT_device_persistent_id</a> extension.
  * 
  * <p>Applications can query a list of {@code EGLDeviceEXT} handles, but those handles are only valid within the process that queried them. An application
  * has no way, for example, to record its selection and select the same device when run again later.</p>

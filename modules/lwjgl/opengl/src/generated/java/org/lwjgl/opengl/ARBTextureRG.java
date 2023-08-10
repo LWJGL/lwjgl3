@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_rg.txt">ARB_texture_rg</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_rg.txt">ARB_texture_rg</a> extension.
  * 
  * <p>Historically one- and two- component textures have been specified in OpenGL using the intensity, luminance or luminance-alpha (I/L/LA) formats. With the
  * advent of programmable shaders and render-to-texture capabilites these legacy formats carry some historical artifacts which are no longer useful.</p>

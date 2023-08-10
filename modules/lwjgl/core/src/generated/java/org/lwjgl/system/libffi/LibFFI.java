@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://sourceware.org/libffi">libffi</a> library.
+ * Native bindings to the <a href="https://sourceware.org/libffi">libffi</a> library.
  * 
  * <p>The foreign function interface provides a mechanism by which a function can generate a call to another function at runtime without requiring knowledge
  * of the called function's interface at compile time. This enables use of native libraries that LWJGL does not provide bindings for.</p>

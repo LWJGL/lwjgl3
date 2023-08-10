@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_fifo_synchronous.txt">NV_stream_fifo_synchronous</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_fifo_synchronous.txt">NV_stream_fifo_synchronous</a> extension.
  * 
  * <p>On platforms which support asynchronous rendering, frames may be inserted into a stream by the producer and become available to the consumer before
  * rendering of the images has completed. When this happens, commands issued by the consumer which read from the image must implicitly wait before they

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_compressed_3DC_texture.txt">AMD_compressed_3DC_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_compressed_3DC_texture.txt">AMD_compressed_3DC_texture</a> extension.
  * 
  * <p>Two compression formats are introduced:</p>
  * 

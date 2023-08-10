@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_drm_render_node.txt">EXT_device_drm_render_node</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_drm_render_node.txt">EXT_device_drm_render_node</a> extension.
  * 
  * <p>The {@code EGL_EXT_device_drm} extension provided a method for applications to query the DRM device node file associated with a given
  * {@code EGLDeviceEXT} object. However, it was not clear whether it referred to the primary or render device node. This extension adds an enum to refer

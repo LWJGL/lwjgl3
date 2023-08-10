@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_scissor_exclusive.txt">NV_scissor_exclusive</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_scissor_exclusive.txt">NV_scissor_exclusive</a> extension.
  * 
  * <p>In unextended OpenGL, applications can enable a per-viewport scissor test ({@link GLES20#GL_SCISSOR_TEST SCISSOR_TEST}) where fragments are discarded if their (x,y) coordinates lie
  * outside the corresponding scissor rectangle. In this extension, we provide a separate per-viewport exclusive scissor test, where fragments are

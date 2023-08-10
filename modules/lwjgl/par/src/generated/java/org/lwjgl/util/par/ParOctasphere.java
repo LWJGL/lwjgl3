@@ -13,7 +13,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://prideout.net/blog/octasphere">par_octasphere.h</a>, a tiny malloc-free library that generates triangle meshes for spheres,
+ * Bindings to <a href="https://prideout.net/blog/octasphere">par_octasphere.h</a>, a tiny malloc-free library that generates triangle meshes for spheres,
  * rounded boxes, and capsules.
  * 
  * <p>Usage example:</p>

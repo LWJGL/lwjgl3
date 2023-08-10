@@ -23,7 +23,7 @@ import static org.lwjgl.openxr.EXTUUIUD.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The structure is composed of 16 octets, with the size and order of the fields defined in <a target="_blank" href="https://www.rfc-editor.org/rfc/rfc4122.html#section-4.1.2">RFC 4122 section 4.1.2</a>.</p>
+ * <p>The structure is composed of 16 octets, with the size and order of the fields defined in <a href="https://www.rfc-editor.org/rfc/rfc4122.html#section-4.1.2">RFC 4122 section 4.1.2</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

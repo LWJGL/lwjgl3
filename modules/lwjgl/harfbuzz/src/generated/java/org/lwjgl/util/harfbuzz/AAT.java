@@ -16,7 +16,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the Apple Advanced Typography Layout API of the <a target="_blank" href="https://harfbuzz.github.io/">HarfBuzz</a> library. */
+/** Native bindings to the Apple Advanced Typography Layout API of the <a href="https://harfbuzz.github.io/">HarfBuzz</a> library. */
 public class AAT {
 
     /** Contains the function pointers loaded from {@code HarfBuzz.getLibrary()}. */
@@ -36,7 +36,7 @@ public class AAT {
     }
 
     /**
-     * The possible feature types defined for AAT shaping, from Apple <a target="_blank" href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html">Font Feature Registry</a>. ({@code hb_aat_layout_feature_type_t})
+     * The possible feature types defined for AAT shaping, from Apple <a href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html">Font Feature Registry</a>. ({@code hb_aat_layout_feature_type_t})
      * 
      * <h5>Enum values:</h5>
      * 

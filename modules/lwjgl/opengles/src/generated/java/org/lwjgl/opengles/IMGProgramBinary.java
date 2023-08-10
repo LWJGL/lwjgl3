@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_program_binary.txt">IMG_program_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_program_binary.txt">IMG_program_binary</a> extension.
  * 
  * <p>This extension makes available a program binary format, SGX_PROGRAM_BINARY_IMG. It enables retrieving and loading of pre-linked program objects on
  * chips designed by Imagination Technologies.</p>

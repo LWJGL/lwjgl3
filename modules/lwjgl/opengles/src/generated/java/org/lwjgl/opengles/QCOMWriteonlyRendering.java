@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_writeonly_rendering.txt">QCOM_writeonly_rendering</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_writeonly_rendering.txt">QCOM_writeonly_rendering</a> extension.
  * 
  * <p>This extension defines a specialized "write-only" rendering mode that may offer a performance boost for simple 2D rendering.</p>
  * 

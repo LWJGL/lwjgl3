@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shadow_samplers_cube.txt">NV_shadow_samplers_cube</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shadow_samplers_cube.txt">NV_shadow_samplers_cube</a> extension.
  * 
  * <p>This extension expands the shadow map capability described in EXT_shadow_samplers to include support for shadow samplers of cube map textures.</p>
  * 

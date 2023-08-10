@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_primitive_shading_rate.txt">NV_primitive_shading_rate</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_primitive_shading_rate.txt">NV_primitive_shading_rate</a> extension.
  * 
  * <p>This extension builds on top of the {@code NV_shading_rate_image} extension to provide OpenGL API support for using a per-primitive shading rate value
  * to control the computation of the rate used to process each fragment.</p>

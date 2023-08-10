@@ -194,7 +194,7 @@ public class VkPhysicalDeviceMeshShaderPropertiesEXT extends Struct implements N
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of total local workgroups that <b>can</b> be launched by a single mesh tasks drawing command. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
+    /** the maximum number of total local workgroups that <b>can</b> be launched by a single mesh tasks drawing command. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
     @NativeType("uint32_t")
     public int maxTaskWorkGroupTotalCount() { return nmaxTaskWorkGroupTotalCount(address()); }
     /** the maximum number of local workgroups that <b>can</b> be launched by a single mesh tasks drawing command. These three values represent the maximum number of local workgroups for the X, Y, and Z dimensions, respectively. The workgroup count parameters to the drawing commands <b>must</b> be less than or equal to the corresponding limit. The product of these dimensions <b>must</b> be less than or equal to {@code maxTaskWorkGroupTotalCount}. */
@@ -245,10 +245,10 @@ public class VkPhysicalDeviceMeshShaderPropertiesEXT extends Struct implements N
     /** the maximum total storage size, in bytes, available for variables that are declared with the {@code TaskPayloadWorkgroupEXT} or {@code Workgroup} storage class in shader modules in the mesh shader stage. */
     @NativeType("uint32_t")
     public int maxMeshPayloadAndSharedMemorySize() { return nmaxMeshPayloadAndSharedMemorySize(address()); }
-    /** the maximum total storage size, in bytes, available for output variables in shader modules in the mesh shader stage, according to the formula in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#mesh-output">Mesh Shader Output</a>. */
+    /** the maximum total storage size, in bytes, available for output variables in shader modules in the mesh shader stage, according to the formula in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#mesh-output">Mesh Shader Output</a>. */
     @NativeType("uint32_t")
     public int maxMeshOutputMemorySize() { return nmaxMeshOutputMemorySize(address()); }
-    /** the maximum total storage size, in bytes, available for variables that are declared with the {@code TaskPayloadWorkgroupEXT} storage class, or output variables in shader modules in the mesh shader stage, according to the formula in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#mesh-output">Mesh Shader Output</a>. */
+    /** the maximum total storage size, in bytes, available for variables that are declared with the {@code TaskPayloadWorkgroupEXT} storage class, or output variables in shader modules in the mesh shader stage, according to the formula in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#mesh-output">Mesh Shader Output</a>. */
     @NativeType("uint32_t")
     public int maxMeshPayloadAndOutputMemorySize() { return nmaxMeshPayloadAndOutputMemorySize(address()); }
     /** the maximum number of components of output variables which <b>can</b> be output from the mesh shader stage. */

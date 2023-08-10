@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.util.zstd.Zstd.*;
 
-/** Native bindings to the experimental API of <a target="_blank" href="https://facebook.github.io/zstd/">Zstandard</a> (zstd). */
+/** Native bindings to the experimental API of <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class ZstdX {
 
     static { LibZstd.initialize(); }

@@ -19,7 +19,7 @@ val KHR_opengl_enable = "KHROpenGLEnable".nativeClassXR("KHR_opengl_enable", typ
 
         This extension provides mechanisms for the application to interact with images acquired by calling #EnumerateSwapchainImages().
 
-        In order to expose the structures, types, and functions of this extension, the application <b>must</b> define #USE_GRAPHICS_API_OPENGL, as well as an appropriate <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:
+        In order to expose the structures, types, and functions of this extension, the application <b>must</b> define #USE_GRAPHICS_API_OPENGL, as well as an appropriate <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:
 
         <ul>
             <li>#USE_PLATFORM_WIN32</li>

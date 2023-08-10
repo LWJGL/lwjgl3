@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_transform_feedback.txt">NV_transform_feedback</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_transform_feedback.txt">NV_transform_feedback</a> extension.
  * 
  * <p>This extension provides a new mode to the GL, called transform feedback, which records vertex attributes of the primitives processed by the GL. The
  * selected attributes are written into buffer objects, and can be written with each attribute in a separate buffer object or with all attributes

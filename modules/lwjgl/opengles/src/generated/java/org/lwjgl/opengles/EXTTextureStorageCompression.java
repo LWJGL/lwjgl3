@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_storage_compression.txt">EXT_texture_storage_compression</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_storage_compression.txt">EXT_texture_storage_compression</a> extension.
  * 
  * <p>Applications may wish to take advantage of framebuffer compression. Some platforms may support framebuffer compression at fixed bitrates. Such
  * compression algorithms generally produce results that are visually lossless, but the results are typically not bit-exact when compared to a

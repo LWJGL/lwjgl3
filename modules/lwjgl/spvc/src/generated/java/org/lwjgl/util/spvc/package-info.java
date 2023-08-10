@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Cross">SPIRV-Cross</a>, a library for performing reflection on SPIR-V and
+ * Contains bindings to <a href="https://github.com/KhronosGroup/SPIRV-Cross">SPIRV-Cross</a>, a library for performing reflection on SPIR-V and
  * disassembling SPIR-V back to high level languages.
  */
 @org.lwjgl.system.NonnullDefault

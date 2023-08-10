@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * Data type for holding variation data.
  * 
  * <p>Registered OpenType variation-axis tags are listed in
- * <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Axis Tag Registry</a>.</p>
+ * <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Axis Tag Registry</a>.</p>
  * 
  * <h3>Layout</h3>
  * 

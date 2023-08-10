@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_float_buffer.txt">GLX_NV_float_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_float_buffer.txt">GLX_NV_float_buffer</a> extension.
  * 
  * <p>GLX functionality for {@link NVFloatBuffer NV_float_buffer}.</p>
  */

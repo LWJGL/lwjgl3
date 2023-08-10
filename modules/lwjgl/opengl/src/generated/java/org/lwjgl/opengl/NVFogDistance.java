@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fog_distance.txt">NV_fog_distance</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fog_distance.txt">NV_fog_distance</a> extension.
  * 
  * <p>Ideally, the fog distance (used to compute the fog factor as described in Section 3.10) should be computed as the per-fragment Euclidean distance to
  * the fragment center from the eye. In practice, implementations "may choose to approximate the eye-coordinate distance from the eye to each fragment

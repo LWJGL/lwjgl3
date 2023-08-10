@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fbo_color_attachments.txt">NV_fbo_color_attachments</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fbo_color_attachments.txt">NV_fbo_color_attachments</a> extension.
  * 
  * <p>This extension increases the number of available framebuffer object color attachment points.</p>
  */

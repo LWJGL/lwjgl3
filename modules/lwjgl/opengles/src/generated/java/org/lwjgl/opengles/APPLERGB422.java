@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_rgb_422.txt">APPLE_rgb_422</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_rgb_422.txt">APPLE_rgb_422</a> extension.
  * 
  * <p>A common storage format for video data is 8-bit 422, with every four bytes encoding two pixels. Within the four bytes there are two luminance samples,
  * and two chrominance samples that are shared between both pixels.</p>

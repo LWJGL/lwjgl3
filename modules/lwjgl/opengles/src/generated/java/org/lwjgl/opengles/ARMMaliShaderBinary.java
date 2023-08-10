@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_mali_shader_binary.txt">ARM_mali_shader_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_mali_shader_binary.txt">ARM_mali_shader_binary</a> extension.
  * 
  * <p>This extension enables OpenGL ES 2.0 applications running on ARM Mali graphics cores to use shaders precompiled with the Mali ESSL shader compiler.</p>
  * 

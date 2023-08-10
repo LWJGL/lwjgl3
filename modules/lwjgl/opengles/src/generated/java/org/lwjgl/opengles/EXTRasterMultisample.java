@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_raster_multisample.txt">EXT_raster_multisample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_raster_multisample.txt">EXT_raster_multisample</a> extension.
  * 
  * <p>This extension allows rendering to a non-multisample color buffer while rasterizing with more than one sample. The result of rasterization (coverage)
  * is available in the gl_SampleMaskIn[] fragment shader input, multisample rasterization is enabled for all primitives, and several per- fragment

@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_EGL_image_storage.txt">EXT_EGL_image_storage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_EGL_image_storage.txt">EXT_EGL_image_storage</a> extension.
  * 
  * <p>The OpenGL ES extension {@code OES_EGL_image} provides a mechanism for creating GL textures sharing storage with {@code EGLImage} objects (in other
  * words, creating GL texture {@code EGLImage} targets). The extension was written against the OpenGL ES 2.0 specification, which does not have the

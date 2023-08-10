@@ -10,7 +10,7 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_indirect.txt">ARB_draw_indirect</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_indirect.txt">ARB_draw_indirect</a> extension.
  * 
  * <p>This extension provides a mechanism for supplying the arguments to a
  * DrawArraysInstanced or DrawElementsInstancedBaseVertex from buffer object

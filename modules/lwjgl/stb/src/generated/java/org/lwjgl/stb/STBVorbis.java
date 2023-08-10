@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.system.libc.LibCStdlib;
 
 /**
- * Native bindings to stb_vorbis.c from the <a target="_blank" href="https://github.com/nothings/stb">stb library</a>.
+ * Native bindings to stb_vorbis.c from the <a href="https://github.com/nothings/stb">stb library</a>.
  * 
  * <p>Ogg Vorbis audio decoder.</p>
  * 

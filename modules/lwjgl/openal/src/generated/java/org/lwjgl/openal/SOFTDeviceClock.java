@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_device_clock.txt">SOFT_device_clock</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_device_clock.txt">SOFT_device_clock</a> extension.
  * 
  * <p>This extension allows applications to query the timing clock from the audio device. This clock lets applications measure the passage of time as the
  * audio device sees it, which may be slightly different than the system clock's tick rate (the infamous timer drift).</p>

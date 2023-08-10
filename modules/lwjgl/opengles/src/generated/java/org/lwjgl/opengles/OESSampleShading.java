@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_sample_shading.txt">OES_sample_shading</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_sample_shading.txt">OES_sample_shading</a> extension.
  * 
  * <p>In standard multisample rendering, an implementation is allowed to assign the same sets of fragment shader input values to each sample. This can cause
  * aliasing where the fragment shader input values are used to generate a result that doesn't antialias itself, for example with alpha-tested

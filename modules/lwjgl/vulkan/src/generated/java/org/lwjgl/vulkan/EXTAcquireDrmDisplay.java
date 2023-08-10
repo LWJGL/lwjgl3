@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>{@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Drew DeVault <a target="_blank" href="mailto:sir@cmpwn.com">sir@cmpwn.com</a></li>
+ * <li>Drew DeVault <a href="mailto:sir@cmpwn.com">sir@cmpwn.com</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_map_texture.txt">INTEL_map_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_map_texture.txt">INTEL_map_texture</a> extension.
  * 
  * <p>Systems with integrated GPUs can share the same physical memory between CPU and GPU. This feature, if exposed by API, can bring significant performance
  * benefits for graphics applications by reducing the complexity of uploading/accessing texture contents. This extension enables CPU direct access to the

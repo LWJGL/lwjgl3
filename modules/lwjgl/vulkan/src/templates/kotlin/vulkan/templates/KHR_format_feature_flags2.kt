@@ -22,7 +22,7 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
             <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR indicates that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
         </ul>
 
-        Prior to version 2 of this extension, implementations exposing the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderStorageImageReadWithoutFormat">{@code shaderStorageImageReadWithoutFormat}</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderStorageImageWriteWithoutFormat">{@code shaderStorageImageWriteWithoutFormat}</a> features may not report #FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR in ##VkFormatProperties3KHR{@code ::bufferFeatures}. Despite this, buffer reads/writes are supported as intended by the original features.
+        Prior to version 2 of this extension, implementations exposing the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderStorageImageReadWithoutFormat">{@code shaderStorageImageReadWithoutFormat}</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderStorageImageWriteWithoutFormat">{@code shaderStorageImageWriteWithoutFormat}</a> features may not report #FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR in ##VkFormatProperties3KHR{@code ::bufferFeatures}. Despite this, buffer reads/writes are supported as intended by the original features.
 
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
@@ -46,12 +46,12 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_format_feature_flags2]%20@llandwerlin%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_format_feature_flags2%20extension*">llandwerlin</a></li>
+                <li>Lionel Landwerlin <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_format_feature_flags2]%20@llandwerlin%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_format_feature_flags2%20extension*">llandwerlin</a></li>
             </ul></dd>
         </dl>
 

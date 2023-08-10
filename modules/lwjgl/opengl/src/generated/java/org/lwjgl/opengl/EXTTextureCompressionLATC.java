@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_latc.txt">EXT_texture_compression_latc</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_latc.txt">EXT_texture_compression_latc</a> extension.
  * 
  * <p>This extension introduces four new block-based texture compression formats suited for unsigned and signed luminance and luminance-alpha textures (hence
  * the name "latc" for Luminance-Alpha Texture Compression).</p>

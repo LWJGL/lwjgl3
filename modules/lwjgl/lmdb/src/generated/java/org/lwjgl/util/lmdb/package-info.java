@@ -5,7 +5,7 @@
  */
 
 /**
- * Bindings to <a target="_blank" href="https://symas.com/lmdb/">LMDB</a>, the Symas Lightning Memory-Mapped Database.
+ * Bindings to <a href="https://symas.com/lmdb/">LMDB</a>, the Symas Lightning Memory-Mapped Database.
  * 
  * <p>LMDB is a Btree-based database management library modeled loosely on the BerkeleyDB API, but much simplified. The entire database is exposed in a
  * memory map, and all data fetches return data directly from the mapped memory, so no malloc's or memcpy's occur during data fetches. As such, the

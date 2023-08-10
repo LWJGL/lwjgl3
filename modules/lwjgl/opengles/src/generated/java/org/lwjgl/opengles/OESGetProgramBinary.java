@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_get_program_binary.txt">OES_get_program_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_get_program_binary.txt">OES_get_program_binary</a> extension.
  * 
  * <p>This extension introduces two new commands. GetProgramBinaryOES empowers an application to use the GL itself as an offline compiler. The resulting
  * program binary can be reloaded into the GL via ProgramBinaryOES. This is a very useful path for applications that wish to remain portable by shipping

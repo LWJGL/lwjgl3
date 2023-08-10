@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_cube_map_array.txt">ARB_texture_cube_map_array</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_cube_map_array.txt">ARB_texture_cube_map_array</a> extension.
  * 
  * <p>The {@link EXTTextureArray EXT_texture_array} extension, and subsequently OpenGL 3.0 have introduced the concept of one- and two-dimensional array textures. An array
  * texture is an ordered set of images with the same size and format. Each image in an array texture has a unique level. This extension expands texture

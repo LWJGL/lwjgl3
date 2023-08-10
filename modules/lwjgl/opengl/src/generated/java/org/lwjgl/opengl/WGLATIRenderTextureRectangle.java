@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/WGL_ATI_render_texture_rectangle.txt">WGL_ATI_render_texture_rectangle</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ATI/WGL_ATI_render_texture_rectangle.txt">WGL_ATI_render_texture_rectangle</a> extension.
  * 
  * <p>This extension builds upon {@link WGLARBRenderTexture WGL_ARB_render_texture} and allows a pbuffer to be bound to a texture rectangle target.</p>
  * 

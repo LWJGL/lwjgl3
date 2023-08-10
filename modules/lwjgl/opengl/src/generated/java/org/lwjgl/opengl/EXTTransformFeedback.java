@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_transform_feedback.txt">EXT_transform_feedback</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_transform_feedback.txt">EXT_transform_feedback</a> extension.
  * 
  * <p>This extension provides a new mode to the GL, called transform feedback, which records selected vertex attributes for each primitive processed by the
  * GL. The selected attributes are written into buffer objects, and can be written with each attribute in a separate buffer object or with all attributes
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>The vertex data recorded in transform feedback mode is stored into buffer objects as an array of vertex attributes. The regular representation and the
  * use of buffer objects allows the recorded data to be processed directly by the GL without requiring CPU intervention to copy data. In particular,
  * transform feedback data can be used for vertex arrays (via vertex buffer objects), as the source for pixel data (via pixel buffer objects), as shader
- * constant data (via the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_parameter_buffer_object.txt">NV_parameter_buffer_object</a> or {@link EXTBindableUniform EXT_bindable_uniform} extensions), or via any other extension that
+ * constant data (via the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_parameter_buffer_object.txt">NV_parameter_buffer_object</a> or {@link EXTBindableUniform EXT_bindable_uniform} extensions), or via any other extension that
  * makes use of buffer objects.</p>
  * 
  * <p>This extension introduces new query object support to allow transform feedback mode to operate asynchronously. Query objects allow applications to

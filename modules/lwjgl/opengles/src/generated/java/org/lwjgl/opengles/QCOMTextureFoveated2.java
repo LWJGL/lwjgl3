@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_texture_foveated2.txt">QCOM_texture_foveated2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_texture_foveated2.txt">QCOM_texture_foveated2</a> extension.
  * 
  * <p>This extension adds a new texture parameter that specifies a pixel density below which rendering can be discarded during foveated rendering.</p>
  * 

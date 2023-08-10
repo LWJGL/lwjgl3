@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/ALC_SOFT_loopback_bformat.txt">ALC_SOFT_loopback_bformat</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/ALC_SOFT_loopback_bformat.txt">ALC_SOFT_loopback_bformat</a> extension.
  * 
  * <p>This extension allows a loopback device to render B-Format audio channels. The base loopback extension provides for discrete channel mixes, while
  * sometimes a non-discrete soundfield mix may be desirable, for instance if recording a 3D video or passing the output to an external ambisonic decoder.</p>

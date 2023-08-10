@@ -5,11 +5,11 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://jemalloc.net/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that emphasizes
+ * Contains bindings to the <a href="https://jemalloc.net/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that emphasizes
  * fragmentation avoidance and scalable concurrency support.
  * 
- * <p>The jemalloc documentation can be found <a target="_blank" href="https://jemalloc.net/jemalloc.3.html">here</a>. The jemalloc
- * <a target="_blank" href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.</p>
+ * <p>The jemalloc documentation can be found <a href="https://jemalloc.net/jemalloc.3.html">here</a>. The jemalloc
+ * <a href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.</p>
  * 
  * <p>The jemalloc shared library that comes with LWJGL is configured with:</p>
  * 
@@ -26,7 +26,7 @@
  * <p>The shared library may be replaced with a custom build that has more features enabled.</p>
  * 
  * <p>Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
- * <a target="_blank" href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.</p>
+ * <a href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.</p>
  */
 @org.lwjgl.system.NonnullDefault
 package org.lwjgl.system.jemalloc;

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_equation_advanced.txt">NV_blend_equation_advanced_coherent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_equation_advanced.txt">NV_blend_equation_advanced_coherent</a> extension.
  * 
  * <p>Similar to NV_blend_equation_advanced, but guarantees that blending is done coherently and in API primitive ordering. An enable is provided to allow
  * implementations to opt out of fully coherent blending and instead behave as though only NV_blend_equation_advanced were supported.</p>

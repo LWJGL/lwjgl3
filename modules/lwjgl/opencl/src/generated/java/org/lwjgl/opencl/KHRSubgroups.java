@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_subgroups.txt">khr_subgroups</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_subgroups.txt">khr_subgroups</a> extension.
  * 
  * <p>This extension adds support for implementation-controlled groups of work items, known as subgroups. Subgroups behave similarly to work groups and have
  * their own sets of built-ins and synchronization primitives. Subgroups within a work group are independent, may make forward progress with respect to

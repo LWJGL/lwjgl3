@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ARM/EGL_ARM_image_format.txt">ARM_image_format</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ARM/EGL_ARM_image_format.txt">ARM_image_format</a> extension.
  * 
  * <p>When an {@code EGLImage} is created from an existing image resource the implementation will deduce the format of the image data from that resource. In
  * some cases, however, the implementation may not know how to map the existing image resource to a known format. This extension extends the list of

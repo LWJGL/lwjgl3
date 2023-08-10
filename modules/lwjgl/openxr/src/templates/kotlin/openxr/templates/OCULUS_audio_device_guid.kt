@@ -77,7 +77,7 @@ val OCULUS_audio_device_guid = "OCULUSAudioDeviceGuid".nativeClassXR("OCULUS_aud
         """,
 
         XrInstance("instance", "the {@code XrInstance} to query the audio device state in."),
-        Check("XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS")..wchar_t.p("buffer", "a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a target=\"_blank\" href=\"https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid\">IMMDevice::GetId</a> API.")
+        Check("XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS")..wchar_t.p("buffer", "a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href=\"https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid\">IMMDevice::GetId</a> API.")
     )
 
     XrResult(
@@ -121,6 +121,6 @@ val OCULUS_audio_device_guid = "OCULUSAudioDeviceGuid".nativeClassXR("OCULUS_aud
         """,
 
         XrInstance("instance", "the {@code XrInstance} to query the audio device state in."),
-        Check("XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS")..wchar_t.p("buffer", "a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a target=\"_blank\" href=\"https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid\">IMMDevice::GetId</a> API.")
+        Check("XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS")..wchar_t.p("buffer", "a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href=\"https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid\">IMMDevice::GetId</a> API.")
     )
 }

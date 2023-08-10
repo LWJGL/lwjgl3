@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_HRTF.txt">SOFT_HRTF</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_HRTF.txt">SOFT_HRTF</a> extension.
  * 
  * <p>This extension allows an application to request and determine the status of HRTF mixing. HRTF, or Head-Related Transfer Function, is a method of mixing
  * 3D audio for "true" 3D panning, typically using filters designed to simulate how sound is affected by a listener's head as the sound waves travel

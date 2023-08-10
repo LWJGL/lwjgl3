@@ -38,7 +38,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_device_fault.adoc">VK_EXT_device_fault</a></dd>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_device_fault.adoc">VK_EXT_device_fault</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -150,7 +150,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
 
         If {@code pFaultInfo} is not {@code NULL}, {@code pFaultCounts} <b>must</b> point to a ##VkDeviceFaultCountsEXT structure with each structure count or size member ({@code addressInfoCount}, {@code vendorInfoCount}, {@code vendorBinarySize}) set by the user to the number of elements in the corresponding output array member of {@code pFaultInfo} ({@code pAddressInfos} and {@code pVendorInfos}), or to the size of the output buffer in bytes ({@code pVendorBinaryData}). On return, each structure count member is overwritten with the number of structures actually written to the corresponding output array member of {@code pFaultInfo}. Similarly, {@code vendorBinarySize} is overwritten with the number of bytes actually written to the {@code pVendorBinaryData} member of {@code pFaultInfo}.
 
-        If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceFaultVendorBinary">vendor-specific crash dumps</a> feature is not enabled, then implementations <b>must</b> set {@code pFaultCounts}-&gt;vendorBinarySize to zero and <b>must</b> not modify {@code pFaultInfo}-&gt;pVendorBinaryData.
+        If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceFaultVendorBinary">vendor-specific crash dumps</a> feature is not enabled, then implementations <b>must</b> set {@code pFaultCounts}-&gt;vendorBinarySize to zero and <b>must</b> not modify {@code pFaultInfo}-&gt;pVendorBinaryData.
 
         If any {@code pFaultCounts} structure count member is less than the number of corresponding fault properties available, at most structure count ({@code addressInfoCount}, {@code vendorInfoCount}) elements will be written to the associated {@code pFaultInfo} output array. Similarly, if {@code vendorBinarySize} is less than the size in bytes of the available crash dump data, at most {@code vendorBinarySize} elements will be written to {@code pVendorBinaryData}.
 
@@ -160,7 +160,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
 
         If any {@code pFaultCounts} structure count member is smaller than the number of corresponding fault properties available, or if {@code pFaultCounts}-&gt;vendorBinarySize is smaller than the size in bytes of the generated binary crash dump data, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
 
-        If {@code pFaultCounts}-&gt;vendorBinarySize is less than what is necessary to store the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vendor-binary-crash-dumps">binary crash dump header</a>, nothing will be written to {@code pFaultInfo}-&gt;pVendorBinaryData and zero will be written to {@code pFaultCounts}-&gt;vendorBinarySize.
+        If {@code pFaultCounts}-&gt;vendorBinarySize is less than what is necessary to store the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vendor-binary-crash-dumps">binary crash dump header</a>, nothing will be written to {@code pFaultInfo}-&gt;pVendorBinaryData and zero will be written to {@code pFaultCounts}-&gt;vendorBinarySize.
 
         <h5>Valid Usage</h5>
         <ul>

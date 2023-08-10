@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using {@link XrSpaceComponentStatusSetInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code componentType} <b>must</b> be a valid {@code XrSpaceComponentTypeFB} value</li>
  * </ul>
  * 
@@ -106,7 +106,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
     /** the value to set the component to. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
-    /** the number of nanoseconds before the operation should be cancelled. A value of {@link XR10#XR_INFINITE_DURATION INFINITE_DURATION} indicates to never time out. See <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#duration">duration</a> for more details. */
+    /** the number of nanoseconds before the operation should be cancelled. A value of {@link XR10#XR_INFINITE_DURATION INFINITE_DURATION} indicates to never time out. See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#duration">duration</a> for more details. */
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
 

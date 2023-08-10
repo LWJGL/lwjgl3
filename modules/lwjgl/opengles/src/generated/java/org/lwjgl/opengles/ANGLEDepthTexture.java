@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_depth_texture.txt">ANGLE_depth_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_depth_texture.txt">ANGLE_depth_texture</a> extension.
  * 
  * <p>This extension defines support for 2D depth and depth-stencil textures in an OpenGL ES implementation.</p>
  * 

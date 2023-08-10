@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_framebuffer_multisample.txt">NV_framebuffer_multisample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_framebuffer_multisample.txt">NV_framebuffer_multisample</a> extension.
  * 
  * <p>This extension extends the framebuffer object framework to enable multisample rendering.</p>
  * 

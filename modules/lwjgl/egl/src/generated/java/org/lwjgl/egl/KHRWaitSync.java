@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_wait_sync.txt">KHR_wait_sync</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_wait_sync.txt">KHR_wait_sync</a> extension.
  * 
  * <p>This extension adds the ability to wait for signaling of sync objects in the server for a client API context, rather than in the application thread
  * bound to that context. This form of wait does not necessarily block the application thread which issued the wait (unlike eglClientWaitSyncKHR), so the

@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">ODBC</a>.
+ * Contains bindings to <a href="https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">ODBC</a>.
  * 
  * <p>The Microsoft Open Database Connectivity (ODBC) interface is a C programming language interface that makes it possible for applications to access data
  * from a variety of database management systems (DBMSs). ODBC is a low-level, high-performance interface that is designed specifically for relational

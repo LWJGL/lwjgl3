@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_draw_buffers.txt">EXT_multiview_draw_buffers</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_draw_buffers.txt">EXT_multiview_draw_buffers</a> extension.
  * 
  * <p>This extension allows selecting among draw buffers as the rendering target. This may be among multiple primary buffers pertaining to platform-specific
  * stereoscopic or multiview displays or among offscreen framebuffer object color attachments.</p>

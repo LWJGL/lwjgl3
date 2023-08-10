@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_bgra.txt">MESA_bgra</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_bgra.txt">MESA_bgra</a> extension.
  * 
  * <p>{@code MESA_bgra} extends the list of combinations host-memory color formats with internal formats to include {@code BGRA} and {@code BGR} as
  * acceptable formats with {@code RGB8/SRGB8} and {@code RGBA/sRGB8_ALPHA8} as internal formats respectively. This feature is of interest in virtualized

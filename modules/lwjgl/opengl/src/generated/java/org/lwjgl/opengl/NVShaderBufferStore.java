@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_buffer_store.txt">NV_shader_buffer_store</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_buffer_store.txt">NV_shader_buffer_store</a> extension.
  * 
  * <p>This extension builds upon the mechanisms added by the NV_shader_buffer_load extension to allow shaders to perform random-access
  * reads to buffer object memory without using dedicated buffer object binding points.  Instead, it allowed an application to make a buffer
@@ -14,7 +14,7 @@ package org.lwjgl.opengl;
  * shaders to access a large number of buffer objects without needing to repeatedly bind buffers to a limited number of fixed-functionality binding
  * points.</p>
  * 
- * <p>Requires {@link GL30 OpenGL 3.0}, GLSL 1.30, {@link NVShaderBufferLoad NV_shader_buffer_load}, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program5.txt">NV_gpu_program5</a> and/or {@link NVGPUShader5 NV_gpu_shader5}.</p>
+ * <p>Requires {@link GL30 OpenGL 3.0}, GLSL 1.30, {@link NVShaderBufferLoad NV_shader_buffer_load}, <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program5.txt">NV_gpu_program5</a> and/or {@link NVGPUShader5 NV_gpu_shader5}.</p>
  */
 public final class NVShaderBufferStore {
 

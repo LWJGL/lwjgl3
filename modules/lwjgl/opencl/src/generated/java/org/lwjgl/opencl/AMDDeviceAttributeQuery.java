@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_device_attribute_query.txt">amd_device_attribute_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_device_attribute_query.txt">amd_device_attribute_query</a> extension.
  * 
  * <p>This extension provides a means to query AMD-specific device attributes.</p>
  */

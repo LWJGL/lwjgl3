@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_channel_property.txt">intel_mem_channel_property</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_channel_property.txt">intel_mem_channel_property</a> extension.
  * 
  * <p>On some accelerators, manual partitioning of buffers across different regions of memory may result in higher performance by spreading high-demand
  * memory across different interfaces or ports of a memory.</p>

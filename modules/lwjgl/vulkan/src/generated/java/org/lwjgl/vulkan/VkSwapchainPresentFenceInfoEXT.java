@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The wait semaphores specified when queuing the image for presentation.</li>
  * </ul>
  * 
- * <p>The application <b>can</b> provide a fence that the implementation will signal when all such queue operations have completed and the presentation engine has taken a reference to the payload of any objects it accesses as part of the present operation. For all binary wait semaphores imported by the presentation engine using the equivalent of reference transference, as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, this fence <b>must</b> not signal until all such semaphore payloads have been reset by the presentation engine.</p>
+ * <p>The application <b>can</b> provide a fence that the implementation will signal when all such queue operations have completed and the presentation engine has taken a reference to the payload of any objects it accesses as part of the present operation. For all binary wait semaphores imported by the presentation engine using the equivalent of reference transference, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, this fence <b>must</b> not signal until all such semaphore payloads have been reset by the presentation engine.</p>
  * 
  * <p>The application <b>can</b> destroy the wait semaphores associated with a given presentation operation when the associated fence is signaled, and <b>can</b> destroy the swapchain when the fences associated with all past presentation requests have signaled.</p>
  * 

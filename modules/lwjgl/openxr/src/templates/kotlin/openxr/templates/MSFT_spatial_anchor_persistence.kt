@@ -197,7 +197,7 @@ val MSFT_spatial_anchor_persistence = "MSFTSpatialAnchorPersistence".nativeClass
         Enumerate the names of currently persisted spatial anchors in the spatial anchor store.
 
         <h5>C Specification</h5>
-        The application <b>can</b> use the #EnumeratePersistedSpatialAnchorNamesMSFT() function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.
+        The application <b>can</b> use the #EnumeratePersistedSpatialAnchorNamesMSFT() function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.
 
         <pre><code>
 ￿XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(

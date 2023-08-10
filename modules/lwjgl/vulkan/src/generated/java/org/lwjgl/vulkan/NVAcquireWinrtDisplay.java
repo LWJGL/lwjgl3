@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension allows an application to take exclusive control of a display on Windows 10 provided that the display is not already controlled by a compositor. Examples of compositors include the Windows desktop compositor, other applications using this Vulkan extension, and applications that <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code Acquire}”</a> a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code DisplayTarget}”</a> using a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/">“{@code WinRT}”</a> command such as <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a>.
+ * This extension allows an application to take exclusive control of a display on Windows 10 provided that the display is not already controlled by a compositor. Examples of compositors include the Windows desktop compositor, other applications using this Vulkan extension, and applications that <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code Acquire}”</a> a <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code DisplayTarget}”</a> using a <a href="https://docs.microsoft.com/en-us/uwp/api/">“{@code WinRT}”</a> command such as <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a>.
  * 
  * <p>When control is acquired the application has exclusive access to the display until control is released or the application terminates. An application’s attempt to acquire is denied if a different application has already acquired the display.</p>
  * 
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>{@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display]%20@jjuliano%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_acquire_winrt_display%20extension*">jjuliano</a></li>
+ * <li>Jeff Juliano <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display]%20@jjuliano%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_acquire_winrt_display%20extension*">jjuliano</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -82,7 +82,7 @@ public class NVAcquireWinrtDisplay {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>The Vulkan instance acquires control of a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a> by performing an operation equivalent to <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a> on the “{@code DisplayTarget}”.</p>
+     * <p>The Vulkan instance acquires control of a <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a> by performing an operation equivalent to <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a> on the “{@code DisplayTarget}”.</p>
      * </div>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -148,7 +148,7 @@ public class NVAcquireWinrtDisplay {
      * 
      * <p>When acquiring displays on Windows 10, an application may also wish to enumerate and identify them using a native handle rather than a {@code VkDisplayKHR} handle.</p>
      * 
-     * <p>To determine the {@code VkDisplayKHR} handle corresponding to a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a>, call:</p>
+     * <p>To determine the {@code VkDisplayKHR} handle corresponding to a <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a>, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetWinrtDisplayNV(
@@ -183,7 +183,7 @@ public class NVAcquireWinrtDisplay {
      * </dl>
      *
      * @param physicalDevice   The physical device on which to query the display handle.
-     * @param deviceRelativeId The value of the <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget.adapterrelativeid">“AdapterRelativeId”</a> property of a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“DisplayTarget”</a> that is enumerated by a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displayadapter">“DisplayAdapter”</a> with an <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displayadapter.id">“Id”</a> property matching the {@code deviceLUID} property of a {@link VkPhysicalDeviceIDProperties} for {@code physicalDevice}.
+     * @param deviceRelativeId The value of the <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget.adapterrelativeid">“AdapterRelativeId”</a> property of a <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“DisplayTarget”</a> that is enumerated by a <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displayadapter">“DisplayAdapter”</a> with an <a href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displayadapter.id">“Id”</a> property matching the {@code deviceLUID} property of a {@link VkPhysicalDeviceIDProperties} for {@code physicalDevice}.
      * @param pDisplay         The corresponding {@code VkDisplayKHR} handle will be returned here.
      */
     @NativeType("VkResult")

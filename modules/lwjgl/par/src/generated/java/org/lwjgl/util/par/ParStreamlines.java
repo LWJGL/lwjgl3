@@ -12,7 +12,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 
 /**
- * Bindings to <a target="_blank" href="https://github.com/prideout/par/blob/master/par_streamlines.h">par_streamlines.h</a>, a single-file, zero-dependency, C99 library
+ * Bindings to <a href="https://github.com/prideout/par/blob/master/par_streamlines.h">par_streamlines.h</a>, a single-file, zero-dependency, C99 library
  * that can triangulate wide lines and curves.
  */
 public class ParStreamlines {

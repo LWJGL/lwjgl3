@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_gpu_memory_info.txt">NVX_gpu_memory_info</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_gpu_memory_info.txt">NVX_gpu_memory_info</a> extension.
  * 
  * <p>GL_NVX_gpu_memory_info provides applications visibility into GPU hardware memory utilization in order to allow the application to effectively manage
  * its resource allocations in the scope of the current available GPU memory.</p>

@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_system_time.txt">NV_system_time</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_system_time.txt">NV_system_time</a> extension.
  * 
  * <p>This extension exposes an alternative method of querying the system time from the driver instead of the operating system.</p>
  * 

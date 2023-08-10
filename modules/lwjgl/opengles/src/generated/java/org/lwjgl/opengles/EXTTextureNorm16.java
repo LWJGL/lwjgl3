@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_norm16.txt">EXT_texture_norm16</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_norm16.txt">EXT_texture_norm16</a> extension.
  * 
  * <p>OpenGL ES 3.1 supports 8-bit (signed) normalized textures.</p>
  * 

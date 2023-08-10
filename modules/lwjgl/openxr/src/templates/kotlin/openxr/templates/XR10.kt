@@ -60,8 +60,8 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
                 <tr><td>#ERROR_SIZE_INSUFFICIENT</td><td>The supplied size was smaller than required.</td></tr>
                 <tr><td>#ERROR_HANDLE_INVALID</td><td>A supplied object handle was invalid.</td></tr>
                 <tr><td>#ERROR_INSTANCE_LOST</td><td>The {@code XrInstance} was lost or could not be found. It will need to be destroyed and optionally recreated.</td></tr>
-                <tr><td>#ERROR_SESSION_RUNNING</td><td>The session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is already running</a>.</td></tr>
-                <tr><td>#ERROR_SESSION_NOT_RUNNING</td><td>The session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not yet running</a>.</td></tr>
+                <tr><td>#ERROR_SESSION_RUNNING</td><td>The session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is already running</a>.</td></tr>
+                <tr><td>#ERROR_SESSION_NOT_RUNNING</td><td>The session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not yet running</a>.</td></tr>
                 <tr><td>#ERROR_SESSION_LOST</td><td>The {@code XrSession} was lost. It will need to be destroyed and optionally recreated.</td></tr>
                 <tr><td>#ERROR_SYSTEM_INVALID</td><td>The provided {@code XrSystemId} was invalid.</td></tr>
                 <tr><td>#ERROR_PATH_INVALID</td><td>The provided {@code XrPath} was not valid.</td></tr>
@@ -198,7 +198,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         XrStructureType - Values for type members of structs
 
         <h5>Description</h5>
-        Most structures containing {@code type} members have a value of {@code type} matching the type of the structure, as described more fully in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-types">Valid Usage for Structure Types</a>.
+        Most structures containing {@code type} members have a value of {@code type} matching the type of the structure, as described more fully in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-types">Valid Usage for Structure Types</a>.
 
         Note that all extension enums begin at the extension enum base of <code>1<sup>10</sup></code> (base 10). Each extension is assigned a block of 1000 enums, starting at the enum base and arranged by the extension’s index.
 
@@ -595,10 +595,10 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <ul>
             <li>#SESSION_STATE_UNKNOWN. An unknown state. The runtime <b>must</b> not return this value in an ##XrEventDataSessionStateChanged event.</li>
             <li>#SESSION_STATE_IDLE. The initial state after calling #CreateSession() or returned to after calling #EndSession().</li>
-            <li>#SESSION_STATE_READY. The application is ready to call #BeginSession() and <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">sync its frame loop with the runtime.</a></li>
+            <li>#SESSION_STATE_READY. The application is ready to call #BeginSession() and <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">sync its frame loop with the runtime.</a></li>
             <li>#SESSION_STATE_SYNCHRONIZED. The application has synced its frame loop with the runtime but is not visible to the user.</li>
-            <li>#SESSION_STATE_VISIBLE. The application has <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synced its frame loop with the runtime</a> and is visible to the user but cannot receive XR input.</li>
-            <li>#SESSION_STATE_FOCUSED. The application has <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synced its frame loop with the runtime</a>, is visible to the user and can receive XR input.</li>
+            <li>#SESSION_STATE_VISIBLE. The application has <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synced its frame loop with the runtime</a> and is visible to the user but cannot receive XR input.</li>
+            <li>#SESSION_STATE_FOCUSED. The application has <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synced its frame loop with the runtime</a>, is visible to the user and can receive XR input.</li>
             <li>#SESSION_STATE_STOPPING. The application should exit its frame loop and call #EndSession().</li>
             <li>#SESSION_STATE_LOSS_PENDING. The session is in the process of being lost. The application should destroy the current session and can optionally recreate it.</li>
             <li>#SESSION_STATE_EXITING. The application should end its XR experience and not automatically restart it.</li>
@@ -610,11 +610,11 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         Receiving the #SESSION_STATE_READY state indicates that the runtime desires the application to prepare rendering resources, begin its session and synchronize its frame loop with the runtime. The application does this by successfully calling #BeginSession() and then running its frame loop by calling #WaitFrame(), #BeginFrame() and #EndFrame() in a loop. If the runtime wishes to return the session to the #SESSION_STATE_IDLE state, it <b>must</b> wait until the application calls #BeginSession(). After returning from the #BeginSession() call, the runtime may then immediately transition forward through the #SESSION_STATE_SYNCHRONIZED state to the #SESSION_STATE_STOPPING state, to request that the application end this session. If the system supports a user engagement sensor and runtime is in #SESSION_STATE_IDLE state, the runtime <b>should</b> not transition to the #SESSION_STATE_READY state until the user starts engaging with the device.
 
-        Receiving the #SESSION_STATE_SYNCHRONIZED state indicates that the application has <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, but its frames are not visible to the user. The application <b>should</b> continue running its frame loop by calling #WaitFrame(), #BeginFrame() and #EndFrame(), although it should avoid heavy GPU work so that other visible applications can take CPU and GPU precedence. The application can save resources here by skipping rendering and not submitting any composition layers until #WaitFrame() returns an ##XrFrameState with {@code shouldRender} set to true. A runtime <b>may</b> use this frame synchronization to facilitate seamless switching from a previous XR application to this application on a frame boundary.
+        Receiving the #SESSION_STATE_SYNCHRONIZED state indicates that the application has <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, but its frames are not visible to the user. The application <b>should</b> continue running its frame loop by calling #WaitFrame(), #BeginFrame() and #EndFrame(), although it should avoid heavy GPU work so that other visible applications can take CPU and GPU precedence. The application can save resources here by skipping rendering and not submitting any composition layers until #WaitFrame() returns an ##XrFrameState with {@code shouldRender} set to true. A runtime <b>may</b> use this frame synchronization to facilitate seamless switching from a previous XR application to this application on a frame boundary.
 
-        Receiving the #SESSION_STATE_VISIBLE state indicates that the application has <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, and the session’s frames will be visible to the user, but the session is not eligible to receive XR input. An application may be visible but not have focus, for example when the runtime is composing a modal pop-up on top of the application’s rendered frames. The application <b>should</b> continue running its frame loop, rendering and submitting its composition layers, although it may wish to pause its experience, as users cannot interact with the application at this time. It is important for applications to continue rendering when visible, even when they do not have focus, so the user continues to see something reasonable underneath modal pop-ups. Runtimes <b>should</b> make input actions inactive while the application is unfocused, and applications should react to an inactive input action by skipping rendering of that action’s input avatar (depictions of hands or other tracked objects controlled by the user).
+        Receiving the #SESSION_STATE_VISIBLE state indicates that the application has <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, and the session’s frames will be visible to the user, but the session is not eligible to receive XR input. An application may be visible but not have focus, for example when the runtime is composing a modal pop-up on top of the application’s rendered frames. The application <b>should</b> continue running its frame loop, rendering and submitting its composition layers, although it may wish to pause its experience, as users cannot interact with the application at this time. It is important for applications to continue rendering when visible, even when they do not have focus, so the user continues to see something reasonable underneath modal pop-ups. Runtimes <b>should</b> make input actions inactive while the application is unfocused, and applications should react to an inactive input action by skipping rendering of that action’s input avatar (depictions of hands or other tracked objects controlled by the user).
 
-        Receiving the #SESSION_STATE_FOCUSED state indicates that the application has <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, the session’s frames will be visible to the user, and the session is eligible to receive XR input. The runtime <b>should</b> only give one session XR input focus at any given time. The application <b>should</b> be running its frame loop, rendering and submitting composition layers, including input avatars (depictions of hands or other tracked objects controlled by the user) for any input actions that are active. The runtime <b>should</b> avoid rendering its own input avatars when an application is focused, unless input from a given source is being captured by the runtime at the moment.
+        Receiving the #SESSION_STATE_FOCUSED state indicates that the application has <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#sync_frame_loop">synchronized its frame loop with the runtime</a>, the session’s frames will be visible to the user, and the session is eligible to receive XR input. The runtime <b>should</b> only give one session XR input focus at any given time. The application <b>should</b> be running its frame loop, rendering and submitting composition layers, including input avatars (depictions of hands or other tracked objects controlled by the user) for any input actions that are active. The runtime <b>should</b> avoid rendering its own input avatars when an application is focused, unless input from a given source is being captured by the runtime at the moment.
 
         Receiving the #SESSION_STATE_STOPPING state indicates that the runtime has determined that the application should halt its rendering loop. Applications <b>should</b> exit their rendering loop and call #EndSession() when in this state. A possible reason for this would be to minimize contention between multiple applications. If the system supports a user engagement sensor and the session is running, the runtime <b>should</b> transition to the #SESSION_STATE_STOPPING state when the user stops engaging with the device.
 
@@ -1205,7 +1205,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrSystemId*                                 systemId);</code></pre>
 
         <h5>Description</h5>
-        To get an {@code XrSystemId}, an application specifies its desired <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#form_factor_description">form factor</a> to #GetSystem() and gets the runtime’s {@code XrSystemId} associated with that configuration.
+        To get an {@code XrSystemId}, an application specifies its desired <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#form_factor_description">form factor</a> to #GetSystem() and gets the runtime’s {@code XrSystemId} associated with that configuration.
 
         If the form factor is supported but temporarily unavailable, #GetSystem() <b>must</b> return #ERROR_FORM_FACTOR_UNAVAILABLE. A runtime <b>may</b> return #SUCCESS on a subsequent call for a form factor it previously returned #ERROR_FORM_FACTOR_UNAVAILABLE. For example, connecting or warming up hardware might cause an unavailable form factor to become available.
 
@@ -1711,7 +1711,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         For a {@code time} in the future, the runtime <b>should</b> locate the spaces based on the runtime’s most up-to-date prediction of how the world will be at that future time.
 
-        The minimum valid range of values for {@code time} are described in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#prediction-time-limits">prediction-time-limits</a>. For values of {@code time} outside this range, #LocateSpace() <b>may</b> return a location with no position and #SPACE_LOCATION_POSITION_VALID_BIT unset.
+        The minimum valid range of values for {@code time} are described in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#prediction-time-limits">prediction-time-limits</a>. For values of {@code time} outside this range, #LocateSpace() <b>may</b> return a location with no position and #SPACE_LOCATION_POSITION_VALID_BIT unset.
 
         Some devices improve their understanding of the world as the device is used. The location returned by #LocateSpace() for a given {@code space}, {@code baseSpace} and {@code time} <b>may</b> change over time, even for spaces that track static objects, as one or both spaces adjust their origins.
 
@@ -2391,13 +2391,13 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Description</h5>
         When the application receives ##XrEventDataSessionStateChanged event with the #SESSION_STATE_READY state, the application <b>should</b> then call #BeginSession() to start rendering frames for display to the user.
 
-        After this function successfully returns, the session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is considered to be running</a>. The application <b>should</b> then start its frame loop consisting of some sequence of #WaitFrame()/#BeginFrame()/#EndFrame() calls.
+        After this function successfully returns, the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is considered to be running</a>. The application <b>should</b> then start its frame loop consisting of some sequence of #WaitFrame()/#BeginFrame()/#EndFrame() calls.
 
-        If the session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is already running</a> when the application calls #BeginSession(), the runtime <b>must</b> return error #ERROR_SESSION_RUNNING. If the session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when the application calls #BeginSession(), but the session is not yet in the #SESSION_STATE_READY state, the runtime <b>must</b> return error #ERROR_SESSION_NOT_READY.
+        If the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is already running</a> when the application calls #BeginSession(), the runtime <b>must</b> return error #ERROR_SESSION_RUNNING. If the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when the application calls #BeginSession(), but the session is not yet in the #SESSION_STATE_READY state, the runtime <b>must</b> return error #ERROR_SESSION_NOT_READY.
 
         Note that a runtime <b>may</b> decide not to show the user any given frame from a session at any time, for example if the user has switched to a different application’s running session. The application should check whether #WaitFrame() returns an ##XrFrameState with {@code shouldRender} set to true before rendering a given frame to determine whether that frame will be visible to the user.
 
-        Runtime session frame state <b>must</b> start in a reset state when a session transitions to <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> so that no state is carried over from when the same session was previously running.
+        Runtime session frame state <b>must</b> start in a reset state when a session transitions to <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> so that no state is carried over from when the same session was previously running.
 
         If {@code primaryViewConfigurationType} in {@code beginInfo} is not supported by the {@code XrSystemId} used to create the {@code session}, the runtime <b>must</b> return #ERROR_VIEW_CONFIGURATION_TYPE_UNSUPPORTED.
 
@@ -2449,9 +2449,9 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrSession                                   session);</code></pre>
 
         <h5>Description</h5>
-        When the application receives ##XrEventDataSessionStateChanged event with the #SESSION_STATE_STOPPING state, the application should stop its frame loop and then call #EndSession() to end the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> session. This function signals to the runtime that the application will no longer call #WaitFrame(), #BeginFrame() or #EndFrame() from any thread allowing the runtime to safely transition the session to #SESSION_STATE_IDLE. The application <b>must</b> also avoid reading input state or sending haptic output after calling #EndSession().
+        When the application receives ##XrEventDataSessionStateChanged event with the #SESSION_STATE_STOPPING state, the application should stop its frame loop and then call #EndSession() to end the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> session. This function signals to the runtime that the application will no longer call #WaitFrame(), #BeginFrame() or #EndFrame() from any thread allowing the runtime to safely transition the session to #SESSION_STATE_IDLE. The application <b>must</b> also avoid reading input state or sending haptic output after calling #EndSession().
 
-        If the session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when the application calls #EndSession(), the runtime <b>must</b> return error #ERROR_SESSION_NOT_RUNNING. If the session <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is still running</a> when the application calls #EndSession(), but the session is not yet in the #SESSION_STATE_STOPPING state, the runtime <b>must</b> return error #ERROR_SESSION_NOT_STOPPING.
+        If the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when the application calls #EndSession(), the runtime <b>must</b> return error #ERROR_SESSION_NOT_RUNNING. If the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">is still running</a> when the application calls #EndSession(), but the session is not yet in the #SESSION_STATE_STOPPING state, the runtime <b>must</b> return error #ERROR_SESSION_NOT_STOPPING.
 
         If the application wishes to exit a running session, the application can call #RequestExitSession() so that the session transitions from #SESSION_STATE_IDLE to #SESSION_STATE_EXITING.
 
@@ -2484,7 +2484,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         #BeginSession(), #CreateSession(), #DestroySession()
         """,
 
-        XrSession("session", "a handle to a <a target=\"_blank\" href=\"https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\\#session_running\">running</a> {@code XrSession}.")
+        XrSession("session", "a handle to a <a href=\"https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\\#session_running\">running</a> {@code XrSession}.")
     )
 
     XrResult(
@@ -2493,7 +2493,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         Request to exit a running session.
 
         <h5>C Specification</h5>
-        When an application wishes to exit a <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> session, it <b>can</b> call #RequestExitSession(), requesting that the runtime transition through the various intermediate session states including #SESSION_STATE_STOPPING to #SESSION_STATE_EXITING.
+        When an application wishes to exit a <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_running">running</a> session, it <b>can</b> call #RequestExitSession(), requesting that the runtime transition through the various intermediate session states including #SESSION_STATE_STOPPING to #SESSION_STATE_EXITING.
 
         On platforms where an application’s lifecycle is managed by the system, session state changes may be implicitly triggered by application lifecycle state changes. On such platforms, using platform-specific methods to alter application lifecycle state may be the preferred method of provoking session state changes. The behavior of #RequestExitSession() is not altered, however explicit session exit <b>may</b> not interact with the platform-specific application lifecycle.
 
@@ -2504,7 +2504,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrSession                                   session);</code></pre>
 
         <h5>Description</h5>
-        If {@code session} <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when #RequestExitSession() is called, #ERROR_SESSION_NOT_RUNNING <b>must</b> be returned.
+        If {@code session} <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a> when #RequestExitSession() is called, #ERROR_SESSION_NOT_RUNNING <b>must</b> be returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2566,7 +2566,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         Calling #WaitFrame() <b>must</b> be externally synchronized by the application, concurrent calls <b>may</b> result in undefined behavior.
 
-        The runtime <b>must</b> return #ERROR_SESSION_NOT_RUNNING if the {@code session} <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
+        The runtime <b>must</b> return #ERROR_SESSION_NOT_RUNNING if the {@code session} <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The engine simulation <b>should</b> advance based on the display time. Every stage in the engine pipeline should use the exact same display time for one particular application-generated frame. An accurate and consistent display time across all stages and threads in the engine pipeline is important to avoid object motion judder. If the application has multiple pipeline stages, the application should pass its computed display time through its pipeline, as #WaitFrame() must be called only once per frame.
@@ -2634,7 +2634,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         The runtime <b>must</b> return the success code #FRAME_DISCARDED if a prior #BeginFrame() has been called without an intervening call to #EndFrame().
 
-        The runtime <b>must</b> return #ERROR_SESSION_NOT_RUNNING if the {@code session} <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
+        The runtime <b>must</b> return #ERROR_SESSION_NOT_RUNNING if the {@code session} <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2710,7 +2710,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         #ERROR_ENVIRONMENT_BLEND_MODE_UNSUPPORTED <b>must</b> be returned if ##XrFrameEndInfo::environmentBlendMode is not supported.
 
-        #ERROR_SESSION_NOT_RUNNING <b>must</b> be returned if the {@code session} <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
+        #ERROR_SESSION_NOT_RUNNING <b>must</b> be returned if the {@code session} <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#session_not_running">is not running</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Applications should discard frames for which #EndFrame() returns a recoverable error over attempting to resubmit the frame with different frame parameters to provide a more consistent experience across different runtime implementations.
@@ -2781,7 +2781,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Description</h5>
         The #LocateViews() function returns the view and projection info for a particular display time. This time is typically the target display time for a given frame. Repeatedly calling #LocateViews() with the same time <b>may</b> not necessarily return the same result. Instead the prediction gets increasingly accurate as the function is called closer to the given time for which a prediction is made. This allows an application to get the predicted views as late as possible in its pipeline to get the least amount of latency and prediction error.
 
-        #LocateViews() returns an array of ##XrView elements, one for each view of the specified view configuration type, along with an ##XrViewState containing additional state data shared across all views. The eye each view corresponds to is statically defined in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#view_configuration_type">{@code XrViewConfigurationType}</a> in case the application wants to apply eye-specific rendering traits. The ##XrViewState and ##XrView member data may change on subsequent calls to #LocateViews(), and so applications <b>must</b> not assume it to be constant.
+        #LocateViews() returns an array of ##XrView elements, one for each view of the specified view configuration type, along with an ##XrViewState containing additional state data shared across all views. The eye each view corresponds to is statically defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#view_configuration_type">{@code XrViewConfigurationType}</a> in case the application wants to apply eye-specific rendering traits. The ##XrViewState and ##XrView member data may change on subsequent calls to #LocateViews(), and so applications <b>must</b> not assume it to be constant.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2842,7 +2842,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrPath*                                     path);</code></pre>
 
         <h5>Description</h5>
-        #StringToPath() retrieves the {@code XrPath} value for a well-formed path string. If such a value had not yet been assigned by the runtime to the provided path string in this {@code XrInstance}, one <b>must</b> be assigned at this point. All calls to this function with the same {@code XrInstance} and path string <b>must</b> retrieve the same {@code XrPath} value. Upon failure, #StringToPath() <b>must</b> return an appropriate {@code XrResult}, and <b>may</b> set the output parameter to #NULL_PATH. See <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#path-atom-type">Path Atom Type</a> for the conditions under which an error <b>may</b> be returned when this function is given a valid {@code XrInstance} and a well-formed path string.
+        #StringToPath() retrieves the {@code XrPath} value for a well-formed path string. If such a value had not yet been assigned by the runtime to the provided path string in this {@code XrInstance}, one <b>must</b> be assigned at this point. All calls to this function with the same {@code XrInstance} and path string <b>must</b> retrieve the same {@code XrPath} value. Upon failure, #StringToPath() <b>must</b> return an appropriate {@code XrResult}, and <b>may</b> set the output parameter to #NULL_PATH. See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#path-atom-type">Path Atom Type</a> for the conditions under which an error <b>may</b> be returned when this function is given a valid {@code XrInstance} and a well-formed path string.
 
         If the runtime’s resources are exhausted and it cannot create the path, a return value of #ERROR_PATH_COUNT_EXCEEDED <b>must</b> be returned. If the application specifies a string that is not a well-formed path string, #ERROR_PATH_FORMAT_INVALID <b>must</b> be returned.
 
@@ -3008,7 +3008,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Description</h5>
         Action set handles <b>can</b> be destroyed by calling #DestroyActionSet(). When an action set handle is destroyed, all handles of actions in that action set are also destroyed.
 
-        The implementation <b>must</b> not free underlying resources for the action set while there are other valid handles that refer to those resources. The implementation <b>may</b> release resources for an action set when all of the action spaces for actions in that action set have been destroyed. See <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#spaces-action-spaces-lifetime">Action Spaces Lifetime</a> for details.
+        The implementation <b>must</b> not free underlying resources for the action set while there are other valid handles that refer to those resources. The implementation <b>may</b> release resources for an action set when all of the action spaces for actions in that action set have been destroyed. See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#spaces-action-spaces-lifetime">Action Spaces Lifetime</a> for details.
 
         Resources for all action sets in an instance <b>must</b> be freed when the instance containing those actions sets is destroyed.
 
@@ -3118,7 +3118,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Description</h5>
         Action handles <b>can</b> be destroyed by calling #DestroyAction(). Handles for actions that are part of an action set are automatically destroyed when the action set’s handle is destroyed.
 
-        The implementation <b>must</b> not destroy the underlying resources for an action when #DestroyAction() is called. Those resources are still used to make <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#spaces-action-spaces-lifetime">action spaces locatable</a> and when processing action priority in #SyncActions(). Destroying the action handle removes the application’s access to these resources, but has no other change on actions.
+        The implementation <b>must</b> not destroy the underlying resources for an action when #DestroyAction() is called. Those resources are still used to make <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#spaces-action-spaces-lifetime">action spaces locatable</a> and when processing action priority in #SyncActions(). Destroying the action handle removes the application’s access to these resources, but has no other change on actions.
 
         Resources for all actions in an instance <b>must</b> be freed when the instance containing those actions sets is destroyed.
 
@@ -3172,7 +3172,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         If the application successfully calls #SuggestInteractionProfileBindings() more than once for an interaction profile, the runtime <b>must</b> discard the previous suggested bindings and replace them with the new suggested bindings for that profile.
 
-        If the interaction profile path does not follow the structure defined in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-interaction-profiles">Interaction Profiles</a> or suggested bindings contain paths that do not follow the format defined in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-input">Device input subpaths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. If the interaction profile or input source for any of the suggested bindings does not exist in the allowlist defined in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-interaction-profiles">Interaction Profile Paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. A runtime <b>must</b> accept every valid binding in the allowlist though it is free to ignore any of them.
+        If the interaction profile path does not follow the structure defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-interaction-profiles">Interaction Profiles</a> or suggested bindings contain paths that do not follow the format defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-input">Device input subpaths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. If the interaction profile or input source for any of the suggested bindings does not exist in the allowlist defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-interaction-profiles">Interaction Profile Paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. A runtime <b>must</b> accept every valid binding in the allowlist though it is free to ignore any of them.
 
         If the action set for any action referenced in the {@code suggestedBindings} parameter has been included in a call to #AttachSessionActionSets(), the implementation <b>must</b> return #ERROR_ACTIONSETS_ALREADY_ATTACHED.
 
@@ -3283,7 +3283,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         The runtime <b>must</b> return only interaction profiles for which the application has provided bindings with #SuggestInteractionProfileBindings() or #NULL_PATH. The runtime <b>may</b> return interaction profiles that do not represent physically present hardware, for example if the runtime is using a known interaction profile to bind to hardware that the application is not aware of. The runtime <b>may</b> return the last-known interaction profile in the event that no controllers are active.
 
-        If #AttachSessionActionSets() has not yet been called for the {@code session}, the runtime <b>must</b> return #ERROR_ACTIONSET_NOT_ATTACHED. If {@code topLevelUserPath} is not one of the device input subpaths described in section <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-user">/user paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED.
+        If #AttachSessionActionSets() has not yet been called for the {@code session}, the runtime <b>must</b> return #ERROR_ACTIONSET_NOT_ATTACHED. If {@code topLevelUserPath} is not one of the device input subpaths described in section <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#semantic-path-user">/user paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

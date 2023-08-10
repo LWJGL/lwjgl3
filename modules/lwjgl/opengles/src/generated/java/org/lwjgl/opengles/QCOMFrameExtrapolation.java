@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_frame_extrapolation.txt">QCOM_frame_extrapolation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_frame_extrapolation.txt">QCOM_frame_extrapolation</a> extension.
  * 
  * <p>Frame extrapolation is the process of producing a new, future frame based on the contents of two previously rendered frames. It may be used to produce
  * high frame rate display updates without incurring the full cost of traditional rendering at the higher framerate.</p>

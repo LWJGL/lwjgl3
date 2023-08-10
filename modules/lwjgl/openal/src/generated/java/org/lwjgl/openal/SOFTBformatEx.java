@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_bformat_ex.txt">SOFT_bformat_ex</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_bformat_ex.txt">SOFT_bformat_ex</a> extension.
  * 
  * <p>This extension allows B-Format buffers to be interpreted according to the ACN (Ambisonic Channel Number), SN3D (Semi-Normalized), and N3D (fully
  * Normalized) standards. The AL_EXT_BFORMAT extension provides support for B-Format buffers using the FuMa standard for channel ordering and scaling,

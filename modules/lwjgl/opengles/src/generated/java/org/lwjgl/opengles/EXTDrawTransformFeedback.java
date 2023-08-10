@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_transform_feedback.txt">EXT_draw_transform_feedback</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_transform_feedback.txt">EXT_draw_transform_feedback</a> extension.
  * 
  * <p>This extension adds the {@code DrawTransformFeedback} commands. These were omitted from OpenGL ES 3.0 because the number of vertices captured by
  * transform feedback could never be different than the number drawn during capture. The addition of geometry shaders in OpenGL ES 3.2 broke that

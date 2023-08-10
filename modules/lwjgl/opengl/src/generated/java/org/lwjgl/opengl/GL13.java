@@ -21,15 +21,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression.txt">ARB_texture_compression</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_cube_map.txt">ARB_texture_cube_map</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multisample.txt">ARB_multisample</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multitexture.txt">ARB_multitexture</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_add.txt">ARB_texture_env_add</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_combine.txt">ARB_texture_env_combine</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_dot3.txt">ARB_texture_env_dot3</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_border_clamp.txt">ARB_texture_border_clamp</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transpose_matrix.txt">ARB_transpose_matrix</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression.txt">ARB_texture_compression</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_cube_map.txt">ARB_texture_cube_map</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multisample.txt">ARB_multisample</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multitexture.txt">ARB_multitexture</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_add.txt">ARB_texture_env_add</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_combine.txt">ARB_texture_env_combine</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_dot3.txt">ARB_texture_env_dot3</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_border_clamp.txt">ARB_texture_border_clamp</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transpose_matrix.txt">ARB_transpose_matrix</a></li>
  * </ul>
  */
 public class GL13 extends GL12 {
@@ -238,7 +238,7 @@ public class GL13 extends GL12 {
      * @param imageSize      the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage3D">Reference Page</a>
      */
     public static void glCompressedTexImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLsizei") int imageSize, @Nullable @NativeType("void const *") long data) {
         GL13C.glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data);
@@ -256,7 +256,7 @@ public class GL13 extends GL12 {
      * @param border         must be 0
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage3D">Reference Page</a>
      */
     public static void glCompressedTexImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, data);
@@ -285,7 +285,7 @@ public class GL13 extends GL12 {
      * @param imageSize      the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage2D">Reference Page</a>
      */
     public static void glCompressedTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLsizei") int imageSize, @Nullable @NativeType("void const *") long data) {
         GL13C.glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
@@ -302,7 +302,7 @@ public class GL13 extends GL12 {
      * @param border         must be 0
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage2D">Reference Page</a>
      */
     public static void glCompressedTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexImage2D(target, level, internalformat, width, height, border, data);
@@ -330,7 +330,7 @@ public class GL13 extends GL12 {
      * @param imageSize      the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage1D">Reference Page</a>
      */
     public static void glCompressedTexImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLsizei") int imageSize, @Nullable @NativeType("void const *") long data) {
         GL13C.glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data);
@@ -346,7 +346,7 @@ public class GL13 extends GL12 {
      * @param border         must be 0
      * @param data           a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexImage1D">Reference Page</a>
      */
     public static void glCompressedTexImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexImage1D(target, level, internalformat, width, border, data);
@@ -378,7 +378,7 @@ public class GL13 extends GL12 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage3D">Reference Page</a>
      */
     public static void glCompressedTexSubImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL13C.glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
@@ -398,7 +398,7 @@ public class GL13 extends GL12 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage3D">Reference Page</a>
      */
     public static void glCompressedTexSubImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, data);
@@ -428,7 +428,7 @@ public class GL13 extends GL12 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage2D">Reference Page</a>
      */
     public static void glCompressedTexSubImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL13C.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
@@ -446,7 +446,7 @@ public class GL13 extends GL12 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage2D">Reference Page</a>
      */
     public static void glCompressedTexSubImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, data);
@@ -474,7 +474,7 @@ public class GL13 extends GL12 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage1D">Reference Page</a>
      */
     public static void glCompressedTexSubImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL13C.glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data);
@@ -490,7 +490,7 @@ public class GL13 extends GL12 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTexSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTexSubImage1D">Reference Page</a>
      */
     public static void glCompressedTexSubImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL13C.glCompressedTexSubImage1D(target, level, xoffset, width, format, data);
@@ -510,7 +510,7 @@ public class GL13 extends GL12 {
      * @param level  the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image.
      * @param pixels a buffer in which to return the compressed texture image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTexImage">Reference Page</a>
      */
     public static void glGetCompressedTexImage(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("void *") ByteBuffer pixels) {
         GL13C.glGetCompressedTexImage(target, level, pixels);
@@ -523,7 +523,7 @@ public class GL13 extends GL12 {
      * @param level  the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image.
      * @param pixels a buffer in which to return the compressed texture image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTexImage">Reference Page</a>
      */
     public static void glGetCompressedTexImage(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("void *") long pixels) {
         GL13C.glGetCompressedTexImage(target, level, pixels);
@@ -550,7 +550,7 @@ public class GL13 extends GL12 {
      * @param value  a sample coverage value. The value is clamped to the range [0, 1]. The initial value is 1.0.
      * @param invert if the coverage masks should be inverted. The initial value is false.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glSampleCoverage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glSampleCoverage">Reference Page</a>
      */
     public static void glSampleCoverage(@NativeType("GLfloat") float value, @NativeType("GLboolean") boolean invert) {
         GL13C.glSampleCoverage(value, invert);
@@ -564,7 +564,7 @@ public class GL13 extends GL12 {
      *
      * @param texture which texture unit to make active. One of:<br><table><tr><td>{@link GL13C#GL_TEXTURE0 TEXTURE0}</td><td>GL_TEXTURE[1-31]</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glActiveTexture">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glActiveTexture">Reference Page</a>
      */
     public static void glActiveTexture(@NativeType("GLenum") int texture) {
         GL13C.glActiveTexture(texture);
@@ -578,7 +578,7 @@ public class GL13 extends GL12 {
      *
      * @param texture which texture coordinate array to make active. One of:<br><table><tr><td>{@link #GL_TEXTURE0 TEXTURE0}</td><td>GL_TEXTURE[1-31]</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glClientActiveTexture">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glClientActiveTexture">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glClientActiveTexture(@NativeType("GLenum") int texture);
 
@@ -590,7 +590,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param s       the s component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord1f(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s);
 
@@ -602,7 +602,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param s       the s component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord1s(@NativeType("GLenum") int texture, @NativeType("GLshort") short s);
 
@@ -614,7 +614,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param s       the s component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord1i(@NativeType("GLenum") int texture, @NativeType("GLint") int s);
 
@@ -626,7 +626,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param s       the s component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord1d(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s);
 
@@ -641,7 +641,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -661,7 +661,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -681,7 +681,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -701,7 +701,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -719,7 +719,7 @@ public class GL13 extends GL12 {
      * @param s       the s component of the current texture coordinates
      * @param t       the t component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord2f(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t);
 
@@ -732,7 +732,7 @@ public class GL13 extends GL12 {
      * @param s       the s component of the current texture coordinates
      * @param t       the t component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord2s(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t);
 
@@ -745,7 +745,7 @@ public class GL13 extends GL12 {
      * @param s       the s component of the current texture coordinates
      * @param t       the t component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord2i(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t);
 
@@ -758,7 +758,7 @@ public class GL13 extends GL12 {
      * @param s       the s component of the current texture coordinates
      * @param t       the t component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord2d(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t);
 
@@ -773,7 +773,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -793,7 +793,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -813,7 +813,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -833,7 +833,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -852,7 +852,7 @@ public class GL13 extends GL12 {
      * @param t       the t component of the current texture coordinates
      * @param r       the r component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord3f(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t, @NativeType("GLfloat") float r);
 
@@ -866,7 +866,7 @@ public class GL13 extends GL12 {
      * @param t       the t component of the current texture coordinates
      * @param r       the r component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord3s(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t, @NativeType("GLshort") short r);
 
@@ -880,7 +880,7 @@ public class GL13 extends GL12 {
      * @param t       the t component of the current texture coordinates
      * @param r       the r component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord3i(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t, @NativeType("GLint") int r);
 
@@ -894,7 +894,7 @@ public class GL13 extends GL12 {
      * @param t       the t component of the current texture coordinates
      * @param r       the r component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord3d(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t, @NativeType("GLdouble") double r);
 
@@ -909,7 +909,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -929,7 +929,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -949,7 +949,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -969,7 +969,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -989,7 +989,7 @@ public class GL13 extends GL12 {
      * @param r       the r component of the current texture coordinates
      * @param q       the q component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord4f(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t, @NativeType("GLfloat") float r, @NativeType("GLfloat") float q);
 
@@ -1004,7 +1004,7 @@ public class GL13 extends GL12 {
      * @param r       the r component of the current texture coordinates
      * @param q       the q component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord4s(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t, @NativeType("GLshort") short r, @NativeType("GLshort") short q);
 
@@ -1019,7 +1019,7 @@ public class GL13 extends GL12 {
      * @param r       the r component of the current texture coordinates
      * @param q       the q component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord4i(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t, @NativeType("GLint") int r, @NativeType("GLint") int q);
 
@@ -1034,7 +1034,7 @@ public class GL13 extends GL12 {
      * @param r       the r component of the current texture coordinates
      * @param q       the q component of the current texture coordinates
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glMultiTexCoord4d(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t, @NativeType("GLdouble") double r, @NativeType("GLdouble") double q);
 
@@ -1049,7 +1049,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -1069,7 +1069,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1089,7 +1089,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -1109,7 +1109,7 @@ public class GL13 extends GL12 {
      * @param texture the coordinate set to be modified
      * @param v       the texture coordinate buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -1137,7 +1137,7 @@ public class GL13 extends GL12 {
      *
      * @param m the matrix data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glLoadTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glLoadTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glLoadTransposeMatrixf(@NativeType("GLfloat const *") FloatBuffer m) {
         if (CHECKS) {
@@ -1156,7 +1156,7 @@ public class GL13 extends GL12 {
      *
      * @param m the matrix data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glLoadTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glLoadTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glLoadTransposeMatrixd(@NativeType("GLdouble const *") DoubleBuffer m) {
         if (CHECKS) {
@@ -1175,7 +1175,7 @@ public class GL13 extends GL12 {
      *
      * @param m the matrix data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultTransposeMatrixf(@NativeType("GLfloat const *") FloatBuffer m) {
         if (CHECKS) {
@@ -1194,7 +1194,7 @@ public class GL13 extends GL12 {
      *
      * @param m the matrix data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultTransposeMatrixd(@NativeType("GLdouble const *") DoubleBuffer m) {
         if (CHECKS) {
@@ -1206,7 +1206,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord1fv MultiTexCoord1fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1fv;
@@ -1220,7 +1220,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord1sv MultiTexCoord1sv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1sv;
@@ -1234,7 +1234,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord1iv MultiTexCoord1iv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1iv;
@@ -1248,7 +1248,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord1dv MultiTexCoord1dv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord1dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1dv;
@@ -1262,7 +1262,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord2fv MultiTexCoord2fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2fv;
@@ -1276,7 +1276,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord2sv MultiTexCoord2sv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2sv;
@@ -1290,7 +1290,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord2iv MultiTexCoord2iv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2iv;
@@ -1304,7 +1304,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord2dv MultiTexCoord2dv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord2dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2dv;
@@ -1318,7 +1318,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord3fv MultiTexCoord3fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3fv;
@@ -1332,7 +1332,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord3sv MultiTexCoord3sv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3sv;
@@ -1346,7 +1346,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord3iv MultiTexCoord3iv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3iv;
@@ -1360,7 +1360,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord3dv MultiTexCoord3dv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord3dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3dv;
@@ -1374,7 +1374,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord4fv MultiTexCoord4fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4fv(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4fv;
@@ -1388,7 +1388,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord4sv MultiTexCoord4sv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4sv(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4sv;
@@ -1402,7 +1402,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord4iv MultiTexCoord4iv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4iv(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4iv;
@@ -1416,7 +1416,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultiTexCoord4dv MultiTexCoord4dv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultiTexCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultiTexCoord4dv(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4dv;
@@ -1430,7 +1430,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glLoadTransposeMatrixf LoadTransposeMatrixf}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glLoadTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glLoadTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glLoadTransposeMatrixf(@NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glLoadTransposeMatrixf;
@@ -1444,7 +1444,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glLoadTransposeMatrixd LoadTransposeMatrixd}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glLoadTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glLoadTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glLoadTransposeMatrixd(@NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glLoadTransposeMatrixd;
@@ -1458,7 +1458,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultTransposeMatrixf MultTransposeMatrixf}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultTransposeMatrixf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultTransposeMatrixf(@NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMultTransposeMatrixf;
@@ -1472,7 +1472,7 @@ public class GL13 extends GL12 {
     /**
      * Array version of: {@link #glMultTransposeMatrixd MultTransposeMatrixd}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl3/glMultTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
+     * @see <a href="https://docs.gl/gl3/glMultTransposeMatrixd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glMultTransposeMatrixd(@NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMultTransposeMatrixd;

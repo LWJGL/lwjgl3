@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_UHJ_ex.txt">SOFT_UHJ_ex</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_UHJ_ex.txt">SOFT_UHJ_ex</a> extension.
  * 
  * <p>This extension supplements {@code AL_SOFT_UHJ} by adding {@code muLaw}, {@code aLaw}, {@code IMA4}, and {@code MSADPCM} sample types to UHJ formats.
  * The base {@code AL_SOFT_UHJ} extension could already use these formats (when available) for Super Stereo processing, and this extension allows them to

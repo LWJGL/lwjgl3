@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_filter_minmax.txt">EXT_texture_filter_minmax</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_filter_minmax.txt">EXT_texture_filter_minmax</a> extension.
  * 
  * <p>In unextended OpenGL 4.3, minification and magnification filters such as LINEAR allow texture lookups to returned a filtered texel value produced by
  * computing an weighted average of a collection of texels in the neighborhood of the texture coordinate provided.</p>

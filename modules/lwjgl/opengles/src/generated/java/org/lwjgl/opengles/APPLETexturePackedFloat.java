@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_texture_packed_float.txt">APPLE_texture_packed_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_texture_packed_float.txt">APPLE_texture_packed_float</a> extension.
  * 
  * <p>This extension adds two new 3-component floating-point texture formats that fit within a single 32-bit word called R11F_G11F_B10F and RGB9_E5</p>
  * 

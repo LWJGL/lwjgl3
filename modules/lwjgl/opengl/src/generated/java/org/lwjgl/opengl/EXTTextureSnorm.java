@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_snorm.txt">EXT_texture_snorm</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_snorm.txt">EXT_texture_snorm</a> extension.
  * 
  * <p>Fixed-point textures in unextended OpenGL have integer components, but those values are taken to represent floating-point values in the range
  * [0.0,1.0]. These integer components are considered "unsigned normalized" integers. When such a texture is accessed by a shader or by fixed-function

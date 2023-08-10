@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_standard_derivatives.txt">OES_standard_derivatives</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_standard_derivatives.txt">OES_standard_derivatives</a> extension.
  * 
  * <p>The standard derivative built-in functions and semantics from OpenGL 2.0 are optional for OpenGL ES 2.0. When this extension is available, these
  * built-in functions are also available, as is a hint controlling the quality/performance trade off.</p>

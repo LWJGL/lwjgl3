@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension is based on the {@link NVFragmentShaderBarycentric VK_NV_fragment_shader_barycentric} extension, and adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li><a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_fragment_shader_barycentric.html">{@code SPV_KHR_fragment_shader_barycentric}</a></li>
+ * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_fragment_shader_barycentric.html">{@code SPV_KHR_fragment_shader_barycentric}</a></li>
  * </ul>
  * 
  * <p>The extension provides access to three additional fragment shader variable decorations in SPIR-V:</p>
@@ -47,7 +47,7 @@ package org.lwjgl.vulkan;
  * <li>Stu Smith</li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
- * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_fragment_shader_barycentric.adoc">VK_KHR_fragment_shader_barycentric</a></dd>
+ * <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_fragment_shader_barycentric.adoc">VK_KHR_fragment_shader_barycentric</a></dd>
  * </dl>
  * 
  * <h5>Other Extension Metadata</h5>
@@ -59,8 +59,8 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_fragment_shader_barycentric.html">{@code SPV_KHR_fragment_shader_barycentric}</a></li>
- * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_fragment_shader_barycentric.txt">{@code GL_EXT_fragment_shader_barycentric}</a></li>
+ * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_fragment_shader_barycentric.html">{@code SPV_KHR_fragment_shader_barycentric}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_fragment_shader_barycentric.txt">{@code GL_EXT_fragment_shader_barycentric}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

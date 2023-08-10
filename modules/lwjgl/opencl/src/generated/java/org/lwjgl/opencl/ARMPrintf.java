@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_printf.txt">arm_printf</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_printf.txt">arm_printf</a> extension.
  * 
  * <p>This extension enables the device side printf built in function for OpenCL C versions prior to 1.2. It also extends the {@code cl_context_properties}
  * enumeration to allow a user defined {@code printf} callback and/or {@code printf} buffer size.</p>

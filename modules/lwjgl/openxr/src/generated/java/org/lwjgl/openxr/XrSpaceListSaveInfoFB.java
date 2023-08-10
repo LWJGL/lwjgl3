@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpatialEntityStorageBatch XR_FB_spatial_entity_storage_batch} extension <b>must</b> be enabled prior to using {@link XrSpaceListSaveInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpatialEntityStorageBatch#XR_TYPE_SPACE_LIST_SAVE_INFO_FB TYPE_SPACE_LIST_SAVE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
  * <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
  * <li>The {@code spaceCount} parameter <b>must</b> be greater than 0</li>

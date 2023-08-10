@@ -15,7 +15,7 @@ val FB_space_warp = "FBSpaceWarp".nativeClassXR("FB_space_warp", type = "instanc
 
         This extension provides support to enable space warp technology on application. By feeding application generated motion vector and depth buffer images, the runtime can do high quality frame extrapolation and reprojection, allow applications to run at half fps but still providing smooth experience to users.
 
-        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         This extension is independent of {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth}, and both may be enabled and used at the same time, for different purposes. The ##XrCompositionLayerSpaceWarpInfoFB{@code ::depthSubImage} depth data is dedicated for space warp, and its resolution is usually lower than ##XrCompositionLayerDepthInfoKHR{@code ::subImage}. See ##XrSystemSpaceWarpPropertiesFB for suggested resolution of {@code depthSubImage}.

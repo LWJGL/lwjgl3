@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_device_d3d.txt">ANGLE_device_d3d</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_device_d3d.txt">ANGLE_device_d3d</a> extension.
  * 
  * <p>ANGLE has the ability to run GPU commands on a native D3D device. This extension defines a mapping from an EGL device to a D3D device, after it's
  * queried from an EGL display.</p>

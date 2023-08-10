@@ -29,7 +29,7 @@ val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_memory_overallocation_behavior]%20@mdinkov%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_memory_overallocation_behavior%20extension*">mdinkov</a></li>
+                <li>Martin Dinkov <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_memory_overallocation_behavior]%20@mdinkov%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_memory_overallocation_behavior%20extension*">mdinkov</a></li>
             </ul></dd>
         </dl>
 

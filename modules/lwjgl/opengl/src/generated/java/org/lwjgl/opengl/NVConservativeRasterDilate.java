@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster_dilate.txt">NV_conservative_raster_dilate</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster_dilate.txt">NV_conservative_raster_dilate</a> extension.
  * 
  * <p>This extension extends the conservative rasterization funtionality provided by NV_conservative_raster. It provides a new control to generate an
  * "over-conservative" rasterization by dilating primitives prior to rasterization.</p>

@@ -1122,7 +1122,7 @@ public class Blendish {
     /**
      * Designates an image handle as returned by {@code nvgCreateImage*()} as the themes' icon sheet.
      * 
-     * <p>The icon sheet format must be compatible to Blender 2.6's icon sheet; the order of icons does not matter. A valid icon sheet is e.g. shown at <a target="_blank" href="http://wiki.blender.org/index.php/Dev:2.5/Doc/How_to/Add_an_icon">how to add an icon</a>.</p>
+     * <p>The icon sheet format must be compatible to Blender 2.6's icon sheet; the order of icons does not matter. A valid icon sheet is e.g. shown at <a href="http://wiki.blender.org/index.php/Dev:2.5/Doc/How_to/Add_an_icon">how to add an icon</a>.</p>
      */
     public static native void bndSetIconImage(int image);
 
@@ -1131,7 +1131,7 @@ public class Blendish {
     /**
      * Designates an image handle as returned by {@code nvgCreateFont*()} as the themes' UI font.
      * 
-     * <p>Blender's original UI font Droid Sans is perfectly suited and available <a target="_blank" href="https://svn.blender.org/svnroot/bf-blender/trunk/blender/release/datafiles/fonts/">here</a>.</p>
+     * <p>Blender's original UI font Droid Sans is perfectly suited and available <a href="https://svn.blender.org/svnroot/bf-blender/trunk/blender/release/datafiles/fonts/">here</a>.</p>
      */
     public static native void bndSetFont(int font);
 

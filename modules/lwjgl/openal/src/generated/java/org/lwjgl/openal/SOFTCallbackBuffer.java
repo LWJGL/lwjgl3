@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_callback_buffer.txt">SOFT_callback_buffer</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_callback_buffer.txt">SOFT_callback_buffer</a> extension.
  * 
  * <p>This extension provides a mechanism for applications to provide sample data to the audio device in real-time.</p>
  * 

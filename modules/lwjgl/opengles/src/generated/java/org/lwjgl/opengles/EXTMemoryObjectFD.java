@@ -8,9 +8,9 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects_fd.txt">EXT_memory_object_fd</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects_fd.txt">EXT_memory_object_fd</a> extension.
  * 
- * <p>Building upon the OpenGL memory object and semaphore framework defined in <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects.txt">EXT_external_objects</a> this extension enables an OpenGL
+ * <p>Building upon the OpenGL memory object and semaphore framework defined in <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects.txt">EXT_external_objects</a> this extension enables an OpenGL
  * application to import a memory object or semaphore from POSIX file descriptor external handles.</p>
  * 
  * <p>Requires {@link EXTMemoryObject EXT_memory_object} and {@link GLES30 GLES30}.</p>

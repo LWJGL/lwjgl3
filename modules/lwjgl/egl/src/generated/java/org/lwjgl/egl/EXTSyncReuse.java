@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_sync_reuse.txt">EXT_sync_reuse</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_sync_reuse.txt">EXT_sync_reuse</a> extension.
  * 
  * <p>The original {@code EGLSync} extensions separated sync objects into two types: fence sync objects signaled by one time events in an API command
  * pipeline; and reusable sync objects signaled by commands which can be issued again and again. However, this conflates reusability of the event

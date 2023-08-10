@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_image_native_buffer.txt">ANDROID_image_native_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_image_native_buffer.txt">ANDROID_image_native_buffer</a> extension.
  * 
  * <p>This extension enables using an Android window buffer (struct ANativeWindowBuffer) as an EGLImage source.</p>
  * 

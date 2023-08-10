@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_coverage_sample_resolve.txt">NV_coverage_sample_resolve</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_coverage_sample_resolve.txt">NV_coverage_sample_resolve</a> extension.
  * 
  * <p>NV_coverage_sample introduced a method to improve rendering quality using a separate buffer to store coverage information for pixels in the color
  * buffers. It also provided a mechanism to disable writing to the coverage buffer when coverage sample filtering was not needed or undesirable. However,

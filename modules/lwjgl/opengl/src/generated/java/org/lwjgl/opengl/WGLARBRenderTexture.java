@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_render_texture.txt">WGL_ARB_render_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_render_texture.txt">WGL_ARB_render_texture</a> extension.
  * 
  * <p>This extension allows a color buffer to be used for both rendering and texturing. When a color buffer is bound to a texture target it cannot be
  * rendered to. Once it has been released from the texture it can be  rendered to once again.</p>
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>The application must release the color buffer from the texture before it can render to the pbuffer again. When the color buffer is bound as a
  * texture, draw and read operations on the pbuffer are undefined.</li>
  * <li>A mipmap attribute can be set, in which case memory will be allocated up front for mipmaps. The application can render the mipmap images or, if
- * <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/SGIS/SGIS_generate_mipmap.txt">SGIS_generate_mipmap</a> is supported, they can be automatically generated when the color buffer is bound as a texture.</li>
+ * <a href="https://www.khronos.org/registry/OpenGL/extensions/SGIS/SGIS_generate_mipmap.txt">SGIS_generate_mipmap</a> is supported, they can be automatically generated when the color buffer is bound as a texture.</li>
  * <li>A texture target is associated with the pbuffer, so that cubemap images can be rendered into a single color buffer.</li>
  * </ul>
  * 

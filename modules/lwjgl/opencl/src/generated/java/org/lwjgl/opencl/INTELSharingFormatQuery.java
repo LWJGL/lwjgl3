@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_sharing_format_query.txt">intel_sharing_format_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_sharing_format_query.txt">intel_sharing_format_query</a> extension.
  * 
  * <p>Existing interop / sharing extensions require support for a minimum set of image formats, however many OpenCL implementations may support sharing image
  * formats above and beyond the minimum. This extension provides a mechanism for an application to query the set of API-specific image formats that an

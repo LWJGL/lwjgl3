@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_motion_estimation.txt">QCOM_motion_estimation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_motion_estimation.txt">QCOM_motion_estimation</a> extension.
  * 
  * <p>Motion estimation, also referred to as optical flow, is the process of producing motion vectors that convey the 2D transformation from a reference
  * image to a target image. There are various uses of motion estimation, such as frame extrapolation, compression, object tracking, etc.</p>

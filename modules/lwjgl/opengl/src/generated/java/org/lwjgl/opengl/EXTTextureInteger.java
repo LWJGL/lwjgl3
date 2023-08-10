@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_integer.txt">EXT_texture_integer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_integer.txt">EXT_texture_integer</a> extension.
  * 
  * <p>Fixed-point textures in unextended OpenGL have integer components, but those values are taken to represent floating-point values in the range [0,1].
  * These integer components are considered "normalized" integers. When such a texture is accessed by a shader or by fixed-function fragment processing,
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Textures or render buffers with unnormalized integer formats may also be attached to framebuffer objects to receive fragment color values written by a
  * fragment shader. Per-fragment operations that require floating-point color components, including multisample alpha operations, alpha test, blending, and
- * dithering, have no effect when the corresponding colors are written to an integer color buffer. The <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> and
+ * dithering, have no effect when the corresponding colors are written to an integer color buffer. The <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> and
  * {@link EXTGPUShader4 EXT_gpu_shader4} extensions add the capability to fragment programs and fragment shaders to write signed and unsigned integer output values.</p>
  * 
  * <p>This extension does not enforce type consistency for texture accesses or between fragment shaders and the corresponding framebuffer attachments. The
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components.</li>
  * </ul>
  * 
- * <p>Requires {@link GL20 OpenGL 2.0} and <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> or {@link EXTGPUShader4 EXT_gpu_shader4}. Promoted to core in {@link GL30 OpenGL 3.0}.</p>
+ * <p>Requires {@link GL20 OpenGL 2.0} and <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> or {@link EXTGPUShader4 EXT_gpu_shader4}. Promoted to core in {@link GL30 OpenGL 3.0}.</p>
  */
 public class EXTTextureInteger {
 

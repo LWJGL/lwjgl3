@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_alpha_test.txt">QCOM_alpha_test</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_alpha_test.txt">QCOM_alpha_test</a> extension.
  * 
  * <p>This extension reintroduces the alpha test per-fragment operation from OpenGL ES 1.x. Some hardware has a dedicated unit capable of performing this
  * operation, and it can save ALU operations in the fragment shader by avoiding the conditional discard.</p>

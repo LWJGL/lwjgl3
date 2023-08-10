@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_gl_colorspace.txt">KHR_gl_colorspace</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_gl_colorspace.txt">KHR_gl_colorspace</a> extension.
  * 
  * <p>Applications may wish to use sRGB format default framebuffers to more easily achieve sRGB rendering to display devices. This extension allows creating
  * EGLSurfaces which will be rendered to in sRGB by OpenGL contexts supporting that capability.</p>

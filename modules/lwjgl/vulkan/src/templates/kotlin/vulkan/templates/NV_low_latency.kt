@@ -29,7 +29,7 @@ val NV_low_latency = "NVLowLatency".nativeClassVK("NV_low_latency", type = "devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Charles Hansen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_low_latency]%20@cshansen%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_low_latency%20extension*">cshansen</a></li>
+                <li>Charles Hansen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_low_latency]%20@cshansen%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_low_latency%20extension*">cshansen</a></li>
             </ul></dd>
         </dl>
 

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_mirror_clamp_to_edge.txt">EXT_texture_mirror_clamp_to_edge</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_mirror_clamp_to_edge.txt">EXT_texture_mirror_clamp_to_edge</a> extension.
  * 
  * <p>{@code EXT_texture_mirror_clamp_to_edge} extends the set of texture wrap modes to include an additional mode ({@link #GL_MIRROR_CLAMP_TO_EDGE_EXT MIRROR_CLAMP_TO_EDGE_EXT}) that
  * effectively uses a texture map twice as large as the original image in which the additional half of the new image is a mirror image of the original

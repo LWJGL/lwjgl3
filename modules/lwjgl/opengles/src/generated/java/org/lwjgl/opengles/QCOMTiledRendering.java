@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_tiled_rendering.txt">QCOM_tiled_rendering</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_tiled_rendering.txt">QCOM_tiled_rendering</a> extension.
  * 
  * <p>In the handheld graphics space, a typical challenge is achieving efficient rendering performance given the different characteristics of the various
  * types of graphics memory. Some types of memory ("slow" memory) are less expensive but have low bandwidth, higher latency, and/or higher power

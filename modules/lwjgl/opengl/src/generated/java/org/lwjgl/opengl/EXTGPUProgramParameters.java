@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_gpu_program_parameters.txt">EXT_gpu_program_parameters</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_gpu_program_parameters.txt">EXT_gpu_program_parameters</a> extension.
  * 
  * <p>This extension provides a new set of procedures to load multiple consecutive program environment parameters more efficiently, via a single GL call
  * instead of multiple calls. This will reduce the amount of CPU overhead involved in loading parameters.</p>

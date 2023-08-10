@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_geometry_shader.txt">EXT_geometry_shader</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_geometry_shader.txt">EXT_geometry_shader</a> extension.
  * 
  * <p>EXT_geometry_shader defines a new shader type available to be run on the GPU, called a geometry shader. Geometry shaders are run after vertices are
  * transformed, but prior to color clamping, flatshading and clipping.</p>

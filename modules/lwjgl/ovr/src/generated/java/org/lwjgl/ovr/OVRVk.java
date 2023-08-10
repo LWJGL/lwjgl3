@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Native bindings to libOVR, using the <a target="_blank" href="https://developer.oculus.com/">Oculus SDK</a> C API.
+ * Native bindings to libOVR, using the <a href="https://developer.oculus.com/">Oculus SDK</a> C API.
  * 
  * <p>This class contains Vulkan specific functionality.</p>
  */

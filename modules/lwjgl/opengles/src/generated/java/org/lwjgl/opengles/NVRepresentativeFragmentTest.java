@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_representative_fragment_test.txt">NV_representative_fragment_test</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_representative_fragment_test.txt">NV_representative_fragment_test</a> extension.
  * 
  * <p>This extension provides a new <em>representative fragment test</em> that allows implementations to reduce the amount of rasterization and fragment
  * processing work performed for each point, line, or triangle primitive. For any primitive that produces one or more fragments that pass all other early

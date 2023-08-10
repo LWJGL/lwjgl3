@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/GLX_NV_delay_before_swap.txt">GLX_NV_delay_before_swap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/GLX_NV_delay_before_swap.txt">GLX_NV_delay_before_swap</a> extension.
  * 
  * <p>For most interactive applications, the standard rendering loop responding to input events on a frame granularity is sufficient. Some more demanding
  * applications may want to exchange performance for the ability to sample input closer to the final frame swap and adjust rendering accordingly. This

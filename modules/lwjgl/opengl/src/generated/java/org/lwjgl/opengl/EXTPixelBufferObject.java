@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_pixel_buffer_object.txt">EXT_pixel_buffer_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_pixel_buffer_object.txt">EXT_pixel_buffer_object</a> extension.
  * 
  * <p>This extension expands on the interface provided by buffer objects. It is intended to permit buffer objects to be used not only with vertex array data,
  * but also with pixel data. Buffer objects were promoted from the ARB_vertex_buffer_object extension in OpenGL 1.5.</p>

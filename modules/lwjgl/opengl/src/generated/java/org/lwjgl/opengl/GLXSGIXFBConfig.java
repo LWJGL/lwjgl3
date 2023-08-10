@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.system.linux.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/SGIX/GLX_SGIX_fbconfig.txt">GLX_SGIX_fbconfig</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/SGIX/GLX_SGIX_fbconfig.txt">GLX_SGIX_fbconfig</a> extension.
  * 
  * <p>This extension introduces a new way to describe the capabilities of a GLX drawable (i.e., to describe the depth of color buffer components and the type
  * and size of ancillary buffers), removes the "similarity" requirement when making a context current to a drawable, and supports  RGBA rendering to

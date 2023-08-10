@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://www.khronos.org/ktx/">KTX (Khronos Texture)</a>, a lightweight container for textures for OpenGL®, Vulkan® and
+ * Contains bindings to the <a href="https://www.khronos.org/ktx/">KTX (Khronos Texture)</a>, a lightweight container for textures for OpenGL®, Vulkan® and
  * other GPU APIs.
  * 
  * <p>The LWJGL bindings support the KTX encoding functionality, but its presence is optional. Applications may choose to deploy the read-only version of the

@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://github.com/syoyo/tinyexr">Tiny OpenEXR</a> image library.
+ * Contains bindings to the <a href="https://github.com/syoyo/tinyexr">Tiny OpenEXR</a> image library.
  * 
  * <p>tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.</p>
  */

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_minmax_factor.txt">NV_blend_minmax_factor</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_minmax_factor.txt">NV_blend_minmax_factor</a> extension.
  * 
  * <p>The {@link EXTBlendMinmax EXT_blend_minmax} extension extended the GL's blending functionality to allow the blending equation to be specified by the application. That
  * extension introduced the {@link EXTBlendMinmax#GL_MIN_EXT MIN_EXT} and {@link EXTBlendMinmax#GL_MAX_EXT MAX_EXT} blend equations, which caused the result of the blend equation to become the minimum or maximum of the

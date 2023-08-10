@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_framebuffer_foveated.txt">QCOM_framebuffer_foveated</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_framebuffer_foveated.txt">QCOM_framebuffer_foveated</a> extension.
  * 
  * <p>Foveated rendering is a technique that aims to reduce fragment processing workload and bandwidth by reducing the average resolution of a framebuffer.
  * Perceived image quality is kept high by leaving the focal point of rendering at full resolution.</p>

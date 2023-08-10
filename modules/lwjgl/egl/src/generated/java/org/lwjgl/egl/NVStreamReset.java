@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_reset.txt">NV_stream_reset</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_reset.txt">NV_stream_reset</a> extension.
  * 
  * <p>The base stream extension requires that, once the producer inserts the first frame into the stream, at least one frame is always available to be
  * acquired by the consumer until the stream disconnects. However, there are some use cases in which the producer or the consumer may wish to allow the

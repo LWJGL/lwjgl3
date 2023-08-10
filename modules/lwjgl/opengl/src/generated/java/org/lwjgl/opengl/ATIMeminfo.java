@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_meminfo.txt">ATI_meminfo</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_meminfo.txt">ATI_meminfo</a> extension.
  * 
  * <p>Traditionally, OpenGL has treated resource management as a task of hardware virtualization hidden from applications. While providing great portability,
  * this shielding of information can prevent applications from making intelligent decisions on the management of resources they create. For instance, an

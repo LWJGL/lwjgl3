@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_surface_CTA861_3_metadata.txt">EXT_surface_CTA861_3_metadata</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_surface_CTA861_3_metadata.txt">EXT_surface_CTA861_3_metadata</a> extension.
  * 
  * <p>This extension adds additional EGL surface attributes for the metadata defined by the CTA (Consumer Technology Association) 861.3 standard. This
  * metadata, in addition to the SMPTE 2086 metadata, is used to define the color volume of the mastering display as well as the content (CTA-861.3), The

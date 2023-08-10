@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_shader_framebuffer_fetch.txt">ARM_shader_framebuffer_fetch</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_shader_framebuffer_fetch.txt">ARM_shader_framebuffer_fetch</a> extension.
  * 
  * <p>This extension enables fragment shaders to read existing framebuffer data as input. This permits use-cases such as programmable blending, and other
  * operations that may not be possible to implement with fixed-function blending.</p>

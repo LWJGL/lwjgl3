@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/IMG/EGL_IMG_image_plane_attribs.txt">IMG_image_plane_attribs</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/IMG/EGL_IMG_image_plane_attribs.txt">IMG_image_plane_attribs</a> extension.
  * 
  * <p>This extension allows creating an EGLImage from a single plane of a multi-planar Android native image buffer (ANativeWindowBuffer) or a native pixmap
  * (EGLNativePixmap).</p>

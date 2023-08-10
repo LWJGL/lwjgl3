@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_multigpu_context.txt">WGL_NV_multigpu_context</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_multigpu_context.txt">WGL_NV_multigpu_context</a> extension.
  * 
  * <p>This extension allows the creation of an OpenGL context in a multi-GPU environment with a specified multi-GPU strategy (known as SLI mode) which takes
  * precedence over process-wide multi-GPU mode settings.</p>

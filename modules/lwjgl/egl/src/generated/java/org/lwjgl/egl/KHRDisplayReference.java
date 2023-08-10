@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_display_reference.txt">KHR_display_reference</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_display_reference.txt">KHR_display_reference</a> extension.
  * 
  * <p>The existing semantics of {@code EGLDisplay} object lifetimes work well for applications in which one module manages all EGL usage, and in which EGL
  * displays are expected to remain available until application termination once they are instantiated. However, EGL does not provide reasonable semantics

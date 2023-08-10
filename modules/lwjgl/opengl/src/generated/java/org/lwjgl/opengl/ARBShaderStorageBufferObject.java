@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_storage_buffer_object.txt">ARB_shader_storage_buffer_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_storage_buffer_object.txt">ARB_shader_storage_buffer_object</a> extension.
  * 
  * <p>This extension provides the ability for OpenGL shaders to perform random access reads, writes, and atomic memory operations on variables stored in a
  * buffer object. Application shader code can declare sets of variables (referred to as "buffer variables") arranged into interface blocks in a manner

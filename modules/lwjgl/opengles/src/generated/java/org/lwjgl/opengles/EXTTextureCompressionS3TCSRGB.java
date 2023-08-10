@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_s3tc_srgb.txt">EXT_texture_compression_s3tc_srgb</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_s3tc_srgb.txt">EXT_texture_compression_s3tc_srgb</a> extension.
  * 
  * <p>This extension adds new compressed color texture formats using S3TC with nonlinear sRGB color components.</p>
  */

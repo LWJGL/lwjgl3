@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_memory_object_sparse.txt">NV_memory_object_sparse</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_memory_object_sparse.txt">NV_memory_object_sparse</a> extension.
  * 
  * <p>This extension adds sparse support to {@code EXT_memory_object} extension.</p>
  * 

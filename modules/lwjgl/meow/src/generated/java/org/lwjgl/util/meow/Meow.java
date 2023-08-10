@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://github.com/cmuratori/meow_hash">Meow hash</a>, an extremely fast non-cryptographic hash.
+ * Native bindings to <a href="https://github.com/cmuratori/meow_hash">Meow hash</a>, an extremely fast non-cryptographic hash.
  * 
  * <p>Q: What is it?<br>
  * A: Meow is a 128-bit non-cryptographic hash that operates at high speeds on x64 and ARM processors that provide AES instructions.  It is designed to be

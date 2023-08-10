@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_va_api_media_sharing.txt">intel_va_api_media_sharing</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_va_api_media_sharing.txt">intel_va_api_media_sharing</a> extension.
  * 
  * <p>The goal of this extension is to provide interoperability between OpenCL and the cross-platform Video Acceleration API (VA API). The extension
  * specifically enables sharing of VA API surfaces for media. It uses similar mechanisms and provides similar surface sharing capabilities for VA API that

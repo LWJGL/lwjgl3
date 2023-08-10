@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_YUV_target.txt">EXT_YUV_target</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_YUV_target.txt">EXT_YUV_target</a> extension.
  * 
  * <p>This extension adds support for three new YUV related items: first rendering to YUV images, second sampling from YUV images while keeping the data in
  * YUV space, third it defines a new built in function that does conversion from RGB to YUV with controls to choose ITU-R BT.601-7, ITU-R BT.601-7 Full

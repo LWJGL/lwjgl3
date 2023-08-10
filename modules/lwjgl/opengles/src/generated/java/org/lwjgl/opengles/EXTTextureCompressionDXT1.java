@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_dxt1.txt">EXT_texture_compression_dxt1</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_dxt1.txt">EXT_texture_compression_dxt1</a> extension.
  * 
  * <p>Support of EXT_texture_compression_s3tc is attractive for OpenGL-ES implementations because it provides compressed textures that allow for
  * significantly reduced texture storage. Reducing texture storage is advantageous because of the smaller memory capacity of many embedded systems

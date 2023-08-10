@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ARM/EGL_ARM_pixmap_multisample_discard.txt">ARM_pixmap_multisample_discard</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ARM/EGL_ARM_pixmap_multisample_discard.txt">ARM_pixmap_multisample_discard</a> extension.
  * 
  * <p>ARM_pixmap_multisample_discard adds an attribute to eglCreatePixmapSurface that allows the client API implementation to resolve a multisampled pixmap
  * surface, therefore allowing the multisample buffer to be discarded.</p>

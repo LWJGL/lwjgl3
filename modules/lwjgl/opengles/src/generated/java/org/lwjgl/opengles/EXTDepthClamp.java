@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_depth_clamp.txt">EXT_depth_clamp</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_depth_clamp.txt">EXT_depth_clamp</a> extension.
  * 
  * <p>Conventional OpenGL clips geometric primitives to a clip volume with six faces, two of which are the near and far clip planes. Clipping to the near and
  * far planes of the clip volume ensures that interpolated depth values (after the depth range transform) must be in the {@code [0,1]} range.</p>

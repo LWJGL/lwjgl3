@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.util.harfbuzz.HarfBuzz.*;
 
-/** Native bindings to the OpenType API of the <a target="_blank" href="https://harfbuzz.github.io/">HarfBuzz</a> library. */
+/** Native bindings to the OpenType API of the <a href="https://harfbuzz.github.io/">HarfBuzz</a> library. */
 public class OpenType {
 
     /** Contains the function pointers loaded from {@code HarfBuzz.getLibrary()}. */
@@ -136,19 +136,19 @@ public class OpenType {
         HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_LIGHT_BACKGROUND = 0x1,
         HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND  = 0x2;
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/base">Baseline Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/base">Baseline Table</a>. */
     public static final int HB_OT_TAG_BASE = HB_TAG('B','A','S','E');
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/gdef">Glyph Definition Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/gdef">Glyph Definition Table</a>. */
     public static final int HB_OT_TAG_GDEF = HB_TAG('G','D','E','F');
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/gsub">Glyph Substitution Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/gsub">Glyph Substitution Table</a>. */
     public static final int HB_OT_TAG_GSUB = HB_TAG('G','S','U','B');
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/gpos">Glyph Positioning Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/gpos">Glyph Positioning Table</a>. */
     public static final int HB_OT_TAG_GPOS = HB_TAG('G','P','O','S');
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/jstf">Justification Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/jstf">Justification Table</a>. */
     public static final int HB_OT_TAG_JSTF = HB_TAG('J','S','T','F');
 
     /** OpenType script tag, {@code DFLT}, for features that are not script-specific. */
@@ -196,7 +196,7 @@ public class OpenType {
     public static final int HB_OT_LAYOUT_NO_VARIATIONS_INDEX = 0xFFFFFFFF;
 
     /**
-     * Baseline tags from <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags">Baseline Tags</a> registry.
+     * Baseline tags from <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags">Baseline Tags</a> registry.
      * 
      * <h5>Enum values:</h5>
      * 
@@ -237,7 +237,7 @@ public class OpenType {
         HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_CENTRAL        = HB_TAG ('I','d','c','e'),
         HB_OT_LAYOUT_BASELINE_TAG_MATH                      = HB_TAG ('m','a','t','h');
 
-    /** OpenType <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/math">Mathematical Typesetting Table</a>. */
+    /** OpenType <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/math">Mathematical Typesetting Table</a>. */
     public static final int HB_OT_TAG_MATH = HB_TAG('M','A','T','H');
 
     /**
@@ -249,7 +249,7 @@ public class OpenType {
     public static final int HB_OT_TAG_MATH_SCRIPT = HB_TAG('m','a','t','h');
 
     /**
-     * The {@code MATH} table constants, refer to <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table">OpenType documentation</a> for more explanations. ({@code hb_ot_math_constant_t})
+     * The {@code MATH} table constants, refer to <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table">OpenType documentation</a> for more explanations. ({@code hb_ot_math_constant_t})
      * 
      * <h5>Enum values:</h5>
      * 
@@ -400,7 +400,7 @@ public class OpenType {
     public static final int HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER = 0x1;
 
     /**
-     * Known metadata tags from <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/meta">https://docs.microsoft.com/en-us/typography/opentype/spec/meta</a>. ({@code hb_ot_meta_tag_t})
+     * Known metadata tags from <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/meta">https://docs.microsoft.com/en-us/typography/opentype/spec/meta</a>. ({@code hb_ot_meta_tag_t})
      * 
      * <h5>Enum values:</h5>
      * 
@@ -423,7 +423,7 @@ public class OpenType {
         HB_OT_META_TAG_SUPPORTED_LANGUAGES = HB_TAG ('s','l','n','g');
 
     /**
-     * Metric tags corresponding to <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags">MVAR Value Tags</a>.
+     * Metric tags corresponding to <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags">MVAR Value Tags</a>.
      * 
      * <p>({@code hb_ot_metrics_tag_t})</p>
      * 
@@ -495,7 +495,7 @@ public class OpenType {
      * 
      * <p>There are predefined name IDs, as well as name IDs return from other API. These can be used to fetch name strings from a font face.</p>
      * 
-     * <p>For more information on these fields, see the <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids">OpenType spec</a>.</p>
+     * <p>For more information on these fields, see the <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids">OpenType spec</a>.</p>
      * 
      * <h5>Enum values:</h5>
      * 

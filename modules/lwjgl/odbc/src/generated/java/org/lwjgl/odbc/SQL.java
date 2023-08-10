@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">ODBC</a>.
+ * Native bindings to <a href="https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">ODBC</a>.
  * 
  * <p>The Microsoft Open Database Connectivity (ODBC) interface is a C programming language interface that makes it possible for applications to access data
  * from a variety of database management systems (DBMSs). ODBC is a low-level, high-performance interface that is designed specifically for relational
@@ -3346,7 +3346,7 @@ public class SQL {
 
     /**
      * SQLCompleteAsync can be used to determine when an asynchronous function is complete using either notification- or polling-based processing. For more
-     * information about asynchronous operations, see <a target="_blank" href="https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/asynchronous-execution">Asynchronous Execution</a>.
+     * information about asynchronous operations, see <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/asynchronous-execution">Asynchronous Execution</a>.
      * 
      * <p>SQLCompleteAsync is only implemented in the ODBC Driver Manager.</p>
      * 

@@ -5,10 +5,10 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
+ * Contains bindings to the <a href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
  * 
- * <p>The bgfx documentation can be found online <a target="_blank" href="https://bkaradzic.github.io/bgfx/">here</a>. The API reference is available
- * <a target="_blank" href="https://bkaradzic.github.io/bgfx/bgfx.html">here</a>.</p>
+ * <p>The bgfx documentation can be found online <a href="https://bkaradzic.github.io/bgfx/">here</a>. The API reference is available
+ * <a href="https://bkaradzic.github.io/bgfx/bgfx.html">here</a>.</p>
  * 
  * <p>Starting with LWJGL 3.2.1, builds of the bgfx tools are available for download via the LWJGL site's <a href="https://www.lwjgl.org/browse">file
  * browser</a>. These tools are:</p>

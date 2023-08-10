@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_combine.txt">ARB_texture_env_combine</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_combine.txt">ARB_texture_env_combine</a> extension.
  * 
  * <p>New texture environment function COMBINE_ARB allows programmable texture combiner operations.</p>
  * 

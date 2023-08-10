@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_sRGB.txt">WGL_EXT_framebuffer_sRGB</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_sRGB.txt">WGL_EXT_framebuffer_sRGB</a> extension.
  * 
  * <p>WGL functionality for {@link EXTFramebufferSRGB EXT_framebuffer_sRGB}.</p>
  * 

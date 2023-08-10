@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_motion_estimation.txt">intel_motion_estimation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_motion_estimation.txt">intel_motion_estimation</a> extension.
  * 
  * <p>This document presents the motion estimation extension for OpenCL. This extension includes a set of host-callable functions for frame-based motion
  * estimation and introduces motion estimators, or also "motion estimation accelerator objects". These accelerator objects provide an abstraction of

@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_debug.txt">KHR_debug</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_debug.txt">KHR_debug</a> extension.
  * 
  * <p>This extension allows EGL to notify applications when various events occur that may be useful during application development and debugging.</p>
  * 

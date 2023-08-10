@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_present_opaque.txt">EXT_present_opaque</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_present_opaque.txt">EXT_present_opaque</a> extension.
  * 
  * <p>This extension adds a new EGL surface attribute {@link #EGL_PRESENT_OPAQUE_EXT PRESENT_OPAQUE_EXT} to indicate that the surface should be presented as opaque, disregarding any alpha
  * channel if present. If surface attribute {@code EGL_PRESENT_OPAQUE_EXT} is {@link EGL10#EGL_TRUE TRUE}, then the surface will be presented as opaque.</p>

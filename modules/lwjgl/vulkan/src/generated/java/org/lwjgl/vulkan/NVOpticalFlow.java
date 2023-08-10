@@ -117,7 +117,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_optical_flow]%20@crohde%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_optical_flow%20extension*">crohde</a></li>
+ * <li>Carsten Rohde <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_optical_flow]%20@crohde%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_optical_flow%20extension*">crohde</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -420,11 +420,11 @@ public class NVOpticalFlow {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>{@link VK10#VK_FORMAT_B8G8R8A8_UNORM FORMAT_B8G8R8A8_UNORM}, {@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM} and {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} are initially supported for images with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical usage</a> {@link #VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV OPTICAL_FLOW_USAGE_INPUT_BIT_NV}.</p>
+     * <p>{@link VK10#VK_FORMAT_B8G8R8A8_UNORM FORMAT_B8G8R8A8_UNORM}, {@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM} and {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} are initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical usage</a> {@link #VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV OPTICAL_FLOW_USAGE_INPUT_BIT_NV}.</p>
      * 
-     * <p>{@link #VK_FORMAT_R16G16_S10_5_NV FORMAT_R16G16_S10_5_NV} is initially supported for images with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV}, {@link #VK_OPTICAL_FLOW_USAGE_HINT_BIT_NV OPTICAL_FLOW_USAGE_HINT_BIT_NV} and {@link #VK_OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV}.</p>
+     * <p>{@link #VK_FORMAT_R16G16_S10_5_NV FORMAT_R16G16_S10_5_NV} is initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV}, {@link #VK_OPTICAL_FLOW_USAGE_HINT_BIT_NV OPTICAL_FLOW_USAGE_HINT_BIT_NV} and {@link #VK_OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV}.</p>
      * 
-     * <p>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} and {@link VK10#VK_FORMAT_R32_UINT FORMAT_R32_UINT} are initially supported for images with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_COST_BIT_NV OPTICAL_FLOW_USAGE_COST_BIT_NV}. It is recommended to use {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} because of the lower bandwidth.</p>
+     * <p>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} and {@link VK10#VK_FORMAT_R32_UINT FORMAT_R32_UINT} are initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_COST_BIT_NV OPTICAL_FLOW_USAGE_COST_BIT_NV}. It is recommended to use {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} because of the lower bandwidth.</p>
      * </div>
      * 
      * <h5>See Also</h5>
@@ -499,7 +499,7 @@ public class NVOpticalFlow {
      *
      * @param device      the logical device that creates the optical flow session object.
      * @param pCreateInfo a pointer to a {@link VkOpticalFlowSessionCreateInfoNV} structure containing parameters specifying the creation of the optical flow session.
-     * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator  controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pSession    a pointer to a {@code VkOpticalFlowSessionNV} handle specifying the optical flow session object which will be created by this function when it returns {@link VK10#VK_SUCCESS SUCCESS}
      */
     @NativeType("VkResult")
@@ -549,7 +549,7 @@ public class NVOpticalFlow {
      *
      * @param device     the device that was used for the creation of the optical flow session.
      * @param session    the optical flow session to be destroyed.
-     * @param pAllocator controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionNV") long session, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyOpticalFlowSessionNV(device, session, memAddressSafe(pAllocator));
@@ -645,7 +645,7 @@ public class NVOpticalFlow {
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code session} <b>must</b> be a valid {@code VkOpticalFlowSessionNV} handle</li>
      * <li>{@code pExecuteInfo} <b>must</b> be a valid pointer to a valid {@link VkOpticalFlowExecuteInfoNV} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support opticalflow operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>
@@ -661,7 +661,7 @@ public class NVOpticalFlow {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Outside</td><td>Opticalflow</td><td>Action</td></tr></tbody>
      * </table>
      * 

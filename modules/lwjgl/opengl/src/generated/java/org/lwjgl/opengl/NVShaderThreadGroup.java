@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_thread_group.txt">NV_shader_thread_group</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_thread_group.txt">NV_shader_thread_group</a> extension.
  * 
  * <p>Implementations of the OpenGL Shading Language may, but are not required to, run multiple shader threads for a single stage as a SIMD thread group,
  * where individual execution threads are assigned to thread groups in an undefined, implementation-dependent order. This extension provides a set of new

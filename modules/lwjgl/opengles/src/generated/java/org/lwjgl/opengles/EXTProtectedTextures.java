@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_protected_textures.txt">EXT_protected_textures</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_protected_textures.txt">EXT_protected_textures</a> extension.
  * 
  * <p>This extension requires another extension like {@code EGL_EXT_protected_content} to have created a protected context. A protected context enables the
  * driver to put the GPU into a protected mode where it is able to operate on protected surfaces.</p>

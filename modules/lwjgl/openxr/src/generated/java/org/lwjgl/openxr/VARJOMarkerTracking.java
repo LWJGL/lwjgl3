@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Varjo Markers are physical markers tracked by the video cameras of the HMD. Different types of markers <b>can</b> be used for different purposes. As an example, Varjo Markers <b>can</b> be used as cheap replacements for electronic trackers. The cost per printed tracker is significantly lower and the markers require no power to function.</p>
  * 
- * <p>This extension provides the tracking interface to a set of marker types and sizes. Markers <b>can</b> be printed out from the PDF documents and instructions freely available at <a target="_blank" href="https://developer.varjo.com/docs/get-started/varjo-markers#printing-varjo-markers">https://developer.varjo.com/docs/get-started/varjo-markers#printing-varjo-markers</a>. Note that the printed marker <b>must</b> have the exact physical size for its ID.</p>
+ * <p>This extension provides the tracking interface to a set of marker types and sizes. Markers <b>can</b> be printed out from the PDF documents and instructions freely available at <a href="https://developer.varjo.com/docs/get-started/varjo-markers#printing-varjo-markers">https://developer.varjo.com/docs/get-started/varjo-markers#printing-varjo-markers</a>. Note that the printed marker <b>must</b> have the exact physical size for its ID.</p>
  * 
  * <p>Object markers are used to track static or dynamic objects in the user environment. You <b>may</b> use object markers in both XR and VR applications. Each marker has a unique ID, and you <b>must</b> not use the same physical marker more than once in any given environment. For added precision, an application <b>may</b> use multiple markers to track a single object. For example, you could track a monitor by placing a marker in each corner.</p>
  * 

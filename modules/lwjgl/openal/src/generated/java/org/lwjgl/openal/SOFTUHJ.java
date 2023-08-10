@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_UHJ.txt">SOFT_UHJ</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_UHJ.txt">SOFT_UHJ</a> extension.
  * 
  * <p>This extension adds support for UHJ channel formats and a Super Stereo (a.k.a. Stereo Enhance) processor.</p>
  * 

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_surface_SMPTE2086_metadata.txt">EXT_surface_SMPTE2086_metadata</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_surface_SMPTE2086_metadata.txt">EXT_surface_SMPTE2086_metadata</a> extension.
  * 
  * <p>This extension adds a new set of EGL surface attributes for the metadata defined by the SMPTE (the Society of Motion Picture and Television Engineers)
  * ST 2086 standard. The SMPTE 2086 metadata includes the color primaries, white point and luminance range of the mastering display, which all together

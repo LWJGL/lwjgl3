@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_pixel_local_storage.txt">EXT_shader_pixel_local_storage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_pixel_local_storage.txt">EXT_shader_pixel_local_storage</a> extension.
  * 
  * <p>Techniques such as deferred shading and deferred lighting are often implemented by attaching multiple color render targets to a framebuffer object,
  * rendering the required intermediate data, and then sampling from this data as textures. While flexible, this approach consumes a large amount of

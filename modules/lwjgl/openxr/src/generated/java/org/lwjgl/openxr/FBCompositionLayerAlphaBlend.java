@@ -14,7 +14,7 @@ package org.lwjgl.openxr;
  * 
  * <p>Like color, destination alpha is initialized to 0 before composition begins.</p>
  * 
- * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  * 
  * <p>These blend factors are specified by attaching a {@link XrCompositionLayerAlphaBlendFB} structure to the {@code next} chain of a {@link XrCompositionLayerBaseHeader}-derived layer structure.</p>
  */

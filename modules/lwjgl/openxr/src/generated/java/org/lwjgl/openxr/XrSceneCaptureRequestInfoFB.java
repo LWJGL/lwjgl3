@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSceneCapture XR_FB_scene_capture} extension <b>must</b> be enabled prior to using {@link XrSceneCaptureRequestInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>If {@code requestByteCount} is not 0, {@code request} <b>must</b> be a pointer to an array of {@code requestByteCount} char values</li>
  * </ul>
  * 

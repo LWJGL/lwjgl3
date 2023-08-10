@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_program_binary_formats.txt">MESA_program_binary_formats</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_program_binary_formats.txt">MESA_program_binary_formats</a> extension.
  * 
  * <p>The {@code get_program_binary} exensions require a {@code GLenum} {@code binaryFormat}. This extension documents that format for use with Mesa.</p>
  */

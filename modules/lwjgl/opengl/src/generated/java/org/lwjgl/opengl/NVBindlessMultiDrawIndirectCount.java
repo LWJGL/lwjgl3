@@ -13,7 +13,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_bindless_multi_draw_indirect_count.txt">NV_bindless_multi_draw_indirect_count</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_bindless_multi_draw_indirect_count.txt">NV_bindless_multi_draw_indirect_count</a> extension.
  * 
  * <p>This extension adds the possibility to define the number of drawcalls within a multi-draw-indirect call from the GPU, as provided by
  * {@code ARB_indirect_parameters}, for the functions added in {@code NV_bindless_multi_draw_indirect}.</p>

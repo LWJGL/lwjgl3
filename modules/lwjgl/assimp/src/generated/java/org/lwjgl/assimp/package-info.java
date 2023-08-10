@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://www.assimp.org/">Assimp</a> library, a library to import and export various 3d-model-formats including
+ * Contains bindings to the <a href="https://www.assimp.org/">Assimp</a> library, a library to import and export various 3d-model-formats including
  * scene-post-processing to generate missing render data.
  * 
  * <p>Assimp aims to provide a full asset conversion pipeline for use in game engines / realtime rendering systems of any kind, but it is not limited to this

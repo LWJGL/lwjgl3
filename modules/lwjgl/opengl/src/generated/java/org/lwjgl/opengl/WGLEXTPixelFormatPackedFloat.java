@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_packed_float.txt">WGL_EXT_pixel_format_packed_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_packed_float.txt">WGL_EXT_pixel_format_packed_float</a> extension.
  * 
  * <p>This extension provides support for rendering into an unsigned floating-point rendering format with the assumption that the texture format described in
  * {@link EXTPackedFloat} could also be advertised as an unsigned floating-point format for rendering.</p>

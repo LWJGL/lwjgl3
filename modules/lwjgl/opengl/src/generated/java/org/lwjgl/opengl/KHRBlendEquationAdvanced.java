@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_blend_equation_advanced.txt">KHR_blend_equation_advanced</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_blend_equation_advanced.txt">KHR_blend_equation_advanced</a> extension.
  * 
  * <p>This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
  * than the standard blend modes provided by unextended OpenGL. This extension provides two different extension string entries:</p>

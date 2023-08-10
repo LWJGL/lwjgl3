@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_front_buffer_auto_refresh.txt">ANDROID_front_buffer_auto_refresh</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_front_buffer_auto_refresh.txt">ANDROID_front_buffer_auto_refresh</a> extension.
  * 
  * <p>This extension is intended for latency-sensitive applications that are doing front-buffer rendering. It allows them to indicate to the Android
  * compositor that it should perform composition every time the display refreshes. This removes the overhead of having to notify the compositor that the

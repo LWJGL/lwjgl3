@@ -85,7 +85,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
     /** an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the {@link VkInstanceCreateInfo} structure to enable this layer for an instance. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** the Vulkan version the layer was written to, encoded as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. */
+    /** the Vulkan version the layer was written to, encoded as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. */
     @NativeType("uint32_t")
     public int specVersion() { return nspecVersion(address()); }
     /** the version of this layer. It is an integer, increasing with backward compatible changes. */

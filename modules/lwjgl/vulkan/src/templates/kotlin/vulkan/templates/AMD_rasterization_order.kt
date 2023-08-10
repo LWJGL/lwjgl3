@@ -50,7 +50,7 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_rasterization_order]%20@drakos-amd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_rasterization_order%20extension*">drakos-amd</a></li>
+                <li>Daniel Rakos <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_rasterization_order]%20@drakos-amd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_rasterization_order%20extension*">drakos-amd</a></li>
             </ul></dd>
         </dl>
 
@@ -97,8 +97,8 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
         <h5>Description</h5>
         <ul>
-            <li>#RASTERIZATION_ORDER_STRICT_AMD specifies that operations for each primitive in a subpass <b>must</b> occur in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
-            <li>#RASTERIZATION_ORDER_RELAXED_AMD specifies that operations for each primitive in a subpass <b>may</b> not occur in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
+            <li>#RASTERIZATION_ORDER_STRICT_AMD specifies that operations for each primitive in a subpass <b>must</b> occur in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
+            <li>#RASTERIZATION_ORDER_RELAXED_AMD specifies that operations for each primitive in a subpass <b>may</b> not occur in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
         </ul>
 
         <h5>See Also</h5>

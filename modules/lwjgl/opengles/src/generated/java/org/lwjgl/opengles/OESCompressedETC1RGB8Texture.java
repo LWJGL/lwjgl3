@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_ETC1_RGB8_texture.txt">OES_compressed_ETC1_RGB8_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_ETC1_RGB8_texture.txt">OES_compressed_ETC1_RGB8_texture</a> extension.
  * 
  * <p>The goal of this extension is to allow direct support of compressed textures in the Ericsson Texture Compression (ETC) formats in OpenGL ES.</p>
  * 

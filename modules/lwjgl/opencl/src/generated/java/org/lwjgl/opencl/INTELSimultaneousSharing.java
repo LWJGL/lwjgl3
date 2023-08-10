@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_simultaneous_sharing.txt">intel_simultaneous_sharing</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_simultaneous_sharing.txt">intel_simultaneous_sharing</a> extension.
  * 
  * <p>Currently OpenCL 1.2 Extension Spec forbids to specify interoperability with multiple graphics APIs at {@link CL10#clCreateContext CreateContext} or
  * {@link CL10#clCreateContextFromType CreateContextFromType} time and defines that {@link CL10#CL_INVALID_OPERATION INVALID_OPERATION} should be returned in such cases as noted e.g. in chapters dedicated to

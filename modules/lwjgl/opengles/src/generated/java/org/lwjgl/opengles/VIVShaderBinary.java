@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/VIV/VIV_shader_binary.txt">VIV_shader_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/VIV/VIV_shader_binary.txt">VIV_shader_binary</a> extension.
  * 
  * <p>This extension enables loading precompiled binary shaders compatible with chips designed by Vivante Corporation.</p>
  */

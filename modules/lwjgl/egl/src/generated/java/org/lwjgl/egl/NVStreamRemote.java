@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_remote.txt">NV_stream_remote</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_remote.txt">NV_stream_remote</a> extension.
  * 
  * <p>This extension provides a generic framework for establishing stream connections when the producer and consumer endpoints are not associated with the
  * same {@code EGLStream} object. The cross-process streams allowed by the {@link KHRStreamCrossProcessFD KHR_stream_cross_process_fd} extension are one example of such a

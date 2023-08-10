@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_fifo.txt">KHR_stream_fifo</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_fifo.txt">KHR_stream_fifo</a> extension.
  * 
  * <p>This extension allows an EGLStream to operate as a fifo rather than as a mailbox.</p>
  * 

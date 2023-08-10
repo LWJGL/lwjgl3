@@ -79,7 +79,7 @@ public class XrActionSuggestedBinding extends Struct implements NativeResource {
     /** the {@code XrAction} handle for an action */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the {@code XrPath} of a binding for the action specified in {@code action}. This path is any top level user path plus input source path, for example pathname:/user/hand/right/input/trigger/click. See <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">suggested bindings</a> for more details. */
+    /** the {@code XrPath} of a binding for the action specified in {@code action}. This path is any top level user path plus input source path, for example pathname:/user/hand/right/input/trigger/click. See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">suggested bindings</a> for more details. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
 

@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_pause_device.txt">SOFT_pause_device</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_pause_device.txt">SOFT_pause_device</a> extension.
  * 
  * <p>This extension allows applications to pause a playback device. The main purpose of this is to silence output, stop processing, and allow the audio
  * hardware to go into a low-power mode. On a mobile device, for instance, apps may want to silence output and not waste battery life with unneeded

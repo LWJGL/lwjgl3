@@ -16,7 +16,7 @@ val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        Vulkan 1.3 adds <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-new-features">additional functionality related to this extension</a> in the form of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxInlineUniformTotalSize">{@code maxInlineUniformTotalSize}</a> limit.
+        Vulkan 1.3 adds <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-new-features">additional functionality related to this extension</a> in the form of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxInlineUniformTotalSize">{@code maxInlineUniformTotalSize}</a> limit.
 
         <h5>VK_EXT_inline_uniform_block</h5>
         <dl>
@@ -37,12 +37,12 @@ val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_inline_uniform_block]%20@aqnuep%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_inline_uniform_block%20extension*">aqnuep</a></li>
+                <li>Daniel Rakos <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_inline_uniform_block]%20@aqnuep%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_inline_uniform_block%20extension*">aqnuep</a></li>
             </ul></dd>
         </dl>
 

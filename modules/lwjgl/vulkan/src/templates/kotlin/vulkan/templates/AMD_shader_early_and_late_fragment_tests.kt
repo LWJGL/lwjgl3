@@ -11,7 +11,7 @@ import vulkan.*
 val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTests".nativeClassVK("AMD_shader_early_and_late_fragment_tests", type = "device", postfix = "AMD") {
     documentation =
         """
-        This extension adds support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a> extension, allowing shaders to explicitly opt in to allowing both early <em>and</em> late fragment tests with the {@code EarlyAndLateFragmentTestsAMD} execution mode.
+        This extension adds support for the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a> extension, allowing shaders to explicitly opt in to allowing both early <em>and</em> late fragment tests with the {@code EarlyAndLateFragmentTestsAMD} execution mode.
 
         If {@link EXTShaderStencilExport VK_EXT_shader_stencil_export} is supported, additional execution modes allowing early depth tests similar to {@code DepthUnchanged}, {@code DepthLess}, and {@code DepthGreater} are provided.
 
@@ -34,11 +34,11 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_early_and_late_fragment_tests]%20@tobski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_early_and_late_fragment_tests%20extension*">tobski</a></li>
+                <li>Tobias Hector <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_early_and_late_fragment_tests]%20@tobski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_early_and_late_fragment_tests%20extension*">tobski</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_AMD_shader_early_and_late_fragment_tests.adoc">VK_AMD_shader_early_and_late_fragment_tests</a></dd>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_AMD_shader_early_and_late_fragment_tests.adoc">VK_AMD_shader_early_and_late_fragment_tests</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -48,7 +48,7 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a></li>
+                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a></li>
                 <li>This extension interacts with {@link EXTShaderStencilExport VK_EXT_shader_stencil_export}</li>
             </ul></dd>
 

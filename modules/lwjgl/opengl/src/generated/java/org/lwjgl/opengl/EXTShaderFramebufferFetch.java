@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_framebuffer_fetch.txt">EXT_shader_framebuffer_fetch</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_framebuffer_fetch.txt">EXT_shader_framebuffer_fetch</a> extension.
  * 
  * <p>Conventional OpenGL blending provides a configurable series of operations that can be used to combine the output values from a fragment shader with the
  * values already in the framebuffer. While these operations are suitable for basic image compositing, other compositing operations or operations that

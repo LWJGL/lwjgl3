@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_shading_rate.txt">QCOM_shading_rate</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_shading_rate.txt">QCOM_shading_rate</a> extension.
  * 
  * <p>By default, OpenGL runs a fragment shader once for each pixel covered by a primitive being rasterized. When using multisampling, the outputs of that
  * fragment shader are broadcast to each covered sample of the fragment's pixel. When using multisampling, applications can optionally request that the

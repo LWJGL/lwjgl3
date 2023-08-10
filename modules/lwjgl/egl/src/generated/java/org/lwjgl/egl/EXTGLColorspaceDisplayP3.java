@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_display_p3.txt">EXT_gl_colorspace_display_p3</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_display_p3.txt">EXT_gl_colorspace_display_p3</a> extension.
  * 
  * <p>Applications that want to use the Display-P3 color space (DCI-P3 primaries and linear or sRGB-like transfer function) can use this extension to
  * communicate to the platform that framebuffer contents represent colors in the Display-P3 color space. The application is responsible for producing

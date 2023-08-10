@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_EGL_image_external.txt">OES_EGL_image_external</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_EGL_image_external.txt">OES_EGL_image_external</a> extension.
  * 
  * <p>This extension provides a mechanism for creating EGLImage texture targets from EGLImages. This extension defines a new texture target,
  * TEXTURE_EXTERNAL_OES. This texture target can only be specified using an EGLImage. There is no support for most of the functions that manipulate other

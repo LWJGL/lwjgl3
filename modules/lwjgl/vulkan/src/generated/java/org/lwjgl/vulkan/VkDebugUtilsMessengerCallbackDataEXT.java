@@ -169,14 +169,14 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
     /** a count of items contained in the {@code pQueueLabels} array. */
     @NativeType("uint32_t")
     public int queueLabelCount() { return nqueueLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information. */
+    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information. */
     @Nullable
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.Buffer pQueueLabels() { return npQueueLabels(address()); }
     /** a count of items contained in the {@code pCmdBufLabels} array. */
     @NativeType("uint32_t")
     public int cmdBufLabelCount() { return ncmdBufLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information. */
+    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information. */
     @Nullable
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.Buffer pCmdBufLabels() { return npCmdBufLabels(address()); }

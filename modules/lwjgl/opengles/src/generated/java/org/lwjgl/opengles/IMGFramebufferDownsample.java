@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_framebuffer_downsample.txt">IMG_framebuffer_downsample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_framebuffer_downsample.txt">IMG_framebuffer_downsample</a> extension.
  * 
  * <p>This extension introduces the ability to attach color buffers to a framebuffer that are at a lower resolution than the framebuffer itself, with the GPU
  * automatically downsampling the color attachment to fit.</p>

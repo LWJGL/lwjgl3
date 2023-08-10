@@ -26,15 +26,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_array_bgra.txt">ARB_vertex_array_bgra</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_elements_base_vertex.txt">ARB_draw_elements_base_vertex</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_coord_conventions.txt">ARB_fragment_coord_conventions</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_provoking_vertex.txt">ARB_provoking_vertex</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cube_map.txt">ARB_seamless_cube_map</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_multisample.txt">ARB_texture_multisample</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_clamp.txt">ARB_depth_clamp</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_geometry_shader4.txt">ARB_geometry_shader4</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sync.txt">ARB_sync</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_array_bgra.txt">ARB_vertex_array_bgra</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_elements_base_vertex.txt">ARB_draw_elements_base_vertex</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_coord_conventions.txt">ARB_fragment_coord_conventions</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_provoking_vertex.txt">ARB_provoking_vertex</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cube_map.txt">ARB_seamless_cube_map</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_multisample.txt">ARB_texture_multisample</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_clamp.txt">ARB_depth_clamp</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_geometry_shader4.txt">ARB_geometry_shader4</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sync.txt">ARB_sync</a></li>
  * </ul>
  */
 public class GL32C extends GL31C {
@@ -210,7 +210,7 @@ public class GL32C extends GL31C {
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * @param params the requested parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetBufferParameteri64v(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
         if (CHECKS) {
@@ -225,7 +225,7 @@ public class GL32C extends GL31C {
      * @param target the target buffer object. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetBufferParameteri64(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
@@ -258,7 +258,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLint") int basevertex) {
         nglDrawElementsBaseVertex(mode, count, type, indices, basevertex);
@@ -272,7 +272,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawElementsBaseVertex(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), basevertex);
@@ -285,7 +285,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawElementsBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), basevertex);
@@ -298,7 +298,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawElementsBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), basevertex);
@@ -311,7 +311,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawElementsBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), basevertex);
@@ -338,7 +338,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawRangeElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLuint") int start, @NativeType("GLuint") int end, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLint") int basevertex) {
         nglDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
@@ -354,7 +354,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawRangeElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLuint") int start, @NativeType("GLuint") int end, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawRangeElementsBaseVertex(mode, start, end, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), basevertex);
@@ -369,7 +369,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawRangeElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLuint") int start, @NativeType("GLuint") int end, @NativeType("void const *") ByteBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawRangeElementsBaseVertex(mode, start, end, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), basevertex);
@@ -384,7 +384,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawRangeElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLuint") int start, @NativeType("GLuint") int end, @NativeType("void const *") ShortBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawRangeElementsBaseVertex(mode, start, end, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), basevertex);
@@ -399,7 +399,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawRangeElementsBaseVertex">Reference Page</a>
      */
     public static void glDrawRangeElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLuint") int start, @NativeType("GLuint") int end, @NativeType("void const *") IntBuffer indices, @NativeType("GLint") int basevertex) {
         nglDrawRangeElementsBaseVertex(mode, start, end, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), basevertex);
@@ -425,7 +425,7 @@ public class GL32C extends GL31C {
      * @param primcount  the number of instances of the indexed geometry that should be drawn
      * @param basevertex a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex) {
         nglDrawElementsInstancedBaseVertex(mode, count, type, indices, primcount, basevertex);
@@ -440,7 +440,7 @@ public class GL32C extends GL31C {
      * @param primcount  the number of instances of the indexed geometry that should be drawn
      * @param basevertex a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex) {
         nglDrawElementsInstancedBaseVertex(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), primcount, basevertex);
@@ -454,7 +454,7 @@ public class GL32C extends GL31C {
      * @param primcount  the number of instances of the indexed geometry that should be drawn
      * @param basevertex a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex) {
         nglDrawElementsInstancedBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), primcount, basevertex);
@@ -468,7 +468,7 @@ public class GL32C extends GL31C {
      * @param primcount  the number of instances of the indexed geometry that should be drawn
      * @param basevertex a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex) {
         nglDrawElementsInstancedBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), primcount, basevertex);
@@ -482,7 +482,7 @@ public class GL32C extends GL31C {
      * @param primcount  the number of instances of the indexed geometry that should be drawn
      * @param basevertex a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertex">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertex(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex) {
         nglDrawElementsInstancedBaseVertex(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), primcount, basevertex);
@@ -508,7 +508,7 @@ public class GL32C extends GL31C {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a pointer to the location where the base vertices are stored
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
         if (CHECKS) {
@@ -525,7 +525,7 @@ public class GL32C extends GL31C {
      *
      * @param mode the provoking vertex mode. One of:<br><table><tr><td>{@link #GL_FIRST_VERTEX_CONVENTION FIRST_VERTEX_CONVENTION}</td><td>{@link #GL_LAST_VERTEX_CONVENTION LAST_VERTEX_CONVENTION}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glProvokingVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glProvokingVertex">Reference Page</a>
      */
     public static native void glProvokingVertex(@NativeType("GLenum") int mode);
 
@@ -543,7 +543,7 @@ public class GL32C extends GL31C {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTexImage2DMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTexImage2DMultisample">Reference Page</a>
      */
     public static native void glTexImage2DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations);
 
@@ -562,7 +562,7 @@ public class GL32C extends GL31C {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTexImage3DMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTexImage3DMultisample">Reference Page</a>
      */
     public static native void glTexImage3DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations);
 
@@ -578,7 +578,7 @@ public class GL32C extends GL31C {
      * @param index the index of the sample whose position to query
      * @param val   an array to receive the position of the sample
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
      */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") FloatBuffer val) {
         if (CHECKS) {
@@ -593,7 +593,7 @@ public class GL32C extends GL31C {
      * @param pname the sample parameter name. Must be:<br><table><tr><td>{@link #GL_SAMPLE_POSITION SAMPLE_POSITION}</td></tr></table>
      * @param index the index of the sample whose position to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetMultisamplef(@NativeType("GLenum") int pname, @NativeType("GLuint") int index) {
@@ -615,7 +615,7 @@ public class GL32C extends GL31C {
      * @param index which 32-bit sub-word of the sample mask to update
      * @param mask  the new value of the mask sub-word
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glSampleMaski">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glSampleMaski">Reference Page</a>
      */
     public static native void glSampleMaski(@NativeType("GLuint") int index, @NativeType("GLbitfield") int mask);
 
@@ -629,7 +629,7 @@ public class GL32C extends GL31C {
      * @param texture    the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level      the mipmap level of {@code texture} to attach
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferTexture">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferTexture">Reference Page</a>
      */
     public static native void glFramebufferTexture(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level);
 
@@ -642,7 +642,7 @@ public class GL32C extends GL31C {
      * @param flags     a bitwise combination of flags controlling the behavior of the sync object. No flags are presently defined for this operation and {@code flags} must
      *                  be zero.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFenceSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFenceSync">Reference Page</a>
      */
     @NativeType("GLsync")
     public static native long glFenceSync(@NativeType("GLenum") int condition, @NativeType("GLbitfield") int flags);
@@ -657,7 +657,7 @@ public class GL32C extends GL31C {
      *
      * @param sync a value that may be the name of a sync object
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glIsSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glIsSync">Reference Page</a>
      */
     @NativeType("GLboolean")
     public static boolean glIsSync(@NativeType("GLsync") long sync) {
@@ -677,7 +677,7 @@ public class GL32C extends GL31C {
      *
      * @param sync the sync object to be deleted
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDeleteSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDeleteSync">Reference Page</a>
      */
     public static void glDeleteSync(@NativeType("GLsync") long sync) {
         if (CHECKS) {
@@ -708,7 +708,7 @@ public class GL32C extends GL31C {
      * @param flags   a bitfield controlling the command flushing behavior. One or more of:<br><table><tr><td>0</td><td>{@link #GL_SYNC_FLUSH_COMMANDS_BIT SYNC_FLUSH_COMMANDS_BIT}</td></tr></table>
      * @param timeout the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClientWaitSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClientWaitSync">Reference Page</a>
      */
     @NativeType("GLenum")
     public static int glClientWaitSync(@NativeType("GLsync") long sync, @NativeType("GLbitfield") int flags, @NativeType("GLuint64") long timeout) {
@@ -736,7 +736,7 @@ public class GL32C extends GL31C {
      * @param flags   a bitfield controlling the command flushing behavior. Must be:<br><table><tr><td>0</td></tr></table>
      * @param timeout the timeout that the server should wait before continuing. Must be:<br><table><tr><td>{@link #GL_TIMEOUT_IGNORED TIMEOUT_IGNORED}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glWaitSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glWaitSync">Reference Page</a>
      */
     public static void glWaitSync(@NativeType("GLsync") long sync, @NativeType("GLbitfield") int flags, @NativeType("GLuint64") long timeout) {
         if (CHECKS) {
@@ -756,7 +756,7 @@ public class GL32C extends GL31C {
      * @param pname  the parameter value to be returned
      * @param params the value or values of the specified parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
      */
     public static void glGetInteger64v(@NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
         if (CHECKS) {
@@ -770,7 +770,7 @@ public class GL32C extends GL31C {
      *
      * @param pname the parameter value to be returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetInteger64(@NativeType("GLenum") int pname) {
@@ -796,7 +796,7 @@ public class GL32C extends GL31C {
      * @param index  the index of the element being queried
      * @param params the value or values of the specified parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
      */
     public static void glGetInteger64i_v(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint64 *") LongBuffer params) {
         if (CHECKS) {
@@ -811,7 +811,7 @@ public class GL32C extends GL31C {
      * @param pname the indexed state to query
      * @param index the index of the element being queried
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetInteger64i(@NativeType("GLenum") int pname, @NativeType("GLuint") int index) {
@@ -842,7 +842,7 @@ public class GL32C extends GL31C {
      * @param length the address of an variable to receive the number of integers placed in {@code values}
      * @param values the address of an array to receive the values of the queried parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
     public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer values) {
         if (CHECKS) {
@@ -859,7 +859,7 @@ public class GL32C extends GL31C {
      * @param pname  the parameter whose value to retrieve from the sync object specified in {@code sync}. One of:<br><table><tr><td>{@link #GL_OBJECT_TYPE OBJECT_TYPE}</td><td>{@link #GL_SYNC_CONDITION SYNC_CONDITION}</td><td>{@link #GL_SYNC_STATUS SYNC_STATUS}</td><td>{@link #GL_SYNC_FLAGS SYNC_FLAGS}</td></tr></table>
      * @param length the address of an variable to receive the number of integers placed in {@code values}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetSynci(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length) {
@@ -880,7 +880,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glGetBufferParameteri64v GetBufferParameteri64v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetBufferParameteri64v(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         long __functionAddress = GL.getICD().glGetBufferParameteri64v;
@@ -894,7 +894,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
     public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
         long __functionAddress = GL.getICD().glMultiDrawElementsBaseVertex;
@@ -909,7 +909,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glGetMultisamplefv GetMultisamplefv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMultisample">Reference Page</a>
      */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {
         long __functionAddress = GL.getICD().glGetMultisamplefv;
@@ -923,7 +923,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glGetInteger64v GetInteger64v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger64v">Reference Page</a>
      */
     public static void glGetInteger64v(@NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         long __functionAddress = GL.getICD().glGetInteger64v;
@@ -937,7 +937,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glGetInteger64i_v GetInteger64i_v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInteger">Reference Page</a>
      */
     public static void glGetInteger64i_v(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint64 *") long[] params) {
         long __functionAddress = GL.getICD().glGetInteger64i_v;
@@ -951,7 +951,7 @@ public class GL32C extends GL31C {
     /**
      * Array version of: {@link #glGetSynciv GetSynciv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetSync">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
     public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] values) {
         long __functionAddress = GL.getICD().glGetSynciv;

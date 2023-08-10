@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_gather.txt">ARB_texture_gather</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_gather.txt">ARB_texture_gather</a> extension.
  * 
  * <p>This extension provides a new set of texture functions (textureGather) to the shading language that determine 2x2 footprint that are used for linear
  * filtering in a texture lookup, and return a vector consisting of the first component from each of the four texels in the footprint.</p>

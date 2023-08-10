@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_spirv_extensions.txt">ARB_spirv_extensions</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_spirv_extensions.txt">ARB_spirv_extensions</a> extension.
  * 
  * <p>{@code ARB_gl_spirv} added support for using SPIR-V modules in OpenGL. However it only added support for SPIR-V 1.0 concepts that were part of the
  * OpenGL 4.5 Core Profile.</p>

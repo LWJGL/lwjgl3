@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_render_snorm.txt">EXT_render_snorm</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_render_snorm.txt">EXT_render_snorm</a> extension.
  * 
  * <p>OpenGL ES 3.1 supports a variety of signed normalized texture and renderbuffer formats which are not color-renderable.</p>
  * 

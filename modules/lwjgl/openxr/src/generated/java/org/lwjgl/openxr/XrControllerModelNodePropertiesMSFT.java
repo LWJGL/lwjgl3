@@ -34,7 +34,7 @@ import static org.lwjgl.openxr.MSFTControllerModel.*;
  * <ul>
  * <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using {@link XrControllerModelNodePropertiesMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code parentNodeName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link MSFTControllerModel#XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT}</li>
  * <li>{@code nodeName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link MSFTControllerModel#XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT}</li>
  * </ul>

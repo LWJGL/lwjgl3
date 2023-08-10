@@ -32,11 +32,11 @@ val EXT_pipeline_protected_access = "EXTPipelineProtectedAccess".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_protected_access]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_protected_access%20extension*">syoussefi</a></li>
+                <li>Shahbaz Youssefi <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_protected_access]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_protected_access%20extension*">syoussefi</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_pipeline_protected_access.adoc">VK_EXT_pipeline_protected_access</a></dd>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_pipeline_protected_access.adoc">VK_EXT_pipeline_protected_access</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>

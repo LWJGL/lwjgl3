@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_buffer_load.txt">NV_shader_buffer_load</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_buffer_load.txt">NV_shader_buffer_load</a> extension.
  * 
  * <p>At a very coarse level, GL has evolved in a way that allows applications to replace many of the original state machine variables with blocks of
  * user-defined data. For example, the current vertex state has been augmented by vertex buffer objects, fixed-function shading state and parameters have

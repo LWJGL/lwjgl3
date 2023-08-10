@@ -13,7 +13,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to stb_dxt.h from the <a target="_blank" href="https://github.com/nothings/stb">stb library</a>.
+ * Native bindings to stb_dxt.h from the <a href="https://github.com/nothings/stb">stb library</a>.
  * 
  * <p>DXT1/DXT5 compressor.</p>
  */

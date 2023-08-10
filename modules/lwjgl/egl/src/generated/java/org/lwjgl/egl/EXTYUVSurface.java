@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_yuv_surface.txt">EXT_yuv_surface</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_yuv_surface.txt">EXT_yuv_surface</a> extension.
  * 
  * <p>This extension defines a set of new EGL configuration attributes and values which allows EGL to create and use YUV surfaces.</p>
  * 

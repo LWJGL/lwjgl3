@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Contains bindings to <a target="_blank" href="https://symas.com/lmdb/">LMDB</a>, the Symas Lightning Memory-Mapped Database.
+ * Contains bindings to <a href="https://symas.com/lmdb/">LMDB</a>, the Symas Lightning Memory-Mapped Database.
  * 
  * <h3>Getting Started</h3>
  * 

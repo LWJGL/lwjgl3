@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_buffer_unified_memory.txt">NV_vertex_buffer_unified_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_buffer_unified_memory.txt">NV_vertex_buffer_unified_memory</a> extension.
  * 
  * <p>This extension provides a mechanism to specify vertex attrib and element array locations using GPU addresses.</p>
  * 

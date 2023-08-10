@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_coverage_to_color.txt">NV_fragment_coverage_to_color</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_coverage_to_color.txt">NV_fragment_coverage_to_color</a> extension.
  * 
  * <p>This extension allows the fragment coverage value, represented as an integer bitfield, to be substituted for a color output being written to a
  * single-component color buffer with integer components (e.g., R8UI). The capability provided by this extension is different from simply writing the

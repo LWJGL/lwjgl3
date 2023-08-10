@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_multisample_blit_scaled.txt">EXT_framebuffer_multisample_blit_scaled</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_multisample_blit_scaled.txt">EXT_framebuffer_multisample_blit_scaled</a> extension.
  * 
  * <p>This extension relaxes some of the restrictions associated with multisample resolve operations, specifically to allow a combined resolve and scale
  * operation through a single call to BlitFramebuffer. It also adds two new filter types to control the quality of the combined scaled resolve operation.</p>

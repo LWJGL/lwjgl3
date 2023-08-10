@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NOK/EGL_NOK_texture_from_pixmap.txt">NOK_texture_from_pixmap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NOK/EGL_NOK_texture_from_pixmap.txt">NOK_texture_from_pixmap</a> extension.
  * 
  * <p>This extension allows a color buffer to be used for both rendering and texturing.</p>
  * 

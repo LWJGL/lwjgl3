@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt">GLX_ARB_context_flush_control</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt">GLX_ARB_context_flush_control</a> extension.
  * 
  * <p>The GLX version of {@link KHRContextFlushControl}. This extension adds new context creation parameters the allow an application to specify the behavior
  * that is desired when a context is made non-current, and specifically to opt out of the implicit flush behavior.</p>

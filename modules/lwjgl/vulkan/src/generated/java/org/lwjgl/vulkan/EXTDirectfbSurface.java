@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>{@link KHRSurface VK_KHR_surface}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Nicolas Caramelli <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_directfb_surface]%20@caramelli%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_directfb_surface%20extension*">caramelli</a></li>
+ * <li>Nicolas Caramelli <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_directfb_surface]%20@caramelli%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_directfb_surface%20extension*">caramelli</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -119,7 +119,7 @@ public class EXTDirectfbSurface {
      *
      * @param instance    the instance to associate the surface with.
      * @param pCreateInfo a pointer to a {@link VkDirectFBSurfaceCreateInfoEXT} structure containing parameters affecting the creation of the surface object.
-     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")

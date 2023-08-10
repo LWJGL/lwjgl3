@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_import_memory.txt">arm_import_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_import_memory.txt">arm_import_memory</a> extension.
  * 
  * <p>This extension adds a new function that allows for direct memory import into OpenCL via the {@link #clImportMemoryARM ImportMemoryARM} function.</p>
  * 

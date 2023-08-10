@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_device_fission.txt">ext_device_fission</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_device_fission.txt">ext_device_fission</a> extension.
  * 
  * <p>This extension provides an interface for sub-dividing an OpenCL device into multiple sub-devices. There are a number of cases in which a typical user
  * would like to subdivide a device:</p>

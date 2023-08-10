@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_create_buffer_with_properties.txt">intel_create_buffer_with_properties</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_create_buffer_with_properties.txt">intel_create_buffer_with_properties</a> extension.
  * 
  * <p>This extension allows OpenCL 1.x and 2.x devices to support the {@code clCreateBufferWithProperties} API that was added in OpenCL 3.0. This allows
  * older OpenCL implementations to support other optional extensions or features that use the {@code clCreateBufferWithProperties} API to specify

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_gl_image.txt">KHR_gl_texture_3D_image</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_gl_image.txt">KHR_gl_texture_3D_image</a> extension.
  * 
  * <p>This extension provides a mechanism for creating EGLImage objects from OpenGL and OpenGL ES (henceforth referred to collectively as 'GL')
  * three-dimensional images.</p>

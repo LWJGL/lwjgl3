@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_no_error.txt">KHR_no_error</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_no_error.txt">KHR_no_error</a> extension.
  * 
  * <p>With this extension enabled any behavior that generates a GL error will have undefined behavior. The reason this extension exists is performance can be
  * increased and power usage decreased. When this mode is used, a GL driver can have undefined behavior where it would have generated a GL error without

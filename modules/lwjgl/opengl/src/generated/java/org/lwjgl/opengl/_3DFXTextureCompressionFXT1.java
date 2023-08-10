@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/3DFX/3DFX_texture_compression_FXT1.txt">3DFX_texture_compression_FXT1</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/3DFX/3DFX_texture_compression_FXT1.txt">3DFX_texture_compression_FXT1</a> extension.
  * 
  * <p>This extension additional texture compression functionality's FXT1 format, specific to 3dfxsubject to all the requirements and limitations described by
  * the extension {@code GL_ARB_texture_compression}. The FXT1 texture format supports only 2D and 3D images without borders.</p>

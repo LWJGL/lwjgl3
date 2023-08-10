@@ -8,7 +8,7 @@ package org.lwjgl.odbc;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://docs.microsoft.com/en-us/sql/relational-databases/native-client/sql-server-native-client-programming">SQL Server Native Client</a>.
+ * Native bindings to the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/native-client/sql-server-native-client-programming">SQL Server Native Client</a>.
  * 
  * <p>Microsoft SQL Server Native Client is a single native dynamic link library (DLL) that contains the ODBC driver and OLE DB provider, which together
  * support applications using native-code APIs (ODBC, OLE DB and ADO) to access Microsoft SQL Server. SQL Server Native Client is a component of SQL

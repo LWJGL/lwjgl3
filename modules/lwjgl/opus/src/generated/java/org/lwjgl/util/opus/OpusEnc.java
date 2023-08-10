@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.opus.Opus.*;
 
 /**
- * This is the documentation for the <a target="_blank" href="https://github.com/xiph/libopusenc">libopusenc</a> C API.
+ * This is the documentation for the <a href="https://github.com/xiph/libopusenc">libopusenc</a> C API.
  * 
  * <p>The {@code libopusenc} package provides a convenient high-level API for encoding Ogg Opus files.</p>
  * 

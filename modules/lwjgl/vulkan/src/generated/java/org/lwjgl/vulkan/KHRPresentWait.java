@@ -28,7 +28,7 @@ import static org.lwjgl.system.JNI.*;
  * <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRPresentId VK_KHR_present_id}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Keith Packard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_present_wait]%20@keithp%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_present_wait%20extension*">keithp</a></li>
+ * <li>Keith Packard <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_present_wait]%20@keithp%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_present_wait%20extension*">keithp</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -70,7 +70,7 @@ public class KHRPresentWait {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>When the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentWait">{@code presentWait}</a> feature is enabled, an application <b>can</b> wait for an image to be presented to the user by first specifying a presentId for the target presentation by adding a {@link VkPresentIdKHR} structure to the {@code pNext} chain of the {@link VkPresentInfoKHR} structure and then waiting for that presentation to complete by calling:</p>
+     * <p>When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentWait">{@code presentWait}</a> feature is enabled, an application <b>can</b> wait for an image to be presented to the user by first specifying a presentId for the target presentation by adding a {@link VkPresentIdKHR} structure to the {@code pNext} chain of the {@link VkPresentInfoKHR} structure and then waiting for that presentation to complete by calling:</p>
      * 
      * <pre><code>
      * VkResult vkWaitForPresentKHR(
@@ -97,7 +97,7 @@ public class KHRPresentWait {
      * 
      * <ul>
      * <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-     * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentWait">{@code presentWait}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentWait">{@code presentWait}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

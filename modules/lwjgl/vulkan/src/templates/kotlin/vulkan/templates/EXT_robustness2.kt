@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension adds stricter requirements for how out of bounds reads and writes are handled. Most accesses <b>must</b> be tightly bounds-checked, out of bounds writes <b>must</b> be discarded, out of bound reads <b>must</b> return zero. Rather than allowing multiple possible <code>(0,0,0,x)</code> vectors, the out of bounds values are treated as zero, and then missing components are inserted based on the format as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-conversion-to-rgba">Conversion to RGBA</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fxvertex-input-extraction">vertex input attribute extraction</a>.
+        This extension adds stricter requirements for how out of bounds reads and writes are handled. Most accesses <b>must</b> be tightly bounds-checked, out of bounds writes <b>must</b> be discarded, out of bound reads <b>must</b> return zero. Rather than allowing multiple possible <code>(0,0,0,x)</code> vectors, the out of bounds values are treated as zero, and then missing components are inserted based on the format as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-conversion-to-rgba">Conversion to RGBA</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fxvertex-input-extraction">vertex input attribute extraction</a>.
 
         These additional requirements <b>may</b> be expensive on some implementations, and should only be enabled when truly necessary.
 
@@ -35,11 +35,11 @@ val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_robustness2]%20@liam-middlebrook%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_robustness2%20extension*">liam-middlebrook</a></li>
+                <li>Liam Middlebrook <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_robustness2]%20@liam-middlebrook%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_robustness2%20extension*">liam-middlebrook</a></li>
             </ul></dd>
         </dl>
 

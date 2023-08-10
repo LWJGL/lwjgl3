@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_create_context_no_error.txt">KHR_create_context_no_error</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_create_context_no_error.txt">KHR_create_context_no_error</a> extension.
  * 
  * <p>This extension allows the creation of an OpenGL or OpenGL ES context that doesn't generate errors if the context supports a no error mode. The
  * implications of this feature are discussed in the {@link org.lwjgl.opengl.KHRNoError GL_KHR_no_error} extension.</p>

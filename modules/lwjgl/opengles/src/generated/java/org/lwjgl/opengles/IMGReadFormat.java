@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_read_format.txt">IMG_read_format</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_read_format.txt">IMG_read_format</a> extension.
  * 
  * <p>This extension is intended to supplement the GL_OES_read_format extension by adding support for more format/type combinations to be used when calling
  * ReadPixels. ReadPixels currently accepts one fixed format/type combination (format RGBA and type UNSIGNED_BYTE) for portability, and an implementation

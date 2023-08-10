@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_texture.txt">NV_draw_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_texture.txt">NV_draw_texture</a> extension.
  * 
  * <p>This extension provides a new function, DrawTextureNV(), allowing
  * applications to draw an screen-aligned rectangle displaying some or all of

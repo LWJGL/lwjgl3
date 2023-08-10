@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_force_host_memory.txt">intel_mem_force_host_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_mem_force_host_memory.txt">intel_mem_force_host_memory</a> extension.
  * 
  * <p>This extension allows an application to override driver heuristics to force allocation of a buffer memory object in host memory. Host memory is
  * described in the {@code cl_intel_unified_shared_memory} extension.</p>

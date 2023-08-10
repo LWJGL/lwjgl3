@@ -23,7 +23,7 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
             <li>An application to set the color space for the session.</li>
         </ul>
 
-        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(
@@ -194,7 +194,7 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
 
         Formal definitions of color spaces contain a number of aspects such as gamma correction, max luminance and more. However, #SetColorSpaceFB() will only affect the color gamut of the output by transforming the color gamut from the source (defined by the {@code colorSpace} parameter) to the HMD display’s color gamut (defined by the hardware internally). This call will not affect gamma correction, leaving that to follow the GPU texture format standards. Luminance, tonemapping, and other aspects of the color space will also remain unaffected.
 
-        For more info on color management in Oculus HMDs, please refer to this guide: <a target="_blank" href="https://developer.oculus.com/resources/color-management-guide/">Color Management in Oculus Headsets</a>
+        For more info on color management in Oculus HMDs, please refer to this guide: <a href="https://developer.oculus.com/resources/color-management-guide/">Color Management in Oculus Headsets</a>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

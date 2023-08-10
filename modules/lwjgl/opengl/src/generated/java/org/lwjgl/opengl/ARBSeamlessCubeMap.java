@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cube_map.txt">ARB_seamless_cube_map</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cube_map.txt">ARB_seamless_cube_map</a> extension.
  * 
  * <p>When sampling from cube map textures, a three-dimensional texture coordinate is used to select one of the cube map faces and generate a two dimensional
  * texture coordinate ( s t ), at which a texel is sampled from the determined face of the cube map texture. Each face of the texture is treated as an

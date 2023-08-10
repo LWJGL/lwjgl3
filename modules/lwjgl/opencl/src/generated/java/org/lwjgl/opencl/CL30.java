@@ -314,7 +314,7 @@ public class CL30 extends CL22 {
      *
      * @param version a packed {@code cl_version}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_MAJOR.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_MAJOR.html">Reference Page</a>
      */
     @NativeType("uint32_t")
     public static int CL_VERSION_MAJOR(@NativeType("uint32_t") int version) {
@@ -328,7 +328,7 @@ public class CL30 extends CL22 {
      *
      * @param version a packed {@code cl_version}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_MINOR.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_MINOR.html">Reference Page</a>
      */
     @NativeType("uint32_t")
     public static int CL_VERSION_MINOR(@NativeType("uint32_t") int version) {
@@ -342,7 +342,7 @@ public class CL30 extends CL22 {
      *
      * @param version a packed {@code cl_version}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_PATCH.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_VERSION_PATCH.html">Reference Page</a>
      */
     @NativeType("uint32_t")
     public static int CL_VERSION_PATCH(@NativeType("uint32_t") int version) {
@@ -358,7 +358,7 @@ public class CL30 extends CL22 {
      * @param minor the minor version
      * @param patch the patch version
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_MAKE_VERSION.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/CL_MAKE_VERSION.html">Reference Page</a>
      */
     @NativeType("uint32_t")
     public static int CL_MAKE_VERSION(@NativeType("uint32_t") int major, @NativeType("uint32_t") int minor, @NativeType("uint32_t") int patch) {
@@ -403,7 +403,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetContextDestructorCallback.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetContextDestructorCallback.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetContextDestructorCallback(@NativeType("cl_context") long context, @NativeType("void (*) (cl_context, void *)") CLContextDestructorCallbackI pfn_notify, @NativeType("void *") long user_data) {
@@ -462,7 +462,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("size_t") long size, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -511,7 +511,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -560,7 +560,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -609,7 +609,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -658,7 +658,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -707,7 +707,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") DoubleBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -815,7 +815,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -911,7 +911,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -1007,7 +1007,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -1103,7 +1103,7 @@ public class CL30 extends CL22 {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -1117,7 +1117,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateBufferWithProperties CreateBufferWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1134,7 +1134,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateBufferWithProperties CreateBufferWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1151,7 +1151,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateBufferWithProperties CreateBufferWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1168,7 +1168,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateBufferWithProperties CreateBufferWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1185,7 +1185,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateBufferWithProperties CreateBufferWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBufferWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateBufferWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") double[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1202,7 +1202,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateImageWithProperties CreateImageWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1219,7 +1219,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateImageWithProperties CreateImageWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1236,7 +1236,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateImageWithProperties CreateImageWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1253,7 +1253,7 @@ public class CL30 extends CL22 {
     /**
      * Array version of: {@link #clCreateImageWithProperties CreateImageWithProperties}
      * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
+     * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateImageWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateImageWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @Nullable @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {

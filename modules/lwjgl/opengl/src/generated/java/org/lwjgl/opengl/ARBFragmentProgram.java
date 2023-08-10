@@ -6,14 +6,14 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_program.txt">ARB_fragment_program</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_program.txt">ARB_fragment_program</a> extension.
  * 
  * <p>Unextended OpenGL mandates a certain set of configurable per- fragment computations defining texture application, texture environment, color sum, and
  * fog operations. Several extensions have added further per-fragment computations to OpenGL. For example, extensions have defined new texture environment
  * capabilities (ARB_texture_env_add, {@link ARBTextureEnvCombine ARB_texture_env_combine}, {@link ARBTextureEnvDot3 ARB_texture_env_dot3}, ARB_texture_env_crossbar), per-fragment depth
- * comparisons ({@link ARBDepthTexture ARB_depth_texture}, {@link ARBShadow ARB_shadow}, {@link ARBShadowAmbient ARB_shadow_ambient}, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shadow_funcs.txt">EXT_shadow_funcs</a>), per-fragment lighting
- * (<a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_lighting.txt">EXT_fragment_lighting</a>, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_light_texture.txt">EXT_light_texture</a>), and environment mapped bump mapping
- * (<a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_envmap_bumpmap.txt">ATI_envmap_bumpmap</a>).</p>
+ * comparisons ({@link ARBDepthTexture ARB_depth_texture}, {@link ARBShadow ARB_shadow}, {@link ARBShadowAmbient ARB_shadow_ambient}, <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shadow_funcs.txt">EXT_shadow_funcs</a>), per-fragment lighting
+ * (<a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_lighting.txt">EXT_fragment_lighting</a>, <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_light_texture.txt">EXT_light_texture</a>), and environment mapped bump mapping
+ * (<a href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_envmap_bumpmap.txt">ATI_envmap_bumpmap</a>).</p>
  * 
  * <p>Each such extension adds a small set of relatively inflexible per-fragment computations.</p>
  * 

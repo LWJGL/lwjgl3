@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_half_float.txt">AMD_gpu_shader_half_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_half_float.txt">AMD_gpu_shader_half_float</a> extension.
  * 
  * <p>This extension was developed based on the {@link NVGPUShader5 NV_gpu_shader5} extension to allow implementations supporting half float in shader and expose the
  * feature without the additional requirements that are present in {@code NV_gpu_shader5}.</p>

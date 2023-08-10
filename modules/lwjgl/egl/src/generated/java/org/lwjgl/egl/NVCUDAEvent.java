@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_cuda_event.txt">NV_cuda_event</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_cuda_event.txt">NV_cuda_event</a> extension.
  * 
  * <p>This extension allows creating an EGL sync object linked to a CUDA event object, potentially improving efficiency of sharing images and compute results
  * between the two APIs.</p>

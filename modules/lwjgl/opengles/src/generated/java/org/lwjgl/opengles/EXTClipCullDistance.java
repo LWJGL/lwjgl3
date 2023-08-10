@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_clip_cull_distance.txt">EXT_clip_cull_distance</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_clip_cull_distance.txt">EXT_clip_cull_distance</a> extension.
  * 
  * <p>This extension adds support for hardware clip planes and cull distances to OpenGL ES.</p>
  */

@@ -15,7 +15,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_map_buffer_range.txt">EXT_map_buffer_range</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_map_buffer_range.txt">EXT_map_buffer_range</a> extension.
  * 
  * <p>EXT_map_buffer_range expands the buffer object API to allow greater performance when a client application only needs to write to a sub-range of a
  * buffer object. To that end, this extension introduces two new buffer object features: non-serialized buffer modification and explicit sub-range

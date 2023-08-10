@@ -13,7 +13,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_bindless_multi_draw_indirect.txt">NV_bindless_multi_draw_indirect</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_bindless_multi_draw_indirect.txt">NV_bindless_multi_draw_indirect</a> extension.
  * 
  * <p>This extension combines {@code NV_vertex_buffer_unified_memory} and {@code ARB_multi_draw_indirect} to allow the processing of multiple drawing
  * commands, whose vertex and index data can be sourced from arbitrary buffer locations, by a single function call.</p>

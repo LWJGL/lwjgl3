@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader.txt">ARB_fragment_shader</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader.txt">ARB_fragment_shader</a> extension.
  * 
  * <p>This extension adds functionality to define fragment shader objects. A fragment shader object is a shader object (see the ARB_shader_objects extension)
  * that, when attached to a program object, can be compiled and linked to produce an executable that runs on the fragment processor in OpenGL. The fragment

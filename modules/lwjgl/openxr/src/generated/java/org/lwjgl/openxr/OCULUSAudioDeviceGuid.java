@@ -87,7 +87,7 @@ public class OCULUSAudioDeviceGuid {
      * <p>{@link #xrGetAudioInputDeviceGuidOculus GetAudioInputDeviceGuidOculus}</p>
      *
      * @param instance the {@code XrInstance} to query the audio device state in.
-     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
+     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
      */
     @NativeType("XrResult")
     public static int xrGetAudioOutputDeviceGuidOculus(XrInstance instance, @NativeType("wchar_t *") ByteBuffer buffer) {
@@ -149,7 +149,7 @@ public class OCULUSAudioDeviceGuid {
      * <p>{@link #xrGetAudioOutputDeviceGuidOculus GetAudioOutputDeviceGuidOculus}</p>
      *
      * @param instance the {@code XrInstance} to query the audio device state in.
-     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
+     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
      */
     @NativeType("XrResult")
     public static int xrGetAudioInputDeviceGuidOculus(XrInstance instance, @NativeType("wchar_t *") ByteBuffer buffer) {

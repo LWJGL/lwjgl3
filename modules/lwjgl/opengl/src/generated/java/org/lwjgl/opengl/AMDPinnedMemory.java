@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_pinned_memory.txt">AMD_pinned_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_pinned_memory.txt">AMD_pinned_memory</a> extension.
  * 
  * <p>This extension defines an interface that allows improved control of the physical memory used by the graphics device.</p>
  * 

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_dma.txt">NV_stream_dma</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_dma.txt">NV_stream_dma</a> extension.
  * 
  * <p>This extension provides the framework for performing DMA transfers between opposite ends of a single stream, if there is no shared memory available
  * between them.</p>

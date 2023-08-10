@@ -14,7 +14,7 @@ import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_bind.txt">ARB_multi_bind</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_bind.txt">ARB_multi_bind</a> extension.
  * 
  * <p>This extension provides a new set of commands allowing applications to bind or unbind a set of objects in a single call, instead of requiring a separate
  * call for each bind or unbind operation.  Using a single command allows OpenGL implementations to amortize function call, name space lookup, and

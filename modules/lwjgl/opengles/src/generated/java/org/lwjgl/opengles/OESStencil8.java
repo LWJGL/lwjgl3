@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_stencil8.txt">OES_stencil8</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_stencil8.txt">OES_stencil8</a> extension.
  * 
  * <p>This extension enables 8-bit stencil component as a valid render buffer storage format.</p>
  */

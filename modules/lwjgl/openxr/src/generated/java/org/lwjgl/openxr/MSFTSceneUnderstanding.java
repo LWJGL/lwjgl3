@@ -328,7 +328,7 @@ public class MSFTSceneUnderstanding {
      * 
      * <p>The {@link #xrEnumerateSceneComputeFeaturesMSFT EnumerateSceneComputeFeaturesMSFT} function enumerates the supported scene compute features of the given system.</p>
      * 
-     * <p>This function follows the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code features} array.</p>
+     * <p>This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code features} array.</p>
      * 
      * <pre><code>
      * XrResult xrEnumerateSceneComputeFeaturesMSFT(
@@ -858,7 +858,7 @@ public class MSFTSceneUnderstanding {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>Scene components are read from an {@code XrSceneMSFT} using {@link #xrGetSceneComponentsMSFT GetSceneComponentsMSFT} and passing one {@code XrSceneComponentTypeMSFT}. This function follows the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Different scene component types <b>may</b> have additional properties that <b>can</b> be read by chaining additional structures to {@link XrSceneComponentsMSFT}. Those additional structures <b>must</b> have an array size that is at least as large as {@link XrSceneComponentsMSFT}::componentCapacityInput, otherwise the runtime <b>must</b> return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}.</p>
+     * <p>Scene components are read from an {@code XrSceneMSFT} using {@link #xrGetSceneComponentsMSFT GetSceneComponentsMSFT} and passing one {@code XrSceneComponentTypeMSFT}. This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Different scene component types <b>may</b> have additional properties that <b>can</b> be read by chaining additional structures to {@link XrSceneComponentsMSFT}. Those additional structures <b>must</b> have an array size that is at least as large as {@link XrSceneComponentsMSFT}::componentCapacityInput, otherwise the runtime <b>must</b> return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}.</p>
      * 
      * <ul>
      * <li>If {@link #XR_SCENE_COMPONENT_TYPE_OBJECT_MSFT SCENE_COMPONENT_TYPE_OBJECT_MSFT} is passed to {@link #xrGetSceneComponentsMSFT GetSceneComponentsMSFT}, then {@link XrSceneObjectsMSFT} may be included in the {@link XrSceneComponentsMSFT}{@code ::next} chain.</li>

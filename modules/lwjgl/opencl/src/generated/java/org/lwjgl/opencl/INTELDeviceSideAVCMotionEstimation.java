@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_side_avc_motion_estimation.txt">intel_device_side_avc_motion_estimation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_side_avc_motion_estimation.txt">intel_device_side_avc_motion_estimation</a> extension.
  * 
  * <p>Video motion estimation (VME) is defined as of set motion estimation operations that are used to determine the motion vectors, intra estimation angles
  * and macroblock partitioning combination that best describe the transformation to the source macroblock, from blocks in one or more previous reference

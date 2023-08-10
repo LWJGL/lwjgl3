@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_vg_parent_image.txt">KHR_vg_parent_image</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_vg_parent_image.txt">KHR_vg_parent_image</a> extension.
  * 
  * <p>This extension provides a mechanism for creating EGLImage objects from OpenVG VGImage API resources. For an overview of EGLImage operation, please see
  * the EGL_KHR_image specification.</p>

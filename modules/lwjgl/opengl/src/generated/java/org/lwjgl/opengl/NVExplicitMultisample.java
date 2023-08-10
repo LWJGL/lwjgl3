@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_explicit_multisample.txt">NV_explicit_multisample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_explicit_multisample.txt">NV_explicit_multisample</a> extension.
  * 
  * <p>In traditional multisample specs, the API only allows access to the samples indirectly through methods such as coverage values and downsampled
  * readbacks. NV_explicit_multisample adds a set of new capabilities to allow more precise control over the use of multisamples. Specifically, it adds:</p>

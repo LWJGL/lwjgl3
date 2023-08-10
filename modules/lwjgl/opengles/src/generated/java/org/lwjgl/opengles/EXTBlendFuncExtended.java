@@ -14,7 +14,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_func_extended.txt">EXT_blend_func_extended</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_func_extended.txt">EXT_blend_func_extended</a> extension.
  * 
  * <p>This extension provides an ES version of the ARB_blend_func_extended functionality.</p>
  * 

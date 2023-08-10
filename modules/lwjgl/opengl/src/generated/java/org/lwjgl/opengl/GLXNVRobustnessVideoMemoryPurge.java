@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_robustness_video_memory_purge.txt">GLX_NV_robustness_video_memory_purge</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_robustness_video_memory_purge.txt">GLX_NV_robustness_video_memory_purge</a> extension.
  * 
  * <p>GLX functionality for {@link NVRobustnessVideoMemoryPurge NV_robustness_video_memory_purge}.</p>
  */

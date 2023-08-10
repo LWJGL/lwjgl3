@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_driver_diagnostics.txt">intel_driver_diagnostics</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_driver_diagnostics.txt">intel_driver_diagnostics</a> extension.
  * 
  * <p>The OpenCL specification allows registering a callback function during OpenCL context creation that will be called whenever there is an error. This
  * extension extends this mechanism by allowing the driver to pass additional strings containing diagnostic information. The diagnostic messages can help

@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_loop_points.txt">SOFT_loop_points</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_loop_points.txt">SOFT_loop_points</a> extension.
  * 
  * <p>This extension allows an application to specify the offsets at which a buffer loops. Unextended OpenAL only allows for a source to loop a whole buffer,
  * or all buffers of a queue, which is not desirable for sounds that may want a lead-in or lead-out along with the looping portion.</p>

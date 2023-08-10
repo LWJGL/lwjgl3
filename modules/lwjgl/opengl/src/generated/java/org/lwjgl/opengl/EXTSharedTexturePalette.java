@@ -6,14 +6,14 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shared_texture_palette.txt">EXT_shared_texture_palette</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shared_texture_palette.txt">EXT_shared_texture_palette</a> extension.
  * 
  * <p>EXT_shared_texture_palette defines a shared texture palette which may be used in place of the texture object palettes provided by
- * <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_paletted_texture.txt">EXT_paletted_texture</a>. This is useful for rapidly changing a palette common to many textures, rather than having to reload the
+ * <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_paletted_texture.txt">EXT_paletted_texture</a>. This is useful for rapidly changing a palette common to many textures, rather than having to reload the
  * new palette for each texture. The extension acts as a switch, causing all lookups that would normally be done on the texture's palette to instead use
  * the shared palette.</p>
  * 
- * <p>Requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_paletted_texture.txt">EXT_paletted_texture</a>.</p>
+ * <p>Requires <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_paletted_texture.txt">EXT_paletted_texture</a>.</p>
  */
 public final class EXTSharedTexturePalette {
 

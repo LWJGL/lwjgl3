@@ -37,7 +37,7 @@ val QCOM_render_pass_shader_resolve = "QCOMRenderPassShaderResolve".nativeClassV
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_shader_resolve]%20@wwlk%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_shader_resolve%20extension*">wwlk</a></li>
+                <li>Bill Licea-Kane <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_shader_resolve]%20@wwlk%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_shader_resolve%20extension*">wwlk</a></li>
             </ul></dd>
         </dl>
 

@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_locations.txt">NV_sample_locations</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_locations.txt">NV_sample_locations</a> extension.
  * 
  * <p>This extension allows an application to modify the locations of samples within a pixel used in multisample rasterization. Additionally, it allows
  * applications to specify different sample locations for each pixel in a group of adjacent pixels, which may increase antialiasing quality (particularly

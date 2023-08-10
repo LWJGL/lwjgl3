@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_occlusion_query.txt">ARB_occlusion_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_occlusion_query.txt">ARB_occlusion_query</a> extension.
  * 
  * <p>This extension defines a mechanism whereby an application can query the number of pixels (or, more precisely, samples) drawn by a primitive or group of
  * primitives.</p>
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * application will render the major occluders in the scene, then perform an occlusion query for the bounding box of each detail object in the scene. Only
  * if said bounding box is visible, i.e., if at least one sample is drawn, should the corresponding object be drawn.</p>
  * 
- * <p>The earlier <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/HP/HP_occlusion_test.txt">HP_occlusion_test</a> extension defined a similar mechanism, but it had two major shortcomings.</p>
+ * <p>The earlier <a href="https://www.khronos.org/registry/OpenGL/extensions/HP/HP_occlusion_test.txt">HP_occlusion_test</a> extension defined a similar mechanism, but it had two major shortcomings.</p>
  * 
  * <ul>
  * <li>It returned the result as a simple {@link GL11#GL_TRUE TRUE}/{@link GL11#GL_FALSE FALSE} result, when in fact it is often useful to know exactly how many samples were drawn.</li>

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_multiview_window.txt">EXT_multiview_window</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_multiview_window.txt">EXT_multiview_window</a> extension.
  * 
  * <p>Adds support for creating an onscreen EGLSurface containing multiple color buffers.</p>
  * 

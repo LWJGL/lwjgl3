@@ -31,7 +31,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Cort Stratton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_cache]%20@cdwfs%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_validation_cache%20extension*">cdwfs</a></li>
+                <li>Cort Stratton <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_cache]%20@cdwfs%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_validation_cache%20extension*">cdwfs</a></li>
             </ul></dd>
         </dl>
 
@@ -145,7 +145,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
         VkDevice("device", "the logical device that creates the validation cache object."),
         VkValidationCacheCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkValidationCacheCreateInfoEXT structure containing the initial parameters for the validation cache object."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkValidationCacheEXT.p("pValidationCache", "a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.")
     )
 
@@ -188,7 +188,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
         VkDevice("device", "the logical device that destroys the validation cache object."),
         VkValidationCacheEXT("validationCache", "the handle of the validation cache to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(

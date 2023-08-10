@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_partial_update.txt">KHR_partial_update</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_partial_update.txt">KHR_partial_update</a> extension.
  * 
  * <p>The aim of this extension is to allow efficient partial updates for postable surfaces. It allows implementations to completely avoid processing areas
  * of the surface which have not changed between frames, allowing increased efficiency.</p>

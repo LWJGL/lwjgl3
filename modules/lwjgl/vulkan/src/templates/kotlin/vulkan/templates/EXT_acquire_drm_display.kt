@@ -32,7 +32,7 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Drew DeVault <a target="_blank" href="mailto:sir@cmpwn.com">sir@cmpwn.com</a></li>
+                <li>Drew DeVault <a href="mailto:sir@cmpwn.com">sir@cmpwn.com</a></li>
             </ul></dd>
         </dl>
 

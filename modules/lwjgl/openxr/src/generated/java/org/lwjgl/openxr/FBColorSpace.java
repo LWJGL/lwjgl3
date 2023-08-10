@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>An application to set the color space for the session.</li>
  * </ul>
  * 
- * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  */
 public class FBColorSpace {
 
@@ -212,7 +212,7 @@ public class FBColorSpace {
      * 
      * <p>Formal definitions of color spaces contain a number of aspects such as gamma correction, max luminance and more. However, {@link #xrSetColorSpaceFB SetColorSpaceFB} will only affect the color gamut of the output by transforming the color gamut from the source (defined by the {@code colorSpace} parameter) to the HMD display’s color gamut (defined by the hardware internally). This call will not affect gamma correction, leaving that to follow the GPU texture format standards. Luminance, tonemapping, and other aspects of the color space will also remain unaffected.</p>
      * 
-     * <p>For more info on color management in Oculus HMDs, please refer to this guide: <a target="_blank" href="https://developer.oculus.com/resources/color-management-guide/">Color Management in Oculus Headsets</a></p>
+     * <p>For more info on color management in Oculus HMDs, please refer to this guide: <a href="https://developer.oculus.com/resources/color-management-guide/">Color Management in Oculus Headsets</a></p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

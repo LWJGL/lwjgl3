@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_unified_shared_memory.txt">intel_unified_shared_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_unified_shared_memory.txt">intel_unified_shared_memory</a> extension.
  * 
  * <p>This extension adds "Unified Shared Memory" (USM) to OpenCL. Unified Shared Memory provides:</p>
  * 

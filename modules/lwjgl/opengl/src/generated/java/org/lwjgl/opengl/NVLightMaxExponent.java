@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_light_max_exponent.txt">NV_light_max_exponent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_light_max_exponent.txt">NV_light_max_exponent</a> extension.
  * 
  * <p>Default OpenGL does not permit a shininess or spot exponent over 128.0.  This extension permits implementations to support and advertise a maximum
  * shininess and spot exponent beyond 128.0.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sRGB_formats.txt">NV_sRGB_formats</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sRGB_formats.txt">NV_sRGB_formats</a> extension.
  * 
  * <p>This extension adds new uncompressed and compressed color texture formats with nonlinear sRGB color components.</p>
  * 

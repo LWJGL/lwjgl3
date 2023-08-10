@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_dot3.txt">ARB_texture_env_dot3</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_dot3.txt">ARB_texture_env_dot3</a> extension.
  * 
  * <p>Adds new dot product operation to the texture combiner operations.</p>
  * 

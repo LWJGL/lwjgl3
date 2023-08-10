@@ -39,12 +39,12 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
             <dd>{@link EXTOpacityMicromap VK_EXT_opacity_micromap}
 
             <ul>
-                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">pixeljetstream</a></li>
+                <li>Christoph Kubisch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">pixeljetstream</a></li>
                 <li>Eric Werness</li>
             </ul></dd>
         </dl>
@@ -109,9 +109,9 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
 
         <h5>Description</h5>
         <ul>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV indicates that the given micromap format encodes 64 micro-triangles worth of displacements in 64 bytes as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 256 micro-triangles worth of displacements in 128 bytes as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 1024 micro-triangles worth of displacements in 128 bytes as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV indicates that the given micromap format encodes 64 micro-triangles worth of displacements in 64 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 256 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 1024 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFTX_hold_on_disconnect.txt">SOFTX_hold_on_disconnect</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFTX_hold_on_disconnect.txt">SOFTX_hold_on_disconnect</a> extension.
  * 
  * <p>LWJGL: This extension is experimental.</p>
  */

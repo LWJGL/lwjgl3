@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the C API of <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Cross">SPIRV-Cross</a>.
+ * Native bindings to the C API of <a href="https://github.com/KhronosGroup/SPIRV-Cross">SPIRV-Cross</a>.
  * 
  * <p>SPIRV-Cross is a tool designed for parsing and converting SPIR-V to other shader languages.</p>
  * 

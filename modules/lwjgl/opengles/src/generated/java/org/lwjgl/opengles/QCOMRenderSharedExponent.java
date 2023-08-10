@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_render_shared_exponent.txt">QCOM_render_shared_exponent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_render_shared_exponent.txt">QCOM_render_shared_exponent</a> extension.
  * 
  * <p>OpenGL ES 3.2 supports a packed, shared exponent floating format {@code RGB9_E5} which is not color-renderable.</p>
  * 

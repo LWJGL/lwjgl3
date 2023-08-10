@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_rg.txt">EXT_texture_rg</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_rg.txt">EXT_texture_rg</a> extension.
  * 
  * <p>Historically one- and two-component textures have been specified in OpenGL ES using the luminance or luminance-alpha (L/LA) formats. With the advent of
  * programmable shaders and render-to-texture capabilities these legacy formats carry some historical artifacts which are no longer useful.</p>

@@ -32,7 +32,7 @@ val EXT_depth_clamp_zero_one = "EXTDepthClampZeroOne".nativeClassVK("EXT_depth_c
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Graeme Leese <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_depth_clamp_zero_one]%20@gnl21%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_depth_clamp_zero_one%20extension*">gnl21</a></li>
+                <li>Graeme Leese <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_depth_clamp_zero_one]%20@gnl21%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_depth_clamp_zero_one%20extension*">gnl21</a></li>
             </ul></dd>
         </dl>
 

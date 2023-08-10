@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-/** Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_icd.txt">khr_icd</a> extension. */
+/** Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_icd.txt">khr_icd</a> extension. */
 public final class KHRICD {
 
     /** Accepted as {@code param_name} to the function {@link CL10#clGetPlatformInfo GetPlatformInfo}. */

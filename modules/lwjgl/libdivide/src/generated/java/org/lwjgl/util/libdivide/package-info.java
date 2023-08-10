@@ -4,7 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 
-/** Contains bindings to <a target="_blank" href="https://libdivide.com/">libdivide</a>. */
+/** Contains bindings to <a href="https://libdivide.com/">libdivide</a>. */
 @org.lwjgl.system.NonnullDefault
 package org.lwjgl.util.libdivide;
 

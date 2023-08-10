@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_texture_compression_pvrtc.txt">IMG_texture_compression_pvrtc</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_texture_compression_pvrtc.txt">IMG_texture_compression_pvrtc</a> extension.
  * 
  * <p>This extension provides additional texture compression functionality specific to Imagination Technologies PowerVR Texture compression format (called
  * PVRTC) subject to all the requirements and limitations described by the OpenGL 1.3 specifications.</p>

@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://lz4.org/">LZ4</a>, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
+ * Native bindings to <a href="https://lz4.org/">LZ4</a>, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
  * scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
  * multi-core systems.
  * 
@@ -23,13 +23,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * compression derivative, {@code LZ4_HC}, is also provided, trading CPU time for improved compression ratio. All versions feature the same decompression
  * speed.</p>
  * 
- * <p>LZ4 is also compatible with <a target="_blank" href="https://github.com/facebook/zstd#the-case-for-small-data-compression">dictionary compression</a>, and can ingest
- * any input file as dictionary, including those created by <a target="_blank" href="https://github.com/facebook/zstd/blob/v1.3.5/programs/zstd.1.md#dictionary-builder">Zstandard Dictionary Builder</a>. (note: only the final 64KB are used).</p>
+ * <p>LZ4 is also compatible with <a href="https://github.com/facebook/zstd#the-case-for-small-data-compression">dictionary compression</a>, and can ingest
+ * any input file as dictionary, including those created by <a href="https://github.com/facebook/zstd/blob/v1.3.5/programs/zstd.1.md#dictionary-builder">Zstandard Dictionary Builder</a>. (note: only the final 64KB are used).</p>
  * 
  * <p>The raw LZ4 block compression format is detailed within <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Block_format.md">lz4_Block_format</a>.</p>
  * 
  * <p>Arbitrarily long files or data streams are compressed using multiple blocks, for streaming requirements. These blocks are organized into a frame,
- * defined into <a target="_blank" href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md">lz4_Frame_format</a>. Interoperable versions of LZ4 must also respect
+ * defined into <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md">lz4_Frame_format</a>. Interoperable versions of LZ4 must also respect
  * the frame format.</p>
  * 
  * <h3>In-place compression and decompression</h3>

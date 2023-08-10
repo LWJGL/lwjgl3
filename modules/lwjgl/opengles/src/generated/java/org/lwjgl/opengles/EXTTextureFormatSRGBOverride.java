@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_format_sRGB_override.txt">EXT_texture_format_sRGB_override</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_format_sRGB_override.txt">EXT_texture_format_sRGB_override</a> extension.
  * 
  * <p>This extension provides a new texture parameter to override the internal format of a texture object; allowing a non-sRGB format to be overridden to a
  * corresponding sRGB format. For example, an RGB8 texture can be overridden to SRGB8. Such an override will cause the RGB components to be "decoded" from

@@ -25,7 +25,7 @@ import static org.lwjgl.openxr.OCULUSExternalCamera.*;
  * <ul>
  * <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using {@link XrExternalCameraOCULUS}</li>
  * <li>{@code type} <b>must</b> be {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

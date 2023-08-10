@@ -36,7 +36,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Lisa Wu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_headless_surface]%20@chengtianww%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_headless_surface%20extension*">chengtianww</a></li>
+                <li>Lisa Wu <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_headless_surface]%20@chengtianww%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_headless_surface%20extension*">chengtianww</a></li>
             </ul></dd>
         </dl>
 
@@ -116,7 +116,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
 
         VkInstance("instance", "the instance to associate the surface with."),
         VkHeadlessSurfaceCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkHeadlessSurfaceCreateInfoEXT structure containing parameters affecting the creation of the surface object."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSurfaceKHR.p("pSurface", "a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.")
     )
 }

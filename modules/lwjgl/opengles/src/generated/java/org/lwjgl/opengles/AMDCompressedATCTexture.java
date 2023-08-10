@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_compressed_ATC_texture.txt">AMD_compressed_ATC_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_compressed_ATC_texture.txt">AMD_compressed_ATC_texture</a> extension.
  * 
  * <p>This extension enables support for ATC compressed texture formats. ATC is AMD's proprietary compression algorithm for compressing textures for handheld
  * devices to save on power consumption, memory footprint and bandwidth.</p>

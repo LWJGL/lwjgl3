@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_coverage.txt">GLX_NV_multisample_coverage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_coverage.txt">GLX_NV_multisample_coverage</a> extension.
  * 
  * <p>GLX functionality for {@link NVMultisampleCoverage NV_multisample_coverage}.</p>
  */

@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MLCompat XR_ML_compat} extension <b>must</b> be enabled prior to using {@link XrCoordinateSpaceCreateInfoML}</li>
  * <li>{@code type} <b>must</b> be {@link MLCompat#XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML TYPE_COORDINATE_SPACE_CREATE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code cfuid} <b>must</b> be a valid {@code MLCoordinateFrameUID} value</li>
  * </ul>
  * 

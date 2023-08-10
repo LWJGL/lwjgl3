@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_minmax.txt">EXT_blend_minmax</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_minmax.txt">EXT_blend_minmax</a> extension.
  * 
  * <p>Blending capability is extended by respecifying the entire blend equation. While this document defines only two new equations, the BlendEquationEXT
  * procedure that it defines will be used by subsequent extensions to define additional blending equations.</p>

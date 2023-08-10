@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://harfbuzz.github.io/">HarfBuzz</a>, a text shaping library.
+ * Native bindings to <a href="https://harfbuzz.github.io/">HarfBuzz</a>, a text shaping library.
  * 
  * <p>Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing
  * system and language.</p>
@@ -504,7 +504,7 @@ public class HarfBuzz {
      * Data type for scripts. ({@code hb_script_t})
      * 
      * <p>Each {@code hb_script_t}'s value is an {@code hb_tag_t} corresponding to the four-letter values defined by
-     * <a target="_blank" href="https://unicode.org/iso15924/">ISO 15924</a>.</p>
+     * <a href="https://unicode.org/iso15924/">ISO 15924</a>.</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -1232,7 +1232,7 @@ public class HarfBuzz {
     public static final int HB_SET_VALUE_INVALID = -1;
 
     /**
-     * Defined by <a target="_blank" href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Design-Variation Axis Tag Registry</a>.
+     * Defined by <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Design-Variation Axis Tag Registry</a>.
      * ({@code hb_style_tag_t})
      * 
      * <h5>Enum values:</h5>

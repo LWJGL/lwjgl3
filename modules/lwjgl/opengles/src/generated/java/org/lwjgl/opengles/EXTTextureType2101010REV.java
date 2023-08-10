@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_type_2_10_10_10_REV.txt">EXT_texture_type_2_10_10_10_REV</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_type_2_10_10_10_REV.txt">EXT_texture_type_2_10_10_10_REV</a> extension.
  * 
  * <p>This extension adds a new texture data type, unsigned 2.10.10.10 ABGR, which can be used with RGB or RGBA formats.</p>
  */

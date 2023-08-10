@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_half_float_pixel.txt">ARB_half_float_pixel</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_half_float_pixel.txt">ARB_half_float_pixel</a> extension.
  * 
  * <p>This extension introduces a new data type for half-precision (16-bit) floating-point quantities. The floating-point format is very similar to the IEEE
  * single-precision floating-point standard, except that it has only 5 exponent bits and 10 mantissa bits. Half-precision floats are smaller than full

@@ -38,7 +38,7 @@ val KHR_ray_tracing_position_fetch = "KHRRayTracingPositionFetch".nativeClassVK(
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_ray_tracing_position_fetch.adoc">VK_KHR_ray_tracing_position_fetch</a></dd>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_ray_tracing_position_fetch.adoc">VK_KHR_ray_tracing_position_fetch</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -48,8 +48,8 @@ val KHR_ray_tracing_position_fetch = "KHRRayTracingPositionFetch".nativeClassVK(
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_ray_tracing_position_fetch.html">{@code SPV_KHR_ray_tracing_position_fetch}</a></li>
-                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_ray_tracing_position_fetch.txt">{@code GLSL_EXT_ray_tracing_position_fetch}</a></li>
+                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_ray_tracing_position_fetch.html">{@code SPV_KHR_ray_tracing_position_fetch}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_ray_tracing_position_fetch.txt">{@code GLSL_EXT_ray_tracing_position_fetch}</a></li>
                 <li>Interacts with {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
                 <li>Interacts with {@link KHRRayQuery VK_KHR_ray_query}</li>
             </ul></dd>

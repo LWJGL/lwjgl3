@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import_modifiers.txt">EXT_image_dma_buf_import_modifiers</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import_modifiers.txt">EXT_image_dma_buf_import_modifiers</a> extension.
  * 
  * <p>This extension builds on {@link EXTImageDMABufImport EXT_image_dma_buf_import}, in order to support format modifiers used for tiling, compression, and additional non-linear
  * modes. It also adds support for a fourth auxiliary plane, and queries for the implementation-supported types.</p>

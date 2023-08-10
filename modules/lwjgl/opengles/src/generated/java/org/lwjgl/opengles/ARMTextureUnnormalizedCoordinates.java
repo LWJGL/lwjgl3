@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_texture_unnormalized_coordinates.txt">ARM_texture_unnormalized_coordinates</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_texture_unnormalized_coordinates.txt">ARM_texture_unnormalized_coordinates</a> extension.
  * 
  * <p>This extension provides the option to switch to unnormalized coordinates for texture lookups using a sampler parameter.</p>
  * 

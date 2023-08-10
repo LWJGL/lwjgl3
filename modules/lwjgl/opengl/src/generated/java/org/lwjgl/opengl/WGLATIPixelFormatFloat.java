@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/WGL_ATI_pixel_format_float.txt">WGL_ATI_pixel_format_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ATI/WGL_ATI_pixel_format_float.txt">WGL_ATI_pixel_format_float</a> extension.
  * 
  * <p>This extension adds pixel formats with floating-point RGBA color components.</p>
  * 

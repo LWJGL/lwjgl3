@@ -40,7 +40,7 @@ public class GLFWNativeWGL {
      * Returns the {@code HGLRC} of the specified window.
      * 
      * <p>The {@code HDC} associated with the window can be queried with the
-     * <a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdc">GetDC</a> function.
+     * <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdc">GetDC</a> function.
      * <code>
      * HDC dc = GetDC(glfwGetWin32Window(window));</code>
      * This DC is private and does not need to be released.</p>

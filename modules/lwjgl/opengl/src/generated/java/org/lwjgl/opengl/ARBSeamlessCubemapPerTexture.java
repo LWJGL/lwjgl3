@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cubemap_per_texture.txt">ARB_seamless_cubemap_per_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_seamless_cubemap_per_texture.txt">ARB_seamless_cubemap_per_texture</a> extension.
  * 
  * <p>In unextended OpenGL, cube maps are treated as sets of six, independent texture images. Once a face is selected from the set, it is treated exactly as
  * any other two-dimensional texture would be. When sampling linearly from the texture, all of the individual texels that would be used to to create the

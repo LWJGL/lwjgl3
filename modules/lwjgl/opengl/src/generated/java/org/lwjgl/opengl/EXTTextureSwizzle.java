@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_swizzle.txt">EXT_texture_swizzle</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_swizzle.txt">EXT_texture_swizzle</a> extension.
  * 
  * <p>Classic OpenGL texture formats conflate texture storage and interpretation, and assume that textures represent color. In modern applications, a
  * significant quantity of textures don't represent color, but rather data like shadow maps, normal maps, page tables, occlusion data, etc.. For the

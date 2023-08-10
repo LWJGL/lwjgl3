@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_pixel_local_storage2.txt">EXT_shader_pixel_local_storage2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_pixel_local_storage2.txt">EXT_shader_pixel_local_storage2</a> extension.
  * 
  * <p>This extension builds on {@link EXTShaderPixelLocalStorage EXT_shader_pixel_local_storage} by lifting the restriction that pixel local storage is not supported when rendering to
  * multiple draw buffers.</p>

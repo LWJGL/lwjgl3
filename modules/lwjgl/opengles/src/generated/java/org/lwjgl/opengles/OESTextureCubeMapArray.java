@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_cube_map_array.txt">OES_texture_cube_map_array</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_cube_map_array.txt">OES_texture_cube_map_array</a> extension.
  * 
  * <p>OpenGL ES 3.1 supports two-dimensional array textures. An array texture is an ordered set of images with the same size and format. Each image in an
  * array texture has a unique level. This extension expands texture array support to include cube map textures.</p>

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.system.linux.*;
 
-/** Native bindings to <a target="_blank" href="https://github.com/axboe/liburing">liburing</a>. */
+/** Native bindings to <a href="https://github.com/axboe/liburing">liburing</a>. */
 public class LibURing {
 
     static { Library.initialize(); }

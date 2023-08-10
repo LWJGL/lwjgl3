@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_direct_state_access.txt">EXT_direct_state_access</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_direct_state_access.txt">EXT_direct_state_access</a> extension.
  * 
  * <p>This extension introduces a set of new "direct state access" commands (meaning no selector is involved) to access (update and query) OpenGL state that
  * previously depended on the OpenGL state selectors for access. These new commands supplement the existing selector-based OpenGL commands to access the

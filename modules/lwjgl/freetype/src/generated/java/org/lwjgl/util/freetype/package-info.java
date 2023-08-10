@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://freetype.org/">FreeType</a>, a freely available software library to render fonts.
+ * Contains bindings to the <a href="https://freetype.org/">FreeType</a>, a freely available software library to render fonts.
  * 
  * <p>It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of
  * most vector and bitmap font formats.</p>

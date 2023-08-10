@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_metadata.txt">NV_stream_metadata</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_metadata.txt">NV_stream_metadata</a> extension.
  * 
  * <p>Application suites which make use of streams to transmit images may need to communicate additional data between the producer and consumer, synchronized
  * with the frame updates. This data may change infrequently, such as a movie title and track number to be displayed to the user, or every frame, such as

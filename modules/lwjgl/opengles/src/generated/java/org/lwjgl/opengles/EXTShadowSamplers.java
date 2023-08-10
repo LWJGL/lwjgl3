@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shadow_samplers.txt">EXT_shadow_samplers</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shadow_samplers.txt">EXT_shadow_samplers</a> extension.
  * 
  * <p>This extension supports comparing the texture R coordinate to a depth texture value returning the result as a float value in the range [0,1]. This can
  * be used to implement shadow maps.</p>

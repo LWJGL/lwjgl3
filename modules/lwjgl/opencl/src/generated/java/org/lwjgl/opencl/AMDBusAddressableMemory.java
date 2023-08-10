@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_bus_addressable_memory.txt">amd_bus_addressable_memory</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_bus_addressable_memory.txt">amd_bus_addressable_memory</a> extension.
  * 
  * <p>This extension defines an API that allows improved control of the physical memory used by the graphics device.</p>
  * 

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_conservative_rasterization.txt">INTEL_conservative_rasterization</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_conservative_rasterization.txt">INTEL_conservative_rasterization</a> extension.
  * 
  * <p>Regular rasterization includes fragments with at least one sample covered by a polygon. Conservative rasterization includes all fragments that are at
  * least partially covered by the polygon.</p>

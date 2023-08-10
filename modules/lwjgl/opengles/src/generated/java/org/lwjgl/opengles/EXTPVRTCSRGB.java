@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_pvrtc_sRGB.txt">EXT_pvrtc_sRGB</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_pvrtc_sRGB.txt">EXT_pvrtc_sRGB</a> extension.
  * 
  * <p>The response from electronic display systems given RGB tristimulus values for each pixel is non-linear. Gamma correction is the process of encoding or
  * decoding images in a manner that will correct for non-linear response profiles of output devices. The displayed results of gamma-corrected pixel data

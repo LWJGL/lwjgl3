@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects.txt">EXT_semaphore</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects.txt">EXT_semaphore</a> extension.
  * 
  * <p>The Vulkan API introduces the concept of explicit memory objects and reusable synchronization objects. This extension brings those concepts to the
  * OpenGL API via two new object types:</p>

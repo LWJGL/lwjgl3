@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_sync.txt">EXT_client_sync</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_sync.txt">EXT_client_sync</a> extension.
  * 
  * <p>The {@link KHRReusableSync KHR_reusable_sync} extension defines an {@link KHRReusableSync#EGL_SYNC_REUSABLE_KHR SYNC_REUSABLE_KHR} {@code EGLSync} type which is signaled and unsignaled by client events. The
  * {@link EXTSyncReuse EXT_sync_reuse} extension allows all {@code EGLSyncs} to become reusable. The signaling behavior associated with {@code EGL_SYNC_REUSABLE_KHR}

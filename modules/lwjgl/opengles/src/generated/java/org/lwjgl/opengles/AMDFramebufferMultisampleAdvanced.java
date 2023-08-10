@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_framebuffer_multisample_advanced.txt">AMD_framebuffer_multisample_advanced</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_framebuffer_multisample_advanced.txt">AMD_framebuffer_multisample_advanced</a> extension.
  * 
  * <p>This extension extends {@code ARB_framebuffer_object} by allowing compromises between image quality and memory footprint of multisample antialiasing.</p>
  * 

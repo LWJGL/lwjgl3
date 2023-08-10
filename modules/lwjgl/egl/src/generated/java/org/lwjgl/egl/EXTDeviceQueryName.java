@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_query_name.txt">EXT_device_query_name</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_query_name.txt">EXT_device_query_name</a> extension.
  * 
  * <p>The {@code EGL_EXT_device_enumeration} and {@code EGL_EXT_device_query} extensions provide a list of devices and a list of extensions, but lacks a way
  * to find a name for a device that an application can present to a user.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_binning_control.txt">QCOM_binning_control</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_binning_control.txt">QCOM_binning_control</a> extension.
  * 
  * <p>This extension adds some new hints to give more control to application developers over the driver's binning algorithm.</p>
  * 

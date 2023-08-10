@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://github.com/GPUOpen-Tools/amd-tootle">AMD Tootle</a>.
+ * Bindings to <a href="https://github.com/GPUOpen-Tools/amd-tootle">AMD Tootle</a>.
  * 
  * <p>AMD Tootle (Triangle Order Optimization Tool) is a 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques. By
  * using AMD Tootle, developers can optimize their models for pixel overdraw as well as vertex cache performance. This can provide significant performance

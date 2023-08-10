@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_discard_framebuffer.txt">EXT_discard_framebuffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_discard_framebuffer.txt">EXT_discard_framebuffer</a> extension.
  * 
  * <p>This extension provides a new command, DiscardFramebufferEXT, which causes the contents of the named framebuffer attachable images to become undefined.
  * The contents of the specified buffers are undefined until a subsequent operation modifies the content, and only the modified region is guaranteed to

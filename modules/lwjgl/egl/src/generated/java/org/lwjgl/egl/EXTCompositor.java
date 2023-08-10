@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_compositor.txt">EXT_compositor</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_compositor.txt">EXT_compositor</a> extension.
  * 
  * <p>This extension allows for the composition of multiple windows within a multi-partition EGL system. The extension allows a primary EGLContext and window
  * to be created for each display. All other windows are created using non-displayable surfaces. A handle to each off-screen window is provided to the

@@ -19,7 +19,7 @@ val FB_composition_layer_alpha_blend = "FBCompositionLayerAlphaBlend".nativeClas
 
         Like color, destination alpha is initialized to 0 before composition begins.
 
-        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
 
         These blend factors are specified by attaching a ##XrCompositionLayerAlphaBlendFB structure to the {@code next} chain of a ##XrCompositionLayerBaseHeader-derived layer structure.
         """

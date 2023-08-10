@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_program_binary.txt">ANGLE_program_binary</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_program_binary.txt">ANGLE_program_binary</a> extension.
  * 
  * <p>This extension makes available a program binary format, PROGRAM_BINARY_ANGLE. It enables retrieving and loading of pre-linked ANGLE program objects.</p>
  * 

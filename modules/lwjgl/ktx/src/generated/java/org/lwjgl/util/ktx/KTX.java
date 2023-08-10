@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://www.khronos.org/ktx/">KTX (Khronos Texture)</a>.
+ * Native bindings to <a href="https://www.khronos.org/ktx/">KTX (Khronos Texture)</a>.
  * 
  * <p>KTX is a lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs. KTX files contain all the parameters needed for texture loading.
  * A single file can contain anything from a simple base-level 2D texture through to a cubemap array texture with mipmaps. Contained textures can be in a

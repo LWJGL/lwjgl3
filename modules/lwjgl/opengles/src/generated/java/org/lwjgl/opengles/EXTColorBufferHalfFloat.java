@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_color_buffer_half_float.txt">EXT_color_buffer_half_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_color_buffer_half_float.txt">EXT_color_buffer_half_float</a> extension.
  * 
  * <p>This extension allows 16-bit floating point formats as defined in OES_texture_half_float to be rendered to via framebuffer objects.</p>
  * 

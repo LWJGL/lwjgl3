@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_R8.txt">EXT_texture_sRGB_R8</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_R8.txt">EXT_texture_sRGB_R8</a> extension.
  * 
  * <p>This extension introduces {@link #GL_SR8_EXT SR8_EXT} as an acceptable internal format. This allows efficient sRGB sampling for source images stored as a separate texture
  * per channel.</p>

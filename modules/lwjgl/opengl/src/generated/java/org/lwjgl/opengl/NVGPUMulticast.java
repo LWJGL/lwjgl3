@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_multicast.txt">NV_gpu_multicast</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_multicast.txt">NV_gpu_multicast</a> extension.
  * 
  * <p>This extension enables novel multi-GPU rendering techniques by providing application control over a group of linked GPUs with identical hardware
  * configuration.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_bt2020_linear.txt">EXT_gl_colorspace_bt2020_linear</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_bt2020_linear.txt">EXT_gl_colorspace_bt2020_linear</a> extension.
  * 
  * <p>Applications may wish to take advantage of a larger color gamut in the BT.2020 (ITU-R Recommendation BT.2020) color space. These extensions allow
  * applications to do so by communicating to the platform the color space the framebuffer data is in, i.e. BT.2020 color space, as well as the encoding of

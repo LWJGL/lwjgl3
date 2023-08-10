@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://facebook.github.io/yoga/">Yoga</a>.
+ * Contains bindings to <a href="https://facebook.github.io/yoga/">Yoga</a>.
  * 
  * <p>Yoga is a cross-platform layout engine enabling maximum collaboration within your team by implementing an API familiar to many designers and opening it
  * up to developers across different platforms.</p>

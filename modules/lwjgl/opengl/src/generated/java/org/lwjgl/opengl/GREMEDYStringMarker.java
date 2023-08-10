@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/GREMEDY/GREMEDY_string_marker.txt">GREMEDY_string_marker</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/GREMEDY/GREMEDY_string_marker.txt">GREMEDY_string_marker</a> extension.
  * 
  * <p>This extension defines a mechanism to insert textual markers into the OpenGL stream.</p>
  * 

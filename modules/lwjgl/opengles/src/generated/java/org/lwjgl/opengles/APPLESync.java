@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_sync.txt">APPLE_sync</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_sync.txt">APPLE_sync</a> extension.
  * 
  * <p>This extension introduces the concept of "sync objects". Sync objects are a synchronization primitive - a representation of events whose completion
  * status can be tested or waited upon. One specific type of sync object, the "fence sync object", is supported in this extension, and additional types

@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_buffer_length_query.txt">SOFT_buffer_length_query</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_buffer_length_query.txt">SOFT_buffer_length_query</a> extension.
  * 
  * <p>This extension adds buffer queries to get the length in bytes, samples, and seconds.</p>
  * 

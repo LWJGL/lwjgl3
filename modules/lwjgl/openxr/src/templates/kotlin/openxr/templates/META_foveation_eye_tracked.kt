@@ -24,7 +24,7 @@ val META_foveation_eye_tracked = "METAFoveationEyeTracked".nativeClassXR("META_f
             <li>An application to request a foveation pattern update from the runtime. As a consequence, runtime knows how to adjust the eye tracking camera exposure start time in order to optimize the total pipeline latency.</li>
         </ul>
 
-        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

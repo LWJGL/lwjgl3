@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_source_start_delay.txt">SOFT_source_start_delay</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_source_start_delay.txt">SOFT_source_start_delay</a> extension.
  * 
  * <p>This extension allows applications to play a source at a particular future time.</p>
  * 

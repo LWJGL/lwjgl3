@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_polygon_offset_clamp.txt">EXT_polygon_offset_clamp</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_polygon_offset_clamp.txt">EXT_polygon_offset_clamp</a> extension.
  * 
  * <p>This extension adds a new parameter to the polygon offset function that clamps the calculated offset to a minimum or maximum value. The clamping
  * functionality is useful when polygons are nearly parallel to the view direction because their high slopes can result in arbitrarily large polygon

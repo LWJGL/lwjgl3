@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_android.txt">KHR_platform_android</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_android.txt">KHR_platform_android</a> extension.
  * 
  * <p>This extension defines how to create EGL resources from native Android resources using the EGL 1.5 platform functionality.</p>
  * 

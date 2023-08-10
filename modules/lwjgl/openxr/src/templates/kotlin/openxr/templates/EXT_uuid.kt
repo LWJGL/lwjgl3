@@ -13,7 +13,7 @@ val EXT_uuid = "EXTUUIUD".nativeClassXR("EXT_uuid", type = "instance", postfix =
         """
         The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_uuid">XR_EXT_uuid</a> extension.
 
-        This extension defines a Universally Unique Identifier that follows <a target="_blank" href="https://www.rfc-editor.org/rfc/rfc4122.html">RFC 4122</a>.
+        This extension defines a Universally Unique Identifier that follows <a href="https://www.rfc-editor.org/rfc/rfc4122.html">RFC 4122</a>.
         """
 
     IntConstant(

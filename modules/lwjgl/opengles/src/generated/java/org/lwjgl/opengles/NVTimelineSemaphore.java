@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_timeline_semaphore.txt">NV_timeline_semaphore</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_timeline_semaphore.txt">NV_timeline_semaphore</a> extension.
  * 
  * <p>The Vulkan API introduces the concept of timeline semaphores. This extension brings those concepts to the OpenGL API by adding a semaphore type to the
  * semaphore object. In OpenGL, timeline semaphore signal and wait operations are similar to the corresponding operations on imported Direct3D 12 fences

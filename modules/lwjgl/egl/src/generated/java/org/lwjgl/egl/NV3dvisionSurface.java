@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_3dvision_surface.txt">NV_3dvision_surface</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_3dvision_surface.txt">NV_3dvision_surface</a> extension.
  * 
  * <p>NVIDIA 3D Vision provides stereoscopic 3d rendering without requiring applications to change their rendering methods. However there are cases where
  * applications can benefit from adjusting 3D vision parameters directly to experiment with this functionality in applications not yet known to 3D Vision,

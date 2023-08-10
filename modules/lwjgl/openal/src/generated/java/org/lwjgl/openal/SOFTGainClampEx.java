@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_gain_clamp_ex.txt">SOFT_gain_clamp_ex</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_gain_clamp_ex.txt">SOFT_gain_clamp_ex</a> extension.
  * 
  * <p>This extension extends the gain clamping mechanism in standard AL. By default, OpenAL allows the source's and listener's {@link AL10#AL_GAIN GAIN} property to be set to
  * any value that's greater-than or equal-to 0. The calculated source gain is clamped between its {@link AL10#AL_MIN_GAIN MIN_GAIN} and {@link AL10#AL_MAX_GAIN MAX_GAIN} properties after distance

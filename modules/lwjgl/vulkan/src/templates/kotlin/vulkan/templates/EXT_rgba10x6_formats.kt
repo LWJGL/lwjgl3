@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_formats", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
+        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
 
         <h5>VK_EXT_rgba10x6_formats</h5>
         <dl>
@@ -32,7 +32,7 @@ val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_form
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_rgba10x6_formats]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_rgba10x6_formats%20extension*">janharaldfredriksen-arm</a></li>
+                <li>Jan-Harald Fredriksen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_rgba10x6_formats]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_rgba10x6_formats%20extension*">janharaldfredriksen-arm</a></li>
             </ul></dd>
         </dl>
 

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_float_buffer.txt">NV_float_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_float_buffer.txt">NV_float_buffer</a> extension.
  * 
  * <p>This extension builds upon NV_fragment_program to provide a framebuffer and texture format that allows fragment programs to read and write
  * unconstrained floating point data.</p>

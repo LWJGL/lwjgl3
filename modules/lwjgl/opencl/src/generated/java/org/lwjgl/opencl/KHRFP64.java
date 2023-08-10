@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-/** Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_fp64.txt">khr_fp64</a>  extension. */
+/** Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_fp64.txt">khr_fp64</a>  extension. */
 public final class KHRFP64 {
 
     /** cl_device_info */

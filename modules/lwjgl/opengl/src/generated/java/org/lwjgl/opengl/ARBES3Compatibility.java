@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_compatibility.txt">ARB_ES3_compatibility</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_compatibility.txt">ARB_ES3_compatibility</a> extension.
  * 
  * <p>This extension adds support for features of OpenGL ES 3.0 that are missing from OpenGL 3.x. Enabling these features will ease the process of porting
  * applications from OpenGL ES 3.0 to OpenGL. These features include conservative boolean occlusion queries, primitive restart with a fixed index, the

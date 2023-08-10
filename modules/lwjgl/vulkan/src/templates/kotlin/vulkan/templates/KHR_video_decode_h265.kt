@@ -36,11 +36,11 @@ val KHR_video_decode_h265 = "KHRVideoDecodeH265".nativeClassVK("KHR_video_decode
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li><a target="_blank" href="mailto:peter.fang@amd.com">peter.fang@amd.com</a></li>
+                <li><a href="mailto:peter.fang@amd.com">peter.fang@amd.com</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_video_decode_h265.adoc">VK_KHR_video_decode_h265</a></dd>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_video_decode_h265.adoc">VK_KHR_video_decode_h265</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>

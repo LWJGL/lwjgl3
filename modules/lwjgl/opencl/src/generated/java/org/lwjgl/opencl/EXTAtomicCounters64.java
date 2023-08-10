@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_atomic_counters_64.txt">ext_atomic_counters_64</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_atomic_counters_64.txt">ext_atomic_counters_64</a> extension.
  * 
  * <p>This extension adds support in the OpenCL C language for 64-bit atomic counters. Atomic counter is a device-level counter that can be added /
  * decremented by work-items in a work-group or across work-groups executing a kernel, where the atomicity of the operation is guaranteed. The access to

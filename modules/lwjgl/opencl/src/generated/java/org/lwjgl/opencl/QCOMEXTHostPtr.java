@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/qcom/cl_qcom_ext_host_ptr.txt">qcom_ext_host_ptr</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/qcom/cl_qcom_ext_host_ptr.txt">qcom_ext_host_ptr</a> extension.
  * 
  * <p>This extension extends the functionality provided by {@link CL10#clCreateBuffer CreateBuffer}, {@link CL10#clCreateImage2D CreateImage2D}, {@link CL10#clCreateImage3D CreateImage3D}. It allows applications to specify
  * a new flag {@link #CL_MEM_EXT_HOST_PTR_QCOM MEM_EXT_HOST_PTR_QCOM} which enables the driver to map external memory allocations --to be defined in future layered extensions-- to the

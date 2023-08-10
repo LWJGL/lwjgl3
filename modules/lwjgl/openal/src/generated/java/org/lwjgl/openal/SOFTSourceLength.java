@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_source_length.txt">SOFT_source_length</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_source_length.txt">SOFT_source_length</a> extension.
  * 
  * <p>This extension adds a method to retrieve the total length of a source's buffer data in bytes, samples, and seconds, which correspond to the byte,
  * sample, and seconds offset extents. By default, OpenAL only provides a way to retrieve a buffer's storage size in bytes, which does not necessarily

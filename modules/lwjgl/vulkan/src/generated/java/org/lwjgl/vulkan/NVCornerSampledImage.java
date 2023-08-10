@@ -9,11 +9,11 @@ package org.lwjgl.vulkan;
  * This extension adds support for a new image organization, which this extension refers to as “{@code corner-sampled}” images. A corner-sampled image differs from a conventional image in the following ways:
  * 
  * <ul>
- * <li>Texels are centered on integer coordinates. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-unnormalized-to-integer">Unnormalized Texel Coordinate Operations</a></li>
- * <li>Normalized coordinates are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>, where dim is the size of one dimension of the image. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
- * <li>Partial derivatives are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-scale-factor">Scale Factor Operation</a>.</li>
- * <li>Calculation of the next higher lod size goes according to <code>⌈dim / 2⌉</code> rather than <code>⌊dim / 2⌋</code>. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
- * <li>The minimum level size is 2x2 for 2D images and 2x2x2 for 3D images. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
+ * <li>Texels are centered on integer coordinates. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-unnormalized-to-integer">Unnormalized Texel Coordinate Operations</a></li>
+ * <li>Normalized coordinates are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>, where dim is the size of one dimension of the image. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
+ * <li>Partial derivatives are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-scale-factor">Scale Factor Operation</a>.</li>
+ * <li>Calculation of the next higher lod size goes according to <code>⌈dim / 2⌉</code> rather than <code>⌊dim / 2⌋</code>. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
+ * <li>The minimum level size is 2x2 for 2D images and 2x2x2 for 3D images. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
  * </ul>
  * 
  * <p>This image organization is designed to facilitate a system like Ptex with separate textures for each face of a subdivision or polygon mesh. Placing sample locations at pixel corners allows applications to maintain continuity between adjacent patches by duplicating values along shared edges. Additionally, using the modified mipmapping logic along with texture dimensions of the form <code>2<sup>n</sup>+1</code> allows continuity across shared edges even if the adjacent patches use different level-of-detail values.</p>
@@ -33,7 +33,7 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_corner_sampled_image]%20@dgkoch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_corner_sampled_image%20extension*">dgkoch</a></li>
+ * <li>Daniel Koch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_corner_sampled_image]%20@dgkoch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_corner_sampled_image%20extension*">dgkoch</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_blit_layers.txt">EXT_framebuffer_blit_layers</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_blit_layers.txt">EXT_framebuffer_blit_layers</a> extension.
  * 
  * <p>This extensions defines the behaviour for copying data from one layered framebuffer to another layered framebuffer.</p>
  * 

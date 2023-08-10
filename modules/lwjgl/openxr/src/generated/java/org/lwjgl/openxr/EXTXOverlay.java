@@ -25,7 +25,7 @@ package org.lwjgl.openxr;
  * <li>The ability for an overlay session to get information about what is going on with the main application</li>
  * </ul>
  * 
- * <p>To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  * 
  * <p>To create an overlay session, an application <b>must</b> pass an {@link XrSessionCreateInfoOverlayEXTX} structure to {@link XR10#xrCreateSession CreateSession} via the {@link XrSessionCreateInfo} structure’s {@code next} parameter.</p>
  * 

@@ -14,7 +14,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
         This extension allows GLSL shaders written to the {@code GL_KHR_vulkan_glsl} extension specification to be used instead of SPIR-V. The implementation will automatically detect whether the shader is SPIR-V or GLSL, and compile it appropriately.
 
         <h5>Deprecation</h5>
-        Functionality in this extension is outside of the scope of Vulkan and is better served by a compiler library such as <a target="_blank" href="https://github.com/KhronosGroup/glslang">glslang</a>. No new implementations will support this extension, so applications <b>should</b> not use it.
+        Functionality in this extension is outside of the scope of Vulkan and is better served by a compiler library such as <a href="https://github.com/KhronosGroup/glslang">glslang</a>. No new implementations will support this extension, so applications <b>should</b> not use it.
 
         <h5>Examples</h5>
         <b>Example 1</b>
@@ -60,7 +60,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_glsl_shader]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_glsl_shader%20extension*">pdaniell-nv</a></li>
+                <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_glsl_shader]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_glsl_shader%20extension*">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 

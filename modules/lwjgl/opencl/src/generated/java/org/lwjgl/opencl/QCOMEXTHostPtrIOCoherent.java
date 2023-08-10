@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/qcom/cl_qcom_ext_host_ptr_iocoherent.txt">qcom_ext_host_ptr_iocoherent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/qcom/cl_qcom_ext_host_ptr_iocoherent.txt">qcom_ext_host_ptr_iocoherent</a> extension.
  * 
  * <p>This extension extends the functionality provided by {@code cl_qcom_ext_host_ptr} by adding a new host cache policy. It allows applications to specify
  * a new value, {@link #CL_MEM_HOST_IOCOHERENT_QCOM MEM_HOST_IOCOHERENT_QCOM}, for {@code cl_mem_ext_host_ptr::host_cache_policy}. When the application selects this value for host cache

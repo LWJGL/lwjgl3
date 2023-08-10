@@ -29,7 +29,7 @@ val KHR_pipeline_library = "KHRPipelineLibrary".nativeClassVK("KHR_pipeline_libr
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_pipeline_library]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_pipeline_library%20extension*">pixeljetstream</a></li>
+                <li>Christoph Kubisch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_pipeline_library]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_pipeline_library%20extension*">pixeljetstream</a></li>
             </ul></dd>
         </dl>
 

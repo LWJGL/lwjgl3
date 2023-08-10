@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_recordable.txt">ANDROID_recordable</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_recordable.txt">ANDROID_recordable</a> extension.
  * 
  * <p>Android supports a number of different ANativeWindow implementations that can be used to create an EGLSurface. One implementation, which records the
  * rendered image as a video each time eglSwapBuffers gets called, may have some device-specific restrictions. Because of this, some EGLConfigs may be

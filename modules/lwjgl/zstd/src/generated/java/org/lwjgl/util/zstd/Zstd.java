@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://facebook.github.io/zstd/">Zstandard</a> (zstd), a fast lossless compression algorithm, targeting real-time
+ * Native bindings to <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd), a fast lossless compression algorithm, targeting real-time
  * compression scenarios at zlib-level and better compression ratios.
  * 
  * <h3>Introduction</h3>

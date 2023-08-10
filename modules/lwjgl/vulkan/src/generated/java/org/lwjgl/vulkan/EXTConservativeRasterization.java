@@ -26,10 +26,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_conservative_rasterization]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_conservative_rasterization%20extension*">pdaniell-nv</a></li>
+ * <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_conservative_rasterization]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_conservative_rasterization%20extension*">pdaniell-nv</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -40,9 +40,9 @@ package org.lwjgl.vulkan;
  * <dd>2020-06-09</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_fully_covered.html">{@code SPV_EXT_fragment_fully_covered}</a> if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::fullyCoveredFragmentShaderInputVariable} feature is used.</li>
- * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_post_depth_coverage.html">{@code SPV_KHR_post_depth_coverage}</a>if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::conservativeRasterizationPostDepthCoverage} feature is used.</li>
- * <li>This extension provides API support for <a target="_blank" href="https://registry.khronos.org/OpenGL/extensions/NV/NV_conservative_raster_underestimation.txt">{@code GL_NV_conservative_raster_underestimation}</a> if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::fullyCoveredFragmentShaderInputVariable} feature is used.</li>
+ * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_fully_covered.html">{@code SPV_EXT_fragment_fully_covered}</a> if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::fullyCoveredFragmentShaderInputVariable} feature is used.</li>
+ * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_post_depth_coverage.html">{@code SPV_KHR_post_depth_coverage}</a>if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::conservativeRasterizationPostDepthCoverage} feature is used.</li>
+ * <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/NV/NV_conservative_raster_underestimation.txt">{@code GL_NV_conservative_raster_underestimation}</a> if the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::fullyCoveredFragmentShaderInputVariable} feature is used.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

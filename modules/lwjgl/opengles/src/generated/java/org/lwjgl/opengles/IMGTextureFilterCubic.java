@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_texture_filter_cubic.txt">IMG_texture_filter_cubic</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/IMG/IMG_texture_filter_cubic.txt">IMG_texture_filter_cubic</a> extension.
  * 
  * <p>OpenGL ES provides two sampling methods available; nearest neighbor or linear filtering, with optional MIP Map sampling modes added to move between
  * differently sized textures when downsampling.</p>

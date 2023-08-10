@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/FJ/FJ_shader_binary_GCCSO.txt">FJ_shader_binary_GCCSO</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/FJ/FJ_shader_binary_GCCSO.txt">FJ_shader_binary_GCCSO</a> extension.
  * 
  * <p>This extension enables loading precompiled binary shaders compatible with chips designed by Fujitsu Semiconductor.</p>
  */

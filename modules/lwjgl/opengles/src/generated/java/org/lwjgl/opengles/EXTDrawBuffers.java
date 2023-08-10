@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_buffers.txt">EXT_draw_buffers</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_buffers.txt">EXT_draw_buffers</a> extension.
  * 
  * <p>This extension increases the number of available framebuffer object color attachment points, extends OpenGL ES 2.0 to allow multiple output colors, and
  * provides a mechanism for directing those outputs to multiple color buffers.</p>

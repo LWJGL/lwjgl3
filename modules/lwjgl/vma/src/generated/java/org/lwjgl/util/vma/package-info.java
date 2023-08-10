@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator">VMA</a>, an easy to integrate Vulkan memory
+ * Contains bindings to <a href="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator">VMA</a>, an easy to integrate Vulkan memory
  * allocation library.
  * 
  * <h4>Problem</h4>

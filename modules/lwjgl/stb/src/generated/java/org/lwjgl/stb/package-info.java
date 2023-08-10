@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://github.com/nothings/stb">stb</a>, a set of single-file public domain libraries.
+ * Contains bindings to <a href="https://github.com/nothings/stb">stb</a>, a set of single-file public domain libraries.
  * 
  * <p>The functionality provided by stb includes:</p>
  * 

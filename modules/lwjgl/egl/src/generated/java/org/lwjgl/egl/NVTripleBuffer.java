@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_triple_buffer.txt">NV_triple_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_triple_buffer.txt">NV_triple_buffer</a> extension.
  * 
  * <p>Allows applications to request additional back buffers, in order to produce greater and less variable frame rates.</p>
  */

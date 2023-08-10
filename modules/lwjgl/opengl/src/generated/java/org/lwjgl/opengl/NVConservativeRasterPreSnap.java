@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster_pre_snap.txt">NV_conservative_raster_pre_snap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster_pre_snap.txt">NV_conservative_raster_pre_snap</a> extension.
  * 
  * <p>{@link NVConservativeRasterPreSnapTriangles NV_conservative_raster_pre_snap_triangles} provides a new mode to achieve rasterization of triangles that is conservative w.r.t the triangle at
  * infinite precision i.e. before it is snapped to the sub-pixel grid. This extension provides a new mode that expands this functionality to lines and

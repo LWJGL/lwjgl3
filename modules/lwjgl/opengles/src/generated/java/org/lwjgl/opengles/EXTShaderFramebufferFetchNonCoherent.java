@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_framebuffer_fetch_non_coherent.txt">EXT_shader_framebuffer_fetch_non_coherent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_framebuffer_fetch_non_coherent.txt">EXT_shader_framebuffer_fetch_non_coherent</a> extension.
  * 
  * <p>See {@link EXTShaderFramebufferFetch EXT_shader_framebuffer_fetch}.</p>
  */

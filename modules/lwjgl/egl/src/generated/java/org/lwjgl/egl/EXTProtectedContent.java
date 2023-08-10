@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_protected_content.txt">EXT_protected_content</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_protected_content.txt">EXT_protected_content</a> extension.
  * 
  * <p>This extension introduces the concept of protected contexts and protected resources, specifically surfaces and {@code EGLImages}. Applications can
  * choose at creation time whether a context, surface or {@code EGLImage} is protected or not.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_sRGB.txt">EXT_sRGB</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_sRGB.txt">EXT_sRGB</a> extension.
  * 
  * <p>The sRGB color space is based on typical (non-linear) response of the human eye. It has been standardized by the International Electrotechnical
  * Commission (IEC) as IEC 61966-2-1. The transfer function of sRGB roughly corresponds to a power function with a gamma of 2.2.</p>

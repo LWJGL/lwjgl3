@@ -22,16 +22,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression_bptc.txt">ARB_texture_compression_bptc</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compressed_texture_pixel_storage.txt">ARB_compressed_texture_pixel_storage</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counters.txt">ARB_shader_atomic_counters</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_storage.txt">ARB_texture_storage</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback_instanced.txt">ARB_transform_feedback_instanced</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_base_instance.txt">ARB_base_instance</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_load_store.txt">ARB_shader_image_load_store</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_conservative_depth.txt">ARB_conservative_depth</a> and <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shading_language_420pack.txt">ARB_shading_language_420pack</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query.txt">ARB_internalformat_query</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_alignment.txt">ARB_map_buffer_alignment</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression_bptc.txt">ARB_texture_compression_bptc</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compressed_texture_pixel_storage.txt">ARB_compressed_texture_pixel_storage</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counters.txt">ARB_shader_atomic_counters</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_storage.txt">ARB_texture_storage</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback_instanced.txt">ARB_transform_feedback_instanced</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_base_instance.txt">ARB_base_instance</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_load_store.txt">ARB_shader_image_load_store</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_conservative_depth.txt">ARB_conservative_depth</a> and <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shading_language_420pack.txt">ARB_shading_language_420pack</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query.txt">ARB_internalformat_query</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_alignment.txt">ARB_map_buffer_alignment</a></li>
  * </ul>
  */
 public class GL42C extends GL41C {
@@ -227,7 +227,7 @@ public class GL42C extends GL41C {
      * @param pname       the parameter to query. One of:<br><table><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE ATOMIC_COUNTER_BUFFER_DATA_SIZE}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
      * @param params      a buffer in which to place the returned value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -243,7 +243,7 @@ public class GL42C extends GL41C {
      * @param bufferIndex the index of an active atomic counter buffer
      * @param pname       the parameter to query. One of:<br><table><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE ATOMIC_COUNTER_BUFFER_DATA_SIZE}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetActiveAtomicCounterBufferi(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname) {
@@ -267,7 +267,7 @@ public class GL42C extends GL41C {
      * @param internalformat the sized internal format to be used to store texture image data
      * @param width          the width of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTexStorage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTexStorage1D">Reference Page</a>
      */
     public static native void glTexStorage1D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width);
 
@@ -282,7 +282,7 @@ public class GL42C extends GL41C {
      * @param width          the width of the texture, in texels
      * @param height         the height of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTexStorage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTexStorage2D">Reference Page</a>
      */
     public static native void glTexStorage2D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
@@ -298,7 +298,7 @@ public class GL42C extends GL41C {
      * @param height         the height of the texture, in texels
      * @param depth          the depth of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTexStorage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTexStorage3D">Reference Page</a>
      */
     public static native void glTexStorage3D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
 
@@ -311,7 +311,7 @@ public class GL42C extends GL41C {
      * @param id        the name of a transform feedback object from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawTransformFeedbackInstanced">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawTransformFeedbackInstanced">Reference Page</a>
      */
     public static native void glDrawTransformFeedbackInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLsizei") int primcount);
 
@@ -325,7 +325,7 @@ public class GL42C extends GL41C {
      * @param stream    the index of the transform feedback stream from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawTransformFeedbackStreamInstanced">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawTransformFeedbackStreamInstanced">Reference Page</a>
      */
     public static native void glDrawTransformFeedbackStreamInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream, @NativeType("GLsizei") int primcount);
 
@@ -340,7 +340,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawArraysInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawArraysInstancedBaseInstance">Reference Page</a>
      */
     public static native void glDrawArraysInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLint") int first, @NativeType("GLsizei") int count, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance);
 
@@ -364,7 +364,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, count, type, indices, primcount, baseinstance);
@@ -379,7 +379,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), primcount, baseinstance);
@@ -393,7 +393,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), primcount, baseinstance);
@@ -407,7 +407,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), primcount, baseinstance);
@@ -421,7 +421,7 @@ public class GL42C extends GL41C {
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), primcount, baseinstance);
@@ -448,7 +448,7 @@ public class GL42C extends GL41C {
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, primcount, basevertex, baseinstance);
@@ -464,7 +464,7 @@ public class GL42C extends GL41C {
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), primcount, basevertex, baseinstance);
@@ -479,7 +479,7 @@ public class GL42C extends GL41C {
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), primcount, basevertex, baseinstance);
@@ -494,7 +494,7 @@ public class GL42C extends GL41C {
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), primcount, basevertex, baseinstance);
@@ -509,7 +509,7 @@ public class GL42C extends GL41C {
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), primcount, basevertex, baseinstance);
@@ -528,7 +528,7 @@ public class GL42C extends GL41C {
      * @param access  a token indicating the type of access that will be performed on the image
      * @param format  the format that the elements of the image will be treated as for the purposes of formatted stores
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindImageTexture">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindImageTexture">Reference Page</a>
      */
     public static native void glBindImageTexture(@NativeType("GLuint") int unit, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLboolean") boolean layered, @NativeType("GLint") int layer, @NativeType("GLenum") int access, @NativeType("GLenum") int format);
 
@@ -539,7 +539,7 @@ public class GL42C extends GL41C {
      *
      * @param barriers the barriers to insert (bitwise combination). One or more of:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT VERTEX_ATTRIB_ARRAY_BARRIER_BIT}</td><td>{@link #GL_ELEMENT_ARRAY_BARRIER_BIT ELEMENT_ARRAY_BARRIER_BIT}</td><td>{@link #GL_UNIFORM_BARRIER_BIT UNIFORM_BARRIER_BIT}</td></tr><tr><td>{@link #GL_TEXTURE_FETCH_BARRIER_BIT TEXTURE_FETCH_BARRIER_BIT}</td><td>{@link #GL_SHADER_IMAGE_ACCESS_BARRIER_BIT SHADER_IMAGE_ACCESS_BARRIER_BIT}</td><td>{@link #GL_COMMAND_BARRIER_BIT COMMAND_BARRIER_BIT}</td></tr><tr><td>{@link #GL_PIXEL_BUFFER_BARRIER_BIT PIXEL_BUFFER_BARRIER_BIT}</td><td>{@link #GL_TEXTURE_UPDATE_BARRIER_BIT TEXTURE_UPDATE_BARRIER_BIT}</td><td>{@link #GL_BUFFER_UPDATE_BARRIER_BIT BUFFER_UPDATE_BARRIER_BIT}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_BARRIER_BIT FRAMEBUFFER_BARRIER_BIT}</td><td>{@link #GL_TRANSFORM_FEEDBACK_BARRIER_BIT TRANSFORM_FEEDBACK_BARRIER_BIT}</td><td>{@link #GL_ATOMIC_COUNTER_BARRIER_BIT ATOMIC_COUNTER_BARRIER_BIT}</td></tr><tr><td>{@link #GL_ALL_BARRIER_BITS ALL_BARRIER_BITS}</td><td>{@link GL43#GL_SHADER_STORAGE_BARRIER_BIT SHADER_STORAGE_BARRIER_BIT}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMemoryBarrier">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMemoryBarrier">Reference Page</a>
      */
     public static native void glMemoryBarrier(@NativeType("GLbitfield") int barriers);
 
@@ -560,7 +560,7 @@ public class GL42C extends GL41C {
      * @param pname          the type of information to query
      * @param params         a variable into which to write the retrieved information
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformativ(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         nglGetInternalformativ(target, internalformat, pname, params.remaining(), memAddress(params));
@@ -573,7 +573,7 @@ public class GL42C extends GL41C {
      * @param internalformat the internal format about which to retrieve information
      * @param pname          the type of information to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetInternalformati(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
@@ -590,7 +590,7 @@ public class GL42C extends GL41C {
     /**
      * Array version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetActiveAtomicCounterBufferiv;
@@ -604,7 +604,7 @@ public class GL42C extends GL41C {
     /**
      * Array version of: {@link #glGetInternalformativ GetInternalformativ}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformativ(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetInternalformativ;

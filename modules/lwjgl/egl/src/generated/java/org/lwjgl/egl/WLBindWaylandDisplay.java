@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/WL/EGL_WL_bind_wayland_display.txt">WL_bind_wayland_display</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/WL/EGL_WL_bind_wayland_display.txt">WL_bind_wayland_display</a> extension.
  * 
  * <p>This extension provides entry points for binding and unbinding the wl_display of a Wayland compositor to an {@code EGLDisplay}. Binding a
  * {@code wl_display} means that the EGL implementation should provide one or more interfaces in the Wayland protocol to allow clients to create

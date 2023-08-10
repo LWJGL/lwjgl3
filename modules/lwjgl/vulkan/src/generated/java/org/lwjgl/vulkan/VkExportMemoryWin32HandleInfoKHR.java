@@ -37,7 +37,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <dl>
  * <dt>1</dt>
- * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
+ * <dd><a href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
  * </dl>
  * 
  * <h5>Valid Usage</h5>

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://github.com/Celtoys/Remotery">Remotery</a>, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
+ * Bindings to <a href="https://github.com/Celtoys/Remotery">Remotery</a>, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
  * a web browser.
  * 
  * <p>Supported features:</p>

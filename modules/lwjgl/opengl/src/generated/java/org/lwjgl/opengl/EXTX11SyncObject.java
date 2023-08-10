@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_x11_sync_object.txt">EXT_x11_sync_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_x11_sync_object.txt">EXT_x11_sync_object</a> extension.
  * 
  * <p>Synchronization objects added the ability to better coordinate operations between multiple GL command streams. However, it is desirable to have the
  * same level of coordination between GL command streams and external rendering APIs. This extension introduces two new concepts to build upon the

@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_cxx_for_opencl.txt">ext_cxx_for_opencl</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_cxx_for_opencl.txt">ext_cxx_for_opencl</a> extension.
  * 
  * <p>This extension adds support for building programs written using the C++ for OpenCL kernel language. It also enables applications to query the version
  * of the language supported by the device compiler.</p>

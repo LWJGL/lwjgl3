@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_shader3.txt">NV_texture_shader3</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_shader3.txt">NV_texture_shader3</a> extension.
  * 
  * <p>{@code NV_texture_shader3} extends the {@code NV_texture_shader} functionality by adding several new texture shader operations, extending several
  * existing texture shader operations, adding a new {@code HILO8} internal format, and adding new and more flexible re-mapping modes for dot product and

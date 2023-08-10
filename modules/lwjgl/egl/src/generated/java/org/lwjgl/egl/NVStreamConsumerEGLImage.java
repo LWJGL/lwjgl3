@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt">NV_stream_consumer_eglimage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt">NV_stream_consumer_eglimage</a> extension.
  * 
  * <p>An {@code EGLStream} consists of a sequence of image frames. This extension allows these frames to be acquired as {@code EGLImages}. Frames from the
  * stream would be used as the content for the EGLImage.</p>

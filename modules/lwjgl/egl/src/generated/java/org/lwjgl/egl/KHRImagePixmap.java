@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_image_pixmap.txt">KHR_image_pixmap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_image_pixmap.txt">KHR_image_pixmap</a> extension.
  * 
  * <p>This extension allows creating an EGLImage from a native pixmap image.</p>
  * 

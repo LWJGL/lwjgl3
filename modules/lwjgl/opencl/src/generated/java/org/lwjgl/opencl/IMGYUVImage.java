@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_yuv_image.txt">img_yuv_image</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_yuv_image.txt">img_yuv_image</a> extension.
  * 
  * <p>This extension provides new image formats to read YUV images, such as those provided by cameras on mobile devices.</p>
  * 

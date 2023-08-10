@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_command_queue_families.txt">intel_command_queue_families</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_command_queue_families.txt">intel_command_queue_families</a> extension.
  * 
  * <p>Some OpenCL devices may support different sets of command queues with different capabilities or execution properties. These sets are described in this
  * extension as command queue families. Applications may be able to improve performance or predictability by creating command queues from a specific

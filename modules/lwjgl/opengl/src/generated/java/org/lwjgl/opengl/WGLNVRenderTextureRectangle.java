@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_render_texture_rectangle.txt">WGL_NV_render_texture_rectangle</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_render_texture_rectangle.txt">WGL_NV_render_texture_rectangle</a> extension.
  * 
  * <p>This extension allows a color buffer with non-power-of-two dimensions to be used for both rendering and texturing. It is built upon the
  * ARB_render_texture extension; the only addition in this extension is the ability to bind a texture to a texture rectangle target, as provided through

@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_migrate_memobject.txt">ext_migrate_memobject</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_migrate_memobject.txt">ext_migrate_memobject</a> extension.
  * 
  * <p>This extension defines a mechanism for assigning which device an OpenCL memory object resides.</p>
  */

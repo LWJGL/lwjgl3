@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_texture_format_BGRA8888.txt">APPLE_texture_format_BGRA8888</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_texture_format_BGRA8888.txt">APPLE_texture_format_BGRA8888</a> extension.
  * 
  * <p>This extension introduces BGRA_EXT as an acceptable external format. This avoids byte swizzling when loading RGBA internal format textures, which may
  * be stored in BGRA order internally.</p>

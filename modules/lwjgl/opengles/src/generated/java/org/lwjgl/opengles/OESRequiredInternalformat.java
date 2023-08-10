@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_required_internalformat.txt">OES_required_internalformat</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_required_internalformat.txt">OES_required_internalformat</a> extension.
  * 
  * <p>The ES 1.1 API allows an implementation to store texture data internally with arbitrary precision, regardless of the format and type of the data
  * supplied by the application. Similarly, ES allows an implementation to choose an arbitrary precision for the internal storage of image data allocated

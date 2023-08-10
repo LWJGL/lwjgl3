@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texgen_reflection.txt">NV_texgen_reflection</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texgen_reflection.txt">NV_texgen_reflection</a> extension.
  * 
  * <p>This extension provides two new texture coordinate generation modes that are useful texture-based lighting and environment mapping.</p>
  */

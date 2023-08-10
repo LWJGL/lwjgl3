@@ -973,7 +973,7 @@ public class CGL {
      * {@link #CGLChoosePixelFormat ChoosePixelFormat} with the full-screen attribute, you need to check whether the pixel format object is created successfully.</p>
      * 
      * <p>You must capture the display prior to entering full-screen mode and release it after exiting. After calling this function, subsequent OpenGL drawing is
-     * rendered into the entire screen. For more information, see <a target="_blank" href="https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html">OpenGL Programming Guide for Mac</a>.</p>
+     * rendered into the entire screen. For more information, see <a href="https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html">OpenGL Programming Guide for Mac</a>.</p>
      * 
      * <p>To exit full-screen mode, call {@link #CGLClearDrawable ClearDrawable}.</p>
      * 

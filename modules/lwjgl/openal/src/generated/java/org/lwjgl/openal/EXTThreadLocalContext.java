@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/EXT_thread_local_context.txt">EXT_thread_local_context</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/EXT_thread_local_context.txt">EXT_thread_local_context</a> extension.
  * 
  * <p>This extension introduces the concept of a current thread-local context, with each thread able to have its own current context. The current context is
  * what the al- functions work on, effectively allowing multiple threads to independently drive separate OpenAL playback contexts.</p>

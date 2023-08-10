@@ -13,7 +13,7 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
         """
         The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_perception_anchor_interop">XR_MSFT_perception_anchor_interop</a> extension.
 
-        This extension supports conversion between {@code XrSpatialAnchorMSFT} and <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>. An application <b>can</b> use this extension to persist spatial anchors on the Windows device through <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchorStore">SpatialAnchorStore</a> or transfer spatial anchors between devices through <a target="_blank" href="https://docs.microsoft.com/uwp/api/windows.perception.spatial.spatialanchortransfermanager">SpatialAnchorTransferManager</a>.
+        This extension supports conversion between {@code XrSpatialAnchorMSFT} and <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>. An application <b>can</b> use this extension to persist spatial anchors on the Windows device through <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchorStore">SpatialAnchorStore</a> or transfer spatial anchors between devices through <a href="https://docs.microsoft.com/uwp/api/windows.perception.spatial.spatialanchortransfermanager">SpatialAnchorTransferManager</a>.
         """
 
     IntConstant(
@@ -34,7 +34,7 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
         Create an {@code XrSpatialAnchorMSFT} from a Windows SpatialAnchor pointer.
 
         <h5>C Specification</h5>
-        The #CreateSpatialAnchorFromPerceptionAnchorMSFT() function creates a {@code XrSpatialAnchorMSFT} handle from an {@code IUnknown} pointer to <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>.
+        The #CreateSpatialAnchorFromPerceptionAnchorMSFT() function creates a {@code XrSpatialAnchorMSFT} handle from an {@code IUnknown} pointer to <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>.
 
         <pre><code>
 ￿XrResult xrCreateSpatialAnchorFromPerceptionAnchorMSFT(
@@ -43,7 +43,7 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
 ￿    XrSpatialAnchorMSFT*                        anchor);</code></pre>
 
         <h5>Description</h5>
-        The input {@code perceptionAnchor} <b>must</b> support successful {@code QueryInterface} to <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> , otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
+        The input {@code perceptionAnchor} <b>must</b> support successful {@code QueryInterface} to <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> , otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
 
         If the function successfully returned, the output {@code anchor} <b>must</b> be a valid handle. This also increments the refcount of the {@code perceptionAnchor} object.
 
@@ -79,7 +79,7 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
         """,
 
         XrSession("session", "the specified {@code XrSession}."),
-        IUnknown.p("perceptionAnchor", "an IUnknown pointer to a <a target=\"_blank\" href=\"https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor\">Windows.Perception.Spatial.SpatialAnchor</a> object."),
+        IUnknown.p("perceptionAnchor", "an IUnknown pointer to a <a href=\"https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor\">Windows.Perception.Spatial.SpatialAnchor</a> object."),
         Check(1)..XrSpatialAnchorMSFT.p("anchor", "a pointer to {@code XrSpatialAnchorMSFT} to receive the returned anchor handle.")
     )
 
@@ -89,7 +89,7 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
         Convert an {@code XrSpatialAnchorMSFT} to a Windows SpatialAnchor.
 
         <h5>C Specification</h5>
-        The #TryGetPerceptionAnchorFromSpatialAnchorMSFT() function converts a {@code XrSpatialAnchorMSFT} handle into an {@code IUnknown} pointer to <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>.
+        The #TryGetPerceptionAnchorFromSpatialAnchorMSFT() function converts a {@code XrSpatialAnchorMSFT} handle into an {@code IUnknown} pointer to <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>.
 
         <pre><code>
 ￿XrResult xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(
@@ -98,9 +98,9 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
 ￿    IUnknown**                                  perceptionAnchor);</code></pre>
 
         <h5>Description</h5>
-        If the runtime can convert the {@code anchor} to a <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object, this function <b>must</b> return #SUCCESS, and the output {@code IUnknown} in the pointer of {@code perceptionAnchor} <b>must</b> be not {@code NULL}. This also increments the refcount of the object. The application <b>can</b> then use {@code QueryInterface} to get the pointer for <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object. The application <b>should</b> release the COM pointer after done with the object, or attach it to a smart COM pointer such as {@code winrt::com_ptr}.
+        If the runtime can convert the {@code anchor} to a <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object, this function <b>must</b> return #SUCCESS, and the output {@code IUnknown} in the pointer of {@code perceptionAnchor} <b>must</b> be not {@code NULL}. This also increments the refcount of the object. The application <b>can</b> then use {@code QueryInterface} to get the pointer for <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object. The application <b>should</b> release the COM pointer after done with the object, or attach it to a smart COM pointer such as {@code winrt::com_ptr}.
 
-        If the runtime cannot convert the {@code anchor} to a <a target="_blank" href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object, the function <b>must</b> return #SUCCESS, and the output {@code IUnknown} in the pointer of {@code perceptionAnchor} <b>must</b> be {@code NULL}.
+        If the runtime cannot convert the {@code anchor} to a <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a> object, the function <b>must</b> return #SUCCESS, and the output {@code IUnknown} in the pointer of {@code perceptionAnchor} <b>must</b> be {@code NULL}.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -133,6 +133,6 @@ val MSFT_perception_anchor_interop = "MSFTPerceptionAnchorInterop".nativeClassXR
 
         XrSession("session", "the specified {@code XrSession}."),
         XrSpatialAnchorMSFT("anchor", "a valid {@code XrSpatialAnchorMSFT} handle."),
-        Check(1)..IUnknown.p.p("perceptionAnchor", "a valid pointer to IUnknown pointer to receive the output <a target=\"_blank\" href=\"https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor\">Windows.Perception.Spatial.SpatialAnchor</a> object.")
+        Check(1)..IUnknown.p.p("perceptionAnchor", "a valid pointer to IUnknown pointer to receive the output <a href=\"https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor\">Windows.Perception.Spatial.SpatialAnchor</a> object.")
     )
 }

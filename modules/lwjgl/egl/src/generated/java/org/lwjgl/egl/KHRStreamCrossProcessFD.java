@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_cross_process_fd.txt">KHR_stream_cross_process_fd</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_cross_process_fd.txt">KHR_stream_cross_process_fd</a> extension.
  * 
  * <p>This extension allows an EGLStreamKHR object handle to be duplicated into another process so that the EGLStream producer can be in one process while
  * the EGLStream consumer can be in another process.</p>

@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_color.txt">EXT_blend_color</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_color.txt">EXT_blend_color</a> extension.
  * 
  * <p>Blending capability is extended by defining a constant color that can be included in blending equations. A typical usage is blending two RGB images.
  * Without the constant blend factor, one image must have an alpha channel with each pixel set to the desired blend factor.</p>

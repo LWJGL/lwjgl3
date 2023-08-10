@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_paletted_texture.txt">OES_compressed_paletted_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_paletted_texture.txt">OES_compressed_paletted_texture</a> extension.
  * 
  * <p>The goal of this extension is to allow direct support of palettized textures in OpenGL ES.</p>
  * 

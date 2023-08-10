@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_query_buffer_object.txt">ARB_query_buffer_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_query_buffer_object.txt">ARB_query_buffer_object</a> extension.
  * 
  * <p>Statistics about the operation of the OpenGL pipeline, such as the number of samples that passed the depth test, the elapsed time between two events or
  * the number of vertices written by transform feedback can be retrieved from the GL through query objects. The result of a query object is acquired by the

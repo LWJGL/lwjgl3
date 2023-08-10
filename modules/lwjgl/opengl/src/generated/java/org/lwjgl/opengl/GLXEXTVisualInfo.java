@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_visual_info.txt">GLX_EXT_visual_info</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_visual_info.txt">GLX_EXT_visual_info</a> extension.
  * 
  * <p>This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
  * underlying a GLX visual.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_EGL_image_storage_compression.txt">EXT_EGL_image_storage_compression</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_EGL_image_storage_compression.txt">EXT_EGL_image_storage_compression</a> extension.
  * 
  * <p>Applications may wish to take advantage of framebuffer compression. Some platforms may support framebuffer compression at fixed bitrates. Such
  * compression algorithms generally produce results that are visually lossless, but the results are typically not bit-exact when compared to a

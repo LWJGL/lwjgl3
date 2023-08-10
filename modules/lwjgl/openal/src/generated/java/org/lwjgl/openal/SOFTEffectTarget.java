@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_effect_target.txt">SOFT_effect_target</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_effect_target.txt">SOFT_effect_target</a> extension.
  * 
  * <p>This extension provides a method to reroute the output of an auxiliary effect slot to the input of another auxiliary effect slot. By default, an effect
  * slot's output is added to the main output along side other effect slots and each source's direct path. This makes it impossible to, for example, apply

@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the frame API of <a target="_blank" href="https://lz4.org/">LZ4</a>.
+ * Native bindings to the frame API of <a href="https://lz4.org/">LZ4</a>.
  * 
  * <p>LZ4F is a stand-alone API to create LZ4-compressed frames conformant with specification v1.6.1. It also offers streaming capabilities. {@code lz4.h} is
  * not required when using {@code lz4frame.h}, except to get constant such as {@link LZ4#LZ4_VERSION_NUMBER VERSION_NUMBER}.</p>

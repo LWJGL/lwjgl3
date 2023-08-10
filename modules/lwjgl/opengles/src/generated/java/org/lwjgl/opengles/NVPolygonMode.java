@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_polygon_mode.txt">NV_polygon_mode</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_polygon_mode.txt">NV_polygon_mode</a> extension.
  * 
  * <p>This extension adds a PolygonModeNV entry point which can be used to change the polygon rasterization method. Using this extension, state consistent
  * with rendering triangle primitives can trivially be toggled to render primitives as lines or points. In addition, independent enables are provided for

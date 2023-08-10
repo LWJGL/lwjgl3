@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_buffer_samples.txt">SOFT_buffer_samples</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_buffer_samples.txt">SOFT_buffer_samples</a> extension.
  * 
  * <p>This extension provides a more flexible mechanism for loading buffer data, as well as a method to retrieve buffer data. Unextended OpenAL only provides
  * a method to specify a single buffer format when loading data, which defines the data given by the application. The AL is given leeway in converting the

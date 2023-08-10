@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_create_context_es2_profile.txt">WGL_EXT_create_context_es2_profile</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_create_context_es2_profile.txt">WGL_EXT_create_context_es2_profile</a> extension.
  * 
  * <p>This extension allows creating an OpenGL ES context.</p>
  * 

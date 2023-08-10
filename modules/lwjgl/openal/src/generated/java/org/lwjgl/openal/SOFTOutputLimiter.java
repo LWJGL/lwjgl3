@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_output_limiter.txt">SOFT_output_limiter</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_output_limiter.txt">SOFT_output_limiter</a> extension.
  * 
  * <p>This extension allows an application to control OpenAL Soft's output limiter. OpenAL Soft 1.18 adds an output limiter to prevent excessive clipping on
  * the output, and this extension allows applications to turn it off or on.</p>

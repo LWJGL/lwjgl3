@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_create_buffer.txt">nv_create_buffer</a> extension. */
+/** Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_create_buffer.txt">nv_create_buffer</a> extension. */
 public class NVCreateBuffer {
 
     public static final int

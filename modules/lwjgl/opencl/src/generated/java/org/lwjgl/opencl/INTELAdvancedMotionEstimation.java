@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_advanced_motion_estimation.txt">intel_advanced_motion_estimation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_advanced_motion_estimation.txt">intel_advanced_motion_estimation</a> extension.
  * 
  * <p>This extension builds upon the cl_intel_motion_estimation extension by providing block-based estimation and greater control over the estimation
  * algorithm.</p>

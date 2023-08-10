@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_swizzle.txt">NV_viewport_swizzle</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_swizzle.txt">NV_viewport_swizzle</a> extension.
  * 
  * <p>This extension provides a new per-viewport swizzle that can modify the position of primitives sent to each viewport. New viewport swizzle state is
  * added for each viewport, and a new position vector is computed for each vertex by selecting from and optionally negating any of the four components of

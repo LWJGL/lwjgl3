@@ -1308,7 +1308,7 @@ public final class GLESCapabilities {
     /** When true, {@link AMDProgramBinaryZ400} is supported. */
     public final boolean GL_AMD_program_binary_Z400;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANDROID/ANDROID_extension_pack_es31a.txt">ANDROID_extension_pack_es31a</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANDROID/ANDROID_extension_pack_es31a.txt">ANDROID_extension_pack_es31a</a> extension is supported.
      * 
      * <p>This extension changes little functionality directly. Instead it serves to roll up the 20 extensions it requires, allowing applications to check for
      * all of them at once, and enable all of their shading language features with a single #extension statement. The Android platform provides special
@@ -1345,7 +1345,7 @@ public final class GLESCapabilities {
     /** When true, {@link APPLEClipDistance} is supported. */
     public final boolean GL_APPLE_clip_distance;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_color_buffer_packed_float.txt">APPLE_color_buffer_packed_float</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_color_buffer_packed_float.txt">APPLE_color_buffer_packed_float</a> extension is supported.
      * 
      * <p>This extension allows two packed floating point formats R11F_G11F_B10F and as RGB9_E5 defined in APPLE_texture_packed_float or OpenGL ES 3.0 or to be
      * rendered to via framebuffer objects.</p>
@@ -1372,7 +1372,7 @@ public final class GLESCapabilities {
     /** When true, {@link ARMMaliShaderBinary} is supported. */
     public final boolean GL_ARM_mali_shader_binary;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_rgba8.txt">ARM_rgba8</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_rgba8.txt">ARM_rgba8</a> extension is supported.
      * 
      * <p>This extension enables a RGBA8 renderbuffer storage format. It is similar to OES_rgb8_rgba8, but only exposes RGBA8.</p>
      * 
@@ -1382,7 +1382,7 @@ public final class GLESCapabilities {
     /** When true, {@link ARMShaderFramebufferFetch} is supported. */
     public final boolean GL_ARM_shader_framebuffer_fetch;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_shader_framebuffer_fetch_depth_stencil.txt">ARM_shader_framebuffer_fetch_depth_stencil</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARM/ARM_shader_framebuffer_fetch_depth_stencil.txt">ARM_shader_framebuffer_fetch_depth_stencil</a> extension is supported.
      * 
      * <p>Existing extensions, such as EXT_shader_framebuffer_fetch, allow fragment shaders to read existing framebuffer color data as input. This enables
      * use-cases such as programmable blending, and other operations that may not be possible to implement with fixed-function blending.</p>
@@ -1417,7 +1417,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTClipCullDistance} is supported. */
     public final boolean GL_EXT_clip_cull_distance;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_color_buffer_float.txt">EXT_color_buffer_float</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_color_buffer_float.txt">EXT_color_buffer_float</a> extension is supported.
      * 
      * <p>This extension allows a variety of floating point formats to be rendered to via framebuffer objects.</p>
      * 
@@ -1426,10 +1426,10 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_color_buffer_float;
     /** When true, {@link EXTColorBufferHalfFloat} is supported. */
     public final boolean GL_EXT_color_buffer_half_float;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_compressed_ETC1_RGB8_sub_texture.txt">EXT_compressed_ETC1_RGB8_sub_texture</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_compressed_ETC1_RGB8_sub_texture.txt">EXT_compressed_ETC1_RGB8_sub_texture</a> extension is supported. */
     public final boolean GL_EXT_compressed_ETC1_RGB8_sub_texture;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_conservative_depth.txt">EXT_conservative_depth</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_conservative_depth.txt">EXT_conservative_depth</a> extension is supported.
      * 
      * <p>There is a common optimization for hardware accelerated implementation of OpenGL ES which relies on an early depth test to be run before the fragment
      * shader so that the shader evaluation can be skipped if the fragment ends up being discarded because it is occluded.</p>
@@ -1490,7 +1490,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTExternalBuffer} is supported. */
     public final boolean GL_EXT_external_buffer;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_float_blend.txt">EXT_float_blend</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_float_blend.txt">EXT_float_blend</a> extension is supported.
      * 
      * <p>This extension expands upon the EXT_color_buffer_float extension to allow support for blending with 32-bit floating-point color buffers.</p>
      * 
@@ -1500,25 +1500,25 @@ public final class GLESCapabilities {
     /** When true, {@link EXTFragmentShadingRate} is supported. */
     public final boolean GL_EXT_fragment_shading_rate;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_shading_rate_attachment.txt">EXT_fragment_shading_rate_attachment</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_shading_rate_attachment.txt">EXT_fragment_shading_rate_attachment</a> extension is supported.
      * 
      * <p>See {@link EXTFragmentShadingRate EXT_fragment_shading_rate} for more information.</p>
      */
     public final boolean GL_EXT_fragment_shading_rate_attachment;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_shading_rate_primitive.txt">EXT_fragment_shading_rate_primitive</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fragment_shading_rate_primitive.txt">EXT_fragment_shading_rate_primitive</a> extension is supported.
      * 
      * <p>See {@link EXTFragmentShadingRate EXT_fragment_shading_rate} for more information.</p>
      */
     public final boolean GL_EXT_fragment_shading_rate_primitive;
     /** When true, {@link EXTFramebufferBlitLayers} is supported. */
     public final boolean GL_EXT_framebuffer_blit_layers;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_geometry_shader.txt">EXT_geometry_point_size</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_geometry_shader.txt">EXT_geometry_point_size</a> extension is supported. */
     public final boolean GL_EXT_geometry_point_size;
     /** When true, {@link EXTGeometryShader} is supported. */
     public final boolean GL_EXT_geometry_shader;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_gpu_shader5.txt">EXT_gpu_shader5</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_gpu_shader5.txt">EXT_gpu_shader5</a> extension is supported.
      * 
      * <p>This extension provides a set of new features to the OpenGL ES Shading Language and related APIs to support capabilities of new GPUs, extending the
      * capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
@@ -1581,7 +1581,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTMultiviewDrawBuffers} is supported. */
     public final boolean GL_EXT_multiview_draw_buffers;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_tessellation_geometry_shader.txt">EXT_multiview_tessellation_geometry_shader</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_tessellation_geometry_shader.txt">EXT_multiview_tessellation_geometry_shader</a> extension is supported.
      * 
      * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of tessellation control, tessellation
      * evaluation, and geometry shaders during multiview rendering. {@code OVR_multiview} by itself forbids the use of any of these shader types.</p>
@@ -1599,7 +1599,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_multiview_tessellation_geometry_shader;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_texture_multisample.txt">EXT_multiview_texture_multisample</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_texture_multisample.txt">EXT_multiview_texture_multisample</a> extension is supported.
      * 
      * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of multisample textures during multiview
      * rendering.</p>
@@ -1621,7 +1621,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_multiview_texture_multisample;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_timer_query.txt">EXT_multiview_timer_query</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_timer_query.txt">EXT_multiview_timer_query</a> extension is supported.
      * 
      * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of timer queries during multiview rendering.
      * {@code OVR_multiview} does not specify defined behavior for such usage (if {@link EXTDisjointTimerQuery EXT_disjoint_timer_query} is present).</p>
@@ -1634,7 +1634,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTPolygonOffsetClamp} is supported. */
     public final boolean GL_EXT_polygon_offset_clamp;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">EXT_post_depth_coverage</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">EXT_post_depth_coverage</a> extension is supported.
      * 
      * <p>This extension allows the fragment shader to control whether values in gl_SampleMaskIn[] reflect the coverage after application of the early depth and
      * stencil tests. This feature can be enabled with the following layout qualifier in the fragment shader:</p>
@@ -1671,7 +1671,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTSemaphoreWin32} is supported. */
     public final boolean GL_EXT_semaphore_win32;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_separate_depth_stencil.txt">EXT_separate_depth_stencil</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_separate_depth_stencil.txt">EXT_separate_depth_stencil</a> extension is supported.
      * 
      * <p>This extension adds support for binding a different image to the depth and stencil attachments of a framebuffer object.</p>
      */
@@ -1721,7 +1721,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_shader_group_vote;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_implicit_conversions.txt">EXT_shader_implicit_conversions</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_implicit_conversions.txt">EXT_shader_implicit_conversions</a> extension is supported.
      * 
      * <p>This extension provides support for implicitly converting signed integer types to unsigned types, as well as more general implicit conversion and
      * function overloading infrastructure to support new data types introduced by other extensions.</p>
@@ -1730,7 +1730,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_shader_implicit_conversions;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_integer_mix.txt">EXT_shader_integer_mix</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_integer_mix.txt">EXT_shader_integer_mix</a> extension is supported.
      * 
      * <p>GLSL 1.30 (and GLSL ES 3.00) expanded the mix() built-in function to operate on a boolean third argument that does not interpolate but selects. This
      * extension extends mix() to select between int, uint, and bool components.</p>
@@ -1739,7 +1739,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_shader_integer_mix;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_io_blocks.txt">EXT_shader_io_blocks</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_io_blocks.txt">EXT_shader_io_blocks</a> extension is supported.
      * 
      * <p>This extension extends the functionality of interface blocks to support input and output interfaces in the OpenGL ES Shading Language.</p>
      * 
@@ -1759,7 +1759,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_shader_io_blocks;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_non_constant_global_initializers.txt">EXT_shader_non_constant_global_initializers</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_non_constant_global_initializers.txt">EXT_shader_non_constant_global_initializers</a> extension is supported.
      * 
      * <p>This extension adds the ability to use non-constant initializers for global variables in the OpenGL ES Shading Language specifications. This
      * functionality is already present in the OpenGL Shading language specification.</p>
@@ -1770,7 +1770,7 @@ public final class GLESCapabilities {
     /** When true, {@link EXTShaderPixelLocalStorage2} is supported. */
     public final boolean GL_EXT_shader_pixel_local_storage2;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_samples_identical.txt">EXT_shader_samples_identical</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_samples_identical.txt">EXT_shader_samples_identical</a> extension is supported.
      * 
      * <p>Multisampled antialiasing has become a common method for improving the quality of rendered images. Multisampling differs from supersampling in that the
      * color of a primitive that covers all or part of a pixel is resolved once, regardless of the number of samples covered. If a large polygon is rendered,
@@ -1797,7 +1797,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_EXT_shader_samples_identical;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_texture_lod.txt">EXT_shader_texture_lod</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_texture_lod.txt">EXT_shader_texture_lod</a> extension is supported.
      * 
      * <p>This extension adds additional texture functions to the OpenGL ES Shading Language which provide the shader writer with explicit control of LOD.</p>
      * 
@@ -1884,7 +1884,7 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_sRGB;
     /** When true, {@link EXTSRGBWriteControl} is supported. */
     public final boolean GL_EXT_sRGB_write_control;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_tessellation_shader.txt">EXT_tessellation_point_size</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_tessellation_shader.txt">EXT_tessellation_point_size</a> extension is supported. */
     public final boolean GL_EXT_tessellation_point_size;
     /** When true, {@link EXTTessellationShader} is supported. */
     public final boolean GL_EXT_tessellation_shader;
@@ -1958,7 +1958,7 @@ public final class GLESCapabilities {
     /** See {@link EXTTextureCompressionASTCDecodeMode EXT_texture_compression_astc_decode_mode}. */
     public final boolean GL_EXT_texture_compression_astc_decode_mode_rgb9e5;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GL_EXT_texture_query_lod.txt">GL_EXT_texture_query_lod</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GL_EXT_texture_query_lod.txt">GL_EXT_texture_query_lod</a> extension is supported.
      * 
      * <p>This extension adds a new set of fragment shader texture functions ({@code textureLOD}) that return the results of automatic level-of-detail
      * computations that would be performed if a texture lookup were performed.</p>
@@ -1991,7 +1991,7 @@ public final class GLESCapabilities {
     /** When true, {@link INTELPerformanceQuery} is supported. */
     public final boolean GL_INTEL_performance_query;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_shader_integer_functions2.txt">INTEL_shader_integer_functions2</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_shader_integer_functions2.txt">INTEL_shader_integer_functions2</a> extension is supported.
      * 
      * <p>OpenCL and other GPU programming environments provides a number of useful functions operating on integer data. Many of these functions are supported by
      * specialized instructions various GPUs. Correct GLSL implementations for some of these functions are non-trivial. Recognizing open-coded versions of
@@ -2015,7 +2015,7 @@ public final class GLESCapabilities {
     /** When true, {@link KHRParallelShaderCompile} is supported. */
     public final boolean GL_KHR_parallel_shader_compile;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_robust_buffer_access_behavior.txt">KHR_robust_buffer_access_behavior</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_robust_buffer_access_behavior.txt">KHR_robust_buffer_access_behavior</a> extension is supported.
      * 
      * <p>This extension specifies the behavior of out-of-bounds buffer and array accesses. This is an improvement over the existing KHR_robustness extension
      * which states that the application should not crash, but that behavior is otherwise undefined. This extension specifies the access protection provided
@@ -2030,7 +2030,7 @@ public final class GLESCapabilities {
     /** When true, {@link KHRShaderSubgroup} is supported. */
     public final boolean GL_KHR_shader_subgroup;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_hdr.txt">KHR_texture_compression_astc_hdr</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_hdr.txt">KHR_texture_compression_astc_hdr</a> extension is supported.
      * 
      * <p>This extension corresponds to the ASTC HDR Profile, see {@link KHRTextureCompressionASTCLDR KHR_texture_compression_astc_ldr} for details.</p>
      */
@@ -2038,7 +2038,7 @@ public final class GLESCapabilities {
     /** When true, {@link KHRTextureCompressionASTCLDR} is supported. */
     public final boolean GL_KHR_texture_compression_astc_ldr;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_sliced_3d.txt">KHR_texture_compression_astc_sliced_3d</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_sliced_3d.txt">KHR_texture_compression_astc_sliced_3d</a> extension is supported.
      * 
      * <p>Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
      * comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
@@ -2061,7 +2061,7 @@ public final class GLESCapabilities {
     /** When true, {@link MESAProgramBinaryFormats} is supported. */
     public final boolean GL_MESA_program_binary_formats;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_tile_raster_order.txt">MESA_tile_raster_order</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_tile_raster_order.txt">MESA_tile_raster_order</a> extension is supported.
      * 
      * <p>This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_NV_texture_barrier} to allow setting the rasterization order of
      * the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first copying
@@ -2083,7 +2083,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVClipSpaceWScaling} is supported. */
     public final boolean GL_NV_clip_space_w_scaling;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_compute_shader_derivatives.txt">NV_compute_shader_derivatives</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_compute_shader_derivatives.txt">NV_compute_shader_derivatives</a> extension is supported.
      * 
      * <p>This extension adds OpenGL ES API support for the OpenGL Shading Language (GLSL) extension {@code "NV_compute_shader_derivatives"}.</p>
      * 
@@ -2116,7 +2116,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVDrawVulkanImage} is supported. */
     public final boolean GL_NV_draw_vulkan_image;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_explicit_attrib_location.txt">NV_explicit_attrib_location</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_explicit_attrib_location.txt">NV_explicit_attrib_location</a> extension is supported.
      * 
      * <p>This extension provides a method to pre-assign attribute locations to named vertex shader inputs. This allows applications to globally assign a
      * particular semantic meaning, such as diffuse color or vertex normal, to a particular attribute location without knowing how that attribute will be
@@ -2134,7 +2134,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVFragmentCoverageToColor} is supported. */
     public final boolean GL_NV_fragment_coverage_to_color;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_barycentric.txt">NV_fragment_shader_barycentric</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_barycentric.txt">NV_fragment_shader_barycentric</a> extension is supported.
      * 
      * <p>This extension advertises OpenGL support for the OpenGL Shading Language (GLSL) extension {@code "NV_fragment_shader_barycentric"}, which provides
      * fragment shader built-in variables holding barycentric weight vectors that identify the location of the fragment within its primitive. Additionally,
@@ -2144,7 +2144,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_fragment_shader_barycentric;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_interlock.txt">NV_fragment_shader_interlock</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_interlock.txt">NV_fragment_shader_interlock</a> extension is supported.
      * 
      * <p>In unextended OpenGL 4.3 or OpenGL ES 3.1, applications may produce a large number of fragment shader invocations that perform loads and stores to
      * memory using image uniforms, atomic counter uniforms, buffer variables, or pointers. The order in which loads and stores to common addresses are
@@ -2188,7 +2188,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVFramebufferMultisample} is supported. */
     public final boolean GL_NV_framebuffer_multisample;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_generate_mipmap_sRGB.txt">NV_generate_mipmap_sRGB</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_generate_mipmap_sRGB.txt">NV_generate_mipmap_sRGB</a> extension is supported.
      * 
      * <p>EXT_sRGB requires GenerateMipmap() to throw INVALID_OPERATION on textures with sRGB encoding. NV_generate_mipmap_sRGB lifts this restriction.</p>
      * 
@@ -2196,7 +2196,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_generate_mipmap_sRGB;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">NV_geometry_shader_passthrough</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">NV_geometry_shader_passthrough</a> extension is supported.
      * 
      * <p>Geometry shaders provide the ability for applications to process each primitive sent through the GL using a programmable shader. While geometry shaders
      * can be used to perform a number of different operations, including subdividing primitives and changing primitive type, one common use case treats
@@ -2270,7 +2270,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVGPUShader5} is supported. */
     public final boolean GL_NV_gpu_shader5;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_image_formats.txt">NV_image_formats</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_image_formats.txt">NV_image_formats</a> extension is supported.
      * 
      * <p>OpenGL ES 3.1 specifies a variety of formats required to be usable with texture images. This extension introduces the texture image formats missing for
      * parity with OpenGL 4.4.</p>
@@ -2303,7 +2303,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVReadBuffer} is supported. */
     public final boolean GL_NV_read_buffer;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_buffer.txt">NV_read_buffer_front</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_buffer.txt">NV_read_buffer_front</a> extension is supported.
      * 
      * <p>Adds the ability to select the system-provided FRONT color buffer as the source for read operations when the system-provided framebuffer is bound and
      * contains both a front and back buffer.</p>
@@ -2312,7 +2312,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_read_buffer_front;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_depth</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_depth</a> extension is supported.
      * 
      * <p>Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the default color buffer of the currently-bound framebuffer. However, it is useful
      * for debugging to be able to read from depth and stencil buffers. This extension re-introduces these features into OpenGL-ES 2.0.</p>
@@ -2321,7 +2321,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_read_depth;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_depth_stencil</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_depth_stencil</a> extension is supported.
      * 
      * <p>Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the default color buffer of the currently-bound framebuffer. However, it is useful
      * for debugging to be able to read from depth and stencil buffers. This extension re-introduces these features into OpenGL-ES 2.0.</p>
@@ -2330,7 +2330,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_read_depth_stencil;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_stencil</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_read_depth_stencil.txt">NV_read_stencil</a> extension is supported.
      * 
      * <p>Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the default color buffer of the currently-bound framebuffer. However, it is useful
      * for debugging to be able to read from depth and stencil buffers. This extension re-introduces these features into OpenGL-ES 2.0.</p>
@@ -2343,7 +2343,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVSampleLocations} is supported. */
     public final boolean GL_NV_sample_locations;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_mask_override_coverage.txt">NV_sample_mask_override_coverage</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_mask_override_coverage.txt">NV_sample_mask_override_coverage</a> extension is supported.
      * 
      * <p>This extension allows the fragment shader to control whether the gl_SampleMask output can enable samples that were not covered by the original
      * primitive, or that failed the early depth/stencil tests. This can be enabled by redeclaring the gl_SampleMask output with the "override_coverage"
@@ -2365,7 +2365,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_shader_atomic_fp16_vector;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_noperspective_interpolation.txt">NV_shader_noperspective_interpolation</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_noperspective_interpolation.txt">NV_shader_noperspective_interpolation</a> extension is supported.
      * 
      * <p>In OpenGL 3.0 and later, and in other APIs, there are three types of interpolation qualifiers that are available for fragment shader inputs: flat,
      * smooth, and noperspective. The 'flat' qualifier indicates that no interpolation should be used. This is mandatory for integer-type variables. The
@@ -2385,7 +2385,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
     public final boolean GL_NV_shader_subgroup_partitioned;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_texture_footprint.txt">NV_shader_texture_footprint</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_texture_footprint.txt">NV_shader_texture_footprint</a> extension is supported.
      * 
      * <p>This extension adds OpenGL API support for the OpenGL Shading Language (GLSL) extension {@code "NV_shader_texture_footprint"}. That extension adds a
      * new set of texture query functions ({@code "textureFootprint*NV"}) to GLSL. These built-in functions prepare to perform a filtered texture lookup based
@@ -2423,7 +2423,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVSRGBFormats} is supported. */
     public final boolean GL_NV_sRGB_formats;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_stereo_view_rendering.txt">NV_stereo_view_rendering</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_stereo_view_rendering.txt">NV_stereo_view_rendering</a> extension is supported.
      * 
      * <p>Virtual reality (VR) applications often render a single logical scene from multiple views corresponding to a pair of eyes. The views (eyes) are
      * separated by a fixed offset in the X direction.</p>
@@ -2450,7 +2450,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVTextureCompressionS3TC} is supported. */
     public final boolean GL_NV_texture_compression_s3tc;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_compression_s3tc_update.txt">NV_texture_compression_s3tc_update</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_compression_s3tc_update.txt">NV_texture_compression_s3tc_update</a> extension is supported.
      * 
      * <p>This extension allows for full or partial image updates to a compressed 2D texture from an uncompressed texel data buffer using TexImage2D and
      * TexSubImage2D. Consquently, if a compressed internal format is used, all the restrictions associated with compressed textures will apply. These include
@@ -2460,7 +2460,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_NV_texture_compression_s3tc_update;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_npot_2D_mipmap.txt">NV_texture_npot_2D_mipmap</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_npot_2D_mipmap.txt">NV_texture_npot_2D_mipmap</a> extension is supported.
      * 
      * <p>Conventional OpenGL ES 2.0 allows the use of non-power-of-two (NPOT) textures with the limitation that mipmap minification filters can not be used.
      * This extension relaxes this restriction and adds limited mipmap support for 2D NPOT textures.</p>
@@ -2479,7 +2479,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVViewportArray} is supported. */
     public final boolean GL_NV_viewport_array;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">NV_viewport_array2</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">NV_viewport_array2</a> extension is supported.
      * 
      * <p>This extension provides new support allowing a single primitive to be broadcast to multiple viewports and/or multiple layers. A shader output
      * gl_ViewportMask[] is provided, allowing a single primitive to be output to multiple viewports simultaneously. Also, a new shader option is provided to
@@ -2500,7 +2500,7 @@ public final class GLESCapabilities {
     /** When true, {@link NVViewportSwizzle} is supported. */
     public final boolean GL_NV_viewport_swizzle;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_blend_equation_advanced_multi_draw_buffers.txt">NVX_blend_equation_advanced_multi_draw_buffers</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_blend_equation_advanced_multi_draw_buffers.txt">NVX_blend_equation_advanced_multi_draw_buffers</a> extension is supported.
      * 
      * <p>This extension adds support for using advanced blend equations introduced with {@link NVBlendEquationAdvanced NV_blend_equation_advanced} (and standardized by
      * {@link KHRBlendEquationAdvanced KHR_blend_equation_advanced}) in conjunction with multiple draw buffers. The NV_blend_equation_advanced extension supports advanced blending
@@ -2521,7 +2521,7 @@ public final class GLESCapabilities {
     /** When true, {@link OESDepth32} is supported. */
     public final boolean GL_OES_depth32;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_depth_texture.txt">OES_depth_texture</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_depth_texture.txt">OES_depth_texture</a> extension is supported.
      * 
      * <p>This extension defines a new texture format that stores depth values in the texture. Depth texture images are widely used for shadow casting but can
      * also be used for other effects such as image based rendering, displacement mapping etc.</p>
@@ -2540,7 +2540,7 @@ public final class GLESCapabilities {
     /** When true, {@link OESEGLImageExternal} is supported. */
     public final boolean GL_OES_EGL_image_external;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_EGL_image_external_essl3.txt">OES_EGL_image_external_essl3</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_EGL_image_external_essl3.txt">OES_EGL_image_external_essl3</a> extension is supported.
      * 
      * <p>OES_EGL_image_external provides a mechanism for creating EGLImage texture targets from EGLImages, but only specified language interactions for the
      * OpenGL ES Shading Language version 1.0. This extension adds support for versions 3.x of the OpenGL ES Shading Language.</p>
@@ -2549,14 +2549,14 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_EGL_image_external_essl3;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_element_index_uint.txt">OES_element_index_uint</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_element_index_uint.txt">OES_element_index_uint</a> extension is supported.
      * 
      * <p>OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT
      * {@code type} values.</p>
      */
     public final boolean GL_OES_element_index_uint;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_fbo_render_mipmap.txt">OES_fbo_render_mipmap</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_fbo_render_mipmap.txt">OES_fbo_render_mipmap</a> extension is supported.
      * 
      * <p>OES_framebuffer_object allows rendering to the base level of a texture only. This extension removes this limitation by allowing implementations to
      * support rendering to any mip-level of a texture(s) that is attached to a framebuffer object(s).</p>
@@ -2565,14 +2565,14 @@ public final class GLESCapabilities {
      * image</p>
      */
     public final boolean GL_OES_fbo_render_mipmap;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_geometry_shader.txt">OES_geometry_point_size</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_geometry_shader.txt">OES_geometry_point_size</a> extension is supported. */
     public final boolean GL_OES_geometry_point_size;
     /** When true, {@link OESGeometryShader} is supported. */
     public final boolean GL_OES_geometry_shader;
     /** When true, {@link OESGetProgramBinary} is supported. */
     public final boolean GL_OES_get_program_binary;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_gpu_shader5.txt">OES_gpu_shader5</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_gpu_shader5.txt">OES_gpu_shader5</a> extension is supported.
      * 
      * <p>This extension provides a set of new features to the OpenGL ES Shading Language and related APIs to support capabilities of new GPUs, extending the
      * capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
@@ -2618,7 +2618,7 @@ public final class GLESCapabilities {
     /** When true, {@link OESSampleShading} is supported. */
     public final boolean GL_OES_sample_shading;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_sample_variables.txt">OES_sample_variables</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_sample_variables.txt">OES_sample_variables</a> extension is supported.
      * 
      * <p>This extension allows fragment shaders more control over multisample rendering. The mask of samples covered by a fragment can be read by the shader and
      * individual samples can be masked out. Additionally fragment shaders can be run on individual samples and the sample's ID and position read to allow
@@ -2636,7 +2636,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_sample_variables;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_image_atomic.txt">OES_shader_image_atomic</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_image_atomic.txt">OES_shader_image_atomic</a> extension is supported.
      * 
      * <p>This extension provides built-in functions allowing shaders to perform atomic read-modify-write operations to a single level of a texture object from
      * any shader stage. These built-in functions are named imageAtomic*(), and accept integer texel coordinates to identify the texel accessed. These
@@ -2646,7 +2646,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_shader_image_atomic;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_io_blocks.txt">OES_shader_io_blocks</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_io_blocks.txt">OES_shader_io_blocks</a> extension is supported.
      * 
      * <p>This extension extends the functionality of interface blocks to support input and output interfaces in the OpenGL ES Shading Language.</p>
      * 
@@ -2677,7 +2677,7 @@ public final class GLESCapabilities {
     public final boolean GL_OES_stencil8;
     /** When true, {@link OESSurfacelessContext} is supported. */
     public final boolean GL_OES_surfaceless_context;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_tessellation_shader.txt">OES_tessellation_point_size</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_tessellation_shader.txt">OES_tessellation_point_size</a> extension is supported. */
     public final boolean GL_OES_tessellation_point_size;
     /** When true, {@link OESTessellationShader} is supported. */
     public final boolean GL_OES_tessellation_shader;
@@ -2692,7 +2692,7 @@ public final class GLESCapabilities {
     /** When true, {@link OESTextureCubeMapArray} is supported. */
     public final boolean GL_OES_texture_cube_map_array;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float.txt">OES_texture_float</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float.txt">OES_texture_float</a> extension is supported.
      * 
      * <p>These extensions add texture formats with 16- (aka half float) and 32-bit floating-point components. The 32-bit floating-point components are in the
      * standard IEEE float format. The 16-bit floating-point components have 1 sign bit, 5 exponent bits, and 10 mantissa bits. Floating-point components are
@@ -2704,7 +2704,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_texture_float;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float_linear.txt">OES_texture_float_linear</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float_linear.txt">OES_texture_float_linear</a> extension is supported.
      * 
      * <p>These extensions expand upon the OES_texture_half_float and OES_texture_float extensions by allowing support for LINEAR magnification filter and
      * LINEAR, NEAREST_MIPMAP_LINEAR, LINEAR_MIPMAP_NEAREST and LINEAR_MIPMAP_NEAREST minification filters.</p>
@@ -2719,7 +2719,7 @@ public final class GLESCapabilities {
     /** When true, {@link OESTextureHalfFloat} is supported. */
     public final boolean GL_OES_texture_half_float;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float_linear.txt">OES_texture_half_float_linear</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_float_linear.txt">OES_texture_half_float_linear</a> extension is supported.
      * 
      * <p>These extensions expand upon the OES_texture_half_float and OES_texture_float extensions by allowing support for LINEAR magnification filter and
      * LINEAR, NEAREST_MIPMAP_LINEAR, LINEAR_MIPMAP_NEAREST and LINEAR_MIPMAP_NEAREST minification filters.</p>
@@ -2732,7 +2732,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_texture_half_float_linear;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_npot.txt">OES_texture_npot</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_npot.txt">OES_texture_npot</a> extension is supported.
      * 
      * <p>This extension adds support for the REPEAT and MIRRORED_REPEAT texture wrap modes and the minification filters supported for non-power of two 2D
      * textures, cubemaps and for 3D textures, if the OES_texture_3D extension is supported.</p>
@@ -2745,7 +2745,7 @@ public final class GLESCapabilities {
      */
     public final boolean GL_OES_texture_npot;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_stencil8.txt">OES_texture_stencil8</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_stencil8.txt">OES_texture_stencil8</a> extension is supported.
      * 
      * <p>This extension accepts STENCIL_INDEX8 as a texture internal format, and adds STENCIL_INDEX8 to the required internal format list. This removes the need
      * to use renderbuffers if a stencil-only format is desired.</p>
@@ -2766,7 +2766,7 @@ public final class GLESCapabilities {
     /** When true, {@link OVRMultiview} is supported. */
     public final boolean GL_OVR_multiview;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OVR/OVR_multiview2.txt">OVR_multiview2</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/OVR/OVR_multiview2.txt">OVR_multiview2</a> extension is supported.
      * 
      * <p>This extension relaxes the restriction in OVR_multiview that only gl_Position can depend on ViewID in the vertex shader. With this change,
      * view-dependent outputs like reflection vectors and similar are allowed.</p>

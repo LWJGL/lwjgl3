@@ -116,7 +116,7 @@ public class XrApplicationInfo extends Struct implements NativeResource {
     /** an unsigned integer variable containing the developer-supplied version number of the engine used to create the application. May be zero to indicate no specified engine. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** the version of this API against which the application will run, encoded as described in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return {@link XR10#XR_ERROR_API_VERSION_UNSUPPORTED ERROR_API_VERSION_UNSUPPORTED}. */
+    /** the version of this API against which the application will run, encoded as described in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return {@link XR10#XR_ERROR_API_VERSION_UNSUPPORTED ERROR_API_VERSION_UNSUPPORTED}. */
     @NativeType("XrVersion")
     public long apiVersion() { return napiVersion(address()); }
 

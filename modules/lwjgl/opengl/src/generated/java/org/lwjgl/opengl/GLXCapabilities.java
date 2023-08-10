@@ -177,7 +177,7 @@ public final class GLXCapabilities {
     /** When true, {@link GLXARBRobustnessApplicationIsolation} is supported. */
     public final boolean GLX_ARB_robustness_application_isolation;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_robustness_application_isolation.txt">GLX_ARB_robustness_share_group_isolation</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_robustness_application_isolation.txt">GLX_ARB_robustness_share_group_isolation</a> extension is supported.
      * 
      * <p>GL_ARB_robustness and GLX_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
      * GLX_ARB_robustness_share_group_isolation provides stronger guarantees about the possible side-effects of a graphics reset.</p>
@@ -208,7 +208,7 @@ public final class GLXCapabilities {
     /** When true, {@link GLXEXTFramebufferSRGB} is supported. */
     public final boolean GLX_EXT_framebuffer_sRGB;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_get_drawable_type.txt">GLX_EXT_get_drawable_type</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_get_drawable_type.txt">GLX_EXT_get_drawable_type</a> extension is supported.
      * 
      * <p>This extension adds {@link GLX13#GLX_DRAWABLE_TYPE DRAWABLE_TYPE} to the set of drawable attributes that are sent in a {@code GLXGetDrawableAttributes} request, and that can be
      * queried with {@link GLX13#glXQueryDrawable QueryDrawable}. While this is primarily a convenience for the client library implementation, it may also be useful for applications.</p>
@@ -217,7 +217,7 @@ public final class GLXCapabilities {
     /** When true, {@link GLXEXTImportContext} is supported. */
     public final boolean GLX_EXT_import_context;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_no_config_context.txt">GLX_EXT_no_config_context</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_no_config_context.txt">GLX_EXT_no_config_context</a> extension is supported.
      * 
      * <p>Modern GPUs allow contexts to render to almost any combination of supported color and auxiliary buffer formats. Traditionally GLX context creation is
      * done with respect to a GLXFBConfig specifying buffer formats, and constrains contexts to only work with drawables created with a "compatible" config.</p>

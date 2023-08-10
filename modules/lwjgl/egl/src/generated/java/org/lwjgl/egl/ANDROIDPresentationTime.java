@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_presentation_time.txt">ANDROID_presentation_time</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_presentation_time.txt">ANDROID_presentation_time</a> extension.
  * 
  * <p>Often when rendering a sequence of images, there is some time at which each image is intended to be presented to the viewer. This extension allows this
  * desired presentation time to be specified for each frame rendered to an {@code EGLSurface}, allowing the native window system to use it.</p>

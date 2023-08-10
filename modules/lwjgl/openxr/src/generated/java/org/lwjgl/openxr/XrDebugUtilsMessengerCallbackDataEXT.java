@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using {@link XrDebugUtilsMessengerCallbackDataEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code messageId} <b>must</b> be a null-terminated UTF-8 string</li>
  * <li>{@code functionName} <b>must</b> be a null-terminated UTF-8 string</li>
  * <li>{@code message} <b>must</b> be a null-terminated UTF-8 string</li>
@@ -155,7 +155,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
     /**
      * a pointer to an array of {@link XrDebugUtilsLabelEXT} objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.
      * 
-     * <p>NULL or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#session-labels">Session Labels</a> for more information.</p>
+     * <p>NULL or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#session-labels">Session Labels</a> for more information.</p>
      */
     @Nullable
     @NativeType("XrDebugUtilsLabelEXT *")

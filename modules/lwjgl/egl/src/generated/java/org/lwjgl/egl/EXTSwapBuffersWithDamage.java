@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_swap_buffers_with_damage.txt">EXT_swap_buffers_with_damage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_swap_buffers_with_damage.txt">EXT_swap_buffers_with_damage</a> extension.
  * 
  * <p>This extension provides a means to issue a swap buffers request to display the contents of the current back buffer and also specify a list of damage
  * rectangles that can be passed to a system compositor so it can minimize how much it has to recompose.</p>

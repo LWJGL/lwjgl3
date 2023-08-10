@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_framebuffer_multisample.txt">ANGLE_framebuffer_multisample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_framebuffer_multisample.txt">ANGLE_framebuffer_multisample</a> extension.
  * 
  * <p>This extension extends the framebuffer object framework to enable multisample rendering.</p>
  * 

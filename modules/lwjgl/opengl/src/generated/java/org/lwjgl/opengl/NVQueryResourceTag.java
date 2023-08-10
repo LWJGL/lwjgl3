@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_query_resource_tag.txt">NV_query_resource_tag</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_query_resource_tag.txt">NV_query_resource_tag</a> extension.
  * 
  * <p>This extension adds the capability to associate a tag with one or more memory resource allocations. This tag can be reported back during
  * {@code queryResource} operations and also be used to limit resource reporting to only those allocations with the specified tag. A tag is a previously

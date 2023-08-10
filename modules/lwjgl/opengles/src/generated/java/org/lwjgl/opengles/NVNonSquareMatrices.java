@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_non_square_matrices.txt">NV_non_square_matrices</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_non_square_matrices.txt">NV_non_square_matrices</a> extension.
  * 
  * <p>This extension adds support for non-square matrix variables in GLSL shaders.</p>
  * 

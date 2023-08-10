@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_texture_usage.txt">ANGLE_texture_usage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_texture_usage.txt">ANGLE_texture_usage</a> extension.
  * 
  * <p>In some implementations it is advantageous to know the expected usage of a texture before the backing storage for it is allocated. This can help to
  * inform the implementation's choice of format and type of memory used for the allocation. If the usage is not known in advance, the implementation

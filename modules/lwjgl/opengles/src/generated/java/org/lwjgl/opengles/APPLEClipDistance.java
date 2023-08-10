@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_clip_distance.txt">APPLE_clip_distance</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_clip_distance.txt">APPLE_clip_distance</a> extension.
  * 
  * <p>This extension adds support for hardware clip planes to OpenGL ES 2.0 and 3.0. These were present in OpenGL ES 1.1, but were removed to better match
  * certain hardware. Since they're useful for certain applications, notable CAD, we return them here.</p>

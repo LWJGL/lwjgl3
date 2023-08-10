@@ -5,10 +5,10 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="https://www.glfw.org/">GLFW</a> library.
+ * Contains bindings to the <a href="https://www.glfw.org/">GLFW</a> library.
  * 
- * <p>GLFW comes with extensive documentation, which you can read online <a target="_blank" href="https://www.glfw.org/docs/latest/">here</a>. The
- * <a target="_blank" href="https://www.glfw.org/faq.html">Frequently Asked Questions</a> are also useful.</p>
+ * <p>GLFW comes with extensive documentation, which you can read online <a href="https://www.glfw.org/docs/latest/">here</a>. The
+ * <a href="https://www.glfw.org/faq.html">Frequently Asked Questions</a> are also useful.</p>
  * 
  * <h3>Using GLFW on macOS</h3>
  * 

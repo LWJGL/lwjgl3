@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_frame_limits.txt">NV_stream_frame_limits</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_frame_limits.txt">NV_stream_frame_limits</a> extension.
  * 
  * <p>Some stream consumers may allow more than one frame to be acquired at a time, so that applications can operate on sequences of images rather than
  * individual images. This in turn may lead to producers allocating additional buffers to keep the fifo full while fulfilling the consumer's needs.

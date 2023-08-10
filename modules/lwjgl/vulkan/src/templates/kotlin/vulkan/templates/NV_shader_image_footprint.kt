@@ -11,7 +11,7 @@ import vulkan.*
 val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shader_image_footprint", type = "device", postfix = "NV") {
     documentation =
         """
-        This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a> SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpImageSampleFootprintNV} allowing shaders to determine the set of texels that would be accessed by an equivalent filtered texture lookup.
+        This extension adds Vulkan support for the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a> SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpImageSampleFootprintNV} allowing shaders to determine the set of texels that would be accessed by an equivalent filtered texture lookup.
 
         Instead of returning a filtered texture value, the instruction returns a structure that can be interpreted by shader code to determine the footprint of a filtered texture lookup. This structure includes integer values that identify a small neighborhood of texels in the image being accessed and a bitfield that indicates which texels in that neighborhood would be used. The structure also includes a bitfield where each bit identifies whether any texel in a small aligned block of texels would be fetched by the texture lookup. The size of each block is specified by an access <em>granularity</em> provided by the shader. The minimum granularity supported by this extension is 2x2 (for 2D textures) and 2x2x2 (for 3D textures); the maximum granularity is 256x256 (for 2D textures) or 64x32x32 (for 3D textures). Each footprint query returns the footprint from a single texture level. When using minification filters that combine accesses from multiple mipmap levels, shaders must perform separate queries for the two levels accessed (“{@code fine}” and “{@code coarse}”). The footprint query also returns a flag indicating if the texture lookup would access texels from only one mipmap level or from two neighboring levels.
 
@@ -43,7 +43,7 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_shader_image_footprint]%20@nvpbrown%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_shader_image_footprint%20extension*">nvpbrown</a></li>
+                <li>Pat Brown <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_shader_image_footprint]%20@nvpbrown%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_shader_image_footprint%20extension*">nvpbrown</a></li>
             </ul></dd>
         </dl>
 
@@ -57,8 +57,8 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a></li>
-                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_texture_footprint.txt">{@code GL_NV_shader_texture_footprint}</a></li>
+                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_texture_footprint.txt">{@code GL_NV_shader_texture_footprint}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_shader2.txt">NV_texture_shader2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_shader2.txt">NV_texture_shader2</a> extension.
  * 
  * <p>This extension extends the {@code NV_texture_shader} functionality to support texture shader operations for 3D textures.</p>
  * 

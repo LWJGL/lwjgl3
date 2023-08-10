@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_clip_volume_hint.txt">EXT_clip_volume_hint</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_clip_volume_hint.txt">EXT_clip_volume_hint</a> extension.
  * 
  * <p>EXT_clip_volume_hint provides a mechanism for applications to indicate that they do not require clip volume clipping for primitives. It allows
  * applications to maximize performance in situations where they know that clipping is unnecessary. EXT_clip_volume_hint is only an indication, though,

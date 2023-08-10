@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_lock_surface3.txt">KHR_lock_surface3</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_lock_surface3.txt">KHR_lock_surface3</a> extension.
  * 
  * <p>This extension allows mapping color buffers of EGL surfaces into the client address space. This is useful primarily for software rendering on low-end
  * devices which do not support EGL client rendering APIs, although it may be implemented efficiently on more capable devices as well.</p>

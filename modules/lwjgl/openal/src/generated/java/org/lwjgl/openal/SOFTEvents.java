@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_events.txt">SOFT_events</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_events.txt">SOFT_events</a> extension.
  * 
  * <p>This extension provides a method for applications to receive notifications about audio events via an asynchronous callback. This can help alleviate the
  * need for applications to continually poll the AL to check if an event happened, and instead allow them to respond when events happen. Such events can

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_reopen_device.txt">SOFT_reopen_device</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_reopen_device.txt">SOFT_reopen_device</a> extension.
  * 
  * <p>This extension provides a mechanism for applications to move the output of a device from one endpoint to another. Standard OpenAL devices are
  * associated with an output on the system upon being opened, but if the endpoint should no longer be the desired output, there is no method for the

@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a target="_blank" href="https://facebook.github.io/zstd/">Zstandard</a> (zstd), a fast lossless compression algorithm, targeting real-time
+ * Contains bindings to <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd), a fast lossless compression algorithm, targeting real-time
  * compression scenarios at zlib-level and better compression ratios.
  * 
  * <p>Zstandard is a real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-off, while

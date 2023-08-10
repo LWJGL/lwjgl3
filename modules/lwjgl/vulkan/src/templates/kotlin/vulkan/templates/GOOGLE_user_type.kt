@@ -29,7 +29,7 @@ val GOOGLE_user_type = "GOOGLEUserType".nativeClassVK("GOOGLE_user_type", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Kaye Mason <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_user_type]%20@chaleur%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_GOOGLE_user_type%20extension*">chaleur</a></li>
+                <li>Kaye Mason <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_user_type]%20@chaleur%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_GOOGLE_user_type%20extension*">chaleur</a></li>
             </ul></dd>
         </dl>
 
@@ -43,7 +43,7 @@ val GOOGLE_user_type = "GOOGLEUserType".nativeClassVK("GOOGLE_user_type", type =
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_user_type.html">{@code SPV_GOOGLE_user_type}</a></li>
+                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_user_type.html">{@code SPV_GOOGLE_user_type}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

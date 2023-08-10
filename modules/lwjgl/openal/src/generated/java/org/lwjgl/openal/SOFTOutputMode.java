@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_output_mode.txt">SOFT_output_mode</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_output_mode.txt">SOFT_output_mode</a> extension.
  * 
  * <p>This extension provides a method for applications to request a particular output mode for playback devices, and query what's in use. With standard
  * OpenAL, the output mode is at the sole discretion of the library, with the application having no way to know what's being used. While this works fine

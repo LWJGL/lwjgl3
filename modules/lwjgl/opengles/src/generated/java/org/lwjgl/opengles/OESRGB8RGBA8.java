@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_rgb8_rgba8.txt">OES_rgb8_rgba8</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_rgb8_rgba8.txt">OES_rgb8_rgba8</a> extension.
  * 
  * <p>This extension enables RGB8 and RGBA8 renderbuffer storage formats.</p>
  */

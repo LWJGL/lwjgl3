@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_texture.txt">ARB_depth_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_texture.txt">ARB_depth_texture</a> extension.
  * 
  * <p>This extension defines a new depth texture format. An important application of depth texture images is shadow casting, but separating this from the
  * shadow extension allows for the potential use of depth textures in other applications such as image-based rendering or displacement mapping. This

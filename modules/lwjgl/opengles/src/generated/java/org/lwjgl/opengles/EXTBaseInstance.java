@@ -12,7 +12,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_base_instance.txt">EXT_base_instance</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_base_instance.txt">EXT_base_instance</a> extension.
  * 
  * <p>This extension allows the offset within buffer objects used for instanced rendering to be specified. This is congruent with the {@code first} parameter
  * in glDrawArrays and the {@code basevertex} parameter in glDrawElements. When instanced rendering is performed (for example, through

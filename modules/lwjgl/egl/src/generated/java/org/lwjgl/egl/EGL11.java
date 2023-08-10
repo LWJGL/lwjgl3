@@ -35,7 +35,7 @@ public class EGL11 extends EGL10 {
 
     // --- [ eglBindTexImage ] ---
 
-    /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglBindTexImage.xhtml">Reference Page</a> */
+    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglBindTexImage.xhtml">Reference Page</a> */
     @NativeType("EGLBoolean")
     public static boolean eglBindTexImage(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int buffer) {
         long __functionAddress = EGL.getCapabilities().eglBindTexImage;
@@ -49,7 +49,7 @@ public class EGL11 extends EGL10 {
 
     // --- [ eglReleaseTexImage ] ---
 
-    /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglReleaseTexImage.xhtml">Reference Page</a> */
+    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglReleaseTexImage.xhtml">Reference Page</a> */
     @NativeType("EGLBoolean")
     public static boolean eglReleaseTexImage(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int buffer) {
         long __functionAddress = EGL.getCapabilities().eglReleaseTexImage;
@@ -63,7 +63,7 @@ public class EGL11 extends EGL10 {
 
     // --- [ eglSurfaceAttrib ] ---
 
-    /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglSurfaceAttrib.xhtml">Reference Page</a> */
+    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglSurfaceAttrib.xhtml">Reference Page</a> */
     @NativeType("EGLBoolean")
     public static boolean eglSurfaceAttrib(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int attribute, @NativeType("EGLint") int value) {
         long __functionAddress = EGL.getCapabilities().eglSurfaceAttrib;
@@ -77,7 +77,7 @@ public class EGL11 extends EGL10 {
 
     // --- [ eglSwapInterval ] ---
 
-    /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglSwapInterval.xhtml">Reference Page</a> */
+    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglSwapInterval.xhtml">Reference Page</a> */
     @NativeType("EGLBoolean")
     public static boolean eglSwapInterval(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint") int interval) {
         long __functionAddress = EGL.getCapabilities().eglSwapInterval;

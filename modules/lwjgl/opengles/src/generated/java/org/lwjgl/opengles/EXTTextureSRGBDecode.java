@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_decode.txt">EXT_texture_sRGB_decode</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_decode.txt">EXT_texture_sRGB_decode</a> extension.
  * 
  * <p>The EXT_texture_sRGB extension (promoted to core in OpenGL 2.1) provides a texture format stored in the sRGB color space. Sampling one of these
  * textures will always return the color value decoded into a linear color space. However, an application may wish to sample and retrieve the undecoded

@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_memory_attachment.txt">NV_memory_attachment</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_memory_attachment.txt">NV_memory_attachment</a> extension.
  * 
  * <p>This extension extends the memory objects introduced with {@link EXTMemoryObject EXT_memory_object} to allow existing textures and buffers to be migrated to an
  * imported memory allocation. The primary use-case of this extension is plug-in development where resource management (creation, deletion, sizing etc.)

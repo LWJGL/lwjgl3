@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_stereo_tree.txt">GLX_EXT_stereo_tree</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_stereo_tree.txt">GLX_EXT_stereo_tree</a> extension.
  * 
  * <p>When using stereoscopic rendering with the X composite extension, a stereo-aware GLX composite manager can be used to composite both the left and right
  * buffers of a window's backing pixmap to the left and right buffers of the root or composite overlay window to preserve the stereo effect of a

@@ -26,17 +26,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clip_control.txt">ARB_clip_control</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_cull_distance.txt">ARB_cull_distance</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_1_compatibility.txt">ARB_ES3_1_compatibility</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_conditional_render_inverted.txt">ARB_conditional_render_inverted</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt">KHR_context_flush_control</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_derivative_control.txt">ARB_derivative_control</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_direct_state_access.txt">ARB_direct_state_access</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_get_texture_sub_image.txt">ARB_get_texture_sub_image</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_robustness.txt">KHR_robustness</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_texture_image_samples.txt">ARB_shader_texture_image_samples</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_barrier.txt">ARB_texture_barrier</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clip_control.txt">ARB_clip_control</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_cull_distance.txt">ARB_cull_distance</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_1_compatibility.txt">ARB_ES3_1_compatibility</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_conditional_render_inverted.txt">ARB_conditional_render_inverted</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt">KHR_context_flush_control</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_derivative_control.txt">ARB_derivative_control</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_direct_state_access.txt">ARB_direct_state_access</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_get_texture_sub_image.txt">ARB_get_texture_sub_image</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_robustness.txt">KHR_robustness</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_texture_image_samples.txt">ARB_shader_texture_image_samples</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_barrier.txt">ARB_texture_barrier</a></li>
  * </ul>
  */
 public class GL45 extends GL44 {
@@ -115,7 +115,7 @@ public class GL45 extends GL44 {
      * @param origin the clip origin. One of:<br><table><tr><td>{@link GL20#GL_LOWER_LEFT LOWER_LEFT}</td><td>{@link GL20#GL_UPPER_LEFT UPPER_LEFT}</td></tr></table>
      * @param depth  the clip depth mode. One of:<br><table><tr><td>{@link GL45C#GL_NEGATIVE_ONE_TO_ONE NEGATIVE_ONE_TO_ONE}</td><td>{@link GL45C#GL_ZERO_TO_ONE ZERO_TO_ONE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClipControl">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClipControl">Reference Page</a>
      */
     public static void glClipControl(@NativeType("GLenum") int origin, @NativeType("GLenum") int depth) {
         GL45C.glClipControl(origin, depth);
@@ -137,7 +137,7 @@ public class GL45 extends GL44 {
      *
      * @param ids the buffer in which to return the names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
      */
     public static void glCreateTransformFeedbacks(@NativeType("GLuint *") IntBuffer ids) {
         GL45C.glCreateTransformFeedbacks(ids);
@@ -146,7 +146,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateTransformFeedbacks() {
@@ -162,7 +162,7 @@ public class GL45 extends GL44 {
      * @param index  the transform feedback stream index
      * @param buffer the name of an existing buffer object
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTransformFeedbackBufferBase">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTransformFeedbackBufferBase">Reference Page</a>
      */
     public static void glTransformFeedbackBufferBase(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer) {
         GL45C.glTransformFeedbackBufferBase(xfb, index, buffer);
@@ -179,7 +179,7 @@ public class GL45 extends GL44 {
      * @param offset the starting offset in basic machine units into the buffer object
      * @param size   the amount of data in machine units
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTransformFeedbackBufferRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTransformFeedbackBufferRange">Reference Page</a>
      */
     public static void glTransformFeedbackBufferRange(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
         GL45C.glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
@@ -199,7 +199,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. One of:<br><table><tr><td>{@link GL42#GL_TRANSFORM_FEEDBACK_PAUSED TRANSFORM_FEEDBACK_PAUSED}</td><td>{@link GL42#GL_TRANSFORM_FEEDBACK_ACTIVE TRANSFORM_FEEDBACK_ACTIVE}</td></tr></table>
      * @param param the buffer in which to return the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
      */
     public static void glGetTransformFeedbackiv(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer param) {
         GL45C.glGetTransformFeedbackiv(xfb, pname, param);
@@ -211,7 +211,7 @@ public class GL45 extends GL44 {
      * @param xfb   zero or the name of an existing transform feedback object
      * @param pname the parameter to query. One of:<br><table><tr><td>{@link GL42#GL_TRANSFORM_FEEDBACK_PAUSED TRANSFORM_FEEDBACK_PAUSED}</td><td>{@link GL42#GL_TRANSFORM_FEEDBACK_ACTIVE TRANSFORM_FEEDBACK_ACTIVE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTransformFeedbacki(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname) {
@@ -233,7 +233,7 @@ public class GL45 extends GL44 {
      * @param index the transform feedback stream index
      * @param param the buffer in which to return the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
      */
     public static void glGetTransformFeedbacki_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer param) {
         GL45C.glGetTransformFeedbacki_v(xfb, pname, index, param);
@@ -246,7 +246,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. Must be:<br><table><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER_BINDING TRANSFORM_FEEDBACK_BUFFER_BINDING}</td></tr></table>
      * @param index the transform feedback stream index
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTransformFeedbacki(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index) {
@@ -268,7 +268,7 @@ public class GL45 extends GL44 {
      * @param index the transform feedback stream index
      * @param param the buffer in which to return the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
      */
     public static void glGetTransformFeedbacki64_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint64 *") LongBuffer param) {
         GL45C.glGetTransformFeedbacki64_v(xfb, pname, index, param);
@@ -281,7 +281,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. One of:<br><table><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER_START TRANSFORM_FEEDBACK_BUFFER_START}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER_SIZE TRANSFORM_FEEDBACK_BUFFER_SIZE}</td></tr></table>
      * @param index the transform feedback stream index
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetTransformFeedbacki64(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index) {
@@ -305,7 +305,7 @@ public class GL45 extends GL44 {
      *
      * @param buffers the buffer in which to return the names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
      */
     public static void glCreateBuffers(@NativeType("GLuint *") IntBuffer buffers) {
         GL45C.glCreateBuffers(buffers);
@@ -315,7 +315,7 @@ public class GL45 extends GL44 {
      * Returns {@code n} previously unused buffer names in {@code buffers}, each representing a new buffer object initialized as if it had been bound to an
      * unspecified target.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateBuffers() {
@@ -375,7 +375,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("GLsizeiptr") long size, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, size, flags);
@@ -424,7 +424,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") ByteBuffer data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -473,7 +473,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") ShortBuffer data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -522,7 +522,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") IntBuffer data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -571,7 +571,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") FloatBuffer data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -620,7 +620,7 @@ public class GL45 extends GL44 {
      *               
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") DoubleBuffer data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -643,7 +643,7 @@ public class GL45 extends GL44 {
      * @param size  the size in bytes of the buffer object's new data store
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, size, usage);
@@ -655,7 +655,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") ByteBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -667,7 +667,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") ShortBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -679,7 +679,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") IntBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -691,7 +691,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") LongBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -703,7 +703,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") FloatBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -715,7 +715,7 @@ public class GL45 extends GL44 {
      * @param data  a pointer to data that will be copied into the data store for initialization, or {@code NULL} if no data is to be copied
      * @param usage the expected usage pattern of the data store. One of:<br><table><tr><td>{@link GL15#GL_STREAM_DRAW STREAM_DRAW}</td><td>{@link GL15#GL_STREAM_READ STREAM_READ}</td><td>{@link GL15#GL_STREAM_COPY STREAM_COPY}</td><td>{@link GL15#GL_STATIC_DRAW STATIC_DRAW}</td><td>{@link GL15#GL_STATIC_READ STATIC_READ}</td><td>{@link GL15#GL_STATIC_COPY STATIC_COPY}</td><td>{@link GL15#GL_DYNAMIC_DRAW DYNAMIC_DRAW}</td></tr><tr><td>{@link GL15#GL_DYNAMIC_READ DYNAMIC_READ}</td><td>{@link GL15#GL_DYNAMIC_COPY DYNAMIC_COPY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") DoubleBuffer data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -738,7 +738,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") ByteBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -750,7 +750,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") ShortBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -762,7 +762,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") IntBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -774,7 +774,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") LongBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -786,7 +786,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") FloatBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -798,7 +798,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store where data replacement will begin, measured in bytes
      * @param data   a pointer to the new data that will be copied into the data store
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") DoubleBuffer data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -815,7 +815,7 @@ public class GL45 extends GL44 {
      * @param writeOffset the destination buffer object offset, in bytes
      * @param size        the number of bytes to copy
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCopyBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCopyBufferSubData">Reference Page</a>
      */
     public static void glCopyNamedBufferSubData(@NativeType("GLuint") int readBuffer, @NativeType("GLuint") int writeBuffer, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size) {
         GL45C.glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
@@ -839,7 +839,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -856,7 +856,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -873,7 +873,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -890,7 +890,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -916,7 +916,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -935,7 +935,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -954,7 +954,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -973,7 +973,7 @@ public class GL45 extends GL44 {
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -992,7 +992,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param access the access policy, indicating whether it will be possible to read from, write to, or both read from and write to the buffer object's mapped data store. One of:<br><table><tr><td>{@link GL15#GL_READ_ONLY READ_ONLY}</td><td>{@link GL15#GL_WRITE_ONLY WRITE_ONLY}</td><td>{@link GL15#GL_READ_WRITE READ_WRITE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -1006,7 +1006,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param access the access policy, indicating whether it will be possible to read from, write to, or both read from and write to the buffer object's mapped data store. One of:<br><table><tr><td>{@link GL15#GL_READ_ONLY READ_ONLY}</td><td>{@link GL15#GL_WRITE_ONLY WRITE_ONLY}</td><td>{@link GL15#GL_READ_WRITE READ_WRITE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -1020,7 +1020,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param access the access policy, indicating whether it will be possible to read from, write to, or both read from and write to the buffer object's mapped data store. One of:<br><table><tr><td>{@link GL15#GL_READ_ONLY READ_ONLY}</td><td>{@link GL15#GL_WRITE_ONLY WRITE_ONLY}</td><td>{@link GL15#GL_READ_WRITE READ_WRITE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -1043,7 +1043,7 @@ public class GL45 extends GL44 {
      * @param length the length of the range to be mapped
      * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -1059,7 +1059,7 @@ public class GL45 extends GL44 {
      * @param length the length of the range to be mapped
      * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -1074,7 +1074,7 @@ public class GL45 extends GL44 {
      *
      * @param buffer the buffer object name
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUnmapBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUnmapBuffer">Reference Page</a>
      */
     @NativeType("GLboolean")
     public static boolean glUnmapNamedBuffer(@NativeType("GLuint") int buffer) {
@@ -1090,7 +1090,7 @@ public class GL45 extends GL44 {
      * @param offset the start of the buffer subrange, in basic machine units
      * @param length the length of the buffer subrange, in basic machine units
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFlushMappedBufferRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFlushMappedBufferRange">Reference Page</a>
      */
     public static void glFlushMappedNamedBufferRange(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length) {
         GL45C.glFlushMappedNamedBufferRange(buffer, offset, length);
@@ -1110,7 +1110,7 @@ public class GL45 extends GL44 {
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * @param params the requested parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetNamedBufferParameteriv(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetNamedBufferParameteriv(buffer, pname, params);
@@ -1122,7 +1122,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetNamedBufferParameteri(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname) {
@@ -1143,7 +1143,7 @@ public class GL45 extends GL44 {
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * @param params the requested parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetNamedBufferParameteri64v(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
         GL45C.glGetNamedBufferParameteri64v(buffer, pname, params);
@@ -1155,7 +1155,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param pname  the symbolic name of a buffer object parameter. One of:<br><table><tr><td>{@link GL15#GL_BUFFER_SIZE BUFFER_SIZE}</td><td>{@link GL15#GL_BUFFER_USAGE BUFFER_USAGE}</td><td>{@link GL15#GL_BUFFER_ACCESS BUFFER_ACCESS}</td><td>{@link GL15#GL_BUFFER_MAPPED BUFFER_MAPPED}</td></tr><tr><td>{@link GL30#GL_BUFFER_ACCESS_FLAGS BUFFER_ACCESS_FLAGS}</td><td>{@link GL30#GL_BUFFER_MAP_LENGTH BUFFER_MAP_LENGTH}</td><td>{@link GL30#GL_BUFFER_MAP_OFFSET BUFFER_MAP_OFFSET}</td><td>{@link GL44#GL_BUFFER_IMMUTABLE_STORAGE BUFFER_IMMUTABLE_STORAGE}</td></tr><tr><td>{@link GL44#GL_BUFFER_STORAGE_FLAGS BUFFER_STORAGE_FLAGS}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetNamedBufferParameteri64(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname) {
@@ -1176,7 +1176,7 @@ public class GL45 extends GL44 {
      * @param pname  the pointer to be returned. Must be:<br><table><tr><td>{@link GL15#GL_BUFFER_MAP_POINTER BUFFER_MAP_POINTER}</td></tr></table>
      * @param params the pointer value specified by {@code pname}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferPointerv">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferPointerv">Reference Page</a>
      */
     public static void glGetNamedBufferPointerv(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("void **") PointerBuffer params) {
         GL45C.glGetNamedBufferPointerv(buffer, pname, params);
@@ -1188,7 +1188,7 @@ public class GL45 extends GL44 {
      * @param buffer the buffer object name
      * @param pname  the pointer to be returned. Must be:<br><table><tr><td>{@link GL15#GL_BUFFER_MAP_POINTER BUFFER_MAP_POINTER}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferPointerv">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferPointerv">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetNamedBufferPointer(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname) {
@@ -1213,7 +1213,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") ByteBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1226,7 +1226,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") ShortBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1239,7 +1239,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") IntBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1252,7 +1252,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") LongBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1265,7 +1265,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") FloatBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1278,7 +1278,7 @@ public class GL45 extends GL44 {
      * @param offset the offset into the buffer object's data store from which data will be returned, measured in bytes
      * @param data   a pointer to the location where buffer object data is returned
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") DoubleBuffer data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -1300,7 +1300,7 @@ public class GL45 extends GL44 {
      *
      * @param framebuffers the buffer in which to store the framebuffer names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
      */
     public static void glCreateFramebuffers(@NativeType("GLuint *") IntBuffer framebuffers) {
         GL45C.glCreateFramebuffers(framebuffers);
@@ -1309,7 +1309,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateFramebuffers() {
@@ -1326,7 +1326,7 @@ public class GL45 extends GL44 {
      * @param renderbuffertarget the renderbuffer target. Must be:<br><table><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param renderbuffer       the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferRenderbuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferRenderbuffer">Reference Page</a>
      */
     public static void glNamedFramebufferRenderbuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int renderbuffertarget, @NativeType("GLuint") int renderbuffer) {
         GL45C.glNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer);
@@ -1341,7 +1341,7 @@ public class GL45 extends GL44 {
      * @param pname       a token indicating the parameter to be modified. One of:<br><table><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param param       the new value for the parameter named {@code pname}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferParameteri">Reference Page</a>
      */
     public static void glNamedFramebufferParameteri(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
         GL45C.glNamedFramebufferParameteri(framebuffer, pname, param);
@@ -1357,7 +1357,7 @@ public class GL45 extends GL44 {
      * @param texture     the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level       the mipmap level of {@code texture} to attach
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferTexture">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferTexture">Reference Page</a>
      */
     public static void glNamedFramebufferTexture(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level) {
         GL45C.glNamedFramebufferTexture(framebuffer, attachment, texture, level);
@@ -1374,7 +1374,7 @@ public class GL45 extends GL44 {
      * @param level       the mipmap level of {@code texture} to attach
      * @param layer       the layer of {@code texture} to attach.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferTextureLayer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferTextureLayer">Reference Page</a>
      */
     public static void glNamedFramebufferTextureLayer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer) {
         GL45C.glNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer);
@@ -1388,7 +1388,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param buf         the color buffer to draw to. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_LEFT LEFT}</td></tr><tr><td>{@link GL11#GL_RIGHT RIGHT}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferDrawBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferDrawBuffer">Reference Page</a>
      */
     public static void glNamedFramebufferDrawBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buf) {
         GL45C.glNamedFramebufferDrawBuffer(framebuffer, buf);
@@ -1411,7 +1411,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param bufs        an array of symbolic constants specifying the buffers into which fragment colors or data values will be written. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td></tr><tr><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
      */
     public static void glNamedFramebufferDrawBuffers(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") IntBuffer bufs) {
         GL45C.glNamedFramebufferDrawBuffers(framebuffer, bufs);
@@ -1422,7 +1422,7 @@ public class GL45 extends GL44 {
      *
      * @param framebuffer the framebuffer name
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
      */
     public static void glNamedFramebufferDrawBuffers(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int buf) {
         GL45C.glNamedFramebufferDrawBuffers(framebuffer, buf);
@@ -1436,7 +1436,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param src         the color buffer to read from. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_LEFT LEFT}</td></tr><tr><td>{@link GL11#GL_RIGHT RIGHT}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferReadBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferReadBuffer">Reference Page</a>
      */
     public static void glNamedFramebufferReadBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int src) {
         GL45C.glNamedFramebufferReadBuffer(framebuffer, src);
@@ -1459,7 +1459,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param attachments the address of an array identifying the attachments to be invalidated
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") IntBuffer attachments) {
         GL45C.glInvalidateNamedFramebufferData(framebuffer, attachments);
@@ -1470,7 +1470,7 @@ public class GL45 extends GL44 {
      *
      * @param framebuffer the framebuffer name
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int attachment) {
         GL45C.glInvalidateNamedFramebufferData(framebuffer, attachment);
@@ -1497,7 +1497,7 @@ public class GL45 extends GL44 {
      * @param width       the width of the region to be invalidated
      * @param height      the height of the region to be invalidated
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferSubData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") IntBuffer attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glInvalidateNamedFramebufferSubData(framebuffer, attachments, x, y, width, height);
@@ -1512,7 +1512,7 @@ public class GL45 extends GL44 {
      * @param width       the width of the region to be invalidated
      * @param height      the height of the region to be invalidated
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferSubData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int attachment, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glInvalidateNamedFramebufferSubData(framebuffer, attachment, x, y, width, height);
@@ -1534,7 +1534,7 @@ public class GL45 extends GL44 {
      * @param value       for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
      *                    single stencil value to clear the buffer to.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
@@ -1555,7 +1555,7 @@ public class GL45 extends GL44 {
      * @param drawbuffer  the draw buffer to clear
      * @param value       a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
@@ -1577,7 +1577,7 @@ public class GL45 extends GL44 {
      * @param value       for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a
      *                    single depth value to clear the buffer to.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
@@ -1594,7 +1594,7 @@ public class GL45 extends GL44 {
      * @param depth       the depth value to clear the buffer to
      * @param stencil     the stencil value to clear the buffer to
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebufferfi">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebufferfi">Reference Page</a>
      */
     public static void glClearNamedFramebufferfi(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat") float depth, @NativeType("GLint") int stencil) {
         GL45C.glClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil);
@@ -1618,7 +1618,7 @@ public class GL45 extends GL44 {
      * @param mask            the bitwise OR of the flags indicating which buffers are to be copied. One of:<br><table><tr><td>{@link GL11#GL_COLOR_BUFFER_BIT COLOR_BUFFER_BIT}</td><td>{@link GL11#GL_DEPTH_BUFFER_BIT DEPTH_BUFFER_BIT}</td><td>{@link GL11#GL_STENCIL_BUFFER_BIT STENCIL_BUFFER_BIT}</td></tr></table>
      * @param filter          the interpolation to be applied if the image is stretched. One of:<br><table><tr><td>{@link GL11#GL_NEAREST NEAREST}</td><td>{@link GL11#GL_LINEAR LINEAR}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBlitFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBlitFramebuffer">Reference Page</a>
      */
     public static void glBlitNamedFramebuffer(@NativeType("GLuint") int readFramebuffer, @NativeType("GLuint") int drawFramebuffer, @NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter) {
         GL45C.glBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
@@ -1632,7 +1632,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param target      the target of the framebuffer completeness check. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCheckFramebufferStatus">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCheckFramebufferStatus">Reference Page</a>
      */
     @NativeType("GLenum")
     public static int glCheckNamedFramebufferStatus(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int target) {
@@ -1653,7 +1653,7 @@ public class GL45 extends GL44 {
      * @param pname       a token indicating the parameter to be retrieved. One of:<br><table><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param params      a variable to receive the value of the parameter named {@code pname}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
      */
     public static void glGetNamedFramebufferParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetNamedFramebufferParameteriv(framebuffer, pname, params);
@@ -1665,7 +1665,7 @@ public class GL45 extends GL44 {
      * @param framebuffer the framebuffer name
      * @param pname       a token indicating the parameter to be retrieved. One of:<br><table><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetNamedFramebufferParameteri(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname) {
@@ -1687,7 +1687,7 @@ public class GL45 extends GL44 {
      * @param pname       the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
      * @param params      an array to receive the value of the queried parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
      */
     public static void glGetNamedFramebufferAttachmentParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
@@ -1700,7 +1700,7 @@ public class GL45 extends GL44 {
      * @param attachment  the attachment within {@code target}. One of:<br><table><tr><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
      * @param pname       the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link GL30#GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetNamedFramebufferAttachmentParameteri(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname) {
@@ -1723,7 +1723,7 @@ public class GL45 extends GL44 {
      *
      * @param renderbuffers the buffer in which to store the created renderbuffer names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
      */
     public static void glCreateRenderbuffers(@NativeType("GLuint *") IntBuffer renderbuffers) {
         GL45C.glCreateRenderbuffers(renderbuffers);
@@ -1732,7 +1732,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateRenderbuffers() {
@@ -1748,7 +1748,7 @@ public class GL45 extends GL44 {
      * @param width          the width of the renderbuffer, in pixels
      * @param height         the height of the renderbuffer, in pixels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glRenderbufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glRenderbufferStorage">Reference Page</a>
      */
     public static void glNamedRenderbufferStorage(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glNamedRenderbufferStorage(renderbuffer, internalformat, width, height);
@@ -1764,7 +1764,7 @@ public class GL45 extends GL44 {
      * @param width          the width of the renderbuffer, in pixels
      * @param height         the height of the renderbuffer, in pixels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glRenderbufferStorageMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glRenderbufferStorageMultisample">Reference Page</a>
      */
     public static void glNamedRenderbufferStorageMultisample(@NativeType("GLuint") int renderbuffer, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height);
@@ -1783,7 +1783,7 @@ public class GL45 extends GL44 {
      * @param pname  the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link GL30#GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link GL30#GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link GL30#GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
      * @param params an array to receive the value of the queried parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
      */
     public static void glGetNamedRenderbufferParameteriv(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
@@ -1794,7 +1794,7 @@ public class GL45 extends GL44 {
      *
      * @param pname the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link GL30#GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link GL30#GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link GL30#GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link GL30#GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetNamedRenderbufferParameteri(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int pname) {
@@ -1818,7 +1818,7 @@ public class GL45 extends GL44 {
      * @param target   the texture target. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
      * @param textures the buffer in which to store the created texture names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
      */
     public static void glCreateTextures(@NativeType("GLenum") int target, @NativeType("GLuint *") IntBuffer textures) {
         GL45C.glCreateTextures(target, textures);
@@ -1829,7 +1829,7 @@ public class GL45 extends GL44 {
      *
      * @param target the texture target. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateTextures(@NativeType("GLenum") int target) {
@@ -1845,7 +1845,7 @@ public class GL45 extends GL44 {
      * @param internalformat the sized internal format of the data in the store belonging to {@code buffer}
      * @param buffer         the name of the buffer object whose storage to attach to the active buffer texture
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureBuffer">Reference Page</a>
      */
     public static void glTextureBuffer(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer) {
         GL45C.glTextureBuffer(texture, internalformat, buffer);
@@ -1862,7 +1862,7 @@ public class GL45 extends GL44 {
      * @param offset         the offset of the start of the range of the buffer's data store to attach
      * @param size           the size of the range of the buffer's data store to attach
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureBufferRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureBufferRange">Reference Page</a>
      */
     public static void glTextureBufferRange(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
         GL45C.glTextureBufferRange(texture, internalformat, buffer, offset, size);
@@ -1878,7 +1878,7 @@ public class GL45 extends GL44 {
      * @param internalformat the sized internal format to be used to store texture image data
      * @param width          the width of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureStorage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureStorage1D">Reference Page</a>
      */
     public static void glTextureStorage1D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width) {
         GL45C.glTextureStorage1D(texture, levels, internalformat, width);
@@ -1895,7 +1895,7 @@ public class GL45 extends GL44 {
      * @param width          the width of the texture, in texels
      * @param height         the height of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureStorage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureStorage2D">Reference Page</a>
      */
     public static void glTextureStorage2D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glTextureStorage2D(texture, levels, internalformat, width, height);
@@ -1913,7 +1913,7 @@ public class GL45 extends GL44 {
      * @param height         the height of the texture, in texels
      * @param depth          the depth of the texture, in texels
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureStorage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureStorage3D">Reference Page</a>
      */
     public static void glTextureStorage3D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth) {
         GL45C.glTextureStorage3D(texture, levels, internalformat, width, height, depth);
@@ -1932,7 +1932,7 @@ public class GL45 extends GL44 {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureStorage2DMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureStorage2DMultisample">Reference Page</a>
      */
     public static void glTextureStorage2DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations) {
         GL45C.glTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations);
@@ -1952,7 +1952,7 @@ public class GL45 extends GL44 {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureStorage3DMultisample">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureStorage3DMultisample">Reference Page</a>
      */
     public static void glTextureStorage3DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations) {
         GL45C.glTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations);
@@ -1976,7 +1976,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -1993,7 +1993,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") long pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -2010,7 +2010,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ShortBuffer pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -2027,7 +2027,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -2044,7 +2044,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") FloatBuffer pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -2061,7 +2061,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") DoubleBuffer pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -2087,7 +2087,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2106,7 +2106,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") long pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2125,7 +2125,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ShortBuffer pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2144,7 +2144,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2163,7 +2163,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") FloatBuffer pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2182,7 +2182,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") DoubleBuffer pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -2210,7 +2210,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2231,7 +2231,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") long pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2252,7 +2252,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") ShortBuffer pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2273,7 +2273,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2294,7 +2294,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") FloatBuffer pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2315,7 +2315,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") DoubleBuffer pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -2343,7 +2343,7 @@ public class GL45 extends GL44 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage1D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL45C.glCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data);
@@ -2359,7 +2359,7 @@ public class GL45 extends GL44 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage1D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL45C.glCompressedTextureSubImage1D(texture, level, xoffset, width, format, data);
@@ -2389,7 +2389,7 @@ public class GL45 extends GL44 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage2D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL45C.glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data);
@@ -2407,7 +2407,7 @@ public class GL45 extends GL44 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage2D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL45C.glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, data);
@@ -2439,7 +2439,7 @@ public class GL45 extends GL44 {
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      * @param data      a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage3D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLsizei") int imageSize, @NativeType("void const *") long data) {
         GL45C.glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
@@ -2459,7 +2459,7 @@ public class GL45 extends GL44 {
      * @param format  the format of the compressed image data stored at address {@code data}. One of:<br><table><tr><td>{@link GL30#GL_COMPRESSED_RED_RGTC1 COMPRESSED_RED_RGTC1}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 COMPRESSED_SIGNED_RED_RGTC1}</td></tr><tr><td>{@link GL30#GL_COMPRESSED_RG_RGTC2 COMPRESSED_RG_RGTC2}</td><td>{@link GL30#GL_COMPRESSED_SIGNED_RG_RGTC2 COMPRESSED_SIGNED_RG_RGTC2}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGBA_BPTC_UNORM COMPRESSED_RGBA_BPTC_UNORM}</td><td>{@link GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM COMPRESSED_SRGB_ALPHA_BPTC_UNORM}</td></tr><tr><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT COMPRESSED_RGB_BPTC_SIGNED_FLOAT}</td><td>{@link GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_ETC2 COMPRESSED_RGB8_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ETC2 COMPRESSED_SRGB8_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RGBA8_ETC2_EAC COMPRESSED_RGBA8_ETC2_EAC}</td><td>{@link GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC COMPRESSED_SRGB8_ALPHA8_ETC2_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_R11_EAC COMPRESSED_R11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_R11_EAC COMPRESSED_SIGNED_R11_EAC}</td></tr><tr><td>{@link GL43#GL_COMPRESSED_RG11_EAC COMPRESSED_RG11_EAC}</td><td>{@link GL43#GL_COMPRESSED_SIGNED_RG11_EAC COMPRESSED_SIGNED_RG11_EAC}</td></tr><tr><td>see {@link EXTTextureCompressionS3TC}</td><td>see {@link EXTTextureCompressionLATC}</td></tr><tr><td>see {@link ATITextureCompression3DC}</td><td>see {@link KHRTextureCompressionASTCLDR}</td></tr></table>
      * @param data    a pointer to the compressed image data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCompressedTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCompressedTextureSubImage3D">Reference Page</a>
      */
     public static void glCompressedTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("void const *") ByteBuffer data) {
         GL45C.glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, data);
@@ -2477,7 +2477,7 @@ public class GL45 extends GL44 {
      * @param y       the lower framebuffer pixel coordinate
      * @param width   the texture subregion width
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCopyTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCopyTextureSubImage1D">Reference Page</a>
      */
     public static void glCopyTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width) {
         GL45C.glCopyTextureSubImage1D(texture, level, xoffset, x, y, width);
@@ -2497,7 +2497,7 @@ public class GL45 extends GL44 {
      * @param width   the texture subregion width
      * @param height  the texture subregion height
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCopyTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCopyTextureSubImage2D">Reference Page</a>
      */
     public static void glCopyTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height);
@@ -2518,7 +2518,7 @@ public class GL45 extends GL44 {
      * @param width   the texture subregion width
      * @param height  the texture subregion height
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCopyTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCopyTextureSubImage3D">Reference Page</a>
      */
     public static void glCopyTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height);
@@ -2533,7 +2533,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to set
      * @param param   the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameterf">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameterf">Reference Page</a>
      */
     public static void glTextureParameterf(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
         GL45C.glTextureParameterf(texture, pname, param);
@@ -2553,7 +2553,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to set
      * @param params  the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
         GL45C.glTextureParameterfv(texture, pname, params);
@@ -2568,7 +2568,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to set. One of:<br><table><tr><td>{@link GL12#GL_TEXTURE_BASE_LEVEL TEXTURE_BASE_LEVEL}</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td><td>{@link GL12#GL_TEXTURE_MAX_LEVEL TEXTURE_MAX_LEVEL}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td></tr><tr><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_R TEXTURE_SWIZZLE_R}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_G TEXTURE_SWIZZLE_G}</td></tr><tr><td>{@link GL33#GL_TEXTURE_SWIZZLE_B TEXTURE_SWIZZLE_B}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_A TEXTURE_SWIZZLE_A}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_RGBA TEXTURE_SWIZZLE_RGBA}</td><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td></tr><tr><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL14#GL_DEPTH_TEXTURE_MODE DEPTH_TEXTURE_MODE}</td><td>{@link GL14#GL_GENERATE_MIPMAP GENERATE_MIPMAP}</td></tr></table>
      * @param param   the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameteri">Reference Page</a>
      */
     public static void glTextureParameteri(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
         GL45C.glTextureParameteri(texture, pname, param);
@@ -2588,7 +2588,7 @@ public class GL45 extends GL44 {
      * @param pname   the symbolic name of a single-valued texture parameter
      * @param params  the value of {@code pname}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
         GL45C.glTextureParameterIiv(texture, pname, params);
@@ -2600,7 +2600,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the symbolic name of a single-valued texture parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIi(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") int param) {
         GL45C.glTextureParameterIi(texture, pname, param);
@@ -2620,7 +2620,7 @@ public class GL45 extends GL44 {
      * @param pname   the symbolic name of a single-valued texture parameter
      * @param params  the value of {@code pname}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint const *") IntBuffer params) {
         GL45C.glTextureParameterIuiv(texture, pname, params);
@@ -2632,7 +2632,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the symbolic name of a single-valued texture parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIui(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int param) {
         GL45C.glTextureParameterIui(texture, pname, param);
@@ -2652,7 +2652,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to set
      * @param params  the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
         GL45C.glTextureParameteriv(texture, pname, params);
@@ -2665,7 +2665,7 @@ public class GL45 extends GL44 {
      *
      * @param texture the texture name
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGenerateTextureMipmap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGenerateTextureMipmap">Reference Page</a>
      */
     public static void glGenerateTextureMipmap(@NativeType("GLuint") int texture) {
         GL45C.glGenerateTextureMipmap(texture);
@@ -2683,7 +2683,7 @@ public class GL45 extends GL44 {
      * @param unit    the texture unit number
      * @param texture the texture name
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindTextureUnit">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindTextureUnit">Reference Page</a>
      */
     public static void glBindTextureUnit(@NativeType("GLuint") int unit, @NativeType("GLuint") int texture) {
         GL45C.glBindTextureUnit(unit, texture);
@@ -2710,7 +2710,7 @@ public class GL45 extends GL44 {
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, bufSize, pixels);
@@ -2725,7 +2725,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -2740,7 +2740,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ShortBuffer pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -2755,7 +2755,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") IntBuffer pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -2770,7 +2770,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") FloatBuffer pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -2785,7 +2785,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") DoubleBuffer pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -2810,7 +2810,7 @@ public class GL45 extends GL44 {
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      * @param pixels  a buffer in which to return the compressed texture image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureImage">Reference Page</a>
      */
     public static void glGetCompressedTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLsizei") int bufSize, @NativeType("void *") long pixels) {
         GL45C.glGetCompressedTextureImage(texture, level, bufSize, pixels);
@@ -2823,7 +2823,7 @@ public class GL45 extends GL44 {
      * @param level   the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image.
      * @param pixels  a buffer in which to return the compressed texture image
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureImage">Reference Page</a>
      */
     public static void glGetCompressedTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("void *") ByteBuffer pixels) {
         GL45C.glGetCompressedTextureImage(texture, level, pixels);
@@ -2844,7 +2844,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to query
      * @param params  a scalar or buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     public static void glGetTextureLevelParameterfv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
         GL45C.glGetTextureLevelParameterfv(texture, level, pname, params);
@@ -2857,7 +2857,7 @@ public class GL45 extends GL44 {
      * @param level   the level-of-detail number
      * @param pname   the parameter to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetTextureLevelParameterf(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname) {
@@ -2879,7 +2879,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to query. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WIDTH TEXTURE_WIDTH}</td><td>{@link GL11#GL_TEXTURE_HEIGHT TEXTURE_HEIGHT}</td><td>{@link GL12#GL_TEXTURE_DEPTH TEXTURE_DEPTH}</td><td>{@link GL32#GL_TEXTURE_SAMPLES TEXTURE_SAMPLES}</td></tr><tr><td>{@link GL32#GL_TEXTURE_FIXED_SAMPLE_LOCATIONS TEXTURE_FIXED_SAMPLE_LOCATIONS}</td><td>{@link GL11#GL_TEXTURE_INTERNAL_FORMAT TEXTURE_INTERNAL_FORMAT}</td><td>{@link GL11#GL_TEXTURE_RED_SIZE TEXTURE_RED_SIZE}</td><td>{@link GL11#GL_TEXTURE_GREEN_SIZE TEXTURE_GREEN_SIZE}</td></tr><tr><td>{@link GL11#GL_TEXTURE_BLUE_SIZE TEXTURE_BLUE_SIZE}</td><td>{@link GL11#GL_TEXTURE_ALPHA_SIZE TEXTURE_ALPHA_SIZE}</td><td>{@link GL14#GL_TEXTURE_DEPTH_SIZE TEXTURE_DEPTH_SIZE}</td><td>{@link GL30#GL_TEXTURE_STENCIL_SIZE TEXTURE_STENCIL_SIZE}</td></tr><tr><td>{@link GL30#GL_TEXTURE_SHARED_SIZE TEXTURE_SHARED_SIZE}</td><td>{@link GL30#GL_TEXTURE_ALPHA_TYPE TEXTURE_ALPHA_TYPE}</td><td>{@link GL30#GL_TEXTURE_DEPTH_TYPE TEXTURE_DEPTH_TYPE}</td><td>{@link GL13#GL_TEXTURE_COMPRESSED TEXTURE_COMPRESSED}</td></tr><tr><td>{@link GL13#GL_TEXTURE_COMPRESSED_IMAGE_SIZE TEXTURE_COMPRESSED_IMAGE_SIZE}</td><td>{@link GL31#GL_TEXTURE_BUFFER_DATA_STORE_BINDING TEXTURE_BUFFER_DATA_STORE_BINDING}</td><td>{@link GL43#GL_TEXTURE_BUFFER_OFFSET TEXTURE_BUFFER_OFFSET}</td><td>{@link GL43#GL_TEXTURE_BUFFER_SIZE TEXTURE_BUFFER_SIZE}</td></tr></table>
      * @param params  a scalar or buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     public static void glGetTextureLevelParameteriv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetTextureLevelParameteriv(texture, level, pname, params);
@@ -2892,7 +2892,7 @@ public class GL45 extends GL44 {
      * @param level   the level-of-detail number
      * @param pname   the parameter to query. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WIDTH TEXTURE_WIDTH}</td><td>{@link GL11#GL_TEXTURE_HEIGHT TEXTURE_HEIGHT}</td><td>{@link GL12#GL_TEXTURE_DEPTH TEXTURE_DEPTH}</td><td>{@link GL32#GL_TEXTURE_SAMPLES TEXTURE_SAMPLES}</td></tr><tr><td>{@link GL32#GL_TEXTURE_FIXED_SAMPLE_LOCATIONS TEXTURE_FIXED_SAMPLE_LOCATIONS}</td><td>{@link GL11#GL_TEXTURE_INTERNAL_FORMAT TEXTURE_INTERNAL_FORMAT}</td><td>{@link GL11#GL_TEXTURE_RED_SIZE TEXTURE_RED_SIZE}</td><td>{@link GL11#GL_TEXTURE_GREEN_SIZE TEXTURE_GREEN_SIZE}</td></tr><tr><td>{@link GL11#GL_TEXTURE_BLUE_SIZE TEXTURE_BLUE_SIZE}</td><td>{@link GL11#GL_TEXTURE_ALPHA_SIZE TEXTURE_ALPHA_SIZE}</td><td>{@link GL14#GL_TEXTURE_DEPTH_SIZE TEXTURE_DEPTH_SIZE}</td><td>{@link GL30#GL_TEXTURE_STENCIL_SIZE TEXTURE_STENCIL_SIZE}</td></tr><tr><td>{@link GL30#GL_TEXTURE_SHARED_SIZE TEXTURE_SHARED_SIZE}</td><td>{@link GL30#GL_TEXTURE_ALPHA_TYPE TEXTURE_ALPHA_TYPE}</td><td>{@link GL30#GL_TEXTURE_DEPTH_TYPE TEXTURE_DEPTH_TYPE}</td><td>{@link GL13#GL_TEXTURE_COMPRESSED TEXTURE_COMPRESSED}</td></tr><tr><td>{@link GL13#GL_TEXTURE_COMPRESSED_IMAGE_SIZE TEXTURE_COMPRESSED_IMAGE_SIZE}</td><td>{@link GL31#GL_TEXTURE_BUFFER_DATA_STORE_BINDING TEXTURE_BUFFER_DATA_STORE_BINDING}</td><td>{@link GL43#GL_TEXTURE_BUFFER_OFFSET TEXTURE_BUFFER_OFFSET}</td><td>{@link GL43#GL_TEXTURE_BUFFER_SIZE TEXTURE_BUFFER_SIZE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTextureLevelParameteri(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname) {
@@ -2913,7 +2913,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to query
      * @param params  a scalar or buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
         GL45C.glGetTextureParameterfv(texture, pname, params);
@@ -2925,7 +2925,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the parameter to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetTextureParameterf(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname) {
@@ -2946,7 +2946,7 @@ public class GL45 extends GL44 {
      * @param pname   the symbolic name of a texture parameter
      * @param params  returns the texture parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetTextureParameterIiv(texture, pname, params);
@@ -2958,7 +2958,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the symbolic name of a texture parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTextureParameterIi(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname) {
@@ -2979,7 +2979,7 @@ public class GL45 extends GL44 {
      * @param pname   the symbolic name of a texture parameter
      * @param params  returns the texture parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
         GL45C.glGetTextureParameterIuiv(texture, pname, params);
@@ -2991,7 +2991,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the symbolic name of a texture parameter
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTextureParameterIui(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname) {
@@ -3012,7 +3012,7 @@ public class GL45 extends GL44 {
      * @param pname   the parameter to query. One of:<br><table><tr><td>{@link GL12#GL_TEXTURE_BASE_LEVEL TEXTURE_BASE_LEVEL}</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td><td>{@link GL12#GL_TEXTURE_MAX_LEVEL TEXTURE_MAX_LEVEL}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td></tr><tr><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_R TEXTURE_SWIZZLE_R}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_G TEXTURE_SWIZZLE_G}</td></tr><tr><td>{@link GL33#GL_TEXTURE_SWIZZLE_B TEXTURE_SWIZZLE_B}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_A TEXTURE_SWIZZLE_A}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_RGBA TEXTURE_SWIZZLE_RGBA}</td><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td></tr><tr><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL14#GL_DEPTH_TEXTURE_MODE DEPTH_TEXTURE_MODE}</td><td>{@link GL14#GL_GENERATE_MIPMAP GENERATE_MIPMAP}</td></tr><tr><td>{@link GL42#GL_IMAGE_FORMAT_COMPATIBILITY_TYPE IMAGE_FORMAT_COMPATIBILITY_TYPE}</td><td>{@link GL42#GL_TEXTURE_IMMUTABLE_FORMAT TEXTURE_IMMUTABLE_FORMAT}</td><td>{@link GL43#GL_TEXTURE_IMMUTABLE_LEVELS TEXTURE_IMMUTABLE_LEVELS}</td><td>{@link GL43#GL_TEXTURE_VIEW_MIN_LEVEL TEXTURE_VIEW_MIN_LEVEL}</td></tr><tr><td>{@link GL43#GL_TEXTURE_VIEW_NUM_LEVELS TEXTURE_VIEW_NUM_LEVELS}</td><td>{@link GL43#GL_TEXTURE_VIEW_MIN_LAYER TEXTURE_VIEW_MIN_LAYER}</td><td>{@link GL43#GL_TEXTURE_VIEW_NUM_LAYERS TEXTURE_VIEW_NUM_LAYERS}</td></tr></table>
      * @param params  a scalar or buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetTextureParameteriv(texture, pname, params);
@@ -3024,7 +3024,7 @@ public class GL45 extends GL44 {
      * @param texture the texture name
      * @param pname   the parameter to query. One of:<br><table><tr><td>{@link GL12#GL_TEXTURE_BASE_LEVEL TEXTURE_BASE_LEVEL}</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td><td>{@link GL12#GL_TEXTURE_MAX_LEVEL TEXTURE_MAX_LEVEL}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td></tr><tr><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_R TEXTURE_SWIZZLE_R}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_G TEXTURE_SWIZZLE_G}</td></tr><tr><td>{@link GL33#GL_TEXTURE_SWIZZLE_B TEXTURE_SWIZZLE_B}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_A TEXTURE_SWIZZLE_A}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_RGBA TEXTURE_SWIZZLE_RGBA}</td><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td></tr><tr><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL14#GL_DEPTH_TEXTURE_MODE DEPTH_TEXTURE_MODE}</td><td>{@link GL14#GL_GENERATE_MIPMAP GENERATE_MIPMAP}</td></tr><tr><td>{@link GL42#GL_IMAGE_FORMAT_COMPATIBILITY_TYPE IMAGE_FORMAT_COMPATIBILITY_TYPE}</td><td>{@link GL42#GL_TEXTURE_IMMUTABLE_FORMAT TEXTURE_IMMUTABLE_FORMAT}</td><td>{@link GL43#GL_TEXTURE_IMMUTABLE_LEVELS TEXTURE_IMMUTABLE_LEVELS}</td><td>{@link GL43#GL_TEXTURE_VIEW_MIN_LEVEL TEXTURE_VIEW_MIN_LEVEL}</td></tr><tr><td>{@link GL43#GL_TEXTURE_VIEW_NUM_LEVELS TEXTURE_VIEW_NUM_LEVELS}</td><td>{@link GL43#GL_TEXTURE_VIEW_MIN_LAYER TEXTURE_VIEW_MIN_LAYER}</td><td>{@link GL43#GL_TEXTURE_VIEW_NUM_LAYERS TEXTURE_VIEW_NUM_LAYERS}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetTextureParameteri(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname) {
@@ -3047,7 +3047,7 @@ public class GL45 extends GL44 {
      *
      * @param arrays the buffer in which to return the created vertex array object names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
      */
     public static void glCreateVertexArrays(@NativeType("GLuint *") IntBuffer arrays) {
         GL45C.glCreateVertexArrays(arrays);
@@ -3056,7 +3056,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused vertex array object names in {@code arrays}.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateVertexArrays() {
@@ -3071,7 +3071,7 @@ public class GL45 extends GL44 {
      * @param vaobj the vertex array object name
      * @param index the index of the generic vertex attribute to be disabled
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glDisableVertexArrayAttrib">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glDisableVertexArrayAttrib">Reference Page</a>
      */
     public static void glDisableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index) {
         GL45C.glDisableVertexArrayAttrib(vaobj, index);
@@ -3085,7 +3085,7 @@ public class GL45 extends GL44 {
      * @param vaobj the vertex array object name
      * @param index the index of the generic vertex attribute to be enabled
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glEnableVertexArrayAttrib">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glEnableVertexArrayAttrib">Reference Page</a>
      */
     public static void glEnableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index) {
         GL45C.glEnableVertexArrayAttrib(vaobj, index);
@@ -3099,7 +3099,7 @@ public class GL45 extends GL44 {
      * @param vaobj  the vertex array object name
      * @param buffer the buffer object name. If {@code buffer} is zero, any existing element array buffer binding to {@code vaobj} is removed.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayElementBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayElementBuffer">Reference Page</a>
      */
     public static void glVertexArrayElementBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int buffer) {
         GL45C.glVertexArrayElementBuffer(vaobj, buffer);
@@ -3116,7 +3116,7 @@ public class GL45 extends GL44 {
      * @param offset       the offset of the first element of the buffer
      * @param stride       the distance between elements within the buffer
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayVertexBuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayVertexBuffer">Reference Page</a>
      */
     public static void glVertexArrayVertexBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizei") int stride) {
         GL45C.glVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride);
@@ -3142,7 +3142,7 @@ public class GL45 extends GL44 {
      * @param offsets an array of offses
      * @param strides an array of stride values
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayVertexBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayVertexBuffers">Reference Page</a>
      */
     public static void glVertexArrayVertexBuffers(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") IntBuffer strides) {
         GL45C.glVertexArrayVertexBuffers(vaobj, first, buffers, offsets, strides);
@@ -3161,7 +3161,7 @@ public class GL45 extends GL44 {
      *                       directly converted to floating point.
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayAttribFormat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayAttribFormat">Reference Page</a>
      */
     public static void glVertexArrayAttribFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int relativeoffset) {
         GL45C.glVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset);
@@ -3178,7 +3178,7 @@ public class GL45 extends GL44 {
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayAttribIFormat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayAttribIFormat">Reference Page</a>
      */
     public static void glVertexArrayAttribIFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
         GL45C.glVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset);
@@ -3195,7 +3195,7 @@ public class GL45 extends GL44 {
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayAttribLFormat">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayAttribLFormat">Reference Page</a>
      */
     public static void glVertexArrayAttribLFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
         GL45C.glVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset);
@@ -3210,7 +3210,7 @@ public class GL45 extends GL44 {
      * @param attribindex  the index of the attribute to associate with a vertex buffer binding
      * @param bindingindex the index of the vertex buffer binding with which to associate the generic vertex attribute
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayAttribBinding">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayAttribBinding">Reference Page</a>
      */
     public static void glVertexArrayAttribBinding(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLuint") int bindingindex) {
         GL45C.glVertexArrayAttribBinding(vaobj, attribindex, bindingindex);
@@ -3225,7 +3225,7 @@ public class GL45 extends GL44 {
      * @param bindingindex the index of the generic vertex attribute
      * @param divisor      the number of instances that will pass between updates of the generic attribute at slot {@code index}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayBindingDivisor">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayBindingDivisor">Reference Page</a>
      */
     public static void glVertexArrayBindingDivisor(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor) {
         GL45C.glVertexArrayBindingDivisor(vaobj, bindingindex, divisor);
@@ -3245,7 +3245,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. Must be:<br><table><tr><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER_BINDING ELEMENT_ARRAY_BUFFER_BINDING}</td></tr></table>
      * @param param the buffer in which to return the parameter values
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
      */
     public static void glGetVertexArrayiv(@NativeType("GLuint") int vaobj, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer param) {
         GL45C.glGetVertexArrayiv(vaobj, pname, param);
@@ -3257,7 +3257,7 @@ public class GL45 extends GL44 {
      * @param vaobj the vertex array object name
      * @param pname the parameter to query. Must be:<br><table><tr><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER_BINDING ELEMENT_ARRAY_BUFFER_BINDING}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetVertexArrayi(@NativeType("GLuint") int vaobj, @NativeType("GLenum") int pname) {
@@ -3279,7 +3279,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. One of:<br><table><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_ENABLED VERTEX_ATTRIB_ARRAY_ENABLED}</td><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_SIZE VERTEX_ATTRIB_ARRAY_SIZE},</td></tr><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_STRIDE VERTEX_ATTRIB_ARRAY_STRIDE}</td><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_TYPE VERTEX_ATTRIB_ARRAY_TYPE}</td></tr><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_NORMALIZED VERTEX_ATTRIB_ARRAY_NORMALIZED}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td><td>{@link GL43#GL_VERTEX_ATTRIB_ARRAY_LONG VERTEX_ATTRIB_ARRAY_LONG}</td></tr><tr><td>{@link GL43#GL_VERTEX_ATTRIB_RELATIVE_OFFSET VERTEX_ATTRIB_RELATIVE_OFFSET}</td></tr></table>
      * @param param the buffer in which to return the parameter values
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     public static void glGetVertexArrayIndexediv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer param) {
         GL45C.glGetVertexArrayIndexediv(vaobj, index, pname, param);
@@ -3292,7 +3292,7 @@ public class GL45 extends GL44 {
      * @param index the attribute to query
      * @param pname the parameter to query. One of:<br><table><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_ENABLED VERTEX_ATTRIB_ARRAY_ENABLED}</td><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_SIZE VERTEX_ATTRIB_ARRAY_SIZE},</td></tr><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_STRIDE VERTEX_ATTRIB_ARRAY_STRIDE}</td><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_TYPE VERTEX_ATTRIB_ARRAY_TYPE}</td></tr><tr><td>{@link GL20#GL_VERTEX_ATTRIB_ARRAY_NORMALIZED VERTEX_ATTRIB_ARRAY_NORMALIZED}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td><td>{@link GL43#GL_VERTEX_ATTRIB_ARRAY_LONG VERTEX_ATTRIB_ARRAY_LONG}</td></tr><tr><td>{@link GL43#GL_VERTEX_ATTRIB_RELATIVE_OFFSET VERTEX_ATTRIB_RELATIVE_OFFSET}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetVertexArrayIndexedi(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
@@ -3314,7 +3314,7 @@ public class GL45 extends GL44 {
      * @param pname the parameter to query. Must be:<br><table><tr><td>{@link GL43#GL_VERTEX_BINDING_OFFSET VERTEX_BINDING_OFFSET}</td></tr></table>
      * @param param the buffer in which to return the parameter values
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     public static void glGetVertexArrayIndexed64iv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer param) {
         GL45C.glGetVertexArrayIndexed64iv(vaobj, index, pname, param);
@@ -3327,7 +3327,7 @@ public class GL45 extends GL44 {
      * @param index the attribute to query
      * @param pname the parameter to query. Must be:<br><table><tr><td>{@link GL43#GL_VERTEX_BINDING_OFFSET VERTEX_BINDING_OFFSET}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetVertexArrayIndexed64i(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
@@ -3350,7 +3350,7 @@ public class GL45 extends GL44 {
      *
      * @param samplers the buffer in which to return the created sampler object names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
      */
     public static void glCreateSamplers(@NativeType("GLuint *") IntBuffer samplers) {
         GL45C.glCreateSamplers(samplers);
@@ -3359,7 +3359,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateSamplers() {
@@ -3382,7 +3382,7 @@ public class GL45 extends GL44 {
      *
      * @param pipelines the buffer in which to return the created program pipeline names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
      */
     public static void glCreateProgramPipelines(@NativeType("GLuint *") IntBuffer pipelines) {
         GL45C.glCreateProgramPipelines(pipelines);
@@ -3391,7 +3391,7 @@ public class GL45 extends GL44 {
     /**
      * Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateProgramPipelines() {
@@ -3415,7 +3415,7 @@ public class GL45 extends GL44 {
      * @param target the query target. One of:<br><table><tr><td>{@link GL15#GL_SAMPLES_PASSED SAMPLES_PASSED}</td><td>{@link GL30#GL_PRIMITIVES_GENERATED PRIMITIVES_GENERATED}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN}</td><td>{@link GL33#GL_TIME_ELAPSED TIME_ELAPSED}</td></tr><tr><td>{@link GL33#GL_TIMESTAMP TIMESTAMP}</td><td>{@link GL33#GL_ANY_SAMPLES_PASSED ANY_SAMPLES_PASSED}</td><td>{@link GL43#GL_ANY_SAMPLES_PASSED_CONSERVATIVE ANY_SAMPLES_PASSED_CONSERVATIVE}</td></tr></table>
      * @param ids    the buffer in which to return the created query object names
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
      */
     public static void glCreateQueries(@NativeType("GLenum") int target, @NativeType("GLuint *") IntBuffer ids) {
         GL45C.glCreateQueries(target, ids);
@@ -3426,7 +3426,7 @@ public class GL45 extends GL44 {
      *
      * @param target the query target. One of:<br><table><tr><td>{@link GL15#GL_SAMPLES_PASSED SAMPLES_PASSED}</td><td>{@link GL30#GL_PRIMITIVES_GENERATED PRIMITIVES_GENERATED}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN}</td><td>{@link GL33#GL_TIME_ELAPSED TIME_ELAPSED}</td></tr><tr><td>{@link GL33#GL_TIMESTAMP TIMESTAMP}</td><td>{@link GL33#GL_ANY_SAMPLES_PASSED ANY_SAMPLES_PASSED}</td><td>{@link GL43#GL_ANY_SAMPLES_PASSED_CONSERVATIVE ANY_SAMPLES_PASSED_CONSERVATIVE}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
      */
     @NativeType("void")
     public static int glCreateQueries(@NativeType("GLenum") int target) {
@@ -3443,7 +3443,7 @@ public class GL45 extends GL44 {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
      */
     public static void glGetQueryBufferObjectiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
         GL45C.glGetQueryBufferObjectiv(id, buffer, pname, offset);
@@ -3459,7 +3459,7 @@ public class GL45 extends GL44 {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
      */
     public static void glGetQueryBufferObjectuiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
         GL45C.glGetQueryBufferObjectuiv(id, buffer, pname, offset);
@@ -3475,7 +3475,7 @@ public class GL45 extends GL44 {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
      */
     public static void glGetQueryBufferObjecti64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
         GL45C.glGetQueryBufferObjecti64v(id, buffer, pname, offset);
@@ -3491,7 +3491,7 @@ public class GL45 extends GL44 {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetQueryBufferObject">Reference Page</a>
      */
     public static void glGetQueryBufferObjectui64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
         GL45C.glGetQueryBufferObjectui64v(id, buffer, pname, offset);
@@ -3516,7 +3516,7 @@ public class GL45 extends GL44 {
      *
      * @param barriers the barriers to insert. One or more of:<br><table><tr><td>{@link GL42#GL_ATOMIC_COUNTER_BARRIER_BIT ATOMIC_COUNTER_BARRIER_BIT}</td><td>{@link GL42#GL_FRAMEBUFFER_BARRIER_BIT FRAMEBUFFER_BARRIER_BIT}</td><td>{@link GL42#GL_SHADER_IMAGE_ACCESS_BARRIER_BIT SHADER_IMAGE_ACCESS_BARRIER_BIT}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BARRIER_BIT SHADER_STORAGE_BARRIER_BIT}</td><td>{@link GL42#GL_TEXTURE_FETCH_BARRIER_BIT TEXTURE_FETCH_BARRIER_BIT}</td><td>{@link GL42#GL_UNIFORM_BARRIER_BIT UNIFORM_BARRIER_BIT}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMemoryBarrierByRegion">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMemoryBarrierByRegion">Reference Page</a>
      */
     public static void glMemoryBarrierByRegion(@NativeType("GLbitfield") int barriers) {
         GL45C.glMemoryBarrierByRegion(barriers);
@@ -3549,7 +3549,7 @@ public class GL45 extends GL44 {
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels);
@@ -3570,7 +3570,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -3591,7 +3591,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ShortBuffer pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -3612,7 +3612,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") IntBuffer pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -3633,7 +3633,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") FloatBuffer pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -3654,7 +3654,7 @@ public class GL45 extends GL44 {
      * @param type    the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") DoubleBuffer pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -3685,7 +3685,7 @@ public class GL45 extends GL44 {
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLsizei") int bufSize, @NativeType("void *") long pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
@@ -3704,7 +3704,7 @@ public class GL45 extends GL44 {
      * @param depth   the subregion depth
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") ByteBuffer pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -3723,7 +3723,7 @@ public class GL45 extends GL44 {
      * @param depth   the subregion depth
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") ShortBuffer pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -3742,7 +3742,7 @@ public class GL45 extends GL44 {
      * @param depth   the subregion depth
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") IntBuffer pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -3761,7 +3761,7 @@ public class GL45 extends GL44 {
      * @param depth   the subregion depth
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") FloatBuffer pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -3780,7 +3780,7 @@ public class GL45 extends GL44 {
      * @param depth   the subregion depth
      * @param pixels  the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") DoubleBuffer pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -3791,7 +3791,7 @@ public class GL45 extends GL44 {
     /**
      * Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureBarrier">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureBarrier">Reference Page</a>
      */
     public static void glTextureBarrier() {
         GL45C.glTextureBarrier();
@@ -3834,7 +3834,7 @@ public class GL45 extends GL44 {
      * indicating completion to the application.</li>
      * </ul>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetGraphicsResetStatus">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetGraphicsResetStatus">Reference Page</a>
      */
     @NativeType("GLenum")
     public static int glGetGraphicsResetStatus() {
@@ -3857,7 +3857,7 @@ public class GL45 extends GL44 {
      * @param query  the information to query
      * @param data   a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapdv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLdouble *") DoubleBuffer data) {
         nglGetnMapdv(target, query, data.remaining(), memAddress(data));
@@ -3869,7 +3869,7 @@ public class GL45 extends GL44 {
      * @param target the evaluator map
      * @param query  the information to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     @NativeType("void")
     public static double glGetnMapd(@NativeType("GLenum") int target, @NativeType("GLenum") int query) {
@@ -3899,7 +3899,7 @@ public class GL45 extends GL44 {
      * @param query  the information to query
      * @param data   a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapfv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLfloat *") FloatBuffer data) {
         nglGetnMapfv(target, query, data.remaining(), memAddress(data));
@@ -3911,7 +3911,7 @@ public class GL45 extends GL44 {
      * @param target the evaluator map
      * @param query  the information to query
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetnMapf(@NativeType("GLenum") int target, @NativeType("GLenum") int query) {
@@ -3941,7 +3941,7 @@ public class GL45 extends GL44 {
      * @param query  the information to query. One of:<br><table><tr><td>{@link GL11#GL_ORDER ORDER}</td><td>{@link GL11#GL_COEFF COEFF}</td><td>{@link GL11#GL_DOMAIN DOMAIN}</td></tr></table>
      * @param data   a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapiv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLint *") IntBuffer data) {
         nglGetnMapiv(target, query, data.remaining(), memAddress(data));
@@ -3953,7 +3953,7 @@ public class GL45 extends GL44 {
      * @param target the evaluator target. One of:<br><table><tr><td>{@link GL11#GL_MAP1_VERTEX_3 MAP1_VERTEX_3}</td><td>{@link GL11#GL_MAP1_VERTEX_4 MAP1_VERTEX_4}</td><td>{@link GL11#GL_MAP1_COLOR_4 MAP1_COLOR_4}</td><td>{@link GL11#GL_MAP1_NORMAL MAP1_NORMAL}</td><td>{@link GL11#GL_MAP1_TEXTURE_COORD_1 MAP1_TEXTURE_COORD_1}</td></tr><tr><td>{@link GL11#GL_MAP1_TEXTURE_COORD_2 MAP1_TEXTURE_COORD_2}</td><td>{@link GL11#GL_MAP1_TEXTURE_COORD_3 MAP1_TEXTURE_COORD_3}</td><td>{@link GL11#GL_MAP1_TEXTURE_COORD_4 MAP1_TEXTURE_COORD_4}</td><td>{@link GL11#GL_MAP2_VERTEX_3 MAP2_VERTEX_3}</td><td>{@link GL11#GL_MAP2_VERTEX_4 MAP2_VERTEX_4}</td></tr><tr><td>{@link GL11#GL_MAP2_COLOR_4 MAP2_COLOR_4}</td><td>{@link GL11#GL_MAP2_NORMAL MAP2_NORMAL}</td><td>{@link GL11#GL_MAP2_TEXTURE_COORD_1 MAP2_TEXTURE_COORD_1}</td><td>{@link GL11#GL_MAP2_TEXTURE_COORD_2 MAP2_TEXTURE_COORD_2}</td><td>{@link GL11#GL_MAP2_TEXTURE_COORD_3 MAP2_TEXTURE_COORD_3}</td></tr><tr><td>{@link GL11#GL_MAP2_TEXTURE_COORD_4 MAP2_TEXTURE_COORD_4}</td></tr></table>
      * @param query  the information to query. One of:<br><table><tr><td>{@link GL11#GL_ORDER ORDER}</td><td>{@link GL11#GL_COEFF COEFF}</td><td>{@link GL11#GL_DOMAIN DOMAIN}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetnMapi(@NativeType("GLenum") int target, @NativeType("GLenum") int query) {
@@ -3982,7 +3982,7 @@ public class GL45 extends GL44 {
      * @param map  the pixel map parameter to query. One of:<br><table><tr><td>{@link GL11#GL_PIXEL_MAP_I_TO_I PIXEL_MAP_I_TO_I}</td><td>{@link GL11#GL_PIXEL_MAP_S_TO_S PIXEL_MAP_S_TO_S}</td><td>{@link GL11#GL_PIXEL_MAP_I_TO_R PIXEL_MAP_I_TO_R}</td><td>{@link GL11#GL_PIXEL_MAP_I_TO_G PIXEL_MAP_I_TO_G}</td><td>{@link GL11#GL_PIXEL_MAP_I_TO_B PIXEL_MAP_I_TO_B}</td></tr><tr><td>{@link GL11#GL_PIXEL_MAP_I_TO_A PIXEL_MAP_I_TO_A}</td><td>{@link GL11#GL_PIXEL_MAP_R_TO_R PIXEL_MAP_R_TO_R}</td><td>{@link GL11#GL_PIXEL_MAP_G_TO_G PIXEL_MAP_G_TO_G}</td><td>{@link GL11#GL_PIXEL_MAP_B_TO_B PIXEL_MAP_B_TO_B}</td><td>{@link GL11#GL_PIXEL_MAP_A_TO_A PIXEL_MAP_A_TO_A}</td></tr></table>
      * @param data a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapfv(@NativeType("GLenum") int map, @NativeType("GLfloat *") FloatBuffer data) {
         nglGetnPixelMapfv(map, data.remaining(), memAddress(data));
@@ -4003,7 +4003,7 @@ public class GL45 extends GL44 {
      * @param map  the pixel map parameter to query
      * @param data a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapuiv(@NativeType("GLenum") int map, @NativeType("GLuint *") IntBuffer data) {
         nglGetnPixelMapuiv(map, data.remaining(), memAddress(data));
@@ -4024,7 +4024,7 @@ public class GL45 extends GL44 {
      * @param map  the pixel map parameter to query
      * @param data a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapusv(@NativeType("GLenum") int map, @NativeType("GLushort *") ShortBuffer data) {
         nglGetnPixelMapusv(map, data.remaining(), memAddress(data));
@@ -4045,7 +4045,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code pattern}
      * @param pattern a buffer in which to place the returned pattern
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnPolygonStipple">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnPolygonStipple">Reference Page</a>
      */
     public static void glGetnPolygonStipple(@NativeType("GLsizei") int bufSize, @NativeType("GLubyte *") long pattern) {
         nglGetnPolygonStipple(bufSize, pattern);
@@ -4056,7 +4056,7 @@ public class GL45 extends GL44 {
      *
      * @param pattern a buffer in which to place the returned pattern
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnPolygonStipple">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnPolygonStipple">Reference Page</a>
      */
     public static void glGetnPolygonStipple(@NativeType("GLubyte *") ByteBuffer pattern) {
         nglGetnPolygonStipple(pattern.remaining(), memAddress(pattern));
@@ -4083,7 +4083,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code img}
      * @param img     a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long img) {
         GL45C.glGetnTexImage(tex, level, format, type, bufSize, img);
@@ -4098,7 +4098,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -4113,7 +4113,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ShortBuffer img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -4128,7 +4128,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") IntBuffer img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -4143,7 +4143,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") FloatBuffer img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -4158,7 +4158,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr></table>
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") DoubleBuffer img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -4187,7 +4187,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code data}
      * @param pixels  a buffer in which to place the returned pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, bufSize, pixels);
@@ -4204,7 +4204,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels a buffer in which to place the returned pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -4221,7 +4221,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels a buffer in which to place the returned pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ShortBuffer pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -4238,7 +4238,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels a buffer in which to place the returned pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") IntBuffer pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -4255,7 +4255,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param pixels a buffer in which to place the returned pixel data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") FloatBuffer pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -4279,7 +4279,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code table}
      * @param table   a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long table) {
         nglGetnColorTable(target, format, type, bufSize, table);
@@ -4293,7 +4293,7 @@ public class GL45 extends GL44 {
      * @param type   the color data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param table  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer table) {
         nglGetnColorTable(target, format, type, table.remaining(), memAddress(table));
@@ -4307,7 +4307,7 @@ public class GL45 extends GL44 {
      * @param type   the color data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param table  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ShortBuffer table) {
         nglGetnColorTable(target, format, type, table.remaining() << 1, memAddress(table));
@@ -4321,7 +4321,7 @@ public class GL45 extends GL44 {
      * @param type   the color data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param table  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") IntBuffer table) {
         nglGetnColorTable(target, format, type, table.remaining() << 2, memAddress(table));
@@ -4335,7 +4335,7 @@ public class GL45 extends GL44 {
      * @param type   the color data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param table  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") FloatBuffer table) {
         nglGetnColorTable(target, format, type, table.remaining() << 2, memAddress(table));
@@ -4359,7 +4359,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code image}
      * @param image   a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnConvolutionFilter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnConvolutionFilter">Reference Page</a>
      */
     public static void glGetnConvolutionFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long image) {
         nglGetnConvolutionFilter(target, format, type, bufSize, image);
@@ -4373,7 +4373,7 @@ public class GL45 extends GL44 {
      * @param type   the filter data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param image  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnConvolutionFilter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnConvolutionFilter">Reference Page</a>
      */
     public static void glGetnConvolutionFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer image) {
         nglGetnConvolutionFilter(target, format, type, image.remaining(), memAddress(image));
@@ -4400,7 +4400,7 @@ public class GL45 extends GL44 {
      * @param columnBufSize the maximum number of bytes to write into {@code column}
      * @param column        a buffer in which to return the filter column
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnSeparableFilter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnSeparableFilter">Reference Page</a>
      */
     public static void glGetnSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int rowBufSize, @NativeType("void *") long row, @NativeType("GLsizei") int columnBufSize, @NativeType("void *") long column, @Nullable @NativeType("void *") ByteBuffer span) {
         nglGetnSeparableFilter(target, format, type, rowBufSize, row, columnBufSize, column, memAddressSafe(span));
@@ -4415,7 +4415,7 @@ public class GL45 extends GL44 {
      * @param row    a buffer in which to return the filter row
      * @param column a buffer in which to return the filter column
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnSeparableFilter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnSeparableFilter">Reference Page</a>
      */
     public static void glGetnSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer row, @NativeType("void *") ByteBuffer column, @Nullable @NativeType("void *") ByteBuffer span) {
         nglGetnSeparableFilter(target, format, type, row.remaining(), memAddress(row), column.remaining(), memAddress(column), memAddressSafe(span));
@@ -4440,7 +4440,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code values}
      * @param values  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnHistogram">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnHistogram">Reference Page</a>
      */
     public static void glGetnHistogram(@NativeType("GLenum") int target, @NativeType("GLboolean") boolean reset, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long values) {
         nglGetnHistogram(target, reset, format, type, bufSize, values);
@@ -4455,7 +4455,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel data types. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param values a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnHistogram">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnHistogram">Reference Page</a>
      */
     public static void glGetnHistogram(@NativeType("GLenum") int target, @NativeType("GLboolean") boolean reset, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer values) {
         nglGetnHistogram(target, reset, format, type, values.remaining(), memAddress(values));
@@ -4481,7 +4481,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code values}
      * @param values  a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnMinmax">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnMinmax">Reference Page</a>
      */
     public static void glGetnMinmax(@NativeType("GLenum") int target, @NativeType("GLboolean") boolean reset, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int bufSize, @NativeType("void *") long values) {
         nglGetnMinmax(target, reset, format, type, bufSize, values);
@@ -4497,7 +4497,7 @@ public class GL45 extends GL44 {
      * @param type   the pixel data type. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param values a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnMinmax">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnMinmax">Reference Page</a>
      */
     public static void glGetnMinmax(@NativeType("GLenum") int target, @NativeType("GLboolean") boolean reset, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer values) {
         nglGetnMinmax(target, reset, format, type, values.remaining(), memAddress(values));
@@ -4522,7 +4522,7 @@ public class GL45 extends GL44 {
      * @param bufSize the maximum number of bytes to write into {@code img}
      * @param img     a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnCompressedTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnCompressedTexImage">Reference Page</a>
      */
     public static void glGetnCompressedTexImage(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLsizei") int bufSize, @NativeType("void *") long img) {
         GL45C.glGetnCompressedTexImage(target, level, bufSize, img);
@@ -4535,7 +4535,7 @@ public class GL45 extends GL44 {
      * @param level  the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image.
      * @param img    a buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnCompressedTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnCompressedTexImage">Reference Page</a>
      */
     public static void glGetnCompressedTexImage(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("void *") ByteBuffer img) {
         GL45C.glGetnCompressedTexImage(target, level, img);
@@ -4559,7 +4559,7 @@ public class GL45 extends GL44 {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformfv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
         GL45C.glGetnUniformfv(program, location, params);
@@ -4571,7 +4571,7 @@ public class GL45 extends GL44 {
      * @param program  the program object
      * @param location the uniform location
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetnUniformf(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -4596,7 +4596,7 @@ public class GL45 extends GL44 {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformdv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble *") DoubleBuffer params) {
         GL45C.glGetnUniformdv(program, location, params);
@@ -4608,7 +4608,7 @@ public class GL45 extends GL44 {
      * @param program  the program object
      * @param location the uniform location
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static double glGetnUniformd(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -4633,7 +4633,7 @@ public class GL45 extends GL44 {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetnUniformiv(program, location, params);
@@ -4645,7 +4645,7 @@ public class GL45 extends GL44 {
      * @param program  the program object
      * @param location the uniform location
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetnUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -4670,7 +4670,7 @@ public class GL45 extends GL44 {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") IntBuffer params) {
         GL45C.glGetnUniformuiv(program, location, params);
@@ -4682,7 +4682,7 @@ public class GL45 extends GL44 {
      * @param program  the program object
      * @param location the uniform location
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetnUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -4692,7 +4692,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateTransformFeedbacks CreateTransformFeedbacks}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTransformFeedbacks">Reference Page</a>
      */
     public static void glCreateTransformFeedbacks(@NativeType("GLuint *") int[] ids) {
         GL45C.glCreateTransformFeedbacks(ids);
@@ -4701,7 +4701,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedback">Reference Page</a>
      */
     public static void glGetTransformFeedbackiv(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetTransformFeedbackiv(xfb, pname, param);
@@ -4710,7 +4710,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki_v">Reference Page</a>
      */
     public static void glGetTransformFeedbacki_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint *") int[] param) {
         GL45C.glGetTransformFeedbacki_v(xfb, pname, index, param);
@@ -4719,7 +4719,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTransformFeedbacki64_v">Reference Page</a>
      */
     public static void glGetTransformFeedbacki64_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint64 *") long[] param) {
         GL45C.glGetTransformFeedbacki64_v(xfb, pname, index, param);
@@ -4728,7 +4728,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateBuffers CreateBuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateBuffers">Reference Page</a>
      */
     public static void glCreateBuffers(@NativeType("GLuint *") int[] buffers) {
         GL45C.glCreateBuffers(buffers);
@@ -4737,7 +4737,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -4746,7 +4746,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -4755,7 +4755,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -4764,7 +4764,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
@@ -4773,7 +4773,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferData NamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -4782,7 +4782,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferData NamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -4791,7 +4791,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferData NamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") long[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -4800,7 +4800,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferData NamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -4809,7 +4809,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferData NamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferData">Reference Page</a>
      */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
@@ -4818,7 +4818,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") short[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -4827,7 +4827,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") int[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -4836,7 +4836,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") long[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -4845,7 +4845,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") float[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -4854,7 +4854,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferSubData">Reference Page</a>
      */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") double[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
@@ -4863,7 +4863,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -4872,7 +4872,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -4881,7 +4881,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
@@ -4890,7 +4890,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -4899,7 +4899,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -4908,7 +4908,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
@@ -4917,7 +4917,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetNamedBufferParameteriv(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedBufferParameteriv(buffer, pname, params);
@@ -4926,7 +4926,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferParameter">Reference Page</a>
      */
     public static void glGetNamedBufferParameteri64v(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL45C.glGetNamedBufferParameteri64v(buffer, pname, params);
@@ -4935,7 +4935,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") short[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -4944,7 +4944,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") int[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -4953,7 +4953,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") long[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -4962,7 +4962,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") float[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -4971,7 +4971,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetBufferSubData">Reference Page</a>
      */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") double[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
@@ -4980,7 +4980,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateFramebuffers CreateFramebuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateFramebuffers">Reference Page</a>
      */
     public static void glCreateFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
         GL45C.glCreateFramebuffers(framebuffers);
@@ -4989,7 +4989,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glNamedFramebufferDrawBuffers NamedFramebufferDrawBuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glFramebufferDrawBuffers">Reference Page</a>
      */
     public static void glNamedFramebufferDrawBuffers(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] bufs) {
         GL45C.glNamedFramebufferDrawBuffers(framebuffer, bufs);
@@ -4998,7 +4998,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glInvalidateNamedFramebufferData InvalidateNamedFramebufferData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] attachments) {
         GL45C.glInvalidateNamedFramebufferData(framebuffer, attachments);
@@ -5007,7 +5007,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glInvalidateNamedFramebufferSubData InvalidateNamedFramebufferSubData}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glInvalidateFramebufferSubData">Reference Page</a>
      */
     public static void glInvalidateNamedFramebufferSubData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glInvalidateNamedFramebufferSubData(framebuffer, attachments, x, y, width, height);
@@ -5016,7 +5016,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
@@ -5025,7 +5025,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
@@ -5034,7 +5034,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
     public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
@@ -5043,7 +5043,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
      */
     public static void glGetNamedFramebufferParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedFramebufferParameteriv(framebuffer, pname, params);
@@ -5052,7 +5052,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
      */
     public static void glGetNamedFramebufferAttachmentParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
@@ -5061,7 +5061,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateRenderbuffers CreateRenderbuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateRenderbuffers">Reference Page</a>
      */
     public static void glCreateRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
         GL45C.glCreateRenderbuffers(renderbuffers);
@@ -5070,7 +5070,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
      */
     public static void glGetNamedRenderbufferParameteriv(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
@@ -5079,7 +5079,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateTextures CreateTextures}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateTextures">Reference Page</a>
      */
     public static void glCreateTextures(@NativeType("GLenum") int target, @NativeType("GLuint *") int[] textures) {
         GL45C.glCreateTextures(target, textures);
@@ -5088,7 +5088,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -5097,7 +5097,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -5106,7 +5106,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -5115,7 +5115,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage1D">Reference Page</a>
      */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
@@ -5124,7 +5124,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -5133,7 +5133,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -5142,7 +5142,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -5151,7 +5151,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage2D">Reference Page</a>
      */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
@@ -5160,7 +5160,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5169,7 +5169,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5178,7 +5178,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5187,7 +5187,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureSubImage3D">Reference Page</a>
      */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5196,7 +5196,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureParameterfv TextureParameterfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         GL45C.glTextureParameterfv(texture, pname, params);
@@ -5205,7 +5205,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureParameterIiv TextureParameterIiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         GL45C.glTextureParameterIiv(texture, pname, params);
@@ -5214,7 +5214,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureParameterIuiv TextureParameterIuiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int[] params) {
         GL45C.glTextureParameterIuiv(texture, pname, params);
@@ -5223,7 +5223,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glTextureParameteriv TextureParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glTextureParameter">Reference Page</a>
      */
     public static void glTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         GL45C.glTextureParameteriv(texture, pname, params);
@@ -5232,7 +5232,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureImage GetTextureImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -5241,7 +5241,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureImage GetTextureImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -5250,7 +5250,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureImage GetTextureImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -5259,7 +5259,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureImage GetTextureImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureImage">Reference Page</a>
      */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
@@ -5268,7 +5268,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     public static void glGetTextureLevelParameterfv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetTextureLevelParameterfv(texture, level, pname, params);
@@ -5277,7 +5277,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureLevelParameter">Reference Page</a>
      */
     public static void glGetTextureLevelParameteriv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureLevelParameteriv(texture, level, pname, params);
@@ -5286,7 +5286,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureParameterfv GetTextureParameterfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetTextureParameterfv(texture, pname, params);
@@ -5295,7 +5295,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureParameterIiv(texture, pname, params);
@@ -5304,7 +5304,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         GL45C.glGetTextureParameterIuiv(texture, pname, params);
@@ -5313,7 +5313,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureParameteriv GetTextureParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureParameter">Reference Page</a>
      */
     public static void glGetTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureParameteriv(texture, pname, params);
@@ -5322,7 +5322,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateVertexArrays CreateVertexArrays}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateVertexArrays">Reference Page</a>
      */
     public static void glCreateVertexArrays(@NativeType("GLuint *") int[] arrays) {
         GL45C.glCreateVertexArrays(arrays);
@@ -5331,7 +5331,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glVertexArrayVertexBuffers VertexArrayVertexBuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glVertexArrayVertexBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glVertexArrayVertexBuffers">Reference Page</a>
      */
     public static void glVertexArrayVertexBuffers(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
         GL45C.glVertexArrayVertexBuffers(vaobj, first, buffers, offsets, strides);
@@ -5340,7 +5340,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetVertexArrayiv GetVertexArrayiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArray">Reference Page</a>
      */
     public static void glGetVertexArrayiv(@NativeType("GLuint") int vaobj, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetVertexArrayiv(vaobj, pname, param);
@@ -5349,7 +5349,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     public static void glGetVertexArrayIndexediv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetVertexArrayIndexediv(vaobj, index, pname, param);
@@ -5358,7 +5358,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetVertexArrayIndexed">Reference Page</a>
      */
     public static void glGetVertexArrayIndexed64iv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] param) {
         GL45C.glGetVertexArrayIndexed64iv(vaobj, index, pname, param);
@@ -5367,7 +5367,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateSamplers CreateSamplers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateSamplers">Reference Page</a>
      */
     public static void glCreateSamplers(@NativeType("GLuint *") int[] samplers) {
         GL45C.glCreateSamplers(samplers);
@@ -5376,7 +5376,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateProgramPipelines CreateProgramPipelines}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateProgramPipelines">Reference Page</a>
      */
     public static void glCreateProgramPipelines(@NativeType("GLuint *") int[] pipelines) {
         GL45C.glCreateProgramPipelines(pipelines);
@@ -5385,7 +5385,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glCreateQueries CreateQueries}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glCreateQueries">Reference Page</a>
      */
     public static void glCreateQueries(@NativeType("GLenum") int target, @NativeType("GLuint *") int[] ids) {
         GL45C.glCreateQueries(target, ids);
@@ -5394,7 +5394,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureSubImage GetTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5403,7 +5403,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureSubImage GetTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5412,7 +5412,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureSubImage GetTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5421,7 +5421,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetTextureSubImage GetTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetTextureSubImage">Reference Page</a>
      */
     public static void glGetTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] pixels) {
         GL45C.glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
@@ -5430,7 +5430,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetCompressedTextureSubImage GetCompressedTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") short[] pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -5439,7 +5439,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetCompressedTextureSubImage GetCompressedTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") int[] pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -5448,7 +5448,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetCompressedTextureSubImage GetCompressedTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") float[] pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -5457,7 +5457,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetCompressedTextureSubImage GetCompressedTextureSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetCompressedTextureSubImage">Reference Page</a>
      */
     public static void glGetCompressedTextureSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("void *") double[] pixels) {
         GL45C.glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels);
@@ -5466,7 +5466,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnMapdv GetnMapdv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapdv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLdouble *") double[] data) {
         long __functionAddress = GL.getICD().glGetnMapdv;
@@ -5479,7 +5479,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnMapfv GetnMapfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapfv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLfloat *") float[] data) {
         long __functionAddress = GL.getICD().glGetnMapfv;
@@ -5492,7 +5492,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnMapiv GetnMapiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetMap">Reference Page</a>
      */
     public static void glGetnMapiv(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLint *") int[] data) {
         long __functionAddress = GL.getICD().glGetnMapiv;
@@ -5505,7 +5505,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnPixelMapfv GetnPixelMapfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapfv(@NativeType("GLenum") int map, @NativeType("GLfloat *") float[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapfv;
@@ -5518,7 +5518,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnPixelMapuiv GetnPixelMapuiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapuiv(@NativeType("GLenum") int map, @NativeType("GLuint *") int[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapuiv;
@@ -5531,7 +5531,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnPixelMapusv GetnPixelMapusv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetPixelMap">Reference Page</a>
      */
     public static void glGetnPixelMapusv(@NativeType("GLenum") int map, @NativeType("GLushort *") short[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapusv;
@@ -5544,7 +5544,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnTexImage GetnTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -5553,7 +5553,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnTexImage GetnTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -5562,7 +5562,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnTexImage GetnTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -5571,7 +5571,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnTexImage GetnTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnTexImage">Reference Page</a>
      */
     public static void glGetnTexImage(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] img) {
         GL45C.glGetnTexImage(tex, level, format, type, img);
@@ -5580,7 +5580,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glReadnPixels ReadnPixels}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -5589,7 +5589,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glReadnPixels ReadnPixels}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -5598,7 +5598,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glReadnPixels ReadnPixels}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glReadnPixels">Reference Page</a>
      */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
@@ -5607,7 +5607,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnColorTable GetnColorTable}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] table) {
         long __functionAddress = GL.getICD().glGetnColorTable;
@@ -5620,7 +5620,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnColorTable GetnColorTable}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] table) {
         long __functionAddress = GL.getICD().glGetnColorTable;
@@ -5633,7 +5633,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnColorTable GetnColorTable}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetnColorTable">Reference Page</a>
      */
     public static void glGetnColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] table) {
         long __functionAddress = GL.getICD().glGetnColorTable;
@@ -5646,7 +5646,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnUniformfv GetnUniformfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformfv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetnUniformfv(program, location, params);
@@ -5655,7 +5655,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnUniformdv GetnUniformdv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformdv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble *") double[] params) {
         GL45C.glGetnUniformdv(program, location, params);
@@ -5664,7 +5664,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnUniformiv GetnUniformiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         GL45C.glGetnUniformiv(program, location, params);
@@ -5673,7 +5673,7 @@ public class GL45 extends GL44 {
     /**
      * Array version of: {@link #glGetnUniformuiv GetnUniformuiv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         GL45C.glGetnUniformuiv(program, location, params);

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_transform_feedback4.txt">AMD_transform_feedback4</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_transform_feedback4.txt">AMD_transform_feedback4</a> extension.
  * 
  * <p>This extension enhances transform feedback in two significant ways. First, it allows multiple transform feedback streams to be captured, each with its
  * own, independent primitve type. Second, it allows any combination of streams to be rasterized.</p>

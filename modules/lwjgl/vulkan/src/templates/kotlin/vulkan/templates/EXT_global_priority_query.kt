@@ -37,7 +37,7 @@ val EXT_global_priority_query = "EXTGlobalPriorityQuery".nativeClassVK("EXT_glob
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Yiwei Zhang <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority_query]%20@zhangyiwei%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_global_priority_query%20extension*">zhangyiwei</a></li>
+                <li>Yiwei Zhang <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority_query]%20@zhangyiwei%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_global_priority_query%20extension*">zhangyiwei</a></li>
             </ul></dd>
         </dl>
 

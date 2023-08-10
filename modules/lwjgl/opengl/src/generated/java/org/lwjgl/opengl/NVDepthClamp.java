@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_depth_clamp.txt">NV_depth_clamp</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_depth_clamp.txt">NV_depth_clamp</a> extension.
  * 
  * <p>In some rendering applications such as shadow volumes, it is useful
  * to allow line and polygon primitives to be rasterized without

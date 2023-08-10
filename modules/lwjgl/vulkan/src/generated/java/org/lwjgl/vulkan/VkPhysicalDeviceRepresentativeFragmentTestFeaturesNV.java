@@ -85,7 +85,7 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the representative fragment test. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>. */
+    /** indicates whether the implementation supports the representative fragment test. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>. */
     @NativeType("VkBool32")
     public boolean representativeFragmentTest() { return nrepresentativeFragmentTest(address()) != 0; }
 

@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_swap_group.txt">WGL_NV_swap_group</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_swap_group.txt">WGL_NV_swap_group</a> extension.
  * 
  * <p>This extension provides the capability to synchronize the buffer swaps of a group of OpenGL windows. A swap group is created, and windows are added as
  * members to the swap group. Buffer swaps to members of the swap group will then take place concurrently.</p>

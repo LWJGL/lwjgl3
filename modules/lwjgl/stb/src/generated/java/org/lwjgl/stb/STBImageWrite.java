@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to stb_image_write.h from the <a target="_blank" href="https://github.com/nothings/stb">stb library</a>.
+ * Native bindings to stb_image_write.h from the <a href="https://github.com/nothings/stb">stb library</a>.
  * 
  * <h3>ABOUT</h3>
  * 

@@ -21,14 +21,14 @@ import org.lwjgl.system.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_buffer_storage.txt">ARB_buffer_storage</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_texture.txt">ARB_clear_texture</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_enhanced_layouts.txt">ARB_enhanced_layouts</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_bind.txt">ARB_multi_bind</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_query_buffer_object.txt">ARB_query_buffer_object</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirror_clamp_to_edge.txt">ARB_texture_mirror_clamp_to_edge</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_stencil8.txt">ARB_texture_stencil8</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_type_10f_11f_11f_rev.txt">ARB_vertex_type_10f_11f_11f_rev</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_buffer_storage.txt">ARB_buffer_storage</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_texture.txt">ARB_clear_texture</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_enhanced_layouts.txt">ARB_enhanced_layouts</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_bind.txt">ARB_multi_bind</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_query_buffer_object.txt">ARB_query_buffer_object</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirror_clamp_to_edge.txt">ARB_texture_mirror_clamp_to_edge</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_stencil8.txt">ARB_texture_stencil8</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_type_10f_11f_11f_rev.txt">ARB_vertex_type_10f_11f_11f_rev</a></li>
  * </ul>
  */
 public class GL44 extends GL43 {
@@ -163,7 +163,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("GLsizeiptr") long size, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, size, flags);
@@ -219,7 +219,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ByteBuffer data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -275,7 +275,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ShortBuffer data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -331,7 +331,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") IntBuffer data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -387,7 +387,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") FloatBuffer data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -443,7 +443,7 @@ public class GL44 extends GL43 {
      *               
      *               <p>It is an error to specify {@link GL44C#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44C#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") DoubleBuffer data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -484,7 +484,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -518,7 +518,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -552,7 +552,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -586,7 +586,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -620,7 +620,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -646,7 +646,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -665,7 +665,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -684,7 +684,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -703,7 +703,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -722,7 +722,7 @@ public class GL44 extends GL43 {
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -759,7 +759,7 @@ public class GL44 extends GL43 {
      * @param first   the first binding
      * @param buffers an array of zeros or names of existing buffers objects
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers) {
         GL44C.glBindBuffersBase(target, first, buffers);
@@ -804,7 +804,7 @@ public class GL44 extends GL43 {
      * @param offsets an array of offsets
      * @param sizes   an array of sizes
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
         GL44C.glBindBuffersRange(target, first, buffers, offsets, sizes);
@@ -860,7 +860,7 @@ public class GL44 extends GL43 {
      * @param first    the first texture objects
      * @param textures an array of zeros or names of existing texture objects
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
         GL44C.glBindTextures(first, textures);
@@ -900,7 +900,7 @@ public class GL44 extends GL43 {
      * @param first    the first sampler object
      * @param samplers an array of zeros or names of existing sampler objects
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer samplers) {
         GL44C.glBindSamplers(first, samplers);
@@ -951,7 +951,7 @@ public class GL44 extends GL43 {
      * @param first    the first image unit
      * @param textures an array of zeros or names of existing texture objects
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
         GL44C.glBindImageTextures(first, textures);
@@ -998,7 +998,7 @@ public class GL44 extends GL43 {
      * @param offsets an array of offses
      * @param strides an array of stride values
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") IntBuffer strides) {
         GL44C.glBindVertexBuffers(first, buffers, offsets, strides);
@@ -1007,7 +1007,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBufferStorage BufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -1016,7 +1016,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBufferStorage BufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -1025,7 +1025,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBufferStorage BufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -1034,7 +1034,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBufferStorage BufferStorage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
@@ -1043,7 +1043,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -1052,7 +1052,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -1061,7 +1061,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -1070,7 +1070,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
@@ -1079,7 +1079,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexImage ClearTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -1088,7 +1088,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexImage ClearTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -1097,7 +1097,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexImage ClearTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -1106,7 +1106,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glClearTexImage ClearTexImage}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
@@ -1115,7 +1115,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindBuffersBase BindBuffersBase}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers) {
         GL44C.glBindBuffersBase(target, first, buffers);
@@ -1124,7 +1124,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindBuffersRange BindBuffersRange}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
         GL44C.glBindBuffersRange(target, first, buffers, offsets, sizes);
@@ -1133,7 +1133,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindTextures BindTextures}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
         GL44C.glBindTextures(first, textures);
@@ -1142,7 +1142,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindSamplers BindSamplers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] samplers) {
         GL44C.glBindSamplers(first, samplers);
@@ -1151,7 +1151,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindImageTextures BindImageTextures}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
         GL44C.glBindImageTextures(first, textures);
@@ -1160,7 +1160,7 @@ public class GL44 extends GL43 {
     /**
      * Array version of: {@link #glBindVertexBuffers BindVertexBuffers}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
         GL44C.glBindVertexBuffers(first, buffers, offsets, strides);

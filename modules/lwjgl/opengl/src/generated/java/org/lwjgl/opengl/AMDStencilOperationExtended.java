@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_stencil_operation_extended.txt">AMD_stencil_operation_extended</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_stencil_operation_extended.txt">AMD_stencil_operation_extended</a> extension.
  * 
  * <p>Stencil buffers are special buffers that allow tests to be made against an incoming value and action taken based on that value. The stencil buffer is
  * updated during rasterization, and the operation used to update the stencil buffer is chosen based on whether the fragment passes the stencil test, and

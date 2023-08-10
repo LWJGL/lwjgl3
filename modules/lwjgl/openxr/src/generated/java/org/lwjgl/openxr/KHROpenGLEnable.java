@@ -19,7 +19,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>This extension provides mechanisms for the application to interact with images acquired by calling {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages}.</p>
  * 
- * <p>In order to expose the structures, types, and functions of this extension, the application <b>must</b> define {@link XR10#XR_USE_GRAPHICS_API_OPENGL USE_GRAPHICS_API_OPENGL}, as well as an appropriate <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:</p>
+ * <p>In order to expose the structures, types, and functions of this extension, the application <b>must</b> define {@link XR10#XR_USE_GRAPHICS_API_OPENGL USE_GRAPHICS_API_OPENGL}, as well as an appropriate <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:</p>
  * 
  * <ul>
  * <li>{@link XR10#XR_USE_PLATFORM_WIN32 USE_PLATFORM_WIN32}</li>

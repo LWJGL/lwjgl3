@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_socket.txt">NV_stream_socket</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_socket.txt">NV_stream_socket</a> extension.
  * 
  * <p>These extensions build on the framework for remote streams provided in {@link NVStreamRemote NV_stream_remote} to define a means for two {@code EGLStream} objects
  * representing opposite ends of a single stream to establish communication using a socket. The application is expected to create and connnect both ends

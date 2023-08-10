@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_spir.txt">khr_spir</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_spir.txt">khr_spir</a> extension.
  * 
  * <p>This extension adds support to create an OpenCL program object from a Standard Portable Intermediate Representation (SPIR) instance. SPIR is a vendor
  * neutral non-source representation for OpenCL C programs.</p>

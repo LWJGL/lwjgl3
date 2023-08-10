@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirrored_repeat.txt">ARB_texture_mirrored_repeat</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirrored_repeat.txt">ARB_texture_mirrored_repeat</a> extension.
  * 
  * <p>ARB_texture_mirrored_repeat extends the set of texture wrap modes to include a mode ({@link #GL_MIRRORED_REPEAT_ARB MIRRORED_REPEAT_ARB}) that effectively uses a texture map twice
  * as large at the original image in which the additional half, for each coordinate, of the new image is a mirror image of the original image.</p>

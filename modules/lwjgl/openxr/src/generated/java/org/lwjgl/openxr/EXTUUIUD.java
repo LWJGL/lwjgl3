@@ -8,7 +8,7 @@ package org.lwjgl.openxr;
 /**
  * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_uuid">XR_EXT_uuid</a> extension.
  * 
- * <p>This extension defines a Universally Unique Identifier that follows <a target="_blank" href="https://www.rfc-editor.org/rfc/rfc4122.html">RFC 4122</a>.</p>
+ * <p>This extension defines a Universally Unique Identifier that follows <a href="https://www.rfc-editor.org/rfc/rfc4122.html">RFC 4122</a>.</p>
  */
 public final class EXTUUIUD {
 

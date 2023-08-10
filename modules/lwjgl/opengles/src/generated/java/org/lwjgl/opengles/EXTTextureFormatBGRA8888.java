@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_format_BGRA8888.txt">EXT_texture_format_BGRA8888</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_format_BGRA8888.txt">EXT_texture_format_BGRA8888</a> extension.
  * 
  * <p>This extension provides an additional format and type combination for use when specifying texture data.  The current allowed combinations are:</p>
  * 

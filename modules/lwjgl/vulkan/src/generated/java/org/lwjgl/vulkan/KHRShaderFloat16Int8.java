@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * The {@code VK_KHR_shader_float16_int8} extension allows use of 16-bit floating-point types and 8-bit integer types in shaders for arithmetic operations.
  * 
- * <p>It introduces two new optional features {@code shaderFloat16} and {@code shaderInt8} which directly map to the {@code Float16} and the {@code Int8} SPIR-V capabilities. The {@code VK_KHR_shader_float16_int8} extension also specifies precision requirements for half-precision floating-point SPIR-V operations. This extension does not enable use of 8-bit integer types or 16-bit floating-point types in any <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-iointerfaces">shader input and output interfaces</a> and therefore does not supersede the {@link KHR8bitStorage VK_KHR_8bit_storage} or {@link KHR16bitStorage VK_KHR_16bit_storage} extensions.</p>
+ * <p>It introduces two new optional features {@code shaderFloat16} and {@code shaderInt8} which directly map to the {@code Float16} and the {@code Int8} SPIR-V capabilities. The {@code VK_KHR_shader_float16_int8} extension also specifies precision requirements for half-precision floating-point SPIR-V operations. This extension does not enable use of 8-bit integer types or 16-bit floating-point types in any <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-iointerfaces">shader input and output interfaces</a> and therefore does not supersede the {@link KHR8bitStorage VK_KHR_8bit_storage} or {@link KHR16bitStorage VK_KHR_16bit_storage} extensions.</p>
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
@@ -29,11 +29,11 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_float16_int8]%20@alegal-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_float16_int8%20extension*">alegal-arm</a></li>
+ * <li>Alexander Galazin <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_float16_int8]%20@alegal-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_float16_int8%20extension*">alegal-arm</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -48,7 +48,7 @@ package org.lwjgl.vulkan;
  * <li>This extension interacts with {@link KHR8bitStorage VK_KHR_8bit_storage}</li>
  * <li>This extension interacts with {@link KHR16bitStorage VK_KHR_16bit_storage}</li>
  * <li>This extension interacts with {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>
- * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_explicit_arithmetic_types.txt">{@code GL_EXT_shader_explicit_arithmetic_types}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_explicit_arithmetic_types.txt">{@code GL_EXT_shader_explicit_arithmetic_types}</a></li>
  * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>

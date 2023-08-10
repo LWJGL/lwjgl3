@@ -247,7 +247,7 @@ public class CLCapabilities {
     /** When true, {@link AMDBusAddressableMemory} is supported. */
     public final boolean cl_amd_bus_addressable_memory;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_compile_options.txt">amd_compile_options</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_compile_options.txt">amd_compile_options</a> extension is supported.
      * 
      * <p>This extension adds the following options, which are not part of the OpenCL specification:</p>
      * 
@@ -281,14 +281,14 @@ public class CLCapabilities {
     /** When true, {@link AMDDeviceTopology} is supported. */
     public final boolean cl_amd_device_topology;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_event_callback.txt">amd_event_callback</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_event_callback.txt">amd_event_callback</a> extension is supported.
      * 
      * <p>This extension provides the ability to register event callbacks for states other than {@link CL10#CL_COMPLETE COMPLETE}. The full set of event states are allowed:
      * {@link CL10#CL_QUEUED QUEUED}, {@link CL10#CL_SUBMITTED SUBMITTED}, and {@link CL10#CL_RUNNING RUNNING}.</p>
      */
     public final boolean cl_amd_event_callback;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_fp64.txt">amd_fp64</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_fp64.txt">amd_fp64</a> extension is supported.
      * 
      * <p>This extension provides a subset of the functionality of that provided by the cl_khr_fp64 extension. When enabled, the compiler recognizes the double
      * scalar and vector types, compiles expressions involving those types, and accepts calls to all builtin functions enabled by the cl_khr_fp64 extension.
@@ -297,7 +297,7 @@ public class CLCapabilities {
      */
     public final boolean cl_amd_fp64;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops.txt">amd_media_ops</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops.txt">amd_media_ops</a> extension is supported.
      * 
      * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
      * 
@@ -401,7 +401,7 @@ public class CLCapabilities {
      */
     public final boolean cl_amd_media_ops;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops2.txt">amd_media_ops2</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops2.txt">amd_media_ops2</a> extension is supported.
      * 
      * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
      * 
@@ -521,14 +521,14 @@ public class CLCapabilities {
     /** When true, {@link AMDOfflineDevices} is supported. */
     public final boolean cl_amd_offline_devices;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_popcnt.txt">amd_popcnt</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_popcnt.txt">amd_popcnt</a> extension is supported.
      * 
      * <p>This extension introduces a “population count” function called popcnt. This extension was taken into core OpenCL 1.2, and the function was renamed
      * popcount. The core 1.2 popcount function is identical to the AMD extension popcnt function.</p>
      */
     public final boolean cl_amd_popcnt;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_predefined_macros.txt">amd_predefined_macros</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_predefined_macros.txt">amd_predefined_macros</a> extension is supported.
      * 
      * <p>The following macros are predefined when compiling OpenCL™ C kernels. These macros are defined automatically based on the device for which the code is
      * being compiled.</p>
@@ -585,7 +585,7 @@ public class CLCapabilities {
      */
     public final boolean cl_amd_predefined_macros;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_printf.txt">amd_printf</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_printf.txt">amd_printf</a> extension is supported.
      * 
      * <p>This extension adds the built-in function {@code printf(__constant char * restrict format, …);}</p>
      * 
@@ -618,7 +618,7 @@ public class CLCapabilities {
      */
     public final boolean cl_amd_printf;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_vec3.txt">amd_vec3</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_vec3.txt">amd_vec3</a> extension is supported.
      * 
      * <p>This extension adds support for vectors with three elements: float3, short3, char3, etc. This data type was added to OpenCL 1.1 as a core feature.</p>
      */
@@ -645,18 +645,18 @@ public class CLCapabilities {
     public final boolean cl_arm_core_id;
     /** When true, {@link ARMImportMemory} is supported. */
     public final boolean cl_arm_import_memory;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int16</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int16</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_int16;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int8</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int8</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_int8;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_saturate_int8</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_saturate_int8</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_saturate_int8;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_int8</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_int8</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_int8;
     /** When true, {@link ARMJobSlotSelection} is supported. */
     public final boolean cl_arm_job_slot_selection;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_non_uniform_work_group_size.txt">arm_non_uniform_work_group_size</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_non_uniform_work_group_size.txt">arm_non_uniform_work_group_size</a> extension is supported.
      * 
      * <p>This extension provides a way to enqueue kernels with local work-group sizes that are not integer factors of the global work-group size in OpenCL C 1.x
      * languages.</p>
@@ -681,19 +681,19 @@ public class CLCapabilities {
     /** When true, {@link ARMSchedulingControls} is supported. */
     public final boolean cl_arm_scheduling_controls;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_thread_limit_hint.txt">arm_thread_limit_hint</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_thread_limit_hint.txt">arm_thread_limit_hint</a> extension is supported.
      * 
      * <p>This extension enables an application to provide a hint for the maximum number of threads allowed to run concurrently on a compute unit. This results
      * in a limit in the threads used by a kernel instance on devices that support it, lowering pressure on caches.</p>
      */
     public final boolean cl_arm_thread_limit_hint;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_android_hardware_buffer.txt">cl_arm_import_memory_android_hardware_buffer</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_android_hardware_buffer.txt">cl_arm_import_memory_android_hardware_buffer</a> extension is supported. */
     public final boolean cl_cl_arm_import_memory_android_hardware_buffer;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_dma_buf.txt">cl_arm_import_memory_dma_buf</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_dma_buf.txt">cl_arm_import_memory_dma_buf</a> extension is supported. */
     public final boolean cl_cl_arm_import_memory_dma_buf;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_host.txt">cl_arm_import_memory_host</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_host.txt">cl_arm_import_memory_host</a> extension is supported. */
     public final boolean cl_cl_arm_import_memory_host;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_protected.txt">cl_arm_import_memory_protected</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_protected.txt">cl_arm_import_memory_protected</a> extension is supported. */
     public final boolean cl_cl_arm_import_memory_protected;
     /** When true, {@link EXTAtomicCounters32} is supported. */
     public final boolean cl_ext_atomic_counters_32;
@@ -737,7 +737,7 @@ public class CLCapabilities {
     public final boolean cl_intel_exec_by_local_thread;
     /**
      * This extension augments the block read/write functionality available in the Intel vendor extensions {@link INTELSubgroups intel_subgroups} and
-     * <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups_short.txt">intel_media_block_io</a> by the specification of additional built-in functions to facilitate the reading and writing of flexible 2D
+     * <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups_short.txt">intel_media_block_io</a> by the specification of additional built-in functions to facilitate the reading and writing of flexible 2D
      * regions from images. This API allows for the explicit specification of the width and height of the image regions.
      * 
      * <p>While not required, this extension is most useful when the subgroup size is known at compile-time. The primary use case for this extension is to
@@ -776,7 +776,7 @@ public class CLCapabilities {
     /**
      * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
      * 
-     * <p>Requires {@link CL21 OpenCL 2.1} and <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_media_block_io.txt">intel_spirv_media_block_io</a>.</p>
+     * <p>Requires {@link CL21 OpenCL 2.1} and <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_media_block_io.txt">intel_spirv_media_block_io</a>.</p>
      */
     public final boolean cl_intel_spirv_media_block_io;
     /**
@@ -871,7 +871,7 @@ public class CLCapabilities {
     /** When true, {@link KHREGLImage} is supported. */
     public final boolean cl_khr_egl_image;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_expect_assume.txt">khr_expect_assume</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_expect_assume.txt">khr_expect_assume</a> extension is supported.
      * 
      * <p>This extension adds mechanisms to provide information to the compiler that may improve the performance of some kernels. Specifically, this extension
      * adds the ability to:</p>
@@ -889,7 +889,7 @@ public class CLCapabilities {
      */
     public final boolean cl_khr_expect_assume;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_async_copies.txt">khr_extended_async_copies</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_async_copies.txt">khr_extended_async_copies</a> extension is supported.
      * 
      * <p>This extension augments built-in asynchronous copy functions to OpenCL C to support more patterns:</p>
      * 
@@ -900,7 +900,7 @@ public class CLCapabilities {
      */
     public final boolean cl_khr_extended_async_copies;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_bit_ops.txt">khr_extended_bit_ops</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_bit_ops.txt">khr_extended_bit_ops</a> extension is supported.
      * 
      * <p>This extension adds OpenCL C functions for performing extended bit operations. Specifically, the following functions are added:</p>
      * 
@@ -915,11 +915,11 @@ public class CLCapabilities {
     public final boolean cl_khr_extended_versioning;
     /** When true, {@link KHRExternalMemory} is supported. */
     public final boolean cl_khr_external_memory;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_dma_buf.txt">khr_external_memory_dma_buf</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_dma_buf.txt">khr_external_memory_dma_buf</a> extension is supported. */
     public final boolean cl_khr_external_memory_dma_buf;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_opaque_fd.txt">khr_external_memory_opaque_fd</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_opaque_fd.txt">khr_external_memory_opaque_fd</a> extension is supported. */
     public final boolean cl_khr_external_memory_opaque_fd;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_win32.txt">khr_external_memory_win32</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_win32.txt">khr_external_memory_win32</a> extension is supported. */
     public final boolean cl_khr_external_memory_win32;
     /** When true, {@link KHRExternalSemaphore} is supported. */
     public final boolean cl_khr_external_semaphore;
@@ -1093,7 +1093,7 @@ public class CLCapabilities {
     /** When true, {@link KHRThrottleHints} is supported. */
     public final boolean cl_khr_throttle_hints;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_compiler_options.txt">nv_compiler_options</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_compiler_options.txt">nv_compiler_options</a> extension is supported.
      * 
      * <p>This extension allows the programmer to pass options to the PTX assembler allowing greater control over code generation.</p>
      * 
@@ -1126,14 +1126,14 @@ public class CLCapabilities {
      *     callback parameter to clBuildProgram).</code></pre>
      */
     public final boolean cl_nv_compiler_options;
-    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_copy_opts.txt">nv_copy_opts</a> extension is supported. */
+    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_copy_opts.txt">nv_copy_opts</a> extension is supported. */
     public final boolean cl_nv_copy_opts;
     /** When true, {@link NVCreateBuffer} is supported. */
     public final boolean cl_nv_create_buffer;
     /** When true, {@link NVDeviceAttributeQuery} is supported. */
     public final boolean cl_nv_device_attribute_query;
     /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_pragma_unroll.txt">nv_pragma_unroll</a> extension is supported.
+     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_pragma_unroll.txt">nv_pragma_unroll</a> extension is supported.
      * 
      * <h5>Overview</h5>
      * 

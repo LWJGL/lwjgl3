@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_source_resampler.txt">SOFT_source_resampler</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_source_resampler.txt">SOFT_source_resampler</a> extension.
  * 
  * <p>This extension provides a method for applications to use different resamplers for sources. OpenAL automatically resamples when playing a source at a
  * sample rate that don't match the device's sample rate, but the resampling method is left unspecified. One could assume it would use the "best" resample

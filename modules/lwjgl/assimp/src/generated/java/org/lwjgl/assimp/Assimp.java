@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Contains bindings to the <a target="_blank" href="https://www.assimp.org/">Assimp</a> library.
+ * Contains bindings to the <a href="https://www.assimp.org/">Assimp</a> library.
  * 
  * <h3>General Features</h3>
  * 
@@ -320,7 +320,7 @@ public class Assimp {
      * Enables time measurements.
      * 
      * <p>If enabled, measures the time needed for each part of the loading process (i.e. IO time, importing, postprocessing, ..) and dumps these timings to the
-     * DefaultLogger. See the <a target="_blank" href="https://assimp-docs.readthedocs.io/en/latest/usage/use_the_lib.html#performance">Performance Page</a> for more
+     * DefaultLogger. See the <a href="https://assimp-docs.readthedocs.io/en/latest/usage/use_the_lib.html#performance">Performance Page</a> for more
      * information on this topic.</p>
      * 
      * <p>Property type: bool. Default value: false.</p>
@@ -1475,13 +1475,13 @@ public class Assimp {
      * <li>{@link #aiTextureType_SHEEN TextureType_SHEEN} - 
      * Generally used to simulate textiles that are covered in a layer of microfibers eg velvet.
      * 
-     * <p><a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen">KHR_materials_sheen</a>)</p>
+     * <p><a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen">KHR_materials_sheen</a>)</p>
      * </li>
      * <li>{@link #aiTextureType_CLEARCOAT TextureType_CLEARCOAT} - 
      * Simulates a layer of 'polish' or 'lacquer' layered on top of a PBR substrate.
      * 
-     * <p><a target="_blank" href="https://autodesk.github.io/standard-surface/#closures/coating">coating</a>,
-     * <a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat">KHR_materials_clearcoat</a></p>
+     * <p><a href="https://autodesk.github.io/standard-surface/#closures/coating">coating</a>,
+     * <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat">KHR_materials_clearcoat</a></p>
      * </li>
      * <li>{@link #aiTextureType_TRANSMISSION TextureType_TRANSMISSION} - 
      * Simulates transmission through the surface.
@@ -1974,7 +1974,7 @@ public class Assimp {
      * Reorders triangles for better vertex cache locality.
      * 
      * <p>The step tries to improve the ACMR (average post-transform vertex cache miss ratio) for all meshes. The implementation runs in O(n) and is roughly
-     * based on the 'tipsify' algorithm (see <a target="_blank" href="http://gfx.cs.princeton.edu/pubs/Sander_2007_%3ETR/tipsy.pdf">this paper</a>).</p>
+     * based on the 'tipsify' algorithm (see <a href="http://gfx.cs.princeton.edu/pubs/Sander_2007_%3ETR/tipsy.pdf">this paper</a>).</p>
      * 
      * <p>If you intend to render huge models in hardware, this step might be of interest to you. The {@link #AI_CONFIG_PP_ICL_PTCACHE_SIZE} importer property
      * can be used to fine-tune the cache optimization.</p>

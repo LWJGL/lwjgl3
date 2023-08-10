@@ -13,7 +13,7 @@ val QCOM_multiview_per_view_viewports = "QCOMMultiviewPerViewViewports".nativeCl
         """
         Certain use-cases for multiview have a need for specifying a separate viewport and scissor for each view, without using shader-based viewport indexing as introduced with {@link EXTShaderViewportIndexLayer VK_EXT_shader_viewport_index_layer}.
 
-        This extension adds a new way to control ViewportIndex with multiview. When the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview-per-view-viewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview renderpass instance will use a viewport and scissor index equal to the {@code ViewIndex}.
+        This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview-per-view-viewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview renderpass instance will use a viewport and scissor index equal to the {@code ViewIndex}.
 
         <h5>VK_QCOM_multiview_per_view_viewports</h5>
         <dl>
@@ -34,7 +34,7 @@ val QCOM_multiview_per_view_viewports = "QCOMMultiviewPerViewViewports".nativeCl
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_viewports]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_viewports%20extension*">jackohound</a></li>
+                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_viewports]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_viewports%20extension*">jackohound</a></li>
             </ul></dd>
         </dl>
 

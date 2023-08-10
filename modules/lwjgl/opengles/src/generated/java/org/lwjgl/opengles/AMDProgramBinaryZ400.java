@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_program_binary_Z400.txt">AMD_program_binary_Z400</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_program_binary_Z400.txt">AMD_program_binary_Z400</a> extension.
  * 
  * <p>AMD provides an offline shader compiler as part of its suite of SDK tools for AMD's Z400 family of embedded graphics accelerator IP. This extension
  * makes available a program binary format, Z400_BINARY_AMD.</p>

@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_framebuffer_flip_y.txt">MESA_framebuffer_flip_y</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_framebuffer_flip_y.txt">MESA_framebuffer_flip_y</a> extension.
  * 
  * <p>This extension defines a new framebuffer parameter, {@link #GL_FRAMEBUFFER_FLIP_Y_MESA FRAMEBUFFER_FLIP_Y_MESA}, that changes the behavior of the reads and writes to the framebuffer
  * attachment points. When {@code GL_FRAMEBUFFER_FLIP_Y_MESA} is {@link GLES20#GL_TRUE TRUE}, render commands and pixel transfer operations access the backing store of each

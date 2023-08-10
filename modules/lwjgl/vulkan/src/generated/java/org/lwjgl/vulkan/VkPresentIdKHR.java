@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>For applications to be able to reference specific presentation events queued by a call to {@code vkQueuePresentKHR}, an identifier needs to be associated with them. When the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentId">{@code presentId}</a> feature is enabled, applications <b>can</b> include the {@link VkPresentIdKHR} structure in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure to supply identifiers.</p>
+ * <p>For applications to be able to reference specific presentation events queued by a call to {@code vkQueuePresentKHR}, an identifier needs to be associated with them. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentId">{@code presentId}</a> feature is enabled, applications <b>can</b> include the {@link VkPresentIdKHR} structure in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure to supply identifiers.</p>
  * 
  * <p>Each {@code VkSwapchainKHR} has a presentId associated with it. This value is initially set to zero when the {@code VkSwapchainKHR} is created.</p>
  * 

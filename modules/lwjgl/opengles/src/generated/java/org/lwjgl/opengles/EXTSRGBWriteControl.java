@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_sRGB_write_control.txt">EXT_sRGB_write_control</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_sRGB_write_control.txt">EXT_sRGB_write_control</a> extension.
  * 
  * <p>This extension's intent is to expose new functionality which allows an application the ability to decide if the conversion from linear space to sRGB is
  * necessary by enabling or disabling this conversion at framebuffer write or blending time. An application which passes non-linear vector data to a

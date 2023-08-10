@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_egl_event.txt">khr_egl_event</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_egl_event.txt">khr_egl_event</a> extension.
  * 
  * <p>This extension allows creating OpenCL event objects linked to EGL fence sync objects, potentially improving efficiency of sharing images and buffers
  * between the two APIs. The companion {@code EGL_KHR_cl_event} extension provides the complementary functionality of creating an EGL sync object from an

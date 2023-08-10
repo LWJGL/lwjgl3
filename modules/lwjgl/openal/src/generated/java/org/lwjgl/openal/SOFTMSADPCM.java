@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_MSADPCM.txt">SOFT_MSADPCM</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_MSADPCM.txt">SOFT_MSADPCM</a> extension.
  * 
  * <p>This extension adds support for MSADPCM compressed sample formats.</p>
  */

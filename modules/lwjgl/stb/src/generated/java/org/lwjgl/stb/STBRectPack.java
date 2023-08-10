@@ -8,7 +8,7 @@ package org.lwjgl.stb;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to stb_rect_pack.h from the <a target="_blank" href="https://github.com/nothings/stb">stb library</a>.
+ * Native bindings to stb_rect_pack.h from the <a href="https://github.com/nothings/stb">stb library</a>.
  * 
  * <p>Useful for e.g. packing rectangular textures into an atlas. Does not do rotation.</p>
  * 

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://github.com/btzy/nativefiledialog-extended">Native File Dialog Extended</a>, a small C library that portably invokes native
+ * Bindings to <a href="https://github.com/btzy/nativefiledialog-extended">Native File Dialog Extended</a>, a small C library that portably invokes native
  * file open, folder select and file save dialogs. Write dialog code once and have it pop up native dialogs on all supported platforms.
  * 
  * <h3>Usage</h3>

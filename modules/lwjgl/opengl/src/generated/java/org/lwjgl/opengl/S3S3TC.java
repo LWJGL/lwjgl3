@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/S3TC/S3_s3tc.txt">S3_s3tc</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/S3TC/S3_s3tc.txt">S3_s3tc</a> extension.
  * 
  * <p>This extension allows specifying texture data in compressed S3TC format.</p>
  */

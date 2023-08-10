@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_mutable_render_buffer.txt">KHR_mutable_render_buffer</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_mutable_render_buffer.txt">KHR_mutable_render_buffer</a> extension.
  * 
  * <p>The aim of this extension is to allow toggling of front-buffer rendering for window surfaces after their initial creation.</p>
  * 

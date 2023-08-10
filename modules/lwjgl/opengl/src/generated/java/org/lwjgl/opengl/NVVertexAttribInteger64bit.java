@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_attrib_integer_64bit.txt">NV_vertex_attrib_integer_64bit</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_attrib_integer_64bit.txt">NV_vertex_attrib_integer_64bit</a> extension.
  * 
  * <p>This extension provides support for specifying vertex attributes with 64-bit integer components, analagous to the 64-bit floating point support added
  * in EXT_vertex_attrib_64bit.</p>

@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://opus-codec.org/">Opus</a> library.
+ * Native bindings to the <a href="https://opus-codec.org/">Opus</a> library.
  * 
  * <p>The Opus codec is designed for interactive speech and audio transmission over the Internet. It is designed by the IETF Codec Working Group and
  * incorporates technology from Skype's SILK codec and Xiph.Org's CELT codec.</p>

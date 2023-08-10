@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_surfaceless_context.txt">OES_surfaceless_context</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_surfaceless_context.txt">OES_surfaceless_context</a> extension.
  * 
  * <p>Applications that only want to render to framebuffer objects should not need to create a throw-away EGL surface (typically a 1x1 pbuffer) just to get a
  * current context. The EGL extension KHR_surfaceless_context provides a mechanism for making a context current without a surface. This extensions

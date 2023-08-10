@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_direct_channels.txt">SOFT_direct_channels</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_direct_channels.txt">SOFT_direct_channels</a> extension.
  * 
  * <p>This extension allows a multi-channel source to play without virtualized output speakers. By default, OpenAL requires buffer channels to be down-mixed
  * to the output channel configuration, possibly using HRTF or other virtualization techniques to give a sense of speakers that may not be physically

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_framebuffer_swap_xy.txt">MESA_framebuffer_swap_xy</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_framebuffer_swap_xy.txt">MESA_framebuffer_swap_xy</a> extension.
  * 
  * <p>This extension defines a new framebuffer parameter, {@link #GL_FRAMEBUFFER_SWAP_XY_MESA FRAMEBUFFER_SWAP_XY_MESA}, that changes the behavior of the reads and writes to the framebuffer
  * attachment points. When {@code GL_FRAMEBUFFER_SWAP_XY_MESA} is {@link GL11#GL_TRUE TRUE}, render commands and pixel transfer operations access the backing store of each

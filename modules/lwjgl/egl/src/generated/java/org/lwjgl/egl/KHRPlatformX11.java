@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_x11.txt">KHR_platform_x11</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_x11.txt">KHR_platform_x11</a> extension.
  * 
  * <p>This extension defines how to create EGL resources from native X11 resources using the EGL 1.5 platform functionality.</p>
  * 

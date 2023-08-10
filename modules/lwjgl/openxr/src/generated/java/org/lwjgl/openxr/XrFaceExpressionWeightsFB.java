@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using {@link XrFaceExpressionWeightsFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code weights} <b>must</b> be a pointer to an array of {@code weightCount} {@code float} values</li>
  * <li>{@code confidences} <b>must</b> be a pointer to an array of {@code confidenceCount} {@code float} values</li>
  * <li>{@code status} <b>must</b> be a valid {@link XrFaceExpressionStatusFB} structure</li>

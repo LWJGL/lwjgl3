@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_depth_clamp_separate.txt">AMD_depth_clamp_separate</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_depth_clamp_separate.txt">AMD_depth_clamp_separate</a> extension.
  * 
  * <p>The extension {@link ARBDepthClamp ARB_depth_clamp} introduced the ability to control the clamping of the depth value for both the near and far plane. One limitation
  * is that the control was for both planes at the same time; some applications can benefit from having clamping enabled for only one of the two planes, in

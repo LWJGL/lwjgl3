@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_depth_float.txt">WGL_EXT_depth_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_depth_float.txt">WGL_EXT_depth_float</a> extension.
  * 
  * <p>For perspective scenes, the density of objects (vertices) increases as the distance from the eye increases. For a linear depth buffer, this means that
  * objects (vertices) are sparse for a large portion of the depth range and are dense for a small portion of the depth buffer.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_vertex_half_float.txt">OES_vertex_half_float</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_vertex_half_float.txt">OES_vertex_half_float</a> extension.
  * 
  * <p>This extension adds a 16-bit floating pt data type (aka half float) to vertex data specified using vertex arrays. The 16-bit floating-point components
  * have 1 sign bit, 5 exponent bits, and 10 mantissa bits.</p>

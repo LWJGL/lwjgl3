@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_planar_yuv.txt">intel_planar_yuv</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_planar_yuv.txt">intel_planar_yuv</a> extension.
  * 
  * <p>The purpose of this extension is to provide OpenCL support for the Planar YUV (YCbCr) image formats. {@link #CL_NV12_INTEL NV12_INTEL} format must be supported; support for
  * other Planar YUV formats that may be defined in this extension is optional.</p>

@@ -9,7 +9,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the experimental error code API of <a target="_blank" href="https://facebook.github.io/zstd/">Zstandard</a> (zstd). */
+/** Native bindings to the experimental error code API of <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class ZstdErrors {
 
     static { LibZstd.initialize(); }

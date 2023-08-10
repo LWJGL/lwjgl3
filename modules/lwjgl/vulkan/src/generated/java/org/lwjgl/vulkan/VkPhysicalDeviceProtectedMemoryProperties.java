@@ -85,7 +85,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies how an implementation behaves when an application attempts to write to unprotected memory in a protected queue operation, read from protected memory in an unprotected queue operation, or perform a query in a protected queue operation. If this limit is {@link VK10#VK_TRUE TRUE}, such writes will be discarded or have undefined values written, reads and queries will return undefined values. If this limit is {@link VK10#VK_FALSE FALSE}, applications <b>must</b> not perform these operations. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-protected-access-rules">Protected Memory Access Rules</a> for more information. */
+    /** specifies how an implementation behaves when an application attempts to write to unprotected memory in a protected queue operation, read from protected memory in an unprotected queue operation, or perform a query in a protected queue operation. If this limit is {@link VK10#VK_TRUE TRUE}, such writes will be discarded or have undefined values written, reads and queries will return undefined values. If this limit is {@link VK10#VK_FALSE FALSE}, applications <b>must</b> not perform these operations. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-protected-access-rules">Protected Memory Access Rules</a> for more information. */
     @NativeType("VkBool32")
     public boolean protectedNoFault() { return nprotectedNoFault(address()) != 0; }
 

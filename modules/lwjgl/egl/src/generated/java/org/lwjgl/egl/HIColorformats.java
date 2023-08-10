@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/HI/EGL_HI_colorformats.txt">HI_colorformats</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/HI/EGL_HI_colorformats.txt">HI_colorformats</a> extension.
  * 
  * <p>This extension provides a mechanism for creating ARGB color-buffers, as opposed to the default RGBA format used by other EGL configurations.</p>
  */

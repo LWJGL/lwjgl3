@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://prideout.net/shapes">par_shapes.h</a>, a simple C library for creation and manipulation of triangle meshes.
+ * Bindings to <a href="https://prideout.net/shapes">par_shapes.h</a>, a simple C library for creation and manipulation of triangle meshes.
  * 
  * <p>The par_shapes API is divided into three sections:</p>
  * 
@@ -366,7 +366,7 @@ public class ParShapes {
      * Creates trees or vegetation by executing a recursive turtle graphics program.
      * 
      * <p>The program is a list of command-argument pairs. See the
-     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
+     * <a href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
      * example. Texture coordinates and normals are not generated.</p>
      *
      * @param program  the list of command-argument pairs
@@ -389,7 +389,7 @@ public class ParShapes {
      * Creates trees or vegetation by executing a recursive turtle graphics program.
      * 
      * <p>The program is a list of command-argument pairs. See the
-     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
+     * <a href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
      * example. Texture coordinates and normals are not generated.</p>
      *
      * @param program  the list of command-argument pairs

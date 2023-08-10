@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_array_range2.txt">NV_vertex_array_range2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_array_range2.txt">NV_vertex_array_range2</a> extension.
  * 
  * <p>Enabling and disabling the vertex array range is specified by the original NV_vertex_array_range extension specification to flush the vertex array
  * range implicitly. In retrospect, this semantic is extremely misconceived and creates terrible performance problems for any application that wishes to

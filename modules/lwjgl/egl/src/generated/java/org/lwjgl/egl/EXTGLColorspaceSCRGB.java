@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_scrgb.txt">EXT_gl_colorspace_scrgb</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_scrgb.txt">EXT_gl_colorspace_scrgb</a> extension.
  * 
  * <p>This extension provides an extended sRGB (also called scRGB) color space option for applications to choose from when creating an {@code EGLSurface}.
  * This extension defines the non-linear display referred scRGB color space. It has the same white point and color primaries as sRGB, and thus is

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_filter_hint.txt">NV_multisample_filter_hint</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_filter_hint.txt">NV_multisample_filter_hint</a> extension.
  * 
  * <p>OpenGL multisampling typically assumes that the samples of a given pixel are weighted uniformly and averaged to compute the pixel's resolved color.
  * This extension provides a hint that permits implementations to provide an alternative method of resolving the color of multisampled pixels.</p>

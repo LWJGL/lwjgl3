@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_native_query.txt">NV_native_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_native_query.txt">NV_native_query</a> extension.
  * 
  * <p>This extension allows an application to query which native display, pixmap and surface corresponds to a EGL object.</p>
  */

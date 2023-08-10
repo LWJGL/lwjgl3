@@ -11,7 +11,7 @@ import vulkan.*
 val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_render_pass_transform", type = "device", postfix = "QCOM") {
     documentation =
         """
-        This extension provides a mechanism for applications to enable driver support for <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vertexpostproc-renderpass-transform">render pass transform</a>.
+        This extension provides a mechanism for applications to enable driver support for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vertexpostproc-renderpass-transform">render pass transform</a>.
 
         Mobile devices can be rotated and mobile applications need to render properly when a device is held in a landscape or portrait orientation. When the current orientation differs from the device’s native orientation, a rotation is required so that the “{@code up}” direction of the rendered scene matches the current orientation.
 
@@ -57,7 +57,7 @@ val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_r
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_transform]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_transform%20extension*">jackohound</a></li>
+                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_transform]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_transform%20extension*">jackohound</a></li>
             </ul></dd>
         </dl>
 

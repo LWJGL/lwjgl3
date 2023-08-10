@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_pack_subimage.txt">NV_pack_subimage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_pack_subimage.txt">NV_pack_subimage</a> extension.
  * 
  * <p>This OpenGL ES 2.0 extension adds support for {@link #GL_PACK_ROW_LENGTH_NV PACK_ROW_LENGTH_NV}, {@link #GL_PACK_SKIP_ROWS_NV PACK_SKIP_ROWS_NV} and {@link #GL_PACK_SKIP_PIXELS_NV PACK_SKIP_PIXELS_NV} as valid enums to {@link GLES20#glPixelStorei PixelStorei}.</p>
  * 

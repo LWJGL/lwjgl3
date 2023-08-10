@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>The metadata is stored as a series of (tag, value) pairs, in length-encoded string vectors, using the same format as Vorbis (without the final "framing
  * bit"), Theora, and Speex, except for the packet header. The first occurrence of the '=' character delimits the tag and value. A particular tag may
  * occur more than once, and order is significant. The character set encoding for the strings is always UTF-8, but the tag names are limited to ASCII, and
- * treated as case-insensitive. See <a target="_blank" href="https://www.xiph.org/vorbis/doc/v-comment.html">the Vorbis comment header specification</a> for details.</p>
+ * treated as case-insensitive. See <a href="https://www.xiph.org/vorbis/doc/v-comment.html">the Vorbis comment header specification</a> for details.</p>
  * 
  * <p>In filling in this structure, libopusfile will null-terminate the {@code #user_comments} strings for safety. However, the bitstream format itself
  * treats them as 8-bit clean vectors, possibly containing {@code NUL} characters, so the {@code #comment_lengths} array should be treated as their

@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_partition_by_names.txt">intel_device_partition_by_names</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_device_partition_by_names.txt">intel_device_partition_by_names</a> extension.
  * 
  * <p>This extension allows the user to create sub-devices containing specific compute units. {@link #CL_DEVICE_PARTITION_BY_NAMES_INTEL DEVICE_PARTITION_BY_NAMES_INTEL} is a
  * {@code cl_device_partition_property} that is followed by a list of compute unit names, teminated by {@link #CL_PARTITION_BY_NAMES_LIST_END_INTEL PARTITION_BY_NAMES_LIST_END_INTEL}.

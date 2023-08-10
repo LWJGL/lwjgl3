@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_blackhole_render.txt">INTEL_blackhole_render</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_blackhole_render.txt">INTEL_blackhole_render</a> extension.
  * 
  * <p>The purpose of this extension is to allow an application to disable all rendering operations emitted to the GPU through the OpenGL rendering commands
  * ({@code Draw*}, {@code DispatchCompute*}, {@code BlitFramebuffer}, etc...). Changes to the OpenGL pipeline are not affected.</p>

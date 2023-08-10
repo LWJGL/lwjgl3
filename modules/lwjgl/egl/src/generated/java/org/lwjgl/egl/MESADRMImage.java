@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/MESA/EGL_MESA_drm_image.txt">MESA_drm_image</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/MESA/EGL_MESA_drm_image.txt">MESA_drm_image</a> extension.
  * 
  * <p>This extension provides entry points for integrating EGLImage with the Linux DRM mode setting and memory management drivers. The extension lets
  * applications create EGLImages without a client API resource and lets the application get the DRM buffer handles.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_fifo_next.txt">NV_stream_fifo_next</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_fifo_next.txt">NV_stream_fifo_next</a> extension.
  * 
  * <p>When operating on a FIFO stream, a consumer may need to know the timestamp associated with the next frame in the stream before deciding whether to
  * acquire it or reuse the previous frame. In the case of a FIFO size of 1, the {@link KHRStreamFIFO#EGL_STREAM_TIME_PRODUCER_KHR STREAM_TIME_PRODUCER_KHR} attribute is sufficient to determine this.

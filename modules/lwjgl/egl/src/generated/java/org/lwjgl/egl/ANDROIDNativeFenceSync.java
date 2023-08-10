@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_native_fence_sync.txt">ANDROID_native_fence_sync</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_native_fence_sync.txt">ANDROID_native_fence_sync</a> extension.
  * 
  * <p>This extension enables the creation of EGL fence sync objects that are associated with a native synchronization fence object that is referenced using a
  * file descriptor. These EGL fence sync objects have nearly identical semantics to those defined by the KHR_fence_sync extension, except that they have

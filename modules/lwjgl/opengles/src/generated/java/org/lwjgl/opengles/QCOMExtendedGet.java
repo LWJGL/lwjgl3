@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_extended_get.txt">QCOM_extended_get</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_extended_get.txt">QCOM_extended_get</a> extension.
  * This extension enables instrumenting the driver for debugging of OpenGL ES applications.
  */
 public class QCOMExtendedGet {

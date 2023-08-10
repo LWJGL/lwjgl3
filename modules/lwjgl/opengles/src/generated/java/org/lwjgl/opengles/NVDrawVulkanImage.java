@@ -14,7 +14,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_vulkan_image.txt">NV_draw_vulkan_image</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_vulkan_image.txt">NV_draw_vulkan_image</a> extension.
  * 
  * <p>This extension provides a new function, {@link #glDrawVkImageNV DrawVkImageNV}, allowing applications to draw a screen-aligned rectangle displaying some or all of the
  * contents of a two-dimensional Vulkan VkImage. Callers specify a Vulkan {@code VkImage} handle, an optional OpenGL sampler object, window coordinates of

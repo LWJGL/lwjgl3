@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_float_atomics.txt">ext_float_atomics</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/ext/cl_ext_float_atomics.txt">ext_float_atomics</a> extension.
  * 
  * <p>This extension enables programmers to perform atomic operations on floating-point numbers in memory.</p>
  * 

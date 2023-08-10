@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_packed_yuv.txt">intel_packed_yuv</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_packed_yuv.txt">intel_packed_yuv</a> extension.
  * 
  * <p>The purpose of this extension is to provide OpenCL support for packed YUV images.</p>
  * 

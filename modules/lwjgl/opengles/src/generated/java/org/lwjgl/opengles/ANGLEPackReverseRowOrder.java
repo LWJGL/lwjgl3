@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_pack_reverse_row_order.txt">ANGLE_pack_reverse_row_order</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_pack_reverse_row_order.txt">ANGLE_pack_reverse_row_order</a> extension.
  * 
  * <p>This extension introduces a mechanism to allow reversing the order in which image rows are written into a pack destination. This effectively allows an
  * application to flip the results of a ReadPixels in the y direction operation without having to render upside down.</p>

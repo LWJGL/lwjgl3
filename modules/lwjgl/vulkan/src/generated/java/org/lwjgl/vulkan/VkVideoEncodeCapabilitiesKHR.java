@@ -125,7 +125,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
     public int maxQualityLevels() { return nmaxQualityLevels(address()); }
     /** reports alignment of data that should be filled in the input image horizontally and vertically in pixels before encode operations are performed on the input image. */
     public VkExtent2D inputImageDataFillAlignment() { return ninputImageDataFillAlignment(address()); }
-    /** a bitmask of {@code VkVideoEncodeFeedbackFlagBitsKHR} values specifying the supported flags for <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-video-encode-feedback">video encode feedback queries</a>. */
+    /** a bitmask of {@code VkVideoEncodeFeedbackFlagBitsKHR} values specifying the supported flags for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-video-encode-feedback">video encode feedback queries</a>. */
     @NativeType("VkVideoEncodeFeedbackFlagsKHR")
     public int supportedEncodeFeedbackFlags() { return nsupportedEncodeFeedbackFlags(address()); }
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_gltexture_yuv.txt">NV_stream_consumer_gltexture_yuv</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_gltexture_yuv.txt">NV_stream_consumer_gltexture_yuv</a> extension.
  * 
  * <p>The EGL_KHR_stream_consumer_gltexture extension allows EGLStream frames to be latched to a GL texture for use in rendering. These frames are assumed to
  * be stored in RGB format and accessed as such by shader programs. If the producer uses a different color space, the stream implementation must perform

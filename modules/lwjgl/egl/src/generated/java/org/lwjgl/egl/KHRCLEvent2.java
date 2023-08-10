@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_cl_event2.txt">KHR_cl_event2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_cl_event2.txt">KHR_cl_event2</a> extension.
  * 
  * <p>This extension allows creating an EGL sync object linked to an OpenCL event object, potentially improving efficiency of sharing images between the two
  * APIs. The companion cl_khr_egl_event extension provides the complementary functionality of creating an OpenCL event object from an EGL sync object.</p>

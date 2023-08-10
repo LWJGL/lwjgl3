@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/EGL_NV_coverage_sample.txt">NV_coverage_sample</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/EGL_NV_coverage_sample.txt">NV_coverage_sample</a> extension.
  * 
  * <p>Anti-aliasing is a critical component for delivering high-quality OpenGL rendering. Traditionally, OpenGL implementations have implemented two
  * anti-aliasing algorithms: edge anti-aliasing and multisampling.</p>

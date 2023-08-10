@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_internalformat_sample_query.txt">NV_internalformat_sample_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_internalformat_sample_query.txt">NV_internalformat_sample_query</a> extension.
  * 
  * <p>Some OpenGL implementations support modes of multisampling which have properties which are non-obvious to applications and/or which may not be
  * standards conformant. The idea of non-conformant AA modes is not new, and is exposed in both GLX and EGL with config caveats and the

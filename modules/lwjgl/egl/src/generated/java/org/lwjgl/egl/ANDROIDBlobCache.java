@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_blob_cache.txt">ANDROID_blob_cache</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_blob_cache.txt">ANDROID_blob_cache</a> extension.
  * 
  * <p>Shader compilation and optimization has been a troublesome aspect of OpenGL programming for a long time. It can consume seconds of CPU cycles during
  * application start-up. Additionally, state-based re-compiles done internally by the drivers add an unpredictable element to application performance

@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension provides functionality to disable <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-cubemapedge">cube map edge handling</a> on a per sampler level which matches the behavior of other graphics APIs.
+ * This extension provides functionality to disable <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-cubemapedge">cube map edge handling</a> on a per sampler level which matches the behavior of other graphics APIs.
  * 
  * <p>This extension may be useful for building translation layers for those APIs or for porting applications that rely on this cube map behavior.</p>
  * 
@@ -25,15 +25,15 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Special Uses</b></dt>
  * <dd><ul>
- * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">D3D support</a></li>
- * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">D3D support</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Georg Lehmann <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_non_seamless_cube_map]%20@DadSchoorse%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_non_seamless_cube_map%20extension*">DadSchoorse</a></li>
+ * <li>Georg Lehmann <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_non_seamless_cube_map]%20@DadSchoorse%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_non_seamless_cube_map%20extension*">DadSchoorse</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
- * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_non_seamless_cube_map.adoc">VK_EXT_non_seamless_cube_map</a></dd>
+ * <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_non_seamless_cube_map.adoc">VK_EXT_non_seamless_cube_map</a></dd>
  * </dl>
  * 
  * <h5>Other Extension Metadata</h5>

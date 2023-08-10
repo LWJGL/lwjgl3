@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the dictionary builder API of <a target="_blank" href="https://facebook.github.io/zstd/">Zstandard</a> (zstd).
+ * Native bindings to the dictionary builder API of <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd).
  * 
  * <h4>Why should I use a dictionary?</h4>
  * 

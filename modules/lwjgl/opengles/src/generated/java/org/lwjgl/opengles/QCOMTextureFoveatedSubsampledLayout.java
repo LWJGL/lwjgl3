@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_texture_foveated_subsampled_layout.txt">QCOM_texture_foveated_subsampled_layout</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_texture_foveated_subsampled_layout.txt">QCOM_texture_foveated_subsampled_layout</a> extension.
  * 
  * <p>This extension builds on {@link QCOMTextureFoveated QCOM_texture_foveated} by introducing a new foveation method bit that aims to reduce memory bandwidth by avoiding the
  * upscaling that occurred as part of the original extension.</p>

@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_depth_nonlinear.txt">NV_depth_nonlinear</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_depth_nonlinear.txt">NV_depth_nonlinear</a> extension.
  * 
  * <p>Due to the perspective divide, conventional integer Z-buffers have a hyperbolic distribution of encodings between the near plane and the far plane.
  * This can result in inaccurate depth testing, particularly when the number of depth buffer bits is small and objects are rendered near the far plane.</p>

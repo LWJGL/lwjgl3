@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/SGIX/GLX_SGIX_swap_barrier.txt">GLX_SGIX_swap_barrier</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/SGIX/GLX_SGIX_swap_barrier.txt">GLX_SGIX_swap_barrier</a> extension.
  * 
  * <p>This extension provides the capability to sychronize the buffer swaps of different swap groups.</p>
  * 

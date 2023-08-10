@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_framebuffer_target.txt">ANDROID_framebuffer_target</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANDROID/EGL_ANDROID_framebuffer_target.txt">ANDROID_framebuffer_target</a> extension.
  * 
  * <p>Android supports a number of different ANativeWindow implementations that can be used to create an EGLSurface. One implementation, which is used to
  * send the result of performing window composition to a display, may have some device-specific restrictions. Because of this, some EGLConfigs may be

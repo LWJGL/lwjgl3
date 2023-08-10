@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_create_context.txt">GLX_ARB_create_context_profile</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_create_context.txt">GLX_ARB_create_context_profile</a> extension.
  * 
  * <p>Adds an attribute to {@link GLXARBCreateContext}, specifying the GL profile requested for a context of OpenGL 3.2 or later.</p>
  * 

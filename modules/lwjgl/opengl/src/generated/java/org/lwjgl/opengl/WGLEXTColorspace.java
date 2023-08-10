@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_colorspace.txt">WGL_EXT_colorspace</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_colorspace.txt">WGL_EXT_colorspace</a> extension.
  * 
  * <p>Applications may wish to use sRGB format default framebuffers to more easily achieve sRGB rendering to display devices. This extension allows creating
  * pixel formats which will be rendered to in sRGB by OpenGL/ES contexts supporting that capability.</p>

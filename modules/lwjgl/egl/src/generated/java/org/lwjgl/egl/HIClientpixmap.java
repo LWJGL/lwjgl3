@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/HI/EGL_HI_clientpixmap.txt">HI_clientpixmap</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/HI/EGL_HI_clientpixmap.txt">HI_clientpixmap</a> extension.
  * 
  * <p>This extension provides a mechanism for using memory allocated by the application as a color-buffer.</p>
  */

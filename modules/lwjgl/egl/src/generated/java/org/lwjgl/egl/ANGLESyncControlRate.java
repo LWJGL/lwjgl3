@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_sync_control_rate.txt">ANGLE_sync_control_rate</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/ANGLE/EGL_ANGLE_sync_control_rate.txt">ANGLE_sync_control_rate</a> extension.
  * 
  * <p>This extension provides counters which let applications know about the timing of the last vertical retrace. By looking at the system clock, as well as
  * the refresh rate of the monitor, this should enable applications to predict the position of future retraces so as to schedule an optimal workload.</p>

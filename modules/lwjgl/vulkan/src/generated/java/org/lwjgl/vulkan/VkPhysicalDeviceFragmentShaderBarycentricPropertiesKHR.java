@@ -85,7 +85,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR extends Stru
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation does not change its vertex numbering for triangle strip primitives when the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-flatshading">provoking vertex mode</a> is {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT}, as shown in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-barycentric-order-table-last-vertex">last vertex table</a>. */
+    /** indicates that the implementation does not change its vertex numbering for triangle strip primitives when the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-flatshading">provoking vertex mode</a> is {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT}, as shown in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-barycentric-order-table-last-vertex">last vertex table</a>. */
     @NativeType("VkBool32")
     public boolean triStripVertexOrderIndependentOfProvokingVertex() { return ntriStripVertexOrderIndependentOfProvokingVertex(address()) != 0; }
 

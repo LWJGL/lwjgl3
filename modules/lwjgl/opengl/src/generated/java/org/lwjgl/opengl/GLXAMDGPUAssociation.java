@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/GLX_AMD_gpu_association.txt">GLX_AMD_gpu_association</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/GLX_AMD_gpu_association.txt">GLX_AMD_gpu_association</a> extension.
  * 
  * <p>There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
  * that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most

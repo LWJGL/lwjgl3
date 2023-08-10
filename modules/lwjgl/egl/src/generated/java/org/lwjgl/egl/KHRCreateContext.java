@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_create_context.txt">KHR_create_context</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_create_context.txt">KHR_create_context</a> extension.
  * 
  * <p>With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
  * to indicate at context creation which interface will be used. This extension adds a new context creation routine with attributes specifying the OpenGL

@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_bindless_texture.txt">ARB_bindless_texture</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_bindless_texture.txt">ARB_bindless_texture</a> extension.
  * 
  * <p>This extension allows OpenGL applications to access texture objects in shaders without first binding each texture to one of a limited number of texture
  * image units. Using this extension, an application can query a 64-bit unsigned integer texture handle for each texture that it wants to access and then

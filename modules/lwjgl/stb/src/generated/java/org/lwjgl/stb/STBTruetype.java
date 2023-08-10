@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to stb_truetype.h from the <a target="_blank" href="https://github.com/nothings/stb">stb library</a>.
+ * Native bindings to stb_truetype.h from the <a href="https://github.com/nothings/stb">stb library</a>.
  * 
  * <p>This library processes TrueType files:</p>
  * 
@@ -575,7 +575,7 @@ public class STBTruetype {
      * default (no oversampling) is achieved by {@code h_oversample=1, v_oversample=1}. The total number of pixels required is
      * {@code h_oversample*v_oversample} larger than the default; for example, 2x2 oversampling requires 4x the storage of 1x1. For best results, render
      * oversampled textures with bilinear filtering. Look at the readme in
-     * <a target="_blank" href="https://github.com/nothings/stb/blob/master/tests/oversample/README.md">stb/tests/oversample</a> for information about oversampled fonts.</p>
+     * <a href="https://github.com/nothings/stb/blob/master/tests/oversample/README.md">stb/tests/oversample</a> for information about oversampled fonts.</p>
      * 
      * <p>To use with PackFontRangesGather etc., you must set it before calls to {@link #stbtt_PackFontRangesGatherRects PackFontRangesGatherRects}.</p>
      *
@@ -1879,8 +1879,8 @@ public class STBTruetype {
      * <p>See the truetype spec:</p>
      * 
      * <ul>
-     * <li><a target="_blank" href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html">TrueType Reference Manual - The 'name' table</a></li>
-     * <li><a target="_blank" href="https://learn.microsoft.com/en-us/typography/opentype/spec/name">OpenType™ Specification - The Naming Table</a></li>
+     * <li><a href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html">TrueType Reference Manual - The 'name' table</a></li>
+     * <li><a href="https://learn.microsoft.com/en-us/typography/opentype/spec/name">OpenType™ Specification - The Naming Table</a></li>
      * </ul>
      *
      * @param font       an {@link STBTTFontinfo} struct

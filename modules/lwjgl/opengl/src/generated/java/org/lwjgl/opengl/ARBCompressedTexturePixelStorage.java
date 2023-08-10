@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compressed_texture_pixel_storage.txt">ARB_compressed_texture_pixel_storage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compressed_texture_pixel_storage.txt">ARB_compressed_texture_pixel_storage</a> extension.
  * 
  * <p>This extension expands the functionality of the {@link GL11C#glPixelStorei PixelStorei} modes to allow {@link GL11#GL_UNPACK_ROW_LENGTH UNPACK_ROW_LENGTH}, {@link GL11#GL_UNPACK_SKIP_ROWS UNPACK_SKIP_ROWS},
  * {@link GL11#GL_UNPACK_SKIP_PIXELS UNPACK_SKIP_PIXELS}, {@link GL12#GL_UNPACK_IMAGE_HEIGHT UNPACK_IMAGE_HEIGHT} and {@link GL12#GL_UNPACK_SKIP_IMAGES UNPACK_SKIP_IMAGES} to affect the operation of CompressedTexImage*D and

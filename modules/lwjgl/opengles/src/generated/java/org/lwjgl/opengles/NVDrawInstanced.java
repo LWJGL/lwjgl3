@@ -12,7 +12,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_instanced.txt">NV_draw_instanced</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_instanced.txt">NV_draw_instanced</a> extension.
  * 
  * <p>A common use case in GL for some applications is to be able to draw the same object, or groups of similar objects that share vertex data, primitive
  * count and type, multiple times. This extension provides a means of accelerating such use cases while limiting the number of required API calls, and

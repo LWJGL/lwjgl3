@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_buffer_storage.txt">EXT_buffer_storage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_buffer_storage.txt">EXT_buffer_storage</a> extension.
  * 
  * <p>OpenGL ES has long supported buffer objects as a means of storing data that may be used to source vertex attributes, pixel data for textures, uniforms
  * and other elements. In un-extended ES, buffer data stores are mutable - that is, they may be de-allocated or resized while they are in use. The

@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_protected_memory_allocation.txt">arm_protected_memory_allocation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_protected_memory_allocation.txt">arm_protected_memory_allocation</a> extension.
  * 
  * <p>This extensions enables the creation of buffers and images backed by protected memory, i.e. memory protected using TrustZone Media Protection.</p>
  * 

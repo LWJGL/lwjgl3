@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_half_float_vertex.txt">ARB_half_float_vertex</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_half_float_vertex.txt">ARB_half_float_vertex</a> extension.
  * 
  * <p>This extension extends the usage of the half-precision (16-bit) floating-point quantities introduced in {@link ARBHalfFloatPixel ARB_half_float_pixel} for usage in
  * specifying vertex array data.</p>

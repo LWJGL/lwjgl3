@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_transform_feedback2.txt">NV_transform_feedback2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_transform_feedback2.txt">NV_transform_feedback2</a> extension.
  * 
  * <p>The NV_transform_feedback and EXT_transform_feedback extensions allow applications to capture primitives to one or more buffer objects when transformed
  * by the GL. This extension provides a few additional capabilities to these extensions, making transform feedback mode more useful.</p>

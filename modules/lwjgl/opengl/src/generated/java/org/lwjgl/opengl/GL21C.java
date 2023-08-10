@@ -21,8 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_pixel_buffer_object.txt">ARB_pixel_buffer_object</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB.txt">EXT_texture_sRGB</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_pixel_buffer_object.txt">ARB_pixel_buffer_object</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB.txt">EXT_texture_sRGB</a></li>
  * </ul>
  */
 public class GL21C extends GL20C {
@@ -80,7 +80,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix2x3fv(location, value.remaining() / 6, transpose, memAddress(value));
@@ -102,7 +102,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix3x2fv(location, value.remaining() / 6, transpose, memAddress(value));
@@ -124,7 +124,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix2x4fv(location, value.remaining() >> 3, transpose, memAddress(value));
@@ -146,7 +146,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix4x2fv(location, value.remaining() >> 3, transpose, memAddress(value));
@@ -168,7 +168,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix3x4fv(location, value.remaining() / 12, transpose, memAddress(value));
@@ -190,7 +190,7 @@ public class GL21C extends GL20C {
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix4x3fv(location, value.remaining() / 12, transpose, memAddress(value));
@@ -199,7 +199,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix2x3fv UniformMatrix2x3fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix2x3fv;
@@ -212,7 +212,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix3x2fv UniformMatrix3x2fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix3x2fv;
@@ -225,7 +225,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix2x4fv UniformMatrix2x4fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix2x4fv;
@@ -238,7 +238,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix4x2fv UniformMatrix4x2fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix4x2fv;
@@ -251,7 +251,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix3x4fv UniformMatrix3x4fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix3x4fv;
@@ -264,7 +264,7 @@ public class GL21C extends GL20C {
     /**
      * Array version of: {@link #glUniformMatrix4x3fv UniformMatrix4x3fv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glUniform">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix4x3fv;

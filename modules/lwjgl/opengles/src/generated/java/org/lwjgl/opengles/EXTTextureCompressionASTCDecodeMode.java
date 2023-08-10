@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_astc_decode_mode.txt">EXT_texture_compression_astc_decode_mode</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_compression_astc_decode_mode.txt">EXT_texture_compression_astc_decode_mode</a> extension.
  * 
  * <p>Adaptive Scalable Texture Compression (ASTC) is a texture compression technology that is exposed by existing extensions and specifications.</p>
  * 

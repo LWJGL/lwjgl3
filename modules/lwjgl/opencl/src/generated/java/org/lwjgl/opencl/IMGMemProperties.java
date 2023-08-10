@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_mem_properties.txt">img_mem_properties</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_mem_properties.txt">img_mem_properties</a> extension.
  * 
  * <p>This extension provides additional properties that can be passed to {@link CL30#clCreateBufferWithProperties CreateBufferWithProperties}.</p>
  * 

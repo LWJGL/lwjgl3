@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_block_alignment.txt">SOFT_block_alignment</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_block_alignment.txt">SOFT_block_alignment</a> extension.
  * 
  * <p>This extension provides a mechanism for specifying block alignment properties for sample data. This is useful for, though not strictly limited to,
  * ADPCM compression where the block alignment is specified in the media file header instead of the data stream, and controls the decoding process.</p>

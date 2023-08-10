@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_coverage.txt">NV_multisample_coverage</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_multisample_coverage.txt">NV_multisample_coverage</a> extension.
  * 
  * <p>The ARB_multisample extension provides a mechanism for antialiasing primitives. This mechanism allows an application to request an additional buffer,
  * the multisample buffer, that is added to the framebuffer. An application can request the number of samples per fragment that are stored in the

@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_half_float_fetch.txt">AMD_gpu_shader_half_float_fetch</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_half_float_fetch.txt">AMD_gpu_shader_half_float_fetch</a> extension.
  * 
  * <p>This extension was developed based on the {@code AMD_gpu_shader_half_float} extension to allow implementations supporting half-precision floating-point
  * both in shader texture functions and in shader image memory functions.</p>

@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://github.com/Cyan4973/xxHash">xxhash</a>.
+ * Native bindings to <a href="https://github.com/Cyan4973/xxHash">xxhash</a>.
  * 
  * <p>xxHash is an extremely fast Hash algorithm, running at RAM speed limits. It also successfully passes all tests from the SMHasher suite.</p>
  * 
@@ -92,7 +92,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Speed analysis methodology is explained here:</p>
  * 
- * <p><a target="_blank" href="https://fastcompression.blogspot.com/2019/03/presenting-xxh3.html">https://fastcompression.blogspot.com/2019/03/presenting-xxh3.html</a></p>
+ * <p><a href="https://fastcompression.blogspot.com/2019/03/presenting-xxh3.html">https://fastcompression.blogspot.com/2019/03/presenting-xxh3.html</a></p>
  * 
  * <p>Compared to XXH64, expect XXH3 to run approximately ~2x faster on large inputs and &gt;3x faster on small ones, exact differences vary depending on
  * platform.</p>

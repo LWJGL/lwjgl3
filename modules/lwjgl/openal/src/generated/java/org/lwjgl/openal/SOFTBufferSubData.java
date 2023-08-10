@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_buffer_sub_data.txt">SOFT_buffer_sub_data</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_buffer_sub_data.txt">SOFT_buffer_sub_data</a> extension.
  * 
  * <p>This extension allows an application to modify a section of buffered sample data while the buffer is in use.</p>
  */

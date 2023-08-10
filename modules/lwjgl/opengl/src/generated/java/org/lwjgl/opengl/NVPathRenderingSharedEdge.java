@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_path_rendering_shared_edge.txt">NV_path_rendering_shared_edge</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_path_rendering_shared_edge.txt">NV_path_rendering_shared_edge</a> extension.
  * 
  * <p>This extension introduces a new path command modifier to the NV_path_rendering extension to indicate that a path command represents an edge (either
  * straight or curved) that is shared with another path.</p>

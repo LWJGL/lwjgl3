@@ -6,7 +6,7 @@
 package org.lwjgl.egl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage_use_scanout_attrib.txt">NV_stream_consumer_eglimage_use_scanout_attrib</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage_use_scanout_attrib.txt">NV_stream_consumer_eglimage_use_scanout_attrib</a> extension.
  * 
  * <p>This extension allows clients to specify to EGL implementations if the images frames in the {@code EGLStream} acquired as {@code EGLImages} are to be
  * scanned out directly by display hardware.</p>

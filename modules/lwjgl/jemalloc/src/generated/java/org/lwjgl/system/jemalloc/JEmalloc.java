@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://jemalloc.net/">jemalloc</a>.
+ * Native bindings to <a href="https://jemalloc.net/">jemalloc</a>.
  * 
  * <p>jemalloc is a general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support. jemalloc first came into
  * use as the FreeBSD libc allocator in 2005, and since then it has found its way into numerous applications that rely on its predictable behavior. In
@@ -594,7 +594,7 @@ public class JEmalloc {
     /**
      * Provides a general interface for introspecting the memory allocator, as well as setting modifiable parameters and triggering actions. The
      * period-separated {@code name} argument specifies a location in a tree-structured namespace; see the
-     * <a target="_blank" href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> section for
+     * <a href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> section for
      * documentation on the tree contents. To read a value, pass a pointer via {@code oldp} to adequate space to contain the value, and a pointer to its
      * length via {@code oldlenp}; otherwise pass {@code NULL} and {@code NULL}. Similarly, to write a value, pass a pointer to the value via {@code newp}, and its length
      * via {@code newlen}; otherwise pass {@code NULL} and {@code 0}.
@@ -615,7 +615,7 @@ public class JEmalloc {
     /**
      * Provides a general interface for introspecting the memory allocator, as well as setting modifiable parameters and triggering actions. The
      * period-separated {@code name} argument specifies a location in a tree-structured namespace; see the
-     * <a target="_blank" href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> section for
+     * <a href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> section for
      * documentation on the tree contents. To read a value, pass a pointer via {@code oldp} to adequate space to contain the value, and a pointer to its
      * length via {@code oldlenp}; otherwise pass {@code NULL} and {@code NULL}. Similarly, to write a value, pass a pointer to the value via {@code newp}, and its length
      * via {@code newlen}; otherwise pass {@code NULL} and {@code 0}.

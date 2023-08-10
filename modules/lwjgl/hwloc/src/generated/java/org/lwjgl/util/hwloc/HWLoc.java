@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.regex.*;
 
 /**
- * Native bindings to <a target="_blank" href="https://www.open-mpi.org/projects/hwloc/">hwloc</a>, a portable abstraction (across OS, versions, architectures, ...) of the
+ * Native bindings to <a href="https://www.open-mpi.org/projects/hwloc/">hwloc</a>, a portable abstraction (across OS, versions, architectures, ...) of the
  * hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading.
  * 
  * <p>It also gathers various system attributes such as cache and memory information as well as the locality of I/O devices such as network interfaces,

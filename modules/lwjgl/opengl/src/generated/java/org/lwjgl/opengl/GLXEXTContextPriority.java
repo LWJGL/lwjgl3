@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_context_priority.txt">GLX_EXT_context_priority</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_context_priority.txt">GLX_EXT_context_priority</a> extension.
  * 
  * <p>This extension allows a {@code GLXContext} to be created with a priority hint. It is possible that an implementation will not honour the hint,
  * especially if there are constraints on the number of high priority contexts available in the system, or system policy limits access to high priority

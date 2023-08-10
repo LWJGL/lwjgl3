@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_platform_base.txt">EXT_platform_base</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_platform_base.txt">EXT_platform_base</a> extension.
  * 
  * <p>This extension defines functionality and behavior for EGL implementations that support multiple platforms at runtime. For example, on Linux an EGL
  * implementation could support X11, Wayland, GBM (Generic Buffer Manager), Surface Flinger, and perhaps other platforms.</p>
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>This extension does not specify behavior specific to any platform, nor does it specify the set of platforms that an EGL implementation may support.
  * Platform-specific details lie outside this extension's scope and are instead described by extensions layered atop this one.</p>
  * 
- * <p>Requires {@link EGL14 EGL 1.4} and <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_extensions.txt">EXT_platform_base</a> to query its existence without a display.</p>
+ * <p>Requires {@link EGL14 EGL 1.4} and <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_extensions.txt">EXT_platform_base</a> to query its existence without a display.</p>
  */
 public class EXTPlatformBase {
 

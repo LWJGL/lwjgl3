@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_source_latency.txt">SOFT_source_latency</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_source_latency.txt">SOFT_source_latency</a> extension.
  * 
  * <p>This extension provides a method for applications to more accurately measure the playback latency of sources. Unextended OpenAL allows apps to retrieve
  * a source's playback offset in bytes, samples, or seconds, but this is (typically) where the AL is processing the audio data.</p>

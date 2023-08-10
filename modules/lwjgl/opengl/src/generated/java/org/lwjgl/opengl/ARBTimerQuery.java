@@ -10,7 +10,7 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_timer_query.txt">ARB_timer_query</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_timer_query.txt">ARB_timer_query</a> extension.
  * 
  * <p>Applications can benefit from accurate timing information in a number of different ways. During application development, timing information can help
  * identify application or driver bottlenecks. At run time, applications can use timing information to dynamically adjust the amount of detail in a scene

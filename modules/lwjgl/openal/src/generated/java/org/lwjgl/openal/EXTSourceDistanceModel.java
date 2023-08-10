@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/EXT_source_distance_model.txt">EXT_source_distance_model</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/EXT_source_distance_model.txt">EXT_source_distance_model</a> extension.
  * 
  * <p>This extension allows each source to specify a distance model, instead of being restricted to one distance model for every source in the context. It
  * provides a mechanism for applications to apply different models to each source, without the burden of manually applying the attenuation through the

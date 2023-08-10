@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_flush.txt">NV_stream_flush</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_flush.txt">NV_stream_flush</a> extension.
  * 
  * <p>The {@code EGL_KHR_stream_cross_process_fd} and {@code EGL_NV_stream_remote} extensions do not guarantee that when the state of the {@code EGLStream}
  * object representing one endpoint of the stream changes, the state of the other endpoint will immediately reflect that change. Depending on the

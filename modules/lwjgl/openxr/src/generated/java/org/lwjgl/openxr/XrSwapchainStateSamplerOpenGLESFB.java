@@ -39,7 +39,7 @@ import org.lwjgl.egl.*;
  * <ul>
  * <li>The {@link FBSwapchainUpdateStateOpenGLES XR_FB_swapchain_update_state_opengl_es} extension <b>must</b> be enabled prior to using {@link XrSwapchainStateSamplerOpenGLESFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSwapchainUpdateStateOpenGLES#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code minFilter} <b>must</b> be a valid {@code EGLenum} value</li>
  * <li>{@code magFilter} <b>must</b> be a valid {@code EGLenum} value</li>
  * <li>{@code wrapModeS} <b>must</b> be a valid {@code EGLenum} value</li>

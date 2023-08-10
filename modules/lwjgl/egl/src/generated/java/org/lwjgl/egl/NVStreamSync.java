@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_sync.txt">NV_stream_sync</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_sync.txt">NV_stream_sync</a> extension.
  * 
  * <p>This extension defines a new type of reusable sync object. This sync object will be signaled each time a new image frame becomes available in an
  * EGLStream for the consumer to consume.</p>

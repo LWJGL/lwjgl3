@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_vertex_array_object.txt">OES_vertex_array_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_vertex_array_object.txt">OES_vertex_array_object</a> extension.
  * 
  * <p>This extension introduces vertex array objects which encapsulate vertex array states on the server side (vertex buffer objects). These objects aim to
  * keep pointers to vertex data and to provide names for different sets of vertex data. Therefore applications are allowed to rapidly switch between

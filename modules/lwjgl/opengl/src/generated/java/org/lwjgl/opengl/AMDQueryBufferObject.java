@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_query_buffer_object.txt">AMD_query_buffer_object</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_query_buffer_object.txt">AMD_query_buffer_object</a> extension.
  * 
  * <p>Statistics about the operation of the OpenGL pipeline, such as the number of samples that passed the depth test, the elapsed time between two events or
  * the number of vertices written to a transform feedback buffer may be retrieved from the GL through query objects. The current value of a query object

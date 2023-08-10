@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_shader_subgroup.txt">KHR_shader_subgroup</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_shader_subgroup.txt">KHR_shader_subgroup</a> extension.
  * 
  * <p>This extension enables support for the {@code KHR_shader_subgroup} shading language extension in OpenGL.</p>
  * 

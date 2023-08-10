@@ -8,7 +8,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_shader_framebuffer_fetch_noncoherent.txt">QCOM_shader_framebuffer_fetch_noncoherent</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_shader_framebuffer_fetch_noncoherent.txt">QCOM_shader_framebuffer_fetch_noncoherent</a> extension.
  * 
  * <p>Existing extensions such as {@link EXTShaderFramebufferFetch EXT_shader_framebuffer_fetch} and ARM_shader_framebuffer_fetch_depth_stencil allow fragment shaders to read existing
  * framebuffer color or depth/stencil data as input. This extension adds support for reading those same inputs with relaxed coherency requirements. This

@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_multisample_interpolation.txt">OES_shader_multisample_interpolation</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_shader_multisample_interpolation.txt">OES_shader_multisample_interpolation</a> extension.
  * 
  * <p>In standard multisample rendering, an implementation is allowed to assign the same sets of fragment shader input values to each sample. This can cause
  * aliasing where the fragment shader input values are used to generate a result that doesn't antialias itself, for example with alpha-tested

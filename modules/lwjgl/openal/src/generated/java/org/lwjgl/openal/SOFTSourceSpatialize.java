@@ -6,7 +6,7 @@
 package org.lwjgl.openal;
 
 /**
- * Native bindings to the <a target="_blank" href="https://openal-soft.org/openal-extensions/SOFT_source_spatialize.txt">SOFT_source_spatialize</a> extension.
+ * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_source_spatialize.txt">SOFT_source_spatialize</a> extension.
  * 
  * <p>This extension provides more control over the spatialization behavior of sources. By default, OpenAL will spatialize sources playing a mono buffer and
  * not spatialize sources playing a multi-channel buffer. Spatialization features include positional panning, distance attenuation, cone-related

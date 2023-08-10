@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_get_proc_address.txt">GLX_ARB_get_proc_address</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_get_proc_address.txt">GLX_ARB_get_proc_address</a> extension.
  * 
  * <p>This extension adds a function to return the address of GLX and GL extension functions, given the function name. This is necessary with (for example)
  * heterogenous implementations where hardware drivers may implement extension functions not known to the link library; a similar situation on Windows

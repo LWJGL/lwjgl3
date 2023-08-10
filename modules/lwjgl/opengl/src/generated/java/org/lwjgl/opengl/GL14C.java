@@ -21,16 +21,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Extensions promoted to core in this release:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_square.txt">NV_blend_square</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_texture.txt">ARB_depth_texture</a> and <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shadow.txt">ARB_shadow</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fog_coord.txt">EXT_fog_coord</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multi_draw_arrays.txt">EXT_multi_draw_arrays</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_point_parameters.txt">ARB_point_parameters</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_func_separate.txt">EXT_blend_func_separate</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_stencil_wrap.txt">EXT_stencil_wrap</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_crossbar.txt">ARB_texture_env_crossbar</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_lod_bias.txt">EXT_texture_lod_bias</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirrored_repeat.txt">ARB_texture_mirrored_repeat</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_square.txt">NV_blend_square</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_depth_texture.txt">ARB_depth_texture</a> and <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shadow.txt">ARB_shadow</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_fog_coord.txt">EXT_fog_coord</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multi_draw_arrays.txt">EXT_multi_draw_arrays</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_point_parameters.txt">ARB_point_parameters</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_blend_func_separate.txt">EXT_blend_func_separate</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_stencil_wrap.txt">EXT_stencil_wrap</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_crossbar.txt">ARB_texture_env_crossbar</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_lod_bias.txt">EXT_texture_lod_bias</a></li>
+ * <li><a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_mirrored_repeat.txt">ARB_texture_mirrored_repeat</a></li>
  * </ul>
  */
 public class GL14C extends GL13C {
@@ -113,7 +113,7 @@ public class GL14C extends GL13C {
      * @param blue  the blue color component
      * @param alpha the alpha color component
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBlendColor">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBlendColor">Reference Page</a>
      */
     public static native void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha);
 
@@ -124,7 +124,7 @@ public class GL14C extends GL13C {
      *
      * @param mode the blend equation. One of:<br><table><tr><td>{@link #GL_FUNC_ADD FUNC_ADD}</td><td>{@link #GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link #GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link #GL_MIN MIN}</td><td>{@link #GL_MAX MAX}</td></tr></table>
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBlendEquation">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBlendEquation">Reference Page</a>
      */
     public static native void glBlendEquation(@NativeType("GLenum") int mode);
 
@@ -144,7 +144,7 @@ public class GL14C extends GL13C {
      * @param first an array of starting indices in the enabled arrays
      * @param count an array of the number of indices to be rendered
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
         if (CHECKS) {
@@ -172,7 +172,7 @@ public class GL14C extends GL13C {
      * @param type    the type of the values in indices. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices a pointer to the location where the indices are stored
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
         if (CHECKS) {
@@ -189,7 +189,7 @@ public class GL14C extends GL13C {
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameterf">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameterf">Reference Page</a>
      */
     public static native void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
 
@@ -201,7 +201,7 @@ public class GL14C extends GL13C {
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameteri">Reference Page</a>
      */
     public static native void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param);
 
@@ -216,7 +216,7 @@ public class GL14C extends GL13C {
      * @param pname  the parameter to set
      * @param params the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
         if (CHECKS) {
@@ -236,7 +236,7 @@ public class GL14C extends GL13C {
      * @param pname  the parameter to set
      * @param params the parameter value
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
         if (CHECKS) {
@@ -255,14 +255,14 @@ public class GL14C extends GL13C {
      * @param sfactorAlpha how the alpha source blending factor is computed. The initial value is GL_ONE.
      * @param dfactorAlpha how the alpha destination blending factor is computed. The initial value is GL_ZERO.
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glBlendFuncSeparate">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glBlendFuncSeparate">Reference Page</a>
      */
     public static native void glBlendFuncSeparate(@NativeType("GLenum") int sfactorRGB, @NativeType("GLenum") int dfactorRGB, @NativeType("GLenum") int sfactorAlpha, @NativeType("GLenum") int dfactorAlpha);
 
     /**
      * Array version of: {@link #glMultiDrawArrays MultiDrawArrays}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") int[] first, @NativeType("GLsizei const *") int[] count) {
         long __functionAddress = GL.getICD().glMultiDrawArrays;
@@ -276,7 +276,7 @@ public class GL14C extends GL13C {
     /**
      * Array version of: {@link #glMultiDrawElements MultiDrawElements}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
         long __functionAddress = GL.getICD().glMultiDrawElements;
@@ -290,7 +290,7 @@ public class GL14C extends GL13C {
     /**
      * Array version of: {@link #glPointParameterfv PointParameterfv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glPointParameterfv;
@@ -304,7 +304,7 @@ public class GL14C extends GL13C {
     /**
      * Array version of: {@link #glPointParameteriv PointParameteriv}
      * 
-     * @see <a target="_blank" href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glPointParameteriv;

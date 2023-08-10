@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_cached_allocations.txt">img_cached_allocations</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/img/cl_img_cached_allocations.txt">img_cached_allocations</a> extension.
  * 
  * <p>This extension extends the functionality provided by {@link CL10#clCreateBuffer CreateBuffer} and {@link CL12#clCreateImage CreateImage} to allow the OpenCL implementation to allocate memory on the
  * device which is also cached on the host CPU.</p>

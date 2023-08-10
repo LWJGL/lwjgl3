@@ -6,7 +6,7 @@
 package org.lwjgl.opengles;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multisample_compatibility.txt">EXT_multisample_compatibility</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multisample_compatibility.txt">EXT_multisample_compatibility</a> extension.
  * 
  * <p>This extension allows disabling and enabling of multisampling.</p>
  * 

@@ -22,13 +22,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>See {@link XrSwapchainSubImage} for more information about {@code imageRect} values, and {@link XrSwapchainCreateInfo} for more information about creating swapchains appropriately sized to support those {@code imageRect} values.</p>
  * 
- * <p>The array of {@link XrViewConfigurationView} returned by the runtime <b>must</b> adhere to the rules defined in <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#view_configuration_type">{@code XrViewConfigurationType}</a>, such as the count and association to the left and right eyes.</p>
+ * <p>The array of {@link XrViewConfigurationView} returned by the runtime <b>must</b> adhere to the rules defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#view_configuration_type">{@code XrViewConfigurationType}</a>, such as the count and association to the left and right eyes.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationViewFovEPIC}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationViewFovEPIC}</li>
  * </ul>
  * 
  * <h5>See Also</h5>

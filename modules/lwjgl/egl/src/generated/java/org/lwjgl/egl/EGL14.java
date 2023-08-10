@@ -30,7 +30,7 @@ public class EGL14 extends EGL13 {
 
     // --- [ eglGetCurrentContext ] ---
 
-    /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentContext.xhtml">Reference Page</a> */
+    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentContext.xhtml">Reference Page</a> */
     @NativeType("EGLContext")
     public static long eglGetCurrentContext() {
         long __functionAddress = EGL.getCapabilities().eglGetCurrentContext;

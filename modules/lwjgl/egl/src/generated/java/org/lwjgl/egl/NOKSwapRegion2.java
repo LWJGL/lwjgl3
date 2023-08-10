@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/NOK/EGL_NOK_swap_region2.txt">NOK_swap_region2</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NOK/EGL_NOK_swap_region2.txt">NOK_swap_region2</a> extension.
  * 
  * <p>This extension adds a new function which provides an alternative to eglSwapBuffers. eglSwapBuffersRegion2NOK accepts two new parameters in addition to
  * those in eglSwapBuffers. The new parameters consist of a pointer to a list of 4-integer blocks defining rectangles (x, y, width, height) and an integer

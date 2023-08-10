@@ -6,7 +6,7 @@
 package org.lwjgl.opengl;
 
 /**
- * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_filter_minmax.txt">ARB_texture_filter_minmax</a> extension.
+ * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_filter_minmax.txt">ARB_texture_filter_minmax</a> extension.
  * 
  * <p>In unextended OpenGL, minification and magnification filters such as {@link GL11#GL_LINEAR LINEAR} allow texture lookups to returned a filtered texel value produced by
  * computing an weighted average of a collection of texels in the neighborhood of the texture coordinate provided.</p>
