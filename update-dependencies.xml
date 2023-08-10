@@ -16,13 +16,12 @@
         <property name="jquery" value="3.5.1"/>
         <property name="slf4j" value="1.7.36"/>
     <property name="joml" value="1.10.5"/>
-    <property name="kotlinc-version" value="1.8.21"/>
-    <property name="kotlinc-build" value="1.8.21-release-380"/>
-    <property name="jmh-core" value="1.36"/>
-        <property name="jmh-generator-annprocess" value="1.36"/>
+    <property name="kotlinc-version" value="1.9.0"/>
+    <property name="kotlinc-build" value="1.9.0-release-358"/>
+    <property name="jmh-core" value="1.37"/>
+        <property name="jmh-generator-annprocess" value="1.37"/>
         <property name="jopt-simple" value="5.0.4"/>
         <property name="commons-math3" value="3.6.1"/>
-    <property name="openjfx" value="11.0.2"/>
     <!-- *********************************** -->
 
     <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
