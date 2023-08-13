@@ -465,6 +465,7 @@
 
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/10" if:set="jdk10"/>
+        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/16" if:set="jdk16"/>
         <delete file="${bin.lwjgl}/core/META-INF/versions/9/module-info.class" quiet="true" if:set="jdk9"/>
         <lwjgl.javac9 destdir="${bin.lwjgl}/core/META-INF/versions/9" taskname="javac: Core - Java 9" if:set="jdk9">
             <classpath>
@@ -485,6 +486,15 @@
             </src>
             <include name="**"/>
         </lwjgl.javac10>
+        <lwjgl.javac16 destdir="${bin.lwjgl}/core/META-INF/versions/16" taskname="javac: Core - Java 16" if:set="jdk16">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/core"/>
+            </classpath>
+            <src>
+                <pathelement path="${module.lwjgl}/core/src/main/java16"/>
+            </src>
+            <include name="**"/>
+        </lwjgl.javac16>
 
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
@@ -586,6 +596,7 @@
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
@@ -613,6 +624,7 @@
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.extract}"/>
                 <pathelement path="${test.resources}"/>
@@ -872,6 +884,7 @@
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
@@ -882,6 +895,7 @@
             </classpath>
 
             <!--<jvmarg value="-Xcheck:jni"/>--> <!-- SIMD fails with this (see -XX:+RestoreMXCSROnJNICall) -->
+            <jvmarg value="-server"/>
             <jvmarg value="-ea"/>
             <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
             <jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
@@ -910,6 +924,7 @@
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${bin.samples}"/>
@@ -922,6 +937,7 @@
                 <pathelement path="${lib}/native"/>
             </classpath>
 
+            <jvmarg value="-server"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
@@ -1491,6 +1507,9 @@
                 </copy>
                 <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
                     <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
+                </copy>
+                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/16" if:set="jdk16">
+                    <fileset dir="${module.lwjgl}/core/src/main/java16" includes="**"/>
                 </copy>
             </quiet>
             <release-module name="core" native-library="lwjgl" title="Core"/>

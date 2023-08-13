@@ -142,31 +142,25 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     java.version = $VNUM(\-$PRE)?
     -->
     <local name="java.version.regex"/>
-    <property name="java.version.regex" value="[1-9][0-9]+((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/>
+    <property name="java.version.regex" value="((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/> <!-- without the major number -->
 
-    <condition property="jdk19">                             <matches string="${java.version}" pattern="^(?!1[0-8])${java.version.regex}$"/>     </condition>
-    <condition property="jdk18"><or><isset property="jdk19"/><matches string="${java.version}" pattern="^(?!1[0-7])${java.version.regex}$"/></or></condition>
-    <condition property="jdk17"><or><isset property="jdk18"/><matches string="${java.version}" pattern="^(?!1[0-6])${java.version.regex}$"/></or></condition>
-    <condition property="jdk16"><or><isset property="jdk17"/><matches string="${java.version}" pattern="^(?!1[0-5])${java.version.regex}$"/></or></condition>
-    <condition property="jdk15"><or><isset property="jdk16"/><matches string="${java.version}" pattern="^(?!1[0-4])${java.version.regex}$"/></or></condition>
-    <condition property="jdk14"><or><isset property="jdk15"/><matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/></or></condition>
-    <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^(?!1[0-2])${java.version.regex}$"/></or></condition>
-    <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^(?!1[0-1])${java.version.regex}$"/></or></condition>
-    <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^(?!1[0-0])${java.version.regex}$"/></or></condition>
-    <condition property="jdk10">
-        <or>
-            <isset property="jdk11"/>
-            <matches string="${java.version}" pattern="^10((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
-        </or>
-    </condition>
-    <condition property="jdk9">
-        <or>
-            <isset property="jdk10"/>
-            <matches string="${java.version}" pattern="^9((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
-        </or>
-    </condition>
+    <condition property="jdk21">                             <matches string="${java.version}" pattern="^21${java.version.regex}$"/>     </condition>
+    <condition property="jdk20"><or><isset property="jdk21"/><matches string="${java.version}" pattern="^20${java.version.regex}$"/></or></condition>
+    <condition property="jdk19"><or><isset property="jdk20"/><matches string="${java.version}" pattern="^19${java.version.regex}$"/></or></condition>
+    <condition property="jdk18"><or><isset property="jdk19"/><matches string="${java.version}" pattern="^18${java.version.regex}$"/></or></condition>
+    <condition property="jdk17"><or><isset property="jdk18"/><matches string="${java.version}" pattern="^17${java.version.regex}$"/></or></condition>
+    <condition property="jdk16"><or><isset property="jdk17"/><matches string="${java.version}" pattern="^16${java.version.regex}$"/></or></condition>
+    <condition property="jdk15"><or><isset property="jdk16"/><matches string="${java.version}" pattern="^15${java.version.regex}$"/></or></condition>
+    <condition property="jdk14"><or><isset property="jdk15"/><matches string="${java.version}" pattern="^14${java.version.regex}$"/></or></condition>
+    <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^13${java.version.regex}$"/></or></condition>
+    <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^12${java.version.regex}$"/></or></condition>
+    <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^11${java.version.regex}$"/></or></condition>
+    <condition property="jdk10"><or><isset property="jdk11"/><matches string="${java.version}" pattern="^10${java.version.regex}$"/></or></condition>
+    <condition property= "jdk9"><or><isset property="jdk10"/><matches string="${java.version}" pattern= "^9${java.version.regex}$"/></or></condition>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
+    <condition property="core.java20"><isset property="core.java21"/></condition>
+    <condition property="core.java19"><isset property="core.java20"/></condition>
     <condition property="core.java18"><isset property="core.java19"/></condition>
     <condition property="core.java17"><isset property="core.java18"/></condition>
     <condition property="core.java16"><isset property="core.java17"/></condition>
@@ -216,9 +210,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac11">
+    <presetdef name="lwjgl.javac16">
         <javac sourcepath="" debug="yes" encoding="UTF-8">
-            <compilerarg line="--release 11"/>
+            <compilerarg line="--release 16"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>

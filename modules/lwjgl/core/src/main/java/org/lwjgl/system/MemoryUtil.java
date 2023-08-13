@@ -1765,21 +1765,6 @@ public final class MemoryUtil {
         -------------------------------------
         ------------------------------------- */
 
-    private interface NativeShift {
-        long left(long value, int bytes);
-        long right(long value, int bytes);
-    }
-
-    private static final NativeShift SHIFT = NATIVE_ORDER == ByteOrder.BIG_ENDIAN ?
-        new NativeShift() {
-            @Override public long left(long value, int bytes) { return value << (bytes << 3); }
-            @Override public long right(long value, int bytes) { return value >>> (bytes << 3); }
-        } :
-        new NativeShift() {
-            @Override public long left(long value, int bytes) { return value >>> (bytes << 3); }
-            @Override public long right(long value, int bytes) { return value << (bytes << 3); }
-        };
-
     private static final int  FILL_PATTERN_32 = Integer.divideUnsigned(-1, 255);
     private static final long FILL_PATTERN_64 = Long.divideUnsigned(-1L, 255L);
 
@@ -1819,42 +1804,34 @@ public final class MemoryUtil {
         nmemset(ptr, value, bytes);
     }
     private static void memSet64(long ptr, int value, int bytes) {
-        long fill = (value & 0xFF) * FILL_PATTERN_64;
+        int aligned = bytes & ~7;
 
-        int remaining = bytes;
-
-        // Aligned longs for performance
-        while (8 <= remaining) {
-            UNSAFE.putLong(null, ptr, fill);
-            remaining -= 8;
-
-            ptr += 8;
+        // Aligned body
+        long valuel = (value & 0xFF) * FILL_PATTERN_64;
+        for (int i = 0; i < aligned; i += 8) {
+            UNSAFE.putLong(null, ptr + i, valuel);
         }
 
-        if (remaining != 0) {
-            // Aligned tail
-            long mask = SHIFT.right(-1L, remaining);
-            UNSAFE.putLong(null, ptr, fill ^ ((fill ^ UNSAFE.getLong(null, ptr)) & mask));
+        // Unaligned tail
+        byte valueb = (byte)(value & 0xFF);
+        for (int i = aligned; i < bytes; i++) {
+            UNSAFE.putByte(null, ptr + i, valueb);
         }
     }
     private static void memSet32(int ptr, int value, int bytes) {
-        int fill = (value & 0xFF) * FILL_PATTERN_32;
+        int aligned = bytes & ~7;
 
-        int i = 0;
-
-        // Aligned ints for performance
-        for (; i <= bytes - 4; i += 4) {
-            UNSAFE.putInt(null, (long)(ptr + i), fill);
+        // Aligned body
+        int vi = (value & 0xFF) * FILL_PATTERN_32;
+        for (int i = 0; i < aligned; i += 8) {
+            UNSAFE.putInt(null, (ptr + i) & 0xFFFF_FFFFL, vi);
         }
 
-        for (; i < bytes; i++) {
-            UNSAFE.putByte(null, (long)(ptr + i), (byte)fill);
+        // Unaligned tail
+        byte vb = (byte)(value & 0xFF);
+        for (int i = aligned; i < bytes; i++) {
+            UNSAFE.putByte(null, (ptr + i) & 0xFFFF_FFFFL, vb);
         }
-    }
-
-    // Bit from a where mask bit is 0, bit from b where mask bit is 1.
-    private static long merge(long a, long b, long mask) {
-        return a ^ ((a ^ b) & mask);
     }
 
     /**
@@ -1873,32 +1850,29 @@ public final class MemoryUtil {
     }
 
     static void memCopyAligned64(long src, long dst, int bytes) {
-        int i = 0;
+        int aligned = bytes & ~7;
 
-        // Aligned longs for performance
-        for (; i <= bytes - 8; i += 8) {
+        // Aligned body
+        for (int i = 0; i < aligned; i += 8) {
             UNSAFE.putLong(null, dst + i, UNSAFE.getLong(null, src + i));
         }
 
-        // Aligned tail
-        if (i < bytes) {
-            UNSAFE.putLong(null, dst + i, merge(
-                UNSAFE.getLong(null, src + i),
-                UNSAFE.getLong(null, dst + i),
-                SHIFT.right(-1L, bytes - i)
-            ));
+        // Unaligned tail
+        for (int i = aligned; i < bytes; i++) {
+            UNSAFE.putByte(null, dst + i, UNSAFE.getByte(null, src + i));
         }
     }
     static void memCopyAligned32(int src, int dst, int bytes) {
-        int i = 0;
+        int aligned = bytes & ~3;
 
-        // Aligned ints for performance
-        for (; i <= bytes - 4; i += 4, dst += 4, src += 4) {
-            UNSAFE.putInt(null, (long)dst, UNSAFE.getInt(null, (long)src));
+        // Aligned body
+        for (int i = 0; i < aligned; i += 4) {
+            UNSAFE.putInt(null, (dst + i) & 0xFFFF_FFFFL, UNSAFE.getInt(null, (src + i) & 0xFFFF_FFFFL));
         }
-        // Tail
-        for (; i < bytes; i++, dst++, src++) {
-            UNSAFE.putByte(null, (long)dst, UNSAFE.getByte(null, (long)src));
+
+        // Unaligned tail
+        for (int i = aligned; i < bytes; i++) {
+            UNSAFE.putByte(null, (dst + i) & 0xFFFF_FFFFL, UNSAFE.getByte(null, (src + i) & 0xFFFF_FFFFL));
         }
     }
 
