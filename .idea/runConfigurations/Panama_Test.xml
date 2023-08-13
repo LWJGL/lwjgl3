@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Panama Test" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.lwjgl.panama.Test" />
+    <module name="lwjgl.core21" />
+    <option name="VM_PARAMETERS" value="--enable-preview --enable-native-access=ALL-UNNAMED -Djava.library.path=bin/libs/native -Dorg.lwjgl.util.NoChecks=true -Xlog:gc" />
+    <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+      <option name="credential" />
+      <option name="region" />
+      <option name="useCurrentConnection" value="false" />
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

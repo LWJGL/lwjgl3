@@ -217,6 +217,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
+    
+    <presetdef name="lwjgl.javac21">
+        <javac sourcepath="" debug="yes" encoding="UTF-8">
+            <compilerarg line="--release 21"/>
+            <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/>
+        </javac>
+    </presetdef>
 
     <macrodef name="quiet">
         <element name="body" implicit="yes"/>

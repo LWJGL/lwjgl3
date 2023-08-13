@@ -18,5 +18,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-Xlint:unchecked" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lwjgl.core21" options="--enable-preview" />
+    </option>
   </component>
 </project>
