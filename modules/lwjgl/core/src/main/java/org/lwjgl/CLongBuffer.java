@@ -5,7 +5,7 @@
 package org.lwjgl;
 
 import org.lwjgl.system.*;
-
+/w
 import javax.annotation.*;
 import java.nio.*;
 
