@@ -119,6 +119,13 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
         returnDoc = "the value of {@code dest}"
     )
 
+    size_t(
+        "strlen",
+        "",
+
+        NullTerminated..char.const.p("str", "")
+    )
+
     customMethod("""
     /**
      * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.

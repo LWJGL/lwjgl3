@@ -31,6 +31,12 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nmemmove__JJJ(JNIE
     return (jlong)(uintptr_t)memmove(dest, src, (size_t)count);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nstrlen(JNIEnv *__env, jclass clazz, jlong strAddress) {
+    char const *str = (char const *)(uintptr_t)strAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)strlen(str);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nstrerror(JNIEnv *__env, jclass clazz, jint errnum) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)strerror(errnum);

@@ -338,6 +338,18 @@ public class LibCString {
         return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 3);
     }
 
+    // --- [ strlen ] ---
+
+    public static native long nstrlen(long str);
+
+    @NativeType("size_t")
+    public static long strlen(@NativeType("char const *") ByteBuffer str) {
+        if (CHECKS) {
+            checkNT1(str);
+        }
+        return nstrlen(memAddress(str));
+    }
+
     // --- [ strerror ] ---
 
     /** Unsafe version of: {@link #strerror} */
