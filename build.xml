@@ -1672,7 +1672,18 @@
         <release-module name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" if:true="${binding.nanovg}"/>
 
         <!-- Native File Dialog -->
-        <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}"/>
+        <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so"/>
+                <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so.git"/>
+
+                <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so"/>
+                <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so"/>
+                <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so.git"/>
+            </natives>
+        </release-module>
 
         <!-- Nuklear -->
         <release-module name="nuklear" native-library="lwjgl_nuklear" title="Nuklear" if:true="${binding.nuklear}"/>

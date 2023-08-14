@@ -423,7 +423,11 @@ enum class Module(
         Contains bindings to ${url("https://github.com/btzy/nativefiledialog-extended", "Native File Dialog Extended")}, a small C library that portably
         invokes native file open, folder select and file save dialogs. Write dialog code once and have it pop up native dialogs on all supported platforms.
         """,
-        library = JNILibrary.create("LibNFD", setupAllocator = true)
+        library = JNILibrary.create(
+            "LibNFD",
+            libraryName = "Platform.get() == Platform.LINUX && Configuration.NFD_LINUX_PORTAL.get(false) ? \"lwjgl_nfd_portal\" : \"lwjgl_nfd\"",
+            setupAllocator = true
+        )
     ),
     NUKLEAR(
         "nuklear",
@@ -884,8 +888,14 @@ float h = layout.dimensions(YGDimensionHeight);""")}
 internal interface JNILibrary {
     companion object {
         fun simple(expression: String? = null): JNILibrary = JNILibrarySimple(expression)
-        fun create(className: String, custom: Boolean = false, setupAllocator: Boolean = false, cpp: Boolean = false): JNILibrary =
-            JNILibraryWithInit(className, custom, setupAllocator, cpp)
+        fun create(
+            className: String,
+            libraryName: String? = null,
+            custom: Boolean = false,
+            setupAllocator: Boolean = false,
+            cpp: Boolean = false
+        ): JNILibrary =
+            JNILibraryWithInit(className, libraryName, custom, setupAllocator, cpp)
     }
 
     fun expression(module: Module): String
@@ -902,9 +912,10 @@ private class JNILibrarySimple(private val expression: String?) : JNILibrary {
 
 private class JNILibraryWithInit constructor(
     private val className: String,
-    private val custom: Boolean = false,
-    private val setupAllocator: Boolean = false,
-    private val cpp: Boolean = false
+    private val libraryName: String?,
+    private val custom: Boolean,
+    private val setupAllocator: Boolean,
+    private val cpp: Boolean
 ) : JNILibrary {
 
     override fun expression(module: Module) = "$className.initialize();"
@@ -933,7 +944,7 @@ private class JNILibraryWithInit constructor(
                     """${access.modifier}final class $className {
 
     static {
-        String libName = Platform.mapLibraryNameBundled("lwjgl_${module.key}");
+        String libName = Platform.mapLibraryNameBundled(${libraryName ?: "\"lwjgl_${module.key}\""});
         Library.loadSystem(System::load, System::loadLibrary, $className.class, "${module.java}", libName);${if (setupAllocator) """
 
         MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));

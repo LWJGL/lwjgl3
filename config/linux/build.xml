@@ -60,6 +60,7 @@
 
     <macrodef name="build">
         <attribute name="module"/>
+        <attribute name="suffix" default=""/>
         <attribute name="linker" default="gcc"/>
         <attribute name="lang" default="c"/>
         <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
@@ -79,12 +80,12 @@
             <property name="src.generated" location="${module.lwjgl}/@{module}/src/generated/c" relative="true"/>
 
             <local name="name"/>
-            <condition property="name" value="lwjgl" else="lwjgl_@{module}">
+            <condition property="name" value="lwjgl" else="lwjgl_@{module}@{suffix}">
                 <equals arg1="@{module}" arg2="core"/>
             </condition>
 
             <local name="dest"/>
-            <property name="dest" value="${bin.native}/@{module}"/>
+            <property name="dest" value="${bin.native}/@{module}@{suffix}"/>
 
             <beforeCompile/>
             <compile lang="@{lang}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" flags="@{flags}" simple="@{simple}">
@@ -280,6 +281,26 @@
                 <arg value="-lgobject-2.0"/>
                 <arg value="-lgtk-3"/>
                 <arg value="-lgdk-3"/>
+            </link>
+        </build>
+        <build module="nfd" suffix="_portal" simple="true" linker="g++" if:true="${binding.nfd}">
+            <beforeCompile>
+                <local name="linux.triplet"/>
+                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
+                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
+
+                <compile lang="c++">
+                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
+                    <arg value="-I${src.main.rel}/include"/>
+                    <fileset dir="." includes="${src.main}/nfd_portal.cpp"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.main.rel}/include"/>
+            </source>
+            <link>
+                <arg value="-ldbus-1"/>
             </link>
         </build>
 
