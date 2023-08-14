@@ -359,4 +359,11 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         JNI_ENV,
         jobject("obj", "a local, global or weak global reference")
     )
+
+    Code(nativeCall = "")..void(
+        "noop",
+        "No-op JNI function for benchmarking.",
+
+        void()
+    )
 }

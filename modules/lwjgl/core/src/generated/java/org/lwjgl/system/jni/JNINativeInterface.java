@@ -1133,4 +1133,9 @@ public class JNINativeInterface {
     @NativeType("jobjectRefType")
     public static native int GetObjectRefType(@NativeType("jobject") Object obj);
 
+    // --- [ noop ] ---
+
+    /** No-op JNI function for benchmarking. */
+    public static native void noop();
+
 }

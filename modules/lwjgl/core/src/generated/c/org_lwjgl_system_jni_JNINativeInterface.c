@@ -293,4 +293,9 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_GetObjectRef
     return (jint)(*__env)->GetObjectRefType(__env, obj);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_noop(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+
+}
+
 EXTERN_C_EXIT
