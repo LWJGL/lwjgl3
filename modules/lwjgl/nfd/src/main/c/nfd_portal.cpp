@@ -484,7 +484,7 @@ void AppendSaveFileQueryDictEntryCurrentName(DBusMessageIter& sub_iter, const ch
     dbus_message_iter_close_container(&sub_iter, &sub_sub_iter);
 }
 
-void AppendSaveFileQueryDictEntryCurrentFolder(DBusMessageIter& sub_iter, const char* path) {
+void AppendOpenFileQueryDictEntryCurrentFolder(DBusMessageIter& sub_iter, const char* path) {
     if (!path) return;
     DBusMessageIter sub_sub_iter;
     DBusMessageIter variant_iter;
@@ -551,7 +551,8 @@ template <bool Multiple, bool Directory>
 void AppendOpenFileQueryParams(DBusMessage* query,
                                const char* handle_token,
                                const nfdnfilteritem_t* filterList,
-                               nfdfiltersize_t filterCount) {
+                               nfdfiltersize_t filterCount,
+                               const nfdnchar_t* defaultPath) {
     DBusMessageIter iter;
     dbus_message_iter_init_append(query, &iter);
 
@@ -565,6 +566,7 @@ void AppendOpenFileQueryParams(DBusMessage* query,
     AppendOpenFileQueryDictEntryMultiple<Multiple>(sub_iter);
     AppendOpenFileQueryDictEntryDirectory<Directory>(sub_iter);
     AppendOpenFileQueryDictEntryFilters<!Directory>(sub_iter, filterList, filterCount);
+    AppendOpenFileQueryDictEntryCurrentFolder(sub_iter, defaultPath);
     dbus_message_iter_close_container(&iter, &sub_iter);
 }
 
@@ -587,7 +589,7 @@ void AppendSaveFileQueryParams(DBusMessage* query,
     AppendOpenFileQueryDictEntryHandleToken(sub_iter, handle_token);
     AppendSaveFileQueryDictEntryFilters(sub_iter, filterList, filterCount, defaultName);
     AppendSaveFileQueryDictEntryCurrentName(sub_iter, defaultName);
-    AppendSaveFileQueryDictEntryCurrentFolder(sub_iter, defaultPath);
+    AppendOpenFileQueryDictEntryCurrentFolder(sub_iter, defaultPath);
     AppendSaveFileQueryDictEntryCurrentFile(sub_iter, defaultPath, defaultName);
     dbus_message_iter_close_container(&iter, &sub_iter);
 }
@@ -1120,7 +1122,8 @@ nfdresult_t AllocAndCopyFilePathWithExtn(const char* fileUri, const char* extn, 
 template <bool Multiple, bool Directory>
 nfdresult_t NFD_DBus_OpenFile(DBusMessage*& outMsg,
                               const nfdnfilteritem_t* filterList,
-                              nfdfiltersize_t filterCount) {
+                              nfdfiltersize_t filterCount,
+                              const nfdnchar_t* defaultPath) {
     const char* handle_token_ptr;
     char* handle_obj_path = MakeUniqueObjectPath(&handle_token_ptr);
     Free_Guard<char> handle_obj_path_guard(handle_obj_path);
@@ -1141,7 +1144,7 @@ nfdresult_t NFD_DBus_OpenFile(DBusMessage*& outMsg,
         DBUS_DESTINATION, DBUS_PATH, DBUS_FILECHOOSER_IFACE, "OpenFile");
     DBusMessage_Guard query_guard(query);
     AppendOpenFileQueryParams<Multiple, Directory>(
-        query, handle_token_ptr, filterList, filterCount);
+        query, handle_token_ptr, filterList, filterCount, defaultPath);
 
     DBusMessage* reply =
         dbus_connection_send_with_reply_and_block(dbus_conn, query, DBUS_TIMEOUT_INFINITE, &err);
@@ -1372,11 +1375,10 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
                             const nfdnchar_t* defaultPath) {
-    (void)defaultPath;  // Default path not supported for portal backend
-
     DBusMessage* msg;
     {
-        const nfdresult_t res = NFD_DBus_OpenFile<false, false>(msg, filterList, filterCount);
+        const nfdresult_t res =
+            NFD_DBus_OpenFile<false, false>(msg, filterList, filterCount, defaultPath);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1398,11 +1400,10 @@ nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
                                     nfdfiltersize_t filterCount,
                                     const nfdnchar_t* defaultPath) {
-    (void)defaultPath;  // Default path not supported for portal backend
-
     DBusMessage* msg;
     {
-        const nfdresult_t res = NFD_DBus_OpenFile<true, false>(msg, filterList, filterCount);
+        const nfdresult_t res =
+            NFD_DBus_OpenFile<true, false>(msg, filterList, filterCount, defaultPath);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1479,7 +1480,7 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
 
     DBusMessage* msg;
     {
-        const nfdresult_t res = NFD_DBus_OpenFile<false, true>(msg, nullptr, 0);
+        const nfdresult_t res = NFD_DBus_OpenFile<false, true>(msg, nullptr, 0, defaultPath);
         if (res != NFD_OKAY) {
             return res;
         }
