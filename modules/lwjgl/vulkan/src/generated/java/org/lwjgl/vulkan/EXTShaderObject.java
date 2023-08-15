@@ -441,8 +441,8 @@ public class EXTShaderObject {
      * 
      * <ul>
      * <li>{@link #VK_SHADER_CREATE_LINK_STAGE_BIT_EXT SHADER_CREATE_LINK_STAGE_BIT_EXT} specifies that a shader is linked to all other shaders created in the same {@link #vkCreateShadersEXT CreateShadersEXT} call whose {@link VkShaderCreateInfoEXT} structures' {@code flags} include {@link #VK_SHADER_CREATE_LINK_STAGE_BIT_EXT SHADER_CREATE_LINK_STAGE_BIT_EXT}.</li>
-     * <li>{@link #VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} specifies that the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in a compute shader.</li>
-     * <li>{@link #VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} specifies that the subgroup sizes <b>must</b> be launched with all invocations active in a compute shader.</li>
+     * <li>{@link #VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} specifies that the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in a task, mesh, or compute shader.</li>
+     * <li>{@link #VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} specifies that the subgroup sizes <b>must</b> be launched with all invocations active in a task, mesh, or compute shader.</li>
      * <li>{@link #VK_SHADER_CREATE_NO_TASK_SHADER_BIT_EXT SHADER_CREATE_NO_TASK_SHADER_BIT_EXT} specifies that a mesh shader <b>must</b> only be used without a task shader. Otherwise, the mesh shader <b>must</b> only be used with a task shader.</li>
      * <li>{@link #VK_SHADER_CREATE_DISPATCH_BASE_BIT_EXT SHADER_CREATE_DISPATCH_BASE_BIT_EXT} specifies that a compute shader <b>can</b> be used with {@link VK11#vkCmdDispatchBase CmdDispatchBase} with a non-zero base workgroup.</li>
      * <li>{@link #VK_SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT} specifies that a fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
@@ -808,8 +808,8 @@ public class EXTShaderObject {
      * </table>
      *
      * @param commandBuffer the command buffer that the shader object will be bound to.
-     * @param pStages       an array of {@code VkShaderStageFlagBits} values specifying one stage per array index that is affected by the corresponding value in the {@code pShaders} array.
-     * @param pShaders      an array of {@code VkShaderEXT} handles and/or {@link VK10#VK_NULL_HANDLE NULL_HANDLE} values describing the shader binding operations to be performed on each stage in {@code pStages}.
+     * @param pStages       a pointer to an array of {@code VkShaderStageFlagBits} values specifying one stage per array index that is affected by the corresponding value in the {@code pShaders} array.
+     * @param pShaders      a pointer to an array of {@code VkShaderEXT} handles and/or {@link VK10#VK_NULL_HANDLE NULL_HANDLE} values describing the shader binding operations to be performed on each stage in {@code pStages}.
      */
     public static void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, @NativeType("VkShaderStageFlagBits const *") IntBuffer pStages, @NativeType("VkShaderEXT const *") LongBuffer pShaders) {
         if (CHECKS) {
@@ -1964,6 +1964,11 @@ public class EXTShaderObject {
      * <h5>Description</h5>
      * 
      * <p>This command sets the color write masks of the specified attachments for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT DYNAMIC_STATE_COLOR_WRITE_MASK_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineColorBlendAttachmentState}{@code ::colorWriteMask} values used to create the currently active pipeline.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Formats with bits that are shared between components specified by {@code VkColorComponentFlagBits}, such as {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32}, cannot have their channels individually masked by this functionality; either all components that share bits have to be enabled, or none of them.</p>
+     * </div>
      * 
      * <h5>Valid Usage</h5>
      * 

@@ -110,6 +110,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
+            <li>{@code pHostPointer} <b>must</b> be a pointer value</li>
             <li>{@code pMemoryHostPointerProperties} <b>must</b> be a valid pointer to a ##VkMemoryHostPointerPropertiesEXT structure</li>
         </ul>
 

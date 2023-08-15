@@ -26,7 +26,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>398</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link EXTOpacityMicromap VK_EXT_opacity_micromap}
  * 
@@ -36,7 +36,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Christoph Kubisch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">pixeljetstream</a></li>
- * <li>Eric Werness</li>
+ * <li>Eric Werness <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@ewerness-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">ewerness-nv</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -57,7 +57,7 @@ package org.lwjgl.vulkan;
 public final class NVDisplacementMicromap {
 
     /** The extension specification version. */
-    public static final int VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION = 1;
+    public static final int VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME = "VK_NV_displacement_micromap";

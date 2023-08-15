@@ -105,16 +105,51 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         "DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT".."1000455019",
         "DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT".."1000455020",
         "DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT".."1000455021",
-        "DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT".."1000455022",
-        "DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV".."1000455023",
-        "DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV".."1000455024",
+        "DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT".."1000455022"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
+        "DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV".."1000455023"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
+        "DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV".."1000455024"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
         "DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV".."1000455025",
-        "DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV".."1000455026",
+        "DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV".."1000455026"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
         "DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV".."1000455027",
         "DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV".."1000455028",
-        "DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV".."1000455029",
-        "DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV".."1000455030",
-        "DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV".."1000455031",
+        "DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV".."1000455029"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
+        "DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV".."1000455030"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
+        "DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV".."1000455031"
+    )
+
+    EnumConstant(
+        "Extends {@code VkDynamicState}.",
+
         "DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV".."1000455032"
     )
 
@@ -624,6 +659,10 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 
         <h5>Description</h5>
         This command sets the color write masks of the specified attachments for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_COLOR_WRITE_MASK_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineColorBlendAttachmentState{@code ::colorWriteMask} values used to create the currently active pipeline.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Formats with bits that are shared between components specified by {@code VkColorComponentFlagBits}, such as #FORMAT_E5B9G9R9_UFLOAT_PACK32, cannot have their channels individually masked by this functionality; either all components that share bits have to be enabled, or none of them.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1141,7 +1180,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("negativeOneToOne", "specifies the {@code negativeOneToOne} state.")
     )
 
-    void(
+    DependsOn("VK_NV_clip_space_w_scaling")..void(
         "CmdSetViewportWScalingEnableNV",
         """
         Specify the viewport W scaling enable state dynamically for a command buffer.
@@ -1187,7 +1226,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("viewportWScalingEnable", "specifies the {@code viewportWScalingEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_viewport_swizzle")..void(
         "CmdSetViewportSwizzleNV",
         """
         Specify the viewport swizzle state dynamically for a command buffer.
@@ -1242,7 +1281,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkViewportSwizzleNV.const.p("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures specifying viewport swizzles.")
     )
 
-    void(
+    DependsOn("VK_NV_fragment_coverage_to_color")..void(
         "CmdSetCoverageToColorEnableNV",
         """
         Specify the coverage to color enable state dynamically for a command buffer.
@@ -1288,7 +1327,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("coverageToColorEnable", "specifies the {@code coverageToColorEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_fragment_coverage_to_color")..void(
         "CmdSetCoverageToColorLocationNV",
         """
         Specify the coverage to color location dynamically for a command buffer.
@@ -1334,7 +1373,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         uint32_t("coverageToColorLocation", "specifies the {@code coverageToColorLocation} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationModeNV",
         """
         Specify the coverage modulation mode dynamically for a command buffer.
@@ -1381,7 +1420,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkCoverageModulationModeNV("coverageModulationMode", "specifies the {@code coverageModulationMode} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationTableEnableNV",
         """
         Specify the coverage modulation table enable state dynamically for a command buffer.
@@ -1427,7 +1466,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("coverageModulationTableEnable", "specifies the {@code coverageModulationTableEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationTableNV",
         """
         Specify the coverage modulation table dynamically for a command buffer.
@@ -1477,7 +1516,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         float.const.p("pCoverageModulationTable", "specifies the table of modulation factors containing a value for each number of covered samples.")
     )
 
-    void(
+    DependsOn("VK_NV_shading_rate_image")..void(
         "CmdSetShadingRateImageEnableNV",
         """
         Specify the shading rate image enable state dynamically for a command buffer.
@@ -1523,7 +1562,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("shadingRateImageEnable", "specifies the {@code shadingRateImageEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_representative_fragment_test")..void(
         "CmdSetRepresentativeFragmentTestEnableNV",
         """
         Specify the representative fragment test enable dynamically for a command buffer.
@@ -1569,7 +1608,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkBool32("representativeFragmentTestEnable", "specifies the {@code representativeFragmentTestEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_coverage_reduction_mode")..void(
         "CmdSetCoverageReductionModeNV",
         """
         Specify the coverage reduction mode dynamically for a command buffer.

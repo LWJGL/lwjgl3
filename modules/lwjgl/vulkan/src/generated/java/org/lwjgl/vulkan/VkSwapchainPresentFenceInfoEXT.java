@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The application <b>can</b> provide a fence that the implementation will signal when all such queue operations have completed and the presentation engine has taken a reference to the payload of any objects it accesses as part of the present operation. For all binary wait semaphores imported by the presentation engine using the equivalent of reference transference, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, this fence <b>must</b> not signal until all such semaphore payloads have been reset by the presentation engine.</p>
  * 
- * <p>The application <b>can</b> destroy the wait semaphores associated with a given presentation operation when the associated fence is signaled, and <b>can</b> destroy the swapchain when the fences associated with all past presentation requests have signaled.</p>
+ * <p>The application <b>can</b> destroy the wait semaphores associated with a given presentation operation when at least one of the associated fences is signaled, and <b>can</b> destroy the swapchain when the fences associated with all past presentation requests referring to that swapchain have signaled.</p>
  * 
  * <p>Fences associated with presentations to the same swapchain on the same {@code VkQueue} <b>must</b> be signaled in the same order as the present operations.</p>
  * 
@@ -116,7 +116,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

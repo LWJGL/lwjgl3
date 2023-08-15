@@ -39,7 +39,7 @@ package org.lwjgl.vulkan;
  * <li>Daniel Koch, NVIDIA</li>
  * <li>Donald Scorgie, Imagination Technologies</li>
  * <li>Graeme Leese, Broadcom</li>
- * <li>Jan-Herald Fredericksen, ARM</li>
+ * <li>Jan-Harald Fredriksen, ARM</li>
  * <li>Jeff Leger, Qualcomm Technologies, Inc.</li>
  * <li>Tobias Hector, AMD</li>
  * <li>Tom Olson, ARM</li>

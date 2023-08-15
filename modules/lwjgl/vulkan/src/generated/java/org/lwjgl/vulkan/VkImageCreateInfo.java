@@ -46,6 +46,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the size of the resultant image would exceed {@code maxResourceSize}, then {@link VK10#vkCreateImage CreateImage} <b>must</b> fail and return {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. This failure <b>may</b> occur even when all image creation parameters satisfy their valid usage requirements.</p>
  * 
+ * <p>If the implementation reports {@link VK10#VK_TRUE TRUE} in {@link VkPhysicalDeviceHostImageCopyPropertiesEXT}{@code ::identicalMemoryTypeRequirements}, usage of {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} <b>must</b> not affect the memory type requirements of the image as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#sparsememory-memory-requirements">Sparse Resource Memory Requirements</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-association">Resource Memory Association</a>.</p>
+ * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
  * <p>For images created without {@link VK11#VK_IMAGE_CREATE_EXTENDED_USAGE_BIT IMAGE_CREATE_EXTENDED_USAGE_BIT} a {@code usage} bit is valid if it is supported for the format the image is created with.</p>
@@ -264,6 +266,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code pNext} chain includes a {@link VkImportMetalTextureInfoEXT} structure its {@code plane} member <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}</li>
  * <li>If the {@code pNext} chain includes a {@link VkImportMetalTextureInfoEXT} structure and the image does not have a multi-planar format, then {@link VkImportMetalTextureInfoEXT}{@code ::plane} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}</li>
  * <li>If the {@code pNext} chain includes a {@link VkImportMetalTextureInfoEXT} structure and the image has a multi-planar format with only two planes, then {@link VkImportMetalTextureInfoEXT}{@code ::plane} <b>must</b> not be {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}</li>
+ * <li>If {@code imageCreateFormatFeatures} (as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-creation-limits">Image Creation Limits</a>) does not contain {@link EXTHostImageCopy#VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT}, then {@code usage} <b>must</b> not contain {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -285,7 +288,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkDeviceImageMemoryRequirements}, {@link VkExtent3D}, {@link VK10#vkCreateImage CreateImage}</p>
+ * <p>{@link VkDeviceImageMemoryRequirements}, {@link VkDeviceImageSubresourceInfoKHR}, {@link VkExtent3D}, {@link VK10#vkCreateImage CreateImage}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -395,7 +398,7 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

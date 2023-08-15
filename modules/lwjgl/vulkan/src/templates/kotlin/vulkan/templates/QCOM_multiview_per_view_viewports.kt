@@ -11,9 +11,9 @@ import vulkan.*
 val QCOM_multiview_per_view_viewports = "QCOMMultiviewPerViewViewports".nativeClassVK("QCOM_multiview_per_view_viewports", type = "device", postfix = "QCOM") {
     documentation =
         """
-        Certain use-cases for multiview have a need for specifying a separate viewport and scissor for each view, without using shader-based viewport indexing as introduced with {@link EXTShaderViewportIndexLayer VK_EXT_shader_viewport_index_layer}.
+        Certain use cases for multiview have a need for specifying a separate viewport and scissor for each view, without using shader-based viewport indexing as introduced with {@link EXTShaderViewportIndexLayer VK_EXT_shader_viewport_index_layer}.
 
-        This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview-per-view-viewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview renderpass instance will use a viewport and scissor index equal to the {@code ViewIndex}.
+        This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview-per-view-viewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview render pass instance will use a viewport and scissor index equal to the {@code ViewIndex}.
 
         <h5>VK_QCOM_multiview_per_view_viewports</h5>
         <dl>

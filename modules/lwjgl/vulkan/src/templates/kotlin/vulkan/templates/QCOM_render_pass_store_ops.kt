@@ -11,7 +11,7 @@ import vulkan.*
 val QCOM_render_pass_store_ops = "QCOMRenderPassStoreOps".nativeClassVK("QCOM_render_pass_store_ops", type = "device", postfix = "QCOM") {
     documentation =
         """
-        Renderpass attachments <b>can</b> be read-only for the duration of a render pass.
+        Render pass attachments <b>can</b> be read-only for the duration of a render pass.
 
         Examples include input attachments and depth attachments where depth tests are enabled but depth writes are not enabled.
 

@@ -39,7 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT}</li>
- * <li>If {@code drmFormatModifierPlaneCount} is not 0, {@code pPlaneLayouts} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierPlaneCount} {@link VkSubresourceLayout} structures</li>
+ * <li>{@code pPlaneLayouts} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierPlaneCount} {@link VkSubresourceLayout} structures</li>
+ * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -114,7 +115,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -127,7 +128,6 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
     /** a pointer to an array of {@link VkSubresourceLayout} structures describing the image’s <em>memory planes</em>. */
-    @Nullable
     @NativeType("VkSubresourceLayout const *")
     public VkSubresourceLayout.Buffer pPlaneLayouts() { return npPlaneLayouts(address()); }
 
@@ -140,14 +140,14 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     /** Sets the specified value to the {@link #drmFormatModifier} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT drmFormatModifier(@NativeType("uint64_t") long value) { ndrmFormatModifier(address(), value); return this; }
     /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@link #pPlaneLayouts} field. */
-    public VkImageDrmFormatModifierExplicitCreateInfoEXT pPlaneLayouts(@Nullable @NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { npPlaneLayouts(address(), value); return this; }
+    public VkImageDrmFormatModifierExplicitCreateInfoEXT pPlaneLayouts(@NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { npPlaneLayouts(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT set(
         int sType,
         long pNext,
         long drmFormatModifier,
-        @Nullable VkSubresourceLayout.Buffer pPlaneLayouts
+        VkSubresourceLayout.Buffer pPlaneLayouts
     ) {
         sType(sType);
         pNext(pNext);
@@ -310,7 +310,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     /** Unsafe version of {@link #drmFormatModifierPlaneCount}. */
     public static int ndrmFormatModifierPlaneCount(long struct) { return UNSAFE.getInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT); }
     /** Unsafe version of {@link #pPlaneLayouts}. */
-    @Nullable public static VkSubresourceLayout.Buffer npPlaneLayouts(long struct) { return VkSubresourceLayout.createSafe(memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS), ndrmFormatModifierPlaneCount(struct)); }
+    public static VkSubresourceLayout.Buffer npPlaneLayouts(long struct) { return VkSubresourceLayout.create(memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS), ndrmFormatModifierPlaneCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.STYPE, value); }
@@ -321,7 +321,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     /** Sets the specified value to the {@code drmFormatModifierPlaneCount} field of the specified {@code struct}. */
     public static void ndrmFormatModifierPlaneCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT, value); }
     /** Unsafe version of {@link #pPlaneLayouts(VkSubresourceLayout.Buffer) pPlaneLayouts}. */
-    public static void npPlaneLayouts(long struct, @Nullable VkSubresourceLayout.Buffer value) { memPutAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS, memAddressSafe(value)); ndrmFormatModifierPlaneCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npPlaneLayouts(long struct, VkSubresourceLayout.Buffer value) { memPutAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS, value.address()); ndrmFormatModifierPlaneCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -329,9 +329,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        if (ndrmFormatModifierPlaneCount(struct) != 0) {
-            check(memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS));
-        }
+        check(memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS));
     }
 
     // -----------------------------------
@@ -385,7 +383,6 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
         @NativeType("uint32_t")
         public int drmFormatModifierPlaneCount() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.ndrmFormatModifierPlaneCount(address()); }
         /** @return a {@link VkSubresourceLayout.Buffer} view of the struct array pointed to by the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pPlaneLayouts} field. */
-        @Nullable
         @NativeType("VkSubresourceLayout const *")
         public VkSubresourceLayout.Buffer pPlaneLayouts() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.npPlaneLayouts(address()); }
 
@@ -398,7 +395,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
         /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#drmFormatModifier} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer drmFormatModifier(@NativeType("uint64_t") long value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.ndrmFormatModifier(address(), value); return this; }
         /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pPlaneLayouts} field. */
-        public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer pPlaneLayouts(@Nullable @NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.npPlaneLayouts(address(), value); return this; }
+        public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer pPlaneLayouts(@NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.npPlaneLayouts(address(), value); return this; }
 
     }
 

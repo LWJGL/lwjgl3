@@ -445,8 +445,8 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         <h5>Description</h5>
         <ul>
             <li>#SHADER_CREATE_LINK_STAGE_BIT_EXT specifies that a shader is linked to all other shaders created in the same #CreateShadersEXT() call whose ##VkShaderCreateInfoEXT structures' {@code flags} include #SHADER_CREATE_LINK_STAGE_BIT_EXT.</li>
-            <li>#SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT specifies that the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in a compute shader.</li>
-            <li>#SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT specifies that the subgroup sizes <b>must</b> be launched with all invocations active in a compute shader.</li>
+            <li>#SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT specifies that the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in a task, mesh, or compute shader.</li>
+            <li>#SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT specifies that the subgroup sizes <b>must</b> be launched with all invocations active in a task, mesh, or compute shader.</li>
             <li>#SHADER_CREATE_NO_TASK_SHADER_BIT_EXT specifies that a mesh shader <b>must</b> only be used without a task shader. Otherwise, the mesh shader <b>must</b> only be used with a task shader.</li>
             <li>#SHADER_CREATE_DISPATCH_BASE_BIT_EXT specifies that a compute shader <b>can</b> be used with #CmdDispatchBase() with a non-zero base workgroup.</li>
             <li>#SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT specifies that a fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
@@ -727,8 +727,8 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         VkCommandBuffer("commandBuffer", "the command buffer that the shader object will be bound to."),
         AutoSize("pStages", "pShaders")..uint32_t("stageCount", "the length of the {@code pStages} and {@code pShaders} arrays."),
-        VkShaderStageFlagBits.const.p("pStages", "an array of {@code VkShaderStageFlagBits} values specifying one stage per array index that is affected by the corresponding value in the {@code pShaders} array."),
-        VkShaderEXT.const.p("pShaders", "an array of {@code VkShaderEXT} handles and/or #NULL_HANDLE values describing the shader binding operations to be performed on each stage in {@code pStages}.")
+        VkShaderStageFlagBits.const.p("pStages", "a pointer to an array of {@code VkShaderStageFlagBits} values specifying one stage per array index that is affected by the corresponding value in the {@code pShaders} array."),
+        VkShaderEXT.const.p("pShaders", "a pointer to an array of {@code VkShaderEXT} handles and/or #NULL_HANDLE values describing the shader binding operations to be performed on each stage in {@code pStages}.")
     )
 
     void(
@@ -1527,6 +1527,10 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         <h5>Description</h5>
         This command sets the color write masks of the specified attachments for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_COLOR_WRITE_MASK_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineColorBlendAttachmentState{@code ::colorWriteMask} values used to create the currently active pipeline.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Formats with bits that are shared between components specified by {@code VkColorComponentFlagBits}, such as #FORMAT_E5B9G9R9_UFLOAT_PACK32, cannot have their channels individually masked by this functionality; either all components that share bits have to be enabled, or none of them.
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
             <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState3ColorWriteMask">{@code extendedDynamicState3ColorWriteMask}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
@@ -2043,7 +2047,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("negativeOneToOne", "specifies the {@code negativeOneToOne} state.")
     )
 
-    void(
+    DependsOn("VK_NV_clip_space_w_scaling")..void(
         "CmdSetViewportWScalingEnableNV",
         """
         Specify the viewport W scaling enable state dynamically for a command buffer.
@@ -2089,7 +2093,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("viewportWScalingEnable", "specifies the {@code viewportWScalingEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_viewport_swizzle")..void(
         "CmdSetViewportSwizzleNV",
         """
         Specify the viewport swizzle state dynamically for a command buffer.
@@ -2144,7 +2148,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkViewportSwizzleNV.const.p("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures specifying viewport swizzles.")
     )
 
-    void(
+    DependsOn("VK_NV_fragment_coverage_to_color")..void(
         "CmdSetCoverageToColorEnableNV",
         """
         Specify the coverage to color enable state dynamically for a command buffer.
@@ -2190,7 +2194,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("coverageToColorEnable", "specifies the {@code coverageToColorEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_fragment_coverage_to_color")..void(
         "CmdSetCoverageToColorLocationNV",
         """
         Specify the coverage to color location dynamically for a command buffer.
@@ -2236,7 +2240,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         uint32_t("coverageToColorLocation", "specifies the {@code coverageToColorLocation} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationModeNV",
         """
         Specify the coverage modulation mode dynamically for a command buffer.
@@ -2283,7 +2287,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkCoverageModulationModeNV("coverageModulationMode", "specifies the {@code coverageModulationMode} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationTableEnableNV",
         """
         Specify the coverage modulation table enable state dynamically for a command buffer.
@@ -2329,7 +2333,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("coverageModulationTableEnable", "specifies the {@code coverageModulationTableEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_framebuffer_mixed_samples")..void(
         "CmdSetCoverageModulationTableNV",
         """
         Specify the coverage modulation table dynamically for a command buffer.
@@ -2379,7 +2383,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         float.const.p("pCoverageModulationTable", "specifies the table of modulation factors containing a value for each number of covered samples.")
     )
 
-    void(
+    DependsOn("VK_NV_shading_rate_image")..void(
         "CmdSetShadingRateImageEnableNV",
         """
         Specify the shading rate image enable state dynamically for a command buffer.
@@ -2425,7 +2429,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("shadingRateImageEnable", "specifies the {@code shadingRateImageEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_representative_fragment_test")..void(
         "CmdSetRepresentativeFragmentTestEnableNV",
         """
         Specify the representative fragment test enable dynamically for a command buffer.
@@ -2471,7 +2475,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("representativeFragmentTestEnable", "specifies the {@code representativeFragmentTestEnable} state.")
     )
 
-    void(
+    DependsOn("VK_NV_coverage_reduction_mode")..void(
         "CmdSetCoverageReductionModeNV",
         """
         Specify the coverage reduction mode dynamically for a command buffer.

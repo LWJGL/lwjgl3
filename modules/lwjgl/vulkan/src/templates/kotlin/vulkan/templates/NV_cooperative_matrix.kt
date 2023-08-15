@@ -81,27 +81,16 @@ val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_
     )
 
     EnumConstant(
-        """
-        VkComponentTypeNV - Specify SPIR-V cooperative matrix component type
+        "Extends {@code VkScopeKHR}.",
 
-        <h5>Description</h5>
-        <ul>
-            <li>#COMPONENT_TYPE_FLOAT16_NV corresponds to SPIR-V {@code OpTypeFloat} 16.</li>
-            <li>#COMPONENT_TYPE_FLOAT32_NV corresponds to SPIR-V {@code OpTypeFloat} 32.</li>
-            <li>#COMPONENT_TYPE_FLOAT64_NV corresponds to SPIR-V {@code OpTypeFloat} 64.</li>
-            <li>#COMPONENT_TYPE_SINT8_NV corresponds to SPIR-V {@code OpTypeInt} 8 1.</li>
-            <li>#COMPONENT_TYPE_SINT16_NV corresponds to SPIR-V {@code OpTypeInt} 16 1.</li>
-            <li>#COMPONENT_TYPE_SINT32_NV corresponds to SPIR-V {@code OpTypeInt} 32 1.</li>
-            <li>#COMPONENT_TYPE_SINT64_NV corresponds to SPIR-V {@code OpTypeInt} 64 1.</li>
-            <li>#COMPONENT_TYPE_UINT8_NV corresponds to SPIR-V {@code OpTypeInt} 8 0.</li>
-            <li>#COMPONENT_TYPE_UINT16_NV corresponds to SPIR-V {@code OpTypeInt} 16 0.</li>
-            <li>#COMPONENT_TYPE_UINT32_NV corresponds to SPIR-V {@code OpTypeInt} 32 0.</li>
-            <li>#COMPONENT_TYPE_UINT64_NV corresponds to SPIR-V {@code OpTypeInt} 64 0.</li>
-        </ul>
+        "SCOPE_DEVICE_NV".."1",
+        "SCOPE_WORKGROUP_NV".."2",
+        "SCOPE_SUBGROUP_NV".."3",
+        "SCOPE_QUEUE_FAMILY_NV".."5"
+    )
 
-        <h5>See Also</h5>
-        ##VkCooperativeMatrixPropertiesNV
-        """,
+    EnumConstant(
+        "Extends {@code VkComponentTypeKHR}.",
 
         "COMPONENT_TYPE_FLOAT16_NV".."0",
         "COMPONENT_TYPE_FLOAT32_NV".."1",
@@ -114,30 +103,6 @@ val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_
         "COMPONENT_TYPE_UINT16_NV".."8",
         "COMPONENT_TYPE_UINT32_NV".."9",
         "COMPONENT_TYPE_UINT64_NV".."10"
-    )
-
-    EnumConstant(
-        """
-        VkScopeNV - Specify SPIR-V scope
-
-        <h5>Description</h5>
-        <ul>
-            <li>#SCOPE_DEVICE_NV corresponds to SPIR-V {@code Device} scope.</li>
-            <li>#SCOPE_WORKGROUP_NV corresponds to SPIR-V {@code Workgroup} scope.</li>
-            <li>#SCOPE_SUBGROUP_NV corresponds to SPIR-V {@code Subgroup} scope.</li>
-            <li>#SCOPE_QUEUE_FAMILY_NV corresponds to SPIR-V {@code QueueFamily} scope.</li>
-        </ul>
-
-        All enum values match the corresponding SPIR-V value.
-
-        <h5>See Also</h5>
-        ##VkCooperativeMatrixPropertiesNV
-        """,
-
-        "SCOPE_DEVICE_NV".."1",
-        "SCOPE_WORKGROUP_NV".."2",
-        "SCOPE_SUBGROUP_NV".."3",
-        "SCOPE_QUEUE_FAMILY_NV".."5"
     )
 
     VkResult(

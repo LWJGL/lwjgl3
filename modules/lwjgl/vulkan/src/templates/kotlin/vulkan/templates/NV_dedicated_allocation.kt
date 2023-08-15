@@ -23,15 +23,15 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
 ￿
 ￿    VkDedicatedAllocationImageCreateInfoNV dedicatedImageInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV,            // sType
-￿        NULL,                                                                   // pNext
-￿        VK_TRUE,                                                                // dedicatedAllocation
+￿        .sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV,
+￿        .pNext = NULL,
+￿        .dedicatedAllocation = VK_TRUE,
 ￿    };
 ￿
 ￿    VkImageCreateInfo imageCreateInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,    // sType
-￿        &amp;dedicatedImageInfo                     // pNext
+￿        .sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+￿        .pNext = &amp;dedicatedImageInfo
 ￿        // Other members set as usual
 ￿    };
 ￿
@@ -39,7 +39,7 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
 ￿    VkResult result = vkCreateImage(
 ￿        device,
 ￿        &amp;imageCreateInfo,
-￿        NULL,                       // pAllocator
+￿        NULL,               // pAllocator
 ￿        &amp;image);
 ￿
 ￿    VkMemoryRequirements memoryRequirements;
@@ -53,25 +53,25 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
 ￿
 ￿    VkDedicatedAllocationMemoryAllocateInfoNV dedicatedInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV,             // sType
-￿        NULL,                                                                       // pNext
-￿        image,                                                                      // image
-￿        VK_NULL_HANDLE,                                                             // buffer
+￿        .sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV,
+￿        .pNext = NULL,
+￿        .image = image,
+￿        .buffer = VK_NULL_HANDLE,
 ￿    };
 ￿
 ￿    VkMemoryAllocateInfo memoryAllocateInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,                 // sType
-￿        &amp;dedicatedInfo,                                         // pNext
-￿        memoryRequirements.size,                                // allocationSize
-￿        FindMemoryTypeIndex(memoryRequirements.memoryTypeBits), // memoryTypeIndex
+￿        .sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+￿        .pNext = &amp;dedicatedInfo,
+￿        .allocationSize = memoryRequirements.size,
+￿        .memoryTypeIndex = FindMemoryTypeIndex(memoryRequirements.memoryTypeBits),
 ￿    };
 ￿
 ￿    VkDeviceMemory memory;
 ￿    vkAllocateMemory(
 ￿        device,
 ￿        &amp;memoryAllocateInfo,
-￿        NULL,                       // pAllocator
+￿        NULL,               // pAllocator
 ￿        &amp;memory);
 ￿
 ￿    // Bind the image to the memory

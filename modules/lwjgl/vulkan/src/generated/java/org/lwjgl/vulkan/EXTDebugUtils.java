@@ -50,15 +50,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     PFN_vkDestroyDebugUtilsMessengerEXT pfnDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
  * 
  *     VkDebugUtilsMessengerCreateInfoEXT callback1 = {
- *             VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,  // sType
- *             NULL,                                                     // pNext
- *             0,                                                        // flags
- *             VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |           // messageSeverity
- *             VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
- *             VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |             // messageType
- *             VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
- *             myOutputDebugString,                                      // pfnUserCallback
- *             NULL                                                      // pUserData
+ *         .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+ *         .pNext = NULL,
+ *         .flags = 0,
+ *         .messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |
+ *                            VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
+ *         .messageType= VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+ *                       VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
+ *         .pfnUserCallback = myOutputDebugString,
+ *         .pUserData = NULL
  *     };
  *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, NULL, &amp;cb1);
  *     if (res != VK_SUCCESS) {
@@ -74,14 +74,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     }
  * 
  *     VkDebugUtilsMessengerCreateInfoEXT callback3 = {
- *             VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,  // sType
- *             NULL,                                                     // pNext
- *             0,                                                        // flags
- *             VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,          // messageSeverity
- *             VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |             // messageType
- *             VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
- *             mystdOutLogger,                                           // pfnUserCallback
- *             NULL                                                      // pUserData
+ *         .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+ *         .pNext = NULL,
+ *         .flags = 0,
+ *         .messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
+ *         .messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+ *                        VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
+ *         .pfnUserCallback = mystdOutLogger,
+ *         .pUserData = NULL
  *     };
  *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback3, NULL, &amp;cb3);
  *     if (res != VK_SUCCESS) {
@@ -110,11 +110,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Set a name on the image
  *     const VkDebugUtilsObjectNameInfoEXT imageNameInfo =
  *     {
- *         VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, // sType
- *         NULL,                                               // pNext
- *         VK_OBJECT_TYPE_IMAGE,                               // objectType
- *         (uint64_t)image,                                    // objectHandle
- *         "Brick Diffuse Texture",                            // pObjectName
+ *         .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
+ *         .pNext = NULL,
+ *         .objectType = VK_OBJECT_TYPE_IMAGE,
+ *         .objectHandle = (uint64_t)image,
+ *         .pObjectName = "Brick Diffuse Texture",
  *     };
  * 
  *     pfnSetDebugUtilsObjectNameEXT(device, &amp;imageNameInfo);
@@ -141,10 +141,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Describe the area being rendered
  *     const VkDebugUtilsLabelEXT houseLabel =
  *     {
- *         VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT, // sType
- *         NULL,                                    // pNext
- *         "Brick House",                           // pLabelName
- *         { 1.0f, 0.0f, 0.0f, 1.0f },              // color
+ *         .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
+ *         .pNext = NULL,
+ *         .pLabelName = "Brick House",
+ *         .color = { 1.0f, 0.0f, 0.0f, 1.0f },
  *     };
  * 
  *     // Start an annotated group of calls under the 'Brick House' name
@@ -153,10 +153,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *         // A mutable structure for each part being rendered
  *         VkDebugUtilsLabelEXT housePartLabel =
  *         {
- *             VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT, // sType
- *             NULL,                                    // pNext
- *             NULL,                                    // pLabelName
- *             { 0.0f, 0.0f, 0.0f, 0.0f },              // color
+ *             .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
+ *             .pNext = NULL,
+ *             .pLabelName = NULL,
+ *             .color = { 0.0f, 0.0f, 0.0f, 0.0f },
  *         };
  * 
  *         // Set the name and insert the marker
@@ -195,10 +195,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Describe the queue being used
  *     const VkDebugUtilsLabelEXT queueLabel =
  *     {
- *         VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT, // sType
- *         NULL,                                    // pNext
- *         "Main Render Work",                      // pLabelName
- *         { 0.0f, 1.0f, 0.0f, 1.0f },              // color
+ *         .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
+ *         .pNext = NULL,
+ *         .pLabelName = "Main Render Work",
+ *         .color = { 0.0f, 1.0f, 0.0f, 1.0f },
  *     };
  * 
  *     // Identify the queue label region
@@ -206,15 +206,18 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  *     // Submit the work for the main render thread
  *     const VkCommandBuffer cmd_bufs[] = {commandBuffer};
- *     VkSubmitInfo submit_info = {.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO,
- *                                 .pNext = NULL,
- *                                 .waitSemaphoreCount = 0,
- *                                 .pWaitSemaphores = NULL,
- *                                 .pWaitDstStageMask = NULL,
- *                                 .commandBufferCount = 1,
- *                                 .pCommandBuffers = cmd_bufs,
- *                                 .signalSemaphoreCount = 0,
- *                                 .pSignalSemaphores = NULL};
+ *     VkSubmitInfo submit_info =
+ *     {
+ *         .sType = VK_STRUCTURE_TYPE_SUBMIT_INFO,
+ *         .pNext = NULL,
+ *         .waitSemaphoreCount = 0,
+ *         .pWaitSemaphores = NULL,
+ *         .pWaitDstStageMask = NULL,
+ *         .commandBufferCount = 1,
+ *         .pCommandBuffers = cmd_bufs,
+ *         .signalSemaphoreCount = 0,
+ *         .pSignalSemaphores = NULL
+ *     };
  *     vkQueueSubmit(queue, 1, &amp;submit_info, fence);
  * 
  *     // End the queue label region
@@ -388,9 +391,9 @@ public class EXTDebugUtils {
      * <ul>
      * <li>{@code pNameInfo→objectType} <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
      * <li>{@code pNameInfo→objectHandle} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→objectHandle}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→objectHandle}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -457,9 +460,9 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
-     * <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→objectHandle}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→objectHandle}</li>
+     * <li>If {@code pNameInfo→objectHandle} is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

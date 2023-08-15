@@ -197,28 +197,28 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 ￿{
 ￿    // binding to a single image descriptor
 ￿    {
-￿        0,                                           // binding
-￿        0,                                           // dstArrayElement
-￿        1,                                           // descriptorCount
-￿        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,   // descriptorType
-￿        offsetof(AppDataStructure, imageInfo),       // offset
-￿        0                                            // stride is not required if descriptorCount is 1
+￿        .binding = 0,
+￿        .dstArrayElement = 0,
+￿        .descriptorCount = 1,
+￿        .descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+￿        .offset = offsetof(AppDataStructure, imageInfo),
+￿        .stride = 0     // not required if descriptorCount is 1
 ￿    }
 ￿};
 ￿
 ￿// create a descriptor update template for push descriptor set updates
 ￿const VkDescriptorUpdateTemplateCreateInfo createInfo =
 ￿{
-￿    VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType
-￿    NULL,                                                      // pNext
-￿    0,                                                         // flags
-￿    1,                                                         // descriptorUpdateEntryCount
-￿    descriptorUpdateTemplateEntries,                           // pDescriptorUpdateEntries
-￿    VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,   // templateType
-￿    0,                                                         // descriptorSetLayout, ignored by given templateType
-￿    VK_PIPELINE_BIND_POINT_GRAPHICS,                           // pipelineBindPoint
-￿    myPipelineLayout,                                          // pipelineLayout
-￿    0,                                                         // set
+￿    .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,
+￿    .pNext = NULL,
+￿    .flags = 0,
+￿    .descriptorUpdateEntryCount = 1,
+￿    .pDescriptorUpdateEntries = descriptorUpdateTemplateEntries,
+￿    .templateType = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,
+￿    .descriptorSetLayout = 0,   // ignored by given templateType
+￿    .pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS,
+￿    .pipelineLayout = myPipelineLayout,
+￿    .set = 0,
 ￿};
 ￿
 ￿VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;

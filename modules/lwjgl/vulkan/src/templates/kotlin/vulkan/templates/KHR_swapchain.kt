@@ -195,7 +195,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         The {@code pCreateInfo→surface} <b>must</b> not be destroyed until after the swapchain is destroyed.
 
-        If {@code pCreateInfo→oldSwapchain} is #NULL_HANDLE, and the native window referred to by {@code pCreateInfo→surface} is already associated with a Vulkan swapchain, #ERROR_NATIVE_WINDOW_IN_USE_KHR <b>must</b> be returned.
+        If {@code oldSwapchain} is #NULL_HANDLE, and the native window referred to by {@code pCreateInfo→surface} is already associated with a Vulkan swapchain, #ERROR_NATIVE_WINDOW_IN_USE_KHR <b>must</b> be returned.
 
         If the native window referred to by {@code pCreateInfo→surface} is already associated with a non-Vulkan graphics API surface, #ERROR_NATIVE_WINDOW_IN_USE_KHR <b>must</b> be returned.
 
@@ -464,9 +464,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <li>Each element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to {@code vkGetPhysicalDeviceSurfaceSupportKHR}</li>
             <li>If more than one member of {@code pSwapchains} was created from a display surface, all display surfaces referenced that refer to the same display <b>must</b> use the same display mode</li>
             <li>When a semaphore wait operation referring to a binary semaphore defined by the elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} executes on {@code queue}, there <b>must</b> be no other queues waiting on the same semaphore</li>
-            <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution</li>
             <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be created with a {@code VkSemaphoreType} of #SEMAPHORE_TYPE_BINARY</li>
-            <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution</li>
+            <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operations</a> on which it depends (if any) <b>must</b> have also been submitted for execution</li>
         </ul>
 
         Any writes to memory backing the images referenced by the {@code pImageIndices} and {@code pSwapchains} members of {@code pPresentInfo}, that are available before #QueuePresentKHR() is executed, are automatically made visible to the read access performed by the presentation engine. This automatic visibility operation for an image happens-after the semaphore signal operation, and happens-before the presentation engine accesses the image.

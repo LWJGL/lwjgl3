@@ -29,17 +29,17 @@ val EXT_astc_decode_mode = "EXTAstcDecodeMode".nativeClassVK("EXT_astc_decode_mo
         <pre><code>
 ￿    VkImageViewASTCDecodeModeEXT decodeMode =
 ￿    {
-￿        VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT, // sType
-￿        NULL, // pNext
-￿        VK_FORMAT_R8G8B8A8_UNORM // decode mode
+￿        .sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
+￿        .pNext = NULL,
+￿        .decodeMode = VK_FORMAT_R8G8B8A8_UNORM
 ￿    };
 ￿
 ￿    VkImageViewCreateInfo createInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO, // sType
-￿        &amp;decodeMode, // pNext
+￿        .sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+￿        .pNext = &amp;decodeMode,
 ￿        // flags, image, viewType set to application-desired values
-￿        VK_FORMAT_ASTC_8x8_UNORM_BLOCK, // format
+￿        .format = VK_FORMAT_ASTC_8x8_UNORM_BLOCK,
 ￿        // components, subresourceRange set to application-desired values
 ￿    };
 ￿

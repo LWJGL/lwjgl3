@@ -15,29 +15,29 @@ package org.lwjgl.vulkan;
  * <pre><code>
  *     const VkVertexInputBindingDivisorDescriptionEXT divisorDesc =
  *     {
- *         0,
- *         4
+ *         .binding = 0,
+ *         .divisor = 4
  *     };
  * 
  *     const VkPipelineVertexInputDivisorStateCreateInfoEXT divisorInfo =
  *     {
- *         VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT, // sType
- *         NULL,                                                             // pNext
- *         1,                                                                // vertexBindingDivisorCount
- *         &amp;divisorDesc                                                      // pVertexBindingDivisors
+ *         .sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
+ *         .pNext = NULL,
+ *         .vertexBindingDivisorCount = 1,
+ *         .pVertexBindingDivisors = &amp;divisorDesc
  *     }
  * 
  *     const VkVertexInputBindingDescription binding =
  *     {
- *         0,                                                                // binding
- *         sizeof(Vertex),                                                   // stride
- *         VK_VERTEX_INPUT_RATE_INSTANCE                                     // inputRate
+ *         .binding = 0,
+ *         .stride = sizeof(Vertex),
+ *         .inputRate = VK_VERTEX_INPUT_RATE_INSTANCE
  *     };
  * 
  *     const VkPipelineVertexInputStateCreateInfo viInfo =
  *     {
- *         VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_CREATE_INFO,              // sType
- *         &amp;divisorInfo,                                                     // pNext
+ *         .sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_CREATE_INFO,
+ *         .pNext = &amp;divisorInfo,
  *         ...
  *     };
  *     //...</code></pre>

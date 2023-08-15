@@ -581,9 +581,9 @@ public class VK13 extends VK12 {
      * </ul>
      * </li>
      * <li>{@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} specifies the fragment shader stage.</li>
-     * <li>{@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} specifies the stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed. This stage also includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load operations</a> for framebuffer attachments with a depth/stencil format.</li>
-     * <li>{@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} specifies the stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed. This stage also includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass store operations</a> for framebuffer attachments with a depth/stencil format.</li>
-     * <li>{@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} specifies the stage of the pipeline where final color values are output from the pipeline. This stage includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blending">blending</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-logicop">logic operations</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load and store operations</a>, multisample resolve operations for framebuffer attachments with a color or depth/stencil format, and {@link VK10#vkCmdClearAttachments CmdClearAttachments}.</li>
+     * <li>{@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} specifies the stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed. This stage also includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">render pass load operations</a> for framebuffer attachments with a depth/stencil format.</li>
+     * <li>{@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} specifies the stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed. This stage also includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">render pass store operations</a> for framebuffer attachments with a depth/stencil format.</li>
+     * <li>{@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} specifies the stage of the pipeline where final color values are output from the pipeline. This stage includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blending">blending</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-logicop">logic operations</a>, render pass <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store</a> operations for color attachments, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">render pass multisample resolve operations</a>, and {@link VK10#vkCmdClearAttachments CmdClearAttachments}.</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT PIPELINE_STAGE_2_COMPUTE_SHADER_BIT} specifies the compute shader stage.</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT} specifies a pseudo-stage indicating execution on the host of reads/writes of device memory. This stage is not invoked by any commands recorded in a command buffer.</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT} specifies the execution of all <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#copies">copy commands</a>, including {@link VK10#vkCmdCopyQueryPoolResults CmdCopyQueryPoolResults}.</li>
@@ -622,6 +622,7 @@ public class VK13 extends VK12 {
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV}</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>
+     * <li>{@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
      * <li>{@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
      * <li>{@link HUAWEIClusterCullingShader#VK_PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI}</li>
      * </ul>
@@ -636,7 +637,7 @@ public class VK13 extends VK12 {
      * <li>{@link KHRVideoDecodeQueue#VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR} specifies the execution of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-decode-operations">video decode operations</a>.</li>
      * <li>{@link KHRVideoEncodeQueue#VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR} specifies the execution of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-encode-operations">video encode operations</a>.</li>
      * <li>{@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV} specifies the stage of the pipeline where <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-operations">optical flow operation</a> are performed.</li>
-     * <li>{@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI} specifies the subpass shading shader stage.</li>
+     * <li>{@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI} specifies the subpass shading shader stage.</li>
      * <li>{@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} specifies the execution of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#micromap">micromap commands</a>.</li>
      * <li>{@link HUAWEIClusterCullingShader#VK_PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI} specifies the cluster culling shader stage.</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT PIPELINE_STAGE_2_TOP_OF_PIPE_BIT} is equivalent to {@link #VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT} with {@code VkAccessFlags2} set to 0 when specified in the second synchronization scope, but equivalent to {@link #VK_PIPELINE_STAGE_2_NONE PIPELINE_STAGE_2_NONE} in the first scope.</li>
@@ -690,10 +691,10 @@ public class VK13 extends VK12 {
      * <li>{@link #VK_ACCESS_2_MEMORY_READ_BIT ACCESS_2_MEMORY_READ_BIT} specifies all read accesses. It is always valid in any access mask, and is treated as equivalent to setting all {@code READ} access flags that are valid where it is used.</li>
      * <li>{@link #VK_ACCESS_2_MEMORY_WRITE_BIT ACCESS_2_MEMORY_WRITE_BIT} specifies all write accesses. It is always valid in any access mask, and is treated as equivalent to setting all {@code WRITE} access flags that are valid where it is used.</li>
      * <li>{@link #VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT ACCESS_2_INDIRECT_COMMAND_READ_BIT} specifies read access to command data read from indirect buffers as part of an indirect build, trace, drawing or dispatch command. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT PIPELINE_STAGE_2_DRAW_INDIRECT_BIT} pipeline stage.</li>
-     * <li>{@link #VK_ACCESS_2_INDEX_READ_BIT ACCESS_2_INDEX_READ_BIT} specifies read access to an index buffer as part of an indexed drawing command, bound by {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT PIPELINE_STAGE_2_INDEX_INPUT_BIT} pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_INDEX_READ_BIT ACCESS_2_INDEX_READ_BIT} specifies read access to an index buffer as part of an indexed drawing command, bound by {@link KHRMaintenance5#vkCmdBindIndexBuffer2KHR CmdBindIndexBuffer2KHR} and {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT PIPELINE_STAGE_2_INDEX_INPUT_BIT} pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT} specifies read access to a vertex buffer as part of a drawing command, bound by {@link VK10#vkCmdBindVertexBuffers CmdBindVertexBuffers}. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT} pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_UNIFORM_READ_BIT ACCESS_2_UNIFORM_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-uniformbuffer">uniform buffer</a> in any shader pipeline stage.</li>
-     * <li>{@link #VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT ACCESS_2_INPUT_ATTACHMENT_READ_BIT} specifies read access to an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">input attachment</a> within a render pass during subpass shading or fragment shading. Such access occurs in the {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI} or {@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT ACCESS_2_INPUT_ATTACHMENT_READ_BIT} specifies read access to an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">input attachment</a> within a render pass during subpass shading or fragment shading. Such access occurs in the {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI} or {@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_SHADER_SAMPLED_READ_BIT ACCESS_2_SHADER_SAMPLED_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-uniformtexelbuffer">uniform texel buffer</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-sampledimage">sampled image</a> in any shader pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_SHADER_STORAGE_READ_BIT ACCESS_2_SHADER_STORAGE_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagebuffer">storage buffer</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-physical-storage-buffer">physical storage buffer</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a> in any shader pipeline stage.</li>
      * <li>{@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shader-binding-table">shader binding table</a> in any shader pipeline stage.</li>
@@ -708,11 +709,10 @@ public class VK13 extends VK12 {
      * </li>
      * <li>{@link #VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT ACCESS_2_SHADER_STORAGE_WRITE_BIT} specifies write access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagebuffer">storage buffer</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-physical-storage-buffer">physical storage buffer</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a> in any shader pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_SHADER_WRITE_BIT ACCESS_2_SHADER_WRITE_BIT} is equivalent to {@link #VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT ACCESS_2_SHADER_STORAGE_WRITE_BIT}.</li>
-     * <li>{@link #VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT ACCESS_2_COLOR_ATTACHMENT_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">color attachment</a>, such as via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blending">blending</a> (other than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operations</a>), <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-logicop">logic operations</a>, or via certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load operations</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-shader-tileimage-reads">fragment shader tile image reads</a>. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} pipeline stage.</li>
-     * <li>{@link #VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT} specifies write access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">color, resolve, or depth/stencil resolve attachment</a> during a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">render pass</a> or via certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load and store operations</a>. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} pipeline stage.</li>
-     * <li>{@link #VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">depth/stencil attachment</a>, via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-ds-state">depth or stencil operations</a> or certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load operations</a>. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} or {@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} pipeline stages.</li>
-     * <li>{@link #VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT} specifies write <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-ds-state">depth or stencil operations</a> in the {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR} pipeline stages or via certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load operations</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-shader-tileimage-reads">fragment shader tile image reads</a> in the {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR} pipeline stage.</li>
-     * <li>{@link KHRSynchronization2#VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR} specifies write access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">depth/stencil attachment</a>, via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-ds-state">depth or stencil operations</a> or certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">subpass load and store operations</a>. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} or {@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} pipeline stages.</li>
+     * <li>{@link #VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT ACCESS_2_COLOR_ATTACHMENT_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">color attachment</a>, such as via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blending">blending</a> (other than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operations</a>), <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-logicop">logic operations</a> or certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">render pass load operations</a> in the {@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} pipeline stage or via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-shader-tileimage-reads">fragment shader tile image reads</a> in the {@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT} specifies write access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">color attachment</a> during a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">render pass</a> or via certain render pass <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store</a>, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">multisample resolve</a> operations. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT} specifies read access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">depth/stencil attachment</a>, via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-ds-state">depth or stencil operations</a> or certain <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">render pass load operations</a> in the {@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} or {@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} pipeline stages or via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-shader-tileimage-reads">fragment shader tile image reads</a> in the {@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT} specifies write access to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">depth/stencil attachment</a>, via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-ds-state">depth or stencil operations</a> or certain render pass <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store</a> operations. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT} or {@link #VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT} pipeline stages.</li>
      * <li>{@link #VK_ACCESS_2_TRANSFER_READ_BIT ACCESS_2_TRANSFER_READ_BIT} specifies read access to an image or buffer in a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#copies">copy</a> operation. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link #VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, or {@link #VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT} pipeline stages.</li>
      * <li>{@link #VK_ACCESS_2_TRANSFER_WRITE_BIT ACCESS_2_TRANSFER_WRITE_BIT} specifies write access to an image or buffer in a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#clears">clear</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#copies">copy</a> operation. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link #VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, {@link #VK_PIPELINE_STAGE_2_CLEAR_BIT PIPELINE_STAGE_2_CLEAR_BIT}, or {@link #VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT} pipeline stages.</li>
      * <li>{@link #VK_ACCESS_2_HOST_READ_BIT ACCESS_2_HOST_READ_BIT} specifies read access by a host operation. Accesses of this type are not performed through a resource, but directly on memory. Such access occurs in the {@link #VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT} pipeline stage.</li>
@@ -854,6 +854,7 @@ public class VK13 extends VK12 {
      * <li>{@link QCOMImageProcessing#VK_FORMAT_FEATURE_2_WEIGHT_SAMPLED_IMAGE_BIT_QCOM FORMAT_FEATURE_2_WEIGHT_SAMPLED_IMAGE_BIT_QCOM} specifies that image views created with this format <b>can</b> be sampled in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage">weight image sampling</a> operations.</li>
      * <li>{@link QCOMImageProcessing#VK_FORMAT_FEATURE_2_BLOCK_MATCHING_BIT_QCOM FORMAT_FEATURE_2_BLOCK_MATCHING_BIT_QCOM} specifies that image views created with this format <b>can</b> be used in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-blockmatch">block matching</a> operations.</li>
      * <li>{@link QCOMImageProcessing#VK_FORMAT_FEATURE_2_BOX_FILTER_SAMPLED_BIT_QCOM FORMAT_FEATURE_2_BOX_FILTER_SAMPLED_BIT_QCOM} specifies that image views created with this format <b>can</b> be sampled in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations.</li>
+     * <li>{@link EXTHostImageCopy#VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT} specifies that an image <b>can</b> be created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT}.</li>
      * </ul>
      * 
      * <p>The following bits <b>may</b> be set in {@code bufferFeatures}, specifying that the features are supported by buffers ({@code VkBuffer}) or buffer views ({@code VkBufferView}) created with the queried {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2}{@code ::format}:</p>
@@ -1420,7 +1421,7 @@ public class VK13 extends VK12 {
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT}</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT}</li>
      * <li>If neither the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> are enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
-     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI}</li>
+     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
      * <li>If neither the {@link NVRayTracing VK_NV_ray_tracing} extension or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rayTracingPipeline">{@code rayTracingPipeline} feature</a> are enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
@@ -1716,18 +1717,16 @@ public class VK13 extends VK12 {
      * 
      * <p>The second <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> includes only the timestamp write operation.</p>
      * 
-     * <p>When the timestamp value is written, the availability status of the query is set to available.</p>
-     * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>If an implementation is unable to detect completion and latch the timer immediately after {@code stage} has completed, it <b>may</b> instead do so at any logically later stage.</p>
+     * <p>Implementations may write the timestamp at any stage that is <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages-order">logically later</a> than {@code stage}.</p>
      * </div>
      * 
-     * <p>Comparisons between timestamps are not meaningful if the timestamps are written by commands submitted to different queues.</p>
+     * <p>Any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-execution">happens-after</a> another timestamp write in the same submission <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. If apiext:`VK_EXT_calibrated_timestamps` is enabled, this extends to timestamp writes across all submissions on the same logical device: any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-execution">happens-after</a> another <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. Timestamps written by this command <b>must</b> be in the {@link EXTCalibratedTimestamps#VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} time domain ({@code VkTimeDomainEXT}). If an overflow occurs, the timestamp value <b>must</b> wrap back to zero.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>An example of such a comparison is subtracting an older timestamp from a newer one to determine the execution time of a sequence of commands.</p>
+     * <p>Comparisons between timestamps should be done between timestamps where they are guaranteed to not decrease. For example, subtracting an older timestamp from a newer one to determine the execution time of a sequence of commands is only a reliable measurement if the two timestamp writes were performed in the same submission, or if the writes were performed on the same logical device and apiext:`VK_EXT_calibrated_timestamps` is enabled.</p>
      * </div>
      * 
      * <p>If {@code vkCmdWriteTimestamp2} is called while executing a render pass instance that has multiview enabled, the timestamp uses <code>N</code> consecutive query indices in the query pool (starting at {@code query}) where <code>N</code> is the number of bits set in the view mask of the subpass the command is executed in. The resulting query values are determined by an implementation-dependent choice of one of the following behaviors:</p>
@@ -1750,17 +1749,16 @@ public class VK13 extends VK12 {
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT}</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT}</li>
      * <li>If neither the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> are enabled, {@code stage} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
-     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stage} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI}</li>
+     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stage} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code stage} <b>must</b> not contain {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
      * <li>If neither the {@link NVRayTracing VK_NV_ray_tracing} extension or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rayTracingPipeline">{@code rayTracingPipeline} feature</a> are enabled, {@code stage} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
      * <li>{@code stage} <b>must</b> only include a single pipeline stage</li>
      * <li>{@code stage} <b>must</b> only include stages valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
      * <li>{@code queryPool} <b>must</b> have been created with a {@code queryType} of {@link VK10#VK_QUERY_TYPE_TIMESTAMP QUERY_TYPE_TIMESTAMP}</li>
-     * <li>The query identified by {@code queryPool} and {@code query} <b>must</b> be <em>unavailable</em></li>
      * <li>The command pool’s queue family <b>must</b> support a non-zero {@code timestampValidBits}</li>
      * <li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
-     * <li>All queries used by the command <b>must</b> be unavailable</li>
+     * <li>All queries used by the command <b>must</b> be <em>unavailable</em></li>
      * <li>If {@code vkCmdWriteTimestamp2} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass’s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
      * </ul>
      * 
@@ -1862,8 +1860,7 @@ public class VK13 extends VK12 {
      * <li>The {@code stageMask} member of any element of the {@code pSignalSemaphoreInfos} member of any element of {@code pSubmits} <b>must</b> only include pipeline stages that are supported by the queue family which {@code queue} belongs to</li>
      * <li>The {@code stageMask} member of any element of the {@code pWaitSemaphoreInfos} member of any element of {@code pSubmits} <b>must</b> only include pipeline stages that are supported by the queue family which {@code queue} belongs to</li>
      * <li>When a semaphore wait operation for a binary semaphore is executed, as defined by the {@code semaphore} member of any element of the {@code pWaitSemaphoreInfos} member of any element of {@code pSubmits}, there <b>must</b> be no other queues waiting on the same semaphore</li>
-     * <li>The {@code semaphore} member of any element of the {@code pWaitSemaphoreInfos} member of any element of {@code pSubmits} <b>must</b> be semaphores that are signaled, or have <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution</li>
-     * <li>Any {@code semaphore} member of any element of the {@code pWaitSemaphoreInfos} member of any element of {@code pSubmits} that was created with a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution</li>
+     * <li>Any {@code semaphore} member of any element of the {@code pWaitSemaphoreInfos} member of any element of {@code pSubmits} that was created with a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> on which it depends (if any) <b>must</b> have also been submitted for execution</li>
      * <li>The {@code commandBuffer} member of any element of the {@code pCommandBufferInfos} member of any element of {@code pSubmits} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">pending or executable state</a></li>
      * <li>If a command recorded into the {@code commandBuffer} member of any element of the {@code pCommandBufferInfos} member of any element of {@code pSubmits} was not recorded with the {@link VK10#VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT}, it <b>must</b> not be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">pending state</a></li>
      * <li>Any <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-secondary">secondary command buffers recorded</a> into the {@code commandBuffer} member of any element of the {@code pCommandBufferInfos} member of any element of {@code pSubmits} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">pending or executable state</a></li>
@@ -1957,7 +1954,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each source region specified by {@code pCopyBufferInfo→pname}:pRegions is copied from the source buffer to the destination region of the destination buffer. If any of the specified regions in {@code pCopyBufferInfo→pname}:srcBuffer overlaps in memory with any of the specified regions in {@code pCopyBufferInfo→pname}:dstBuffer, values read from those overlapping regions are undefined.</p>
+     * <p>Each source region specified by {@code pCopyBufferInfo→pRegions} is copied from the source buffer to the destination region of the destination buffer. If any of the specified regions in {@code pCopyBufferInfo→srcBuffer} overlaps in memory with any of the specified regions in {@code pCopyBufferInfo→dstBuffer}, values read from those overlapping regions are undefined.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -2574,6 +2571,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the cull mode for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_CULL_MODE DYNAMIC_STATE_CULL_MODE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationStateCreateInfo}{@code ::cullMode} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -2634,6 +2644,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the front face orientation for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_FRONT_FACE DYNAMIC_STATE_FRONT_FACE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationStateCreateInfo}{@code ::frontFace} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -2693,6 +2716,19 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the primitive topology for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY DYNAMIC_STATE_PRIMITIVE_TOPOLOGY} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineInputAssemblyStateCreateInfo}{@code ::topology} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2772,6 +2808,14 @@ public class VK13 extends VK12 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
      * <li>{@code viewportCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiViewport">{@code multiViewport}</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
      * <li>{@code commandBuffer} <b>must</b> not have {@link VkCommandBufferInheritanceViewportScissorInfoNV}{@code ::viewportScissor2D} enabled</li>
@@ -2856,6 +2900,14 @@ public class VK13 extends VK12 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
      * <li>{@code scissorCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiViewport">{@code multiViewport}</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
      * <li>The {@code x} and {@code y} members of {@code offset} member of any element of {@code pScissors} <b>must</b> be greater than or equal to 0</li>
@@ -2946,7 +2998,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. If {@code pSizes} is not {@code NULL} then {@code pSizes}[i] specifies the bound size of the vertex buffer starting from the corresponding elements of {@code pBuffers}[i] plus {@code pOffsets}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent drawing commands. If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, elements of {@code pBuffers} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, and <b>can</b> be used by the vertex shader. If a vertex input attribute is bound to a vertex input binding that is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the values taken from memory are considered to be zero, and missing G, B, or A components are <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</p>
+     * <p>The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. If {@code pSizes} is not {@code NULL} then {@code pSizes}[i] specifies the bound size of the vertex buffer starting from the corresponding elements of {@code pBuffers}[i] plus {@code pOffsets}[i]. If {@code pSizes}[i] is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} then the bound size is from {@code pBuffers}[i] plus {@code pOffsets}[i] to the end of the buffer {@code pBuffers}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent drawing commands. If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, elements of {@code pBuffers} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, and <b>can</b> be used by the vertex shader. If a vertex input attribute is bound to a vertex input binding that is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the values taken from memory are considered to be zero, and missing G, B, or A components are <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</p>
      * 
      * <p>This command also <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically sets</a> the byte strides between consecutive elements within buffer {@code pBuffers}[i] to the corresponding {@code pStrides}[i] value when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, strides are specified by the {@link VkVertexInputBindingDescription}{@code ::stride} values used to create the currently active pipeline.</p>
      * 
@@ -2963,7 +3015,8 @@ public class VK13 extends VK12 {
      * <li>{@code firstBinding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
      * <li>The sum of {@code firstBinding} and {@code bindingCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
      * <li>All elements of {@code pOffsets} <b>must</b> be less than the size of the corresponding element in {@code pBuffers}</li>
-     * <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pOffsets} plus {@code pSizes} <b>must</b> be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
+     * <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pSizes} that are not {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} <b>must</b> have the corresponding elements in {@code pOffsets} plus {@code pSizes} be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
+     * <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pSizes} that are {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} <b>must</b> have the corresponding element in {@code pOffsets} be less than the size of the corresponding element in {@code pBuffers}</li>
      * <li>All elements of {@code pBuffers} <b>must</b> have been created with the {@link VK10#VK_BUFFER_USAGE_VERTEX_BUFFER_BIT BUFFER_USAGE_VERTEX_BUFFER_BIT} flag</li>
      * <li>Each element of {@code pBuffers} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, all elements of {@code pBuffers} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
@@ -3042,6 +3095,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the depth test enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE DYNAMIC_STATE_DEPTH_TEST_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDepthStencilStateCreateInfo}{@code ::depthTestEnable} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -3101,6 +3167,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the depth write enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE DYNAMIC_STATE_DEPTH_WRITE_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDepthStencilStateCreateInfo}{@code ::depthWriteEnable} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -3159,6 +3238,19 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the depth comparison operator for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_COMPARE_OP DYNAMIC_STATE_DEPTH_COMPARE_OP} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDepthStencilStateCreateInfo}{@code ::depthCompareOp} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -3220,6 +3312,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the depth bounds enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDepthStencilStateCreateInfo}{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -3278,6 +3383,19 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the stencil test enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE DYNAMIC_STATE_STENCIL_TEST_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDepthStencilStateCreateInfo}{@code ::stencilTestEnable} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -3345,6 +3463,19 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the stencil operation for subsequent drawing commands when when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_STENCIL_OP DYNAMIC_STATE_STENCIL_OP} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding {@link VkPipelineDepthStencilStateCreateInfo}{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState">{@code extendedDynamicState}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -3415,6 +3546,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the discard enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationStateCreateInfo}{@code ::rasterizerDiscardEnable} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2">{@code extendedDynamicState2}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -3474,6 +3618,19 @@ public class VK13 extends VK12 {
      * 
      * <p>This command sets the depth bias enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE DYNAMIC_STATE_DEPTH_BIAS_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationStateCreateInfo}{@code ::depthBiasEnable} value used to create the currently active pipeline.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2">{@code extendedDynamicState2}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -3532,6 +3689,19 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the primitive restart enable for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineInputAssemblyStateCreateInfo}{@code ::primitiveRestartEnable} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2">{@code extendedDynamicState2}</a> feature is enabled</li>
+     * <li>the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

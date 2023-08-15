@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code pDepthStencilResolveAttachment} is {@code NULL}, or if its attachment index is {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, it indicates that no depth/stencil resolve attachment will be used in the subpass.</p>
+ * <p>If the {@code pNext} chain of {@link VkSubpassDescription2} includes a {@link VkSubpassDescriptionDepthStencilResolve} structure, then that structure describes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">multisample resolve operations</a> for the depth/stencil attachment in a subpass. If this structure is not included in the {@code pNext} chain of {@link VkSubpassDescription2}, or if it is and either {@code pDepthStencilResolveAttachment} is {@code NULL} or its attachment index is {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, it indicates that no depth/stencil resolve attachment will be used in the subpass.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -122,7 +122,7 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct<VkSubpassDes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

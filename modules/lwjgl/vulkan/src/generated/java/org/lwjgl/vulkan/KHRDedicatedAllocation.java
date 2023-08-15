@@ -29,26 +29,26 @@ package org.lwjgl.vulkan;
  *     VkResult result = vkCreateImage(
  *         device,
  *         &amp;imageCreateInfo,
- *         NULL,                               // pAllocator
+ *         NULL,               // pAllocator
  *         &amp;image);
  * 
  *     VkMemoryDedicatedRequirementsKHR dedicatedRequirements =
  *     {
- *         VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR,
- *         NULL,                               // pNext
+ *         .sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR,
+ *         .pNext = NULL,
  *     };
  * 
  *     VkMemoryRequirements2 memoryRequirements =
  *     {
- *         VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
- *         &amp;dedicatedRequirements,             // pNext
+ *         .sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
+ *         .pNext = &amp;dedicatedRequirements,
  *     };
  * 
  *     const VkImageMemoryRequirementsInfo2 imageRequirementsInfo =
  *     {
- *         VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2,
- *         NULL,                               // pNext
- *         image
+ *         .sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2,
+ *         .pNext = NULL,
+ *         .image = image
  *     };
  * 
  *     vkGetImageMemoryRequirements2(
@@ -62,25 +62,25 @@ package org.lwjgl.vulkan;
  * 
  *         VkMemoryDedicatedAllocateInfoKHR dedicatedInfo =
  *         {
- *             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,   // sType
- *             NULL,                                                   // pNext
- *             image,                                                  // image
- *             VK_NULL_HANDLE,                                         // buffer
+ *             .sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,
+ *             .pNext = NULL,
+ *             .image = image,
+ *             .buffer = VK_NULL_HANDLE,
  *         };
  * 
  *         VkMemoryAllocateInfo memoryAllocateInfo =
  *         {
- *             VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,                 // sType
- *             &amp;dedicatedInfo,                                         // pNext
- *             memoryRequirements.size,                                // allocationSize
- *             FindMemoryTypeIndex(memoryRequirements.memoryTypeBits), // memoryTypeIndex
+ *             .sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+ *             .pNext = &amp;dedicatedInfo,
+ *             .allocationSize = memoryRequirements.size,
+ *             .memoryTypeIndex = FindMemoryTypeIndex(memoryRequirements.memoryTypeBits),
  *         };
  * 
  *         VkDeviceMemory memory;
  *         vkAllocateMemory(
  *             device,
  *             &amp;memoryAllocateInfo,
- *             NULL,                       // pAllocator
+ *             NULL,               // pAllocator
  *             &amp;memory);
  * 
  *         // Bind the image to the memory

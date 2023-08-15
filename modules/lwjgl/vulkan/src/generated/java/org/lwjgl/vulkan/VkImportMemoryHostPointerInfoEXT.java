@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -43,6 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT}</li>
  * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
+ * <li>{@code pHostPointer} <b>must</b> be a pointer value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -109,7 +111,7 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -308,7 +310,16 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostP
     /** Unsafe version of {@link #handleType(int) handleType}. */
     public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryHostPointerInfoEXT.HANDLETYPE, value); }
     /** Unsafe version of {@link #pHostPointer(long) pHostPointer}. */
-    public static void npHostPointer(long struct, long value) { memPutAddress(struct + VkImportMemoryHostPointerInfoEXT.PHOSTPOINTER, value); }
+    public static void npHostPointer(long struct, long value) { memPutAddress(struct + VkImportMemoryHostPointerInfoEXT.PHOSTPOINTER, check(value)); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        check(memGetAddress(struct + VkImportMemoryHostPointerInfoEXT.PHOSTPOINTER));
+    }
 
     // -----------------------------------
 

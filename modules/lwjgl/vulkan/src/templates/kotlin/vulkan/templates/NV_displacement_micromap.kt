@@ -33,7 +33,7 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
             <dd>398</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link EXTOpacityMicromap VK_EXT_opacity_micromap}
@@ -45,7 +45,7 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Christoph Kubisch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">pixeljetstream</a></li>
-                <li>Eric Werness</li>
+                <li>Eric Werness <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_displacement_micromap]%20@ewerness-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_displacement_micromap%20extension*">ewerness-nv</a></li>
             </ul></dd>
         </dl>
 
@@ -68,7 +68,7 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
     IntConstant(
         "The extension specification version.",
 
-        "NV_DISPLACEMENT_MICROMAP_SPEC_VERSION".."1"
+        "NV_DISPLACEMENT_MICROMAP_SPEC_VERSION".."2"
     )
 
     StringConstant(

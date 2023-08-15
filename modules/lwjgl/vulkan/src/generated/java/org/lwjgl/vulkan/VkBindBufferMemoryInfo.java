@@ -37,7 +37,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code memory} was allocated by a memory import operation, that is not {@link VkImportAndroidHardwareBufferInfoANDROID} with a non-{@code NULL} {@code buffer} value, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
  * <li>If {@code memory} was allocated with the {@link VkImportAndroidHardwareBufferInfoANDROID} memory import operation with a non-{@code NULL} {@code buffer} value, {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
  * <li>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures}{@code ::bufferDeviceAddress} feature is enabled and {@code buffer} was created with the {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
- * <li>If the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT} {@code ::descriptorBufferCaptureReplay} feature is enabled and {@code buffer} was created with the {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
+ * <li>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures}{@code ::bufferDeviceAddressCaptureReplay} feature is enabled and {@code buffer} was created with the {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set</li>
+ * <li>If the {@code buffer} was created with the {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
+ * <li>If the {@code buffer} was created with the {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set</li>
  * <li>If the {@code pNext} chain includes a {@link VkBindBufferMemoryDeviceGroupInfo} structure, all instances of {@code memory} specified by {@link VkBindBufferMemoryDeviceGroupInfo}{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
  * </ul>
  * 
@@ -124,7 +126,7 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

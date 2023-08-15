@@ -19,7 +19,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
         <pre><code>
 ￿    VkSamplerCreateInfo createInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO // sType
+￿        .sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
 ￿        // Other members set to application-desired values
 ￿    };
 ￿

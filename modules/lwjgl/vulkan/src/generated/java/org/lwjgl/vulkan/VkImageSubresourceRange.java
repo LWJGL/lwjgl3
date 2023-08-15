@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkImageMemoryBarrier}, {@link VkImageMemoryBarrier2}, {@link VkImageViewCreateInfo}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}, {@link VK10#vkCmdClearDepthStencilImage CmdClearDepthStencilImage}</p>
+ * <p>{@link VkHostImageLayoutTransitionInfoEXT}, {@link VkImageMemoryBarrier}, {@link VkImageMemoryBarrier2}, {@link VkImageViewCreateInfo}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}, {@link VK10#vkCmdClearDepthStencilImage CmdClearDepthStencilImage}</p>
  * 
  * <h3>Layout</h3>
  * 

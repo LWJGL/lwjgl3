@@ -88,7 +88,7 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
         Specify whether attachment feedback loops are enabled dynamically on a command buffer.
 
         <h5>C Specification</h5>
-        To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> whether attachment feedback loops are enabled, call:
+        To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> whether a pipeline <b>can</b> access a resource as a non-attachment while it is also used as an attachment that is written to, call:
 
         <pre><code>
 ￿void vkCmdSetAttachmentFeedbackLoopEnableEXT(
@@ -96,7 +96,7 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
 ￿    VkImageAspectFlags                          aspectMask);</code></pre>
 
         <h5>Description</h5>
-        This command sets the enabled attachment feedback loops for subsequent drawing commands.
+        For attachments that are written to in a render pass, only attachments with the aspects specified in {@code aspectMask} <b>can</b> be accessed as non-attachments by subsequent <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing">drawing commands</a>.
 
         <h5>Valid Usage</h5>
         <ul>

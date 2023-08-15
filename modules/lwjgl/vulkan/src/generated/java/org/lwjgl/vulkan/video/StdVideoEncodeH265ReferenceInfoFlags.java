@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoEncodeH265ReferenceInfoFlags {
  *     uint32_t used_for_long_term_reference : 1;
  *     uint32_t unused_for_reference : 1;
+ *     uint32_t reserved : 30;
  * }</code></pre>
  */
 public class StdVideoEncodeH265ReferenceInfoFlags extends Struct<StdVideoEncodeH265ReferenceInfoFlags> implements NativeResource {
@@ -34,10 +35,12 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct<StdVideoEncodeH
 
     /** The struct member offsets. */
     public static final int
-        BITFIELD0;
+        BITFIELD0,
+        BITFIELD1;
 
     static {
         Layout layout = __struct(
+            __member(4),
             __member(4)
         );
 
@@ -45,6 +48,7 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct<StdVideoEncodeH
         ALIGNOF = layout.getAlignment();
 
         BITFIELD0 = layout.offsetof(0);
+        BITFIELD1 = layout.offsetof(1);
     }
 
     protected StdVideoEncodeH265ReferenceInfoFlags(long address, @Nullable ByteBuffer container) {
@@ -222,12 +226,16 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct<StdVideoEncodeH
     public static int nused_for_long_term_reference(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #unused_for_reference}. */
     public static int nunused_for_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265ReferenceInfoFlags.BITFIELD1); }
+    public static int nreserved(long struct) { return nbitfield1(struct) & 0x3F_FF_FF_FF; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #used_for_long_term_reference(boolean) used_for_long_term_reference}. */
     public static void nused_for_long_term_reference(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #unused_for_reference(boolean) unused_for_reference}. */
     public static void nunused_for_reference(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceInfoFlags.BITFIELD1, value); }
+    public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xC0_00_00_00) | (value & 0x3F_FF_FF_FF)); }
 
     // -----------------------------------
 

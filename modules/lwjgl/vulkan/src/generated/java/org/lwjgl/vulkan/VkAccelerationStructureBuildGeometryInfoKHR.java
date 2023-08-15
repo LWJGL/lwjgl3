@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Setting {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} in {@code flags} indicates that this build is a motion top level acceleration structure. A motion top level uses instances of format {@link VkAccelerationStructureMotionInstanceNV} if {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::arrayOfPointers} is {@link VK10#VK_FALSE FALSE}.</p>
  * 
- * <p>If {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::arrayOfPointers} is {@link VK10#VK_TRUE TRUE}, the pointer for any given element of the array of instance pointers consists of 4 bits of {@code VkAccelerationStructureMotionInstanceTypeNV} in the low 4 bits of the pointer identifying the type of structure at the pointer. The device address accessed is the value in the array with the low 4 bits set to zero. The structure at the pointer is one of {@link VkAccelerationStructureInstanceKHR}, {@link VkAccelerationStructureMatrixMotionInstanceNV} or {@link VkAccelerationStructureSRTMotionInstanceNV}, depending on the type value encoded in the low 4 bits.</p>
+ * <p>If {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::arrayOfPointers} is {@link VK10#VK_TRUE TRUE}, the pointer for each element of the array of instance pointers consists of 4 bits of {@code VkAccelerationStructureMotionInstanceTypeNV} in the low 4 bits of the pointer identifying the type of structure at the pointer. The device address accessed is the value in the array with the low 4 bits set to zero. The structure at the pointer is one of {@link VkAccelerationStructureInstanceKHR}, {@link VkAccelerationStructureMatrixMotionInstanceNV} or {@link VkAccelerationStructureSRTMotionInstanceNV}, depending on the type value encoded in the low 4 bits.</p>
  * 
  * <p>A top level acceleration structure with either motion instances or vertex motion in its instances <b>must</b> set {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} in {@code flags}.</p>
  * 
@@ -159,7 +159,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

@@ -109,9 +109,6 @@ public class KHRSamplerYcbcrConversion {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR = 1000156004,
         VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR  = 1000156005;
 
-    /** Extends {@code VkDebugReportObjectTypeEXT}. */
-    public static final int VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT = 1000156000;
-
     /** Extends {@code VkObjectType}. */
     public static final int VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR = 1000156000;
 
@@ -284,8 +281,19 @@ public class KHRSamplerYcbcrConversion {
         VK_CHROMA_LOCATION_COSITED_EVEN_KHR = 0,
         VK_CHROMA_LOCATION_MIDPOINT_KHR     = 1;
 
-    /** Extends {@code VkDebugReportObjectTypeEXT}. */
-    public static final int VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT = 1000156000;
+    /**
+     * Extends {@code VkDebugReportObjectTypeEXT}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT}</li>
+     * <li>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT     = 1000156000,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT = 1000156000;
 
     protected KHRSamplerYcbcrConversion() {
         throw new UnsupportedOperationException();

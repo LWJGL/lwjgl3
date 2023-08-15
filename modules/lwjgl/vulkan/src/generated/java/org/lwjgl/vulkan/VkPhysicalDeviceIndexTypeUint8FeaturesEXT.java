@@ -88,13 +88,13 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends Struct<VkPhysical
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT} can be used with {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. */
+    /** indicates that {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT} can be used with {@link KHRMaintenance5#vkCmdBindIndexBuffer2KHR CmdBindIndexBuffer2KHR} and {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. */
     @NativeType("VkBool32")
     public boolean indexTypeUint8() { return nindexTypeUint8(address()) != 0; }
 

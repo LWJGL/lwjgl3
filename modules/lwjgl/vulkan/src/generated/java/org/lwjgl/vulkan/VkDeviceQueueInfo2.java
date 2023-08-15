@@ -121,7 +121,7 @@ public class VkDeviceQueueInfo2 extends Struct<VkDeviceQueueInfo2> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} <b>can</b> be used to provide additional device queue parameters to {@code vkGetDeviceQueue2}. */

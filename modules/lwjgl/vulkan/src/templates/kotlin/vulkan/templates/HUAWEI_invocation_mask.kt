@@ -152,7 +152,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
             <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_GENERAL</li>
             <li>Thread mask image resolution must match the {@code width} and {@code height} in #CmdTraceRaysKHR()</li>
             <li>Each element in the invocation mask image <b>must</b> have the value 0 or 1. The value 1 means the invocation is active</li>
-            <li>{@code width} in #CmdTraceRaysKHR() should be 1</li>
+            <li>{@code depth} in #CmdTraceRaysKHR() <b>must</b> be 1</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

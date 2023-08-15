@@ -29,7 +29,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>8</dd>
+            <dd>9</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}
@@ -47,7 +47,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2023-03-06</dd>
+            <dd>2023-06-06</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -63,8 +63,11 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
                 <li>Srinath Kumarapuram, NVIDIA</li>
                 <li>Thomas J. Meier, NVIDIA</li>
                 <li>Tony Zlatinski, NVIDIA</li>
+                <li>Ravi Chaudhary, NVIDIA</li>
                 <li>Yang Liu, AMD</li>
                 <li>Daniel Rakos, RasterGrid</li>
+                <li>Ping Liu, Intel</li>
+                <li>Aidan Fabius, Core Avionics &amp; Industrial Inc.</li>
             </ul></dd>
         </dl>
         """
@@ -72,7 +75,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."8"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."9"
     )
 
     StringConstant(
@@ -102,7 +105,12 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002",
         "STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR".."1000299003",
         "STRUCTURE_TYPE_VIDEO_ENCODE_USAGE_INFO_KHR".."1000299004",
-        "STRUCTURE_TYPE_QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR".."1000299005"
+        "STRUCTURE_TYPE_QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR".."1000299005",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR".."1000299006",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR".."1000299007",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR".."1000299008",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR".."1000299009",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR".."1000299010"
     )
 
     EnumConstant(
@@ -115,7 +123,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "Extends {@code VkVideoCodingControlFlagBitsKHR}.",
 
         "VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR".enum(0x00000002),
-        "VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR".enum(0x00000004)
+        "VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR".enum(0x00000004)
     )
 
     EnumConstant(
@@ -138,6 +146,12 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
         "FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR".enum(0x08000000),
         "FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR".enum(0x10000000)
+    )
+
+    EnumConstant(
+        "Extends {@code VkVideoSessionCreateFlagBitsKHR}.",
+
+        "VIDEO_SESSION_CREATE_ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS_BIT_KHR".enum(0x00000002)
     )
 
     EnumConstant(
@@ -173,7 +187,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR reports that the implementation supports use of ##VkVideoEncodeInfoKHR{@code ::precedingExternallyEncodedBytes}.</li>
+            <li>#VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR indicates that the implementation supports the use of ##VkVideoEncodeInfoKHR{@code ::precedingExternallyEncodedBytes}.</li>
         </ul>
         """,
 
@@ -193,7 +207,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeRateControlInfoKHR
+        ##VkVideoEncodeQualityLevelPropertiesKHR, ##VkVideoEncodeRateControlInfoKHR
         """,
 
         "VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR".."0",
@@ -210,13 +224,15 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <ul>
             <li>#VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR specifies that queries managed by the pool will capture the byte offset of the bitstream data written by the video encode operation to the bitstream buffer specified in ##VkVideoEncodeInfoKHR{@code ::dstBuffer} relative to the offset specified in ##VkVideoEncodeInfoKHR{@code ::dstBufferOffset}.</li>
             <li>#VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR specifies that queries managed by the pool will capture the number of bytes written by the video encode operation to the bitstream buffer specified in ##VkVideoEncodeInfoKHR{@code ::dstBuffer}.</li>
+            <li>#VIDEO_ENCODE_FEEDBACK_BITSTREAM_HAS_OVERRIDES_BIT_KHR specifies that queries managed by the pool will capture a boolean value indicating that the data written to the bitstream buffer specified in ##VkVideoEncodeInfoKHR{@code ::dstBuffer} contains overridden parameters.</li>
         </ul>
 
         When retrieving the results of video encode feedback queries, the values corresponding to each enabled video encode feedback are written in the order of the bits defined above, followed by an optional value indicating availability or result status if #QUERY_RESULT_WITH_AVAILABILITY_BIT or #QUERY_RESULT_WITH_STATUS_BIT_KHR is specified, respectively.
         """,
 
         "VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR".enum(0x00000001),
-        "VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR".enum(0x00000002)
+        "VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR".enum(0x00000002),
+        "VIDEO_ENCODE_FEEDBACK_BITSTREAM_HAS_OVERRIDES_BIT_KHR".enum(0x00000004)
     )
 
     EnumConstant(
@@ -287,6 +303,114 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "VIDEO_ENCODE_TUNING_MODE_LOW_LATENCY_KHR".."2",
         "VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR".."3",
         "VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR".."4"
+    )
+
+    VkResult(
+        "GetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR",
+        """
+        Query video encode quality level properties.
+
+        <h5>C Specification</h5>
+        To query properties for a specific video encode quality level supported by a video encode profile, call:
+
+        <pre><code>
+￿VkResult vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR* pQualityLevelInfo,
+￿    VkVideoEncodeQualityLevelPropertiesKHR*     pQualityLevelProperties);</code></pre>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+            <li>{@code pQualityLevelInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR structure</li>
+            <li>{@code pQualityLevelProperties} <b>must</b> be a valid pointer to a ##VkVideoEncodeQualityLevelPropertiesKHR structure</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR, ##VkVideoEncodeQualityLevelPropertiesKHR
+        """,
+
+        VkPhysicalDevice("physicalDevice", "the physical device to query the video encode quality level properties for."),
+        VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.const.p("pQualityLevelInfo", "a pointer to a ##VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR structure specifying the video encode profile and quality level to query properties for."),
+        VkVideoEncodeQualityLevelPropertiesKHR.p("pQualityLevelProperties", "a pointer to a ##VkVideoEncodeQualityLevelPropertiesKHR structure in which the properties are returned.")
+    )
+
+    VkResult(
+        "GetEncodedVideoSessionParametersKHR",
+        """
+        Get encoded parameter sets from a video session parameters object.
+
+        <h5>C Specification</h5>
+        Encoded parameter data <b>can</b> be retrieved from a video session parameters object created with a video encode operation using the command:
+
+        <pre><code>
+￿VkResult vkGetEncodedVideoSessionParametersKHR(
+￿    VkDevice                                    device,
+￿    const VkVideoEncodeSessionParametersGetInfoKHR* pVideoSessionParametersInfo,
+￿    VkVideoEncodeSessionParametersFeedbackInfoKHR* pFeedbackInfo,
+￿    size_t*                                     pDataSize,
+￿    void*                                       pData);</code></pre>
+
+        <h5>Description</h5>
+        If {@code pData} is {@code NULL}, then the size of the encoded parameter data, in bytes, that <b>can</b> be retrieved is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the application to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the number of bytes actually written to {@code pData}. If {@code pDataSize} is less than the size of the encoded parameter data that <b>can</b> be retrieved, then no data will be written to {@code pData}, zero will be written to {@code pDataSize}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that no encoded parameter data was returned.
+
+        If {@code pFeedbackInfo} is not {@code NULL} then the members of the ##VkVideoEncodeSessionParametersFeedbackInfoKHR structure and any additional structures included in its {@code pNext} chain that are applicable to the video session parameters object specified in {@code pVideoSessionParametersInfo}{@code ::videoSessionParameters} will be filled with feedback about the requested parameter data on all successful calls to this command.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        This includes the cases when {@code pData} is {@code NULL} or when #INCOMPLETE is returned by the command, and enables the application to determine whether the implementation overrode any of the requested video session parameters without actually needing to retrieve the encoded parameter data itself.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pVideoSessionParametersInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeSessionParametersGetInfoKHR structure</li>
+            <li>If {@code pFeedbackInfo} is not {@code NULL}, {@code pFeedbackInfo} <b>must</b> be a valid pointer to a ##VkVideoEncodeSessionParametersFeedbackInfoKHR structure</li>
+            <li>{@code pDataSize} <b>must</b> be a valid pointer to a {@code size_t} value</li>
+            <li>If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code pDataSize} bytes</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+                <li>#INCOMPLETE</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkVideoEncodeSessionParametersFeedbackInfoKHR, ##VkVideoEncodeSessionParametersGetInfoKHR
+        """,
+
+        VkDevice("device", "the logical device that owns the video session parameters object."),
+        VkVideoEncodeSessionParametersGetInfoKHR.const.p("pVideoSessionParametersInfo", "a pointer to a ##VkVideoEncodeSessionParametersGetInfoKHR structure specifying the parameters of the encoded parameter data to retrieve."),
+        nullable..VkVideoEncodeSessionParametersFeedbackInfoKHR.p("pFeedbackInfo", "either {@code NULL} or a pointer to a ##VkVideoEncodeSessionParametersFeedbackInfoKHR structure in which feedback about the requested parameter data is returned."),
+        AutoSize("pData")..Check(1)..size_t.p("pDataSize", "a pointer to a {@code size_t} value related to the amount of encode parameter data returned, as described below."),
+        nullable..void.p("pData", "either {@code NULL} or a pointer to a buffer to write the encoded parameter data to.")
     )
 
     void(

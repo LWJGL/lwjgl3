@@ -27,11 +27,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Filling {@code imageFormatProperties} with zero for unsupported formats is an exception to the usual rule that output structures have undefined contents on error. This exception was unintentional, but is preserved for backwards compatibility. This exception only applies to {@code imageFormatProperties}, not {@code sType}, {@code pNext}, or any structures chained from {@code pNext}.</p>
  * </div>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If {@link VkHostImageCopyDevicePerformanceQueryEXT} is included in a {@code pNext} chain, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-hostImageCopy">{@code hostImageCopy}</a> feature <b>must</b> be enabled</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAndroidHardwareBufferUsageANDROID}, {@link VkExternalImageFormatProperties}, {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, {@link VkImageCompressionPropertiesEXT}, {@link VkSamplerYcbcrConversionImageFormatProperties}, or {@link VkTextureLODGatherFormatPropertiesAMD}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAndroidHardwareBufferUsageANDROID}, {@link VkExternalImageFormatProperties}, {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, {@link VkHostImageCopyDevicePerformanceQueryEXT}, {@link VkImageCompressionPropertiesEXT}, {@link VkSamplerYcbcrConversionImageFormatProperties}, or {@link VkTextureLODGatherFormatPropertiesAMD}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -99,7 +105,7 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}. */
@@ -122,6 +128,8 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
     public VkImageFormatProperties2 pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFilterCubicImageViewImageFormatPropertiesEXT} value to the {@code pNext} chain. */
     public VkImageFormatProperties2 pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkHostImageCopyDevicePerformanceQueryEXT} value to the {@code pNext} chain. */
+    public VkImageFormatProperties2 pNext(VkHostImageCopyDevicePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
     public VkImageFormatProperties2 pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatProperties} value to the {@code pNext} chain. */
@@ -359,6 +367,8 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
         public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFilterCubicImageViewImageFormatPropertiesEXT} value to the {@code pNext} chain. */
         public VkImageFormatProperties2.Buffer pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkHostImageCopyDevicePerformanceQueryEXT} value to the {@code pNext} chain. */
+        public VkImageFormatProperties2.Buffer pNext(VkHostImageCopyDevicePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
         public VkImageFormatProperties2.Buffer pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatProperties} value to the {@code pNext} chain. */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkGraphicsPipelineLibraryCreateInfoEXT {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkGraphicsPipelineLibraryFlagsEXT {@link #flags};
  * }</code></pre>
  */
@@ -92,11 +92,11 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkGraphicsPipelineLibraryFlagBitsEXT} specifying the subsets of the graphics pipeline that are being compiled. */
     @NativeType("VkGraphicsPipelineLibraryFlagsEXT")
@@ -107,7 +107,7 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
     /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@link #sType} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkGraphicsPipelineLibraryCreateInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkGraphicsPipelineLibraryCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT flags(@NativeType("VkGraphicsPipelineLibraryFlagsEXT") int value) { nflags(address(), value); return this; }
 
@@ -305,7 +305,7 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
         @NativeType("VkStructureType")
         public int sType() { return VkGraphicsPipelineLibraryCreateInfoEXT.nsType(address()); }
         /** @return the value of the {@link VkGraphicsPipelineLibraryCreateInfoEXT#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkGraphicsPipelineLibraryCreateInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkGraphicsPipelineLibraryCreateInfoEXT#flags} field. */
         @NativeType("VkGraphicsPipelineLibraryFlagsEXT")
@@ -316,7 +316,7 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
         /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#sType} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#pNext} field. */
-        public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkGraphicsPipelineLibraryCreateInfoEXT.npNext(address(), value); return this; }
+        public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsPipelineLibraryCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#flags} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer flags(@NativeType("VkGraphicsPipelineLibraryFlagsEXT") int value) { VkGraphicsPipelineLibraryCreateInfoEXT.nflags(address(), value); return this; }
 

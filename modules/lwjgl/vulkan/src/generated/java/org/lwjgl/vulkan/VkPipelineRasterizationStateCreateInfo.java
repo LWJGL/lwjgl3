@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}, {@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}, {@link VkPipelineRasterizationStateRasterizationOrderAMD}, or {@link VkPipelineRasterizationStateStreamCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDepthBiasRepresentationInfoEXT}, {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}, {@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}, {@link VkPipelineRasterizationStateRasterizationOrderAMD}, or {@link VkPipelineRasterizationStateStreamCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code polygonMode} <b>must</b> be a valid {@code VkPolygonMode} value</li>
@@ -147,7 +147,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -189,6 +189,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
     public VkPipelineRasterizationStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDepthBiasRepresentationInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineRasterizationStateCreateInfo pNext(VkDepthBiasRepresentationInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} value to the {@code pNext} chain. */
@@ -535,6 +537,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
         public VkPipelineRasterizationStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#pNext} field. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationStateCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDepthBiasRepresentationInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkDepthBiasRepresentationInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} value to the {@code pNext} chain. */

@@ -108,16 +108,6 @@ public class EXTExtendedDynamicState3 {
      * <li>{@link #VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV}</li>
      * </ul>
      */
     public static final int
@@ -141,17 +131,52 @@ public class EXTExtendedDynamicState3 {
         VK_DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT               = 1000455019,
         VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT             = 1000455020,
         VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT                 = 1000455021,
-        VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT      = 1000455022,
-        VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV            = 1000455023,
-        VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV                     = 1000455024,
-        VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV             = 1000455025,
-        VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV           = 1000455026,
-        VK_DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV             = 1000455027,
-        VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV     = 1000455028,
-        VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV            = 1000455029,
-        VK_DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV            = 1000455030,
-        VK_DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV  = 1000455031,
-        VK_DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV              = 1000455032;
+        VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT      = 1000455022;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV = 1000455023;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV = 1000455024;
+
+    /**
+     * Extends {@code VkDynamicState}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV}</li>
+     * </ul>
+     */
+    public static final int
+        VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV   = 1000455025,
+        VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV = 1000455026;
+
+    /**
+     * Extends {@code VkDynamicState}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV}</li>
+     * </ul>
+     */
+    public static final int
+        VK_DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV         = 1000455027,
+        VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV = 1000455028,
+        VK_DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV        = 1000455029;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV = 1000455030;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV = 1000455031;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV = 1000455032;
 
     protected EXTExtendedDynamicState3() {
         throw new UnsupportedOperationException();
@@ -820,6 +845,11 @@ public class EXTExtendedDynamicState3 {
      * <h5>Description</h5>
      * 
      * <p>This command sets the color write masks of the specified attachments for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT DYNAMIC_STATE_COLOR_WRITE_MASK_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineColorBlendAttachmentState}{@code ::colorWriteMask} values used to create the currently active pipeline.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Formats with bits that are shared between components specified by {@code VkColorComponentFlagBits}, such as {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32}, cannot have their channels individually masked by this functionality; either all components that share bits have to be enabled, or none of them.</p>
+     * </div>
      * 
      * <h5>Valid Usage</h5>
      * 

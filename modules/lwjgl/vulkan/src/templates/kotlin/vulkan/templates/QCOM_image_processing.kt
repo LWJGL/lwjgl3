@@ -11,7 +11,7 @@ import vulkan.*
 val QCOM_image_processing = "QCOMImageProcessing".nativeClassVK("QCOM_image_processing", type = "device", postfix = "QCOM") {
     documentation =
         """
-        GPUs are commonly used to process images for various applications from 3D graphics to UI and from composition to compute applications. Simple scaling and filtering can be done with bilinear filtering, which comes for free during texture sampling. However, as screen sizes get larger and more use-cases rely on GPU such as camera and video post-processing needs, there is increasing demand for GPU to support higher order filtering and other advanced image processing.
+        GPUs are commonly used to process images for various applications from 3D graphics to UI and from composition to compute applications. Simple scaling and filtering can be done with bilinear filtering, which comes for free during texture sampling. However, as screen sizes get larger and more use cases rely on GPU such as camera and video post-processing needs, there is increasing demand for GPU to support higher order filtering and other advanced image processing.
 
         This extension introduces a new set of SPIR-V built-in functions for image processing. It exposes the following new imaging operations
 

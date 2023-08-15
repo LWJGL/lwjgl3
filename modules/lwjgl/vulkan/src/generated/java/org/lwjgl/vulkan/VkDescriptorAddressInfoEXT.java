@@ -22,9 +22,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code address} <b>must</b> not be zero</li>
+ * <li>If {@code address} is zero, {@code range} <b>must</b> be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
+ * <li>If {@code address} is not zero, {@code range} <b>must</b> not be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
  * <li>If {@code address} is not zero, {@code address} <b>must</b> be a valid device address at an offset within a {@code VkBuffer}</li>
  * <li>{@code range} <b>must</b> be less than or equal to the size of the buffer containing {@code address} minus the offset of {@code address} from the base address of the buffer</li>
- * <li>{@code range} must not be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
+ * <li>{@code range} <b>must</b> not be zero</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -109,7 +111,7 @@ public class VkDescriptorAddressInfoEXT extends Struct<VkDescriptorAddressInfoEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

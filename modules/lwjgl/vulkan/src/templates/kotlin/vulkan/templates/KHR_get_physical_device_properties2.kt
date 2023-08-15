@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nativeClassVK("KHR_get_physical_device_properties2", type = "instance", postfix = "KHR") {
     documentation =
         """
-        This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each {@code vkGetPhysicalDevice*} command in core Vulkan 1.0. The new feature structure (and a {@code pNext} chain of extending structures) can also be passed in to device creation to enable features.
+        This extension provides new queries for device features, device properties, and format properties that can be easily extended by other extensions, without introducing any further queries. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each {@code vkGetPhysicalDevice*} command in core Vulkan 1.0. The new feature structure (and a {@code pNext} chain of extending structures) can also be passed in to device creation to enable features.
 
         This extension also allows applications to use the physical-device components of device extensions before #CreateDevice() is called.
 
@@ -23,14 +23,14 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    // Get features with a hypothetical future extension.
 ￿    VkHypotheticalExtensionFeaturesKHR hypotheticalFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
-￿        NULL,                                                       // pNext
+￿        .sType = VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,
+￿        .pNext = NULL,
 ￿    };
 ￿
 ￿    VkPhysicalDeviceFeatures2KHR features =
 ￿    {
-￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
-￿        &amp;hypotheticalFeatures,                                      // pNext
+￿        .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,
+￿        .pNext = &amp;hypotheticalFeatures,
 ￿    };
 ￿
 ￿    // After this call, features and hypotheticalFeatures have been filled out.
@@ -41,14 +41,14 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    // Enable some features:
 ￿    VkHypotheticalExtensionFeaturesKHR enabledHypotheticalFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
-￿        NULL,                                                       // pNext
+￿        .sType = VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,
+￿        .pNext = NULL,
 ￿    };
 ￿
 ￿    VkPhysicalDeviceFeatures2KHR enabledFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
-￿        &amp;enabledHypotheticalFeatures,                               // pNext
+￿        .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,
+￿        .pNext = &amp;enabledHypotheticalFeatures,
 ￿    };
 ￿
 ￿    enabledFeatures.features.xyz = VK_TRUE;
@@ -56,10 +56,10 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿
 ￿    VkDeviceCreateInfo deviceCreateInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,                       // sType
-￿        &amp;enabledFeatures,                                           // pNext
+￿        .sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+￿        .pNext = &amp;enabledFeatures,
 ￿        ...
-￿        NULL,                                                       // pEnabledFeatures
+￿        .pEnabledFeatures = NULL,
 ￿    };
 ￿
 ￿    VkDevice device;

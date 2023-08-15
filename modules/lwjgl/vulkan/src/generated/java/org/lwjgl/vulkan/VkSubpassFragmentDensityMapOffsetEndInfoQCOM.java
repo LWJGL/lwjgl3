@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The array elements are given per {@code layer} as defined by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragmentdensitymap-fetch-density-value">Fetch Density Value</a>, where <code>index = layer</code>. Each <code>(x,y)</code> offset is in framebuffer pixels and shifts the fetch of the fragment density map by that amount. Offsets can be positive or negative.</p>
  * 
- * <p>Offset values specified for any subpass that is not the last subpass in the render pass are ignored. If the {@link VkSubpassEndInfo}{@code ::pNext} chain for the last subpass of a renderpass does not include {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}, or if {@code fragmentDensityOffsetCount} is zero, then the offset <code>(0,0)</code> is used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragmentdensitymap-fetch-density-value">Fetch Density Value</a>.</p>
+ * <p>Offset values specified for any subpass that is not the last subpass in the render pass are ignored. If the {@link VkSubpassEndInfo}{@code ::pNext} chain for the last subpass of a render pass does not include {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}, or if {@code fragmentDensityOffsetCount} is zero, then the offset <code>(0,0)</code> is used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragmentdensitymap-fetch-density-value">Fetch Density Value</a>.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -116,7 +116,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

@@ -25,7 +25,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <p>If {@link VkExportFenceCreateInfo} is not included in the same {@code pNext} chain, this structure is ignored.</p>
  * 
- * <p>If {@link VkExportFenceCreateInfo} is included in the {@code pNext} chain of {@link VkFenceCreateInfo} with a Windows {@code handleType}, but either {@link VkExportFenceWin32HandleInfoKHR} is not included in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “{@code Synchronization Object Security and Access Rights}”<sup>1</sup>. Further, if the structure is not present, the access rights will be</p>
+ * <p>If {@link VkExportFenceCreateInfo} is included in the {@code pNext} chain of {@link VkFenceCreateInfo} with a Windows {@code handleType}, but either {@link VkExportFenceWin32HandleInfoKHR} is not included in the {@code pNext} chain, or it is included but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “{@code Synchronization Object Security and Access Rights}”<sup>1</sup>. Further, if the structure is not present, the access rights will be</p>
  * 
  * <p>{@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}</p>
  * 
@@ -119,7 +119,7 @@ public class VkExportFenceWin32HandleInfoKHR extends Struct<VkExportFenceWin32Ha
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
