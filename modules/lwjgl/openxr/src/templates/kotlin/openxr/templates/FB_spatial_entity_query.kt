@@ -99,7 +99,7 @@ val FB_spatial_entity_query = "FBSpatialEntityQuery".nativeClassXR("FB_spatial_e
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        The #QuerySpacesFB() function enables an application to find and retrieve spatial entities from storage. Cast an ##XrSpaceQueryInfoFB pointer to a ##XrSpaceQueryInfoBaseHeaderFB pointer to pass as {@code info}. The application <b>should</b> keep the returned {@code requestId} for the duration of the request as it is used to refer to the request when calling #RetrieveSpaceQueryResultsFB() and is used to map completion events to the request. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceQueryCompleteFB event when the operation completes successfully or encounters an error. The runtime <b>must</b> post an ##XrEventDataSpaceQueryResultsAvailableFB if before ##XrEventDataSpaceQueryCompleteFB if any results are found. Once an ##XrEventDataSpaceQueryResultsAvailableFB event has been posted, the application <b>may</b> call #RetrieveSpaceQueryResultsFB() to retrieve the available results.
+        The #QuerySpacesFB() function enables an application to find and retrieve spatial entities from storage. Cast an ##XrSpaceQueryInfoFB pointer to a ##XrSpaceQueryInfoBaseHeaderFB pointer to pass as {@code info}. The application <b>should</b> keep the returned {@code requestId} for the duration of the request as it is used to refer to the request when calling #RetrieveSpaceQueryResultsFB() and is used to map completion events to the request. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceQueryCompleteFB event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted. The runtime <b>must</b> post an ##XrEventDataSpaceQueryResultsAvailableFB before ##XrEventDataSpaceQueryCompleteFB if any results are found. Once an ##XrEventDataSpaceQueryResultsAvailableFB event has been posted, the application <b>may</b> call #RetrieveSpaceQueryResultsFB() to retrieve the available results.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -178,6 +178,7 @@ val FB_spatial_entity_query = "FBSpatialEntityQuery".nativeClassXR("FB_spatial_e
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>
         </dl>

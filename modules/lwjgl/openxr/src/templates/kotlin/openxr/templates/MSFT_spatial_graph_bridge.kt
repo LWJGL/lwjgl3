@@ -126,7 +126,7 @@ val MSFT_spatial_graph_bridge = "MSFTSpatialGraphBridge".nativeClassXR("MSFT_spa
         Try create spatial graph static node binding.
 
         <h5>C Specification</h5>
-        The #TryCreateSpatialGraphStaticNodeBindingMSFT() function tries to create a spatial graph static node binding nearest to the given location and returns an {@code XrSpatialGraphNodeBindingMSFT} handle.
+        The #TryCreateSpatialGraphStaticNodeBindingMSFT() function tries to create a binding to the best spatial graph static node relative to the given location and returns an {@code XrSpatialGraphNodeBindingMSFT} handle.
 
         <pre><code>
 ￿XrResult xrTryCreateSpatialGraphStaticNodeBindingMSFT(
@@ -136,6 +136,8 @@ val MSFT_spatial_graph_bridge = "MSFTSpatialGraphBridge".nativeClassXR("MSFT_spa
 
         <h5>Description</h5>
         The runtime <b>may</b> return #SUCCESS and set {@code nodeBinding} to #NULL_HANDLE if it is unable to create a spatial graph static node binding. This may happen when the given {@code XrSpace} cannot be properly tracked at the moment. The application can retry creating the {@code XrSpatialGraphNodeBindingMSFT} handle again after a reasonable period of time when tracking is regained.
+
+        The #TryCreateSpatialGraphStaticNodeBindingMSFT() function <b>may</b> be a slow operation and therefore <b>should</b> be invoked from a non-timing critical thread.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

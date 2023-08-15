@@ -162,7 +162,7 @@ public class MSFTSpatialGraphBridge {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The {@link #xrTryCreateSpatialGraphStaticNodeBindingMSFT TryCreateSpatialGraphStaticNodeBindingMSFT} function tries to create a spatial graph static node binding nearest to the given location and returns an {@code XrSpatialGraphNodeBindingMSFT} handle.</p>
+     * <p>The {@link #xrTryCreateSpatialGraphStaticNodeBindingMSFT TryCreateSpatialGraphStaticNodeBindingMSFT} function tries to create a binding to the best spatial graph static node relative to the given location and returns an {@code XrSpatialGraphNodeBindingMSFT} handle.</p>
      * 
      * <pre><code>
      * XrResult xrTryCreateSpatialGraphStaticNodeBindingMSFT(
@@ -173,6 +173,8 @@ public class MSFTSpatialGraphBridge {
      * <h5>Description</h5>
      * 
      * <p>The runtime <b>may</b> return {@link XR10#XR_SUCCESS SUCCESS} and set {@code nodeBinding} to {@link XR10#XR_NULL_HANDLE NULL_HANDLE} if it is unable to create a spatial graph static node binding. This may happen when the given {@code XrSpace} cannot be properly tracked at the moment. The application can retry creating the {@code XrSpatialGraphNodeBindingMSFT} handle again after a reasonable period of time when tracking is regained.</p>
+     * 
+     * <p>The {@link #xrTryCreateSpatialGraphStaticNodeBindingMSFT TryCreateSpatialGraphStaticNodeBindingMSFT} function <b>may</b> be a slow operation and therefore <b>should</b> be invoked from a non-timing critical thread.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

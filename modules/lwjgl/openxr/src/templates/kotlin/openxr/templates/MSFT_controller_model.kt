@@ -206,6 +206,7 @@ val MSFT_controller_model = "MSFTControllerModel".nativeClassXR("MSFT_controller
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_CONTROLLER_MODEL_KEY_INVALID_MSFT</li>
             </ul></dd>
         </dl>

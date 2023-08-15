@@ -20,7 +20,7 @@ import static org.lwjgl.system.JNI.*;
 public class FBScene {
 
     /** The extension specification version. */
-    public static final int XR_FB_scene_SPEC_VERSION = 1;
+    public static final int XR_FB_scene_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_FB_SCENE_EXTENSION_NAME = "XR_FB_scene";
@@ -34,12 +34,28 @@ public class FBScene {
      * <li>{@link #XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB}</li>
      * <li>{@link #XR_TYPE_ROOM_LAYOUT_FB TYPE_ROOM_LAYOUT_FB}</li>
      * <li>{@link #XR_TYPE_BOUNDARY_2D_FB TYPE_BOUNDARY_2D_FB}</li>
+     * <li>{@link #XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB}</li>
      * </ul>
      */
     public static final int
-        XR_TYPE_SEMANTIC_LABELS_FB = 1000175000,
-        XR_TYPE_ROOM_LAYOUT_FB     = 1000175001,
-        XR_TYPE_BOUNDARY_2D_FB     = 1000175002;
+        XR_TYPE_SEMANTIC_LABELS_FB              = 1000175000,
+        XR_TYPE_ROOM_LAYOUT_FB                  = 1000175001,
+        XR_TYPE_BOUNDARY_2D_FB                  = 1000175002,
+        XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB = 1000175010;
+
+    /**
+     * XrSemanticLabelsSupportFlagBitsFB - XrSemanticLabelsSupportFlagBitsFB
+     * 
+     * <h5>Flag Descriptions</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_SEMANTIC_LABELS_SUPPORT_MULTIPLE_SEMANTIC_LABELS_BIT_FB SEMANTIC_LABELS_SUPPORT_MULTIPLE_SEMANTIC_LABELS_BIT_FB} — If set, and the runtime reports the {@code extensionVersion} as 2 or greater, the runtime <b>may</b> return multiple semantic labels separated by a comma without spaces. Otherwise, the runtime <b>must</b> return a single semantic label.</li>
+     * <li>{@link #XR_SEMANTIC_LABELS_SUPPORT_ACCEPT_DESK_TO_TABLE_MIGRATION_BIT_FB SEMANTIC_LABELS_SUPPORT_ACCEPT_DESK_TO_TABLE_MIGRATION_BIT_FB} — If set, and the runtime reports the {@code extensionVersion} as 3 or greater, the runtime <b>must</b> return "TABLE" instead of "DESK" as a semantic label to the application. Otherwise, the runtime <b>must</b> return "DESK" instead of "TABLE" as a semantic label to the application, when applicable.</li>
+     * </ul>
+     */
+    public static final int
+        XR_SEMANTIC_LABELS_SUPPORT_MULTIPLE_SEMANTIC_LABELS_BIT_FB       = 0x1,
+        XR_SEMANTIC_LABELS_SUPPORT_ACCEPT_DESK_TO_TABLE_MIGRATION_BIT_FB = 0x2;
 
     protected FBScene() {
         throw new UnsupportedOperationException();
@@ -72,6 +88,8 @@ public class FBScene {
      * <h5>Description</h5>
      * 
      * <p>Gets the 2D bounding box for a spatial entity with the {@link FBSpatialEntity#XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB SPACE_COMPONENT_TYPE_BOUNDED_2D_FB} component type enabled.</p>
+     * 
+     * <p>The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the x-y plane of the given {@code XrSpace}’s coordinate system; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -243,6 +261,7 @@ public class FBScene {
      * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
+     * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
      * <li>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB ERROR_SPACE_COMPONENT_NOT_ENABLED_FB}</li>
      * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
      * </ul></dd>
@@ -315,6 +334,7 @@ public class FBScene {
      * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
+     * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
      * <li>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB ERROR_SPACE_COMPONENT_NOT_ENABLED_FB}</li>
      * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
      * </ul></dd>
@@ -361,6 +381,8 @@ public class FBScene {
      * 
      * <p>Gets the room layout, specified by UUIDs for each surface, for a spatial entity with the {@link FBSpatialEntity#XR_SPACE_COMPONENT_TYPE_ROOM_LAYOUT_FB SPACE_COMPONENT_TYPE_ROOM_LAYOUT_FB} component type enabled.</p>
      * 
+     * <p>If the {@link XrRoomLayoutFB}{@code ::wallUuidCapacityInput} field is zero (indicating a request to retrieve the required capacity for the {@link XrRoomLayoutFB}{@code ::wallUuids} array), or if {@link #xrGetSpaceRoomLayoutFB GetSpaceRoomLayoutFB} returns failure, then the values of {@code floorUuid} and {@code ceilingUuid} are unspecified and should not be used.</p>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -387,6 +409,7 @@ public class FBScene {
      * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
+     * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
      * <li>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB ERROR_SPACE_COMPONENT_NOT_ENABLED_FB}</li>
      * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
      * </ul></dd>

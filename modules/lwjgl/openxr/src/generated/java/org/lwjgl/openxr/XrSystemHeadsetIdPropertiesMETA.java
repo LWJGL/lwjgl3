@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This is in contrast to the {@code systemName} field in {@link XrSystemProperties} which is not required to be consistent across product renames.</p>
  * 
- * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_META_headset_id">XR_META_headset_id</a> extension documentation for more details.</p>
+ * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the {@link METAHeadsetId XR_META_headset_id} extension documentation for more details.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

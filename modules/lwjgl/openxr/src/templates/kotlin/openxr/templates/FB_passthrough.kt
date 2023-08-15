@@ -616,7 +616,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
 ￿    XrGeometryInstanceFB*                       outGeometryInstance);</code></pre>
 
         <h5>Description</h5>
-        Creates an {@code XrGeometryInstanceFB} handle. Geometry instance functionality requires <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_triangle_mesh">XR_FB_triangle_mesh</a> extension to be enabled. An {@code XrGeometryInstanceFB} connects a layer, a mesh, and a transformation, with the semantics that a specific mesh will be instantiated in a specific layer with a specific transformation. A mesh can be instantiated multiple times, in the same or in different layers.
+        Creates an {@code XrGeometryInstanceFB} handle. Geometry instance functionality requires {@link FBTriangleMesh XR_FB_triangle_mesh} extension to be enabled. An {@code XrGeometryInstanceFB} connects a layer, a mesh, and a transformation, with the semantics that a specific mesh will be instantiated in a specific layer with a specific transformation. A mesh can be instantiated multiple times, in the same or in different layers.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

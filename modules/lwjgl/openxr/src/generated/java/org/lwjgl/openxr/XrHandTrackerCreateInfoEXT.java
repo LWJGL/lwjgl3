@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using {@link XrHandTrackerCreateInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTracking#XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT TYPE_HAND_TRACKER_CREATE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandPoseTypeInfoMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandPoseTypeInfoMSFT}, {@link XrHandTrackingDataSourceInfoEXT}</li>
  * <li>{@code hand} <b>must</b> be a valid {@code XrHandEXT} value</li>
  * <li>{@code handJointSet} <b>must</b> be a valid {@code XrHandJointSetEXT} value</li>
  * </ul>
@@ -117,6 +117,8 @@ public class XrHandTrackerCreateInfoEXT extends Struct<XrHandTrackerCreateInfoEX
     public XrHandTrackerCreateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrHandPoseTypeInfoMSFT} value to the {@code next} chain. */
     public XrHandTrackerCreateInfoEXT next(XrHandPoseTypeInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingDataSourceInfoEXT} value to the {@code next} chain. */
+    public XrHandTrackerCreateInfoEXT next(XrHandTrackingDataSourceInfoEXT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #hand} field. */
     public XrHandTrackerCreateInfoEXT hand(@NativeType("XrHandEXT") int value) { nhand(address(), value); return this; }
     /** Sets the specified value to the {@link #handJointSet} field. */
@@ -339,6 +341,8 @@ public class XrHandTrackerCreateInfoEXT extends Struct<XrHandTrackerCreateInfoEX
         public XrHandTrackerCreateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandTrackerCreateInfoEXT.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrHandPoseTypeInfoMSFT} value to the {@code next} chain. */
         public XrHandTrackerCreateInfoEXT.Buffer next(XrHandPoseTypeInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingDataSourceInfoEXT} value to the {@code next} chain. */
+        public XrHandTrackerCreateInfoEXT.Buffer next(XrHandTrackingDataSourceInfoEXT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandTrackerCreateInfoEXT#hand} field. */
         public XrHandTrackerCreateInfoEXT.Buffer hand(@NativeType("XrHandEXT") int value) { XrHandTrackerCreateInfoEXT.nhand(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandTrackerCreateInfoEXT#handJointSet} field. */

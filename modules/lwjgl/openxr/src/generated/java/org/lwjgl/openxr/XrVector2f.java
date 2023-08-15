@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrActionStateVector2f}, {@link XrBoundary2DFB}, {@link XrCompositionLayerEquirectKHR}, {@link XrFoveationConfigurationHTC}, {@link XrFoveationEyeTrackedStateMETA}, {@link XrHandTrackingMeshFB}, {@link XrPosef}, {@link XrQuaternionf}, {@link XrVector3f}, {@link XrVector4f}, {@link XrVisibilityMaskKHR}, {@link EXTConformanceAutomation#xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT}</p>
+ * <p>{@link XrActionStateVector2f}, {@link XrBoundary2DFB}, {@link XrCompositionLayerEquirectKHR}, {@link XrFoveationConfigurationHTC}, {@link XrFoveationEyeTrackedStateMETA}, {@link XrHandTrackingMeshFB}, {@link XrPlaneDetectorPolygonBufferEXT}, {@link XrPosef}, {@link XrQuaternionf}, {@link XrVector3f}, {@link XrVector4f}, {@link XrVisibilityMaskKHR}, {@link EXTConformanceAutomation#xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrCompositionLayerQuad}, {@link XrOffset2Df}, {@link XrRect2Df}, {@link XrScenePlaneMSFT}, {@link VARJOMarkerTracking#xrGetMarkerSizeVARJO GetMarkerSizeVARJO}, {@link XR10#xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect}</p>
+ * <p>{@link XrCompositionLayerQuad}, {@link XrOffset2Df}, {@link XrPlaneDetectorLocationEXT}, {@link XrRect2Df}, {@link XrScenePlaneMSFT}, {@link VARJOMarkerTracking#xrGetMarkerSizeVARJO GetMarkerSizeVARJO}, {@link XR10#xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect}</p>
  * 
  * <h3>Layout</h3>
  * 

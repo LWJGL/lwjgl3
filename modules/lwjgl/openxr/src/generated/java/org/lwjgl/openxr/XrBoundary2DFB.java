@@ -109,10 +109,10 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code vertices} array, in bytes, or 0 to indicate a request to retrieve the required capacity. */
+    /** the capacity of the {@code vertices} array, in number of vertices, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** a pointer to the count of {@link XrVector2f} written, or a pointer to the required capacity in the case that {@code vertexCapacityInput} is insufficient. */
+    /** the count of {@link XrVector2f} written, or the required capacity in the case that {@code vertexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** a pointer to an array of {@link XrVector2f}, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0. */

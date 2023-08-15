@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This structure is used for component values that may be fractional (floating-point).</p>
  * 
+ * <p>The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the local space of the {@code XrSpace}; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

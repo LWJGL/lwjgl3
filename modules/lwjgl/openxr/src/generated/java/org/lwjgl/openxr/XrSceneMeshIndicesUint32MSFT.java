@@ -108,7 +108,7 @@ public class XrSceneMeshIndicesUint32MSFT extends Struct<XrSceneMeshIndicesUint3
     /** the capacity of the array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** a pointer to the count of indices, or a pointer to the required capacity in the case that {@code indexCapacityInput} is insufficient. */
+    /** the count of indices, or the required capacity in the case that {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle. */

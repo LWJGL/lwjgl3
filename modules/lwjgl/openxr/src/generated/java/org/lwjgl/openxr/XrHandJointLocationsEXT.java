@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using {@link XrHandJointLocationsEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTracking#XR_TYPE_HAND_JOINT_LOCATIONS_EXT TYPE_HAND_JOINT_LOCATIONS_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandJointVelocitiesEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingScaleFB}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandJointVelocitiesEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingDataSourceStateEXT}, {@link XrHandTrackingScaleFB}</li>
  * <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointCount} {@link XrHandJointLocationEXT} structures</li>
  * <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
  * </ul>
@@ -143,6 +143,8 @@ public class XrHandJointLocationsEXT extends Struct<XrHandJointLocationsEXT> imp
     public XrHandJointLocationsEXT next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
     public XrHandJointLocationsEXT next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingDataSourceStateEXT} value to the {@code next} chain. */
+    public XrHandJointLocationsEXT next(XrHandTrackingDataSourceStateEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
     public XrHandJointLocationsEXT next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #isActive} field. */
@@ -387,6 +389,8 @@ public class XrHandJointLocationsEXT extends Struct<XrHandJointLocationsEXT> imp
         public XrHandJointLocationsEXT.Buffer next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
         public XrHandJointLocationsEXT.Buffer next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingDataSourceStateEXT} value to the {@code next} chain. */
+        public XrHandJointLocationsEXT.Buffer next(XrHandTrackingDataSourceStateEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
         public XrHandJointLocationsEXT.Buffer next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandJointLocationsEXT#isActive} field. */

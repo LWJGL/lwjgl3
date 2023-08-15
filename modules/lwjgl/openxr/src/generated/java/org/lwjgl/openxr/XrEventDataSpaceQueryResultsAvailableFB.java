@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>It indicates a query request has produced some number of results. If a query yields results this event <b>must</b> be delivered before the {@link XrEventDataSpaceQueryCompleteFB} event is delivered. Call {@link FBSpatialEntityQuery#xrQuerySpacesFB QuerySpacesFB} to retrieve those results.</p>
+ * <p>It indicates a query request has produced some number of results. If a query yields results this event <b>must</b> be delivered before the {@link XrEventDataSpaceQueryCompleteFB} event is delivered. Call {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} to retrieve those results.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -121,10 +121,10 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     public XrUuidEXT floorUuid() { return nfloorUuid(address()); }
     /** the UUID of the spatial entity representing the room ceiling */
     public XrUuidEXT ceilingUuid() { return nceilingUuid(address()); }
-    /** the capacity of the {@code wallUuids} array, in bytes, or 0 to indicate a request to retrieve the required capacity. */
+    /** the capacity of the {@code wallUuids} array, in number of UUIDs, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int wallUuidCapacityInput() { return nwallUuidCapacityInput(address()); }
-    /** a pointer to the count of {@link XrUuidEXT} handles written, or a pointer to the required capacity in the case that {@code wallUuidCapacityInput} is insufficient. */
+    /** the count of {@link XrUuidEXT} handles written, or the required capacity in the case that {@code wallUuidCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int wallUuidCountOutput() { return nwallUuidCountOutput(address()); }
     /** a pointer to an array of {@link XrUuidEXT} handles, but can be {@code NULL} if {@code wallUuidCapacityInput} is 0. */

@@ -21,7 +21,7 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
     IntConstant(
         "The extension specification version.",
 
-        "FB_scene_SPEC_VERSION".."1"
+        "FB_scene_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -35,7 +35,23 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
 
         "TYPE_SEMANTIC_LABELS_FB".."1000175000",
         "TYPE_ROOM_LAYOUT_FB".."1000175001",
-        "TYPE_BOUNDARY_2D_FB".."1000175002"
+        "TYPE_BOUNDARY_2D_FB".."1000175002",
+        "TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB".."1000175010"
+    )
+
+    EnumConstant(
+        """
+        XrSemanticLabelsSupportFlagBitsFB - XrSemanticLabelsSupportFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SEMANTIC_LABELS_SUPPORT_MULTIPLE_SEMANTIC_LABELS_BIT_FB — If set, and the runtime reports the {@code extensionVersion} as 2 or greater, the runtime <b>may</b> return multiple semantic labels separated by a comma without spaces. Otherwise, the runtime <b>must</b> return a single semantic label.</li>
+            <li>#SEMANTIC_LABELS_SUPPORT_ACCEPT_DESK_TO_TABLE_MIGRATION_BIT_FB — If set, and the runtime reports the {@code extensionVersion} as 3 or greater, the runtime <b>must</b> return "TABLE" instead of "DESK" as a semantic label to the application. Otherwise, the runtime <b>must</b> return "DESK" instead of "TABLE" as a semantic label to the application, when applicable.</li>
+        </ul>
+        """,
+
+        "SEMANTIC_LABELS_SUPPORT_MULTIPLE_SEMANTIC_LABELS_BIT_FB".enum(0x00000001),
+        "SEMANTIC_LABELS_SUPPORT_ACCEPT_DESK_TO_TABLE_MIGRATION_BIT_FB".enum(0x00000002)
     )
 
     XrResult(
@@ -54,6 +70,8 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
 
         <h5>Description</h5>
         Gets the 2D bounding box for a spatial entity with the #SPACE_COMPONENT_TYPE_BOUNDED_2D_FB component type enabled.
+
+        The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the x-y plane of the given {@code XrSpace}’s coordinate system; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -192,6 +210,7 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_SPACE_COMPONENT_NOT_ENABLED_FB</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>
@@ -248,6 +267,7 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_SPACE_COMPONENT_NOT_ENABLED_FB</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>
@@ -279,6 +299,8 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
         <h5>Description</h5>
         Gets the room layout, specified by UUIDs for each surface, for a spatial entity with the #SPACE_COMPONENT_TYPE_ROOM_LAYOUT_FB component type enabled.
 
+        If the ##XrRoomLayoutFB{@code ::wallUuidCapacityInput} field is zero (indicating a request to retrieve the required capacity for the ##XrRoomLayoutFB{@code ::wallUuids} array), or if #GetSpaceRoomLayoutFB() returns failure, then the values of {@code floorUuid} and {@code ceilingUuid} are unspecified and should not be used.
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to calling #GetSpaceRoomLayoutFB()</li>
@@ -304,6 +326,7 @@ val FB_scene = "FBScene".nativeClassXR("FB_scene", type = "instance", postfix = 
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_SPACE_COMPONENT_NOT_ENABLED_FB</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>
