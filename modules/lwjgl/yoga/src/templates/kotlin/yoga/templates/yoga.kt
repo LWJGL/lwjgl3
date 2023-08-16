@@ -11,7 +11,7 @@ val yoga = "Yoga".nativeClass(Module.YOGA, prefix = "YG", prefixConstant = "YG",
     nativeDirective("""#define FB_ASSERTIONS_ENABLED 0
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()
-#include "Yoga.h"
+#include <yoga/Yoga.h>
 ENABLE_WARNINGS()""")
 
     cpp = true
@@ -117,11 +117,20 @@ div {
     ).javaDocLinks
 
     EnumConstant(
+        "YGErrata",
+
+        "ErrataNone".enum("", "0"),
+        "ErrataStretchFlexBasis".enum("", "1"),
+        "ErrataAll".enum("", "2147483647"),
+        "ErrataClassic".enum("", "2147483646")
+    )
+
+    EnumConstant(
         "YGExperimentalFeature",
 
         "ExperimentalFeatureWebFlexBasis".enum,
         "ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge".enum,
-        "ExperimentalFeatureFixAbsoluteTrailingColumnMargin".enum
+        "ExperimentalFeatureFixJNILocalRefOverflows".enum
     )
 
     val Gutters = EnumConstant(
@@ -427,6 +436,21 @@ div {
 
         node,
         opaque_p("context", "")
+    )
+
+    YGConfigRef(
+        "NodeGetConfig",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeSetConfig",
+        "",
+
+        node,
+        YGConfigRef("config", "")
     )
 
     void(
@@ -1128,23 +1152,11 @@ div {
         float("pixelsInPoint", "")
     )
 
-    bool(
-        "ConfigGetUseLegacyStretchBehaviour",
+    float(
+        "ConfigGetPointScaleFactor",
         "",
 
         YGConfigRef("config", "")
-    )
-
-    void(
-        "ConfigSetUseLegacyStretchBehaviour",
-        """
-        Yoga previously had an error where containers would take the maximum space possible instead of the minimum like they are supposed to. In practice this
-        resulted in implicit behaviour similar to align-self: stretch; Because this was such a long-standing bug we must allow legacy users to switch back to
-        this behaviour.
-        """,
-
-        YGConfigRef("config", ""),
-        bool("useLegacyStretchBehaviour", "")
     )
 
     YGConfigRef("ConfigNew", "", void())
@@ -1213,6 +1225,21 @@ div {
     )
     opaque_p(
         "ConfigGetContext",
+        "",
+
+        YGConfigRef("config", "")
+    )
+
+    void(
+        "ConfigSetErrata",
+        "",
+
+        YGConfigRef("config", ""),
+        YGErrata("errata", "")
+    )
+
+    YGErrata(
+        "ConfigGetErrata",
         "",
 
         YGConfigRef("config", "")

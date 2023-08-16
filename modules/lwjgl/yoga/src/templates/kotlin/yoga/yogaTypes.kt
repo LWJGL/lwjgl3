@@ -16,6 +16,7 @@ val YGDimension = "YGDimension".enumType
 val YGDirection = "YGDirection".enumType
 val YGDisplay = "YGDisplay".enumType
 val YGEdge = "YGEdge".enumType
+val YGErrata = "YGErrata".enumType
 val YGExperimentalFeature = "YGExperimentalFeature".enumType
 val YGFlexDirection = "YGFlexDirection".enumType
 val YGGutter = "YGGutter".enumType
@@ -287,11 +288,7 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGFloatOptional("aspectRatio", "")
 }
 
-val YGNode = struct(Module.YOGA, "YGNode") {
-    documentation = "Unstable/private API."
-
-    nullable..opaque_p("context", "")
-
+val YGNodeFlags = struct(Module.YOGA, "YGNodeFlags") {
     uint8_t("flags", "").virtual()
     bool("hasNewLayout", "", bits = 1).getter("(nflags(struct) & 0b1) != 0")
     bool("isReferenceBaseline", "", bits = 1).getter("((nflags(struct) >>> 1) & 0b1) != 0")
@@ -300,8 +297,14 @@ val YGNode = struct(Module.YOGA, "YGNode") {
     bool("measureUsesContext", "", bits = 1).getter("((nflags(struct) >>> 4) & 0b1) != 0")
     bool("baselineUsesContext", "", bits = 1).getter("((nflags(struct) >>> 5) & 0b1) != 0")
     bool("printUsesContext", "", bits = 1).getter("((nflags(struct) >>> 6) & 0b1) != 0")
-    bool("useWebDefaults", "", bits = 1).getter("((nflags(struct) >>> 7) & 0b1) != 0")
-    padding(1)
+}
+
+val YGNode = struct(Module.YOGA, "YGNode") {
+    documentation = "Unstable/private API."
+
+    nullable..opaque_p("context", "")
+
+    YGNodeFlags("flags", "")
 
     union {
         nullable..YGMeasureFunc("noContext", "")
