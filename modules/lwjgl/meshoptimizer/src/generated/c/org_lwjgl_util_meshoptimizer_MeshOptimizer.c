@@ -231,6 +231,17 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt
     return (jlong)meshopt_simplify(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)target_index_count, target_error, (unsigned int)options, result_error);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifyWithAttributes(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong vertex_attributesAddress, jlong vertex_attributes_stride, jlong attribute_weightsAddress, jlong attribute_count, jlong target_index_count, jfloat target_error, jint options, jlong result_errorAddress) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    float const *vertex_attributes = (float const *)(uintptr_t)vertex_attributesAddress;
+    float const *attribute_weights = (float const *)(uintptr_t)attribute_weightsAddress;
+    float *result_error = (float *)(uintptr_t)result_errorAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_simplifyWithAttributes(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, vertex_attributes, (size_t)vertex_attributes_stride, attribute_weights, (size_t)attribute_count, (size_t)target_index_count, target_error, (unsigned int)options, result_error);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifySloppy(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_index_count, jfloat target_error, jlong result_errorAddress) {
     unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;

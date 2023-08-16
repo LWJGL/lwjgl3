@@ -843,6 +843,50 @@ nmeshopt_setAllocator(
     )
 
     size_t(
+        "simplifyWithAttributes",
+        """
+        Experimental: Mesh simplifier with attribute metric.
+
+        The algorithm ehnahces #simplify() by incorporating attribute values into the error metric used to prioritize simplification order; see #simplify() for
+        details. Note that the number of attributes affects memory requirements and running time; this algorithm requires {@code ~1.5x} more memory and time
+        compared to #simplify() when using 4 scalar attributes.
+        """,
+
+        unsigned_int.p(
+            "destination",
+            "must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!"
+        ),
+        unsigned_int.const.p("indices", ""),
+        AutoSize("destination", "indices")..size_t("index_count", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
+            "vertex_positions",
+            "should have {@code float3} position in the first 12 bytes of each vertex"
+        ),
+        size_t("vertex_count", ""),
+        size_t("vertex_positions_stride", ""),
+        Check("vertex_count * (vertex_attributes_stride >>> 2)")..float.const.p(
+            "vertex_attributes",
+            "should have {@code attribute_count} floats for each vertex"
+        ),
+        size_t("vertex_attributes_stride", ""),
+        float.const.p(
+            "attribute_weights",
+            """
+            should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position. The
+            recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
+            """
+        ),
+        AutoSize("attribute_weights")..size_t("attribute_count", ""),
+        size_t("target_index_count", ""),
+        float(
+            "target_error",
+            "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}"
+        ),
+        unsigned_int("options", "must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default"),
+        Check(1)..nullable..float.p("result_error", "can be #NULL; when it's not #NULL, it will contain the resulting (relative) error after simplification")
+    )
+
+    size_t(
         "simplifySloppy",
         """
         Experimental: Mesh simplifier (sloppy). Reduces the number of triangles in the mesh, sacrificing mesh appearance for simplification performance.
@@ -1071,7 +1115,7 @@ nmeshopt_setAllocator(
 
         For backface culling with orthographic projection, use the following formula to reject backfacing clusters: {@code dot(view, cone_axis) >= cone_cutoff}
 
-        For perspective projection, you can the formula that needs cone apex in addition to axis &amp; cutoff:
+        For perspective projection, you can use the formula that needs cone apex in addition to axis &amp; cutoff:
         {@code dot(normalize(cone_apex - camera_position), cone_axis) >= cone_cutoff}.
 
         Alternatively, you can use the formula that doesn't need cone apex and uses bounding sphere instead:

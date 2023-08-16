@@ -1058,6 +1058,38 @@ public class MeshOptimizer {
         return nmeshopt_simplify(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_index_count, target_error, options, memAddressSafe(result_error));
     }
 
+    // --- [ meshopt_simplifyWithAttributes ] ---
+
+    /** Unsafe version of: {@link #meshopt_simplifyWithAttributes simplifyWithAttributes} */
+    public static native long nmeshopt_simplifyWithAttributes(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long target_index_count, float target_error, int options, long result_error);
+
+    /**
+     * Experimental: Mesh simplifier with attribute metric.
+     * 
+     * <p>The algorithm ehnahces {@link #meshopt_simplify simplify} by incorporating attribute values into the error metric used to prioritize simplification order; see {@link #meshopt_simplify simplify} for
+     * details. Note that the number of attributes affects memory requirements and running time; this algorithm requires {@code ~1.5x} more memory and time
+     * compared to {@link #meshopt_simplify simplify} when using 4 scalar attributes.</p>
+     *
+     * @param destination       must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
+     * @param vertex_positions  should have {@code float3} position in the first 12 bytes of each vertex
+     * @param vertex_attributes should have {@code attribute_count} floats for each vertex
+     * @param attribute_weights should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position. The
+     *                          recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
+     * @param target_error      represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}
+     * @param options           must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default
+     * @param result_error      can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
+     */
+    @NativeType("size_t")
+    public static long meshopt_simplifyWithAttributes(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
+        if (CHECKS) {
+            check(indices, destination.remaining());
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+            check(vertex_attributes, vertex_count * (vertex_attributes_stride >>> 2));
+            checkSafe(result_error, 1);
+        }
+        return nmeshopt_simplifyWithAttributes(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_attributes), vertex_attributes_stride, memAddress(attribute_weights), attribute_weights.remaining(), target_index_count, target_error, options, memAddressSafe(result_error));
+    }
+
     // --- [ meshopt_simplifySloppy ] ---
 
     /** Unsafe version of: {@link #meshopt_simplifySloppy simplifySloppy} */
@@ -1294,7 +1326,7 @@ public class MeshOptimizer {
      * 
      * <p>For backface culling with orthographic projection, use the following formula to reject backfacing clusters: {@code dot(view, cone_axis) >= cone_cutoff}</p>
      * 
-     * <p>For perspective projection, you can the formula that needs cone apex in addition to axis &amp; cutoff:
+     * <p>For perspective projection, you can use the formula that needs cone apex in addition to axis &amp; cutoff:
      * {@code dot(normalize(cone_apex - camera_position), cone_axis) >= cone_cutoff}.</p>
      * 
      * <p>Alternatively, you can use the formula that doesn't need cone apex and uses bounding sphere instead:
