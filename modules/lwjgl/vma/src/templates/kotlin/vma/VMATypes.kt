@@ -608,6 +608,23 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
     )
 }
 
+val PFN_vmaCheckDefragmentationBreakFunction = Module.VMA.callback {
+    VkBool32(
+        "VmaCheckDefragmentationBreakFunction",
+        """
+        Callback function called during #BeginDefragmentation() to check custom criterion about ending current defragmentation pass.
+
+        Should return true if the defragmentation needs to stop current pass.
+        """,
+
+        nullable..opaque_p("pUserData", ""),
+
+        nativeType = "PFN_vmaCheckDefragmentationBreakFunction"
+    ) {
+        documentation = "Instances of this interface may be set to the ##VmaDefragmentationInfo struct."
+    }
+}
+
 val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
@@ -642,6 +659,15 @@ val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
         0 means no limit.
         """
     )
+    nullable..PFN_vmaCheckDefragmentationBreakFunction(
+        "pfnBreakCallback",
+        """
+        Optional custom callback for stopping #BeginDefragmentation().
+
+        Have to return true for breaking current defragmentation pass.
+        """
+    )
+    nullable..opaque_p("pBreakCallbackUserData", "optional data to pass to custom callback for stopping pass of defragmentation.")
 }
 
 val VmaDefragmentationMove = struct(Module.VMA, "VmaDefragmentationMove")  {
@@ -651,7 +677,7 @@ val VmaDefragmentationMove = struct(Module.VMA, "VmaDefragmentationMove")  {
         "operation",
         """
         operation to be performed on the allocation by #EndDefragmentationPass().
-        
+
         Default value is #DEFRAGMENTATION_MOVE_OPERATION_COPY. You can modify it.
         """
     )
