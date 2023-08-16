@@ -109,7 +109,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."5",
-        "VERSION_RELEASE".."4"
+        "VERSION_RELEASE".."5"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -410,7 +410,7 @@ ENABLE_WARNINGS()""")
         """
         Compresses {@code src} content as a single zstd compressed frame into already allocated {@code dst}.
 
-        Hint: compression runs faster if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}
+        Providing {@code dstCapacity} &ge; #compressBound(){@code (srcSize)} guarantees that zstd will have enough space to successfully compress the data.
         """,
 
         void.p("dst", ""),
@@ -698,8 +698,10 @@ ENABLE_WARNINGS()""")
         {@code ZSTD_compress2()} always starts a new frame. Should cctx hold data from a previously unfinished frame, everything about it is forgotten.
 
         - Compression parameters are pushed into {@code CCtx} before starting compression, using {@code ZSTD_CCtx_set*()}
-        - The function is always blocking, returns when compression is completed. Hint: compression runs faster if {@code dstCapacity} &ge;
-        {@code ZSTD_compressBound(srcSize)}.
+        - The function is always blocking, returns when compression is completed.
+
+        Providing {@code dstCapacity} &ge; #compressBound(){@code (srcSize)} guarantees that zstd will have enough space to successfully compress the data,
+        though it is possible it fails for other reasons.
         """,
 
         ZSTD_CCtx.p("cctx", ""),
@@ -1110,6 +1112,9 @@ ENABLE_WARNINGS()""")
         case, dictionary buffer must outlive its users.
 
         Note 4: Use #CCtx_loadDictionary_advanced() to precisely select how dictionary content must be interpreted.
+
+        Note 5 : This method does not benefit from LDM (long distance mode). If you want to employ LDM on some large dictionary content, prefer employing
+        #CCtx_refPrefix().
         """,
 
         ZSTD_CCtx.p("cctx", ""),
@@ -1149,6 +1154,8 @@ ENABLE_WARNINGS()""")
         A prefix is <b>only used once</b>. Tables are discarded at end of frame (#e_end). Decompression will need same prefix to properly regenerate data.
         Compressing with a prefix is similar in outcome as performing a diff and compressing it, but performs much faster, especially during decompression
         (compression speed is tunable with compression level).
+
+        This method is compatible with LDM (long distance mode).
 
         Special: Adding any prefix (including #NULL) invalidates any previous prefix or dictionary
 

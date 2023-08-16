@@ -399,7 +399,7 @@ ENABLE_WARNINGS()""")
         Allowed values are between 1KB and #BLOCKSIZE_MAX (128KB). The default is {@code ZSTD_BLOCKSIZE_MAX}, and setting to 0 will set to the default.
 
         This parameter can be used to set an upper bound on the blocksize that overrides the default {@code ZSTD_BLOCKSIZE_MAX}. It cannot be used to set upper
-        bounds greater than {@code ZSTD_BLOCKSIZE_MAX} or bounds lower than 1KB (will make #compressBound() innacurate). Only currently meant to be used for
+        bounds greater than {@code ZSTD_BLOCKSIZE_MAX} or bounds lower than 1KB (will make #compressBound() inaccurate). Only currently meant to be used for
         testing.
         """,
         "c_maxBlockSize".."ZSTD_c_experimentalParam18"
@@ -581,6 +581,31 @@ ENABLE_WARNINGS()""")
         AutoSize("src")..size_t("srcSize", "must be &ge; {@link \\#ZSTD_FRAMEHEADERSIZE_PREFIX}"),
 
         returnDoc = ": size of the Frame Header, or an error code (if srcSize is too small)"
+    )
+
+    size_t(
+        "getFrameHeader",
+        "Decode Frame Header, or requires larger {@code srcSize}.",
+
+        ZSTD_frameHeader.p("zfhPtr", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+
+        returnDoc =
+        """
+        0, {@code zfhPtr} is correctly filled, &gt;0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
+        tested using #isError()
+        """
+    )
+
+    size_t(
+        "getFrameHeader_advanced",
+        "Same as #getFrameHeader(), with added capability to select a format (like #f_zstd1_magicless).",
+
+        ZSTD_frameHeader.p("zfhPtr", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+        ZSTD_format_e("format", "", formats)
     )
 
     size_t(
@@ -1092,7 +1117,23 @@ v                                       v                      v
         ZSTD_CCtx.p("cctx", ""),
         ZSTD_compressionParameters("cparams", ""),
 
-        returnDoc = "0 on success, or an error code (can be checked with #isError())"
+        returnDoc = "0 on success, or an error code (can be checked with #isError()). On failure, no parameters are updated."
+    )
+
+    size_t(
+        "CCtx_setFParams",
+        "Set all parameters provided within {@code fparams} into the working {@code cctx}.",
+
+        ZSTD_CCtx.p("cctx", ""),
+        ZSTD_frameParameters("fparams", ""),
+    )
+
+    size_t(
+        "CCtx_setParams",
+        "Set all parameters provided within {@code params} into the working {@code cctx}.",
+
+        ZSTD_CCtx.p("cctx", ""),
+        ZSTD_parameters("params", "")
     )
 
     size_t(
@@ -1388,77 +1429,35 @@ v                                       v                      v
         """
     )
 
-    size_t(
-        "compressBegin",
+    // BLOCK-LEVEL SEQUENCE PRODUCER API
+
+    LongConstant(
         "",
 
-        ZSTD_CCtx.p("cctx", ""),
-        int("compressionLevel", "")
+        "SEQUENCE_PRODUCER_ERROR".."-1L"
     )
 
-    size_t(
-        "compressBegin_usingDict",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.const.p("dict", ""),
-        AutoSize("dict")..size_t("dictSize", ""),
-        int("compressionLevel", "")
-    )
-
-    size_t(
-        "compressBegin_usingCDict",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        ZSTD_CDict.const.p("cdict", "")
-    )
-
-    size_t(
-        "compressContinue",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", "")
-    )
-
-    size_t(
-        "compressEnd",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", "")
-    )
-
-    size_t(
-        "getFrameHeader",
-        "Decode Frame Header, or requires larger {@code srcSize}.",
-
-        ZSTD_frameHeader.p("zfhPtr", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", ""),
-
-        returnDoc =
+    void(
+        "registerSequenceProducer",
         """
-        0, {@code zfhPtr} is correctly filled, &gt;0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
-        tested using #isError()
-        """
-    )
+        Instruct zstd to use a block-level external sequence producer function.
 
-    size_t(
-        "getFrameHeader_advanced",
-        "Same as #getFrameHeader(), with added capability to select a format (like #f_zstd1_magicless).",
+        The {@code sequenceProducerState} must be initialized by the caller, and the caller is responsible for managing its lifetime. This parameter is sticky
+        across compressions. It will remain set until the user explicitly resets compression parameters.
+ 
+        Sequence producer registration is considered to be an "advanced parameter", part of the "advanced API". This means it will only have an effect on
+        compression APIs which respect advanced parameters, such as #compress2() and #compressStream2(). Older compression APIs such as #compressCCtx(), which
+        predate the introduction of "advanced parameters", will ignore any external sequence producer setting.
+ 
+        The sequence producer can be "cleared" by registering a #NULL function pointer. This removes all limitations described above in the "LIMITATIONS"
+        section of the API docs.
+ 
+        The user is strongly encouraged to read the full API documentation before calling this function.
+        """,
 
-        ZSTD_frameHeader.p("zfhPtr", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", ""),
-        ZSTD_format_e("format", "", formats)
+        ZSTD_CCtx.p("cctx", ""),
+        nullable..opaque_p("sequenceProducerState", ""),
+        nullable..ZSTD_sequenceProducer_F("sequenceProducer", "")
     )
 
     size_t(
@@ -1516,74 +1515,5 @@ v                                       v                      v
         "",
 
         ZSTD_DCtx.p("dctx", "")
-    )
-
-    size_t(
-        "getBlockSize",
-        "",
-
-        ZSTD_CCtx.const.p("cctx", "")
-    )
-
-    size_t(
-        "compressBlock",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", "")
-    )
-
-    size_t(
-        "decompressBlock",
-        "",
-
-        ZSTD_DCtx.p("dctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", "")
-    )
-
-    size_t(
-        "insertBlock",
-        "Insert uncompressed block into {@code dctx} history. Useful for multi-blocks decompression.",
-
-        ZSTD_DCtx.p("dctx", ""),
-        void.const.p("blockStart", ""),
-        AutoSize("blockStart")..size_t("blockSize", "")
-    )
-
-    // BLOCK-LEVEL SEQUENCE PRODUCER API
-
-    LongConstant(
-        "",
-
-        "SEQUENCE_PRODUCER_ERROR".."-1L"
-    )
-
-    void(
-        "registerSequenceProducer",
-        """
-        Instruct zstd to use a block-level external sequence producer function.
-
-        The {@code sequenceProducerState} must be initialized by the caller, and the caller is responsible for managing its lifetime. This parameter is sticky
-        across compressions. It will remain set until the user explicitly resets compression parameters.
- 
-        Sequence producer registration is considered to be an "advanced parameter", part of the "advanced API". This means it will only have an effect on
-        compression APIs which respect advanced parameters, such as #compress2() and #compressStream2(). Older compression APIs such as #compressCCtx(), which
-        predate the introduction of "advanced parameters", will ignore any external sequence producer setting.
- 
-        The sequence producer can be "cleared" by registering a #NULL function pointer. This removes all limitations described above in the "LIMITATIONS"
-        section of the API docs.
- 
-        The user is strongly encouraged to read the full API documentation before calling this function.
-        """,
-
-        ZSTD_CCtx.p("cctx", ""),
-        nullable..opaque_p("sequenceProducerState", ""),
-        nullable..ZSTD_sequenceProducer_F("sequenceProducer", "")
     )
 }
