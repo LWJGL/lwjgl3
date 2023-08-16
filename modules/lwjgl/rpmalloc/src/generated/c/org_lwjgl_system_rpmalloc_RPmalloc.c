@@ -214,4 +214,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1heap_1t
     rpmalloc_heap_thread_set_current(heap);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1get_1heap_1for_1ptr(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
+    void *ptr = (void *)(uintptr_t)ptrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)rpmalloc_get_heap_for_ptr(ptr);
+}
+
 EXTERN_C_EXIT

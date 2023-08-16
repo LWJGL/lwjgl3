@@ -653,4 +653,51 @@ public class RPmalloc {
      */
     public static native void rpmalloc_heap_thread_set_current(@NativeType("rpmalloc_heap_t *") long heap);
 
+    // --- [ rpmalloc_get_heap_for_ptr ] ---
+
+    /** Unsafe version of: {@link #rpmalloc_get_heap_for_ptr malloc_get_heap_for_ptr} */
+    public static native long nrpmalloc_get_heap_for_ptr(long ptr);
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") ByteBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") ShortBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") IntBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") LongBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") FloatBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") DoubleBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
+    /** Returns which heap the given pointer is allocated on. */
+    @NativeType("rpmalloc_heap_t *")
+    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") PointerBuffer ptr) {
+        return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
+    }
+
 }
