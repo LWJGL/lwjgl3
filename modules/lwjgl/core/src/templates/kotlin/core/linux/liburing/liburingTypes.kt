@@ -240,19 +240,6 @@ val io_uring_rsrc_update2 = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdat
     __u32("resv2", "")
 }
 
-val io_uring_notification_slot = struct(Module.CORE_LINUX_LIBURING, "IOUringNotificationSlot", nativeName = "struct io_uring_notification_slot") {
-    __u64("tag", "")
-    __u64("resv", "")[3]
-}
-
-val io_uring_notification_register = struct(Module.CORE_LINUX_LIBURING, "IOUringNotificationRegister", nativeName = "struct io_uring_notification_register") {
-    __u32("nr_slots", "")
-    __u32("resv", "")
-    __u64("resv2", "")
-    __u64("data", "")
-    __u64("resv3", "")
-}
-
 val io_uring_probe_op = struct(Module.CORE_LINUX_LIBURING, "IOURingProbeOp", nativeName = "struct io_uring_probe_op") {
     __u8("op", "")
     __u8("resv", "")
