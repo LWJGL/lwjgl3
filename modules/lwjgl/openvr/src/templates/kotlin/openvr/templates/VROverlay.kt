@@ -222,6 +222,9 @@ typedef struct HmdRect2_t
         Within a category overlays are rendered lowest sort order to highest sort order. Overlays with the same sort order are rendered back to front base on
         distance from the HMD.
 
+        Subview overlays are always drawn immediately on top of their parent overlay, and the sort order is only relative to their peer subviews for that
+        overlay.
+
         Sort order defaults to 0.
         """,
 
@@ -389,24 +392,6 @@ typedef struct HmdRect2_t
         Check(1)..TrackedDeviceIndex_t.p("punDeviceIndex", ""),
         char.p("pchComponentName", ""),
         AutoSize("pchComponentName")..uint32_t("unComponentNameSize", "")
-    )
-
-    EVROverlayError(
-        "GetOverlayTransformOverlayRelative",
-        "",
-
-        VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..VROverlayHandle_t.p("ulOverlayHandleParent", ""),
-        HmdMatrix34_t.p("pmatParentOverlayToOverlayTransform", "")
-    )
-
-    EVROverlayError(
-        "SetOverlayTransformOverlayRelative",
-        "",
-
-        VROverlayHandle_t("ulOverlayHandle", ""),
-        VROverlayHandle_t("ulOverlayHandleParent", ""),
-        HmdMatrix34_t.p("pmatParentOverlayToOverlayTransform", "")
     )
 
     EVROverlayError(

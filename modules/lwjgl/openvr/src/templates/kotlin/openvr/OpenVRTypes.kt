@@ -12,6 +12,9 @@ val OPENVR_API_BINDING = simpleBinding(
     bundledWithLWJGL = true
 )
 
+val vrshared_uint64_t = typedef(uint64_t, "vrshared_uint64_t")
+val vrshared_double = typedef(double, "vrshared_double")
+
 val EVRApplicationError = "EVRApplicationError".enumType
 val EVRCompositorError = "EVRCompositorError".enumType
 val EVRFirmwareError = "EVRFirmwareError".enumType
@@ -188,20 +191,6 @@ val Texture_t = struct(Module.OPENVR, "Texture", nativeName = "Texture_t") {
     EColorSpace("eColorSpace", "").links("EColorSpace_\\w+")
 }
 
-val TrackedDevicePose_t = struct(Module.OPENVR, "TrackedDevicePose", nativeName = "TrackedDevicePose_t") {
-    documentation = "Describes a single pose for a tracked object."
-
-    HmdMatrix34_t("mDeviceToAbsoluteTracking", "")
-    HmdVector3_t("vVelocity", "velocity in tracker space in m/s")
-    HmdVector3_t("vAngularVelocity", "angular velocity in radians/s")
-    ETrackingResult("eTrackingResult", "").links("ETrackingResult_\\w+")
-    bool("bPoseIsValid", "")
-    bool(
-        "bDeviceIsConnected",
-        "This indicates that there is a device connected for this spot in the pose array. It could go from true to false if the user unplugs the device."
-    )
-}
-
 val VRTextureBounds_t = struct(Module.OPENVR, "VRTextureBounds", nativeName = "VRTextureBounds_t") {
     documentation = "Allows the application to control what part of the provided texture will be used in the frame buffer."
 
@@ -245,6 +234,20 @@ val VRTextureWithPoseAndDepth_t = struct(Module.OPENVR, "VRTextureWithPoseAndDep
     EColorSpace("eColorSpace", "")
     HmdMatrix34_t("mDeviceToAbsoluteTracking", "")
     VRTextureDepthInfo_t("depth", "")
+}
+
+val TrackedDevicePose_t = struct(Module.OPENVR, "TrackedDevicePose", nativeName = "TrackedDevicePose_t") {
+    documentation = "Describes a single pose for a tracked object."
+
+    HmdMatrix34_t("mDeviceToAbsoluteTracking", "")
+    HmdVector3_t("vVelocity", "velocity in tracker space in m/s")
+    HmdVector3_t("vAngularVelocity", "angular velocity in radians/s")
+    ETrackingResult("eTrackingResult", "").links("ETrackingResult_\\w+")
+    bool("bPoseIsValid", "")
+    bool(
+        "bDeviceIsConnected",
+        "This indicates that there is a device connected for this spot in the pose array. It could go from true to false if the user unplugs the device."
+    )
 }
 
 val VRVulkanTextureData_t = struct(Module.OPENVR, "VRVulkanTextureData", nativeName = "VRVulkanTextureData_t") {
@@ -678,6 +681,13 @@ val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStat
     uint32_t("m_nNumFramePresentsTimedOut", "")
     uint32_t("m_nNumDroppedFramesTimedOut", "")
     uint32_t("m_nNumReprojectedFramesTimedOut", "")
+    uint32_t("m_nNumFrameSubmits", "")
+    vrshared_double("m_flSumCompositorCPUTimeMS", "divide by {@code m_nNumFrameSubmits}")
+    vrshared_double("m_flSumCompositorGPUTimeMS", "divide by {@code m_nNumFrameSubmits}")
+    vrshared_double("m_flSumTargetFrameTimes", "divide by {@code m_nNumFrameSubmits}")
+    vrshared_double("m_flSumApplicationCPUTimeMS", "divide by {@code m_nNumFrameSubmits}")
+    vrshared_double("m_flSumApplicationGPUTimeMS", "divide by {@code m_nNumFrameSubmits}")
+    uint32_t("m_nNumFramesWithDepth", "total frames submitted with depth by the current application")
 }
 
 val Compositor_StageRenderSettings = struct(Module.OPENVR, "CompositorStageRenderSettings", nativeName = "Compositor_StageRenderSettings", mutable = false) {
