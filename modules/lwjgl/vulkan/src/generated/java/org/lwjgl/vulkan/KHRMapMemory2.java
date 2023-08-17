@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension provides extensible versions of the Vulkan memory map and unmap entrypoints. The new entrypoints are functionally identical to the core entrypoints, except that their parameters are specified using extensible structures that can be used to pass extension-specific information.
+ * This extension provides extensible versions of the Vulkan memory map and unmap entry points. The new entry points are functionally identical to the core entry points, except that their parameters are specified using extensible structures that can be used to pass extension-specific information.
  * 
  * <h5>VK_KHR_map_memory2</h5>
  * 

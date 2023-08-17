@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature is enabled and an instance of {@link VkShaderModuleCreateInfo} is included in the {@code pNext} chain, {@code module} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. If {@code module} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code used by the pipeline is defined by {@code module}. If {@code module} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code is defined by the chained {@link VkShaderModuleCreateInfo} if present.</p>
+ * <p>If {@code module} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code used by the pipeline is defined by {@code module}. If {@code module} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code is defined by the chained {@link VkShaderModuleCreateInfo} if present.</p>
  * 
  * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature is enabled, applications <b>can</b> omit shader code for {@code stage} and instead provide a module identifier. This is done by including a {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} struct with {@code identifierSize} not equal to 0 in the {@code pNext} chain. A shader stage created in this way is equivalent to one created using a shader module with the same identifier. The identifier allows an implementation to look up a pipeline without consuming a valid SPIR-V module. If a pipeline is not found, pipeline compilation is not possible and the implementation <b>must</b> fail as specified by {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT}.</p>
  * 
@@ -59,15 +59,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, and the identified entry point writes to {@code FragStencilRefEXT} in any execution path, all execution paths that are not exclusive to helper invocations <b>must</b> either discard the fragment, or write or initialize the value of {@code FragStencilRefEXT}</li>
  * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled</li>
  * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-computeFullSubgroups">{@code computeFullSubgroups}</a> feature <b>must</b> be enabled</li>
+ * <li>If {@code flags} includes {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT}, {@code stage} <b>must</b> be one of {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, or {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
  * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, {@code flags} <b>must</b> not have the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set</li>
  * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled, and {@code stage} <b>must</b> be a valid bit specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-requiredSubgroupSizeStages">{@code requiredSubgroupSizeStages}</a></li>
- * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain and {@code stage} is {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, the local workgroup size of the shader <b>must</b> be less than or equal to the product of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}{@code ::requiredSubgroupSize} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxComputeWorkgroupSubgroups">{@code maxComputeWorkgroupSubgroups}</a></li>
+ * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain and {@code stage} is {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, or {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, the local workgroup size of the shader <b>must</b> be less than or equal to the product of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}{@code ::requiredSubgroupSize} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxComputeWorkgroupSubgroups">{@code maxComputeWorkgroupSubgroups}</a></li>
  * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, and {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}{@code ::requiredSubgroupSize}</li>
  * <li>If {@code flags} has both the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} and {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flags set, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
  * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set and {@code flags} does not have the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set and no {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">{@code subgroupSize}</a></li>
+ * <li>If {@code module} uses the {@code OpTypeCooperativeMatrixKHR} instruction with a {@code Scope} equal to {@code Subgroup}, then the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">{@code subgroupSize}</a>.</li>
  * <li>If a shader module identifier is specified for this {@code stage}, a {@link VkShaderModuleCreateInfo} structure <b>must</b> not be present in the {@code pNext} chain</li>
  * <li>If a shader module identifier is not specified for this {@code stage}, {@code module} <b>must</b> be a valid {@code VkShaderModule} or there <b>must</b> be a valid {@link VkShaderModuleCreateInfo} structure in the {@code pNext} chain</li>
- * <li>If a shader module identifier is not specified for this {@code stage}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature is not enabled, {@code module} <b>must</b> be a valid {@code VkShaderModule}</li>
+ * <li>If a shader module identifier is not specified for this {@code stage}, and neither the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> nor <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature are enabled, {@code module} <b>must</b> be a valid {@code VkShaderModule}</li>
  * <li>If a shader module identifier is specified for this {@code stage}, {@code module} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If a shader module identifier is not specified, the shader code used by the pipeline <b>must</b> be valid as described by the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a> after applying the specializations provided in {@code pSpecializationInfo}, if any, and then converting all specialization constants into fixed constants</li>
  * </ul>
@@ -76,7 +78,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugUtilsObjectNameInfoEXT}, {@link VkPipelineRobustnessCreateInfoEXT}, {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT}, {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}, {@link VkShaderModuleCreateInfo}, or {@link VkShaderModuleValidationCacheCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugUtilsObjectNameInfoEXT}, {@link VkPipelineRobustnessCreateInfoEXT}, {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT}, {@link VkPipelineShaderStageNodeCreateInfoAMDX}, {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}, {@link VkShaderModuleCreateInfo}, or {@link VkShaderModuleValidationCacheCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineShaderStageCreateFlagBits} values</li>
  * <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
@@ -87,7 +89,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkComputePipelineCreateInfo}, {@link VkGraphicsPipelineCreateInfo}, {@link VkGraphicsShaderGroupCreateInfoNV}, {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}, {@link VkSpecializationInfo}</p>
+ * <p>{@link VkComputePipelineCreateInfo}, {@link VkExecutionGraphPipelineCreateInfoAMDX}, {@link VkGraphicsPipelineCreateInfo}, {@link VkGraphicsShaderGroupCreateInfoNV}, {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}, {@link VkSpecializationInfo}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -165,7 +167,7 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -203,6 +205,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageModuleIdentifierCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineShaderStageNodeCreateInfoAMDX} value to the {@code pNext} chain. */
+    public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageNodeCreateInfoAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
@@ -513,6 +517,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageModuleIdentifierCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineShaderStageNodeCreateInfoAMDX} value to the {@code pNext} chain. */
+        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageNodeCreateInfoAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */

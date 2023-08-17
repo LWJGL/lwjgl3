@@ -167,6 +167,24 @@ public class Yoga {
         YGEdgeAll        = 8;
 
     /**
+     * YGErrata
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #YGErrataNone ErrataNone}</li>
+     * <li>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</li>
+     * <li>{@link #YGErrataAll ErrataAll}</li>
+     * <li>{@link #YGErrataClassic ErrataClassic}</li>
+     * </ul>
+     */
+    public static final int
+        YGErrataNone             = 0,
+        YGErrataStretchFlexBasis = 1,
+        YGErrataAll              = 2147483647,
+        YGErrataClassic          = 2147483646;
+
+    /**
      * YGExperimentalFeature
      * 
      * <h5>Enum values:</h5>
@@ -174,13 +192,13 @@ public class Yoga {
      * <ul>
      * <li>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</li>
      * <li>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</li>
-     * <li>{@link #YGExperimentalFeatureFixAbsoluteTrailingColumnMargin ExperimentalFeatureFixAbsoluteTrailingColumnMargin}</li>
+     * <li>{@link #YGExperimentalFeatureFixJNILocalRefOverflows ExperimentalFeatureFixJNILocalRefOverflows}</li>
      * </ul>
      */
     public static final int
         YGExperimentalFeatureWebFlexBasis                         = 0,
         YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge = 1,
-        YGExperimentalFeatureFixAbsoluteTrailingColumnMargin      = 2;
+        YGExperimentalFeatureFixJNILocalRefOverflows              = 2;
 
     /**
      * YGGutter
@@ -666,6 +684,30 @@ public class Yoga {
             check(context);
         }
         nYGNodeSetContext(node, context);
+    }
+
+    // --- [ YGNodeGetConfig ] ---
+
+    public static native long nYGNodeGetConfig(long node);
+
+    @NativeType("YGConfigRef")
+    public static long YGNodeGetConfig(@NativeType("YGNodeRef") long node) {
+        if (CHECKS) {
+            check(node);
+        }
+        return nYGNodeGetConfig(node);
+    }
+
+    // --- [ YGNodeSetConfig ] ---
+
+    public static native void nYGNodeSetConfig(long node, long config);
+
+    public static void YGNodeSetConfig(@NativeType("YGNodeRef") long node, @NativeType("YGConfigRef") long config) {
+        if (CHECKS) {
+            check(node);
+            check(config);
+        }
+        nYGNodeSetConfig(node, config);
     }
 
     // --- [ YGConfigSetPrintTreeFlag ] ---
@@ -1868,33 +1910,15 @@ public class Yoga {
         nYGConfigSetPointScaleFactor(config, pixelsInPoint);
     }
 
-    // --- [ YGConfigGetUseLegacyStretchBehaviour ] ---
+    // --- [ YGConfigGetPointScaleFactor ] ---
 
-    public static native boolean nYGConfigGetUseLegacyStretchBehaviour(long config);
+    public static native float nYGConfigGetPointScaleFactor(long config);
 
-    @NativeType("bool")
-    public static boolean YGConfigGetUseLegacyStretchBehaviour(@NativeType("YGConfigRef") long config) {
+    public static float YGConfigGetPointScaleFactor(@NativeType("YGConfigRef") long config) {
         if (CHECKS) {
             check(config);
         }
-        return nYGConfigGetUseLegacyStretchBehaviour(config);
-    }
-
-    // --- [ YGConfigSetUseLegacyStretchBehaviour ] ---
-
-    /** Unsafe version of: {@link #YGConfigSetUseLegacyStretchBehaviour ConfigSetUseLegacyStretchBehaviour} */
-    public static native void nYGConfigSetUseLegacyStretchBehaviour(long config, boolean useLegacyStretchBehaviour);
-
-    /**
-     * Yoga previously had an error where containers would take the maximum space possible instead of the minimum like they are supposed to. In practice this
-     * resulted in implicit behaviour similar to align-self: stretch; Because this was such a long-standing bug we must allow legacy users to switch back to
-     * this behaviour.
-     */
-    public static void YGConfigSetUseLegacyStretchBehaviour(@NativeType("YGConfigRef") long config, @NativeType("bool") boolean useLegacyStretchBehaviour) {
-        if (CHECKS) {
-            check(config);
-        }
-        nYGConfigSetUseLegacyStretchBehaviour(config, useLegacyStretchBehaviour);
+        return nYGConfigGetPointScaleFactor(config);
     }
 
     // --- [ YGConfigNew ] ---
@@ -1935,7 +1959,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGConfigSetExperimentalFeatureEnabled ConfigSetExperimentalFeatureEnabled} */
     public static native void nYGConfigSetExperimentalFeatureEnabled(long config, int feature, boolean enabled);
 
-    /** @param feature one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixAbsoluteTrailingColumnMargin ExperimentalFeatureFixAbsoluteTrailingColumnMargin}</td></tr></table> */
+    /** @param feature one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixJNILocalRefOverflows ExperimentalFeatureFixJNILocalRefOverflows}</td></tr></table> */
     public static void YGConfigSetExperimentalFeatureEnabled(@NativeType("YGConfigRef") long config, @NativeType("YGExperimentalFeature") int feature, @NativeType("bool") boolean enabled) {
         if (CHECKS) {
             check(config);
@@ -1948,7 +1972,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGConfigIsExperimentalFeatureEnabled ConfigIsExperimentalFeatureEnabled} */
     public static native boolean nYGConfigIsExperimentalFeatureEnabled(long config, int feature);
 
-    /** @param feature one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixAbsoluteTrailingColumnMargin ExperimentalFeatureFixAbsoluteTrailingColumnMargin}</td></tr></table> */
+    /** @param feature one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixJNILocalRefOverflows ExperimentalFeatureFixJNILocalRefOverflows}</td></tr></table> */
     @NativeType("bool")
     public static boolean YGConfigIsExperimentalFeatureEnabled(@NativeType("YGConfigRef") long config, @NativeType("YGExperimentalFeature") int feature) {
         if (CHECKS) {
@@ -2022,6 +2046,29 @@ public class Yoga {
         return nYGConfigGetContext(config);
     }
 
+    // --- [ YGConfigSetErrata ] ---
+
+    public static native void nYGConfigSetErrata(long config, int errata);
+
+    public static void YGConfigSetErrata(@NativeType("YGConfigRef") long config, @NativeType("YGErrata") int errata) {
+        if (CHECKS) {
+            check(config);
+        }
+        nYGConfigSetErrata(config, errata);
+    }
+
+    // --- [ YGConfigGetErrata ] ---
+
+    public static native int nYGConfigGetErrata(long config);
+
+    @NativeType("YGErrata")
+    public static int YGConfigGetErrata(@NativeType("YGConfigRef") long config) {
+        if (CHECKS) {
+            check(config);
+        }
+        return nYGConfigGetErrata(config);
+    }
+
     // --- [ YGRoundValueToPixelGrid ] ---
 
     public static native float YGRoundValueToPixelGrid(double value, double pointScaleFactor, @NativeType("bool") boolean forceCeil, @NativeType("bool") boolean forceFloor);
@@ -2091,7 +2138,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGExperimentalFeatureToString ExperimentalFeatureToString} */
     public static native long nYGExperimentalFeatureToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixAbsoluteTrailingColumnMargin ExperimentalFeatureFixAbsoluteTrailingColumnMargin}</td></tr></table> */
+    /** @param value one of:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr><tr><td>{@link #YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge}</td></tr><tr><td>{@link #YGExperimentalFeatureFixJNILocalRefOverflows ExperimentalFeatureFixJNILocalRefOverflows}</td></tr></table> */
     @NativeType("char const *")
     public static String YGExperimentalFeatureToString(@NativeType("YGExperimentalFeature") int value) {
         long __result = nYGExperimentalFeatureToString(value);

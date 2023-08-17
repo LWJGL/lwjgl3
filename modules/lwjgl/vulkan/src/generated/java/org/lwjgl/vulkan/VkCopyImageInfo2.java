@@ -53,8 +53,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code srcOffset.z} <b>must</b> be 0</li>
  * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code dstOffset.z} <b>must</b> be 0</li>
  * <li>If the {@link KHRMaintenance1 VK_KHR_maintenance1} extension is not enabled, {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, {@code srcImage} and {@code dstImage} <b>must</b> have the same {@code VkImageType}</li>
- * <li>If {@code srcImage} and {@code dstImage} have a different {@code VkImageType}, one <b>must</b> be {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} and the other <b>must</b> be {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
- * <li>If {@code srcImage} and {@code dstImage} have the same {@code VkImageType}, the {@code layerCount} member of {@code srcSubresource} and {@code dstSubresource} in each element of {@code pRegions} <b>must</b> match</li>
+ * <li>If the {@link KHRMaintenance1 VK_KHR_maintenance1} extension is not enabled, {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, and {@code srcImage} or {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code extent.depth} <b>must</b> be 1</li>
+ * <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> is not enabled, and {@code srcImage} and {@code dstImage} have a different {@code VkImageType}, one <b>must</b> be {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} and the other <b>must</b> be {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> feature is not enabled, the {@code layerCount} member of {@code srcSubresource} or {@code dstSubresource} <b>must</b> not be {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}</li>
+ * <li>If {@code srcImage} and {@code dstImage} have the same {@code VkImageType}, and neither of the {@code layerCount} members of {@code srcSubresource} or {@code dstSubresource} are VK_REMAINING_ARRAY_LAYERS, the {@code layerCount} members <b>must</b> match</li>
+ * <li>If {@code srcImage} and {@code dstImage} have the same {@code VkImageType}, and one of the {@code layerCount} members of {@code srcSubresource} or {@code dstSubresource} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the other member <b>must</b> be either {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} or equal to the {@code arrayLayers} member of the {@link VkImageCreateInfo} used to create the image minus {@code baseArrayLayer}</li>
  * <li>If {@code srcImage} and {@code dstImage} are both of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code extent.depth} <b>must</b> be 1</li>
  * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, and {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then for each element of {@code pRegions}, {@code extent.depth} <b>must</b> equal {@code srcSubresource.layerCount}</li>
  * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, and {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then for each element of {@code pRegions}, {@code extent.depth} <b>must</b> equal {@code dstSubresource.layerCount}</li>
@@ -83,14 +86,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If {@code srcImage} is non-sparse then the image or the specified <em>disjoint</em> plane <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
  * <li>The {@code srcSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>The <code>{@code srcSubresource.baseArrayLayer} + {@code srcSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
+ * <li>If {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the <code>{@code srcSubresource.baseArrayLayer} + {@code srcSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
  * <li>{@code srcImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
  * </ul>
  * 
  * <ul>
  * <li>If {@code dstImage} is non-sparse then the image or the specified <em>disjoint</em> plane <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
  * <li>The {@code dstSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>The <code>{@code dstSubresource.baseArrayLayer} + {@code dstSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
+ * <li>If {@code dstSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the <code>{@code dstSubresource.baseArrayLayer} + {@code dstSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
  * <li>{@code dstImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
  * </ul>
  * 
@@ -192,7 +195,7 @@ public class VkCopyImageInfo2 extends Struct<VkCopyImageInfo2> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

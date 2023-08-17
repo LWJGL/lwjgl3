@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, {@link VkSubresourceLayout2EXT}, {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}</p>
+ * <p>{@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, {@link VkSubresourceLayout2KHR}, {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}</p>
  * 
  * <h3>Layout</h3>
  * 

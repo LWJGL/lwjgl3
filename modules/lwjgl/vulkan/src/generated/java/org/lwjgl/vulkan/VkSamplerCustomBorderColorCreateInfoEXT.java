@@ -33,6 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code format} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} and {@code format} is not a depth/stencil format then the {@link VkSamplerCreateInfo}{@code ::borderColor} type <b>must</b> match the sampled type of the provided {@code format}, as shown in the <em>SPIR-V Type</em> column of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">Interpretation of Numeric Format</a> table</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-customBorderColorWithoutFormat">{@code customBorderColorWithoutFormat}</a> feature is not enabled then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
  * <li>If the sampler is used to sample an image view of {@link VK10#VK_FORMAT_B4G4R4A4_UNORM_PACK16 FORMAT_B4G4R4A4_UNORM_PACK16}, {@link VK10#VK_FORMAT_B5G6R5_UNORM_PACK16 FORMAT_B5G6R5_UNORM_PACK16}, or {@link VK10#VK_FORMAT_B5G5R5A1_UNORM_PACK16 FORMAT_B5G5R5A1_UNORM_PACK16} format then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
+ * <li>If the sampler is used to sample an image view of {@link KHRMaintenance5#VK_FORMAT_A1B5G5R5_UNORM_PACK16_KHR FORMAT_A1B5G5R5_UNORM_PACK16_KHR} format then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -110,7 +111,7 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCus
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

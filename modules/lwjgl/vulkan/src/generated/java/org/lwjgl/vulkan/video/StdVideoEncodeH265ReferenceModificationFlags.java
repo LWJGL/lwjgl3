@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoEncodeH265ReferenceModificationFlags {
  *     uint32_t ref_pic_list_modification_flag_l0 : 1;
  *     uint32_t ref_pic_list_modification_flag_l1 : 1;
+ *     uint32_t reserved : 30;
  * }</code></pre>
  */
 public class StdVideoEncodeH265ReferenceModificationFlags extends Struct<StdVideoEncodeH265ReferenceModificationFlags> implements NativeResource {
@@ -222,12 +223,14 @@ public class StdVideoEncodeH265ReferenceModificationFlags extends Struct<StdVide
     public static int nref_pic_list_modification_flag_l0(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #ref_pic_list_modification_flag_l1}. */
     public static int nref_pic_list_modification_flag_l1(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    public static int nreserved(long struct) { return nbitfield0(struct) >>> 2; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceModificationFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #ref_pic_list_modification_flag_l0(boolean) ref_pic_list_modification_flag_l0}. */
     public static void nref_pic_list_modification_flag_l0(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #ref_pic_list_modification_flag_l1(boolean) ref_pic_list_modification_flag_l1}. */
     public static void nref_pic_list_modification_flag_l1(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    public static void nreserved(long struct, int value) { nbitfield0(struct, (value << 2) | (nbitfield0(struct) & 0x00_00_00_03)); }
 
     // -----------------------------------
 

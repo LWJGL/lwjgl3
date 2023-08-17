@@ -459,7 +459,7 @@ public class ZstdX {
      * Allowed values are between 1KB and {@link Zstd#ZSTD_BLOCKSIZE_MAX BLOCKSIZE_MAX} (128KB). The default is {@code ZSTD_BLOCKSIZE_MAX}, and setting to 0 will set to the default.
      * 
      * <p>This parameter can be used to set an upper bound on the blocksize that overrides the default {@code ZSTD_BLOCKSIZE_MAX}. It cannot be used to set upper
-     * bounds greater than {@code ZSTD_BLOCKSIZE_MAX} or bounds lower than 1KB (will make {@link Zstd#ZSTD_compressBound compressBound} innacurate). Only currently meant to be used for
+     * bounds greater than {@code ZSTD_BLOCKSIZE_MAX} or bounds lower than 1KB (will make {@link Zstd#ZSTD_compressBound compressBound} inaccurate). Only currently meant to be used for
      * testing.</p>
      */
     public static final int ZSTD_c_maxBlockSize = ZSTD_c_experimentalParam18;
@@ -682,6 +682,37 @@ public class ZstdX {
     @NativeType("size_t")
     public static long ZSTD_frameHeaderSize(@NativeType("void const *") ByteBuffer src) {
         return nZSTD_frameHeaderSize(memAddress(src), src.remaining());
+    }
+
+    // --- [ ZSTD_getFrameHeader ] ---
+
+    /** Unsafe version of: {@link #ZSTD_getFrameHeader getFrameHeader} */
+    public static native long nZSTD_getFrameHeader(long zfhPtr, long src, long srcSize);
+
+    /**
+     * Decode Frame Header, or requires larger {@code srcSize}.
+     *
+     * @return 0, {@code zfhPtr} is correctly filled, &gt;0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
+     *         tested using {@link Zstd#ZSTD_isError isError}
+     */
+    @NativeType("size_t")
+    public static long ZSTD_getFrameHeader(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src) {
+        return nZSTD_getFrameHeader(zfhPtr.address(), memAddress(src), src.remaining());
+    }
+
+    // --- [ ZSTD_getFrameHeader_advanced ] ---
+
+    /** Unsafe version of: {@link #ZSTD_getFrameHeader_advanced getFrameHeader_advanced} */
+    public static native long nZSTD_getFrameHeader_advanced(long zfhPtr, long src, long srcSize, int format);
+
+    /**
+     * Same as {@link #ZSTD_getFrameHeader getFrameHeader}, with added capability to select a format (like {@link #ZSTD_f_zstd1_magicless f_zstd1_magicless}).
+     *
+     * @param format one of:<br><table><tr><td>{@link #ZSTD_f_zstd1 f_zstd1}</td><td>{@link #ZSTD_f_zstd1_magicless f_zstd1_magicless}</td></tr></table>
+     */
+    @NativeType("size_t")
+    public static long ZSTD_getFrameHeader_advanced(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_format_e") int format) {
+        return nZSTD_getFrameHeader_advanced(zfhPtr.address(), memAddress(src), src.remaining(), format);
     }
 
     // --- [ ZSTD_decompressionMargin ] ---
@@ -1302,7 +1333,7 @@ public class ZstdX {
      * 
      * <p>Note: if modifying parameters during compression (MT mode only), note that changes to the {@code .windowLog} parameter will be ignored.</p>
      *
-     * @return 0 on success, or an error code (can be checked with {@link Zstd#ZSTD_isError isError})
+     * @return 0 on success, or an error code (can be checked with {@link Zstd#ZSTD_isError isError}). On failure, no parameters are updated.
      */
     @NativeType("size_t")
     public static long ZSTD_CCtx_setCParams(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters cparams) {
@@ -1310,6 +1341,34 @@ public class ZstdX {
             check(cctx);
         }
         return nZSTD_CCtx_setCParams(cctx, cparams.address());
+    }
+
+    // --- [ ZSTD_CCtx_setFParams ] ---
+
+    /** Unsafe version of: {@link #ZSTD_CCtx_setFParams CCtx_setFParams} */
+    public static native long nZSTD_CCtx_setFParams(long cctx, long fparams);
+
+    /** Set all parameters provided within {@code fparams} into the working {@code cctx}. */
+    @NativeType("size_t")
+    public static long ZSTD_CCtx_setFParams(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_frameParameters") ZSTDFrameParameters fparams) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_CCtx_setFParams(cctx, fparams.address());
+    }
+
+    // --- [ ZSTD_CCtx_setParams ] ---
+
+    /** Unsafe version of: {@link #ZSTD_CCtx_setParams CCtx_setParams} */
+    public static native long nZSTD_CCtx_setParams(long cctx, long params);
+
+    /** Set all parameters provided within {@code params} into the working {@code cctx}. */
+    @NativeType("size_t")
+    public static long ZSTD_CCtx_setParams(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_parameters") ZSTDParameters params) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_CCtx_setParams(cctx, params.address());
     }
 
     // --- [ ZSTD_CCtx_loadDictionary_byReference ] ---
@@ -1731,96 +1790,31 @@ public class ZstdX {
         return nZSTD_toFlushNow(cctx);
     }
 
-    // --- [ ZSTD_compressBegin ] ---
+    // --- [ ZSTD_registerSequenceProducer ] ---
 
-    public static native long nZSTD_compressBegin(long cctx, int compressionLevel);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressBegin(@NativeType("ZSTD_CCtx *") long cctx, int compressionLevel) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_compressBegin(cctx, compressionLevel);
-    }
-
-    // --- [ ZSTD_compressBegin_usingDict ] ---
-
-    public static native long nZSTD_compressBegin_usingDict(long cctx, long dict, long dictSize, int compressionLevel);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressBegin_usingDict(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void const *") ByteBuffer dict, int compressionLevel) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_compressBegin_usingDict(cctx, memAddress(dict), dict.remaining(), compressionLevel);
-    }
-
-    // --- [ ZSTD_compressBegin_usingCDict ] ---
-
-    public static native long nZSTD_compressBegin_usingCDict(long cctx, long cdict);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressBegin_usingCDict(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_CDict const *") long cdict) {
-        if (CHECKS) {
-            check(cctx);
-            check(cdict);
-        }
-        return nZSTD_compressBegin_usingCDict(cctx, cdict);
-    }
-
-    // --- [ ZSTD_compressContinue ] ---
-
-    public static native long nZSTD_compressContinue(long cctx, long dst, long dstCapacity, long src, long srcSize);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressContinue(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_compressContinue(cctx, memAddress(dst), dst.remaining(), memAddress(src), src.remaining());
-    }
-
-    // --- [ ZSTD_compressEnd ] ---
-
-    public static native long nZSTD_compressEnd(long cctx, long dst, long dstCapacity, long src, long srcSize);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressEnd(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_compressEnd(cctx, memAddress(dst), dst.remaining(), memAddress(src), src.remaining());
-    }
-
-    // --- [ ZSTD_getFrameHeader ] ---
-
-    /** Unsafe version of: {@link #ZSTD_getFrameHeader getFrameHeader} */
-    public static native long nZSTD_getFrameHeader(long zfhPtr, long src, long srcSize);
+    /** Unsafe version of: {@link #ZSTD_registerSequenceProducer registerSequenceProducer} */
+    public static native void nZSTD_registerSequenceProducer(long cctx, long sequenceProducerState, long sequenceProducer);
 
     /**
-     * Decode Frame Header, or requires larger {@code srcSize}.
-     *
-     * @return 0, {@code zfhPtr} is correctly filled, &gt;0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
-     *         tested using {@link Zstd#ZSTD_isError isError}
+     * Instruct zstd to use a block-level external sequence producer function.
+     * 
+     * <p>The {@code sequenceProducerState} must be initialized by the caller, and the caller is responsible for managing its lifetime. This parameter is sticky
+     * across compressions. It will remain set until the user explicitly resets compression parameters.</p>
+     * 
+     * <p>Sequence producer registration is considered to be an "advanced parameter", part of the "advanced API". This means it will only have an effect on
+     * compression APIs which respect advanced parameters, such as {@link Zstd#ZSTD_compress2 compress2} and {@link Zstd#ZSTD_compressStream2 compressStream2}. Older compression APIs such as {@link Zstd#ZSTD_compressCCtx compressCCtx}, which
+     * predate the introduction of "advanced parameters", will ignore any external sequence producer setting.</p>
+     * 
+     * <p>The sequence producer can be "cleared" by registering a {@code NULL} function pointer. This removes all limitations described above in the "LIMITATIONS"
+     * section of the API docs.</p>
+     * 
+     * <p>The user is strongly encouraged to read the full API documentation before calling this function.</p>
      */
-    @NativeType("size_t")
-    public static long ZSTD_getFrameHeader(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src) {
-        return nZSTD_getFrameHeader(zfhPtr.address(), memAddress(src), src.remaining());
-    }
-
-    // --- [ ZSTD_getFrameHeader_advanced ] ---
-
-    /** Unsafe version of: {@link #ZSTD_getFrameHeader_advanced getFrameHeader_advanced} */
-    public static native long nZSTD_getFrameHeader_advanced(long zfhPtr, long src, long srcSize, int format);
-
-    /**
-     * Same as {@link #ZSTD_getFrameHeader getFrameHeader}, with added capability to select a format (like {@link #ZSTD_f_zstd1_magicless f_zstd1_magicless}).
-     *
-     * @param format one of:<br><table><tr><td>{@link #ZSTD_f_zstd1 f_zstd1}</td><td>{@link #ZSTD_f_zstd1_magicless f_zstd1_magicless}</td></tr></table>
-     */
-    @NativeType("size_t")
-    public static long ZSTD_getFrameHeader_advanced(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_format_e") int format) {
-        return nZSTD_getFrameHeader_advanced(zfhPtr.address(), memAddress(src), src.remaining(), format);
+    public static void ZSTD_registerSequenceProducer(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") long sequenceProducerState, @Nullable @NativeType("ZSTD_sequenceProducer_F *") ZSTDSequenceProducerI sequenceProducer) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        nZSTD_registerSequenceProducer(cctx, sequenceProducerState, memAddressSafe(sequenceProducer));
     }
 
     // --- [ ZSTD_decodingBufferSize_min ] ---
@@ -1899,83 +1893,6 @@ public class ZstdX {
             check(dctx);
         }
         return nZSTD_nextInputType(dctx);
-    }
-
-    // --- [ ZSTD_getBlockSize ] ---
-
-    public static native long nZSTD_getBlockSize(long cctx);
-
-    @NativeType("size_t")
-    public static long ZSTD_getBlockSize(@NativeType("ZSTD_CCtx const *") long cctx) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_getBlockSize(cctx);
-    }
-
-    // --- [ ZSTD_compressBlock ] ---
-
-    public static native long nZSTD_compressBlock(long cctx, long dst, long dstCapacity, long src, long srcSize);
-
-    @NativeType("size_t")
-    public static long ZSTD_compressBlock(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_compressBlock(cctx, memAddress(dst), dst.remaining(), memAddress(src), src.remaining());
-    }
-
-    // --- [ ZSTD_decompressBlock ] ---
-
-    public static native long nZSTD_decompressBlock(long dctx, long dst, long dstCapacity, long src, long srcSize);
-
-    @NativeType("size_t")
-    public static long ZSTD_decompressBlock(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src) {
-        if (CHECKS) {
-            check(dctx);
-        }
-        return nZSTD_decompressBlock(dctx, memAddress(dst), dst.remaining(), memAddress(src), src.remaining());
-    }
-
-    // --- [ ZSTD_insertBlock ] ---
-
-    /** Unsafe version of: {@link #ZSTD_insertBlock insertBlock} */
-    public static native long nZSTD_insertBlock(long dctx, long blockStart, long blockSize);
-
-    /** Insert uncompressed block into {@code dctx} history. Useful for multi-blocks decompression. */
-    @NativeType("size_t")
-    public static long ZSTD_insertBlock(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void const *") ByteBuffer blockStart) {
-        if (CHECKS) {
-            check(dctx);
-        }
-        return nZSTD_insertBlock(dctx, memAddress(blockStart), blockStart.remaining());
-    }
-
-    // --- [ ZSTD_registerSequenceProducer ] ---
-
-    /** Unsafe version of: {@link #ZSTD_registerSequenceProducer registerSequenceProducer} */
-    public static native void nZSTD_registerSequenceProducer(long cctx, long sequenceProducerState, long sequenceProducer);
-
-    /**
-     * Instruct zstd to use a block-level external sequence producer function.
-     * 
-     * <p>The {@code sequenceProducerState} must be initialized by the caller, and the caller is responsible for managing its lifetime. This parameter is sticky
-     * across compressions. It will remain set until the user explicitly resets compression parameters.</p>
-     * 
-     * <p>Sequence producer registration is considered to be an "advanced parameter", part of the "advanced API". This means it will only have an effect on
-     * compression APIs which respect advanced parameters, such as {@link Zstd#ZSTD_compress2 compress2} and {@link Zstd#ZSTD_compressStream2 compressStream2}. Older compression APIs such as {@link Zstd#ZSTD_compressCCtx compressCCtx}, which
-     * predate the introduction of "advanced parameters", will ignore any external sequence producer setting.</p>
-     * 
-     * <p>The sequence producer can be "cleared" by registering a {@code NULL} function pointer. This removes all limitations described above in the "LIMITATIONS"
-     * section of the API docs.</p>
-     * 
-     * <p>The user is strongly encouraged to read the full API documentation before calling this function.</p>
-     */
-    public static void ZSTD_registerSequenceProducer(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") long sequenceProducerState, @Nullable @NativeType("ZSTD_sequenceProducer_F *") ZSTDSequenceProducerI sequenceProducer) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        nZSTD_registerSequenceProducer(cctx, sequenceProducerState, memAddressSafe(sequenceProducer));
     }
 
     public static int ZSTD_FRAMEHEADERSIZE_PREFIX(int format) {

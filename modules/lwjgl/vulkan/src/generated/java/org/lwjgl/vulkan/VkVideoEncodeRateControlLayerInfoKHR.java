@@ -24,14 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Per-layer rate control settings for all enabled rate control layers <b>must</b> be initialized or re-initialized whenever stream rate control settings are provided via {@link VkVideoEncodeRateControlInfoKHR}. This is done by specifying settings for all enabled rate control layers in {@link VkVideoEncodeRateControlInfoKHR}{@code ::pLayers}.</p>
  * 
- * <p>Including this structure in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} and including {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR} in {@link VkVideoCodingControlInfoKHR}{@code ::flags} will define stream rate control settings for individual layers during video encoding. This adjustment only impacts the specified layer without impacting the rate control settings or implementation rate control algorithm behavior for any other enabled rate control layers. The adjustment takes effect whenever the corresponding {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} is executed, and only impacts {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} operations pertaining to the corresponding video coding layer that follow in execution order.</p>
- * 
  * <p>It is possible for an application to enable multiple video coding layers (via codec-specific extensions to encoding operations) while only enabling a single layer of rate control for the entire video stream. To achieve this, {@code layerCount} in {@link VkVideoEncodeRateControlInfoKHR} <b>must</b> be set to 1, and the single {@link VkVideoEncodeRateControlLayerInfoKHR} provided in {@code pLayers} would apply to all encoded segments of the video stream, regardless of which codec-defined video coding layer they belong to. In this case, the implementation decides bitrate distribution across video coding layers (if applicable to the specified stream rate control mode).</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264RateControlLayerInfoEXT} or {@link VkVideoEncodeH265RateControlLayerInfoEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -48,8 +48,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t {@link #maxBitrate};
  *     uint32_t {@link #frameRateNumerator};
  *     uint32_t {@link #frameRateDenominator};
- *     uint32_t {@link #virtualBufferSizeInMs};
- *     uint32_t {@link #initialVirtualBufferSizeInMs};
  * }</code></pre>
  */
 public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRateControlLayerInfoKHR> implements NativeResource {
@@ -67,9 +65,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         AVERAGEBITRATE,
         MAXBITRATE,
         FRAMERATENUMERATOR,
-        FRAMERATEDENOMINATOR,
-        VIRTUALBUFFERSIZEINMS,
-        INITIALVIRTUALBUFFERSIZEINMS;
+        FRAMERATEDENOMINATOR;
 
     static {
         Layout layout = __struct(
@@ -77,8 +73,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
             __member(POINTER_SIZE),
             __member(8),
             __member(8),
-            __member(4),
-            __member(4),
             __member(4),
             __member(4)
         );
@@ -92,8 +86,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         MAXBITRATE = layout.offsetof(3);
         FRAMERATENUMERATOR = layout.offsetof(4);
         FRAMERATEDENOMINATOR = layout.offsetof(5);
-        VIRTUALBUFFERSIZEINMS = layout.offsetof(6);
-        INITIALVIRTUALBUFFERSIZEINMS = layout.offsetof(7);
     }
 
     protected VkVideoEncodeRateControlLayerInfoKHR(long address, @Nullable ByteBuffer container) {
@@ -118,7 +110,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** a pointer to a structure extending this structure. */
@@ -136,12 +128,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     /** the denominator of the frame rate. Valid when rate control mode is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. */
     @NativeType("uint32_t")
     public int frameRateDenominator() { return nframeRateDenominator(address()); }
-    /** the leaky bucket model virtual buffer size in milliseconds, with respect to peak bitrate. Valid when rate control mode is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. For example, virtual buffer size is ({@code virtualBufferSizeInMs} × {@code maxBitrate} / 1000). */
-    @NativeType("uint32_t")
-    public int virtualBufferSizeInMs() { return nvirtualBufferSizeInMs(address()); }
-    /** the initial occupancy in milliseconds of the virtual buffer in the leaky bucket model. Valid when rate control mode is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. */
-    @NativeType("uint32_t")
-    public int initialVirtualBufferSizeInMs() { return ninitialVirtualBufferSizeInMs(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeRateControlLayerInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -161,10 +147,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     public VkVideoEncodeRateControlLayerInfoKHR frameRateNumerator(@NativeType("uint32_t") int value) { nframeRateNumerator(address(), value); return this; }
     /** Sets the specified value to the {@link #frameRateDenominator} field. */
     public VkVideoEncodeRateControlLayerInfoKHR frameRateDenominator(@NativeType("uint32_t") int value) { nframeRateDenominator(address(), value); return this; }
-    /** Sets the specified value to the {@link #virtualBufferSizeInMs} field. */
-    public VkVideoEncodeRateControlLayerInfoKHR virtualBufferSizeInMs(@NativeType("uint32_t") int value) { nvirtualBufferSizeInMs(address(), value); return this; }
-    /** Sets the specified value to the {@link #initialVirtualBufferSizeInMs} field. */
-    public VkVideoEncodeRateControlLayerInfoKHR initialVirtualBufferSizeInMs(@NativeType("uint32_t") int value) { ninitialVirtualBufferSizeInMs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeRateControlLayerInfoKHR set(
@@ -173,9 +155,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         long averageBitrate,
         long maxBitrate,
         int frameRateNumerator,
-        int frameRateDenominator,
-        int virtualBufferSizeInMs,
-        int initialVirtualBufferSizeInMs
+        int frameRateDenominator
     ) {
         sType(sType);
         pNext(pNext);
@@ -183,8 +163,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         maxBitrate(maxBitrate);
         frameRateNumerator(frameRateNumerator);
         frameRateDenominator(frameRateDenominator);
-        virtualBufferSizeInMs(virtualBufferSizeInMs);
-        initialVirtualBufferSizeInMs(initialVirtualBufferSizeInMs);
 
         return this;
     }
@@ -326,10 +304,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     public static int nframeRateNumerator(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR); }
     /** Unsafe version of {@link #frameRateDenominator}. */
     public static int nframeRateDenominator(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR); }
-    /** Unsafe version of {@link #virtualBufferSizeInMs}. */
-    public static int nvirtualBufferSizeInMs(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.VIRTUALBUFFERSIZEINMS); }
-    /** Unsafe version of {@link #initialVirtualBufferSizeInMs}. */
-    public static int ninitialVirtualBufferSizeInMs(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.INITIALVIRTUALBUFFERSIZEINMS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.STYPE, value); }
@@ -343,10 +317,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     public static void nframeRateNumerator(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR, value); }
     /** Unsafe version of {@link #frameRateDenominator(int) frameRateDenominator}. */
     public static void nframeRateDenominator(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR, value); }
-    /** Unsafe version of {@link #virtualBufferSizeInMs(int) virtualBufferSizeInMs}. */
-    public static void nvirtualBufferSizeInMs(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.VIRTUALBUFFERSIZEINMS, value); }
-    /** Unsafe version of {@link #initialVirtualBufferSizeInMs(int) initialVirtualBufferSizeInMs}. */
-    public static void ninitialVirtualBufferSizeInMs(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.INITIALVIRTUALBUFFERSIZEINMS, value); }
 
     // -----------------------------------
 
@@ -404,12 +374,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateDenominator} field. */
         @NativeType("uint32_t")
         public int frameRateDenominator() { return VkVideoEncodeRateControlLayerInfoKHR.nframeRateDenominator(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#virtualBufferSizeInMs} field. */
-        @NativeType("uint32_t")
-        public int virtualBufferSizeInMs() { return VkVideoEncodeRateControlLayerInfoKHR.nvirtualBufferSizeInMs(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#initialVirtualBufferSizeInMs} field. */
-        @NativeType("uint32_t")
-        public int initialVirtualBufferSizeInMs() { return VkVideoEncodeRateControlLayerInfoKHR.ninitialVirtualBufferSizeInMs(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#sType} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeRateControlLayerInfoKHR.nsType(address(), value); return this; }
@@ -429,10 +393,6 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer frameRateNumerator(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.nframeRateNumerator(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateDenominator} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer frameRateDenominator(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.nframeRateDenominator(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#virtualBufferSizeInMs} field. */
-        public VkVideoEncodeRateControlLayerInfoKHR.Buffer virtualBufferSizeInMs(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.nvirtualBufferSizeInMs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#initialVirtualBufferSizeInMs} field. */
-        public VkVideoEncodeRateControlLayerInfoKHR.Buffer initialVirtualBufferSizeInMs(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.ninitialVirtualBufferSizeInMs(address(), value); return this; }
 
     }
 

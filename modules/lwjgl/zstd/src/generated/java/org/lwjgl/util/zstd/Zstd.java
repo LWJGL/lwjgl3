@@ -112,7 +112,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 5,
-        ZSTD_VERSION_RELEASE = 4;
+        ZSTD_VERSION_RELEASE = 5;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -464,7 +464,7 @@ public class Zstd {
     /**
      * Compresses {@code src} content as a single zstd compressed frame into already allocated {@code dst}.
      * 
-     * <p>Hint: compression runs faster if {@code dstCapacity} &ge; {@link #ZSTD_compressBound compressBound}{@code (srcSize)}</p>
+     * <p>Providing {@code dstCapacity} &ge; {@link #ZSTD_compressBound compressBound}{@code (srcSize)} guarantees that zstd will have enough space to successfully compress the data.</p>
      *
      * @return compressed size written into {@code dst} (&le; {@code dstCapacity}), or an error code if it fails (which can be tested using {@link #ZSTD_isError isError}).
      */
@@ -789,8 +789,10 @@ public class Zstd {
      * <p>{@code ZSTD_compress2()} always starts a new frame. Should cctx hold data from a previously unfinished frame, everything about it is forgotten.</p>
      * 
      * <p>- Compression parameters are pushed into {@code CCtx} before starting compression, using {@code ZSTD_CCtx_set*()}
-     * - The function is always blocking, returns when compression is completed. Hint: compression runs faster if {@code dstCapacity} &ge;
-     * {@code ZSTD_compressBound(srcSize)}.</p>
+     * - The function is always blocking, returns when compression is completed.</p>
+     * 
+     * <p>Providing {@code dstCapacity} &ge; {@link #ZSTD_compressBound compressBound}{@code (srcSize)} guarantees that zstd will have enough space to successfully compress the data,
+     * though it is possible it fails for other reasons.</p>
      *
      * @return compressed size written into {@code dst} (&le; {@code dstCapacity}), or an error code if it fails (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -1253,6 +1255,9 @@ public class Zstd {
      * case, dictionary buffer must outlive its users.</p>
      * 
      * <p>Note 4: Use {@link ZstdX#ZSTD_CCtx_loadDictionary_advanced CCtx_loadDictionary_advanced} to precisely select how dictionary content must be interpreted.</p>
+     * 
+     * <p>Note 5 : This method does not benefit from LDM (long distance mode). If you want to employ LDM on some large dictionary content, prefer employing
+     * {@link #ZSTD_CCtx_refPrefix CCtx_refPrefix}.</p>
      *
      * @return 0, or an error code (which can be tested with {@link #ZSTD_isError isError}).
      */
@@ -1303,6 +1308,8 @@ public class Zstd {
      * <p>A prefix is <b>only used once</b>. Tables are discarded at end of frame ({@link #ZSTD_e_end e_end}). Decompression will need same prefix to properly regenerate data.
      * Compressing with a prefix is similar in outcome as performing a diff and compressing it, but performs much faster, especially during decompression
      * (compression speed is tunable with compression level).</p>
+     * 
+     * <p>This method is compatible with LDM (long distance mode).</p>
      * 
      * <p>Special: Adding any prefix (including {@code NULL}) invalidates any previous prefix or dictionary</p>
      * 

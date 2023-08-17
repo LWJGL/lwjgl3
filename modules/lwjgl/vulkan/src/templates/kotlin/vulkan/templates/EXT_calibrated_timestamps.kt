@@ -34,6 +34,9 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
             <dd><ul>
                 <li>Daniel Rakos <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_calibrated_timestamps]%20@drakos-amd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_calibrated_timestamps%20extension*">drakos-amd</a></li>
             </ul></dd>
+
+            <dt><b>Extension Proposal</b></dt>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_calibrated_timestamps.adoc">VK_EXT_calibrated_timestamps</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>

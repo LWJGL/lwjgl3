@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A {@code modelKey} value of {@link MSFTControllerModel#XR_NULL_CONTROLLER_MODEL_KEY_MSFT NULL_CONTROLLER_MODEL_KEY_MSFT}, represents an invalid model key and indicates there is no controller model yet available. The application <b>should</b> keep calling {@link MSFTControllerModel#xrGetControllerModelKeyMSFT GetControllerModelKeyMSFT} because the model <b>may</b> become available at a later point.</p>
  * 
+ * <p>The returned {@code modelKey} value depends on an active action binding to the corresponding subpathname:/grip/pose of the controller. Therefore, the application <b>must</b> have provided a valid action set containing an action for subpathname:/grip/pose, and have successfully completed an {@link XR10#xrSyncActions SyncActions} call, in order to obtain a valid {@code modelKey}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

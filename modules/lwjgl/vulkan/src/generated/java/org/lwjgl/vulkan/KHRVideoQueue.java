@@ -250,6 +250,7 @@ public class KHRVideoQueue {
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR} specifies that the video session uses protected video content.</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_SESSION_CREATE_ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS_BIT_KHR VIDEO_SESSION_CREATE_ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS_BIT_KHR} specifies that the implementation is allowed to override video session parameters and other codec-specific encoding parameters to optimize video encode operations based on the specific use case defined by the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profiles">video profile</a> and the used video encode quality level.</li>
      * </ul>
      */
     public static final int VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR = 0x1;
@@ -262,7 +263,7 @@ public class KHRVideoQueue {
      * <ul>
      * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session to be reset before other coding control parameters are applied.</li>
      * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR} indicates that the coding control parameters include video encode rate control parameters (see {@link VkVideoEncodeRateControlInfoKHR}).</li>
-     * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR} indicates that the coding control parameters include video encode rate control layer parameters (see {@link VkVideoEncodeRateControlLayerInfoKHR}).</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR} indicates that the coding control parameters include video encode quality level parameters (see {@link VkVideoEncodeQualityLevelInfoKHR}).</li>
      * </ul>
      */
     public static final int VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR = 0x1;
@@ -426,6 +427,25 @@ public class KHRVideoQueue {
      * <p>The application <b>can</b> select the parameters returned in the {@link VkVideoFormatPropertiesKHR} entries and use compatible parameters when creating the input, output, and DPB images. The implementation will report all image creation and usage flags that are valid for images used with the requested video profiles but applications <b>should</b> create images only with those that are necessary for the particular use case.</p>
      * 
      * <p>Before creating an image, the application <b>can</b> obtain the complete set of supported image format features by calling {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} using parameters derived from the members of one of the reported {@link VkVideoFormatPropertiesKHR} entries and adding the same {@link VkVideoProfileListInfoKHR} structure to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2}.</p>
+     * 
+     * <p>The following applies to all {@link VkVideoFormatPropertiesKHR} entries returned by {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR}:</p>
+     * 
+     * <ul>
+     * <li>{@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} <b>must</b> succeed when called with {@link VkVideoFormatPropertiesKHR}{@code ::format}</li>
+     * <li>If {@link VkVideoFormatPropertiesKHR}{@code ::imageTiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, then the {@code optimalTilingFeatures} returned by {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} <b>must</b> include all format features required by the image usage flags reported in {@link VkVideoFormatPropertiesKHR}{@code ::imageUsageFlags} for the format, as indicated in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#format-feature-dependent-usage-flags">Format Feature Dependent Usage Flags</a> section.</li>
+     * <li>If {@link VkVideoFormatPropertiesKHR}{@code ::imageTiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}, then the {@code linearTilingFeatures} returned by {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} <b>must</b> include all format features required by the image usage flags reported in {@link VkVideoFormatPropertiesKHR}{@code ::imageUsageFlags} for the format, as indicated in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#format-feature-dependent-usage-flags">Format Feature Dependent Usage Flags</a> section.</li>
+     * <li>{@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} <b>must</b> succeed when called with a {@link VkPhysicalDeviceImageFormatInfo2} structure containing the following information:
+     * 
+     * <ul>
+     * <li>The {@code pNext} chain including the same {@link VkVideoProfileListInfoKHR} structure used to call {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR}.</li>
+     * <li>{@code format} set to the value of {@link VkVideoFormatPropertiesKHR}{@code ::format}.</li>
+     * <li>{@code type} set to the value of {@link VkVideoFormatPropertiesKHR}{@code ::imageType}.</li>
+     * <li>{@code tiling} set to the value of {@link VkVideoFormatPropertiesKHR}{@code ::imageTiling}.</li>
+     * <li>{@code usage} set to the value of {@link VkVideoFormatPropertiesKHR}{@code ::imageUsageFlags}.</li>
+     * <li>{@code flags} set to the value of {@link VkVideoFormatPropertiesKHR}{@code ::imageCreateFlags}.</li>
+     * </ul>
+     * </li>
+     * </ul>
      * 
      * <p>The {@code componentMapping} member of {@link VkVideoFormatPropertiesKHR} defines the ordering of the Y′C<sub>B</sub>C<sub>R</sub> color channels from the perspective of the video codec operations specified in {@link VkVideoProfileListInfoKHR}. For example, if the implementation produces video decode output with the format {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} where the blue and red chrominance channels are swapped then the {@code componentMapping} member of the corresponding {@link VkVideoFormatPropertiesKHR} structure will have the following member values:</p>
      * 
@@ -855,7 +875,7 @@ public class KHRVideoQueue {
      * <p>If {@code pCreateInfo→videoSession} was created with the video codec operation {@link KHRVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR}, then the created video session parameters object will initially contain the following sets of parameter entries:</p>
      * 
      * <ul>
-     * <li>{@code StdVideoH265VideoParameterSet} structures representing <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h265-vps">H.264 VPS</a> entries, as follows:
+     * <li>{@code StdVideoH265VideoParameterSet} structures representing <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h265-vps">H.265 VPS</a> entries, as follows:
      * 
      * <ul>
      * <li>If the {@code pParametersAddInfo} member of the {@link VkVideoDecodeH265SessionParametersCreateInfoKHR} structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265VideoParameterSet} entries specified in {@code pParametersAddInfo→pStdVPSs} are added first;</li>
@@ -1304,7 +1324,7 @@ public class KHRVideoQueue {
      * 
      * <p>A newly created video session <b>must</b> be reset before performing video coding operations using it by including {@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} in {@code pCodingControlInfo→flags}. The reset operation also returns all DPB slots of the video session to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">inactive state</a>. Correspondingly, any DPB slot index associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#bound-reference-picture-resources">bound reference picture resources</a> is removed.</p>
      * 
-     * <p>For encode sessions, the reset operation returns rate control configuration to implementation default settings.</p>
+     * <p>For encode sessions, the reset operation returns rate control configuration to implementation default settings and sets the video encode quality level to zero.</p>
      * 
      * <p>After video coding operations are performed using a video session, the reset operation <b>can</b> be used to return the video session to the same <em>initial</em> state as after the reset of a newly created video session. This <b>can</b> be used, for example, when different video sequences are needed to be processed with the same video session object.</p>
      * 

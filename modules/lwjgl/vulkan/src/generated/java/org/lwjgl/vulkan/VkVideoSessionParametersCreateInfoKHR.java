@@ -79,7 +79,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersCreateInfoKHR}, {@link VkVideoDecodeH265SessionParametersCreateInfoKHR}, {@link VkVideoEncodeH264SessionParametersCreateInfoEXT}, or {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersCreateInfoKHR}, {@link VkVideoDecodeH265SessionParametersCreateInfoKHR}, {@link VkVideoEncodeH264SessionParametersCreateInfoEXT}, {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}, or {@link VkVideoEncodeQualityLevelInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code videoSessionParametersTemplate} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParametersTemplate} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
@@ -160,7 +160,7 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct<VkVideoSession
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -190,6 +190,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct<VkVideoSession
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} value to the {@code pNext} chain. */
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeQualityLevelInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeQualityLevelInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoSessionParametersCreateInfoKHR flags(@NativeType("VkVideoSessionParametersCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #videoSessionParametersTemplate} field. */
@@ -429,6 +431,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct<VkVideoSession
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} value to the {@code pNext} chain. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeQualityLevelInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeQualityLevelInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#flags} field. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer flags(@NativeType("VkVideoSessionParametersCreateFlagsKHR") int value) { VkVideoSessionParametersCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#videoSessionParametersTemplate} field. */

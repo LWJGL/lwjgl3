@@ -197,65 +197,14 @@ public class EXTImageCompressionControl {
     }
 
     /**
-     * Retrieve information about an image subresource.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To query the memory layout of an image subresource, call:</p>
-     * 
-     * <pre><code>
-     * void vkGetImageSubresourceLayout2EXT(
-     *     VkDevice                                    device,
-     *     VkImage                                     image,
-     *     const VkImageSubresource2EXT*               pSubresource,
-     *     VkSubresourceLayout2EXT*                    pLayout);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>{@code vkGetImageSubresourceLayout2EXT} behaves similarly to {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
-     * 
-     * <p>It is legal to call {@code vkGetImageSubresourceLayout2EXT} with a {@code image} created with {@code tiling} equal to {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, but the members of {@link VkSubresourceLayout2EXT}{@code ::subresourceLayout} will have undefined values in this case.</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>Structures chained from {@link VkImageSubresource2EXT}{@code ::pNext} will also be updated when {@code tiling} is equal to {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}.</p>
-     * </div>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
-     * <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
-     * <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
-     * <li>If {@code format} of the {@code image} is a color format, {@code tiling} of the {@code image} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, and does not have a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
-     * <li>If {@code format} of the {@code image} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}</li>
-     * <li>If {@code format} of the {@code image} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
-     * <li>If {@code format} of the {@code image} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
-     * <li>If the {@code tiling} of the {@code image} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} and has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a></li>
-     * <li>If {@code image} was created with the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
-     * <li>If the {@code tiling} of the {@code image} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> and the index <em>i</em> <b>must</b> be less than the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and {@link VkImageDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifier}</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-     * <li>{@code pSubresource} <b>must</b> be a valid pointer to a valid {@link VkImageSubresource2EXT} structure</li>
-     * <li>{@code pLayout} <b>must</b> be a valid pointer to a {@link VkSubresourceLayout2EXT} structure</li>
-     * <li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkImageSubresource2EXT}, {@link VkSubresourceLayout2EXT}</p>
+     * See {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}.
      *
      * @param device       the logical device that owns the image.
      * @param image        the image whose layout is being queried.
-     * @param pSubresource a pointer to a {@link VkImageSubresource2EXT} structure selecting a specific image for the image subresource.
-     * @param pLayout      a pointer to a {@link VkSubresourceLayout2EXT} structure in which the layout is returned.
+     * @param pSubresource a pointer to a {@link VkImageSubresource2KHR} structure selecting a specific image for the image subresource.
+     * @param pLayout      a pointer to a {@link VkSubresourceLayout2KHR} structure in which the layout is returned.
      */
-    public static void vkGetImageSubresourceLayout2EXT(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource2EXT const *") VkImageSubresource2EXT pSubresource, @NativeType("VkSubresourceLayout2EXT *") VkSubresourceLayout2EXT pLayout) {
+    public static void vkGetImageSubresourceLayout2EXT(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource2KHR const *") VkImageSubresource2KHR pSubresource, @NativeType("VkSubresourceLayout2KHR *") VkSubresourceLayout2KHR pLayout) {
         nvkGetImageSubresourceLayout2EXT(device, image, pSubresource.address(), pLayout.address());
     }
 

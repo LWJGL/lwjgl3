@@ -37,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>pathname:/model_fb/keyboard/local</li>
  * <li>pathname:/model_fb/keyboard/remote</li>
+ * <li>pathname:/model_meta/keyboard/virtual (if the {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension is enabled)</li>
  * </ul>
  * </li>
  * </ul>

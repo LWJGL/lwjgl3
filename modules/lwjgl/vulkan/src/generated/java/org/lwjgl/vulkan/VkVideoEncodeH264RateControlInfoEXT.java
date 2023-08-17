@@ -30,7 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT}</li>
- * <li>{@code rateControlStructure} <b>must</b> be a valid {@code VkVideoEncodeH264RateControlStructureEXT} value</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264RateControlFlagBitsEXT} values</li>
+ * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -39,10 +40,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoEncodeH264RateControlInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
+ *     VkVideoEncodeH264RateControlFlagsEXT {@link #flags};
  *     uint32_t {@link #gopFrameCount};
  *     uint32_t {@link #idrPeriod};
  *     uint32_t {@link #consecutiveBFrameCount};
- *     VkVideoEncodeH264RateControlStructureEXT {@link #rateControlStructure};
  *     uint32_t {@link #temporalLayerCount};
  * }</code></pre>
  */
@@ -58,10 +59,10 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     public static final int
         STYPE,
         PNEXT,
+        FLAGS,
         GOPFRAMECOUNT,
         IDRPERIOD,
         CONSECUTIVEBFRAMECOUNT,
-        RATECONTROLSTRUCTURE,
         TEMPORALLAYERCOUNT;
 
     static {
@@ -80,10 +81,10 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        GOPFRAMECOUNT = layout.offsetof(2);
-        IDRPERIOD = layout.offsetof(3);
-        CONSECUTIVEBFRAMECOUNT = layout.offsetof(4);
-        RATECONTROLSTRUCTURE = layout.offsetof(5);
+        FLAGS = layout.offsetof(2);
+        GOPFRAMECOUNT = layout.offsetof(3);
+        IDRPERIOD = layout.offsetof(4);
+        CONSECUTIVEBFRAMECOUNT = layout.offsetof(5);
         TEMPORALLAYERCOUNT = layout.offsetof(6);
     }
 
@@ -109,12 +110,15 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
+    /** a bitmask of {@code VkVideoEncodeH264RateControlFlagBitsEXT} specifying H.264 rate control flags. */
+    @NativeType("VkVideoEncodeH264RateControlFlagsEXT")
+    public int flags() { return nflags(address()); }
     /** the number of frames contained within the group of pictures (GOP), starting from an intra frame and until the next intra frame. If it is set to 0, the implementation chooses a suitable value. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite. */
     @NativeType("uint32_t")
     public int gopFrameCount() { return ngopFrameCount(address()); }
@@ -124,9 +128,6 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     /** the number of consecutive B-frames between I- and/or P-frames within the GOP. */
     @NativeType("uint32_t")
     public int consecutiveBFrameCount() { return nconsecutiveBFrameCount(address()); }
-    /** a {@code VkVideoEncodeH264RateControlStructureEXT} value specifying the expected encode stream reference structure, to aid in rate control calculations. */
-    @NativeType("VkVideoEncodeH264RateControlStructureEXT")
-    public int rateControlStructure() { return nrateControlStructure(address()); }
     /** specifies the number of temporal layers enabled in the stream. */
     @NativeType("uint32_t")
     public int temporalLayerCount() { return ntemporalLayerCount(address()); }
@@ -137,14 +138,14 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     public VkVideoEncodeH264RateControlInfoEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH264RateControlInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@link #flags} field. */
+    public VkVideoEncodeH264RateControlInfoEXT flags(@NativeType("VkVideoEncodeH264RateControlFlagsEXT") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #gopFrameCount} field. */
     public VkVideoEncodeH264RateControlInfoEXT gopFrameCount(@NativeType("uint32_t") int value) { ngopFrameCount(address(), value); return this; }
     /** Sets the specified value to the {@link #idrPeriod} field. */
     public VkVideoEncodeH264RateControlInfoEXT idrPeriod(@NativeType("uint32_t") int value) { nidrPeriod(address(), value); return this; }
     /** Sets the specified value to the {@link #consecutiveBFrameCount} field. */
     public VkVideoEncodeH264RateControlInfoEXT consecutiveBFrameCount(@NativeType("uint32_t") int value) { nconsecutiveBFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #rateControlStructure} field. */
-    public VkVideoEncodeH264RateControlInfoEXT rateControlStructure(@NativeType("VkVideoEncodeH264RateControlStructureEXT") int value) { nrateControlStructure(address(), value); return this; }
     /** Sets the specified value to the {@link #temporalLayerCount} field. */
     public VkVideoEncodeH264RateControlInfoEXT temporalLayerCount(@NativeType("uint32_t") int value) { ntemporalLayerCount(address(), value); return this; }
 
@@ -152,18 +153,18 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     public VkVideoEncodeH264RateControlInfoEXT set(
         int sType,
         long pNext,
+        int flags,
         int gopFrameCount,
         int idrPeriod,
         int consecutiveBFrameCount,
-        int rateControlStructure,
         int temporalLayerCount
     ) {
         sType(sType);
         pNext(pNext);
+        flags(flags);
         gopFrameCount(gopFrameCount);
         idrPeriod(idrPeriod);
         consecutiveBFrameCount(consecutiveBFrameCount);
-        rateControlStructure(rateControlStructure);
         temporalLayerCount(temporalLayerCount);
 
         return this;
@@ -298,14 +299,14 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264RateControlInfoEXT.PNEXT); }
+    /** Unsafe version of {@link #flags}. */
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.FLAGS); }
     /** Unsafe version of {@link #gopFrameCount}. */
     public static int ngopFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.GOPFRAMECOUNT); }
     /** Unsafe version of {@link #idrPeriod}. */
     public static int nidrPeriod(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.IDRPERIOD); }
     /** Unsafe version of {@link #consecutiveBFrameCount}. */
     public static int nconsecutiveBFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.CONSECUTIVEBFRAMECOUNT); }
-    /** Unsafe version of {@link #rateControlStructure}. */
-    public static int nrateControlStructure(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.RATECONTROLSTRUCTURE); }
     /** Unsafe version of {@link #temporalLayerCount}. */
     public static int ntemporalLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT); }
 
@@ -313,14 +314,14 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264RateControlInfoEXT.PNEXT, value); }
+    /** Unsafe version of {@link #flags(int) flags}. */
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #gopFrameCount(int) gopFrameCount}. */
     public static void ngopFrameCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.GOPFRAMECOUNT, value); }
     /** Unsafe version of {@link #idrPeriod(int) idrPeriod}. */
     public static void nidrPeriod(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.IDRPERIOD, value); }
     /** Unsafe version of {@link #consecutiveBFrameCount(int) consecutiveBFrameCount}. */
     public static void nconsecutiveBFrameCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.CONSECUTIVEBFRAMECOUNT, value); }
-    /** Unsafe version of {@link #rateControlStructure(int) rateControlStructure}. */
-    public static void nrateControlStructure(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.RATECONTROLSTRUCTURE, value); }
     /** Unsafe version of {@link #temporalLayerCount(int) temporalLayerCount}. */
     public static void ntemporalLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT, value); }
 
@@ -368,6 +369,9 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
         /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264RateControlInfoEXT.npNext(address()); }
+        /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#flags} field. */
+        @NativeType("VkVideoEncodeH264RateControlFlagsEXT")
+        public int flags() { return VkVideoEncodeH264RateControlInfoEXT.nflags(address()); }
         /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#gopFrameCount} field. */
         @NativeType("uint32_t")
         public int gopFrameCount() { return VkVideoEncodeH264RateControlInfoEXT.ngopFrameCount(address()); }
@@ -377,9 +381,6 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
         /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#consecutiveBFrameCount} field. */
         @NativeType("uint32_t")
         public int consecutiveBFrameCount() { return VkVideoEncodeH264RateControlInfoEXT.nconsecutiveBFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#rateControlStructure} field. */
-        @NativeType("VkVideoEncodeH264RateControlStructureEXT")
-        public int rateControlStructure() { return VkVideoEncodeH264RateControlInfoEXT.nrateControlStructure(address()); }
         /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#temporalLayerCount} field. */
         @NativeType("uint32_t")
         public int temporalLayerCount() { return VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address()); }
@@ -390,14 +391,14 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct<VkVideoEncodeH26
         public VkVideoEncodeH264RateControlInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#pNext} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264RateControlInfoEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#flags} field. */
+        public VkVideoEncodeH264RateControlInfoEXT.Buffer flags(@NativeType("VkVideoEncodeH264RateControlFlagsEXT") int value) { VkVideoEncodeH264RateControlInfoEXT.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#gopFrameCount} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer gopFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH264RateControlInfoEXT.ngopFrameCount(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#idrPeriod} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer idrPeriod(@NativeType("uint32_t") int value) { VkVideoEncodeH264RateControlInfoEXT.nidrPeriod(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#consecutiveBFrameCount} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer consecutiveBFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH264RateControlInfoEXT.nconsecutiveBFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#rateControlStructure} field. */
-        public VkVideoEncodeH264RateControlInfoEXT.Buffer rateControlStructure(@NativeType("VkVideoEncodeH264RateControlStructureEXT") int value) { VkVideoEncodeH264RateControlInfoEXT.nrateControlStructure(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#temporalLayerCount} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer temporalLayerCount(@NativeType("uint32_t") int value) { VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address(), value); return this; }
 

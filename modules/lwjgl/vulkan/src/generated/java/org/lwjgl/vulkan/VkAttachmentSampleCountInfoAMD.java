@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@link VkCommandBufferInheritanceInfo}{@code ::renderPass} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT} is specified in {@link VkCommandBufferBeginInfo}{@code ::flags}, and the {@code pNext} chain of {@link VkCommandBufferInheritanceInfo} includes {@link VkAttachmentSampleCountInfoAMD}, then this structure defines the sample counts of each attachment within the render pass instance. If {@link VkAttachmentSampleCountInfoAMD} is not included, the value of {@link VkCommandBufferInheritanceRenderingInfo}{@code ::rasterizationSamples} is used as the sample count for each attachment. If {@link VkCommandBufferInheritanceInfo}{@code ::renderPass} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT} is not specified in {@link VkCommandBufferBeginInfo}{@code ::flags}, parameters of this structure are ignored.</p>
  * 
- * <p>{@link VkAttachmentSampleCountInfoAMD} <b>can</b> also be included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}. When a graphics pipeline is created without a {@code VkRenderPass}, if this structure is present in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the sample count of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, the value of {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples} is used as the sample count for each attachment. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.</p>
+ * <p>{@link VkAttachmentSampleCountInfoAMD} <b>can</b> also be included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}. When a graphics pipeline is created without a {@code VkRenderPass}, if this structure is included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the sample count of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, the value of {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples} is used as the sample count for each attachment. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -98,7 +98,7 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure */

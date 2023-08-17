@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkRayTracingPipelineCreateInfoKHR}</p>
+ * <p>{@link VkExecutionGraphPipelineCreateInfoAMDX}, {@link VkRayTracingPipelineCreateInfoKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -106,7 +106,7 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

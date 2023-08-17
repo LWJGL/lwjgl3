@@ -347,9 +347,13 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         <h5>Description</h5>
         Similar to other objects in Vulkan, the micromap creation merely creates an object with a specific “{@code shape}”. The type and quantity of geometry that can be built into a micromap is determined by the parameters of ##VkMicromapCreateInfoEXT.
 
-        Populating the data in the object after allocating and binding memory is done with commands such as #CmdBuildMicromapsEXT(), #BuildMicromapsEXT(), #CmdCopyMicromapEXT(), and #CopyMicromapEXT().
+        The micromap data is stored in the object referred to by ##VkMicromapCreateInfoEXT{@code ::buffer}. Once memory has been bound to that buffer, it <b>must</b> be populated by micromap build or micromap copy commands such as #CmdBuildMicromapsEXT(), #BuildMicromapsEXT(), #CmdCopyMicromapEXT(), and #CopyMicromapEXT().
 
-        The input buffers passed to micromap build commands will be referenced by the implementation for the duration of the command. Micromaps <b>must</b> be fully self-contained. The application <b>may</b> re-use or free any memory which was used by the command as an input or as scratch without affecting the results of a subsequent acceleration structure build using the micromap or traversal of that acceleration structure.
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The expected usage for a trace capture/replay tool is that it will serialize and later deserialize the micromap data using micromap copy commands. During capture the tool will use #CopyMicromapToMemoryEXT() or #CmdCopyMicromapToMemoryEXT() with a {@code mode} of #COPY_MICROMAP_MODE_SERIALIZE_EXT, and #CopyMemoryToMicromapEXT() or #CmdCopyMemoryToMicromapEXT() with a {@code mode} of #COPY_MICROMAP_MODE_DESERIALIZE_EXT during replay.
+        </div>
+
+        The input buffers passed to micromap build commands will be referenced by the implementation for the duration of the command. Micromaps <b>must</b> be fully self-contained. The application <b>can</b> reuse or free any memory which was used by the command as an input or as scratch without affecting the results of a subsequent acceleration structure build using the micromap or traversal of that acceleration structure.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1166,6 +1170,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>##VkMicromapBuildInfoEXT{@code ::dstMicromap} <b>must</b> have been created from {@code device}</li>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>

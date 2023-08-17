@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the acceleration structure will be the target of a build operation, the required size for an acceleration structure <b>can</b> be queried with {@link KHRAccelerationStructure#vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR}. If the acceleration structure is going to be the target of a compacting copy, {@link KHRAccelerationStructure#vkCmdWriteAccelerationStructuresPropertiesKHR CmdWriteAccelerationStructuresPropertiesKHR} or {@link KHRAccelerationStructure#vkWriteAccelerationStructuresPropertiesKHR WriteAccelerationStructuresPropertiesKHR} <b>can</b> be used to obtain the compacted size required.</p>
  * 
- * <p>If the acceleration structure will be the target of a build operation with {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} it <b>must</b> include {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} in {@code flags} and include {@link VkAccelerationStructureMotionInfoNV} as an extension structure in {@code pNext} with the number of instances as metadata for the object.</p>
+ * <p>If the acceleration structure will be the target of a build operation with {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} it <b>must</b> include {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} in {@code createFlags} and include {@link VkAccelerationStructureMotionInfoNV} as an extension structure in {@code pNext} with the number of instances as metadata for the object.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -53,8 +53,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code buffer} <b>must</b> not have been created with {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}</li>
  * <li>The sum of {@code offset} and {@code size} <b>must</b> be less than the size of {@code buffer}</li>
  * <li>{@code offset} <b>must</b> be a multiple of 256 bytes</li>
- * <li>If {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} is set in {@code flags} and {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR}, one member of the {@code pNext} chain <b>must</b> be a pointer to a valid instance of {@link VkAccelerationStructureMotionInfoNV}</li>
- * <li>If any geometry includes {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} then {@code flags} <b>must</b> contain {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV}</li>
+ * <li>If {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} is set in {@code createFlags} and {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR}, one member of the {@code pNext} chain <b>must</b> be a pointer to a valid instance of {@link VkAccelerationStructureMotionInfoNV}</li>
+ * <li>If any geometry includes {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} then {@code createFlags} <b>must</b> contain {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV}</li>
  * <li>If {@code createFlags} includes {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
  * <li>If the {@code pNext} chain includes a {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} structure, {@code createFlags} <b>must</b> contain {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}</li>
  * </ul>
@@ -154,7 +154,7 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct<VkAccelerationS
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

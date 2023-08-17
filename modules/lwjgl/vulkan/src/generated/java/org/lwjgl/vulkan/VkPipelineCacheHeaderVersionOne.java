@@ -32,6 +32,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <ul>
  * <li>{@code headerSize} <b>must</b> be 32</li>
  * <li>{@code headerVersion} <b>must</b> be {@link VK10#VK_PIPELINE_CACHE_HEADER_VERSION_ONE PIPELINE_CACHE_HEADER_VERSION_ONE}</li>
+ * <li>{@code headerSize} <b>must</b> not exceed the size of the pipeline cache</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

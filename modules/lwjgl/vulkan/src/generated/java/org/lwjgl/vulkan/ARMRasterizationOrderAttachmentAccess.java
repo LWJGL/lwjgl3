@@ -10,8 +10,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension extends the mechanism of input attachments to allow access to framebuffer attachments when used as both input and color, or depth/stencil, attachments from one fragment to the next, in rasterization order, without explicit synchronization.</p>
  * 
- * <p>See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-feedbackloop">renderpass feedback loops</a> for more information.</p>
- * 
  * <h5>Examples</h5>
  * 
  * <p>None.</p>

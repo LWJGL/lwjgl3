@@ -11,7 +11,7 @@ import vulkan.*
 val GOOGLE_surfaceless_query = "GOOGLESurfacelessQuery".nativeClassVK("GOOGLE_surfaceless_query", type = "instance", postfix = "GOOGLE") {
     documentation =
         """
-        This extension allows the #GetPhysicalDeviceSurfaceFormatsKHR() and #GetPhysicalDeviceSurfacePresentModesKHR() functions to accept #NULL_HANDLE as their {@code surface} parameter, allowing potential surface formats, colorspaces and present modes to be queried without providing a surface. Identically, #GetPhysicalDeviceSurfaceFormats2KHR(), #GetPhysicalDeviceSurfacePresentModes2EXT(), and #GetPhysicalDeviceSurfaceCapabilities2KHR() would accept #NULL_HANDLE in ##VkPhysicalDeviceSurfaceInfo2KHR{@code ::surface}. <b>This can only be supported on platforms where the results of these queries are surface-agnostic and a single presentation engine is the implicit target of all present operations</b>.
+        This extension allows the #GetPhysicalDeviceSurfaceFormatsKHR() and #GetPhysicalDeviceSurfacePresentModesKHR() functions to accept #NULL_HANDLE as their {@code surface} parameter, allowing potential surface formats, color spaces and present modes to be queried without providing a surface. Identically, #GetPhysicalDeviceSurfaceFormats2KHR(), #GetPhysicalDeviceSurfacePresentModes2EXT(), and #GetPhysicalDeviceSurfaceCapabilities2KHR() would accept #NULL_HANDLE in ##VkPhysicalDeviceSurfaceInfo2KHR{@code ::surface}. <b>This can only be supported on platforms where the results of these queries are surface-agnostic and a single presentation engine is the implicit target of all present operations</b>.
 
         <h5>VK_GOOGLE_surfaceless_query</h5>
         <dl>

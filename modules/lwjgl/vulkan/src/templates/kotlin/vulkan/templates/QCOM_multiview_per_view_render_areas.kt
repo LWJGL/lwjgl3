@@ -11,7 +11,7 @@ import vulkan.*
 val QCOM_multiview_per_view_render_areas = "QCOMMultiviewPerViewRenderAreas".nativeClassVK("QCOM_multiview_per_view_render_areas", type = "device", postfix = "QCOM") {
     documentation =
         """
-        Certain use-cases (e.g., side-by-side VR rendering) use multiview and render to distinct regions of the framebuffer for each view. On some implementations, there may be a performance benefit for providing per-view render areas to the implementation. Such per-view render areas can be used by the implementation to reduce the pixels that are affected by attachment load, store, and multisample resolve operations.
+        Certain use cases (e.g., side-by-side VR rendering) use multiview and render to distinct regions of the framebuffer for each view. On some implementations, there may be a performance benefit for providing per-view render areas to the implementation. Such per-view render areas can be used by the implementation to reduce the pixels that are affected by attachment load, store, and multisample resolve operations.
 
         The extension enables a multiview render pass instance to define per-view render areas. For each view of a multiview render pass instance, only those pixels in the per-view render area are affected by load, store and resolve operations.
 

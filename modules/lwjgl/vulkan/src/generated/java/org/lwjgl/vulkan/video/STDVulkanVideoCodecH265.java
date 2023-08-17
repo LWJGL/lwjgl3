@@ -10,8 +10,8 @@ import static org.lwjgl.vulkan.video.STDVulkanVideo.*;
 public final class STDVulkanVideoCodecH265 {
 
     public static final int
-        STD_VIDEO_H265_SUBLAYERS_LIST_SIZE                      = 7,
         STD_VIDEO_H265_CPB_CNT_LIST_SIZE                        = 32,
+        STD_VIDEO_H265_SUBLAYERS_LIST_SIZE                      = 7,
         STD_VIDEO_H265_SCALING_LIST_4X4_NUM_LISTS               = 6,
         STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS            = 16,
         STD_VIDEO_H265_SCALING_LIST_8X8_NUM_LISTS               = 6,
@@ -20,16 +20,16 @@ public final class STDVulkanVideoCodecH265 {
         STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS          = 64,
         STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS             = 2,
         STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS          = 64,
-        STD_VIDEO_H265_PREDICTOR_PALETTE_COMPONENTS_LIST_SIZE   = 3,
-        STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE = 128,
-        STD_VIDEO_H265_MAX_DPB_SIZE                             = 16,
-        STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS               = 32,
         STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE               = 6,
         STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE     = 19,
         STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE     = 21,
+        STD_VIDEO_H265_PREDICTOR_PALETTE_COMPONENTS_LIST_SIZE   = 3,
+        STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE = 128,
         STD_VIDEO_H265_MAX_NUM_LIST_REF                         = 15,
         STD_VIDEO_H265_MAX_CHROMA_PLANES                        = 2,
         STD_VIDEO_H265_MAX_SHORT_TERM_REF_PIC_SETS              = 64,
+        STD_VIDEO_H265_MAX_DPB_SIZE                             = 16,
+        STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS               = 32,
         STD_VIDEO_H265_MAX_LONG_TERM_PICS                       = 16,
         STD_VIDEO_H265_MAX_DELTA_POC                            = 48;
 
@@ -208,7 +208,7 @@ public final class STDVulkanVideoCodecH265 {
     public static final int STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE = 8;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 10);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 11);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h265_encode";

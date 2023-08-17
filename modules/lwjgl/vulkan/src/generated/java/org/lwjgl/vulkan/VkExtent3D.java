@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2}, {@link VkCopyMemoryToImageIndirectCommandNV}, {@link VkImageCopy}, {@link VkImageCopy2}, {@link VkImageCreateInfo}, {@link VkImageFormatProperties}, {@link VkImageResolve}, {@link VkImageResolve2}, {@link VkQueueFamilyProperties}, {@link VkSparseImageFormatProperties}, {@link VkSparseImageMemoryBind}, {@link VkTilePropertiesQCOM}</p>
+ * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2}, {@link VkCopyMemoryToImageIndirectCommandNV}, {@link VkImageCopy}, {@link VkImageCopy2}, {@link VkImageCreateInfo}, {@link VkImageFormatProperties}, {@link VkImageResolve}, {@link VkImageResolve2}, {@link VkImageToMemoryCopyEXT}, {@link VkMemoryToImageCopyEXT}, {@link VkQueueFamilyProperties}, {@link VkSparseImageFormatProperties}, {@link VkSparseImageMemoryBind}, {@link VkTilePropertiesQCOM}</p>
  * 
  * <h3>Layout</h3>
  * 

@@ -442,7 +442,7 @@ class YogaNode {
 
     public boolean hasNewLayout() {
         return INTERNAL_API
-            ? internal.hasNewLayout()
+            ? internal.flags().hasNewLayout()
             : YGNodeGetHasNewLayout(node);
     }
 
@@ -518,9 +518,7 @@ class YogaNode {
     float getFlexShrink() {
         if (INTERNAL_API) {
             YGFloatOptional value = internal.style().flexShrink();
-            return value.isUndefined()
-                ? internal.useWebDefaults() ? 1.0f : 0.0f
-                : value.value();
+            return value.isUndefined() ? 0.0f : value.value();
         }
         return YGNodeStyleGetFlexShrink(node);
     }

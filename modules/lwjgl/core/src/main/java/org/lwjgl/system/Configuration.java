@@ -517,6 +517,16 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the LLVM/LTO library (<b>org.lwjgl.llvm.clang.libname</b>). */
     public static final Configuration<String> LLVM_LTO_LIBRARY_NAME = new Configuration<>("org.lwjgl.llvm.lto.libname", StateInit.STRING);
 
+    // -- NativeFileDialog
+    /**
+     * Set to true to enable NativeFileDialog's XDG Desktop Portal backend on Linux.
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.nfd.linux.portal</b><br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Boolean> NFD_LINUX_PORTAL = new Configuration<>("org.lwjgl.nfd.linux.portal", StateInit.BOOLEAN);
+
     // -- ODBC
 
     /** Similar to {@link #LIBRARY_NAME} for the ODBC library (<b>org.lwjgl.odbc.libname</b>). */

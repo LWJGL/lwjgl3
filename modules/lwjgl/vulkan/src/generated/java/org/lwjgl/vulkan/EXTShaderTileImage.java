@@ -69,7 +69,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_tile_image.html">{@code SPV_EXT_shader_tile_image}</a></li>
- * <li>This extension provides API support for <a href="https://raw.githubusercontent.com/KhronosGroup/GLSL/master/extensions/ext/GL_EXT_shader_tile_image.txt">{@code GL_EXT_shader_tile_image}</a></li>
+ * <li>This extension provides API support for <a href="https://raw.githubusercontent.com/KhronosGroup/GLSL/master/extensions/ext/GLSL_EXT_shader_tile_image.txt">{@code GL_EXT_shader_tile_image}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

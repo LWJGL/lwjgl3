@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension adds support for the integer dot product SPIR-V instructions defined in SPV_KHR_integer_dot_product. These instructions are particularly useful for neural network inference and training but find uses in other general purpose compute applications as well.
+ * This extension adds support for the integer dot product SPIR-V instructions defined in SPV_KHR_integer_dot_product. These instructions are particularly useful for neural network inference and training but find uses in other general-purpose compute applications as well.
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 

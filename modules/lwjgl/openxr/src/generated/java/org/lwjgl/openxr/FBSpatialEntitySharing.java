@@ -93,7 +93,7 @@ public class FBSpatialEntitySharing {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceShareCompleteFB} event when the operation completes successfully or encounters an error. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an {@link XrEventDataSpaceShareCompleteFB} is posted to the event queue.</p>
+     * <p>This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceShareCompleteFB} event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an {@link XrEventDataSpaceShareCompleteFB} is posted to the event queue.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

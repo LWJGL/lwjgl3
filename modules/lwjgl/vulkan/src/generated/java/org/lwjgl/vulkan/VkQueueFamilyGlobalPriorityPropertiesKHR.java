@@ -38,7 +38,7 @@ import static org.lwjgl.vulkan.KHRGlobalPriority.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR}</li>
- * <li>Any given element of {@code priorities} <b>must</b> be a valid {@code VkQueueGlobalPriorityKHR} value</li>
+ * <li>Each element of {@code priorities} <b>must</b> be a valid {@code VkQueueGlobalPriorityKHR} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -105,7 +105,7 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

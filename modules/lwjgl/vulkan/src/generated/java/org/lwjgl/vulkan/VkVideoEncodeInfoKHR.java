@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264VclFrameInfoEXT} or {@link VkVideoEncodeH265VclFrameInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264PictureInfoEXT} or {@link VkVideoEncodeH265PictureInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -55,7 +55,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
  *     VkVideoEncodeFlagsKHR {@link #flags};
- *     uint32_t {@link #qualityLevel};
  *     VkBuffer {@link #dstBuffer};
  *     VkDeviceSize {@link #dstBufferOffset};
  *     VkDeviceSize {@link #dstBufferRange};
@@ -79,7 +78,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         STYPE,
         PNEXT,
         FLAGS,
-        QUALITYLEVEL,
         DSTBUFFER,
         DSTBUFFEROFFSET,
         DSTBUFFERRANGE,
@@ -93,7 +91,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(4),
             __member(4),
             __member(8),
             __member(8),
@@ -111,15 +108,14 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
-        QUALITYLEVEL = layout.offsetof(3);
-        DSTBUFFER = layout.offsetof(4);
-        DSTBUFFEROFFSET = layout.offsetof(5);
-        DSTBUFFERRANGE = layout.offsetof(6);
-        SRCPICTURERESOURCE = layout.offsetof(7);
-        PSETUPREFERENCESLOT = layout.offsetof(8);
-        REFERENCESLOTCOUNT = layout.offsetof(9);
-        PREFERENCESLOTS = layout.offsetof(10);
-        PRECEDINGEXTERNALLYENCODEDBYTES = layout.offsetof(11);
+        DSTBUFFER = layout.offsetof(3);
+        DSTBUFFEROFFSET = layout.offsetof(4);
+        DSTBUFFERRANGE = layout.offsetof(5);
+        SRCPICTURERESOURCE = layout.offsetof(6);
+        PSETUPREFERENCESLOT = layout.offsetof(7);
+        REFERENCESLOTCOUNT = layout.offsetof(8);
+        PREFERENCESLOTS = layout.offsetof(9);
+        PRECEDINGEXTERNALLYENCODEDBYTES = layout.offsetof(10);
     }
 
     protected VkVideoEncodeInfoKHR(long address, @Nullable ByteBuffer container) {
@@ -144,7 +140,7 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation. */
@@ -153,9 +149,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     /** reserved for future use. */
     @NativeType("VkVideoEncodeFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the coding quality level of the encoding. It is defined by the codec-specific extensions. */
-    @NativeType("uint32_t")
-    public int qualityLevel() { return nqualityLevel(address()); }
     /** the destination video bitstream buffer to write the encoded bitstream to. */
     @NativeType("VkBuffer")
     public long dstBuffer() { return ndstBuffer(address()); }
@@ -188,14 +181,12 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     public VkVideoEncodeInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoEncodeH264VclFrameInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265VclFrameInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH264PictureInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265PictureInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoEncodeInfoKHR flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #qualityLevel} field. */
-    public VkVideoEncodeInfoKHR qualityLevel(@NativeType("uint32_t") int value) { nqualityLevel(address(), value); return this; }
     /** Sets the specified value to the {@link #dstBuffer} field. */
     public VkVideoEncodeInfoKHR dstBuffer(@NativeType("VkBuffer") long value) { ndstBuffer(address(), value); return this; }
     /** Sets the specified value to the {@link #dstBufferOffset} field. */
@@ -218,7 +209,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         int sType,
         long pNext,
         int flags,
-        int qualityLevel,
         long dstBuffer,
         long dstBufferOffset,
         long dstBufferRange,
@@ -230,7 +220,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         sType(sType);
         pNext(pNext);
         flags(flags);
-        qualityLevel(qualityLevel);
         dstBuffer(dstBuffer);
         dstBufferOffset(dstBufferOffset);
         dstBufferRange(dstBufferRange);
@@ -373,8 +362,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.FLAGS); }
-    /** Unsafe version of {@link #qualityLevel}. */
-    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.QUALITYLEVEL); }
     /** Unsafe version of {@link #dstBuffer}. */
     public static long ndstBuffer(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFER); }
     /** Unsafe version of {@link #dstBufferOffset}. */
@@ -398,8 +385,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.FLAGS, value); }
-    /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
-    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.QUALITYLEVEL, value); }
     /** Unsafe version of {@link #dstBuffer(long) dstBuffer}. */
     public static void ndstBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFER, value); }
     /** Unsafe version of {@link #dstBufferOffset(long) dstBufferOffset}. */
@@ -475,9 +460,6 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         /** @return the value of the {@link VkVideoEncodeInfoKHR#flags} field. */
         @NativeType("VkVideoEncodeFlagsKHR")
         public int flags() { return VkVideoEncodeInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */
-        @NativeType("uint32_t")
-        public int qualityLevel() { return VkVideoEncodeInfoKHR.nqualityLevel(address()); }
         /** @return the value of the {@link VkVideoEncodeInfoKHR#dstBuffer} field. */
         @NativeType("VkBuffer")
         public long dstBuffer() { return VkVideoEncodeInfoKHR.ndstBuffer(address()); }
@@ -510,14 +492,12 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         public VkVideoEncodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#pNext} field. */
         public VkVideoEncodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoEncodeH264VclFrameInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265VclFrameInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH264PictureInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265PictureInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#flags} field. */
         public VkVideoEncodeInfoKHR.Buffer flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { VkVideoEncodeInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */
-        public VkVideoEncodeInfoKHR.Buffer qualityLevel(@NativeType("uint32_t") int value) { VkVideoEncodeInfoKHR.nqualityLevel(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#dstBuffer} field. */
         public VkVideoEncodeInfoKHR.Buffer dstBuffer(@NativeType("VkBuffer") long value) { VkVideoEncodeInfoKHR.ndstBuffer(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#dstBufferOffset} field. */

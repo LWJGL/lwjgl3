@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrInteractionProfileDpadBindingEXT} structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the {@code bindingModifications} array of the {@link XrBindingModificationsKHR} structure (See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension).</p>
+ * <p>The {@link XrInteractionProfileDpadBindingEXT} structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the {@code bindingModifications} array of the {@link XrBindingModificationsKHR} structure (See {@link KHRBindingModification XR_KHR_binding_modification} extension).</p>
  * 
  * <p>Runtimes are free to ignore any of the fields when not obeying the bindings, but <b>may</b> use it for automatic rebindings of actions.</p>
  * 

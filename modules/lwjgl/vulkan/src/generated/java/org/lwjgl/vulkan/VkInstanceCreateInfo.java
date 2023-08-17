@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>To capture events that occur while creating or destroying an instance, an application can link a {@link VkDebugReportCallbackCreateInfoEXT} structure or a {@link VkDebugUtilsMessengerCreateInfoEXT} structure to the {@code pNext} element of the {@link VkInstanceCreateInfo} structure given to {@code vkCreateInstance}. This callback is only valid for the duration of the {@link VK10#vkCreateInstance CreateInstance} and the {@link VK10#vkDestroyInstance DestroyInstance} call. Use {@link EXTDebugReport#vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT} or {@link EXTDebugUtils#vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT} to create persistent callback objects.</p>
+ * <p>To capture events that occur while creating or destroying an instance, an application <b>can</b> link a {@link VkDebugReportCallbackCreateInfoEXT} structure or a {@link VkDebugUtilsMessengerCreateInfoEXT} structure to the {@code pNext} element of the {@link VkInstanceCreateInfo} structure given to {@code vkCreateInstance}. This callback is only valid for the duration of the {@link VK10#vkCreateInstance CreateInstance} and the {@link VK10#vkDestroyInstance DestroyInstance} call. Use {@link EXTDebugReport#vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT} or {@link EXTDebugUtils#vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT} to create persistent callback objects.</p>
  * 
  * <p>An application can add additional drivers by including the {@link VkDirectDriverLoadingListLUNARG} struct to the {@code pNext} element of the {@link VkInstanceCreateInfo} structure given to {@code vkCreateInstance}.</p>
  * 
@@ -136,7 +136,7 @@ public class VkInstanceCreateInfo extends Struct<VkInstanceCreateInfo> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

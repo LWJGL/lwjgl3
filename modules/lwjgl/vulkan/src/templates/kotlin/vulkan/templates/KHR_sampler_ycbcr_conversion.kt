@@ -105,12 +105,6 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     )
 
     EnumConstant(
-        "Extends {@code VkDebugReportObjectTypeEXT}.",
-
-        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT".."1000156000"
-    )
-
-    EnumConstant(
         "Extends {@code VkObjectType}.",
 
         "OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR".."1000156000"
@@ -208,7 +202,8 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     EnumConstant(
         "Extends {@code VkDebugReportObjectTypeEXT}.",
 
-        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000156000"
+        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000156000",
+        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT".."1000156000"
     )
 
     VkResult(

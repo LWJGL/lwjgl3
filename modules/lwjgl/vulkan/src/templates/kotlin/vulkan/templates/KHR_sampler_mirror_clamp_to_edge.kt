@@ -24,7 +24,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
         <pre><code>
 ￿    VkSamplerCreateInfo createInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO // sType
+￿        .sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
 ￿        // Other members set to application-desired values
 ￿    };
 ￿

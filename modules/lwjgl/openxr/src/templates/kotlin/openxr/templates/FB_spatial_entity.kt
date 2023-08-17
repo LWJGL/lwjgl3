@@ -109,7 +109,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        Creates a Spatial Anchor using the specified tracking origin and pose relative to the specified tracking origin. The anchor will be locatable at the time of creation, and the 6 DOF pose relative to the tracking origin <b>can</b> be queried using the #LocateSpace() method. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpatialAnchorCreateCompleteFB event when the operation completes successfully or encounters an error. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an ##XrEventDataSpatialAnchorCreateCompleteFB is posted to the event queue.
+        Creates a Spatial Anchor using the specified tracking origin and pose relative to the specified tracking origin. The anchor will be locatable at the time of creation, and the 6 DOF pose relative to the tracking origin <b>can</b> be queried using the #LocateSpace() method. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpatialAnchorCreateCompleteFB event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an ##XrEventDataSpatialAnchorCreateCompleteFB is posted to the event queue.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -245,6 +245,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>
         </dl>
@@ -271,7 +272,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        Enables or disables the specified component for the specified entity. This operation is asynchronous and always returns immediately, regardless of the value of {@code timeout}. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an ##XrEventDataSpaceSetStatusCompleteFB is posted to the event queue. This function <b>must</b> return #ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB if the {@code XrSpace} does not support the specified component type.
+        Enables or disables the specified component for the specified entity. This operation is asynchronous and always returns immediately, regardless of the value of {@code timeout}. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an ##XrEventDataSpaceSetStatusCompleteFB is posted to the event queue. If this function returns a failure code, no event is posted. This function <b>must</b> return #ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB if the {@code XrSpace} does not support the specified component type.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

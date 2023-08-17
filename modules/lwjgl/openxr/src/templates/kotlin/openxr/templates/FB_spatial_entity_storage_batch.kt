@@ -52,7 +52,7 @@ val FB_spatial_entity_storage_batch = "FBSpatialEntityStorageBatch".nativeClassX
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        The #SaveSpaceListFB() function persists the specified spatial entities at the specified storage location. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceListSaveCompleteFB event when the operation completes successfully or encounters an error.
+        The #SaveSpaceListFB() function persists the specified spatial entities at the specified storage location. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceListSaveCompleteFB event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

@@ -84,27 +84,41 @@ public class NVCooperativeMatrix {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV = 1000249002;
 
     /**
-     * VkComponentTypeNV - Specify SPIR-V cooperative matrix component type
+     * Extends {@code VkScopeKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_COMPONENT_TYPE_FLOAT16_NV COMPONENT_TYPE_FLOAT16_NV} corresponds to SPIR-V {@code OpTypeFloat} 16.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_FLOAT32_NV COMPONENT_TYPE_FLOAT32_NV} corresponds to SPIR-V {@code OpTypeFloat} 32.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_FLOAT64_NV COMPONENT_TYPE_FLOAT64_NV} corresponds to SPIR-V {@code OpTypeFloat} 64.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_SINT8_NV COMPONENT_TYPE_SINT8_NV} corresponds to SPIR-V {@code OpTypeInt} 8 1.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_SINT16_NV COMPONENT_TYPE_SINT16_NV} corresponds to SPIR-V {@code OpTypeInt} 16 1.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_SINT32_NV COMPONENT_TYPE_SINT32_NV} corresponds to SPIR-V {@code OpTypeInt} 32 1.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_SINT64_NV COMPONENT_TYPE_SINT64_NV} corresponds to SPIR-V {@code OpTypeInt} 64 1.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_UINT8_NV COMPONENT_TYPE_UINT8_NV} corresponds to SPIR-V {@code OpTypeInt} 8 0.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_UINT16_NV COMPONENT_TYPE_UINT16_NV} corresponds to SPIR-V {@code OpTypeInt} 16 0.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_UINT32_NV COMPONENT_TYPE_UINT32_NV} corresponds to SPIR-V {@code OpTypeInt} 32 0.</li>
-     * <li>{@link #VK_COMPONENT_TYPE_UINT64_NV COMPONENT_TYPE_UINT64_NV} corresponds to SPIR-V {@code OpTypeInt} 64 0.</li>
+     * <li>{@link #VK_SCOPE_DEVICE_NV SCOPE_DEVICE_NV}</li>
+     * <li>{@link #VK_SCOPE_WORKGROUP_NV SCOPE_WORKGROUP_NV}</li>
+     * <li>{@link #VK_SCOPE_SUBGROUP_NV SCOPE_SUBGROUP_NV}</li>
+     * <li>{@link #VK_SCOPE_QUEUE_FAMILY_NV SCOPE_QUEUE_FAMILY_NV}</li>
      * </ul>
+     */
+    public static final int
+        VK_SCOPE_DEVICE_NV       = 1,
+        VK_SCOPE_WORKGROUP_NV    = 2,
+        VK_SCOPE_SUBGROUP_NV     = 3,
+        VK_SCOPE_QUEUE_FAMILY_NV = 5;
+
+    /**
+     * Extends {@code VkComponentTypeKHR}.
      * 
-     * <h5>See Also</h5>
+     * <h5>Enum values:</h5>
      * 
-     * <p>{@link VkCooperativeMatrixPropertiesNV}</p>
+     * <ul>
+     * <li>{@link #VK_COMPONENT_TYPE_FLOAT16_NV COMPONENT_TYPE_FLOAT16_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_FLOAT32_NV COMPONENT_TYPE_FLOAT32_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_FLOAT64_NV COMPONENT_TYPE_FLOAT64_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_SINT8_NV COMPONENT_TYPE_SINT8_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_SINT16_NV COMPONENT_TYPE_SINT16_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_SINT32_NV COMPONENT_TYPE_SINT32_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_SINT64_NV COMPONENT_TYPE_SINT64_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_UINT8_NV COMPONENT_TYPE_UINT8_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_UINT16_NV COMPONENT_TYPE_UINT16_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_UINT32_NV COMPONENT_TYPE_UINT32_NV}</li>
+     * <li>{@link #VK_COMPONENT_TYPE_UINT64_NV COMPONENT_TYPE_UINT64_NV}</li>
+     * </ul>
      */
     public static final int
         VK_COMPONENT_TYPE_FLOAT16_NV = 0,
@@ -118,30 +132,6 @@ public class NVCooperativeMatrix {
         VK_COMPONENT_TYPE_UINT16_NV  = 8,
         VK_COMPONENT_TYPE_UINT32_NV  = 9,
         VK_COMPONENT_TYPE_UINT64_NV  = 10;
-
-    /**
-     * VkScopeNV - Specify SPIR-V scope
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_SCOPE_DEVICE_NV SCOPE_DEVICE_NV} corresponds to SPIR-V {@code Device} scope.</li>
-     * <li>{@link #VK_SCOPE_WORKGROUP_NV SCOPE_WORKGROUP_NV} corresponds to SPIR-V {@code Workgroup} scope.</li>
-     * <li>{@link #VK_SCOPE_SUBGROUP_NV SCOPE_SUBGROUP_NV} corresponds to SPIR-V {@code Subgroup} scope.</li>
-     * <li>{@link #VK_SCOPE_QUEUE_FAMILY_NV SCOPE_QUEUE_FAMILY_NV} corresponds to SPIR-V {@code QueueFamily} scope.</li>
-     * </ul>
-     * 
-     * <p>All enum values match the corresponding SPIR-V value.</p>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkCooperativeMatrixPropertiesNV}</p>
-     */
-    public static final int
-        VK_SCOPE_DEVICE_NV       = 1,
-        VK_SCOPE_WORKGROUP_NV    = 2,
-        VK_SCOPE_SUBGROUP_NV     = 3,
-        VK_SCOPE_QUEUE_FAMILY_NV = 5;
 
     protected NVCooperativeMatrix() {
         throw new UnsupportedOperationException();

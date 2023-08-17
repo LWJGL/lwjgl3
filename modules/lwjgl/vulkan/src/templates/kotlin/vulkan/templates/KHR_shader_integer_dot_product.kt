@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_shader_integer_dot_product = "KHRShaderIntegerDotProduct".nativeClassVK("KHR_shader_integer_dot_product", type = "device", postfix = "KHR") {
     documentation =
         """
-        This extension adds support for the integer dot product SPIR-V instructions defined in SPV_KHR_integer_dot_product. These instructions are particularly useful for neural network inference and training but find uses in other general purpose compute applications as well.
+        This extension adds support for the integer dot product SPIR-V instructions defined in SPV_KHR_integer_dot_product. These instructions are particularly useful for neural network inference and training but find uses in other general-purpose compute applications as well.
 
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.

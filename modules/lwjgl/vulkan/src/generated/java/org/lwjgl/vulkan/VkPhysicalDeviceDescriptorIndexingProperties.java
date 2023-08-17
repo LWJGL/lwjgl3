@@ -176,7 +176,7 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -203,7 +203,7 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct<VkPhysi
     /** a boolean value indicating whether <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> <b>can</b> be enabled on a device simultaneously with {@code descriptorBindingUniformBufferUpdateAfterBind}, {@code descriptorBindingStorageBufferUpdateAfterBind}, {@code descriptorBindingUniformTexelBufferUpdateAfterBind}, and/or {@code descriptorBindingStorageTexelBufferUpdateAfterBind}. If this is {@link VK10#VK_FALSE FALSE}, then either {@code robustBufferAccess} <b>must</b> be disabled or all of these update-after-bind features <b>must</b> be disabled. */
     @NativeType("VkBool32")
     public boolean robustBufferAccessUpdateAfterBind() { return nrobustBufferAccessUpdateAfterBind(address()) != 0; }
-    /** a boolean value indicating whether implicit level of detail calculations for image operations have well-defined results when the image and/or sampler objects used for the instruction are not uniform within a quad. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-derivative-image-operations">Derivative Image Operations</a>. */
+    /** a boolean value indicating whether implicit LOD calculations for image operations have well-defined results when the image and/or sampler objects used for the instruction are not uniform within a quad. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-derivative-image-operations">Derivative Image Operations</a>. */
     @NativeType("VkBool32")
     public boolean quadDivergentImplicitLod() { return nquadDivergentImplicitLod(address()) != 0; }
     /** similar to {@code maxPerStageDescriptorSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */

@@ -19,7 +19,7 @@ extern "C" {
 
 #if defined(__clang__) || defined(__GNUC__)
 # define RPMALLOC_EXPORT __attribute__((visibility("default")))
-# define RPMALLOC_ALLOCATOR 
+# define RPMALLOC_ALLOCATOR
 # if (defined(__clang_major__) && (__clang_major__ < 4)) || (defined(__GNUC__) && defined(ENABLE_PRELOAD) && ENABLE_PRELOAD)
 # define RPMALLOC_ATTRIB_MALLOC
 # define RPMALLOC_ATTRIB_ALLOC_SIZE(size)
@@ -361,6 +361,10 @@ rpmalloc_heap_free_all(rpmalloc_heap_t* heap);
 //  current heap for the calling thread is released to be reused by other threads.
 RPMALLOC_EXPORT void
 rpmalloc_heap_thread_set_current(rpmalloc_heap_t* heap);
+
+//! Returns which heap the given pointer is allocated on
+RPMALLOC_EXPORT rpmalloc_heap_t*
+rpmalloc_get_heap_for_ptr(void* ptr);
 
 #endif
 

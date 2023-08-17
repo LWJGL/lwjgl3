@@ -73,7 +73,7 @@ public class FBSpatialEntityStorageBatch {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #xrSaveSpaceListFB SaveSpaceListFB} function persists the specified spatial entities at the specified storage location. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@link XrSpaceSaveInfoFB}{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceListSaveCompleteFB} event when the operation completes successfully or encounters an error.</p>
+     * <p>The {@link #xrSaveSpaceListFB SaveSpaceListFB} function persists the specified spatial entities at the specified storage location. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@link XrSpaceSaveInfoFB}{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceListSaveCompleteFB} event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

@@ -125,7 +125,7 @@ public class FBSpatialEntityQuery {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #xrQuerySpacesFB QuerySpacesFB} function enables an application to find and retrieve spatial entities from storage. Cast an {@link XrSpaceQueryInfoFB} pointer to a {@link XrSpaceQueryInfoBaseHeaderFB} pointer to pass as {@code info}. The application <b>should</b> keep the returned {@code requestId} for the duration of the request as it is used to refer to the request when calling {@link #xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} and is used to map completion events to the request. This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceQueryCompleteFB} event when the operation completes successfully or encounters an error. The runtime <b>must</b> post an {@link XrEventDataSpaceQueryResultsAvailableFB} if before {@link XrEventDataSpaceQueryCompleteFB} if any results are found. Once an {@link XrEventDataSpaceQueryResultsAvailableFB} event has been posted, the application <b>may</b> call {@link #xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} to retrieve the available results.</p>
+     * <p>The {@link #xrQuerySpacesFB QuerySpacesFB} function enables an application to find and retrieve spatial entities from storage. Cast an {@link XrSpaceQueryInfoFB} pointer to a {@link XrSpaceQueryInfoBaseHeaderFB} pointer to pass as {@code info}. The application <b>should</b> keep the returned {@code requestId} for the duration of the request as it is used to refer to the request when calling {@link #xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} and is used to map completion events to the request. This operation is asynchronous and the runtime <b>must</b> post an {@link XrEventDataSpaceQueryCompleteFB} event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted. The runtime <b>must</b> post an {@link XrEventDataSpaceQueryResultsAvailableFB} before {@link XrEventDataSpaceQueryCompleteFB} if any results are found. Once an {@link XrEventDataSpaceQueryResultsAvailableFB} event has been posted, the application <b>may</b> call {@link #xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} to retrieve the available results.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -224,6 +224,7 @@ public class FBSpatialEntityQuery {
      * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
+     * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
      * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
      * </ul></dd>
      * </dl>

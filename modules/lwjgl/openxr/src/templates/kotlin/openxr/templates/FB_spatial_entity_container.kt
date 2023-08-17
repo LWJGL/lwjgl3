@@ -80,6 +80,7 @@ val FB_spatial_entity_container = "FBSpatialEntityContainer".nativeClassXR("FB_s
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
+                <li>#ERROR_SIZE_INSUFFICIENT</li>
                 <li>#ERROR_SPACE_COMPONENT_NOT_ENABLED_FB</li>
                 <li>#ERROR_FEATURE_UNSUPPORTED</li>
             </ul></dd>

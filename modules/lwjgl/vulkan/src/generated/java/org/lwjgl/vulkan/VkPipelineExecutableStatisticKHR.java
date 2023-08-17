@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure describing a compile-time pipeline executable statistic.
+ * Structure describing a compile time pipeline executable statistic.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -103,7 +103,7 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

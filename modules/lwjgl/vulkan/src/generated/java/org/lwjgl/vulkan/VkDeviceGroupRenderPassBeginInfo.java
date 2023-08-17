@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@code deviceMask} serves several purposes. It is an upper bound on the set of physical devices that <b>can</b> be used during the render pass instance, and the initial device mask when the render pass instance begins. In addition, commands transitioning to the next subpass in a render pass instance and commands ending the render pass instance, and, accordingly render pass attachment load, store, and resolve operations and subpass dependencies corresponding to the render pass instance, are executed on the physical devices included in the device mask provided here.</p>
+ * <p>The {@code deviceMask} serves several purposes. It is an upper bound on the set of physical devices that <b>can</b> be used during the render pass instance, and the initial device mask when the render pass instance begins. In addition, commands transitioning to the next subpass in a render pass instance and commands ending the render pass instance, and, accordingly render pass <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store</a>, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">multisample resolve</a> operations and subpass dependencies corresponding to the render pass instance, are executed on the physical devices included in the device mask provided here.</p>
  * 
  * <p>If {@code deviceRenderAreaCount} is not zero, then the elements of {@code pDeviceRenderAreas} override the value of {@link VkRenderPassBeginInfo}{@code ::renderArea}, and provide a render area specific to each physical device. These render areas serve the same purpose as {@link VkRenderPassBeginInfo}{@code ::renderArea}, including controlling the region of attachments that are cleared by {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} and that are resolved into resolve attachments.</p>
  * 
@@ -38,6 +38,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code offset.y} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
  * <li>The sum of the {@code offset.x} and {@code extent.width} members of any element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxFramebufferWidth">{@code maxFramebufferWidth}</a></li>
  * <li>The sum of the {@code offset.y} and {@code extent.height} members of any element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxFramebufferHeight">{@code maxFramebufferHeight}</a></li>
+ * <li>The {@code extent.width} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than 0</li>
+ * <li>The {@code extent.height} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -119,7 +121,7 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRender
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

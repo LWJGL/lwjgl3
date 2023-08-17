@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import org.lwjgl.vulkan.video.*;
+
 /**
  * Structure specifying H.265 encode capabilities.
  * 
@@ -24,6 +26,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT}</li>
  * </ul>
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkExtent2D}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -31,23 +37,21 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
  *     VkVideoEncodeH265CapabilityFlagsEXT {@link #flags};
+ *     StdVideoH265LevelIdc {@link #maxLevelIdc};
+ *     uint32_t {@link #maxSliceSegmentCount};
+ *     {@link VkExtent2D VkExtent2D} {@link #maxTiles};
  *     VkVideoEncodeH265CtbSizeFlagsEXT {@link #ctbSizes};
  *     VkVideoEncodeH265TransformBlockSizeFlagsEXT {@link #transformBlockSizes};
  *     uint32_t {@link #maxPPictureL0ReferenceCount};
  *     uint32_t {@link #maxBPictureL0ReferenceCount};
  *     uint32_t {@link #maxL1ReferenceCount};
- *     uint32_t {@link #maxSubLayersCount};
- *     uint32_t {@link #minLog2MinLumaCodingBlockSizeMinus3};
- *     uint32_t {@link #maxLog2MinLumaCodingBlockSizeMinus3};
- *     uint32_t {@link #minLog2MinLumaTransformBlockSizeMinus2};
- *     uint32_t {@link #maxLog2MinLumaTransformBlockSizeMinus2};
- *     uint32_t {@link #minMaxTransformHierarchyDepthInter};
- *     uint32_t {@link #maxMaxTransformHierarchyDepthInter};
- *     uint32_t {@link #minMaxTransformHierarchyDepthIntra};
- *     uint32_t {@link #maxMaxTransformHierarchyDepthIntra};
- *     uint32_t {@link #maxDiffCuQpDeltaDepth};
- *     uint32_t {@link #minMaxNumMergeCand};
- *     uint32_t {@link #maxMaxNumMergeCand};
+ *     uint32_t {@link #maxSubLayerCount};
+ *     VkBool32 {@link #expectDyadicTemporalSubLayerPattern};
+ *     int32_t {@link #minQp};
+ *     int32_t {@link #maxQp};
+ *     VkBool32 {@link #prefersGopRemainingFrames};
+ *     VkBool32 {@link #requiresGopRemainingFrames};
+ *     VkVideoEncodeH265StdFlagsEXT {@link #stdSyntaxFlags};
  * }</code></pre>
  */
 public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265CapabilitiesEXT> implements NativeResource {
@@ -63,23 +67,21 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
         STYPE,
         PNEXT,
         FLAGS,
+        MAXLEVELIDC,
+        MAXSLICESEGMENTCOUNT,
+        MAXTILES,
         CTBSIZES,
         TRANSFORMBLOCKSIZES,
         MAXPPICTUREL0REFERENCECOUNT,
         MAXBPICTUREL0REFERENCECOUNT,
         MAXL1REFERENCECOUNT,
-        MAXSUBLAYERSCOUNT,
-        MINLOG2MINLUMACODINGBLOCKSIZEMINUS3,
-        MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3,
-        MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2,
-        MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2,
-        MINMAXTRANSFORMHIERARCHYDEPTHINTER,
-        MAXMAXTRANSFORMHIERARCHYDEPTHINTER,
-        MINMAXTRANSFORMHIERARCHYDEPTHINTRA,
-        MAXMAXTRANSFORMHIERARCHYDEPTHINTRA,
-        MAXDIFFCUQPDELTADEPTH,
-        MINMAXNUMMERGECAND,
-        MAXMAXNUMMERGECAND;
+        MAXSUBLAYERCOUNT,
+        EXPECTDYADICTEMPORALSUBLAYERPATTERN,
+        MINQP,
+        MAXQP,
+        PREFERSGOPREMAININGFRAMES,
+        REQUIRESGOPREMAININGFRAMES,
+        STDSYNTAXFLAGS;
 
     static {
         Layout layout = __struct(
@@ -88,9 +90,7 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
             __member(4),
             __member(4),
             __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
+            __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
             __member(4),
             __member(4),
             __member(4),
@@ -111,23 +111,21 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
-        CTBSIZES = layout.offsetof(3);
-        TRANSFORMBLOCKSIZES = layout.offsetof(4);
-        MAXPPICTUREL0REFERENCECOUNT = layout.offsetof(5);
-        MAXBPICTUREL0REFERENCECOUNT = layout.offsetof(6);
-        MAXL1REFERENCECOUNT = layout.offsetof(7);
-        MAXSUBLAYERSCOUNT = layout.offsetof(8);
-        MINLOG2MINLUMACODINGBLOCKSIZEMINUS3 = layout.offsetof(9);
-        MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3 = layout.offsetof(10);
-        MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2 = layout.offsetof(11);
-        MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2 = layout.offsetof(12);
-        MINMAXTRANSFORMHIERARCHYDEPTHINTER = layout.offsetof(13);
-        MAXMAXTRANSFORMHIERARCHYDEPTHINTER = layout.offsetof(14);
-        MINMAXTRANSFORMHIERARCHYDEPTHINTRA = layout.offsetof(15);
-        MAXMAXTRANSFORMHIERARCHYDEPTHINTRA = layout.offsetof(16);
-        MAXDIFFCUQPDELTADEPTH = layout.offsetof(17);
-        MINMAXNUMMERGECAND = layout.offsetof(18);
-        MAXMAXNUMMERGECAND = layout.offsetof(19);
+        MAXLEVELIDC = layout.offsetof(3);
+        MAXSLICESEGMENTCOUNT = layout.offsetof(4);
+        MAXTILES = layout.offsetof(5);
+        CTBSIZES = layout.offsetof(6);
+        TRANSFORMBLOCKSIZES = layout.offsetof(7);
+        MAXPPICTUREL0REFERENCECOUNT = layout.offsetof(8);
+        MAXBPICTUREL0REFERENCECOUNT = layout.offsetof(9);
+        MAXL1REFERENCECOUNT = layout.offsetof(10);
+        MAXSUBLAYERCOUNT = layout.offsetof(11);
+        EXPECTDYADICTEMPORALSUBLAYERPATTERN = layout.offsetof(12);
+        MINQP = layout.offsetof(13);
+        MAXQP = layout.offsetof(14);
+        PREFERSGOPREMAININGFRAMES = layout.offsetof(15);
+        REQUIRESGOPREMAININGFRAMES = layout.offsetof(16);
+        STDSYNTAXFLAGS = layout.offsetof(17);
     }
 
     protected VkVideoEncodeH265CapabilitiesEXT(long address, @Nullable ByteBuffer container) {
@@ -152,66 +150,59 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} describing supported encoding tools. */
+    /** a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} indicating supported H.265 encoding capabilities. */
     @NativeType("VkVideoEncodeH265CapabilityFlagsEXT")
     public int flags() { return nflags(address()); }
+    /** a {@code StdVideoH265LevelIdc} value indicating the maximum H.265 level supported. */
+    @NativeType("StdVideoH265LevelIdc")
+    public int maxLevelIdc() { return nmaxLevelIdc(address()); }
+    /** indicates the maximum number of slice segments that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of slice segments that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules. */
+    @NativeType("uint32_t")
+    public int maxSliceSegmentCount() { return nmaxSliceSegmentCount(address()); }
+    /** indicates the maximum number of H.265 tile columns and rows that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of H.265 tiles that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules. */
+    public VkExtent2D maxTiles() { return nmaxTiles(address()); }
     /** a bitmask of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} describing the supported CTB sizes. */
     @NativeType("VkVideoEncodeH265CtbSizeFlagsEXT")
     public int ctbSizes() { return nctbSizes(address()); }
     /** a bitmask of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} describing the supported transform block sizes. */
     @NativeType("VkVideoEncodeH265TransformBlockSizeFlagsEXT")
     public int transformBlockSizes() { return ntransformBlockSizes(address()); }
-    /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures. */
+    /** indicates the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures. */
     @NativeType("uint32_t")
     public int maxPPictureL0ReferenceCount() { return nmaxPPictureL0ReferenceCount(address()); }
-    /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported. */
+    /** indicates the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported. */
     @NativeType("uint32_t")
     public int maxBPictureL0ReferenceCount() { return nmaxBPictureL0ReferenceCount(address()); }
-    /** reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported. */
+    /** indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported. */
     @NativeType("uint32_t")
     public int maxL1ReferenceCount() { return nmaxL1ReferenceCount(address()); }
-    /** reports the maximum number of sublayers. */
+    /** indicates the maximum number of H.265 sub-layers supported by the implementation. */
     @NativeType("uint32_t")
-    public int maxSubLayersCount() { return nmaxSubLayersCount(address()); }
-    /** reports the minimum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int minLog2MinLumaCodingBlockSizeMinus3() { return nminLog2MinLumaCodingBlockSizeMinus3(address()); }
-    /** reports the maximum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int maxLog2MinLumaCodingBlockSizeMinus3() { return nmaxLog2MinLumaCodingBlockSizeMinus3(address()); }
-    /** reports the minimum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int minLog2MinLumaTransformBlockSizeMinus2() { return nminLog2MinLumaTransformBlockSizeMinus2(address()); }
-    /** reports the maximum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int maxLog2MinLumaTransformBlockSizeMinus2() { return nmaxLog2MinLumaTransformBlockSizeMinus2(address()); }
-    /** reports the minimum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int minMaxTransformHierarchyDepthInter() { return nminMaxTransformHierarchyDepthInter(address()); }
-    /** reports the maximum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int maxMaxTransformHierarchyDepthInter() { return nmaxMaxTransformHierarchyDepthInter(address()); }
-    /** reports the minimum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int minMaxTransformHierarchyDepthIntra() { return nminMaxTransformHierarchyDepthIntra(address()); }
-    /** reports the maximum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet. */
-    @NativeType("uint32_t")
-    public int maxMaxTransformHierarchyDepthIntra() { return nmaxMaxTransformHierarchyDepthIntra(address()); }
-    /** reports the maximum value that may be set for diff_cu_qp_delta_depth in StdVideoH265PictureParameterSet. */
-    @NativeType("uint32_t")
-    public int maxDiffCuQpDeltaDepth() { return nmaxDiffCuQpDeltaDepth(address()); }
-    /** reports the minimum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader. */
-    @NativeType("uint32_t")
-    public int minMaxNumMergeCand() { return nminMaxNumMergeCand(address()); }
-    /** reports the maximum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader. */
-    @NativeType("uint32_t")
-    public int maxMaxNumMergeCand() { return nmaxMaxNumMergeCand(address()); }
+    public int maxSubLayerCount() { return nmaxSubLayerCount(address()); }
+    /** indicates that the implementation’s rate control algorithms expect the application to use a dyadic temporal sub-layer pattern when encoding multiple temporal sub-layers. */
+    @NativeType("VkBool32")
+    public boolean expectDyadicTemporalSubLayerPattern() { return nexpectDyadicTemporalSubLayerPattern(address()) != 0; }
+    /** indicates the minimum QP value supported. */
+    @NativeType("int32_t")
+    public int minQp() { return nminQp(address()); }
+    /** indicates the maximum QP value supported. */
+    @NativeType("int32_t")
+    public int maxQp() { return nmaxQp(address()); }
+    /** indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type remaining in the current group of pictures. */
+    @NativeType("VkBool32")
+    public boolean prefersGopRemainingFrames() { return nprefersGopRemainingFrames(address()) != 0; }
+    /** indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type remaining in the current group of pictures. */
+    @NativeType("VkBool32")
+    public boolean requiresGopRemainingFrames() { return nrequiresGopRemainingFrames(address()) != 0; }
+    /** a bitmask of {@code VkVideoEncodeH265StdFlagBitsEXT} indicating capabilities related to H.265 syntax elements. */
+    @NativeType("VkVideoEncodeH265StdFlagsEXT")
+    public int stdSyntaxFlags() { return nstdSyntaxFlags(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH265CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -362,6 +353,12 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265CapabilitiesEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.FLAGS); }
+    /** Unsafe version of {@link #maxLevelIdc}. */
+    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLEVELIDC); }
+    /** Unsafe version of {@link #maxSliceSegmentCount}. */
+    public static int nmaxSliceSegmentCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXSLICESEGMENTCOUNT); }
+    /** Unsafe version of {@link #maxTiles}. */
+    public static VkExtent2D nmaxTiles(long struct) { return VkExtent2D.create(struct + VkVideoEncodeH265CapabilitiesEXT.MAXTILES); }
     /** Unsafe version of {@link #ctbSizes}. */
     public static int nctbSizes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.CTBSIZES); }
     /** Unsafe version of {@link #transformBlockSizes}. */
@@ -372,30 +369,20 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
     public static int nmaxBPictureL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT); }
     /** Unsafe version of {@link #maxL1ReferenceCount}. */
     public static int nmaxL1ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXL1REFERENCECOUNT); }
-    /** Unsafe version of {@link #maxSubLayersCount}. */
-    public static int nmaxSubLayersCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXSUBLAYERSCOUNT); }
-    /** Unsafe version of {@link #minLog2MinLumaCodingBlockSizeMinus3}. */
-    public static int nminLog2MinLumaCodingBlockSizeMinus3(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMACODINGBLOCKSIZEMINUS3); }
-    /** Unsafe version of {@link #maxLog2MinLumaCodingBlockSizeMinus3}. */
-    public static int nmaxLog2MinLumaCodingBlockSizeMinus3(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3); }
-    /** Unsafe version of {@link #minLog2MinLumaTransformBlockSizeMinus2}. */
-    public static int nminLog2MinLumaTransformBlockSizeMinus2(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2); }
-    /** Unsafe version of {@link #maxLog2MinLumaTransformBlockSizeMinus2}. */
-    public static int nmaxLog2MinLumaTransformBlockSizeMinus2(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2); }
-    /** Unsafe version of {@link #minMaxTransformHierarchyDepthInter}. */
-    public static int nminMaxTransformHierarchyDepthInter(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTER); }
-    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthInter}. */
-    public static int nmaxMaxTransformHierarchyDepthInter(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTER); }
-    /** Unsafe version of {@link #minMaxTransformHierarchyDepthIntra}. */
-    public static int nminMaxTransformHierarchyDepthIntra(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTRA); }
-    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthIntra}. */
-    public static int nmaxMaxTransformHierarchyDepthIntra(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTRA); }
-    /** Unsafe version of {@link #maxDiffCuQpDeltaDepth}. */
-    public static int nmaxDiffCuQpDeltaDepth(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXDIFFCUQPDELTADEPTH); }
-    /** Unsafe version of {@link #minMaxNumMergeCand}. */
-    public static int nminMaxNumMergeCand(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXNUMMERGECAND); }
-    /** Unsafe version of {@link #maxMaxNumMergeCand}. */
-    public static int nmaxMaxNumMergeCand(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXNUMMERGECAND); }
+    /** Unsafe version of {@link #maxSubLayerCount}. */
+    public static int nmaxSubLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXSUBLAYERCOUNT); }
+    /** Unsafe version of {@link #expectDyadicTemporalSubLayerPattern}. */
+    public static int nexpectDyadicTemporalSubLayerPattern(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.EXPECTDYADICTEMPORALSUBLAYERPATTERN); }
+    /** Unsafe version of {@link #minQp}. */
+    public static int nminQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINQP); }
+    /** Unsafe version of {@link #maxQp}. */
+    public static int nmaxQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXQP); }
+    /** Unsafe version of {@link #prefersGopRemainingFrames}. */
+    public static int nprefersGopRemainingFrames(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.PREFERSGOPREMAININGFRAMES); }
+    /** Unsafe version of {@link #requiresGopRemainingFrames}. */
+    public static int nrequiresGopRemainingFrames(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.REQUIRESGOPREMAININGFRAMES); }
+    /** Unsafe version of {@link #stdSyntaxFlags}. */
+    public static int nstdSyntaxFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.STDSYNTAXFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.STYPE, value); }
@@ -449,6 +436,14 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
         /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#flags} field. */
         @NativeType("VkVideoEncodeH265CapabilityFlagsEXT")
         public int flags() { return VkVideoEncodeH265CapabilitiesEXT.nflags(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxLevelIdc} field. */
+        @NativeType("StdVideoH265LevelIdc")
+        public int maxLevelIdc() { return VkVideoEncodeH265CapabilitiesEXT.nmaxLevelIdc(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxSliceSegmentCount} field. */
+        @NativeType("uint32_t")
+        public int maxSliceSegmentCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxSliceSegmentCount(address()); }
+        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeH265CapabilitiesEXT#maxTiles} field. */
+        public VkExtent2D maxTiles() { return VkVideoEncodeH265CapabilitiesEXT.nmaxTiles(address()); }
         /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#ctbSizes} field. */
         @NativeType("VkVideoEncodeH265CtbSizeFlagsEXT")
         public int ctbSizes() { return VkVideoEncodeH265CapabilitiesEXT.nctbSizes(address()); }
@@ -464,42 +459,27 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct<VkVideoEncodeH265Ca
         /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxL1ReferenceCount} field. */
         @NativeType("uint32_t")
         public int maxL1ReferenceCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxL1ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxSubLayersCount} field. */
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxSubLayerCount} field. */
         @NativeType("uint32_t")
-        public int maxSubLayersCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxSubLayersCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaCodingBlockSizeMinus3} field. */
-        @NativeType("uint32_t")
-        public int minLog2MinLumaCodingBlockSizeMinus3() { return VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaCodingBlockSizeMinus3(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaCodingBlockSizeMinus3} field. */
-        @NativeType("uint32_t")
-        public int maxLog2MinLumaCodingBlockSizeMinus3() { return VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaCodingBlockSizeMinus3(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaTransformBlockSizeMinus2} field. */
-        @NativeType("uint32_t")
-        public int minLog2MinLumaTransformBlockSizeMinus2() { return VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaTransformBlockSizeMinus2(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaTransformBlockSizeMinus2} field. */
-        @NativeType("uint32_t")
-        public int maxLog2MinLumaTransformBlockSizeMinus2() { return VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaTransformBlockSizeMinus2(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthInter} field. */
-        @NativeType("uint32_t")
-        public int minMaxTransformHierarchyDepthInter() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthInter(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthInter} field. */
-        @NativeType("uint32_t")
-        public int maxMaxTransformHierarchyDepthInter() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthInter(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthIntra} field. */
-        @NativeType("uint32_t")
-        public int minMaxTransformHierarchyDepthIntra() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthIntra(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthIntra} field. */
-        @NativeType("uint32_t")
-        public int maxMaxTransformHierarchyDepthIntra() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthIntra(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxDiffCuQpDeltaDepth} field. */
-        @NativeType("uint32_t")
-        public int maxDiffCuQpDeltaDepth() { return VkVideoEncodeH265CapabilitiesEXT.nmaxDiffCuQpDeltaDepth(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxNumMergeCand} field. */
-        @NativeType("uint32_t")
-        public int minMaxNumMergeCand() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxNumMergeCand(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxNumMergeCand} field. */
-        @NativeType("uint32_t")
-        public int maxMaxNumMergeCand() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxNumMergeCand(address()); }
+        public int maxSubLayerCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxSubLayerCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#expectDyadicTemporalSubLayerPattern} field. */
+        @NativeType("VkBool32")
+        public boolean expectDyadicTemporalSubLayerPattern() { return VkVideoEncodeH265CapabilitiesEXT.nexpectDyadicTemporalSubLayerPattern(address()) != 0; }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minQp} field. */
+        @NativeType("int32_t")
+        public int minQp() { return VkVideoEncodeH265CapabilitiesEXT.nminQp(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxQp} field. */
+        @NativeType("int32_t")
+        public int maxQp() { return VkVideoEncodeH265CapabilitiesEXT.nmaxQp(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#prefersGopRemainingFrames} field. */
+        @NativeType("VkBool32")
+        public boolean prefersGopRemainingFrames() { return VkVideoEncodeH265CapabilitiesEXT.nprefersGopRemainingFrames(address()) != 0; }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#requiresGopRemainingFrames} field. */
+        @NativeType("VkBool32")
+        public boolean requiresGopRemainingFrames() { return VkVideoEncodeH265CapabilitiesEXT.nrequiresGopRemainingFrames(address()) != 0; }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#stdSyntaxFlags} field. */
+        @NativeType("VkVideoEncodeH265StdFlagsEXT")
+        public int stdSyntaxFlags() { return VkVideoEncodeH265CapabilitiesEXT.nstdSyntaxFlags(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#sType} field. */
         public VkVideoEncodeH265CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265CapabilitiesEXT.nsType(address(), value); return this; }

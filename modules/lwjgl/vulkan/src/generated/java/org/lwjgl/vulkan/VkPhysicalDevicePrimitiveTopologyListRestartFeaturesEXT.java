@@ -92,7 +92,7 @@ public class VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT extends Str
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

@@ -29,7 +29,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
         <h5>Format Translation</h5>
         <em>Modifier</em>-capable APIs often pair <em>modifiers</em> with DRM formats, which are defined in <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/drm/drm_fourcc.h">{@code drm_fourcc.h}</a>. However, {@code VK_EXT_image_drm_format_modifier} uses {@code VkFormat} instead of DRM formats. The application must convert between {@code VkFormat} and DRM format when it sends or receives a DRM format to or from an external API.
 
-        The mapping from {@code VkFormat} to DRM format is lossy. Therefore, when receiving a DRM format from an external API, often the application must use information from the external API to accurately map the DRM format to a {@code VkFormat}. For example, DRM formats do not distinguish between RGB and sRGB (as of 2018-03-28); external information is required to identify the image’s colorspace.
+        The mapping from {@code VkFormat} to DRM format is lossy. Therefore, when receiving a DRM format from an external API, often the application must use information from the external API to accurately map the DRM format to a {@code VkFormat}. For example, DRM formats do not distinguish between RGB and sRGB (as of 2018-03-28); external information is required to identify the image’s color space.
 
         The mapping between {@code VkFormat} and DRM format is also incomplete. For some DRM formats there exist no corresponding Vulkan format, and for some Vulkan formats there exist no corresponding DRM format.
 

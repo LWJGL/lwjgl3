@@ -20,11 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Values in {@code imageView} are loaded and stored according to the values of {@code loadOp} and {@code storeOp}, within the render area for each device specified in {@link VkRenderingInfo}. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, other members of this structure are ignored; writes to this attachment will be discarded, and no load, store, or resolve operations will be performed.</p>
+ * <p>Values in {@code imageView} are loaded and stored according to the values of {@code loadOp} and {@code storeOp}, within the render area for each device specified in {@link VkRenderingInfo}. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, other members of this structure are ignored; writes to this attachment will be discarded, and no <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store</a>, or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">multisample resolve</a> operations will be performed.</p>
  * 
- * <p>If {@code resolveMode} is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, then {@code resolveImageView} is ignored. If {@code resolveMode} is not {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, and {@code resolveImageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, values in {@code resolveImageView} within the render area become undefined once rendering begins. Only values in the aspect corresponding to the use of this attachment become undefined (the depth aspect if this attachment is used as {@link VkRenderingInfo}{@code ::pDepthAttachment}, and the stencil aspect if it is used as {@code pStencilAttachment}).</p>
- * 
- * <p>At the end of rendering, the values written to each pixel location in {@code imageView} will be resolved according to {@code resolveMode} and stored into the same location in {@code resolveImageView}.</p>
+ * <p>If {@code resolveMode} is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, then {@code resolveImageView} is ignored. If {@code resolveMode} is not {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, and {@code resolveImageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-resolve-operations">render pass multisample resolve operation</a> is defined for the attachment subresource.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -169,7 +167,7 @@ public class VkRenderingAttachmentInfo extends Struct<VkRenderingAttachmentInfo>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -190,10 +188,10 @@ public class VkRenderingAttachmentInfo extends Struct<VkRenderingAttachmentInfo>
     /** the layout that {@code resolveImageView} will be in during rendering. */
     @NativeType("VkImageLayout")
     public int resolveImageLayout() { return nresolveImageLayout(address()); }
-    /** a {@code VkAttachmentLoadOp} value specifying how the contents of {@code imageView} are treated at the start of the render pass instance. */
+    /** a {@code VkAttachmentLoadOp} value defining the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-operations">load operation</a> for the attachment. */
     @NativeType("VkAttachmentLoadOp")
     public int loadOp() { return nloadOp(address()); }
-    /** a {@code VkAttachmentStoreOp} value specifying how the contents of {@code imageView} are treated at the end of the render pass instance. */
+    /** a {@code VkAttachmentStoreOp} value defining the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-store-operations">store operation</a> for the attachment. */
     @NativeType("VkAttachmentStoreOp")
     public int storeOp() { return nstoreOp(address()); }
     /** a {@link VkClearValue} structure defining values used to clear {@code imageView} when {@code loadOp} is {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. */

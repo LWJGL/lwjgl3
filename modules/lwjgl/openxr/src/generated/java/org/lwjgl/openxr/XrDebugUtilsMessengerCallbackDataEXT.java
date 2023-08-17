@@ -154,18 +154,14 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** a count of items contained in the {@code objects} array. This may be 0. */
     @NativeType("uint32_t")
     public int objectCount() { return nobjectCount(address()); }
-    /** a pointer to an array of {@link XrDebugUtilsObjectNameInfoEXT} objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message. */
+    /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsObjectNameInfoEXT} objects related to the detected issue. The array is roughly in order of importance, but the 0th element is always guaranteed to be the most important object for this message. */
     @Nullable
     @NativeType("XrDebugUtilsObjectNameInfoEXT *")
     public XrDebugUtilsObjectNameInfoEXT.Buffer objects() { return nobjects(address()); }
     /** a count of items contained in the {@code sessionLabels} array. This may be 0. */
     @NativeType("uint32_t")
     public int sessionLabelCount() { return nsessionLabelCount(address()); }
-    /**
-     * a pointer to an array of {@link XrDebugUtilsLabelEXT} objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.
-     * 
-     * <p>NULL or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#session-labels">Session Labels</a> for more information.</p>
-     */
+    /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#session-labels">Session Labels</a> for more information. */
     @Nullable
     @NativeType("XrDebugUtilsLabelEXT *")
     public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return nsessionLabels(address()); }

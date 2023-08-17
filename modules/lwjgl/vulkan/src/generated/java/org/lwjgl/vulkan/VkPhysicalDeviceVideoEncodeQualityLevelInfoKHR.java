@@ -1,0 +1,353 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+import javax.annotation.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+/**
+ * Structure describing the video encode profile and quality level to query properties for.
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileInfoKHR} structure</li>
+ * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkVideoProfileInfoKHR}, {@link KHRVideoEncodeQueue#vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR GetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR}</p>
+ * 
+ * <h3>Layout</h3>
+ * 
+ * <pre><code>
+ * struct VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR {
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     {@link VkVideoProfileInfoKHR VkVideoProfileInfoKHR} const * {@link #pVideoProfile};
+ *     uint32_t {@link #qualityLevel};
+ * }</code></pre>
+ */
+public class VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR extends Struct<VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR> implements NativeResource {
+
+    /** The struct size in bytes. */
+    public static final int SIZEOF;
+
+    /** The struct alignment in bytes. */
+    public static final int ALIGNOF;
+
+    /** The struct member offsets. */
+    public static final int
+        STYPE,
+        PNEXT,
+        PVIDEOPROFILE,
+        QUALITYLEVEL;
+
+    static {
+        Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
+            __member(4)
+        );
+
+        SIZEOF = layout.getSize();
+        ALIGNOF = layout.getAlignment();
+
+        STYPE = layout.offsetof(0);
+        PNEXT = layout.offsetof(1);
+        PVIDEOPROFILE = layout.offsetof(2);
+        QUALITYLEVEL = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(address, container);
+    }
+
+    /**
+     * Creates a {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * visible to the struct instance and vice versa.
+     *
+     * <p>The created instance holds a strong reference to the container object.</p>
+     */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(ByteBuffer container) {
+        super(memAddress(container), __checkContainer(container, SIZEOF));
+    }
+
+    @Override
+    public int sizeof() { return SIZEOF; }
+
+    /** a {@code VkStructureType} value identifying this structure. */
+    @NativeType("VkStructureType")
+    public int sType() { return nsType(address()); }
+    /** {@code NULL} or a pointer to a structure extending this structure. */
+    @NativeType("void const *")
+    public long pNext() { return npNext(address()); }
+    /** a pointer to a {@link VkVideoProfileInfoKHR} structure specifying the video profile to query the video encode quality level properties for. */
+    @NativeType("VkVideoProfileInfoKHR const *")
+    public VkVideoProfileInfoKHR pVideoProfile() { return npVideoProfile(address()); }
+    /** the video encode quality level to query properties for. */
+    @NativeType("uint32_t")
+    public int qualityLevel() { return nqualityLevel(address()); }
+
+    /** Sets the specified value to the {@link #sType} field. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR); }
+    /** Sets the specified value to the {@link #pNext} field. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified {@link VkVideoProfileInfoKHR} to the {@link #pVideoProfile} field. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR pVideoProfile(@NativeType("VkVideoProfileInfoKHR const *") VkVideoProfileInfoKHR value) { npVideoProfile(address(), value); return this; }
+    /** Sets the specified value to the {@link #qualityLevel} field. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR qualityLevel(@NativeType("uint32_t") int value) { nqualityLevel(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR set(
+        int sType,
+        long pNext,
+        VkVideoProfileInfoKHR pVideoProfile,
+        int qualityLevel
+    ) {
+        sType(sType);
+        pNext(pNext);
+        pVideoProfile(pVideoProfile);
+        qualityLevel(qualityLevel);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR set(VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR malloc() {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(nmemAllocChecked(SIZEOF), null);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR calloc() {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(nmemCallocChecked(1, SIZEOF), null);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(memAddress(container), container);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance for the specified memory address. */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR create(long address) {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(address, null);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR createSafe(long address) {
+        return address == NULL ? null : new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(address, null);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer malloc(int capacity) {
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer calloc(int capacity) {
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
+    }
+
+    /**
+     * Create a {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance at the specified memory.
+     *
+     * @param address  the memory address
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer create(long address, int capacity) {
+        return new Buffer(address, capacity);
+    }
+
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer createSafe(long address, int capacity) {
+        return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR malloc(MemoryStack stack) {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR calloc(MemoryStack stack) {
+        return new VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
+    /** Unsafe version of {@link #sType}. */
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE); }
+    /** Unsafe version of {@link #pNext}. */
+    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PNEXT); }
+    /** Unsafe version of {@link #pVideoProfile}. */
+    public static VkVideoProfileInfoKHR npVideoProfile(long struct) { return VkVideoProfileInfoKHR.create(memGetAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PVIDEOPROFILE)); }
+    /** Unsafe version of {@link #qualityLevel}. */
+    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL); }
+
+    /** Unsafe version of {@link #sType(int) sType}. */
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE, value); }
+    /** Unsafe version of {@link #pNext(long) pNext}. */
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PNEXT, value); }
+    /** Unsafe version of {@link #pVideoProfile(VkVideoProfileInfoKHR) pVideoProfile}. */
+    public static void npVideoProfile(long struct, VkVideoProfileInfoKHR value) { memPutAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PVIDEOPROFILE, value.address()); }
+    /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
+    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL, value); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        check(memGetAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PVIDEOPROFILE));
+    }
+
+    // -----------------------------------
+
+    /** An array of {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR} structs. */
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR ELEMENT_FACTORY = VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.create(-1L);
+
+        /**
+         * Creates a new {@code VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer} instance backed by the specified container.
+         *
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
+         * by {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#SIZEOF}, and its mark will be undefined.</p>
+         *
+         * <p>The created buffer instance holds a strong reference to the container object.</p>
+         */
+        public Buffer(ByteBuffer container) {
+            super(container, container.remaining() / SIZEOF);
+        }
+
+        public Buffer(long address, int cap) {
+            super(address, null, -1, 0, cap, cap);
+        }
+
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            super(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected Buffer self() {
+            return this;
+        }
+
+        @Override
+        protected VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
+        }
+
+        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#sType} field. */
+        @NativeType("VkStructureType")
+        public int sType() { return VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.nsType(address()); }
+        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#pNext} field. */
+        @NativeType("void const *")
+        public long pNext() { return VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.npNext(address()); }
+        /** @return a {@link VkVideoProfileInfoKHR} view of the struct pointed to by the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#pVideoProfile} field. */
+        @NativeType("VkVideoProfileInfoKHR const *")
+        public VkVideoProfileInfoKHR pVideoProfile() { return VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.npVideoProfile(address()); }
+        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#qualityLevel} field. */
+        @NativeType("uint32_t")
+        public int qualityLevel() { return VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.nqualityLevel(address()); }
+
+        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#sType} field. */
+        public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#sType} field. */
+        public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR); }
+        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#pNext} field. */
+        public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified {@link VkVideoProfileInfoKHR} to the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#pVideoProfile} field. */
+        public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer pVideoProfile(@NativeType("VkVideoProfileInfoKHR const *") VkVideoProfileInfoKHR value) { VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.npVideoProfile(address(), value); return this; }
+        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR#qualityLevel} field. */
+        public VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.Buffer qualityLevel(@NativeType("uint32_t") int value) { VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.nqualityLevel(address(), value); return this; }
+
+    }
+
+}

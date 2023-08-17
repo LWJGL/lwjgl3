@@ -18,10 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifies H.264 encoder parameter set information.
  * 
- * <h5>Description</h5>
- * 
- * <p>A {@link VkVideoEncodeH264SessionParametersCreateInfoEXT} structure holding one H.264 SPS and at least one H.264 PPS parameter set <b>must</b> be chained to {@link VkVideoSessionParametersCreateInfoKHR} when calling {@link KHRVideoQueue#vkCreateVideoSessionParametersKHR CreateVideoSessionParametersKHR} to store these parameter set(s) with the encoder parameter set object for later reference. The provided H.264 SPS/PPS parameters <b>must</b> be within the limits specified during encoder creation for the encoder specified in {@link VkVideoSessionParametersCreateInfoKHR}.</p>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -101,7 +97,7 @@ public class VkVideoEncodeH264SessionParametersCreateInfoEXT extends Struct<VkVi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

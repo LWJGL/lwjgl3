@@ -136,7 +136,7 @@ public class HUAWEIInvocationMask {
      * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageLayout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL}</li>
      * <li>Thread mask image resolution must match the {@code width} and {@code height} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}</li>
      * <li>Each element in the invocation mask image <b>must</b> have the value 0 or 1. The value 1 means the invocation is active</li>
-     * <li>{@code width} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR} should be 1</li>
+     * <li>{@code depth} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR} <b>must</b> be 1</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

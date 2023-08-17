@@ -121,7 +121,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct<VkWin32KeyedM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

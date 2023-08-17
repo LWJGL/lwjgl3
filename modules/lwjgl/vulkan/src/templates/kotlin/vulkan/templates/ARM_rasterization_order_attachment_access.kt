@@ -15,8 +15,6 @@ val ARM_rasterization_order_attachment_access = "ARMRasterizationOrderAttachment
 
         This extension extends the mechanism of input attachments to allow access to framebuffer attachments when used as both input and color, or depth/stencil, attachments from one fragment to the next, in rasterization order, without explicit synchronization.
 
-        See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-feedbackloop">renderpass feedback loops</a> for more information.
-
         <h5>Examples</h5>
         None.
 

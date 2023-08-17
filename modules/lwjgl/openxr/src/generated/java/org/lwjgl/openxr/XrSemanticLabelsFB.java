@@ -106,16 +106,16 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
     /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain, such as {@link XrSemanticLabelsSupportInfoFB}. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** the capacity of the {@code buffer} array, in bytes, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int bufferCapacityInput() { return nbufferCapacityInput(address()); }
-    /** a pointer to the count of bytes written, or a pointer to the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
+    /** the count of bytes written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int bufferCountOutput() { return nbufferCountOutput(address()); }
-    /** a pointer to an array of bytes, but can be {@code NULL} if {@code bufferCapacityInput} is 0. Multiple labels represented by raw string, separated by comma (,). */
+    /** a pointer to an array of bytes, but can be {@code NULL} if {@code bufferCapacityInput} is 0. Multiple labels represented by raw string, separated by a comma without spaces. */
     @Nullable
     @NativeType("char *")
     public ByteBuffer buffer() { return nbuffer(address()); }

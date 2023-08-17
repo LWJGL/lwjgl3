@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether clamping the min lod of a image view is supported by the implementation.
+ * Structure describing whether clamping the min LOD of a image view is supported by the implementation.
  * 
  * <h5>Description</h5>
  * 
@@ -88,7 +88,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct<VkPhysica
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

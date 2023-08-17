@@ -24,15 +24,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A sliced 3D view <b>must</b> only be used with a single mip level. The slice coordinates are integer coordinates within the {@code subresourceRange.baseMipLevel} used to create the image view.</p>
  * 
- * <p>The effective view depth is equal to {@code extent.depth} used to create the {@code image} for this view adjusted by {@code subresourceRange.baseMipLevel} as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</p>
+ * <p>The effective view depth is equal to {@code extent.depth} used to create the {@code image} for this view adjusted by {@code subresourceRange.baseMipLevel} as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a>.</p>
  * 
  * <p>Shader access to this image view is only affected by {@link VkImageViewSlicedCreateInfoEXT} if it uses a descriptor of type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}. For access using any other descriptor type, the contents of {@link VkImageViewSlicedCreateInfoEXT} are ignored; instead, {@code sliceOffset} is treated as being equal to 0, and {@code sliceCount} is treated as being equal to {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code sliceOffset} <b>must</b> be less than the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a></li>
- * <li>If {@code sliceCount} is not {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}, it <b>must</b> be be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a></li>
+ * <li>{@code sliceOffset} <b>must</b> be less than the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
+ * <li>If {@code sliceCount} is not {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}, it <b>must</b> be be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
  * <li>{@code image} <b>must</b> have been created with {@code imageType} equal to {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
  * <li>{@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
  * <li>The image view <b>must</b> reference exactly 1 mip level</li>
@@ -109,7 +109,7 @@ public class VkImageViewSlicedCreateInfoEXT extends Struct<VkImageViewSlicedCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

@@ -516,6 +516,7 @@ public class EXTDescriptorBuffer {
      * <li>Each element of {@code pBufferIndices} <b>must</b> reference a valid descriptor buffer binding set by a previous call to {@link #vkCmdBindDescriptorBuffersEXT CmdBindDescriptorBuffersEXT} in {@code commandBuffer}</li>
      * <li>The sum of {@code firstSet} and {@code setCount} <b>must</b> be less than or equal to {@link VkPipelineLayoutCreateInfo}{@code ::setLayoutCount} provided when {@code layout} was created</li>
      * <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
+     * <li>The {@code VkDescriptorSetLayout} for each set from {@code firstSet} to <code>firstSet + setCount</code> when {@code layout} was created <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} bit set</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

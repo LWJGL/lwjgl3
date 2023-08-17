@@ -140,7 +140,7 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct<VkPhysicalDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -164,7 +164,7 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct<VkPhysicalDe
     /** an unsigned integer value indicating the maximum size of a subgroup. */
     @NativeType("uint32_t")
     public int wavefrontSize() { return nwavefrontSize(address()); }
-    /** an unsigned integer value indicating the number of physical Scalar General Purpose Registers (SGPRs) per SIMD. */
+    /** an unsigned integer value indicating the number of physical Scalar General-Purpose Registers (SGPRs) per SIMD. */
     @NativeType("uint32_t")
     public int sgprsPerSimd() { return nsgprsPerSimd(address()); }
     /** an unsigned integer value indicating the minimum number of SGPRs allocated for a wave. */
@@ -176,7 +176,7 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct<VkPhysicalDe
     /** an unsigned integer value indicating the granularity of SGPR allocation for a wave. */
     @NativeType("uint32_t")
     public int sgprAllocationGranularity() { return nsgprAllocationGranularity(address()); }
-    /** an unsigned integer value indicating the number of physical Vector General Purpose Registers (VGPRs) per SIMD. */
+    /** an unsigned integer value indicating the number of physical Vector General-Purpose Registers (VGPRs) per SIMD. */
     @NativeType("uint32_t")
     public int vgprsPerSimd() { return nvgprsPerSimd(address()); }
     /** an unsigned integer value indicating the minimum number of VGPRs allocated for a wave. */

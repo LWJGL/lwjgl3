@@ -104,7 +104,7 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -113,7 +113,7 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     /** the size, in bytes, of the buffer pointed to by {@code pIdentifier}. */
     @NativeType("uint32_t")
     public int identifierSize() { return nidentifierSize(address()); }
-    /** points to a buffer of opaque data specifying an identifier. */
+    /** a pointer to a buffer of opaque data specifying an identifier. */
     @Nullable
     @NativeType("uint8_t const *")
     public ByteBuffer pIdentifier() { return npIdentifier(address()); }

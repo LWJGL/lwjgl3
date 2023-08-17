@@ -39,7 +39,7 @@ public class YogaConfig {
     }
 
     void setUseLegacyStretchBehaviour(boolean useLegaceStretchBehaviour) {
-        YGConfigSetUseLegacyStretchBehaviour(handle, useLegaceStretchBehaviour);
+        YGConfigSetErrata(handle, useLegaceStretchBehaviour ? YGErrataStretchFlexBasis : YGErrataNone);
     }
 
     void setUseWebDefaults(boolean enabled) {

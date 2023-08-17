@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBRenderModel {
 
     /** The extension specification version. */
-    public static final int XR_FB_render_model_SPEC_VERSION = 3;
+    public static final int XR_FB_render_model_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String XR_FB_RENDER_MODEL_EXTENSION_NAME = "XR_FB_render_model";

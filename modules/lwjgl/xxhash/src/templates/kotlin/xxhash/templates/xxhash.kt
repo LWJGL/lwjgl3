@@ -148,7 +148,7 @@ hashFile(FILE* stream)
 
     IntConstant("The major version number.", "VERSION_MAJOR".."0")
     IntConstant("The minor version number.", "VERSION_MINOR".."8")
-    IntConstant("The release version number.", "VERSION_RELEASE".."1")
+    IntConstant("The release version number.", "VERSION_RELEASE".."2")
 
     IntConstant(
         "The version number",
@@ -480,24 +480,26 @@ hashFile(FILE* stream)
     XXH_errorcode(
         "3_64bits_reset",
         """
-        Initialize with default parameters.
-        
-        Result will be equivalent to #3_64bits().
+        Resets an {@code XXH3_state_t} to begin a new hash.
+
+        This function resets {@code statePtr} and generate a secret with default parameters. Call it before #3_64bits_update(). Digest will be equivalent to
+        #3_64bits().
         """,
 
-        XXH3_state_t.p("statePtr", "")
+        XXH3_state_t.p("statePtr", "the state struct to reset")
     )
 
     XXH_errorcode(
         "3_64bits_reset_withSeed",
         """
-        Generate a custom secret from {@code seed}, and store it into {@code state}.
-        
-        Digest will be equivalent to #3_64bits_withSeed().
+        Resets an {@code XXH3_state_t} with 64-bit seed to begin a new hash.
+
+        This function resets {@code statePtr} and generate a secret from {@code seed}. Call it before #3_64bits_update(). Digest will be equivalent to
+        #3_64bits_withSeed().
         """,
 
-        XXH3_state_t.p("statePtr", ""),
-        XXH64_hash_t("seed", "")
+        XXH3_state_t.p("statePtr", "the state struct to reset"),
+        XXH64_hash_t("seed", "the 64-bit seed to alter the state")
     )
 
     XXH_errorcode(
@@ -517,18 +519,29 @@ hashFile(FILE* stream)
 
     XXH_errorcode(
         "3_64bits_update",
-        "",
+        """
+        Consumes a block of {@code input} to an {@code XXH3_state_t}.
 
-        XXH3_state_t.p("statePtr", ""),
-        void.const.p("input", ""),
-        AutoSize("input")..size_t("length", "")
+        Call this to incrementally consume blocks of data.
+
+        The memory between {@code input} and {@code input + length} must be valid, readable, contiguous memory. However, if {@code length} is 0, {@code input}
+        may be #NULL.
+        """,
+
+        XXH3_state_t.p("statePtr", "the state struct to update"),
+        nullable..void.const.p("input", "the block of data to be hashed, at least {@code length} bytes in size"),
+        AutoSize("input")..size_t("length", "the length of {@code input}, in bytes")
     )
 
     XXH64_hash_t(
         "3_64bits_digest",
-        "",
+        """
+        Returns the calculated XXH3 64-bit hash value from an {@code XXH3_state_t}.
 
-        XXH3_state_t.const.p("statePtr", "")
+        Calling {@code XXH3_64bits_digest()} will not affect {@code statePtr}, so you can update, digest, and update again.
+        """,
+
+        XXH3_state_t.const.p("statePtr", "the state struct to calculate the hash from")
     )
 
     XXH128_hash_t(
@@ -567,22 +580,32 @@ hashFile(FILE* stream)
 
     XXH_errorcode(
         "3_128bits_reset",
-        "",
+        """
+        Resets an {@code XXH3_state_t} to begin a new hash.
 
-        XXH3_state_t.p("statePtr", "")
+        This function resets {@code statePtr} and generates a secret with default parameters. Call it before #3_128bits_update(). Digest will be equivalent to
+        #3_128bits()`.
+        """,
+
+        XXH3_state_t.p("statePtr", "the state struct to reset")
     )
 
     XXH_errorcode(
         "3_128bits_reset_withSeed",
-        "",
+        """
+        Resets an {@code XXH3_state_t} with 64-bit seed to begin a new hash.
 
-        XXH3_state_t.p("statePtr", ""),
-        XXH64_hash_t("seed", "")
+        This function resets {@code statePtr} and generates a secret from {@code seed}. Call it before #3_128bits_update(). Digest will be equivalent to
+        #3_128bits_withSeed().
+        """,
+
+        XXH3_state_t.p("statePtr", "the state struct to reset"),
+        XXH64_hash_t("seed", "he 64-bit seed to alter the state")
     )
 
     XXH_errorcode(
         "3_128bits_reset_withSecret",
-        "",
+        "Custom secret 128-bit variant of XXH3. See #3_64bits_reset_withSecret().",
 
         XXH3_state_t.p("statePtr", ""),
         Check("XXH3_SECRET_SIZE_MIN")..void.const.p("secret", ""),
@@ -591,18 +614,29 @@ hashFile(FILE* stream)
 
     XXH_errorcode(
         "3_128bits_update",
-        "",
+        """
+        Consumes a block of {@code input} to an {@code XXH3_state_t}.
 
-        XXH3_state_t.p("statePtr", ""),
-        void.const.p("input", ""),
-        AutoSize("input")..size_t("length", "")
+        Call this to incrementally consume blocks of data.
+
+        The memory between {@code input} and {@code input + length} must be valid, readable, contiguous memory. However, if {@code length} is 0, {@code input}
+        may be #NULL.
+        """,
+
+        XXH3_state_t.p("statePtr", "the state struct to update"),
+        nullable..void.const.p("input", "the block of data to be hashed, at least {@code length} bytes in size"),
+        AutoSize("input")..size_t("length", "the length of {@code input}, in bytes")
     )
 
     XXH128_hash_t(
         "3_128bits_digest",
-        "",
+        """
+        Returns the calculated XXH3 128-bit hash value from an {@code XXH3_state_t}.
 
-        XXH3_state_t.const.p("statePtr", "")
+        Calling {@code XXH3_128bits_digest()} will not affect {@code statePtr}, so you can update, digest, and update again.
+        """,
+
+        XXH3_state_t.const.p("statePtr", "the state struct to calculate the hash from")
     )
 
     intb(
@@ -623,17 +657,17 @@ hashFile(FILE* stream)
 
     void(
         "128_canonicalFromHash",
-        "",
+        "Converts an {@code XXH128_hash_t} to a big endian {@code XXH128_canonical_t}.",
 
-        XXH128_canonical_t.p("dst", ""),
-        XXH128_hash_t("hash", "")
+        XXH128_canonical_t.p("dst", "the {@code XXH128_canonical_t} pointer to be stored to"),
+        XXH128_hash_t("hash", "the {@code XXH128_hash_t} to be converted")
     )
 
     XXH128_hash_t(
         "128_hashFromCanonical",
-        "",
+        "Converts an {@code XXH128_canonical_t} to a native {@code XXH128_hash_t}.",
 
-        XXH128_canonical_t.const.p("src", "")
+        XXH128_canonical_t.const.p("src", "the {@code XXH128_canonical_t} to convert")
     )
 
     void(

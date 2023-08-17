@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * To be done.
+ * This extension expands {@code VkColorSpaceKHR} to add support for most standard color spaces beyond {@link KHRSurface#VK_COLOR_SPACE_SRGB_NONLINEAR_KHR COLOR_SPACE_SRGB_NONLINEAR_KHR}. This extension also adds support for {@link #VK_COLOR_SPACE_PASS_THROUGH_EXT COLOR_SPACE_PASS_THROUGH_EXT} which allows applications to use color spaces not explicitly enumerated in {@code VkColorSpaceKHR}.
  * 
  * <h5>VK_EXT_swapchain_colorspace</h5>
  * 

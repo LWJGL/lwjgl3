@@ -126,9 +126,7 @@ See documentation chapter: \ref statistics.
 extern "C" {
 #endif
 
-#ifndef VULKAN_H_
-    #include <vulkan/vulkan.h>
-#endif
+#include <vulkan/vulkan.h>
 
 #if !defined(VMA_VULKAN_VERSION)
     #if defined(VK_VERSION_1_3)
@@ -232,6 +230,12 @@ extern "C" {
 #endif
 #ifndef VMA_CALL_POST
     #define VMA_CALL_POST
+#endif
+
+// Define this macro to decorate pNext pointers with an attribute specifying the Vulkan
+// structure that will be extended via the pNext chain.
+#ifndef VMA_EXTENDS_VK_STRUCT
+    #define VMA_EXTENDS_VK_STRUCT(vkStruct)
 #endif
 
 // Define this macro to decorate pointers with an attribute specifying the
@@ -1319,7 +1323,7 @@ typedef struct VmaPoolCreateInfo
     Please note that some structures, e.g. `VkMemoryPriorityAllocateInfoEXT`, `VkMemoryDedicatedAllocateInfoKHR`,
     can be attached automatically by this library when using other, more convenient of its features.
     */
-    void* VMA_NULLABLE pMemoryAllocateNext;
+    void* VMA_NULLABLE VMA_EXTENDS_VK_STRUCT(VkMemoryAllocateInfo) pMemoryAllocateNext;
 } VmaPoolCreateInfo;
 
 /** @} */
@@ -1389,6 +1393,12 @@ typedef struct VmaAllocationInfo
     const char* VMA_NULLABLE pName;
 } VmaAllocationInfo;
 
+/** Callback function called during vmaBeginDefragmentation() to check custom criterion about ending current defragmentation pass.
+
+Should return true if the defragmentation needs to stop current pass.
+*/
+typedef VkBool32 (VKAPI_PTR* PFN_vmaCheckDefragmentationBreakFunction)(void* VMA_NULLABLE pUserData);
+
 /** \brief Parameters for defragmentation.
 
 To be used with function vmaBeginDefragmentation().
@@ -1412,6 +1422,13 @@ typedef struct VmaDefragmentationInfo
     `0` means no limit.
     */
     uint32_t maxAllocationsPerPass;
+    /** \brief Optional custom callback for stopping vmaBeginDefragmentation().
+
+    Have to return true for breaking current defragmentation pass.
+    */
+    PFN_vmaCheckDefragmentationBreakFunction VMA_NULLABLE pfnBreakCallback;
+    /// \brief Optional data to pass to custom callback for stopping pass of defragmentation.
+    void* VMA_NULLABLE pBreakCallbackUserData;
 } VmaDefragmentationInfo;
 
 /// Single move of an allocation to be done for defragmentation.
@@ -2227,7 +2244,7 @@ VMA_CALL_PRE VkResult VMA_CALL_POST vmaBindBufferMemory2(
     VmaAllocation VMA_NOT_NULL allocation,
     VkDeviceSize allocationLocalOffset,
     VkBuffer VMA_NOT_NULL_NON_DISPATCHABLE buffer,
-    const void* VMA_NULLABLE pNext);
+    const void* VMA_NULLABLE VMA_EXTENDS_VK_STRUCT(VkBindBufferMemoryInfoKHR) pNext);
 
 /** \brief Binds image to allocation.
 
@@ -2264,7 +2281,7 @@ VMA_CALL_PRE VkResult VMA_CALL_POST vmaBindImageMemory2(
     VmaAllocation VMA_NOT_NULL allocation,
     VkDeviceSize allocationLocalOffset,
     VkImage VMA_NOT_NULL_NON_DISPATCHABLE image,
-    const void* VMA_NULLABLE pNext);
+    const void* VMA_NULLABLE VMA_EXTENDS_VK_STRUCT(VkBindImageMemoryInfoKHR) pNext);
 
 /** \brief Creates a new `VkBuffer`, allocates and binds memory for it.
 
@@ -3737,19 +3754,18 @@ static bool FindMemoryPreferences(
         // No CPU access
         else
         {
-            // GPU access, no CPU access (e.g. a color attachment image) - prefer GPU memory
-            if(deviceAccess)
-            {
-                // ...unless there is a clear preference from the user not to do so.
-                if(preferHost)
-                    outNotPreferredFlags |= VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
-                else
-                    outPreferredFlags |= VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
-            }
+            // if(deviceAccess)
+            //
+            // GPU access, no CPU access (e.g. a color attachment image) - prefer GPU memory,
+            // unless there is a clear preference from the user not to do so.
+            //
+            // else:
+            //
             // No direct GPU access, no CPU access, just transfers.
             // It may be staging copy intended for e.g. preserving image for next frame (then better GPU memory) or
             // a "swap file" copy to free some GPU memory (then better CPU memory).
             // Up to the user to decide. If no preferece, assume the former and choose GPU memory.
+
             if(preferHost)
                 outNotPreferredFlags |= VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
             else
@@ -10295,8 +10311,8 @@ bool VmaBlockMetadata_TLSF::CreateAllocationRequest(
     else
         sizeForNextList += smallSizeStep;
 
-    uint32_t nextListIndex = 0;
-    uint32_t prevListIndex = 0;
+    uint32_t nextListIndex = m_ListsCount;
+    uint32_t prevListIndex = m_ListsCount;
     Block* nextListBlock = VMA_NULL;
     Block* prevListBlock = VMA_NULL;
 
@@ -11038,6 +11054,8 @@ private:
 
     const VkDeviceSize m_MaxPassBytes;
     const uint32_t m_MaxPassAllocations;
+    const PFN_vmaCheckDefragmentationBreakFunction m_BreakCallback;
+    void* m_BreakCallbackUserData;
 
     VmaStlAllocator<VmaDefragmentationMove> m_MoveAllocator;
     VmaVector<VmaDefragmentationMove, VmaStlAllocator<VmaDefragmentationMove>> m_Moves;
@@ -12968,6 +12986,8 @@ VmaDefragmentationContext_T::VmaDefragmentationContext_T(
     const VmaDefragmentationInfo& info)
     : m_MaxPassBytes(info.maxBytesPerPass == 0 ? VK_WHOLE_SIZE : info.maxBytesPerPass),
     m_MaxPassAllocations(info.maxAllocationsPerPass == 0 ? UINT32_MAX : info.maxAllocationsPerPass),
+    m_BreakCallback(info.pfnBreakCallback),
+    m_BreakCallbackUserData(info.pBreakCallbackUserData),
     m_MoveAllocator(hAllocator->GetAllocationCallbacks()),
     m_Moves(m_MoveAllocator)
 {
@@ -13363,6 +13383,10 @@ VmaDefragmentationContext_T::MoveAllocationData VmaDefragmentationContext_T::Get
 
 VmaDefragmentationContext_T::CounterStatus VmaDefragmentationContext_T::CheckCounters(VkDeviceSize bytes)
 {
+    // Check custom criteria if exists
+    if (m_BreakCallback && m_BreakCallback(m_BreakCallbackUserData))
+        return CounterStatus::End;
+
     // Ignore allocation if will exceed max size for copy
     if (m_PassStats.bytesMoved + bytes > m_MaxPassBytes)
     {
@@ -13371,6 +13395,8 @@ VmaDefragmentationContext_T::CounterStatus VmaDefragmentationContext_T::CheckCou
         else
             return CounterStatus::End;
     }
+    else
+        m_IgnoredAllocs = 0;
     return CounterStatus::Pass;
 }
 
@@ -13730,7 +13756,7 @@ bool VmaDefragmentationContext_T::ComputeDefragmentation_Extensive(VmaBlockVecto
             {
                 // Full clear performed already
                 if (prevMoveCount != m_Moves.size() && freeMetadata->GetNextAllocation(handle) == VK_NULL_HANDLE)
-                    reinterpret_cast<size_t*>(m_AlgorithmState)[index] = last;
+                    vectorState.firstFreeBlock = last;
                 return true;
             }
         }

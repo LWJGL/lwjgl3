@@ -533,7 +533,7 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
             <li>{@code session} <b>must</b> be a valid {@code VkOpticalFlowSessionNV} handle</li>
             <li>{@code pExecuteInfo} <b>must</b> be a valid pointer to a valid ##VkOpticalFlowExecuteInfoNV structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support opticalflow operations</li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support optical flow operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>Both of {@code commandBuffer}, and {@code session} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>

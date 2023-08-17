@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
  * This extension introduces the following display native HDR features to Vulkan:
  * 
  * <ul>
- * <li>A new {@code VkColorSpaceKHR} enum for setting the native display colorspace. For example, this color space would be set by the swapchain to use the native color space in Freesync2 displays.</li>
+ * <li>A new {@code VkColorSpaceKHR} enum for setting the native display color space. For example, this color space would be set by the swapchain to use the native color space in Freesync2 displays.</li>
  * <li>Local dimming control</li>
  * </ul>
  * 

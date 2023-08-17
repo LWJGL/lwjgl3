@@ -58,6 +58,23 @@ val EXT_hp_mixed_reality_controller = "EXTHPMixedRealityController".nativeClassX
                 </ul>
             </li>
         </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the {@link EXTPalmPose XR_EXT_palm_pose} extension is available and enabled, this interaction profile <b>must</b> also support
+
+        <ul>
+            <li>subpathname:/input/palm_ext/pose</li>
+        </ul>
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the {@link EXTHandInteraction XR_EXT_hand_interaction} extension is available and enabled, this interaction profile <b>must</b> also support
+
+        <ul>
+            <li>subpathname:/input/pinch_ext/pose</li>
+            <li>subpathname:/input/poke_ext/pose</li>
+        </ul>
+        </div>
         """
 
     IntConstant(

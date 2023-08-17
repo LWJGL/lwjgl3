@@ -7,7 +7,7 @@
 #define FB_ASSERTIONS_ENABLED 0
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()
-#include "Yoga.h"
+#include <yoga/Yoga.h>
 ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
@@ -171,6 +171,19 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetContext(JNIEnv *_
     void *context = (void *)(uintptr_t)contextAddress;
     UNUSED_PARAMS(__env, clazz)
     YGNodeSetContext(node, context);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeGetConfig(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
+    YGNodeRef node = (YGNodeRef)(uintptr_t)nodeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)YGNodeGetConfig(node);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetConfig(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong configAddress) {
+    YGNodeRef node = (YGNodeRef)(uintptr_t)nodeAddress;
+    YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGNodeSetConfig(node, config);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetPrintTreeFlag(JNIEnv *__env, jclass clazz, jlong configAddress, jboolean enabled) {
@@ -750,16 +763,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetPointScaleFacto
     YGConfigSetPointScaleFactor(config, pixelsInPoint);
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetUseLegacyStretchBehaviour(JNIEnv *__env, jclass clazz, jlong configAddress) {
+JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetPointScaleFactor(JNIEnv *__env, jclass clazz, jlong configAddress) {
     YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jboolean)YGConfigGetUseLegacyStretchBehaviour(config);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetUseLegacyStretchBehaviour(JNIEnv *__env, jclass clazz, jlong configAddress, jboolean useLegacyStretchBehaviour) {
-    YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
-    UNUSED_PARAMS(__env, clazz)
-    YGConfigSetUseLegacyStretchBehaviour(config, (bool)useLegacyStretchBehaviour);
+    return (jfloat)YGConfigGetPointScaleFactor(config);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_YGConfigNew(JNIEnv *__env, jclass clazz) {
@@ -832,6 +839,18 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetContext(JNIEnv
     YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)YGConfigGetContext(config);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetErrata(JNIEnv *__env, jclass clazz, jlong configAddress, jint errata) {
+    YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGConfigSetErrata(config, (YGErrata)errata);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetErrata(JNIEnv *__env, jclass clazz, jlong configAddress) {
+    YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)YGConfigGetErrata(config);
 }
 
 JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_YGRoundValueToPixelGrid(JNIEnv *__env, jclass clazz, jdouble value, jdouble pointScaleFactor, jboolean forceCeil, jboolean forceFloor) {

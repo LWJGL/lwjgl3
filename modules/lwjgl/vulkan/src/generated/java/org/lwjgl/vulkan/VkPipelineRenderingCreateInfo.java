@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When a pipeline is created without a {@code VkRenderPass}, if this structure is present in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the view mask and format of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, {@code viewMask} and {@code colorAttachmentCount} are 0, and {@code depthAttachmentFormat} and {@code stencilAttachmentFormat} are {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.</p>
+ * <p>When a pipeline is created without a {@code VkRenderPass}, if the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo} includes this structure, it specifies the view mask and format of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, {@code viewMask} and {@code colorAttachmentCount} are 0, and {@code depthAttachmentFormat} and {@code stencilAttachmentFormat} are {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.</p>
  * 
  * <p>If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it indicates that the corresponding attachment is unused within the render pass. Valid formats indicate that an attachment <b>can</b> be used - but it is still valid to set the attachment to {@code NULL} when beginning rendering.</p>
  * 
@@ -106,7 +106,7 @@ public class VkPipelineRenderingCreateInfo extends Struct<VkPipelineRenderingCre
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

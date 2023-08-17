@@ -40,7 +40,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264SessionCreateInfoEXT} or {@link VkVideoEncodeH265SessionCreateInfoEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoSessionCreateFlagBitsKHR} values</li>
  * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileInfoKHR} structure</li>
  * <li>{@code pictureFormat} <b>must</b> be a valid {@code VkFormat} value</li>
@@ -144,7 +145,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
@@ -183,6 +184,10 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
     public VkVideoSessionCreateInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoSessionCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkVideoSessionCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -491,6 +496,10 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
         public VkVideoSessionCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
         public VkVideoSessionCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoSessionCreateInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#queueFamilyIndex} field. */
         public VkVideoSessionCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#flags} field. */

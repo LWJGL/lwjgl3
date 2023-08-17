@@ -19,7 +19,7 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
     IntConstant(
         "The extension specification version.",
 
-        "FB_render_model_SPEC_VERSION".."3"
+        "FB_render_model_SPEC_VERSION".."4"
     )
 
     StringConstant(

@@ -75,7 +75,7 @@ val FB_spatial_entity_storage = "FBSpatialEntityStorage".nativeClassXR("FB_spati
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        The #SaveSpaceFB() function persists the spatial entity at the specified location with the specified mode. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::space} is #NULL_HANDLE or otherwise invalid. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::location} or ##XrSpaceSaveInfoFB{@code ::persistenceMode} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceSaveCompleteFB event when the operation completes successfully or encounters an error.
+        The #SaveSpaceFB() function persists the spatial entity at the specified location with the specified mode. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::space} is #NULL_HANDLE or otherwise invalid. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceSaveInfoFB{@code ::location} or ##XrSpaceSaveInfoFB{@code ::persistenceMode} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceSaveCompleteFB event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -130,7 +130,7 @@ val FB_spatial_entity_storage = "FBSpatialEntityStorage".nativeClassXR("FB_spati
 ￿    XrAsyncRequestIdFB*                         requestId);</code></pre>
 
         <h5>Description</h5>
-        The #EraseSpaceFB() function erases a spatial entity from storage at the specified location. The {@code XrSpace} remains valid in the current session until the application destroys it or the session ends. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceEraseInfoFB{@code ::space} is #NULL_HANDLE or otherwise invalid. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceEraseInfoFB{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceEraseCompleteFB event when the operation completes successfully or encounters an error.
+        The #EraseSpaceFB() function erases a spatial entity from storage at the specified location. The {@code XrSpace} remains valid in the current session until the application destroys it or the session ends. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceEraseInfoFB{@code ::space} is #NULL_HANDLE or otherwise invalid. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if ##XrSpaceEraseInfoFB{@code ::location} is invalid. This operation is asynchronous and the runtime <b>must</b> post an ##XrEventDataSpaceEraseCompleteFB event when the operation completes successfully or encounters an error. If this function returns a failure code, no event is posted.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

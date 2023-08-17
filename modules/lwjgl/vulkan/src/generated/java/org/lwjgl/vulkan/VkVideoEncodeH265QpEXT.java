@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkVideoEncodeH265RateControlLayerInfoEXT}</p>
+ * <p>{@link VkVideoEncodeH265QualityLevelPropertiesEXT}, {@link VkVideoEncodeH265RateControlLayerInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

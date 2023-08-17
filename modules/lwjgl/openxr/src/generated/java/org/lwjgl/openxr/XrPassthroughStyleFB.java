@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughStyleFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorMapInterpolatedLutMETA}, {@link XrPassthroughColorMapLutMETA}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -117,6 +117,10 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     public XrPassthroughStyleFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrPassthroughBrightnessContrastSaturationFB} value to the {@code next} chain. */
     public XrPassthroughStyleFB next(XrPassthroughBrightnessContrastSaturationFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrPassthroughColorMapInterpolatedLutMETA} value to the {@code next} chain. */
+    public XrPassthroughStyleFB next(XrPassthroughColorMapInterpolatedLutMETA value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrPassthroughColorMapLutMETA} value to the {@code next} chain. */
+    public XrPassthroughStyleFB next(XrPassthroughColorMapLutMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrPassthroughColorMapMonoToMonoFB} value to the {@code next} chain. */
     public XrPassthroughStyleFB next(XrPassthroughColorMapMonoToMonoFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrPassthroughColorMapMonoToRgbaFB} value to the {@code next} chain. */
@@ -343,6 +347,10 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
         public XrPassthroughStyleFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughStyleFB.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrPassthroughBrightnessContrastSaturationFB} value to the {@code next} chain. */
         public XrPassthroughStyleFB.Buffer next(XrPassthroughBrightnessContrastSaturationFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrPassthroughColorMapInterpolatedLutMETA} value to the {@code next} chain. */
+        public XrPassthroughStyleFB.Buffer next(XrPassthroughColorMapInterpolatedLutMETA value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrPassthroughColorMapLutMETA} value to the {@code next} chain. */
+        public XrPassthroughStyleFB.Buffer next(XrPassthroughColorMapLutMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrPassthroughColorMapMonoToMonoFB} value to the {@code next} chain. */
         public XrPassthroughStyleFB.Buffer next(XrPassthroughColorMapMonoToMonoFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrPassthroughColorMapMonoToRgbaFB} value to the {@code next} chain. */
