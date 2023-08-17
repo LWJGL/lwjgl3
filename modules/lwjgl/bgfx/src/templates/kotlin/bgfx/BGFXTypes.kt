@@ -17,6 +17,7 @@ val bgfx_access_t = "bgfx_access_t".enumType
 val bgfx_attrib_t = "bgfx_attrib_t".enumType
 val bgfx_attrib_type_t = "bgfx_attrib_type_t".enumType
 val bgfx_backbuffer_ratio_t = "bgfx_backbuffer_ratio_t".enumType
+val bgfx_native_window_handle_type_t = "bgfx_native_window_handle_type_t".enumType
 val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
 val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
 val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
@@ -545,6 +546,7 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
     uint32_t("reset", "reset parameters")
     uint8_t("numBackBuffers", "number of back buffers")
     uint8_t("maxFrameLatency", "maximum frame latency")
+    uint8_t("debugTextScale", "scale factor for debug text")
 }
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {
@@ -564,6 +566,7 @@ val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = 
     nullable..opaque_p("context", "GL context, D3D device, or Vulkan device. If #NULL, bgfx will create context/device.")
     nullable..opaque_p("backBuffer", "GL back-buffer, or D3D render target view. If #NULL bgfx will create back-buffer color surface.")
     nullable..opaque_p("backBufferDS", "backbuffer depth/stencil. If #NULL, bgfx will create a back-buffer depth/stencil surface.")
+    bgfx_native_window_handle_type_t("type", "handle type. Needed for platforms having more than one option.")
 }
 
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {
