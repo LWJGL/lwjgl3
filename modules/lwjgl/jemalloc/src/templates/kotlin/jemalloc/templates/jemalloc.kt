@@ -76,7 +76,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         // Force jemalloc to initialize before anyone else uses it.
         // This avoids a dangerous race when the first jemalloc functions are called concurrently.
         if (Platform.get() == Platform.WINDOWS) {
-            nje_free(nje_malloc(8));
+            invokePV(invokePP(8L, apiGetFunctionAddress(JEMALLOC, "je_malloc")), apiGetFunctionAddress(JEMALLOC, "je_free"));
         }
     }""")
 
@@ -194,6 +194,29 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         "Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is #NULL, no action occurs.",
 
         MultiTypeAll..Unsafe..nullable..void.p("ptr", "the allocated memory to free")
+    )
+
+    OffHeapOnly..void(
+        "free_sized",
+        """
+        The {@code free_sized()} function is an extension of #free() with a {@code size} parameter to allow the caller to pass in the allocation size as an
+        optimization.
+        """,
+
+        MultiTypeAll..nullable..void.p("ptr", ""),
+        AutoSize("ptr")..size_t("size", "")
+    )
+
+    OffHeapOnly..void(
+        "free_aligned_sized",
+        """
+        The {@code free_aligned_sized()} function accepts a {@code ptr} which was allocated with a requested {@code size} and {@code alignment}, causing the
+        allocated memory referenced by {@code ptr} to be made available for future allocations.
+        """,
+
+        MultiTypeAll..nullable..void.p("ptr", ""),
+        size_t("alignment", ""),
+        AutoSize("ptr")..size_t("size", "")
     )
 
     // Non-standard API
