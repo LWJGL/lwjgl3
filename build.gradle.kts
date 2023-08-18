@@ -136,7 +136,9 @@ enum class Artifacts(
     KTX(
         "lwjgl-ktx", "LWJGL - KTX (Khronos Texture) bindings",
         "A lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs.",
-        *Platforms.ALL
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
+        Platforms.MACOS, Platforms.MACOS_ARM64,
+        Platforms.WINDOWS, Platforms.WINDOWS_ARM64
     ),
     LIBDIVIDE(
         "lwjgl-libdivide", "LWJGL - libdivide bindings",

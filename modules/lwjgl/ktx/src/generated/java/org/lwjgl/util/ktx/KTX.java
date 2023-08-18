@@ -63,9 +63,12 @@ public class KTX {
             Texture2_CreateFromStream      = apiGetFunctionAddress(KTX, "ktxTexture2_CreateFromStream"),
             Texture2_CompressBasis         = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressBasis"),
             Texture2_DeflateZstd           = apiGetFunctionAddressOptional(KTX, "ktxTexture2_DeflateZstd"),
+            Texture2_DeflateZLIB           = apiGetFunctionAddress(KTX, "ktxTexture2_DeflateZLIB"),
             Texture2_GetComponentInfo      = apiGetFunctionAddress(KTX, "ktxTexture2_GetComponentInfo"),
             Texture2_GetNumComponents      = apiGetFunctionAddress(KTX, "ktxTexture2_GetNumComponents"),
+            Texture2_GetOETF_e             = apiGetFunctionAddress(KTX, "ktxTexture2_GetOETF_e"),
             Texture2_GetOETF               = apiGetFunctionAddress(KTX, "ktxTexture2_GetOETF"),
+            Texture2_GetColorModel_e       = apiGetFunctionAddress(KTX, "ktxTexture2_GetColorModel_e"),
             Texture2_GetPremultipliedAlpha = apiGetFunctionAddress(KTX, "ktxTexture2_GetPremultipliedAlpha"),
             Texture2_NeedsTranscoding      = apiGetFunctionAddress(KTX, "ktxTexture2_NeedsTranscoding"),
             Texture2_CompressAstcEx        = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressAstcEx"),
@@ -93,7 +96,13 @@ public class KTX {
             HashListEntry_GetKey           = apiGetFunctionAddress(KTX, "ktxHashListEntry_GetKey"),
             HashListEntry_GetValue         = apiGetFunctionAddress(KTX, "ktxHashListEntry_GetValue"),
             PrintInfoForNamedFile          = apiGetFunctionAddress(KTX, "ktxPrintInfoForNamedFile"),
-            PrintInfoForMemory             = apiGetFunctionAddress(KTX, "ktxPrintInfoForMemory");
+            PrintInfoForMemory             = apiGetFunctionAddress(KTX, "ktxPrintInfoForMemory"),
+            PrintKTX2InfoTextForMemory     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForMemory"),
+            PrintKTX2InfoTextForNamedFile  = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForNamedFile"),
+            PrintKTX2InfoTextForStream     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForStream"),
+            PrintKTX2InfoJSONForMemory     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoJSONForMemory"),
+            PrintKTX2InfoJSONForNamedFile  = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoJSONForNamedFile"),
+            PrintKTX2InfoJSONForStream     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoJSONForStream");
 
     }
 
@@ -155,28 +164,32 @@ public class KTX {
      * <li>{@link #KTX_UNSUPPORTED_TEXTURE_TYPE UNSUPPORTED_TEXTURE_TYPE} - The KTX file specifies an unsupported texture type.</li>
      * <li>{@link #KTX_UNSUPPORTED_FEATURE UNSUPPORTED_FEATURE} - Feature not included in in-use library or not yet implemented.</li>
      * <li>{@link #KTX_LIBRARY_NOT_LINKED LIBRARY_NOT_LINKED} - Library dependency (OpenGL or Vulkan) not linked into application.</li>
+     * <li>{@link #KTX_DECOMPRESS_LENGTH_ERROR DECOMPRESS_LENGTH_ERROR} - Decompressed byte count does not match expected byte size.</li>
+     * <li>{@link #KTX_DECOMPRESS_CHECKSUM_ERROR DECOMPRESS_CHECKSUM_ERROR} - Checksum mismatch when decompressing.</li>
      * </ul>
      */
     public static final int
-        KTX_SUCCESS                  = 0,
-        KTX_FILE_DATA_ERROR          = 1,
-        KTX_FILE_ISPIPE              = 2,
-        KTX_FILE_OPEN_FAILED         = 3,
-        KTX_FILE_OVERFLOW            = 4,
-        KTX_FILE_READ_ERROR          = 5,
-        KTX_FILE_SEEK_ERROR          = 6,
-        KTX_FILE_UNEXPECTED_EOF      = 7,
-        KTX_FILE_WRITE_ERROR         = 8,
-        KTX_GL_ERROR                 = 9,
-        KTX_INVALID_OPERATION        = 10,
-        KTX_INVALID_VALUE            = 11,
-        KTX_NOT_FOUND                = 12,
-        KTX_OUT_OF_MEMORY            = 13,
-        KTX_TRANSCODE_FAILED         = 14,
-        KTX_UNKNOWN_FILE_FORMAT      = 15,
-        KTX_UNSUPPORTED_TEXTURE_TYPE = 16,
-        KTX_UNSUPPORTED_FEATURE      = 17,
-        KTX_LIBRARY_NOT_LINKED       = 18;
+        KTX_SUCCESS                   = 0,
+        KTX_FILE_DATA_ERROR           = 1,
+        KTX_FILE_ISPIPE               = 2,
+        KTX_FILE_OPEN_FAILED          = 3,
+        KTX_FILE_OVERFLOW             = 4,
+        KTX_FILE_READ_ERROR           = 5,
+        KTX_FILE_SEEK_ERROR           = 6,
+        KTX_FILE_UNEXPECTED_EOF       = 7,
+        KTX_FILE_WRITE_ERROR          = 8,
+        KTX_GL_ERROR                  = 9,
+        KTX_INVALID_OPERATION         = 10,
+        KTX_INVALID_VALUE             = 11,
+        KTX_NOT_FOUND                 = 12,
+        KTX_OUT_OF_MEMORY             = 13,
+        KTX_TRANSCODE_FAILED          = 14,
+        KTX_UNKNOWN_FILE_FORMAT       = 15,
+        KTX_UNSUPPORTED_TEXTURE_TYPE  = 16,
+        KTX_UNSUPPORTED_FEATURE       = 17,
+        KTX_LIBRARY_NOT_LINKED        = 18,
+        KTX_DECOMPRESS_LENGTH_ERROR   = 19,
+        KTX_DECOMPRESS_CHECKSUM_ERROR = 20;
 
     /**
      * {@code ktxOrientationX}
@@ -243,6 +256,7 @@ public class KTX {
      * <li>{@link #KTX_SS_NONE SS_NONE} - No supercompression.</li>
      * <li>{@link #KTX_SS_BASIS_LZ SS_BASIS_LZ} - Basis LZ supercompression.</li>
      * <li>{@link #KTX_SS_ZSTD SS_ZSTD} - ZStd supercompression.</li>
+     * <li>{@link #KTX_SS_ZLIB SS_ZLIB} - ZLIB supercompression.</li>
      * <li>{@link #KTX_SS_BEGIN_RANGE SS_BEGIN_RANGE}</li>
      * <li>{@link #KTX_SS_END_RANGE SS_END_RANGE}</li>
      * <li>{@link #KTX_SS_BEGIN_VENDOR_RANGE SS_BEGIN_VENDOR_RANGE}</li>
@@ -254,8 +268,9 @@ public class KTX {
         KTX_SS_NONE               = 0,
         KTX_SS_BASIS_LZ           = 1,
         KTX_SS_ZSTD               = 2,
+        KTX_SS_ZLIB               = 3,
         KTX_SS_BEGIN_RANGE        = KTX_SS_NONE,
-        KTX_SS_END_RANGE          = KTX_SS_ZSTD,
+        KTX_SS_END_RANGE          = KTX_SS_ZLIB,
         KTX_SS_BEGIN_VENDOR_RANGE = 0x10000,
         KTX_SS_END_VENDOR_RANGE   = 0x1ffff,
         KTX_SS_BEGIN_RESERVED     = 0x20000;
@@ -284,13 +299,15 @@ public class KTX {
      * <li>{@link #KTX_TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT} - Load the images from the KTX source.</li>
      * <li>{@link #KTX_TEXTURE_CREATE_RAW_KVDATA_BIT TEXTURE_CREATE_RAW_KVDATA_BIT} - Load the raw key-value data instead of creating a {@code ktxHashList} from it.</li>
      * <li>{@link #KTX_TEXTURE_CREATE_SKIP_KVDATA_BIT TEXTURE_CREATE_SKIP_KVDATA_BIT} - Skip any key-value data. This overrides the {@code RAW_KVDATA_BIT}.</li>
+     * <li>{@link #KTX_TEXTURE_CREATE_CHECK_GLTF_BASISU_BIT TEXTURE_CREATE_CHECK_GLTF_BASISU_BIT} - Load texture compatible with the rules of KHR_texture_basisu glTF extension.</li>
      * </ul>
      */
     public static final int
-        KTX_TEXTURE_CREATE_NO_FLAGS            = 0x00,
-        KTX_TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT = 0x01,
-        KTX_TEXTURE_CREATE_RAW_KVDATA_BIT      = 0x02,
-        KTX_TEXTURE_CREATE_SKIP_KVDATA_BIT     = 0x04;
+        KTX_TEXTURE_CREATE_NO_FLAGS              = 0x00,
+        KTX_TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT   = 0x01,
+        KTX_TEXTURE_CREATE_RAW_KVDATA_BIT        = 0x02,
+        KTX_TEXTURE_CREATE_SKIP_KVDATA_BIT       = 0x04,
+        KTX_TEXTURE_CREATE_CHECK_GLTF_BASISU_BIT = 0x08;
 
     /**
      * {@code enum streamType}
@@ -987,6 +1004,18 @@ public class KTX {
         return nktxTexture2_DeflateZstd(This.address(), level);
     }
 
+    // --- [ ktxTexture2_DeflateZLIB ] ---
+
+    public static int nktxTexture2_DeflateZLIB(long This, int level) {
+        long __functionAddress = Functions.Texture2_DeflateZLIB;
+        return callPI(This, level, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_DeflateZLIB(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktx_uint32_t") int level) {
+        return nktxTexture2_DeflateZLIB(This.address(), level);
+    }
+
     // --- [ ktxTexture2_GetComponentInfo ] ---
 
     public static void nktxTexture2_GetComponentInfo(long This, long numComponents, long componentByteLength) {
@@ -1014,6 +1043,18 @@ public class KTX {
         return nktxTexture2_GetNumComponents(This.address());
     }
 
+    // --- [ ktxTexture2_GetOETF_e ] ---
+
+    public static int nktxTexture2_GetOETF_e(long This) {
+        long __functionAddress = Functions.Texture2_GetOETF_e;
+        return callPI(This, __functionAddress);
+    }
+
+    @NativeType("khr_df_transfer_e")
+    public static int ktxTexture2_GetOETF_e(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_GetOETF_e(This.address());
+    }
+
     // --- [ ktxTexture2_GetOETF ] ---
 
     public static int nktxTexture2_GetOETF(long This) {
@@ -1024,6 +1065,18 @@ public class KTX {
     @NativeType("ktx_uint32_t")
     public static int ktxTexture2_GetOETF(@NativeType("ktxTexture2 *") ktxTexture2 This) {
         return nktxTexture2_GetOETF(This.address());
+    }
+
+    // --- [ ktxTexture2_GetColorModel_e ] ---
+
+    public static int nktxTexture2_GetColorModel_e(long This) {
+        long __functionAddress = Functions.Texture2_GetColorModel_e;
+        return callPI(This, __functionAddress);
+    }
+
+    @NativeType("khr_df_model_e")
+    public static int ktxTexture2_GetColorModel_e(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_GetColorModel_e(This.address());
     }
 
     // --- [ ktxTexture2_GetPremultipliedAlpha ] ---
@@ -1525,6 +1578,108 @@ public class KTX {
     @NativeType("KTX_error_code")
     public static int ktxPrintInfoForMemory(@NativeType("ktx_uint8_t const *") ByteBuffer bytes) {
         return nktxPrintInfoForMemory(memAddress(bytes), bytes.remaining());
+    }
+
+    // --- [ ktxPrintKTX2InfoTextForMemory ] ---
+
+    public static int nktxPrintKTX2InfoTextForMemory(long bytes, long size) {
+        long __functionAddress = Functions.PrintKTX2InfoTextForMemory;
+        return callPPI(bytes, size, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoTextForMemory(@NativeType("ktx_uint8_t const *") ByteBuffer bytes) {
+        return nktxPrintKTX2InfoTextForMemory(memAddress(bytes), bytes.remaining());
+    }
+
+    // --- [ ktxPrintKTX2InfoTextForNamedFile ] ---
+
+    public static int nktxPrintKTX2InfoTextForNamedFile(long filename) {
+        long __functionAddress = Functions.PrintKTX2InfoTextForNamedFile;
+        return callPI(filename, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoTextForNamedFile(@NativeType("char const * const") ByteBuffer filename) {
+        if (CHECKS) {
+            checkNT1(filename);
+        }
+        return nktxPrintKTX2InfoTextForNamedFile(memAddress(filename));
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoTextForNamedFile(@NativeType("char const * const") CharSequence filename) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nktxPrintKTX2InfoTextForNamedFile(filenameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ ktxPrintKTX2InfoTextForStream ] ---
+
+    public static int nktxPrintKTX2InfoTextForStream(long stream) {
+        long __functionAddress = Functions.PrintKTX2InfoTextForStream;
+        return callPI(stream, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoTextForStream(@NativeType("struct ktxStream *") ktxStream stream) {
+        return nktxPrintKTX2InfoTextForStream(stream.address());
+    }
+
+    // --- [ ktxPrintKTX2InfoJSONForMemory ] ---
+
+    public static int nktxPrintKTX2InfoJSONForMemory(long bytes, long size, int base_indent, int indent_width, boolean minified) {
+        long __functionAddress = Functions.PrintKTX2InfoJSONForMemory;
+        return callPPI(bytes, size, base_indent, indent_width, minified, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoJSONForMemory(@NativeType("ktx_uint8_t const *") ByteBuffer bytes, @NativeType("ktx_uint32_t") int base_indent, @NativeType("ktx_uint32_t") int indent_width, @NativeType("bool") boolean minified) {
+        return nktxPrintKTX2InfoJSONForMemory(memAddress(bytes), bytes.remaining(), base_indent, indent_width, minified);
+    }
+
+    // --- [ ktxPrintKTX2InfoJSONForNamedFile ] ---
+
+    public static int nktxPrintKTX2InfoJSONForNamedFile(long filename, int base_indent, int indent_width, boolean minified) {
+        long __functionAddress = Functions.PrintKTX2InfoJSONForNamedFile;
+        return callPI(filename, base_indent, indent_width, minified, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoJSONForNamedFile(@NativeType("char const * const") ByteBuffer filename, @NativeType("ktx_uint32_t") int base_indent, @NativeType("ktx_uint32_t") int indent_width, @NativeType("bool") boolean minified) {
+        if (CHECKS) {
+            checkNT1(filename);
+        }
+        return nktxPrintKTX2InfoJSONForNamedFile(memAddress(filename), base_indent, indent_width, minified);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoJSONForNamedFile(@NativeType("char const * const") CharSequence filename, @NativeType("ktx_uint32_t") int base_indent, @NativeType("ktx_uint32_t") int indent_width, @NativeType("bool") boolean minified) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nktxPrintKTX2InfoJSONForNamedFile(filenameEncoded, base_indent, indent_width, minified);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ ktxPrintKTX2InfoJSONForStream ] ---
+
+    public static int nktxPrintKTX2InfoJSONForStream(long stream, int base_indent, int indent_width, boolean minified) {
+        long __functionAddress = Functions.PrintKTX2InfoJSONForStream;
+        return callPI(stream, base_indent, indent_width, minified, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX2InfoJSONForStream(@NativeType("struct ktxStream *") ktxStream stream, @NativeType("ktx_uint32_t") int base_indent, @NativeType("ktx_uint32_t") int indent_width, @NativeType("bool") boolean minified) {
+        return nktxPrintKTX2InfoJSONForStream(stream.address(), base_indent, indent_width, minified);
     }
 
     public static final byte[] KTX_IDENTIFIER_REF = {

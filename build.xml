@@ -1638,7 +1638,17 @@
         <release-module name="jemalloc" native-library="jemalloc" title="jemalloc" if:true="${binding.jemalloc}"/>
 
         <!-- KTX -->
-        <release-module name="ktx" native-library="ktx" title="KTX" if:true="${binding.ktx}"/>
+        <release-module name="ktx" title="KTX" if:true="${binding.ktx}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="libktx.so"/>
+                <get-release platform="linux" arch="arm64" file="libktx.so"/>
+                <get-release platform="linux" arch="arm32" file="libktx.so"/>
+                <get-release platform="macos" arch="x64" file="libktx.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libktx.dylib"/>
+                <get-release platform="windows" arch="x64" file="ktx.dll"/>
+                <get-release platform="windows" arch="arm64" file="ktx.dll"/>
+            </natives>
+        </release-module>
 
         <!-- libdivide -->
         <release-module name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
