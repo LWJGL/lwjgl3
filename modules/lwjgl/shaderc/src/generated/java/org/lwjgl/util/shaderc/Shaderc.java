@@ -430,6 +430,25 @@ public class Shaderc {
      * <li>{@link #shaderc_limit_max_cull_distances limit_max_cull_distances}</li>
      * <li>{@link #shaderc_limit_max_combined_clip_and_cull_distances limit_max_combined_clip_and_cull_distances}</li>
      * <li>{@link #shaderc_limit_max_samples limit_max_samples}</li>
+     * <li>{@link #shaderc_limit_max_mesh_output_vertices_nv limit_max_mesh_output_vertices_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_output_primitives_nv limit_max_mesh_output_primitives_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_x_nv limit_max_mesh_work_group_size_x_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_y_nv limit_max_mesh_work_group_size_y_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_z_nv limit_max_mesh_work_group_size_z_nv}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_x_nv limit_max_task_work_group_size_x_nv}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_y_nv limit_max_task_work_group_size_y_nv}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_z_nv limit_max_task_work_group_size_z_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_view_count_nv limit_max_mesh_view_count_nv}</li>
+     * <li>{@link #shaderc_limit_max_mesh_output_vertices_ext limit_max_mesh_output_vertices_ext}</li>
+     * <li>{@link #shaderc_limit_max_mesh_output_primitives_ext limit_max_mesh_output_primitives_ext}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_x_ext limit_max_mesh_work_group_size_x_ext}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_y_ext limit_max_mesh_work_group_size_y_ext}</li>
+     * <li>{@link #shaderc_limit_max_mesh_work_group_size_z_ext limit_max_mesh_work_group_size_z_ext}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_x_ext limit_max_task_work_group_size_x_ext}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_y_ext limit_max_task_work_group_size_y_ext}</li>
+     * <li>{@link #shaderc_limit_max_task_work_group_size_z_ext limit_max_task_work_group_size_z_ext}</li>
+     * <li>{@link #shaderc_limit_max_mesh_view_count_ext limit_max_mesh_view_count_ext}</li>
+     * <li>{@link #shaderc_limit_max_dual_source_draw_buffers_ext limit_max_dual_source_draw_buffers_ext}</li>
      * </ul>
      */
     public static final int
@@ -515,7 +534,26 @@ public class Shaderc {
         shaderc_limit_max_transform_feedback_interleaved_components = 79,
         shaderc_limit_max_cull_distances                            = 80,
         shaderc_limit_max_combined_clip_and_cull_distances          = 81,
-        shaderc_limit_max_samples                                   = 82;
+        shaderc_limit_max_samples                                   = 82,
+        shaderc_limit_max_mesh_output_vertices_nv                   = 83,
+        shaderc_limit_max_mesh_output_primitives_nv                 = 84,
+        shaderc_limit_max_mesh_work_group_size_x_nv                 = 85,
+        shaderc_limit_max_mesh_work_group_size_y_nv                 = 86,
+        shaderc_limit_max_mesh_work_group_size_z_nv                 = 87,
+        shaderc_limit_max_task_work_group_size_x_nv                 = 88,
+        shaderc_limit_max_task_work_group_size_y_nv                 = 89,
+        shaderc_limit_max_task_work_group_size_z_nv                 = 90,
+        shaderc_limit_max_mesh_view_count_nv                        = 91,
+        shaderc_limit_max_mesh_output_vertices_ext                  = 92,
+        shaderc_limit_max_mesh_output_primitives_ext                = 93,
+        shaderc_limit_max_mesh_work_group_size_x_ext                = 94,
+        shaderc_limit_max_mesh_work_group_size_y_ext                = 95,
+        shaderc_limit_max_mesh_work_group_size_z_ext                = 96,
+        shaderc_limit_max_task_work_group_size_x_ext                = 97,
+        shaderc_limit_max_task_work_group_size_y_ext                = 98,
+        shaderc_limit_max_task_work_group_size_z_ext                = 99,
+        shaderc_limit_max_mesh_view_count_ext                       = 100,
+        shaderc_limit_max_dual_source_draw_buffers_ext              = 101;
 
     /**
      * Uniform resource kinds. In Vulkan, uniform resources are bound to the pipeline via descriptors with numbered bindings and sets.

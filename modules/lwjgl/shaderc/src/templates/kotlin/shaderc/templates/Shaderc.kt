@@ -265,7 +265,26 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "limit_max_transform_feedback_interleaved_components".enum,
         "limit_max_cull_distances".enum,
         "limit_max_combined_clip_and_cull_distances".enum,
-        "limit_max_samples".enum
+        "limit_max_samples".enum,
+        "limit_max_mesh_output_vertices_nv".enum,
+        "limit_max_mesh_output_primitives_nv".enum,
+        "limit_max_mesh_work_group_size_x_nv".enum,
+        "limit_max_mesh_work_group_size_y_nv".enum,
+        "limit_max_mesh_work_group_size_z_nv".enum,
+        "limit_max_task_work_group_size_x_nv".enum,
+        "limit_max_task_work_group_size_y_nv".enum,
+        "limit_max_task_work_group_size_z_nv".enum,
+        "limit_max_mesh_view_count_nv".enum,
+        "limit_max_mesh_output_vertices_ext".enum,
+        "limit_max_mesh_output_primitives_ext".enum,
+        "limit_max_mesh_work_group_size_x_ext".enum,
+        "limit_max_mesh_work_group_size_y_ext".enum,
+        "limit_max_mesh_work_group_size_z_ext".enum,
+        "limit_max_task_work_group_size_x_ext".enum,
+        "limit_max_task_work_group_size_y_ext".enum,
+        "limit_max_task_work_group_size_z_ext".enum,
+        "limit_max_mesh_view_count_ext".enum,
+        "limit_max_dual_source_draw_buffers_ext".enum,
     )
 
     EnumConstant(
