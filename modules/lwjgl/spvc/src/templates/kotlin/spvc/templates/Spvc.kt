@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."51")
+    IntConstant("", "C_API_VERSION_MINOR".."57")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -514,7 +514,12 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT".enum("", "77 | SPVC_COMPILER_OPTION_GLSL_BIT"),
         "COMPILER_OPTION_RELAX_NAN_CHECKS".enum("", "78 | SPVC_COMPILER_OPTION_COMMON_BIT"),
         "COMPILER_OPTION_MSL_RAW_BUFFER_TESE_INPUT".enum("", "79 | SPVC_COMPILER_OPTION_MSL_BIT"),
-        "COMPILER_OPTION_MSL_SHADER_PATCH_INPUT_BUFFER_INDEX".enum("", "80 | SPVC_COMPILER_OPTION_MSL_BIT")
+        "COMPILER_OPTION_MSL_SHADER_PATCH_INPUT_BUFFER_INDEX".enum("", "80 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_MANUAL_HELPER_INVOCATION_UPDATES".enum("", "81 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_CHECK_DISCARDED_FRAG_STORES".enum("", "82 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_GLSL_ENABLE_ROW_MAJOR_LOAD_WORKAROUND".enum("", "83 | SPVC_COMPILER_OPTION_GLSL_BIT"),
+        "COMPILER_OPTION_MSL_ARGUMENT_BUFFERS_TIER".enum("", "84 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_SAMPLE_DREF_LOD_ARRAY_AS_GRAD".enum("", "85 | SPVC_COMPILER_OPTION_MSL_BIT")
     )
 
     void(
@@ -736,6 +741,21 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_compiler("compiler", ""),
         charUTF8.const.p("ext", "")
+    )
+
+    size_t(
+        "compiler_get_num_required_extensions",
+        "",
+
+        spvc_compiler("compiler", "")
+    )
+
+    charUTF8.const.p(
+        "compiler_get_required_extension",
+        "",
+
+        spvc_compiler("compiler", ""),
+        size_t("index", "")
     )
 
     spvc_result(
@@ -1751,6 +1771,97 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_constant("constant", "")
     )
+
+    void(
+        "constant_set_scalar_fp16",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        unsigned_short("value", "")
+    )
+
+    void(
+        "constant_set_scalar_fp32",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        float("value", "")
+    )
+
+    void(
+        "constant_set_scalar_fp64",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        double("value", "")
+    )
+
+    void(
+        "constant_set_scalar_u32",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        unsigned("value", "")
+    )
+
+    void(
+        "constant_set_scalar_i32",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        int("value", "")
+    )
+
+    void(
+        "constant_set_scalar_u16",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        unsigned_short("value", "")
+    )
+
+    void(
+        "constant_set_scalar_i16",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        short("value", "")
+    )
+
+    void(
+        "constant_set_scalar_u8",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        unsigned_char("value", "")
+    )
+
+    void(
+        "constant_set_scalar_i8",
+        "",
+
+        spvc_constant("constant", ""),
+        unsigned("column", ""),
+        unsigned("row", ""),
+        char("value", "")
+    )
+
 
     spvc_bool(
         "compiler_get_binary_offset_for_decoration",
