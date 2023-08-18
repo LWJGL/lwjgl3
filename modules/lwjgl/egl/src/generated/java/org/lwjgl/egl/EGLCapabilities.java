@@ -278,6 +278,8 @@ public class EGLCapabilities {
      * <p>Using {@code EGL_EXT_explicit_device} with {@code EGL_MESA_platform_surfaceless} is functionally identical to {@code EGL_EXT_platform_device}.</p>
      */
     public final boolean EGL_EXT_explicit_device;
+    /** When true, {@link EXTGLColorspaceBT2020HLG} is supported. */
+    public final boolean EGL_EXT_gl_colorspace_bt2020_hlg;
     /** When true, {@link EXTGLColorspaceBT2020Linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_bt2020_linear;
     /** When true, {@link EXTGLColorspaceBT2020PQ} is supported. */
@@ -1079,6 +1081,7 @@ public class EGLCapabilities {
         EGL_EXT_device_query = check_EXT_device_query(ext);
         EGL_EXT_device_query_name = ext.contains("EGL_EXT_device_query_name");
         EGL_EXT_explicit_device = ext.contains("EGL_EXT_explicit_device");
+        EGL_EXT_gl_colorspace_bt2020_hlg = ext.contains("EGL_EXT_gl_colorspace_bt2020_hlg");
         EGL_EXT_gl_colorspace_bt2020_linear = ext.contains("EGL_EXT_gl_colorspace_bt2020_linear");
         EGL_EXT_gl_colorspace_bt2020_pq = ext.contains("EGL_EXT_gl_colorspace_bt2020_pq");
         EGL_EXT_gl_colorspace_display_p3 = ext.contains("EGL_EXT_gl_colorspace_display_p3");

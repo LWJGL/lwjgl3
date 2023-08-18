@@ -39,3 +39,16 @@ val EXT_gl_colorspace_bt2020_pq = "EXTGLColorspaceBT2020PQ".nativeClassEGL("EXT_
         "GL_COLORSPACE_BT2020_PQ_EXT"..0x3340
     )
 }
+
+val EXT_gl_colorspace_bt2020_hlg = "EXTGLColorspaceBT2020HLG".nativeClassEGL("EXT_gl_colorspace_bt2020_hlg", postfix = EXT) {
+    documentation =
+        """
+        See ${EXT_gl_colorspace_bt2020_linear.link}.
+        """
+
+    IntConstant(
+        "Accepted as attribute values for #GL_COLORSPACE by #CreateWindowSurface(), #CreatePbufferSurface() and #CreatePixmapSurface().",
+
+        "GL_COLORSPACE_BT2020_HLG_EXT"..0x3540
+    )
+}
