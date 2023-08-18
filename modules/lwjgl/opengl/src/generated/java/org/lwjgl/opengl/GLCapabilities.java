@@ -4756,6 +4756,19 @@ public final class GLCapabilities {
     public final boolean GL_NV_transform_feedback;
     /** When true, {@link NVTransformFeedback2} is supported. */
     public final boolean GL_NV_transform_feedback2;
+    /**
+     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_uniform_buffer_std430_layout.txt">NV_uniform_buffer_std430_layout</a> extension is supported.
+     * 
+     * <p>OpenGL 4.3 (and {@code ARB_enhanced_layouts}) provide an enhanced layout qualifier syntax for aligning members of uniform and shader storage blocks.
+     * The std430 enhanced layout qualifier is advantageous, compared with std140, because it provides a more space-efficient layout of arrays that more
+     * easily matches the data layout in C/C++ structures stored in CPU memory.</p>
+     * 
+     * <p>However OpenGL 4.3 precluded using the std430 layout qualifier for uniform blocks (by mandating a compilation error be generated).</p>
+     * 
+     * <p>This extension makes std430 a legal layout qualifier for uniform blocks in GLSL when the extension's GLSL {@code #extension} functionality is enabled
+     * or required.</p>
+     */
+    public final boolean GL_NV_uniform_buffer_std430_layout;
     /** When true, {@link NVUniformBufferUnifiedMemory} is supported. */
     public final boolean GL_NV_uniform_buffer_unified_memory;
     /** When true, {@link NVVertexArrayRange} is supported. */
@@ -5251,6 +5264,7 @@ public final class GLCapabilities {
         GL_NV_timeline_semaphore = check_NV_timeline_semaphore(provider, caps, ext);
         GL_NV_transform_feedback = check_NV_transform_feedback(provider, caps, ext);
         GL_NV_transform_feedback2 = check_NV_transform_feedback2(provider, caps, ext);
+        GL_NV_uniform_buffer_std430_layout = ext.contains("GL_NV_uniform_buffer_std430_layout");
         GL_NV_uniform_buffer_unified_memory = ext.contains("GL_NV_uniform_buffer_unified_memory");
         GL_NV_vertex_array_range = check_NV_vertex_array_range(provider, caps, ext);
         GL_NV_vertex_array_range2 = ext.contains("GL_NV_vertex_array_range2");
