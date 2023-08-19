@@ -1685,13 +1685,8 @@
         <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}">
             <natives>
                 <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so.git"/>
-
                 <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so.git"/>
-
                 <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so.git"/>
             </natives>
         </release-module>
 
