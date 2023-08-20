@@ -259,7 +259,6 @@ public class HarfBuzz {
             font_get_glyph_contour_point              = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_contour_point"),
             font_get_glyph_name                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_name"),
             font_get_glyph_from_name                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_from_name"),
-            font_get_glyph_shape                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_shape"),
             font_draw_glyph                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_draw_glyph"),
             font_paint_glyph                          = apiGetFunctionAddress(HARFBUZZ, "hb_font_paint_glyph"),
             font_get_glyph                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph"),
@@ -461,6 +460,9 @@ public class HarfBuzz {
     public static SharedLibrary getLibrary() {
         return HARFBUZZ;
     }
+
+    /** Unused {@code hb_codepoint_t} value. */
+    public static final int HB_CODEPOINT_INVALID = -1;
 
     /** Special setting for {@code hb_feature_t.start} to apply the feature from the start of the buffer. */
     public static final int HB_FEATURE_GLOBAL_START = 0;
@@ -1129,7 +1131,7 @@ public class HarfBuzz {
      */
     public static final int HB_FONT_NO_VAR_NAMED_INSTANCE = 0xFFFFFFFF;
 
-    public static final int HB_MAP_VALUE_INVALID = -1;
+    public static final int HB_MAP_VALUE_INVALID = HB_CODEPOINT_INVALID;
 
     /** Tag identifying PNG images in {@code hb_paint_image_func_t} callbacks. */
     public static final int HB_PAINT_IMAGE_FORMAT_PNG = HB_TAG('p', 'n', 'g', ' ');
@@ -1229,7 +1231,7 @@ public class HarfBuzz {
         HB_PAINT_COMPOSITE_MODE_HSL_COLOR      = 26,
         HB_PAINT_COMPOSITE_MODE_HSL_LUMINOSITY = 27;
 
-    public static final int HB_SET_VALUE_INVALID = -1;
+    public static final int HB_SET_VALUE_INVALID = HB_CODEPOINT_INVALID;
 
     /**
      * Defined by <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Design-Variation Axis Tag Registry</a>.
@@ -1402,7 +1404,7 @@ public class HarfBuzz {
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_CCC122 UNICODE_COMBINING_CLASS_CCC122} - Lao</li>
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_CCC129 UNICODE_COMBINING_CLASS_CCC129} - Tibetan</li>
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_CCC130 UNICODE_COMBINING_CLASS_CCC130} - Tibetan</li>
-     * <li>{@link #HB_UNICODE_COMBINING_CLASS_CCC133 UNICODE_COMBINING_CLASS_CCC133} - Tibetan</li>
+     * <li>{@link #HB_UNICODE_COMBINING_CLASS_CCC132 UNICODE_COMBINING_CLASS_CCC132} - Tibetan</li>
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT} - Marks attached at the bottom left</li>
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW UNICODE_COMBINING_CLASS_ATTACHED_BELOW} - Marks attached directly below</li>
      * <li>{@link #HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE UNICODE_COMBINING_CLASS_ATTACHED_ABOVE} - Marks attached directly above</li>
@@ -1462,7 +1464,7 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_CCC122               = 122,
         HB_UNICODE_COMBINING_CLASS_CCC129               = 129,
         HB_UNICODE_COMBINING_CLASS_CCC130               = 130,
-        HB_UNICODE_COMBINING_CLASS_CCC133               = 132,
+        HB_UNICODE_COMBINING_CLASS_CCC132               = 132,
         HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT  = 200,
         HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW       = 202,
         HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE       = 214,
@@ -1480,13 +1482,13 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT       = 240,
         HB_UNICODE_COMBINING_CLASS_INVALID              = 255;
 
-    public static final int HB_VERSION_MAJOR = 7;
+    public static final int HB_VERSION_MAJOR = 8;
 
     public static final int HB_VERSION_MINOR = 1;
 
-    public static final int HB_VERSION_MICRO = 0;
+    public static final int HB_VERSION_MICRO = 1;
 
-    public static final String HB_VERSION_STRING = "7.1.0";
+    public static final String HB_VERSION_STRING = "8.1.1";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -4204,17 +4206,6 @@ public class HarfBuzz {
         } finally {
             stack.setPointer(stackPointer);
         }
-    }
-
-    // --- [ hb_font_get_glyph_shape ] ---
-
-    public static void hb_font_get_glyph_shape(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data) {
-        long __functionAddress = Functions.font_get_glyph_shape;
-        if (CHECKS) {
-            check(font);
-            check(dfuncs);
-        }
-        invokePPPV(font, glyph, dfuncs, draw_data, __functionAddress);
     }
 
     // --- [ hb_font_draw_glyph ] ---
