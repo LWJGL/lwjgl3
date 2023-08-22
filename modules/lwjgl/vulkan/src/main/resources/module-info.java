@@ -6,4 +6,5 @@ module org.lwjgl.vulkan {
     requires transitive org.lwjgl;
 
     exports org.lwjgl.vulkan;
+    exports org.lwjgl.vulkan.video;
 }

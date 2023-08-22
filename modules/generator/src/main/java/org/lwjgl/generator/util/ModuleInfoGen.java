@@ -18,7 +18,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
     private static final Pattern
         MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{", Pattern.MULTILINE),
-        REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(transitive|static))?\\s+(.+)\\s*;", Pattern.MULTILINE);
+        REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(static))?(?:\\s+(transitive))?\\s+(.+)\\s*;", Pattern.MULTILINE);
 
     private static final Path METAINF = Paths.get("META-INF", "versions", "9");
 
@@ -82,9 +82,12 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
 
         private void compile(ModuleInfoGen gen, String moduleVersion) {
-            String modulePath = dependencies.stream()
-                .filter(it -> !it.missing)
-                .map(it -> "bin/classes/lwjgl/" + it.name)
+            String modulePath = Stream.concat(
+                    Stream.of("bin/libs/java/jsr305.jar"),
+                    dependencies.stream()
+                        .filter(it -> !it.missing)
+                        .map(it -> "bin/classes/lwjgl/" + it.name)
+                )
                 .collect(Collectors.joining(File.pathSeparator));
 
             String info = this.info;
@@ -197,8 +200,14 @@ public final class ModuleInfoGen implements AutoCloseable {
                                             "\n" +
                                             "    opens " + nativePackage + ";\n" +
                                             "}",
-                                            Stream.concat(Stream.of(module.name), module.dependencies.stream().map(it -> it.name))
-                                                .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
+                                            Stream.concat(
+                                                    Stream.of("bin/libs/java/jsr305.jar"),
+                                                    Stream.concat(
+                                                            Stream.of(module.name),
+                                                            module.dependencies.stream().map(it -> it.name)
+                                                        )
+                                                        .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
+                                                )
                                                 .collect(Collectors.joining(File.pathSeparator)),
                                             architecture,
                                             outputPath,
@@ -242,7 +251,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
         matcher = REQUIRES.matcher(info);
         while (matcher.find()) {
-            String dependency = matcher.group(2);
+            String dependency = matcher.group(3);
             if (dependency.startsWith("org.lwjgl")) {
                 dependencies.add(new Module.Dependency(getModule(dependency), "static".equals(matcher.group(1))));
             }

@@ -5,8 +5,8 @@
 module org.lwjgl.ovr {
     requires transitive org.lwjgl;
 
-    requires static org.lwjgl.opengl;
-    requires static org.lwjgl.vulkan;
+    requires static transitive org.lwjgl.opengl;
+    requires static transitive org.lwjgl.vulkan;
 
     exports org.lwjgl.ovr;
 }
