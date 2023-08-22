@@ -1513,8 +1513,14 @@
                 <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/16" if:set="jdk16">
                     <fileset dir="${module.lwjgl}/core/src/main/java16" includes="**"/>
                 </copy>
+                <copy todir="${bin.lwjgl}/core/META-INF/native-image/org.lwjgl/lwjgl">
+                    <fileset dir="config/native-image/META-INF/native-image" includes="**" excludes="resource-config.json"/>
+                </copy>
             </quiet>
+
             <release-module name="core" native-library="lwjgl" title="Core"/>
+
+            <delete dir="${bin.lwjgl}/core/META-INF/native-image" quiet="true"/>
         </sequential>
 
         <!-- Assimp -->
