@@ -1,6 +1,3 @@
-# This workflow will build a Java project with Ant
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
-
 name: Java Build
 
 on:
@@ -11,31 +8,36 @@ on:
     
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # This action checks out your repository's code
+      uses: actions/checkout@v2
 
     - name: Setup JDK 17 and Apache Ant
       uses: actions/setup-java@v2
       with:
         java-version: 17
+
     - name: Build and Create Artifacts
       run: |
-        # Ant
+        # Install Ant
         sudo apt-get install ant
 
-        # Build
+        # Build the project using Ant with the specified targets
         ant compile-templates
         ant compile
         ant compile-native
         ant tests
 
-        # Get Ready For Packing
+        # Create a directory for artifacts
         mkdir -p artifacts
+
+        # Copy the built files to the artifacts directory
+        # Replace '<path-to-built-files>' with the actual path
+        # to the built files you want to include in the artifacts
         cp -r <path-to-built-files> artifacts/
-        
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
