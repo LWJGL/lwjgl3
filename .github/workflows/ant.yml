@@ -1,0 +1,54 @@
+# This workflow will build a Java project with Ant
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
+
+name: Java Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This action checks out your repository's code
+
+    - name: Setup JDK 17 and Apache Ant
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+
+    - name: Build and Create Artifacts
+      run: |
+        # Ant
+        sudo apt-get install ant
+
+        # Build
+        ant compile-templates
+        ant compile
+        ant compile-native
+        ant tests
+
+        # Get Ready For Packing
+        mkdir -p artifacts
+        cp -r <path-to-built-files> artifacts/
+        
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: lwjgl-artifacts
+          path: artifacts/
+
+    - name: Cleanup
+      run: |
+        # Clean up the artifacts directory if needed
+        rm -rf artifacts/
+
+    - name: Display Artifacts URL
+      run: |
+        # Output the URL to access the uploaded artifacts
+        echo "Artifacts are available at: ${{ steps.upload-artifact.outputs.artifact_url }}"
