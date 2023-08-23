@@ -23,26 +23,23 @@ jobs:
       run: |
         # Install Ant
         sudo apt-get install ant
-
         # Build the project using Ant with the specified targets
         ant compile-templates
         ant compile
         ant compile-native
         ant tests
-
         # Create a directory for artifacts
         mkdir -p artifacts
-
         # Copy the built files to the artifacts directory
         # Replace '<path-to-built-files>' with the actual path
         # to the built files you want to include in the artifacts
         cp -r <path-to-built-files> artifacts/
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: lwjgl-artifacts
-          path: artifacts/
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: lwjgl-artifacts
+        path: artifacts/
 
     - name: Cleanup
       run: |
