@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portability_subset", type = "device", postfix = "KHR") {
     documentation =
         """
-        The `VK_KHR_portability_subset extension allows a non-conformant Vulkan implementation to be built on top of another non-Vulkan graphics API, and identifies differences between that implementation and a fully-conformant native Vulkan implementation.
+        The {@link KHRPortabilitySubset VK_KHR_portability_subset} extension allows a non-conformant Vulkan implementation to be built on top of another non-Vulkan graphics API, and identifies differences between that implementation and a fully-conformant native Vulkan implementation.
 
         This extension provides Vulkan implementations with the ability to mark otherwise-required capabilities as unsupported, or to establish additional properties and limits that the application should adhere to in order to guarantee portable behaviour and operation across platforms, including platforms where Vulkan is not natively supported.
 

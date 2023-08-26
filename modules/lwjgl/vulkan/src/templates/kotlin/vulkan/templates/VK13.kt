@@ -509,7 +509,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
             <li>
                 #ACCESS_2_SHADER_READ_BIT is equivalent to the logical OR of:
                 <ul>
-                    <li>#ACCESS_2_UNIFORM_READ_BIT</li>
                     <li>#ACCESS_2_SHADER_SAMPLED_READ_BIT</li>
                     <li>#ACCESS_2_SHADER_STORAGE_READ_BIT</li>
                     <li>#ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR</li>
@@ -1363,10 +1362,10 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         Implementations may write the timestamp at any stage that is <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages-order">logically later</a> than {@code stage}.
         </div>
 
-        Any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-execution">happens-after</a> another timestamp write in the same submission <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. If apiext:`VK_EXT_calibrated_timestamps` is enabled, this extends to timestamp writes across all submissions on the same logical device: any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-execution">happens-after</a> another <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. Timestamps written by this command <b>must</b> be in the #TIME_DOMAIN_DEVICE_EXT time domain ({@code VkTimeDomainEXT}). If an overflow occurs, the timestamp value <b>must</b> wrap back to zero.
+        Any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-execution">happens-after</a> another timestamp write in the same submission <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. If {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} is enabled, this extends to timestamp writes across all submissions on the same logical device: any timestamp write that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-execution">happens-after</a> another <b>must</b> not have a lower value unless its value overflows the maximum supported integer bit width of the query. Timestamps written by this command <b>must</b> be in the #TIME_DOMAIN_DEVICE_EXT time domain ({@code VkTimeDomainEXT}). If an overflow occurs, the timestamp value <b>must</b> wrap back to zero.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Comparisons between timestamps should be done between timestamps where they are guaranteed to not decrease. For example, subtracting an older timestamp from a newer one to determine the execution time of a sequence of commands is only a reliable measurement if the two timestamp writes were performed in the same submission, or if the writes were performed on the same logical device and apiext:`VK_EXT_calibrated_timestamps` is enabled.
+        Comparisons between timestamps should be done between timestamps where they are guaranteed to not decrease. For example, subtracting an older timestamp from a newer one to determine the execution time of a sequence of commands is only a reliable measurement if the two timestamp writes were performed in the same submission, or if the writes were performed on the same logical device and {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} is enabled.
         </div>
 
         If {@code vkCmdWriteTimestamp2} is called while executing a render pass instance that has multiview enabled, the timestamp uses <code>N</code> consecutive query indices in the query pool (starting at {@code query}) where <code>N</code> is the number of bits set in the view mask of the subpass the command is executed in. The resulting query values are determined by an implementation-dependent choice of one of the following behaviors:
@@ -1501,6 +1500,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>-</td><td>-</td><td>-</td><td>Any</td><td>-</td></tr></tbody>
         </table>
 
         <h5>Return Codes</h5>
@@ -2387,9 +2387,8 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <ul>
             <li>{@code firstBinding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
             <li>The sum of {@code firstBinding} and {@code bindingCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
-            <li>All elements of {@code pOffsets} <b>must</b> be less than the size of the corresponding element in {@code pBuffers}</li>
-            <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pSizes} that are not #WHOLE_SIZE <b>must</b> have the corresponding elements in {@code pOffsets} plus {@code pSizes} be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
-            <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pSizes} that are #WHOLE_SIZE <b>must</b> have the corresponding element in {@code pOffsets} be less than the size of the corresponding element in {@code pBuffers}</li>
+            <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pOffsets} <b>must</b> be less than the size of the corresponding element in {@code pBuffers}</li>
+            <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pOffsets} plus {@code pSizes} , where {@code pSizes} is not #WHOLE_SIZE, <b>must</b> be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
             <li>All elements of {@code pBuffers} <b>must</b> have been created with the #BUFFER_USAGE_VERTEX_BUFFER_BIT flag</li>
             <li>Each element of {@code pBuffers} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, all elements of {@code pBuffers} <b>must</b> not be #NULL_HANDLE</li>

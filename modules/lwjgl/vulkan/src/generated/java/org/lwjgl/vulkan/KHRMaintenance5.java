@@ -27,7 +27,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>A default size of 1.0 is used if {@code PointSize} is not written</li>
  * <li>Shader modules are deprecated - applications can now pass {@link VkShaderModuleCreateInfo} as a chained struct to pipeline creation via {@link VkPipelineShaderStageCreateInfo}</li>
  * <li>A function {@link #vkGetRenderingAreaGranularityKHR GetRenderingAreaGranularityKHR} to query the optimal render area for a dynamic rendering instance.</li>
- * <li>A property to indicate that depth/stencil texturing operations with enum:VK_COMPONENT_SWIZZLE_ONE have defined behavior</li>
+ * <li>A property to indicate that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior</li>
  * <li>Add {@link #vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR} and a new function {@link #vkGetDeviceImageSubresourceLayoutKHR GetDeviceImageSubresourceLayoutKHR} to allow the application to query the image memory layout without having to create an image object and query it.</li>
  * <li>Allow {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} as the {@code layerCount} member of {@link VkImageSubresourceLayers}</li>
  * <li>Adds stronger guarantees for propagation of {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST} return values</li>

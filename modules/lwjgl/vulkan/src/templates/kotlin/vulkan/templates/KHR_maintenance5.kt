@@ -27,7 +27,7 @@ val KHR_maintenance5 = "KHRMaintenance5".nativeClassVK("KHR_maintenance5", type 
             <li>A default size of 1.0 is used if {@code PointSize} is not written</li>
             <li>Shader modules are deprecated - applications can now pass ##VkShaderModuleCreateInfo as a chained struct to pipeline creation via ##VkPipelineShaderStageCreateInfo</li>
             <li>A function #GetRenderingAreaGranularityKHR() to query the optimal render area for a dynamic rendering instance.</li>
-            <li>A property to indicate that depth/stencil texturing operations with enum:VK_COMPONENT_SWIZZLE_ONE have defined behavior</li>
+            <li>A property to indicate that depth/stencil texturing operations with #COMPONENT_SWIZZLE_ONE have defined behavior</li>
             <li>Add #GetImageSubresourceLayout2KHR() and a new function #GetDeviceImageSubresourceLayoutKHR() to allow the application to query the image memory layout without having to create an image object and query it.</li>
             <li>Allow #REMAINING_ARRAY_LAYERS as the {@code layerCount} member of ##VkImageSubresourceLayers</li>
             <li>Adds stronger guarantees for propagation of #ERROR_DEVICE_LOST return values</li>

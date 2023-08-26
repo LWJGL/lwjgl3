@@ -1602,7 +1602,7 @@ public class EXTShaderObject {
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param samples       specifies the number of sample bits in the {@code pSampleMask}.
-     * @param pSampleMask   a pointer to an array of VkSampleMask values, where the array size is based on the {@code samples} parameter.
+     * @param pSampleMask   a pointer to an array of {@code VkSampleMask} values, where the array size is based on the {@code samples} parameter.
      */
     public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") IntBuffer pSampleMask) {
         nvkCmdSetSampleMaskEXT(commandBuffer, samples, memAddress(pSampleMask));

@@ -27,12 +27,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Filling {@code imageFormatProperties} with zero for unsupported formats is an exception to the usual rule that output structures have undefined contents on error. This exception was unintentional, but is preserved for backwards compatibility. This exception only applies to {@code imageFormatProperties}, not {@code sType}, {@code pNext}, or any structures chained from {@code pNext}.</p>
  * </div>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkHostImageCopyDevicePerformanceQueryEXT} is included in a {@code pNext} chain, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-hostImageCopy">{@code hostImageCopy}</a> feature <b>must</b> be enabled</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

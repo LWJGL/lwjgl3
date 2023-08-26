@@ -120,7 +120,7 @@ public class VkPhysicalDeviceMaintenance5PropertiesKHR extends Struct<VkPhysical
     /** a boolean value indicating whether the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a> operation is performed before <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplecount">sample counting</a> for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-shader">fragment shaders</a> using the {@code EarlyFragmentTests} execution mode. */
     @NativeType("VkBool32")
     public boolean earlyFragmentSampleMaskTestBeforeSampleCounting() { return nearlyFragmentSampleMaskTestBeforeSampleCounting(address()) != 0; }
-    /** a boolean indicating that depth/stencil texturing operations with enum:VK_COMPONENT_SWIZZLE_ONE have defined behavior. */
+    /** a boolean indicating that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior. */
     @NativeType("VkBool32")
     public boolean depthStencilSwizzleOneSupport() { return ndepthStencilSwizzleOneSupport(address()) != 0; }
     /** a boolean value indicating whether the point size of the final rasterization of polygons with {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT} is controlled by {@code PointSize}. */

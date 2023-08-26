@@ -502,6 +502,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>-</td><td>-</td><td>-</td><td>Any</td><td>-</td></tr></tbody>
         </table>
 
         <h5>Return Codes</h5>

@@ -526,6 +526,7 @@ public class KHRDisplay {
      * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
      * <li>{@code mode} <b>must</b> be a valid {@code VkDisplayModeKHR} handle</li>
      * <li>{@code pCapabilities} <b>must</b> be a valid pointer to a {@link VkDisplayPlaneCapabilitiesKHR} structure</li>
+     * <li>{@code mode} <b>must</b> have been created, allocated, or retrieved from {@code physicalDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>

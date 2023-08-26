@@ -105,7 +105,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct<VkMultisa
     /** controls whether multisampled rendering to single-sampled attachments is performed as described <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#multisampled-render-to-single-sampled">below</a>. */
     @NativeType("VkBool32")
     public boolean multisampledRenderToSingleSampledEnable() { return nmultisampledRenderToSingleSampledEnable(address()) != 0; }
-    /** a VkSampleCountFlagBits specifying the number of samples used in rasterization. */
+    /** a {@code VkSampleCountFlagBits} specifying the number of samples used in rasterization. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
 
