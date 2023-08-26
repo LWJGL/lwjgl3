@@ -43,6 +43,10 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
                         <li>{@code right_elbow}</li>
                         <li>{@code left_knee}</li>
                         <li>{@code right_knee}</li>
+                        <li>{@code left_wrist} (rev: 3)</li>
+                        <li>{@code right_wrist} (rev: 3)</li>
+                        <li>{@code left_ankle} (rev: 3)</li>
+                        <li>{@code right_ankle} (rev: 3)</li>
                         <li>{@code waist}</li>
                         <li>{@code chest}</li>
                         <li>{@code camera}</li>
@@ -61,7 +65,7 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
     IntConstant(
         "The extension specification version.",
 
-        "HTCX_vive_tracker_interaction_SPEC_VERSION".."2"
+        "HTCX_vive_tracker_interaction_SPEC_VERSION".."3"
     )
 
     StringConstant(
