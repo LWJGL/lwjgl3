@@ -2,11 +2,8 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-@SuppressWarnings({"requires-automatic", "requires-transitive-automatic"})
 module org.lwjgl {
     requires transitive jdk.unsupported;
-
-    requires static transitive jsr305;
 
     exports org.lwjgl;
     exports org.lwjgl.system;

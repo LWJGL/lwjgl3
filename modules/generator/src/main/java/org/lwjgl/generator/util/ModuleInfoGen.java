@@ -82,12 +82,9 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
 
         private void compile(ModuleInfoGen gen, String moduleVersion) {
-            String modulePath = Stream.concat(
-                    Stream.of("bin/libs/java/jsr305.jar"),
-                    dependencies.stream()
-                        .filter(it -> !it.missing)
-                        .map(it -> "bin/classes/lwjgl/" + it.name)
-                )
+            String modulePath = dependencies.stream()
+                .filter(it -> !it.missing)
+                .map(it -> "bin/classes/lwjgl/" + it.name)
                 .collect(Collectors.joining(File.pathSeparator));
 
             String info = this.info;
@@ -201,13 +198,10 @@ public final class ModuleInfoGen implements AutoCloseable {
                                             "    opens " + nativePackage + ";\n" +
                                             "}",
                                             Stream.concat(
-                                                    Stream.of("bin/libs/java/jsr305.jar"),
-                                                    Stream.concat(
-                                                            Stream.of(module.name),
-                                                            module.dependencies.stream().map(it -> it.name)
-                                                        )
-                                                        .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
+                                                    Stream.of(module.name),
+                                                    module.dependencies.stream().map(it -> it.name)
                                                 )
+                                                .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
                                                 .collect(Collectors.joining(File.pathSeparator)),
                                             architecture,
                                             outputPath,
