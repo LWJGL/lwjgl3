@@ -462,40 +462,6 @@ val PFN_vkDeviceMemoryReportCallbackEXT = Module.VULKAN.callback {
     }
 }
 
-val PFN_vkGetInstanceProcAddrLUNARG = Module.VULKAN.callback {
-    PFN_vkVoidFunction(
-        "VkGetInstanceProcAddrLUNARG",
-        "Type definition for vkGetInstanceProcAddr.",
-
-        VkInstance("instance", "a {@code VkInstance} handle."),
-        charASCII.const.p("pName", "the name of a Vulkan command."),
-
-        nativeType = "PFN_vkGetInstanceProcAddrLUNARG"
-    ) {
-        documentation =
-        """
-        Type definition for vkGetInstanceProcAddr.
-
-        <h5>C Specification</h5>
-        The type of ##VkGetInstanceProcAddrLUNARG is:
-
-        <pre><code>
-￿typedef PFN_vkVoidFunction (VKAPI_PTR *PFN_vkGetInstanceProcAddrLUNARG)(
-￿    VkInstance instance, const char* pName);</code></pre>
-
-        <h5>Description</h5>
-        This type is compatible with the type of a pointer to the #GetInstanceProcAddr() command, but is used only to specify device driver addresses in ##VkDirectDriverLoadingInfoLUNARG{@code ::pfnGetInstanceProcAddr}.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This type exists only because of limitations in the XML schema and processing scripts, and its name may change in the future. Ideally we would use the {@code PFN_vkGetInstanceProcAddr} type generated in the {@code vulkan_core.h} header.
-        </div>
-
-        <h5>See Also</h5>
-        ##VkDirectDriverLoadingInfoLUNARG
-        """
-    }
-}
-
 // Struct types
 val VkSurfaceCapabilitiesKHR = struct(Module.VULKAN, "VkSurfaceCapabilitiesKHR", mutable = false) {
     documentation =
@@ -19432,7 +19398,7 @@ val VkDirectDriverLoadingInfoLUNARG = struct(Module.VULKAN, "VkDirectDriverLoadi
     Expression("#STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_INFO_LUNARG")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDirectDriverLoadingFlagsLUNARG("flags", "reserved for future use.")
-    nullable..PFN_vkGetInstanceProcAddrLUNARG("pfnGetInstanceProcAddr", "a ##VkGetInstanceProcAddrLUNARG pointer to the driver #GetInstanceProcAddr() function.")
+    PFN_vkGetInstanceProcAddrLUNARG("pfnGetInstanceProcAddr", "a ##VkGetInstanceProcAddrLUNARG pointer to the driver #GetInstanceProcAddr() function.")
 }
 
 val VkDirectDriverLoadingListLUNARG = struct(Module.VULKAN, "VkDirectDriverLoadingListLUNARG") {

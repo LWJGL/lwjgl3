@@ -20,9 +20,8 @@ val XrSystemId = XR_DEFINE_ATOM("XrSystemId")
 val XrTime = typedef(uint64_t, "XrTime")
 val XrVersion = typedef(uint64_t, "XrVersion")
 
-val PFN_xrVoidFunction = typedef(opaque_p, "PFN_xrVoidFunction")
-
-val PFNEGLGETPROCADDRESSPROC = "PFNEGLGETPROCADDRESSPROC".handle
+val PFN_xrVoidFunction = "PFN_xrVoidFunction".handle
+val PFN_xrEglGetProcAddressMNDX = "PFN_xrEglGetProcAddressMNDX".handle
 
 // TODO:
 val wchar_t = CharType("wchar_t", CharMapping.UTF16)

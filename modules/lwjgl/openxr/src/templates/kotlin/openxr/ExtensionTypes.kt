@@ -174,32 +174,6 @@ val PFN_xrDebugUtilsMessengerCallbackEXT = Module.OPENXR.callback {
     }
 }
 
-val PFN_xrEglGetProcAddressMNDX = Module.OPENXR.callback {
-    void.p(
-        "XrEglGetProcAddressMNDX",
-        "typedef of eglGetProcAddress.",
-
-        charUTF8.const.p("name", "specifies the name of the function to return."),
-
-        nativeType = "PFN_xrEglGetProcAddressMNDX"
-    ) {
-        documentation =
-        """
-        typedef of eglGetProcAddress.
-
-        <h5>C Specification</h5>
-        <pre><code>
-￿typedef void *(*PFN_xrEglGetProcAddressMNDX)(const char *name);</code></pre>
-
-        <h5>Description</h5>
-        eglGetProcAddress returns the address of the client API or EGL function named by procname. For details please see <a href="https://registry.khronos.org/EGL/sdk/docs/man/html/eglGetProcAddress.xhtml">https://registry.khronos.org/EGL/sdk/docs/man/html/eglGetProcAddress.xhtml</a>
-
-        <h5>See Also</h5>
-        ##XrGraphicsBindingEGLMNDX
-        """
-    }
-}
-
 // Struct types
 val XrCompositionLayerCubeKHR = struct(Module.OPENXR, "XrCompositionLayerCubeKHR", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
