@@ -65,7 +65,9 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "UNKNOWN_FILE_FORMAT".enum("The file not a KTX file"),
         "UNSUPPORTED_TEXTURE_TYPE".enum("The KTX file specifies an unsupported texture type."),
         "UNSUPPORTED_FEATURE".enum("Feature not included in in-use library or not yet implemented."),
-        "LIBRARY_NOT_LINKED".enum("Library dependency (OpenGL or Vulkan) not linked into application.")
+        "LIBRARY_NOT_LINKED".enum("Library dependency (OpenGL or Vulkan) not linked into application."),
+        "DECOMPRESS_LENGTH_ERROR".enum("Decompressed byte count does not match expected byte size."),
+        "DECOMPRESS_CHECKSUM_ERROR".enum("Checksum mismatch when decompressing.")
     )
 
     EnumConstant(
@@ -102,8 +104,9 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "SS_NONE".enum("No supercompression.", "0"),
         "SS_BASIS_LZ".enum("Basis LZ supercompression."),
         "SS_ZSTD".enum("ZStd supercompression."),
+        "SS_ZLIB".enum("ZLIB supercompression."),
         "SS_BEGIN_RANGE".enum("", "KTX_SS_NONE"),
-        "SS_END_RANGE".enum("", "KTX_SS_ZSTD"),
+        "SS_END_RANGE".enum("", "KTX_SS_ZLIB"),
         "SS_BEGIN_VENDOR_RANGE".enum("", "0x10000"),
         "SS_END_VENDOR_RANGE".enum("", "0x1ffff"),
         "SS_BEGIN_RESERVED".enum("", "0x20000")
@@ -122,7 +125,8 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "TEXTURE_CREATE_NO_FLAGS".enum("", "0x00"),
         "TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT".enum("Load the images from the KTX source.", "0x01"),
         "TEXTURE_CREATE_RAW_KVDATA_BIT".enum("Load the raw key-value data instead of creating a {@code ktxHashList} from it.", "0x02"),
-        "TEXTURE_CREATE_SKIP_KVDATA_BIT".enum("Skip any key-value data. This overrides the {@code RAW_KVDATA_BIT}.", "0x04")
+        "TEXTURE_CREATE_SKIP_KVDATA_BIT".enum("Skip any key-value data. This overrides the {@code RAW_KVDATA_BIT}.", "0x04"),
+        "TEXTURE_CREATE_CHECK_GLTF_BASISU_BIT".enum("Load texture compatible with the rules of KHR_texture_basisu glTF extension.", "0x08")
     )
 
     EnumConstant(
@@ -514,6 +518,14 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         ktx_uint32_t("level", "")
     )
 
+    ktx_error_code_e(
+        "Texture2_DeflateZLIB",
+        "",
+
+        ktxTexture2.p("This", ""),
+        ktx_uint32_t("level", "")
+    )
+
     void(
         "Texture2_GetComponentInfo",
         "",
@@ -530,8 +542,22 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         ktxTexture2.p("This", "")
     )
 
+    khr_df_transfer_e(
+        "Texture2_GetOETF_e",
+        "",
+
+        ktxTexture2.p("This", "")
+    )
+
     ktx_uint32_t(
         "Texture2_GetOETF",
+        "",
+
+        ktxTexture2.p("This", "")
+    )
+
+    khr_df_model_e(
+        "Texture2_GetColorModel_e",
         "",
 
         ktxTexture2.p("This", "")
@@ -771,6 +797,59 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
 
         ktx_uint8_t.const.p("bytes", ""),
         AutoSize("bytes")..ktx_size_t("size", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoTextForMemory",
+        "",
+
+        ktx_uint8_t.const.p("bytes", ""),
+        AutoSize("bytes")..ktx_size_t("size", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoTextForNamedFile",
+        "",
+
+        charUTF8.const.p.const("filename", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoTextForStream",
+        "",
+
+        ktxStream.p("stream", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoJSONForMemory",
+        "",
+
+        ktx_uint8_t.const.p("bytes", ""),
+        AutoSize("bytes")..ktx_size_t("size", ""),
+        ktx_uint32_t("base_indent", ""),
+        ktx_uint32_t("indent_width", ""),
+        bool("minified", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoJSONForNamedFile",
+        "",
+
+        charUTF8.const.p.const("filename", ""),
+        ktx_uint32_t("base_indent", ""),
+        ktx_uint32_t("indent_width", ""),
+        bool("minified", "")
+    )
+
+    ktx_error_code_e(
+        "PrintKTX2InfoJSONForStream",
+        "",
+
+        ktxStream.p("stream", ""),
+        ktx_uint32_t("base_indent", ""),
+        ktx_uint32_t("indent_width", ""),
+        bool("minified", "")
     )
 
     /*void(

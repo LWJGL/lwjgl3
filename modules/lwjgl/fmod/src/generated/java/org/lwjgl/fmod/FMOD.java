@@ -421,7 +421,7 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20213;
+    public static final int FMOD_VERSION = 0x20216;
 
     public static final int FMOD_DEBUG_LEVEL_NONE = 0x0;
 

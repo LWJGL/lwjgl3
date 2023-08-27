@@ -207,7 +207,7 @@ public class EXTDescriptorBuffer {
      * 
      * <ul>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-     * <li>{@code layout} <b>must</b> have been created with the VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT flag set</li>
+     * <li>{@code layout} <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} flag set</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -273,7 +273,7 @@ public class EXTDescriptorBuffer {
      * 
      * <ul>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-     * <li>{@code layout} <b>must</b> have been created with the VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT flag set</li>
+     * <li>{@code layout} <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} flag set</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

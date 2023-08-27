@@ -1819,11 +1819,11 @@ public final class MemoryUtil {
         }
     }
     private static void memSet32(int ptr, int value, int bytes) {
-        int aligned = bytes & ~7;
+        int aligned = bytes & ~3;
 
         // Aligned body
         int vi = (value & 0xFF) * FILL_PATTERN_32;
-        for (int i = 0; i < aligned; i += 8) {
+        for (int i = 0; i < aligned; i += 4) {
             UNSAFE.putInt(null, (ptr + i) & 0xFFFF_FFFFL, vi);
         }
 

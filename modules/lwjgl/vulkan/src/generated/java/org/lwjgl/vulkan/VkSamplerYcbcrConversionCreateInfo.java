@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If an external format conversion is being created, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>If an external format conversion is not being created, {@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a {@code UNORM} format)</li>
+ * <li>If an external format conversion is not being created, {@code format} <b>must</b> represent unsigned normalized values (i.e. the format <b>must</b> be a {@code UNORM} format)</li>
  * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> support {@link VK11#VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT} or {@link VK11#VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT}</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT}, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be {@link VK11#VK_CHROMA_LOCATION_COSITED_EVEN CHROMA_LOCATION_COSITED_EVEN} if the corresponding components are <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-chroma-reconstruction">downsampled</a></li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT}, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be {@link VK11#VK_CHROMA_LOCATION_MIDPOINT CHROMA_LOCATION_MIDPOINT} if the corresponding components are <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-chroma-reconstruction">downsampled</a></li>
@@ -46,13 +46,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code ycbcrRange} is {@link VK11#VK_SAMPLER_YCBCR_RANGE_ITU_NARROW SAMPLER_YCBCR_RANGE_ITU_NARROW} then the R, G and B components obtained by applying the {@code component} swizzle to {@code format} <b>must</b> each have a bit-depth greater than or equal to 8</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT} {@code forceExplicitReconstruction} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT}, {@code chromaFilter} <b>must</b> not be {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM} structure, and if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-ycbcr-degamma">{@code ycbcrDegamma}</a> feature is not enabled, then {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM}{@code ::enableYDegamma} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM} structure, and if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-ycbcr-degamma">{@code ycbcrDegamma}</a> feature is not enabled, then {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM}{@code ::enableCbCrDegamma} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM} structure, {@code format} <b>must</b> be a format with 8-bit R, G, and B components.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkExternalFormatANDROID}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExternalFormatANDROID} or {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code ycbcrModel} <b>must</b> be a valid {@code VkSamplerYcbcrModelConversion} value</li>
@@ -195,6 +198,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct<VkSamplerYcbcrCon
     public VkSamplerYcbcrConversionCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
     public VkSamplerYcbcrConversionCreateInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM} value to the {@code pNext} chain. */
+    public VkSamplerYcbcrConversionCreateInfo pNext(VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #format} field. */
     public VkSamplerYcbcrConversionCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Sets the specified value to the {@link #ycbcrModel} field. */
@@ -503,6 +508,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct<VkSamplerYcbcrCon
         public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerYcbcrConversionCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM} value to the {@code pNext} chain. */
+        public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#format} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkSamplerYcbcrConversionCreateInfo.nformat(address(), value); return this; }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrModel} field. */

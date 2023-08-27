@@ -116,7 +116,7 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     /** the number of swapchains being presented to the {@code vkQueuePresentKHR} command. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** {@code NULL} or a pointer to an array of uint64_t with {@code swapchainCount} entries. If not {@code NULL}, each non-zero value in {@code pPresentIds} specifies the present id to be associated with the presentation of the swapchain with the same index in the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} call. */
+    /** {@code NULL} or a pointer to an array of {@code uint64_t} with {@code swapchainCount} entries. If not {@code NULL}, each non-zero value in {@code pPresentIds} specifies the present id to be associated with the presentation of the swapchain with the same index in the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} call. */
     @Nullable
     @NativeType("uint64_t const *")
     public LongBuffer pPresentIds() { return npPresentIds(address()); }

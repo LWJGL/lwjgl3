@@ -291,7 +291,7 @@
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
 
                 <compile lang="c++">
-                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
+                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_portal.cpp"/>
                 </compile>

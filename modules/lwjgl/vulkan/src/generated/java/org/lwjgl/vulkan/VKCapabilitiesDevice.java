@@ -1436,10 +1436,16 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_image_view_handle;
     /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
+    /** When true, {@link QCOMFilterCubicClamp} is supported. */
+    public final boolean VK_QCOM_filter_cubic_clamp;
+    /** When true, {@link QCOMFilterCubicWeights} is supported. */
+    public final boolean VK_QCOM_filter_cubic_weights;
     /** When true, {@link QCOMFragmentDensityMapOffset} is supported. */
     public final boolean VK_QCOM_fragment_density_map_offset;
     /** When true, {@link QCOMImageProcessing} is supported. */
     public final boolean VK_QCOM_image_processing;
+    /** When true, {@link QCOMImageProcessing2} is supported. */
+    public final boolean VK_QCOM_image_processing2;
     /** When true, {@link QCOMMultiviewPerViewRenderAreas} is supported. */
     public final boolean VK_QCOM_multiview_per_view_render_areas;
     /** When true, {@link QCOMMultiviewPerViewViewports} is supported. */
@@ -1454,6 +1460,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_QCOM_rotated_copy_commands;
     /** When true, {@link QCOMTileProperties} is supported. */
     public final boolean VK_QCOM_tile_properties;
+    /** When true, {@link QCOMYcbcrDegamma} is supported. */
+    public final boolean VK_QCOM_ycbcr_degamma;
     /** When true, {@link SECAmigoProfiling} is supported. */
     public final boolean VK_SEC_amigo_profiling;
     /** When true, {@code STD_vulkan_video_codec_h264} is supported. */
@@ -1754,8 +1762,11 @@ public class VKCapabilitiesDevice {
         VK_NVX_binary_import = check_NVX_binary_import(provider, caps, ext);
         VK_NVX_image_view_handle = check_NVX_image_view_handle(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
+        VK_QCOM_filter_cubic_clamp = ext.contains("VK_QCOM_filter_cubic_clamp");
+        VK_QCOM_filter_cubic_weights = ext.contains("VK_QCOM_filter_cubic_weights");
         VK_QCOM_fragment_density_map_offset = ext.contains("VK_QCOM_fragment_density_map_offset");
         VK_QCOM_image_processing = ext.contains("VK_QCOM_image_processing");
+        VK_QCOM_image_processing2 = ext.contains("VK_QCOM_image_processing2");
         VK_QCOM_multiview_per_view_render_areas = ext.contains("VK_QCOM_multiview_per_view_render_areas");
         VK_QCOM_multiview_per_view_viewports = ext.contains("VK_QCOM_multiview_per_view_viewports");
         VK_QCOM_render_pass_shader_resolve = ext.contains("VK_QCOM_render_pass_shader_resolve");
@@ -1763,6 +1774,7 @@ public class VKCapabilitiesDevice {
         VK_QCOM_render_pass_transform = ext.contains("VK_QCOM_render_pass_transform");
         VK_QCOM_rotated_copy_commands = ext.contains("VK_QCOM_rotated_copy_commands");
         VK_QCOM_tile_properties = check_QCOM_tile_properties(provider, caps, ext);
+        VK_QCOM_ycbcr_degamma = ext.contains("VK_QCOM_ycbcr_degamma");
         VK_SEC_amigo_profiling = ext.contains("VK_SEC_amigo_profiling");
         STD_vulkan_video_codec_h264 = ext.contains("STD_vulkan_video_codec_h264");
         STD_vulkan_video_codec_h265 = ext.contains("STD_vulkan_video_codec_h265");

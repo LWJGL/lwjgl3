@@ -76,7 +76,7 @@ fun templateCustomization() {
         LongConstant(
             "OpenXR current version number.",
 
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 0, 27)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 0, 29)"
         )
 
         macro(expression = "((major & 0xFFFFL) << 48) | ((minor & 0xFFFFL) << 32) | (patch & 0xFFFF_FFFFL)")..uint64_t(

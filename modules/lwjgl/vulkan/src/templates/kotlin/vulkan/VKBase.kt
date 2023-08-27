@@ -18,6 +18,7 @@ val VkSampleMask = typedef(uint32_t, "VkSampleMask")
 
 val PFN_vkVoidFunction = "PFN_vkVoidFunction".handle
 val PFN_vkGetInstanceProcAddr = "PFN_vkGetInstanceProcAddr".handle
+val PFN_vkGetInstanceProcAddrLUNARG = "PFN_vkGetInstanceProcAddrLUNARG".handle
 
 val VkRemoteAddressNV = "VkRemoteAddressNV".handle
 

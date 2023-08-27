@@ -1855,7 +1855,8 @@ public class Assimp {
      * 
      * <p>After this step is run, each mesh contains unique vertices, so a vertex may be used by multiple faces. You usually want to use this post processing
      * step. If your application deals with indexed geometry, this step is compulsory or you'll just waste rendering time. <b>If this flag is not
-     * specified</b>, no vertices are referenced by more than one face and <b>no index buffer is required</b> for rendering.</p>
+     * specified</b>, no vertices are referenced by more than one face and <b>no index buffer is required</b> for rendering. Unless the importer (like
+     * ply) had to split vertices. Then you need one regardless.</p>
      * </li>
      * <li>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded} - 
      * Converts all the imported data to a left-handed coordinate space.

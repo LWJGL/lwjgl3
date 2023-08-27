@@ -180,6 +180,7 @@ public class FreeType {
             Get_MM_WeightVector                  = apiGetFunctionAddress(FREETYPE, "FT_Get_MM_WeightVector"),
             Get_Var_Axis_Flags                   = apiGetFunctionAddress(FREETYPE, "FT_Get_Var_Axis_Flags"),
             Set_Named_Instance                   = apiGetFunctionAddress(FREETYPE, "FT_Set_Named_Instance"),
+            Get_Default_Named_Instance           = apiGetFunctionAddress(FREETYPE, "FT_Get_Default_Named_Instance"),
             Add_Module                           = apiGetFunctionAddress(FREETYPE, "FT_Add_Module"),
             Get_Module                           = apiGetFunctionAddress(FREETYPE, "FT_Get_Module"),
             Remove_Module                        = apiGetFunctionAddress(FREETYPE, "FT_Remove_Module"),
@@ -238,6 +239,7 @@ public class FreeType {
             Glyph_Stroke                         = apiGetFunctionAddress(FREETYPE, "FT_Glyph_Stroke"),
             Glyph_StrokeBorder                   = apiGetFunctionAddress(FREETYPE, "FT_Glyph_StrokeBorder"),
             GlyphSlot_Embolden                   = apiGetFunctionAddress(FREETYPE, "FT_GlyphSlot_Embolden"),
+            GlyphSlot_AdjustWeight               = apiGetFunctionAddress(FREETYPE, "FT_GlyphSlot_AdjustWeight"),
             GlyphSlot_Oblique                    = apiGetFunctionAddress(FREETYPE, "FT_GlyphSlot_Oblique"),
             GlyphSlot_Slant                      = apiGetFunctionAddress(FREETYPE, "FT_GlyphSlot_Slant"),
             Sin                                  = apiGetFunctionAddress(FREETYPE, "FT_Sin"),
@@ -446,6 +448,7 @@ public class FreeType {
      * <li>{@link #FT_LOAD_COLOR LOAD_COLOR}</li>
      * <li>{@link #FT_LOAD_COMPUTE_METRICS LOAD_COMPUTE_METRICS}</li>
      * <li>{@link #FT_LOAD_BITMAP_METRICS_ONLY LOAD_BITMAP_METRICS_ONLY}</li>
+     * <li>{@link #FT_LOAD_NO_SVG LOAD_NO_SVG}</li>
      * <li>{@link #FT_LOAD_ADVANCE_ONLY LOAD_ADVANCE_ONLY}</li>
      * <li>{@link #FT_LOAD_SVG_ONLY LOAD_SVG_ONLY}</li>
      * </ul>
@@ -470,6 +473,7 @@ public class FreeType {
         FT_LOAD_COLOR                       = 1 << 20,
         FT_LOAD_COMPUTE_METRICS             = 1 << 21,
         FT_LOAD_BITMAP_METRICS_ONLY         = 1 << 22,
+        FT_LOAD_NO_SVG                      = 1 << 24,
         FT_LOAD_ADVANCE_ONLY                = 1 << 8,
         FT_LOAD_SVG_ONLY                    = 1 << 23;
 
@@ -583,7 +587,7 @@ public class FreeType {
 
     public static final int FREETYPE_MINOR = 13;
 
-    public static final int FREETYPE_PATCH = 0;
+    public static final int FREETYPE_PATCH = 1;
 
     public static final int FT_ADVANCE_FLAG_FAST_ONLY = 0x20000000;
 
@@ -4749,6 +4753,21 @@ public class FreeType {
         return nFT_Set_Named_Instance(face.address(), instance_index);
     }
 
+    // --- [ FT_Get_Default_Named_Instance ] ---
+
+    public static int nFT_Get_Default_Named_Instance(long face, long instance_index) {
+        long __functionAddress = Functions.Get_Default_Named_Instance;
+        return invokePPI(face, instance_index, __functionAddress);
+    }
+
+    @NativeType("FT_Error")
+    public static int FT_Get_Default_Named_Instance(FT_Face face, @NativeType("FT_UInt *") IntBuffer instance_index) {
+        if (CHECKS) {
+            check(instance_index, 1);
+        }
+        return nFT_Get_Default_Named_Instance(face.address(), memAddress(instance_index));
+    }
+
     // --- [ FT_Add_Module ] ---
 
     public static int nFT_Add_Module(long library, long clazz) {
@@ -5577,6 +5596,17 @@ public class FreeType {
 
     public static void FT_GlyphSlot_Embolden(FT_GlyphSlot slot) {
         nFT_GlyphSlot_Embolden(slot.address());
+    }
+
+    // --- [ FT_GlyphSlot_AdjustWeight ] ---
+
+    public static void nFT_GlyphSlot_AdjustWeight(long slot, long xdelta, long ydelta) {
+        long __functionAddress = Functions.GlyphSlot_AdjustWeight;
+        invokePNNV(slot, xdelta, ydelta, __functionAddress);
+    }
+
+    public static void FT_GlyphSlot_AdjustWeight(FT_GlyphSlot slot, @NativeType("FT_Fixed") long xdelta, @NativeType("FT_Fixed") long ydelta) {
+        nFT_GlyphSlot_AdjustWeight(slot.address(), xdelta, ydelta);
     }
 
     // --- [ FT_GlyphSlot_Oblique ] ---

@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 261
+#define VK_HEADER_VERSION 262
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1108,6 +1108,15 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR = 1000506002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM = 1000510000,
     VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM = 1000510001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM = 1000518000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM = 1000518001,
+    VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM = 1000518002,
+    VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM = 1000519000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM = 1000519001,
+    VK_STRUCTURE_TYPE_BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM = 1000519002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM = 1000520000,
+    VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM = 1000520001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM = 1000521000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT = 1000524000,
     VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX = 1000529000,
     VK_STRUCTURE_TYPE_SCREEN_BUFFER_FORMAT_PROPERTIES_QNX = 1000529001,
@@ -5813,6 +5822,7 @@ typedef enum VkSamplerReductionMode {
     VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE = 0,
     VK_SAMPLER_REDUCTION_MODE_MIN = 1,
     VK_SAMPLER_REDUCTION_MODE_MAX = 2,
+    VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_RANGECLAMP_QCOM = 1000521000,
     VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE,
     VK_SAMPLER_REDUCTION_MODE_MIN_EXT = VK_SAMPLER_REDUCTION_MODE_MIN,
     VK_SAMPLER_REDUCTION_MODE_MAX_EXT = VK_SAMPLER_REDUCTION_MODE_MAX,
@@ -17548,6 +17558,100 @@ typedef struct VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
     uint32_t           perViewRenderAreaCount;
     const VkRect2D*    pPerViewRenderAreas;
 } VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+
+
+// VK_QCOM_image_processing2 is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_image_processing2 1
+#define VK_QCOM_IMAGE_PROCESSING_2_SPEC_VERSION 1
+#define VK_QCOM_IMAGE_PROCESSING_2_EXTENSION_NAME "VK_QCOM_image_processing2"
+
+typedef enum VkBlockMatchWindowCompareModeQCOM {
+    VK_BLOCK_MATCH_WINDOW_COMPARE_MODE_MIN_QCOM = 0,
+    VK_BLOCK_MATCH_WINDOW_COMPARE_MODE_MAX_QCOM = 1,
+    VK_BLOCK_MATCH_WINDOW_COMPARE_MODE_MAX_ENUM_QCOM = 0x7FFFFFFF
+} VkBlockMatchWindowCompareModeQCOM;
+typedef struct VkPhysicalDeviceImageProcessing2FeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           textureBlockMatch2;
+} VkPhysicalDeviceImageProcessing2FeaturesQCOM;
+
+typedef struct VkPhysicalDeviceImageProcessing2PropertiesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkExtent2D         maxBlockMatchWindow;
+} VkPhysicalDeviceImageProcessing2PropertiesQCOM;
+
+typedef struct VkSamplerBlockMatchWindowCreateInfoQCOM {
+    VkStructureType                      sType;
+    const void*                          pNext;
+    VkExtent2D                           windowExtent;
+    VkBlockMatchWindowCompareModeQCOM    windowCompareMode;
+} VkSamplerBlockMatchWindowCreateInfoQCOM;
+
+
+
+// VK_QCOM_filter_cubic_weights is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_filter_cubic_weights 1
+#define VK_QCOM_FILTER_CUBIC_WEIGHTS_SPEC_VERSION 1
+#define VK_QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION_NAME "VK_QCOM_filter_cubic_weights"
+
+typedef enum VkCubicFilterWeightsQCOM {
+    VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM = 0,
+    VK_CUBIC_FILTER_WEIGHTS_ZERO_TANGENT_CARDINAL_QCOM = 1,
+    VK_CUBIC_FILTER_WEIGHTS_B_SPLINE_QCOM = 2,
+    VK_CUBIC_FILTER_WEIGHTS_MITCHELL_NETRAVALI_QCOM = 3,
+    VK_CUBIC_FILTER_WEIGHTS_MAX_ENUM_QCOM = 0x7FFFFFFF
+} VkCubicFilterWeightsQCOM;
+typedef struct VkPhysicalDeviceCubicWeightsFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           selectableCubicWeights;
+} VkPhysicalDeviceCubicWeightsFeaturesQCOM;
+
+typedef struct VkSamplerCubicWeightsCreateInfoQCOM {
+    VkStructureType             sType;
+    const void*                 pNext;
+    VkCubicFilterWeightsQCOM    cubicWeights;
+} VkSamplerCubicWeightsCreateInfoQCOM;
+
+typedef struct VkBlitImageCubicWeightsInfoQCOM {
+    VkStructureType             sType;
+    const void*                 pNext;
+    VkCubicFilterWeightsQCOM    cubicWeights;
+} VkBlitImageCubicWeightsInfoQCOM;
+
+
+
+// VK_QCOM_ycbcr_degamma is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_ycbcr_degamma 1
+#define VK_QCOM_YCBCR_DEGAMMA_SPEC_VERSION 1
+#define VK_QCOM_YCBCR_DEGAMMA_EXTENSION_NAME "VK_QCOM_ycbcr_degamma"
+typedef struct VkPhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           ycbcrDegamma;
+} VkPhysicalDeviceYcbcrDegammaFeaturesQCOM;
+
+typedef struct VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           enableYDegamma;
+    VkBool32           enableCbCrDegamma;
+} VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM;
+
+
+
+// VK_QCOM_filter_cubic_clamp is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_filter_cubic_clamp 1
+#define VK_QCOM_FILTER_CUBIC_CLAMP_SPEC_VERSION 1
+#define VK_QCOM_FILTER_CUBIC_CLAMP_EXTENSION_NAME "VK_QCOM_filter_cubic_clamp"
+typedef struct VkPhysicalDeviceCubicClampFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           cubicRangeClamp;
+} VkPhysicalDeviceCubicClampFeaturesQCOM;
 
 
 

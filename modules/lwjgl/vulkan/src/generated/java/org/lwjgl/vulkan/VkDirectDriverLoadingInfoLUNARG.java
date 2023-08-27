@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -36,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
  *     VkDirectDriverLoadingFlagsLUNARG {@link #flags};
- *     {@link VkGetInstanceProcAddrLUNARGI PFN_vkGetInstanceProcAddrLUNARG} {@link #pfnGetInstanceProcAddr};
+ *     PFN_vkGetInstanceProcAddrLUNARG {@link #pfnGetInstanceProcAddr};
  * }</code></pre>
  */
 public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadingInfoLUNARG> implements NativeResource {
@@ -103,9 +104,8 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     @NativeType("VkDirectDriverLoadingFlagsLUNARG")
     public int flags() { return nflags(address()); }
     /** a {@link VkGetInstanceProcAddrLUNARG} pointer to the driver {@link VK10#vkGetInstanceProcAddr GetInstanceProcAddr} function. */
-    @Nullable
     @NativeType("PFN_vkGetInstanceProcAddrLUNARG")
-    public VkGetInstanceProcAddrLUNARG pfnGetInstanceProcAddr() { return npfnGetInstanceProcAddr(address()); }
+    public long pfnGetInstanceProcAddr() { return npfnGetInstanceProcAddr(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDirectDriverLoadingInfoLUNARG sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -116,14 +116,14 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     /** Sets the specified value to the {@link #flags} field. */
     public VkDirectDriverLoadingInfoLUNARG flags(@NativeType("VkDirectDriverLoadingFlagsLUNARG") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnGetInstanceProcAddr} field. */
-    public VkDirectDriverLoadingInfoLUNARG pfnGetInstanceProcAddr(@Nullable @NativeType("PFN_vkGetInstanceProcAddrLUNARG") VkGetInstanceProcAddrLUNARGI value) { npfnGetInstanceProcAddr(address(), value); return this; }
+    public VkDirectDriverLoadingInfoLUNARG pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddrLUNARG") long value) { npfnGetInstanceProcAddr(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDirectDriverLoadingInfoLUNARG set(
         int sType,
         long pNext,
         int flags,
-        VkGetInstanceProcAddrLUNARGI pfnGetInstanceProcAddr
+        long pfnGetInstanceProcAddr
     ) {
         sType(sType);
         pNext(pNext);
@@ -265,7 +265,7 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingInfoLUNARG.FLAGS); }
     /** Unsafe version of {@link #pfnGetInstanceProcAddr}. */
-    @Nullable public static VkGetInstanceProcAddrLUNARG npfnGetInstanceProcAddr(long struct) { return VkGetInstanceProcAddrLUNARG.createSafe(memGetAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR)); }
+    public static long npfnGetInstanceProcAddr(long struct) { return memGetAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingInfoLUNARG.STYPE, value); }
@@ -273,8 +273,17 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDirectDriverLoadingInfoLUNARG.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingInfoLUNARG.FLAGS, value); }
-    /** Unsafe version of {@link #pfnGetInstanceProcAddr(VkGetInstanceProcAddrLUNARGI) pfnGetInstanceProcAddr}. */
-    public static void npfnGetInstanceProcAddr(long struct, @Nullable VkGetInstanceProcAddrLUNARGI value) { memPutAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR, memAddressSafe(value)); }
+    /** Unsafe version of {@link #pfnGetInstanceProcAddr(long) pfnGetInstanceProcAddr}. */
+    public static void npfnGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR, check(value)); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        check(memGetAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR));
+    }
 
     // -----------------------------------
 
@@ -324,9 +333,8 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
         @NativeType("VkDirectDriverLoadingFlagsLUNARG")
         public int flags() { return VkDirectDriverLoadingInfoLUNARG.nflags(address()); }
         /** @return the value of the {@link VkDirectDriverLoadingInfoLUNARG#pfnGetInstanceProcAddr} field. */
-        @Nullable
         @NativeType("PFN_vkGetInstanceProcAddrLUNARG")
-        public VkGetInstanceProcAddrLUNARG pfnGetInstanceProcAddr() { return VkDirectDriverLoadingInfoLUNARG.npfnGetInstanceProcAddr(address()); }
+        public long pfnGetInstanceProcAddr() { return VkDirectDriverLoadingInfoLUNARG.npfnGetInstanceProcAddr(address()); }
 
         /** Sets the specified value to the {@link VkDirectDriverLoadingInfoLUNARG#sType} field. */
         public VkDirectDriverLoadingInfoLUNARG.Buffer sType(@NativeType("VkStructureType") int value) { VkDirectDriverLoadingInfoLUNARG.nsType(address(), value); return this; }
@@ -337,7 +345,7 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
         /** Sets the specified value to the {@link VkDirectDriverLoadingInfoLUNARG#flags} field. */
         public VkDirectDriverLoadingInfoLUNARG.Buffer flags(@NativeType("VkDirectDriverLoadingFlagsLUNARG") int value) { VkDirectDriverLoadingInfoLUNARG.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkDirectDriverLoadingInfoLUNARG#pfnGetInstanceProcAddr} field. */
-        public VkDirectDriverLoadingInfoLUNARG.Buffer pfnGetInstanceProcAddr(@Nullable @NativeType("PFN_vkGetInstanceProcAddrLUNARG") VkGetInstanceProcAddrLUNARGI value) { VkDirectDriverLoadingInfoLUNARG.npfnGetInstanceProcAddr(address(), value); return this; }
+        public VkDirectDriverLoadingInfoLUNARG.Buffer pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddrLUNARG") long value) { VkDirectDriverLoadingInfoLUNARG.npfnGetInstanceProcAddr(address(), value); return this; }
 
     }
 

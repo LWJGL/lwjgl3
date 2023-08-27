@@ -392,7 +392,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkSampleCountFlagBits("samples", "specifies the number of sample bits in the {@code pSampleMask}."),
-        Unsafe..VkSampleMask.const.p("pSampleMask", "a pointer to an array of VkSampleMask values, where the array size is based on the {@code samples} parameter.")
+        Unsafe..VkSampleMask.const.p("pSampleMask", "a pointer to an array of {@code VkSampleMask} values, where the array size is based on the {@code samples} parameter.")
     )
 
     void(

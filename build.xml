@@ -1445,13 +1445,13 @@
 
         <local name="input"/>
         <input
-            message="It is recommended to build LWJGL releases on JDK 10 or higher. Continue with current JDK?"
+            message="It is recommended to build LWJGL releases on JDK 16 or higher. Continue with current JDK?"
             validargs="y,n"
             defaultvalue="n"
             addproperty="input"
-            unless:set="jdk10"
+            unless:set="jdk16"
         />
-        <fail message="Cancelled" unless:set="jdk9">
+        <fail message="Cancelled" unless:set="jdk16">
             <condition>
                 <equals arg1="n" arg2="${input}"/>
             </condition>
@@ -1526,8 +1526,14 @@
                 <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/16" if:set="jdk16">
                     <fileset dir="${module.lwjgl}/core/src/main/java16" includes="**"/>
                 </copy>
+                <copy todir="${bin.lwjgl}/core/META-INF/native-image/org.lwjgl/lwjgl">
+                    <fileset dir="config/native-image/META-INF/native-image" includes="**" excludes="resource-config.json"/>
+                </copy>
             </quiet>
+
             <release-module name="core" native-library="lwjgl" title="Core"/>
+
+            <delete dir="${bin.lwjgl}/core/META-INF/native-image" quiet="true"/>
         </sequential>
 
         <!-- Assimp -->
@@ -1651,7 +1657,17 @@
         <release-module name="jemalloc" native-library="jemalloc" title="jemalloc" if:true="${binding.jemalloc}"/>
 
         <!-- KTX -->
-        <release-module name="ktx" native-library="ktx" title="KTX" if:true="${binding.ktx}"/>
+        <release-module name="ktx" title="KTX" if:true="${binding.ktx}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="libktx.so"/>
+                <get-release platform="linux" arch="arm64" file="libktx.so"/>
+                <get-release platform="linux" arch="arm32" file="libktx.so"/>
+                <get-release platform="macos" arch="x64" file="libktx.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libktx.dylib"/>
+                <get-release platform="windows" arch="x64" file="ktx.dll"/>
+                <get-release platform="windows" arch="arm64" file="ktx.dll"/>
+            </natives>
+        </release-module>
 
         <!-- libdivide -->
         <release-module name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
@@ -1688,13 +1704,8 @@
         <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}">
             <natives>
                 <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so.git"/>
-
                 <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so.git"/>
-
                 <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so"/>
-                <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so.git"/>
             </natives>
         </release-module>
 

@@ -4,6 +4,7 @@
  */
 module org.lwjgl.jawt {
     requires transitive org.lwjgl;
+    requires transitive java.desktop;
 
     exports org.lwjgl.system.jawt;
 }

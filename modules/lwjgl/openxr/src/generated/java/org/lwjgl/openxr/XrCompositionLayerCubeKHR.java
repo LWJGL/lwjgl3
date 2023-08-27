@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #next};
  *     XrCompositionLayerFlags {@link #layerFlags};
  *     XrSpace {@link #space};
- *     XrEyeVisibility eyeVisibility;
+ *     XrEyeVisibility {@link #eyeVisibility};
  *     XrSwapchain {@link #swapchain};
  *     uint32_t {@link #imageArrayIndex};
  *     {@link XrQuaternionf XrQuaternionf} {@link #orientation};
@@ -132,7 +132,7 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
     /** the {@code XrSpace} in which the {@code orientation} of the cube layer is evaluated over time. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** @return the value of the {@code eyeVisibility} field. */
+    /** the eye represented by this layer. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
     /** the swapchain, which <b>must</b> have been created with a {@code faceCount} of 6. */
@@ -154,7 +154,7 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
     public XrCompositionLayerCubeKHR layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #space} field. */
     public XrCompositionLayerCubeKHR space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@code eyeVisibility} field. */
+    /** Sets the specified value to the {@link #eyeVisibility} field. */
     public XrCompositionLayerCubeKHR eyeVisibility(@NativeType("XrEyeVisibility") int value) { neyeVisibility(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchain} field. */
     public XrCompositionLayerCubeKHR swapchain(XrSwapchain value) { nswapchain(address(), value); return this; }
@@ -417,7 +417,7 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
         /** @return the value of the {@link XrCompositionLayerCubeKHR#space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerCubeKHR.nspace(address()); }
-        /** @return the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@link XrCompositionLayerCubeKHR#eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerCubeKHR.neyeVisibility(address()); }
         /** @return the value of the {@link XrCompositionLayerCubeKHR#swapchain} field. */
@@ -439,7 +439,7 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
         public XrCompositionLayerCubeKHR.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerCubeKHR.nlayerFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#space} field. */
         public XrCompositionLayerCubeKHR.Buffer space(XrSpace value) { XrCompositionLayerCubeKHR.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@code eyeVisibility} field. */
+        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#eyeVisibility} field. */
         public XrCompositionLayerCubeKHR.Buffer eyeVisibility(@NativeType("XrEyeVisibility") int value) { XrCompositionLayerCubeKHR.neyeVisibility(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#swapchain} field. */
         public XrCompositionLayerCubeKHR.Buffer swapchain(XrSwapchain value) { XrCompositionLayerCubeKHR.nswapchain(address(), value); return this; }

@@ -48,8 +48,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT}, {@code srcImage} <b>must</b> be of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
  * <li>The {@code srcSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
  * <li>The {@code dstSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>If {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the <code>srcSubresource.baseArrayLayer + srcSubresource.layerCount</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>If {@code dstSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the <code>dstSubresource.baseArrayLayer + dstSubresource.layerCount</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
+ * <li>The <code>srcSubresource.baseArrayLayer + srcSubresource.layerCount</code> of each element of {@code pRegions} , if {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> is not enabled, <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
+ * <li>The <code>dstSubresource.baseArrayLayer + dstSubresource.layerCount</code> of each element of {@code pRegions} , if {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> is not enabled, <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
  * <li>{@code dstImage} and {@code srcImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
  * <li>If either {@code srcImage} or {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then for each element of {@code pRegions}, {@code srcSubresource.baseArrayLayer} and {@code dstSubresource.baseArrayLayer} <b>must</b> each be 0, and {@code srcSubresource.layerCount} and {@code dstSubresource.layerCount} <b>must</b> each be 1</li>
  * <li>For each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> specify aspects present in {@code srcImage}</li>
@@ -67,13 +67,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} and {@code dstImage} <b>must</b> not be block-compressed images</li>
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> be of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> not have a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
+ * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} and if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-filter-cubic-weight-selection">selectableCubicWeights</a> feature is not enabled then the cubic weights <b>must</b> be {@link QCOMFilterCubicWeights#VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkBlitImageCubicWeightsInfoQCOM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
  * <li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
  * <li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
@@ -206,6 +208,8 @@ public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements Native
     public VkBlitImageInfo2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBlitImageInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkBlitImageCubicWeightsInfoQCOM} value to the {@code pNext} chain. */
+    public VkBlitImageInfo2 pNext(VkBlitImageCubicWeightsInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcImage} field. */
     public VkBlitImageInfo2 srcImage(@NativeType("VkImage") long value) { nsrcImage(address(), value); return this; }
     /** Sets the specified value to the {@link #srcImageLayout} field. */
@@ -486,6 +490,8 @@ public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements Native
         public VkBlitImageInfo2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2); }
         /** Sets the specified value to the {@link VkBlitImageInfo2#pNext} field. */
         public VkBlitImageInfo2.Buffer pNext(@NativeType("void const *") long value) { VkBlitImageInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkBlitImageCubicWeightsInfoQCOM} value to the {@code pNext} chain. */
+        public VkBlitImageInfo2.Buffer pNext(VkBlitImageCubicWeightsInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkBlitImageInfo2#srcImage} field. */
         public VkBlitImageInfo2.Buffer srcImage(@NativeType("VkImage") long value) { VkBlitImageInfo2.nsrcImage(address(), value); return this; }
         /** Sets the specified value to the {@link VkBlitImageInfo2#srcImageLayout} field. */

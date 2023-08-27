@@ -1029,6 +1029,7 @@ public class KHRVideoQueue {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
      * <li>{@code pUpdateInfo} <b>must</b> be a valid pointer to a valid {@link VkVideoSessionParametersUpdateInfoKHR} structure</li>
+     * <li>{@code videoSessionParameters} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -1097,6 +1098,7 @@ public class KHRVideoQueue {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * <li>If {@code videoSessionParameters} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>

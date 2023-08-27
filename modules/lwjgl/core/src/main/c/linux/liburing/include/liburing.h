@@ -1040,7 +1040,7 @@ IOURINGINLINE void io_uring_prep_msg_ring_fd(struct io_uring_sqe *sqe, int fd,
 			 (void *) (uintptr_t) IORING_MSG_SEND_FD, 0, data);
 	sqe->addr3 = source_fd;
 	/* offset by 1 for allocation */
-	if (target_fd == IORING_FILE_INDEX_ALLOC)
+	if ((unsigned int) target_fd == IORING_FILE_INDEX_ALLOC)
 		target_fd--;
 	__io_uring_set_target_fixed_file(sqe, target_fd);
 	sqe->msg_ring_flags = flags;

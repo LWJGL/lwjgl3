@@ -497,6 +497,17 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     void(
+        "layout_collect_features_map",
+        "",
+
+        hb_face_t.p("face", ""),
+        hb_tag_t("table_tag", ""),
+        unsigned("script_index", ""),
+        unsigned("language_index", ""),
+        hb_map_t.p("feature_map", "")
+    )
+
+    void(
         "layout_collect_lookups",
         "",
 
@@ -648,6 +659,28 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         nullable..hb_codepoint_t.p("characters", "")
     )
 
+    hb_bool_t(
+        "ot_layout_get_font_extents",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_direction_t("direction", ""),
+        hb_tag_t("script_tag", ""),
+        hb_tag_t("language_tag", ""),
+        hb_font_extents_t.p("extents", "")
+    )
+
+    hb_bool_t(
+        "ot_layout_get_font_extents2",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_direction_t("direction", ""),
+        hb_script_t("script", ""),
+        hb_language_t("language", ""),
+        hb_font_extents_t.p("extents", "")
+    )
+
     hb_ot_layout_baseline_tag_t(
         "layout_get_horizontal_baseline_tag_for_script",
         "",
@@ -667,6 +700,18 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         Check(1)..nullable..hb_position_t.p("coord", "")
     )
 
+    hb_bool_t(
+        "ot_layout_get_baseline2",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_ot_layout_baseline_tag_t("baseline_tag", ""),
+        hb_direction_t("direction", ""),
+        hb_script_t("script", ""),
+        hb_language_t("language", ""),
+        Check(1)..nullable..hb_position_t.p("coord", "")
+    )
+
     void(
         "layout_get_baseline_with_fallback",
         "",
@@ -676,6 +721,18 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         hb_direction_t("direction", ""),
         hb_tag_t("script_tag", ""),
         hb_tag_t("language_tag", ""),
+        Check(1)..nullable..hb_position_t.p("coord", "")
+    )
+
+    void(
+        "layout_get_baseline_with_fallback2",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_ot_layout_baseline_tag_t("baseline_tag", ""),
+        hb_direction_t("direction", ""),
+        hb_script_t("script", ""),
+        hb_language_t("language", ""),
         Check(1)..nullable..hb_position_t.p("coord", "")
     )
 

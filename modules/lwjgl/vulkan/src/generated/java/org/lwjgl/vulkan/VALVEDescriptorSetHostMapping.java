@@ -58,6 +58,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
  * <li>{@code descriptorSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
  * <li>{@code ppData} <b>must</b> be a valid pointer to a pointer value</li>
+ * <li>{@code descriptorSet} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
  * </ul>
  * 
  * <p>There is currently no specification language written for this type. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
@@ -244,6 +245,7 @@ public class VALVEDescriptorSetHostMapping {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code descriptorSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
      * <li>{@code ppData} <b>must</b> be a valid pointer to a pointer value</li>
+     * <li>{@code descriptorSet} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      */
     public static void vkGetDescriptorSetHostMappingVALVE(VkDevice device, @NativeType("VkDescriptorSet") long descriptorSet, @NativeType("void **") PointerBuffer ppData) {

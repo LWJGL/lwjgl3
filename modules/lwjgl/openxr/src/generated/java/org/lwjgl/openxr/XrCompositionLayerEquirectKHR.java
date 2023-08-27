@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #next};
  *     XrCompositionLayerFlags {@link #layerFlags};
  *     XrSpace {@link #space};
- *     XrEyeVisibility eyeVisibility;
+ *     XrEyeVisibility {@link #eyeVisibility};
  *     {@link XrSwapchainSubImage XrSwapchainSubImage} {@link #subImage};
  *     {@link XrPosef XrPosef} {@link #pose};
  *     float {@link #radius};
@@ -139,7 +139,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     /** the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** @return the value of the {@code eyeVisibility} field. */
+    /** the eye represented by this layer. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
     /** identifies the image {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
@@ -163,7 +163,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     public XrCompositionLayerEquirectKHR layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #space} field. */
     public XrCompositionLayerEquirectKHR space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@code eyeVisibility} field. */
+    /** Sets the specified value to the {@link #eyeVisibility} field. */
     public XrCompositionLayerEquirectKHR eyeVisibility(@NativeType("XrEyeVisibility") int value) { neyeVisibility(address(), value); return this; }
     /** Copies the specified {@link XrSwapchainSubImage} to the {@link #subImage} field. */
     public XrCompositionLayerEquirectKHR subImage(XrSwapchainSubImage value) { nsubImage(address(), value); return this; }
@@ -448,7 +448,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
         /** @return the value of the {@link XrCompositionLayerEquirectKHR#space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerEquirectKHR.nspace(address()); }
-        /** @return the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@link XrCompositionLayerEquirectKHR#eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerEquirectKHR.neyeVisibility(address()); }
         /** @return a {@link XrSwapchainSubImage} view of the {@link XrCompositionLayerEquirectKHR#subImage} field. */
@@ -472,7 +472,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
         public XrCompositionLayerEquirectKHR.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerEquirectKHR.nlayerFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#space} field. */
         public XrCompositionLayerEquirectKHR.Buffer space(XrSpace value) { XrCompositionLayerEquirectKHR.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@code eyeVisibility} field. */
+        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#eyeVisibility} field. */
         public XrCompositionLayerEquirectKHR.Buffer eyeVisibility(@NativeType("XrEyeVisibility") int value) { XrCompositionLayerEquirectKHR.neyeVisibility(address(), value); return this; }
         /** Copies the specified {@link XrSwapchainSubImage} to the {@link XrCompositionLayerEquirectKHR#subImage} field. */
         public XrCompositionLayerEquirectKHR.Buffer subImage(XrSwapchainSubImage value) { XrCompositionLayerEquirectKHR.nsubImage(address(), value); return this; }

@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."118"
+        "API_VERSION".."122"
     )
 
     ShortConstant(
@@ -480,8 +480,9 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_VERTEX_ATTRIB_HALF"..0x0000000002000000L,
         "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000004000000L,
         "CAPS_VERTEX_ID"..0x0000000008000000L,
-        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000010000000L,
-        "CAPS_DRAW_INDIRECT_COUNT"..0x0000000020000000L
+        "CAPS_PRIMITIVE_ID"..0x0000000010000000L,
+        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000020000000L,
+        "CAPS_DRAW_INDIRECT_COUNT"..0x0000000040000000L
     )
 
     IntConstant(
@@ -825,6 +826,15 @@ RGBA16S
 
         "VIEW_MODE_COUNT".enum
     ).javaDocLinksSkipCount
+
+    EnumConstant(
+        "({@code bgfx_native_window_handle_type}).",
+
+        "NATIVE_WINDOW_HANDLE_TYPE_DEFAULT".enum("Platform default handle type (X11 on Linux)"),
+        "NATIVE_WINDOW_HANDLE_TYPE_WAYLAND".enum("Wayland"),
+
+        "NATIVE_WINDOW_HANDLE_TYPE_COUNT".enum
+    )
 
     void(
         "attachment_init",

@@ -479,6 +479,8 @@ val cl_mem_ext_host_ptr = struct(Module.OPENCL, "CLMemEXTHostPtr", nativeName = 
     cl_uint("host_cache_policy", "host cache policy for this external memory allocation")
 }.p
 
+val cl_image_requirements_info_ext = typedef(cl_uint, "cl_image_requirements_info_ext")
+
 // IMG
 
 val cl_mipmap_filter_mode_img = typedef(cl_uint, "cl_mipmap_filter_mode_img")

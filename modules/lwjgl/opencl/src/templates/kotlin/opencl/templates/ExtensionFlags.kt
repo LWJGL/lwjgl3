@@ -725,6 +725,16 @@ val arm_thread_limit_hint = EXT_FLAG.nativeClassCL("arm_thread_limit_hint", ARM)
         """
 }
 
+val intel_bfloat16_conversions = EXT_FLAG.nativeClassCL("intel_bfloat16_conversions", INTEL) {
+    documentation =
+        """
+        This extension adds built-in functions to convert between single-precision 32-bit floating-point values and 16-bit bfloat16 values. The 16-bit bfloat16
+        format has similar dynamic range as the 32-bit float format, albeit with lower precision than the 16-bit half format.
+
+        Please note that this extension currently does not introduce a bfloat16 type to OpenCL C and instead the built-in functions convert to or from a ushort
+        16-bit unsigned integer type with a bit pattern that represents a bfloat16 value.
+        """
+}
 val intel_media_block_io = EXT_FLAG.nativeClassCL("intel_media_block_io", INTEL) {
     documentation =
         """
@@ -762,6 +772,46 @@ val intel_spirv_subgroups = EXT_FLAG.nativeClassCL("intel_spirv_subgroups", INTE
         This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_subgroups} may behave in an OpenCL environment.
 
         Requires {@link CL21 OpenCL 2.1} and ${intel_subgroups.link}.
+        """
+}
+val intel_split_work_group_barrier = EXT_FLAG.nativeClassCL("intel_split_work_group_barrier", INTEL) {
+    documentation =
+        """
+        This extension adds built-in functions to split a barrier or work_group_barrier function in OpenCL C into two separate operations: the first indicates
+        that a work-item has "arrived" at a barrier but should continue executing, and the second indicates that a work-item should "wait" for all of the
+        work-items to arrive at the barrier before executing further.
+
+        Splitting a barrier operation may improve performance and may provide a closer match to "latch" or "barrier" operations in other parallel languages
+        such as C++ 20.
+        """
+}
+val intel_subgroup_matrix_multiply_accumulate = EXT_FLAG.nativeClassCL("intel_subgroup_matrix_multiply_accumulate", INTEL) {
+    documentation =
+        """
+        The goal of this extension is to allow programmers to access specialized hardware to compute the product of an M x K matrix with a K x N matrix and
+        then add an M x N matrix accumulation value. This is a commonly used building block to compute the product of two large matrices. When used in an
+        OpenCL kernel, all work items in the subgroup cooperate to perform this operation.
+
+        This is a low-level extension for expert programmers seeking to access this functionality directly in custom kernels. Most users will access this
+        functionality via high-level libraries or frameworks.
+
+        Requires support for subgroups.
+        """
+}
+val intel_subgroup_split_matrix_multiply_accumulate = EXT_FLAG.nativeClassCL("intel_subgroup_split_matrix_multiply_accumulate", INTEL) {
+    documentation =
+        """
+        The goal of this extension is to allow programmers to access specialized hardware to compute the product of an M x K matrix with a K x N matrix and
+        then add an M x N matrix accumulation value. This is a commonly used building block to compute the product of two large matrices.
+
+        The functionality described in this extension is very similar to the functionality described in the
+        {@code cl_intel_subgroup_matrix_multiply_accumulate} extension, with one key difference: in this extension, work items across two subgroups cooperate
+        to perform the operation. This is done by splitting the M x K matrix source across two participating subgroups: The first M-divided-by-2 rows of the
+        matrix source are provided by the first subgroup, and the remaining M-divided-by-2 rows of the matrix source are provided by the second subgroup.
+
+        Splitting the matrix source improves performance by halving the amount of data each subgroup must load for the first matrix source.
+
+        Requires support for subgroups.
         """
 }
 val intel_subgroups_char = EXT_FLAG.nativeClassCL("intel_subgroups_char", INTEL) {

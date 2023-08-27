@@ -56,6 +56,9 @@ val ktx_transcode_flag_bits_e = "ktx_transcode_flag_bits_e".enumType
 val ktx_transcode_fmt_e = "ktx_transcode_fmt_e".enumType
 val streamType = "enum streamType".enumType
 
+val khr_df_transfer_e = "khr_df_transfer_e".enumType
+val khr_df_model_e = "khr_df_model_e".enumType
+
 val GLboolean = typedef(unsigned_char, "GLboolean")
 val GLenum = typedef(unsigned_int, "GLenum")
 val GLint = typedef(int, "GLint")

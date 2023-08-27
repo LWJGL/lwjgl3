@@ -299,7 +299,10 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkDirectDriverLoadingListLUNARG.PDRIVERS));
+        int driverCount = ndriverCount(struct);
+        long pDrivers = memGetAddress(struct + VkDirectDriverLoadingListLUNARG.PDRIVERS);
+        check(pDrivers);
+        validate(pDrivers, driverCount, VkDirectDriverLoadingInfoLUNARG.SIZEOF, VkDirectDriverLoadingInfoLUNARG::validate);
     }
 
     // -----------------------------------

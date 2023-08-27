@@ -32,6 +32,12 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-common.h
 
     IntConstant(
+        "Unused {@code hb_codepoint_t} value.",
+
+        "CODEPOINT_INVALID".."-1"
+    )
+
+    IntConstant(
         "Special setting for {@code hb_feature_t.start} to apply the feature from the start of the buffer.",
         "FEATURE_GLOBAL_START".."0"
     )
@@ -2184,16 +2190,6 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
-        "font_get_glyph_shape",
-        "",
-
-        hb_font_t.p("font", ""),
-        hb_codepoint_t("glyph", ""),
-        hb_draw_funcs_t.p("dfuncs", ""),
-        nullable..opaque_p("draw_data", "")
-    )
-
-    void(
         "font_draw_glyph",
         "",
 
@@ -2731,7 +2727,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-map.h
 
-    IntConstant("", "MAP_VALUE_INVALID".."-1")
+    IntConstant("", "MAP_VALUE_INVALID".."HB_CODEPOINT_INVALID")
 
     hb_map_t.p(
         "map_create",
@@ -3324,7 +3320,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-set.h
 
-    IntConstant("", "SET_VALUE_INVALID".."-1")
+    IntConstant("", "SET_VALUE_INVALID".."HB_CODEPOINT_INVALID")
 
     hb_set_t.p(
         "set_create",
@@ -3915,7 +3911,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "UNICODE_COMBINING_CLASS_CCC122".enum("Lao", "122"),
         "UNICODE_COMBINING_CLASS_CCC129".enum("Tibetan", "129"),
         "UNICODE_COMBINING_CLASS_CCC130".enum("Tibetan", "130"),
-        "UNICODE_COMBINING_CLASS_CCC133".enum("Tibetan", "132"),
+        "UNICODE_COMBINING_CLASS_CCC132".enum("Tibetan", "132"),
         "UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT".enum("Marks attached at the bottom left", "200"),
         "UNICODE_COMBINING_CLASS_ATTACHED_BELOW".enum("Marks attached directly below", "202"),
         "UNICODE_COMBINING_CLASS_ATTACHED_ABOVE".enum("Marks attached directly above", "214"),
@@ -4139,11 +4135,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("", "VERSION_MAJOR".."7")
+    IntConstant("", "VERSION_MAJOR".."8")
     IntConstant("", "VERSION_MINOR".."1")
-    IntConstant("", "VERSION_MICRO".."0")
+    IntConstant("", "VERSION_MICRO".."1")
 
-    StringConstant("", "VERSION_STRING".."7.1.0")
+    StringConstant("", "VERSION_STRING".."8.1.1")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

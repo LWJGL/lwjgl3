@@ -48,6 +48,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code right_elbow}</li>
  * <li>{@code left_knee}</li>
  * <li>{@code right_knee}</li>
+ * <li>{@code left_wrist} (rev: 3)</li>
+ * <li>{@code right_wrist} (rev: 3)</li>
+ * <li>{@code left_ankle} (rev: 3)</li>
+ * <li>{@code right_ankle} (rev: 3)</li>
  * <li>{@code waist}</li>
  * <li>{@code chest}</li>
  * <li>{@code camera}</li>
@@ -65,7 +69,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class HTCXViveTrackerInteraction {
 
     /** The extension specification version. */
-    public static final int XR_HTCX_vive_tracker_interaction_SPEC_VERSION = 2;
+    public static final int XR_HTCX_vive_tracker_interaction_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_HTCX_VIVE_TRACKER_INTERACTION_EXTENSION_NAME = "XR_HTCX_vive_tracker_interaction";

@@ -427,7 +427,7 @@ EXPORTS
             <update-dependency module="harfbuzz" artifact="harfbuzz.dll"/>
             <update-dependency module="hwloc" artifact="hwloc.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
-            <update-dependency module="ktx" artifact="ktx.dll"/>
+            <update-dependency module="ktx" artifact="ktx.dll" unless:set="build.arch.x86"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>
             <update-dependency module="openvr" artifact="openvr_api.dll"/>
             <update-dependency module="openxr" artifact="openxr-loader.dll"/>

@@ -50,6 +50,7 @@ val VALVE_descriptor_set_host_mapping = "VALVEDescriptorSetHostMapping".nativeCl
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code descriptorSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
             <li>{@code ppData} <b>must</b> be a valid pointer to a pointer value</li>
+            <li>{@code descriptorSet} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         There is currently no specification language written for this type. This section acts only as placeholder and to avoid dead links in the specification and reference pages.
@@ -211,6 +212,7 @@ val VALVE_descriptor_set_host_mapping = "VALVEDescriptorSetHostMapping".nativeCl
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code descriptorSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
             <li>{@code ppData} <b>must</b> be a valid pointer to a pointer value</li>
+            <li>{@code descriptorSet} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
         """,
 

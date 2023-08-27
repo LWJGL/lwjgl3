@@ -1611,7 +1611,8 @@ class Func(
                 if (
                     it != null && param.nativeType.isReference && param.has(nullable) &&
                     transforms[param] !is SingleValueTransform &&
-                    transforms[param] !is SingleValueStructTransform
+                    transforms[param] !is SingleValueStructTransform &&
+                    transforms[param] !is RawPointerTransform
                 ) {
                     "@Nullable $it"
                 } else {
