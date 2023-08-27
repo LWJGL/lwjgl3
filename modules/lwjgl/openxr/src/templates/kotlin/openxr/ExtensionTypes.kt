@@ -1101,14 +1101,14 @@ val XrGraphicsBindingEGLMNDX = struct(Module.OPENXR, "XrGraphicsBindingEGLMNDX")
             <li>The {@link MNDXEGLEnable XR_MNDX_egl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingEGLMNDX</li>
             <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_EGL_MNDX</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code getProcAddress} <b>must</b> be a valid ##XrEglGetProcAddressMNDX value</li>
+            <li>{@code getProcAddress} <b>must</b> be a valid {@code PFN_xrEglGetProcAddressMNDX} value</li>
             <li>{@code display} <b>must</b> be a valid {@code EGLDisplay} value</li>
             <li>{@code config} <b>must</b> be a valid {@code EGLConfig} value</li>
             <li>{@code context} <b>must</b> be a valid {@code EGLContext} value</li>
         </ul>
 
         <h5>See Also</h5>
-        ##XrEglGetProcAddressMNDX, #CreateSession()
+        #CreateSession()
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_EGL_MNDX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")

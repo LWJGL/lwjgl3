@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkGetInstanceProcAddrLUNARG}, {@link VkDirectDriverLoadingListLUNARG}</p>
+ * <p>{@link VkDirectDriverLoadingListLUNARG}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -103,7 +103,7 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     /** reserved for future use. */
     @NativeType("VkDirectDriverLoadingFlagsLUNARG")
     public int flags() { return nflags(address()); }
-    /** a {@link VkGetInstanceProcAddrLUNARG} pointer to the driver {@link VK10#vkGetInstanceProcAddr GetInstanceProcAddr} function. */
+    /** a {@code PFN_vkGetInstanceProcAddrLUNARG} pointer to the driver {@link VK10#vkGetInstanceProcAddr GetInstanceProcAddr} function. */
     @NativeType("PFN_vkGetInstanceProcAddrLUNARG")
     public long pfnGetInstanceProcAddr() { return npfnGetInstanceProcAddr(address()); }
 

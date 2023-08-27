@@ -19392,13 +19392,13 @@ val VkDirectDriverLoadingInfoLUNARG = struct(Module.VULKAN, "VkDirectDriverLoadi
         </ul>
 
         <h5>See Also</h5>
-        ##VkGetInstanceProcAddrLUNARG, ##VkDirectDriverLoadingListLUNARG
+        ##VkDirectDriverLoadingListLUNARG
         """
 
     Expression("#STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_INFO_LUNARG")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDirectDriverLoadingFlagsLUNARG("flags", "reserved for future use.")
-    PFN_vkGetInstanceProcAddrLUNARG("pfnGetInstanceProcAddr", "a ##VkGetInstanceProcAddrLUNARG pointer to the driver #GetInstanceProcAddr() function.")
+    PFN_vkGetInstanceProcAddrLUNARG("pfnGetInstanceProcAddr", "a {@code PFN_vkGetInstanceProcAddrLUNARG} pointer to the driver #GetInstanceProcAddr() function.")
 }
 
 val VkDirectDriverLoadingListLUNARG = struct(Module.VULKAN, "VkDirectDriverLoadingListLUNARG") {
