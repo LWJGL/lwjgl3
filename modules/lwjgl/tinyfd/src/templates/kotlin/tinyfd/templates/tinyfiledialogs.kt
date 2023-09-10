@@ -187,7 +187,7 @@ dialog whiptail basicinput no_solution""")}
         "Displays a folder selection dialog.",
 
         messageBox["aTitle"],
-        charUTF8.const.p("aDefaultPath", "the default path or #NULL")
+        nullable..charUTF8.const.p("aDefaultPath", "the default path or #NULL")
     )
 
     charUTF8.const.p(
