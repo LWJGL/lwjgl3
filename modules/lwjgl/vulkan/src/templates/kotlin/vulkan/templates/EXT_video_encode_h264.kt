@@ -25,7 +25,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <dd>39</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>11</dd>
+            <dd>12</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}
@@ -43,7 +43,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2023-06-06</dd>
+            <dd>2023-07-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -68,7 +68,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."11"
+        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."12"
     )
 
     StringConstant(
@@ -155,6 +155,8 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <li>#VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_DISABLED_BIT_EXT indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED} from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
             <li>#VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_ENABLED_BIT_EXT indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED} from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
             <li>#VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL} from StdVideoH264DisableDeblockingFilterIdc is supported. An implementation <b>must</b> support at least one deblocking filter mode.</li>
+            <li>#VIDEO_ENCODE_H264_STD_SLICE_QP_DELTA_BIT_EXT indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH264SliceHeader}{@code ::slice_qp_delta} when that value is identical across the slices of the encoded frame.</li>
+            <li>#VIDEO_ENCODE_H264_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH264SliceHeader}{@code ::slice_qp_delta} when that value is different across the slices of the encoded frame.</li>
         </ul>
         """,
 
@@ -175,7 +177,9 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         "VIDEO_ENCODE_H264_STD_CONSTRAINED_INTRA_PRED_FLAG_SET_BIT_EXT".enum(0x00004000),
         "VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_DISABLED_BIT_EXT".enum(0x00008000),
         "VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_ENABLED_BIT_EXT".enum(0x00010000),
-        "VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00020000)
+        "VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00020000),
+        "VIDEO_ENCODE_H264_STD_SLICE_QP_DELTA_BIT_EXT".enum(0x00080000),
+        "VIDEO_ENCODE_H264_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT".enum(0x00100000)
     )
 
     EnumConstant(

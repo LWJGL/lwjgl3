@@ -188,6 +188,7 @@ val VkDeviceFaultVendorBinaryHeaderVersionEXT = "VkDeviceFaultVendorBinaryHeader
 val VkDeviceAddressBindingTypeEXT = "VkDeviceAddressBindingTypeEXT".enumType
 val VkDeviceAddressBindingFlagBitsEXT = "VkDeviceAddressBindingFlagBitsEXT".enumType
 val VkFormatFeatureFlagBits2KHR = "VkFormatFeatureFlagBits2KHR".enumType
+val VkFrameBoundaryFlagBitsEXT = "VkFrameBoundaryFlagBitsEXT".enumType
 val VkMicromapTypeEXT = "VkMicromapTypeEXT".enumType
 val VkBuildMicromapModeEXT = "VkBuildMicromapModeEXT".enumType
 val VkBuildMicromapFlagBitsEXT = "VkBuildMicromapFlagBitsEXT".enumType
@@ -216,6 +217,7 @@ val VkComponentTypeKHR = "VkComponentTypeKHR".enumType
 val VkScopeKHR = "VkScopeKHR".enumType
 val VkBlockMatchWindowCompareModeQCOM = "VkBlockMatchWindowCompareModeQCOM".enumType
 val VkCubicFilterWeightsQCOM = "VkCubicFilterWeightsQCOM".enumType
+val VkLayeredDriverUnderlyingApiMSFT = "VkLayeredDriverUnderlyingApiMSFT".enumType
 
 // Bitmask types
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
@@ -329,6 +331,7 @@ val VkImageCompressionFixedRateFlagsEXT = typedef(VkFlags, "VkImageCompressionFi
 val VkDirectFBSurfaceCreateFlagsEXT = typedef(VkFlags, "VkDirectFBSurfaceCreateFlagsEXT")
 val VkDeviceAddressBindingFlagsEXT = typedef(VkFlags, "VkDeviceAddressBindingFlagsEXT")
 val VkFormatFeatureFlags2KHR = typedef(VkFlags64, "VkFormatFeatureFlags2KHR")
+val VkFrameBoundaryFlagsEXT = typedef(VkFlags, "VkFrameBoundaryFlagsEXT")
 val VkBuildMicromapFlagsEXT = typedef(VkFlags, "VkBuildMicromapFlagsEXT")
 val VkMicromapCreateFlagsEXT = typedef(VkFlags, "VkMicromapCreateFlagsEXT")
 val VkMemoryDecompressionMethodFlagsNV = typedef(VkFlags64, "VkMemoryDecompressionMethodFlagsNV")
@@ -627,6 +630,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>Elements of {@code pSwapchain} <b>must</b> be unique</li>
             <li>Each element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR or #IMAGE_LAYOUT_SHARED_PRESENT_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
             <li>If a ##VkPresentIdKHR structure is included in the {@code pNext} chain, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-presentId">{@code presentId}</a> feature is not enabled, each {@code presentIds} entry in that structure <b>must</b> be NULL</li>
             <li>If any element of the {@code pSwapchains} array has been created with ##VkSwapchainPresentModesCreateInfoEXT, all of the elements of this array <b>must</b> be created with ##VkSwapchainPresentModesCreateInfoEXT</li>
@@ -635,7 +639,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupPresentInfoKHR, ##VkDisplayPresentInfoKHR, ##VkPresentIdKHR, ##VkPresentRegionsKHR, ##VkPresentTimesInfoGOOGLE, ##VkSwapchainPresentFenceInfoEXT, or ##VkSwapchainPresentModeInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupPresentInfoKHR, ##VkDisplayPresentInfoKHR, ##VkFrameBoundaryEXT, ##VkPresentIdKHR, ##VkPresentRegionsKHR, ##VkPresentTimesInfoGOOGLE, ##VkSwapchainPresentFenceInfoEXT, or ##VkSwapchainPresentModeInfoEXT</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
             <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
@@ -651,13 +655,13 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
 
     Expression("#STRUCTURE_TYPE_PRESENT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkDeviceGroupPresentInfoKHR", "VkDisplayPresentInfoKHR", "VkPresentIdKHR", "VkPresentRegionsKHR", "VkPresentTimesInfoGOOGLE", "VkSwapchainPresentFenceInfoEXT", "VkSwapchainPresentModeInfoEXT",
+        "VkDeviceGroupPresentInfoKHR", "VkDisplayPresentInfoKHR", "VkFrameBoundaryEXT", "VkPresentIdKHR", "VkPresentRegionsKHR", "VkPresentTimesInfoGOOGLE", "VkSwapchainPresentFenceInfoEXT", "VkSwapchainPresentModeInfoEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
     VkSemaphore.const.p("pWaitSemaphores", "{@code NULL} or a pointer to an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t("swapchainCount", "the number of swapchains being presented to by this command.")
-    VkSwapchainKHR.const.p("pSwapchains", "a pointer to an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
+    VkSwapchainKHR.const.p("pSwapchains", "a pointer to an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries.")
     uint32_t.const.p("pImageIndices", "a pointer to an array of indices into the array of each swapchain’s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
     nullable..VkResult.p("pResults", "a pointer to an array of {@code VkResult} typed elements with {@code swapchainCount} entries. Applications that do not need per-swapchain results <b>can</b> use {@code NULL} for {@code pResults}. If non-{@code NULL}, each entry in {@code pResults} will be set to the {@code VkResult} for presenting the swapchain corresponding to the same index in {@code pSwapchains}.")
 }
@@ -2451,10 +2455,8 @@ val VkVideoEncodeH264SessionParametersAddInfoEXT = struct(Module.VULKAN, "VkVide
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT</li>
-            <li>If {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH264SequenceParameterSet} values</li>
-            <li>If {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH264PictureParameterSet} values</li>
-            <li>{@code stdSPSCount} <b>must</b> be greater than 0</li>
-            <li>{@code stdPPSCount} <b>must</b> be greater than 0</li>
+            <li>If {@code stdSPSCount} is not 0, and {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH264SequenceParameterSet} values</li>
+            <li>If {@code stdPPSCount} is not 0, and {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH264PictureParameterSet} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2638,7 +2640,6 @@ val VkVideoEncodeH264RateControlInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH2
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264RateControlFlagBitsEXT} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
         </ul>
         """
 
@@ -2823,12 +2824,9 @@ val VkVideoEncodeH265SessionParametersAddInfoEXT = struct(Module.VULKAN, "VkVide
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT</li>
-            <li>If {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
-            <li>If {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
-            <li>If {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
-            <li>{@code stdVPSCount} <b>must</b> be greater than 0</li>
-            <li>{@code stdSPSCount} <b>must</b> be greater than 0</li>
-            <li>{@code stdPPSCount} <b>must</b> be greater than 0</li>
+            <li>If {@code stdVPSCount} is not 0, and {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
+            <li>If {@code stdSPSCount} is not 0, and {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
+            <li>If {@code stdPPSCount} is not 0, and {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
         </ul>
 
         <h5>Valid Usage</h5>
@@ -3030,7 +3028,6 @@ val VkVideoEncodeH265RateControlInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH2
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265RateControlFlagBitsEXT} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
         </ul>
         """
 
@@ -3149,7 +3146,7 @@ val VkVideoDecodeH264CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeH264C
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value specifying the maximum H.264 level supported by the profile, as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
+    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value specifying the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
     VkOffset2D("fieldOffsetGranularity", "the minimum alignment for ##VkVideoPictureResourceInfoKHR{@code ::codedOffset} specified for a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-picture-resources\">video picture resource</a> when using the picture layout #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR.")
 }
 
@@ -9953,7 +9950,7 @@ val VkVideoDecodeH265CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeH265C
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value specifying the maximum H.265 level supported by the profile, as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
+    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value specifying the maximum H.265 level supported by the profile, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
 }
 
 val VkVideoDecodeH265SessionParametersAddInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH265SessionParametersAddInfoKHR") {
@@ -12466,8 +12463,7 @@ val VkCopyMemoryToImageInfoEXT = struct(Module.VULKAN, "VkCopyMemoryToImageInfoE
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> specify aspects present in {@code dstImage}</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">two planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">three planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code dstImage} has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
             <li>If {@code dstImage} is of type #IMAGE_TYPE_3D, for each element of {@code pRegions}, {@code dstSubresource.baseArrayLayer} <b>must</b> be 0 and {@code dstSubresource.layerCount} <b>must</b> be 1</li>
         </ul>
 
@@ -12551,8 +12547,7 @@ val VkCopyImageToMemoryInfoEXT = struct(Module.VULKAN, "VkCopyImageToMemoryInfoE
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> specify aspects present in {@code dstImage}</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">two planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">three planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code dstImage} has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
             <li>If {@code dstImage} is of type #IMAGE_TYPE_3D, for each element of {@code pRegions}, {@code dstSubresource.baseArrayLayer} <b>must</b> be 0 and {@code dstSubresource.layerCount} <b>must</b> be 1</li>
         </ul>
 
@@ -12634,8 +12629,7 @@ val VkCopyImageToImageInfoEXT = struct(Module.VULKAN, "VkCopyImageToImageInfoEXT
             <li>For each element of {@code pRegions}, if the sum of {@code srcOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
             <li>For each element of {@code pRegions}, if the sum of {@code srcOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code srcImage}</li>
             <li>For each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> specify aspects present in {@code srcImage}</li>
-            <li>If {@code srcImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">two planes</a> then for each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
-            <li>If {@code srcImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">three planes</a> then for each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code srcImage} has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
             <li>If {@code srcImage} is of type #IMAGE_TYPE_3D, for each element of {@code pRegions}, {@code srcSubresource.baseArrayLayer} <b>must</b> be 0 and {@code srcSubresource.layerCount} <b>must</b> be 1</li>
         </ul>
 
@@ -12672,8 +12666,7 @@ val VkCopyImageToImageInfoEXT = struct(Module.VULKAN, "VkCopyImageToImageInfoEXT
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code dstImage}</li>
             <li>For each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> specify aspects present in {@code dstImage}</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">two planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
-            <li>If {@code dstImage} has a {@code VkFormat} with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">three planes</a> then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code dstImage} has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
             <li>If {@code dstImage} is of type #IMAGE_TYPE_3D, for each element of {@code pRegions}, {@code dstSubresource.baseArrayLayer} <b>must</b> be 0 and {@code dstSubresource.layerCount} <b>must</b> be 1</li>
             <li>{@code srcImageLayout} <b>must</b> specify the current layout of the image subresources of {@code srcImage} specified in {@code pRegions}</li>
             <li>{@code dstImageLayout} <b>must</b> specify the current layout of the image subresources of {@code dstImage} specified in {@code pRegions}</li>
@@ -12733,13 +12726,15 @@ val VkHostImageLayoutTransitionInfoEXT = struct(Module.VULKAN, "VkHostImageLayou
             <li>{@code subresourceRange.baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code subresourceRange.layerCount} is not #REMAINING_ARRAY_LAYERS, <code>subresourceRange.baseArrayLayer + subresourceRange.layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-            <li>If {@code image} has a single-plane color format or is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
-            <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include at least one <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> or #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code image} has a color format that is single-plane, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code image} has a color format and is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include at least one <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit or #IMAGE_ASPECT_COLOR_BIT</li>
             <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_DEPTH_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_STENCIL_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</li>
-            <li>{@code oldLayout} <b>must</b> be either #IMAGE_LAYOUT_UNDEFINED, #IMAGE_LAYOUT_PREINITIALIZED, or one of the layouts in ##VkPhysicalDeviceHostImageCopyPropertiesEXT{@code ::pCopySrcLayouts}</li>
+            <li>{@code oldLayout} <b>must</b> be either #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources as specified in {@code subresourceRange}</li>
+            <li>If {@code oldLayout} is not #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED, it <b>must</b> be one of the layouts in ##VkPhysicalDeviceHostImageCopyPropertiesEXT{@code ::pCopySrcLayouts}</li>
             <li>{@code newLayout} <b>must</b> be one of the layouts in ##VkPhysicalDeviceHostImageCopyPropertiesEXT{@code ::pCopyDstLayouts}</li>
         </ul>
 
@@ -17254,6 +17249,66 @@ val VkPhysicalDevicePipelinePropertiesFeaturesEXT = struct(Module.VULKAN, "VkPhy
     VkBool32("pipelinePropertiesIdentifier", "indicates that the implementation supports querying a unique pipeline identifier.")
 }
 
+val VkPhysicalDeviceFrameBoundaryFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceFrameBoundaryFeaturesEXT") {
+    documentation =
+        """
+        Structure describing the frame boundary features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceFrameBoundaryFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceFrameBoundaryFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAME_BOUNDARY_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAME_BOUNDARY_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("frameBoundary", "indicates whether the implementation supports frame boundary information.")
+}
+
+val VkFrameBoundaryEXT = struct(Module.VULKAN, "VkFrameBoundaryEXT") {
+    documentation =
+        """
+        Add frame boundary information to queue submissions.
+
+        <h5>Description</h5>
+        The application <b>can</b> associate frame boundary information to a queue submission call by adding a ##VkFrameBoundaryEXT structure to the {@code pNext} chain of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#devsandqueues-submission">queue submission</a>, ##VkPresentInfoKHR, or ##VkBindSparseInfo.
+
+        The frame identifier is used to associate one or more queue submission to a frame, it is thus meant to be unique within a frame lifetime, i.e. it is possible (but not recommended) to reuse frame identifiers, as long as any two frames with any chance of having overlapping queue submissions (as in the example above) use two different frame identifiers.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Since the concept of frame is application-dependent, there is no way to validate the use of frame identifier. It is good practice to use a monotonically increasing counter as the frame identifier and not reuse identifiers between frames.
+        </div>
+
+        The {@code pImages} and {@code pBuffers} arrays contain a list of images and buffers which store the "end result" of the frame. As the concept of frame is application-dependent, not all frames <b>may</b> produce their results in images or buffers, yet this is a sufficiently common case to be handled by ##VkFrameBoundaryEXT. Note that no extra information, such as image layout is being provided, since the images are meant to be used by tools which would already be tracking this required information. Having the possibility of passing a list of end-result images makes ##VkFrameBoundaryEXT as expressive as #QueuePresentKHR(), which is often the default frame boundary delimiter.
+
+        The application <b>can</b> also associate arbitrary extra information via tag data using {@code tagName}, {@code tagSize} and {@code pTag}. This extra information is typically tool-specific.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FRAME_BOUNDARY_EXT</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkFrameBoundaryFlagBitsEXT} values</li>
+            <li>If {@code imageCount} is not 0, and {@code pImages} is not {@code NULL}, {@code pImages} <b>must</b> be a valid pointer to an array of {@code imageCount} valid {@code VkImage} handles</li>
+            <li>If {@code bufferCount} is not 0, and {@code pBuffers} is not {@code NULL}, {@code pBuffers} <b>must</b> be a valid pointer to an array of {@code bufferCount} valid {@code VkBuffer} handles</li>
+            <li>Both of the elements of {@code pBuffers}, and the elements of {@code pImages} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_FRAME_BOUNDARY_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkFrameBoundaryFlagsEXT("flags", "a bitmask of {@code VkFrameBoundaryFlagBitsEXT} that can flag the last submission of a frame identifier.")
+    uint64_t("frameID", "the frame identifier.")
+    AutoSize("pImages", optional = true)..uint32_t("imageCount", "the number of images that store frame results.")
+    nullable..VkImage.const.p("pImages", "a pointer to an array of VkImage objects with imageCount entries.")
+    AutoSize("pBuffers", optional = true)..uint32_t("bufferCount", "the number of buffers the store the frame results.")
+    nullable..VkBuffer.const.p("pBuffers", "a pointer to an array of VkBuffer objects with bufferCount entries.")
+    uint64_t("tagName", "a numerical identifier for tag data.")
+    size_t("tagSize", "the number of bytes of tag data.")
+    nullable..opaque_const_p("pTag", "a pointer to an array of {@code tagSize} bytes containing tag data.")
+}
+
 val VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT") {
     documentation =
         """
@@ -19886,7 +19941,7 @@ val VkDeviceImageSubresourceInfoKHR = struct(Module.VULKAN, "VkDeviceImageSubres
             <li>If {@code format} of the {@code image} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_DEPTH_BIT</li>
             <li>If {@code format} of the {@code image} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If {@code format} of the {@code image} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
-            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a></li>
+            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
             <li>If {@code image} was created with the #EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
             <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> and the index <em>i</em> <b>must</b> be less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier}</li>
         </ul>
@@ -20740,4 +20795,42 @@ val VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT = struct(Modul
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("attachmentFeedbackLoopDynamicState", "specifies whether dynamic feedback loops are supported.")
+}
+
+val VkPhysicalDeviceLayeredDriverPropertiesMSFT = struct(Module.VULKAN, "VkPhysicalDeviceLayeredDriverPropertiesMSFT", mutable = false) {
+    documentation =
+        """
+        Structure containing information about driver layering for a physical device.
+
+        <h5>Description</h5>
+        These are properties of the driver layering information of a physical device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkLayeredDriverUnderlyingApiMSFT("underlyingAPI", "a {@code VkLayeredDriverUnderlyingApiMSFT} value indicating which underlying API is used to implement the layered driver, or #LAYERED_DRIVER_UNDERLYING_API_NONE_MSFT if the driver is not layered.")
+}
+
+val VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV") {
+    documentation =
+        """
+        Structure describing feature to allow descriptor pool overallocation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("descriptorPoolOverallocation", "indicates that the implementation allows the application to opt into descriptor pool overallocation by creating the descriptor pool with #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV and/or #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV flags.")
 }

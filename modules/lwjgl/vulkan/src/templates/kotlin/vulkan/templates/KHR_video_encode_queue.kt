@@ -29,7 +29,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>9</dd>
+            <dd>10</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}
@@ -47,7 +47,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2023-06-06</dd>
+            <dd>2023-07-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -75,7 +75,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."9"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."10"
     )
 
     StringConstant(
@@ -169,6 +169,12 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     )
 
     EnumConstant(
+        "Extends {@code VkQueryResultStatusKHR}.",
+
+        "QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR".."-1000299000"
+    )
+
+    EnumConstant(
         "Extends {@code VkResult}.",
 
         "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR".."-1000299000"
@@ -188,10 +194,17 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <h5>Description</h5>
         <ul>
             <li>#VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR indicates that the implementation supports the use of ##VkVideoEncodeInfoKHR{@code ::precedingExternallyEncodedBytes}.</li>
+            <li>
+                #VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR indicates that the implementation is able to detect and report when the destination video bitstream buffer range provided by the application is not sufficiently large to fit the encoded bitstream data produced by a video encode operation by reporting the #QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#query-result-status-codes">query result status code</a>.
+                <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Some implementations <b>may</b> not be able to reliably detect insufficient bitstream buffer range conditions in all situations. Such implementations will not report support for the #VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR encode capability flag for the video profile, but <b>may</b> still report the #QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR query result status code in certain cases. Applications <b>should</b> always check for the specific query result status code #QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR even when this encode capability flag is not supported by the implementation for the video profile in question. However, applications <b>must</b> not assume that a different negative query result status code indicating an unsuccessful completion of a video encode operation is not the result of an insufficient bitstream buffer condition unless this encode capability flag is supported.
+                </div>
+            </li>
         </ul>
         """,
 
-        "VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR".enum(0x00000001)
+        "VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR".enum(0x00000002)
     )
 
     EnumConstant(

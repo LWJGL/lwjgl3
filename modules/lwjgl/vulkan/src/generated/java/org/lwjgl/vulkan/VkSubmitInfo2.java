@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_SUBMIT_INFO_2 STRUCTURE_TYPE_SUBMIT_INFO_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPerformanceQuerySubmitInfoKHR}, {@link VkWin32KeyedMutexAcquireReleaseInfoKHR}, or {@link VkWin32KeyedMutexAcquireReleaseInfoNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkFrameBoundaryEXT}, {@link VkPerformanceQuerySubmitInfoKHR}, {@link VkWin32KeyedMutexAcquireReleaseInfoKHR}, or {@link VkWin32KeyedMutexAcquireReleaseInfoNV}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSubmitFlagBits} values</li>
  * <li>If {@code waitSemaphoreInfoCount} is not 0, {@code pWaitSemaphoreInfos} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreInfoCount} valid {@link VkSemaphoreSubmitInfo} structures</li>
@@ -172,6 +172,8 @@ public class VkSubmitInfo2 extends Struct<VkSubmitInfo2> implements NativeResour
     public VkSubmitInfo2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_SUBMIT_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+    public VkSubmitInfo2 pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
     public VkSubmitInfo2 pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */
@@ -464,6 +466,8 @@ public class VkSubmitInfo2 extends Struct<VkSubmitInfo2> implements NativeResour
         public VkSubmitInfo2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_SUBMIT_INFO_2); }
         /** Sets the specified value to the {@link VkSubmitInfo2#pNext} field. */
         public VkSubmitInfo2.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+        public VkSubmitInfo2.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
         public VkSubmitInfo2.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */

@@ -100,7 +100,7 @@ public class VkVideoDecodeH264CapabilitiesKHR extends Struct<VkVideoDecodeH264Ca
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code StdVideoH264LevelIdc} value specifying the maximum H.264 level supported by the profile, as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
+    /** a {@code StdVideoH264LevelIdc} value specifying the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
     @NativeType("StdVideoH264LevelIdc")
     public int maxLevelIdc() { return nmaxLevelIdc(address()); }
     /** the minimum alignment for {@link VkVideoPictureResourceInfoKHR}{@code ::codedOffset} specified for a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">video picture resource</a> when using the picture layout {@link KHRVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR}. */

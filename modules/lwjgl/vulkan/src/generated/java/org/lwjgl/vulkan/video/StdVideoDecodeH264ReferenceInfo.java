@@ -25,7 +25,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  * struct StdVideoDecodeH264ReferenceInfo {
  *     {@link StdVideoDecodeH264ReferenceInfoFlags StdVideoDecodeH264ReferenceInfoFlags} flags;
  *     uint16_t {@link #FrameNum};
- *     uint16_t {@link #reserved};
+ *     uint16_t reserved;
  *     int32_t {@link #PicOrderCnt}[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
  * }</code></pre>
  */
@@ -88,9 +88,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
     /** 7.4.3.3 Decoded reference picture marking semantics */
     @NativeType("uint16_t")
     public short FrameNum() { return nFrameNum(address()); }
-    /** for structure members 32-bit packing/alignment */
-    @NativeType("uint16_t")
-    public short reserved() { return nreserved(address()); }
     /** topFieldOrderCnt and BottomFieldOrderCnt fields */
     @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
     public IntBuffer PicOrderCnt() { return nPicOrderCnt(address()); }
@@ -104,8 +101,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
     public StdVideoDecodeH264ReferenceInfo flags(java.util.function.Consumer<StdVideoDecodeH264ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
     /** Sets the specified value to the {@link #FrameNum} field. */
     public StdVideoDecodeH264ReferenceInfo FrameNum(@NativeType("uint16_t") short value) { nFrameNum(address(), value); return this; }
-    /** Sets the specified value to the {@link #reserved} field. */
-    public StdVideoDecodeH264ReferenceInfo reserved(@NativeType("uint16_t") short value) { nreserved(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@link #PicOrderCnt} field. */
     public StdVideoDecodeH264ReferenceInfo PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { nPicOrderCnt(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@link #PicOrderCnt} field. */
@@ -115,12 +110,10 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
     public StdVideoDecodeH264ReferenceInfo set(
         StdVideoDecodeH264ReferenceInfoFlags flags,
         short FrameNum,
-        short reserved,
         IntBuffer PicOrderCnt
     ) {
         flags(flags);
         FrameNum(FrameNum);
-        reserved(reserved);
         PicOrderCnt(PicOrderCnt);
 
         return this;
@@ -255,7 +248,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
     public static StdVideoDecodeH264ReferenceInfoFlags nflags(long struct) { return StdVideoDecodeH264ReferenceInfoFlags.create(struct + StdVideoDecodeH264ReferenceInfo.FLAGS); }
     /** Unsafe version of {@link #FrameNum}. */
     public static short nFrameNum(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264ReferenceInfo.FRAMENUM); }
-    /** Unsafe version of {@link #reserved}. */
     public static short nreserved(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264ReferenceInfo.RESERVED); }
     /** Unsafe version of {@link #PicOrderCnt}. */
     public static IntBuffer nPicOrderCnt(long struct) { return memIntBuffer(struct + StdVideoDecodeH264ReferenceInfo.PICORDERCNT, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE); }
@@ -268,7 +260,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
     public static void nflags(long struct, StdVideoDecodeH264ReferenceInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeH264ReferenceInfo.FLAGS, StdVideoDecodeH264ReferenceInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #FrameNum(short) FrameNum}. */
     public static void nFrameNum(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264ReferenceInfo.FRAMENUM, value); }
-    /** Unsafe version of {@link #reserved(short) reserved}. */
     public static void nreserved(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264ReferenceInfo.RESERVED, value); }
     /** Unsafe version of {@link #PicOrderCnt(IntBuffer) PicOrderCnt}. */
     public static void nPicOrderCnt(long struct, IntBuffer value) {
@@ -323,9 +314,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
         /** @return the value of the {@link StdVideoDecodeH264ReferenceInfo#FrameNum} field. */
         @NativeType("uint16_t")
         public short FrameNum() { return StdVideoDecodeH264ReferenceInfo.nFrameNum(address()); }
-        /** @return the value of the {@link StdVideoDecodeH264ReferenceInfo#reserved} field. */
-        @NativeType("uint16_t")
-        public short reserved() { return StdVideoDecodeH264ReferenceInfo.nreserved(address()); }
         /** @return a {@link IntBuffer} view of the {@link StdVideoDecodeH264ReferenceInfo#PicOrderCnt} field. */
         @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
         public IntBuffer PicOrderCnt() { return StdVideoDecodeH264ReferenceInfo.nPicOrderCnt(address()); }
@@ -339,8 +327,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264Re
         public StdVideoDecodeH264ReferenceInfo.Buffer flags(java.util.function.Consumer<StdVideoDecodeH264ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
         /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfo#FrameNum} field. */
         public StdVideoDecodeH264ReferenceInfo.Buffer FrameNum(@NativeType("uint16_t") short value) { StdVideoDecodeH264ReferenceInfo.nFrameNum(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfo#reserved} field. */
-        public StdVideoDecodeH264ReferenceInfo.Buffer reserved(@NativeType("uint16_t") short value) { StdVideoDecodeH264ReferenceInfo.nreserved(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@link StdVideoDecodeH264ReferenceInfo#PicOrderCnt} field. */
         public StdVideoDecodeH264ReferenceInfo.Buffer PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { StdVideoDecodeH264ReferenceInfo.nPicOrderCnt(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@link StdVideoDecodeH264ReferenceInfo#PicOrderCnt} field. */

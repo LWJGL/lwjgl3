@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t reserved1[7];
  *     {@link StdVideoEncodeH265ReferenceModifications StdVideoEncodeH265ReferenceModifications} const * pRefLists;
  *     {@link StdVideoH265ShortTermRefPicSet StdVideoH265ShortTermRefPicSet} const * pShortTermRefPicSet;
- *     {@link StdVideoEncodeH265SliceSegmentLongTermRefPics StdVideoEncodeH265SliceSegmentLongTermRefPics} const * pLongTermRefPics;
+ *     {@link StdVideoEncodeH265LongTermRefPics StdVideoEncodeH265LongTermRefPics} const * pLongTermRefPics;
  * }</code></pre>
  */
 public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265PictureInfo> implements NativeResource {
@@ -142,9 +142,9 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
     /** @return a {@link StdVideoH265ShortTermRefPicSet} view of the struct pointed to by the {@code pShortTermRefPicSet} field. */
     @NativeType("StdVideoH265ShortTermRefPicSet const *")
     public StdVideoH265ShortTermRefPicSet pShortTermRefPicSet() { return npShortTermRefPicSet(address()); }
-    /** @return a {@link StdVideoEncodeH265SliceSegmentLongTermRefPics} view of the struct pointed to by the {@code pLongTermRefPics} field. */
-    @NativeType("StdVideoEncodeH265SliceSegmentLongTermRefPics const *")
-    public StdVideoEncodeH265SliceSegmentLongTermRefPics pLongTermRefPics() { return npLongTermRefPics(address()); }
+    /** @return a {@link StdVideoEncodeH265LongTermRefPics} view of the struct pointed to by the {@code pLongTermRefPics} field. */
+    @NativeType("StdVideoEncodeH265LongTermRefPics const *")
+    public StdVideoEncodeH265LongTermRefPics pLongTermRefPics() { return npLongTermRefPics(address()); }
 
     /** Copies the specified {@link StdVideoEncodeH265PictureInfoFlags} to the {@code flags} field. */
     public StdVideoEncodeH265PictureInfo flags(StdVideoEncodeH265PictureInfoFlags value) { nflags(address(), value); return this; }
@@ -168,8 +168,8 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
     public StdVideoEncodeH265PictureInfo pRefLists(@NativeType("StdVideoEncodeH265ReferenceModifications const *") StdVideoEncodeH265ReferenceModifications value) { npRefLists(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265ShortTermRefPicSet} to the {@code pShortTermRefPicSet} field. */
     public StdVideoEncodeH265PictureInfo pShortTermRefPicSet(@NativeType("StdVideoH265ShortTermRefPicSet const *") StdVideoH265ShortTermRefPicSet value) { npShortTermRefPicSet(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentLongTermRefPics} to the {@code pLongTermRefPics} field. */
-    public StdVideoEncodeH265PictureInfo pLongTermRefPics(@NativeType("StdVideoEncodeH265SliceSegmentLongTermRefPics const *") StdVideoEncodeH265SliceSegmentLongTermRefPics value) { npLongTermRefPics(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoEncodeH265LongTermRefPics} to the {@code pLongTermRefPics} field. */
+    public StdVideoEncodeH265PictureInfo pLongTermRefPics(@NativeType("StdVideoEncodeH265LongTermRefPics const *") StdVideoEncodeH265LongTermRefPics value) { npLongTermRefPics(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265PictureInfo set(
@@ -183,7 +183,7 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
         byte TemporalId,
         StdVideoEncodeH265ReferenceModifications pRefLists,
         StdVideoH265ShortTermRefPicSet pShortTermRefPicSet,
-        StdVideoEncodeH265SliceSegmentLongTermRefPics pLongTermRefPics
+        StdVideoEncodeH265LongTermRefPics pLongTermRefPics
     ) {
         flags(flags);
         pic_type(pic_type);
@@ -350,7 +350,7 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
     /** Unsafe version of {@link #pShortTermRefPicSet}. */
     public static StdVideoH265ShortTermRefPicSet npShortTermRefPicSet(long struct) { return StdVideoH265ShortTermRefPicSet.create(memGetAddress(struct + StdVideoEncodeH265PictureInfo.PSHORTTERMREFPICSET)); }
     /** Unsafe version of {@link #pLongTermRefPics}. */
-    public static StdVideoEncodeH265SliceSegmentLongTermRefPics npLongTermRefPics(long struct) { return StdVideoEncodeH265SliceSegmentLongTermRefPics.create(memGetAddress(struct + StdVideoEncodeH265PictureInfo.PLONGTERMREFPICS)); }
+    public static StdVideoEncodeH265LongTermRefPics npLongTermRefPics(long struct) { return StdVideoEncodeH265LongTermRefPics.create(memGetAddress(struct + StdVideoEncodeH265PictureInfo.PLONGTERMREFPICS)); }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH265PictureInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH265PictureInfoFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265PictureInfo.FLAGS, StdVideoEncodeH265PictureInfoFlags.SIZEOF); }
@@ -379,8 +379,8 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
     public static void npRefLists(long struct, StdVideoEncodeH265ReferenceModifications value) { memPutAddress(struct + StdVideoEncodeH265PictureInfo.PREFLISTS, value.address()); }
     /** Unsafe version of {@link #pShortTermRefPicSet(StdVideoH265ShortTermRefPicSet) pShortTermRefPicSet}. */
     public static void npShortTermRefPicSet(long struct, StdVideoH265ShortTermRefPicSet value) { memPutAddress(struct + StdVideoEncodeH265PictureInfo.PSHORTTERMREFPICSET, value.address()); }
-    /** Unsafe version of {@link #pLongTermRefPics(StdVideoEncodeH265SliceSegmentLongTermRefPics) pLongTermRefPics}. */
-    public static void npLongTermRefPics(long struct, StdVideoEncodeH265SliceSegmentLongTermRefPics value) { memPutAddress(struct + StdVideoEncodeH265PictureInfo.PLONGTERMREFPICS, value.address()); }
+    /** Unsafe version of {@link #pLongTermRefPics(StdVideoEncodeH265LongTermRefPics) pLongTermRefPics}. */
+    public static void npLongTermRefPics(long struct, StdVideoEncodeH265LongTermRefPics value) { memPutAddress(struct + StdVideoEncodeH265PictureInfo.PLONGTERMREFPICS, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -460,9 +460,9 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
         /** @return a {@link StdVideoH265ShortTermRefPicSet} view of the struct pointed to by the {@code pShortTermRefPicSet} field. */
         @NativeType("StdVideoH265ShortTermRefPicSet const *")
         public StdVideoH265ShortTermRefPicSet pShortTermRefPicSet() { return StdVideoEncodeH265PictureInfo.npShortTermRefPicSet(address()); }
-        /** @return a {@link StdVideoEncodeH265SliceSegmentLongTermRefPics} view of the struct pointed to by the {@code pLongTermRefPics} field. */
-        @NativeType("StdVideoEncodeH265SliceSegmentLongTermRefPics const *")
-        public StdVideoEncodeH265SliceSegmentLongTermRefPics pLongTermRefPics() { return StdVideoEncodeH265PictureInfo.npLongTermRefPics(address()); }
+        /** @return a {@link StdVideoEncodeH265LongTermRefPics} view of the struct pointed to by the {@code pLongTermRefPics} field. */
+        @NativeType("StdVideoEncodeH265LongTermRefPics const *")
+        public StdVideoEncodeH265LongTermRefPics pLongTermRefPics() { return StdVideoEncodeH265PictureInfo.npLongTermRefPics(address()); }
 
         /** Copies the specified {@link StdVideoEncodeH265PictureInfoFlags} to the {@code flags} field. */
         public StdVideoEncodeH265PictureInfo.Buffer flags(StdVideoEncodeH265PictureInfoFlags value) { StdVideoEncodeH265PictureInfo.nflags(address(), value); return this; }
@@ -486,8 +486,8 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
         public StdVideoEncodeH265PictureInfo.Buffer pRefLists(@NativeType("StdVideoEncodeH265ReferenceModifications const *") StdVideoEncodeH265ReferenceModifications value) { StdVideoEncodeH265PictureInfo.npRefLists(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265ShortTermRefPicSet} to the {@code pShortTermRefPicSet} field. */
         public StdVideoEncodeH265PictureInfo.Buffer pShortTermRefPicSet(@NativeType("StdVideoH265ShortTermRefPicSet const *") StdVideoH265ShortTermRefPicSet value) { StdVideoEncodeH265PictureInfo.npShortTermRefPicSet(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentLongTermRefPics} to the {@code pLongTermRefPics} field. */
-        public StdVideoEncodeH265PictureInfo.Buffer pLongTermRefPics(@NativeType("StdVideoEncodeH265SliceSegmentLongTermRefPics const *") StdVideoEncodeH265SliceSegmentLongTermRefPics value) { StdVideoEncodeH265PictureInfo.npLongTermRefPics(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoEncodeH265LongTermRefPics} to the {@code pLongTermRefPics} field. */
+        public StdVideoEncodeH265PictureInfo.Buffer pLongTermRefPics(@NativeType("StdVideoEncodeH265LongTermRefPics const *") StdVideoEncodeH265LongTermRefPics value) { StdVideoEncodeH265PictureInfo.npLongTermRefPics(address(), value); return this; }
 
     }
 

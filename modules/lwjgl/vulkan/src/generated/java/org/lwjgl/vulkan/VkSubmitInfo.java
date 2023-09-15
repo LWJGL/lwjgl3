@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_SUBMIT_INFO STRUCTURE_TYPE_SUBMIT_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAmigoProfilingSubmitInfoSEC}, {@link VkD3D12FenceSubmitInfoKHR}, {@link VkDeviceGroupSubmitInfo}, {@link VkPerformanceQuerySubmitInfoKHR}, {@link VkProtectedSubmitInfo}, {@link VkTimelineSemaphoreSubmitInfo}, {@link VkWin32KeyedMutexAcquireReleaseInfoKHR}, or {@link VkWin32KeyedMutexAcquireReleaseInfoNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAmigoProfilingSubmitInfoSEC}, {@link VkD3D12FenceSubmitInfoKHR}, {@link VkDeviceGroupSubmitInfo}, {@link VkFrameBoundaryEXT}, {@link VkPerformanceQuerySubmitInfoKHR}, {@link VkProtectedSubmitInfo}, {@link VkTimelineSemaphoreSubmitInfo}, {@link VkWin32KeyedMutexAcquireReleaseInfoKHR}, or {@link VkWin32KeyedMutexAcquireReleaseInfoNV}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitDstStageMask} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid combinations of {@code VkPipelineStageFlagBits} values</li>
@@ -200,6 +200,8 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
     public VkSubmitInfo pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceGroupSubmitInfoKHR} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+    public VkSubmitInfo pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
@@ -527,6 +529,8 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
         public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceGroupSubmitInfoKHR} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+        public VkSubmitInfo.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */

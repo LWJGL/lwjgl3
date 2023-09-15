@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BIND_SPARSE_INFO STRUCTURE_TYPE_BIND_SPARSE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupBindSparseInfo} or {@link VkTimelineSemaphoreSubmitInfo}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupBindSparseInfo}, {@link VkFrameBoundaryEXT}, or {@link VkTimelineSemaphoreSubmitInfo}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>If {@code bufferBindCount} is not 0, {@code pBufferBinds} <b>must</b> be a valid pointer to an array of {@code bufferBindCount} valid {@link VkSparseBufferMemoryBindInfo} structures</li>
@@ -196,6 +196,8 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     public VkBindSparseInfo pNext(VkDeviceGroupBindSparseInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceGroupBindSparseInfoKHR} value to the {@code pNext} chain. */
     public VkBindSparseInfo pNext(VkDeviceGroupBindSparseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+    public VkBindSparseInfo pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
     public VkBindSparseInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
@@ -548,6 +550,8 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
         public VkBindSparseInfo.Buffer pNext(VkDeviceGroupBindSparseInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceGroupBindSparseInfoKHR} value to the {@code pNext} chain. */
         public VkBindSparseInfo.Buffer pNext(VkDeviceGroupBindSparseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+        public VkBindSparseInfo.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
         public VkBindSparseInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */

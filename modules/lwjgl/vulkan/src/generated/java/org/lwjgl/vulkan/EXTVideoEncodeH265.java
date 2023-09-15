@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>40</dd>
  * <dt><b>Revision</b></dt>
- * <dd>11</dd>
+ * <dd>12</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}
  * 
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2023-06-06</dd>
+ * <dd>2023-07-19</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -56,7 +56,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH265 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 11;
+    public static final int VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 12;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H265_EXTENSION_NAME = "VK_EXT_video_encode_h265";
@@ -157,6 +157,8 @@ public final class EXTVideoEncodeH265 {
      * <li>{@link #VK_VIDEO_ENCODE_H265_STD_DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET_BIT_EXT VIDEO_ENCODE_H265_STD_DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET_BIT_EXT} indicates if enabling {@code deblocking_filter_override_enabled_flag} in {@code StdVideoH265PpsFlags} is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET_BIT_EXT VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET_BIT_EXT} indicates if enabling {@code dependent_slice_segments_enabled_flag} in {@code StdVideoH265PpsFlags} is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT} indicates if enabling {@code dependent_slice_segment_flag} in {@code StdVideoEncodeH265SliceHeaderFlags} is supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H265_STD_SLICE_QP_DELTA_BIT_EXT VIDEO_ENCODE_H265_STD_SLICE_QP_DELTA_BIT_EXT} indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::slice_qp_delta} when that value is identical across the slice segments of the encoded frame.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H265_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT VIDEO_ENCODE_H265_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT} indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::slice_qp_delta} when that value is different across the slice segments of the encoded frame.</li>
      * </ul>
      */
     public static final int
@@ -178,7 +180,9 @@ public final class EXTVideoEncodeH265 {
         VK_VIDEO_ENCODE_H265_STD_ENTROPY_CODING_SYNC_ENABLED_FLAG_SET_BIT_EXT         = 0x8000,
         VK_VIDEO_ENCODE_H265_STD_DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET_BIT_EXT  = 0x10000,
         VK_VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET_BIT_EXT    = 0x20000,
-        VK_VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT             = 0x40000;
+        VK_VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT             = 0x40000,
+        VK_VIDEO_ENCODE_H265_STD_SLICE_QP_DELTA_BIT_EXT                               = 0x80000,
+        VK_VIDEO_ENCODE_H265_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT                     = 0x100000;
 
     /**
      * VkVideoEncodeH265CtbSizeFlagBitsEXT - Supported CTB sizes for H.265 video encode

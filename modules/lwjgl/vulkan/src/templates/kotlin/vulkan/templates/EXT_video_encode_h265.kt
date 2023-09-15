@@ -25,7 +25,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
             <dd>40</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>11</dd>
+            <dd>12</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}
@@ -43,7 +43,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2023-06-06</dd>
+            <dd>2023-07-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -67,7 +67,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H265_SPEC_VERSION".."11"
+        "EXT_VIDEO_ENCODE_H265_SPEC_VERSION".."12"
     )
 
     StringConstant(
@@ -157,6 +157,8 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
             <li>#VIDEO_ENCODE_H265_STD_DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET_BIT_EXT indicates if enabling {@code deblocking_filter_override_enabled_flag} in {@code StdVideoH265PpsFlags} is supported.</li>
             <li>#VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET_BIT_EXT indicates if enabling {@code dependent_slice_segments_enabled_flag} in {@code StdVideoH265PpsFlags} is supported.</li>
             <li>#VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT indicates if enabling {@code dependent_slice_segment_flag} in {@code StdVideoEncodeH265SliceHeaderFlags} is supported.</li>
+            <li>#VIDEO_ENCODE_H265_STD_SLICE_QP_DELTA_BIT_EXT indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::slice_qp_delta} when that value is identical across the slice segments of the encoded frame.</li>
+            <li>#VIDEO_ENCODE_H265_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::slice_qp_delta} when that value is different across the slice segments of the encoded frame.</li>
         </ul>
         """,
 
@@ -178,7 +180,9 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
         "VIDEO_ENCODE_H265_STD_ENTROPY_CODING_SYNC_ENABLED_FLAG_SET_BIT_EXT".enum(0x00008000),
         "VIDEO_ENCODE_H265_STD_DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET_BIT_EXT".enum(0x00010000),
         "VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET_BIT_EXT".enum(0x00020000),
-        "VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT".enum(0x00040000)
+        "VIDEO_ENCODE_H265_STD_DEPENDENT_SLICE_SEGMENT_FLAG_SET_BIT_EXT".enum(0x00040000),
+        "VIDEO_ENCODE_H265_STD_SLICE_QP_DELTA_BIT_EXT".enum(0x00080000),
+        "VIDEO_ENCODE_H265_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT".enum(0x00100000)
     )
 
     EnumConstant(

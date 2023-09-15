@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxComputeWorkgroupSubgroups};
  *     VkShaderStageFlags {@link #requiredSubgroupSizeStages};
  *     uint32_t {@link #maxInlineUniformBlockSize};
- *     uint32_t maxPerStageDescriptorInlineUniformBlocks;
+ *     uint32_t {@link #maxPerStageDescriptorInlineUniformBlocks};
  *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks};
  *     uint32_t {@link #maxDescriptorSetInlineUniformBlocks};
  *     uint32_t {@link #maxDescriptorSetUpdateAfterBindInlineUniformBlocks};
@@ -289,7 +289,7 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct<VkPhysicalDeviceV
     /** the maximum size in bytes of an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-inlineuniformblock">inline uniform block</a> binding. */
     @NativeType("uint32_t")
     public int maxInlineUniformBlockSize() { return nmaxInlineUniformBlockSize(address()); }
-    /** @return the value of the {@code maxPerStageDescriptorInlineUniformBlocks} field. */
+    /** the maximum number of inline uniform block bindings that <b>can</b> be accessible to a single shader stage in a pipeline layout. Descriptor bindings with a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorInlineUniformBlocks() { return nmaxPerStageDescriptorInlineUniformBlocks(address()); }
     /** similar to {@code maxPerStageDescriptorInlineUniformBlocks} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
@@ -712,7 +712,7 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct<VkPhysicalDeviceV
         /** @return the value of the {@link VkPhysicalDeviceVulkan13Properties#maxInlineUniformBlockSize} field. */
         @NativeType("uint32_t")
         public int maxInlineUniformBlockSize() { return VkPhysicalDeviceVulkan13Properties.nmaxInlineUniformBlockSize(address()); }
-        /** @return the value of the {@code maxPerStageDescriptorInlineUniformBlocks} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan13Properties#maxPerStageDescriptorInlineUniformBlocks} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorInlineUniformBlocks() { return VkPhysicalDeviceVulkan13Properties.nmaxPerStageDescriptorInlineUniformBlocks(address()); }
         /** @return the value of the {@link VkPhysicalDeviceVulkan13Properties#maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks} field. */

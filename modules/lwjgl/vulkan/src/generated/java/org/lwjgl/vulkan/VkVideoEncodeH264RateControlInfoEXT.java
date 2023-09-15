@@ -31,7 +31,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264RateControlFlagBitsEXT} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -1002,6 +1002,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_fragment_density_map2;
     /** When true, {@link EXTFragmentShaderInterlock} is supported. */
     public final boolean VK_EXT_fragment_shader_interlock;
+    /** When true, {@link EXTFrameBoundary} is supported. */
+    public final boolean VK_EXT_frame_boundary;
     /** When true, {@link EXTFullScreenExclusive} is supported. */
     public final boolean VK_EXT_full_screen_exclusive;
     /** When true, {@link EXTGlobalPriority} is supported. */
@@ -1342,6 +1344,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_workgroup_memory_explicit_layout;
     /** When true, {@link KHRZeroInitializeWorkgroupMemory} is supported. */
     public final boolean VK_KHR_zero_initialize_workgroup_memory;
+    /** When true, {@link MSFTLayeredDriver} is supported. */
+    public final boolean VK_MSFT_layered_driver;
     /** When true, {@link NVAcquireWinrtDisplay} is supported. */
     public final boolean VK_NV_acquire_winrt_display;
     /** When true, {@link NVClipSpaceWScaling} is supported. */
@@ -1360,6 +1364,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_dedicated_allocation;
     /** When true, {@link NVDedicatedAllocationImageAliasing} is supported. */
     public final boolean VK_NV_dedicated_allocation_image_aliasing;
+    /** When true, {@link NVDescriptorPoolOverallocation} is supported. */
+    public final boolean VK_NV_descriptor_pool_overallocation;
     /** When true, {@link NVDeviceDiagnosticCheckpoints} is supported. */
     public final boolean VK_NV_device_diagnostic_checkpoints;
     /** When true, {@link NVDeviceDiagnosticsConfig} is supported. */
@@ -1545,6 +1551,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_fragment_density_map = ext.contains("VK_EXT_fragment_density_map");
         VK_EXT_fragment_density_map2 = ext.contains("VK_EXT_fragment_density_map2");
         VK_EXT_fragment_shader_interlock = ext.contains("VK_EXT_fragment_shader_interlock");
+        VK_EXT_frame_boundary = ext.contains("VK_EXT_frame_boundary");
         VK_EXT_full_screen_exclusive = check_EXT_full_screen_exclusive(provider, caps, ext);
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_global_priority_query = ext.contains("VK_EXT_global_priority_query");
@@ -1715,6 +1722,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");
         VK_KHR_workgroup_memory_explicit_layout = ext.contains("VK_KHR_workgroup_memory_explicit_layout");
         VK_KHR_zero_initialize_workgroup_memory = ext.contains("VK_KHR_zero_initialize_workgroup_memory");
+        VK_MSFT_layered_driver = ext.contains("VK_MSFT_layered_driver");
         VK_NV_acquire_winrt_display = ext.contains("VK_NV_acquire_winrt_display");
         VK_NV_clip_space_w_scaling = check_NV_clip_space_w_scaling(provider, caps, ext);
         VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
@@ -1724,6 +1732,7 @@ public class VKCapabilitiesDevice {
         VK_NV_coverage_reduction_mode = ext.contains("VK_NV_coverage_reduction_mode");
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
         VK_NV_dedicated_allocation_image_aliasing = ext.contains("VK_NV_dedicated_allocation_image_aliasing");
+        VK_NV_descriptor_pool_overallocation = ext.contains("VK_NV_descriptor_pool_overallocation");
         VK_NV_device_diagnostic_checkpoints = check_NV_device_diagnostic_checkpoints(provider, caps, ext);
         VK_NV_device_diagnostics_config = ext.contains("VK_NV_device_diagnostics_config");
         VK_NV_device_generated_commands = check_NV_device_generated_commands(provider, caps, ext);

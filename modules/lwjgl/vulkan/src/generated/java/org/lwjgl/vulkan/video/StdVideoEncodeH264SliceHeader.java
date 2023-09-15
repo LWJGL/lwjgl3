@@ -26,7 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH264SliceType slice_type;
  *     int8_t slice_alpha_c0_offset_div2;
  *     int8_t slice_beta_offset_div2;
- *     uint16_t reserved1;
+ *     int8_t slice_qp_delta;
+ *     uint8_t reserved1;
  *     StdVideoH264CabacInitIdc cabac_init_idc;
  *     StdVideoH264DisableDeblockingFilterIdc disable_deblocking_filter_idc;
  *     {@link StdVideoEncodeH264WeightTable StdVideoEncodeH264WeightTable} const * pWeightTable;
@@ -47,6 +48,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         SLICE_TYPE,
         SLICE_ALPHA_C0_OFFSET_DIV2,
         SLICE_BETA_OFFSET_DIV2,
+        SLICE_QP_DELTA,
         RESERVED1,
         CABAC_INIT_IDC,
         DISABLE_DEBLOCKING_FILTER_IDC,
@@ -59,7 +61,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
             __member(4),
             __member(1),
             __member(1),
-            __member(2),
+            __member(1),
+            __member(1),
             __member(4),
             __member(4),
             __member(POINTER_SIZE)
@@ -73,10 +76,11 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         SLICE_TYPE = layout.offsetof(2);
         SLICE_ALPHA_C0_OFFSET_DIV2 = layout.offsetof(3);
         SLICE_BETA_OFFSET_DIV2 = layout.offsetof(4);
-        RESERVED1 = layout.offsetof(5);
-        CABAC_INIT_IDC = layout.offsetof(6);
-        DISABLE_DEBLOCKING_FILTER_IDC = layout.offsetof(7);
-        PWEIGHTTABLE = layout.offsetof(8);
+        SLICE_QP_DELTA = layout.offsetof(5);
+        RESERVED1 = layout.offsetof(6);
+        CABAC_INIT_IDC = layout.offsetof(7);
+        DISABLE_DEBLOCKING_FILTER_IDC = layout.offsetof(8);
+        PWEIGHTTABLE = layout.offsetof(9);
     }
 
     protected StdVideoEncodeH264SliceHeader(long address, @Nullable ByteBuffer container) {
@@ -115,9 +119,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     /** @return the value of the {@code slice_beta_offset_div2} field. */
     @NativeType("int8_t")
     public byte slice_beta_offset_div2() { return nslice_beta_offset_div2(address()); }
-    /** @return the value of the {@code reserved1} field. */
-    @NativeType("uint16_t")
-    public short reserved1() { return nreserved1(address()); }
+    /** @return the value of the {@code slice_qp_delta} field. */
+    @NativeType("int8_t")
+    public byte slice_qp_delta() { return nslice_qp_delta(address()); }
     /** @return the value of the {@code cabac_init_idc} field. */
     @NativeType("StdVideoH264CabacInitIdc")
     public int cabac_init_idc() { return ncabac_init_idc(address()); }
@@ -140,8 +144,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     public StdVideoEncodeH264SliceHeader slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { nslice_alpha_c0_offset_div2(address(), value); return this; }
     /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
     public StdVideoEncodeH264SliceHeader slice_beta_offset_div2(@NativeType("int8_t") byte value) { nslice_beta_offset_div2(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved1} field. */
-    public StdVideoEncodeH264SliceHeader reserved1(@NativeType("uint16_t") short value) { nreserved1(address(), value); return this; }
+    /** Sets the specified value to the {@code slice_qp_delta} field. */
+    public StdVideoEncodeH264SliceHeader slice_qp_delta(@NativeType("int8_t") byte value) { nslice_qp_delta(address(), value); return this; }
     /** Sets the specified value to the {@code cabac_init_idc} field. */
     public StdVideoEncodeH264SliceHeader cabac_init_idc(@NativeType("StdVideoH264CabacInitIdc") int value) { ncabac_init_idc(address(), value); return this; }
     /** Sets the specified value to the {@code disable_deblocking_filter_idc} field. */
@@ -156,7 +160,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         int slice_type,
         byte slice_alpha_c0_offset_div2,
         byte slice_beta_offset_div2,
-        short reserved1,
+        byte slice_qp_delta,
         int cabac_init_idc,
         int disable_deblocking_filter_idc,
         StdVideoEncodeH264WeightTable pWeightTable
@@ -166,7 +170,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         slice_type(slice_type);
         slice_alpha_c0_offset_div2(slice_alpha_c0_offset_div2);
         slice_beta_offset_div2(slice_beta_offset_div2);
-        reserved1(reserved1);
+        slice_qp_delta(slice_qp_delta);
         cabac_init_idc(cabac_init_idc);
         disable_deblocking_filter_idc(disable_deblocking_filter_idc);
         pWeightTable(pWeightTable);
@@ -309,8 +313,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     public static byte nslice_alpha_c0_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_beta_offset_div2}. */
     public static byte nslice_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
-    /** Unsafe version of {@link #reserved1}. */
-    public static short nreserved1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
+    /** Unsafe version of {@link #slice_qp_delta}. */
+    public static byte nslice_qp_delta(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA); }
+    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
     /** Unsafe version of {@link #cabac_init_idc}. */
     public static int ncabac_init_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc}. */
@@ -328,8 +333,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     public static void nslice_alpha_c0_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_beta_offset_div2(byte) slice_beta_offset_div2}. */
     public static void nslice_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
-    /** Unsafe version of {@link #reserved1(short) reserved1}. */
-    public static void nreserved1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
+    /** Unsafe version of {@link #slice_qp_delta(byte) slice_qp_delta}. */
+    public static void nslice_qp_delta(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA, value); }
+    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
     /** Unsafe version of {@link #cabac_init_idc(int) cabac_init_idc}. */
     public static void ncabac_init_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC, value); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc(int) disable_deblocking_filter_idc}. */
@@ -398,9 +404,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         /** @return the value of the {@code slice_beta_offset_div2} field. */
         @NativeType("int8_t")
         public byte slice_beta_offset_div2() { return StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address()); }
-        /** @return the value of the {@code reserved1} field. */
-        @NativeType("uint16_t")
-        public short reserved1() { return StdVideoEncodeH264SliceHeader.nreserved1(address()); }
+        /** @return the value of the {@code slice_qp_delta} field. */
+        @NativeType("int8_t")
+        public byte slice_qp_delta() { return StdVideoEncodeH264SliceHeader.nslice_qp_delta(address()); }
         /** @return the value of the {@code cabac_init_idc} field. */
         @NativeType("StdVideoH264CabacInitIdc")
         public int cabac_init_idc() { return StdVideoEncodeH264SliceHeader.ncabac_init_idc(address()); }
@@ -423,8 +429,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         public StdVideoEncodeH264SliceHeader.Buffer slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_alpha_c0_offset_div2(address(), value); return this; }
         /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
         public StdVideoEncodeH264SliceHeader.Buffer slice_beta_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved1} field. */
-        public StdVideoEncodeH264SliceHeader.Buffer reserved1(@NativeType("uint16_t") short value) { StdVideoEncodeH264SliceHeader.nreserved1(address(), value); return this; }
+        /** Sets the specified value to the {@code slice_qp_delta} field. */
+        public StdVideoEncodeH264SliceHeader.Buffer slice_qp_delta(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_qp_delta(address(), value); return this; }
         /** Sets the specified value to the {@code cabac_init_idc} field. */
         public StdVideoEncodeH264SliceHeader.Buffer cabac_init_idc(@NativeType("StdVideoH264CabacInitIdc") int value) { StdVideoEncodeH264SliceHeader.ncabac_init_idc(address(), value); return this; }
         /** Sets the specified value to the {@code disable_deblocking_filter_idc} field. */

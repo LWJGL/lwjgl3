@@ -31,7 +31,8 @@ public final class STDVulkanVideoCodecH265 {
         STD_VIDEO_H265_MAX_DPB_SIZE                             = 16,
         STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS               = 32,
         STD_VIDEO_H265_MAX_LONG_TERM_PICS                       = 16,
-        STD_VIDEO_H265_MAX_DELTA_POC                            = 48;
+        STD_VIDEO_H265_MAX_DELTA_POC                            = 48,
+        STD_VIDEO_H265_NO_REFERENCE_PICTURE                     = 0xFF;
 
     /**
      * {@code StdVideoH265ChromaFormatIdc}
@@ -208,7 +209,7 @@ public final class STDVulkanVideoCodecH265 {
     public static final int STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE = 8;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 11);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 12);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h265_encode";

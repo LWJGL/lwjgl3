@@ -235,7 +235,7 @@ val StdVideoDecodeH264ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeH264R
 
     StdVideoDecodeH264ReferenceInfoFlags("flags", "")
     uint16_t("FrameNum", "7.4.3.3 Decoded reference picture marking semantics")
-    uint16_t("reserved", "for structure members 32-bit packing/alignment")
+    uint16_t("reserved", "for structure members 32-bit packing/alignment").private()
     int32_t("PicOrderCnt", "topFieldOrderCnt and BottomFieldOrderCnt fields")["STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE"]
 }
 
@@ -312,7 +312,7 @@ val StdVideoEncodeH264RefListModEntry = struct(Module.VULKAN, "StdVideoEncodeH26
 val StdVideoEncodeH264RefPicMarkingEntry = struct(Module.VULKAN, "StdVideoEncodeH264RefPicMarkingEntry") {
     subpackage = "video"
 
-    StdVideoH264MemMgmtControlOp("operation", "")
+    StdVideoH264MemMgmtControlOp("memory_management_control_operation", "")
     uint16_t("difference_of_pic_nums_minus1", "")
     uint16_t("long_term_pic_num", "")
     uint16_t("long_term_frame_idx", "")
@@ -331,7 +331,7 @@ val StdVideoEncodeH264ReferenceListsInfo = struct(Module.VULKAN, "StdVideoEncode
     AutoSize("pRefList0ModOperations")..uint8_t("refList0ModOpCount", "")
     AutoSize("pRefList1ModOperations")..uint8_t("refList1ModOpCount", "")
     AutoSize("pRefPicMarkingOperations")..uint8_t("refPicMarkingOpCount", "")
-    uint8_t("reserved1", "")["7"]
+    uint8_t("reserved1", "")["7"].private()
     nullable..StdVideoEncodeH264RefListModEntry.const.p("pRefList0ModOperations", "")
     nullable..StdVideoEncodeH264RefListModEntry.const.p("pRefList1ModOperations", "")
     StdVideoEncodeH264RefPicMarkingEntry.const.p("pRefPicMarkingOperations", "")
@@ -372,7 +372,8 @@ val StdVideoEncodeH264SliceHeader = struct(Module.VULKAN, "StdVideoEncodeH264Sli
     StdVideoH264SliceType("slice_type", "")
     int8_t("slice_alpha_c0_offset_div2", "")
     int8_t("slice_beta_offset_div2", "")
-    uint16_t("reserved1", "")
+    int8_t("slice_qp_delta", "")
+    uint8_t("reserved1", "").private()
     StdVideoH264CabacInitIdc("cabac_init_idc", "")
     StdVideoH264DisableDeblockingFilterIdc("disable_deblocking_filter_idc", "")
     StdVideoEncodeH264WeightTable.const.p("pWeightTable", "")
@@ -890,7 +891,8 @@ val StdVideoEncodeH265SliceSegmentHeader = struct(Module.VULKAN, "StdVideoEncode
     int8_t("slice_act_y_qp_offset", "")
     int8_t("slice_act_cb_qp_offset", "")
     int8_t("slice_act_cr_qp_offset", "")
-    uint8_t("reserved1", "")[3].private()
+    int8_t("slice_qp_delta", "")
+    uint16_t("reserved1", "").private()
     StdVideoEncodeH265WeightTable.const.p("pWeightTable", "")
 }
 
@@ -931,7 +933,7 @@ val StdVideoEncodeH265PictureInfoFlags = struct(Module.VULKAN, "StdVideoEncodeH2
     uint32_t("reserved", "", bits = 23).private()
 }
 
-val StdVideoEncodeH265SliceSegmentLongTermRefPics = struct(Module.VULKAN, "StdVideoEncodeH265SliceSegmentLongTermRefPics") {
+val StdVideoEncodeH265LongTermRefPics = struct(Module.VULKAN, "StdVideoEncodeH265LongTermRefPics") {
     subpackage = "video"
     javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*")
 
@@ -958,7 +960,7 @@ val StdVideoEncodeH265PictureInfo = struct(Module.VULKAN, "StdVideoEncodeH265Pic
     uint8_t("reserved1", "")[7].private()
     StdVideoEncodeH265ReferenceListsInfo.const.p("pRefLists", "")
     StdVideoH265ShortTermRefPicSet.const.p("pShortTermRefPicSet", "")
-    StdVideoEncodeH265SliceSegmentLongTermRefPics.const.p("pLongTermRefPics", "")
+    StdVideoEncodeH265LongTermRefPics.const.p("pLongTermRefPics", "")
 }
 
 val StdVideoEncodeH265ReferenceInfoFlags = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceInfoFlags") {

@@ -35,7 +35,8 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
         "VIDEO_H265_MAX_DPB_SIZE".."16",
         "VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS".."32",
         "VIDEO_H265_MAX_LONG_TERM_PICS".."16",
-        "VIDEO_H265_MAX_DELTA_POC".."48"
+        "VIDEO_H265_MAX_DELTA_POC".."48",
+        "VIDEO_H265_NO_REFERENCE_PICTURE".."0xFF"
     )
 
     EnumConstant(
@@ -146,7 +147,7 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
     IntConstant(
         "The extension specification version.",
 
-        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 11)"
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 12)"
     ).noPrefix()
 
     StringConstant(

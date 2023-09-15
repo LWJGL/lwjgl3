@@ -16,7 +16,8 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_SCALING_LIST_8X8_NUM_LISTS    = 6,
         STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS = 64,
         STD_VIDEO_H264_MAX_NUM_LIST_REF              = 32,
-        STD_VIDEO_H264_MAX_CHROMA_PLANES             = 2;
+        STD_VIDEO_H264_MAX_CHROMA_PLANES             = 2,
+        STD_VIDEO_H264_NO_REFERENCE_PICTURE          = 0xFF;
 
     /**
      * {@code StdVideoH264ChromaFormatIdc}
@@ -363,7 +364,7 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID = 0x7FFFFFFF;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 10);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 11);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_encode";

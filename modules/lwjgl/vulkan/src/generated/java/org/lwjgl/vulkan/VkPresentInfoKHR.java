@@ -31,6 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
+ * <li>Elements of {@code pSwapchain} <b>must</b> be unique</li>
  * <li>Each element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the {@link KHRSwapchain#VK_IMAGE_LAYOUT_PRESENT_SRC_KHR IMAGE_LAYOUT_PRESENT_SRC_KHR} or {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR} layout at the time the operation is executed on a {@code VkDevice}</li>
  * <li>If a {@link VkPresentIdKHR} structure is included in the {@code pNext} chain, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentId">{@code presentId}</a> feature is not enabled, each {@code presentIds} entry in that structure <b>must</b> be NULL</li>
  * <li>If any element of the {@code pSwapchains} array has been created with {@link VkSwapchainPresentModesCreateInfoEXT}, all of the elements of this array <b>must</b> be created with {@link VkSwapchainPresentModesCreateInfoEXT}</li>
@@ -40,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_PRESENT_INFO_KHR STRUCTURE_TYPE_PRESENT_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupPresentInfoKHR}, {@link VkDisplayPresentInfoKHR}, {@link VkPresentIdKHR}, {@link VkPresentRegionsKHR}, {@link VkPresentTimesInfoGOOGLE}, {@link VkSwapchainPresentFenceInfoEXT}, or {@link VkSwapchainPresentModeInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupPresentInfoKHR}, {@link VkDisplayPresentInfoKHR}, {@link VkFrameBoundaryEXT}, {@link VkPresentIdKHR}, {@link VkPresentRegionsKHR}, {@link VkPresentTimesInfoGOOGLE}, {@link VkSwapchainPresentFenceInfoEXT}, or {@link VkSwapchainPresentModeInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
@@ -150,7 +151,7 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     /** the number of swapchains being presented to by this command. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** a pointer to an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once. */
+    /** a pointer to an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. */
     @NativeType("VkSwapchainKHR const *")
     public LongBuffer pSwapchains() { return npSwapchains(address()); }
     /** a pointer to an array of indices into the array of each swapchain’s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array. */
@@ -171,6 +172,8 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     public VkPresentInfoKHR pNext(VkDeviceGroupPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDisplayPresentInfoKHR} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
@@ -479,6 +482,8 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
         public VkPresentInfoKHR.Buffer pNext(VkDeviceGroupPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDisplayPresentInfoKHR} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */

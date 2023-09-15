@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>300</dd>
  * <dt><b>Revision</b></dt>
- * <dd>9</dd>
+ * <dd>10</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}
  * 
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2023-06-06</dd>
+ * <dd>2023-07-19</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -76,7 +76,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRVideoEncodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 9;
+    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 10;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";
@@ -213,6 +213,9 @@ public class KHRVideoEncodeQueue {
     /** Extends {@code VkQueryType}. */
     public static final int VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR = 1000299000;
 
+    /** Extends {@code VkQueryResultStatusKHR}. */
+    public static final int VK_QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR = -1000299000;
+
     /** Extends {@code VkResult}. */
     public static final int VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR = -1000299000;
 
@@ -237,9 +240,18 @@ public class KHRVideoEncodeQueue {
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR} indicates that the implementation supports the use of {@link VkVideoEncodeInfoKHR}{@code ::precedingExternallyEncodedBytes}.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR} indicates that the implementation is able to detect and report when the destination video bitstream buffer range provided by the application is not sufficiently large to fit the encoded bitstream data produced by a video encode operation by reporting the {@link #VK_QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR} <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#query-result-status-codes">query result status code</a>.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Some implementations <b>may</b> not be able to reliably detect insufficient bitstream buffer range conditions in all situations. Such implementations will not report support for the {@link #VK_VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR} encode capability flag for the video profile, but <b>may</b> still report the {@link #VK_QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR} query result status code in certain cases. Applications <b>should</b> always check for the specific query result status code {@link #VK_QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR} even when this encode capability flag is not supported by the implementation for the video profile in question. However, applications <b>must</b> not assume that a different negative query result status code indicating an unsuccessful completion of a video encode operation is not the result of an insufficient bitstream buffer condition unless this encode capability flag is supported.</p>
+     * </div>
+     * </li>
      * </ul>
      */
-    public static final int VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR = 0x1;
+    public static final int
+        VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR            = 0x1,
+        VK_VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR = 0x2;
 
     /**
      * VkVideoEncodeRateControlModeFlagBitsKHR - Video encode rate control modes

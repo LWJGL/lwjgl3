@@ -1864,7 +1864,7 @@ public class KHRAccelerationStructure {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@code srcAccelerationStructure}, {@code dstAccelerationStructure}, and {@code mode} members of {@code pBuildInfo} are ignored. Any {@link VkDeviceOrHostAddressKHR} members of {@code pBuildInfo} are ignored by this command, except that the {@code hostAddress} member of {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::transformData} will be examined to check if it is {@code NULL}.</p>
+     * <p>The {@code srcAccelerationStructure}, {@code dstAccelerationStructure}, and {@code mode} members of {@code pBuildInfo} are ignored. Any {@link VkDeviceOrHostAddressKHR} or {@link VkDeviceOrHostAddressConstKHR} members of {@code pBuildInfo} are ignored by this command, except that the {@code hostAddress} member of {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::transformData} will be examined to check if it is {@code NULL}.</p>
      * 
      * <p>An acceleration structure created with the {@code accelerationStructureSize} returned by this command supports any build or update with a {@link VkAccelerationStructureBuildGeometryInfoKHR} structure and array of {@link VkAccelerationStructureBuildRangeInfoKHR} structures subject to the following properties:</p>
      * 

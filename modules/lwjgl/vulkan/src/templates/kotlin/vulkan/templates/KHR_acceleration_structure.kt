@@ -1536,7 +1536,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    VkAccelerationStructureBuildSizesInfoKHR*   pSizeInfo);</code></pre>
 
         <h5>Description</h5>
-        The {@code srcAccelerationStructure}, {@code dstAccelerationStructure}, and {@code mode} members of {@code pBuildInfo} are ignored. Any ##VkDeviceOrHostAddressKHR members of {@code pBuildInfo} are ignored by this command, except that the {@code hostAddress} member of ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData} will be examined to check if it is {@code NULL}.
+        The {@code srcAccelerationStructure}, {@code dstAccelerationStructure}, and {@code mode} members of {@code pBuildInfo} are ignored. Any ##VkDeviceOrHostAddressKHR or ##VkDeviceOrHostAddressConstKHR members of {@code pBuildInfo} are ignored by this command, except that the {@code hostAddress} member of ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData} will be examined to check if it is {@code NULL}.
 
         An acceleration structure created with the {@code accelerationStructureSize} returned by this command supports any build or update with a ##VkAccelerationStructureBuildGeometryInfoKHR structure and array of ##VkAccelerationStructureBuildRangeInfoKHR structures subject to the following properties:
 

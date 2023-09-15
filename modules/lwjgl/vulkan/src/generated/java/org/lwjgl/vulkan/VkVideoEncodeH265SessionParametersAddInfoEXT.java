@@ -24,12 +24,9 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
- * <li>If {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
- * <li>If {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
- * <li>If {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
- * <li>{@code stdVPSCount} <b>must</b> be greater than 0</li>
- * <li>{@code stdSPSCount} <b>must</b> be greater than 0</li>
- * <li>{@code stdPPSCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code stdVPSCount} is not 0, and {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
+ * <li>If {@code stdSPSCount} is not 0, and {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
+ * <li>If {@code stdPPSCount} is not 0, and {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>

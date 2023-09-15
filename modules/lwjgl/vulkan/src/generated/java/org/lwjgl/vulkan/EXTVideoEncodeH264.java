@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>39</dd>
  * <dt><b>Revision</b></dt>
- * <dd>11</dd>
+ * <dd>12</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}
  * 
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2023-06-06</dd>
+ * <dd>2023-07-19</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -57,7 +57,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH264 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 11;
+    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 12;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";
@@ -155,6 +155,8 @@ public final class EXTVideoEncodeH264 {
      * <li>{@link #VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_DISABLED_BIT_EXT VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_DISABLED_BIT_EXT} indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED} from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_ENABLED_BIT_EXT VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_ENABLED_BIT_EXT} indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED} from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT} indicates if using {@code STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL} from StdVideoH264DisableDeblockingFilterIdc is supported. An implementation <b>must</b> support at least one deblocking filter mode.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_STD_SLICE_QP_DELTA_BIT_EXT VIDEO_ENCODE_H264_STD_SLICE_QP_DELTA_BIT_EXT} indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH264SliceHeader}{@code ::slice_qp_delta} when that value is identical across the slices of the encoded frame.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT VIDEO_ENCODE_H264_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT} indicates whether the implementation supports using the application-provided value for {@code StdVideoEncodeH264SliceHeader}{@code ::slice_qp_delta} when that value is different across the slices of the encoded frame.</li>
      * </ul>
      */
     public static final int
@@ -175,7 +177,9 @@ public final class EXTVideoEncodeH264 {
         VK_VIDEO_ENCODE_H264_STD_CONSTRAINED_INTRA_PRED_FLAG_SET_BIT_EXT          = 0x4000,
         VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_DISABLED_BIT_EXT               = 0x8000,
         VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_ENABLED_BIT_EXT                = 0x10000,
-        VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT                = 0x20000;
+        VK_VIDEO_ENCODE_H264_STD_DEBLOCKING_FILTER_PARTIAL_BIT_EXT                = 0x20000,
+        VK_VIDEO_ENCODE_H264_STD_SLICE_QP_DELTA_BIT_EXT                           = 0x80000,
+        VK_VIDEO_ENCODE_H264_STD_DIFFERENT_SLICE_QP_DELTA_BIT_EXT                 = 0x100000;
 
     /**
      * VkVideoEncodeH264RateControlFlagBitsEXT - H.264 encode rate control bits
