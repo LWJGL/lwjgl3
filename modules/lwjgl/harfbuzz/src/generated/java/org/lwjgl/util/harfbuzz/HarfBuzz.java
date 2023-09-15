@@ -354,6 +354,7 @@ public class HarfBuzz {
             color_line_get_extend                     = apiGetFunctionAddress(HARFBUZZ, "hb_color_line_get_extend"),
             paint_funcs_set_push_transform_func       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_transform_func"),
             paint_funcs_set_pop_transform_func        = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_transform_func"),
+            paint_funcs_set_color_glyph_func          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_color_glyph_func"),
             paint_funcs_set_push_clip_glyph_func      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_glyph_func"),
             paint_funcs_set_push_clip_rectangle_func  = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_rectangle_func"),
             paint_funcs_set_pop_clip_func             = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_clip_func"),
@@ -367,6 +368,7 @@ public class HarfBuzz {
             paint_funcs_set_custom_palette_color_func = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_custom_palette_color_func"),
             paint_push_transform                      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_transform"),
             paint_pop_transform                       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_transform"),
+            paint_color_glyph                         = apiGetFunctionAddress(HARFBUZZ, "hb_paint_color_glyph"),
             paint_push_clip_glyph                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_glyph"),
             paint_push_clip_rectangle                 = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_rectangle"),
             paint_pop_clip                            = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_clip"),
@@ -1484,11 +1486,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 8;
 
-    public static final int HB_VERSION_MINOR = 1;
+    public static final int HB_VERSION_MINOR = 2;
 
-    public static final int HB_VERSION_MICRO = 1;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "8.1.1";
+    public static final String HB_VERSION_STRING = "8.2.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -5446,6 +5448,20 @@ public class HarfBuzz {
         nhb_paint_funcs_set_pop_transform_func(funcs, func.address(), user_data, memAddressSafe(destroy));
     }
 
+    // --- [ hb_paint_funcs_set_color_glyph_func ] ---
+
+    public static void nhb_paint_funcs_set_color_glyph_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_color_glyph_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_color_glyph_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_color_glyph_func_t") hb_paint_color_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_color_glyph_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
     // --- [ hb_paint_funcs_set_push_clip_glyph_func ] ---
 
     public static void nhb_paint_funcs_set_push_clip_glyph_func(long funcs, long func, long user_data, long destroy) {
@@ -5618,6 +5634,17 @@ public class HarfBuzz {
             check(funcs);
         }
         invokePPV(funcs, paint_data, __functionAddress);
+    }
+
+    // --- [ hb_paint_color_glyph ] ---
+
+    public static void hb_paint_color_glyph(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.paint_color_glyph;
+        if (CHECKS) {
+            check(funcs);
+            check(font);
+        }
+        invokePPPV(funcs, paint_data, glyph, font, __functionAddress);
     }
 
     // --- [ hb_paint_push_clip_glyph ] ---
