@@ -33,20 +33,31 @@ public final class ARMSchedulingControls {
         CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM          = (1 << 1),
         CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM = (1 << 2),
         CL_DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM                = (1 << 3),
-        CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM           = (1 << 4);
+        CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM           = (1 << 4),
+        CL_DEVICE_SCHEDULING_WARP_THROTTLING_ARM               = (1 << 5),
+        CL_DEVICE_SCHEDULING_COMPUTE_UNIT_BATCH_QUEUE_SIZE_ARM = (1 << 6),
+        CL_DEVICE_SCHEDULING_COMPUTE_UNIT_LIMIT_ARM            = (1 << 7);
 
     /** Accepted value for the {@code param_name} parameter to {@link CL10#clGetDeviceInfo GetDeviceInfo}. */
-    public static final int CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM = 0x41EB;
+    public static final int
+        CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM = 0x41EB,
+        CL_DEVICE_MAX_WARP_COUNT_ARM                 = 0x41EA;
 
     /** Accepted value for the {@code param_name} parameter to {@link CL20#clSetKernelExecInfo SetKernelExecInfo}. */
     public static final int
-        CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM          = 0x41E5,
-        CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM = 0x41E6;
+        CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM            = 0x41E5,
+        CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM   = 0x41E6,
+        CL_KERNEL_EXEC_INFO_WARP_COUNT_LIMIT_ARM                = 0x41E8,
+        CL_KERNEL_EXEC_INFO_COMPUTE_UNIT_MAX_QUEUED_BATCHES_ARM = 0x41F1;
 
-    /** Accepted value for the {@code properties} parameter to {@link CL20#clCreateCommandQueueWithProperties CreateCommandQueueWithProperties} */
+    /** Accepted value for the {@code properties} parameter to {@link CL20#clCreateCommandQueueWithProperties CreateCommandQueueWithProperties}. */
     public static final int
-        CL_QUEUE_KERNEL_BATCHING_ARM = 0x41E7,
-        CL_QUEUE_DEFERRED_FLUSH_ARM  = 0x41EC;
+        CL_QUEUE_KERNEL_BATCHING_ARM     = 0x41E7,
+        CL_QUEUE_DEFERRED_FLUSH_ARM      = 0x41EC,
+        CL_QUEUE_COMPUTE_UNIT_LIMIT_ARM  = 0x41F3;
+
+    /** Accepted value for the param_name parameter to {@link CL10#clGetKernelInfo GetKernelInfo}. */
+    public static final int CL_KERNEL_MAX_WARP_COUNT_ARM = 0x41E9;
 
     private ARMSchedulingControls() {}
 
