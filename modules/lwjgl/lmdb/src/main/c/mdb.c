@@ -5178,17 +5178,6 @@ mdb_env_close0(MDB_env *env, int excl)
 				sem_unlink(env->me_txns->mti_wmname);
 			}
 		}
-#elif defined(MDB_ROBUST_SUPPORTED)
-		/* If we have the filelock:  If we are the
-		 * only remaining user, clean up robust
-		 * mutexes.
-		 */
-		if (excl == 0)
-			mdb_env_excl_lock(env, &excl);
-		if (excl > 0) {
-			pthread_mutex_destroy(env->me_txns->mti_rmutex);
-			pthread_mutex_destroy(env->me_txns->mti_wmutex);
-		}
 #endif
 		munmap((void *)env->me_txns, (env->me_maxreaders-1)*sizeof(MDB_reader)+sizeof(MDB_txninfo));
 	}
