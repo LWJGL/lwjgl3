@@ -35,7 +35,7 @@ public class hwloc_osdev_attr_s extends Struct<hwloc_osdev_attr_s> {
 
     static {
         Layout layout = __struct(
-            __member(4)
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -68,7 +68,7 @@ public class hwloc_osdev_attr_s extends Struct<hwloc_osdev_attr_s> {
 
     /** @return the value of the {@code type} field. */
     @NativeType("hwloc_obj_osdev_type_t")
-    public int type() { return ntype(address()); }
+    public long type() { return ntype(address()); }
 
     // -----------------------------------
 
@@ -102,7 +102,7 @@ public class hwloc_osdev_attr_s extends Struct<hwloc_osdev_attr_s> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_osdev_attr_s.TYPE); }
+    public static long ntype(long struct) { return memGetCLong(struct + hwloc_osdev_attr_s.TYPE); }
 
     // -----------------------------------
 
@@ -144,7 +144,7 @@ public class hwloc_osdev_attr_s extends Struct<hwloc_osdev_attr_s> {
 
         /** @return the value of the {@code type} field. */
         @NativeType("hwloc_obj_osdev_type_t")
-        public int type() { return hwloc_osdev_attr_s.ntype(address()); }
+        public long type() { return hwloc_osdev_attr_s.ntype(address()); }
 
     }
 

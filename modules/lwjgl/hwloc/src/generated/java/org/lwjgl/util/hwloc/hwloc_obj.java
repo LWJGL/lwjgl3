@@ -49,8 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     hwloc_cpuset_t complete_cpuset;
  *     hwloc_nodeset_t nodeset;
  *     hwloc_nodeset_t complete_nodeset;
- *     {@link hwloc_info_s struct hwloc_info_s} * infos;
- *     unsigned infos_count;
+ *     {@link hwloc_infos_s struct hwloc_infos_s} infos;
  *     void * userdata;
  *     hwloc_uint64_t gp_index;
  * }</code></pre>
@@ -96,7 +95,6 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         NODESET,
         COMPLETE_NODESET,
         INFOS,
-        INFOS_COUNT,
         USERDATA,
         GP_INDEX;
 
@@ -131,8 +129,7 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(4),
+            __member(hwloc_infos_s.SIZEOF, hwloc_infos_s.ALIGNOF),
             __member(POINTER_SIZE),
             __member(8)
         );
@@ -170,9 +167,8 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         NODESET = layout.offsetof(27);
         COMPLETE_NODESET = layout.offsetof(28);
         INFOS = layout.offsetof(29);
-        INFOS_COUNT = layout.offsetof(30);
-        USERDATA = layout.offsetof(31);
-        GP_INDEX = layout.offsetof(32);
+        USERDATA = layout.offsetof(30);
+        GP_INDEX = layout.offsetof(31);
     }
 
     protected hwloc_obj(long address, @Nullable ByteBuffer container) {
@@ -302,13 +298,9 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** @return the value of the {@code complete_nodeset} field. */
     @NativeType("hwloc_nodeset_t")
     public long complete_nodeset() { return ncomplete_nodeset(address()); }
-    /** @return a {@link hwloc_info_s.Buffer} view of the struct array pointed to by the {@code infos} field. */
-    @Nullable
-    @NativeType("struct hwloc_info_s *")
-    public hwloc_info_s.Buffer infos() { return ninfos(address()); }
-    /** @return the value of the {@code infos_count} field. */
-    @NativeType("unsigned")
-    public int infos_count() { return ninfos_count(address()); }
+    /** @return a {@link hwloc_infos_s} view of the {@code infos} field. */
+    @NativeType("struct hwloc_infos_s")
+    public hwloc_infos_s infos() { return ninfos(address()); }
     /** @return the value of the {@code userdata} field. */
     @NativeType("void *")
     public long userdata() { return nuserdata(address()); }
@@ -507,9 +499,7 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #complete_nodeset}. */
     public static long ncomplete_nodeset(long struct) { return memGetAddress(struct + hwloc_obj.COMPLETE_NODESET); }
     /** Unsafe version of {@link #infos}. */
-    @Nullable public static hwloc_info_s.Buffer ninfos(long struct) { return hwloc_info_s.createSafe(memGetAddress(struct + hwloc_obj.INFOS), ninfos_count(struct)); }
-    /** Unsafe version of {@link #infos_count}. */
-    public static int ninfos_count(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.INFOS_COUNT); }
+    public static hwloc_infos_s ninfos(long struct) { return hwloc_infos_s.create(struct + hwloc_obj.INFOS); }
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + hwloc_obj.USERDATA); }
     /** Unsafe version of {@link #gp_index}. */
@@ -661,13 +651,9 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         /** @return the value of the {@code complete_nodeset} field. */
         @NativeType("hwloc_nodeset_t")
         public long complete_nodeset() { return hwloc_obj.ncomplete_nodeset(address()); }
-        /** @return a {@link hwloc_info_s.Buffer} view of the struct array pointed to by the {@code infos} field. */
-        @Nullable
-        @NativeType("struct hwloc_info_s *")
-        public hwloc_info_s.Buffer infos() { return hwloc_obj.ninfos(address()); }
-        /** @return the value of the {@code infos_count} field. */
-        @NativeType("unsigned")
-        public int infos_count() { return hwloc_obj.ninfos_count(address()); }
+        /** @return a {@link hwloc_infos_s} view of the {@code infos} field. */
+        @NativeType("struct hwloc_infos_s")
+        public hwloc_infos_s infos() { return hwloc_obj.ninfos(address()); }
         /** @return the value of the {@code userdata} field. */
         @NativeType("void *")
         public long userdata() { return hwloc_obj.nuserdata(address()); }

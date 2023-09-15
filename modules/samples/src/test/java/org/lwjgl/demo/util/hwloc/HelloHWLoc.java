@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.hwloc.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -35,15 +36,17 @@ public class HelloHWLoc {
             throw new IllegalStateException();
         }
 
-        hwloc_obj root = hwloc_get_obj_by_depth(topology, 0, 0);
+        hwloc_obj root = Objects.requireNonNull(hwloc_get_obj_by_depth(topology, 0, 0));
 
-        hwloc_info_s.Buffer infos = root.infos();
-        for (hwloc_info_s info : infos) {
-            System.out.println(info.nameString() + ": " + info.valueString());
+        hwloc_infos_s infos = Objects.requireNonNull(root.infos());
+        if (infos.count() != 0) {
+            for (hwloc_info_s info : Objects.requireNonNull(infos.array())) {
+                System.out.println(info.nameString() + ": " + info.valueString());
+            }
+            System.out.println("--------------------");
         }
-        System.out.println("--------------------");
 
-        hwloc_topology_support support = hwloc_topology_get_support(topology);
+        hwloc_topology_support support = Objects.requireNonNull(hwloc_topology_get_support(topology));
 
         System.out.println("support.discovery.pu: " + support.discovery().pu());
         System.out.println("support.discovery.numa: " + support.discovery().numa());

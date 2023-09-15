@@ -484,16 +484,16 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         "OBJ_BRIDGE_PCI".enum
     )
 
-    EnumConstant(
+    EnumConstantLong(
         "{@code hwloc_obj_osdev_type_t}",
 
-        "OBJ_OSDEV_STORAGE".enum("", "0"),
-        "OBJ_OSDEV_GPU".enum,
-        "OBJ_OSDEV_NETWORK".enum,
-        "OBJ_OSDEV_OPENFABRICS".enum,
-        "OBJ_OSDEV_DMA".enum,
-        "OBJ_OSDEV_COPROC".enum,
-        "OBJ_OSDEV_MEMORY".enum
+        "OBJ_OSDEV_STORAGE".enumLong("", "1L << 0"),
+        "OBJ_OSDEV_MEMORY".enumLong("", "1L << 1"),
+        "OBJ_OSDEV_GPU".enumLong("", "1L << 2"),
+        "OBJ_OSDEV_COPROC".enumLong("", "1L << 3"),
+        "OBJ_OSDEV_NETWORK".enumLong("", "1L << 4"),
+        "OBJ_OSDEV_OPENFABRICS".enumLong("", "1L << 5"),
+        "OBJ_OSDEV_DMA".enumLong("", "1L << 6")
     )
 
     EnumConstant(
@@ -513,9 +513,10 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         "{@code enum hwloc_obj_snprintf_flag_e}",
 
         "OBJ_SNPRINTF_FLAG_LONG_NAMES".enumLong("", "1L<<1"),
-        "OBJ_SNPRINTF_FLAG_MORE_ATTRS".enumLong("", "1L<<2"),
-        "OBJ_SNPRINTF_FLAG_NO_UNITS".enumLong("", "1L<<3"),
-        "OBJ_SNPRINTF_FLAG_UNITS_1000".enumLong("", "1L<<4"),
+        "OBJ_SNPRINTF_FLAG_SHORT_NAMES".enumLong("", "1L<<2"),
+        "OBJ_SNPRINTF_FLAG_MORE_ATTRS".enumLong("", "1L<<3"),
+        "OBJ_SNPRINTF_FLAG_NO_UNITS".enumLong("", "1L<<4"),
+        "OBJ_SNPRINTF_FLAG_UNITS_1000".enumLong("", "1L<<5"),
         "OBJ_SNPRINTF_FLAG_OLD_VERBOSE".enumLong("", "1L<<0")
     )
 
@@ -958,11 +959,25 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     @Nullable
     @NativeType("char const *")
     public static String hwloc_obj_get_info_by_name(@NativeType("hwloc_obj_t") hwloc_obj obj, String name) {
-        if (obj.infos_count() == 0) {
+        return hwloc_get_info_by_name(obj.infos(), name);
+    }""")
+
+    /*char.const.p(
+        "get_info_by_name",
+        "",
+
+        hwloc_infos_s.p("infos", ""),
+        char.const.p("name", "")
+    )*/
+    customMethod("""
+    @Nullable
+    @NativeType("char const *")
+    public static String hwloc_get_info_by_name(@NativeType("struct hwloc_infos_s") hwloc_infos_s infos, String name) {
+        if (infos.count() == 0) {
             return null;
         }
-        hwloc_info_s.Buffer infos = Objects.requireNonNull(obj.infos());
-        for (hwloc_info_s info : infos) {
+        hwloc_info_s.Buffer array = Objects.requireNonNull(infos.array());
+        for (hwloc_info_s info : array) {
             if (info.nameString().equals(name)) {
                 return info.valueString();
             }
@@ -971,12 +986,46 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     }""")
 
     int(
+        "modify_infos",
+        "",
+
+        hwloc_infos_s.p("infos", ""),
+        unsigned_long("operation", ""),
+        charASCII.const.p("name", ""),
+        charASCII.const.p("value", "")
+    )
+
+    EnumConstantLong(
+        "{@code hwloc_modify_infos_op_e}",
+
+        "MODIFY_INFOS_OP_ADD".enumLong("", "1L<<0"),
+        "MODIFY_INFOS_OP_ADD_UNIQUE".enumLong("", "1L<<1"),
+        "MODIFY_INFOS_OP_REPLACE".enumLong("", "1L<<2"),
+        "MODIFY_INFOS_OP_REMOVE".enumLong("", "1L<<3")
+    )
+
+    /*int(
         "obj_add_info",
         "",
 
         hwloc_obj_t("obj", ""),
         charASCII.const.p("name", ""),
         charASCII.const.p("value", "")
+    )*/
+    customMethod("""
+    public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+    }
+
+    public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+    }""")
+
+    Nonnull..hwloc_infos_s.p(
+        "topology_get_infos",
+        "",
+
+        hwloc_topology_t("topology", "")
     )
 
     int(
@@ -1388,6 +1437,13 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     // helper.h
 
+    intb("obj_type_is_normal", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_io", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_memory", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_cache", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_dcache", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_icache", "", hwloc_obj_type_t("type", ""))
+
     customMethod("""
     @Nullable
     @NativeType("hwloc_obj_t")
@@ -1646,9 +1702,9 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
             int type = prev.type();
             if (type == HWLOC_OBJ_MISC) {
                 state = 3;
-            } else if (type == HWLOC_OBJ_BRIDGE || type == HWLOC_OBJ_PCI_DEVICE || type == HWLOC_OBJ_OS_DEVICE) {
+            } else if (hwloc_obj_type_is_io(type)) {
                 state = 2;
-            } else if (type == HWLOC_OBJ_NUMANODE) {
+            } else if (hwloc_obj_type_is_memory(type)) {
                 state = 1;
             }
             obj = prev.next_sibling();
@@ -1669,48 +1725,6 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         }
         return obj;
     }""")
-
-    intb(
-        "obj_type_is_normal",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
-
-    intb(
-        "obj_type_is_io",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
-
-    intb(
-        "obj_type_is_memory",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
-
-    intb(
-        "obj_type_is_cache",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
-
-    intb(
-        "obj_type_is_dcache",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
-
-    intb(
-        "obj_type_is_icache",
-        "",
-
-        hwloc_obj_type_t("type", "")
-    )
 
     customMethod("""
     public static int hwloc_get_cache_type_depth(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned") int cachelevel, @NativeType("hwloc_obj_cache_type_t") int cachetype) {
@@ -2262,8 +2276,7 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         unsigned_int("kind_index", ""),
         nullable..hwloc_bitmap_t("cpuset", ""),
         Check(1)..nullable..int.p("efficiency", ""),
-        Check(1)..nullable..unsigned_int.p("nr_infos", ""),
-        Check(1)..nullable..hwloc_info_s.p.p("infos", ""),
+        Check(1)..hwloc_infos_s.p.p("infosp", ""),
         unsigned_long("flags", "")
     )
 
@@ -2274,8 +2287,7 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         hwloc_topology_t("topology", ""),
         hwloc_bitmap_t("cpuset", ""),
         int("forced_efficiency", ""),
-        AutoSize("infos")..unsigned_int("nr_infos", ""),
-        nullable..hwloc_info_s.p("infos", ""),
+        nullable..hwloc_infos_s.p("infos", ""),
         unsigned_long("flags", "")
     )
 

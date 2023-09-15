@@ -35,15 +35,22 @@ val hwloc_const_nodeset_t = typedef(hwloc_const_bitmap_t, "hwloc_const_nodeset_t
 val hwloc_membind_policy_t = "hwloc_membind_policy_t".enumType
 val hwloc_obj_bridge_type_t = "hwloc_obj_bridge_type_t".enumType
 val hwloc_obj_cache_type_t = "hwloc_obj_cache_type_t".enumType
-val hwloc_obj_osdev_type_t = "hwloc_obj_osdev_type_t".enumType
 val hwloc_obj_type_t = "hwloc_obj_type_t".enumType
 val hwloc_type_filter_e = "enum hwloc_type_filter_e".enumType
 
 val hwloc_uint64_t = typedef(uint64_t, "hwloc_uint64_t")
 
+val hwloc_obj_osdev_type_t = typedef(unsigned_long, "hwloc_obj_osdev_type_t")
+
 val hwloc_info_s = struct(Module.HWLOC, "hwloc_info_s", nativeName = "struct hwloc_info_s", mutable = false) {
     charASCII.p("name", "")
     charASCII.p("value", "")
+}
+
+val hwloc_infos_s = struct(Module.HWLOC, "hwloc_infos_s", nativeName = "struct hwloc_infos_s", mutable = false) {
+    nullable..hwloc_info_s.p("array", "")
+    AutoSize("array")..unsigned("count", "")
+    unsigned("allocated", "").private()
 }
 
 val hwloc_pcidev_attr_s = struct(Module.HWLOC, "hwloc_pcidev_attr_s", mutable = false) {
@@ -135,8 +142,7 @@ val hwloc_obj = struct(Module.HWLOC, "hwloc_obj", nativeName = "struct hwloc_obj
     nullable..hwloc_cpuset_t("complete_cpuset", "")
     nullable..hwloc_nodeset_t("nodeset", "")
     nullable..hwloc_nodeset_t("complete_nodeset", "")
-    nullable..hwloc_info_s.p("infos", "")
-    AutoSize("infos")..unsigned("infos_count", "")
+    hwloc_infos_s("infos", "")
     nullable..opaque_p("userdata", "").mutable()
     hwloc_uint64_t("gp_index", "")
 }
