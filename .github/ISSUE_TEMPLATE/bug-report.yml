@@ -8,7 +8,7 @@ body:
       description: Please select the LWJGL version(s) on which the bug is reproducible.
       multiple: true
       options:
-        - 3.3.3 (snapshot)
+        - 3.3.3
         - 3.3.2
         - 3.3.1
         - 3.3.0
@@ -48,7 +48,7 @@ body:
     attributes:
       label: JDK
       description: Please type the name and version of the Java Runtime(s) on which the bug is reproducible.
-      placeholder: e.g. Zulu OpenJDK 16.0.2
+      placeholder: e.g. Zulu OpenJDK 17.0.8
     validations:
       required: true
   - type: input
