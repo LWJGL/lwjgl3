@@ -1,17 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Forum
-    url: http://forum.lwjgl.org
-    about: The LWJGL forum, up since 2003.
-  - name: Slack
-    url: https://lwjgl.slack.com/
-    about: The LWJGL Slack workspace.
-  - name: Slack (join link)
-    url: http://slack.lwjgl.org/
-    about: Visit to join the LWJGL Slack workspace.
-  - name: Discord
-    url: https://discord.gg/6CywMCs
-    about: The LWJGL Discord server.
   - name: Twitter
     url: https://twitter.com/LWJGL
     about: The official LWJGL account on Twitter.
+  - name: Discord
+    url: https://discord.gg/6CywMCs
+    about: The LWJGL Discord server.
+  - name: Forum
+    url: http://forum.lwjgl.org
+    about: The LWJGL forum, up since 2003.

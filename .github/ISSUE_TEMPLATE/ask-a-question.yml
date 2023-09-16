@@ -7,7 +7,7 @@ body:
       value: |
         Ask anything about developing LWJGL applications or the development of LWJGL itself!
 
-        However, questions regarding native API usage (e.g. how do I do X in OpenGL?) are out of scope. Try the Forum/Slack/Discord links, you'll find plenty of people willing to help.
+        However, questions regarding native API usage (e.g. how do I do X in OpenGL?) are out of scope. Try the Discord/Forum links, you'll find plenty of people willing to help.
 
         Finally, try searching the existing issues first, your question may have been answered already.
   - type: textarea
