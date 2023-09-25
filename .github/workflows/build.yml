@@ -96,6 +96,30 @@ jobs:
         run: |
           source scl_source enable devtoolset-11 || true
           ant -emacs tests
+      - name: Run demo with OpenJDK
+        run: |
+          source scl_source enable devtoolset-11 || true
+          ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+      - name: Build GraalVM Native Image
+        run: |
+          source scl_source enable devtoolset-11 || true
+          mkdir jdk-graalvm-21
+          curl -L https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm-21 --strip-components 1
+          jdk-graalvm-21/bin/native-image -cp \
+          bin/classes/lwjgl/core:\
+          bin/classes/lwjgl/lz4:\
+          bin/classes/samples:\
+          modules/samples/src/test/resources:\
+          bin/libs/java/joml.jar:\
+          bin/libs/native:\
+          config/native-image \
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+      - name: Run demo with GraalVM JIT
+        run: |
+          source scl_source enable devtoolset-11 || true
+          JAVA_HOME=jdk-graalvm-21 ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+      - name: Run demo with GraalVM Native Image
+        run: ./org.lwjgl.demo.util.lz4.hellolz4
 
   linux-cross:
     name: Linux Cross
@@ -204,7 +228,30 @@ jobs:
         run: ant -emacs compile-native
       - name: Run tests
         run: ant -emacs tests
-        if: contains(matrix.ARCH, 'arm') != true
+        if: matrix.ARCH == 'x64'
+      - name: Run demo with OpenJDK
+        run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        if: matrix.ARCH == 'x64'
+      - name: Build GraalVM Native Image
+        run: |
+          mkdir jdk-graalvm-21
+          curl -L https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_macos-x64_bin.tar.gz | tar xz -C jdk-graalvm-21 --strip-components 1
+          jdk-graalvm-21/Contents/Home/bin/native-image -cp \
+          bin/classes/lwjgl/core:\
+          bin/classes/lwjgl/lz4:\
+          bin/classes/samples:\
+          modules/samples/src/test/resources:\
+          bin/libs/java/joml.jar:\
+          bin/libs/native:\
+          config/native-image \
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+        if: matrix.ARCH == 'x64'
+      - name: Run demo with GraalVM JIT
+        run: JAVA_HOME=jdk-graalvm-21/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        if: matrix.ARCH == 'x64'
+      - name: Run demo with GraalVM Native Image
+        run: ./org.lwjgl.demo.util.lz4.hellolz4
+        if: matrix.ARCH == 'x64'
 
   windows:
     name: Windows
@@ -273,3 +320,36 @@ jobs:
         run: type bin\test\testng-results.xml
         shell: cmd
         if: failure()
+      - name: Run demo with OpenJDK
+        run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        shell: cmd
+        if: matrix.ARCH == 'x64'
+      - name: Download GraalVM
+        run: |
+          Invoke-WebRequest https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_windows-x64_bin.zip -OutFile jdk-graalvm.zip
+          Expand-Archive -Path jdk-graalvm.zip -DestinationPath .\
+          Get-ChildItem graalvm-jdk-21* | Rename-Item -newname jdk-graalvm-21
+        if: matrix.ARCH == 'x64'
+      - name: Build GraalVM Native Image
+        run: |
+          jdk-graalvm-21\bin\native-image -cp ^
+          bin/classes/lwjgl/core;^
+          bin/classes/lwjgl/lz4;^
+          bin/classes/samples;^
+          modules/samples/src/test/resources;^
+          bin/libs/java/joml.jar;^
+          bin/libs/native;^
+          config/native-image ^
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+        shell: cmd
+        if: matrix.ARCH == 'x64'
+      - name: Run demo with GraalVM JIT
+        run: |
+          set JAVA_HOME=jdk-graalvm-21
+          ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        shell: cmd
+        if: matrix.ARCH == 'x64'
+      - name: Run demo with GraalVM Native Image
+        run: org.lwjgl.demo.util.lz4.hellolz4.exe
+        shell: cmd
+        if: matrix.ARCH == 'x64'
