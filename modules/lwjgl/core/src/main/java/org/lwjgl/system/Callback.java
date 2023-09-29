@@ -206,7 +206,7 @@ public abstract class Callback implements Pointer, NativeResource {
             MemoryManage.DebugAllocator.untrack(functionPointer);
         }
 
-        FFIClosure closure = CLOSURE_REGISTRY.get(functionPointer);
+        FFIClosure closure = CLOSURE_REGISTRY.remove(functionPointer);
 
         DeleteGlobalRef(closure.user_data());
         ffi_closure_free(closure);
