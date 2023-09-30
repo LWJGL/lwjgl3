@@ -21,6 +21,25 @@ import static org.lwjgl.vulkan.VK11.*;
 /**
  * This class loads the Vulkan library into the JVM process.
  *
+ * <p><b>macOS</b>: Vulkan on macOS is emulated over the Metal API using the <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a> library.
+ * The {@code lwjgl-vulkan-natives-macos*} artifact includes a MoltenVK build and LWJGL will try to load it first, if available. Using MoltenVK directly is
+ * simple and efficient, but circumvents the Vulkan SDK and the validation layers it provides. During development, it is often very useful to make use of these
+ * validation layers, to verify correct API usage and avoid common pitfalls. In order to do that on macOS, LWJGL must be forced to load the Vulkan Loader
+ * library ({@code libvulkan.1.dylib}) instead of MoltenVK. There are two options:</p>
+ * <ol>
+ *     <li>
+ *     Set {@link Configuration#VULKAN_LIBRARY_NAME} to {@code libvulkan.1.dylib}. Depending on the Vulkan SDK installation, this file may not be in the
+ *     library path and an absolute path must be used instead.
+ *     </li>
+ *     <li>
+ *     Remove the {@code lwjgl-vulkan-natives} artifact from the class/module-path. LWJGL will fall back to loading {@code libvulkan.1.dylib} (if it is in the
+ *     library path).
+ *     </li>
+ * </ol>
+ *
+ * <p>Note that when using the Vulkan Loader the Vulkan implementation will be provided by the MoltenVK build shipped with the Vulkan SDK. That build may be
+ * different from the one bundled with LWJGL.</p>
+ *
  * @see Configuration#VULKAN_LIBRARY_NAME
  * @see Configuration#VULKAN_EXPLICIT_INIT
  */
