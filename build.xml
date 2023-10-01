@@ -1176,6 +1176,7 @@
         <element name="linux-content" optional="true"/>
         <element name="linux-arm64-content" optional="true"/>
         <element name="linux-arm32-content" optional="true"/>
+        <element name="linux-ppc64le-content" optional="true"/>
         <element name="macos-content" optional="true"/>
         <element name="macos-arm64-content" optional="true"/>
         <element name="windows-content" optional="true"/>
@@ -1202,6 +1203,9 @@
 
                 <get-release platform="linux" arch="arm64" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="arm64" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+                <get-release platform="linux" arch="ppc64le" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="ppc64le" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
                 <get-release platform="linux" arch="arm32" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="arm32" file="lib@{native-library}.so.git" if:set="git-revision"/>
@@ -1270,6 +1274,9 @@
                     <natives-jar name="@{name}" title="@{title}" platform="linux-arm64" path="linux/arm64" type="so">
                         <linux-arm64-content/>
                     </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="linux-ppc64le" path="linux/ppc64le" type="so">
+                        <linux-ppc64le-content/>
+                    </natives-jar>
                     <natives-jar name="@{name}" title="@{title}" platform="linux-arm32" path="linux/arm32" type="so">
                         <linux-arm32-content/>
                     </natives-jar>
@@ -1301,6 +1308,7 @@
         <element name="linux" optional="true"/>
         <element name="linux-arm64" optional="true"/>
         <element name="linux-arm32" optional="true"/>
+        <element name="linux-ppc64le" optional="true"/>
         <element name="macos" optional="true"/>
         <element name="macos-arm64" optional="true"/>
         <element name="windows" optional="true"/>
@@ -1328,6 +1336,7 @@
                 <linux-content><linux/></linux-content>
                 <linux-arm64-content><linux-arm64/></linux-arm64-content>
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
+                <linux-ppc64le-content><linux-ppc64le/></linux-ppc64le-content>
                 <macos-content><macos/></macos-content>
                 <macos-arm64-content><macos-arm64/></macos-arm64-content>
                 <windows-content><windows/></windows-content>
@@ -1534,6 +1543,10 @@
                 <get-release platform="linux" arch="arm64" file="libassimp.so.git"/>
                 <get-release platform="linux" arch="arm64" file="libdraco.so"/>
 
+                <get-release platform="linux" arch="ppc64le" file="libassimp.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="ppc64le" file="libdraco.so"/>
+
                 <get-release platform="linux" arch="arm32" file="libassimp.so"/>
                 <get-release platform="linux" arch="arm32" file="libassimp.so.git"/>
                 <get-release platform="linux" arch="arm32" file="libdraco.so"/>
@@ -1568,6 +1581,9 @@
 
                 <get-release platform="linux" arch="arm64" file="libbgfx.so"/>
                 <get-release platform="linux" arch="arm64" file="libbgfx.so.git"/>
+
+                <get-release platform="linux" arch="ppc64le" file="libbgfx.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libbgfx.so.git"/>
 
                 <get-release platform="linux" arch="arm32" file="libbgfx.so"/>
                 <get-release platform="linux" arch="arm32" file="libbgfx.so.git"/>
@@ -1606,6 +1622,9 @@
 
                 <get-release platform="linux" arch="arm64" file="libglfw.so"/>
                 <get-release platform="linux" arch="arm64" file="libglfw.so.git"/>
+
+                <get-release platform="linux" arch="ppc64le" file="libglfw.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libglfw.so.git"/>
 
                 <get-release platform="linux" arch="arm32" file="libglfw.so"/>
                 <get-release platform="linux" arch="arm32" file="libglfw.so.git"/>
@@ -1711,6 +1730,9 @@
                 <get-release platform="linux" arch="arm64" file="libopenal.so"/>
                 <get-release platform="linux" arch="arm64" file="libopenal.so.git"/>
 
+                <get-release platform="linux" arch="ppc64le" file="libopenal.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libopenal.so.git"/>
+
                 <get-release platform="linux" arch="arm32" file="libopenal.so"/>
                 <get-release platform="linux" arch="arm32" file="libopenal.so.git"/>
 
@@ -1770,6 +1792,9 @@
                 <get-release platform="linux" arch="arm64" file="libopenxr_loader.so"/>
                 <get-release platform="linux" arch="arm64" file="libopenxr_loader.so.git"/>
 
+                <get-release platform="linux" arch="ppc64le" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libopenxr_loader.so.git"/>
+
                 <get-release platform="linux" arch="arm32" file="libopenxr_loader.so"/>
                 <get-release platform="linux" arch="arm32" file="libopenxr_loader.so.git"/>
 
@@ -1803,6 +1828,7 @@
             <natives>
                 <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="ppc64le" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so"/>
 
                 <get-release platform="macos" arch="x64" file="liblwjgl_remotery.dylib"/>
