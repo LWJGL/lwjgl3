@@ -126,11 +126,11 @@ jobs:
     needs: cache-kotlinc
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:18.04
+      image: ubuntu:22.04
     strategy:
       fail-fast: false
       matrix:
-        ARCH: [arm32, arm64]
+        ARCH: [arm32, arm64, ppc64le]
         include:
           - ARCH: arm32
             PACKAGES: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf libc6-dev-armhf-cross
@@ -142,6 +142,11 @@ jobs:
             CROSS_ARCH: arm64
             CROSS_PACKAGES: libgtk-3-dev:arm64 libatk-bridge2.0-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libglu-dev:arm64 libgl1-mesa-glx:arm64 libx11-dev:arm64 libxt-dev:arm64 libdbus-1-dev:arm64
             NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/aarch64-linux-gnu/mesa
+          - ARCH: ppc64le
+            PACKAGES: gcc-powerpc64le-linux-gnu g++-powerpc64le-linux-gnu libc6-dev-ppc64el-cross
+            CROSS_ARCH: ppc64el
+            CROSS_PACKAGES: libgtk-3-dev:ppc64el libatk-bridge2.0-dev:ppc64el libgdk-pixbuf2.0-dev:ppc64el libglu-dev:ppc64el libgl1-mesa-glx:ppc64el libx11-dev:ppc64el libxt-dev:ppc64el libdbus-1-dev:ppc64el
+            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/powerpc64le-linux-gnu/mesa
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
@@ -169,12 +174,12 @@ jobs:
         run: |
           sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
           grep "ubuntu.com/ubuntu" /etc/apt/sources.list | tee /etc/apt/sources.list.d/ports.list
-          sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+          sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
           sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
           dpkg --add-architecture ${{matrix.CROSS_ARCH}}
           apt-get clean
           apt-get update || true
-      - name: Install cross-compilation dependencies
+      - name: Install cross-compilation dependencies (${{matrix.ARCH}})
         run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
@@ -189,7 +194,7 @@ jobs:
         run: ant -emacs clean-generated generate
       - name: Build Java
         run: ant -emacs compile
-      - name: Build native
+      - name: Build native (${{matrix.CROSS_ARCH}})
         run: ant -emacs compile-native ${{matrix.NATIVE_PARAMS}}
 
   macos:
