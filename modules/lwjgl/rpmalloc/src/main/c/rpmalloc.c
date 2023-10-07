@@ -808,6 +808,8 @@ get_thread_id(void) {
 #    else
 	__asm__ volatile ("mrs %0, tpidr_el0" : "=r" (tid));
 #    endif
+#  elif defined(__riscv)
+    __asm__ volatile ("mv %0, tp" : "=r" (tid));
 #  else
 #    error This platform needs implementation of get_thread_id()
 #  endif
