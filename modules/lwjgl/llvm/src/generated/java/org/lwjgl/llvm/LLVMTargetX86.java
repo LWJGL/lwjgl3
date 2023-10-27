@@ -8,6 +8,7 @@ package org.lwjgl.llvm;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 public class LLVMTargetX86 {
@@ -22,6 +23,7 @@ public class LLVMTargetX86 {
             InitializeX86TargetInfo   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86TargetInfo"),
             InitializeX86Target       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86Target"),
             InitializeX86TargetMC     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86TargetMC"),
+            InitializeX86TargetMCA    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInitializeX86TargetMCA"),
             InitializeX86AsmPrinter   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86AsmPrinter"),
             InitializeX86AsmParser    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86AsmParser"),
             InitializeX86Disassembler = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86Disassembler");
@@ -50,6 +52,16 @@ public class LLVMTargetX86 {
 
     public static void LLVMInitializeX86TargetMC() {
         long __functionAddress = Functions.InitializeX86TargetMC;
+        invokeV(__functionAddress);
+    }
+
+    // --- [ LLVMInitializeX86TargetMCA ] ---
+
+    public static void LLVMInitializeX86TargetMCA() {
+        long __functionAddress = Functions.InitializeX86TargetMCA;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         invokeV(__functionAddress);
     }
 
