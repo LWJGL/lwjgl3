@@ -92,6 +92,38 @@ public class VkMemoryRequirements extends Struct<VkMemoryRequirements> implement
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
 
+    /** Sets the specified value to the {@link #size} field. */
+    public VkMemoryRequirements size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
+    /** Sets the specified value to the {@link #alignment} field. */
+    public VkMemoryRequirements alignment(@NativeType("VkDeviceSize") long value) { nalignment(address(), value); return this; }
+    /** Sets the specified value to the {@link #memoryTypeBits} field. */
+    public VkMemoryRequirements memoryTypeBits(@NativeType("uint32_t") int value) { nmemoryTypeBits(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkMemoryRequirements set(
+        long size,
+        long alignment,
+        int memoryTypeBits
+    ) {
+        size(size);
+        alignment(alignment);
+        memoryTypeBits(memoryTypeBits);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkMemoryRequirements set(VkMemoryRequirements src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code VkMemoryRequirements} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -231,6 +263,13 @@ public class VkMemoryRequirements extends Struct<VkMemoryRequirements> implement
     /** Unsafe version of {@link #memoryTypeBits}. */
     public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VkMemoryRequirements.MEMORYTYPEBITS); }
 
+    /** Unsafe version of {@link #size(long) size}. */
+    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryRequirements.SIZE, value); }
+    /** Unsafe version of {@link #alignment(long) alignment}. */
+    public static void nalignment(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryRequirements.ALIGNMENT, value); }
+    /** Unsafe version of {@link #memoryTypeBits(int) memoryTypeBits}. */
+    public static void nmemoryTypeBits(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryRequirements.MEMORYTYPEBITS, value); }
+
     // -----------------------------------
 
     /** An array of {@link VkMemoryRequirements} structs. */
@@ -278,6 +317,13 @@ public class VkMemoryRequirements extends Struct<VkMemoryRequirements> implement
         /** @return the value of the {@link VkMemoryRequirements#memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VkMemoryRequirements.nmemoryTypeBits(address()); }
+
+        /** Sets the specified value to the {@link VkMemoryRequirements#size} field. */
+        public VkMemoryRequirements.Buffer size(@NativeType("VkDeviceSize") long value) { VkMemoryRequirements.nsize(address(), value); return this; }
+        /** Sets the specified value to the {@link VkMemoryRequirements#alignment} field. */
+        public VkMemoryRequirements.Buffer alignment(@NativeType("VkDeviceSize") long value) { VkMemoryRequirements.nalignment(address(), value); return this; }
+        /** Sets the specified value to the {@link VkMemoryRequirements#memoryTypeBits} field. */
+        public VkMemoryRequirements.Buffer memoryTypeBits(@NativeType("uint32_t") int value) { VkMemoryRequirements.nmemoryTypeBits(address(), value); return this; }
 
     }
 

@@ -25,6 +25,12 @@ fun templateCustomization() {
     """
     }
 
+    VkMemoryRequirements.definition.apply {
+        this["size"].mutable()
+        this["alignment"].mutable()
+        this["memoryTypeBits"].mutable()
+    }
+
     VkShaderModuleCreateInfo.definition.apply {
         AutoSize("pCode")..this["codeSize"]
         PrimitiveType("uint32_t", PrimitiveMapping.BYTE).const.p("pCode", "points to code that is used to create the shader module")
