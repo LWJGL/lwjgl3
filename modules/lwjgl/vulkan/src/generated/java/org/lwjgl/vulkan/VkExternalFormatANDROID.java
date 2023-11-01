@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code externalFormat} is zero, the effect is as if the {@link VkExternalFormatANDROID} structure was not present. Otherwise, the {@code image} will have the specified external format.</p>
+ * <p>When included in the {@code pNext} chain of another structure, it indicates <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">additional format information</a> beyond what is provided by {@code VkFormat} values for an Android hardware buffer. If {@code externalFormat} is zero, it indicates that no external format is used, and implementations should rely only on other format information. If this structure is not present, it is equivalent to setting {@code externalFormat} to zero.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

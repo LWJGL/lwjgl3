@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRSurface VK_KHR_surface}</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link EXTMetalSurface VK_EXT_metal_surface} extension</li>
  * </ul></dd>

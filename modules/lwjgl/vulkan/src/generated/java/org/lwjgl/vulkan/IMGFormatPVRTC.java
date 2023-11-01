@@ -23,7 +23,7 @@ package org.lwjgl.vulkan;
  * <dd>55</dd>
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> without replacement</li>
  * </ul></dd>

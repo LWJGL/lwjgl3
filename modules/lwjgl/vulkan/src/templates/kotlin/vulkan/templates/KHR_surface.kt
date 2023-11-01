@@ -158,7 +158,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </div>
 
         <h5>See Also</h5>
-        ##VkSurfacePresentModeCompatibilityEXT, ##VkSurfacePresentModeEXT, ##VkSwapchainCreateInfoKHR, ##VkSwapchainPresentModeInfoEXT, ##VkSwapchainPresentModesCreateInfoEXT, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
+        ##VkLatencySurfaceCapabilitiesNV, ##VkSurfacePresentModeCompatibilityEXT, ##VkSurfacePresentModeEXT, ##VkSwapchainCreateInfoKHR, ##VkSwapchainPresentModeInfoEXT, ##VkSwapchainPresentModesCreateInfoEXT, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
         """,
 
         "PRESENT_MODE_IMMEDIATE_KHR".."0",

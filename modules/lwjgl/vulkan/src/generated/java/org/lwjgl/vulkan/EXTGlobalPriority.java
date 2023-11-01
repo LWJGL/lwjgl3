@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * <dd>175</dd>
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
  * </ul></dd>

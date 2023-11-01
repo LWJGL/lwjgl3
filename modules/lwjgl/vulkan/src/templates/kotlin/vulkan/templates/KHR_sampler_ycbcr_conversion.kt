@@ -35,7 +35,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRMaintenance1 VK_KHR_maintenance1} and {@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
             </ul></dd>

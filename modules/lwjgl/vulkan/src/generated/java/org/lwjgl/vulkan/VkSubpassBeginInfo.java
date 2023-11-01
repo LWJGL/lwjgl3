@@ -18,6 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying subpass begin information.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If {@code contents} is {@link EXTNestedCommandBuffer#VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT}, then <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> <b>must</b> be enabled</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

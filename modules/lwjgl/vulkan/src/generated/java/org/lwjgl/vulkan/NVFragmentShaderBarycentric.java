@@ -46,7 +46,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to {@link KHRFragmentShaderBarycentric VK_KHR_fragment_shader_barycentric} extension</li>
  * </ul></dd>

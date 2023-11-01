@@ -112,7 +112,7 @@ public class VkPipelineCacheHeaderVersionOne extends Struct<VkPipelineCacheHeade
     /** the length in bytes of the pipeline cache header. */
     @NativeType("uint32_t")
     public int headerSize() { return nheaderSize(address()); }
-    /** a {@code VkPipelineCacheHeaderVersion} enum value specifying the version of the header. A consumer of the pipeline cache <b>should</b> use the cache version to interpret the remainder of the cache header. */
+    /** a {@code VkPipelineCacheHeaderVersion} value specifying the version of the header. A consumer of the pipeline cache <b>should</b> use the cache version to interpret the remainder of the cache header. */
     @NativeType("VkPipelineCacheHeaderVersion")
     public int headerVersion() { return nheaderVersion(address()); }
     /** the {@link VkPhysicalDeviceProperties}{@code ::vendorID} of the implementation. */

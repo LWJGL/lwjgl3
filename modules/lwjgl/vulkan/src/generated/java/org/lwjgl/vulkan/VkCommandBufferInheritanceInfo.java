@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAttachmentSampleCountInfoAMD}, {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCommandBufferInheritanceRenderingInfo}, {@link VkCommandBufferInheritanceViewportScissorInfoNV}, or {@link VkMultiviewPerViewAttributesInfoNVX}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAttachmentSampleCountInfoAMD}, {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCommandBufferInheritanceRenderingInfo}, {@link VkCommandBufferInheritanceViewportScissorInfoNV}, {@link VkExternalFormatANDROID}, or {@link VkMultiviewPerViewAttributesInfoNVX}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>Both of {@code framebuffer}, and {@code renderPass} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
@@ -177,6 +177,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #renderPass} field. */
@@ -476,6 +478,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#renderPass} field. */

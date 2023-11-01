@@ -163,7 +163,7 @@ public class KHRSurface {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkSurfacePresentModeCompatibilityEXT}, {@link VkSurfacePresentModeEXT}, {@link VkSwapchainCreateInfoKHR}, {@link VkSwapchainPresentModeInfoEXT}, {@link VkSwapchainPresentModesCreateInfoEXT}, {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}, {@link #vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR}</p>
+     * <p>{@link VkLatencySurfaceCapabilitiesNV}, {@link VkSurfacePresentModeCompatibilityEXT}, {@link VkSurfacePresentModeEXT}, {@link VkSwapchainCreateInfoKHR}, {@link VkSwapchainPresentModeInfoEXT}, {@link VkSwapchainPresentModesCreateInfoEXT}, {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}, {@link #vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR}</p>
      */
     public static final int
         VK_PRESENT_MODE_IMMEDIATE_KHR    = 0,

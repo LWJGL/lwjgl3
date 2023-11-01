@@ -30,7 +30,7 @@ val EXT_global_priority_query = "EXTGlobalPriorityQuery".nativeClassVK("EXT_glob
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link EXTGlobalPriority VK_EXT_global_priority} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
             </ul></dd>

@@ -204,7 +204,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 ￿  1,
 ￿  sizeof(VkPerformanceCounterResultKHR) * enabledCounterCount,
 ￿  recordedCounters,
-￿  sizeof(VkPerformanceCounterResultKHR),
+￿  sizeof(VkPerformanceCounterResultKHR) * enabledCounterCount,
 ￿  NULL);
 ￿
 ￿// recordedCounters is filled with our counters, we will look at one for posterity

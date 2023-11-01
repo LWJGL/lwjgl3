@@ -338,7 +338,7 @@ public class EXTDescriptorBuffer {
      * 
      * <ul>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-     * <li>{@code dataSize} <b>must</b> equal the size of a descriptor of type {@link VkDescriptorGetInfoEXT}{@code ::type} determined by the value in {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}, or {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT}{@code ::combinedImageSamplerDensityMapDescriptorSize} if {@code pDescriptorInfo} specifies a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} whose {@code VkSampler} was created with {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT} set</li>
+     * <li>{@code dataSize} <b>must</b> equal the size of a descriptor of type {@link VkDescriptorGetInfoEXT}{@code ::type} determined by the value in {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT} , or determined by {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT}{@code ::combinedImageSamplerDensityMapDescriptorSize} if {@code pDescriptorInfo} specifies a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} whose {@code VkSampler} was created with {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT} set</li>
      * <li>{@code pDescriptor} <b>must</b> be a valid pointer to an array of at least {@code dataSize} bytes</li>
      * </ul>
      * 

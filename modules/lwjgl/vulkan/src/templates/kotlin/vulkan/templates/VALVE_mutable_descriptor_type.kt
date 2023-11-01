@@ -36,7 +36,7 @@ val VALVE_mutable_descriptor_type = "VALVEMutableDescriptorType".nativeClassVK("
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRMaintenance3 VK_KHR_maintenance3}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to {@link EXTMutableDescriptorType VK_EXT_mutable_descriptor_type} extension</li>
             </ul></dd>

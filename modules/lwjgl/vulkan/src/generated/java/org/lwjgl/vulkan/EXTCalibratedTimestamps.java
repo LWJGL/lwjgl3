@@ -229,6 +229,12 @@ public class EXTCalibratedTimestamps {
      * 
      * <p>Calibrated timestamp values <b>can</b> be extrapolated to estimate future coinciding timestamp values, however, depending on the nature of the time domains and other properties of the platform extrapolating values over a sufficiently long period of time <b>may</b> no longer be accurate enough to fit any particular purpose, so applications are expected to re-calibrate the timestamps on a regular basis.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>The {@code timeDomain} value of each {@link VkCalibratedTimestampInfoEXT} in {@code pTimestampInfos} <b>must</b> be unique</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>

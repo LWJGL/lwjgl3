@@ -44,7 +44,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRMultiview VK_KHR_multiview} and {@link KHRMaintenance2 VK_KHR_maintenance2}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
             </ul></dd>

@@ -113,7 +113,7 @@ val QCOM_image_processing2 = "QCOMImageProcessing2".nativeClassVK("QCOM_image_pr
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/QCOM/SPV_QCOM_image_processing.html">{@code SPV_QCOM_image_processing2}</a></li>
+                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/QCOM/SPV_QCOM_image_processing2.html">{@code SPV_QCOM_image_processing2}</a></li>
                 <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/qcom/GLSL_QCOM_image_processing2.txt">{@code GL_QCOM_image_processing2}</a></li>
             </ul></dd>
 

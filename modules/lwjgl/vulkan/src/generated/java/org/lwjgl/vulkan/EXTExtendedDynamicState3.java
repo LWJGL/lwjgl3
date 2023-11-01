@@ -203,7 +203,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3TessellationDomainOrigin">{@code extendedDynamicState3TessellationDomainOrigin}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3TessellationDomainOrigin">{@code extendedDynamicState3TessellationDomainOrigin}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -264,7 +270,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClampEnable">{@code extendedDynamicState3DepthClampEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClampEnable">{@code extendedDynamicState3DepthClampEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthClamp">{@code depthClamp}</a> feature is not enabled, {@code depthClampEnable} must be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
@@ -323,7 +335,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3PolygonMode">{@code extendedDynamicState3PolygonMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3PolygonMode">{@code extendedDynamicState3PolygonMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-fillModeNonSolid">{@code fillModeNonSolid}</a> feature is not enabled, {@code polygonMode} <b>must</b> be {@link VK10#VK_POLYGON_MODE_FILL POLYGON_MODE_FILL} or {@link NVFillRectangle#VK_POLYGON_MODE_FILL_RECTANGLE_NV POLYGON_MODE_FILL_RECTANGLE_NV}</li>
      * <li>If the {@link NVFillRectangle VK_NV_fill_rectangle} extension is not enabled, {@code polygonMode} <b>must</b> not be {@link NVFillRectangle#VK_POLYGON_MODE_FILL_RECTANGLE_NV POLYGON_MODE_FILL_RECTANGLE_NV}</li>
      * </ul>
@@ -384,7 +402,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RasterizationSamples">{@code extendedDynamicState3RasterizationSamples}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RasterizationSamples">{@code extendedDynamicState3RasterizationSamples}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -453,7 +477,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3SampleMask">{@code extendedDynamicState3SampleMask}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3SampleMask">{@code extendedDynamicState3SampleMask}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -510,7 +540,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToCoverageEnable">{@code extendedDynamicState3AlphaToCoverageEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToCoverageEnable">{@code extendedDynamicState3AlphaToCoverageEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -568,7 +604,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToOneEnable">{@code extendedDynamicState3AlphaToOneEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToOneEnable">{@code extendedDynamicState3AlphaToOneEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-alphaToOne">{@code alphaToOne}</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
@@ -627,8 +669,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LogicOpEnable">{@code extendedDynamicState3LogicOpEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
-     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-logicOp">{@code logicOp}</a> feature is not enabled, {@code logicOpEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LogicOpEnable">{@code extendedDynamicState3LogicOpEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -701,7 +748,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendEnable">{@code extendedDynamicState3ColorBlendEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendEnable">{@code extendedDynamicState3ColorBlendEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -773,7 +826,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendEquation">{@code extendedDynamicState3ColorBlendEquation}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendEquation">{@code extendedDynamicState3ColorBlendEquation}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -854,7 +913,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorWriteMask">{@code extendedDynamicState3ColorWriteMask}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorWriteMask">{@code extendedDynamicState3ColorWriteMask}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -911,7 +976,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RasterizationStream">{@code extendedDynamicState3RasterizationStream}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RasterizationStream">{@code extendedDynamicState3RasterizationStream}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-transformFeedback">{@code transformFeedback}</a> feature <b>must</b> be enabled</li>
      * <li>{@code rasterizationStream} <b>must</b> be less than {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::maxTransformFeedbackStreams}</li>
      * <li>{@code rasterizationStream} <b>must</b> be zero if {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::transformFeedbackRasterizationStreamSelect} is {@link VK10#VK_FALSE FALSE}</li>
@@ -972,7 +1043,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ConservativeRasterizationMode">{@code extendedDynamicState3ConservativeRasterizationMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ConservativeRasterizationMode">{@code extendedDynamicState3ConservativeRasterizationMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1031,7 +1108,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ExtraPrimitiveOverestimationSize">{@code extendedDynamicState3ExtraPrimitiveOverestimationSize}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ExtraPrimitiveOverestimationSize">{@code extendedDynamicState3ExtraPrimitiveOverestimationSize}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>{@code extraPrimitiveOverestimationSize} <b>must</b> be in the range of {@code 0.0} to {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::maxExtraPrimitiveOverestimationSize} inclusive</li>
      * </ul>
      * 
@@ -1090,7 +1173,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClipEnable">{@code extendedDynamicState3DepthClipEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClipEnable">{@code extendedDynamicState3DepthClipEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthClipEnable">{@code depthClipEnable}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
@@ -1149,7 +1238,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3SampleLocationsEnable">{@code extendedDynamicState3SampleLocationsEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3SampleLocationsEnable">{@code extendedDynamicState3SampleLocationsEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1222,7 +1317,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendAdvanced">{@code extendedDynamicState3ColorBlendAdvanced}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ColorBlendAdvanced">{@code extendedDynamicState3ColorBlendAdvanced}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1283,7 +1384,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ProvokingVertexMode">{@code extendedDynamicState3ProvokingVertexMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ProvokingVertexMode">{@code extendedDynamicState3ProvokingVertexMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>If {@code provokingVertexMode} is {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-provokingVertexLast">{@code provokingVertexLast}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
@@ -1343,7 +1450,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LineRasterizationMode">{@code extendedDynamicState3LineRasterizationMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LineRasterizationMode">{@code extendedDynamicState3LineRasterizationMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
      * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT LINE_RASTERIZATION_MODE_BRESENHAM_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
      * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
@@ -1405,7 +1518,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LineStippleEnable">{@code extendedDynamicState3LineStippleEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3LineStippleEnable">{@code extendedDynamicState3LineStippleEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1463,7 +1582,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClipNegativeOneToOne">{@code extendedDynamicState3DepthClipNegativeOneToOne}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3DepthClipNegativeOneToOne">{@code extendedDynamicState3DepthClipNegativeOneToOne}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthClipControl">{@code depthClipControl}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
@@ -1522,7 +1647,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ViewportWScalingEnable">{@code extendedDynamicState3ViewportWScalingEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ViewportWScalingEnable">{@code extendedDynamicState3ViewportWScalingEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1595,7 +1726,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ViewportSwizzle">{@code extendedDynamicState3ViewportSwizzle}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ViewportSwizzle">{@code extendedDynamicState3ViewportSwizzle}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1656,7 +1793,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageToColorEnable">{@code extendedDynamicState3CoverageToColorEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageToColorEnable">{@code extendedDynamicState3CoverageToColorEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1714,7 +1857,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageToColorLocation">{@code extendedDynamicState3CoverageToColorLocation}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageToColorLocation">{@code extendedDynamicState3CoverageToColorLocation}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1772,7 +1921,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationMode">{@code extendedDynamicState3CoverageModulationMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationMode">{@code extendedDynamicState3CoverageModulationMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1831,7 +1986,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationTableEnable">{@code extendedDynamicState3CoverageModulationTableEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationTableEnable">{@code extendedDynamicState3CoverageModulationTableEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1903,7 +2064,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationTable">{@code extendedDynamicState3CoverageModulationTable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageModulationTable">{@code extendedDynamicState3CoverageModulationTable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1959,7 +2126,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ShadingRateImageEnable">{@code extendedDynamicState3ShadingRateImageEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3ShadingRateImageEnable">{@code extendedDynamicState3ShadingRateImageEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2017,7 +2190,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RepresentativeFragmentTestEnable">{@code extendedDynamicState3RepresentativeFragmentTestEnable}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3RepresentativeFragmentTestEnable">{@code extendedDynamicState3RepresentativeFragmentTestEnable}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2075,7 +2254,13 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageReductionMode">{@code extendedDynamicState3CoverageReductionMode}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3CoverageReductionMode">{@code extendedDynamicState3CoverageReductionMode}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

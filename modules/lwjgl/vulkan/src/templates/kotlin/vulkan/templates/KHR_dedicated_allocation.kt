@@ -114,7 +114,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
             </ul></dd>

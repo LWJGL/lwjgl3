@@ -53,7 +53,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Deprecated</em> without replacement</li>
             </ul></dd>

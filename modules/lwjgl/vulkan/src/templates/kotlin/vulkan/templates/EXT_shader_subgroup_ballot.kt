@@ -71,7 +71,7 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Deprecated</em> by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2-new-features">Vulkan 1.2</a></li>
             </ul></dd>

@@ -40,6 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkFrameBoundaryFlagBitsEXT} values</li>
  * <li>If {@code imageCount} is not 0, and {@code pImages} is not {@code NULL}, {@code pImages} <b>must</b> be a valid pointer to an array of {@code imageCount} valid {@code VkImage} handles</li>
  * <li>If {@code bufferCount} is not 0, and {@code pBuffers} is not {@code NULL}, {@code pBuffers} <b>must</b> be a valid pointer to an array of {@code bufferCount} valid {@code VkBuffer} handles</li>
+ * <li>If {@code tagSize} is not 0, and {@code pTag} is not {@code NULL}, {@code pTag} <b>must</b> be a valid pointer to an array of {@code tagSize} bytes</li>
  * <li>Both of the elements of {@code pBuffers}, and the elements of {@code pImages} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
@@ -168,8 +169,9 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
     @NativeType("size_t")
     public long tagSize() { return ntagSize(address()); }
     /** a pointer to an array of {@code tagSize} bytes containing tag data. */
+    @Nullable
     @NativeType("void const *")
-    public long pTag() { return npTag(address()); }
+    public ByteBuffer pTag() { return npTag(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFrameBoundaryEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -193,8 +195,8 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
     public VkFrameBoundaryEXT tagName(@NativeType("uint64_t") long value) { ntagName(address(), value); return this; }
     /** Sets the specified value to the {@link #tagSize} field. */
     public VkFrameBoundaryEXT tagSize(@NativeType("size_t") long value) { ntagSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #pTag} field. */
-    public VkFrameBoundaryEXT pTag(@NativeType("void const *") long value) { npTag(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pTag} field. */
+    public VkFrameBoundaryEXT pTag(@Nullable @NativeType("void const *") ByteBuffer value) { npTag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkFrameBoundaryEXT set(
@@ -208,7 +210,7 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
         @Nullable LongBuffer pBuffers,
         long tagName,
         long tagSize,
-        long pTag
+        @Nullable ByteBuffer pTag
     ) {
         sType(sType);
         pNext(pNext);
@@ -370,8 +372,8 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
     public static long ntagName(long struct) { return UNSAFE.getLong(null, struct + VkFrameBoundaryEXT.TAGNAME); }
     /** Unsafe version of {@link #tagSize}. */
     public static long ntagSize(long struct) { return memGetAddress(struct + VkFrameBoundaryEXT.TAGSIZE); }
-    /** Unsafe version of {@link #pTag}. */
-    public static long npTag(long struct) { return memGetAddress(struct + VkFrameBoundaryEXT.PTAG); }
+    /** Unsafe version of {@link #pTag() pTag}. */
+    @Nullable public static ByteBuffer npTag(long struct) { return memByteBufferSafe(memGetAddress(struct + VkFrameBoundaryEXT.PTAG), (int)ntagSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFrameBoundaryEXT.STYPE, value); }
@@ -391,10 +393,10 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
     public static void npBuffers(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFrameBoundaryEXT.PBUFFERS, memAddressSafe(value)); if (value != null) { nbufferCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #tagName(long) tagName}. */
     public static void ntagName(long struct, long value) { UNSAFE.putLong(null, struct + VkFrameBoundaryEXT.TAGNAME, value); }
-    /** Unsafe version of {@link #tagSize(long) tagSize}. */
+    /** Sets the specified value to the {@code tagSize} field of the specified {@code struct}. */
     public static void ntagSize(long struct, long value) { memPutAddress(struct + VkFrameBoundaryEXT.TAGSIZE, value); }
-    /** Unsafe version of {@link #pTag(long) pTag}. */
-    public static void npTag(long struct, long value) { memPutAddress(struct + VkFrameBoundaryEXT.PTAG, value); }
+    /** Unsafe version of {@link #pTag(ByteBuffer) pTag}. */
+    public static void npTag(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkFrameBoundaryEXT.PTAG, memAddressSafe(value)); if (value != null) { ntagSize(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -466,9 +468,10 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
         /** @return the value of the {@link VkFrameBoundaryEXT#tagSize} field. */
         @NativeType("size_t")
         public long tagSize() { return VkFrameBoundaryEXT.ntagSize(address()); }
-        /** @return the value of the {@link VkFrameBoundaryEXT#pTag} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkFrameBoundaryEXT#pTag} field. */
+        @Nullable
         @NativeType("void const *")
-        public long pTag() { return VkFrameBoundaryEXT.npTag(address()); }
+        public ByteBuffer pTag() { return VkFrameBoundaryEXT.npTag(address()); }
 
         /** Sets the specified value to the {@link VkFrameBoundaryEXT#sType} field. */
         public VkFrameBoundaryEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkFrameBoundaryEXT.nsType(address(), value); return this; }
@@ -492,8 +495,8 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
         public VkFrameBoundaryEXT.Buffer tagName(@NativeType("uint64_t") long value) { VkFrameBoundaryEXT.ntagName(address(), value); return this; }
         /** Sets the specified value to the {@link VkFrameBoundaryEXT#tagSize} field. */
         public VkFrameBoundaryEXT.Buffer tagSize(@NativeType("size_t") long value) { VkFrameBoundaryEXT.ntagSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFrameBoundaryEXT#pTag} field. */
-        public VkFrameBoundaryEXT.Buffer pTag(@NativeType("void const *") long value) { VkFrameBoundaryEXT.npTag(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkFrameBoundaryEXT#pTag} field. */
+        public VkFrameBoundaryEXT.Buffer pTag(@Nullable @NativeType("void const *") ByteBuffer value) { VkFrameBoundaryEXT.npTag(address(), value); return this; }
 
     }
 

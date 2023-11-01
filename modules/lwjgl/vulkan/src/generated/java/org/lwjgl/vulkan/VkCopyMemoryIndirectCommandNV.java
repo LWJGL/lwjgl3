@@ -86,10 +86,10 @@ public class VkCopyMemoryIndirectCommandNV extends Struct<VkCopyMemoryIndirectCo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the starting address of the source host or device memory to copy from. */
+    /** the starting address of the source device memory to copy from. */
     @NativeType("VkDeviceAddress")
     public long srcAddress() { return nsrcAddress(address()); }
-    /** the starting address of the destination host or device memory to copy to. */
+    /** the starting address of the destination device memory to copy to. */
     @NativeType("VkDeviceAddress")
     public long dstAddress() { return ndstAddress(address()); }
     /** the size of the copy in bytes. */

@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * <dd>36</dd>
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Obsoleted</em> by {@link KHRMaintenance1 VK_KHR_maintenance1} extension
  * 

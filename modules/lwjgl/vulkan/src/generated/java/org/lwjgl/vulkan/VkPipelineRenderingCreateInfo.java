@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it indicates that the corresponding attachment is unused within the render pass. Valid formats indicate that an attachment <b>can</b> be used - but it is still valid to set the attachment to {@code NULL} when beginning rendering.</p>
  * 
+ * <p>If the render pass is going to be used with an external format resolve attachment, a {@link VkExternalFormatANDROID} structure <b>must</b> also be included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, defining the external format of the resolve attachment that will be used.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

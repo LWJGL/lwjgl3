@@ -27,13 +27,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Each element of {@code pQueuePriorities} <b>must</b> be between {@code 0.0} and {@code 1.0} inclusive</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-protectedMemory">{@code protectedMemory}</a> feature is not enabled, the {@link VK11#VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT DEVICE_QUEUE_CREATE_PROTECTED_BIT} bit of {@code flags} <b>must</b> not be set</li>
  * <li>If {@code flags} includes {@link VK11#VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT DEVICE_QUEUE_CREATE_PROTECTED_BIT}, {@code queueFamilyIndex} <b>must</b> be the index of a queue family that includes the {@link VK11#VK_QUEUE_PROTECTED_BIT QUEUE_PROTECTED_BIT} capability</li>
+ * <li>If the {@code pNext} chain includes a {@link VkDeviceQueueShaderCoreControlCreateInfoARM} structure then {@link VkPhysicalDeviceSchedulingControlsPropertiesARM}{@code ::schedulingControlsFlags} <b>must</b> contain {@link ARMSchedulingControls#VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDeviceQueueGlobalPriorityCreateInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} or {@link VkDeviceQueueShaderCoreControlCreateInfoARM}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDeviceQueueCreateFlagBits} values</li>
  * <li>{@code pQueuePriorities} <b>must</b> be a valid pointer to an array of {@code queueCount} {@code float} values</li>
@@ -145,6 +146,8 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
     public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} value to the {@code pNext} chain. */
     public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkDeviceQueueShaderCoreControlCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDeviceQueueCreateInfo pNext(VkDeviceQueueShaderCoreControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDeviceQueueCreateInfo flags(@NativeType("VkDeviceQueueCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
@@ -415,6 +418,8 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
         public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} value to the {@code pNext} chain. */
         public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkDeviceQueueShaderCoreControlCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueShaderCoreControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#flags} field. */
         public VkDeviceQueueCreateInfo.Buffer flags(@NativeType("VkDeviceQueueCreateFlags") int value) { VkDeviceQueueCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#queueFamilyIndex} field. */

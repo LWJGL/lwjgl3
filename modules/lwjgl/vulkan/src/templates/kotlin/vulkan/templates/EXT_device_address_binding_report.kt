@@ -46,7 +46,7 @@ val EXT_device_address_binding_report = "EXTDeviceAddressBindingReport".nativeCl
 
         <h5>Other Extension Metadata</h5>
         <dl>
-            <dt>Last Modified Date</dt>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2020-11-23</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
@@ -54,7 +54,7 @@ val EXT_device_address_binding_report = "EXTDeviceAddressBindingReport".nativeCl
                 <li>This extension requires {@code VK_EXT_debug_utils}</li>
             </ul></dd>
 
-            <dt>Contributors</dt>
+            <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Ralph Potter, Samsung</li>
                 <li>Spencer Fricke, Samsung</li>

@@ -166,7 +166,7 @@ import org.lwjgl.system.windows.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link NVExternalMemory VK_NV_external_memory}</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link KHRExternalMemoryWin32 VK_KHR_external_memory_win32} extension</li>
  * </ul></dd>

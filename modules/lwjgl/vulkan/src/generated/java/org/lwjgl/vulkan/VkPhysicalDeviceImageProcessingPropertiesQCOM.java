@@ -112,7 +112,7 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum value that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::numPhases}. in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filterphases">weight image sampling</a> operations. */
+    /** the maximum value that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::numPhases} in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filterphases">weight image sampling</a> operations. */
     @NativeType("uint32_t")
     public int maxWeightFilterPhases() { return nmaxWeightFilterPhases(address()); }
     /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::filterSize}. */

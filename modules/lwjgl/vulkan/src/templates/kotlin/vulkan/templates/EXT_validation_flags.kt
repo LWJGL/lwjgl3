@@ -30,7 +30,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
             <dt><b>Revision</b></dt>
             <dd>2</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>
             </ul></dd>

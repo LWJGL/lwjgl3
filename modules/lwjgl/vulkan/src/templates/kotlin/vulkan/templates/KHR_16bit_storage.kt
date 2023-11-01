@@ -33,7 +33,7 @@ val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", typ
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRStorageBufferStorageClass VK_KHR_storage_buffer_storage_class}</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
             </ul></dd>

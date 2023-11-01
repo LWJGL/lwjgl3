@@ -26,7 +26,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link NVExternalMemoryCapabilities VK_NV_external_memory_capabilities}</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link KHRExternalMemory VK_KHR_external_memory} extension
  * 

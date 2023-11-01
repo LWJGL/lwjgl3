@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #triStripVertexOrderIndependentOfProvokingVertex};
+ *     VkBool32 triStripVertexOrderIndependentOfProvokingVertex;
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR extends Struct<VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR> implements NativeResource {
@@ -94,7 +94,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR extends Stru
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation does not change its vertex numbering for triangle strip primitives when the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-flatshading">provoking vertex mode</a> is {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT}, as shown in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-barycentric-order-table-last-vertex">last vertex table</a>. */
+    /** @return the value of the {@code triStripVertexOrderIndependentOfProvokingVertex} field. */
     @NativeType("VkBool32")
     public boolean triStripVertexOrderIndependentOfProvokingVertex() { return ntriStripVertexOrderIndependentOfProvokingVertex(address()) != 0; }
 
@@ -297,7 +297,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR extends Stru
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR#triStripVertexOrderIndependentOfProvokingVertex} field. */
+        /** @return the value of the {@code triStripVertexOrderIndependentOfProvokingVertex} field. */
         @NativeType("VkBool32")
         public boolean triStripVertexOrderIndependentOfProvokingVertex() { return VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.ntriStripVertexOrderIndependentOfProvokingVertex(address()) != 0; }
 

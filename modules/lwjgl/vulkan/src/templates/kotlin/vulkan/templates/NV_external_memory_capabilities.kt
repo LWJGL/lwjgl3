@@ -27,7 +27,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Deprecation state</b></dt>
+            <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li>
                     <em>Deprecated</em> by {@link KHRExternalMemoryCapabilities VK_KHR_external_memory_capabilities} extension

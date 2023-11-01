@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code srcAddress} <b>must</b> be 4 byte aligned</li>
  * <li>The memory in range {@code srcAddress} and {@code srcAddress} + {@code compressedSize} <b>must</b> be valid and bound to a {@code VkDeviceMemory} object</li>
  * <li>The {@code dstAddress} <b>must</b> be 4 byte aligned</li>
+ * <li>If {@code decompressionMethod} is {@link NVMemoryDecompression#VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV}, then {@code decompressedSize} <b>must</b> be less than or equal to 65536 bytes</li>
  * <li>The memory in range {@code dstAddress} and {@code dstAddress} + {@code decompressedSize} <b>must</b> be valid and bound to a {@code VkDeviceMemory} object</li>
  * <li>The {@code decompressedSize} <b>must</b> be large enough to hold the decompressed data based on the {@code decompressionMethod}</li>
  * <li>The {@code decompressionMethod} <b>must</b> have a single bit set</li>

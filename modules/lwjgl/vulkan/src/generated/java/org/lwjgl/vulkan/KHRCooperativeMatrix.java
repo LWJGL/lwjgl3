@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension adds support for using cooperative matrix types in SPIR-V. Cooperative matrix types are medium-sized matrices that are primarily supported in compute shaders, where the storage for the matrix is spread across all invocations in some scope (usually a subgroup) and those invocations cooperate to efficiently perform matrix multiplies.
  * 
- * <p>Cooperative matrix types are defined by the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_cooperative_matrix.html">{@code SPV_KHR_cooperative_matrix}</a> SPIR-V extension and can be used with the <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GL_KHR_cooperative_matrix.txt">{@code GL_KHR_cooperative_matrix}</a> GLSL extension.</p>
+ * <p>Cooperative matrix types are defined by the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_cooperative_matrix.html">{@code SPV_KHR_cooperative_matrix}</a> SPIR-V extension and can be used with the <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a> GLSL extension.</p>
  * 
  * <p>This extension includes support for enumerating the matrix types and dimensions that are supported by the implementation.</p>
  * 
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_cooperative_matrix.html">{@code SPV_KHR_cooperative_matrix}</a></li>
- * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GL_KHR_cooperative_matrix.txt">{@code GL_KHR_cooperative_matrix}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

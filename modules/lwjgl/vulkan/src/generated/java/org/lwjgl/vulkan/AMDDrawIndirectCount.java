@@ -28,7 +28,7 @@ import static org.lwjgl.system.JNI.*;
  * <dd>34</dd>
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count} extension
  * 

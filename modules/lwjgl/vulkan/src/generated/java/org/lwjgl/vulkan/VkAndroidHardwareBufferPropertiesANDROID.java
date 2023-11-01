@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAndroidHardwareBufferFormatProperties2ANDROID} or {@link VkAndroidHardwareBufferFormatPropertiesANDROID}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAndroidHardwareBufferFormatProperties2ANDROID}, {@link VkAndroidHardwareBufferFormatPropertiesANDROID}, or {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -117,6 +117,8 @@ public class VkAndroidHardwareBufferPropertiesANDROID extends Struct<VkAndroidHa
     public VkAndroidHardwareBufferPropertiesANDROID pNext(VkAndroidHardwareBufferFormatProperties2ANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkAndroidHardwareBufferFormatPropertiesANDROID} value to the {@code pNext} chain. */
     public VkAndroidHardwareBufferPropertiesANDROID pNext(VkAndroidHardwareBufferFormatPropertiesANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID} value to the {@code pNext} chain. */
+    public VkAndroidHardwareBufferPropertiesANDROID pNext(VkAndroidHardwareBufferFormatResolvePropertiesANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkAndroidHardwareBufferPropertiesANDROID set(
@@ -329,6 +331,8 @@ public class VkAndroidHardwareBufferPropertiesANDROID extends Struct<VkAndroidHa
         public VkAndroidHardwareBufferPropertiesANDROID.Buffer pNext(VkAndroidHardwareBufferFormatProperties2ANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkAndroidHardwareBufferFormatPropertiesANDROID} value to the {@code pNext} chain. */
         public VkAndroidHardwareBufferPropertiesANDROID.Buffer pNext(VkAndroidHardwareBufferFormatPropertiesANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID} value to the {@code pNext} chain. */
+        public VkAndroidHardwareBufferPropertiesANDROID.Buffer pNext(VkAndroidHardwareBufferFormatResolvePropertiesANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

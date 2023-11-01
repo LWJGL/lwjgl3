@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}, {@link VkSwapchainPresentBarrierCreateInfoNV}, {@link VkSwapchainPresentModesCreateInfoEXT}, or {@link VkSwapchainPresentScalingCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}, {@link VkSwapchainLatencyCreateInfoNV}, {@link VkSwapchainPresentBarrierCreateInfoNV}, {@link VkSwapchainPresentModesCreateInfoEXT}, or {@link VkSwapchainPresentScalingCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSwapchainCreateFlagBitsKHR} values</li>
  * <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
@@ -305,6 +305,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainCounterCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainDisplayNativeHdrCreateInfoAMD} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainLatencyCreateInfoNV} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainLatencyCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentBarrierCreateInfoNV} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */
@@ -722,6 +724,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainCounterCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainDisplayNativeHdrCreateInfoAMD} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainLatencyCreateInfoNV} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainLatencyCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentBarrierCreateInfoNV} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */

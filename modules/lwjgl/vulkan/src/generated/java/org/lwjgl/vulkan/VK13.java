@@ -620,7 +620,7 @@ public class VK13 extends VK12 {
      * <li>{@link #VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT}</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}</li>
-     * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV}</li>
+     * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>
      * <li>{@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
      * <li>{@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
@@ -790,10 +790,11 @@ public class VK13 extends VK12 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} specifies that draw calls for the render pass instance will be recorded in secondary command buffers.</li>
+     * <li>{@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} specifies that draw calls for the render pass instance will be recorded in secondary command buffers. If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> feature is enabled, the draw calls <b>can</b> come from both inline and {@link VK10#vkCmdExecuteCommands CmdExecuteCommands}.</li>
      * <li>{@link #VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} specifies that the render pass instance is resuming an earlier suspended render pass instance.</li>
      * <li>{@link #VK_RENDERING_SUSPENDING_BIT RENDERING_SUSPENDING_BIT} specifies that the render pass instance will be suspended.</li>
      * <li>{@link EXTLegacyDithering#VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT} specifies that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-legacy-dithering">Legacy Dithering</a> is enabled for the render pass instance.</li>
+     * <li>{@link EXTNestedCommandBuffer#VK_RENDERING_CONTENTS_INLINE_BIT_EXT RENDERING_CONTENTS_INLINE_BIT_EXT} specifies that draw calls for the render pass instance <b>can</b> be recorded inline within the current command buffer. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> feature is enabled this <b>can</b> be combined with the {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} bit to allow draw calls to be recorded both inline and in secondary command buffers.</li>
      * </ul>
      * 
      * <p>The contents of {@code pRenderingInfo} <b>must</b> match between suspended render pass instances and the render pass instances that resume them, other than the presence or absence of the {@link #VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT}, {@link #VK_RENDERING_SUSPENDING_BIT RENDERING_SUSPENDING_BIT}, and {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} flags. No action or synchronization commands, or other render pass instances, are allowed between suspending and resuming render pass instances.</p>
@@ -1333,6 +1334,8 @@ public class VK13 extends VK12 {
      * <ul>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
      * <li>The {@code dependencyFlags} member of {@code pDependencyInfo} <b>must</b> be 0</li>
+     * <li>The {@code srcStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> not include {@link #VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
+     * <li>The {@code dstStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> not include {@link #VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
      * <li>The current device mask of {@code commandBuffer} <b>must</b> include exactly one physical device</li>
      * <li>The {@code srcStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> only include pipeline stages valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
      * <li>The {@code dstStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> only include pipeline stages valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
@@ -1634,7 +1637,9 @@ public class VK13 extends VK12 {
      * <ul>
      * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, the render pass <b>must</b> have been created with at least one subpass dependency that expresses a dependency from the current subpass to itself, does not include {@link VK10#VK_DEPENDENCY_BY_REGION_BIT DEPENDENCY_BY_REGION_BIT} if this command does not, does not include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT} if this command does not, and has <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scopes</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scopes</a> that are all supersets of the scopes defined in this command</li>
      * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, it <b>must</b> not include any buffer memory barriers</li>
-     * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, the {@code image} member of any image memory barrier included in this command <b>must</b> be an attachment used in the current subpass both as an input attachment, and as either a color or depth/stencil attachment</li>
+     * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, the {@code image} member of any image memory barrier included in this command <b>must</b> be an attachment used in the current subpass both as an input attachment, and as either a color, color resolve, or depth/stencil attachment</li>
+     * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, and the {@code image} member of any image memory barrier is a color resolve attachment, the corresponding color attachment <b>must</b> be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}</li>
+     * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance using a {@code VkRenderPass} object, and the {@code image} member of any image memory barrier is a color resolve attachment, it <b>must</b> have been created with a non-zero {@link VkExternalFormatANDROID}{@code ::externalFormat} value</li>
      * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance, the {@code oldLayout} and {@code newLayout} members of any image memory barrier included in this command <b>must</b> be equal</li>
      * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance, the {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} members of any memory barrier included in this command <b>must</b> be equal</li>
      * <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance, and the source stage masks of any memory barriers include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-space stages</a>, destination stage masks of all memory barriers <b>must</b> only include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-space stages</a></li>
@@ -2441,7 +2446,7 @@ public class VK13 extends VK12 {
      * 
      * <ul>
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-dynamicRendering">{@code dynamicRendering}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code commandBuffer} is a secondary command buffer, {@code pRenderingInfo→flags} <b>must</b> not include {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT}</li>
+     * <li>If {@code commandBuffer} is a secondary command buffer, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> feature is not enabled, {@code pRenderingInfo→flags} <b>must</b> not include {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

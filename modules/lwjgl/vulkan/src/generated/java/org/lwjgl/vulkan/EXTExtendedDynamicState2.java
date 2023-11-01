@@ -30,7 +30,7 @@ import static org.lwjgl.system.JNI.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
  * </ul></dd>
@@ -115,7 +115,13 @@ public class EXTExtendedDynamicState2 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2PatchControlPoints">{@code extendedDynamicState2PatchControlPoints}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2PatchControlPoints">{@code extendedDynamicState2PatchControlPoints}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * <li>{@code patchControlPoints} <b>must</b> be greater than zero and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTessellationPatchSize}</li>
      * </ul>
      * 
@@ -206,7 +212,13 @@ public class EXTExtendedDynamicState2 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2LogicOp">{@code extendedDynamicState2LogicOp}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2LogicOp">{@code extendedDynamicState2LogicOp}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

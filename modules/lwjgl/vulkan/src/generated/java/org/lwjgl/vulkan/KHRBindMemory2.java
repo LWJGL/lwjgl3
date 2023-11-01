@@ -30,7 +30,7 @@ import static org.lwjgl.system.JNI.*;
  * <dd>158</dd>
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
- * <dt><b>Deprecation state</b></dt>
+ * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
  * </ul></dd>

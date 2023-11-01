@@ -29,9 +29,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code dstImage} is sparse then all memory ranges accessed by the copy command <b>must</b> be bound as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#sparsememory-resource-binding">Binding Resource Memory</a></li>
- * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was not created with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, the image <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
- * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was created with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, the image <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}</li>
- * <li>If non-stencil aspects of {@code dstImage} are accessed, the image <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
+ * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was not created with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code dstImage} <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
+ * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was created with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code dstImage} <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}</li>
+ * <li>If non-stencil aspects of {@code dstImage} are accessed, {@code dstImage} <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
  * <li>If {@code flags} contains {@link EXTHostImageCopy#VK_HOST_IMAGE_COPY_MEMCPY_EXT HOST_IMAGE_COPY_MEMCPY_EXT}, the {@code x}, {@code y}, and {@code z} members of the {@code dstOffset} member of each element of {@code pRegions} <b>must</b> be 0</li>
  * <li>If {@code flags} contains {@link EXTHostImageCopy#VK_HOST_IMAGE_COPY_MEMCPY_EXT HOST_IMAGE_COPY_MEMCPY_EXT}, the {@code extent} member of each element of {@code pRegions} <b>must</b> equal the extents of {@code dstImage} identified by {@code dstSubresource}</li>
  * </ul>
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If {@code dstImage} is non-sparse then the image or the specified <em>disjoint</em> plane <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
  * <li>The {@code dstSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>The <code>{@code dstSubresource.baseArrayLayer} + {@code dstSubresource.layerCount}</code> of each element of {@code pRegions} , if {@code dstSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance5">{@code maintenance5}</a> is not enabled, <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
+ * <li>If {@code dstSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>{@code dstSubresource.baseArrayLayer} + {@code dstSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
  * <li>{@code dstImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
  * </ul>
  * 
@@ -74,6 +74,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>For each element of {@code pRegions}, {@code bufferRowLength} divided by the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> and then multiplied by the texel block size of {@code dstImage} <b>must</b> be less than or equal to <code>2<sup>31</sup>-1</code></li>
  * <li>{@code srcImageLayout} <b>must</b> specify the current layout of the image subresources of {@code srcImage} specified in {@code pRegions}</li>
  * <li>{@code srcImageLayout} <b>must</b> be one of the image layouts returned in {@link VkPhysicalDeviceHostImageCopyPropertiesEXT}{@code ::pCopySrcLayouts}</li>
+ * <li>If {@code flags} includes {@link EXTHostImageCopy#VK_HOST_IMAGE_COPY_MEMCPY_EXT HOST_IMAGE_COPY_MEMCPY_EXT}, for each region in {@code pRegions}, {@code memoryRowLength} and {@code memoryImageHeight} <b>must</b> both be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
