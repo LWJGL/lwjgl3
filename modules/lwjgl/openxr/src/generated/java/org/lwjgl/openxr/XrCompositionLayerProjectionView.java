@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerSpaceWarpInfoFB}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerSpaceWarpInfoFB}</li>
  * <li>{@code subImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
  * </ul>
  * 
@@ -112,7 +112,7 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     public XrPosef pose() { return npose(address()); }
     /** the {@link XrFovf} for this projection element. */
     public XrFovf fov() { return nfov(address()); }
-    /** the image layer {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
+    /** the image layer {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
 
     /** Sets the specified value to the {@link #type} field. */

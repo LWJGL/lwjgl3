@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MSFTCompositionLayerReprojection XR_MSFT_composition_layer_reprojection} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -42,8 +42,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct XrCompositionLayerReprojectionPlaneOverrideMSFT {
- *     XrStructureType type;
- *     void const * next;
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
  *     {@link XrVector3f XrVector3f} {@link #position$ position};
  *     {@link XrVector3f XrVector3f} {@link #normal};
  *     {@link XrVector3f XrVector3f} {@link #velocity};
@@ -106,10 +106,10 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** describes the position of the focus plane represented in the corresponding {@link XrCompositionLayerProjection}{@code ::space}. */
@@ -119,11 +119,11 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     /** a velocity of the position in the corresponding {@link XrCompositionLayerProjection}{@code ::space} measured in meters per second. */
     public XrVector3f velocity() { return nvelocity(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@code type} field. */
+    /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@link #type} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT type$Default() { return type(MSFTCompositionLayerReprojection.XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Copies the specified {@link XrVector3f} to the {@link #position$} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT position$(XrVector3f value) { nposition$(address(), value); return this; }
@@ -340,10 +340,10 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nnext(address()); }
         /** @return a {@link XrVector3f} view of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#position$} field. */
@@ -353,11 +353,11 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
         /** @return a {@link XrVector3f} view of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#velocity} field. */
         public XrVector3f velocity() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nvelocity(address()); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@code type} field. */
+        /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer type$Default() { return type(MSFTCompositionLayerReprojection.XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#next} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nnext(address(), value); return this; }
         /** Copies the specified {@link XrVector3f} to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#position$} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer position$(XrVector3f value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nposition$(address(), value); return this; }

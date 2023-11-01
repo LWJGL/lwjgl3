@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
  * <p>This extension allows:</p>
  * 
  * <ul>
- * <li>An application to get a skinned hand mesh and a bind pose skeleton that can be used to render a hand object driven by the joints from the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</li>
+ * <li>An application to get a skinned hand mesh and a bind pose skeleton that <b>can</b> be used to render a hand object driven by the joints from the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</li>
  * <li>Control the scale of the hand joints returned by {@link EXTHandTracking XR_EXT_hand_tracking}.</li>
  * </ul>
  */

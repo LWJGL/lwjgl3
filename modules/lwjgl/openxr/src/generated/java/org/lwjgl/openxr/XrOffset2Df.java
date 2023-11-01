@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrExtent2Df}, {@link XrRect2Df}</p>
+ * <p>{@link XrExtent2Df}, {@link XrRect2Df}, {@link XrSceneMarkerMSFT}</p>
  * 
  * <h3>Layout</h3>
  * 

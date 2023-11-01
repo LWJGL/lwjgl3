@@ -10,7 +10,7 @@ package org.lwjgl.openxr;
  * 
  * <p>This extension defines four commonly used action poses for all user hand interaction profiles including both hand tracking devices and motion controller devices.</p>
  * 
- * <p>This extension also introduces a new interaction profile specifically designed for hand tracking devices to input through the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input">OpenXR action system</a>. Though, for runtimes with controller inputs, the runtime <b>should</b> also provide this interaction profile through action mappings from the controller inputs, so that an application whose suggested action bindings solely depending on this hand interaction profile is usable on such runtimes as well.</p>
+ * <p>This extension also introduces a new interaction profile specifically designed for hand tracking devices to input through the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#input">OpenXR action system</a>. Though, for runtimes with controller inputs, the runtime <b>should</b> also provide this interaction profile through action mappings from the controller inputs, so that an application whose suggested action bindings solely depending on this hand interaction profile is usable on such runtimes as well.</p>
  */
 public final class EXTHandInteraction {
 

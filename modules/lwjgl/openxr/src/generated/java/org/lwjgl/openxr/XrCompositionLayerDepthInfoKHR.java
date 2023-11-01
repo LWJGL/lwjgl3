@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerDepthInfoKHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code subImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
  * </ul>
  * 
@@ -133,7 +133,7 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
+    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
     /** {@code minDepth} and {@code maxDepth} are the window space depths that correspond to the near and far frustum planes, respectively. {@code minDepth} must be less than {@code maxDepth}. {@code minDepth} and {@code maxDepth} must be in the range [0, 1]. */
     public float minDepth() { return nminDepth(address()); }

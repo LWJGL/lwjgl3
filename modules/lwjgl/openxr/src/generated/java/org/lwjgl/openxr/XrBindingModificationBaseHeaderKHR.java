@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>The {@link KHRBindingModification XR_KHR_binding_modification} extension <b>must</b> be enabled prior to using {@link XrBindingModificationBaseHeaderKHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

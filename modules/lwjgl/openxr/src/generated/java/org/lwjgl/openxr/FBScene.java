@@ -15,7 +15,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>This extension expands on the concept of spatial entities to include a way for a spatial entity to represent rooms, objects, or other boundaries in a scene.</p>
  * 
- * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  */
 public class FBScene {
 
@@ -89,7 +89,7 @@ public class FBScene {
      * 
      * <p>Gets the 2D bounding box for a spatial entity with the {@link FBSpatialEntity#XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB SPACE_COMPONENT_TYPE_BOUNDED_2D_FB} component type enabled.</p>
      * 
-     * <p>The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the x-y plane of the given {@code XrSpace}’s coordinate system; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.</p>
+     * <p>The bounding box is defined by an {@link XrRect2Df}{@code ::offset} and {@link XrRect2Df}{@code ::extent}. The {@link XrRect2Df}{@code ::offset} refers to the coordinate of the minimum corner of the box in the x-y plane of the given {@code XrSpace}’s coordinate system; that is, the corner whose coordinate has the minimum value on each axis. The {@link XrRect2Df}{@code ::extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>{@link XrRect2Df}::offset {@link XrRect2Df}::extent</code>.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

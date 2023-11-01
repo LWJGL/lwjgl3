@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using {@link XrSpaceUuidFilterInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} {@link XrUuidEXT} structures</li>
  * <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
  * </ul>

@@ -873,6 +873,8 @@ public class FBPassthrough {
      * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
      * </ul></dd>
      * </dl>
+     *
+     * @param instance the {@code XrGeometryInstanceFB} to be destroyed.
      */
     @NativeType("XrResult")
     public static int xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) {
@@ -944,6 +946,9 @@ public class FBPassthrough {
      * <h5>See Also</h5>
      * 
      * <p>{@link XrGeometryInstanceTransformFB}</p>
+     *
+     * @param instance       the {@code XrGeometryInstanceFB} to get the transform.
+     * @param transformation the {@link XrGeometryInstanceTransformFB} to be set.
      */
     @NativeType("XrResult")
     public static int xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, @NativeType("XrGeometryInstanceTransformFB const *") XrGeometryInstanceTransformFB transformation) {

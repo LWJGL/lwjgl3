@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using {@link XrSpaceSaveInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
  * <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
  * <li>{@code persistenceMode} <b>must</b> be a valid {@code XrSpacePersistenceModeFB} value</li>
@@ -112,7 +112,7 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSpace} handle to the reference space that defines the {@code poseInSpace} of the entity to be saved. */
+    /** the {@code XrSpace} handle to the space of the entity to be saved. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
     /** the storage location. */

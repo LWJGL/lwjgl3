@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INTERACTION_PROFILE_SUGGESTED_BINDING TYPE_INTERACTION_PROFILE_SUGGESTED_BINDING}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrBindingModificationsKHR}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrBindingModificationsKHR}</li>
  * <li>{@code suggestedBindings} <b>must</b> be a pointer to an array of {@code countSuggestedBindings} valid {@link XrActionSuggestedBinding} structures</li>
  * <li>The {@code countSuggestedBindings} parameter <b>must</b> be greater than 0</li>
  * </ul>

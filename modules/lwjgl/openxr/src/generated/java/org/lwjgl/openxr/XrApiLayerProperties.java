@@ -24,7 +24,7 @@ import static org.lwjgl.openxr.XR10.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -115,7 +115,7 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     /** a string specifying the name of the API layer. Use this name in the {@link XrInstanceCreateInfo}{@code ::enabledApiLayerNames} array to enable this API layer for an instance. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** the API version the API layer was written to, encoded as described in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. */
+    /** the API version the API layer was written to, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. */
     @NativeType("XrVersion")
     public long specVersion() { return nspecVersion(address()); }
     /** the version of this API layer. It is an integer, increasing with backward compatible changes. */

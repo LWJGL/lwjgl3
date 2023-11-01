@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>If a runtime supports a permission system to control application access to the face tracker, then the runtime <b>must</b> set the {@code isValid} field to {@link XR10#XR_FALSE FALSE} on the supplied {@link XrFaceExpressionStatusFB} structure until the user allows the application to access the face tracker. When the application access has been allowed, the runtime <b>may</b> set {@code isValid} on the supplied {@link XrFaceExpressionStatusFB} structure to {@link XR10#XR_TRUE TRUE}.</p>
  * 
- * <p>Some permission systems may control access to the eye tracking separately from access to the face tracking, even though the eyes are part of the face. In case the user denied tracking of the eyes, yet, allowed tracking of the face, then the runtime <b>must</b> set the {@code isEyeFollowingBlendshapesValid} field to {@link XR10#XR_FALSE FALSE} on the supplied {@link XrFaceExpressionStatusFB} for indicating that eye tracking data is not available, but at the same time <b>may</b> set the {@code isValid} field to {@link XR10#XR_TRUE TRUE} on the supplied {@link XrFaceExpressionStatusFB} for indicating that another part of the face is tracked properly.</p>
+ * <p>Some permission systems <b>may</b> control access to the eye tracking separately from access to the face tracking, even though the eyes are part of the face. In case the user denied tracking of the eyes, yet, allowed tracking of the face, then the runtime <b>must</b> set the {@code isEyeFollowingBlendshapesValid} field to {@link XR10#XR_FALSE FALSE} on the supplied {@link XrFaceExpressionStatusFB} for indicating that eye tracking data is not available, but at the same time <b>may</b> set the {@code isValid} field to {@link XR10#XR_TRUE TRUE} on the supplied {@link XrFaceExpressionStatusFB} for indicating that another part of the face is tracked properly.</p>
  */
 public class FBFaceTracking {
 
@@ -54,7 +54,7 @@ public class FBFaceTracking {
         XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB         = 1000201006;
 
     /**
-     * XrFaceExpressionFB - The name of blend shapes that can be tracked
+     * XrFaceExpressionFB - The names of trackable blend shapes
      * 
      * <h5>Enum values:</h5>
      * 
@@ -258,7 +258,7 @@ public class FBFaceTracking {
      * 
      * <p>An application <b>can</b> create an {@code XrFaceTrackerFB} handle using {@link #xrCreateFaceTrackerFB CreateFaceTrackerFB} function.</p>
      * 
-     * <p>If the system does not support face tracking, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateFaceTrackerFB CreateFaceTrackerFB}. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@code supportsFaceTracking} in {@link XrSystemFaceTrackingPropertiesFB} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>can</b> avoid creating a face tracker.</p>
+     * <p>If the system does not support face tracking, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateFaceTrackerFB CreateFaceTrackerFB}. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@link XrSystemFaceTrackingPropertiesFB}{@code ::supportsFaceTracking} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>can</b> avoid creating a face tracker.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

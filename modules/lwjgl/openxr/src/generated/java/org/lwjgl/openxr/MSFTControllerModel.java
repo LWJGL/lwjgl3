@@ -152,7 +152,7 @@ public class MSFTControllerModel {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The {@link #xrLoadControllerModelMSFT LoadControllerModelMSFT} function loads the controller model as a byte buffer containing a binary form of glTF (a.k.a GLB file format) for the controller. The binary glTF data <b>must</b> conform to glTF 2.0 format defined at {uri-msft-gltf2}.</p>
+     * <p>The {@link #xrLoadControllerModelMSFT LoadControllerModelMSFT} function loads the controller model as a byte buffer containing a binary form of glTF (a.k.a GLB file format) for the controller. The binary glTF data <b>must</b> conform to glTF 2.0 format defined at <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>.</p>
      * 
      * <pre><code>
      * XrResult xrLoadControllerModelMSFT(

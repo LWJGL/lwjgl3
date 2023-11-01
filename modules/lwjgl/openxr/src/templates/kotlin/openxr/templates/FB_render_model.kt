@@ -143,7 +143,7 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
 
         The runtime <b>must</b> return #ERROR_CALL_ORDER_INVALID if #GetRenderModelPropertiesFB() is called with render model paths before calling #EnumerateRenderModelPathsFB(). The runtime <b>must</b> return #ERROR_PATH_INVALID if a path not given by #EnumerateRenderModelPathsFB() is used.
 
-        If #GetRenderModelPropertiesFB() returns a success code of #RENDER_MODEL_UNAVAILABLE_FB and has a {@code modelKey} of #NULL_RENDER_MODEL_KEY_FB, this indicates that the model for the device is unavailable. The application <b>may</b> keep calling #GetRenderModelPropertiesFB() because the model <b>may</b> become available later when a device is connected.
+        If #GetRenderModelPropertiesFB() returns a success code of #RENDER_MODEL_UNAVAILABLE_FB and has a ##XrRenderModelPropertiesFB{@code ::modelKey} of #NULL_RENDER_MODEL_KEY_FB, this indicates that the model for the device is unavailable. The application <b>may</b> keep calling #GetRenderModelPropertiesFB() because the model <b>may</b> become available later when a device is connected.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -199,9 +199,9 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
 ￿    XrRenderModelBufferFB*                      buffer);</code></pre>
 
         <h5>Description</h5>
-        #LoadRenderModelFB() is used to load the GLTF model data using a valid {@code modelKey}. #LoadRenderModelFB() loads the model as a byte buffer containing the GLTF in the binary format (GLB). The GLB data <b>must</b> conform to the glTF 2.0 format defined at {uri-fb-gltf2} The GLB <b>may</b> contain texture data in a format that requires the use of the {@code KHR_texture_basisu} GLTF extension defined at {uri-fb-gltf2-basisu}. Therefore, the application <b>should</b> ensure it can handle this extension.
+        #LoadRenderModelFB() is used to load the GLTF model data using a valid ##XrRenderModelLoadInfoFB{@code ::modelKey}. #LoadRenderModelFB() loads the model as a byte buffer containing the GLTF in the binary format (GLB). The GLB data <b>must</b> conform to the glTF 2.0 format defined at <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>. The GLB <b>may</b> contain texture data in a format that requires the use of the {@code KHR_texture_basisu} GLTF extension defined at <a href="https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_texture_basisu">https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_texture_basisu</a>. Therefore, the application <b>should</b> ensure it can handle this extension.
 
-        If the device for the requested model is disconnected or does not match the {@code modelKey} provided, #LoadRenderModelFB() <b>must</b> return #RENDER_MODEL_UNAVAILABLE_FB as well as a {@code bufferCountOutput} value of 0 indicating that the model was not available.
+        If the device for the requested model is disconnected or does not match the ##XrRenderModelLoadInfoFB{@code ::modelKey} provided, #LoadRenderModelFB() <b>must</b> return #RENDER_MODEL_UNAVAILABLE_FB as well as an ##XrRenderModelBufferFB{@code ::bufferCountOutput} value of 0 indicating that the model was not available.
 
         The #LoadRenderModelFB() function <b>may</b> be slow, therefore applications <b>should</b> call it from a non-time sensitive thread.
 

@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using {@link XrSystemSpaceWarpPropertiesFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

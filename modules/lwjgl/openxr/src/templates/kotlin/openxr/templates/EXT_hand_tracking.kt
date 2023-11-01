@@ -158,7 +158,7 @@ val EXT_hand_tracking = "EXTHandTracking".nativeClassXR("EXT_hand_tracking", typ
             </ul></dd>
         </dl>
 
-        If the system does not support hand tracking, runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateHandTrackerEXT(). In this case, the runtime <b>must</b> return #FALSE for {@code supportsHandTracking} in ##XrSystemHandTrackingPropertiesEXT when the function #GetSystemProperties() is called, so that the application <b>can</b> avoid creating a hand tracker.
+        If the system does not support hand tracking, runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateHandTrackerEXT(). In this case, the runtime <b>must</b> return #FALSE for ##XrSystemHandTrackingPropertiesEXT{@code ::supportsHandTracking} when the function #GetSystemProperties() is called, so that the application <b>can</b> avoid creating a hand tracker.
 
         <h5>See Also</h5>
         ##XrHandTrackerCreateInfoEXT

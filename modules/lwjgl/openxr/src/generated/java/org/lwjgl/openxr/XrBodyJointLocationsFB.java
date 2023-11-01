@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The runtime <b>must</b> return {@code jointLocations} representing the range of human body motion, without any obstructions. Input systems that either obstruct the movement of the user’s body (for example, a held controller preventing the user from making a fist) or input systems that have only limited ability to track finger positions <b>must</b> use the information available to them to emulate an unobstructed range of motion.</p>
  * 
- * <p>The runtime <b>must</b> update the {@code jointLocations} array ordered so that the application can index elements using the corresponding body joint enum (e.g. {@code XrBodyJointFB}) as described by {@code XrBodyJointSetFB} when creating the {@code XrBodyTrackerFB}. For example, when the {@code XrBodyTrackerFB} is created with {@link FBBodyTracking#XR_BODY_JOINT_SET_DEFAULT_FB BODY_JOINT_SET_DEFAULT_FB}, the application <b>must</b> set the {@code jointCount} to {@link FBBodyTracking#XR_BODY_JOINT_COUNT_FB BODY_JOINT_COUNT_FB}, and the runtime <b>must</b> fill the {@code jointLocations} array ordered so that it is indexed by the {@code XrBodyJointFB} enum.</p>
+ * <p>The runtime <b>must</b> update the {@code jointLocations} array ordered so that it is indexed using the corresponding body joint enum (e.g. {@code XrBodyJointFB}) as described by {@code XrBodyJointSetFB} when creating the {@code XrBodyTrackerFB}. For example, when the {@code XrBodyTrackerFB} is created with {@link FBBodyTracking#XR_BODY_JOINT_SET_DEFAULT_FB BODY_JOINT_SET_DEFAULT_FB}, the application <b>must</b> set the {@code jointCount} to {@link FBBodyTracking#XR_BODY_JOINT_COUNT_FB BODY_JOINT_COUNT_FB}, and the runtime <b>must</b> fill the {@code jointLocations} array ordered so that it is indexed by the {@code XrBodyJointFB} enum.</p>
  * 
  * <p>If the returned {@code isActive} is true, the runtime <b>must</b> return all joint locations with both {@link XR10#XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT} and {@link XR10#XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} set. However, in this case, some joint space locations <b>may</b> be untracked (i.e. {@link XR10#XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT} or {@link XR10#XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT} is unset).</p>
  * 
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodyJointLocationsFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointCount} {@link XrBodyJointLocationFB} structures</li>
  * <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
  * </ul>

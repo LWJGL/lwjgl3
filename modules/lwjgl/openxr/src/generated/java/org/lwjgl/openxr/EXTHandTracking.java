@@ -210,7 +210,7 @@ public class EXTHandTracking {
      * </ul></dd>
      * </dl>
      * 
-     * <p>If the system does not support hand tracking, runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateHandTrackerEXT CreateHandTrackerEXT}. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@code supportsHandTracking} in {@link XrSystemHandTrackingPropertiesEXT} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>can</b> avoid creating a hand tracker.</p>
+     * <p>If the system does not support hand tracking, runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateHandTrackerEXT CreateHandTrackerEXT}. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@link XrSystemHandTrackingPropertiesEXT}{@code ::supportsHandTracking} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>can</b> avoid creating a hand tracker.</p>
      * 
      * <h5>See Also</h5>
      * 

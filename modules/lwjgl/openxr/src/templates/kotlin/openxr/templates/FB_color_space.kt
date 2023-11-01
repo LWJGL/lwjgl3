@@ -23,7 +23,7 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
             <li>An application to set the color space for the session.</li>
         </ul>
 
-        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

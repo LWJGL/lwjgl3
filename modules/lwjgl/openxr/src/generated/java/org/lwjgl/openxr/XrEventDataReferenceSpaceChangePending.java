@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -120,7 +120,7 @@ public class XrEventDataReferenceSpaceChangePending extends Struct<XrEventDataRe
     /** the target {@code XrTime} after which {@link XR10#xrLocateSpace LocateSpace} or {@link XR10#xrLocateViews LocateViews} will return values that respect this change. */
     @NativeType("XrTime")
     public long changeTime() { return nchangeTime(address()); }
-    /** true if the runtime can determine the {@code pose} of the new space in the previous space before the change. */
+    /** true if the runtime can determine the {@code poseInPreviousSpace} of the new space in the previous space before the change. */
     @NativeType("XrBool32")
     public boolean poseValid() { return nposeValid(address()) != 0; }
     /** an {@link XrPosef} defining the position and orientation of the new reference space’s natural origin within the natural reference frame of its previous space. */

@@ -702,7 +702,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
         </dl>
         """,
 
-        XrGeometryInstanceFB("instance", "")
+        XrGeometryInstanceFB("instance", "the {@code XrGeometryInstanceFB} to be destroyed.")
     )
 
     XrResult(
@@ -754,7 +754,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
         ##XrGeometryInstanceTransformFB
         """,
 
-        XrGeometryInstanceFB("instance", ""),
-        XrGeometryInstanceTransformFB.const.p("transformation", "")
+        XrGeometryInstanceFB("instance", "the {@code XrGeometryInstanceFB} to get the transform."),
+        XrGeometryInstanceTransformFB.const.p("transformation", "the ##XrGeometryInstanceTransformFB to be set.")
     )
 }

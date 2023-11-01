@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SESSION_BEGIN_INFO TYPE_SESSION_BEGIN_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}</li>
  * <li>{@code primaryViewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
  * </ul>
  * 

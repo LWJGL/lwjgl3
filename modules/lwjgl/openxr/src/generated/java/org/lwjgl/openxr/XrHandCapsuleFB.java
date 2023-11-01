@@ -24,7 +24,7 @@ import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
  * <ul>
  * <li>{@code points} are the two points defining the capsule length.</li>
  * <li>{@code radius} is the radius of the capsule.</li>
- * <li>{@code joint} is the hand joint that drives this capsule’s transform. Multiple capsules can be attached to the same joint.</li>
+ * <li>{@code joint} is the hand joint that drives this capsule’s transform. Multiple capsules <b>may</b> be attached to the same joint.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -16,15 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Rect in two dimensions.
+ * Rect in two dimensions, floating-point values.
  * 
  * <h5>Description</h5>
  * 
  * <p>This structure is used for component values that may be fractional (floating-point).</p>
  * 
+ * <p>The {@code offset} is the position of the rectangle corner with minimum value coordinates. The other three corners are computed by adding the {@link XrExtent2Di}{@code ::width} to the {@code x} offset, {@link XrExtent2Di}{@code ::height} to the {@code y} offset, or both.</p>
+ * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrExtent2Df}, {@link XrOffset2Df}, {@link FBScene#xrGetSpaceBoundingBox2DFB GetSpaceBoundingBox2DFB}</p>
+ * <p>{@link XrExtent2Df}, {@link XrOffset2Df}, {@link XrRect2Di}, {@link FBScene#xrGetSpaceBoundingBox2DFB GetSpaceBoundingBox2DFB}</p>
  * 
  * <h3>Layout</h3>
  * 

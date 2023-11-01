@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrSceneComponentMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}</p>
+ * <p>{@link XrSceneComponentMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link MSFTSceneMarker#xrGetSceneMarkerDecodedStringMSFT GetSceneMarkerDecodedStringMSFT}, {@link MSFTSceneMarker#xrGetSceneMarkerRawDataMSFT GetSceneMarkerRawDataMSFT}</p>
  * 
  * <h3>Layout</h3>
  * 

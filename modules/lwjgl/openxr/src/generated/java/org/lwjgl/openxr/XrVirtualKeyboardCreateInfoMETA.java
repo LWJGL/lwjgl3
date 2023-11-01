@@ -22,14 +22,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The struct is used for keyboard creation. Empty with the intention of future extension.</p>
  * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} if {@code supportsVirtualKeyboard} is {@link XR10#XR_FALSE FALSE} when checking the device compatibility.</p>
+ * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} if {@link XrSystemVirtualKeyboardPropertiesMETA}{@code ::supportsVirtualKeyboard} is {@link XR10#XR_FALSE FALSE} when checking the device compatibility.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardCreateInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

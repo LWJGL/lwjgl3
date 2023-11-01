@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrSpaceQueryResultFB} structure is a query result returned in the {@code results} output parameter of the {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} function.</p>
+ * <p>The {@link XrSpaceQueryResultFB} structure is a query result returned in the {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB}{@code ::results} output parameter of the {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} function.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

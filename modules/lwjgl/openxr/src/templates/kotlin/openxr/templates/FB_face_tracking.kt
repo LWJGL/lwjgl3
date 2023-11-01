@@ -19,7 +19,7 @@ val FB_face_tracking = "FBFaceTracking".nativeClassXR("FB_face_tracking", type =
 
         If a runtime supports a permission system to control application access to the face tracker, then the runtime <b>must</b> set the {@code isValid} field to #FALSE on the supplied ##XrFaceExpressionStatusFB structure until the user allows the application to access the face tracker. When the application access has been allowed, the runtime <b>may</b> set {@code isValid} on the supplied ##XrFaceExpressionStatusFB structure to #TRUE.
 
-        Some permission systems may control access to the eye tracking separately from access to the face tracking, even though the eyes are part of the face. In case the user denied tracking of the eyes, yet, allowed tracking of the face, then the runtime <b>must</b> set the {@code isEyeFollowingBlendshapesValid} field to #FALSE on the supplied ##XrFaceExpressionStatusFB for indicating that eye tracking data is not available, but at the same time <b>may</b> set the {@code isValid} field to #TRUE on the supplied ##XrFaceExpressionStatusFB for indicating that another part of the face is tracked properly.
+        Some permission systems <b>may</b> control access to the eye tracking separately from access to the face tracking, even though the eyes are part of the face. In case the user denied tracking of the eyes, yet, allowed tracking of the face, then the runtime <b>must</b> set the {@code isEyeFollowingBlendshapesValid} field to #FALSE on the supplied ##XrFaceExpressionStatusFB for indicating that eye tracking data is not available, but at the same time <b>may</b> set the {@code isValid} field to #TRUE on the supplied ##XrFaceExpressionStatusFB for indicating that another part of the face is tracked properly.
         """
 
     IntConstant(
@@ -51,7 +51,7 @@ val FB_face_tracking = "FBFaceTracking".nativeClassXR("FB_face_tracking", type =
 
     EnumConstant(
         """
-        XrFaceExpressionFB - The name of blend shapes that can be tracked
+        XrFaceExpressionFB - The names of trackable blend shapes
         """,
 
         "FACE_EXPRESSION_BROW_LOWERER_L_FB".."0",
@@ -166,7 +166,7 @@ val FB_face_tracking = "FBFaceTracking".nativeClassXR("FB_face_tracking", type =
         <h5>Description</h5>
         An application <b>can</b> create an {@code XrFaceTrackerFB} handle using #CreateFaceTrackerFB() function.
 
-        If the system does not support face tracking, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTrackerFB(). In this case, the runtime <b>must</b> return #FALSE for {@code supportsFaceTracking} in ##XrSystemFaceTrackingPropertiesFB when the function #GetSystemProperties() is called, so that the application <b>can</b> avoid creating a face tracker.
+        If the system does not support face tracking, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTrackerFB(). In this case, the runtime <b>must</b> return #FALSE for ##XrSystemFaceTrackingPropertiesFB{@code ::supportsFaceTracking} when the function #GetSystemProperties() is called, so that the application <b>can</b> avoid creating a face tracker.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

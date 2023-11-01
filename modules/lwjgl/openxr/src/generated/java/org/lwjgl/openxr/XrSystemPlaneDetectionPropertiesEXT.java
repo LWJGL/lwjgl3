@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using {@link XrSystemPlaneDetectionPropertiesEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTPlaneDetection#XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

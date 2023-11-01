@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link METAPerformanceMetrics XR_META_performance_metrics} extension <b>must</b> be enabled prior to using {@link XrPerformanceMetricsStateMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_STATE_META TYPE_PERFORMANCE_METRICS_STATE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

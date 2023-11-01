@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBCompositionLayerAlphaBlend XR_FB_composition_layer_alpha_blend} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerAlphaBlendFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBCompositionLayerAlphaBlend#XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code srcFactorColor} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
  * <li>{@code dstFactorColor} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
  * <li>{@code srcFactorAlpha} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>

@@ -33,7 +33,7 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>The {@link FBSwapchainUpdateStateVulkan XR_FB_swapchain_update_state_vulkan} extension <b>must</b> be enabled prior to using {@link XrSwapchainStateSamplerVulkanFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code minFilter} <b>must</b> be a valid {@code VkFilter} value</li>
  * <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
  * <li>{@code mipmapMode} <b>must</b> be a valid {@code VkSamplerMipmapMode} value</li>

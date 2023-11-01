@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using {@link XrControllerModelStateMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_STATE_MSFT TYPE_CONTROLLER_MODEL_STATE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>If {@code nodeCapacityInput} is not 0, {@code nodeStates} <b>must</b> be a pointer to an array of {@code nodeCapacityInput} {@link XrControllerModelNodeStateMSFT} structures</li>
  * </ul>
  * 

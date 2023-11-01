@@ -21,6 +21,9 @@ val FB_touch_controller_pro = "FBTouchControllerPro".nativeClassXR("FB_touch_con
             <li>pathname:/interaction_profiles/facebook/touch_controller_pro</li>
         </ul>
 
+        <h5>Note</h5>
+        The interaction profile path pathname:{legacy-path} defined here does not follow current rules for interaction profile names. If this extension were introduced today, it would be called pathname:{properly-suffixed-path}, to allow for modifications when promoted to a KHR extension or the core specification.
+
         Valid for user paths:
 
         <ul>

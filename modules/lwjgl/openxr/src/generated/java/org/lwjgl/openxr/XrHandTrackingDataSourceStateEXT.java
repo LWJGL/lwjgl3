@@ -26,14 +26,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the tracker was not created with {@link XrHandTrackingDataSourceInfoEXT} chained to {@link XrHandTrackerCreateInfoEXT}{@code ::next}, then the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}, if {@link XrHandTrackingDataSourceStateEXT} is passed in the call to {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT}.</p>
  * 
- * <p>If there is an active hand tracking device that is one of the specified {@code requestedDataSources}, the runtime <b>must</b> set {@code isActive} to {@link XR10#XR_TRUE TRUE}. When the runtime sets {@code isActive} to {@link XR10#XR_TRUE TRUE}, the runtime <b>must</b> set {@code dataSource} indicate the active data source. The runtime <b>must</b> return a {@code dataSource} that is a subset of the {@code requestedDataSources} when creating the corresponding hand tracker.</p>
+ * <p>If there is an active hand tracking device that is one of the specified {@link XrHandTrackingDataSourceInfoEXT}{@code ::requestedDataSources}, the runtime <b>must</b> set {@code isActive} to {@link XR10#XR_TRUE TRUE}. When the runtime sets {@code isActive} to {@link XR10#XR_TRUE TRUE}, the runtime <b>must</b> set {@code dataSource} indicate the active data source. The runtime <b>must</b> return a {@code dataSource} that is a subset of the {@link XrHandTrackingDataSourceInfoEXT}{@code ::requestedDataSources} when creating the corresponding hand tracker.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using {@link XrHandTrackingDataSourceStateEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code dataSource} <b>must</b> be a valid {@code XrHandTrackingDataSourceEXT} value</li>
  * </ul>
  * 

@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
  * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
+ * <li>{@code passthrough} an {@code XrPassthroughFB} handle.</li>
  * <li>{@code flags} {@code XrPassthroughFlagsFB} that specify additional behavior.</li>
  * <li>{@code purpose} {@code XrPassthroughLayerPurposeFB} that specifies the layer’s purpose.</li>
  * </ul>
@@ -33,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughLayerCreateInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code passthrough} <b>must</b> be a valid {@code XrPassthroughFB} handle</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code XrPassthroughFlagBitsFB} values</li>
  * <li>{@code flags} <b>must</b> not be 0</li>

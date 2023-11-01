@@ -30,7 +30,7 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>The {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension <b>must</b> be enabled prior to using {@link XrVulkanDeviceCreateInfoKHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHRVulkanEnable2#XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR TYPE_VULKAN_DEVICE_CREATE_INFO_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code createFlags} <b>must</b> be 0</li>
  * <li>{@code pfnGetInstanceProcAddr} <b>must</b> be a valid {@code PFN_vkGetInstanceProcAddr} value</li>
  * <li>{@code vulkanPhysicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} value</li>
@@ -46,8 +46,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <pre><code>
  * struct XrVulkanDeviceCreateInfoKHR {
- *     XrStructureType type;
- *     void const * next;
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
  *     XrSystemId {@link #systemId};
  *     XrVulkanDeviceCreateFlagsKHR {@link #createFlags};
  *     PFN_vkGetInstanceProcAddr {@link #pfnGetInstanceProcAddr};
@@ -122,10 +122,10 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct<XrVulkanDeviceCreateInfo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** an {@code XrSystemId} handle for the system which will be used to create a session. */
@@ -140,19 +140,19 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct<XrVulkanDeviceCreateInfo
     /** <b>must</b> match {@link KHRVulkanEnable#xrGetVulkanGraphicsDeviceKHR GetVulkanGraphicsDeviceKHR}. */
     @NativeType("VkPhysicalDevice")
     public long vulkanPhysicalDevice() { return nvulkanPhysicalDevice(address()); }
-    /** the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceCreateInfo.html">{@code VkDeviceCreateInfo} as specified by Vulkan</a>. */
+    /** the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceCreateInfo.html">{@code VkDeviceCreateInfo} as specified by Vulkan</a>. */
     @NativeType("VkDeviceCreateInfo const *")
     public VkDeviceCreateInfo vulkanCreateInfo() { return nvulkanCreateInfo(address()); }
-    /** the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAllocationCallbacks.html">{@code VkAllocationCallbacks} as specified by Vulkan</a>. */
+    /** the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAllocationCallbacks.html">{@code VkAllocationCallbacks} as specified by Vulkan</a>. */
     @Nullable
     @NativeType("VkAllocationCallbacks const *")
     public VkAllocationCallbacks vulkanAllocator() { return nvulkanAllocator(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrVulkanDeviceCreateInfoKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR TYPE_VULKAN_DEVICE_CREATE_INFO_KHR} value to the {@code type} field. */
+    /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR TYPE_VULKAN_DEVICE_CREATE_INFO_KHR} value to the {@link #type} field. */
     public XrVulkanDeviceCreateInfoKHR type$Default() { return type(KHRVulkanEnable2.XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrVulkanDeviceCreateInfoKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #systemId} field. */
     public XrVulkanDeviceCreateInfoKHR systemId(@NativeType("XrSystemId") long value) { nsystemId(address(), value); return this; }
@@ -400,10 +400,10 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct<XrVulkanDeviceCreateInfo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVulkanDeviceCreateInfoKHR.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#next} field. */
         @NativeType("void const *")
         public long next() { return XrVulkanDeviceCreateInfoKHR.nnext(address()); }
         /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#systemId} field. */
@@ -426,11 +426,11 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct<XrVulkanDeviceCreateInfo
         @NativeType("VkAllocationCallbacks const *")
         public VkAllocationCallbacks vulkanAllocator() { return XrVulkanDeviceCreateInfoKHR.nvulkanAllocator(address()); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#type} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer type(@NativeType("XrStructureType") int value) { XrVulkanDeviceCreateInfoKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR TYPE_VULKAN_DEVICE_CREATE_INFO_KHR} value to the {@code type} field. */
+        /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR TYPE_VULKAN_DEVICE_CREATE_INFO_KHR} value to the {@link XrVulkanDeviceCreateInfoKHR#type} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer type$Default() { return type(KHRVulkanEnable2.XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#next} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer next(@NativeType("void const *") long value) { XrVulkanDeviceCreateInfoKHR.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#systemId} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer systemId(@NativeType("XrSystemId") long value) { XrVulkanDeviceCreateInfoKHR.nsystemId(address(), value); return this; }

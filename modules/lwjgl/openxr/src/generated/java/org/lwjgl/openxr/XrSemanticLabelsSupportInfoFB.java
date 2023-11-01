@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrSemanticLabelsSupportInfoFB} structure <b>may</b> be specified in the {@code next} chain of {@link XrSemanticLabelsFB} to specify additional behaviors of the {@link FBScene#xrGetSpaceSemanticLabelsFB GetSpaceSemanticLabelsFB} function. The runtime <b>must</b> follow the behaviors specified in {@code flags} according to the descriptions of {@code XrSemanticLabelsSupportFlagBitsFB}. The runtime <b>must</b> return any semantic label that is not included in {@code recognizedLabels} as "OTHER" to the application. The runtime <b>must</b> follow this direction only if the runtime reports the {@code extensionVersion} as 2 or greater, otherwise the runtime <b>must</b> ignore this as an unknown chained structure.</p>
+ * <p>The {@link XrSemanticLabelsSupportInfoFB} structure <b>may</b> be specified in the {@code next} chain of {@link XrSemanticLabelsFB} to specify additional behaviors of the {@link FBScene#xrGetSpaceSemanticLabelsFB GetSpaceSemanticLabelsFB} function. The runtime <b>must</b> follow the behaviors specified in {@code flags} according to the descriptions of {@code XrSemanticLabelsSupportFlagBitsFB}. The runtime <b>must</b> return any semantic label that is not included in {@code recognizedLabels} as "OTHER" to the application. The runtime <b>must</b> follow this direction only if the runtime reports the {@link XrExtensionProperties}{@code ::extensionVersion} as 2 or greater, otherwise the runtime <b>must</b> ignore this as an unknown chained structure.</p>
  * 
  * <p>If the {@link XrSemanticLabelsSupportInfoFB} structure is not present in the {@code next} chain of {@link XrSemanticLabelsFB}, the runtime <b>may</b> return any semantic labels to the application.</p>
  * 
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using {@link XrSemanticLabelsSupportInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBScene#XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSemanticLabelsSupportFlagBitsFB} values</li>
  * <li>{@code recognizedLabels} <b>must</b> be a null-terminated UTF-8 string</li>
  * </ul>

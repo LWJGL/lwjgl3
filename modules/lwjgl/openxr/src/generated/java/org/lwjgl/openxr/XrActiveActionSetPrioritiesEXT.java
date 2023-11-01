@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTActiveActionSetPriority XR_EXT_active_action_set_priority} extension <b>must</b> be enabled prior to using {@link XrActiveActionSetPrioritiesEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code actionSetPriorities} <b>must</b> be a pointer to an array of {@code actionSetPriorityCount} valid {@link XrActiveActionSetPriorityEXT} structures</li>
  * <li>The {@code actionSetPriorityCount} parameter <b>must</b> be greater than 0</li>
  * </ul>
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct XrActiveActionSetPrioritiesEXT {
  *     XrStructureType {@link #type};
  *     void const * {@link #next};
- *     uint32_t actionSetPriorityCount;
+ *     uint32_t {@link #actionSetPriorityCount};
  *     {@link XrActiveActionSetPriorityEXT XrActiveActionSetPriorityEXT} const * {@link #actionSetPriorities};
  * }</code></pre>
  */
@@ -109,7 +109,7 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** @return the value of the {@code actionSetPriorityCount} field. */
+    /** an integer specifying the number of valid elements in the actionSetPriorities array. */
     @NativeType("uint32_t")
     public int actionSetPriorityCount() { return nactionSetPriorityCount(address()); }
     /** a pointer to an array that maps action sets to their active priority numbers. If an action set is specified multiple times, the runtime <b>may</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} from {@link XR10#xrSyncActions SyncActions}. */
@@ -337,7 +337,7 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
         /** @return the value of the {@link XrActiveActionSetPrioritiesEXT#next} field. */
         @NativeType("void const *")
         public long next() { return XrActiveActionSetPrioritiesEXT.nnext(address()); }
-        /** @return the value of the {@code actionSetPriorityCount} field. */
+        /** @return the value of the {@link XrActiveActionSetPrioritiesEXT#actionSetPriorityCount} field. */
         @NativeType("uint32_t")
         public int actionSetPriorityCount() { return XrActiveActionSetPrioritiesEXT.nactionSetPriorityCount(address()); }
         /** @return a {@link XrActiveActionSetPriorityEXT.Buffer} view of the struct array pointed to by the {@link XrActiveActionSetPrioritiesEXT#actionSetPriorities} field. */

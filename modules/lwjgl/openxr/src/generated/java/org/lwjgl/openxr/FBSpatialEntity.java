@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>We use OpenXR {@code XrSpace} handles to give applications access to spatial entities such as Spatial Anchors. In other words, any operation which involves spatial entities uses {@code XrSpace} handles to identify the affected spatial entities.</p>
  * 
- * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  * 
  * <p>This extension allows:</p>
  * 
@@ -365,7 +365,7 @@ public class FBSpatialEntity {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Enables or disables the specified component for the specified entity. This operation is asynchronous and always returns immediately, regardless of the value of {@code timeout}. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an {@link XrEventDataSpaceSetStatusCompleteFB} is posted to the event queue. If this function returns a failure code, no event is posted. This function <b>must</b> return {@link #XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB} if the {@code XrSpace} does not support the specified component type.</p>
+     * <p>Enables or disables the specified component for the specified entity. This operation is asynchronous and always returns immediately, regardless of the value of {@link XrSpaceComponentStatusSetInfoFB}{@code ::timeout}. The {@code requestId} <b>can</b> be used to later refer to the request, such as identifying which request has completed when an {@link XrEventDataSpaceSetStatusCompleteFB} is posted to the event queue. If this function returns a failure code, no event is posted. This function <b>must</b> return {@link #XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB} if the {@code XrSpace} does not support the specified component type.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

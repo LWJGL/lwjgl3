@@ -20,14 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The LUT data <b>may</b> be updated for an existing color LUT, while channels and resolution remain constant after creation. Hence, the value of {@code bufferSize} in {@code data} <b>must</b> be equal to the buffer size specified at creation. Otherwise, the runtime <b>must</b> return {@link METAPassthroughColorLut#XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META}.</p>
+ * <p>The LUT data <b>may</b> be updated for an existing color LUT, while channels and resolution remain constant after creation. Hence, the value of {@link XrPassthroughColorLutDataMETA}{@code ::bufferSize} in {@code data} <b>must</b> be equal to the buffer size specified at creation. Otherwise, the runtime <b>must</b> return {@link METAPassthroughColorLut#XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorLutUpdateInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code data} <b>must</b> be a valid {@link XrPassthroughColorLutDataMETA} structure</li>
  * </ul>
  * 

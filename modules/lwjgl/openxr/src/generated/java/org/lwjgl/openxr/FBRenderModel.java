@@ -197,7 +197,7 @@ public class FBRenderModel {
      * 
      * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_CALL_ORDER_INVALID ERROR_CALL_ORDER_INVALID} if {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB} is called with render model paths before calling {@link #xrEnumerateRenderModelPathsFB EnumerateRenderModelPathsFB}. The runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID} if a path not given by {@link #xrEnumerateRenderModelPathsFB EnumerateRenderModelPathsFB} is used.</p>
      * 
-     * <p>If {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB} returns a success code of {@link #XR_RENDER_MODEL_UNAVAILABLE_FB RENDER_MODEL_UNAVAILABLE_FB} and has a {@code modelKey} of {@link #XR_NULL_RENDER_MODEL_KEY_FB NULL_RENDER_MODEL_KEY_FB}, this indicates that the model for the device is unavailable. The application <b>may</b> keep calling {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB} because the model <b>may</b> become available later when a device is connected.</p>
+     * <p>If {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB} returns a success code of {@link #XR_RENDER_MODEL_UNAVAILABLE_FB RENDER_MODEL_UNAVAILABLE_FB} and has a {@link XrRenderModelPropertiesFB}{@code ::modelKey} of {@link #XR_NULL_RENDER_MODEL_KEY_FB NULL_RENDER_MODEL_KEY_FB}, this indicates that the model for the device is unavailable. The application <b>may</b> keep calling {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB} because the model <b>may</b> become available later when a device is connected.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -269,9 +269,9 @@ public class FBRenderModel {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #xrLoadRenderModelFB LoadRenderModelFB} is used to load the GLTF model data using a valid {@code modelKey}. {@link #xrLoadRenderModelFB LoadRenderModelFB} loads the model as a byte buffer containing the GLTF in the binary format (GLB). The GLB data <b>must</b> conform to the glTF 2.0 format defined at {uri-fb-gltf2} The GLB <b>may</b> contain texture data in a format that requires the use of the {@code KHR_texture_basisu} GLTF extension defined at {uri-fb-gltf2-basisu}. Therefore, the application <b>should</b> ensure it can handle this extension.</p>
+     * <p>{@link #xrLoadRenderModelFB LoadRenderModelFB} is used to load the GLTF model data using a valid {@link XrRenderModelLoadInfoFB}{@code ::modelKey}. {@link #xrLoadRenderModelFB LoadRenderModelFB} loads the model as a byte buffer containing the GLTF in the binary format (GLB). The GLB data <b>must</b> conform to the glTF 2.0 format defined at <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>. The GLB <b>may</b> contain texture data in a format that requires the use of the {@code KHR_texture_basisu} GLTF extension defined at <a href="https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_texture_basisu">https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_texture_basisu</a>. Therefore, the application <b>should</b> ensure it can handle this extension.</p>
      * 
-     * <p>If the device for the requested model is disconnected or does not match the {@code modelKey} provided, {@link #xrLoadRenderModelFB LoadRenderModelFB} <b>must</b> return {@link #XR_RENDER_MODEL_UNAVAILABLE_FB RENDER_MODEL_UNAVAILABLE_FB} as well as a {@code bufferCountOutput} value of 0 indicating that the model was not available.</p>
+     * <p>If the device for the requested model is disconnected or does not match the {@link XrRenderModelLoadInfoFB}{@code ::modelKey} provided, {@link #xrLoadRenderModelFB LoadRenderModelFB} <b>must</b> return {@link #XR_RENDER_MODEL_UNAVAILABLE_FB RENDER_MODEL_UNAVAILABLE_FB} as well as an {@link XrRenderModelBufferFB}{@code ::bufferCountOutput} value of 0 indicating that the model was not available.</p>
      * 
      * <p>The {@link #xrLoadRenderModelFB LoadRenderModelFB} function <b>may</b> be slow, therefore applications <b>should</b> call it from a non-time sensitive thread.</p>
      * 

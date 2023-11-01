@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneComponentsMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_MSFT TYPE_SCENE_COMPONENTS_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSceneMeshesMSFT}, {@link XrSceneObjectsMSFT}, {@link XrScenePlanesMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSceneMarkerQRCodesMSFT}, {@link XrSceneMarkersMSFT}, {@link XrSceneMeshesMSFT}, {@link XrSceneObjectsMSFT}, {@link XrScenePlanesMSFT}</li>
  * <li>If {@code componentCapacityInput} is not 0, {@code components} <b>must</b> be a pointer to an array of {@code componentCapacityInput} {@link XrSceneComponentMSFT} structures</li>
  * </ul>
  * 
@@ -122,6 +122,10 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     public XrSceneComponentsMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_MSFT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSceneComponentsMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSceneMarkerQRCodesMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsMSFT next(XrSceneMarkerQRCodesMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSceneMarkersMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsMSFT next(XrSceneMarkersMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSceneMeshesMSFT} value to the {@code next} chain. */
     public XrSceneComponentsMSFT next(XrSceneMeshesMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSceneObjectsMSFT} value to the {@code next} chain. */
@@ -360,6 +364,10 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
         public XrSceneComponentsMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_MSFT); }
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#next} field. */
         public XrSceneComponentsMSFT.Buffer next(@NativeType("void *") long value) { XrSceneComponentsMSFT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSceneMarkerQRCodesMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsMSFT.Buffer next(XrSceneMarkerQRCodesMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSceneMarkersMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsMSFT.Buffer next(XrSceneMarkersMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSceneMeshesMSFT} value to the {@code next} chain. */
         public XrSceneComponentsMSFT.Buffer next(XrSceneMeshesMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSceneObjectsMSFT} value to the {@code next} chain. */

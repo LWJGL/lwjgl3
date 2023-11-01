@@ -25,7 +25,7 @@ val ALMALENCE_digital_lens_control = "ALMALENCEDigitalLensControl".nativeClassXR
             <li>Enables high quality at wide FoV.</li>
         </ul>
 
-        For OpenXR runtimes DLVR is implemented as implicit API Layer distributed by Almalence Inc. as installable package. DLVR utilize eye tracking data (eye pupil coordinates and gaze direction) to produce corrections of render frames. As long as current core OpenXR API doesn’t expose an eye tracking data, DLVR API Layer relies on 3rd-party eye tracking runtimes.
+        For OpenXR runtimes DLVR is implemented as implicit API Layer distributed by Almalence Inc. as installable package. DLVR utilize eye tracking data (eye pupil coordinates and gaze direction) to produce corrections of render frames. As long as current core OpenXR API does not expose an eye tracking data, DLVR API Layer relies on 3rd-party eye tracking runtimes.
 
         List of supported eye tracking devices:
 

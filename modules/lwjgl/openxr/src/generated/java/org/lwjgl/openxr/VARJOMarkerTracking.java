@@ -194,7 +194,7 @@ public class VARJOMarkerTracking {
      * XrResult xrSetMarkerTrackingPredictionVARJO(
      *     XrSession                                   session,
      *     uint64_t                                    markerId,
-     *     XrBool32                                    enabled);</code></pre>
+     *     XrBool32                                    enable);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -229,14 +229,15 @@ public class VARJOMarkerTracking {
      *
      * @param session  an {@code XrSession} handle previously created with {@link XR10#xrCreateSession CreateSession}.
      * @param markerId the unique identifier of the marker which should be tracked with prediction.
+     * @param enable   whether to enable the prediction feature.
      */
     @NativeType("XrResult")
-    public static int xrSetMarkerTrackingPredictionVARJO(XrSession session, @NativeType("uint64_t") long markerId, @NativeType("XrBool32") boolean enabled) {
+    public static int xrSetMarkerTrackingPredictionVARJO(XrSession session, @NativeType("uint64_t") long markerId, @NativeType("XrBool32") boolean enable) {
         long __functionAddress = session.getCapabilities().xrSetMarkerTrackingPredictionVARJO;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJI(session.address(), markerId, enabled ? 1 : 0, __functionAddress);
+        return callPJI(session.address(), markerId, enable ? 1 : 0, __functionAddress);
     }
 
     // --- [ xrGetMarkerSizeVARJO ] ---

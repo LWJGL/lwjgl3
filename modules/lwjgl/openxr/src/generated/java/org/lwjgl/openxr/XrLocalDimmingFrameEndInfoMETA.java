@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link METALocalDimming XR_META_local_dimming} extension <b>must</b> be enabled prior to using {@link XrLocalDimmingFrameEndInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code localDimmingMode} <b>must</b> be a valid {@code XrLocalDimmingModeMETA} value</li>
  * </ul>
  * 

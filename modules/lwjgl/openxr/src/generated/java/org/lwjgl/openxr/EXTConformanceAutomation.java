@@ -377,6 +377,8 @@ public class EXTConformanceAutomation {
      * <li>{@code session} <b>must</b> be a valid session handle.</li>
      * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
      * <li>{@code inputSourcePath} <b>must</b> be a valid input source path.</li>
+     * <li>{@code space} <b>must</b> be a valid {@code XrSpace}.</li>
+     * <li>{@code pose} <b>must</b> be a valid {@link XrPosef}.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

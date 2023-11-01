@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -99,7 +99,7 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrPath} of the interaction profile path for the {@code topLevelUserPath} used to retrieve this state, or {@link XR10#XR_NULL_PATH NULL_PATH} if there is no active interaction profile at that top level user path. */
+    /** the {@code XrPath} of the interaction profile path for the {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile}{@code ::topLevelUserPath} used to retrieve this state, or {@link XR10#XR_NULL_PATH NULL_PATH} if there is no active interaction profile at that top level user path. */
     @NativeType("XrPath")
     public long interactionProfile() { return ninteractionProfile(address()); }
 

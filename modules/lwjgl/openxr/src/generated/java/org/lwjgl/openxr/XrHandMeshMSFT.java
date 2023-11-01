@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrHandMeshMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code indexBuffer} <b>must</b> be a valid {@link XrHandMeshIndexBufferMSFT} structure</li>
  * <li>{@code vertexBuffer} <b>must</b> be a valid {@link XrHandMeshVertexBufferMSFT} structure</li>
  * </ul>
@@ -332,16 +332,6 @@ public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeReso
     public static void nindexBuffer(long struct, XrHandMeshIndexBufferMSFT value) { memCopy(value.address(), struct + XrHandMeshMSFT.INDEXBUFFER, XrHandMeshIndexBufferMSFT.SIZEOF); }
     /** Unsafe version of {@link #vertexBuffer(XrHandMeshVertexBufferMSFT) vertexBuffer}. */
     public static void nvertexBuffer(long struct, XrHandMeshVertexBufferMSFT value) { memCopy(value.address(), struct + XrHandMeshMSFT.VERTEXBUFFER, XrHandMeshVertexBufferMSFT.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        XrHandMeshIndexBufferMSFT.validate(struct + XrHandMeshMSFT.INDEXBUFFER);
-        XrHandMeshVertexBufferMSFT.validate(struct + XrHandMeshMSFT.VERTEXBUFFER);
-    }
 
     // -----------------------------------
 

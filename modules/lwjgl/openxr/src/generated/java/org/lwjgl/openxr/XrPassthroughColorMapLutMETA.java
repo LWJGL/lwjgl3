@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link XrPassthroughColorMapLutMETA} lets applications apply a color LUT to a passthrough layer. Other Passthrough style elements (such as edges) <b>must</b> not be affected by color LUTs.</p>
  * 
- * <p>Applications <b>may</b> use {@code weight} to efficiently blend between the original colors and the mapped colors. The blend is computed as <code>(1 - weight) * C<sub>in</sub> + weight * colorLut[C<sub>in</sub>]</code>.</p>
+ * <p>Applications <b>may</b> use {@code weight} to efficiently blend between the original colors and the mapped colors. The blend is computed as <code>(1 - weight) * C<sub>in</sub> + weight * colorLut [C<sub>in</sub>]</code>.</p>
  * 
  * <p>{@link XrPassthroughColorMapLutMETA} is provided in the {@code next} chain of {@link XrPassthroughStyleFB} when calling {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB}. Subsequent calls to {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB} with {@link XrPassthroughColorMapLutMETA} in the {@code next} chain update the color LUT for that layer. Subsequent calls to {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB} without this {@link XrPassthroughColorMapLutMETA} (or {@link XrPassthroughColorMapInterpolatedLutMETA}) in the next chain disable color LUTs for that layer.</p>
  * 
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorMapLutMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_LUT_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code colorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
  * </ul>
  * 

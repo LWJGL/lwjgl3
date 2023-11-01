@@ -22,13 +22,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link XrFrameState} describes the time at which the next frame will be displayed to the user. {@code predictedDisplayTime} <b>must</b> refer to the midpoint of the interval during which the frame is displayed. The runtime <b>may</b> report a different {@code predictedDisplayPeriod} from the hardware’s refresh cycle.</p>
  * 
- * <p>For any frame where {@code shouldRender} is {@link XR10#XR_FALSE FALSE}, the application <b>should</b> avoid heavy GPU work for that frame, for example by not rendering its layers. This typically happens when the application is transitioning into or out of a running session, or when some system UI is fully covering the application at the moment. As long as the session <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#session_running">is running</a>, the application <b>should</b> keep running the frame loop to maintain the frame synchronization to the runtime, even if this requires calling {@link XR10#xrEndFrame EndFrame} with all layers omitted.</p>
+ * <p>For any frame where {@code shouldRender} is {@link XR10#XR_FALSE FALSE}, the application <b>should</b> avoid heavy GPU work for that frame, for example by not rendering its layers. This typically happens when the application is transitioning into or out of a running session, or when some system UI is fully covering the application at the moment. As long as the session <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#session_running">is running</a>, the application <b>should</b> keep running the frame loop to maintain the frame synchronization to the runtime, even if this requires calling {@link XR10#xrEndFrame EndFrame} with all layers omitted.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_FRAME_STATE TYPE_FRAME_STATE}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationFrameStateMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationFrameStateMSFT}</li>
  * </ul>
  * 
  * <h5>See Also</h5>

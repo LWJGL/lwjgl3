@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrActiveActionSetPrioritiesEXT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrActiveActionSetPrioritiesEXT}</li>
  * <li>If {@code countActiveActionSets} is not 0, {@code activeActionSets} <b>must</b> be a pointer to an array of {@code countActiveActionSets} valid {@link XrActiveActionSet} structures</li>
  * </ul>
  * 

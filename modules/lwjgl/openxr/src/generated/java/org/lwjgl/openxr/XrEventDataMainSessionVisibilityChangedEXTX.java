@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
  * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
- * <li>{@code visible} is an {@code XrBool32} which indicates if {@code session} is now visible or is not.</li>
+ * <li>{@code visible} is an {@code XrBool32} which indicates if the main session is now visible or is not.</li>
  * <li>{@code flags} is 0 or one or more {@code XrOverlayMainSessionFlagBitsEXTX} which indicates various state information for the main session.</li>
  * </ul>
  * 
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTXOverlay XR_EXTX_overlay} extension <b>must</b> be enabled prior to using {@link XrEventDataMainSessionVisibilityChangedEXTX}</li>
  * <li>{@code type} <b>must</b> be {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h3>Layout</h3>

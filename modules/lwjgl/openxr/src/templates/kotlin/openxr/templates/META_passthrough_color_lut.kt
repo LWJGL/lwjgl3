@@ -183,7 +183,7 @@ val META_passthrough_color_lut = "METAPassthroughColorLut".nativeClassXR("META_p
 ￿    const XrPassthroughColorLutUpdateInfoMETA*  updateInfo);</code></pre>
 
         <h5>Description</h5>
-        Updates the LUT data of a passthrough color LUT. The data type of the color LUT (resolution and channels) is immutable. The provided data in this call <b>must</b> therefore match the data type specified at creation time. Specifically, {@code bufferSize} of the new data <b>must</b> be equal to the {@code bufferSize} specified during creation. Otherwise, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
+        Updates the LUT data of a passthrough color LUT. The data type of the color LUT (resolution and channels) is immutable. The provided data in this call <b>must</b> therefore match the data type specified at creation time. Specifically, ##XrPassthroughColorLutDataMETA{@code ::bufferSize} of the new data <b>must</b> be equal to the ##XrPassthroughColorLutDataMETA{@code ::bufferSize} specified during creation. Otherwise, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
 
         The runtime <b>must</b> reflect changes to color LUT data on all Passthrough layers the color LUT is currently applied to.
 

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -95,7 +95,7 @@ public class XrSwapchainImageWaitInfo extends Struct<XrSwapchainImageWaitInfo> i
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** indicates how many nanoseconds the call should block waiting for the image to become available for writing. */
+    /** indicates how many nanoseconds the call <b>may</b> block waiting for the image to become available for writing. */
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
 

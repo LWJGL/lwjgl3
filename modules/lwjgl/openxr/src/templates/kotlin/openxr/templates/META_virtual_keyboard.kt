@@ -458,7 +458,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    XrVirtualKeyboardModelAnimationStatesMETA*  animationStates);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code states} array in the ##XrVirtualKeyboardModelAnimationStatesMETA structure. Note that new animations may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the ##XrVirtualKeyboardModelAnimationStatesMETA structure. Note that new animations may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -512,7 +512,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    uint64_t*                                   textureIds);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -565,7 +565,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    XrVirtualKeyboardTextureDataMETA*           textureData);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureBytes} array in the ##XrVirtualKeyboardTextureDataMETA structure. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the ##XrVirtualKeyboardTextureDataMETA structure. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -619,7 +619,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    XrPosef*                                    interactorRootPose);</code></pre>
 
         <h5>Description</h5>
-        The application <b>can</b> use values like a pointer pose as the {@code inputPoseInSpace} for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_RAY_*} or {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_RAY_*} input sources, a point on a controller model for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_DIRECT_*} input sources and the hand index tip pose for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_DIRECT_INDEX_TIP_*}. Different input poses can be used to accommodate application specific controller or hand models.
+        The application <b>can</b> use values like a pointer pose as the {@code interactorRootPose} for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_RAY_*} or {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_RAY_*} input sources, a point on a controller model for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_DIRECT_*} input sources and the hand index tip pose for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_DIRECT_INDEX_TIP_*}. Different input poses can be used to accommodate application specific controller or hand models.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -704,6 +704,6 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
         """,
 
         XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} handle."),
-        XrVirtualKeyboardTextContextChangeInfoMETA.const.p("changeInfo", "")
+        XrVirtualKeyboardTextContextChangeInfoMETA.const.p("changeInfo", "the ##XrVirtualKeyboardTextContextChangeInfoMETA detailing prior input text context to the runtime.")
     )
 }

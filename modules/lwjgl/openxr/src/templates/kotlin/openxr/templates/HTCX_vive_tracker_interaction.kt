@@ -15,7 +15,7 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
 
         This extension defines a new interaction profile for HTC VIVE Tracker. HTC VIVE Tracker is a generic tracked device which can be attached to anything to make them trackable. For example, it can be attached to user’s hands or feet to track the motion of human body. It can also be attached to any other devices the user wants to track and interact with.
 
-        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo {@code enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
 
         This extension allows:
 
@@ -57,7 +57,7 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
             <li>Either the persistent path or the role path can be be passed as a subaction path to indicate a specific tracker. For example, ##XrActionCreateInfo{@code ::subactionPath} into function #CreateAction() or ##XrActionSpaceCreateInfo{@code ::subactionPath} into function #CreateActionSpace(). Please see Example 1 below.</li>
         </ul>
 
-        <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event #TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED, and the application <b>may</b> call #GetCurrentInteractionProfile() to check if the tracker is active or not.
+        <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event #TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED, and the application <b>may</b> call #GetCurrentInteractionProfile() to check if the tracker is active or not.
 
         The device that a tracker is attached to probably has a different motion model than what the tracker assumes. The motion tracking might not be as expected in this case.
         """
@@ -130,8 +130,8 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
         """,
 
         XrInstance("instance", "an instance previously created."),
-        AutoSize("viveTrackerPaths")..uint32_t("pathsCapacityInput", "the capacity of the {@code viveTrackerPaths}, or 0 to retrieve the required capacity."),
-        Check(1)..uint32_t.p("pathsCountOutput", "a pointer to the count of ##XrViveTrackerPathsHTCX {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is insufficient."),
-        nullable..XrViveTrackerPathsHTCX.p("viveTrackerPaths", "a pointer to an array of ##XrViveTrackerPathsHTCX VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathsCapacityInput} is 0.")
+        AutoSize("viveTrackerPaths")..uint32_t("pathsCapacityInput", ""),
+        Check(1)..uint32_t.p("pathsCountOutput", ""),
+        nullable..XrViveTrackerPathsHTCX.p("viveTrackerPaths", "")
     )
 }

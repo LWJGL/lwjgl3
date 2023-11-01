@@ -28,14 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Runtimes <b>must</b> employ trilinear interpolation of neighboring color values if the resolution of the color LUT is smaller than the bit depth of the input colors.</p>
  * 
- * <p>The value of {@code bufferSize} in {@code data} <b>must</b> be equal to <code>resolution<sup>3</sup> * bytesPerElement</code>, where <code>bytesPerElement</code> is either 3 or 4 depending on {@code channels}. Otherwise, the runtime <b>must</b> return {@link METAPassthroughColorLut#XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META}.</p>
+ * <p>The value of {@link XrPassthroughColorLutDataMETA}{@code ::bufferSize} in {@code data} <b>must</b> be equal to <code>resolution<sup>3</sup> * bytesPerElement</code>, where <code>bytesPerElement</code> is either 3 or 4 depending on {@code channels}. Otherwise, the runtime <b>must</b> return {@link METAPassthroughColorLut#XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorLutCreateInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code channels} <b>must</b> be a valid {@code XrPassthroughColorLutChannelsMETA} value</li>
  * <li>{@code data} <b>must</b> be a valid {@link XrPassthroughColorLutDataMETA} structure</li>
  * </ul>

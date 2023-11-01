@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The result of passing an {@code XrPath} {@code source} <b>not</b> retrieved from {@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction} is not specified.</p>
+ * <p>The result of passing an {@code XrPath} {@code sourcePath} <b>not</b> retrieved from {@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction} is not specified.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code whichComponents} <b>must</b> be a valid combination of {@code XrInputSourceLocalizedNameFlagBits} values</li>
  * <li>{@code whichComponents} <b>must</b> not be 0</li>
  * </ul>

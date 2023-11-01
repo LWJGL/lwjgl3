@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerSpaceWarpInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpaceWarp#XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerSpaceWarpInfoFlagBitsFB} values</li>
  * <li>{@code motionVectorSubImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
  * <li>{@code depthSubImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
@@ -140,7 +140,7 @@ public class XrCompositionLayerSpaceWarpInfoFB extends Struct<XrCompositionLayer
     public XrPosef appSpaceDeltaPose() { return nappSpaceDeltaPose(address()); }
     /** identifies the depth image {@link XrSwapchainSubImage} to be associated with motionVectorSubImage. The swapchain should be created with {@link XR10#XR_SWAPCHAIN_USAGE_SAMPLED_BIT SWAPCHAIN_USAGE_SAMPLED_BIT} | {@link XR10#XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}. */
     public XrSwapchainSubImage depthSubImage() { return ndepthSubImage(address()); }
-    /** {@code minDepth} and {@code maxDepth} are the range of depth values the {@code depthSwapchain} could have, in the range of <code>[0.0,1.0]</code>. This is akin to min and max values of OpenGL’s {@code glDepthRange}, but with the requirement here that <code>maxDepth ≥ minDepth</code>. */
+    /** {@code minDepth} and {@code maxDepth} are the range of depth values the depth swapchain could have, in the range of <code>[0.0,1.0]</code>. This is akin to min and max values of OpenGL’s {@code glDepthRange}, but with the requirement here that <code>maxDepth ≥ minDepth</code>. */
     public float minDepth() { return nminDepth(address()); }
     /** see {@code minDepth} */
     public float maxDepth() { return nmaxDepth(address()); }

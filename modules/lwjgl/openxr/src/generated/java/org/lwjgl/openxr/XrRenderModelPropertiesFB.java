@@ -32,7 +32,7 @@ import static org.lwjgl.openxr.FBRenderModel.*;
  * <ul>
  * <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using {@link XrRenderModelPropertiesFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PROPERTIES_FB TYPE_RENDER_MODEL_PROPERTIES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrRenderModelCapabilitiesRequestFB}</li>
  * <li>{@code modelName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link FBRenderModel#XR_MAX_RENDER_MODEL_NAME_SIZE_FB MAX_RENDER_MODEL_NAME_SIZE_FB}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
  * <li>{@code flags} <b>must</b> not be 0</li>
@@ -149,6 +149,8 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
     public XrRenderModelPropertiesFB type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_PROPERTIES_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrRenderModelPropertiesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrRenderModelCapabilitiesRequestFB} value to the {@code next} chain. */
+    public XrRenderModelPropertiesFB next(XrRenderModelCapabilitiesRequestFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #vendorId} field. */
     public XrRenderModelPropertiesFB vendorId(@NativeType("uint32_t") int value) { nvendorId(address(), value); return this; }
     /** Copies the specified encoded string to the {@link #modelName} field. */
@@ -413,6 +415,8 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
         public XrRenderModelPropertiesFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_PROPERTIES_FB); }
         /** Sets the specified value to the {@link XrRenderModelPropertiesFB#next} field. */
         public XrRenderModelPropertiesFB.Buffer next(@NativeType("void *") long value) { XrRenderModelPropertiesFB.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrRenderModelCapabilitiesRequestFB} value to the {@code next} chain. */
+        public XrRenderModelPropertiesFB.Buffer next(XrRenderModelCapabilitiesRequestFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrRenderModelPropertiesFB#vendorId} field. */
         public XrRenderModelPropertiesFB.Buffer vendorId(@NativeType("uint32_t") int value) { XrRenderModelPropertiesFB.nvendorId(address(), value); return this; }
         /** Copies the specified encoded string to the {@link XrRenderModelPropertiesFB#modelName} field. */

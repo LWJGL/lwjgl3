@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using {@link XrHandTrackingDataSourceInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>If {@code requestedDataSourceCount} is not 0, {@code requestedDataSources} <b>must</b> be a pointer to an array of {@code requestedDataSourceCount} {@code XrHandTrackingDataSourceEXT} values</li>
  * </ul>
  * 

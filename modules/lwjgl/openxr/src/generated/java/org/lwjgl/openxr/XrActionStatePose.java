@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>A pose action <b>must</b> not be bound to multiple input sources, according to <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#multiple_inputs">the previously defined rule</a>.</p>
+ * <p>A pose action <b>must</b> not be bound to multiple input sources, according to <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#multiple_inputs">the previously defined rule</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_STATE_POSE TYPE_ACTION_STATE_POSE}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

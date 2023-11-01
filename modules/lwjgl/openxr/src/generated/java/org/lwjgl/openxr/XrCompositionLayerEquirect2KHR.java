@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link KHRCompositionLayerEquirect2 XR_KHR_composition_layer_equirect2} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerEquirect2KHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerEquirect2#XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
  * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
  * <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
@@ -146,7 +146,7 @@ public class XrCompositionLayerEquirect2KHR extends Struct<XrCompositionLayerEqu
     /** the eye represented by this layer. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** identifies the image {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
+    /** identifies the image {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
     /** an {@link XrPosef} defining the position and orientation of the center point of the sphere onto which the equirect image data is mapped, relative to the reference frame of the {@code space}. */
     public XrPosef pose() { return npose(address()); }

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The runtime <b>may</b> report a different UUID to some applications for compatibility purposes.</p>
  * 
- * <p>This is in contrast to the {@code systemName} field in {@link XrSystemProperties} which is not required to be consistent across product renames.</p>
+ * <p>This is in contrast to the {@link XrSystemProperties}{@code ::systemName} field which is not required to be consistent across product renames.</p>
  * 
  * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the {@link METAHeadsetId XR_META_headset_id} extension documentation for more details.</p>
  * 
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link METAHeadsetId XR_META_headset_id} extension <b>must</b> be enabled prior to using {@link XrSystemHeadsetIdPropertiesMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

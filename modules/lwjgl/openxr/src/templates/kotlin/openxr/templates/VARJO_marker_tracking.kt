@@ -156,7 +156,7 @@ val VARJO_marker_tracking = "VARJOMarkerTracking".nativeClassXR("VARJO_marker_tr
 ￿XrResult xrSetMarkerTrackingPredictionVARJO(
 ￿    XrSession                                   session,
 ￿    uint64_t                                    markerId,
-￿    XrBool32                                    enabled);</code></pre>
+￿    XrBool32                                    enable);</code></pre>
 
         <h5>Description</h5>
         The #SetMarkerTrackingPredictionVARJO() function enables or disables the prediction feature for a specified marker. By default, markers are created with disabled prediction. This works well for markers that are supposed to be stationary. The prediction <b>can</b> be used to improve tracking of movable markers. The runtime <b>must</b> return #ERROR_MARKER_ID_INVALID_VARJO if the supplied {@code markerId} is invalid.
@@ -190,7 +190,7 @@ val VARJO_marker_tracking = "VARJOMarkerTracking".nativeClassXR("VARJO_marker_tr
 
         XrSession("session", "an {@code XrSession} handle previously created with #CreateSession()."),
         uint64_t("markerId", "the unique identifier of the marker which should be tracked with prediction."),
-        XrBool32("enabled", "")
+        XrBool32("enable", "whether to enable the prediction feature.")
     )
 
     XrResult(

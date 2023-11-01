@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using {@link XrKeyboardTrackingQueryFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBKeyboardTracking#XR_TYPE_KEYBOARD_TRACKING_QUERY_FB TYPE_KEYBOARD_TRACKING_QUERY_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code XrKeyboardTrackingQueryFlagBitsFB} values</li>
  * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>

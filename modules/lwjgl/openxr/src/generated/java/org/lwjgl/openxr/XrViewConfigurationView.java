@@ -20,15 +20,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>See {@link XrSwapchainSubImage} for more information about {@code imageRect} values, and {@link XrSwapchainCreateInfo} for more information about creating swapchains appropriately sized to support those {@code imageRect} values.</p>
+ * <p>See {@link XrSwapchainSubImage} for more information about {@link XrSwapchainSubImage}{@code ::imageRect} values, and {@link XrSwapchainCreateInfo} for more information about creating swapchains appropriately sized to support those {@link XrSwapchainSubImage}{@code ::imageRect} values.</p>
  * 
- * <p>The array of {@link XrViewConfigurationView} returned by the runtime <b>must</b> adhere to the rules defined in <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#view_configuration_type">{@code XrViewConfigurationType}</a>, such as the count and association to the left and right eyes.</p>
+ * <p>The array of {@link XrViewConfigurationView} returned by the runtime <b>must</b> adhere to the rules defined in {@code XrViewConfigurationType}, such as the count and association to the left and right eyes.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationViewFovEPIC}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationViewFovEPIC}</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -121,16 +121,16 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the optimal width of {@code imageRect} to use when rendering this view into a swapchain. */
+    /** the optimal width of {@link XrSwapchainSubImage}{@code ::imageRect} to use when rendering this view into a swapchain. */
     @NativeType("uint32_t")
     public int recommendedImageRectWidth() { return nrecommendedImageRectWidth(address()); }
-    /** the maximum width of {@code imageRect} supported when rendering this view into a swapchain. */
+    /** the maximum width of {@link XrSwapchainSubImage}{@code ::imageRect} supported when rendering this view into a swapchain. */
     @NativeType("uint32_t")
     public int maxImageRectWidth() { return nmaxImageRectWidth(address()); }
-    /** the optimal height of {@code imageRect} to use when rendering this view into a swapchain. */
+    /** the optimal height of {@link XrSwapchainSubImage}{@code ::imageRect} to use when rendering this view into a swapchain. */
     @NativeType("uint32_t")
     public int recommendedImageRectHeight() { return nrecommendedImageRectHeight(address()); }
-    /** the maximum height of {@code imageRect} supported when rendering this view into a swapchain. */
+    /** the maximum height of {@link XrSwapchainSubImage}{@code ::imageRect} supported when rendering this view into a swapchain. */
     @NativeType("uint32_t")
     public int maxImageRectHeight() { return nmaxImageRectHeight(address()); }
     /** the recommended number of sub-data element samples to create for each swapchain image that will be rendered into for this view. */

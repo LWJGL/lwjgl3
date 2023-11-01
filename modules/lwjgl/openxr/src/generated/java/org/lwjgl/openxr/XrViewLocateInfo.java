@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrViewLocateFoveatedRenderingVARJO}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrViewLocateFoveatedRenderingVARJO}</li>
  * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
  * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
  * </ul>
@@ -42,8 +42,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct XrViewLocateInfo {
- *     XrStructureType type;
- *     void const * next;
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
  *     XrViewConfigurationType {@link #viewConfigurationType};
  *     XrTime {@link #displayTime};
  *     XrSpace {@link #space};
@@ -106,10 +106,10 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** {@code XrViewConfigurationType} to query for. */
@@ -122,11 +122,11 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrViewLocateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@code type} field. */
+    /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@link #type} field. */
     public XrViewLocateInfo type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrViewLocateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
     public XrViewLocateInfo next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }
@@ -348,10 +348,10 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrViewLocateInfo#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewLocateInfo.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrViewLocateInfo#next} field. */
         @NativeType("void const *")
         public long next() { return XrViewLocateInfo.nnext(address()); }
         /** @return the value of the {@link XrViewLocateInfo#viewConfigurationType} field. */
@@ -364,11 +364,11 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
         @NativeType("XrSpace")
         public long space() { return XrViewLocateInfo.nspace(address()); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrViewLocateInfo#type} field. */
         public XrViewLocateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrViewLocateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@code type} field. */
+        /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@link XrViewLocateInfo#type} field. */
         public XrViewLocateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrViewLocateInfo#next} field. */
         public XrViewLocateInfo.Buffer next(@NativeType("void const *") long value) { XrViewLocateInfo.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
         public XrViewLocateInfo.Buffer next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }

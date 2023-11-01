@@ -238,7 +238,7 @@ public class METAPassthroughColorLut {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Updates the LUT data of a passthrough color LUT. The data type of the color LUT (resolution and channels) is immutable. The provided data in this call <b>must</b> therefore match the data type specified at creation time. Specifically, {@code bufferSize} of the new data <b>must</b> be equal to the {@code bufferSize} specified during creation. Otherwise, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
+     * <p>Updates the LUT data of a passthrough color LUT. The data type of the color LUT (resolution and channels) is immutable. The provided data in this call <b>must</b> therefore match the data type specified at creation time. Specifically, {@link XrPassthroughColorLutDataMETA}{@code ::bufferSize} of the new data <b>must</b> be equal to the {@link XrPassthroughColorLutDataMETA}{@code ::bufferSize} specified during creation. Otherwise, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
      * 
      * <p>The runtime <b>must</b> reflect changes to color LUT data on all Passthrough layers the color LUT is currently applied to.</p>
      * 

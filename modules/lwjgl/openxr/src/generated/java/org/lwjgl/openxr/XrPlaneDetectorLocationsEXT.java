@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using {@link XrPlaneDetectorLocationsEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT TYPE_PLANE_DETECTOR_LOCATIONS_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>If {@code planeLocationCapacityInput} is not 0, {@code planeLocations} <b>must</b> be a pointer to an array of {@code planeLocationCapacityInput} {@link XrPlaneDetectorLocationEXT} structures</li>
  * </ul>
  * 
@@ -108,10 +108,10 @@ public class XrPlaneDetectorLocationsEXT extends Struct<XrPlaneDetectorLocations
     /** the capacity of the array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int planeLocationCapacityInput() { return nplaneLocationCapacityInput(address()); }
-    /** the number of planes, or the required capacity in the case that {@code planeCapacityInput} is insufficient. */
+    /** the number of planes, or the required capacity in the case that {@code planeLocationCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int planeLocationCountOutput() { return nplaneLocationCountOutput(address()); }
-    /** an array of {@link XrPlaneDetectorLocationEXT}. It <b>can</b> be {@code NULL} if {@code planeCapacityInput} is 0. */
+    /** an array of {@link XrPlaneDetectorLocationEXT}. It <b>can</b> be {@code NULL} if {@code planeLocationCapacityInput} is 0. */
     @Nullable
     @NativeType("XrPlaneDetectorLocationEXT *")
     public XrPlaneDetectorLocationEXT.Buffer planeLocations() { return nplaneLocations(address()); }

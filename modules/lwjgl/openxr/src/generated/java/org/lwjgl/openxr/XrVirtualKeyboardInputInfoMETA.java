@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardInputInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code inputSource} <b>must</b> be a valid {@code XrVirtualKeyboardInputSourceMETA} value</li>
  * <li>If {@code inputSpace} is not {@link XR10#XR_NULL_HANDLE NULL_HANDLE}, {@code inputSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
  * <li>{@code inputState} <b>must</b> be 0 or a valid combination of {@code XrVirtualKeyboardInputStateFlagBitsMETA} values</li>

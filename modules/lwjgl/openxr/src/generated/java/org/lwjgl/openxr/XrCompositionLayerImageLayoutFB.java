@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBCompositionLayerImageLayout XR_FB_composition_layer_image_layout} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerImageLayoutFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBCompositionLayerImageLayout#XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerImageLayoutFlagBitsFB} values</li>
  * </ul>
  * 

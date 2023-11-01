@@ -197,21 +197,21 @@ val MSFT_spatial_anchor_persistence = "MSFTSpatialAnchorPersistence".nativeClass
         Enumerate the names of currently persisted spatial anchors in the spatial anchor store.
 
         <h5>C Specification</h5>
-        The application <b>can</b> use the #EnumeratePersistedSpatialAnchorNamesMSFT() function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.
+        The application <b>can</b> use the #EnumeratePersistedSpatialAnchorNamesMSFT() function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.
 
         <pre><code>
 ￿XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(
 ￿    XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore,
-￿    uint32_t                                    spatialAnchorNamesCapacityInput,
-￿    uint32_t*                                   spatialAnchorNamesCountOutput,
-￿    XrSpatialAnchorPersistenceNameMSFT*         persistedAnchorNames);</code></pre>
+￿    uint32_t                                    spatialAnchorNameCapacityInput,
+￿    uint32_t*                                   spatialAnchorNameCountOutput,
+￿    XrSpatialAnchorPersistenceNameMSFT*         spatialAnchorNames);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling #EnumeratePersistedSpatialAnchorNamesMSFT()</li>
             <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-            <li>If {@code spatialAnchorNamesCountOutput} is not {@code NULL}, {@code spatialAnchorNamesCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If {@code spatialAnchorNamesCapacityInput} is not 0, {@code persistedAnchorNames} <b>must</b> be a pointer to an array of {@code spatialAnchorNamesCapacityInput} ##XrSpatialAnchorPersistenceNameMSFT structures</li>
+            <li>{@code spatialAnchorNameCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+            <li>If {@code spatialAnchorNameCapacityInput} is not 0, {@code spatialAnchorNames} <b>must</b> be a pointer to an array of {@code spatialAnchorNameCapacityInput} ##XrSpatialAnchorPersistenceNameMSFT structures</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -239,9 +239,9 @@ val MSFT_spatial_anchor_persistence = "MSFTSpatialAnchorPersistence".nativeClass
         """,
 
         XrSpatialAnchorStoreConnectionMSFT("spatialAnchorStore", "the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on."),
-        AutoSize("persistedAnchorNames")..uint32_t("spatialAnchorNamesCapacityInput", "the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..nullable..uint32_t.p("spatialAnchorNamesCountOutput", "filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is insufficient."),
-        nullable..XrSpatialAnchorPersistenceNameMSFT.p("persistedAnchorNames", "a pointer to an array of ##XrSpatialAnchorPersistenceNameMSFT structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.")
+        AutoSize("spatialAnchorNames")..uint32_t("spatialAnchorNameCapacityInput", "the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity."),
+        Check(1)..uint32_t.p("spatialAnchorNameCountOutput", "filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNameCapacityInput} is insufficient."),
+        nullable..XrSpatialAnchorPersistenceNameMSFT.p("spatialAnchorNames", "a pointer to an array of ##XrSpatialAnchorPersistenceNameMSFT structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.")
     )
 
     XrResult(

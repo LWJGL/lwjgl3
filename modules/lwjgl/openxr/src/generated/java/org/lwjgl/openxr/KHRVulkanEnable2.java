@@ -128,7 +128,7 @@ public class KHRVulkanEnable2 {
      * @param instance       an {@code XrInstance} handle previously created with {@link XR10#xrCreateInstance CreateInstance}.
      * @param createInfo     extensible input struct of type {@link XrVulkanInstanceCreateInfoKHR}
      * @param vulkanInstance points to a {@code VkInstance} handle to populate with the new Vulkan instance.
-     * @param vulkanResult   points to a {@code VkResult} to populate with the result of the {@code vkCreateInstance} operation as returned by {@code pfnGetInstanceProcAddr}.
+     * @param vulkanResult   points to a {@code VkResult} to populate with the result of the {@code vkCreateInstance} operation as returned by {@link XrVulkanInstanceCreateInfoKHR}{@code ::pfnGetInstanceProcAddr}.
      */
     @NativeType("XrResult")
     public static int xrCreateVulkanInstanceKHR(XrInstance instance, @NativeType("XrVulkanInstanceCreateInfoKHR const *") XrVulkanInstanceCreateInfoKHR createInfo, @NativeType("VkInstance *") PointerBuffer vulkanInstance, @NativeType("VkResult *") IntBuffer vulkanResult) {
@@ -200,7 +200,7 @@ public class KHRVulkanEnable2 {
      * @param instance     an {@code XrInstance} handle previously created with {@link XR10#xrCreateInstance CreateInstance}.
      * @param createInfo   extensible input struct of type {@code XrCreateVulkanDeviceCreateInfoKHR}
      * @param vulkanDevice points to a {@code VkDevice} handle to populate with the new Vulkan device.
-     * @param vulkanResult points to a {@code VkResult} to populate with the result of the {@code vkCreateDevice} operation as returned by {@code pfnGetInstanceProcAddr}.
+     * @param vulkanResult points to a {@code VkResult} to populate with the result of the {@code vkCreateDevice} operation as returned by {@link XrVulkanInstanceCreateInfoKHR}{@code ::pfnGetInstanceProcAddr}.
      */
     @NativeType("XrResult")
     public static int xrCreateVulkanDeviceKHR(XrInstance instance, @NativeType("XrVulkanDeviceCreateInfoKHR const *") XrVulkanDeviceCreateInfoKHR createInfo, @NativeType("VkDevice *") PointerBuffer vulkanDevice, @NativeType("VkResult *") IntBuffer vulkanResult) {

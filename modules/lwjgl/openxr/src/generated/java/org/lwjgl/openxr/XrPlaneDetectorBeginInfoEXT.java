@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using {@link XrPlaneDetectorBeginInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
  * <li>If {@code orientationCount} is not 0, {@code orientations} <b>must</b> be a pointer to an array of {@code orientationCount} valid {@code XrPlaneDetectorOrientationEXT} values</li>
  * <li>If {@code semanticTypeCount} is not 0, {@code semanticTypes} <b>must</b> be a pointer to an array of {@code semanticTypeCount} valid {@code XrPlaneDetectorSemanticTypeEXT} values</li>
@@ -136,7 +136,7 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSpace} that the {@code boundingBox} is defined in. */
+    /** the {@code XrSpace} that the {@code boundingBoxPose} is defined in. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
     /** an {@code XrTime} at which to detect the planes. */

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension defines a new interaction profile for HTC VIVE Tracker. HTC VIVE Tracker is a generic tracked device which can be attached to anything to make them trackable. For example, it can be attached to user’s hands or feet to track the motion of human body. It can also be attached to any other devices the user wants to track and interact with.</p>
  * 
- * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
  * 
  * <p>This extension allows:</p>
  * 
@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Either the persistent path or the role path can be be passed as a subaction path to indicate a specific tracker. For example, {@link XrActionCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateAction CreateAction} or {@link XrActionSpaceCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateActionSpace CreateActionSpace}. Please see Example 1 below.</li>
  * </ul>
  * 
- * <p><a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, and the application <b>may</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} to check if the tracker is active or not.</p>
+ * <p><a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, and the application <b>may</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} to check if the tracker is active or not.</p>
  * 
  * <p>The device that a tracker is attached to probably has a different motion model than what the tracker assumes. The motion tracking might not be as expected in this case.</p>
  */
@@ -94,11 +94,7 @@ public class HTCXViveTrackerInteraction {
 
     // --- [ xrEnumerateViveTrackerPathsHTCX ] ---
 
-    /**
-     * Unsafe version of: {@link #xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX}
-     *
-     * @param pathsCapacityInput the capacity of the {@code viveTrackerPaths}, or 0 to retrieve the required capacity.
-     */
+    /** Unsafe version of: {@link #xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX} */
     public static int nxrEnumerateViveTrackerPathsHTCX(XrInstance instance, int pathsCapacityInput, long pathsCountOutput, long viveTrackerPaths) {
         long __functionAddress = instance.getCapabilities().xrEnumerateViveTrackerPathsHTCX;
         if (CHECKS) {
@@ -156,9 +152,7 @@ public class HTCXViveTrackerInteraction {
      * 
      * <p>{@link XrViveTrackerPathsHTCX}</p>
      *
-     * @param instance         an instance previously created.
-     * @param pathsCountOutput a pointer to the count of {@link XrViveTrackerPathsHTCX} {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is insufficient.
-     * @param viveTrackerPaths a pointer to an array of {@link XrViveTrackerPathsHTCX} VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathsCapacityInput} is 0.
+     * @param instance an instance previously created.
      */
     @NativeType("XrResult")
     public static int xrEnumerateViveTrackerPathsHTCX(XrInstance instance, @NativeType("uint32_t *") IntBuffer pathsCountOutput, @Nullable @NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX.Buffer viveTrackerPaths) {

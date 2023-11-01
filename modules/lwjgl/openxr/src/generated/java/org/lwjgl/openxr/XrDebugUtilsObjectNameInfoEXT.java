@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using {@link XrDebugUtilsObjectNameInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code objectType} <b>must</b> be a valid {@code XrObjectType} value</li>
  * <li>If {@code objectName} is not {@code NULL}, {@code objectName} <b>must</b> be a null-terminated UTF-8 string</li>
  * </ul>

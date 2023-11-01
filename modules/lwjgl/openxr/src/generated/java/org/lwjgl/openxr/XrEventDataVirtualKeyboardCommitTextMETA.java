@@ -30,7 +30,7 @@ import static org.lwjgl.openxr.METAVirtualKeyboard.*;
  * <ul>
  * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrEventDataVirtualKeyboardCommitTextMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
  * <li>{@code text} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link METAVirtualKeyboard#XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META}</li>
  * </ul>

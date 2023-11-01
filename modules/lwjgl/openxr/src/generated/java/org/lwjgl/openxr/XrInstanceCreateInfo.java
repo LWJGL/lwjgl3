@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INSTANCE_CREATE_INFO TYPE_INSTANCE_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrDebugUtilsMessengerCreateInfoEXT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrDebugUtilsMessengerCreateInfoEXT}</li>
  * <li>{@code createFlags} <b>must</b> be 0</li>
  * <li>{@code applicationInfo} <b>must</b> be a valid {@link XrApplicationInfo} structure</li>
  * <li>If {@code enabledApiLayerCount} is not 0, {@code enabledApiLayerNames} <b>must</b> be a pointer to an array of {@code enabledApiLayerCount} null-terminated UTF-8 strings</li>
@@ -128,7 +128,7 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     /** the number of global API layers to enable. */
     @NativeType("uint32_t")
     public int enabledApiLayerCount() { return nenabledApiLayerCount(address()); }
-    /** a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#api-layers-and-extensions">API Layers And Extensions</a> section for further details. */
+    /** a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#api-layers-and-extensions">API Layers And Extensions</a> section for further details. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer enabledApiLayerNames() { return nenabledApiLayerNames(address()); }

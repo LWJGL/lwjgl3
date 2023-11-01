@@ -27,8 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link FBDisplayRefreshRate#XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB}, {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST}, {@link XR10#XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}, {@link VARJOMarkerTracking#XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO}, {@link EXTPerformanceSettings#XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT TYPE_EVENT_DATA_PERF_SETTINGS_EXT}, {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB}, {@link FBSpatialEntityStorageBatch#XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB}, {@link FBSpatialEntitySharing#XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB}, {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}, {@link HTCXViveTrackerInteraction#XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link FBDisplayRefreshRate#XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB}, {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST}, {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML}, {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML}, {@link XR10#XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}, {@link VARJOMarkerTracking#XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO}, {@link EXTPerformanceSettings#XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT TYPE_EVENT_DATA_PERF_SETTINGS_EXT}, {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB}, {@link FBSpatialEntityStorageBatch#XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB}, {@link FBSpatialEntitySharing#XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB}, {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}, {@link HTCXViveTrackerInteraction#XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -220,6 +220,16 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
         return new XrEventDataBaseHeader(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrEventDataHeadsetFitChangedML} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataHeadsetFitChangedML value) {
+        return new XrEventDataBaseHeader(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrEventDataEyeCalibrationChangedML} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataEyeCalibrationChangedML value) {
+        return new XrEventDataBaseHeader(value.address(), __getContainer(value));
+    }
+
     /** Upcasts the specified {@code XrEventDataSpaceQueryResultsAvailableFB} instance to {@code XrEventDataBaseHeader}. */
     public static XrEventDataBaseHeader create(XrEventDataSpaceQueryResultsAvailableFB value) {
         return new XrEventDataBaseHeader(value.address(), __getContainer(value));
@@ -356,6 +366,16 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
 
     /** Upcasts the specified {@code XrEventDataMarkerTrackingUpdateVARJO.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
     public static XrEventDataBaseHeader.Buffer create(XrEventDataMarkerTrackingUpdateVARJO.Buffer value) {
+        return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrEventDataHeadsetFitChangedML.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataHeadsetFitChangedML.Buffer value) {
+        return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrEventDataEyeCalibrationChangedML.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataEyeCalibrationChangedML.Buffer value) {
         return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

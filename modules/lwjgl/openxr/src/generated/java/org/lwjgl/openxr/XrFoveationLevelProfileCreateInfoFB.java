@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBFoveationConfiguration XR_FB_foveation_configuration} extension <b>must</b> be enabled prior to using {@link XrFoveationLevelProfileCreateInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveationEyeTrackedProfileCreateInfoMETA}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveationEyeTrackedProfileCreateInfoMETA}</li>
  * <li>{@code level} <b>must</b> be a valid {@code XrFoveationLevelFB} value</li>
  * <li>{@code dynamic} <b>must</b> be a valid {@code XrFoveationDynamicFB} value</li>
  * </ul>

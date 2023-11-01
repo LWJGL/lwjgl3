@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SWAPCHAIN_CREATE_INFO TYPE_SWAPCHAIN_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrVulkanSwapchainCreateInfoMETA}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrVulkanSwapchainCreateInfoMETA}</li>
  * <li>{@code createFlags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainCreateFlagBits} values</li>
  * <li>{@code usageFlags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainUsageFlagBits} values</li>
  * </ul>
@@ -147,7 +147,7 @@ public class XrSwapchainCreateInfo extends Struct<XrSwapchainCreateInfo> impleme
     /** the height of the image, <b>must</b> not be 0 or greater than the graphics API’s maximum limit. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** the number of faces, which can be either 6 (for cubemaps) or 1. */
+    /** the number of faces, which <b>must</b> be either 6 (for cubemaps) or 1. */
     @NativeType("uint32_t")
     public int faceCount() { return nfaceCount(address()); }
     /** the number of array layers in the image or 1 for a 2D image, <b>must</b> not be 0 or greater than the graphics API’s maximum limit. */

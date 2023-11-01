@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrHandTrackingScaleFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBHandTrackingMesh#XR_TYPE_HAND_TRACKING_SCALE_FB TYPE_HAND_TRACKING_SCALE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -104,14 +104,14 @@ public class XrHandTrackingScaleFB extends Struct<XrHandTrackingScaleFB> impleme
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an output value: the currently measured scale as would be applied without passing this structure. */
+    /** an output value: the currently measured scale as otherwise applied without passing this structure. */
     public float sensorOutput() { return nsensorOutput(address()); }
-    /** an output value: the effective output that the bind skeleton is getting on the current call, which may be subject to filtering, scaling, or validation. */
+    /** an output value: the effective output that the bind skeleton is getting on the current call, which <b>may</b> be subject to filtering, scaling, or validation. */
     public float currentOutput() { return ncurrentOutput(address()); }
-    /** indicates whether the runtime should scale the output of this {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} call according to {@code overrideValueInput} */
+    /** indicates whether the runtime <b>must</b> scale the output of this {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} call according to {@code overrideValueInput} */
     @NativeType("XrBool32")
     public boolean overrideHandScale() { return noverrideHandScale(address()) != 0; }
-    /** an optional input value, enabled only when the {@code overrideHandScale} parameter is set. Setting this to 1.0 and setting {@code overrideHandScale} to {@code true} will give the joints in mesh binding scale. */
+    /** an <b>optional</b> input value, enabled only when the {@code overrideHandScale} parameter is set. Setting this to 1.0 and setting {@code overrideHandScale} to {@code true} will give the joints in mesh binding scale. */
     public float overrideValueInput() { return noverrideValueInput(address()); }
 
     /** Sets the specified value to the {@link #type} field. */

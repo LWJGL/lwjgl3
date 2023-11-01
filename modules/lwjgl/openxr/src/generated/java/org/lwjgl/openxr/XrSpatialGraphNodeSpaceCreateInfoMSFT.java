@@ -26,7 +26,7 @@ import static org.lwjgl.openxr.MSFTSpatialGraphBridge.*;
  * <ul>
  * <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using {@link XrSpatialGraphNodeSpaceCreateInfoMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code nodeType} <b>must</b> be a valid {@code XrSpatialGraphNodeTypeMSFT} value</li>
  * </ul>
  * 

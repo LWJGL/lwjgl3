@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using {@link XrSystemHandTrackingPropertiesEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTracking#XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <p>If a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsHandTracking}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}.</p>

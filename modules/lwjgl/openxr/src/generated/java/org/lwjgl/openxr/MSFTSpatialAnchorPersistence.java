@@ -253,14 +253,14 @@ public class MSFTSpatialAnchorPersistence {
     /**
      * Unsafe version of: {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}
      *
-     * @param spatialAnchorNamesCapacityInput the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity.
+     * @param spatialAnchorNameCapacityInput the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity.
      */
-    public static int nxrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, int spatialAnchorNamesCapacityInput, long spatialAnchorNamesCountOutput, long persistedAnchorNames) {
+    public static int nxrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, int spatialAnchorNameCapacityInput, long spatialAnchorNameCountOutput, long spatialAnchorNames) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrEnumeratePersistedSpatialAnchorNamesMSFT;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(spatialAnchorStore.address(), spatialAnchorNamesCapacityInput, spatialAnchorNamesCountOutput, persistedAnchorNames, __functionAddress);
+        return callPPPI(spatialAnchorStore.address(), spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames, __functionAddress);
     }
 
     /**
@@ -268,22 +268,22 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The application <b>can</b> use the {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT} function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.</p>
+     * <p>The application <b>can</b> use the {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT} function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.</p>
      * 
      * <pre><code>
      * XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(
      *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore,
-     *     uint32_t                                    spatialAnchorNamesCapacityInput,
-     *     uint32_t*                                   spatialAnchorNamesCountOutput,
-     *     XrSpatialAnchorPersistenceNameMSFT*         persistedAnchorNames);</code></pre>
+     *     uint32_t                                    spatialAnchorNameCapacityInput,
+     *     uint32_t*                                   spatialAnchorNameCountOutput,
+     *     XrSpatialAnchorPersistenceNameMSFT*         spatialAnchorNames);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}</li>
      * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * <li>If {@code spatialAnchorNamesCountOutput} is not {@code NULL}, {@code spatialAnchorNamesCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-     * <li>If {@code spatialAnchorNamesCapacityInput} is not 0, {@code persistedAnchorNames} <b>must</b> be a pointer to an array of {@code spatialAnchorNamesCapacityInput} {@link XrSpatialAnchorPersistenceNameMSFT} structures</li>
+     * <li>{@code spatialAnchorNameCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+     * <li>If {@code spatialAnchorNameCapacityInput} is not 0, {@code spatialAnchorNames} <b>must</b> be a pointer to an array of {@code spatialAnchorNameCapacityInput} {@link XrSpatialAnchorPersistenceNameMSFT} structures</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -310,16 +310,16 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <p>{@link XrSpatialAnchorPersistenceNameMSFT}</p>
      *
-     * @param spatialAnchorStore            the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on.
-     * @param spatialAnchorNamesCountOutput filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is insufficient.
-     * @param persistedAnchorNames          a pointer to an array of {@link XrSpatialAnchorPersistenceNameMSFT} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
+     * @param spatialAnchorStore           the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on.
+     * @param spatialAnchorNameCountOutput filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNameCapacityInput} is insufficient.
+     * @param spatialAnchorNames           a pointer to an array of {@link XrSpatialAnchorPersistenceNameMSFT} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @Nullable @NativeType("uint32_t *") IntBuffer spatialAnchorNamesCountOutput, @Nullable @NativeType("XrSpatialAnchorPersistenceNameMSFT *") XrSpatialAnchorPersistenceNameMSFT.Buffer persistedAnchorNames) {
+    public static int xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("uint32_t *") IntBuffer spatialAnchorNameCountOutput, @Nullable @NativeType("XrSpatialAnchorPersistenceNameMSFT *") XrSpatialAnchorPersistenceNameMSFT.Buffer spatialAnchorNames) {
         if (CHECKS) {
-            checkSafe(spatialAnchorNamesCountOutput, 1);
+            check(spatialAnchorNameCountOutput, 1);
         }
-        return nxrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, remainingSafe(persistedAnchorNames), memAddressSafe(spatialAnchorNamesCountOutput), memAddressSafe(persistedAnchorNames));
+        return nxrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, remainingSafe(spatialAnchorNames), memAddress(spatialAnchorNameCountOutput), memAddressSafe(spatialAnchorNames));
     }
 
     // --- [ xrCreateSpatialAnchorFromPersistedNameMSFT ] ---

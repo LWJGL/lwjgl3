@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using {@link XrSecondaryViewConfigurationLayerInfoMSFT}</li>
  * <li>{@code type} <b>must</b> be {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
  * <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
  * <li>{@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid {@link XrCompositionLayerBaseHeader}-based structures. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
@@ -126,7 +126,7 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct<XrSecondar
     /** {@code XrViewConfigurationType} to which the composition layers will be displayed. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** the {@code XrEnvironmentBlendMode} value representing the desired <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#environment_blend_mode">environment blend mode</a> for this view configuration. */
+    /** the {@code XrEnvironmentBlendMode} value representing the desired <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#environment_blend_mode">environment blend mode</a> for this view configuration. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
     /** the number of composition layers in this frame for the secondary view configuration type. The maximum supported layer count is identified by {@link XrSystemGraphicsProperties}::maxLayerCount. If layerCount is greater than the maximum supported layer count then {@link XR10#XR_ERROR_LAYER_LIMIT_EXCEEDED ERROR_LAYER_LIMIT_EXCEEDED} is returned. */

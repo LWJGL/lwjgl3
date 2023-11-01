@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}</li>
  * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
  * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
  * <li>{@code views} <b>must</b> be a pointer to an array of {@code viewCount} valid {@link XrCompositionLayerProjectionView} structures</li>

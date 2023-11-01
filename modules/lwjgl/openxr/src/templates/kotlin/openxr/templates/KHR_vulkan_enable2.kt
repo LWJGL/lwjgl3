@@ -100,7 +100,7 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
         XrInstance("instance", "an {@code XrInstance} handle previously created with #CreateInstance()."),
         XrVulkanInstanceCreateInfoKHR.const.p("createInfo", "extensible input struct of type ##XrVulkanInstanceCreateInfoKHR"),
         Check(1)..VkInstance.p("vulkanInstance", "points to a {@code VkInstance} handle to populate with the new Vulkan instance."),
-        Check(1)..VkResult.p("vulkanResult", "points to a {@code VkResult} to populate with the result of the {@code vkCreateInstance} operation as returned by {@code pfnGetInstanceProcAddr}.")
+        Check(1)..VkResult.p("vulkanResult", "points to a {@code VkResult} to populate with the result of the {@code vkCreateInstance} operation as returned by ##XrVulkanInstanceCreateInfoKHR{@code ::pfnGetInstanceProcAddr}.")
     )
 
     XrResult(
@@ -152,7 +152,7 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
         XrInstance("instance", "an {@code XrInstance} handle previously created with #CreateInstance()."),
         XrVulkanDeviceCreateInfoKHR.const.p("createInfo", "extensible input struct of type {@code XrCreateVulkanDeviceCreateInfoKHR}"),
         Check(1)..VkDevice.p("vulkanDevice", "points to a {@code VkDevice} handle to populate with the new Vulkan device."),
-        Check(1)..VkResult.p("vulkanResult", "points to a {@code VkResult} to populate with the result of the {@code vkCreateDevice} operation as returned by {@code pfnGetInstanceProcAddr}.")
+        Check(1)..VkResult.p("vulkanResult", "points to a {@code VkResult} to populate with the result of the {@code vkCreateDevice} operation as returned by ##XrVulkanInstanceCreateInfoKHR{@code ::pfnGetInstanceProcAddr}.")
     )
 
     XrResult(

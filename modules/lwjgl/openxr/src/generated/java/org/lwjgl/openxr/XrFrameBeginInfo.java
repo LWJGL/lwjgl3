@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Because this structure only exists to support extension-specific structures, {@link XR10#xrBeginFrame BeginFrame} will accept a {@code NULL} argument for {@code frameBeginInfo} for applications that are not using any relevant extensions.</p>
+ * <p>Because this structure only exists to support extension-specific structures, {@link XR10#xrBeginFrame BeginFrame} will accept a {@code NULL} argument for {@link XR10#xrBeginFrame BeginFrame}{@code ::frameBeginInfo} for applications that are not using any relevant extensions.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_FRAME_BEGIN_INFO TYPE_FRAME_BEGIN_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

@@ -19,6 +19,9 @@ val EXT_hp_mixed_reality_controller = "EXTHPMixedRealityController".nativeClassX
             <li>pathname:/interaction_profiles/hp/mixed_reality_controller</li>
         </ul>
 
+        <h5>Note</h5>
+        The interaction profile path pathname:{legacy-path} defined here does not follow current rules for interaction profile names. If this extension were introduced today, it would be called pathname:{properly-suffixed-path}, to allow for modifications when promoted to a KHR extension or the core specification.
+
         Valid for the user paths
 
         <ul>

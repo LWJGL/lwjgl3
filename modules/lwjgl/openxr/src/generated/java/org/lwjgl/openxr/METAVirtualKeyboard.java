@@ -586,7 +586,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code states} array in the {@link XrVirtualKeyboardModelAnimationStatesMETA} structure. Note that new animations may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the {@link XrVirtualKeyboardModelAnimationStatesMETA} structure. Note that new animations may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -660,7 +660,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -730,7 +730,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureBytes} array in the {@link XrVirtualKeyboardTextureDataMETA} structure. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the {@link XrVirtualKeyboardTextureDataMETA} structure. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -800,7 +800,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The application <b>can</b> use values like a pointer pose as the {@code inputPoseInSpace} for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_RAY_*} or {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_RAY_*} input sources, a point on a controller model for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_DIRECT_*} input sources and the hand index tip pose for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_DIRECT_INDEX_TIP_*}. Different input poses can be used to accommodate application specific controller or hand models.</p>
+     * <p>The application <b>can</b> use values like a pointer pose as the {@code interactorRootPose} for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_RAY_*} or {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_RAY_*} input sources, a point on a controller model for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_CONTROLLER_DIRECT_*} input sources and the hand index tip pose for {@code XR_VIRTUAL_KEYBOARD_INPUT_SOURCE_HAND_DIRECT_INDEX_TIP_*}. Different input poses can be used to accommodate application specific controller or hand models.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -901,7 +901,8 @@ public class METAVirtualKeyboard {
      * 
      * <p>{@link XrVirtualKeyboardTextContextChangeInfoMETA}</p>
      *
-     * @param keyboard the {@code XrVirtualKeyboardMETA} handle.
+     * @param keyboard   the {@code XrVirtualKeyboardMETA} handle.
+     * @param changeInfo the {@link XrVirtualKeyboardTextContextChangeInfoMETA} detailing prior input text context to the runtime.
      */
     @NativeType("XrResult")
     public static int xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, @NativeType("XrVirtualKeyboardTextContextChangeInfoMETA const *") XrVirtualKeyboardTextContextChangeInfoMETA changeInfo) {

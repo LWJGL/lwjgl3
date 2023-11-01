@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrSessionCreateInfoOverlayEXTX}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrSessionCreateInfoOverlayEXTX}</li>
  * <li>{@code createFlags} <b>must</b> be 0</li>
  * </ul>
  * 

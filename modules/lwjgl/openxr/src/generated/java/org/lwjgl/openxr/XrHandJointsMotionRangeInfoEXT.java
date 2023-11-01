@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandJointsMotionRange XR_EXT_hand_joints_motion_range} extension <b>must</b> be enabled prior to using {@link XrHandJointsMotionRangeInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code handJointsMotionRange} <b>must</b> be a valid {@code XrHandJointsMotionRangeEXT} value</li>
  * </ul>
  * 

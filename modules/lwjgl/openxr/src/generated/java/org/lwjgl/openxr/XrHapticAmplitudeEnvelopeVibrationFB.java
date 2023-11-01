@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
  * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
- * <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#duration">duration</a> for more details.</li>
+ * <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#duration">duration</a> for more details.</li>
  * <li>{@code amplitudeCount} is the number of samples in the buffer.</li>
  * <li>{@code amplitudes} is the pointer to a float array that contains the samples.</li>
  * </ul>
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link FBHapticAmplitudeEnvelope XR_FB_haptic_amplitude_envelope} extension <b>must</b> be enabled prior to using {@link XrHapticAmplitudeEnvelopeVibrationFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBHapticAmplitudeEnvelope#XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code amplitudes} <b>must</b> be a pointer to an array of {@code amplitudeCount} {@code float} values</li>
  * <li>The {@code amplitudeCount} parameter <b>must</b> be greater than 0</li>
  * </ul>

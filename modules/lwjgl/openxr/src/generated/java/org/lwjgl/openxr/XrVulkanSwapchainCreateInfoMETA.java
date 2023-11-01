@@ -29,7 +29,7 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>The {@link METAVulkanSwapchainCreateInfo XR_META_vulkan_swapchain_create_info} extension <b>must</b> be enabled prior to using {@link XrVulkanSwapchainCreateInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METAVulkanSwapchainCreateInfo#XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code additionalCreateFlags} <b>must</b> be a valid {@code VkImageCreateFlags} value</li>
  * <li>{@code additionalUsageFlags} <b>must</b> be a valid {@code VkImageUsageFlags} value</li>
  * </ul>

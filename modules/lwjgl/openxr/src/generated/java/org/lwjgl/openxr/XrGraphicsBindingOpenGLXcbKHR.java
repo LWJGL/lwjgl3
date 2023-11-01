@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingOpenGLXcbKHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code connection} <b>must</b> be a pointer to an {@code xcb_connection_t} value</li>
  * <li>{@code fbconfigid} <b>must</b> be a valid {@code xcb_glx_fbconfig_t} value</li>
  * <li>{@code visualid} <b>must</b> be a valid {@code xcb_visualid_t} value</li>
