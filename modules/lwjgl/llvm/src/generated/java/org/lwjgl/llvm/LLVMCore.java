@@ -14096,9 +14096,16 @@ public class LLVMCore {
 
     @Nullable
     @NativeType("char const *")
-    public static String LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf) {
+    public static ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf) {
         long __result = nLLVMGetBufferStart(MemBuf);
-        return memUTF8Safe(__result);
+        return memByteBufferSafe(__result, (int)LLVMGetBufferSize(MemBuf));
+    }
+
+    @Nullable
+    @NativeType("char const *")
+    public static ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf, long length) {
+        long __result = nLLVMGetBufferStart(MemBuf);
+        return memByteBufferSafe(__result, (int)length);
     }
 
     // --- [ LLVMGetBufferSize ] ---

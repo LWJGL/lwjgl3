@@ -6092,7 +6092,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("BufferName", "")
     )
 
-    charUTF8.const.p(
+    MapPointer("LLVMGetBufferSize(MemBuf)")..char.const.p(
         "GetBufferStart",
         "",
 
