@@ -65,6 +65,8 @@ val CXIdxObjCContainerKind = "CXIdxObjCContainerKind".enumType
 val CXIdxEntityRefKind = "CXIdxEntityRefKind".enumType
 val CXSymbolRole = "CXSymbolRole".enumType
 val CXIndexOptFlags = "CXIndexOptFlags".enumType
+val CXBinaryOperatorKind = "enum CXBinaryOperatorKind".enumType
+val CXUnaryOperatorKind = "enum CXUnaryOperatorKind".enumType
 
 val CXString = struct(Module.LLVM, "CXString", mutable = false) {
     documentation =
@@ -156,6 +158,52 @@ val CXVersion = struct(Module.LLVM, "CXVersion", mutable = false) {
         """
         the subminor version number, e.g., the '3' in '10.7.3'. This value will be negative if no minor or subminor version number was provided, e.g., in
         version '10' or '10.7'.
+        """
+    )
+}
+
+val CXIndexOptions = struct(Module.LLVM, "CXIndexOptions") {
+    documentation =
+        """
+        Index initialization options.
+
+        0 is the default value of each member of this struct except for {@code Size}.
+        """
+
+    Expression("SIZEOF")..unsigned(
+        "Size",
+        """
+        The size of struct {@code CXIndexOptions} used for option versioning.
+
+        Always initialize this member to {@code sizeof(CXIndexOptions)}, or assign {@code sizeof(CXIndexOptions)} to it right after creating a
+        {@code CXIndexOptions} object.
+        """
+    )
+    unsigned_char("ThreadBackgroundPriorityForIndexing", "a {@code CXChoice} enumerator that specifies the indexing priority policy.").links("Choice_\\w+")
+    unsigned_char("ThreadBackgroundPriorityForEditing", "a {@code CXChoice} enumerator that specifies the editing priority policy").links("Choice_\\w+")
+    unsignedb("ExcludeDeclarationsFromPCH", "see #createIndex()", bits = 1)
+    unsignedb("DisplayDiagnostics", "see #createIndex()", bits = 1)
+    unsignedb("StorePreamblesInMemory", "see #createIndex()", bits = 1)
+    unsignedb("Reserved", "", bits = 13).private()
+    nullable..charUTF8.const.p(
+        "PreambleStoragePath",
+        """
+        the path to a directory, in which to store temporary PCH files.
+
+        If null or empty, the default system temporary directory is used. These PCH files are deleted on clean exit but stay on disk if the program crashes or
+        is killed.
+
+        This option is ignored if {@code StorePreamblesInMemory} is non-zero.
+
+        Libclang does not create the directory at the specified path in the file system. Therefore it must exist, or storing PCH files will fail.
+        """
+    )
+    nullable..charUTF8.const.p(
+        "InvocationEmissionPath",
+        """
+        specifies a path which will contain log files for certain libclang invocations.
+
+        A null value implies that libclang invocations are not logged.
         """
     )
 }

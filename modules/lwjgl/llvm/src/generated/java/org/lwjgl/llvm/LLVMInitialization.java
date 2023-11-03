@@ -11,6 +11,11 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
+/**
+ * This module contains routines used to initialize the LLVM system.
+ * 
+ * <p>Removed in LLVM 17.</p>
+ */
 public class LLVMInitialization {
 
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */

@@ -112,6 +112,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DWARFSourceLanguageFortran18".enum,
         "DWARFSourceLanguageAda2005".enum,
         "DWARFSourceLanguageAda2012".enum,
+        "DWARFSourceLanguageMojo".enum,
         "DWARFSourceLanguageMips_Assembler".enum("Vendor extensions:"),
         "DWARFSourceLanguageGOOGLE_RenderScript".enum("Vendor extensions:"),
         "DWARFSourceLanguageBORLAND_Delphi".enum("Vendor extensions:")
@@ -1025,6 +1026,15 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef("Expr", "the location of the global relative to the attached GlobalVariable"),
         LLVMMetadataRef("Decl", "reference to the corresponding declaration. variables."),
         uint32_t("AlignInBits", "variable alignment(or 0 if no alignment attr was specified)")
+    )
+
+    IgnoreMissing..uint16_t(
+        "GetDINodeTag",
+        "Get the {@code dwarf::Tag} of a {@code DINode}",
+
+        LLVMMetadataRef("MD", ""),
+
+        since = "17"
     )
 
     IgnoreMissing..LLVMMetadataRef(

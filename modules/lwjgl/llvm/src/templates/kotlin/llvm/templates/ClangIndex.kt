@@ -19,7 +19,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "",
 
         "CINDEX_VERSION_MAJOR".."0",
-        "CINDEX_VERSION_MINOR".."63",
+        "CINDEX_VERSION_MINOR".."64",
         "CINDEX_VERSION".."CINDEX_VERSION_MAJOR*10000 + CINDEX_VERSION_MINOR"
     ).noPrefix()
 
@@ -81,6 +81,14 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_ExceptionSpecificationKind_Uninstantiated".enum("The exception specification has not yet been instantiated."),
         "Cursor_ExceptionSpecificationKind_Unparsed".enum("The exception specification has not been parsed yet."),
         "Cursor_ExceptionSpecificationKind_NoThrow".enum("The cursor has a {@code __declspec(nothrow)} exception specification.")
+    )
+
+    EnumConstantByte(
+        "{@code CXChoice}",
+
+        "Choice_Default".enumByte("Use the default value of an option that may depend on the process environment.", "0"),
+        "Choice_Enabled".enumByte("Enable the option."),
+        "Choice_Disabled".enumByte("Disable the option.")
     )
 
     EnumConstant(
@@ -1076,10 +1084,16 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Type_OCLIntelSubgroupAVCImeResult".enum(""),
         "Type_OCLIntelSubgroupAVCRefResult".enum(""),
         "Type_OCLIntelSubgroupAVCSicResult".enum(""),
-        "Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout".enum(""),
+
+        "Type_OCLIntelSubgroupAVCImeResultSingleReferenceStreamout".enum("", "172"),
+        "Type_OCLIntelSubgroupAVCImeResultDualReferenceStreamout".enum(""),
+        "Type_OCLIntelSubgroupAVCImeSingleReferenceStreamin".enum(""),
+        "Type_OCLIntelSubgroupAVCImeDualReferenceStreamin".enum(""),
+
+        /* Old aliases for AVC OpenCL extension types. */
+        "Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout".enum("", "172"),
         "Type_OCLIntelSubgroupAVCImeResultDualRefStreamout".enum(""),
         "Type_OCLIntelSubgroupAVCImeSingleRefStreamin".enum(""),
-
         "Type_OCLIntelSubgroupAVCImeDualRefStreamin".enum(""),
 
         "Type_ExtVector".enum(""),
@@ -1699,6 +1713,65 @@ val ClangIndex = "ClangIndex".nativeClass(
         )
     )
 
+    EnumConstant(
+        "Describes the kind of binary operators. ({@code CXBinaryOperatorKind})",
+
+        "BinaryOperator_Invalid".enum("This value describes cursors which are not binary operators.", "0"),
+        "BinaryOperator_PtrMemD".enum("C++ Pointer - to - member operator."),
+        "BinaryOperator_PtrMemI".enum("C++ Pointer - to - member operator."),
+        "BinaryOperator_Mul".enum("Multiplication operator."),
+        "BinaryOperator_Div".enum("Division operator."),
+        "BinaryOperator_Rem".enum("Remainder operator."),
+        "BinaryOperator_Add".enum("Addition operator."),
+        "BinaryOperator_Sub".enum("Subtraction operator."),
+        "BinaryOperator_Shl".enum("Bitwise shift left operator."),
+        "BinaryOperator_Shr".enum("Bitwise shift right operator."),
+        "BinaryOperator_Cmp".enum("C++ three-way comparison (spaceship) operator."),
+        "BinaryOperator_LT".enum("Less than operator."),
+        "BinaryOperator_GT".enum("Greater than operator."),
+        "BinaryOperator_LE".enum("Less or equal operator."),
+        "BinaryOperator_GE".enum("Greater or equal operator."),
+        "BinaryOperator_EQ".enum("Equal operator."),
+        "BinaryOperator_NE".enum("Not equal operator."),
+        "BinaryOperator_And".enum("Bitwise AND operator."),
+        "BinaryOperator_Xor".enum("Bitwise XOR operator."),
+        "BinaryOperator_Or".enum("Bitwise OR operator."),
+        "BinaryOperator_LAnd".enum("Logical AND operator."),
+        "BinaryOperator_LOr".enum("Logical OR operator."),
+        "BinaryOperator_Assign".enum("Assignment operator."),
+        "BinaryOperator_MulAssign".enum("Multiplication assignment operator."),
+        "BinaryOperator_DivAssign".enum("Division assignment operator."),
+        "BinaryOperator_RemAssign".enum("Remainder assignment operator."),
+        "BinaryOperator_AddAssign".enum("Addition assignment operator."),
+        "BinaryOperator_SubAssign".enum("Subtraction assignment operator."),
+        "BinaryOperator_ShlAssign".enum("Bitwise shift left assignment operator."),
+        "BinaryOperator_ShrAssign".enum("Bitwise shift right assignment operator."),
+        "BinaryOperator_AndAssign".enum("Bitwise AND assignment operator."),
+        "BinaryOperator_XorAssign".enum("Bitwise XOR assignment operator."),
+        "BinaryOperator_OrAssign".enum("Bitwise OR assignment operator."),
+        "BinaryOperator_Comma".enum("Comma operator.")
+    )
+
+    EnumConstant(
+        "Describes the kind of unary operators. ({@code CXUnaryOperatorKind})",
+
+        "UnaryOperator_Invalid".enum("This value describes cursors which are not unary operators.", "0"),
+        "UnaryOperator_PostInc".enum("Postfix increment operator."),
+        "UnaryOperator_PostDec".enum("Postfix decrement operator."),
+        "UnaryOperator_PreInc".enum("Prefix increment operator."),
+        "UnaryOperator_PreDec".enum("Prefix decrement operator."),
+        "UnaryOperator_AddrOf".enum("Address of operator."),
+        "UnaryOperator_Deref".enum("Dereference operator."),
+        "UnaryOperator_Plus".enum("Plus operator."),
+        "UnaryOperator_Minus".enum("Minus operator."),
+        "UnaryOperator_Not".enum("Not operator."),
+        "UnaryOperator_LNot".enum("LNot operator."),
+        "UnaryOperator_Real".enum("{@code __real} expr operator."),
+        "UnaryOperator_Imag".enum("{@code __imag} expr operator."),
+        "UnaryOperator_Extension".enum("{@code __extension__} marker operator."),
+        "UnaryOperator_Coawait".enum("C++ {@code co_await} operator.")
+    )
+
     charUTF8.const.p(
         "getCString",
         "Retrieve the character data associated with the given string.",
@@ -1778,10 +1851,27 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXIndex("index", "")
     )
 
+    IgnoreMissing..CXIndex(
+        "createIndexWithOptions",
+        """
+        Provides a shared context for creating translation units.
+ 
+        Call this function instead of #createIndex() if you need to configure the additional options in {@code CXIndexOptions}.
+        """,
+
+        CXIndexOptions.const.p("options", ""),
+
+        returnDoc = "the created index or null in case of error, such as an unsupported value of {@code options->Size}.",
+        since = "17"
+    )
+
     void(
         "CXIndex_setGlobalOptions",
         """
         Sets general options associated with a {@code CXIndex}.
+
+        This function is DEPRECATED. Set ##CXIndexOptions{@code ::ThreadBackgroundPriorityForIndexing} and/or
+        {@code CXIndexOptions::ThreadBackgroundPriorityForEditing} and call #createIndexWithOptions() instead.
 
         For example:
 
@@ -1798,7 +1888,11 @@ val ClangIndex = "ClangIndex".nativeClass(
 
     unsigned(
         "CXIndex_getGlobalOptions",
-        "Gets the general options associated with a CXIndex.",
+        """
+        Gets the general options associated with a CXIndex.
+
+        This function allows to obtain the final option values used by libclang after specifying the option policies via {@code CXChoice} enumerators.
+        """,
 
         CXIndex("index", ""),
 
@@ -1809,6 +1903,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CXIndex_setInvocationEmissionPathOption",
         """
         Sets the invocation emission path option in a {@code CXIndex}.
+
+        This function is DEPRECATED. Set ##CXIndexOptions{@code ::InvocationEmissionPath} and call #createIndexWithOptions() instead.
 
         The invocation emission path specifies a path which will contain log files for certain libclang invocations. A null value (default) implies that
         libclang invocations are not logged.
@@ -3184,12 +3280,28 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXCursor("C", "")
     )
 
+    unsignedb(
+        "Cursor_isBitField",
+        "Returns non-zero if the cursor specifies a {@code Record} member that is a bit-field.",
+
+        CXCursor("C", "")
+    )
+
     int(
         "getFieldDeclBitWidth",
         """
-        Retrieve the bit width of a bit field declaration as an integer.
+        Retrieve the bit width of a bit-field declaration as an integer.
 
-        If a cursor that is not a bit field declaration is passed in, -1 is returned.
+        If the cursor does not reference a bit-field, or if the bit-field's width expression cannot be evaluated, -1 is returned.
+
+        For example:
+        ${code("""
+if (clang_Cursor_isBitField(Cursor)) {
+    int Width = clang_getFieldDeclBitWidth(Cursor);
+    if (Width != -1) {
+        // The bit-field width is not value-dependent.
+    }
+}""")}
         """,
 
         CXCursor("C", "")
@@ -3873,13 +3985,6 @@ void foo(const int);""")}
     )
 
     unsignedb(
-        "Cursor_isBitField",
-        "Returns non-zero if the cursor specifies a Record member that is a bitfield.",
-
-        CXCursor("C", "")
-    )
-
-    unsignedb(
         "isVirtualBase",
         "Returns 1 if the base class specified by the cursor with kind #Cursor_CXXBaseSpecifier is virtual.",
 
@@ -4518,6 +4623,50 @@ class Bar {
         """,
 
         CXCursor("C", "")
+    )
+
+    IgnoreMissing..unsignedb(
+        "CXXMethod_isExplicit",
+        """
+        Determine if a C++ constructor or conversion function was declared explicit, returning 1 if such is the case and 0 otherwise.
+
+        Constructors or conversion functions are declared explicit through the use of the explicit specifier.
+
+        For example, the following constructor and conversion function are not explicit as they lack the explicit specifier:
+        ${codeBlock("""
+class Foo {
+    Foo();
+    operator int();
+};""")}
+
+        While the following constructor and conversion function are explicit as they are declared with the explicit specifier.
+        ${codeBlock("""
+class Foo {
+    explicit Foo();
+    explicit operator int();
+};""")}
+
+        This function will return 0 when given a cursor pointing to one of the former declarations and it will return 1 for a cursor pointing to the latter
+        declarations.
+
+        The explicit specifier allows the user to specify a conditional compile-time expression whose value decides whether the marked element is explicit or
+        not.
+
+        For example:
+        ${codeBlock("""
+constexpr bool foo(int i) { return i % 2 == 0; }
+
+class Foo {
+    explicit(foo(1)) Foo();
+    explicit(foo(2)) operator int();
+}""")}
+
+        This function will return 0 for the constructor and 1 for the conversion function.
+        """,
+
+        CXCursor("C", ""),
+
+        since = "17"
     )
 
     IgnoreMissing..unsignedb(
@@ -5452,5 +5601,47 @@ class Bar {
         ),
 
         returnDoc = "a non-zero value if the traversal was terminated prematurely by the visitor returning #Visit_Break"
+    )
+
+    IgnoreMissing..CXString(
+        "getBinaryOperatorKindSpelling",
+        "Retrieve the spelling of a given {@code CXBinaryOperatorKind}.",
+
+        CXBinaryOperatorKind("kind", ""),
+
+        since = "17"
+    )
+
+    IgnoreMissing..CXBinaryOperatorKind(
+        "getCursorBinaryOperatorKind",
+        """
+        Retrieve the binary operator kind of this cursor.
+
+        If this cursor is not a binary operator then returns Invalid.
+        """,
+
+        CXCursor("cursor", ""),
+
+        since = "17"
+    )
+
+    IgnoreMissing..CXString(
+        "getUnaryOperatorKindSpelling",
+        "Retrieve the spelling of a given {@code CXUnaryOperatorKind}.",
+
+        CXUnaryOperatorKind("kind", "")
+    )
+
+    IgnoreMissing..CXUnaryOperatorKind(
+        "getCursorUnaryOperatorKind",
+        """
+        Retrieve the unary operator kind of this cursor.
+
+        If this cursor is not a unary operator then returns {@code Invalid}.
+        """,
+
+        CXCursor("cursor", ""),
+
+        since = "17"
     )
 }

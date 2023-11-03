@@ -59,16 +59,16 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         since = "11"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddInstructionCombiningPass",
-        "See {@code llvm::createInstructionCombiningPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddInstructionSimplifyPass",
-        "See {@code llvm::createInstSimplifyLegacyPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
 
@@ -82,16 +82,16 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddConstantMergePass",
-        "See {@code llvm::createConstantMergePass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddMergeFunctionsPass",
-        "See {@code llvm::createMergeFunctionsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
 
@@ -100,49 +100,49 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
 
     IgnoreMissing..void(
         "AddCalledValuePropagationPass",
-        "See {@code llvm::createCalledValuePropagationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddDeadArgEliminationPass",
-        "See {@code llvm::createDeadArgEliminationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddFunctionAttrsPass",
-        "See {@code llvm::createFunctionAttrsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddFunctionInliningPass",
-        "See {@code llvm::createFunctionInliningPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddAlwaysInlinerPass",
-        "See {@code llvm::createAlwaysInlinerPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddGlobalDCEPass",
-        "See {@code llvm::createGlobalDCEPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddGlobalOptimizerPass",
-        "See {@code llvm::createGlobalOptimizerPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
@@ -161,16 +161,16 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddIPSCCPPass",
-        "See {@code llvm::createIPSCCPPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddInternalizePass",
-        "See {@code llvm::createInternalizePass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
         unsigned_int("AllButMain", "")
@@ -178,14 +178,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
 
     IgnoreMissing..void(
         "AddInternalizePassWithMustPreservePredicate",
-        """
-        Create and add the internalize pass to the given pass manager with the provided preservation callback.
-
-        The context parameter is forwarded to the callback on each invocation. As such, it is the responsibility of the caller to extend its lifetime until
-        execution of this pass has finished.
-
-        See {@code llvm::createInternalizePass} function.
-        """,
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
         opaque_p("Context", ""),
@@ -194,16 +187,16 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         since = "10"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddStripDeadPrototypesPass",
-        "See {@code llvm::createStripDeadPrototypesPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddStripSymbolsPass",
-        "See {@code llvm::createStripSymbolsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
@@ -351,6 +344,16 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
     )
 
     IgnoreMissing..void(
+        "PassBuilderOptionsSetInlinerThreshold",
+        "",
+
+        LLVMPassBuilderOptionsRef("Options", ""),
+        int("Threshold", ""),
+
+        since = "17"
+    )
+
+    IgnoreMissing..void(
         "DisposePassBuilderOptions",
         "Dispose of a heap-allocated {@code PassBuilderOptions} instance.",
 
@@ -359,79 +362,79 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         since = "13"
     )
 
-    LLVMPassManagerBuilderRef(
+    IgnoreMissing..LLVMPassManagerBuilderRef(
         "PassManagerBuilderCreate",
-        "See {@code llvm::PassManagerBuilder}.",
+        "Removed in LLVM 17.",
 
         void()
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderDispose",
-        "",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderSetOptLevel",
-        "See {@code llvm::PassManagerBuilder::OptLevel}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         unsigned_int("OptLevel", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderSetSizeLevel",
-        "See {@code llvm::PassManagerBuilder::SizeLevel}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         unsigned_int("SizeLevel", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderSetDisableUnitAtATime",
-        "See {@code llvm::PassManagerBuilder::DisableUnitAtATime}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         LLVMBool("Value", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderSetDisableUnrollLoops",
-        "See {@code llvm::PassManagerBuilder::DisableUnrollLoops}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         LLVMBool("Value", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderSetDisableSimplifyLibCalls",
-        "See {@code llvm::PassManagerBuilder::DisableSimplifyLibCalls}",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         LLVMBool("Value", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderUseInlinerWithThreshold",
-        "See {@code llvm::PassManagerBuilder::Inliner}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         unsigned_int("Threshold", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderPopulateFunctionPassManager",
-        "See {@code llvm::PassManagerBuilder::populateFunctionPassManager}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderPopulateModulePassManager",
-        "See {@code llvm::PassManagerBuilder::populateModulePassManager}.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerBuilderRef("PMB", ""),
         LLVMPassManagerRef("PM", "")
@@ -447,137 +450,137 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMBool("RunInliner", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddAggressiveDCEPass",
-        "See {@code llvm::createAggressiveDCEPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddDCEPass",
-        "See {@code llvm::createDeadCodeEliminationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
 
         since = "10"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddBitTrackingDCEPass",
-        "See {@code llvm::createBitTrackingDCEPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddAlignmentFromAssumptionsPass",
-        "See {@code llvm::createAlignmentFromAssumptionsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCFGSimplificationPass",
-        "See {@code llvm::createCFGSimplificationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddDeadStoreEliminationPass",
-        "See {@code llvm::createDeadStoreEliminationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddScalarizerPass",
-        "See {@code llvm::createScalarizerPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddMergedLoadStoreMotionPass",
-        "See {@code llvm::createMergedLoadStoreMotionPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddGVNPass",
-        "See {@code llvm::createGVNPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddNewGVNPass",
-        "See {@code llvm::createGVNPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddIndVarSimplifyPass",
-        "See {@code llvm::createIndVarSimplifyPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddJumpThreadingPass",
-        "See {@code llvm::createJumpThreadingPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLICMPass",
-        "See {@code llvm::createLICMPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopDeletionPass",
-        "See {@code llvm::createLoopDeletionPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopIdiomPass",
-        "See {@code llvm::createLoopIdiomPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopRotatePass",
-        "See {@code llvm::createLoopRotatePass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopRerollPass",
-        "See {@code llvm::createLoopRerollPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopUnrollPass",
-        "See {@code llvm::createLoopUnrollPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddLoopUnrollAndJamPass",
-        "See {@code llvm::createLoopUnrollAndJamPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
@@ -591,71 +594,71 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
 
     IgnoreMissing..void(
         "AddLowerAtomicPass",
-        "See {@code llvm::createLowerAtomicPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddMemCpyOptPass",
-        "See {@code llvm::createMemCpyOptPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddPartiallyInlineLibCallsPass",
-        "See {@code llvm::createPartiallyInlineLibCallsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddReassociatePass",
-        "See {@code llvm::createReassociatePass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddSCCPPass",
-        "See {@code llvm::createSCCPPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddScalarReplAggregatesPass",
-        "See {@code llvm::createSROAPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddScalarReplAggregatesPassSSA",
-        "See {@code llvm::createSROAPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddScalarReplAggregatesPassWithThreshold",
-        "See {@code llvm::createSROAPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
         int("Threshold", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddSimplifyLibCallsPass",
-        "See {@code llvm::createSimplifyLibCallsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddTailCallEliminationPass",
-        "See {@code llvm::createTailCallEliminationPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
@@ -667,118 +670,118 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddDemoteMemoryToRegisterPass",
-        "See {@code llvm::demotePromoteMemoryToRegisterPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddVerifierPass",
-        "See {@code llvm::createVerifierPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCorrelatedValuePropagationPass",
-        "See {@code llvm::createCorrelatedValuePropagationPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddEarlyCSEPass",
-        "See {@code llvm::createEarlyCSEPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddEarlyCSEMemSSAPass",
-        "See {@code llvm::createEarlyCSEPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLowerExpectIntrinsicPass",
-        "See {@code llvm::createLowerExpectIntrinsicPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddLowerConstantIntrinsicsPass",
-        "See {@code llvm::createLowerConstantIntrinsicsPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
 
         since = "10"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddTypeBasedAliasAnalysisPass",
-        "See {@code llvm::createTypeBasedAliasAnalysisPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddScopedNoAliasAAPass",
-        "See {@code llvm::createScopedNoAliasAAPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddBasicAliasAnalysisPass",
-        "See {@code llvm::createBasicAliasAnalysisPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddUnifyFunctionExitNodesPass",
-        "See {@code llvm::createUnifyFunctionExitNodesPass} function",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLowerSwitchPass",
-        "See {@code llvm::createLowerSwitchPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddPromoteMemoryToRegisterPass",
-        "See {@code llvm::createPromoteMemoryToRegisterPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
     IgnoreMissing..void(
         "AddAddDiscriminatorsPass",
-        "See {@code llvm::createAddDiscriminatorsPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", ""),
 
         since = "9"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopVectorizePass",
-        "See {@code llvm::createLoopVectorizePass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddSLPVectorizePass",
-        "See {@code llvm::createSLPVectorizerPass} function.",
+        "Removed in LLVM 17.",
 
         LLVMPassManagerRef("PM", "")
     )

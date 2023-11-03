@@ -96,6 +96,7 @@ public class LLVMDebugInfo {
             DIBuilderCreateExpression                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateExpression"),
             DIBuilderCreateConstantValueExpression     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateConstantValueExpression"),
             DIBuilderCreateGlobalVariableExpression    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateGlobalVariableExpression"),
+            GetDINodeTag                               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetDINodeTag"),
             DIGlobalVariableExpressionGetVariable      = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetVariable"),
             DIGlobalVariableExpressionGetExpression    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetExpression"),
             DIVariableGetFile                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetFile"),
@@ -256,6 +257,7 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDWARFSourceLanguageFortran18 DWARFSourceLanguageFortran18}</li>
      * <li>{@link #LLVMDWARFSourceLanguageAda2005 DWARFSourceLanguageAda2005}</li>
      * <li>{@link #LLVMDWARFSourceLanguageAda2012 DWARFSourceLanguageAda2012}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageMojo DWARFSourceLanguageMojo}</li>
      * <li>{@link #LLVMDWARFSourceLanguageMips_Assembler DWARFSourceLanguageMips_Assembler} - Vendor extensions:</li>
      * <li>{@link #LLVMDWARFSourceLanguageGOOGLE_RenderScript DWARFSourceLanguageGOOGLE_RenderScript} - Vendor extensions:</li>
      * <li>{@link #LLVMDWARFSourceLanguageBORLAND_Delphi DWARFSourceLanguageBORLAND_Delphi} - Vendor extensions:</li>
@@ -308,9 +310,10 @@ public class LLVMDebugInfo {
         LLVMDWARFSourceLanguageFortran18           = 43,
         LLVMDWARFSourceLanguageAda2005             = 44,
         LLVMDWARFSourceLanguageAda2012             = 45,
-        LLVMDWARFSourceLanguageMips_Assembler      = 46,
-        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 47,
-        LLVMDWARFSourceLanguageBORLAND_Delphi      = 48;
+        LLVMDWARFSourceLanguageMojo                = 46,
+        LLVMDWARFSourceLanguageMips_Assembler      = 47,
+        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 48,
+        LLVMDWARFSourceLanguageBORLAND_Delphi      = 49;
 
     /**
      * The amount of debug information to emit.
@@ -2830,6 +2833,23 @@ public class LLVMDebugInfo {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ LLVMGetDINodeTag ] ---
+
+    /**
+     * Get the {@code dwarf::Tag} of a {@code DINode}
+     *
+     * @since 17
+     */
+    @NativeType("uint16_t")
+    public static short LLVMGetDINodeTag(@NativeType("LLVMMetadataRef") long MD) {
+        long __functionAddress = Functions.GetDINodeTag;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(MD);
+        }
+        return invokePC(MD, __functionAddress);
     }
 
     // --- [ LLVMDIGlobalVariableExpressionGetVariable ] ---

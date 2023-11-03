@@ -382,9 +382,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AttributeFunctionIndex".enum("ISO C restricts enumerator values to range of 'int' (4294967295 is too large)", "-1")
     )
 
-    void(
+    IgnoreMissing..void(
         "InitializeCore",
-        "",
+        "Removed in LLVM 17.",
 
         LLVMPassRegistryRef("R", "")
     )
@@ -501,7 +501,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     IgnoreMissing..void(
         "ContextSetOpaquePointers",
-        "Set whether the given context is in opaque pointer mode.",
+        "Removed in LLVM 17.",
 
         LLVMContextRef("C", ""),
         LLVMBool("OpaquePointers", "")
@@ -1468,11 +1468,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMTypeRef(
         "GetElementType",
-        """
-        Obtain the element type of an array or vector type.
-
-        This currently also works for pointer types, but this usage is deprecated.
-        """,
+        "Obtain the element type of an array or vector type.",
 
         LLVMTypeRef("Ty", "")
     )
@@ -1498,10 +1494,26 @@ val LLVMCore = "LLVMCore".nativeClass(
         Create a fixed size array type that refers to a specific type.
 
         The created type will exist in the context that its element type exists in.
+
+        {@code LLVMArrayType} is deprecated in favor of the API accurate #ArrayType2().
         """,
 
         LLVMTypeRef("ElementType", ""),
         unsigned_int("ElementCount", "")
+    )
+
+    LLVMTypeRef(
+        "ArrayType2",
+        """
+        Create a fixed size array type that refers to a specific type.
+
+        The created type will exist in the context that its element type exists in.
+        """,
+
+        LLVMTypeRef("ElementType", ""),
+        uint64_t("ElementCount", ""),
+
+        since = "17"
     )
 
     unsigned_int(
@@ -1510,9 +1522,24 @@ val LLVMCore = "LLVMCore".nativeClass(
         Obtain the length of an array type.
 
         This only works on types that represent arrays.
+
+        {@code LLVMGetArrayLength} is deprecated in favor of the API accurate #GetArrayLength2().
         """,
 
         LLVMTypeRef("ArrayTy", "")
+    )
+
+    uint64_t(
+        "GetArrayLength2",
+        """
+        Obtain the length of an array type.
+
+        This only works on types that represent arrays.
+        """,
+
+        LLVMTypeRef("ArrayTy", ""),
+
+        since = "17"
     )
 
     LLVMTypeRef(
@@ -1745,8 +1772,17 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     val postLLVM5 = setOf(
         "GlobalIFunc",
+        "PoisonValue",
+        "UnaryOperator",
         "DbgVariableIntrinsic",
-        "DbgLabelInst"
+        "DbgLabelInst",
+        "CatchSwitchInst",
+        "CallBrInst",
+        "FreezeInst",
+        "AtomicCmpXchgInst",
+        "AtomicRMWInst",
+        "FenceInst",
+        "ValueAsMetadata",
     )
     arrayOf(
         "Argument",
@@ -1769,12 +1805,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ConstantVector",
         "GlobalValue",
         "GlobalAlias",
-        "GlobalIFunc",
         "GlobalObject",
         "Function",
         "GlobalVariable",
+        "GlobalIFunc",
         "UndefValue",
+        "PoisonValue",
         "Instruction",
+        "UnaryOperator",
         "BinaryOperator",
         "CallInst",
         "IntrinsicInst",
@@ -1807,6 +1845,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ResumeInst",
         "CleanupReturnInst",
         "CatchReturnInst",
+        "CatchSwitchInst",
+        "CallBrInst",
         "FuncletPadInst",
         "CatchPadInst",
         "CleanupPadInst",
@@ -1829,7 +1869,13 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ExtractValueInst",
         "LoadInst",
         "VAArgInst",
+        "FreezeInst",
+        "AtomicCmpXchgInst",
+        "AtomicRMWInst",
+        "FenceInst",
+        // ----------------
         "MDNode",
+        "ValueAsMetadata",
         "MDString"
     ).forEach {
         LLVMValueRef(
@@ -2139,11 +2185,26 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMValueRef(
         "ConstArray",
-        "Create a {@code ConstantArray} from values.",
+        """
+        Create a {@code ConstantArray} from values.
+
+        {@code LLVMConstArray} is deprecated in favor of the API accurate #ConstArray2().
+        """,
 
         LLVMTypeRef("ElementTy", ""),
         LLVMValueRef.p("ConstantVals", ""),
         AutoSize("ConstantVals")..unsigned_int("Length", "")
+    )
+
+    LLVMValueRef(
+        "ConstArray2",
+        "Create a {@code ConstantArray} from values.",
+
+        LLVMTypeRef("ElementTy", ""),
+        LLVMValueRef.p("ConstantVals", ""),
+        AutoSize("ConstantVals")..uint64_t("Length", ""),
+
+        since = "17"
     )
 
     LLVMValueRef(
@@ -2664,9 +2725,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSelect",
-        "",
+        "Removed in LLVM 17.",
 
         LLVMValueRef("ConstantCondition", ""),
         LLVMValueRef("ConstantIfTrue", ""),
@@ -3728,6 +3789,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         Check(
             "LLVMGetMDNodeNumOperands(V)", debug = true
         )..LLVMValueRef.p("Dest", "destination array for operands")
+    )
+
+    void(
+        "ReplaceMDNodeOperandWith",
+        "Replace an operand at a specific index in a {@code MDNode} value.",
+
+        LLVMValueRef("V", ""),
+        unsigned_int("Index", ""),
+        nullable..LLVMMetadataRef("Replacement", ""),
+
+        since = "17"
     )
 
     LLVMValueRef(
@@ -5240,6 +5312,13 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
+    LLVMBool("GetNUW", "", LLVMValueRef("ArithInst", ""), since = "17")
+    void("SetNUW", "", LLVMValueRef("ArithInst", ""), LLVMBool("HasNUW", ""), since = "17")
+    LLVMBool("GetNSW", "", LLVMValueRef("ArithInst", ""), since = "17")
+    void("SetNSW", "", LLVMValueRef("ArithInst", ""), LLVMBool("HasNSW", ""), since = "17")
+    LLVMBool("GetExact", "", LLVMValueRef("DivOrShrInst", ""), since = "17")
+    void("SetExact", "", LLVMValueRef("DivOrShrInst", ""), LLVMBool("IsExact", ""), since = "17")
+
     LLVMValueRef(
         "BuildNot",
         "",
@@ -5990,7 +6069,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("ShuffleVectorInst", ""),
         unsigned("Elt", ""),
 
-        returnDoc = "the result of #GetUndefMaskElem() if the mask value is {@code undef} at that position.",
+        returnDoc = "the result of #GetUndefMaskElem() if the mask value is poison at that position.",
         since = "11"
     )
 
@@ -6113,9 +6192,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMMemoryBufferRef("MemBuf", "")
     )
 
-    LLVMPassRegistryRef(
+    IgnoreMissing..LLVMPassRegistryRef(
         "GetGlobalPassRegistry",
-        "Return the global pass registry, for use with initialization functions.",
+        "Removed in LLVM 17.",
 
         void()
     )
