@@ -52,6 +52,7 @@ class CallbackFunction internal constructor(
             }
             is PrimitiveType  -> when (mapping) {
                 PrimitiveMapping.BOOLEAN  -> "ffi_type_uint8"
+                PrimitiveMapping.BOOLEAN2  -> "ffi_type_uint16"
                 PrimitiveMapping.BOOLEAN4 -> "ffi_type_uint32"
                 PrimitiveMapping.FLOAT    -> "ffi_type_float"
                 PrimitiveMapping.DOUBLE   -> "ffi_type_double"
@@ -177,7 +178,7 @@ import static org.lwjgl.system.MemoryUtil.*;
         @Override
         public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${signature.asSequence()
             .map {
-                "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean"
+                "${if (it.nativeType.mapping.isPseudoBoolean()) "boolean"
                 else if (it.nativeType is StructType)
                     it.nativeType.definition.className
                 else
@@ -242,7 +243,7 @@ ${access.modifier}interface ${className}I extends CallbackI {
                 if (it.nativeType is StructType) {
                     "${it.nativeType.definition.className}.create($arg)"
                 } else {
-                    "memGet${it.nativeType.memGetType}($arg)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN || it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
+                    "memGet${it.nativeType.memGetType}($arg)${if (it.nativeType.mapping.isBoolean()) " != 0" else ""}"
                 }
             }
             .let { if (returns is StructType) it + "${returns.javaMethodType}.create(ret)" else it }
@@ -261,7 +262,7 @@ ${access.modifier}interface ${className}I extends CallbackI {
         }
         print("""
     ${if (returns is StructType) "void" else returns.annotate(returns.nativeMethodType)} invoke(${signature.asSequence()
-            .map { "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}" }
+            .map { "${it.nativeType.annotate(if (it.nativeType.mapping.isPseudoBoolean()) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}" }
             .let { if (returns is StructType) it + "${returns.annotate(returns.javaMethodType)} $RESULT" else it }
             .joinToString(", ")});
 

@@ -12,10 +12,7 @@ val bool = PrimitiveType("bool", PrimitiveMapping.BOOLEAN)
 val char = IntegerType("char", PrimitiveMapping.BYTE)
 val short = IntegerType("short", PrimitiveMapping.SHORT)
 val int = IntegerType("int", PrimitiveMapping.INT)
-val intb = PrimitiveType("int", PrimitiveMapping.BOOLEAN4) // integer mapped to boolean
 val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
-val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
-val unsigned_charb = PrimitiveType("unsigned char", PrimitiveMapping.BOOLEAN)
 val long = IntegerType("long", PrimitiveMapping.CLONG)
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
@@ -40,10 +37,16 @@ val va_list = "va_list".handle
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
 val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
 val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
-val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
 val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.CLONG, unsigned = true)
 val unsigned_long_int = IntegerType("unsigned long int", PrimitiveMapping.CLONG, unsigned = true)
 val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
+
+val intb = PrimitiveType("int", PrimitiveMapping.BOOLEAN4) // integer mapped to boolean
+
+val unsigned_charb = PrimitiveType("unsigned char", PrimitiveMapping.BOOLEAN)
+val unsigned_shortb = PrimitiveType("unsigned short", PrimitiveMapping.BOOLEAN2)
+val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
+val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
 
 // strings
 

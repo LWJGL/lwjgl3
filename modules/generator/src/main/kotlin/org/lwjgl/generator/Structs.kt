@@ -319,7 +319,8 @@ class Struct(
         .let {
             "0x${it.substring(0, 2)}_${it.substring(2, 4)}_${it.substring(4, 6)}_${it.substring(6, 8)}"
         }
-    fun StructMember.bitfield(bitfield: Int, bitmask: Int): StructMember {
+    private fun String.cast(cast: String) = if (cast.isEmpty()) this else "$cast($this)"
+    fun StructMember.bitfield(bitfield: Int, bitmask: Int, cast: String): StructMember {
         if (bits != bitmask.countOneBits()) {
             this.error("The number of bits set in the specified bitmask (${bitmask.countOneBits()}) does not match the struct member bits ($bits)")
         }
@@ -329,14 +330,14 @@ class Struct(
 
         val shift = bitmask.countTrailingZeroBits()
         if (shift == 0) {
-            this.getter("nbitfield$bitfield(struct) & $mask")
-            this.setter("nbitfield$bitfield(struct, (nbitfield$bitfield(struct) & $maskInv) | (value & $mask))")
+            this.getter("nbitfield$bitfield(struct) & $mask".cast(cast))
+            this.setter("nbitfield$bitfield(struct, ${"(nbitfield$bitfield(struct) & $maskInv) | (value & $mask)".cast(cast)})")
         } else if (bits + shift == Int.SIZE_BITS) {
-            this.getter("nbitfield$bitfield(struct) >>> $shift")
-            this.setter("nbitfield$bitfield(struct, (value << $shift) | (nbitfield$bitfield(struct) & $maskInv))")
+            this.getter("nbitfield$bitfield(struct) >>> $shift".cast(cast))
+            this.setter("nbitfield$bitfield(struct, ${"(value << $shift) | (nbitfield$bitfield(struct) & $maskInv)".cast(cast)})")
         } else {
-            this.getter("(nbitfield$bitfield(struct) & $mask) >>> $shift")
-            this.setter("nbitfield$bitfield(struct, ((value << $shift) & $mask) | (nbitfield$bitfield(struct) & $maskInv))")
+            this.getter("(nbitfield$bitfield(struct) & $mask) >>> $shift".cast(cast))
+            this.setter("nbitfield$bitfield(struct, ${"((value << $shift) & $mask) | (nbitfield$bitfield(struct) & $maskInv)".cast(cast)})")
         }
 
         return this
@@ -769,6 +770,12 @@ $indentation}"""
             }
 
             val typeMapping = (ref.nativeType as PrimitiveType).mapping
+            val cast = if (typeMapping.bytes == 1)
+                "(byte)"
+            else if (typeMapping.bytes == 2)
+                "(short)"
+            else
+                ""
 
             val bitsTotal = typeMapping.bytes * 8
             var bitsConsumed = 0
@@ -776,15 +783,16 @@ $indentation}"""
             var i = m
             while (bitsConsumed < bitsTotal && i < members.size) {
                 val member = members[i]
+                if (bitsTotal < member.bits) {
+                    member.error("width of bit-field (${member.bits} bits) exceeds the width of its type (${bitsTotal} bits)")
+                }
                 if (member.bits == -1 || (member.nativeType as PrimitiveType).mapping !== typeMapping || (bitsTotal - bitsConsumed) < member.bits) {
                     break
                 }
 
-                if (member.getter == null) {
-                    member.bitfield(bitfieldIndex, (-1 ushr (bitsTotal - member.bits)) shl bitsConsumed)
-                } else {
-                    val getter = member.getter
-                    member.bitfield(bitfieldIndex, (-1 ushr (bitsTotal - member.bits)) shl bitsConsumed)
+                val getter = member.getter
+                member.bitfield(bitfieldIndex, ((-1 ushr (32 - bitsTotal)) ushr (bitsTotal - member.bits)) shl bitsConsumed, cast)
+                if (getter != null) {
                     val newGetter = member.getter
                     check(getter == newGetter) { "$getter - $newGetter" }
                 }
@@ -1731,7 +1739,7 @@ ${validations.joinToString("\n")}
                                 if (it.has<AutoSizeMember>())
                                     "$t/** Sets the specified value to the {@code ${it.name}} field of the specified {@code struct}. */"
                                 else
-                                    "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
+                                    "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping.isPseudoBoolean()) "boolean" else javaType}) $setter}. */"
                             )
                         if (it.setter != null) {
                             println("${t}public static void n$setter(long $STRUCT, $javaType value) { ${it.setter}; }")
@@ -1938,7 +1946,12 @@ ${validations.joinToString("\n")}
                 if (it !is StructMemberArray && !it.nativeType.isPointerData) {
                     printSetterJavadoc(accessMode, it, indent, "Sets the specified value to the #member field.", setter)
                     if (overrides) println("$indent@Override")
-                    println("${indent}public $returnType $setter(${it.annotate(it.nativeType.javaMethodType)} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
+                    println("${indent}public $returnType $setter(${it.annotate(it.nativeType.javaMethodType)} value) { $n$setter($ADDRESS, ${if (it.nativeType.mapping.isPseudoBoolean()) 
+                        "value ? 1 : 0".let { expr ->
+                            if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN2) "(short)($expr)" else expr
+                        }
+                    else "value"
+                    }); return this; }")
                 }
 
                 // Alternative setters
@@ -2242,7 +2255,7 @@ ${validations.joinToString("\n")}
                     }
                     printGetterJavadoc(accessMode, it, indent, "@return the value of the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, returnType)
-                    println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
+                    println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping.isPseudoBoolean()) " != 0" else ""}; }")
                 }
 
                 // Alternative getters
