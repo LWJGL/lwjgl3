@@ -11,6 +11,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     nativeImport("meshoptimizer.h")
     javaImport("static java.lang.Float.*")
 
+    cpp = true
     documentation =
         """
         Native bindings to ${url("https://github.com/zeux/meshoptimizer", "meshoptimizer")}.
@@ -301,7 +302,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "MESHOPTIMIZER_VERSION".."190").noPrefix()
+    IntConstant("", "MESHOPTIMIZER_VERSION".."200").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -337,7 +338,7 @@ nmeshopt_setAllocator(
         size_t("index_count", ""),
         UseVariable..AutoSize("destination")..size_t("vertex_count", ""),
         meshopt_Stream.const.p("streams", ""),
-        AutoSize("streams")..size_t("stream_count", "")
+        AutoSize("streams")..size_t("stream_count", "must be &le; 16")
     )
 
     void(
@@ -401,7 +402,7 @@ nmeshopt_setAllocator(
         AutoSize("destination", "indices")..size_t("index_count", ""),
         size_t("vertex_count", ""),
         meshopt_Stream.const.p("streams", ""),
-        AutoSize("streams")..size_t("stream_count", "")
+        AutoSize("streams")..size_t("stream_count", "must be &le; 16")
     )
 
     void(
@@ -876,7 +877,7 @@ nmeshopt_setAllocator(
             recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
             """
         ),
-        AutoSize("attribute_weights")..size_t("attribute_count", ""),
+        AutoSize("attribute_weights")..size_t("attribute_count", "must be &le; 16"),
         size_t("target_index_count", ""),
         float(
             "target_error",
@@ -936,6 +937,12 @@ nmeshopt_setAllocator(
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
+        Check("vertex_count * (vertex_colors_stride >>> 2)")..nullable..float.const.p(
+            "vertex_colors",
+            "can be #NULL; when it's not #NULL, it should have {@code float3} color in the first 12 bytes of each vertex"
+        ),
+        size_t("vertex_colors_stride", ""),
+        float("color_weight", ""),
         size_t("target_vertex_count", "")
     )
 
@@ -1155,13 +1162,16 @@ nmeshopt_setAllocator(
     void(
         "spatialSortRemap",
         """
-        Experimental: Spatial sorter. Generates a remap table that can be used to reorder points for spatial locality.
+        Spatial sorter. Generates a remap table that can be used to reorder points for spatial locality.
 
         Resulting remap table maps old vertices to new vertices and can be used in #remapVertexBuffer().
         """,
 
         unsigned_int.p("destination", "must contain enough space for the resulting remap table ({@code vertex_count} elements)"),
-        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
+            "vertex_positions",
+            "should have {@code float3} position in the first 12 bytes of each vertex"
+        ),
         UseVariable..AutoSize("destination")..size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
@@ -1199,8 +1209,8 @@ nmeshopt_setAllocator(
         meshopt_DeallocateCB("deallocate", "")
     )
 
-    /*int(
-        "quantizeUnorm",
+    NativeName("meshopt_quantizeUnorm")..internal..int(
+        "quantizeUnorm_ref",
         """
         Quantizes a float in {@code [0..1]} range into an N-bit fixed point {@code unorm} value.
 
@@ -1212,8 +1222,8 @@ nmeshopt_setAllocator(
         int("N", "")
     )
 
-    int(
-        "quantizeSnorm",
+    NativeName("meshopt_quantizeSnorm")..internal..int(
+        "quantizeSnorm_ref",
         """
         Quantizes a float in {@code [-1..1]} range into an N-bit fixed point {@code snorm} value.
 
@@ -1225,8 +1235,8 @@ nmeshopt_setAllocator(
         int("N", "")
     )
 
-    short(
-        "quantizeHalf",
+    NativeName("meshopt_quantizeHalf")..internal..short(
+        "quantizeHalf_ref",
         """
         Quantizes a float into half-precision floating point value.
 
@@ -1237,10 +1247,10 @@ nmeshopt_setAllocator(
         float("v", "")
     )
 
-    float(
-        "quantizeFloat",
+    NativeName("meshopt_quantizeFloat")..internal..float(
+        "quantizeFloat_ref",
         """
-        Quantizes a float into a floating point value with a limited number of significant mantissa bits.
+        Quantizes a float into a floating point value with a limited number of significant mantissa bits, preserving the IEEE-754 fp32 binary representation.
 
         Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Assumes {@code N} is in a valid mantissa
         precision range, which is {@code 1..23}.
@@ -1248,7 +1258,19 @@ nmeshopt_setAllocator(
 
         float("v", ""),
         int("N", "")
-    )*/
+    )
+
+    NativeName("meshopt_dequantizeHalf")..internal..float(
+        "dequantizeHalf_ref",
+        """
+        Reverse quantization of a half-precision (as defined by IEEE-754 fp16) floating point value.
+
+        Preserves Inf/NaN, flushes denormals to zero.
+        """,
+
+        unsigned_short("h", "")
+    )
+
     customMethod("""
     /**
      * Quantizes a float in {@code [0..1]} range into an N-bit fixed point {@code unorm} value.
@@ -1283,7 +1305,7 @@ nmeshopt_setAllocator(
     }
 
     /**
-     * Quantizes a float into half-precision floating point value.
+     * Quantizes a float into half-precision (as defined by IEEE-754 fp16) floating point value.
      * 
      * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Representable magnitude range:
      * {@code [6e-5; 65504]}. Maximum relative reconstruction error: {@code 5e-4}.</p>
@@ -1310,7 +1332,7 @@ nmeshopt_setAllocator(
     }
 
     /**
-     * Quantizes a float into a floating point value with a limited number of significant mantissa bits.
+     * Quantizes a float into a floating point value with a limited number of significant mantissa bits, preserving the IEEE-754 fp32 binary representation.
      * 
      * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Assumes {@code N} is in a valid mantissa
      * precision range, which is {@code 1..23}.</p>
@@ -1331,5 +1353,27 @@ nmeshopt_setAllocator(
         ui = e == 0 ? 0 : ui;
 
         return intBitsToFloat(ui);
+    }
+
+    /**
+     * Reverse quantization of a half-precision (as defined by IEEE-754 fp16) floating point value.
+     * 
+     * <p>Preserves Inf/NaN, flushes denormals to zero.</p>
+     */
+    public static float meshopt_dequantizeHalf(@NativeType("unsigned short") short h) {
+        int s = (h & 0x8000) << 16;
+        int em = h & 0x7fff;
+
+        // bias exponent and pad mantissa with 0; 112 is relative exponent bias (127-15)
+        int r = (em + (112 << 10)) << 13;
+
+        // denormal: flush to zero
+        r = (em < (1 << 10)) ? 0 : r;
+
+        // infinity/NaN; note that we preserve NaN payload as a byproduct of unifying inf/nan cases
+        // 112 is an exponent bias fixup; since we already applied it once, applying it twice converts 31 to 255
+        r += (em >= (31 << 10)) ? (112 << 23) : 0;
+
+        return intBitsToFloat(s | r);
     }""")
 }

@@ -325,7 +325,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 190;
+    public static final int MESHOPTIMIZER_VERSION = 200;
 
     /**
      * {@code meshopt_EncodeExpMode}
@@ -389,7 +389,11 @@ public class MeshOptimizer {
 
     // --- [ meshopt_generateVertexRemapMulti ] ---
 
-    /** Unsafe version of: {@link #meshopt_generateVertexRemapMulti generateVertexRemapMulti} */
+    /**
+     * Unsafe version of: {@link #meshopt_generateVertexRemapMulti generateVertexRemapMulti}
+     *
+     * @param stream_count must be &le; 16
+     */
     public static native long nmeshopt_generateVertexRemapMulti(long destination, long indices, long index_count, long vertex_count, long streams, long stream_count);
 
     /**
@@ -477,7 +481,11 @@ public class MeshOptimizer {
 
     // --- [ meshopt_generateShadowIndexBufferMulti ] ---
 
-    /** Unsafe version of: {@link #meshopt_generateShadowIndexBufferMulti generateShadowIndexBufferMulti} */
+    /**
+     * Unsafe version of: {@link #meshopt_generateShadowIndexBufferMulti generateShadowIndexBufferMulti}
+     *
+     * @param stream_count must be &le; 16
+     */
     public static native void nmeshopt_generateShadowIndexBufferMulti(long destination, long indices, long index_count, long vertex_count, long streams, long stream_count);
 
     /**
@@ -1060,7 +1068,11 @@ public class MeshOptimizer {
 
     // --- [ meshopt_simplifyWithAttributes ] ---
 
-    /** Unsafe version of: {@link #meshopt_simplifyWithAttributes simplifyWithAttributes} */
+    /**
+     * Unsafe version of: {@link #meshopt_simplifyWithAttributes simplifyWithAttributes}
+     *
+     * @param attribute_count must be &le; 16
+     */
     public static native long nmeshopt_simplifyWithAttributes(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long target_index_count, float target_error, int options, long result_error);
 
     /**
@@ -1120,7 +1132,7 @@ public class MeshOptimizer {
     // --- [ meshopt_simplifyPoints ] ---
 
     /** Unsafe version of: {@link #meshopt_simplifyPoints simplifyPoints} */
-    public static native long nmeshopt_simplifyPoints(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_vertex_count);
+    public static native long nmeshopt_simplifyPoints(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_colors, long vertex_colors_stride, float color_weight, long target_vertex_count);
 
     /**
      * Experimental: Point cloud simplifier. Reduces the number of points in the cloud to reach the given target.
@@ -1131,14 +1143,16 @@ public class MeshOptimizer {
      *
      * @param destination      must contain enough space for the target index buffer ({@code target_vertex_count} elements)
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
+     * @param vertex_colors    can be {@code NULL}; when it's not {@code NULL}, it should have {@code float3} color in the first 12 bytes of each vertex
      */
     @NativeType("size_t")
-    public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_vertex_count) {
+    public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @Nullable @NativeType("float const *") FloatBuffer vertex_colors, @NativeType("size_t") long vertex_colors_stride, float color_weight, @NativeType("size_t") long target_vertex_count) {
         if (CHECKS) {
             check(destination, target_vertex_count);
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+            checkSafe(vertex_colors, vertex_count * (vertex_colors_stride >>> 2));
         }
-        return nmeshopt_simplifyPoints(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_vertex_count);
+        return nmeshopt_simplifyPoints(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddressSafe(vertex_colors), vertex_colors_stride, color_weight, target_vertex_count);
     }
 
     // --- [ meshopt_simplifyScale ] ---
@@ -1370,11 +1384,12 @@ public class MeshOptimizer {
     public static native void nmeshopt_spatialSortRemap(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride);
 
     /**
-     * Experimental: Spatial sorter. Generates a remap table that can be used to reorder points for spatial locality.
+     * Spatial sorter. Generates a remap table that can be used to reorder points for spatial locality.
      * 
      * <p>Resulting remap table maps old vertices to new vertices and can be used in {@link #meshopt_remapVertexBuffer remapVertexBuffer}.</p>
      *
-     * @param destination must contain enough space for the resulting remap table ({@code vertex_count} elements)
+     * @param destination      must contain enough space for the resulting remap table ({@code vertex_count} elements)
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     public static void meshopt_spatialSortRemap(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_positions_stride) {
         long vertex_count = destination.remaining();
@@ -1421,6 +1436,80 @@ public class MeshOptimizer {
         nmeshopt_setAllocator(allocate.address(), deallocate.address());
     }
 
+    // --- [ meshopt_quantizeUnorm_ref ] ---
+
+    /** Unsafe version of: {@link #meshopt_quantizeUnorm_ref quantizeUnorm_ref} */
+    static native int nmeshopt_quantizeUnorm_ref(float v, int N);
+
+    /**
+     * Quantizes a float in {@code [0..1]} range into an N-bit fixed point {@code unorm} value.
+     * 
+     * <p>Assumes reconstruction function <code>q / (2<sup>N</sup> - 1)</code>, which is the case for fixed-function normalized fixed point conversion. Maximum
+     * reconstruction error: <code>1 / 2<sup>N+1</sup></code>.</p>
+     */
+    static int meshopt_quantizeUnorm_ref(float v, int N) {
+        return nmeshopt_quantizeUnorm_ref(v, N);
+    }
+
+    // --- [ meshopt_quantizeSnorm_ref ] ---
+
+    /** Unsafe version of: {@link #meshopt_quantizeSnorm_ref quantizeSnorm_ref} */
+    static native int nmeshopt_quantizeSnorm_ref(float v, int N);
+
+    /**
+     * Quantizes a float in {@code [-1..1]} range into an N-bit fixed point {@code snorm} value.
+     * 
+     * <p>Assumes reconstruction function <code>q / (2<sup>N-1</sup> - 1)</code>, which is the case for fixed-function normalized fixed point conversion (except early
+     * OpenGL versions). Maximum reconstruction error: <code>1 / 2<sup>N</sup></code>.</p>
+     */
+    static int meshopt_quantizeSnorm_ref(float v, int N) {
+        return nmeshopt_quantizeSnorm_ref(v, N);
+    }
+
+    // --- [ meshopt_quantizeHalf_ref ] ---
+
+    /** Unsafe version of: {@link #meshopt_quantizeHalf_ref quantizeHalf_ref} */
+    static native short nmeshopt_quantizeHalf_ref(float v);
+
+    /**
+     * Quantizes a float into half-precision floating point value.
+     * 
+     * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Representable magnitude range:
+     * {@code [6e-5; 65504]}. Maximum relative reconstruction error: {@code 5e-4}.</p>
+     */
+    static short meshopt_quantizeHalf_ref(float v) {
+        return nmeshopt_quantizeHalf_ref(v);
+    }
+
+    // --- [ meshopt_quantizeFloat_ref ] ---
+
+    /** Unsafe version of: {@link #meshopt_quantizeFloat_ref quantizeFloat_ref} */
+    static native float nmeshopt_quantizeFloat_ref(float v, int N);
+
+    /**
+     * Quantizes a float into a floating point value with a limited number of significant mantissa bits, preserving the IEEE-754 fp32 binary representation.
+     * 
+     * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Assumes {@code N} is in a valid mantissa
+     * precision range, which is {@code 1..23}.</p>
+     */
+    static float meshopt_quantizeFloat_ref(float v, int N) {
+        return nmeshopt_quantizeFloat_ref(v, N);
+    }
+
+    // --- [ meshopt_dequantizeHalf_ref ] ---
+
+    /** Unsafe version of: {@link #meshopt_dequantizeHalf_ref dequantizeHalf_ref} */
+    static native float nmeshopt_dequantizeHalf_ref(short h);
+
+    /**
+     * Reverse quantization of a half-precision (as defined by IEEE-754 fp16) floating point value.
+     * 
+     * <p>Preserves Inf/NaN, flushes denormals to zero.</p>
+     */
+    static float meshopt_dequantizeHalf_ref(@NativeType("unsigned short") short h) {
+        return nmeshopt_dequantizeHalf_ref(h);
+    }
+
     /**
      * Quantizes a float in {@code [0..1]} range into an N-bit fixed point {@code unorm} value.
      * 
@@ -1454,7 +1543,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Quantizes a float into half-precision floating point value.
+     * Quantizes a float into half-precision (as defined by IEEE-754 fp16) floating point value.
      * 
      * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Representable magnitude range:
      * {@code [6e-5; 65504]}. Maximum relative reconstruction error: {@code 5e-4}.</p>
@@ -1481,7 +1570,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Quantizes a float into a floating point value with a limited number of significant mantissa bits.
+     * Quantizes a float into a floating point value with a limited number of significant mantissa bits, preserving the IEEE-754 fp32 binary representation.
      * 
      * <p>Generates {@code +-inf} for overflow, preserves {@code NaN}, flushes denormals to zero, rounds to nearest. Assumes {@code N} is in a valid mantissa
      * precision range, which is {@code 1..23}.</p>
@@ -1502,6 +1591,28 @@ public class MeshOptimizer {
         ui = e == 0 ? 0 : ui;
 
         return intBitsToFloat(ui);
+    }
+
+    /**
+     * Reverse quantization of a half-precision (as defined by IEEE-754 fp16) floating point value.
+     * 
+     * <p>Preserves Inf/NaN, flushes denormals to zero.</p>
+     */
+    public static float meshopt_dequantizeHalf(@NativeType("unsigned short") short h) {
+        int s = (h & 0x8000) << 16;
+        int em = h & 0x7fff;
+
+        // bias exponent and pad mantissa with 0; 112 is relative exponent bias (127-15)
+        int r = (em + (112 << 10)) << 13;
+
+        // denormal: flush to zero
+        r = (em < (1 << 10)) ? 0 : r;
+
+        // infinity/NaN; note that we preserve NaN payload as a byproduct of unifying inf/nan cases
+        // 112 is an exponent bias fixup; since we already applied it once, applying it twice converts 31 to 255
+        r += (em >= (31 << 10)) ? (112 << 23) : 0;
+
+        return intBitsToFloat(s | r);
     }
 
 }

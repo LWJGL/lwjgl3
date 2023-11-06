@@ -202,7 +202,7 @@
         </sequential>
 
         <!-- meshoptimizer -->
-        <build module="meshoptimizer" simple="true" linker="clang++" if:true="${binding.meshoptimizer}">
+        <build module="meshoptimizer" simple="true" lang="c++" if:true="${binding.meshoptimizer}">
             <beforeCompile>
                 <compile lang="c++" flags="-DMESHOPTIMIZER_NO_WRAPPERS">
                     <arg value="-I${src.main.rel}"/>
