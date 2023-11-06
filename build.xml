@@ -828,6 +828,7 @@
             <include name="org/lwjgl/demo/bgfx/**" if:set="test.bgfx"/>
             <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
+            <include name="org/lwjgl/demo/fmod/**" if:true="${binding.fmod}"/>
             <include name="org/lwjgl/demo/glfw/**" if:set="test.glfw"/>
             <include name="org/lwjgl/demo/llvm/**" if:true="${binding.llvm}"/>
             <include name="org/lwjgl/demo/nanovg/**" if:set="test.nanovg"/>

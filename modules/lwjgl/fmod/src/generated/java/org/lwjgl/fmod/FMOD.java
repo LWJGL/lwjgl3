@@ -421,7 +421,7 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20216;
+    public static final int FMOD_VERSION = 0x20219;
 
     public static final int FMOD_DEBUG_LEVEL_NONE = 0x0;
 
@@ -1066,6 +1066,7 @@ public class FMOD {
      * <li>{@link #FMOD_OUTPUTTYPE_AAUDIO OUTPUTTYPE_AAUDIO}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_AUDIOWORKLET OUTPUTTYPE_AUDIOWORKLET}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_PHASE OUTPUTTYPE_PHASE}</li>
+     * <li>{@link #FMOD_OUTPUTTYPE_OHAUDIO OUTPUTTYPE_OHAUDIO}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_MAX OUTPUTTYPE_MAX}</li>
      * </ul>
      */
@@ -1091,7 +1092,8 @@ public class FMOD {
         FMOD_OUTPUTTYPE_AAUDIO        = 18,
         FMOD_OUTPUTTYPE_AUDIOWORKLET  = 19,
         FMOD_OUTPUTTYPE_PHASE         = 20,
-        FMOD_OUTPUTTYPE_MAX           = 21;
+        FMOD_OUTPUTTYPE_OHAUDIO       = 21,
+        FMOD_OUTPUTTYPE_MAX           = 22;
 
     /**
      * {@code FMOD_DEBUG_MODE}

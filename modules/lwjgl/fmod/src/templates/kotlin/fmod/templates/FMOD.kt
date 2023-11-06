@@ -14,7 +14,7 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("", "VERSION"..0x00020216)
+    IntConstant("", "VERSION"..0x00020219)
 
     IntConstant("", "DEBUG_LEVEL_NONE"..0x00000000)
     IntConstant("", "DEBUG_LEVEL_ERROR"..0x00000001)
@@ -397,6 +397,7 @@ val FMOD = "FMOD".nativeClass(
         "OUTPUTTYPE_AAUDIO".enum,
         "OUTPUTTYPE_AUDIOWORKLET".enum,
         "OUTPUTTYPE_PHASE".enum,
+        "OUTPUTTYPE_OHAUDIO".enum,
         "OUTPUTTYPE_MAX".enum
     )
 
