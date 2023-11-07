@@ -1046,6 +1046,15 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         void(
+            "rule_horizontal",
+            "Line for visual seperation. Draws a line with thickness determined by the current row height.",
+
+            ctx,
+            nk_color("color", "color of the horizontal line"),
+            nk_bool("rounding", "whether or not to make the line round")
+        )
+
+        void(
             "layout_set_min_row_height",
             """
             Sets the currently used minimum row height.

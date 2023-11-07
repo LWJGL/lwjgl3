@@ -2231,6 +2231,22 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_rule_horizontal ] ---
+
+    /** Unsafe version of: {@link #nk_rule_horizontal rule_horizontal} */
+    public static native void nnk_rule_horizontal(long ctx, long color, boolean rounding);
+
+    /**
+     * Line for visual seperation. Draws a line with thickness determined by the current row height.
+     *
+     * @param ctx      the nuklear context
+     * @param color    color of the horizontal line
+     * @param rounding whether or not to make the line round
+     */
+    public static void nk_rule_horizontal(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_color") NkColor color, @NativeType("nk_bool") boolean rounding) {
+        nnk_rule_horizontal(ctx.address(), color.address(), rounding);
+    }
+
     // --- [ nk_layout_set_min_row_height ] ---
 
     /** Unsafe version of: {@link #nk_layout_set_min_row_height layout_set_min_row_height} */

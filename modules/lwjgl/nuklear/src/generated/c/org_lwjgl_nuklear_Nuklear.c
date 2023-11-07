@@ -303,6 +303,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1show_1if(JNIE
     nk_window_show_if(ctx, name, (enum nk_show_states)s, (nk_bool)cond);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1rule_1horizontal(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong colorAddress, jboolean rounding) {
+    struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
+    struct nk_color *color = (struct nk_color *)(uintptr_t)colorAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_rule_horizontal(ctx, *color, (nk_bool)rounding);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1layout_1set_1min_1row_1height(JNIEnv *__env, jclass clazz, jlong ctxAddress, jfloat height) {
     struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
     UNUSED_PARAMS(__env, clazz)
