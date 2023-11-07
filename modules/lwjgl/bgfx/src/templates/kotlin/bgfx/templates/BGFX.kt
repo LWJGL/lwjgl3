@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."122"
+        "API_VERSION".."123"
     )
 
     ShortConstant(
@@ -555,7 +555,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
 
         "RENDERER_TYPE_NOOP".enum("No rendering."),
         "RENDERER_TYPE_AGC".enum("AGC"),
-        "RENDERER_TYPE_DIRECT3D9".enum("Direct3D 9.0"),
         "RENDERER_TYPE_DIRECT3D11".enum("Direct3D 11.0"),
         "RENDERER_TYPE_DIRECT3D12".enum("Direct3D 12.0"),
         "RENDERER_TYPE_GNM".enum("GNM"),
@@ -828,7 +827,7 @@ RGBA16S
     ).javaDocLinksSkipCount
 
     EnumConstant(
-        "({@code bgfx_native_window_handle_type}).",
+        "Native window handle type. ({@code bgfx_native_window_handle_type}).",
 
         "NATIVE_WINDOW_HANDLE_TYPE_DEFAULT".enum("Platform default handle type (X11 on Linux)"),
         "NATIVE_WINDOW_HANDLE_TYPE_WAYLAND".enum("Wayland"),
