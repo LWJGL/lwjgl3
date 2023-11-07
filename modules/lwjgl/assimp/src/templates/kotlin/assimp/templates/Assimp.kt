@@ -1208,6 +1208,21 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Specifies whether to apply a limit on the number of four bones per vertex in skinning
+
+        When this flag is not defined, all bone weights and indices are limited to a maximum of four bones for each vertex (attributes {@code JOINT_0} and
+        {@code WEIGHT_0} only). By enabling this flag, the number of bones per vertex is unlimited. In both cases, indices and bone weights are sorted by
+        weight in descending order. In the case of the limit of up to four bones, a maximum of the four largest values are exported. Weights are not
+        normalized.
+
+        Property type: Bool. Default value: false.
+        """,
+
+        "AI_CONFIG_EXPORT_GLTF_UNLIMITED_SKINNING_BONES_PER_VERTEX".."USE_UNLIMITED_BONES_PER VERTEX"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Specifies the blob name, assimp uses for exporting.
 
         Some formats require auxiliary files to be written, that need to be linked back into the original file. For example, OBJ files export materials to a
