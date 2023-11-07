@@ -5674,7 +5674,7 @@ void VmaJsonWriter::ContinueString(const char* pStr)
         {
             m_SB.Add("\\\"");
         }
-        else if (ch >= 32)
+        else if ((uint8_t)ch >= 32)
         {
             m_SB.Add(ch);
         }
@@ -13995,6 +13995,9 @@ VmaPool_T::VmaPool_T(
 VmaPool_T::~VmaPool_T()
 {
     VMA_ASSERT(m_PrevPool == VMA_NULL && m_NextPool == VMA_NULL);
+
+    const VkAllocationCallbacks* allocs = m_BlockVector.GetAllocator()->GetAllocationCallbacks();
+    VmaFreeString(allocs, m_Name);
 }
 
 void VmaPool_T::SetName(const char* pName)
