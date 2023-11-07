@@ -1,10 +1,12 @@
 /* SPDX-License-Identifier: ZLIB
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
-If you are using a C++ compiler to compile tinyfiledialogs.c (maybe renamed with an extension ".cpp")
+If you are using a C++ compiler to compile tinyfiledialogs.c (maybe renamed with the extension ".cpp")
 then comment out << extern "C" >> bellow in this header file)
+
+********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.h v3.13.3 [Jul 2, 2023]
+ /         \ tinyfiledialogs.h v3.15.1 [Sep 12, 2023]
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -47,6 +49,13 @@ appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be
 misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
+
+     __________________________________________
+    |  ______________________________________  |
+    | |                                      | |
+    | | DO NOT USE USER INPUT IN THE DIALOGS | |
+    | |______________________________________| |
+    |__________________________________________|
 */
 
 #ifndef TINYFILEDIALOGS_H
@@ -87,7 +96,6 @@ int tinyfd_setGlobalInt(char const * aIntVariableName, int aValue); /* returns -
    aIntVariableName : "tinyfd_verbose" "tinyfd_silent" "tinyfd_allowCursesDialogs"
 				      "tinyfd_forceConsole" "tinyfd_assumeGraphicDisplay" "tinyfd_winUtf8"
 **************/
-
 
 extern char tinyfd_version[8]; /* contains tinyfd current version number */
 extern char tinyfd_needs[]; /* info about requirements */
