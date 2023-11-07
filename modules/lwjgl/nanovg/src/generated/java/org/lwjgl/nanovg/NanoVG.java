@@ -102,7 +102,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * const char* txt = "Text me up.";
  * nvgTextBounds(vg, x,y, txt, NULL, bounds);
  * nvgBeginPath(vg);
- * nvgRoundedRect(vg, bounds[0],bounds[1], bounds[2]-bounds[0], bounds[3]-bounds[1]);
+ * nvgRect(vg, bounds[0],bounds[1], bounds[2]-bounds[0], bounds[3]-bounds[1]);
  * nvgFill(vg);</code></pre>
  * 
  * <p>Note: currently only solid color fill is supported for text.</p>
