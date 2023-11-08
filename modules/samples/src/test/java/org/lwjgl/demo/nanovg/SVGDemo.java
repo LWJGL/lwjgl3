@@ -270,14 +270,10 @@ public class SVGDemo {
             int output_w = max(1, input_w >> 1);
             int output_h = max(1, input_h >> 1);
 
-            ByteBuffer output_pixels = memAlloc(output_w * output_h * 4);
-            stbir_resize_uint8_generic(
+            ByteBuffer output_pixels = stbir_resize_uint8_srgb(
                 input_pixels, input_w, input_h, input_w * 4,
-                output_pixels, output_w, output_h, output_w * 4,
-                4, 3, STBIR_FLAG_ALPHA_PREMULTIPLIED,
-                STBIR_EDGE_CLAMP,
-                STBIR_FILTER_MITCHELL,
-                STBIR_COLORSPACE_SRGB
+                null, output_w, output_h, output_w * 4,
+                STBIR_RGBA_PM
             );
 
             memFree(input_pixels);
@@ -357,6 +353,8 @@ public class SVGDemo {
         glfwDestroyWindow(window);
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();
+
+        nsvgDelete(svg);
     }
 
 }

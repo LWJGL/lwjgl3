@@ -5,6 +5,8 @@
  */
 package org.lwjgl.stb;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -12,91 +14,81 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to stb_image_resize.h from the <a href="https://github.com/nothings/stb">stb library</a>.
- * 
- * <p>Written with emphasis on usability, portability, and efficiency. (No SIMD or threads, so it be easily outperformed by libs that use those.) Only
- * scaling and translation is supported, no rotations or shears. Easy API downsamples w/Mitchell filter, upsamples w/cubic interpolation.</p>
- * 
- * <h3>QUICKSTART</h3>
- * 
- * <pre><code>
- * stbir_resize_uint8(      input_pixels , in_w , in_h , 0,
- *                          output_pixels, out_w, out_h, 0, num_channels)
- * stbir_resize_float(...)
- * stbir_resize_uint8_srgb( input_pixels , in_w , in_h , 0,
- *                          output_pixels, out_w, out_h, 0,
- *                          num_channels , alpha_chan  , 0)
- * stbir_resize_uint8_srgb_edgemode(
- *                          input_pixels , in_w , in_h , 0,
- *                          output_pixels, out_w, out_h, 0,
- *                          num_channels , alpha_chan  , 0, STBIR_EDGE_CLAMP)
- *                                                       // WRAP/REFLECT/ZERO</code></pre>
- * 
- * <h3>ALPHA CHANNEL</h3>
- * 
- * <p>Most of the resizing functions provide the ability to control how the alpha channel of an image is processed. The important things to know about this:</p>
- * 
- * <ol>
- * <li>The best mathematically-behaved version of alpha to use is called "premultiplied alpha", in which the other color channels have had the alpha value
- * multiplied in. If you use premultiplied alpha, linear filtering (such as image resampling done by this library, or performed in texture units on
- * GPUs) does the "right thing". While premultiplied alpha is standard in the movie CGI industry, it is still uncommon in the videogame/real-time
- * world. If you linearly filter non-premultiplied alpha, strange effects occur. (For example, the average of 1% opaque bright green and 99% opaque
- * black produces 50% transparent dark green when non-premultiplied, whereas premultiplied it produces 50% transparent near-black. The former
- * introduces green energy that doesn't exist in the source image.)</li>
- * <li>Artists should not edit premultiplied-alpha images; artists want non-premultiplied alpha images. Thus, art tools generally output non-premultiplied
- * alpha images.</li>
- * <li>You will get best results in most cases by converting images to premultiplied alpha before processing them mathematically.</li>
- * <li>If you pass the flag {@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}, the resizer does not do anything special for the alpha channel; it is resampled identically to
- * other channels. This produces the correct results for premultiplied-alpha images, but produces less-than-ideal results for non-premultiplied-alpha
- * images.</li>
- * <li>If you do not pass the flag {@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}, then the resizer weights the contribution of input pixels based on their alpha values, or,
- * equivalently, it multiplies the alpha value into the color channels, resamples, then divides by the resultant alpha value. Input pixels which have
- * {@code alpha=0} do not contribute at all to output pixels unless <b>all</b> of the input pixels affecting that output pixel have {@code alpha=0},
- * in which case the result for that pixel is the same as it would be without {@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}. However, this is only true for input images
- * in integer formats. For input images in float format, input pixels with {@code alpha=0} have no effect, and output pixels which have
- * {@code alpha=0} will be 0 in all channels. (For float images, you can manually achieve the same result by adding a tiny epsilon value to the alpha
- * channel of every image, and then subtracting or clamping it at the end.)</li>
- * <li>You can separately control whether the alpha channel is interpreted as linear or affected by the colorspace. By default it is linear; you almost
- * never want to apply the colorspace. (For example, graphics hardware does not apply sRGB conversion to the alpha channel.)</li>
- * </ol>
- */
+/** Native bindings to stb_image_resize2.h from the <a href="https://github.com/nothings/stb">stb library</a>. */
 public class STBImageResize {
 
     static { LibSTB.initialize(); }
 
-    /** Set this flag if you have no alpha channel, or otherwise provide the index of the alpha channel. */
-    public static final int STBIR_ALPHA_CHANNEL_NONE = -1;
-
     /**
-     * Set this flag if your texture has premultiplied alpha. Otherwise, stbir will use alpha-weighted resampling (effectively premultiplying, resampling,
-     * then unpremultiplying).
+     * {@code stbir_pixel_layout} specifies:
+     * 
+     * <ul>
+     * <li>number of channels</li>
+     * <li>order of channels</li>
+     * <li>whether color is premultiplied by alpha</li>
+     * </ul>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #STBIR_BGR BGR}</li>
+     * <li>{@link #STBIR_1CHANNEL 1CHANNEL}</li>
+     * <li>{@link #STBIR_2CHANNEL 2CHANNEL}</li>
+     * <li>{@link #STBIR_RGB RGB}</li>
+     * <li>{@link #STBIR_RGBA RGBA}</li>
+     * <li>{@link #STBIR_4CHANNEL 4CHANNEL}</li>
+     * <li>{@link #STBIR_BGRA BGRA}</li>
+     * <li>{@link #STBIR_ARGB ARGB}</li>
+     * <li>{@link #STBIR_ABGR ABGR}</li>
+     * <li>{@link #STBIR_RA RA}</li>
+     * <li>{@link #STBIR_AR AR}</li>
+     * <li>{@link #STBIR_RGBA_PM RGBA_PM}</li>
+     * <li>{@link #STBIR_BGRA_PM BGRA_PM}</li>
+     * <li>{@link #STBIR_ARGB_PM ARGB_PM}</li>
+     * <li>{@link #STBIR_ABGR_PM ABGR_PM}</li>
+     * <li>{@link #STBIR_RA_PM RA_PM}</li>
+     * <li>{@link #STBIR_AR_PM AR_PM}</li>
+     * </ul>
      */
-    public static final int STBIR_FLAG_ALPHA_PREMULTIPLIED = 1 << 0;
-
-    /** The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations. */
-    public static final int STBIR_FLAG_ALPHA_USES_COLORSPACE = 1 << 1;
+    public static final int
+        STBIR_BGR      = 0,
+        STBIR_1CHANNEL = 1,
+        STBIR_2CHANNEL = 2,
+        STBIR_RGB      = 3,
+        STBIR_RGBA     = 4,
+        STBIR_4CHANNEL = 5,
+        STBIR_BGRA     = 6,
+        STBIR_ARGB     = 7,
+        STBIR_ABGR     = 8,
+        STBIR_RA       = 9,
+        STBIR_AR       = 10,
+        STBIR_RGBA_PM  = 11,
+        STBIR_BGRA_PM  = 12,
+        STBIR_ARGB_PM  = 13,
+        STBIR_ABGR_PM  = 14,
+        STBIR_RA_PM    = 15,
+        STBIR_AR_PM    = 16;
 
     /**
-     * Edge wrap mode.
+     * {@code stbir_edge}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
      * <li>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</li>
      * <li>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</li>
-     * <li>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</li>
+     * <li>{@link #STBIR_EDGE_WRAP EDGE_WRAP} - This edge mode is slower and uses more memory.</li>
      * <li>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</li>
      * </ul>
      */
     public static final int
-        STBIR_EDGE_CLAMP   = 0x1,
-        STBIR_EDGE_REFLECT = 0x2,
-        STBIR_EDGE_WRAP    = 0x3,
-        STBIR_EDGE_ZERO    = 0x4;
+        STBIR_EDGE_CLAMP   = 0,
+        STBIR_EDGE_REFLECT = 1,
+        STBIR_EDGE_WRAP    = 2,
+        STBIR_EDGE_ZERO    = 3;
 
     /**
-     * Filters.
+     * {@code stbir_filter}
      * 
      * <h5>Enum values:</h5>
      * 
@@ -104,9 +96,11 @@ public class STBImageResize {
      * <li>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT} - Use same filter type that easy-to-use API chooses.</li>
      * <li>{@link #STBIR_FILTER_BOX FILTER_BOX} - A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.</li>
      * <li>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE} - On upsampling, produces same results as bilinear texture filtering.</li>
-     * <li>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE} - The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.</li>
+     * <li>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE} - The cubic b-spline (aka Mitchell-Netrevalli with {@code B=1,C=0}), gaussian-esque.</li>
      * <li>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM} - An interpolating cubic spline.</li>
-     * <li>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL} - Mitchell-Netrevalli filter with B=1/3, C=1/3.</li>
+     * <li>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL} - Mitchell-Netrevalli filter with {@code B=1/3,C=1/3}.</li>
+     * <li>{@link #STBIR_FILTER_POINT_SAMPLE FILTER_POINT_SAMPLE} - Simple point sampling.</li>
+     * <li>{@link #STBIR_FILTER_OTHER FILTER_OTHER} - User callback specified.</li>
      * </ul>
      */
     public static final int
@@ -115,451 +109,331 @@ public class STBImageResize {
         STBIR_FILTER_TRIANGLE     = 2,
         STBIR_FILTER_CUBICBSPLINE = 3,
         STBIR_FILTER_CATMULLROM   = 4,
-        STBIR_FILTER_MITCHELL     = 5;
+        STBIR_FILTER_MITCHELL     = 5,
+        STBIR_FILTER_POINT_SAMPLE = 6,
+        STBIR_FILTER_OTHER        = 7;
 
     /**
-     * Colorspace.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</li>
-     * <li>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</li>
-     * </ul>
-     */
-    public static final int
-        STBIR_COLORSPACE_LINEAR = 0,
-        STBIR_COLORSPACE_SRGB   = 1;
-
-    /**
-     * Data type.
+     * {@code stbir_datatype}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
      * <li>{@link #STBIR_TYPE_UINT8 TYPE_UINT8}</li>
+     * <li>{@link #STBIR_TYPE_UINT8_SRGB TYPE_UINT8_SRGB}</li>
+     * <li>{@link #STBIR_TYPE_UINT8_SRGB_ALPHA TYPE_UINT8_SRGB_ALPHA} - Alpha channel, when present, should also be SRGB (this is very unusual).</li>
      * <li>{@link #STBIR_TYPE_UINT16 TYPE_UINT16}</li>
-     * <li>{@link #STBIR_TYPE_UINT32 TYPE_UINT32}</li>
      * <li>{@link #STBIR_TYPE_FLOAT TYPE_FLOAT}</li>
+     * <li>{@link #STBIR_TYPE_HALF_FLOAT TYPE_HALF_FLOAT}</li>
      * </ul>
      */
     public static final int
-        STBIR_TYPE_UINT8  = 0,
-        STBIR_TYPE_UINT16 = 1,
-        STBIR_TYPE_UINT32 = 2,
-        STBIR_TYPE_FLOAT  = 3;
+        STBIR_TYPE_UINT8            = 0,
+        STBIR_TYPE_UINT8_SRGB       = 1,
+        STBIR_TYPE_UINT8_SRGB_ALPHA = 2,
+        STBIR_TYPE_UINT16           = 3,
+        STBIR_TYPE_FLOAT            = 4,
+        STBIR_TYPE_HALF_FLOAT       = 5;
 
     protected STBImageResize() {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ stbir_resize_uint8 ] ---
-
-    /** Unsafe version of: {@link #stbir_resize_uint8 resize_uint8} */
-    public static native int nstbir_resize_uint8(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
-
-    /**
-     * Easy-to-use API for resizing images.
-     * 
-     * <ul>
-     * <li>The colorspace is linear.</li>
-     * <li>The alpha channel is treated identically to other channels.</li>
-     * <li>Memory required grows approximately linearly with input and output size, but with discontinuities at {@code input_w == output_w} and
-     * {@code input_h == output_h}.</li>
-     * </ul>
-     * 
-     * <p>This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.</p>
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_uint8(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes));
-        }
-        return nstbir_resize_uint8(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels) != 0;
-    }
-
-    // --- [ stbir_resize_float ] ---
-
-    /** Unsafe version of: {@link #stbir_resize_float resize_float} */
-    public static native int nstbir_resize_float(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
-
-    /**
-     * Float version of {@link #stbir_resize_uint8 resize_uint8}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_float(@NativeType("float const *") FloatBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") FloatBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2)));
-        }
-        return nstbir_resize_float(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels) != 0;
-    }
-
     // --- [ stbir_resize_uint8_srgb ] ---
 
-    /** Unsafe version of: {@link #stbir_resize_uint8_srgb resize_uint8_srgb} */
-    public static native int nstbir_resize_uint8_srgb(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags);
+    public static native long nstbir_resize_uint8_srgb(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int pixel_type);
 
-    /**
-     * Easy-to-use API for resizing images.
-     * 
-     * <ul>
-     * <li>The image data is interpreted as gamma-corrected sRGB.</li>
-     * <li>Memory required grows approximately linearly with input and output size, but with discontinuities at {@code input_w == output_w} and
-     * {@code input_h == output_h}.</li>
-     * </ul>
-     * 
-     * <p>This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.</p>
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_uint8_srgb(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags) {
+    @Nullable
+    @NativeType("unsigned char *")
+    public static ByteBuffer stbir_resize_uint8_srgb(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type) {
+        int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 1);
         if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes));
+            checkSafe(output_pixels, length);
         }
-        return nstbir_resize_uint8_srgb(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags) != 0;
+        long __result = nstbir_resize_uint8_srgb(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memByteBufferSafe(__result, length);
     }
 
-    // --- [ stbir_resize_uint8_srgb_edgemode ] ---
-
-    /** Unsafe version of: {@link #stbir_resize_uint8_srgb_edgemode resize_uint8_srgb_edgemode} */
-    public static native int nstbir_resize_uint8_srgb_edgemode(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode);
-
-    /**
-     * Same as {@link #stbir_resize_uint8_srgb resize_uint8_srgb}, but adds the ability to specify how requests to sample off the edge of the image are handled.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_uint8_srgb_edgemode(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode) {
+    @Nullable
+    @NativeType("unsigned char *")
+    public static ByteBuffer stbir_resize_uint8_srgb(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type, long length) {
         if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes));
+            checkSafe(output_pixels, length);
         }
-        return nstbir_resize_uint8_srgb_edgemode(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode) != 0;
+        long __result = nstbir_resize_uint8_srgb(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memByteBufferSafe(__result, (int)length);
     }
 
-    // --- [ stbir_resize_uint8_generic ] ---
+    // --- [ stbir_resize_uint8_linear ] ---
 
-    /** Unsafe version of: {@link #stbir_resize_uint8_generic resize_uint8_generic} */
-    public static native int nstbir_resize_uint8_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
+    public static native long nstbir_resize_uint8_linear(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int pixel_type);
 
-    /**
-     * Medium-complexity version of {@link #stbir_resize_uint8 resize_uint8}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
-     * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_uint8_generic(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
+    @Nullable
+    @NativeType("unsigned char *")
+    public static ByteBuffer stbir_resize_uint8_linear(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type) {
+        int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 1);
         if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes));
+            checkSafe(output_pixels, length);
         }
-        return nstbir_resize_uint8_generic(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
+        long __result = nstbir_resize_uint8_linear(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memByteBufferSafe(__result, length);
     }
 
-    // --- [ stbir_resize_uint16_generic ] ---
-
-    /** Unsafe version of: {@link #stbir_resize_uint16_generic resize_uint16_generic} */
-    public static native int nstbir_resize_uint16_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
-
-    /**
-     * Short version of {@link #stbir_resize_uint8_generic resize_uint8_generic}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
-     * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_uint16_generic(@NativeType("stbir_uint16 const *") ShortBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("stbir_uint16 *") ShortBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
+    @Nullable
+    @NativeType("unsigned char *")
+    public static ByteBuffer stbir_resize_uint8_linear(@NativeType("unsigned char const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("unsigned char *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type, long length) {
         if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 1)));
+            checkSafe(output_pixels, length);
         }
-        return nstbir_resize_uint16_generic(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
+        long __result = nstbir_resize_uint8_linear(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memByteBufferSafe(__result, (int)length);
     }
 
-    // --- [ stbir_resize_float_generic ] ---
+    // --- [ stbir_resize_float_linear ] ---
 
-    /** Unsafe version of: {@link #stbir_resize_float_generic resize_float_generic} */
-    public static native int nstbir_resize_float_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
+    public static native long nstbir_resize_float_linear(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int pixel_type);
 
-    /**
-     * Float version of {@link #stbir_resize_uint8_generic resize_uint8_generic}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
-     * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
-     */
-    @NativeType("int")
-    public static boolean stbir_resize_float_generic(@NativeType("float const *") FloatBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") FloatBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
+    @Nullable
+    @NativeType("float *")
+    public static FloatBuffer stbir_resize_float_linear(@NativeType("float const *") FloatBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("float *") FloatBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type) {
+        int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 4);
         if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2)));
+            checkSafe(output_pixels, length);
         }
-        return nstbir_resize_float_generic(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
+        long __result = nstbir_resize_float_linear(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memFloatBufferSafe(__result, length);
+    }
+
+    @Nullable
+    @NativeType("float *")
+    public static FloatBuffer stbir_resize_float_linear(@NativeType("float const *") FloatBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("float *") FloatBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_type, long length) {
+        if (CHECKS) {
+            checkSafe(output_pixels, length);
+        }
+        long __result = nstbir_resize_float_linear(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_type);
+        return memFloatBufferSafe(__result, (int)length);
     }
 
     // --- [ stbir_resize ] ---
 
-    /** Unsafe version of: {@link #stbir_resize resize} */
-    public static native int nstbir_resize(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context);
+    public static native long nstbir_resize(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int pixel_layout, int data_type, int edge, int filter);
+
+    @Nullable
+    @NativeType("void *")
+    public static ByteBuffer stbir_resize(@NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_layout, @NativeType("stbir_datatype") int data_type, @NativeType("stbir_edge") int edge, @NativeType("stbir_filter") int filter) {
+        int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_layout, stbir_type_size[data_type]);
+        if (CHECKS) {
+            checkSafe(output_pixels, length);
+        }
+        long __result = nstbir_resize(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_layout, data_type, edge, filter);
+        return memByteBufferSafe(__result, length);
+    }
+
+    @Nullable
+    @NativeType("void *")
+    public static ByteBuffer stbir_resize(@NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_layout, @NativeType("stbir_datatype") int data_type, @NativeType("stbir_edge") int edge, @NativeType("stbir_filter") int filter, long length) {
+        if (CHECKS) {
+            checkSafe(output_pixels, length);
+        }
+        long __result = nstbir_resize(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_layout, data_type, edge, filter);
+        return memByteBufferSafe(__result, (int)length);
+    }
+
+    // --- [ stbir_resize_init ] ---
+
+    public static native void nstbir_resize_init(long resize, long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int pixel_layout, int data_type);
+
+    public static void stbir_resize_init(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @Nullable @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_pixel_layout") int pixel_layout, @NativeType("stbir_datatype") int data_type) {
+        if (CHECKS) {
+            checkSafe(output_pixels, calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_layout, stbir_type_size[data_type]));
+        }
+        nstbir_resize_init(resize.address(), memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddressSafe(output_pixels), output_w, output_h, output_stride_in_bytes, pixel_layout, data_type);
+    }
+
+    // --- [ stbir_set_datatypes ] ---
+
+    public static native void nstbir_set_datatypes(long resize, int input_type, int output_type);
+
+    public static void stbir_set_datatypes(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("stbir_datatype") int input_type, @NativeType("stbir_datatype") int output_type) {
+        nstbir_set_datatypes(resize.address(), input_type, output_type);
+    }
+
+    // --- [ stbir_set_pixel_callbacks ] ---
+
+    public static native void nstbir_set_pixel_callbacks(long resize, long input_cb, long output_cb);
+
+    public static void stbir_set_pixel_callbacks(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @Nullable @NativeType("stbir_input_callback *") STBIRInputCallbackI input_cb, @Nullable @NativeType("stbir_output_callback *") STBIROutputCallbackI output_cb) {
+        nstbir_set_pixel_callbacks(resize.address(), memAddressSafe(input_cb), memAddressSafe(output_cb));
+    }
+
+    // --- [ stbir_set_user_data ] ---
+
+    public static native void nstbir_set_user_data(long resize, long user_data);
+
+    public static void stbir_set_user_data(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("void *") long user_data) {
+        nstbir_set_user_data(resize.address(), user_data);
+    }
+
+    // --- [ stbir_set_buffer_ptrs ] ---
+
+    public static native void nstbir_set_buffer_ptrs(long resize, long input_pixels, int input_stride_in_bytes, long output_pixels, int output_stride_in_bytes);
+
+    public static void stbir_set_buffer_ptrs(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("void const *") ByteBuffer input_pixels, int input_stride_in_bytes, @Nullable @NativeType("void *") ByteBuffer output_pixels, int output_stride_in_bytes) {
+        nstbir_set_buffer_ptrs(resize.address(), memAddress(input_pixels), input_stride_in_bytes, memAddressSafe(output_pixels), output_stride_in_bytes);
+    }
+
+    // --- [ stbir_set_pixel_layouts ] ---
+
+    /** Unsafe version of: {@link #stbir_set_pixel_layouts set_pixel_layouts} */
+    public static native int nstbir_set_pixel_layouts(long resize, int input_pixel_layout, int output_pixel_layout);
+
+    /** Sets new buffer layouts. */
+    public static int stbir_set_pixel_layouts(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("stbir_pixel_layout") int input_pixel_layout, @NativeType("stbir_pixel_layout") int output_pixel_layout) {
+        return nstbir_set_pixel_layouts(resize.address(), input_pixel_layout, output_pixel_layout);
+    }
+
+    // --- [ stbir_set_edgemodes ] ---
+
+    public static native int nstbir_set_edgemodes(long resize, int horizontal_edge, int vertical_edge);
+
+    public static int stbir_set_edgemodes(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("stbir_edge") int horizontal_edge, @NativeType("stbir_edge") int vertical_edge) {
+        return nstbir_set_edgemodes(resize.address(), horizontal_edge, vertical_edge);
+    }
+
+    // --- [ stbir_set_filters ] ---
+
+    public static native int nstbir_set_filters(long resize, int horizontal_filter, int vertical_filter);
+
+    public static int stbir_set_filters(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("stbir_filter") int horizontal_filter, @NativeType("stbir_filter") int vertical_filter) {
+        return nstbir_set_filters(resize.address(), horizontal_filter, vertical_filter);
+    }
+
+    // --- [ stbir_set_filter_callbacks ] ---
+
+    public static native int nstbir_set_filter_callbacks(long resize, long horizontal_filter, long horizontal_support, long vertical_filter, long vertical_support);
+
+    public static int stbir_set_filter_callbacks(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @Nullable @NativeType("stbir__kernel_callback *") STBIRKernelCallbackI horizontal_filter, @Nullable @NativeType("stbir__support_callback *") STBIRSupportCallbackI horizontal_support, @Nullable @NativeType("stbir__kernel_callback *") STBIRKernelCallbackI vertical_filter, @Nullable @NativeType("stbir__support_callback *") STBIRSupportCallbackI vertical_support) {
+        return nstbir_set_filter_callbacks(resize.address(), memAddressSafe(horizontal_filter), memAddressSafe(horizontal_support), memAddressSafe(vertical_filter), memAddressSafe(vertical_support));
+    }
+
+    // --- [ stbir_set_pixel_subrect ] ---
+
+    /** Unsafe version of: {@link #stbir_set_pixel_subrect set_pixel_subrect} */
+    public static native int nstbir_set_pixel_subrect(long resize, int subx, int suby, int subw, int subh);
+
+    /** Sets input sub-region (full region by default). */
+    public static int stbir_set_pixel_subrect(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, int subx, int suby, int subw, int subh) {
+        return nstbir_set_pixel_subrect(resize.address(), subx, suby, subw, subh);
+    }
+
+    // --- [ stbir_set_input_subrect ] ---
+
+    public static native int nstbir_set_input_subrect(long resize, double s0, double t0, double s1, double t1);
+
+    public static int stbir_set_input_subrect(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, double s0, double t0, double s1, double t1) {
+        return nstbir_set_input_subrect(resize.address(), s0, t0, s1, t1);
+    }
+
+    // --- [ stbir_set_output_pixel_subrect ] ---
+
+    /** Unsafe version of: {@link #stbir_set_output_pixel_subrect set_output_pixel_subrect} */
+    public static native int nstbir_set_output_pixel_subrect(long resize, int subx, int suby, int subw, int subh);
+
+    /** Sets output sub-region (full region by default). */
+    public static int stbir_set_output_pixel_subrect(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, int subx, int suby, int subw, int subh) {
+        return nstbir_set_output_pixel_subrect(resize.address(), subx, suby, subw, subh);
+    }
+
+    // --- [ stbir_set_non_pm_alpha_speed_over_quality ] ---
+
+    /** Unsafe version of: {@link #stbir_set_non_pm_alpha_speed_over_quality set_non_pm_alpha_speed_over_quality} */
+    public static native int nstbir_set_non_pm_alpha_speed_over_quality(long resize, int non_pma_alpha_speed_over_quality);
 
     /**
-     * Full-complexity version of {@link #stbir_resize_uint8_generic resize_uint8_generic}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param datatype               the image data type. One of:<br><table><tr><td>{@link #STBIR_TYPE_UINT8 TYPE_UINT8}</td><td>{@link #STBIR_TYPE_UINT16 TYPE_UINT16}</td><td>{@link #STBIR_TYPE_UINT32 TYPE_UINT32}</td><td>{@link #STBIR_TYPE_FLOAT TYPE_FLOAT}</td></tr></table>
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_mode_horizontal   the horizontal edge wrap mode
-     * @param edge_mode_vertical     the vertical edge wrap mode
-     * @param filter_horizontal      the horizontal scale filter
-     * @param filter_vertical        the vertical scale filter
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     *
-     * @return 1 on success, 0 on failure
+     * When inputting AND outputting non-premultiplied alpha pixels, we use a slower but higher quality technique that fills the zero alpha pixel's RGB values
+     * with something plausible. If you don't care about areas of zero alpha, you can call this function to get about a 25% speed improvement for {@link #STBIR_RGBA RGBA} to
+     * {@code STBIR_RGBA} types of resizes.
      */
-    @NativeType("int")
-    public static boolean stbir_resize(@NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_datatype") int datatype, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_mode_horizontal, @NativeType("stbir_edge") int edge_mode_vertical, @NativeType("stbir_filter") int filter_horizontal, @NativeType("stbir_filter") int filter_vertical, @NativeType("stbir_colorspace") int space) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? (output_w * num_channels) << getTypeShift(datatype) : output_stride_in_bytes));
-        }
-        return nstbir_resize(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, datatype, num_channels, alpha_channel, flags, edge_mode_horizontal, edge_mode_vertical, filter_horizontal, filter_vertical, space, NULL) != 0;
+    public static int stbir_set_non_pm_alpha_speed_over_quality(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, @NativeType("int") boolean non_pma_alpha_speed_over_quality) {
+        return nstbir_set_non_pm_alpha_speed_over_quality(resize.address(), non_pma_alpha_speed_over_quality ? 1 : 0);
     }
 
-    // --- [ stbir_resize_subpixel ] ---
+    // --- [ stbir_build_samplers ] ---
 
-    /** Unsafe version of: {@link #stbir_resize_subpixel resize_subpixel} */
-    public static native int nstbir_resize_subpixel(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context, float x_scale, float y_scale, float x_offset, float y_offset);
+    /** Unsafe version of: {@link #stbir_build_samplers build_samplers} */
+    public static native int nstbir_build_samplers(long resize);
+
+    /** Builds the samplers and does one allocation. */
+    public static int stbir_build_samplers(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize) {
+        return nstbir_build_samplers(resize.address());
+    }
+
+    // --- [ stbir_free_samplers ] ---
+
+    /** Unsafe version of: {@link #stbir_free_samplers free_samplers} */
+    public static native void nstbir_free_samplers(long resize);
+
+    /** You MUST call this, if you call {@link #stbir_build_samplers build_samplers} or {@link #stbir_build_samplers_with_splits build_samplers_with_splits}. */
+    public static void stbir_free_samplers(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize) {
+        nstbir_free_samplers(resize.address());
+    }
+
+    // --- [ stbir_resize_extended ] ---
+
+    /** Unsafe version of: {@link #stbir_resize_extended resize_extended} */
+    public static native int nstbir_resize_extended(long resize);
+
+    /** The main function to perform the resize synchronously on one thread. */
+    public static int stbir_resize_extended(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize) {
+        return nstbir_resize_extended(resize.address());
+    }
+
+    // --- [ stbir_build_samplers_with_splits ] ---
+
+    /** Unsafe version of: {@link #stbir_build_samplers_with_splits build_samplers_with_splits} */
+    public static native int nstbir_build_samplers_with_splits(long resize, int try_splits);
 
     /**
-     * Subpixel version of {@link #stbir_resize resize}.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param datatype               the image data type. One of:<br><table><tr><td>{@link #STBIR_TYPE_UINT8 TYPE_UINT8}</td><td>{@link #STBIR_TYPE_UINT16 TYPE_UINT16}</td><td>{@link #STBIR_TYPE_UINT32 TYPE_UINT32}</td><td>{@link #STBIR_TYPE_FLOAT TYPE_FLOAT}</td></tr></table>
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_mode_horizontal   the horizontal edge wrap mode
-     * @param edge_mode_vertical     the vertical edge wrap mode
-     * @param filter_horizontal      the horizontal scale filter
-     * @param filter_vertical        the vertical scale filter
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     * @param x_scale                horizontal scale for subpixel correctness
-     * @param y_scale                vertical scale for subpixel correctness
-     * @param x_offset               horizontal offset for subpixel correctness
-     * @param y_offset               vertical offset for subpixel correctness
-     *
-     * @return 1 on success, 0 on failure
+     * Build samplers for threading.
+     * 
+     * <p>You can pass in the number of threads you'd like to use ({@code try_splits}). It returns the number of splits (threads) that you can call it with. It
+     * might be less if the image resize can't be split up that many ways.</p>
      */
-    @NativeType("int")
-    public static boolean stbir_resize_subpixel(@NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_datatype") int datatype, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_mode_horizontal, @NativeType("stbir_edge") int edge_mode_vertical, @NativeType("stbir_filter") int filter_horizontal, @NativeType("stbir_filter") int filter_vertical, @NativeType("stbir_colorspace") int space, float x_scale, float y_scale, float x_offset, float y_offset) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? (output_w * num_channels) << getTypeShift(datatype) : output_stride_in_bytes));
-        }
-        return nstbir_resize_subpixel(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, datatype, num_channels, alpha_channel, flags, edge_mode_horizontal, edge_mode_vertical, filter_horizontal, filter_vertical, space, NULL, x_scale, y_scale, x_offset, y_offset) != 0;
+    public static int stbir_build_samplers_with_splits(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, int try_splits) {
+        return nstbir_build_samplers_with_splits(resize.address(), try_splits);
     }
 
-    // --- [ stbir_resize_region ] ---
+    // --- [ stbir_resize_extended_split ] ---
 
-    /** Unsafe version of: {@link #stbir_resize_region resize_region} */
-    public static native int nstbir_resize_region(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context, float s0, float t0, float s1, float t1);
+    /** Unsafe version of: {@link #stbir_resize_extended_split resize_extended_split} */
+    public static native int nstbir_resize_extended_split(long resize, int split_start, int split_count);
 
     /**
-     * Region version of {@link #stbir_resize resize}, using texture coordinates.
-     *
-     * @param input_pixels           the source image data
-     * @param input_w                the source image width
-     * @param input_h                the source image height
-     * @param input_stride_in_bytes  the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param output_pixels          returns the scaled image data
-     * @param output_w               the resized image width
-     * @param output_h               the resized image height
-     * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
-     * @param datatype               the image data type. One of:<br><table><tr><td>{@link #STBIR_TYPE_UINT8 TYPE_UINT8}</td><td>{@link #STBIR_TYPE_UINT16 TYPE_UINT16}</td><td>{@link #STBIR_TYPE_UINT32 TYPE_UINT32}</td><td>{@link #STBIR_TYPE_FLOAT TYPE_FLOAT}</td></tr></table>
-     * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
-     * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
-     * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
-     * @param edge_mode_horizontal   the horizontal edge wrap mode
-     * @param edge_mode_vertical     the vertical edge wrap mode
-     * @param filter_horizontal      the horizontal scale filter
-     * @param filter_vertical        the vertical scale filter
-     * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
-     * @param s0                     the left texture coordinate of the region to scale
-     * @param t0                     the top texture coordinate of the region to scale
-     * @param s1                     the right texture coordinate of the region to scale
-     * @param t1                     the bottom texture coordinate of the region to scale
-     *
-     * @return 1 on success, 0 on failure
+     * This function does a split of the resizing (you call this fuction for each split, on multiple threads). A split is a piece of the output resize pixel
+     * space.
+     * 
+     * <p>Note that you MUST call {@link #stbir_build_samplers_with_splits build_samplers_with_splits} before {@code stbir_resize_extended_split}!</p>
+     * 
+     * <p>Usually, you will always call {@code stbir_resize_extended_split} with {@code split_start} as the {@code thread_index} and "1" for the
+     * {@code split_count}. But, if you have a weird situation where you MIGHT want 8 threads, but sometimes only 4 threads, you can use 0,2,4,6 for the
+     * {@code split_start}'s and use "2" for the {@code split_count} each time to turn in into a 4 thread resize. (This is unusual).</p>
      */
-    @NativeType("int")
-    public static boolean stbir_resize_region(@NativeType("void const *") ByteBuffer input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("void *") ByteBuffer output_pixels, int output_w, int output_h, int output_stride_in_bytes, @NativeType("stbir_datatype") int datatype, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_mode_horizontal, @NativeType("stbir_edge") int edge_mode_vertical, @NativeType("stbir_filter") int filter_horizontal, @NativeType("stbir_filter") int filter_vertical, @NativeType("stbir_colorspace") int space, float s0, float t0, float s1, float t1) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? (output_w * num_channels) << getTypeShift(datatype) : output_stride_in_bytes));
-        }
-        return nstbir_resize_region(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, datatype, num_channels, alpha_channel, flags, edge_mode_horizontal, edge_mode_vertical, filter_horizontal, filter_vertical, space, NULL, s0, t0, s1, t1) != 0;
+    public static int stbir_resize_extended_split(@NativeType("STBIR_RESIZE *") STBIR_RESIZE resize, int split_start, int split_count) {
+        return nstbir_resize_extended_split(resize.address(), split_start, split_count);
     }
 
-    /** Array version of: {@link #nstbir_resize_float} */
-    public static native int nstbir_resize_float(float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
+    private static final int[] stbir_pixel_layout_channels = {
+        3, 1, 2, 3, 4,
+        4, 4, 4, 4, 2, 2,
+        4, 4, 4, 4, 2, 2,
+    };
 
-    /** Array version of: {@link #stbir_resize_float resize_float} */
-    @NativeType("int")
-    public static boolean stbir_resize_float(@NativeType("float const *") float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2)));
-        }
-        return nstbir_resize_float(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels) != 0;
+    private static int calculateBufferSize(int width, int height, int stride_in_bytes, int pixel_type, int type_size) {
+        return height * (stride_in_bytes == 0 ? width * stbir_pixel_layout_channels[pixel_type] * type_size : stride_in_bytes);
     }
 
-    /** Array version of: {@link #nstbir_resize_uint16_generic} */
-    public static native int nstbir_resize_uint16_generic(short[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, short[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
-
-    /** Array version of: {@link #stbir_resize_uint16_generic resize_uint16_generic} */
-    @NativeType("int")
-    public static boolean stbir_resize_uint16_generic(@NativeType("stbir_uint16 const *") short[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("stbir_uint16 *") short[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 1)));
-        }
-        return nstbir_resize_uint16_generic(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
-    }
-
-    /** Array version of: {@link #nstbir_resize_float_generic} */
-    public static native int nstbir_resize_float_generic(float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
-
-    /** Array version of: {@link #stbir_resize_float_generic resize_float_generic} */
-    @NativeType("int")
-    public static boolean stbir_resize_float_generic(@NativeType("float const *") float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
-        if (CHECKS) {
-            check(input_pixels, input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2)));
-            check(output_pixels, output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2)));
-        }
-        return nstbir_resize_float_generic(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
-    }
-
-    private static int getTypeShift(int type) {
-        switch (type) {
-            case STBIR_TYPE_UINT8:
-                return 0;
-            case STBIR_TYPE_UINT16:
-                return 1;
-            default:
-                return 2;
-        }
-    }
+    private static final int[] stbir_type_size = {
+        1, 1, 1, 2, 4, 2
+    };
 
 }

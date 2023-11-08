@@ -10,397 +10,374 @@ import stb.*
 val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR", prefixMethod = "stbir_") {
     includeSTBAPI(
         """#include "lwjgl_malloc.h"
-#define STBIR_MALLOC(size,c) org_lwjgl_malloc(size)
-#define STBIR_FREE(ptr,c)    org_lwjgl_free(ptr)
+#define STBIR_MALLOC(size,user_data) org_lwjgl_malloc(size)
+#define STBIR_FREE(ptr,user_data)    org_lwjgl_free(ptr)
 #define STBIR_ASSERT(x)
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC
-#include "stb_image_resize.h"""")
+#include "stb_image_resize2.h"""")
 
-    documentation =
+    documentation = "Native bindings to stb_image_resize2.h from the ${url("https://github.com/nothings/stb", "stb library")}."
+
+    EnumConstant(
         """
-        Native bindings to stb_image_resize.h from the ${url("https://github.com/nothings/stb", "stb library")}.
-
-        Written with emphasis on usability, portability, and efficiency. (No SIMD or threads, so it be easily outperformed by libs that use those.) Only
-        scaling and translation is supported, no rotations or shears. Easy API downsamples w/Mitchell filter, upsamples w/cubic interpolation.
-
-        <h3>QUICKSTART</h3>
-        ${codeBlock("""
-stbir_resize_uint8(      input_pixels , in_w , in_h , 0,
-                         output_pixels, out_w, out_h, 0, num_channels)
-stbir_resize_float(...)
-stbir_resize_uint8_srgb( input_pixels , in_w , in_h , 0,
-                         output_pixels, out_w, out_h, 0,
-                         num_channels , alpha_chan  , 0)
-stbir_resize_uint8_srgb_edgemode(
-                         input_pixels , in_w , in_h , 0,
-                         output_pixels, out_w, out_h, 0,
-                         num_channels , alpha_chan  , 0, STBIR_EDGE_CLAMP)
-                                                      // WRAP/REFLECT/ZERO""")}
-        <h3>ALPHA CHANNEL</h3>
-
-        Most of the resizing functions provide the ability to control how the alpha channel of an image is processed. The important things to know about this:
-        ${ol(
-            """
-            The best mathematically-behaved version of alpha to use is called "premultiplied alpha", in which the other color channels have had the alpha value
-            multiplied in. If you use premultiplied alpha, linear filtering (such as image resampling done by this library, or performed in texture units on
-            GPUs) does the "right thing". While premultiplied alpha is standard in the movie CGI industry, it is still uncommon in the videogame/real-time
-            world. If you linearly filter non-premultiplied alpha, strange effects occur. (For example, the average of 1% opaque bright green and 99% opaque
-            black produces 50% transparent dark green when non-premultiplied, whereas premultiplied it produces 50% transparent near-black. The former
-            introduces green energy that doesn't exist in the source image.)
-            """,
-            """
-            Artists should not edit premultiplied-alpha images; artists want non-premultiplied alpha images. Thus, art tools generally output non-premultiplied
-            alpha images.
-            """,
-            "You will get best results in most cases by converting images to premultiplied alpha before processing them mathematically.",
-            """
-            If you pass the flag #FLAG_ALPHA_PREMULTIPLIED, the resizer does not do anything special for the alpha channel; it is resampled identically to
-            other channels. This produces the correct results for premultiplied-alpha images, but produces less-than-ideal results for non-premultiplied-alpha
-            images.
-            """,
-            """
-            If you do not pass the flag #FLAG_ALPHA_PREMULTIPLIED, then the resizer weights the contribution of input pixels based on their alpha values, or,
-            equivalently, it multiplies the alpha value into the color channels, resamples, then divides by the resultant alpha value. Input pixels which have
-            {@code alpha=0} do not contribute at all to output pixels unless <b>all</b> of the input pixels affecting that output pixel have {@code alpha=0},
-            in which case the result for that pixel is the same as it would be without #FLAG_ALPHA_PREMULTIPLIED. However, this is only true for input images
-            in integer formats. For input images in float format, input pixels with {@code alpha=0} have no effect, and output pixels which have
-            {@code alpha=0} will be 0 in all channels. (For float images, you can manually achieve the same result by adding a tiny epsilon value to the alpha
-            channel of every image, and then subtracting or clamping it at the end.)
-            """,
-            """
-            You can separately control whether the alpha channel is interpreted as linear or affected by the colorspace. By default it is linear; you almost
-            never want to apply the colorspace. (For example, graphics hardware does not apply sRGB conversion to the alpha channel.)
-            """
-        )}
-        """
-
-    // Easy-to-use API
-
-    IntConstant(
-        "Set this flag if you have no alpha channel, or otherwise provide the index of the alpha channel.",
-        "ALPHA_CHANNEL_NONE".."-1"
-    )
-    IntConstant(
-        """
-        Set this flag if your texture has premultiplied alpha. Otherwise, stbir will use alpha-weighted resampling (effectively premultiplying, resampling,
-        then unpremultiplying).
-        """,
-        "FLAG_ALPHA_PREMULTIPLIED".."1 << 0"
-    )
-    IntConstant(
-        "The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations.",
-        "FLAG_ALPHA_USES_COLORSPACE".."1 << 1"
-    )
-
-    val EdgeWrapModes = EnumConstant(
-        "Edge wrap mode.",
-
-        "EDGE_CLAMP" enum 1,
-        "EDGE_REFLECT".enum,
-        "EDGE_WRAP".enum,
-        "EDGE_ZERO".enum
-    ).javaDocLinks
-
-    val resize_uint8 = intb(
-        "resize_uint8",
-        """
-        Easy-to-use API for resizing images.
+        {@code stbir_pixel_layout} specifies:
         ${ul(
-            "The colorspace is linear.",
-            "The alpha channel is treated identically to other channels.",
-            """
-            Memory required grows approximately linearly with input and output size, but with discontinuities at {@code input_w == output_w} and
-            {@code input_h == output_h}.
-            """
+            "number of channels",
+            "order of channels",
+            "whether color is premultiplied by alpha"
         )}
-        This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
         """,
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes)")..unsigned_char.const.p("input_pixels", "the source image data"),
-        int("input_w", "the source image width"),
-        int("input_h", "the source image height"),
-        int(
-            "input_stride_in_bytes",
-            "the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
-        ),
-        Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes)")..unsigned_char.p("output_pixels", "returns the scaled image data"),
-        int("output_w", "the resized image width"),
-        int("output_h", "the resized image height"),
-        int(
-            "output_stride_in_bytes",
-            "the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
-        ),
-        int("num_channels", "the number of channels in the image (e.g. RGB=3, RGBA=4)"),
-
-        returnDoc = "1 on success, 0 on failure"
+        "BGR".enum("", "0"),
+        "1CHANNEL".enum,
+        "2CHANNEL".enum,
+        "RGB".enum,
+        "RGBA".enum,
+        "4CHANNEL".enum,
+        "BGRA".enum,
+        "ARGB".enum,
+        "ABGR".enum,
+        "RA".enum,
+        "AR".enum,
+        "RGBA_PM".enum,
+        "BGRA_PM".enum,
+        "ARGB_PM".enum,
+        "ABGR_PM".enum,
+        "RA_PM".enum,
+        "AR_PM".enum
     )
 
-    val resize_float = intb(
-        "resize_float",
-        "Float version of #resize_uint8().",
+    customMethod("""
+    private static final int[] stbir_pixel_layout_channels = {
+        3, 1, 2, 3, 4,
+        4, 4, 4, 4, 2, 2,
+        4, 4, 4, 4, 2, 2,
+    };
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2))")..float.const.p("input_pixels", "the source image data"),
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2))")..float.p("output_pixels", "returns the scaled image data"),
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
+    private static int calculateBufferSize(int width, int height, int stride_in_bytes, int pixel_type, int type_size) {
+        return height * (stride_in_bytes == 0 ? width * stbir_pixel_layout_channels[pixel_type] * type_size : stride_in_bytes);
+    }""")
 
-        returnDoc = "1 on success, 0 on failure"
-    )
+    // Simple-complexity API
 
-    val resize_uint8_srgb = intb(
+    Code(javaInit = statement(
+        code = "$t${t}int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 1);",
+        applyTo = ApplyTo.NORMAL
+    ))..
+    MapPointer("length")..
+    OffHeapOnly..
+    unsigned_char.p(
         "resize_uint8_srgb",
-        """
-        Easy-to-use API for resizing images.
-        ${ul(
-            "The image data is interpreted as gamma-corrected sRGB.",
-            """
-            Memory required grows approximately linearly with input and output size, but with discontinuities at {@code input_w == output_w} and
-            {@code input_h == output_h}.
-            """
-        )}
-        This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
-        """,
+        "",
 
-        resize_uint8["input_pixels"],
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        resize_uint8["output_pixels"],
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
-        int("alpha_channel", "the alpha channel index, or #ALPHA_CHANNEL_NONE if there is no alpha channel"),
-        int(
-            "flags",
-            "the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean",
-            "#FLAG_ALPHA_PREMULTIPLIED #FLAG_ALPHA_USES_COLORSPACE"
-        ),
-
-        returnDoc = "1 on success, 0 on failure"
+        Unsafe..unsigned_char.const.p("input_pixels", ""),
+        int("input_w", ""),
+        int("input_h", ""),
+        int("input_stride_in_bytes", ""),
+        Check("length")..nullable..unsigned_char.p("output_pixels", ""),
+        int("output_w", ""),
+        int("output_h", ""),
+        int("output_stride_in_bytes", ""),
+        stbir_pixel_layout("pixel_type", "")
     )
 
-    val resize_uint8_srgb_edgemode = intb(
-        "resize_uint8_srgb_edgemode",
-        "Same as #resize_uint8_srgb(), but adds the ability to specify how requests to sample off the edge of the image are handled.",
+    Code(javaInit = statement(
+        code = "$t${t}int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 1);",
+        applyTo = ApplyTo.NORMAL
+    ))..
+    MapPointer("length")..
+    OffHeapOnly..
+    unsigned_char.p(
+        "resize_uint8_linear",
+        "",
 
-        resize_uint8["input_pixels"],
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        resize_uint8["output_pixels"],
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
-        resize_uint8_srgb["alpha_channel"],
-        resize_uint8_srgb["flags"],
-        stbir_edge("edge_wrap_mode", "the edge wrap mode", EdgeWrapModes),
+        Unsafe..unsigned_char.const.p("input_pixels", ""),
+        int("input_w", ""),
+        int("input_h", ""),
+        int("input_stride_in_bytes", ""),
+        Check("length")..nullable..unsigned_char.p("output_pixels", ""),
+        int("output_w", ""),
+        int("output_h", ""),
+        int("output_stride_in_bytes", ""),
+        stbir_pixel_layout("pixel_type", "")
+    )
 
-        returnDoc = "1 on success, 0 on failure"
+    Code(javaInit = statement(
+        code = "$t${t}int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_type, 4);",
+        applyTo = ApplyTo.NORMAL
+    ))..
+    MapPointer("length")..
+    OffHeapOnly..
+    float.p(
+        "resize_float_linear",
+        "",
+
+        Unsafe..float.const.p("input_pixels", ""),
+        int("input_w", ""),
+        int("input_h", ""),
+        int("input_stride_in_bytes", ""),
+        Check("length")..nullable..float.p("output_pixels", ""),
+        int("output_w", ""),
+        int("output_h", ""),
+        int("output_stride_in_bytes", ""),
+        stbir_pixel_layout("pixel_type", "")
     )
 
     // Medium-complexity API
 
-    val Filters = EnumConstant(
-        "Filters.",
+    EnumConstant(
+        "{@code stbir_edge}",
 
-        "FILTER_DEFAULT" enum "Use same filter type that easy-to-use API chooses.",
-        "FILTER_BOX" enum "A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.",
-        "FILTER_TRIANGLE" enum "On upsampling, produces same results as bilinear texture filtering.",
-        "FILTER_CUBICBSPLINE" enum "The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.",
-        "FILTER_CATMULLROM" enum "An interpolating cubic spline.",
-        "FILTER_MITCHELL" enum "Mitchell-Netrevalli filter with B=1/3, C=1/3."
-    ).javaDocLinks
-
-    val ColorSpaces = EnumConstant(
-        "Colorspace.",
-
-        "COLORSPACE_LINEAR".enum,
-        "COLORSPACE_SRGB".enum
-    ).javaDocLinks
-
-    val resize_uint8_generic = intb(
-        "resize_uint8_generic",
-        "Medium-complexity version of #resize_uint8().",
-
-        resize_uint8["input_pixels"],
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        resize_uint8["output_pixels"],
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
-        resize_uint8_srgb["alpha_channel"],
-        resize_uint8_srgb["flags"],
-        resize_uint8_srgb_edgemode["edge_wrap_mode"],
-        stbir_filter("filter", "the scale filter", Filters),
-        stbir_colorspace("space", "the image colorspace", ColorSpaces),
-        Expression("NULL", skipNormal = true)..opaque_p("alloc_context", "pointer to the allocation context"),
-
-        returnDoc = "1 on success, 0 on failure"
+        "EDGE_CLAMP".enum("", "0"),
+        "EDGE_REFLECT".enum,
+        "EDGE_WRAP".enum("This edge mode is slower and uses more memory."),
+        "EDGE_ZERO".enum
     )
 
-    intb(
-        "resize_uint16_generic",
-        "Short version of #resize_uint8_generic().",
+    EnumConstant(
+        "{@code stbir_filter}",
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1))")..stbir_uint16.const.p("input_pixels", "the source image data"),
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 1))")..stbir_uint16.p("output_pixels", "returns the scaled image data"),
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
-        resize_uint8_srgb["alpha_channel"],
-        resize_uint8_srgb["flags"],
-        resize_uint8_srgb_edgemode["edge_wrap_mode"],
-        resize_uint8_generic["filter"],
-        resize_uint8_generic["space"],
-        resize_uint8_generic["alloc_context"],
-
-        returnDoc = "1 on success, 0 on failure"
+        "FILTER_DEFAULT".enum("Use same filter type that easy-to-use API chooses.", "0"),
+        "FILTER_BOX".enum("A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios."),
+        "FILTER_TRIANGLE".enum("On upsampling, produces same results as bilinear texture filtering."),
+        "FILTER_CUBICBSPLINE".enum("The cubic b-spline (aka Mitchell-Netrevalli with {@code B=1,C=0}), gaussian-esque."),
+        "FILTER_CATMULLROM".enum("An interpolating cubic spline."),
+        "FILTER_MITCHELL".enum("Mitchell-Netrevalli filter with {@code B=1/3,C=1/3}."),
+        "FILTER_POINT_SAMPLE".enum("Simple point sampling."),
+        "FILTER_OTHER".enum("User callback specified.")
     )
 
-    intb(
-        "resize_float_generic",
-        "Float version of #resize_uint8_generic().",
+    EnumConstant(
+        "{@code stbir_datatype}",
 
-        resize_float["input_pixels"],
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        resize_float["output_pixels"],
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        resize_uint8["num_channels"],
-        resize_uint8_srgb["alpha_channel"],
-        resize_uint8_srgb["flags"],
-        resize_uint8_srgb_edgemode["edge_wrap_mode"],
-        resize_uint8_generic["filter"],
-        resize_uint8_generic["space"],
-        resize_uint8_generic["alloc_context"],
-
-        returnDoc = "1 on success, 0 on failure"
-    )
-
-    // Full-complexity API
-
-    val DataTypes = EnumConstant(
-        "Data type.",
-
-        "TYPE_UINT8".enum,
+        "TYPE_UINT8".enum("", "0"),
+        "TYPE_UINT8_SRGB".enum,
+        "TYPE_UINT8_SRGB_ALPHA".enum("Alpha channel, when present, should also be SRGB (this is very unusual)."),
         "TYPE_UINT16".enum,
-        "TYPE_UINT32".enum,
-        "TYPE_FLOAT".enum
-    ).javaDocLinks
+        "TYPE_FLOAT".enum,
+        "TYPE_HALF_FLOAT".enum
+    )
 
     customMethod("""
-    private static int getTypeShift(int type) {
-        switch (type) {
-            case STBIR_TYPE_UINT8:
-                return 0;
-            case STBIR_TYPE_UINT16:
-                return 1;
-            default:
-                return 2;
-        }
-    }""")
+    private static final int[] stbir_type_size = {
+        1, 1, 1, 2, 4, 2
+    };""")
 
-    val resize = intb(
+    Code(javaInit = statement(
+        code = "$t${t}int length = calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_layout, stbir_type_size[data_type]);",
+        applyTo = ApplyTo.NORMAL
+    ))..
+    MapPointer("length")..
+    OffHeapOnly..
+    void.p(
         "resize",
-        "Full-complexity version of #resize_uint8_generic().",
+        "",
 
-        Check("input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes)")..void.const.p("input_pixels", "the source image data"),
-        resize_uint8["input_w"],
-        resize_uint8["input_h"],
-        resize_uint8["input_stride_in_bytes"],
-        Check("output_h * (output_stride_in_bytes == 0 ? (output_w * num_channels) << getTypeShift(datatype) : output_stride_in_bytes)")..void.p("output_pixels", "returns the scaled image data"),
-        resize_uint8["output_w"],
-        resize_uint8["output_h"],
-        resize_uint8["output_stride_in_bytes"],
-        stbir_datatype("datatype", "the image data type", DataTypes),
-        resize_uint8["num_channels"],
-        resize_uint8_srgb["alpha_channel"],
-        resize_uint8_srgb["flags"],
-        stbir_edge("edge_mode_horizontal", "the horizontal edge wrap mode"),
-        stbir_edge("edge_mode_vertical", "the vertical edge wrap mode"),
-        stbir_filter("filter_horizontal", "the horizontal scale filter"),
-        stbir_filter("filter_vertical", "the vertical scale filter"),
-        resize_uint8_generic["space"],
-        resize_uint8_generic["alloc_context"],
-
-        returnDoc = "1 on success, 0 on failure"
+        Unsafe..void.const.p("input_pixels", ""),
+        int("input_w", ""),
+        int("input_h", ""),
+        int("input_stride_in_bytes", ""),
+        Check("length")..nullable..void.p("output_pixels", ""),
+        int("output_w", ""),
+        int("output_h", ""),
+        int("output_stride_in_bytes", ""),
+        stbir_pixel_layout("pixel_layout", ""),
+        stbir_datatype("data_type", ""),
+        stbir_edge("edge", ""),
+        stbir_filter("filter", "")
     )
 
-    intb(
-        "resize_subpixel",
-        "Subpixel version of #resize().",
+    // Extended-complexity API
 
-        resize["input_pixels"],
-        resize["input_w"],
-        resize["input_h"],
-        resize["input_stride_in_bytes"],
-        resize["output_pixels"],
-        resize["output_w"],
-        resize["output_h"],
-        resize["output_stride_in_bytes"],
-        resize["datatype"],
-        resize["num_channels"],
-        resize["alpha_channel"],
-        resize["flags"],
-        resize["edge_mode_horizontal"],
-        resize["edge_mode_vertical"],
-        resize["filter_horizontal"],
-        resize["filter_vertical"],
-        resize["space"],
-        resize["alloc_context"],
-        float("x_scale", "horizontal scale for subpixel correctness"),
-        float("y_scale", "vertical scale for subpixel correctness"),
-        float("x_offset", "horizontal offset for subpixel correctness"),
-        float("y_offset", "vertical offset for subpixel correctness"),
+    void(
+        "resize_init",
+        "",
 
-        returnDoc = "1 on success, 0 on failure"
+        STBIR_RESIZE.p("resize", ""),
+        Unsafe..void.const.p("input_pixels", ""),
+        int("input_w", ""),
+        int("input_h", ""),
+        int("input_stride_in_bytes", ""),
+        Check("calculateBufferSize(output_w, output_h, output_stride_in_bytes, pixel_layout, stbir_type_size[data_type])")..nullable..void.p("output_pixels", ""),
+        int("output_w", ""),
+        int("output_h", ""),
+        int("output_stride_in_bytes", ""),
+        stbir_pixel_layout("pixel_layout", ""),
+        stbir_datatype("data_type", "")
     )
 
-    intb(
-        "resize_region",
-        "Region version of #resize(), using texture coordinates.",
+    void(
+        "set_datatypes",
+        "",
 
-        resize["input_pixels"],
-        resize["input_w"],
-        resize["input_h"],
-        resize["input_stride_in_bytes"],
-        resize["output_pixels"],
-        resize["output_w"],
-        resize["output_h"],
-        resize["output_stride_in_bytes"],
-        resize["datatype"],
-        resize["num_channels"],
-        resize["alpha_channel"],
-        resize["flags"],
-        resize["edge_mode_horizontal"],
-        resize["edge_mode_vertical"],
-        resize["filter_horizontal"],
-        resize["filter_vertical"],
-        resize["space"],
-        resize["alloc_context"],
-        float("s0", "the left texture coordinate of the region to scale"),
-        float("t0", "the top texture coordinate of the region to scale"),
-        float("s1", "the right texture coordinate of the region to scale"),
-        float("t1", "the bottom texture coordinate of the region to scale"),
+        STBIR_RESIZE.p("resize", ""),
+        stbir_datatype("input_type", ""),
+        stbir_datatype("output_type", "")
+    )
 
-        returnDoc = "1 on success, 0 on failure"
+    void(
+        "set_pixel_callbacks",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        nullable..stbir_input_callback("input_cb", ""),
+        nullable..stbir_output_callback("output_cb", "")
+
+    )
+
+    void(
+        "set_user_data",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        nullable..opaque_p("user_data", "")
+    )
+
+    void(
+        "set_buffer_ptrs",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        Unsafe..void.const.p("input_pixels", ""),
+        int("input_stride_in_bytes", ""),
+        Unsafe..nullable..void.p("output_pixels", ""),
+        int("output_stride_in_bytes", "")
+    )
+
+    int(
+        "set_pixel_layouts",
+        "Sets new buffer layouts.",
+
+        STBIR_RESIZE.p("resize", ""),
+        stbir_pixel_layout("input_pixel_layout", ""),
+        stbir_pixel_layout("output_pixel_layout", "")
+    )
+
+    int(
+        "set_edgemodes",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        stbir_edge("horizontal_edge", ""),
+        stbir_edge("vertical_edge", "")
+    )
+
+    int(
+        "set_filters",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        stbir_filter("horizontal_filter", ""),
+        stbir_filter("vertical_filter", "")
+    )
+
+    int(
+        "set_filter_callbacks",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        nullable..stbir__kernel_callback("horizontal_filter", ""),
+        nullable..stbir__support_callback("horizontal_support", ""),
+        nullable..stbir__kernel_callback("vertical_filter", ""),
+        nullable..stbir__support_callback("vertical_support", "")
+    )
+
+    int(
+        "set_pixel_subrect",
+        "Sets input sub-region (full region by default).",
+
+        STBIR_RESIZE.p("resize", ""),
+        int("subx", ""),
+        int("suby", ""),
+        int("subw", ""),
+        int("subh", "")
+    )
+
+    int(
+        "set_input_subrect",
+        "",
+
+        STBIR_RESIZE.p("resize", ""),
+        double("s0", ""),
+        double("t0", ""),
+        double("s1", ""),
+        double("t1", "")
+    )
+
+    int(
+        "set_output_pixel_subrect",
+        "Sets output sub-region (full region by default).",
+
+        STBIR_RESIZE.p("resize", ""),
+        int("subx", ""),
+        int("suby", ""),
+        int("subw", ""),
+        int("subh", "")
+    )
+
+    int(
+        "set_non_pm_alpha_speed_over_quality",
+        """
+        When inputting AND outputting non-premultiplied alpha pixels, we use a slower but higher quality technique that fills the zero alpha pixel's RGB values
+        with something plausible. If you don't care about areas of zero alpha, you can call this function to get about a 25% speed improvement for #RGBA to
+        {@code STBIR_RGBA} types of resizes.
+        """,
+
+        STBIR_RESIZE.p("resize", ""),
+        intb("non_pma_alpha_speed_over_quality", "")
+    )
+
+
+    int(
+        "build_samplers",
+        "Builds the samplers and does one allocation.",
+
+        STBIR_RESIZE.p("resize", "")
+    )
+
+    void(
+        "free_samplers",
+        "You MUST call this, if you call #build_samplers() or #build_samplers_with_splits().",
+
+        STBIR_RESIZE.p("resize", "")
+    )
+
+    int(
+        "resize_extended",
+        "The main function to perform the resize synchronously on one thread.",
+
+        STBIR_RESIZE.p("resize", "")
+    )
+
+    int(
+        "build_samplers_with_splits",
+        """
+        Build samplers for threading.
+
+        You can pass in the number of threads you'd like to use ({@code try_splits}). It returns the number of splits (threads) that you can call it with. It
+        might be less if the image resize can't be split up that many ways.
+        """,
+
+        STBIR_RESIZE.p("resize", ""),
+        int("try_splits", "")
+    )
+
+    int(
+        "resize_extended_split",
+        """
+        This function does a split of the resizing (you call this fuction for each split, on multiple threads). A split is a piece of the output resize pixel
+        space.
+
+        Note that you MUST call #build_samplers_with_splits() before {@code stbir_resize_extended_split}!
+
+        Usually, you will always call {@code stbir_resize_extended_split} with {@code split_start} as the {@code thread_index} and "1" for the
+        {@code split_count}. But, if you have a weird situation where you MIGHT want 8 threads, but sometimes only 4 threads, you can use 0,2,4,6 for the
+        {@code split_start}'s and use "2" for the {@code split_count} each time to turn in into a 4 thread resize. (This is unusual).
+        """,
+
+        STBIR_RESIZE.p("resize", ""),
+        int("split_start", ""),
+        int("split_count", "")
     )
 }

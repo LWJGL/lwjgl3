@@ -73,12 +73,111 @@ val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi
 
 // stb_image_resize.h
 
-val stbir_uint16 = typedef(unsigned_short, "stbir_uint16")
+val  stbir_uint8 = typedef( uint8_t, "stbir_uint8")
+val stbir_uint16 = typedef(uint16_t, "stbir_uint16")
+val stbir_uint32 = typedef(uint32_t, "stbir_uint32")
+val stbir_uint64 = typedef(uint64_t, "stbir_uint64")
 
+val stbir_datatype = "stbir_datatype".enumType
 val stbir_edge = "stbir_edge".enumType
 val stbir_filter = "stbir_filter".enumType
-val stbir_colorspace = "stbir_colorspace".enumType
-val stbir_datatype = "stbir_datatype".enumType
+val stbir_pixel_layout = "stbir_pixel_layout".enumType
+
+val stbir_input_callback = Module.STB.callback {
+    void(
+        "STBIRInputCallback",
+        "Callback used for input scanlines.",
+
+        nullable..void.p("optional_output", ""),
+        void.const.p("input_ptr", ""),
+        int("num_pixels", ""),
+        int("x", ""),
+        int("y", ""),
+        nullable..opaque_p("context", ""),
+
+        nativeType = "stbir_input_callback *"
+    ) {}
+}
+
+val stbir_output_callback = Module.STB.callback {
+    void(
+        "STBIROutputCallback",
+        "Callback used for output scanlines.",
+
+        void.const.p("output_ptr", ""),
+        int("num_pixels", ""),
+        int("x", ""),
+        int("y", ""),
+        nullable..opaque_p("context", ""),
+
+        nativeType = "stbir_output_callback *"
+    ) {}
+}
+
+val stbir__kernel_callback = Module.STB.callback {
+    float(
+        "STBIRKernelCallback",
+        "",
+
+        float("x", ""),
+        float("scale", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "stbir__kernel_callback *"
+    ) {}
+
+}
+
+val stbir__support_callback = Module.STB.callback {
+    float(
+        "STBIRSupportCallback",
+        "",
+
+        float("scale", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "stbir__support_callback *"
+    ) {}
+}
+
+val STBIR_RESIZE = struct(Module.STB, "STBIR_RESIZE") {
+    nullable..opaque_p("user_data", "")
+    void.const.p("input_pixels", "")
+    int("input_w", "")
+    int("input_h", "")
+    double("input_s0", "")
+    double("input_t0", "")
+    double("input_s1", "")
+    double("input_t1", "")
+    nullable..stbir_input_callback.p("input_cb", "")
+    nullable..void.p("output_pixels", "")
+    int("output_w", "")
+    int("output_h", "")
+    int("output_subx", "")
+    int("output_suby", "")
+    int("output_subw", "")
+    int("output_subh", "")
+    nullable..stbir_output_callback.p("output_cb", "")
+    int("input_stride_in_bytes", "")
+    int("output_stride_in_bytes", "")
+    int("splits", "")
+    intb("fast_alpha", "")
+    intb("needs_rebuild", "")
+    intb("called_alloc", "")
+    stbir_pixel_layout("input_pixel_layout_public", "")
+    stbir_pixel_layout("output_pixel_layout_public", "")
+    stbir_datatype("input_data_type", "")
+    stbir_datatype("output_data_type", "")
+    stbir_filter("horizontal_filter", "")
+    stbir_filter("vertical_filter", "")
+    stbir_edge("horizontal_edge", "")
+    stbir_edge("vertical_edge", "")
+    nullable..stbir__kernel_callback.p("horizontal_filter_kernel", "")
+    nullable..stbir__support_callback.p("horizontal_filter_support", "")
+    nullable..stbir__kernel_callback.p("vertical_filter_kernel", "")
+    nullable..stbir__support_callback.p("vertical_filter_support", "")
+    "stbir__info".opaque.p("samplers", "")
+}
 
 // stb_image_write.h
 
