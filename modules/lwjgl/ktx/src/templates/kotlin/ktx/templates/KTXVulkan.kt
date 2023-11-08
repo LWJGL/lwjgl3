@@ -85,6 +85,19 @@ val ktxvulkan = "KTXVulkan".nativeClass(Module.KTX, prefix = "KTX", binding = KT
     )
 
     ktx_error_code_e(
+        "Texture_VkUploadEx_WithSuballocator",
+        "",
+
+        ktxTexture.p("This", ""),
+        ktxVulkanDeviceInfo.p("vdi", ""),
+        ktxVulkanTexture.p("vkTexture", ""),
+        VkImageTiling("tiling", ""),
+        VkImageUsageFlags("usageFlags", ""),
+        VkImageLayout("finalLayout", ""),
+        ktxVulkanTexture_subAllocatorCallbacks.p("subAllocatorCallbacks", "")
+    )
+
+    ktx_error_code_e(
         "Texture_VkUploadEx",
         "",
 
@@ -106,6 +119,19 @@ val ktxvulkan = "KTXVulkan".nativeClass(Module.KTX, prefix = "KTX", binding = KT
     )
 
     ktx_error_code_e(
+        "Texture1_VkUploadEx_WithSuballocator",
+        "",
+
+        ktxTexture1.p("This", ""),
+        ktxVulkanDeviceInfo.p("vdi", ""),
+        ktxVulkanTexture.p("vkTexture", ""),
+        VkImageTiling("tiling", ""),
+        VkImageUsageFlags("usageFlags", ""),
+        VkImageLayout("finalLayout", ""),
+        ktxVulkanTexture_subAllocatorCallbacks.p("subAllocatorCallbacks", "")
+    )
+
+    ktx_error_code_e(
         "Texture1_VkUploadEx",
         "",
 
@@ -124,6 +150,19 @@ val ktxvulkan = "KTXVulkan".nativeClass(Module.KTX, prefix = "KTX", binding = KT
         ktxTexture1.p("texture", ""),
         ktxVulkanDeviceInfo.p("vdi", ""),
         ktxVulkanTexture.p("vkTexture", "")
+    )
+
+    ktx_error_code_e(
+        "Texture2_VkUploadEx_WithSuballocator",
+        "",
+
+        ktxTexture2.p("This", ""),
+        ktxVulkanDeviceInfo.p("vdi", ""),
+        ktxVulkanTexture.p("vkTexture", ""),
+        VkImageTiling("tiling", ""),
+        VkImageUsageFlags("usageFlags", ""),
+        VkImageLayout("finalLayout", ""),
+        ktxVulkanTexture_subAllocatorCallbacks.p("subAllocatorCallbacks", "")
     )
 
     ktx_error_code_e(

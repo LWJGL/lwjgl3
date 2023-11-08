@@ -25,22 +25,25 @@ public class KTXVulkan {
 
         /** Function address. */
         public static final long
-            VulkanTexture_Destruct       = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanTexture_Destruct"),
-            VulkanDeviceInfo_CreateEx    = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_CreateEx"),
-            VulkanDeviceInfo_Create      = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Create"),
-            VulkanDeviceInfo_Construct   = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Construct"),
-            VulkanDeviceInfo_ConstructEx = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_ConstructEx"),
-            VulkanDeviceInfo_Destruct    = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Destruct"),
-            VulkanDeviceInfo_Destroy     = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Destroy"),
-            Texture_VkUploadEx           = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_VkUploadEx"),
-            Texture_VkUpload             = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_VkUpload"),
-            Texture1_VkUploadEx          = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_VkUploadEx"),
-            Texture1_VkUpload            = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_VkUpload"),
-            Texture2_VkUploadEx          = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_VkUploadEx"),
-            Texture2_VkUpload            = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_VkUpload"),
-            Texture_GetVkFormat          = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_GetVkFormat"),
-            Texture1_GetVkFormat         = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_GetVkFormat"),
-            Texture2_GetVkFormat         = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_GetVkFormat");
+            VulkanTexture_Destruct               = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanTexture_Destruct"),
+            VulkanDeviceInfo_CreateEx            = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_CreateEx"),
+            VulkanDeviceInfo_Create              = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Create"),
+            VulkanDeviceInfo_Construct           = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Construct"),
+            VulkanDeviceInfo_ConstructEx         = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_ConstructEx"),
+            VulkanDeviceInfo_Destruct            = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Destruct"),
+            VulkanDeviceInfo_Destroy             = apiGetFunctionAddress(KTX.getLibrary(), "ktxVulkanDeviceInfo_Destroy"),
+            Texture_VkUploadEx_WithSuballocator  = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_VkUploadEx_WithSuballocator"),
+            Texture_VkUploadEx                   = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_VkUploadEx"),
+            Texture_VkUpload                     = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_VkUpload"),
+            Texture1_VkUploadEx_WithSuballocator = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_VkUploadEx_WithSuballocator"),
+            Texture1_VkUploadEx                  = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_VkUploadEx"),
+            Texture1_VkUpload                    = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_VkUpload"),
+            Texture2_VkUploadEx_WithSuballocator = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_VkUploadEx_WithSuballocator"),
+            Texture2_VkUploadEx                  = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_VkUploadEx"),
+            Texture2_VkUpload                    = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_VkUpload"),
+            Texture_GetVkFormat                  = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture_GetVkFormat"),
+            Texture1_GetVkFormat                 = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture1_GetVkFormat"),
+            Texture2_GetVkFormat                 = apiGetFunctionAddress(KTX.getLibrary(), "ktxTexture2_GetVkFormat");
 
     }
 
@@ -139,6 +142,18 @@ public class KTXVulkan {
         nktxVulkanDeviceInfo_Destroy(This.address());
     }
 
+    // --- [ ktxTexture_VkUploadEx_WithSuballocator ] ---
+
+    public static int nktxTexture_VkUploadEx_WithSuballocator(long This, long vdi, long vkTexture, int tiling, int usageFlags, int finalLayout, long subAllocatorCallbacks) {
+        long __functionAddress = Functions.Texture_VkUploadEx_WithSuballocator;
+        return callPPPPI(This, vdi, vkTexture, tiling, usageFlags, finalLayout, subAllocatorCallbacks, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxTexture_VkUploadEx_WithSuballocator(@NativeType("ktxTexture *") ktxTexture This, @NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo vdi, @NativeType("ktxVulkanTexture *") ktxVulkanTexture vkTexture, @NativeType("VkImageTiling") int tiling, @NativeType("VkImageUsageFlags") int usageFlags, @NativeType("VkImageLayout") int finalLayout, @NativeType("ktxVulkanTexture_subAllocatorCallbacks *") ktxVulkanTexture_subAllocatorCallbacks subAllocatorCallbacks) {
+        return nktxTexture_VkUploadEx_WithSuballocator(This.address(), vdi.address(), vkTexture.address(), tiling, usageFlags, finalLayout, subAllocatorCallbacks.address());
+    }
+
     // --- [ ktxTexture_VkUploadEx ] ---
 
     public static int nktxTexture_VkUploadEx(long This, long vdi, long vkTexture, int tiling, int usageFlags, int finalLayout) {
@@ -163,6 +178,18 @@ public class KTXVulkan {
         return nktxTexture_VkUpload(texture.address(), vdi.address(), vkTexture.address());
     }
 
+    // --- [ ktxTexture1_VkUploadEx_WithSuballocator ] ---
+
+    public static int nktxTexture1_VkUploadEx_WithSuballocator(long This, long vdi, long vkTexture, int tiling, int usageFlags, int finalLayout, long subAllocatorCallbacks) {
+        long __functionAddress = Functions.Texture1_VkUploadEx_WithSuballocator;
+        return callPPPPI(This, vdi, vkTexture, tiling, usageFlags, finalLayout, subAllocatorCallbacks, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_VkUploadEx_WithSuballocator(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo vdi, @NativeType("ktxVulkanTexture *") ktxVulkanTexture vkTexture, @NativeType("VkImageTiling") int tiling, @NativeType("VkImageUsageFlags") int usageFlags, @NativeType("VkImageLayout") int finalLayout, @NativeType("ktxVulkanTexture_subAllocatorCallbacks *") ktxVulkanTexture_subAllocatorCallbacks subAllocatorCallbacks) {
+        return nktxTexture1_VkUploadEx_WithSuballocator(This.address(), vdi.address(), vkTexture.address(), tiling, usageFlags, finalLayout, subAllocatorCallbacks.address());
+    }
+
     // --- [ ktxTexture1_VkUploadEx ] ---
 
     public static int nktxTexture1_VkUploadEx(long This, long vdi, long vkTexture, int tiling, int usageFlags, int finalLayout) {
@@ -185,6 +212,18 @@ public class KTXVulkan {
     @NativeType("KTX_error_code")
     public static int ktxTexture1_VkUpload(@NativeType("ktxTexture1 *") ktxTexture1 texture, @NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo vdi, @NativeType("ktxVulkanTexture *") ktxVulkanTexture vkTexture) {
         return nktxTexture1_VkUpload(texture.address(), vdi.address(), vkTexture.address());
+    }
+
+    // --- [ ktxTexture2_VkUploadEx_WithSuballocator ] ---
+
+    public static int nktxTexture2_VkUploadEx_WithSuballocator(long This, long vdi, long vkTexture, int tiling, int usageFlags, int finalLayout, long subAllocatorCallbacks) {
+        long __functionAddress = Functions.Texture2_VkUploadEx_WithSuballocator;
+        return callPPPPI(This, vdi, vkTexture, tiling, usageFlags, finalLayout, subAllocatorCallbacks, __functionAddress);
+    }
+
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_VkUploadEx_WithSuballocator(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo vdi, @NativeType("ktxVulkanTexture *") ktxVulkanTexture vkTexture, @NativeType("VkImageTiling") int tiling, @NativeType("VkImageUsageFlags") int usageFlags, @NativeType("VkImageLayout") int finalLayout, @NativeType("ktxVulkanTexture_subAllocatorCallbacks *") ktxVulkanTexture_subAllocatorCallbacks subAllocatorCallbacks) {
+        return nktxTexture2_VkUploadEx_WithSuballocator(This.address(), vdi.address(), vkTexture.address(), tiling, usageFlags, finalLayout, subAllocatorCallbacks.address());
     }
 
     // --- [ ktxTexture2_VkUploadEx ] ---

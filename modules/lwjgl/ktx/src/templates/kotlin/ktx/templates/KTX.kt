@@ -29,6 +29,7 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     StringConstant("", "ORIENTATION3_FMT".."S=%c,T=%c,R=%c")
 
     IntConstant("", "GL_UNPACK_ALIGNMENT".."4")
+    IntConstant("", "FACESLICE_WHOLE_LEVEL"..0xFFFFFFFF.i)
 
     IntConstant("", "TRUE".."1")
     IntConstant("", "FALSE".."0")
@@ -58,8 +59,8 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "FILE_WRITE_ERROR".enum("An error occurred while writing to the file."),
         "GL_ERROR".enum("GL operations resulted in an error."),
         "INVALID_OPERATION".enum("The operation is not allowed in the current state."),
-        "INVALID_VALUE".enum("A parameter value was not valid"),
-        "NOT_FOUND".enum("Requested key was not found"),
+        "INVALID_VALUE".enum("A parameter value was not valid."),
+        "NOT_FOUND".enum("Requested metadata key or required dynamically loaded GPU function was not found."),
         "OUT_OF_MEMORY".enum("Not enough memory to complete the operation."),
         "TRANSCODE_FAILED".enum("Transcoding of block compressed texture failed."),
         "UNKNOWN_FILE_FORMAT".enum("The file not a KTX file"),

@@ -711,13 +711,94 @@ val ktxVulkanTexture = struct(Module.KTX, "ktxVulkanTexture", mutable = false) {
     VkImage("image", "handle to the Vulkan image created by the loader")
     VkFormat("imageFormat", "format of the image data")
     VkImageLayout("imageLayout", "layout of the created image. Has the same value as {@code layout} parameter passed to the loader.")
-    VkDeviceMemory("deviceMemory", "the memory allocated for the image on the Vulkan device")
+    VkDeviceMemory("deviceMemory", "the memory (sub)allocation for the image on the Vulkan device. Will not be used with suballocators.")
     VkImageViewType("viewType", "viewType corresponding to {@code image}. Reflects the dimensionality, cubeness and arrayness of the image.")
     uint32_t("width", "the width of the image")
     uint32_t("height", "the height of the image")
     uint32_t("depth", "the depth of the image")
     uint32_t("levelCount", "the number of MIP levels in the image")
     uint32_t("layerCount", "the number of array layers in the image")
+    uint64_t("allocationId", "an id referencing suballocation(s)")
+}
+
+val ktxVulkanTexture_subAllocatorAllocMemFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorAllocMemFuncPtr",
+        "The memory procurement function. Can suballocate one or more pages.",
+
+        VkMemoryAllocateInfo.p("allocInfo", ""),
+        VkMemoryRequirements.p("memReq", ""),
+        Check(1)..uint64_t.p("pageCount", "")
+    ) {}
+}
+val ktxVulkanTexture_subAllocatorBindBufferFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorBindBufferFuncPtr",
+        "The bind-buffer-to-suballocation(s) function.",
+
+        VkBuffer("buffer", ""),
+        uint64_t("allocId", "")
+    ) {}
+}
+val ktxVulkanTexture_subAllocatorBindImageFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorBindImageFuncPtr",
+        "The bind-image-to-suballocation(s) function.",
+
+        VkImage("image", ""),
+        uint64_t("allocId", "")
+    ) {}
+}
+val ktxVulkanTexture_subAllocatorMemoryMapFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorMemoryMapFuncPtr",
+        "Function for mapping the memory of a specific page.",
+
+        uint64_t("allocId", ""),
+        uint64_t("pageNumber", ""),
+        Check(1)..VkDeviceSize.p("mapLength", ""),
+        Check(1)..void.p.p("dataPtr", "")
+    ) {}
+}
+val ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr",
+        "Function for unmapping the memory of a specific page.",
+
+        uint64_t("allocId", ""),
+        uint64_t("pageNumber", "")
+    ) {}
+}
+val ktxVulkanTexture_subAllocatorFreeMemFuncPtr = Module.KTX.callback {
+    void.p(
+        "ktxVulkanTexture_subAllocatorFreeMemFuncPtr",
+        "The free procurement function.",
+
+        uint64_t("allocId", "")
+    ) {}
+}
+
+/**
+ * @class ktxVulkanTexture_subAllocatorCallbacks
+ * @~English
+ * @brief Struct that contains all callbacks necessary for suballocation.
+ *
+ * These pointers must all be provided for upload or destroy to occur using suballocator callbacks.
+ */
+val ktxVulkanTexture_subAllocatorCallbacks = struct(Module.KTX, "ktxVulkanTexture_subAllocatorCallbacks") {
+    documentation =
+        """
+        Struct that contains all callbacks necessary for suballocation.
+
+        These pointers must all be provided for upload or destroy to occur using suballocator callbacks.
+        """
+
+    ktxVulkanTexture_subAllocatorAllocMemFuncPtr("allocMemFuncPtr", "pointer to the memory procurement function. Can suballocate one or more pages.")
+    ktxVulkanTexture_subAllocatorBindBufferFuncPtr("bindBufferFuncPtr", "pointer to bind-buffer-to-suballocation(s) function")
+    ktxVulkanTexture_subAllocatorBindImageFuncPtr("bindImageFuncPtr", "ointer to bind-image-to-suballocation(s) function")
+    ktxVulkanTexture_subAllocatorMemoryMapFuncPtr("memoryMapFuncPtr", "pointer to function for mapping the memory of a specific page")
+    ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr("memoryUnmapFuncPtr", "pointer to function for unmapping the memory of a specific page")
+    ktxVulkanTexture_subAllocatorFreeMemFuncPtr("freeMemFuncPtr", "pointer to the free procurement function")
 }
 
 val ktxVulkanDeviceInfo = struct(Module.KTX, "ktxVulkanDeviceInfo") {
