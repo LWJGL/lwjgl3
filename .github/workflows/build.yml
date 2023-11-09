@@ -132,7 +132,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ARCH: [arm32, arm64, riscv64]
+        ARCH: [arm32, arm64, ppc64le, riscv64]
         include:
           - ARCH: arm32
             CROSS_ARCH: armhf
@@ -142,6 +142,10 @@ jobs:
             CROSS_ARCH: arm64
             CONTAINER: ubuntu:18.04
             TRIPLET: aarch64-linux-gnu
+          - ARCH: ppc64le
+            CROSS_ARCH: ppc64el
+            CONTAINER: ubuntu:18.04
+            TRIPLET: powerpc64le-linux-gnu
           - ARCH: riscv64
             CROSS_ARCH: riscv64
             CONTAINER: ubuntu:20.04
@@ -174,7 +178,7 @@ jobs:
           DEBIAN_FRONTEND=noninteractive apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
-      - name: Prepare cross-compilation for $${matrix.CROSS_ARCH}}
+      - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
         run: |
           sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
           grep "ubuntu.com/ubuntu" /etc/apt/sources.list | tee /etc/apt/sources.list.d/ports.list

@@ -5,12 +5,14 @@
 <project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-    <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
-    <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
-    <property name="gcc.prefix" value="riscv64-linux-gnu-" if:set="build.arch.riscv64"/>
+    <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
+    <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
+    <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.ppc64le"/></condition>
+    <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
+    <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
 
-    <condition property="gcc.prefix" value="${gcc.prefix}" else="">
-        <isset property="gcc.prefix"/>
+    <condition property="gcc.prefix" value="" else="${linux.triplet}-">
+        <isset property="build.arch.x64|x86"/>
     </condition>
     <condition property="gcc.suffix" value="-${gcc.version}" else="">
         <isset property="gcc.version"/>
@@ -39,6 +41,7 @@
                 <arg line="-c -std=gnu++14" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
+                <arg line="-mcpu=powerpc64le" if:set="build.arch.ppc64le"/>
                 <arg line="-march=rv64g" if:set="build.arch.riscv64"/>
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
                 <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE"/>
@@ -179,6 +182,7 @@
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
+                <arg value="-I${src.main.rel}/libffi/ppc64le" if:set="build.arch.ppc64le"/>
                 <arg value="-I${src.main.rel}/libffi/riscv64" if:set="build.arch.riscv64"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
@@ -265,12 +269,6 @@
         <!-- NativeFileDialog -->
         <build module="nfd" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
-                <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
-                <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
-
                 <compile lang="c++">
                     <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}/include"/>
@@ -289,12 +287,6 @@
         </build>
         <build module="nfd" suffix="_portal" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
-                <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
-                <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
-
                 <compile lang="c++">
                     <arg line="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>

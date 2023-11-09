@@ -186,6 +186,9 @@
 #      define PR_SET_VMA 0x53564d41
 #      define PR_SET_VMA_ANON_NAME 0
 #    endif
+#    if defined(__PPC64__)
+#      include <sys/syscall.h>
+#    endif
 #  endif
 #  if defined(__APPLE__)
 #    include <TargetConditionals.h>
@@ -808,7 +811,11 @@ get_thread_id(void) {
 #    else
 	__asm__ volatile ("mrs %0, tpidr_el0" : "=r" (tid));
 #    endif
+#  elif defined(__PPC64__)
+    // LWJGL
+    return (uintptr_t)((void*)syscall(SYS_gettid));
 #  elif defined(__riscv)
+    // LWJGL
     __asm__ volatile ("mv %0, tp" : "=r" (tid));
 #  else
 #    error This platform needs implementation of get_thread_id()

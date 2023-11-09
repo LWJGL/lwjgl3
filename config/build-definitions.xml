@@ -34,6 +34,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
             <contains string="${os.arch}"    substring="aarch64"/>
         </or>
     </condition>
+    <condition property="build.arch.ppc" value="true">
+        <or>
+            <contains string="${build.arch}" substring="ppc"/>
+            <contains string="${os.arch}"    substring="ppc"/>
+        </or>
+    </condition>
     <condition property="build.arch.riscv" value="true">
         <or>
             <contains string="${build.arch}" substring="riscv"/>
@@ -43,6 +49,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="build.arch.x64|x86" value="true">
         <and>
             <not><isset property="build.arch.arm"/></not>
+            <not><isset property="build.arch.ppc"/></not>
             <not><isset property="build.arch.riscv"/></not>
         </and>
     </condition>
@@ -50,13 +57,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <!-- Normalize os.arch -->
     <condition property="build.arch" value="arm64"      unless:set="build.arch"><and><isset property="build.arch.arm"/>    <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm32"      unless:set="build.arch"><and><isset property="build.arch.arm"/>    <isfalse value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="ppc64le"    unless:set="build.arch"><and><isset property="build.arch.ppc"/>    <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="riscv64"    unless:set="build.arch"><and><isset property="build.arch.riscv"/>  <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x64"        unless:set="build.arch"><and><isset property="build.arch.x64|x86"/><istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x86"        unless:set="build.arch"><and><isset property="build.arch.x64|x86"/><isfalse value="${is64Bit}"/></and></condition>
     <property      name="build.arch" value="${os.arch}" unless:set="build.arch"/>
 
-    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, riscv64">
-        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|riscv64)$"/></not></condition>
+    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, ppc64le, riscv64">
+        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|ppc64le|riscv64)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>

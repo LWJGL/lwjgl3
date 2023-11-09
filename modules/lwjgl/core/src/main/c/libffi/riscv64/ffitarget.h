@@ -52,6 +52,7 @@ typedef enum ffi_abi {
     FFI_LAST_ABI,
 
     FFI_DEFAULT_ABI = FFI_SYSV,
+
 // LWJGL
   FFI_WIN64 = -1,
   FFI_GNUW64 = -1,

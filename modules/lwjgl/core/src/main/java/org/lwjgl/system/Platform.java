@@ -55,6 +55,7 @@ public enum Platform {
         X86(false),
         ARM64(true),
         ARM32(false),
+        PPC64LE(true),
         RISCV64(true);
 
         static final Architecture current;
@@ -67,6 +68,11 @@ public enum Platform {
 
             if (osArch.startsWith("arm") || osArch.startsWith("aarch")) {
                 current = is64Bit ? Architecture.ARM64 : Architecture.ARM32;
+            } else if (osArch.startsWith("ppc")) {
+                if (!"ppc64le".equals(osArch)) {
+                    throw new UnsupportedOperationException("Only PowerPC 64 LE is supported.");
+                }
+                current = Architecture.PPC64LE;
             } else if (osArch.startsWith("riscv")) {
                 if (!"riscv64".equals(osArch)) {
                     throw new UnsupportedOperationException("Only RISC-V 64 is supported.");
