@@ -90,6 +90,14 @@ public class LibURing {
         return nio_uring_opcode_supported(p.address(), op);
     }
 
+    // --- [ io_uring_queue_init_mem ] ---
+
+    public static native int nio_uring_queue_init_mem(int entries, long ring, long p, long buf, long buf_size);
+
+    public static int io_uring_queue_init_mem(@NativeType("unsigned") int entries, @NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_params *") IOURingParams p, @NativeType("void *") ByteBuffer buf) {
+        return nio_uring_queue_init_mem(entries, ring.address(), p.address(), memAddress(buf), buf.remaining());
+    }
+
     // --- [ io_uring_queue_init_params ] ---
 
     public static native int nio_uring_queue_init_params(int entries, long ring, long p);
@@ -1991,6 +1999,14 @@ public class LibURing {
 
     public static void io_uring_prep_socket_direct_alloc(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int domain, int type, int protocol, @NativeType("unsigned int") int flags) {
         nio_uring_prep_socket_direct_alloc(sqe.address(), domain, type, protocol, flags);
+    }
+
+    // --- [ io_uring_prep_cmd_sock ] ---
+
+    public static native void nio_uring_prep_cmd_sock(long sqe, int cmd_op, int fd, int level, int optname, long optval, int optlen);
+
+    public static void io_uring_prep_cmd_sock(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int cmd_op, int fd, int level, int optname, @NativeType("void *") ByteBuffer optval) {
+        nio_uring_prep_cmd_sock(sqe.address(), cmd_op, fd, level, optname, memAddress(optval), optval.remaining());
     }
 
     // --- [ io_uring_sq_ready ] ---

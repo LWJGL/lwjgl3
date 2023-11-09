@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 cqes;
  *     __u32 flags;
  *     __u32 resv1;
- *     __u64 resv2;
+ *     __u64 user_addr;
  * }</code></pre>
  */
 @NativeType("struct io_cqring_offsets")
@@ -50,7 +50,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         CQES,
         FLAGS,
         RESV1,
-        RESV2;
+        USER_ADDR;
 
     static {
         Layout layout = __struct(
@@ -76,7 +76,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         CQES = layout.offsetof(5);
         FLAGS = layout.offsetof(6);
         RESV1 = layout.offsetof(7);
-        RESV2 = layout.offsetof(8);
+        USER_ADDR = layout.offsetof(8);
     }
 
     protected IOCQRingOffsets(long address, @Nullable ByteBuffer container) {
@@ -122,6 +122,9 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     /** @return the value of the {@code flags} field. */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
+    /** @return the value of the {@code user_addr} field. */
+    @NativeType("__u64")
+    public long user_addr() { return nuser_addr(address()); }
 
     /** Sets the specified value to the {@code head} field. */
     public IOCQRingOffsets head(@NativeType("__u32") int value) { nhead(address(), value); return this; }
@@ -137,6 +140,8 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     public IOCQRingOffsets cqes(@NativeType("__u32") int value) { ncqes(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public IOCQRingOffsets flags(@NativeType("__u32") int value) { nflags(address(), value); return this; }
+    /** Sets the specified value to the {@code user_addr} field. */
+    public IOCQRingOffsets user_addr(@NativeType("__u64") long value) { nuser_addr(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOCQRingOffsets set(
@@ -146,7 +151,8 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         int ring_entries,
         int overflow,
         int cqes,
-        int flags
+        int flags,
+        long user_addr
     ) {
         head(head);
         tail(tail);
@@ -155,6 +161,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         overflow(overflow);
         cqes(cqes);
         flags(flags);
+        user_addr(user_addr);
 
         return this;
     }
@@ -299,7 +306,8 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.FLAGS); }
     public static int nresv1(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.RESV1); }
-    public static long nresv2(long struct) { return UNSAFE.getLong(null, struct + IOCQRingOffsets.RESV2); }
+    /** Unsafe version of {@link #user_addr}. */
+    public static long nuser_addr(long struct) { return UNSAFE.getLong(null, struct + IOCQRingOffsets.USER_ADDR); }
 
     /** Unsafe version of {@link #head(int) head}. */
     public static void nhead(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.HEAD, value); }
@@ -316,7 +324,8 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.FLAGS, value); }
     public static void nresv1(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.RESV1, value); }
-    public static void nresv2(long struct, long value) { UNSAFE.putLong(null, struct + IOCQRingOffsets.RESV2, value); }
+    /** Unsafe version of {@link #user_addr(long) user_addr}. */
+    public static void nuser_addr(long struct, long value) { UNSAFE.putLong(null, struct + IOCQRingOffsets.USER_ADDR, value); }
 
     // -----------------------------------
 
@@ -377,6 +386,9 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         /** @return the value of the {@code flags} field. */
         @NativeType("__u32")
         public int flags() { return IOCQRingOffsets.nflags(address()); }
+        /** @return the value of the {@code user_addr} field. */
+        @NativeType("__u64")
+        public long user_addr() { return IOCQRingOffsets.nuser_addr(address()); }
 
         /** Sets the specified value to the {@code head} field. */
         public IOCQRingOffsets.Buffer head(@NativeType("__u32") int value) { IOCQRingOffsets.nhead(address(), value); return this; }
@@ -392,6 +404,8 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
         public IOCQRingOffsets.Buffer cqes(@NativeType("__u32") int value) { IOCQRingOffsets.ncqes(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public IOCQRingOffsets.Buffer flags(@NativeType("__u32") int value) { IOCQRingOffsets.nflags(address(), value); return this; }
+        /** Sets the specified value to the {@code user_addr} field. */
+        public IOCQRingOffsets.Buffer user_addr(@NativeType("__u64") long value) { IOCQRingOffsets.nuser_addr(address(), value); return this; }
 
     }
 

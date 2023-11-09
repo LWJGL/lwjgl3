@@ -5,6 +5,7 @@
 enum {
 	INT_FLAG_REG_RING	= 1,
 	INT_FLAG_REG_REG_RING	= 2,
+	INT_FLAG_APP_MEM	= 4,
 };
 
 #endif

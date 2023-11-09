@@ -501,6 +501,11 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             Available since 6.1.
             """,
             "1 << 13"
+        ),
+        "SETUP_NO_MMAP".enum("Application provides ring memory", "1 << 14"),
+        "SETUP_REGISTERED_FD_ONLY".enum(
+            "Register the ring fd in itself for use with #REGISTER_USE_REGISTERED_RING; return a registered fd index rather than an fd.",
+            "1 << 15"
         )
     )
 
@@ -960,7 +965,7 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "OP_SEND_ZC".enumByte(
             """
             Issue the zerocopy equivalent of a {@code send(2)} system call.
-            
+
             Similar to #OP_SEND, but tries to avoid making intermediate copies of data. Zerocopy execution is not guaranteed and it may fall back to copying.
 
             The {@code flags} field of the first {@code "struct io_uring_cqe"} may likely contain #CQE_F_MORE, which means that there will be a second
@@ -1073,14 +1078,14 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "RECVSEND_POLL_FIRST".enum(
             """
             If set, io_uring will assume the socket is currently empty and attempting to receive data will be unsuccessful.
-            
+
             For this case, io_uring will arm internal poll and trigger a receive of the data when the socket has data to be read. This initial receive attempt
             can be wasteful for the case where the socket is expected to be empty, setting this flag will bypass the initial receive attempt and go straight to
             arming poll. If poll does indicate that data is ready to be received, the operation will proceed.
 
             Can be used with the CQE #CQE_F_SOCK_NONEMPTY flag, which io_uring will set on CQEs after a {@code recv(2)} or {@code recvmsg(2)} operation. If
             set, the socket still had data to be read after the operation completed.
-            
+
             Both these flags are available since 5.19.
             """,
             "1 << 0"
@@ -1722,6 +1727,13 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         "RESTRICTION_SQE_FLAGS_REQUIRED".enum("Require sqe flags (these flags must be set on each submission)"),
         "RESTRICTION_LAST".enum("Require sqe flags (these flags must be set on each submission)")
     )
+
+    EnumConstant(
+        "Argument for #OP_URING_CMD when file is a socket.",
+
+        "SOCKET_URING_OP_SIOCINQ".enum("", "0"),
+        "SOCKET_URING_OP_SIOCOUTQ".enum
+    ).noPrefix()
 
     SaveErrno..NativeName("__sys_io_uring_setup")..int(
         "setup",

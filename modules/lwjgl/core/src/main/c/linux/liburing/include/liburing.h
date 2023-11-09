@@ -164,6 +164,9 @@ IOURINGINLINE int io_uring_opcode_supported(const struct io_uring_probe *p,
 	return (p->ops[op].flags & IO_URING_OP_SUPPORTED) != 0;
 }
 
+int io_uring_queue_init_mem(unsigned entries, struct io_uring *ring,
+				struct io_uring_params *p,
+				void *buf, size_t buf_size);
 int io_uring_queue_init_params(unsigned entries, struct io_uring *ring,
 				struct io_uring_params *p);
 int io_uring_queue_init(unsigned entries, struct io_uring *ring,
@@ -1123,6 +1126,29 @@ IOURINGINLINE void io_uring_prep_socket_direct_alloc(struct io_uring_sqe *sqe,
 	io_uring_prep_rw(IORING_OP_SOCKET, sqe, domain, NULL, protocol, type);
 	sqe->rw_flags = flags;
 	__io_uring_set_target_fixed_file(sqe, IORING_FILE_INDEX_ALLOC - 1);
+}
+
+
+#define UNUSED(x) (void)(x)
+
+/*
+ * Prepare commands for sockets
+ */
+IOURINGINLINE void io_uring_prep_cmd_sock(struct io_uring_sqe *sqe,
+					  int cmd_op,
+					  int fd,
+					  int level,
+					  int optname,
+					  void *optval,
+					  int optlen)
+{
+	/* This will be removed once the get/setsockopt() patches land */
+	UNUSED(optlen);
+	UNUSED(optval);
+	UNUSED(level);
+	UNUSED(optname);
+	io_uring_prep_rw(IORING_OP_URING_CMD, sqe, fd, NULL, 0, 0);
+	sqe->cmd_op = cmd_op;
 }
 
 /*

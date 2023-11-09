@@ -450,23 +450,27 @@ public class LibIOURing {
      * 
      * <p>Available since 6.1.</p>
      * </li>
+     * <li>{@link #IORING_SETUP_NO_MMAP SETUP_NO_MMAP} - Application provides ring memory</li>
+     * <li>{@link #IORING_SETUP_REGISTERED_FD_ONLY SETUP_REGISTERED_FD_ONLY} - Register the ring fd in itself for use with {@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}; return a registered fd index rather than an fd.</li>
      * </ul>
      */
     public static final int
-        IORING_SETUP_IOPOLL        = 1 << 0,
-        IORING_SETUP_SQPOLL        = 1 << 1,
-        IORING_SETUP_SQ_AFF        = 1 << 2,
-        IORING_SETUP_CQSIZE        = 1 << 3,
-        IORING_SETUP_CLAMP         = 1 << 4,
-        IORING_SETUP_ATTACH_WQ     = 1 << 5,
-        IORING_SETUP_R_DISABLED    = 1 << 6,
-        IORING_SETUP_SUBMIT_ALL    = 1 << 7,
-        IORING_SETUP_COOP_TASKRUN  = 1 << 8,
-        IORING_SETUP_TASKRUN_FLAG  = 1 << 9,
-        IORING_SETUP_SQE128        = 1 << 10,
-        IORING_SETUP_CQE32         = 1 << 11,
-        IORING_SETUP_SINGLE_ISSUER = 1 << 12,
-        IORING_SETUP_DEFER_TASKRUN = 1 << 13;
+        IORING_SETUP_IOPOLL             = 1 << 0,
+        IORING_SETUP_SQPOLL             = 1 << 1,
+        IORING_SETUP_SQ_AFF             = 1 << 2,
+        IORING_SETUP_CQSIZE             = 1 << 3,
+        IORING_SETUP_CLAMP              = 1 << 4,
+        IORING_SETUP_ATTACH_WQ          = 1 << 5,
+        IORING_SETUP_R_DISABLED         = 1 << 6,
+        IORING_SETUP_SUBMIT_ALL         = 1 << 7,
+        IORING_SETUP_COOP_TASKRUN       = 1 << 8,
+        IORING_SETUP_TASKRUN_FLAG       = 1 << 9,
+        IORING_SETUP_SQE128             = 1 << 10,
+        IORING_SETUP_CQE32              = 1 << 11,
+        IORING_SETUP_SINGLE_ISSUER      = 1 << 12,
+        IORING_SETUP_DEFER_TASKRUN      = 1 << 13,
+        IORING_SETUP_NO_MMAP            = 1 << 14,
+        IORING_SETUP_REGISTERED_FD_ONLY = 1 << 15;
 
     /**
      * {@code io_uring_op}
@@ -1667,6 +1671,20 @@ public class LibIOURing {
         IORING_RESTRICTION_SQE_FLAGS_ALLOWED  = 2,
         IORING_RESTRICTION_SQE_FLAGS_REQUIRED = 3,
         IORING_RESTRICTION_LAST               = 4;
+
+    /**
+     * Argument for {@link #IORING_OP_URING_CMD OP_URING_CMD} when file is a socket.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #SOCKET_URING_OP_SIOCINQ SOCKET_URING_OP_SIOCINQ}</li>
+     * <li>{@link #SOCKET_URING_OP_SIOCOUTQ SOCKET_URING_OP_SIOCOUTQ}</li>
+     * </ul>
+     */
+    public static final int
+        SOCKET_URING_OP_SIOCINQ  = 0,
+        SOCKET_URING_OP_SIOCOUTQ = 1;
 
     protected LibIOURing() {
         throw new UnsupportedOperationException();

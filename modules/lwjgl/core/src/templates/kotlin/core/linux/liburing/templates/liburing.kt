@@ -69,6 +69,17 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "queue_init_mem",
+        "",
+
+        unsigned("entries", ""),
+        io_uring.p("ring", ""),
+        io_uring_params.p("p", ""),
+        void.p("buf", ""),
+        AutoSize("buf")..size_t("buf_size", "")
+    )
+
+    int(
         "queue_init_params",
         "",
 
@@ -1729,6 +1740,19 @@ struct io_uring_buf {
         int("type", ""),
         int("protocol", ""),
         unsigned_int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_cmd_sock",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("cmd_op", ""),
+        int("fd", ""),
+        int("level", ""),
+        int("optname", ""),
+        void.p("optval", ""),
+        AutoSize("optval")..int("optlen", "")
     )
 
     unsigned_int(

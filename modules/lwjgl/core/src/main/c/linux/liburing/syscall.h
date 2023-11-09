@@ -37,6 +37,8 @@ static inline bool IS_ERR(const void *ptr)
 #include "arch/x86/syscall.h"
 #elif defined(__aarch64__)
 #include "arch/aarch64/syscall.h"
+#elif defined(__riscv) && __riscv_xlen == 64
+#include "arch/riscv64/syscall.h"
 #else
 /*
  * We don't have native syscall wrappers

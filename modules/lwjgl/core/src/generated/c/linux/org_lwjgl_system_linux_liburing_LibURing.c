@@ -36,6 +36,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     return (jint)io_uring_opcode_supported(p, op);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1queue_1init_1mem(JNIEnv *__env, jclass clazz, jint entries, jlong ringAddress, jlong pAddress, jlong bufAddress, jlong buf_size) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_params *p = (struct io_uring_params *)(uintptr_t)pAddress;
+    void *buf = (void *)(uintptr_t)bufAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_queue_init_mem((unsigned)entries, ring, p, buf, (size_t)buf_size);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1queue_1init_1params(JNIEnv *__env, jclass clazz, jint entries, jlong ringAddress, jlong pAddress) {
     struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
     struct io_uring_params *p = (struct io_uring_params *)(uintptr_t)pAddress;
@@ -965,6 +973,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_prep_socket_direct_alloc(sqe, domain, type, protocol, (unsigned int)flags);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1cmd_1sock(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint cmd_op, jint fd, jint level, jint optname, jlong optvalAddress, jint optlen) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    void *optval = (void *)(uintptr_t)optvalAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_cmd_sock(sqe, cmd_op, fd, level, optname, optval, optlen);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sq_1ready(JNIEnv *__env, jclass clazz, jlong ringAddress) {

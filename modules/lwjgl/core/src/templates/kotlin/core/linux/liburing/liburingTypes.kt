@@ -136,7 +136,7 @@ val io_sqring_offsets = struct(Module.CORE_LINUX_LIBURING, "IOSQRingOffsets", na
     __u32("dropped", "")
     __u32("array", "")
     __u32("resv1", "").private()
-    __u64("resv2", "").private()
+    __u64("user_addr", "")
 }
 
 val io_cqring_offsets = struct(Module.CORE_LINUX_LIBURING, "IOCQRingOffsets", nativeName = "struct io_cqring_offsets") {
@@ -148,7 +148,7 @@ val io_cqring_offsets = struct(Module.CORE_LINUX_LIBURING, "IOCQRingOffsets", na
     __u32("cqes", "")
     __u32("flags", "")
     __u32("resv1", "").private()
-    __u64("resv2", "").private()
+    __u64("user_addr", "")
 }
 
 val io_uring_params = struct(Module.CORE_LINUX_LIBURING, "IOURingParams", nativeName = "struct io_uring_params") {
