@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float ydelta;
  *     uint32_t unused;
  *     float {@link #viewportscale};
+ *     uint32_t {@link #cursorIndex};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Scroll_t")
@@ -40,10 +41,12 @@ public class VREventScroll extends Struct<VREventScroll> {
         XDELTA,
         YDELTA,
         UNUSED,
-        VIEWPORTSCALE;
+        VIEWPORTSCALE,
+        CURSORINDEX;
 
     static {
         Layout layout = __struct(
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -57,6 +60,7 @@ public class VREventScroll extends Struct<VREventScroll> {
         YDELTA = layout.offsetof(1);
         UNUSED = layout.offsetof(2);
         VIEWPORTSCALE = layout.offsetof(3);
+        CURSORINDEX = layout.offsetof(4);
     }
 
     protected VREventScroll(long address, @Nullable ByteBuffer container) {
@@ -90,6 +94,9 @@ public class VREventScroll extends Struct<VREventScroll> {
     public int unused() { return nunused(address()); }
     /** for scrolling on an overlay with laser mouse, this is the overlay's vertical size relative to the overlay height. Range: {@code [0,1]} */
     public float viewportscale() { return nviewportscale(address()); }
+    /** if from an event triggered by cursor input on an overlay that supports multiple cursors, this is the index of which tracked cursor the event is for */
+    @NativeType("uint32_t")
+    public int cursorIndex() { return ncursorIndex(address()); }
 
     // -----------------------------------
 
@@ -130,6 +137,8 @@ public class VREventScroll extends Struct<VREventScroll> {
     public static int nunused(long struct) { return UNSAFE.getInt(null, struct + VREventScroll.UNUSED); }
     /** Unsafe version of {@link #viewportscale}. */
     public static float nviewportscale(long struct) { return UNSAFE.getFloat(null, struct + VREventScroll.VIEWPORTSCALE); }
+    /** Unsafe version of {@link #cursorIndex}. */
+    public static int ncursorIndex(long struct) { return UNSAFE.getInt(null, struct + VREventScroll.CURSORINDEX); }
 
     // -----------------------------------
 
@@ -178,6 +187,9 @@ public class VREventScroll extends Struct<VREventScroll> {
         public int unused() { return VREventScroll.nunused(address()); }
         /** @return the value of the {@link VREventScroll#viewportscale} field. */
         public float viewportscale() { return VREventScroll.nviewportscale(address()); }
+        /** @return the value of the {@link VREventScroll#cursorIndex} field. */
+        @NativeType("uint32_t")
+        public int cursorIndex() { return VREventScroll.ncursorIndex(address()); }
 
     }
 

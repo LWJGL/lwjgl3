@@ -134,18 +134,22 @@ jobs:
       matrix:
         ARCH: [arm32, arm64, ppc64le, riscv64]
         include:
+          # ----
           - ARCH: arm32
             CROSS_ARCH: armhf
             CONTAINER: ubuntu:18.04
             TRIPLET: arm-linux-gnueabihf
+          # ----
           - ARCH: arm64
             CROSS_ARCH: arm64
             CONTAINER: ubuntu:18.04
             TRIPLET: aarch64-linux-gnu
+          # ----
           - ARCH: ppc64le
             CROSS_ARCH: ppc64el
             CONTAINER: ubuntu:18.04
             TRIPLET: powerpc64le-linux-gnu
+          # ----
           - ARCH: riscv64
             CROSS_ARCH: riscv64
             CONTAINER: ubuntu:20.04

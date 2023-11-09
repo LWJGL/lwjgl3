@@ -53,9 +53,9 @@ public class VR {
 
     /** OpenVR version. */
     public static final int
-        k_nSteamVRVersionMajor = 1,
-        k_nSteamVRVersionMinor = 26,
-        k_nSteamVRVersionBuild = 7;
+        k_nSteamVRVersionMajor = 2,
+        k_nSteamVRVersionMinor = 0,
+        k_nSteamVRVersionBuild = 10;
 
     /** OpenVR constants. */
     public static final int
@@ -164,7 +164,10 @@ public class VR {
         k_pch_Controller_Component_GDC2015                             = "gdc2015",
         k_pch_Controller_Component_Base                                = "base",
         k_pch_Controller_Component_Tip                                 = "tip",
+        k_pch_Controller_Component_OpenXR_Aim                          = "openxr_aim",
         k_pch_Controller_Component_HandGrip                            = "handgrip",
+        k_pch_Controller_Component_OpenXR_Grip                         = "openxr_grip",
+        k_pch_Controller_Component_OpenXR_HandModel                    = "openxr_handmodel",
         k_pch_Controller_Component_Status                              = "status",
         IVRRenderModels_Version                                        = "IVRRenderModels_006",
         IVRNotifications_Version                                       = "IVRNotifications_002",
@@ -247,6 +250,7 @@ public class VR {
         k_pch_SteamVR_HDCPLegacyCompatibility_Bool                     = "hdcp14legacyCompatibility",
         k_pch_SteamVR_DisplayPortTrainingMode_Int                      = "displayPortTrainingMode",
         k_pch_SteamVR_UsePrism_Bool                                    = "usePrism",
+        k_pch_SteamVR_AllowFallbackMirrorWindowLinux_Bool              = "allowFallbackMirrorWindowLinux",
         k_pch_DirectMode_Section                                       = "direct_mode",
         k_pch_DirectMode_Enable_Bool                                   = "enable",
         k_pch_DirectMode_Count_Int32                                   = "count",
@@ -357,6 +361,9 @@ public class VR {
         k_pch_Dashboard_UseStandaloneSystemLayer                       = "standaloneSystemLayer",
         k_pch_Dashboard_StickyDashboard                                = "stickyDashboard",
         k_pch_Dashboard_AllowSteamOverlays_Bool                        = "allowSteamOverlays",
+        k_pch_Dashboard_AllowVRGamepadUI_Bool                          = "allowVRGamepadUI",
+        k_pch_Dashboard_AllowDesktopBPMWithVRGamepadUI_Bool            = "allowDesktopBPMWithVRGamepadUI",
+        k_pch_Dashboard_SteamMatchesHMDFramerate                       = "steamMatchesHMDFramerate",
         k_pch_modelskin_Section                                        = "modelskins",
         k_pch_Driver_Enable_Bool                                       = "enable",
         k_pch_Driver_BlockedBySafemode_Bool                            = "blocked_by_safe_mode",
@@ -380,6 +387,7 @@ public class VR {
         k_pch_LastKnown_Section                                        = "LastKnown",
         k_pch_LastKnown_HMDManufacturer_String                         = "HMDManufacturer",
         k_pch_LastKnown_HMDModel_String                                = "HMDModel",
+        k_pch_LastKnown_ActualHMDDriver_String                         = "ActualHMDDriver",
         k_pch_DismissedWarnings_Section                                = "DismissedWarnings",
         k_pch_Input_Section                                            = "input",
         k_pch_Input_LeftThumbstickRotation_Float                       = "leftThumbstickRotation",
@@ -475,6 +483,7 @@ public class VR {
      * Handle is a {@code MTLTexture} conforming to the {@code MTLSharedTexture} protocol. Textures submitted to {@link VRCompositor#VRCompositor_Submit Submit} which  are of type
      * {@code MTLTextureType2DArray} assume layer 0 is the left eye texture ({@link #EVREye_Eye_Left}), layer 1 is the right eye texture ({@link #EVREye_Eye_Right}).
      * </li>
+     * <li>{@link #ETextureType_TextureType_Reserved ETextureType_TextureType_Reserved}</li>
      * </ul>
      */
     public static final int
@@ -485,7 +494,8 @@ public class VR {
         ETextureType_TextureType_IOSurface        = 3,
         ETextureType_TextureType_DirectX12        = 4,
         ETextureType_TextureType_DXGISharedHandle = 5,
-        ETextureType_TextureType_Metal            = 6;
+        ETextureType_TextureType_Metal            = 6,
+        ETextureType_TextureType_Reserved         = 7;
 
     /**
      * {@code EColorSpace}
@@ -672,6 +682,7 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_EstimatedDeviceFirstUseTime_Int32 ETrackedDeviceProperty_Prop_EstimatedDeviceFirstUseTime_Int32}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DevicePowerUsage_Float ETrackedDeviceProperty_Prop_DevicePowerUsage_Float}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_IgnoreMotionForStandby_Bool ETrackedDeviceProperty_Prop_IgnoreMotionForStandby_Bool}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ActualTrackingSystemName_String ETrackedDeviceProperty_Prop_ActualTrackingSystemName_String} - the literal local driver name in case someone is playing games with prop 1000</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DisplayFrequency_Float ETrackedDeviceProperty_Prop_DisplayFrequency_Float}</li>
@@ -772,6 +783,8 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_Hmd_SupportsRoomViewDirect_Bool ETrackedDeviceProperty_Prop_Hmd_SupportsRoomViewDirect_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_Hmd_SupportsAppThrottling_Bool ETrackedDeviceProperty_Prop_Hmd_SupportsAppThrottling_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_Hmd_SupportsGpuBusMonitoring_Bool ETrackedDeviceProperty_Prop_Hmd_SupportsGpuBusMonitoring_Bool}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverDisplaysIPDChanges_Bool ETrackedDeviceProperty_Prop_DriverDisplaysIPDChanges_Bool}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_Driver_Reserved_01 ETrackedDeviceProperty_Prop_Driver_Reserved_01}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DSCVersion_Int32 ETrackedDeviceProperty_Prop_DSCVersion_Int32}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DSCSliceCount_Int32 ETrackedDeviceProperty_Prop_DSCSliceCount_Int32}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DSCBPPx16_Int32 ETrackedDeviceProperty_Prop_DSCBPPx16_Int32}</li>
@@ -890,6 +903,7 @@ public class VR {
         ETrackedDeviceProperty_Prop_EstimatedDeviceFirstUseTime_Int32              = 1051,
         ETrackedDeviceProperty_Prop_DevicePowerUsage_Float                         = 1052,
         ETrackedDeviceProperty_Prop_IgnoreMotionForStandby_Bool                    = 1053,
+        ETrackedDeviceProperty_Prop_ActualTrackingSystemName_String                = 1054,
         ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool                     = 2000,
         ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float                = 2001,
         ETrackedDeviceProperty_Prop_DisplayFrequency_Float                         = 2002,
@@ -990,6 +1004,8 @@ public class VR {
         ETrackedDeviceProperty_Prop_Hmd_SupportsRoomViewDirect_Bool                = 2105,
         ETrackedDeviceProperty_Prop_Hmd_SupportsAppThrottling_Bool                 = 2106,
         ETrackedDeviceProperty_Prop_Hmd_SupportsGpuBusMonitoring_Bool              = 2107,
+        ETrackedDeviceProperty_Prop_DriverDisplaysIPDChanges_Bool                  = 2108,
+        ETrackedDeviceProperty_Prop_Driver_Reserved_01                             = 2109,
         ETrackedDeviceProperty_Prop_DSCVersion_Int32                               = 2110,
         ETrackedDeviceProperty_Prop_DSCSliceCount_Int32                            = 2111,
         ETrackedDeviceProperty_Prop_DSCBPPx16_Int32                                = 2112,
@@ -1142,22 +1158,24 @@ public class VR {
      * </li>
      * <li>{@link #EVRSubmitFlags_Submit_VulkanTextureWithArrayData EVRSubmitFlags_Submit_VulkanTextureWithArrayData} - Set to indicate that {@code pTexture->handle} is a contains {@code VRVulkanTextureArrayData_t}.</li>
      * <li>{@link #EVRSubmitFlags_Submit_GlArrayTexture EVRSubmitFlags_Submit_GlArrayTexture} - If the texture pointer passed in is an OpenGL Array texture, set this flag.</li>
+     * <li>{@link #EVRSubmitFlags_Submit_IsEgl EVRSubmitFlags_Submit_IsEgl} - If the texture is an EGL texture and not an glX/wGL texture (Linux only, currently)</li>
      * <li>{@link #EVRSubmitFlags_Submit_Reserved2 EVRSubmitFlags_Submit_Reserved2} - Do not use.</li>
      * <li>{@link #EVRSubmitFlags_Submit_Reserved3 EVRSubmitFlags_Submit_Reserved3} - Do not use.</li>
      * </ul>
      */
     public static final int
-        EVRSubmitFlags_Submit_Default                      = 0,
-        EVRSubmitFlags_Submit_LensDistortionAlreadyApplied = 1,
-        EVRSubmitFlags_Submit_GlRenderBuffer               = 2,
-        EVRSubmitFlags_Submit_Reserved                     = 4,
-        EVRSubmit_TextureWithPose                          = 8,
-        EVRSubmitFlags_Submit_TextureWithDepth             = 16,
-        EVRSubmitFlags_Submit_FrameDiscontinuty            = 32,
-        EVRSubmitFlags_Submit_VulkanTextureWithArrayData   = 64,
-        EVRSubmitFlags_Submit_GlArrayTexture               = 128,
-        EVRSubmitFlags_Submit_Reserved2                    = 32768,
-        EVRSubmitFlags_Submit_Reserved3                    = 65536;
+        EVRSubmitFlags_Submit_Default                      = 0x00,
+        EVRSubmitFlags_Submit_LensDistortionAlreadyApplied = 0x01,
+        EVRSubmitFlags_Submit_GlRenderBuffer               = 0x02,
+        EVRSubmitFlags_Submit_Reserved                     = 0x04,
+        EVRSubmit_TextureWithPose                          = 0x08,
+        EVRSubmitFlags_Submit_TextureWithDepth             = 0x10,
+        EVRSubmitFlags_Submit_FrameDiscontinuty            = 0x20,
+        EVRSubmitFlags_Submit_VulkanTextureWithArrayData   = 0x40,
+        EVRSubmitFlags_Submit_GlArrayTexture               = 0x80,
+        EVRSubmitFlags_Submit_IsEgl                        = 0x100,
+        EVRSubmitFlags_Submit_Reserved2                    = 0x08000,
+        EVRSubmitFlags_Submit_Reserved3                    = 0x10000;
 
     /**
      * {@code EVRState}: Status of the overall system or tracked objects.
@@ -1208,6 +1226,8 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_PropertyChanged EVREventType_VREvent_PropertyChanged}</li>
      * <li>{@link #EVREventType_VREvent_WirelessDisconnect EVREventType_VREvent_WirelessDisconnect}</li>
      * <li>{@link #EVREventType_VREvent_WirelessReconnect EVREventType_VREvent_WirelessReconnect}</li>
+     * <li>{@link #EVREventType_VREvent_Reserved_01 EVREventType_VREvent_Reserved_01}</li>
+     * <li>{@link #EVREventType_VREvent_Reserved_02 EVREventType_VREvent_Reserved_02}</li>
      * <li>{@link #EVREventType_VREvent_ButtonPress EVREventType_VREvent_ButtonPress} - data is controller</li>
      * <li>{@link #EVREventType_VREvent_ButtonUnpress EVREventType_VREvent_ButtonUnpress} - data is controller</li>
      * <li>{@link #EVREventType_VREvent_ButtonTouch EVREventType_VREvent_ButtonTouch} - data is controller</li>
@@ -1223,8 +1243,8 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_OverlayFocusChanged EVREventType_VREvent_OverlayFocusChanged} - data is overlay, global event</li>
      * <li>{@link #EVREventType_VREvent_ReloadOverlays EVREventType_VREvent_ReloadOverlays}</li>
      * <li>{@link #EVREventType_VREvent_ScrollSmooth EVREventType_VREvent_ScrollSmooth} - data is scroll</li>
-     * <li>{@link #EVREventType_VREvent_LockMousePosition EVREventType_VREvent_LockMousePosition}</li>
-     * <li>{@link #EVREventType_VREvent_UnlockMousePosition EVREventType_VREvent_UnlockMousePosition}</li>
+     * <li>{@link #EVREventType_VREvent_LockMousePosition EVREventType_VREvent_LockMousePosition} - data is mouse</li>
+     * <li>{@link #EVREventType_VREvent_UnlockMousePosition EVREventType_VREvent_UnlockMousePosition} - data is mouse</li>
      * <li>{@link #EVREventType_VREvent_InputFocusCaptured EVREventType_VREvent_InputFocusCaptured} - data is process DEPRECATED</li>
      * <li>{@link #EVREventType_VREvent_InputFocusReleased EVREventType_VREvent_InputFocusReleased} - data is process DEPRECATED</li>
      * <li>{@link #EVREventType_VREvent_SceneApplicationChanged EVREventType_VREvent_SceneApplicationChanged} - data is process - The App actually drawing the scene changed (usually to or from the compositor)</li>
@@ -1237,8 +1257,14 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_SceneAppPipeDisconnected EVREventType_VREvent_SceneAppPipeDisconnected}</li>
      * <li>{@link #EVREventType_VREvent_ConsoleOpened EVREventType_VREvent_ConsoleOpened}</li>
      * <li>{@link #EVREventType_VREvent_ConsoleClosed EVREventType_VREvent_ConsoleClosed}</li>
-     * <li>{@link #EVREventType_VREvent_OverlayShown EVREventType_VREvent_OverlayShown}</li>
-     * <li>{@link #EVREventType_VREvent_OverlayHidden EVREventType_VREvent_OverlayHidden}</li>
+     * <li>{@link #EVREventType_VREvent_OverlayShown EVREventType_VREvent_OverlayShown} - 
+     * Indicates that an overlay is now visible to someone and should be rendering normally. Reflects {@code IVROverlay::IsOverlayVisible()} becoming
+     * true.
+     * </li>
+     * <li>{@link #EVREventType_VREvent_OverlayHidden EVREventType_VREvent_OverlayHidden} - 
+     * Indicates that an overlay is no longer visible to someone and doesn't need to render frames. Reflects {@code IVROverlay::IsOverlayVisible()}
+     * becoming false.
+     * </li>
      * <li>{@link #EVREventType_VREvent_DashboardActivated EVREventType_VREvent_DashboardActivated}</li>
      * <li>{@link #EVREventType_VREvent_DashboardDeactivated EVREventType_VREvent_DashboardDeactivated}</li>
      * <li>{@link #EVREventType_VREvent_DashboardRequested EVREventType_VREvent_DashboardRequested} - Sent to the overlay manager - data is overlay</li>
@@ -1268,6 +1294,7 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_StartDashboard EVREventType_VREvent_StartDashboard}</li>
      * <li>{@link #EVREventType_VREvent_ElevatePrism EVREventType_VREvent_ElevatePrism}</li>
      * <li>{@link #EVREventType_VREvent_OverlayClosed EVREventType_VREvent_OverlayClosed}</li>
+     * <li>{@link #EVREventType_VREvent_DashboardThumbChanged EVREventType_VREvent_DashboardThumbChanged} - Sent when a dashboard thumbnail image changes</li>
      * <li>{@link #EVREventType_VREvent_Notification_Shown EVREventType_VREvent_Notification_Shown}</li>
      * <li>{@link #EVREventType_VREvent_Notification_Hidden EVREventType_VREvent_Notification_Hidden}</li>
      * <li>{@link #EVREventType_VREvent_Notification_BeginInteraction EVREventType_VREvent_Notification_BeginInteraction}</li>
@@ -1310,14 +1337,23 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_GpuSpeedSectionSettingChanged EVREventType_VREvent_GpuSpeedSectionSettingChanged}</li>
      * <li>{@link #EVREventType_VREvent_WindowsMRSectionSettingChanged EVREventType_VREvent_WindowsMRSectionSettingChanged}</li>
      * <li>{@link #EVREventType_VREvent_OtherSectionSettingChanged EVREventType_VREvent_OtherSectionSettingChanged}</li>
+     * <li>{@link #EVREventType_VREvent_AnyDriverSettingsChanged EVREventType_VREvent_AnyDriverSettingsChanged}</li>
      * <li>{@link #EVREventType_VREvent_StatusUpdate EVREventType_VREvent_StatusUpdate}</li>
      * <li>{@link #EVREventType_VREvent_WebInterface_InstallDriverCompleted EVREventType_VREvent_WebInterface_InstallDriverCompleted}</li>
      * <li>{@link #EVREventType_VREvent_MCImageUpdated EVREventType_VREvent_MCImageUpdated}</li>
      * <li>{@link #EVREventType_VREvent_FirmwareUpdateStarted EVREventType_VREvent_FirmwareUpdateStarted}</li>
      * <li>{@link #EVREventType_VREvent_FirmwareUpdateFinished EVREventType_VREvent_FirmwareUpdateFinished}</li>
-     * <li>{@link #EVREventType_VREvent_KeyboardClosed EVREventType_VREvent_KeyboardClosed}</li>
+     * <li>{@link #EVREventType_VREvent_KeyboardClosed EVREventType_VREvent_KeyboardClosed} - DEPRECATED: Sent only to the overlay it closed for, or globally if it was closed for a scene app</li>
      * <li>{@link #EVREventType_VREvent_KeyboardCharInput EVREventType_VREvent_KeyboardCharInput}</li>
      * <li>{@link #EVREventType_VREvent_KeyboardDone EVREventType_VREvent_KeyboardDone} - Sent when DONE button clicked on keyboard</li>
+     * <li>{@link #EVREventType_VREvent_KeyboardOpened_Global EVREventType_VREvent_KeyboardOpened_Global} - 
+     * Sent globally when the keyboard is opened. {@code data.keyboard.overlayHandle} is who it was opened for (scene app if
+     * {@code k_ulOverlayHandleInvalid}).
+     * </li>
+     * <li>{@link #EVREventType_VREvent_KeyboardClosed_Global EVREventType_VREvent_KeyboardClosed_Global} - 
+     * Sent globally when the keyboard is closed. {@code data.keyboard.overlayHandle} is who it was opened for (scene app if
+     * {@code k_ulOverlayHandleInvalid}).
+     * </li>
      * <li>{@link #EVREventType_VREvent_ApplicationListUpdated EVREventType_VREvent_ApplicationListUpdated}</li>
      * <li>{@link #EVREventType_VREvent_ApplicationMimeTypeLoad EVREventType_VREvent_ApplicationMimeTypeLoad}</li>
      * <li>{@link #EVREventType_VREvent_ProcessConnected EVREventType_VREvent_ProcessConnected}</li>
@@ -1379,6 +1415,8 @@ public class VR {
         EVREventType_VREvent_PropertyChanged                           = 111,
         EVREventType_VREvent_WirelessDisconnect                        = 112,
         EVREventType_VREvent_WirelessReconnect                         = 113,
+        EVREventType_VREvent_Reserved_01                               = 114,
+        EVREventType_VREvent_Reserved_02                               = 115,
         EVREventType_VREvent_ButtonPress                               = 200,
         EVREventType_VREvent_ButtonUnpress                             = 201,
         EVREventType_VREvent_ButtonTouch                               = 202,
@@ -1439,6 +1477,7 @@ public class VR {
         EVREventType_VREvent_StartDashboard                            = 532,
         EVREventType_VREvent_ElevatePrism                              = 533,
         EVREventType_VREvent_OverlayClosed                             = 534,
+        EVREventType_VREvent_DashboardThumbChanged                     = 535,
         EVREventType_VREvent_Notification_Shown                        = 600,
         EVREventType_VREvent_Notification_Hidden                       = 601,
         EVREventType_VREvent_Notification_BeginInteraction             = 602,
@@ -1481,6 +1520,7 @@ public class VR {
         EVREventType_VREvent_GpuSpeedSectionSettingChanged             = 869,
         EVREventType_VREvent_WindowsMRSectionSettingChanged            = 870,
         EVREventType_VREvent_OtherSectionSettingChanged                = 871,
+        EVREventType_VREvent_AnyDriverSettingsChanged                  = 872,
         EVREventType_VREvent_StatusUpdate                              = 900,
         EVREventType_VREvent_WebInterface_InstallDriverCompleted       = 950,
         EVREventType_VREvent_MCImageUpdated                            = 1000,
@@ -1489,6 +1529,8 @@ public class VR {
         EVREventType_VREvent_KeyboardClosed                            = 1200,
         EVREventType_VREvent_KeyboardCharInput                         = 1201,
         EVREventType_VREvent_KeyboardDone                              = 1202,
+        EVREventType_VREvent_KeyboardOpened_Global                     = 1203,
+        EVREventType_VREvent_KeyboardClosed_Global                     = 1204,
         EVREventType_VREvent_ApplicationListUpdated                    = 1303,
         EVREventType_VREvent_ApplicationMimeTypeLoad                   = 1304,
         EVREventType_VREvent_ProcessConnected                          = 1306,
@@ -2247,6 +2289,10 @@ public class VR {
      * <li>{@link #EVRInitError_VRInitError_Compositor_SystemLayerCreateSession EVRInitError_VRInitError_Compositor_SystemLayerCreateSession}</li>
      * <li>{@link #EVRInitError_VRInitError_Compositor_CreateInverseDistortUVs EVRInitError_VRInitError_Compositor_CreateInverseDistortUVs}</li>
      * <li>{@link #EVRInitError_VRInitError_Compositor_CreateBackbufferDepth EVRInitError_VRInitError_Compositor_CreateBackbufferDepth}</li>
+     * <li>{@link #EVRInitError_VRInitError_Compositor_CannotDRMLeaseDisplay EVRInitError_VRInitError_Compositor_CannotDRMLeaseDisplay}</li>
+     * <li>{@link #EVRInitError_Compositor_CannotConnectToDisplayServer EVRInitError_Compositor_CannotConnectToDisplayServer}</li>
+     * <li>{@link #EVRInitError_Compositor_GnomeNoDRMLeasing EVRInitError_Compositor_GnomeNoDRMLeasing}</li>
+     * <li>{@link #EVRInitError_Compositor_FailedToInitializeEncoder EVRInitError_Compositor_FailedToInitializeEncoder}</li>
      * <li>{@link #EVRInitError_VRInitError_VendorSpecific_UnableToConnectToOculusRuntime EVRInitError_VRInitError_VendorSpecific_UnableToConnectToOculusRuntime}</li>
      * <li>{@link #EVRInitError_VRInitError_VendorSpecific_WindowsNotInDevMode EVRInitError_VRInitError_VendorSpecific_WindowsNotInDevMode}</li>
      * <li>{@link #EVRInitError_VRInitError_VendorSpecific_OculusLinkNotEnabled EVRInitError_VRInitError_VendorSpecific_OculusLinkNotEnabled}</li>
@@ -2462,6 +2508,10 @@ public class VR {
         EVRInitError_VRInitError_Compositor_SystemLayerCreateSession                          = 493,
         EVRInitError_VRInitError_Compositor_CreateInverseDistortUVs                           = 494,
         EVRInitError_VRInitError_Compositor_CreateBackbufferDepth                             = 495,
+        EVRInitError_VRInitError_Compositor_CannotDRMLeaseDisplay                             = 496,
+        EVRInitError_Compositor_CannotConnectToDisplayServer                                  = 497,
+        EVRInitError_Compositor_GnomeNoDRMLeasing                                             = 498,
+        EVRInitError_Compositor_FailedToInitializeEncoder                                     = 499,
         EVRInitError_VRInitError_VendorSpecific_UnableToConnectToOculusRuntime                = 1000,
         EVRInitError_VRInitError_VendorSpecific_WindowsNotInDevMode                           = 1001,
         EVRInitError_VRInitError_VendorSpecific_OculusLinkNotEnabled                          = 1002,
@@ -2983,7 +3033,22 @@ public class VR {
      * </li>
      * <li>{@link #VROverlayFlags_IsPremultiplied VROverlayFlags_IsPremultiplied} - If this is set, alpha composition assumes the texture is pre-multiplied.</li>
      * <li>{@link #VROverlayFlags_IgnoreTextureAlpha VROverlayFlags_IgnoreTextureAlpha} - If this is set, the alpha values of the overlay texture will be ignored.</li>
+     * <li>{@link #VROverlayFlags_EnableControlBar VROverlayFlags_EnableControlBar} - If this is set, this overlay will have a control bar drawn underneath of it in the dashboard.</li>
+     * <li>{@link #VROverlayFlags_EnableControlBarKeyboard VROverlayFlags_EnableControlBarKeyboard} - If this is set, the overlay control bar will provide a button to toggle the keyboard.</li>
+     * <li>{@link #VROverlayFlags_EnableControlBarClose VROverlayFlags_EnableControlBarClose} - 
+     * If this is set, the overlay control bar will provide a "close" button which will send a {@code VREvent_OverlayClosed} event to the overlay when
+     * pressed.
+     * 
+     * <p>Applications that use this flag are responsible for responding to the event with something that approximates "closing" behavior, such as destroying
+     * their overlay and/or shutting down their application.</p>
+     * </li>
      * <li>{@link #VROverlayFlags_Reserved VROverlayFlags_Reserved}</li>
+     * <li>{@link #VROverlayFlags_EnableClickStabilization VROverlayFlags_EnableClickStabilization} - If this is set, click stabilization will be applied to the laser interaction so that clicks more reliably trigger on the user's intended target</li>
+     * <li>{@link #VROverlayFlags_MultiCursor VROverlayFlags_MultiCursor} - 
+     * If this is set, laser mouse pointer events may be sent for the secondary laser.
+     * 
+     * <p>These events will have {@code cursorIndex} set to 0 for the primary laser and 1 for the secondary.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -3005,7 +3070,12 @@ public class VR {
         VROverlayFlags_WantsModalBehavior                 = 1 << 20,
         VROverlayFlags_IsPremultiplied                    = 1 << 21,
         VROverlayFlags_IgnoreTextureAlpha                 = 1 << 22,
-        VROverlayFlags_Reserved                           = 1 << 26;
+        VROverlayFlags_EnableControlBar                   = 1 << 23,
+        VROverlayFlags_EnableControlBarKeyboard           = 1 << 24,
+        VROverlayFlags_EnableControlBarClose              = 1 << 25,
+        VROverlayFlags_Reserved                           = 1 << 26,
+        VROverlayFlags_EnableClickStabilization           = 1 << 27,
+        VROverlayFlags_MultiCursor                        = 1 << 28;
 
     /**
      * {@code VRMessageOverlayResponse}
@@ -3083,11 +3153,22 @@ public class VR {
      * <ul>
      * <li>{@link #EKeyboardFlags_KeyboardFlag_Minimal EKeyboardFlags_KeyboardFlag_Minimal} - Makes the keyboard send key events immediately instead of accumulating a buffer.</li>
      * <li>{@link #EKeyboardFlags_KeyboardFlag_Modal EKeyboardFlags_KeyboardFlag_Modal} - Makes the keyboard take all focus and dismiss when clicking off the panel.</li>
+     * <li>{@link #EKeyboardFlags_KeyboardFlag_ShowArrowKeys EKeyboardFlags_KeyboardFlag_ShowArrowKeys} - Shows arrow keys on the keyboard when in minimal mode.
+     * 
+     * <p>Buffered (non-minimal) mode always has them. In minimal mode, when arrow keys are pressed, they send ANSI escape sequences (e.g. "\x1b[D" for left
+arrow).</p></li>
+     * <li>{@link #EKeyboardFlags_KeyboardFlag_HideDoneKey EKeyboardFlags_KeyboardFlag_HideDoneKey} - 
+     * Shows the hide keyboard button instead of a Done button.
+     * 
+     * <p>The Done key sends a {@code VREvent_KeyboardDone} when clicked. Hide only sends the Closed event.</p>
+     * </li>
      * </ul>
      */
     public static final int
-        EKeyboardFlags_KeyboardFlag_Minimal = 1 << 0,
-        EKeyboardFlags_KeyboardFlag_Modal   = 2 << 0;
+        EKeyboardFlags_KeyboardFlag_Minimal       = 1 << 0,
+        EKeyboardFlags_KeyboardFlag_Modal         = 1 << 1,
+        EKeyboardFlags_KeyboardFlag_ShowArrowKeys = 1 << 2,
+        EKeyboardFlags_KeyboardFlag_HideDoneKey   = 1 << 3;
 
     /**
      * {@code EDeviceType}

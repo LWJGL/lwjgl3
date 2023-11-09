@@ -23,6 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint64_t {@link #overlayHandle};
  *     uint64_t devicePath;
  *     uint64_t memoryBlockId;
+ *     uint32_t {@link #cursorIndex};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Overlay_t")
@@ -38,13 +39,15 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     public static final int
         OVERLAYHANDLE,
         DEVICEPATH,
-        MEMORYBLOCKID;
+        MEMORYBLOCKID,
+        CURSORINDEX;
 
     static {
         Layout layout = __struct(
             __member(8),
             __member(8),
-            __member(8)
+            __member(8),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -53,6 +56,7 @@ public class VREventOverlay extends Struct<VREventOverlay> {
         OVERLAYHANDLE = layout.offsetof(0);
         DEVICEPATH = layout.offsetof(1);
         MEMORYBLOCKID = layout.offsetof(2);
+        CURSORINDEX = layout.offsetof(3);
     }
 
     protected VREventOverlay(long address, @Nullable ByteBuffer container) {
@@ -86,6 +90,9 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     /** @return the value of the {@code memoryBlockId} field. */
     @NativeType("uint64_t")
     public long memoryBlockId() { return nmemoryBlockId(address()); }
+    /** if from an event triggered by cursor input on an overlay that supports multiple cursors, this is the index of which tracked cursor the event is for */
+    @NativeType("uint32_t")
+    public int cursorIndex() { return ncursorIndex(address()); }
 
     // -----------------------------------
 
@@ -124,6 +131,8 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     public static long ndevicePath(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.DEVICEPATH); }
     /** Unsafe version of {@link #memoryBlockId}. */
     public static long nmemoryBlockId(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.MEMORYBLOCKID); }
+    /** Unsafe version of {@link #cursorIndex}. */
+    public static int ncursorIndex(long struct) { return UNSAFE.getInt(null, struct + VREventOverlay.CURSORINDEX); }
 
     // -----------------------------------
 
@@ -172,6 +181,9 @@ public class VREventOverlay extends Struct<VREventOverlay> {
         /** @return the value of the {@code memoryBlockId} field. */
         @NativeType("uint64_t")
         public long memoryBlockId() { return VREventOverlay.nmemoryBlockId(address()); }
+        /** @return the value of the {@link VREventOverlay#cursorIndex} field. */
+        @NativeType("uint32_t")
+        public int cursorIndex() { return VREventOverlay.ncursorIndex(address()); }
 
     }
 
