@@ -1085,11 +1085,15 @@
 
                 <!-- Online build -->
                 <sequential unless:true="${build.offline}">
+                    <local name="platform.remote.s3"/>
+                    <condition property="platform.remote.s3" value="macosx" else="@{platform}">
+                        <equals arg1="@{platform}" arg2="macos"/>
+                    </condition>
                     <quiet>
                         <mkdir dir="${destination}"/>
                     </quiet>
                     <get
-                        src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
+                        src="https://build.lwjgl.org/${build.type}/${platform.remote.s3}/@{arch}/@{file}"
                         dest="${destination}"
                         usetimestamp="true"
                     />
