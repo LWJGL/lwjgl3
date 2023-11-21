@@ -209,6 +209,50 @@ jobs:
       - name: Build native
         run: ant -emacs compile-native -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
 
+  freebsd-cross:
+    name: FreeBSD Cross
+    needs: cache-kotlinc
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+          fetch-tags: true
+      - name: Install dependencies
+        run: |
+          mkdir jdk8
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-macosx_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+      - name: Restore kotlinc output
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            bin/classes/generator
+            bin/classes/templates
+          key: cache-kotlinc-${{ github.sha }}
+          enableCrossOsArchive: true
+          fail-on-cache-miss: true
+      - name: Generate bindings
+        run: ant -emacs clean-generated generate
+      - name: Build Java
+        run: ant -emacs compile
+      - name: Build & Test
+        uses: cross-platform-actions/action@v0.21.1
+        with:
+          operating_system: freebsd
+          architecture: x86-64
+          version: '13.2'
+          memory: 8G
+          shell: bash
+          environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
+          run: |
+            sudo pkg install -y openjdk8 apache-ant git gtk3 dbus
+            ant -emacs compile-native
+            ant -emacs tests
+            ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+
   macos:
     name: macOS
     needs: cache-kotlinc

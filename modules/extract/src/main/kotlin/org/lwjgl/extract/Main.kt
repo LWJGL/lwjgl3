@@ -44,6 +44,7 @@ class Application {
 
     companion object {
         val SHARED_LIBRARY_SUFFIX = when (Platform.get()) {
+            Platform.FREEBSD,
             Platform.LINUX   -> "so"
             Platform.MACOSX  -> "dylib"
             Platform.WINDOWS -> "dll"

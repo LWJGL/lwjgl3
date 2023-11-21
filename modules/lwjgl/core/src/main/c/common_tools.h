@@ -4,14 +4,17 @@
  */
 #pragma once
 
-#ifdef LWJGL_WINDOWS
-    #include "WindowsConfig.h"
+#ifdef LWJGL_FREEBSD
+    #include "FreeBSDConfig.h"
 #endif
 #ifdef LWJGL_LINUX
     #include "LinuxConfig.h"
 #endif
 #ifdef LWJGL_MACOS
     #include "macOSConfig.h"
+#endif
+#ifdef LWJGL_WINDOWS
+    #include "WindowsConfig.h"
 #endif
 
 DISABLE_WARNINGS()

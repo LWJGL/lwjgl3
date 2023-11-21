@@ -45,6 +45,7 @@ public final class CUDA {
 
     static {
         switch (Platform.get()) {
+            case FREEBSD:
             case LINUX:
                 TOOLKIT_DEFAULT_ROOT = "/usr/local/";
                 TOOLKIT_PREFIX = "cuda-";
@@ -118,6 +119,8 @@ public final class CUDA {
     private static String getToolkitLibrary(String name) {
         Path toolkit = getToolkitPath();
         switch (Platform.get()) {
+            case FREEBSD:
+                // fall-through
             case LINUX:
                 // fall-through
             case MACOSX:
@@ -137,6 +140,7 @@ public final class CUDA {
             if (basicFileAttributes.isRegularFile()) {
                 String fileName = path.getFileName().toString();
                 switch (Platform.get()) {
+                    case FREEBSD:
                     case LINUX:
                         if (fileName.startsWith("lib" + name) && fileName.endsWith(".so")) {
                             return true;

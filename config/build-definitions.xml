@@ -133,6 +133,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <isset property="env.LWJGL_BUILD_OFFLINE"/>
     </condition>
 
+    <condition property="platform.freebsd">
+        <os name="FreeBSD"/>
+    </condition>
     <condition property="platform.linux">
         <os name="Linux"/>
     </condition>
@@ -143,16 +146,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <os family="Windows"/>
     </condition>
 
+    <property name="platform" value="freebsd" if:set="platform.freebsd"/>
     <property name="platform" value="linux" if:set="platform.linux"/>
     <property name="platform" value="macos" if:set="platform.macos"/>
     <property name="platform" value="windows" if:set="platform.windows"/>
+    <fail message="Failed to detect a supported platform."><condition><not><isset property="platform"/></not></condition></fail>
 
     <property name="platform.remote" value="macosx" if:set="platform.macos"/>
     <property name="platform.remote" value="${platform}"/>
-
-    <property name="platform.linux.remote" value="linux"/>
-    <property name="platform.macos.remote" value="macosx"/>
-    <property name="platform.windows.remote" value="windows"/>
 
     <property name="lib.native" location="${lib}/native/${platform}/${build.arch}" relative="true"/>
 

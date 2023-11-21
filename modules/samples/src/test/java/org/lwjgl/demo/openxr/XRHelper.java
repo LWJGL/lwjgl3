@@ -160,6 +160,7 @@ final class XRHelper {
             );
         }
         switch (Platform.get()) {
+            case FREEBSD:
             case LINUX:
                 int platform = glfwGetPlatform();
                 if (platform == GLFW_PLATFORM_X11) {

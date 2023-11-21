@@ -15,11 +15,11 @@
  * 
  * <ul>
  * <li>--with-jemalloc-prefix=je_</li>
- * <li>--enable-lazy-lock (Linux)</li>
+ * <li>--enable-lazy-lock=no (FreeBSD)</li>
  * <li>--disable-stats</li>
  * <li>--disable-fill</li>
  * <li>--disable-cxx</li>
- * <li>--disable-initial-exec-tls (Linux &amp; macOS)</li>
+ * <li>--disable-initial-exec-tls (FreeBSD, Linux &amp; macOS)</li>
  * <li>--disable-zone-allocator (macOS)</li>
  * </ul>
  * 

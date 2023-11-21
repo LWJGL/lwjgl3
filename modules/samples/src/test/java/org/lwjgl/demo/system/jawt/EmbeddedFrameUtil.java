@@ -47,6 +47,7 @@ final class EmbeddedFrameUtil {
 
     private static String getEmbeddedFrameImpl() {
         switch (Platform.get()) {
+            case FREEBSD:
             case LINUX:
                 return "sun.awt.X11.XEmbeddedFrame";
             case MACOSX:
@@ -60,6 +61,7 @@ final class EmbeddedFrameUtil {
 
     private static long getEmbeddedFrameHandle(long window) {
         switch (Platform.get()) {
+            case FREEBSD:
             case LINUX:
                 return glfwGetX11Window(window);
             case MACOSX:

@@ -160,6 +160,7 @@ public class LWJGLCanvas extends Canvas {
 
             try {
                 switch (Platform.get()) {
+                    case FREEBSD:
                     case LINUX:
                         // Get the platform-specific drawing info
                         JAWTX11DrawingSurfaceInfo dsi_x11 = JAWTX11DrawingSurfaceInfo.create(dsi.platformInfo());

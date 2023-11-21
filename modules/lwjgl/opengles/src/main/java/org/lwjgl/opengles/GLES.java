@@ -80,6 +80,7 @@ public final class GLES {
     public static void create() {
         SharedLibrary GLES;
         switch (Platform.get()) {
+            case FREEBSD:
             case LINUX:
                 GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2.so.2");
                 break;

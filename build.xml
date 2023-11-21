@@ -222,14 +222,6 @@
             <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
             <compilerarg line="-jvm-target 1.8"/>
 
-            <src path="${core.kotlin.path}/jni"/>
-            <src path="${core.kotlin.path}/libc"/>
-            <src path="${core.kotlin.path}/libffi"/>
-            <src path="${core.kotlin.path}/linux"/>
-            <src path="${core.kotlin.path}/macos"/>
-            <src path="${core.kotlin.path}/templates"/>
-            <src path="${core.kotlin.path}/windows"/>
-
             <src path="${module.templatepath}"/>
 
             <src path="${module.lwjgl}/egl/src/templates/kotlin/egl/EGLTypes.kt" if:set="egl_types"/>
@@ -1037,6 +1029,7 @@
 
     <target name="upload-native" description="Uploads native build artifacts to build.lwjgl.org" depends="compile-native,-check-AWS-credentials">
         <local name="revision"/>
+        <property name="revision" value="liblwjgl.so.git" if:set="platform.freebsd"/>
         <property name="revision" value="liblwjgl.so.git" if:set="platform.linux"/>
         <property name="revision" value="liblwjgl.dylib.git" if:set="platform.macos"/>
         <property name="revision" value="lwjgl.dll.git" if:set="platform.windows"/>
@@ -1174,6 +1167,7 @@
         <attribute name="title"/>
         <attribute name="native-library"/>
         <element name="content" optional="true"/>
+        <element name="freebsd-content" optional="true"/>
         <element name="linux-content" optional="true"/>
         <element name="linux-arm64-content" optional="true"/>
         <element name="linux-arm32-content" optional="true"/>
@@ -1200,6 +1194,9 @@
             </condition>
 
             <parallel threadsPerProcessor="4" failonany="true">
+                <get-release platform="freebsd" arch="x64" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="freebsd" arch="x64" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
                 <get-release platform="linux" arch="x64" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="x64" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
@@ -1273,6 +1270,9 @@
 
                 <!-- Create native jar files -->
                 <parallel threadsPerProcessor="1" failonany="true">
+                    <natives-jar name="@{name}" title="@{title}" platform="freebsd" path="freebsd/x64" type="so">
+                        <freebsd-content/>
+                    </natives-jar>
                     <natives-jar name="@{name}" title="@{title}" platform="linux" path="linux/x64" type="so">
                         <linux-content/>
                     </natives-jar>
@@ -1313,6 +1313,7 @@
         <attribute name="title"/>
         <attribute name="native-library" default=""/>
         <element name="natives" optional="true"/>
+        <element name="freebsd" optional="true"/>
         <element name="linux" optional="true"/>
         <element name="linux-arm64" optional="true"/>
         <element name="linux-arm32" optional="true"/>
@@ -1342,6 +1343,7 @@
             <!-- Bundle natives -->
             <release-natives name="@{name}" title="@{title}" native-library="@{native-library}" unless:set="java-only.binding.@{name}">
                 <content><natives/></content>
+                <freebsd-content><freebsd/></freebsd-content>
                 <linux-content><linux/></linux-content>
                 <linux-arm64-content><linux-arm64/></linux-arm64-content>
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
@@ -1545,6 +1547,10 @@
         <!-- Assimp -->
         <release-module name="assimp" title="assimp" if:true="${binding.assimp}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libassimp.so"/>
+                <get-release platform="freebsd" arch="x64" file="libassimp.so.git"/>
+                <get-release platform="freebsd" arch="x64" file="libdraco.so"/>
+
                 <get-release platform="linux" arch="x64" file="libassimp.so"/>
                 <get-release platform="linux" arch="x64" file="libassimp.so.git"/>
                 <get-release platform="linux" arch="x64" file="libdraco.so"/>
@@ -1590,6 +1596,9 @@
         <!-- bgfx -->
         <release-module name="bgfx" title="bgfx" if:true="${binding.bgfx}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libbgfx.so"/>
+                <get-release platform="freebsd" arch="x64" file="libbgfx.so.git"/>
+
                 <get-release platform="linux" arch="x64" file="libbgfx.so"/>
                 <get-release platform="linux" arch="x64" file="libbgfx.so.git"/>
 
@@ -1634,6 +1643,9 @@
         <!-- GLFW -->
         <release-module name="glfw" title="GLFW" if:true="${binding.glfw}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libglfw.so"/>
+                <get-release platform="freebsd" arch="x64" file="libglfw.so.git"/>
+
                 <get-release platform="linux" arch="x64" file="libglfw.so"/>
                 <get-release platform="linux" arch="x64" file="libglfw.so.git"/>
 
@@ -1685,13 +1697,17 @@
         <!-- KTX -->
         <release-module name="ktx" title="KTX" if:true="${binding.ktx}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libktx.so"/>
+
                 <get-release platform="linux" arch="x64" file="libktx.so"/>
                 <get-release platform="linux" arch="arm64" file="libktx.so"/>
                 <get-release platform="linux" arch="arm32" file="libktx.so"/>
                 <get-release platform="linux" arch="ppc64le" file="libktx.so"/>
                 <get-release platform="linux" arch="riscv64" file="libktx.so"/>
+
                 <get-release platform="macos" arch="x64" file="libktx.dylib"/>
                 <get-release platform="macos" arch="arm64" file="libktx.dylib"/>
+
                 <get-release platform="windows" arch="x64" file="ktx.dll"/>
                 <get-release platform="windows" arch="arm64" file="ktx.dll"/>
             </natives>
@@ -1712,10 +1728,14 @@
         <!-- Meow hash -->
         <release-module name="meow" title="Meow hash" if:true="${binding.meow}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_meow.so"/>
+
                 <get-release platform="linux" arch="x64" file="liblwjgl_meow.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_meow.so"/>
+
                 <get-release platform="macos" arch="x64" file="liblwjgl_meow.dylib"/>
                 <get-release platform="macos" arch="arm64" file="liblwjgl_meow.dylib"/>
+
                 <get-release platform="windows" arch="x64" file="lwjgl_meow.dll"/>
                 <get-release platform="windows" arch="x86" file="lwjgl_meow.dll"/>
                 <get-release platform="windows" arch="arm64" file="lwjgl_meow.dll"/>
@@ -1731,6 +1751,8 @@
         <!-- Native File Dialog -->
         <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_nfd_portal.so"/>
+
                 <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so"/>
                 <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so"/>
@@ -1748,6 +1770,9 @@
         <!-- OpenAL -->
         <release-module name="openal" title="OpenAL" if:true="${binding.openal}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libopenal.so"/>
+                <get-release platform="freebsd" arch="x64" file="libopenal.so.git"/>
+
                 <get-release platform="linux" arch="x64" file="libopenal.so"/>
                 <get-release platform="linux" arch="x64" file="libopenal.so.git"/>
 
@@ -1813,6 +1838,9 @@
         <!-- OpenXR -->
         <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="libopenxr_loader.so"/>
+                <get-release platform="freebsd" arch="x64" file="libopenxr_loader.so.git"/>
+
                 <get-release platform="linux" arch="x64" file="libopenxr_loader.so"/>
                 <get-release platform="linux" arch="x64" file="libopenxr_loader.so.git"/>
 
@@ -1856,6 +1884,8 @@
         <!-- Remotery -->
         <release-module name="remotery" title="remotery" if:true="${binding.remotery}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_remotery.so"/>
+
                 <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so"/>
@@ -1882,8 +1912,12 @@
         <!-- SSE -->
         <release-module name="sse" title="SSE" if:true="${binding.sse}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_sse.so"/>
+
                 <get-release platform="linux" arch="x64" file="liblwjgl_sse.so"/>
+
                 <get-release platform="macos" arch="x64" file="liblwjgl_sse.dylib"/>
+
                 <get-release platform="windows" arch="x64" file="lwjgl_sse.dll"/>
                 <get-release platform="windows" arch="x86" file="lwjgl_sse.dll"/>
             </natives>
@@ -1901,8 +1935,12 @@
         <!-- AMD Tootle -->
         <release-module name="tootle" title="tootle" if:true="${binding.tootle}">
             <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_tootle.so"/>
+
                 <get-release platform="linux" arch="x64" file="liblwjgl_tootle.so"/>
+
                 <get-release platform="macos" arch="x64" file="liblwjgl_tootle.dylib"/>
+
                 <get-release platform="windows" arch="x64" file="lwjgl_tootle.dll"/>
                 <get-release platform="windows" arch="x86" file="lwjgl_tootle.dll"/>
             </natives>

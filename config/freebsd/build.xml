@@ -2,29 +2,14 @@
   ~ Copyright LWJGL. All rights reserved.
   ~ License terms: https://www.lwjgl.org/license
   -->
-<project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="native-freebsd" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
-
-    <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-    <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
-    <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.ppc64le"/></condition>
-    <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
-    <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
-
-    <condition property="gcc.prefix" value="" else="${linux.triplet}-">
-        <isset property="build.arch.x64|x86"/>
-    </condition>
-    <condition property="gcc.suffix" value="-${gcc.version}" else="">
-        <isset property="gcc.version"/>
-    </condition>
 
     <property name="module.lwjgl.rel" value="../../../../${module.lwjgl}"/>
 
     <macrodef name="compile">
         <attribute name="dest" default="${dest}"/>
         <attribute name="lang" default="c"/>
-        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <attribute name="flags" default=""/>
         <attribute name="simple" default="false"/>
         <attribute name="relative" default="true"/>
@@ -32,22 +17,22 @@
         <sequential>
             <local name="cpp"/>
             <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
-            <local name="gcc"/>
-            <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
+            <local name="clang"/>
+            <condition property="clang" value="clang" else="clang++"><equals arg1="@{lang}" arg2="c"/></condition>
+
             <mkdir dir="@{dest}"/>
-            <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-                <arg line="-c -std=gnu11" unless:set="cpp"/>
-                <arg line="-c -std=gnu++14" if:set="cpp"/>
+            <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+                <arg line="-c -std=c11" unless:set="cpp"/>
+                <arg line="-c -std=c++17" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
-                <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
-                <arg line="-mcpu=powerpc64le" if:set="build.arch.ppc64le"/>
-                <arg line="-march=rv64g" if:set="build.arch.riscv64"/>
-                <arg line="-O3 -flto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
-                <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE"/>
+                <arg line="-O3 -flto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_FREEBSD -DLWJGL_${build.arch}"/>
+                <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_BSD_SOURCE"/>
                 <arg line="-D_FILE_OFFSET_BITS=64"/>
 
+                <arg value="-I/usr/local/include"/>
+
                 <arg value="-I${jni.headers}"/>
-                <arg value="-I${jni.headers}/linux"/>
+                <arg value="-I${jni.headers}/freebsd"/>
 
                 <arg value="-I${module.lwjgl.rel}/core/src/main/c"/>
                 <arg value="-I${module.lwjgl.rel}/core/src/main/c/${platform}"/>
@@ -65,10 +50,8 @@
     <macrodef name="build">
         <attribute name="module"/>
         <attribute name="suffix" default=""/>
-        <attribute name="linker" default="gcc"/>
+        <attribute name="linker" default="clang"/>
         <attribute name="lang" default="c"/>
-        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <attribute name="flags" default="-Werror -Wfatal-errors"/>
         <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
@@ -92,7 +75,7 @@
             <property name="dest" value="${bin.native}/@{module}@{suffix}"/>
 
             <beforeCompile/>
-            <compile lang="@{lang}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" flags="@{flags}" simple="@{simple}">
+            <compile lang="@{lang}" flags="@{flags}" simple="@{simple}">
                 <source/>
             </compile>
 
@@ -101,7 +84,7 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.so">
-                <srcfiles file="config/${platform}/build.xml"/>
+                <!--<srcfiles file="config/${platform}/build.xml"/>-->
                 <srcfiles dir="${dest}" includes="**"/>
             </uptodate>
             <local name="lib-dependencies-uptodate"/>
@@ -115,22 +98,17 @@
             <local name="version.script"/>
             <property name="version.script" location="config/${platform}/version.script"/>
 
-            <local name="gcc"/>
-            <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}">
-                <and>
-                    <equals arg1="@{lang}" arg2="c"/>
-                    <equals arg1="@{linker}" arg2="gcc"/>
-                </and>
-            </condition>
+            <local name="clang"/>
+            <condition property="clang" value="@{linker}"><not><equals arg1="@{linker}" arg2="clang"/></not></condition>
+            <condition property="clang" value="clang" else="clang++"><equals arg1="@{lang}" arg2="c"/></condition>
 
-            <echo message="Linking ${name}" taskname="${gcc}" unless:set="lib-uptodate"/>
+            <echo message="Linking ${name}" taskname="${clang}" unless:set="lib-uptodate"/>
             <mkdir dir="${lib.arch}" unless:set="lib-uptodate"/>
             <beforeLink unless:set="lib-uptodate"/>
-            <apply executable="${gcc}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+            <apply executable="${clang}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
                 <arg value="-m64" if:set="build.arch.x64"/>
-                <arg value="-m32" if:set="build.arch.x86"/>
 
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib.arch}/lib${name}.so"/>
@@ -141,7 +119,7 @@
                 <link/>
             </apply>
 
-            <apply executable="${gcc.prefix}strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+            <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
                 <filelist dir="${lib.arch}" files="lib${name}.so"/>
             </apply>
             <delete file="${lib.native}/touch.txt" quiet="true" unless:set="lib-uptodate"/>
@@ -150,43 +128,30 @@
 
     <macrodef name="build_simple">
         <attribute name="module"/>
-        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <sequential>
-            <build module="@{module}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" simple="true" if:true="${binding.@{module}}"/>
+            <build module="@{module}" simple="true" if:true="${binding.@{module}}"/>
         </sequential>
     </macrodef>
 
     <target name="compile-native-platform">
-        <local name="gcc.version.string"/>
-        <exec executable="bash" outputproperty="gcc.version.string" logError="true" failonerror="true">
+        <local name="clang.version.string"/>
+        <exec executable="sh" outputproperty="clang.version.string" logError="true" failonerror="true">
             <arg line="-o pipefail -c"/>
-            <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^.*gcc"/>
+            <arg value='clang --version | grep "clang version"'/>
         </exec>
-        <echo message='${gcc.prefix}gcc${gcc.suffix} --version: "${gcc.version.string}"' taskname="Compiler"/>
+        <echo message="${clang.version.string}" taskname="Compiler"/>
 
-        <parallel threadsPerProcessor="2">
+        <!--<parallel threadsPerProcessor="2">-->
 
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
-            <beforeCompile>
-                <compile>
-                    <arg value="-I${src.main.rel}/${platform}/liburing"/>
-                    <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
-                    <arg value="-DCONFIG_HAVE_MEMFD_CREATE"/>
-                    <fileset dir="." includes="${src.main}/${platform}/liburing/*.c"/>
-                </compile>
-            </beforeCompile>
             <source>
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
-                <arg value="-I${src.main.rel}/libffi/ppc64le" if:set="build.arch.ppc64le"/>
-                <arg value="-I${src.main.rel}/libffi/riscv64" if:set="build.arch.riscv64"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
-                <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
-                <arg value="-I${src.main.rel}/${platform}/liburing"/>
-                <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
+                <!-- for libffi/x86/ffitarget.h -->
+                <arg value="-DX86_64" if:set="build.arch.x64"/>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
                     <include name="${src.generated}/*.c"/>
@@ -218,7 +183,6 @@
             <beforeCompile>
                 <compile>
                     <arg value="-I${src.main.rel}"/>
-                    <arg value="-DMDB_USE_ROBUST=0"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
                 </compile>
             </beforeCompile>
@@ -258,7 +222,7 @@
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">
             <source>
-                <arg value="-isystem${module.lwjgl.rel}/stb/src/main/c"/>
+                <arg value="-I${module.lwjgl.rel}/stb/src/main/c"/>
             </source>
             <link>
                 <arg value="-lm"/>
@@ -266,18 +230,17 @@
         </build>
 
         <!-- NativeFileDialog -->
-        <build module="nfd" simple="true" linker="g++" if:true="${binding.nfd}">
+        <build module="nfd" simple="true" linker="clang++" if:true="${binding.nfd}">
             <beforeCompile>
                 <compile lang="c++">
-                    <arg value="-I/usr/include/gtk-3.0"/>
-                    <arg value="-I/usr/include/glib-2.0"/>
-                    <arg value="-I/usr/include/pango-1.0"/>
-                    <arg value="-I/usr/include/harfbuzz"/>
-                    <arg value="-I/usr/include/cairo"/>
-                    <arg value="-I/usr/include/gdk-pixbuf-2.0"/>
-                    <arg value="-I/usr/include/atk-1.0"/>
-                    <arg value="-I/usr/lib64/glib-2.0/include"/>
-                    <arg value="-I/usr/lib/${linux.triplet}/glib-2.0/include"/>
+                    <arg value="-I/usr/local/include/gtk-3.0"/>
+                    <arg value="-I/usr/local/include/glib-2.0"/>
+                    <arg value="-I/usr/local/include/pango-1.0"/>
+                    <arg value="-I/usr/local/include/harfbuzz"/>
+                    <arg value="-I/usr/local/include/cairo"/>
+                    <arg value="-I/usr/local/include/gdk-pixbuf-2.0"/>
+                    <arg value="-I/usr/local/include/atk-1.0"/>
+                    <arg value="-I/usr/local/lib/glib-2.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_gtk.cpp"/>
                 </compile>
@@ -286,16 +249,17 @@
                 <arg value="-I${src.main.rel}/include"/>
             </source>
             <link>
+                <arg value="-L/usr/local/lib"/>
                 <arg value="-lglib-2.0"/>
                 <arg value="-lgobject-2.0"/>
                 <arg value="-lgtk-3"/>
                 <arg value="-lgdk-3"/>
             </link>
         </build>
-        <build module="nfd" suffix="_portal" simple="true" linker="g++" if:true="${binding.nfd}">
+        <build module="nfd" suffix="_portal" simple="true" linker="clang++" if:true="${binding.nfd}">
             <beforeCompile>
                 <compile lang="c++">
-                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
+                    <arg line="-I/usr/local/include/dbus-1.0 -I/usr/local/lib/dbus-1.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_portal.cpp"/>
                 </compile>
@@ -304,6 +268,7 @@
                 <arg value="-I${src.main.rel}/include"/>
             </source>
             <link>
+                <arg value="-L/usr/local/lib"/>
                 <arg value="-ldbus-1"/>
             </link>
         </build>
@@ -330,7 +295,7 @@
         <build_simple module="openvr"/>
 
         <!-- Par -->
-        <build simple="true" module="par">
+        <build simple="true" flags="-Werror -Wfatal-errors -Wno-implicit-const-int-float-conversion" module="par">
             <link>
                 <arg value="-lm"/>
             </link>
@@ -345,8 +310,8 @@
             <link>
                 <arg value="-ldl"/>
                 <arg value="-lm"/>
-                <arg value="-l:libGL.so.1" unless:set="gcc.libpath.opengl"/>
-                <arg line="-L ${gcc.libpath.opengl} -l:libGL.so.1" if:set="gcc.libpath.opengl"/>
+                <arg value="-L/usr/local/lib"/>
+                <arg value="-lGL"/>
             </link>
         </build>
 
@@ -361,18 +326,14 @@
         </build>
 
         <!-- stb -->
-        <build module="stb" if:true="${binding.stb}">
-            <source>
-                <arg value="-isystem${src.main.rel}"/>
-                <fileset dir="." includes="${src.generated}/*.c"/>
-            </source>
+        <build module="stb" simple="true" if:true="${binding.stb}">
             <link>
                 <arg value="-lm"/>
             </link>
         </build>
 
         <!-- tinyexr -->
-        <build module="tinyexr" simple="true" linker="g++" if:true="${binding.tinyexr}">
+        <build module="tinyexr" simple="true" linker="clang++" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
@@ -427,15 +388,12 @@
         </build>
 
         <!-- Vulkan Memory Allocator -->
-        <build module="vma" lang="c++" if:true="${binding.vma}">
+        <build module="vma" lang="c++" flags="-Werror -Wfatal-errors -Wno-nullability-completeness" if:true="${binding.vma}">
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
                 <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
-            <link>
-                <arg value="-latomic" if:set="build.arch.arm"/>
-            </link>
         </build>
 
         <!-- xxHash -->
@@ -470,7 +428,7 @@
             </source>
         </build>
 
-        </parallel>
+        <!--</parallel>-->
 
         <local name="native-dependencies-uptodate"/>
         <condition property="native-dependencies-uptodate" value="true">
@@ -495,7 +453,7 @@
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="ktx" artifact="libktx.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>
-            <update-dependency module="openvr" artifact="libopenvr_api.so"/>
+            <!--<update-dependency module="openvr" artifact="libopenvr_api.so"/>-->
             <update-dependency module="openxr" artifact="libopenxr_loader.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>
             <update-dependency module="shaderc" artifact="libshaderc.so"/>

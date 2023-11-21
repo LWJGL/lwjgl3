@@ -142,6 +142,7 @@ public final class HelloBGFXMT implements AutoCloseable {
                         .reset(BGFX_RESET_VSYNC));
 
                 switch (Platform.get()) {
+                    case FREEBSD:
                     case LINUX:
                         init.platformData()
                             .ndt(GLFWNativeX11.glfwGetX11Display())
