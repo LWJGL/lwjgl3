@@ -160,7 +160,6 @@ val NV_copy_memory_indirect = "NVCopyMemoryIndirect".nativeClassVK("NV_copy_memo
             <li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} at the time this command is executed on a {@code VkDevice}</li>
             <li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, #IMAGE_LAYOUT_SHARED_PRESENT_KHR, or #IMAGE_LAYOUT_GENERAL</li>
             <li>The specified {@code mipLevel} of each region <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code dstImage} was created</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-maintenance5">{@code maintenance5}</a> feature is not enabled, {@code layerCount} <b>must</b> not be #REMAINING_ARRAY_LAYERS</li>
             <li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, the specified {@code baseArrayLayer} + {@code layerCount} of each region <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code dstImage} was created</li>
             <li>The {@code imageOffset} and {@code imageExtent} members of each region <b>must</b> respect the image transfer granularity requirements of {@code commandBuffer}’s command pool’s queue family, as described in ##VkQueueFamilyProperties</li>
             <li>{@code dstImage} <b>must</b> not have been created with {@code flags} containing #IMAGE_CREATE_SUBSAMPLED_BIT_EXT</li>

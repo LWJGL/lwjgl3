@@ -5609,6 +5609,25 @@ val VkSubpassEndInfoKHR = struct(Module.VULKAN, "VkSubpassEndInfoKHR", alias = V
     nullable..opaque_const_p("pNext", "")
 }
 
+val VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG = struct(Module.VULKAN, "VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG") {
+    documentation =
+        """
+        Structure describing relaxed line rasterization features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("relaxedLineRasterization", "indicates that the implementation supports relaxed line rasterization control.")
+}
+
 val VkSharedPresentSurfaceCapabilitiesKHR = struct(Module.VULKAN, "VkSharedPresentSurfaceCapabilitiesKHR", mutable = false) {
     documentation =
         """
@@ -14861,7 +14880,7 @@ val VkPhysicalDeviceCudaKernelLaunchPropertiesNV = struct(Module.VULKAN, "VkPhys
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV")..VkStructureType("sType", "").mutable()
     nullable..opaque_p("pNext", "").mutable()
     uint32_t("computeCapabilityMinor", "indicates the minor version number of the compute code.")
-    uint32_t("computeCapabilityMajor", "indicates the minor version number of the compute code.")
+    uint32_t("computeCapabilityMajor", "indicates the major version number of the compute code.")
 }
 
 val VkQueryLowLatencySupportNV = struct(Module.VULKAN, "VkQueryLowLatencySupportNV") {
@@ -15454,6 +15473,11 @@ val VkDescriptorBufferBindingPushDescriptorBufferHandleEXT = struct(Module.VULKA
         """
         Structure specifying push descriptor buffer binding information.
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-bufferlessPushDescriptors">##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::bufferlessPushDescriptors}</a> <b>must</b> be #FALSE</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT</li>
@@ -15461,9 +15485,9 @@ val VkDescriptorBufferBindingPushDescriptorBufferHandleEXT = struct(Module.VULKA
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
-    VkBuffer("buffer", "")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBuffer("buffer", "the {@code VkBuffer} handle of the buffer for push descriptors.")
 }
 
 val VkDescriptorDataEXT = union(Module.VULKAN, "VkDescriptorDataEXT") {
@@ -15526,6 +15550,8 @@ val VkDescriptorGetInfoEXT = struct(Module.VULKAN, "VkDescriptorGetInfoEXT") {
             <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pStorageTexelBuffer} is not {@code NULL} and {@code pStorageTexelBuffer→address} is not zero, {@code pStorageTexelBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, {@code pUniformBuffer} is not {@code NULL} and {@code pUniformBuffer→address} is not zero, {@code pUniformBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_BUFFER, {@code pStorageBuffer} is not {@code NULL} and {@code pStorageBuffer→address} is not zero, {@code pStorageBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, {@code pUniformBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pUniformBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility">Compatible Formats</a> table for {@code pUniformBuffer→format}, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pStorageBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pStorageBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility">Compatible Formats</a> table for {@code pStorageBuffer→format}, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR and {@code accelerationStructure} is not 0, {@code accelerationStructure} <b>must</b> contain the address of a {@code VkAccelerationStructureKHR} created on {@code device}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV and {@code accelerationStructure} is not 0, {@code accelerationStructure} <b>must</b> contain the handle of a {@code VkAccelerationStructureNV} created on {@code device}, returned by #GetAccelerationStructureHandleNV()</li>
         </ul>
@@ -19052,6 +19078,9 @@ val VkComputePipelineIndirectBufferInfoNV = struct(Module.VULKAN, "VkComputePipe
         """
         Structure describing the device address where pipeline’s metadata will be saved.
 
+        <h5>Description</h5>
+        If {@code pipelineDeviceAddressCaptureReplay} is zero, no specific address is requested. If {@code pipelineDeviceAddressCaptureReplay} is not zero, then it <b>must</b> be an address retrieved from an identically created pipeline on the same implementation. The pipeline metadata <b>must</b> also be placed on an identically created buffer and at the same offset using the #CmdUpdatePipelineIndirectBufferNV() command.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedComputePipelines">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedComputePipelines}</a> feature <b>must</b> be enabled</li>
@@ -19072,17 +19101,24 @@ val VkComputePipelineIndirectBufferInfoNV = struct(Module.VULKAN, "VkComputePipe
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV")..VkStructureType("sType", "")
-    nullable..opaque_const_p("pNext", "")
-    VkDeviceAddress("deviceAddress", "")
-    VkDeviceSize("size", "")
-    VkDeviceAddress("pipelineDeviceAddressCaptureReplay", "")
+    Expression("#STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkDeviceAddress("deviceAddress", "the address where the pipeline’s metadata will be stored.")
+    VkDeviceSize("size", "the size of pipeline’s metadata that was queried using #GetPipelineIndirectMemoryRequirementsNV().")
+    VkDeviceAddress("pipelineDeviceAddressCaptureReplay", "the device address where pipeline’s metadata was originally saved and can now be used to re-populate {@code deviceAddress} for replay.")
 }
 
 val VkPipelineIndirectDeviceAddressInfoNV = struct(Module.VULKAN, "VkPipelineIndirectDeviceAddressInfoNV") {
     documentation =
         """
         Structure specifying the pipeline to query an address for.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The provided {@code pipelineBindPoint} <b>must</b> be of type #PIPELINE_BIND_POINT_COMPUTE</li>
+            <li>{@code pipeline} <b>must</b> have been created with flag #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV set</li>
+            <li>{@code pipeline} <b>must</b> have been created with a ##VkComputePipelineIndirectBufferInfoNV structure specifying a valid address where its metadata will be saved</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -19096,12 +19132,10 @@ val VkPipelineIndirectDeviceAddressInfoNV = struct(Module.VULKAN, "VkPipelineInd
         #GetPipelineIndirectDeviceAddressNV()
         """
 
-    Expression("#STRUCTURE_TYPE_PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV")..VkStructureType("sType", "")
-    nullable..opaque_const_p("pNext", "")
-    VkPipelineBindPoint("pipelineBindPoint", "")
-    VkPipeline("pipeline", """<b>must</b> have been created with flag #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV set
-
-        <b>must</b> have been created with a ##VkComputePipelineIndirectBufferInfoNV structure specifying a valid address where its metadata will be saved""")
+    Expression("#STRUCTURE_TYPE_PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkPipelineBindPoint("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying the type of pipeline whose device address is being queried.")
+    VkPipeline("pipeline", "specifies the pipeline whose device address is being queried.")
 }
 
 val VkBindPipelineIndirectCommandNV = struct(Module.VULKAN, "VkBindPipelineIndirectCommandNV") {
@@ -19726,7 +19760,7 @@ val VkDirectDriverLoadingListLUNARG = struct(Module.VULKAN, "VkDirectDriverLoadi
         """
 
     Expression("#STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDirectDriverLoadingModeLUNARG("mode", "controls the mode in which to load the provided drivers.")
     AutoSize("pDrivers")..uint32_t("driverCount", "the number of driver manifest paths.")
     VkDirectDriverLoadingInfoLUNARG.const.p("pDrivers", "a pointer to an array of {@code driverCount} ##VkDirectDriverLoadingInfoLUNARG structures.")
@@ -21027,6 +21061,8 @@ val VkCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkCooperativeMatri
 
         At least one entry in the list <b>must</b> have power of two values for all of {@code MSize}, {@code KSize}, and {@code NSize}.
 
+        {@code scope} <b>must</b> be #SCOPE_SUBGROUP_KHR.
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR</li>
@@ -21081,6 +21117,8 @@ val VkPhysicalDeviceCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkPh
         Structure describing cooperative matrix properties supported by an implementation.
 
         <h5>Description</h5>
+        {@code cooperativeMatrixSupportedStages} <b>must</b> not have any bits other than #SHADER_STAGE_COMPUTE_BIT set.
+
         If the ##VkPhysicalDeviceCooperativeMatrixPropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
 
         <h5>Valid Usage (Implicit)</h5>

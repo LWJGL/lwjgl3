@@ -36,6 +36,9 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a> or {@link KHRTimelineSemaphore VK_KHR_timeline_semaphore}</dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Charles Hansen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_low_latency2]%20@cshansen%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_low_latency2%20extension*">cshansen</a></li>
@@ -155,7 +158,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 ￿    const VkLatencySleepModeInfoNV*             pSleepModeInfo);</code></pre>
 
         <h5>Description</h5>
-        If {@code pSleepModeInfo} is {@code NULL}, {@code vkSetLatencySleepModeNV} will disable low latency mode, low latency boost, and set the minimum present interval previously specified by ##VkLatencySleepModeInfoNV to zero on {@code swapchain}.
+        If {@code pSleepModeInfo} is {@code NULL}, {@code vkSetLatencySleepModeNV} will disable low latency mode, low latency boost, and set the minimum present interval previously specified by ##VkLatencySleepModeInfoNV to zero on {@code swapchain}. As an exception to the normal rules for objects which are externally synchronized, the swapchain passed to {@code vkSetLatencySleepModeNV} <b>may</b> be simultaneously used by other threads in calls to functions other than #DestroySwapchainKHR(). Access to the swapchain data associated with this extension <b>must</b> be atomic within the implementation.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -249,7 +252,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 ￿    const VkSetLatencyMarkerInfoNV*             pLatencyMarkerInfo);</code></pre>
 
         <h5>Description</h5>
-        At the beginning and end of simulation and render threads and beginning and end of #QueuePresentKHR() calls, {@code vkSetLatencyMarkerNV} <b>can</b> be called to provide timestamps for the application’s reference. These timestamps are returned with a call to #GetLatencyTimingsNV() alongside driver provided timestamps at various points of interest with regards to latency within the application.
+        At the beginning and end of simulation and render threads and beginning and end of #QueuePresentKHR() calls, {@code vkSetLatencyMarkerNV} <b>can</b> be called to provide timestamps for the application’s reference. These timestamps are returned with a call to #GetLatencyTimingsNV() alongside driver provided timestamps at various points of interest with regards to latency within the application. As an exception to the normal rules for objects which are externally synchronized, the swapchain passed to {@code vkSetLatencyMarkerNV} <b>may</b> be simultaneously used by other threads in calls to functions other than #DestroySwapchainKHR(). Access to the swapchain data associated with this extension <b>must</b> be atomic within the implementation.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

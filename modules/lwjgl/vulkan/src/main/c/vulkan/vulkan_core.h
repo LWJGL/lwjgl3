@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 269
+#define VK_HEADER_VERSION 270
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -611,6 +611,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT = 1000102000,
     VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT = 1000102001,
     VK_STRUCTURE_TYPE_HDR_METADATA_EXT = 1000105000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG = 1000110000,
     VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR = 1000111000,
     VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR = 1000114000,
     VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR = 1000114001,
@@ -11913,6 +11914,18 @@ VKAPI_ATTR void VKAPI_CALL vkSetHdrMetadataEXT(
 #endif
 
 
+// VK_IMG_relaxed_line_rasterization is a preprocessor guard. Do not pass it to API calls.
+#define VK_IMG_relaxed_line_rasterization 1
+#define VK_IMG_RELAXED_LINE_RASTERIZATION_SPEC_VERSION 1
+#define VK_IMG_RELAXED_LINE_RASTERIZATION_EXTENSION_NAME "VK_IMG_relaxed_line_rasterization"
+typedef struct VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           relaxedLineRasterization;
+} VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG;
+
+
+
 // VK_EXT_external_memory_dma_buf is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_external_memory_dma_buf 1
 #define VK_EXT_EXTERNAL_MEMORY_DMA_BUF_SPEC_VERSION 1
@@ -17278,7 +17291,7 @@ typedef struct VkDirectDriverLoadingInfoLUNARG {
 
 typedef struct VkDirectDriverLoadingListLUNARG {
     VkStructureType                           sType;
-    void*                                     pNext;
+    const void*                               pNext;
     VkDirectDriverLoadingModeLUNARG           mode;
     uint32_t                                  driverCount;
     const VkDirectDriverLoadingInfoLUNARG*    pDrivers;

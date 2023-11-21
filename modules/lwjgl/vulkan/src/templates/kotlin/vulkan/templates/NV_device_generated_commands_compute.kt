@@ -194,6 +194,11 @@ val NV_device_generated_commands_compute = "NVDeviceGeneratedCommandsCompute".na
 ￿    VkDevice                                    device,
 ￿    const VkPipelineIndirectDeviceAddressInfoNV* pInfo);</code></pre>
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedComputePipelines">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedComputePipelines}</a> feature <b>must</b> be enabled</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -204,7 +209,7 @@ val NV_device_generated_commands_compute = "NVDeviceGeneratedCommandsCompute".na
         ##VkPipelineIndirectDeviceAddressInfoNV
         """,
 
-        VkDevice("device", ""),
-        VkPipelineIndirectDeviceAddressInfoNV.const.p("pInfo", "")
+        VkDevice("device", "the logical device on which the pipeline was created."),
+        VkPipelineIndirectDeviceAddressInfoNV.const.p("pInfo", "a pointer to a ##VkPipelineIndirectDeviceAddressInfoNV structure specifying the pipeline to retrieve the address for.")
     )
 }
