@@ -9,8 +9,8 @@ import nanovg.*
 import java.io.*
 
 val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG, prefix = "NVG", binding = object : SimpleBinding(Module.NANOVG, "BGFX.getLibrary()") {
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from bgfx. */")
+    override fun generateFunctionSetup(writer:PrintWriter, nativeClass: NativeClass) {
+        writer.generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from bgfx. */")
     }
 }) {
     documentation = "Implementation of the NanoVG API using bgfx."

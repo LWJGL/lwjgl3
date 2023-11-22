@@ -110,7 +110,7 @@ abstract class SimpleBinding(
         writer.println("$t${t}long ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
     }
 
-    abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
+    abstract fun generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass)
 
     protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass, javadoc: String) {
         val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has<Macro>() }
@@ -138,27 +138,31 @@ abstract class SimpleBinding(
     }""")
     }
 }
-// TODO: Remove if KT-7859 is fixed.
-private fun SimpleBinding.generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
 fun simpleBinding(
     module: Module,
     libraryName: String = module.name.lowercase(),
     libraryExpression: String = "\"$libraryName\"",
-    bundledWithLWJGL: Boolean = false
+    bundledWithLWJGL: Boolean = false,
+    preamble: String? = null
 ) = object : SimpleBinding(module, libraryName.uppercase()) {
     // TODO: Sync HARFBUZZ_BINDING if this changes
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
+    override fun generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) {
         val libraryReference = libraryName.uppercase()
 
-        println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, \"${module.java}\", $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
-        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
-        println("""
+        with(writer) {
+            if (preamble != null) {
+                println(preamble)
+            }
+            println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, \"${module.java}\", $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
+            generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
+            println("""
     /** Returns the $libraryName {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return $libraryReference;
     }""")
+        }
     }
 }
 
@@ -166,8 +170,8 @@ fun simpleBinding(
 fun APIBinding.delegate(
     libraryExpression: String
 ) = object : SimpleBinding(module, libraryExpression) {
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
+    override fun generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) {
+        writer.generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
     }
 }
 

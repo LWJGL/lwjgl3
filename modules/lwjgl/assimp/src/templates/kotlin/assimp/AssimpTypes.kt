@@ -8,11 +8,12 @@ import org.lwjgl.generator.*
 import java.io.*
 
 val ASSIMP_BINDING = object : SimpleBinding(Module.ASSIMP, "ASSIMP") {
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n${t}private static final SharedLibrary DRACO = Library.loadNative(Assimp.class, \"${module.java}\", Configuration.ASSIMP_DRACO_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(\"draco\")), true);")
-        println("${t}private static final SharedLibrary ASSIMP = Library.loadNative(Assimp.class, \"${module.java}\", Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(\"assimp\")), true);")
-        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the assimp {@link SharedLibrary}. */")
-        println("""
+    override fun generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) {
+        with(writer) {
+            println("\n${t}private static final SharedLibrary DRACO = Library.loadNative(Assimp.class, \"${module.java}\", Configuration.ASSIMP_DRACO_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(\"draco\")), true);")
+            println("${t}private static final SharedLibrary ASSIMP = Library.loadNative(Assimp.class, \"${module.java}\", Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(\"assimp\")), true);")
+            generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the assimp {@link SharedLibrary}. */")
+            println("""
     /** Returns the assimp {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return ASSIMP;
@@ -22,6 +23,7 @@ val ASSIMP_BINDING = object : SimpleBinding(Module.ASSIMP, "ASSIMP") {
     public static SharedLibrary getDraco() {
         return DRACO;
     }""")
+        }
     }
 }
 

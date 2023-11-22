@@ -21,6 +21,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class FSBank {
 
+    static {
+        // Make sure fmod is loaded first, fsbank depends on it.
+        FMOD.getLibrary();
+    }
+
     private static final SharedLibrary FSBANK = Library.loadNative(FSBank.class, "org.lwjgl.fmod", Configuration.FMOD_FSBANK_LIBRARY_NAME, "fsbank");
 
     /** Contains the function pointers loaded from the FSBANK {@link SharedLibrary}. */

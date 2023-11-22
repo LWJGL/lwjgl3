@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.fmod.FMOD.*;
 import static org.lwjgl.fmod.FMODStudio.*;
+import static org.lwjgl.fmod.FSBank.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -36,6 +37,13 @@ public class HelloFMOD {
 
                 check(FMOD_Studio_System_Initialize(studio, 2, 0, 0, NULL));
                 check(FMOD_Studio_System_Release(studio));
+            }
+
+            // Test FSBank
+            {
+                check(FSBank_Init(FSBANK_FSBVERSION_FSB5, FSBANK_INIT_NORMAL, 1, (String)null));
+
+                check(FSBank_Release());
             }
         }
 

@@ -11,7 +11,15 @@ val FSBank = "FSBank".nativeClass(
     Module.FMOD,
     prefix = "FSBANK_",
     prefixMethod = "FSBank_",
-    binding = simpleBinding(Module.FMOD, libraryName = "FSBANK", libraryExpression = "Configuration.FMOD_FSBANK_LIBRARY_NAME, \"fsbank\"")
+    binding = simpleBinding(
+        Module.FMOD,
+        libraryName = "FSBANK",
+        libraryExpression = "Configuration.FMOD_FSBANK_LIBRARY_NAME, \"fsbank\"",
+        preamble = """
+    static {
+        // Make sure fmod is loaded first, fsbank depends on it.
+        FMOD.getLibrary();
+    }""")
 ) {
 
     IntConstant("", "INIT_NORMAL"..0x00000000)

@@ -23,6 +23,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class FMODStudio {
 
+    static {
+        // Make sure fmod is loaded first, fmodstudio depends on it.
+        FMOD.getLibrary();
+    }
+
     private static final SharedLibrary FMODSTUDIO = Library.loadNative(FMODStudio.class, "org.lwjgl.fmod", Configuration.FMOD_STUDIO_LIBRARY_NAME, "fmodstudio");
 
     /** Contains the function pointers loaded from the FMODSTUDIO {@link SharedLibrary}. */
