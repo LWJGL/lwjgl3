@@ -59,7 +59,7 @@ misrepresented as being the original software.
 #endif
 #endif
 
-#if !defined(_WIN32) && ( defined(__GNUC__) || defined(__clang__) )
+#if !defined(_WIN32) && !defined(__FreeBSD__) && ( defined(__GNUC__) || defined(__clang__) )
 #if !defined(_GNU_SOURCE)
  #define _GNU_SOURCE /* used only to resolve symbolic links. Can be commented out */
 #endif

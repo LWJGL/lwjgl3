@@ -141,7 +141,7 @@
         </exec>
         <echo message="${clang.version.string}" taskname="Compiler"/>
 
-        <!--<parallel threadsPerProcessor="2">-->
+        <parallel threadsPerProcessor="2">
 
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
@@ -428,7 +428,7 @@
             </source>
         </build>
 
-        <!--</parallel>-->
+        </parallel>
 
         <local name="native-dependencies-uptodate"/>
         <condition property="native-dependencies-uptodate" value="true">

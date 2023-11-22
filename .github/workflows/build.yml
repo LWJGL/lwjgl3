@@ -213,6 +213,7 @@ jobs:
     name: FreeBSD Cross
     needs: cache-kotlinc
     runs-on: macos-latest
+    timeout-minutes: 20
     strategy:
       fail-fast: false
     steps:
