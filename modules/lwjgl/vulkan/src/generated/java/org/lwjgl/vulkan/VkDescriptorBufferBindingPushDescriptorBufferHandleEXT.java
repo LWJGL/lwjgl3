@@ -18,6 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying push descriptor buffer binding information.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-bufferlessPushDescriptors">{@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::bufferlessPushDescriptors}</a> <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -29,9 +35,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkDescriptorBufferBindingPushDescriptorBufferHandleEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBuffer buffer;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBuffer {@link #buffer};
  * }</code></pre>
  */
 public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Struct<VkDescriptorBufferBindingPushDescriptorBufferHandleEXT> implements NativeResource {
@@ -85,23 +91,23 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code buffer} field. */
+    /** the {@code VkBuffer} handle of the buffer for push descriptors. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@link #sType} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,23 +300,23 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.npNext(address()); }
-        /** @return the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nbuffer(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#sType} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#sType} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#pNext} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer pNext(@NativeType("void *") long value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#buffer} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer buffer(@NativeType("VkBuffer") long value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nbuffer(address(), value); return this; }
 
     }

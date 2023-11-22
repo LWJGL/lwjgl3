@@ -101,7 +101,7 @@ public class VkPhysicalDeviceCudaKernelLaunchPropertiesNV extends Struct<VkPhysi
     /** indicates the minor version number of the compute code. */
     @NativeType("uint32_t")
     public int computeCapabilityMinor() { return ncomputeCapabilityMinor(address()); }
-    /** indicates the minor version number of the compute code. */
+    /** indicates the major version number of the compute code. */
     @NativeType("uint32_t")
     public int computeCapabilityMajor() { return ncomputeCapabilityMajor(address()); }
 

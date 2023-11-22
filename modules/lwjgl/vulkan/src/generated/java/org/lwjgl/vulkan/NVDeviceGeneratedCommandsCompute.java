@@ -240,6 +240,12 @@ public class NVDeviceGeneratedCommandsCompute {
      *     VkDevice                                    device,
      *     const VkPipelineIndirectDeviceAddressInfoNV* pInfo);</code></pre>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-deviceGeneratedComputePipelines">{@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV}{@code ::deviceGeneratedComputePipelines}</a> feature <b>must</b> be enabled</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -250,6 +256,9 @@ public class NVDeviceGeneratedCommandsCompute {
      * <h5>See Also</h5>
      * 
      * <p>{@link VkPipelineIndirectDeviceAddressInfoNV}</p>
+     *
+     * @param device the logical device on which the pipeline was created.
+     * @param pInfo  a pointer to a {@link VkPipelineIndirectDeviceAddressInfoNV} structure specifying the pipeline to retrieve the address for.
      */
     @NativeType("VkDeviceAddress")
     public static long vkGetPipelineIndirectDeviceAddressNV(VkDevice device, @NativeType("VkPipelineIndirectDeviceAddressInfoNV const *") VkPipelineIndirectDeviceAddressInfoNV pInfo) {

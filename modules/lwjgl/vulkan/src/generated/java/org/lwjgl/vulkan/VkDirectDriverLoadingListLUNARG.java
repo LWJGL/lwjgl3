@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkDirectDriverLoadingListLUNARG {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkDirectDriverLoadingModeLUNARG {@link #mode};
  *     uint32_t {@link #driverCount};
  *     {@link VkDirectDriverLoadingInfoLUNARG VkDirectDriverLoadingInfoLUNARG} const * {@link #pDrivers};
@@ -108,7 +108,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** controls the mode in which to load the provided drivers. */
     @NativeType("VkDirectDriverLoadingModeLUNARG")
@@ -125,7 +125,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
     /** Sets the {@link LUNARGDirectDriverLoading#VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG} value to the {@link #sType} field. */
     public VkDirectDriverLoadingListLUNARG sType$Default() { return sType(LUNARGDirectDriverLoading.VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkDirectDriverLoadingListLUNARG pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkDirectDriverLoadingListLUNARG pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #mode} field. */
     public VkDirectDriverLoadingListLUNARG mode(@NativeType("VkDirectDriverLoadingModeLUNARG") int value) { nmode(address(), value); return this; }
     /** Sets the address of the specified {@link VkDirectDriverLoadingInfoLUNARG.Buffer} to the {@link #pDrivers} field. */
@@ -347,7 +347,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
         @NativeType("VkStructureType")
         public int sType() { return VkDirectDriverLoadingListLUNARG.nsType(address()); }
         /** @return the value of the {@link VkDirectDriverLoadingListLUNARG#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkDirectDriverLoadingListLUNARG.npNext(address()); }
         /** @return the value of the {@link VkDirectDriverLoadingListLUNARG#mode} field. */
         @NativeType("VkDirectDriverLoadingModeLUNARG")
@@ -364,7 +364,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
         /** Sets the {@link LUNARGDirectDriverLoading#VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG} value to the {@link VkDirectDriverLoadingListLUNARG#sType} field. */
         public VkDirectDriverLoadingListLUNARG.Buffer sType$Default() { return sType(LUNARGDirectDriverLoading.VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG); }
         /** Sets the specified value to the {@link VkDirectDriverLoadingListLUNARG#pNext} field. */
-        public VkDirectDriverLoadingListLUNARG.Buffer pNext(@NativeType("void *") long value) { VkDirectDriverLoadingListLUNARG.npNext(address(), value); return this; }
+        public VkDirectDriverLoadingListLUNARG.Buffer pNext(@NativeType("void const *") long value) { VkDirectDriverLoadingListLUNARG.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDirectDriverLoadingListLUNARG#mode} field. */
         public VkDirectDriverLoadingListLUNARG.Buffer mode(@NativeType("VkDirectDriverLoadingModeLUNARG") int value) { VkDirectDriverLoadingListLUNARG.nmode(address(), value); return this; }
         /** Sets the address of the specified {@link VkDirectDriverLoadingInfoLUNARG.Buffer} to the {@link VkDirectDriverLoadingListLUNARG#pDrivers} field. */

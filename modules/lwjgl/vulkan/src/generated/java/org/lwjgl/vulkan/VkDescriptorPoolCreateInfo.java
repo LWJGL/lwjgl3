@@ -47,6 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}{@code ::mutableDescriptorType} is not enabled, {@code pPoolSizes} <b>must</b> not contain a {@code descriptorType} of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
  * <li>If {@code flags} has the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT} bit set, {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}{@code ::mutableDescriptorType} <b>must</b> be enabled</li>
  * <li>If {@code pPoolSizes} contains a {@code descriptorType} of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, any other {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} element in {@code pPoolSizes} <b>must</b> not have sets of supported descriptor types which partially overlap</li>
+ * <li>If {@code pPoolSizes} contains a {@code descriptorType} of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, the {@code pNext} chain <b>must</b> include a {@link VkDescriptorPoolInlineUniformBlockCreateInfo} structure whose {@code maxInlineUniformBlockBindings} member is not zero</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

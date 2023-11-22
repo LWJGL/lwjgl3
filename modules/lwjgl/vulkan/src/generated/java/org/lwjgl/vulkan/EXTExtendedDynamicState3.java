@@ -676,6 +676,7 @@ public class EXTExtendedDynamicState3 {
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
      * </ul>
      * </li>
+     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-logicOp">{@code logicOp}</a> feature is not enabled, {@code logicOpEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

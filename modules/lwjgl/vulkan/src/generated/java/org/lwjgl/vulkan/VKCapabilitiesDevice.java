@@ -1195,6 +1195,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_IMG_filter_cubic;
     /** When true, {@link IMGFormatPVRTC} is supported. */
     public final boolean VK_IMG_format_pvrtc;
+    /** When true, {@link IMGRelaxedLineRasterization} is supported. */
+    public final boolean VK_IMG_relaxed_line_rasterization;
     /** When true, {@link INTELPerformanceQuery} is supported. */
     public final boolean VK_INTEL_performance_query;
     /** When true, {@link INTELShaderIntegerFunctions2} is supported. */
@@ -1668,6 +1670,7 @@ public class VKCapabilitiesDevice {
         VK_HUAWEI_subpass_shading = check_HUAWEI_subpass_shading(provider, caps, ext);
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
+        VK_IMG_relaxed_line_rasterization = ext.contains("VK_IMG_relaxed_line_rasterization");
         VK_INTEL_performance_query = check_INTEL_performance_query(provider, caps, ext);
         VK_INTEL_shader_integer_functions2 = ext.contains("VK_INTEL_shader_integer_functions2");
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
