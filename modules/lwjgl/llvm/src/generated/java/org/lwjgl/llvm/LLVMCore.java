@@ -7907,12 +7907,12 @@ public class LLVMCore {
     // --- [ LLVMLookupIntrinsicID ] ---
 
     /** Unsafe version of: {@link #LLVMLookupIntrinsicID LookupIntrinsicID} */
-    public static void nLLVMLookupIntrinsicID(long Name, long NameLen) {
+    public static int nLLVMLookupIntrinsicID(long Name, long NameLen) {
         long __functionAddress = Functions.LookupIntrinsicID;
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePPV(Name, NameLen, __functionAddress);
+        return invokePPI(Name, NameLen, __functionAddress);
     }
 
     /**
@@ -7920,8 +7920,9 @@ public class LLVMCore {
      *
      * @since 9
      */
-    public static void LLVMLookupIntrinsicID(@NativeType("char const *") ByteBuffer Name) {
-        nLLVMLookupIntrinsicID(memAddress(Name), Name.remaining());
+    @NativeType("unsigned int")
+    public static int LLVMLookupIntrinsicID(@NativeType("char const *") ByteBuffer Name) {
+        return nLLVMLookupIntrinsicID(memAddress(Name), Name.remaining());
     }
 
     /**
@@ -7929,12 +7930,13 @@ public class LLVMCore {
      *
      * @since 9
      */
-    public static void LLVMLookupIntrinsicID(@NativeType("char const *") CharSequence Name) {
+    @NativeType("unsigned int")
+    public static int LLVMLookupIntrinsicID(@NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int NameEncodedLength = stack.nUTF8(Name, false);
             long NameEncoded = stack.getPointerAddress();
-            nLLVMLookupIntrinsicID(NameEncoded, NameEncodedLength);
+            return nLLVMLookupIntrinsicID(NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }

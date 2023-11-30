@@ -3233,7 +3233,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("PersonalityFn", "")
     )
 
-    IgnoreMissing..void(
+    IgnoreMissing..unsigned_int(
         "LookupIntrinsicID",
         "Obtain the intrinsic ID number which matches the given function name.",
 
