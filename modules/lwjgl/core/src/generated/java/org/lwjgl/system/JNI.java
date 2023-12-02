@@ -469,6 +469,7 @@ public final class JNI {
     public static native void invokePPPV(long param0, long param1, long param2, int param3, boolean param4, boolean param5, long __functionAddress);
     public static native void invokePPPV(long param0, boolean param1, int param2, long param3, long param4, int param5, long __functionAddress);
     public static native void invokePPPV(long param0, int param1, int param2, long param3, int param4, long param5, int param6, long __functionAddress);
+    public static native void invokePPPV(long param0, int param1, long param2, int param3, long param4, int param5, int param6, long __functionAddress);
     public static native void invokePPPV(long param0, long param1, float param2, float param3, float param4, float param5, long param6, long __functionAddress);
     public static native void invokePPPV(long param0, long param1, long param2, float param3, float param4, float param5, float param6, long __functionAddress);
     public static native void invokePPPV(long param0, long param1, int param2, int param3, int param4, long param5, int param6, boolean param7, long __functionAddress);

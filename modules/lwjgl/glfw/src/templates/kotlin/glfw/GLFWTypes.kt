@@ -622,6 +622,86 @@ val GLFWcharmodsfun = Module.GLFW.callback {
     }
 }
 
+val GLFWpreeditfun = Module.GLFW.callback {
+    void(
+        "GLFWPreeditCallback",
+        "The function pointer type for preedit callbacks.",
+
+        GLFWwindow.p("window", "the window that received the event"),
+        AutoSize("preedit_string")..int("preedit_count", "preedit string count"),
+        unsigned_int.p("preedit_string", "preedit string"),
+        AutoSize("block_sizes")..int("block_count", "attributed block count"),
+        int.p("block_sizes", "list of attributed block size"),
+        int("focused_block", "Focused block index"),
+        int("caret", "Caret position"),
+
+        nativeType = "GLFWpreeditfun"
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetPreeditCallback() method."
+        since = "version 3.X"
+        javaImport("static org.lwjgl.glfw.GLFW.*")
+        additionalCode = """
+    /** See {@link GLFW#glfwSetPreeditCallback SetPreeditCallback}. */
+    public GLFWPreeditCallback set(long window) {
+        glfwSetPreeditCallback(window, this);
+        return this;
+    }
+    """
+    }
+}
+
+val GLFWimestatusfun = Module.GLFW.callback {
+    void(
+        "GLFWIMEStatusCallback",
+        "The function pointer type for IME status change callbacks.",
+
+        GLFWwindow.p("window", "the window that received the event"),
+
+        nativeType = "GLFWimestatusfun"
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetIMEStatusCallback() method."
+        since = "version 3.X"
+        javaImport("static org.lwjgl.glfw.GLFW.*")
+        additionalCode = """
+    /** See {@link GLFW#glfwSetIMEStatusCallback SetIMEStatusCallback}. */
+    public GLFWIMEStatusCallback set(long window) {
+        glfwSetIMEStatusCallback(window, this);
+        return this;
+    }
+    """
+    }
+}
+
+val GLFWpreeditcandidatefun = Module.GLFW.callback {
+    void(
+        "GLFWPreeditCandidateCallback",
+        """
+        The function pointer type for preedit candidate callbacks.
+
+        Use #GetPreeditCandidate() to get the candidate text for a specific index.
+        """,
+
+        GLFWwindow.p("window", "the window that received the event"),
+        int("candidates_count", "candidates count"),
+        int("selected_index", "index of selected candidate"),
+        int("page_start", "start index of candidate currently displayed"),
+        int("page_size", "count of candidates currently displayed"),
+
+        nativeType = "GLFWpreeditcandidatefun"
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetPreeditCandidateCallback() method."
+        since = "version 3.X"
+        javaImport("static org.lwjgl.glfw.GLFW.*")
+        additionalCode = """
+    /** See {@link GLFW#glfwSetPreeditCandidateCallback SetPreeditCandidateCallback}. */
+    public GLFWPreeditCandidateCallback set(long window) {
+        glfwSetPreeditCandidateCallback(window, this);
+        return this;
+    }
+    """
+    }
+}
+
 val GLFWmousebuttonfun = Module.GLFW.callback {
     void(
         "GLFWMouseButtonCallback",

@@ -557,7 +557,11 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             0x0002000E),
         "POSITION_Y".enum(
             "{@code WindowHint}: Initial position y-coordinate window hint.",
-            0x0002000F)
+            0x0002000F),
+        "SOFT_FULLSCREEN".enum(
+            "{@code WindowHint}: Soft fullscreen window hint.",
+            0x00020010
+        )
     ).javaDocLinks
 
     val InputModes = IntConstant(
@@ -567,7 +571,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "STICKY_KEYS"..0x00033002,
         "STICKY_MOUSE_BUTTONS"..0x00033003,
         "LOCK_KEY_MODS"..0x00033004,
-        "RAW_MOUSE_MOTION"..0x00033005
+        "RAW_MOUSE_MOTION"..0x00033005,
+        "IME"..0x00033006
     ).javaDocLinks
 
     IntConstant(
@@ -704,6 +709,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
+        "Preedit candidate init hint.",
+
+        "MANAGE_PREEDIT_CANDIDATE"..0x00050004
+    )
+
+    IntConstant(
         """
         macOS specific init hint.
 
@@ -729,6 +740,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "X11 specific init hint.",
 
         "X11_XCB_VULKAN_SURFACE"..0x00052001
+    )
+
+    IntConstant(
+        "X11 specific init hint.",
+
+        "X11_ONTHESPOT"..0x00052002
     )
 
     IntConstant(
@@ -2742,6 +2759,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         or #FALSE to disable it. If raw motion is not supported, attempting to set this will emit #FEATURE_UNAVAILABLE. Call #RawMouseMotionSupported() to
         check for support.
 
+        If the mode is #IME, the value must be either #TRUE to turn on IME, or #FALSE to turn off it.
+
         This function must only be called from the main thread.
         """,
 
@@ -3053,6 +3072,87 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.1"
     )
 
+    void(
+        "GetPreeditCursorRectangle",
+        """
+        Retrieves the area of the preedit text cursor.
+
+        This area is used to decide the position of the candidate window. The cursor position is relative to the window.
+
+        This function may only be called from the main thread.
+        """,
+
+        GLFWwindow.p("window", "the window to set the preedit text cursor for"),
+        Check(1)..nullable..int.p("x", "the preedit text cursor x position (relative position from window coordinates)"),
+        Check(1)..nullable..int.p("y", "the preedit text cursor y position (relative position from window coordinates)"),
+        Check(1)..nullable..int.p("w", "the preedit text cursor width"),
+        Check(1)..nullable..int.p("h", "the preedit text cursor height"),
+
+        since = "version 3.X",
+    )
+
+    void(
+        "SetPreeditCursorRectangle",
+        """
+        Sets the area of the preedit text cursor.
+
+        This area is used to decide the position of the candidate window. The cursor position is relative to the window.
+
+        This function may only be called from the main thread.
+        """,
+
+        GLFWwindow.p("window", "the window to set the text cursor for"),
+        int("x", "the preedit text cursor x position (relative position from window coordinates)"),
+        int("y", "the preedit text cursor y position (relative position from window coordinates)"),
+        int("w", "the preedit text cursor width"),
+        int("h", "the preedit text cursor height"),
+
+        since = "version 3.X",
+    )
+
+    void(
+        "ResetPreeditText",
+        """
+        Resets IME's preedit text.
+
+        This function may only be called from the main thread.
+
+        ${note(ul(
+            "<b>X11</b>: Since over-the-spot style is used by default, you don't need to use this function.",
+            "<b>Wayland</b>: This function is currently not supported."
+        ))}
+        """,
+
+        GLFWwindow.p("window", "the window"),
+
+        since = "version 3.X",
+    )
+
+    unsigned_int.p(
+        "GetPreeditCandidate",
+        """
+        Returns the text and the text-count of the preedit candidate.
+
+        By default, the IME manages the preedit candidates, so there is no need to use this function. See #SetPreeditCandidateCallback() and
+        #MANAGE_PREEDIT_CANDIDATE hint for details.
+
+        This function may only be called from the main thread.
+
+        ${note(ul(
+            "<b>macOS</b>: This function is currently not supported.",
+            "<b>X11</b>: This function is currently not supported.",
+            "<b>Wayland</b>: This function is currently not supported."
+        ))}
+        """,
+
+        GLFWwindow.p("window", "the window"),
+        int("index", "the index of the candidate"),
+        AutoSizeResult..Check(1)..int.p("textCount", "the text-count of the candidate"),
+
+        returnDoc = "the text of the candidate as Unicode code points",
+        since = "version 3.X",
+    )
+
     GLFWkeyfun(
         "SetKeyCallback",
         """
@@ -3061,9 +3161,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         The key functions deal with physical keys, with layout independent key tokens named after their values in the standard US keyboard layout. If you want
         to input text, use #SetCharCallback() instead.
 
-        When a window loses input focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated
-        events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus callback has been
-        called.
+        When a window loses input focus, it will generate synthetic key release events for all pressed names keys. You can tell these events from
+        user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
+        callback has been called.
 
         The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
         a GLFW key token. Such keys have {@code key} set to #KEY_UNKNOWN, their state is not saved and so it cannot be queried with #GetKey().
@@ -3123,6 +3223,74 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
         since = "version 3.1"
+    )
+
+    GLFWpreeditfun(
+        "SetPreeditCallback",
+        """
+        Sets the preedit callback of the specified window, which is called when an IME is processing text before committed.
+
+        Callback receives relative position of input cursor inside preedit text and attributed text blocks. This callback is used for on-the-spot text editing
+        with IME.
+
+        This function must only be called from the main thread.
+
+        ${note(ul(
+            "<b>X11</b>: Since over-the-spot style is used by default, you don't need to use this function."
+        ))}
+        """,
+
+        GLFWwindow.p("window", "the window whose callback to set"),
+        nullable..GLFWpreeditfun("cbfun", "the new callback or #NULL to remove the currently set callback"),
+
+        returnDoc = "the previously set callback, or #NULL if no callback was set or an error occurred",
+        since = "version 3.X"
+    )
+
+    GLFWimestatusfun(
+        "SetIMEStatusCallback",
+        """
+        Sets the IME status change callback of the specified window, which is called when an IME is switched on and off.
+
+        This function must only be called from the main thread.
+
+        ${note(ul(
+            "<b>X11</b>: Doesn't support this function. The callback is not called.",
+            "<b>Wayland</b>: Doesn't support this function. The callback is not called."
+        ))}
+        """,
+
+        GLFWwindow.p("window", "the window whose callback to set"),
+        nullable..GLFWimestatusfun("cbfun", "the new callback or #NULL to remove the currently set callback"),
+
+        returnDoc = "the previously set callback, or #NULL if no callback was set or an error occurred",
+        since = "version 3.X"
+    )
+
+    GLFWpreeditcandidatefun(
+        "SetPreeditCandidateCallback",
+        """
+        Sets the preedit candidate change callback of the specified window, which is called when the candidates are updated and can be used to display them by
+        the application side.
+
+        By default, this callback is not called because the IME displays the candidates and there is nothing to do on the application side. Only when the
+        application side needs to use this to manage the displaying of IME candidates, you can set #MANAGE_PREEDIT_CANDIDATE init hint and stop the IME from
+        managing it.
+
+        This function must only be called from the main thread.
+
+        ${note(ul(
+            "<b>macOS</b>: Doesn't support this function. The callback is not called.",
+            "<b>X11</b>: Doesn't support this function. The callback is not called.",
+            "<b>Wayland</b>: Doesn't support this function. The callback is not called."
+        ))}
+        """,
+
+        GLFWwindow.p("window", "the window whose callback to set"),
+        nullable..GLFWpreeditcandidatefun("cbfun", "the new callback or #NULL to remove the currently set callback"),
+
+        returnDoc = "the previously set callback, or #NULL if no callback was set or an error occurred",
+        since = "version 3.X"
     )
 
     GLFWmousebuttonfun(

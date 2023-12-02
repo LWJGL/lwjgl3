@@ -120,9 +120,16 @@ public class GLFW {
             CreateStandardCursor          = apiGetFunctionAddress(GLFW, "glfwCreateStandardCursor"),
             DestroyCursor                 = apiGetFunctionAddress(GLFW, "glfwDestroyCursor"),
             SetCursor                     = apiGetFunctionAddress(GLFW, "glfwSetCursor"),
+            GetPreeditCursorRectangle     = apiGetFunctionAddress(GLFW, "glfwGetPreeditCursorRectangle"),
+            SetPreeditCursorRectangle     = apiGetFunctionAddress(GLFW, "glfwSetPreeditCursorRectangle"),
+            ResetPreeditText              = apiGetFunctionAddress(GLFW, "glfwResetPreeditText"),
+            GetPreeditCandidate           = apiGetFunctionAddress(GLFW, "glfwGetPreeditCandidate"),
             SetKeyCallback                = apiGetFunctionAddress(GLFW, "glfwSetKeyCallback"),
             SetCharCallback               = apiGetFunctionAddress(GLFW, "glfwSetCharCallback"),
             SetCharModsCallback           = apiGetFunctionAddress(GLFW, "glfwSetCharModsCallback"),
+            SetPreeditCallback            = apiGetFunctionAddress(GLFW, "glfwSetPreeditCallback"),
+            SetIMEStatusCallback          = apiGetFunctionAddress(GLFW, "glfwSetIMEStatusCallback"),
+            SetPreeditCandidateCallback   = apiGetFunctionAddress(GLFW, "glfwSetPreeditCandidateCallback"),
             SetMouseButtonCallback        = apiGetFunctionAddress(GLFW, "glfwSetMouseButtonCallback"),
             SetCursorPosCallback          = apiGetFunctionAddress(GLFW, "glfwSetCursorPosCallback"),
             SetCursorEnterCallback        = apiGetFunctionAddress(GLFW, "glfwSetCursorEnterCallback"),
@@ -630,6 +637,7 @@ public class GLFW {
      * </li>
      * <li>{@link #GLFW_POSITION_X POSITION_X} - {@code WindowHint}: Initial position x-coordinate window hint.</li>
      * <li>{@link #GLFW_POSITION_Y POSITION_Y} - {@code WindowHint}: Initial position y-coordinate window hint.</li>
+     * <li>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN} - {@code WindowHint}: Soft fullscreen window hint.</li>
      * </ul>
      */
     public static final int
@@ -647,7 +655,8 @@ public class GLFW {
         GLFW_FOCUS_ON_SHOW           = 0x2000C,
         GLFW_MOUSE_PASSTHROUGH       = 0x2000D,
         GLFW_POSITION_X              = 0x2000E,
-        GLFW_POSITION_Y              = 0x2000F;
+        GLFW_POSITION_Y              = 0x2000F,
+        GLFW_SOFT_FULLSCREEN         = 0x20010;
 
     /** Input options. */
     public static final int
@@ -655,7 +664,8 @@ public class GLFW {
         GLFW_STICKY_KEYS          = 0x33002,
         GLFW_STICKY_MOUSE_BUTTONS = 0x33003,
         GLFW_LOCK_KEY_MODS        = 0x33004,
-        GLFW_RAW_MOUSE_MOTION     = 0x33005;
+        GLFW_RAW_MOUSE_MOTION     = 0x33005,
+        GLFW_IME                  = 0x33006;
 
     /** Cursor state. */
     public static final int
@@ -777,6 +787,9 @@ public class GLFW {
     /** Platform selection init hint. */
     public static final int GLFW_PLATFORM = 0x50003;
 
+    /** Preedit candidate init hint. */
+    public static final int GLFW_MANAGE_PREEDIT_CANDIDATE = 0x50004;
+
     /**
      * macOS specific init hint.
      * 
@@ -795,6 +808,9 @@ public class GLFW {
 
     /** X11 specific init hint. */
     public static final int GLFW_X11_XCB_VULKAN_SURFACE = 0x52001;
+
+    /** X11 specific init hint. */
+    public static final int GLFW_X11_ONTHESPOT = 0x52002;
 
     /** Wayland specific init hint. */
     public static final int GLFW_WAYLAND_LIBDECOR = 0x53001;
@@ -1952,7 +1968,7 @@ public class GLFW {
      * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td></tr><tr><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr><tr><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td></tr><tr><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td></tr><tr><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td><td>{@link #GLFW_SAMPLES SAMPLES}</td><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td></tr><tr><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
+     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td></tr><tr><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td></tr><tr><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td></tr><tr><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td></tr><tr><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td></tr><tr><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td><td>{@link #GLFW_SAMPLES SAMPLES}</td><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td></tr><tr><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
      * @param value the new value of the window hint
      *
      * @since version 2.2
@@ -3032,7 +3048,7 @@ public class GLFW {
      * <p><b>Wayland</b>: The Wayland protocol provides no way to check whether a window is iconfied, so {@link #GLFW_ICONIFIED ICONIFIED} always returns {@link #GLFW_FALSE FALSE}.</p>
      *
      * @param window the window to query
-     * @param attrib the <a href="https://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td></tr><tr><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td></tr><tr><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td></tr><tr><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
+     * @param attrib the <a href="https://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td></tr><tr><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td></tr><tr><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
      *
      * @return the value of the attribute, or zero if an error occurred
      *
@@ -3531,7 +3547,7 @@ public class GLFW {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window to query
-     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td></tr></table>
+     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td><td>{@link #GLFW_IME IME}</td></tr></table>
      *
      * @return the input mode value
      *
@@ -3575,6 +3591,8 @@ public class GLFW {
      * <p>If the mode is {@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}, the value must be either {@link #GLFW_TRUE TRUE} to enable raw (unscaled and unaccelerated) mouse motion when the cursor is disabled,
      * or {@link #GLFW_FALSE FALSE} to disable it. If raw motion is not supported, attempting to set this will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}. Call {@link #glfwRawMouseMotionSupported RawMouseMotionSupported} to
      * check for support.</p>
+     * 
+     * <p>If the mode is {@link #GLFW_IME IME}, the value must be either {@link #GLFW_TRUE TRUE} to turn on IME, or {@link #GLFW_FALSE FALSE} to turn off it.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -3977,6 +3995,144 @@ public class GLFW {
         invokePPV(window, cursor, __functionAddress);
     }
 
+    // --- [ glfwGetPreeditCursorRectangle ] ---
+
+    /** Unsafe version of: {@link #glfwGetPreeditCursorRectangle GetPreeditCursorRectangle} */
+    public static void nglfwGetPreeditCursorRectangle(long window, long x, long y, long w, long h) {
+        long __functionAddress = Functions.GetPreeditCursorRectangle;
+        if (CHECKS) {
+            check(window);
+        }
+        invokePPPPPV(window, x, y, w, h, __functionAddress);
+    }
+
+    /**
+     * Retrieves the area of the preedit text cursor.
+     * 
+     * <p>This area is used to decide the position of the candidate window. The cursor position is relative to the window.</p>
+     * 
+     * <p>This function may only be called from the main thread.</p>
+     *
+     * @param window the window to set the preedit text cursor for
+     * @param x      the preedit text cursor x position (relative position from window coordinates)
+     * @param y      the preedit text cursor y position (relative position from window coordinates)
+     * @param w      the preedit text cursor width
+     * @param h      the preedit text cursor height
+     *
+     * @since version 3.X
+     */
+    public static void glfwGetPreeditCursorRectangle(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") IntBuffer x, @Nullable @NativeType("int *") IntBuffer y, @Nullable @NativeType("int *") IntBuffer w, @Nullable @NativeType("int *") IntBuffer h) {
+        if (CHECKS) {
+            checkSafe(x, 1);
+            checkSafe(y, 1);
+            checkSafe(w, 1);
+            checkSafe(h, 1);
+        }
+        nglfwGetPreeditCursorRectangle(window, memAddressSafe(x), memAddressSafe(y), memAddressSafe(w), memAddressSafe(h));
+    }
+
+    // --- [ glfwSetPreeditCursorRectangle ] ---
+
+    /**
+     * Sets the area of the preedit text cursor.
+     * 
+     * <p>This area is used to decide the position of the candidate window. The cursor position is relative to the window.</p>
+     * 
+     * <p>This function may only be called from the main thread.</p>
+     *
+     * @param window the window to set the text cursor for
+     * @param x      the preedit text cursor x position (relative position from window coordinates)
+     * @param y      the preedit text cursor y position (relative position from window coordinates)
+     * @param w      the preedit text cursor width
+     * @param h      the preedit text cursor height
+     *
+     * @since version 3.X
+     */
+    public static void glfwSetPreeditCursorRectangle(@NativeType("GLFWwindow *") long window, int x, int y, int w, int h) {
+        long __functionAddress = Functions.SetPreeditCursorRectangle;
+        if (CHECKS) {
+            check(window);
+        }
+        invokePV(window, x, y, w, h, __functionAddress);
+    }
+
+    // --- [ glfwResetPreeditText ] ---
+
+    /**
+     * Resets IME's preedit text.
+     * 
+     * <p>This function may only be called from the main thread.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>X11</b>: Since over-the-spot style is used by default, you don't need to use this function.</li>
+     * <li><b>Wayland</b>: This function is currently not supported.</li>
+     * </ul></div>
+     *
+     * @param window the window
+     *
+     * @since version 3.X
+     */
+    public static void glfwResetPreeditText(@NativeType("GLFWwindow *") long window) {
+        long __functionAddress = Functions.ResetPreeditText;
+        if (CHECKS) {
+            check(window);
+        }
+        invokePV(window, __functionAddress);
+    }
+
+    // --- [ glfwGetPreeditCandidate ] ---
+
+    /**
+     * Unsafe version of: {@link #glfwGetPreeditCandidate GetPreeditCandidate}
+     *
+     * @param textCount the text-count of the candidate
+     */
+    public static long nglfwGetPreeditCandidate(long window, int index, long textCount) {
+        long __functionAddress = Functions.GetPreeditCandidate;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePPP(window, index, textCount, __functionAddress);
+    }
+
+    /**
+     * Returns the text and the text-count of the preedit candidate.
+     * 
+     * <p>By default, the IME manages the preedit candidates, so there is no need to use this function. See {@link #glfwSetPreeditCandidateCallback SetPreeditCandidateCallback} and
+     * {@link #GLFW_MANAGE_PREEDIT_CANDIDATE MANAGE_PREEDIT_CANDIDATE} hint for details.</p>
+     * 
+     * <p>This function may only be called from the main thread.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>macOS</b>: This function is currently not supported.</li>
+     * <li><b>X11</b>: This function is currently not supported.</li>
+     * <li><b>Wayland</b>: This function is currently not supported.</li>
+     * </ul></div>
+     *
+     * @param window the window
+     * @param index  the index of the candidate
+     *
+     * @return the text of the candidate as Unicode code points
+     *
+     * @since version 3.X
+     */
+    @Nullable
+    @NativeType("unsigned int *")
+    public static IntBuffer glfwGetPreeditCandidate(@NativeType("GLFWwindow *") long window, int index) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        IntBuffer textCount = stack.callocInt(1);
+        try {
+            long __result = nglfwGetPreeditCandidate(window, index, memAddress(textCount));
+            return memIntBufferSafe(__result, textCount.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ glfwSetKeyCallback ] ---
 
     /** Unsafe version of: {@link #glfwSetKeyCallback SetKeyCallback} */
@@ -3994,9 +4150,9 @@ public class GLFW {
      * <p>The key functions deal with physical keys, with layout independent key tokens named after their values in the standard US keyboard layout. If you want
      * to input text, use {@link #glfwSetCharCallback SetCharCallback} instead.</p>
      * 
-     * <p>When a window loses input focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated
-     * events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus callback has been
-     * called.</p>
+     * <p>When a window loses input focus, it will generate synthetic key release events for all pressed names keys. You can tell these events from
+     * user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
+     * callback has been called.</p>
      * 
      * <p>The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
      * a GLFW key token. Such keys have {@code key} set to {@link #GLFW_KEY_UNKNOWN KEY_UNKNOWN}, their state is not saved and so it cannot be queried with {@link #glfwGetKey GetKey}.</p>
@@ -4089,6 +4245,122 @@ public class GLFW {
     @NativeType("GLFWcharmodsfun")
     public static GLFWCharModsCallback glfwSetCharModsCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWcharmodsfun") GLFWCharModsCallbackI cbfun) {
         return GLFWCharModsCallback.createSafe(nglfwSetCharModsCallback(window, memAddressSafe(cbfun)));
+    }
+
+    // --- [ glfwSetPreeditCallback ] ---
+
+    /** Unsafe version of: {@link #glfwSetPreeditCallback SetPreeditCallback} */
+    public static long nglfwSetPreeditCallback(long window, long cbfun) {
+        long __functionAddress = Functions.SetPreeditCallback;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePPP(window, cbfun, __functionAddress);
+    }
+
+    /**
+     * Sets the preedit callback of the specified window, which is called when an IME is processing text before committed.
+     * 
+     * <p>Callback receives relative position of input cursor inside preedit text and attributed text blocks. This callback is used for on-the-spot text editing
+     * with IME.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>X11</b>: Since over-the-spot style is used by default, you don't need to use this function.</li>
+     * </ul></div>
+     *
+     * @param window the window whose callback to set
+     * @param cbfun  the new callback or {@code NULL} to remove the currently set callback
+     *
+     * @return the previously set callback, or {@code NULL} if no callback was set or an error occurred
+     *
+     * @since version 3.X
+     */
+    @Nullable
+    @NativeType("GLFWpreeditfun")
+    public static GLFWPreeditCallback glfwSetPreeditCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWpreeditfun") GLFWPreeditCallbackI cbfun) {
+        return GLFWPreeditCallback.createSafe(nglfwSetPreeditCallback(window, memAddressSafe(cbfun)));
+    }
+
+    // --- [ glfwSetIMEStatusCallback ] ---
+
+    /** Unsafe version of: {@link #glfwSetIMEStatusCallback SetIMEStatusCallback} */
+    public static long nglfwSetIMEStatusCallback(long window, long cbfun) {
+        long __functionAddress = Functions.SetIMEStatusCallback;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePPP(window, cbfun, __functionAddress);
+    }
+
+    /**
+     * Sets the IME status change callback of the specified window, which is called when an IME is switched on and off.
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>X11</b>: Doesn't support this function. The callback is not called.</li>
+     * <li><b>Wayland</b>: Doesn't support this function. The callback is not called.</li>
+     * </ul></div>
+     *
+     * @param window the window whose callback to set
+     * @param cbfun  the new callback or {@code NULL} to remove the currently set callback
+     *
+     * @return the previously set callback, or {@code NULL} if no callback was set or an error occurred
+     *
+     * @since version 3.X
+     */
+    @Nullable
+    @NativeType("GLFWimestatusfun")
+    public static GLFWIMEStatusCallback glfwSetIMEStatusCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimestatusfun") GLFWIMEStatusCallbackI cbfun) {
+        return GLFWIMEStatusCallback.createSafe(nglfwSetIMEStatusCallback(window, memAddressSafe(cbfun)));
+    }
+
+    // --- [ glfwSetPreeditCandidateCallback ] ---
+
+    /** Unsafe version of: {@link #glfwSetPreeditCandidateCallback SetPreeditCandidateCallback} */
+    public static long nglfwSetPreeditCandidateCallback(long window, long cbfun) {
+        long __functionAddress = Functions.SetPreeditCandidateCallback;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePPP(window, cbfun, __functionAddress);
+    }
+
+    /**
+     * Sets the preedit candidate change callback of the specified window, which is called when the candidates are updated and can be used to display them by
+     * the application side.
+     * 
+     * <p>By default, this callback is not called because the IME displays the candidates and there is nothing to do on the application side. Only when the
+     * application side needs to use this to manage the displaying of IME candidates, you can set {@link #GLFW_MANAGE_PREEDIT_CANDIDATE MANAGE_PREEDIT_CANDIDATE} init hint and stop the IME from
+     * managing it.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>macOS</b>: Doesn't support this function. The callback is not called.</li>
+     * <li><b>X11</b>: Doesn't support this function. The callback is not called.</li>
+     * <li><b>Wayland</b>: Doesn't support this function. The callback is not called.</li>
+     * </ul></div>
+     *
+     * @param window the window whose callback to set
+     * @param cbfun  the new callback or {@code NULL} to remove the currently set callback
+     *
+     * @return the previously set callback, or {@code NULL} if no callback was set or an error occurred
+     *
+     * @since version 3.X
+     */
+    @Nullable
+    @NativeType("GLFWpreeditcandidatefun")
+    public static GLFWPreeditCandidateCallback glfwSetPreeditCandidateCallback(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWpreeditcandidatefun") GLFWPreeditCandidateCallbackI cbfun) {
+        return GLFWPreeditCandidateCallback.createSafe(nglfwSetPreeditCandidateCallback(window, memAddressSafe(cbfun)));
     }
 
     // --- [ glfwSetMouseButtonCallback ] ---
@@ -5240,6 +5512,19 @@ public class GLFW {
             checkSafe(ypos, 1);
         }
         invokePPPV(window, xpos, ypos, __functionAddress);
+    }
+
+    /** Array version of: {@link #glfwGetPreeditCursorRectangle GetPreeditCursorRectangle} */
+    public static void glfwGetPreeditCursorRectangle(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") int[] x, @Nullable @NativeType("int *") int[] y, @Nullable @NativeType("int *") int[] w, @Nullable @NativeType("int *") int[] h) {
+        long __functionAddress = Functions.GetPreeditCursorRectangle;
+        if (CHECKS) {
+            check(window);
+            checkSafe(x, 1);
+            checkSafe(y, 1);
+            checkSafe(w, 1);
+            checkSafe(h, 1);
+        }
+        invokePPPPPV(window, x, y, w, h, __functionAddress);
     }
 
 }
