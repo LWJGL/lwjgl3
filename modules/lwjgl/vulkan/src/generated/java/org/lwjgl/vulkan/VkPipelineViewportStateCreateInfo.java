@@ -29,8 +29,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Evaluation of <code>(offset.x + extent.width)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
  * <li>Evaluation of <code>(offset.y + extent.height)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
  * <li>If {@code scissorCount} and {@code viewportCount} are both not dynamic, then {@code scissorCount} and {@code viewportCount} <b>must</b> be identical</li>
- * <li>If the graphics pipeline is being created with {@link VK13#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT DYNAMIC_STATE_VIEWPORT_WITH_COUNT} set then {@code viewportCount} <b>must</b> be 0, otherwise it <b>must</b> be greater than 0</li>
- * <li>If the graphics pipeline is being created with {@link VK13#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT DYNAMIC_STATE_SCISSOR_WITH_COUNT} set then {@code scissorCount} <b>must</b> be 0, otherwise it <b>must</b> be greater than 0</li>
+ * <li>If the graphics pipeline is being created with {@link VK13#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT DYNAMIC_STATE_VIEWPORT_WITH_COUNT} set then {@code viewportCount} <b>must</b> be 0, otherwise {@code viewportCount} <b>must</b> be greater than 0</li>
+ * <li>If the graphics pipeline is being created with {@link VK13#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT DYNAMIC_STATE_SCISSOR_WITH_COUNT} set then {@code scissorCount} <b>must</b> be 0, otherwise {@code scissorCount} <b>must</b> be greater than 0</li>
  * <li>If the {@code viewportWScalingEnable} member of a {@link VkPipelineViewportWScalingStateCreateInfoNV} structure included in the {@code pNext} chain is {@link VK10#VK_TRUE TRUE}, the {@code viewportCount} member of the {@link VkPipelineViewportWScalingStateCreateInfoNV} structure <b>must</b> be greater than or equal to {@link VkPipelineViewportStateCreateInfo}{@code ::viewportCount}</li>
  * </ul>
  * 

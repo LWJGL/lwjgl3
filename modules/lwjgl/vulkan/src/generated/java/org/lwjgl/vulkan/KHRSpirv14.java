@@ -49,7 +49,6 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires SPIR-V 1.4.</li>
- * <li>Promoted to Vulkan 1.2 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

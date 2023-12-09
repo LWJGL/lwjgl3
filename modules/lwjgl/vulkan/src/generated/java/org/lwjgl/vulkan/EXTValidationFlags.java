@@ -8,9 +8,9 @@ package org.lwjgl.vulkan;
 /**
  * This extension provides the {@link VkValidationFlagsEXT} struct that can be included in the {@code pNext} chain of the {@link VkInstanceCreateInfo} structure passed as the {@code pCreateInfo} parameter of {@link VK10#vkCreateInstance CreateInstance}. The structure contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
  * 
- * <h5>Deprecation by {@code VK_EXT_validation_features}</h5>
+ * <h5>Deprecation by {@code VK_EXT_layer_settings}</h5>
  * 
- * <p>Functionality in this extension is subsumed into the {@link EXTValidationFeatures VK_EXT_validation_features} extension.</p>
+ * <p>Functionality in this extension is subsumed into the {@link EXTLayerSettings VK_EXT_layer_settings} extension.</p>
  * 
  * <h5>VK_EXT_validation_flags</h5>
  * 
@@ -22,10 +22,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>62</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>
+ * <li><em>Deprecated</em> by {@link EXTLayerSettings VK_EXT_layer_settings} extension</li>
  * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
@@ -54,7 +54,7 @@ package org.lwjgl.vulkan;
 public final class EXTValidationFlags {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VALIDATION_FLAGS_SPEC_VERSION = 2;
+    public static final int VK_EXT_VALIDATION_FLAGS_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME = "VK_EXT_validation_flags";

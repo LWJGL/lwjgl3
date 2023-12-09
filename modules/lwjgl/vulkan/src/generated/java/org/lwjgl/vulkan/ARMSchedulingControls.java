@@ -77,7 +77,7 @@ public final class ARMSchedulingControls {
      * <li>{@link #VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM} indicates that a {@link VkDeviceQueueShaderCoreControlCreateInfoARM} structure <b>may</b> be included in the {@code pNext} chain of a {@link VkDeviceQueueCreateInfo} or {@link VkDeviceCreateInfo} structure.</li>
      * </ul>
      */
-    public static final int VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM = 0x1;
+    public static final long VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM = 0x1L;
 
     private ARMSchedulingControls() {}
 

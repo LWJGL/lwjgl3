@@ -51,6 +51,36 @@ import static org.lwjgl.system.JNI.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRDynamicRendering VK_KHR_dynamic_rendering}</dd>
+ * <dt><b>API Interactions</b></dt>
+ * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_1</li>
+ * <li>Interacts with VK_VERSION_1_2</li>
+ * <li>Interacts with VK_VERSION_1_3</li>
+ * <li>Interacts with VK_EXT_attachment_feedback_loop_layout</li>
+ * <li>Interacts with VK_EXT_buffer_device_address</li>
+ * <li>Interacts with VK_EXT_conditional_rendering</li>
+ * <li>Interacts with VK_EXT_descriptor_buffer</li>
+ * <li>Interacts with VK_EXT_fragment_density_map</li>
+ * <li>Interacts with VK_EXT_graphics_pipeline_library</li>
+ * <li>Interacts with VK_EXT_opacity_micromap</li>
+ * <li>Interacts with VK_EXT_pipeline_creation_cache_control</li>
+ * <li>Interacts with VK_EXT_pipeline_protected_access</li>
+ * <li>Interacts with VK_EXT_transform_feedback</li>
+ * <li>Interacts with VK_KHR_acceleration_structure</li>
+ * <li>Interacts with VK_KHR_buffer_device_address</li>
+ * <li>Interacts with VK_KHR_device_group</li>
+ * <li>Interacts with VK_KHR_dynamic_rendering</li>
+ * <li>Interacts with VK_KHR_fragment_shading_rate</li>
+ * <li>Interacts with VK_KHR_pipeline_executable_properties</li>
+ * <li>Interacts with VK_KHR_pipeline_library</li>
+ * <li>Interacts with VK_KHR_ray_tracing_pipeline</li>
+ * <li>Interacts with VK_KHR_video_decode_queue</li>
+ * <li>Interacts with VK_KHR_video_encode_queue</li>
+ * <li>Interacts with VK_NV_device_generated_commands</li>
+ * <li>Interacts with VK_NV_displacement_micromap</li>
+ * <li>Interacts with VK_NV_ray_tracing</li>
+ * <li>Interacts with VK_NV_ray_tracing_motion_blur</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Stu Smith <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_maintenance5]%20@stu-s%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_maintenance5%20extension*">stu-s</a></li>
@@ -391,8 +421,8 @@ public class KHRMaintenance5 {
      * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR} specifies that a closest hit shader will always be present when a closest hit shader would be executed. A NULL closest hit shader is a closest hit shader which is effectively {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR}, such as from a shader group consisting entirely of zeros.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR} specifies that a miss shader will always be present when a miss shader would be executed. A NULL miss shader is a miss shader which is effectively {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR}, such as from a shader group consisting entirely of zeros.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR} specifies that an intersection shader will always be present when an intersection shader would be executed. A NULL intersection shader is an intersection shader which is effectively {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR}, such as from a shader group consisting entirely of zeros.</li>
-     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR} specifies that triangle primitives will be skipped during traversal using {@code OpTraceRayKHR}.</li>
-     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_AABBS_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_SKIP_AABBS_BIT_KHR} specifies that AABB primitives will be skipped during traversal using {@code OpTraceRayKHR}.</li>
+     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR} specifies that triangle primitives will be skipped during traversal using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-pipeline-trace-ray">pipeline trace ray</a> instructions.</li>
+     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_AABBS_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_SKIP_AABBS_BIT_KHR} specifies that AABB primitives will be skipped during traversal using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-pipeline-trace-ray">pipeline trace ray</a> instructions.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR PIPELINE_CREATE_2_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR} specifies that the shader group handles <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay).</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_NV} specifies that the pipeline can be used in combination with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_KHR PIPELINE_CREATE_2_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_KHR} specifies that pipeline creation will fail if a compile is required for creation of a valid {@code VkPipeline} object; {@link VK13#VK_PIPELINE_COMPILE_REQUIRED PIPELINE_COMPILE_REQUIRED} will be returned by pipeline creation, and the {@code VkPipeline} will be set to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</li>
@@ -405,8 +435,8 @@ public class KHRMaintenance5 {
      * <li>{@link #VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT} specifies that a pipeline will be used with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorbuffers">descriptor buffers</a>, rather than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets">descriptor sets</a>.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT PIPELINE_CREATE_2_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT} specifies that the pipeline <b>may</b> be used with an attachment feedback loop including color attachments.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT PIPELINE_CREATE_2_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT} specifies that the pipeline <b>may</b> be used with an attachment feedback loop including depth-stencil attachments.</li>
-     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT} specifies that the pipeline <b>can</b> be used with acceleration structures which reference an opacity micromap array.</li>
-     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV} specifies that the pipeline <b>can</b> be used with aceleration structures which reference a displacement micromap array.</li>
+     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT} specifies that the ray tracing pipeline <b>can</b> be used with acceleration structures which reference an opacity micromap array.</li>
+     * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV} specifies that the ray tracing pipeline <b>can</b> be used with acceleration structures which reference a displacement micromap array.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT} specifies that the pipeline <b>must</b> not be bound to a protected command buffer.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT} specifies that the pipeline <b>must</b> not be bound to an unprotected command buffer.</li>
      * </ul>
@@ -700,9 +730,9 @@ public class KHRMaintenance5 {
      * 
      * <ul>
      * <li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
-     * <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
-     * <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
-     * <li>If {@code format} of the {@code image} is a color format, {@code tiling} of the {@code image} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, and does not have a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
+     * <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in {@code image}</li>
+     * <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in {@code image}</li>
+     * <li>If {@code format} of the {@code image} is a color format that is not a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, and {@code tiling} of the {@code image} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
      * <li>If {@code format} of the {@code image} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}</li>
      * <li>If {@code format} of the {@code image} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
      * <li>If {@code format} of the {@code image} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>

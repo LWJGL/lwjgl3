@@ -16,59 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a divisor used in instanced rendering.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is not used to define a divisor value for an attribute, then the divisor has a logical default value of 1.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
- * <li>If the {@code vertexAttributeInstanceRateZeroDivisor} feature is not enabled, {@code divisor} <b>must</b> not be 0</li>
- * <li>If the {@code vertexAttributeInstanceRateDivisor} feature is not enabled, {@code divisor} <b>must</b> be 1</li>
- * <li>{@code divisor} <b>must</b> be a value between 0 and {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}, inclusive</li>
- * <li>{@link VkVertexInputBindingDescription}{@code ::inputRate} <b>must</b> be of type {@link VK10#VK_VERTEX_INPUT_RATE_INSTANCE VERTEX_INPUT_RATE_INSTANCE} for this {@code binding}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineVertexInputDivisorStateCreateInfoEXT}</p>
+ * See {@link VkVertexInputBindingDivisorDescriptionKHR}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkVertexInputBindingDivisorDescriptionEXT {
- *     uint32_t {@link #binding};
- *     uint32_t {@link #divisor};
+ *     uint32_t binding;
+ *     uint32_t divisor;
  * }</code></pre>
  */
-public class VkVertexInputBindingDivisorDescriptionEXT extends Struct<VkVertexInputBindingDivisorDescriptionEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        BINDING,
-        DIVISOR;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        BINDING = layout.offsetof(0);
-        DIVISOR = layout.offsetof(1);
-    }
+public class VkVertexInputBindingDivisorDescriptionEXT extends VkVertexInputBindingDivisorDescriptionKHR {
 
     protected VkVertexInputBindingDivisorDescriptionEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -86,25 +44,18 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct<VkVertexIn
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkVertexInputBindingDivisorDescriptionEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code binding} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the binding number for which the divisor is specified. */
-    @NativeType("uint32_t")
-    public int binding() { return nbinding(address()); }
-    /** the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances. */
-    @NativeType("uint32_t")
-    public int divisor() { return ndivisor(address()); }
-
-    /** Sets the specified value to the {@link #binding} field. */
     public VkVertexInputBindingDivisorDescriptionEXT binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #divisor} field. */
+    /** Sets the specified value to the {@code divisor} field. */
+    @Override
     public VkVertexInputBindingDivisorDescriptionEXT divisor(@NativeType("uint32_t") int value) { ndivisor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkVertexInputBindingDivisorDescriptionEXT set(
         int binding,
         int divisor
@@ -259,20 +210,8 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct<VkVertexIn
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDivisorDescriptionEXT.BINDING); }
-    /** Unsafe version of {@link #divisor}. */
-    public static int ndivisor(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDivisorDescriptionEXT.DIVISOR); }
-
-    /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDivisorDescriptionEXT.BINDING, value); }
-    /** Unsafe version of {@link #divisor(int) divisor}. */
-    public static void ndivisor(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDivisorDescriptionEXT.DIVISOR, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkVertexInputBindingDivisorDescriptionEXT} structs. */
-    public static class Buffer extends StructBuffer<VkVertexInputBindingDivisorDescriptionEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkVertexInputBindingDivisorDescriptionKHR.Buffer {
 
         private static final VkVertexInputBindingDivisorDescriptionEXT ELEMENT_FACTORY = VkVertexInputBindingDivisorDescriptionEXT.create(-1L);
 
@@ -286,7 +225,7 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct<VkVertexIn
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -307,16 +246,11 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct<VkVertexIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVertexInputBindingDivisorDescriptionEXT#binding} field. */
-        @NativeType("uint32_t")
-        public int binding() { return VkVertexInputBindingDivisorDescriptionEXT.nbinding(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDivisorDescriptionEXT#divisor} field. */
-        @NativeType("uint32_t")
-        public int divisor() { return VkVertexInputBindingDivisorDescriptionEXT.ndivisor(address()); }
-
-        /** Sets the specified value to the {@link VkVertexInputBindingDivisorDescriptionEXT#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
+        @Override
         public VkVertexInputBindingDivisorDescriptionEXT.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputBindingDivisorDescriptionEXT.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDivisorDescriptionEXT#divisor} field. */
+        /** Sets the specified value to the {@code divisor} field. */
+        @Override
         public VkVertexInputBindingDivisorDescriptionEXT.Buffer divisor(@NativeType("uint32_t") int value) { VkVertexInputBindingDivisorDescriptionEXT.ndivisor(address(), value); return this; }
 
     }

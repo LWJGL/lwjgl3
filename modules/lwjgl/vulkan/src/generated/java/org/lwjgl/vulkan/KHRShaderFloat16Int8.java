@@ -44,7 +44,6 @@ package org.lwjgl.vulkan;
  * <dd>2018-03-07</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Promoted to Vulkan 1.2 Core</li>
  * <li>This extension interacts with {@link KHR8bitStorage VK_KHR_8bit_storage}</li>
  * <li>This extension interacts with {@link KHR16bitStorage VK_KHR_16bit_storage}</li>
  * <li>This extension interacts with {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>

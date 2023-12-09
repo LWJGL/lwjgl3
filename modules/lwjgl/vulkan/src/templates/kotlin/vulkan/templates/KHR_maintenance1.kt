@@ -59,11 +59,6 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-03-13</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.1 Core</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Dan Ginsburg, Valve</li>

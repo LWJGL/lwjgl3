@@ -60,6 +60,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRDeviceGroupCreation VK_KHR_device_group_creation}</dd>
+ * <dt><b>API Interactions</b></dt>
+ * <dd><ul>
+ * <li>Interacts with VK_KHR_bind_memory2</li>
+ * <li>Interacts with VK_KHR_surface</li>
+ * <li>Interacts with VK_KHR_swapchain</li>
+ * </ul></dd>
+ * <dt><b>SPIR-V Dependencies</b></dt>
+ * <dd><ul>
+ * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_device_group.html">SPV_KHR_device_group</a></li>
+ * </ul></dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
@@ -77,11 +87,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>2017-10-10</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
- * <dt><b>Interactions and External Dependencies</b></dt>
- * <dd><ul>
- * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_device_group.html">{@code SPV_KHR_device_group}</a></li>
- * <li>Promoted to Vulkan 1.1 Core</li>
- * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz, NVIDIA</li>

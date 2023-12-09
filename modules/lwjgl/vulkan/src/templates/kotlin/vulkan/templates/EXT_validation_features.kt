@@ -13,9 +13,8 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         """
         This extension provides the ##VkValidationFeaturesEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The structure contains an array of {@code VkValidationFeatureEnableEXT} enum values that enable specific validation features that are disabled by default. The structure also contains an array of {@code VkValidationFeatureDisableEXT} enum values that disable specific validation layer features that are enabled by default.
 
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The {@link EXTValidationFeatures VK_EXT_validation_features} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension.
-        </div>
+        <h5>Deprecation by {@code VK_EXT_layer_settings}</h5>
+        Functionality in this extension is subsumed into the {@link EXTLayerSettings VK_EXT_layer_settings} extension.
 
         <h5>VK_EXT_validation_features</h5>
         <dl>
@@ -29,7 +28,12 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
             <dd>248</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>5</dd>
+            <dd>6</dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Deprecated</em> by {@link EXTLayerSettings VK_EXT_layer_settings} extension</li>
+            </ul></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
@@ -65,7 +69,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."5"
+        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."6"
     )
 
     StringConstant(

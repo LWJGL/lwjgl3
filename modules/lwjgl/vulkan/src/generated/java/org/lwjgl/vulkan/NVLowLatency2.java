@@ -5,13 +5,10 @@
  */
 package org.lwjgl.vulkan;
 
-import java.nio.*;
-
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * <ul>
@@ -36,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>506</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a> or {@link KHRTimelineSemaphore VK_KHR_timeline_semaphore}</dd>
  * <dt><b>Contact</b></dt>
@@ -63,7 +60,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class NVLowLatency2 {
 
     /** The extension specification version. */
-    public static final int VK_NV_LOW_LATENCY_2_SPEC_VERSION = 1;
+    public static final int VK_NV_LOW_LATENCY_2_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_NV_LOW_LATENCY_2_EXTENSION_NAME = "VK_NV_low_latency2";
@@ -342,12 +339,12 @@ public class NVLowLatency2 {
     // --- [ vkGetLatencyTimingsNV ] ---
 
     /** Unsafe version of: {@link #vkGetLatencyTimingsNV GetLatencyTimingsNV} */
-    public static void nvkGetLatencyTimingsNV(VkDevice device, long swapchain, long pTimingCount, long pLatencyMarkerInfo) {
+    public static void nvkGetLatencyTimingsNV(VkDevice device, long swapchain, long pLatencyMarkerInfo) {
         long __functionAddress = device.getCapabilities().vkGetLatencyTimingsNV;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJPPV(device.address(), swapchain, pTimingCount, pLatencyMarkerInfo, __functionAddress);
+        callPJPV(device.address(), swapchain, pLatencyMarkerInfo, __functionAddress);
     }
 
     /**
@@ -361,19 +358,17 @@ public class NVLowLatency2 {
      * void vkGetLatencyTimingsNV(
      *     VkDevice                                    device,
      *     VkSwapchainKHR                              swapchain,
-     *     uint32_t*                                   pTimingCount,
      *     VkGetLatencyMarkerInfoNV*                   pLatencyMarkerInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
-     * <p>The timings returned by {@code vkGetLatencyTimingsNV} contain the timestamps requested from {@link #vkSetLatencyMarkerNV SetLatencyMarkerNV} and additional implementation-specific markers defined in {@link VkLatencyTimingsFrameReportNV}. If {@code pTimings} is {@code NULL}, then the maximum number of queryable frame data is returned in {@code pTimingCount}. Otherwise, {@code pTimingCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pTimings} array in {@code pGetLatencyMarkerInfo}, and on return the variable is overwritten with the number of values actually written to {@code pTimings}.</p>
+     * <p>The timings returned by {@code vkGetLatencyTimingsNV} contain the timestamps requested from {@link #vkSetLatencyMarkerNV SetLatencyMarkerNV} and additional implementation-specific markers defined in {@link VkLatencyTimingsFrameReportNV}.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-     * <li>{@code pTimingCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
      * <li>{@code pLatencyMarkerInfo} <b>must</b> be a valid pointer to a {@link VkGetLatencyMarkerInfoNV} structure</li>
      * <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
@@ -382,15 +377,11 @@ public class NVLowLatency2 {
      * 
      * <p>{@link VkGetLatencyMarkerInfoNV}</p>
      *
-     * @param device       the device associated with {@code swapchain}.
-     * @param swapchain    the swapchain to return data from.
-     * @param pTimingCount a pointer to an integer related to the number of of previous frames of latency data available or queried, as described below.
+     * @param device    the device associated with {@code swapchain}.
+     * @param swapchain the swapchain to return data from.
      */
-    public static void vkGetLatencyTimingsNV(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") IntBuffer pTimingCount, @NativeType("VkGetLatencyMarkerInfoNV *") VkGetLatencyMarkerInfoNV pLatencyMarkerInfo) {
-        if (CHECKS) {
-            check(pTimingCount, 1);
-        }
-        nvkGetLatencyTimingsNV(device, swapchain, memAddress(pTimingCount), pLatencyMarkerInfo.address());
+    public static void vkGetLatencyTimingsNV(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("VkGetLatencyMarkerInfoNV *") VkGetLatencyMarkerInfoNV pLatencyMarkerInfo) {
+        nvkGetLatencyTimingsNV(device, swapchain, pLatencyMarkerInfo.address());
     }
 
     // --- [ vkQueueNotifyOutOfBandNV ] ---
@@ -439,16 +430,6 @@ public class NVLowLatency2 {
      */
     public static void vkQueueNotifyOutOfBandNV(VkQueue queue, @NativeType("VkOutOfBandQueueTypeInfoNV const *") VkOutOfBandQueueTypeInfoNV pQueueTypeInfo) {
         nvkQueueNotifyOutOfBandNV(queue, pQueueTypeInfo.address());
-    }
-
-    /** Array version of: {@link #vkGetLatencyTimingsNV GetLatencyTimingsNV} */
-    public static void vkGetLatencyTimingsNV(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") int[] pTimingCount, @NativeType("VkGetLatencyMarkerInfoNV *") VkGetLatencyMarkerInfoNV pLatencyMarkerInfo) {
-        long __functionAddress = device.getCapabilities().vkGetLatencyTimingsNV;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(pTimingCount, 1);
-        }
-        callPJPPV(device.address(), swapchain, pTimingCount, pLatencyMarkerInfo.address(), __functionAddress);
     }
 
 }

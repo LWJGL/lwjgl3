@@ -8,10 +8,9 @@ package org.lwjgl.vulkan;
 /**
  * This extension provides the {@link VkValidationFeaturesEXT} struct that can be included in the {@code pNext} chain of the {@link VkInstanceCreateInfo} structure passed as the {@code pCreateInfo} parameter of {@link VK10#vkCreateInstance CreateInstance}. The structure contains an array of {@code VkValidationFeatureEnableEXT} enum values that enable specific validation features that are disabled by default. The structure also contains an array of {@code VkValidationFeatureDisableEXT} enum values that disable specific validation layer features that are enabled by default.
  * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * <h5>Deprecation by {@code VK_EXT_layer_settings}</h5>
  * 
- * <p>The {@link EXTValidationFeatures VK_EXT_validation_features} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension.</p>
- * </div>
+ * <p>Functionality in this extension is subsumed into the {@link EXTLayerSettings VK_EXT_layer_settings} extension.</p>
  * 
  * <h5>VK_EXT_validation_features</h5>
  * 
@@ -23,7 +22,11 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>248</dd>
  * <dt><b>Revision</b></dt>
- * <dd>5</dd>
+ * <dd>6</dd>
+ * <dt><b>Deprecation State</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by {@link EXTLayerSettings VK_EXT_layer_settings} extension</li>
+ * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
  * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
@@ -55,7 +58,7 @@ package org.lwjgl.vulkan;
 public final class EXTValidationFeatures {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 5;
+    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 6;
 
     /** The extension name. */
     public static final String VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME = "VK_EXT_validation_features";

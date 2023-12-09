@@ -31,6 +31,11 @@ val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>SPIR-V Dependencies</b></dt>
+            <dd><ul>
+                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">SPV_AMD_shader_image_load_store_lod</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Dominik Witczak <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_image_load_store_lod]%20@dominikwitczakamd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_image_load_store_lod%20extension*">dominikwitczakamd</a></li>
@@ -44,7 +49,6 @@ val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">{@code SPV_AMD_shader_image_load_store_lod}</a></li>
                 <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/AMD/AMD_shader_image_load_store_lod.txt">{@code GL_AMD_shader_image_load_store_lod}</a></li>
             </ul></dd>
 

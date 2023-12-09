@@ -24,13 +24,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code commandBuffer} <b>must</b> not have been allocated with {@link VK10#VK_COMMAND_BUFFER_LEVEL_SECONDARY COMMAND_BUFFER_LEVEL_SECONDARY}</li>
  * <li>If {@code deviceMask} is not 0, it <b>must</b> be a valid device mask</li>
+ * <li>If any render pass instance in {@code commandBuffer} was recorded with a {@link VkRenderPassStripeBeginInfoARM} structure in its pNext chain, a {@link VkRenderPassStripeSubmitInfoARM} <b>must</b> be included in the {@code pNext} chain</li>
+ * <li>If a {@link VkRenderPassStripeSubmitInfoARM} is included in the {@code pNext} chain, the value of {@link VkRenderPassStripeSubmitInfoARM}{@code ::stripeSemaphoreInfoCount} <b>must</b> be equal to the sum of the {@link VkRenderPassStripeBeginInfoARM}{@code ::stripeInfoCount} parameters provided to render pass instances recorded in {@code commandBuffer}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkRenderPassStripeSubmitInfoARM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
  * </ul>
  * 
@@ -121,6 +124,8 @@ public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo>
     public VkCommandBufferSubmitInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkRenderPassStripeSubmitInfoARM} value to the {@code pNext} chain. */
+    public VkCommandBufferSubmitInfo pNext(VkRenderPassStripeSubmitInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #commandBuffer} field. */
     public VkCommandBufferSubmitInfo commandBuffer(VkCommandBuffer value) { ncommandBuffer(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceMask} field. */
@@ -350,6 +355,8 @@ public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo>
         public VkCommandBufferSubmitInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#pNext} field. */
         public VkCommandBufferSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferSubmitInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkRenderPassStripeSubmitInfoARM} value to the {@code pNext} chain. */
+        public VkCommandBufferSubmitInfo.Buffer pNext(VkRenderPassStripeSubmitInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#commandBuffer} field. */
         public VkCommandBufferSubmitInfo.Buffer commandBuffer(VkCommandBuffer value) { VkCommandBufferSubmitInfo.ncommandBuffer(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#deviceMask} field. */

@@ -64,7 +64,6 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Promoted to Vulkan 1.3 Core</li>
                 <li>Requires SPIR-V 1.2 for {@code LocalSizeId}</li>
             </ul></dd>
 

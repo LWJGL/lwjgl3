@@ -34,7 +34,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
             <dd>506</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a> or {@link KHRTimelineSemaphore VK_KHR_timeline_semaphore}</dd>
@@ -64,7 +64,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
     IntConstant(
         "The extension specification version.",
 
-        "NV_LOW_LATENCY_2_SPEC_VERSION".."1"
+        "NV_LOW_LATENCY_2_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -283,17 +283,15 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 ￿void vkGetLatencyTimingsNV(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
-￿    uint32_t*                                   pTimingCount,
 ￿    VkGetLatencyMarkerInfoNV*                   pLatencyMarkerInfo);</code></pre>
 
         <h5>Description</h5>
-        The timings returned by {@code vkGetLatencyTimingsNV} contain the timestamps requested from #SetLatencyMarkerNV() and additional implementation-specific markers defined in ##VkLatencyTimingsFrameReportNV. If {@code pTimings} is {@code NULL}, then the maximum number of queryable frame data is returned in {@code pTimingCount}. Otherwise, {@code pTimingCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pTimings} array in {@code pGetLatencyMarkerInfo}, and on return the variable is overwritten with the number of values actually written to {@code pTimings}.
+        The timings returned by {@code vkGetLatencyTimingsNV} contain the timestamps requested from #SetLatencyMarkerNV() and additional implementation-specific markers defined in ##VkLatencyTimingsFrameReportNV.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-            <li>{@code pTimingCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>{@code pLatencyMarkerInfo} <b>must</b> be a valid pointer to a ##VkGetLatencyMarkerInfoNV structure</li>
             <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
@@ -304,7 +302,6 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 
         VkDevice("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR("swapchain", "the swapchain to return data from."),
-        Check(1)..uint32_t.p("pTimingCount", "a pointer to an integer related to the number of of previous frames of latency data available or queried, as described below."),
         VkGetLatencyMarkerInfoNV.p("pLatencyMarkerInfo", "")
     )
 

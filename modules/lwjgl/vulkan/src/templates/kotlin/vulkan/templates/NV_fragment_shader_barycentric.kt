@@ -54,6 +54,11 @@ val NV_fragment_shader_barycentric = "NVFragmentShaderBarycentric".nativeClassVK
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
+            <dt><b>SPIR-V Dependencies</b></dt>
+            <dd><ul>
+                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_fragment_shader_barycentric.html">SPV_NV_fragment_shader_barycentric</a></li>
+            </ul></dd>
+
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to {@link KHRFragmentShaderBarycentric VK_KHR_fragment_shader_barycentric} extension</li>
@@ -75,7 +80,6 @@ val NV_fragment_shader_barycentric = "NVFragmentShaderBarycentric".nativeClassVK
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_fragment_shader_barycentric.html">{@code SPV_NV_fragment_shader_barycentric}</a></li>
                 <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_fragment_shader_barycentric.txt">{@code GL_NV_fragment_shader_barycentric}</a></li>
             </ul></dd>
 

@@ -51,7 +51,6 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
                 <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a></li>
             </ul></dd>
 

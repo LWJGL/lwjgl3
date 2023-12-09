@@ -69,6 +69,10 @@ package org.lwjgl.vulkan;
  * <dd>66</dd>
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
+ * <dt><b>SPIR-V Dependencies</b></dt>
+ * <dd><ul>
+ * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_vote.html">SPV_KHR_subgroup_vote</a></li>
+ * </ul></dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-new-features">Vulkan 1.1</a></li>
@@ -88,7 +92,6 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a></li>
  * <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">{@code GL_ARB_shader_group_vote}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

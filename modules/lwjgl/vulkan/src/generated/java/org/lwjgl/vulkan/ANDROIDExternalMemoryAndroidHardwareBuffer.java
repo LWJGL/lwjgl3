@@ -31,6 +31,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation}</dd>
+ * <dt><b>API Interactions</b></dt>
+ * <dd><ul>
+ * <li>Interacts with VK_KHR_format_feature_flags2</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jesse Hall <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_ANDROID_external_memory_android_hardware_buffer]%20@critsec%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_ANDROID_external_memory_android_hardware_buffer%20extension*">critsec</a></li>

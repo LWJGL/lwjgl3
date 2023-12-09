@@ -32,6 +32,11 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
+            <dt><b>SPIR-V Dependencies</b></dt>
+            <dd><ul>
+                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_uniform_control_flow.html">SPV_KHR_subgroup_uniform_control_flow</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Alan Baker <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_subgroup_uniform_control_flow]%20@alan-baker%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_subgroup_uniform_control_flow%20extension*">alan-baker</a></li>
@@ -49,7 +54,6 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Requires SPIR-V 1.3.</li>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_uniform_control_flow.html">{@code SPV_KHR_subgroup_uniform_control_flow}</a></li>
                 <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_subgroupuniform_qualifier.txt">{@code GL_EXT_subgroupuniform_qualifier}</a></li>
             </ul></dd>
 

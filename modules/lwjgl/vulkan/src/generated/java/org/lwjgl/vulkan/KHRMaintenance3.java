@@ -52,10 +52,6 @@ import static org.lwjgl.system.JNI.*;
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>
- * <dt><b>Interactions and External Dependencies</b></dt>
- * <dd><ul>
- * <li>Promoted to Vulkan 1.1 Core</li>
- * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz, NVIDIA</li>

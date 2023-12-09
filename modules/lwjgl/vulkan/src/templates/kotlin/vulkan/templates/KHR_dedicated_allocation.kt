@@ -133,11 +133,6 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.1 Core</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>

@@ -134,6 +134,7 @@ val VkQueueGlobalPriorityKHR = "VkQueueGlobalPriorityKHR".enumType
 val VkQueueGlobalPriorityEXT = "VkQueueGlobalPriorityEXT".enumType
 val VkPipelineCompilerControlFlagBitsAMD = "VkPipelineCompilerControlFlagBitsAMD".enumType
 val VkTimeDomainEXT = "VkTimeDomainEXT".enumType
+val VkTimeDomainKHR = "VkTimeDomainKHR".enumType
 val VkMemoryOverallocationBehaviorAMD = "VkMemoryOverallocationBehaviorAMD".enumType
 val VkPipelineCreationFeedbackFlagBitsEXT = "VkPipelineCreationFeedbackFlagBitsEXT".enumType
 val VkDriverIdKHR = "VkDriverIdKHR".enumType
@@ -216,6 +217,7 @@ val VkBufferUsageFlagBits2KHR = "VkBufferUsageFlagBits2KHR".enumType
 val VkShaderCreateFlagBitsEXT = "VkShaderCreateFlagBitsEXT".enumType
 val VkShaderCodeTypeEXT = "VkShaderCodeTypeEXT".enumType
 val VkRayTracingInvocationReorderModeNV = "VkRayTracingInvocationReorderModeNV".enumType
+val VkLayerSettingTypeEXT = "VkLayerSettingTypeEXT".enumType
 val VkLatencyMarkerNV = "VkLatencyMarkerNV".enumType
 val VkOutOfBandQueueTypeNV = "VkOutOfBandQueueTypeNV".enumType
 val VkComponentTypeKHR = "VkComponentTypeKHR".enumType
@@ -2224,8 +2226,7 @@ val VkCuModuleCreateInfoNVX = struct(Module.VULKAN, "VkCuModuleCreateInfoNVX") {
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
-            <li>{@code dataSize} <b>must</b> be greater than 0</li>
+            <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2234,7 +2235,7 @@ val VkCuModuleCreateInfoNVX = struct(Module.VULKAN, "VkCuModuleCreateInfoNVX") {
 
     Expression("#STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
-    AutoSize("pData")..size_t("dataSize", "")
+    AutoSize("pData", optional = true)..size_t("dataSize", "")
     void.const.p("pData", "")
 }
 
@@ -4740,7 +4741,7 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> have been created with a {@code VkSemaphoreType} of #SEMAPHORE_TYPE_BINARY</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> have an associated semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> have an associated semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends <b>must</b> have also been submitted for execution</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -6938,7 +6939,7 @@ val VkExecutionGraphPipelineCreateInfoAMDX = struct(Module.VULKAN, "VkExecutionG
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</li>
-            <li>If {@code flags} includes #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedComputePipelines">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedComputePipelines}</a> feature <b>must</b> be enabled</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedComputePipelines">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedComputePipelines}</a> is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV</li>
             <li>If {@code flags} includes #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV, then the {@code pNext} chain <b>must</b> include a pointer to a valid instance of ##VkComputePipelineIndirectBufferInfoNV specifying the address where the pipeline’s metadata will be saved</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT or #PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT</li>
             <li>The {@code stage} member of any element of {@code pStages} <b>must</b> be #SHADER_STAGE_COMPUTE_BIT</li>
@@ -9886,30 +9887,39 @@ val VkPipelineCompilerControlCreateInfoAMD = struct(Module.VULKAN, "VkPipelineCo
     VkPipelineCompilerControlFlagsAMD("compilerControlFlags", "a bitmask of {@code VkPipelineCompilerControlFlagBitsAMD} affecting how the pipeline will be compiled.")
 }
 
-val VkCalibratedTimestampInfoEXT = struct(Module.VULKAN, "VkCalibratedTimestampInfoEXT") {
+val _VkCalibratedTimestampInfoKHR = struct(Module.VULKAN, "VkCalibratedTimestampInfoKHR")
+val VkCalibratedTimestampInfoEXT = struct(Module.VULKAN, "VkCalibratedTimestampInfoEXT", alias = _VkCalibratedTimestampInfoKHR) {
+    documentation = "See ##VkCalibratedTimestampInfoKHR."
+
+    Expression("#STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    VkTimeDomainKHR("timeDomain", "")
+}
+
+val VkCalibratedTimestampInfoKHR = struct(Module.VULKAN, "VkCalibratedTimestampInfoKHR") {
     documentation =
         """
         Structure specifying the input parameters of a calibrated timestamp query.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code timeDomain} <b>must</b> be one of the {@code VkTimeDomainEXT} values returned by #GetPhysicalDeviceCalibrateableTimeDomainsEXT()</li>
+            <li>{@code timeDomain} <b>must</b> be one of the {@code VkTimeDomainKHR} values returned by #GetPhysicalDeviceCalibrateableTimeDomainsKHR()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code timeDomain} <b>must</b> be a valid {@code VkTimeDomainEXT} value</li>
+            <li>{@code timeDomain} <b>must</b> be a valid {@code VkTimeDomainKHR} value</li>
         </ul>
 
         <h5>See Also</h5>
-        #GetCalibratedTimestampsEXT()
+        #GetCalibratedTimestampsEXT(), #GetCalibratedTimestampsKHR()
         """
 
-    Expression("#STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkTimeDomainEXT("timeDomain", "a {@code VkTimeDomainEXT} value specifying the time domain from which the calibrated timestamp value should be returned.")
+    VkTimeDomainKHR("timeDomain", "a {@code VkTimeDomainKHR} value specifying the time domain from which the calibrated timestamp value should be returned.")
 }
 
 val VkPhysicalDeviceShaderCorePropertiesAMD = struct(Module.VULKAN, "VkPhysicalDeviceShaderCorePropertiesAMD", mutable = false) {
@@ -10253,7 +10263,15 @@ val VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT = struct(Module.VULKAN, 
     uint32_t("maxVertexAttribDivisor", "the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled.")
 }
 
-val VkVertexInputBindingDivisorDescriptionEXT = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescriptionEXT") {
+val _VkVertexInputBindingDivisorDescriptionKHR = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescriptionKHR")
+val VkVertexInputBindingDivisorDescriptionEXT = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescriptionEXT", alias = _VkVertexInputBindingDivisorDescriptionKHR) {
+    documentation = "See ##VkVertexInputBindingDivisorDescriptionKHR."
+
+    uint32_t("binding", "")
+    uint32_t("divisor", "")
+}
+
+val VkVertexInputBindingDivisorDescriptionKHR = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescriptionKHR") {
     documentation =
         """
         Structure specifying a divisor used in instanced rendering.
@@ -10266,58 +10284,36 @@ val VkVertexInputBindingDivisorDescriptionEXT = struct(Module.VULKAN, "VkVertexI
             <li>{@code binding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
             <li>If the {@code vertexAttributeInstanceRateZeroDivisor} feature is not enabled, {@code divisor} <b>must</b> not be 0</li>
             <li>If the {@code vertexAttributeInstanceRateDivisor} feature is not enabled, {@code divisor} <b>must</b> be 1</li>
-            <li>{@code divisor} <b>must</b> be a value between 0 and ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}, inclusive</li>
+            <li>{@code divisor} <b>must</b> be a value between 0 and ##VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR{@code ::maxVertexAttribDivisor}, inclusive</li>
             <li>##VkVertexInputBindingDescription{@code ::inputRate} <b>must</b> be of type #VERTEX_INPUT_RATE_INSTANCE for this {@code binding}</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkPipelineVertexInputDivisorStateCreateInfoEXT
+        ##VkPipelineVertexInputDivisorStateCreateInfoKHR
         """
 
     uint32_t("binding", "the binding number for which the divisor is specified.")
-    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
+    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
 }
 
-val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoEXT") {
-    documentation =
-        """
-        Structure specifying vertex attributes assignment during instanced rendering.
+val _VkPipelineVertexInputDivisorStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoKHR")
+val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoEXT", alias = _VkPipelineVertexInputDivisorStateCreateInfoKHR) {
+    documentation = "See ##VkPipelineVertexInputDivisorStateCreateInfoKHR."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT</li>
-            <li>{@code pVertexBindingDivisors} <b>must</b> be a valid pointer to an array of {@code vertexBindingDivisorCount} ##VkVertexInputBindingDivisorDescriptionEXT structures</li>
-            <li>{@code vertexBindingDivisorCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkVertexInputBindingDivisorDescriptionEXT
-        """
-
-    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pVertexBindingDivisors")..uint32_t("vertexBindingDivisorCount", "the number of elements in the {@code pVertexBindingDivisors} array.")
-    VkVertexInputBindingDivisorDescriptionEXT.const.p("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionEXT structures specifying the divisor value for each binding.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    AutoSize("pVertexBindingDivisors")..uint32_t("vertexBindingDivisorCount", "")
+    VkVertexInputBindingDivisorDescriptionKHR.const.p("pVertexBindingDivisors", "")
 }
 
-val VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT") {
-    documentation =
-        """
-        Structure describing if fetching of vertex attribute may be repeated for instanced rendering.
+val _VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR")
+val VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", alias = _VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR) {
+    documentation = "See ##VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR."
 
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT</li>
-        </ul>
-        """
-
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("vertexAttributeInstanceRateDivisor", "specifies whether vertex attribute fetching may be repeated in case of instanced rendering.")
-    VkBool32("vertexAttributeInstanceRateZeroDivisor", "specifies whether a zero value for ##VkVertexInputBindingDivisorDescriptionEXT{@code ::divisor} is supported.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("vertexAttributeInstanceRateDivisor", "")
+    VkBool32("vertexAttributeInstanceRateZeroDivisor", "")
 }
 
 val VkPipelineCreationFeedbackCreateInfoEXT = struct(Module.VULKAN, "VkPipelineCreationFeedbackCreateInfoEXT", alias = VkPipelineCreationFeedbackCreateInfo) {
@@ -12756,8 +12752,8 @@ val VkHostImageLayoutTransitionInfoEXT = struct(Module.VULKAN, "VkHostImageLayou
             <li>If {@code image} has a color format that is single-plane, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
             <li>If {@code image} has a color format and is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
             <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include at least one <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit or #IMAGE_ASPECT_COLOR_BIT</li>
-            <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
+            <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_DEPTH_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_STENCIL_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</li>
             <li>{@code oldLayout} <b>must</b> be either #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources as specified in {@code subresourceRange}</li>
@@ -14794,8 +14790,8 @@ val VkCudaFunctionCreateInfoNV = struct(Module.VULKAN, "VkCudaFunctionCreateInfo
         """
 
     Expression("#STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "<b>may</b> be {@code NULL} or <b>may</b> be a pointer to a structure extending this structure.")
-    VkCudaModuleNV("module", "<b>must</b> be the CUDA {@code VkCudaModuleNV} module in which the function resides.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkCudaModuleNV("module", "the CUDA {@code VkCudaModuleNV} module in which the function resides.")
     charUTF8.const.p("pName", "a null-terminated UTF-8 string containing the name of the shader entry point for this stage.")
 }
 
@@ -14803,6 +14799,13 @@ val VkCudaLaunchInfoNV = struct(Module.VULKAN, "VkCudaLaunchInfoNV") {
     documentation =
         """
         Structure specifying the parameters to launch a CUDA kernel.
+
+        <h5>Description</h5>
+        Kernel parameters of {@code function} are specified via {@code pParams}, very much the same way as described in <a href="https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__EXEC.html#group__CUDA__EXEC_1gb8f3dc3031b40da29d5f9a7139e52e15">cuLaunchKernel</a>
+
+        If {@code function} has N parameters, then {@code pParams} <b>must</b> be an array of N pointers and {@code paramCount} <b>must</b> be set to N. Each of {@code kernelParams}[0] through {@code kernelParams}[N-1] <b>must</b> point to a region of memory from which the actual kernel parameter will be copied. The number of kernel parameters and their offsets and sizes are not specified here as that information is stored in the {@code VkCudaFunctionNV} object.
+
+        The application-owned memory pointed to by {@code pParams} and {@code kernelParams}[0] through {@code kernelParams}[N-1] are consumed immediately, and <b>may</b> be altered or freed after #CmdCudaLaunchKernelNV() has returned.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -18441,7 +18444,10 @@ val VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI = struct(Module.VULKAN, "
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("clustercullingShader", "specifies whether cluster culling shader is supported.")
     VkBool32("multiviewClusterCullingShader", "specifies whether multiview is supported.")
 }
@@ -18466,6 +18472,22 @@ val VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI = struct(Module.VULKAN,
     uint32_t("maxWorkGroupSize", "the maximum size of a local workgroup. These three value represent the maximum local workgroup size in the X, Y and Z dimensions, respectively. The x, y and z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the WorkgroupSize decoration in shader modules, must be less than or equal to the corresponding limit. In the current implementation, the maximum workgroup size of the X dimension is 32, the others are 1.")[3]
     uint32_t("maxOutputClusterCount", "the maximum number of output cluster a single cluster culling shader workgroup can emit.")
     VkDeviceSize("indirectBufferOffsetAlignment", "indicates the alignment for cluster drawing command buffer stride. #CmdDrawClusterIndirectHUAWEI(){@code ::offset} must be a multiple of this value.")
+}
+
+val VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI = struct(Module.VULKAN, "VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI") {
+    documentation =
+        """
+        Structure describing whether cluster culling shader support VRS.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("clusterShadingRate", "specifies whether per-cluster shading rates is supported.")
 }
 
 val VkPhysicalDeviceBorderColorSwizzleFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT") {
@@ -18806,6 +18828,142 @@ val VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT = struct(Module.VULKAN, "VkPhy
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("nonSeamlessCubeMap", "indicates that the implementation supports #SAMPLER_CREATE_NON_SEAMLESS_CUBE_MAP_BIT_EXT.")
+}
+
+val VkPhysicalDeviceRenderPassStripedFeaturesARM = struct(Module.VULKAN, "VkPhysicalDeviceRenderPassStripedFeaturesARM") {
+    documentation =
+        """
+        Structure describing whether striped rendering can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRenderPassStripedFeaturesARM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRenderPassStripedFeaturesARM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("renderPassStriped", "indicates that striped rendering is supported by the implementation.")
+}
+
+val VkPhysicalDeviceRenderPassStripedPropertiesARM = struct(Module.VULKAN, "VkPhysicalDeviceRenderPassStripedPropertiesARM", mutable = false) {
+    documentation =
+        """
+        Structure describing striped rendering limits of an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRenderPassStripedPropertiesARM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkExtent2D("renderPassStripeGranularity", "indicates the minimum supported granularity of striped render pass regions.")
+    uint32_t("maxRenderPassStripes", "indicates the maximum number of stripes supported in striped rendering.")
+}
+
+val VkRenderPassStripeInfoARM = struct(Module.VULKAN, "VkRenderPassStripeInfoARM") {
+    documentation =
+        """
+        Structure specifying per rendering stripe information.
+
+        <h5>Description</h5>
+        {@code stripeArea} is the render area that is affected by this stripe of the render pass instance. It <b>must</b> be a subregion of the {@code renderArea} of the render pass instance.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code stripeArea.offset.x} <b>must</b> be a multiple of ##VkPhysicalDeviceRenderPassStripedPropertiesARM{@code ::renderPassStripeGranularity.width}</li>
+            <li>{@code stripeArea.extent.width} <b>must</b> be a multiple of ##VkPhysicalDeviceRenderPassStripedPropertiesARM{@code ::renderPassStripeGranularity.width}, or the sum of {@code stripeArea.offset.x} and {@code stripeArea.extent.width} <b>must</b> be equal to the {@code renderArea.extent.width} of the render pass instance</li>
+            <li>{@code stripeArea.offset.y} <b>must</b> be a multiple of ##VkPhysicalDeviceRenderPassStripedPropertiesARM{@code ::renderPassStripeGranularity.height}</li>
+            <li>{@code stripeArea.extent.height} <b>must</b> be a multiple of ##VkPhysicalDeviceRenderPassStripedPropertiesARM{@code ::renderPassStripeGranularity.height}, or the sum of {@code stripeArea.offset.y} and {@code stripeArea.extent.height} <b>must</b> be equal to the {@code renderArea.extent.height} of the render pass instance</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkRect2D, ##VkRenderPassStripeBeginInfoARM
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkRect2D("stripeArea", "the stripe area, and is described in more detail below.")
+}
+
+val VkRenderPassStripeBeginInfoARM = struct(Module.VULKAN, "VkRenderPassStripeBeginInfoARM") {
+    documentation =
+        """
+        Structure specifying striped rendering information.
+
+        <h5>Description</h5>
+        This structure can be included in the {@code pNext} chain of ##VkRenderPassBeginInfo or ##VkRenderingInfo to define how the render pass instance is split into stripes.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code stripeInfoCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceRenderPassStripedPropertiesARM{@code ::maxRenderPassStripes}</li>
+            <li>The {@code stripeArea} defined by each element of {@code pStripeInfos} <b>must</b> not overlap the {@code stripeArea} of any other element</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM</li>
+            <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} ##VkRenderPassStripeInfoARM structures</li>
+            <li>{@code stripeInfoCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkRenderPassStripeInfoARM
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pStripeInfos")..uint32_t("stripeInfoCount", "the number of stripes in this render pass instance")
+    VkRenderPassStripeInfoARM.p("pStripeInfos", "a pointer to an array of {@code stripeInfoCount} ##VkRenderPassStripeInfoARM structures describing the stripes used by the render pass instance.")
+}
+
+val VkRenderPassStripeSubmitInfoARM = struct(Module.VULKAN, "VkRenderPassStripeSubmitInfoARM") {
+    documentation =
+        """
+        Structure specifying striped rendering submit information.
+
+        <h5>Description</h5>
+        This structure can be included in the {@code pNext} chain of ##VkCommandBufferSubmitInfo to provide a set of semaphores to be signaled for each striped render pass instance.
+
+        The elements of {@code pStripeSemaphoreInfos} are mapped to render pass instances in ##VkCommandBufferSubmitInfo{@code ::commandBuffer} in submission order and in stripe order within each render pass instance. Each semaphore in {@code pStripeSemaphoreInfos} is signaled when the implementation has completed execution of the associated stripe. In a render pass instance that has multiview enabled, the stripe includes all views in the view mask. In a render pass instance with {@code layerCount} greater than 1, the stripe includes all layers.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code semaphore} member of each element of {@code pStripeSemaphoreInfos} <b>must</b> have been created with a {@code VkSemaphoreType} of #SEMAPHORE_TYPE_BINARY</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM</li>
+            <li>{@code pStripeSemaphoreInfos} <b>must</b> be a valid pointer to an array of {@code stripeSemaphoreInfoCount} valid ##VkSemaphoreSubmitInfo structures</li>
+            <li>{@code stripeSemaphoreInfoCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkSemaphoreSubmitInfo
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pStripeSemaphoreInfos")..uint32_t("stripeSemaphoreInfoCount", "the number of semaphores used to signal stripe completion in the render pass instances in the submitted command buffer.")
+    VkSemaphoreSubmitInfo.const.p("pStripeSemaphoreInfos", "a pointer to an array of {@code stripeSemaphoreInfoCount} ##VkSemaphoreSubmitInfo structures describing the semaphores used to signal stripe completion.")
 }
 
 val VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM") {
@@ -20282,15 +20440,13 @@ val VkDeviceImageSubresourceInfoKHR = struct(Module.VULKAN, "VkDeviceImageSubres
         <h5>Valid Usage</h5>
         <ul>
             <li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
-            <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code format} of the {@code image} is a color format, {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR or #IMAGE_TILING_OPTIMAL, and does not have a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
-            <li>If {@code format} of the {@code image} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_DEPTH_BIT</li>
-            <li>If {@code format} of the {@code image} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_STENCIL_BIT</li>
-            <li>If {@code format} of the {@code image} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
-            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
-            <li>If {@code image} was created with the #EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
-            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> and the index <em>i</em> <b>must</b> be less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier}</li>
+            <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in {@code pCreateInfo}</li>
+            <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in {@code pCreateInfo}</li>
+            <li>If {@code format} of the {@code image} is a color format that is not a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, and {@code tiling} of the {@code pCreateInfo} is #IMAGE_TILING_LINEAR or #IMAGE_TILING_OPTIMAL, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code format} of the {@code pCreateInfo} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_DEPTH_BIT</li>
+            <li>If {@code format} of the {@code pCreateInfo} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_STENCIL_BIT</li>
+            <li>If {@code format} of the {@code pCreateInfo} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
+            <li>If the {@code tiling} of the {@code pCreateInfo} is #IMAGE_TILING_LINEAR and has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -20771,6 +20927,54 @@ val VkMutableDescriptorTypeCreateInfoEXT = struct(Module.VULKAN, "VkMutableDescr
     VkMutableDescriptorTypeListEXT.const.p("pMutableDescriptorTypeLists", "a pointer to an array of ##VkMutableDescriptorTypeListEXT structures.")
 }
 
+val VkLayerSettingEXT = struct(Module.VULKAN, "VkLayerSettingEXT") {
+    documentation =
+        """
+        Specify a layer capability to configure.
+
+        <h5>Description</h5>
+        When multiple ##VkLayerSettingsCreateInfoEXT structures are chained and the same {@code pSettingName} is referenced for the same {@code pLayerName}, the value of the first reference of the layer setting is used.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code pLayerName} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>{@code pSettingName} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkLayerSettingTypeEXT} value</li>
+            <li>If {@code valueCount} is not 0, {@code pValues} <b>must</b> be a valid pointer to an array of {@code valueCount} bytes</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkLayerSettingsCreateInfoEXT
+        """
+
+    charUTF8.const.p("pLayerName", "a pointer to a null-terminated UTF-8 string naming the layer to configure the setting from.")
+    charUTF8.const.p("pSettingName", "a pointer to a null-terminated UTF-8 string naming the setting to configure. Unknown {@code pSettingName} by the layer are ignored.")
+    VkLayerSettingTypeEXT("type", "a {@code VkLayerSettingTypeEXT} value specifying the type of the {@code pValues} values.")
+    AutoSize("pValues", optional = true)..uint32_t("valueCount", "")
+    void.const.p("pValues", "a pointer to an array of {@code count} values of the type indicated by {@code type} to configure the layer setting.")
+}
+
+val VkLayerSettingsCreateInfoEXT = struct(Module.VULKAN, "VkLayerSettingsCreateInfoEXT") {
+    documentation =
+        """
+        Specify layer capabilities for a Vulkan instance.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT</li>
+            <li>If {@code settingCount} is not 0, {@code pSettings} <b>must</b> be a valid pointer to an array of {@code settingCount} valid ##VkLayerSettingEXT structures</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkLayerSettingEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pSettings", optional = true)..uint32_t("settingCount", "the number of settings to configure.")
+    VkLayerSettingEXT.const.p("pSettings", "a pointer to an array of {@code settingCount} ##VkLayerSettingEXT values specifying the setting to be configured.")
+}
+
 val VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM = struct(Module.VULKAN, "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM") {
     documentation =
         """
@@ -20958,12 +21162,12 @@ val VkGetLatencyMarkerInfoNV = struct(Module.VULKAN, "VkGetLatencyMarkerInfoNV")
         Structure specifying the parameters of vkGetLatencyTimingsNV.
 
         <h5>Description</h5>
-        The elements of {@code pTimings} are arranged in the order they were requested in, with the oldest data in the first entry.
+        If {@code pTimings} is {@code NULL} then the maximum number of queryable frame data is returned in {@code timingCount}. Otherwise, {@code timingCount} <b>must</b> be set by the user to the number of elements in the {@code pTimings} array, and on return the variable is overwritten with the number of values actually written to {@code pTimings}. The elements of {@code pTimings} are arranged in the order they were requested in, with the oldest data in the first entry.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV</li>
-            <li>{@code pTimings} <b>must</b> be a valid pointer to a ##VkLatencyTimingsFrameReportNV structure</li>
+            <li>If {@code timingCount} is not 0, and {@code pTimings} is not {@code NULL}, {@code pTimings} <b>must</b> be a valid pointer to an array of {@code timingCount} ##VkLatencyTimingsFrameReportNV structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -20972,7 +21176,8 @@ val VkGetLatencyMarkerInfoNV = struct(Module.VULKAN, "VkGetLatencyMarkerInfoNV")
 
     Expression("#STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "either {@code NULL} or a pointer to a structure extending this structure.")
-    VkLatencyTimingsFrameReportNV.p("pTimings", "either {@code NULL} or a pointer to an array of ##VkLatencyTimingsFrameReportNV structures.")
+    AutoSize("pTimings", optional = true)..uint32_t("timingCount", "an integer related to the number of of previous frames of latency data available or queried, as described below.")
+    nullable..VkLatencyTimingsFrameReportNV.p("pTimings", "either {@code NULL} or a pointer to an array of ##VkLatencyTimingsFrameReportNV structures.")
 }
 
 val VkLatencySubmissionPresentIdNV = struct(Module.VULKAN, "VkLatencySubmissionPresentIdNV") {
@@ -21390,6 +21595,68 @@ val VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT = struct(Modul
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("attachmentFeedbackLoopDynamicState", "specifies whether dynamic feedback loops are supported.")
+}
+
+val VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR", mutable = false) {
+    documentation =
+        """
+        Structure describing max value of vertex attribute divisor that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("maxVertexAttribDivisor", "the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled.")
+    VkBool32("supportsNonZeroFirstInstance", "specifies whether a non-zero value for the {@code firstInstance} parameter of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#drawing\">drawing commands</a> is supported when ##VkVertexInputBindingDivisorDescriptionKHR{@code ::divisor} is not 1.")
+}
+
+val VkPipelineVertexInputDivisorStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoKHR") {
+    documentation =
+        """
+        Structure specifying vertex attributes assignment during instanced rendering.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR</li>
+            <li>{@code pVertexBindingDivisors} <b>must</b> be a valid pointer to an array of {@code vertexBindingDivisorCount} ##VkVertexInputBindingDivisorDescriptionKHR structures</li>
+            <li>{@code vertexBindingDivisorCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkVertexInputBindingDivisorDescriptionKHR
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pVertexBindingDivisors")..uint32_t("vertexBindingDivisorCount", "the number of elements in the {@code pVertexBindingDivisors} array.")
+    VkVertexInputBindingDivisorDescriptionKHR.const.p("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionKHR structures specifying the divisor value for each binding.")
+}
+
+val VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR") {
+    documentation =
+        """
+        Structure describing if fetching of vertex attribute may be repeated for instanced rendering.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("vertexAttributeInstanceRateDivisor", "specifies whether vertex attribute fetching may be repeated in the case of instanced rendering.")
+    VkBool32("vertexAttributeInstanceRateZeroDivisor", "specifies whether a zero value for ##VkVertexInputBindingDivisorDescriptionEXT{@code ::divisor} is supported.")
 }
 
 val VkPhysicalDeviceLayeredDriverPropertiesMSFT = struct(Module.VULKAN, "VkPhysicalDeviceLayeredDriverPropertiesMSFT", mutable = false) {

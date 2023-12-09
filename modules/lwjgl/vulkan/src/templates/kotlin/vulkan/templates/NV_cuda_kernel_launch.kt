@@ -21,7 +21,7 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 
         To reduce the impact of compilation time, this extension offers the capability to return a binary cache from the PTX that was provided. For this, a first query for the required cache size is made with #GetCudaModuleCacheNV() with a {@code NULL} pointer to a buffer and with a valid pointer receiving the size; then another call of the same function with a valid pointer to a buffer to retrieve the data. The resulting cache could then be user later for further runs of this application by sending this cache instead of the PTX code (using the same #CreateCudaModuleNV()), thus significantly speeding up the initialization of the CUDA module.
 
-        As with {@code VkPipelineCache}, the binary cache depends on the hardware architecture. Therefore the application must assume the cache might fail, and thus need to handle falling back to the original PTX code as necessary. Most often, the cache will succeed if the same GPU driver and architecture is used between the cache generation from PTX and the use of this cache. But most often, in the event of a new driver version or a if using a different GPU But in the event of a new driver version or if using a different GPU architecture, the cache is likely to become invalid.
+        As with {@code VkPipelineCache}, the binary cache depends on the hardware architecture. The application must assume the cache might fail, and need to handle falling back to the original PTX code as necessary. Most often, the cache will succeed if the same GPU driver and architecture is used between the cache generation from PTX and the use of this cache. In the event of a new driver version, or if using a different GPU architecture, the cache is likely to become invalid.
 
         <h5>VK_NV_cuda_kernel_launch</h5>
         <dl>
@@ -37,6 +37,11 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
             <dt><b>Revision</b></dt>
             <dd><ul>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+            </ul></dd>
+
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_EXT_debug_report</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -89,8 +94,8 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
     EnumConstant(
         "Extends {@code VkDebugReportObjectTypeEXT}.",
 
-        "DEBUG_REPORT_OBJECT_TYPE_CUDA_MODULE_NV".."1000307000",
-        "DEBUG_REPORT_OBJECT_TYPE_CUDA_FUNCTION_NV".."1000307001"
+        "DEBUG_REPORT_OBJECT_TYPE_CUDA_MODULE_NV_EXT".."1000307000",
+        "DEBUG_REPORT_OBJECT_TYPE_CUDA_FUNCTION_NV_EXT".."1000307001"
     )
 
     VkResult(
@@ -109,7 +114,7 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 ￿    VkCudaModuleNV*                             pModule);</code></pre>
 
         <h5>Description</h5>
-        Once a CUDA module has been created, you <b>may</b> create the function entry point that <b>must</b> refer to one function in the module.
+        Once a CUDA module has been created, the application <b>may</b> create the function entry point, which <b>must</b> refer to one function in the module.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -158,11 +163,16 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 ￿    size_t*                                     pCacheSize,
 ￿    void*                                       pCacheData);</code></pre>
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pCacheSize} <b>must</b> be a pointer containing the amount of bytes to be copied in {@code pCacheData}. If {@code pCacheData} is NULL, the function will return in this pointer the total amount of bytes required to later perform the copy into {@code pCacheData}.</li>
-            <li>{@code pCacheData} <b>may</b> be a pointer to a buffer in which the binary cache will be copied. The amount of bytes copied is defined by the value in {@code pCacheSize}. This pointer <b>may</b> be NULL. In this case, the function will write the total amount of required data in {@code pCacheSize}.</li>
-        </ul>
+        <h5>Description</h5>
+        If {@code pCacheData} is {@code NULL}, then the size of the binary cache, in bytes, is returned in {@code pCacheSize}. Otherwise, {@code pCacheSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pCacheData}, and on return the variable is overwritten with the amount of data actually written to {@code pCacheData}. If {@code pCacheSize} is less than the size of the binary shader code, nothing is written to {@code pCacheData}, and #INCOMPLETE will be returned instead of #SUCCESS.
+
+        The returned cache <b>may</b> then be used later for further initialization of the CUDA module, by sending this cache <em>instead</em> of the PTX code when using #CreateCudaModuleNV().
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Using the binary cache instead of the original PTX code <b>should</b> significantly speed up initialization of the CUDA module, given that the whole compilation and validation will not be necessary.
+
+        As with {@code VkPipelineCache}, the binary cache depends on the specific implementation. The application <b>must</b> assume the cache upload might fail in many circumstances and thus <b>may</b> have to get ready for falling back to the original PTX code if necessary. Most often, the cache <b>may</b> succeed if the same device driver and architecture is used between the cache generation from PTX and the use of this cache. In the event of a new driver version or if using a different device architecture, this cache <b>may</b> become invalid.
+        </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

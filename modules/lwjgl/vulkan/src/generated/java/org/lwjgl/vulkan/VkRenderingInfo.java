@@ -109,14 +109,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pStencilAttachment→resolveMode} <b>must</b> not be {@link ANDROIDExternalFormatResolve#VK_RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID}</li>
  * <li>If {@code colorAttachmentCount} is not 1, the {@code resolveMode} member of any element of {@code pColorAttachments} <b>must</b> not be {@link ANDROIDExternalFormatResolve#VK_RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID}</li>
  * <li>If the {@code resolveMode} of any element of {@code pColorAttachments} is {@link ANDROIDExternalFormatResolve#VK_RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID}, {@link VkRenderingFragmentDensityMapAttachmentInfoEXT}{@code ::imageView} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If the {@code resolveMode} of any element of {@code pColorAttachments} is {@link ANDROIDExternalFormatResolve#VK_RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID}, {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}{@code ::imageView} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If the {@code resolveMode} of any element of {@code pColorAttachments} is {@link ANDROIDExternalFormatResolve#VK_RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID}, {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}{@code ::imageView} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} If the {@code pNext} chain contains a {@link VkRenderPassStripeBeginInfoARM} structure, the union of stripe areas defined by the elements of {@link VkRenderPassStripeInfoARM}{@code ::pStripeInfos} <b>must</b> cover the {@code renderArea}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_RENDERING_INFO STRUCTURE_TYPE_RENDERING_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultisampledRenderToSingleSampledInfoEXT}, {@link VkMultiviewPerViewAttributesInfoNVX}, {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}, {@link VkRenderingFragmentDensityMapAttachmentInfoEXT}, or {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultisampledRenderToSingleSampledInfoEXT}, {@link VkMultiviewPerViewAttributesInfoNVX}, {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}, {@link VkRenderPassStripeBeginInfoARM}, {@link VkRenderingFragmentDensityMapAttachmentInfoEXT}, or {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBits} values</li>
  * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachments} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@link VkRenderingAttachmentInfo} structures</li>
@@ -265,6 +265,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     public VkRenderingInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
@@ -576,6 +578,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */

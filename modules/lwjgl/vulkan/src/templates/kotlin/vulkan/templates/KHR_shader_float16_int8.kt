@@ -53,7 +53,6 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
                 <li>This extension interacts with {@link KHR8bitStorage VK_KHR_8bit_storage}</li>
                 <li>This extension interacts with {@link KHR16bitStorage VK_KHR_16bit_storage}</li>
                 <li>This extension interacts with {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>

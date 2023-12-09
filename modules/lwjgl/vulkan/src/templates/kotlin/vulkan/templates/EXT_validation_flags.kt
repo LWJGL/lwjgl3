@@ -13,8 +13,8 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
         """
         This extension provides the ##VkValidationFlagsEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The structure contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
 
-        <h5>Deprecation by {@code VK_EXT_validation_features}</h5>
-        Functionality in this extension is subsumed into the {@link EXTValidationFeatures VK_EXT_validation_features} extension.
+        <h5>Deprecation by {@code VK_EXT_layer_settings}</h5>
+        Functionality in this extension is subsumed into the {@link EXTLayerSettings VK_EXT_layer_settings} extension.
 
         <h5>VK_EXT_validation_flags</h5>
         <dl>
@@ -28,11 +28,11 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
             <dd>62</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>
+                <li><em>Deprecated</em> by {@link EXTLayerSettings VK_EXT_layer_settings} extension</li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>
@@ -65,7 +65,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FLAGS_SPEC_VERSION".."2"
+        "EXT_VALIDATION_FLAGS_SPEC_VERSION".."3"
     )
 
     StringConstant(

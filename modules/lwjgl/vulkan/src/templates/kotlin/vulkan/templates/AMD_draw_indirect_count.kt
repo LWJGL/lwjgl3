@@ -51,11 +51,6 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-08-23</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count}</li>
-            </ul></dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 

@@ -49,11 +49,6 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-12-09</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.3 Core</li>
-            </ul></dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 

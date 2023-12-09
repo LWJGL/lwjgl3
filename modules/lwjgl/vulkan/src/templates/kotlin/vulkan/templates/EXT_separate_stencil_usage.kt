@@ -46,11 +46,6 @@ val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_se
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-11-08</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
-            </ul></dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 

@@ -51,16 +51,6 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
             <dt><b>Last Modified Date</b></dt>
             <dd>2020-07-06</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.3 Core</li>
-            </ul></dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>None</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Leger, Qualcomm</li>

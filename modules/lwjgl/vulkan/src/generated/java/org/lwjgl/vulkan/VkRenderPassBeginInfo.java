@@ -39,8 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code clearValueCount} <b>must</b> be greater than the largest attachment index in {@code renderPass} specifying a {@code loadOp} (or {@code stencilLoadOp}, if the attachment has a depth/stencil format) of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}</li>
  * <li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a valid pointer to an array of {@code clearValueCount} {@link VkClearValue} unions</li>
  * <li>{@code renderPass} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the {@link VkFramebufferCreateInfo} structure specified when creating {@code framebuffer}</li>
- * <li>If {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceRenderAreaCount} is 0, {@code renderArea.extent.width} <b>must</b> be greater than 0</li>
- * <li>If {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceRenderAreaCount} is 0, {@code renderArea.extent.height} <b>must</b> be greater than 0</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.extent.width} <b>must</b> be greater than 0</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.extent.height} <b>must</b> be greater than 0</li>
  * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.x} <b>must</b> be greater than or equal to 0</li>
  * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.y} <b>must</b> be greater than or equal to 0</li>
  * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, <code>renderArea.offset.x + renderArea.extent.width</code> <b>must</b> be less than or equal to {@link VkFramebufferCreateInfo}{@code ::width} the {@code framebuffer} was created with</li>
@@ -64,14 +64,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code pNext} chain includes {@link VkRenderPassTransformBeginInfoQCOM}, {@code renderArea.offset} <b>must</b> equal <code>(0,0)</code></li>
  * <li>If the {@code pNext} chain includes {@link VkRenderPassTransformBeginInfoQCOM}, {@code renderArea.extent} transformed by {@link VkRenderPassTransformBeginInfoQCOM}{@code ::transform} <b>must</b> equal the {@code framebuffer} dimensions</li>
  * <li>If the {@code perViewRenderAreaCount} member of a {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} structure included in the {@code pNext} chain is not 0, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview-per-view-render-areas">{@code multiviewPerViewRenderAreas}</a> feature <b>must</b> be enabled.</li>
- * <li>If the {@code perViewRenderAreaCount} member of a {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} structure included in the {@code pNext} chain is not 0, then {@code renderArea} <b>must</b> specify a render area that includes the union of all per view render areas.</li>
+ * <li>If the {@code perViewRenderAreaCount} member of a {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} structure included in the {@code pNext} chain is not 0, then {@code renderArea} <b>must</b> specify a render area that includes the union of all per view render areas. If the {@code pNext} chain contains a {@link VkRenderPassStripeBeginInfoARM} structure, the union of stripe areas defined by the elements of {@link VkRenderPassStripeInfoARM}{@code ::pStripeInfos} <b>must</b> cover the {@code renderArea}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}, {@link VkRenderPassAttachmentBeginInfo}, {@link VkRenderPassSampleLocationsBeginInfoEXT}, or {@link VkRenderPassTransformBeginInfoQCOM}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}, {@link VkRenderPassAttachmentBeginInfo}, {@link VkRenderPassSampleLocationsBeginInfoEXT}, {@link VkRenderPassStripeBeginInfoARM}, or {@link VkRenderPassTransformBeginInfoQCOM}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
  * <li>{@code framebuffer} <b>must</b> be a valid {@code VkFramebuffer} handle</li>
@@ -198,6 +198,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
     public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassTransformBeginInfoQCOM} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassTransformBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #renderPass} field. */
@@ -486,6 +488,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassTransformBeginInfoQCOM} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassTransformBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkRenderPassBeginInfo#renderPass} field. */

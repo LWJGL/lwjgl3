@@ -316,6 +316,25 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>     {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and      {@link KHRDynamicRendering VK_KHR_dynamic_rendering}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_VERSION_1_1</li>
+                <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_EXT_fragment_density_map</li>
+                <li>Interacts with VK_EXT_mesh_shader</li>
+                <li>Interacts with VK_EXT_subgroup_size_control</li>
+                <li>Interacts with VK_KHR_device_group</li>
+                <li>Interacts with VK_KHR_fragment_shading_rate</li>
+                <li>Interacts with VK_NV_clip_space_w_scaling</li>
+                <li>Interacts with VK_NV_coverage_reduction_mode</li>
+                <li>Interacts with VK_NV_fragment_coverage_to_color</li>
+                <li>Interacts with VK_NV_framebuffer_mixed_samples</li>
+                <li>Interacts with VK_NV_mesh_shader</li>
+                <li>Interacts with VK_NV_representative_fragment_test</li>
+                <li>Interacts with VK_NV_shading_rate_image</li>
+                <li>Interacts with VK_NV_viewport_swizzle</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Daniel Story <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_object]%20@daniel-story%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_object%20extension*">daniel-story</a></li>

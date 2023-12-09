@@ -58,6 +58,13 @@ val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type =
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_EXT_debug_marker</li>
+                <li>Interacts with VK_EXT_debug_report</li>
+                <li>Interacts with VK_EXT_debug_utils</li>
+            </ul></dd>
+
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
@@ -73,11 +80,6 @@ val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type =
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-11-05</dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.3 Core</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

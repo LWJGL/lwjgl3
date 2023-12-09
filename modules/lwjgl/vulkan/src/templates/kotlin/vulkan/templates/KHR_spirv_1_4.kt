@@ -59,7 +59,6 @@ val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device",
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Requires SPIR-V 1.4.</li>
-                <li>Promoted to Vulkan 1.2 Core</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

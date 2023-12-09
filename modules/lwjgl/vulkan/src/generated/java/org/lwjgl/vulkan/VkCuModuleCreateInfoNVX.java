@@ -24,8 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
- * <li>{@code dataSize} <b>must</b> be greater than 0</li>
+ * <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -106,6 +105,7 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
     @NativeType("size_t")
     public long dataSize() { return ndataSize(address()); }
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
+    @Nullable
     @NativeType("void const *")
     public ByteBuffer pData() { return npData(address()); }
 
@@ -116,13 +116,13 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
     /** Sets the specified value to the {@code pNext} field. */
     public VkCuModuleCreateInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
-    public VkCuModuleCreateInfoNVX pData(@NativeType("void const *") ByteBuffer value) { npData(address(), value); return this; }
+    public VkCuModuleCreateInfoNVX pData(@Nullable @NativeType("void const *") ByteBuffer value) { npData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkCuModuleCreateInfoNVX set(
         int sType,
         long pNext,
-        ByteBuffer pData
+        @Nullable ByteBuffer pData
     ) {
         sType(sType);
         pNext(pNext);
@@ -263,7 +263,7 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
     /** Unsafe version of {@link #dataSize}. */
     public static long ndataSize(long struct) { return memGetAddress(struct + VkCuModuleCreateInfoNVX.DATASIZE); }
     /** Unsafe version of {@link #pData() pData}. */
-    public static ByteBuffer npData(long struct) { return memByteBuffer(memGetAddress(struct + VkCuModuleCreateInfoNVX.PDATA), (int)ndataSize(struct)); }
+    @Nullable public static ByteBuffer npData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkCuModuleCreateInfoNVX.PDATA), (int)ndataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCuModuleCreateInfoNVX.STYPE, value); }
@@ -272,7 +272,7 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
     /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */
     public static void ndataSize(long struct, long value) { memPutAddress(struct + VkCuModuleCreateInfoNVX.DATASIZE, value); }
     /** Unsafe version of {@link #pData(ByteBuffer) pData}. */
-    public static void npData(long struct, ByteBuffer value) { memPutAddress(struct + VkCuModuleCreateInfoNVX.PDATA, memAddress(value)); ndataSize(struct, value.remaining()); }
+    public static void npData(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkCuModuleCreateInfoNVX.PDATA, memAddressSafe(value)); ndataSize(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -280,7 +280,9 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkCuModuleCreateInfoNVX.PDATA));
+        if (ndataSize(struct) != 0) {
+            check(memGetAddress(struct + VkCuModuleCreateInfoNVX.PDATA));
+        }
     }
 
     // -----------------------------------
@@ -331,6 +333,7 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
         @NativeType("size_t")
         public long dataSize() { return VkCuModuleCreateInfoNVX.ndataSize(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
+        @Nullable
         @NativeType("void const *")
         public ByteBuffer pData() { return VkCuModuleCreateInfoNVX.npData(address()); }
 
@@ -341,7 +344,7 @@ public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> imp
         /** Sets the specified value to the {@code pNext} field. */
         public VkCuModuleCreateInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkCuModuleCreateInfoNVX.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
-        public VkCuModuleCreateInfoNVX.Buffer pData(@NativeType("void const *") ByteBuffer value) { VkCuModuleCreateInfoNVX.npData(address(), value); return this; }
+        public VkCuModuleCreateInfoNVX.Buffer pData(@Nullable @NativeType("void const *") ByteBuffer value) { VkCuModuleCreateInfoNVX.npData(address(), value); return this; }
 
     }
 

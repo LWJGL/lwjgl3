@@ -51,7 +51,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."270"
+            "HEADER_VERSION".."273"
         )
 
         LongConstant(

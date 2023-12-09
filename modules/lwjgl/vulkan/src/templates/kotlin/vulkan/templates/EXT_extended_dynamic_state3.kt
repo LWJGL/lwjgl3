@@ -30,6 +30,17 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_NV_clip_space_w_scaling</li>
+                <li>Interacts with VK_NV_coverage_reduction_mode</li>
+                <li>Interacts with VK_NV_fragment_coverage_to_color</li>
+                <li>Interacts with VK_NV_framebuffer_mixed_samples</li>
+                <li>Interacts with VK_NV_representative_fragment_test</li>
+                <li>Interacts with VK_NV_shading_rate_image</li>
+                <li>Interacts with VK_NV_viewport_swizzle</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_extended_dynamic_state3]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_extended_dynamic_state3%20extension*">pdaniell-nv</a></li>

@@ -32,6 +32,11 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
+            <dt><b>SPIR-V Dependencies</b></dt>
+            <dd><ul>
+                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_physical_storage_buffer.html">SPV_EXT_physical_storage_buffer</a></li>
+            </ul></dd>
+
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li>
@@ -58,7 +63,6 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_physical_storage_buffer.html">{@code SPV_EXT_physical_storage_buffer}</a></li>
                 <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference.txt">{@code GLSL_EXT_buffer_reference}</a> and <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference_uvec2.txt">{@code GLSL_EXT_buffer_reference_uvec2}</a></li>
             </ul></dd>
 

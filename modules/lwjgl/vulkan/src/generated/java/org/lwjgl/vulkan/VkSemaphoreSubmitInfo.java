@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkSubmitInfo2}</p>
+ * <p>{@link VkRenderPassStripeSubmitInfoARM}, {@link VkSubmitInfo2}</p>
  * 
  * <h3>Layout</h3>
  * 

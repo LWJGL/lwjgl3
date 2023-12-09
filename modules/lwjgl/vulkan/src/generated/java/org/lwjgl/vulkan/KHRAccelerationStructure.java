@@ -41,6 +41,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>13</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}</dd>
+ * <dt><b>API Interactions</b></dt>
+ * <dd><ul>
+ * <li>Interacts with VK_EXT_debug_report</li>
+ * <li>Interacts with VK_KHR_format_feature_flags2</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Daniel Koch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_acceleration_structure]%20@dgkoch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_acceleration_structure%20extension*">dgkoch</a></li>
@@ -1335,7 +1340,7 @@ public class KHRAccelerationStructure {
      * <ul>
      * <li>All acceleration structures in {@code pAccelerationStructures} <b>must</b> have been built prior to the execution of this command</li>
      * <li>All acceleration structures in {@code pAccelerationStructures} <b>must</b> have been built with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} if {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}</li>
-     * <li>{@code queryType} <b>must</b> be {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR}, {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR}, {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR} or {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR}</li>
+     * <li>{@code queryType} <b>must</b> be {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR}, {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR}, {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, or {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR}</li>
      * <li>If {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, then {@code stride} <b>must</b> be a multiple of the size of {@code VkDeviceSize}</li>
      * <li>If {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, then {@code pData} <b>must</b> point to a {@code VkDeviceSize}</li>
      * <li>If {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR}, then {@code stride} <b>must</b> be a multiple of the size of {@code VkDeviceSize}</li>
@@ -1740,7 +1745,7 @@ public class KHRAccelerationStructure {
      * <ul>
      * <li>All acceleration structures in {@code pAccelerationStructures} <b>must</b> have been built prior to the execution of this command</li>
      * <li>All acceleration structures in {@code pAccelerationStructures} <b>must</b> have been built with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} if {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}</li>
-     * <li>{@code queryType} <b>must</b> be {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR}, {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR}, {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR} or {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR}</li>
+     * <li>{@code queryType} <b>must</b> be {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR}, {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR}, {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, or {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

@@ -99,10 +99,10 @@ public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoN
     /** a {@code VkStructureType} value identifying this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** <b>may</b> be {@code NULL} or <b>may</b> be a pointer to a structure extending this structure. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** <b>must</b> be the CUDA {@code VkCudaModuleNV} module in which the function resides. */
+    /** the CUDA {@code VkCudaModuleNV} module in which the function resides. */
     @NativeType("VkCudaModuleNV")
     public long module() { return nmodule(address()); }
     /** a null-terminated UTF-8 string containing the name of the shader entry point for this stage. */

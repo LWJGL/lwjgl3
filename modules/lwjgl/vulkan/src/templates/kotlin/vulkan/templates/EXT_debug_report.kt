@@ -75,6 +75,11 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             <dt><b>Revision</b></dt>
             <dd>10</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_VERSION_1_1</li>
+            </ul></dd>
+
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
                 <li><em>Deprecated</em> by {@link EXTDebugUtils VK_EXT_debug_utils} extension</li>

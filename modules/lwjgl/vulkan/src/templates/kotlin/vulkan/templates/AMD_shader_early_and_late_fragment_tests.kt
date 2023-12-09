@@ -32,6 +32,11 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
+            <dt><b>SPIR-V Dependencies</b></dt>
+            <dd><ul>
+                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">SPV_AMD_shader_early_and_late_fragment_tests</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Tobias Hector <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_early_and_late_fragment_tests]%20@tobski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_early_and_late_fragment_tests%20extension*">tobski</a></li>
@@ -48,7 +53,6 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a></li>
                 <li>This extension interacts with {@link EXTShaderStencilExport VK_EXT_shader_stencil_export}</li>
             </ul></dd>
 

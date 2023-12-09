@@ -49,11 +49,6 @@ val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".native
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-06-25</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Daniel Koch, NVIDIA</li>

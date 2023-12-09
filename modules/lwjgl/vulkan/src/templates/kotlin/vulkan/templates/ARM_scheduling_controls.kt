@@ -76,7 +76,7 @@ val ARM_scheduling_controls = "ARMSchedulingControls".nativeClassVK("ARM_schedul
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM".."1000417002"
     )
 
-    EnumConstant(
+    EnumConstantLong(
         """
         VkPhysicalDeviceSchedulingControlsFlagBitsARM - Bitmask specifying scheduling controls supported by a physical device
 
@@ -86,6 +86,6 @@ val ARM_scheduling_controls = "ARMSchedulingControls".nativeClassVK("ARM_schedul
         </ul>
         """,
 
-        "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM".enum(0x00000001)
+        "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM".enum(0x00000001L)
     )
 }

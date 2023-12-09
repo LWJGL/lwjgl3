@@ -49,11 +49,6 @@ val EXT_scalar_block_layout = "EXTScalarBlockLayout".nativeClassVK("EXT_scalar_b
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-11-14</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz</li>

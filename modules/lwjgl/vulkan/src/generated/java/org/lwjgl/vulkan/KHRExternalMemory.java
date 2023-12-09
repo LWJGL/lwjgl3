@@ -46,7 +46,6 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Interacts with {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation}.</li>
  * <li>Interacts with {@link NVDedicatedAllocation VK_NV_dedicated_allocation}.</li>
- * <li>Promoted to Vulkan 1.1 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

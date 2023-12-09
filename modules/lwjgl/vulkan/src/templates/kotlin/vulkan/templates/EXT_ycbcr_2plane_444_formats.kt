@@ -49,11 +49,6 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
             <dt><b>Last Modified Date</b></dt>
             <dd>2020-07-28</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.3 Core</li>
-            </ul></dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 

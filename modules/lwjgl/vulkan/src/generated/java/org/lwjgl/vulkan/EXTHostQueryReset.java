@@ -47,10 +47,6 @@ import static org.lwjgl.system.JNI.*;
  * <dd>2019-03-06</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
- * <dt><b>Interactions and External Dependencies</b></dt>
- * <dd><ul>
- * <li>Promoted to Vulkan 1.2 Core</li>
- * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Bas Nieuwenhuizen, Google</li>

@@ -44,7 +44,6 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Promoted to Vulkan 1.2 Core</li>
  * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_subgroup_extended_types.txt">{@code GLSL_EXT_shader_subgroup_extended_types}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

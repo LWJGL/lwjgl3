@@ -34,6 +34,11 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_KHR_format_feature_flags2</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li><a href="mailto:jake.beju@amd.com">jake.beju@amd.com</a></li>

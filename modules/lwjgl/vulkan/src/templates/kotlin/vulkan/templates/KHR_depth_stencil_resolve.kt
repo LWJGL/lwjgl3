@@ -53,11 +53,6 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-04-09</dd>
 
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>Promoted to Vulkan 1.2 Core</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jan-Harald Fredriksen, Arm</li>

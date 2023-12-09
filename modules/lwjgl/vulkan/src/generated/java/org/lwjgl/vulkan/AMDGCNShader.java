@@ -23,6 +23,10 @@ package org.lwjgl.vulkan;
  * <dd>26</dd>
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
+ * <dt><b>SPIR-V Dependencies</b></dt>
+ * <dd><ul>
+ * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_gcn_shader.html">SPV_AMD_gcn_shader</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Dominik Witczak <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_gcn_shader]%20@dominikwitczakamd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_gcn_shader%20extension*">dominikwitczakamd</a></li>
@@ -38,7 +42,6 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_gcn_shader.html">{@code SPV_AMD_gcn_shader}</a></li>
  * <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/AMD/AMD_gcn_shader.txt">{@code GL_AMD_gcn_shader}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

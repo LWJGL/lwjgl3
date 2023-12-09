@@ -65,7 +65,6 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
                 <li>This extension interacts with {@link KHRExternalSemaphoreCapabilities VK_KHR_external_semaphore_capabilities}</li>
                 <li>This extension interacts with {@link KHRExternalSemaphore VK_KHR_external_semaphore}</li>
                 <li>This extension interacts with {@link KHRExternalSemaphoreWin32 VK_KHR_external_semaphore_win32}</li>
-                <li>Promoted to Vulkan 1.2 Core</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

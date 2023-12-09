@@ -126,7 +126,7 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     /** the image format. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** the dimensionality of image. */
+    /** the dimensionality of the image. */
     @NativeType("VkImageType")
     public int type() { return ntype(address()); }
     /** a {@code VkSampleCountFlagBits} value specifying the number of samples per texel. */

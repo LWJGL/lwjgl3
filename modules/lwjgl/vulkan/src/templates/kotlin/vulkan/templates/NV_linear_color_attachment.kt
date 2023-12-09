@@ -30,6 +30,11 @@ val NV_linear_color_attachment = "NVLinearColorAttachment".nativeClassVK("NV_lin
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_KHR_format_feature_flags2</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>sourav parmar <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_linear_color_attachment]%20@souravpNV%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_linear_color_attachment%20extension*">souravpNV</a></li>

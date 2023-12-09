@@ -23,6 +23,10 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRAccelerationStructure VK_KHR_acceleration_structure}</dd>
+ * <dt><b>SPIR-V Dependencies</b></dt>
+ * <dd><ul>
+ * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_ray_tracing_position_fetch.html">SPV_KHR_ray_tracing_position_fetch</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Eric Werness</li>
@@ -38,7 +42,6 @@ package org.lwjgl.vulkan;
  * <dd>2023-02-17</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_ray_tracing_position_fetch.html">{@code SPV_KHR_ray_tracing_position_fetch}</a></li>
  * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_ray_tracing_position_fetch.txt">{@code GLSL_EXT_ray_tracing_position_fetch}</a></li>
  * <li>Interacts with {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
  * <li>Interacts with {@link KHRRayQuery VK_KHR_ray_query}</li>
