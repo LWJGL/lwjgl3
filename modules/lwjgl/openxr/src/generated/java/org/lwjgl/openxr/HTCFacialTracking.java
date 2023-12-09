@@ -222,7 +222,7 @@ public class HTCFacialTracking {
      * 
      * <p>An application <b>can</b> create an {@code XrFacialTrackerHTC} handle using {@link #xrCreateFacialTrackerHTC CreateFacialTrackerHTC}.</p>
      * 
-     * <p>If the system does not support eye tracking or lip tracking, runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateFacialTrackerHTC CreateFacialTrackerHTC} according to the corresponding case. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@code supportEyeFacialTracking} or {@code supportLipFacialTracking} in {@link XrSystemFacialTrackingPropertiesHTC} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>may</b> avoid creating a facial tracker.</p>
+     * <p>If the system does not support eye tracking or lip tracking, runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateFacialTrackerHTC CreateFacialTrackerHTC} according to the corresponding case. In this case, the runtime <b>must</b> return {@link XR10#XR_FALSE FALSE} for {@link XrSystemFacialTrackingPropertiesHTC}{@code ::supportEyeFacialTracking} or {@link XrSystemFacialTrackingPropertiesHTC}{@code ::supportLipFacialTracking} when the function {@link XR10#xrGetSystemProperties GetSystemProperties} is called, so that the application <b>may</b> avoid creating a facial tracker.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

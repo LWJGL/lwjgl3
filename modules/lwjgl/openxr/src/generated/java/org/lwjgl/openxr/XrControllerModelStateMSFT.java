@@ -111,7 +111,7 @@ public class XrControllerModelStateMSFT extends Struct<XrControllerModelStateMSF
     /** filled in by the runtime with the count of elements in {@code nodeStates} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int nodeCountOutput() { return nnodeCountOutput(address()); }
-    /** a pointer to an application-allocated array that will be filled with the {@link XrControllerModelNodeStateMSFT} values. It <b>can</b> be {@code NULL} if {@code sourceCapacityInput} is 0. */
+    /** a pointer to an application-allocated array that will be filled with the {@link XrControllerModelNodeStateMSFT} values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0. */
     @Nullable
     @NativeType("XrControllerModelNodeStateMSFT *")
     public XrControllerModelNodeStateMSFT.Buffer nodeStates() { return nnodeStates(address()); }

@@ -262,7 +262,7 @@ val VARJO_marker_tracking = "VARJOMarkerTracking".nativeClassXR("VARJO_marker_tr
 ￿    XrSpace*                                    space);</code></pre>
 
         <h5>Description</h5>
-        The #CreateMarkerSpaceVARJO() function creates marker {@code XrSpace} for pose relative to the marker specified in ##XrMarkerSpaceCreateInfoVARJO. The runtime <b>must</b> return #ERROR_MARKER_ID_INVALID_VARJO if the supplied {@code markerId} is invalid.
+        The #CreateMarkerSpaceVARJO() function creates marker {@code XrSpace} for pose relative to the marker specified in ##XrMarkerSpaceCreateInfoVARJO. The runtime <b>must</b> return #ERROR_MARKER_ID_INVALID_VARJO if the supplied ##XrMarkerSpaceCreateInfoVARJO{@code ::markerId} is invalid.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

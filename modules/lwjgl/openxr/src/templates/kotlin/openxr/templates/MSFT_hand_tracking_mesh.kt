@@ -87,7 +87,7 @@ val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tr
 
         If the underlying {@code XrHandTrackerEXT} is destroyed, the runtime <b>must</b> continue to support #LocateSpace() using the hand mesh space, and it <b>must</b> return space location with #SPACE_LOCATION_POSITION_VALID_BIT and #SPACE_LOCATION_ORIENTATION_VALID_BIT unset.
 
-        The application <b>may</b> create a mesh space for the reference hand by setting {@code handPoseType} to #HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT. Hand mesh spaces for the reference hand <b>must</b> only be locatable in reference to mesh spaces or joint spaces of the reference hand.
+        The application <b>may</b> create a mesh space for the reference hand by setting ##XrHandPoseTypeInfoMSFT{@code ::handPoseType} to #HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT. Hand mesh spaces for the reference hand <b>must</b> only be locatable in reference to mesh spaces or joint spaces of the reference hand.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -144,9 +144,9 @@ val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tr
 ￿    XrHandMeshMSFT*                             handMesh);</code></pre>
 
         <h5>Description</h5>
-        The application <b>should</b> preallocate the index buffer and vertex buffer in ##XrHandMeshMSFT using the {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount} from the ##XrSystemHandTrackingMeshPropertiesMSFT returned from the #GetSystemProperties() function.
+        The application <b>should</b> preallocate the index buffer and vertex buffer in ##XrHandMeshMSFT using the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshIndexCount} and ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshVertexCount} from the ##XrSystemHandTrackingMeshPropertiesMSFT returned from the #GetSystemProperties() function.
 
-        The application <b>should</b> preallocate the ##XrHandMeshMSFT structure and reuse it for each frame so as to reduce the copies of data when underlying tracking data is not changed. The application should use {@code indexBufferChanged} and {@code vertexBufferChanged} in ##XrHandMeshMSFT to detect changes and avoid unnecessary data processing when there is no changes.
+        The application <b>should</b> preallocate the ##XrHandMeshMSFT structure and reuse it for each frame so as to reduce the copies of data when underlying tracking data is not changed. The application should use ##XrHandMeshMSFT{@code ::indexBufferChanged} and ##XrHandMeshMSFT{@code ::vertexBufferChanged} in ##XrHandMeshMSFT to detect changes and avoid unnecessary data processing when there is no changes.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

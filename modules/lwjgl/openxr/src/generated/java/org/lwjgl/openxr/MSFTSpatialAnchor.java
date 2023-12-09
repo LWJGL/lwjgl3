@@ -77,13 +77,13 @@ public class MSFTSpatialAnchor {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Creates an {@code XrSpatialAnchorMSFT} handle representing a spatial anchor that will track a fixed location in the physical world over time. That real-world location is specified by the position and orientation of the specified {@code pose} within {@code space} at {@code time}.</p>
+     * <p>Creates an {@code XrSpatialAnchorMSFT} handle representing a spatial anchor that will track a fixed location in the physical world over time. That real-world location is specified by the position and orientation of the specified {@link XrSpatialAnchorCreateInfoMSFT}{@code ::pose} within {@link XrSpatialAnchorCreateInfoMSFT}{@code ::space} at {@link XrSpatialAnchorCreateInfoMSFT}{@code ::time}.</p>
      * 
      * <p>The runtime <b>must</b> avoid long blocking operations such as networking or disk operations for {@link #xrCreateSpatialAnchorMSFT CreateSpatialAnchorMSFT} function. The application <b>may</b> safely use this function in UI thread. Though, the created anchor handle <b>may</b> not be ready immediately for certain operations yet. For example, the corresponding anchor space <b>may</b> not return valid location, or its location <b>may</b> not be successfully saved in anchor store.</p>
      * 
-     * <p>If {@code space} cannot be located relative to the environment at the moment of the call to {@link #xrCreateSpatialAnchorMSFT CreateSpatialAnchorMSFT}, the runtime <b>must</b> return {@link #XR_ERROR_CREATE_SPATIAL_ANCHOR_FAILED_MSFT ERROR_CREATE_SPATIAL_ANCHOR_FAILED_MSFT}.</p>
+     * <p>If {@link XrSpatialAnchorCreateInfoMSFT}{@code ::space} cannot be located relative to the environment at the moment of the call to {@link #xrCreateSpatialAnchorMSFT CreateSpatialAnchorMSFT}, the runtime <b>must</b> return {@link #XR_ERROR_CREATE_SPATIAL_ANCHOR_FAILED_MSFT ERROR_CREATE_SPATIAL_ANCHOR_FAILED_MSFT}.</p>
      * 
-     * <p>After the anchor is created, the runtime <b>should</b> then adjust its position and orientation over time relative to other spaces so as to maintain maximum alignment to its original real-world location, even if that changes the anchor’s relationship to the original {@code space} used to initialize it.</p>
+     * <p>After the anchor is created, the runtime <b>should</b> then adjust its position and orientation over time relative to other spaces so as to maintain maximum alignment to its original real-world location, even if that changes the anchor’s relationship to the original {@link XrSpatialAnchorCreateInfoMSFT}{@code ::space} used to initialize it.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

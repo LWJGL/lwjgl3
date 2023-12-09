@@ -13,13 +13,21 @@ val KHR_loader_init = "KHRLoaderInit".nativeClassXR("KHR_loader_init", type = "i
         """
         The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_loader_init">XR_KHR_loader_init</a> extension.
 
-        On some platforms, before loading can occur the loader must be initialized with platform-specific parameters. Unlike other extensions, the presence of this extension is signaled by a successful call to #GetInstanceProcAddr() to retrieve the function pointer for #InitializeLoaderKHR() using a null instance handle. If this extension is supported, its use may be required on some platforms and the use of the #InitializeLoaderKHR() function must precede other OpenXR calls except #GetInstanceProcAddr(). This function exists as part of the loader library that the application is using.
+        On some platforms, before loading can occur the loader must be initialized with platform-specific parameters.
+
+        Unlike other extensions, the presence of this extension is signaled by a successful call to #GetInstanceProcAddr() to retrieve the function pointer for #InitializeLoaderKHR() using #NULL_HANDLE as the {@code instance} parameter.
+
+        If this extension is supported, its use <b>may</b> be required on some platforms and the use of the #InitializeLoaderKHR() function <b>must</b> precede other OpenXR calls except #GetInstanceProcAddr().
+
+        This function exists as part of the loader library that the application is using and the loader <b>must</b> pass calls to #InitializeLoaderKHR() to the active runtime, and all enabled API layers that expose a #InitializeLoaderKHR() function exposed either through their manifest, or through their implementation of #GetInstanceProcAddr().
+
+        If the #InitializeLoaderKHR() function is discovered through the manifest, #InitializeLoaderKHR() will be called before {@code xrNegotiateLoaderRuntimeInterface} or {@code xrNegotiateLoaderApiLayerInterface} has been called on the runtime or layer respectively.
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "KHR_loader_init_SPEC_VERSION".."1"
+        "KHR_loader_init_SPEC_VERSION".."2"
     )
 
     StringConstant(

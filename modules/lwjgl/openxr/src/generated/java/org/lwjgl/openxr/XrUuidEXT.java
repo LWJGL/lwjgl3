@@ -33,7 +33,7 @@ import static org.lwjgl.openxr.EXTUUIUD.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrRoomLayoutFB}, {@link XrSpaceContainerFB}, {@link XrSpaceQueryResultFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSystemHeadsetIdPropertiesMETA}, {@link FBSpatialEntity#xrGetSpaceUuidFB GetSpaceUuidFB}</p>
+ * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrLocalizationMapML}, {@link XrMapLocalizationRequestInfoML}, {@link XrRoomLayoutFB}, {@link XrSpaceContainerFB}, {@link XrSpaceQueryResultFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSystemHeadsetIdPropertiesMETA}, {@link MLLocalizationMap#xrCreateExportedLocalizationMapML CreateExportedLocalizationMapML}, {@link FBSpatialEntity#xrGetSpaceUuidFB GetSpaceUuidFB}, {@link MLLocalizationMap#xrImportLocalizationMapML ImportLocalizationMapML}</p>
  * 
  * <h3>Layout</h3>
  * 

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The state is corresponding to the glTF node identified by the {@code nodeName} and {@code nodeParentName} of the node property at the same array index in the {@code nodeProperties} in {@link XrControllerModelPropertiesMSFT}.</p>
+ * <p>The state is corresponding to the glTF node identified by the {@link XrControllerModelNodePropertiesMSFT}{@code ::nodeName} and {@link XrControllerModelNodePropertiesMSFT}{@code ::parentNodeName} of the node property at the same array index in the {@link XrControllerModelPropertiesMSFT}{@code ::nodeProperties} in {@link XrControllerModelPropertiesMSFT}.</p>
  * 
  * <p>The {@code nodePose} is based on the user’s interaction on the controller at the latest {@link XR10#xrSyncActions SyncActions}, represented as the {@link XrPosef} of the node in it’s parent node space.</p>
  * 

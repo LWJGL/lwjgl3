@@ -336,7 +336,7 @@ public class VARJOMarkerTracking {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #xrCreateMarkerSpaceVARJO CreateMarkerSpaceVARJO} function creates marker {@code XrSpace} for pose relative to the marker specified in {@link XrMarkerSpaceCreateInfoVARJO}. The runtime <b>must</b> return {@link #XR_ERROR_MARKER_ID_INVALID_VARJO ERROR_MARKER_ID_INVALID_VARJO} if the supplied {@code markerId} is invalid.</p>
+     * <p>The {@link #xrCreateMarkerSpaceVARJO CreateMarkerSpaceVARJO} function creates marker {@code XrSpace} for pose relative to the marker specified in {@link XrMarkerSpaceCreateInfoVARJO}. The runtime <b>must</b> return {@link #XR_ERROR_MARKER_ID_INVALID_VARJO ERROR_MARKER_ID_INVALID_VARJO} if the supplied {@link XrMarkerSpaceCreateInfoVARJO}{@code ::markerId} is invalid.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

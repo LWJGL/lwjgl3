@@ -37,10 +37,13 @@ val xcb_visualid_t = typedef(uint32_t, "xcb_visualid_t")
 val xcb_glx_drawable_t = typedef(uint32_t, "xcb_glx_drawable_t")
 val xcb_glx_context_t = typedef(uint32_t, "xcb_glx_context_t")
 
+// XR_FB_spatial_entity_user
+val XrSpaceUserIdFB = typedef(uint64_t, "XrSpaceUserIdFB")
+
 // XR_ML_compat
 val MLCoordinateFrameUID = struct(Module.OPENXR, "MLCoordinateFrameUID", mutable = false) {
     uint64_t("data", "")[2]
 }
 
-// XR_FB_spatial_entity_user
-val XrSpaceUserIdFB = typedef(uint64_t, "XrSpaceUserIdFB")
+// XR_ML_marker_understanding
+val XrMarkerML = XR_DEFINE_ATOM("XrMarkerML")

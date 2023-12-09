@@ -13,12 +13,20 @@ import static org.lwjgl.system.JNI.*;
 /**
  * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_loader_init">XR_KHR_loader_init</a> extension.
  * 
- * <p>On some platforms, before loading can occur the loader must be initialized with platform-specific parameters. Unlike other extensions, the presence of this extension is signaled by a successful call to {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr} to retrieve the function pointer for {@link #xrInitializeLoaderKHR InitializeLoaderKHR} using a null instance handle. If this extension is supported, its use may be required on some platforms and the use of the {@link #xrInitializeLoaderKHR InitializeLoaderKHR} function must precede other OpenXR calls except {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr}. This function exists as part of the loader library that the application is using.</p>
+ * <p>On some platforms, before loading can occur the loader must be initialized with platform-specific parameters.</p>
+ * 
+ * <p>Unlike other extensions, the presence of this extension is signaled by a successful call to {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr} to retrieve the function pointer for {@link #xrInitializeLoaderKHR InitializeLoaderKHR} using {@link XR10#XR_NULL_HANDLE NULL_HANDLE} as the {@code instance} parameter.</p>
+ * 
+ * <p>If this extension is supported, its use <b>may</b> be required on some platforms and the use of the {@link #xrInitializeLoaderKHR InitializeLoaderKHR} function <b>must</b> precede other OpenXR calls except {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr}.</p>
+ * 
+ * <p>This function exists as part of the loader library that the application is using and the loader <b>must</b> pass calls to {@link #xrInitializeLoaderKHR InitializeLoaderKHR} to the active runtime, and all enabled API layers that expose a {@link #xrInitializeLoaderKHR InitializeLoaderKHR} function exposed either through their manifest, or through their implementation of {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr}.</p>
+ * 
+ * <p>If the {@link #xrInitializeLoaderKHR InitializeLoaderKHR} function is discovered through the manifest, {@link #xrInitializeLoaderKHR InitializeLoaderKHR} will be called before {@code xrNegotiateLoaderRuntimeInterface} or {@code xrNegotiateLoaderApiLayerInterface} has been called on the runtime or layer respectively.</p>
  */
 public class KHRLoaderInit {
 
     /** The extension specification version. */
-    public static final int XR_KHR_loader_init_SPEC_VERSION = 1;
+    public static final int XR_KHR_loader_init_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_KHR_LOADER_INIT_EXTENSION_NAME = "XR_KHR_loader_init";

@@ -201,7 +201,7 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The application <b>can</b> use the {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} function to persist a spatial anchor in the spatial anchor store for this application. The given {@code spatialAnchorName} will be the string to retrieve the spatial anchor from the Spatial Anchor store or subsequently remove the record of this spatial anchor from the store. This name will uniquely identify the spatial anchor for the current application. If there is already a spatial anchor of the same name persisted in the spatial anchor store, the existing spatial anchor will be replaced and {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} <b>must</b> return {@link XR10#XR_SUCCESS SUCCESS}.</p>
+     * <p>The application <b>can</b> use the {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} function to persist a spatial anchor in the spatial anchor store for this application. The given {@link XrSpatialAnchorPersistenceInfoMSFT}{@code ::spatialAnchorPersistenceName} will be the string to retrieve the spatial anchor from the Spatial Anchor store or subsequently remove the record of this spatial anchor from the store. This name will uniquely identify the spatial anchor for the current application. If there is already a spatial anchor of the same name persisted in the spatial anchor store, the existing spatial anchor will be replaced and {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} <b>must</b> return {@link XR10#XR_SUCCESS SUCCESS}.</p>
      * 
      * <pre><code>
      * XrResult xrPersistSpatialAnchorMSFT(
@@ -240,7 +240,7 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <p>{@link XrSpatialAnchorPersistenceInfoMSFT}</p>
      *
-     * @param spatialAnchorStore           the {@code XrSpatialAnchorStoreConnectionMSFT} with which to persist the {@code spatialAnchor}.
+     * @param spatialAnchorStore           the {@code XrSpatialAnchorStoreConnectionMSFT} with which to persist the {@link XrSpatialAnchorPersistenceInfoMSFT}{@code ::spatialAnchor}.
      * @param spatialAnchorPersistenceInfo a pointer to {@link XrSpatialAnchorPersistenceInfoMSFT} structure to specify the anchor and its name to persist.
      */
     @NativeType("XrResult")
@@ -339,7 +339,7 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The application <b>can</b> use the {@link #xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT} function to create a {@code XrSpatialAnchorMSFT} from the spatial anchor store. If the {@code spatialAnchorName} provided does not correspond to a currently stored anchor (i.e. the list of spatial anchor names returned from {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}), the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
+     * <p>The application <b>can</b> use the {@link #xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT} function to create a {@code XrSpatialAnchorMSFT} from the spatial anchor store. If the {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}{@code ::spatialAnchorPersistenceName} provided does not correspond to a currently stored anchor (i.e. the list of spatial anchor names returned from {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}), the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
      * 
      * <pre><code>
      * XrResult xrCreateSpatialAnchorFromPersistedNameMSFT(
@@ -410,7 +410,7 @@ public class MSFTSpatialAnchorPersistence {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The application <b>can</b> use the {@link #xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT} function to remove the record of the anchor in the spatial anchor store. This operation will not affect any {@code XrSpatialAnchorMSFT} handles previously created. If the {@code spatialAnchorName} provided does not correspond to a currently stored anchor, the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
+     * <p>The application <b>can</b> use the {@link #xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT} function to remove the record of the anchor in the spatial anchor store. This operation will not affect any {@code XrSpatialAnchorMSFT} handles previously created. If the {@code spatialAnchorPersistenceName} provided does not correspond to a currently stored anchor, the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
      * 
      * <pre><code>
      * XrResult xrUnpersistSpatialAnchorMSFT(

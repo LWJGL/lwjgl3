@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The specified {@link XrSwapchainSubImage} to the corresponding view.</li>
  * </ul>
  * 
- * <p>The {@code faceCount} of {@code XrSwapchain} in {@link XrSwapchainSubImage} <b>must</b> be 1 since this extension does not support cubemaps.</p>
+ * <p>The {@code XrSwapchain}{@code ::faceCount} of the swapchain in {@link XrSwapchainSubImage} <b>must</b> be 1 since this extension does not support cubemaps.</p>
  * 
  * <p>If {@code mode} is {@link HTCFoveation#XR_FOVEATION_MODE_DYNAMIC_HTC FOVEATION_MODE_DYNAMIC_HTC}, the {@code next} chain for this structure <b>must</b> include {@link XrFoveationDynamicModeInfoHTC} structure.</p>
  * 

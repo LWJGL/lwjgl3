@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrSceneMarkerMSFT} structure is an element in the array of {@code sceneMarkers} in {@link XrSceneMarkersMSFT}.</p>
+ * <p>The {@link XrSceneMarkerMSFT} structure is an element in the array of {@link XrSceneMarkersMSFT}{@code ::sceneMarkers}.</p>
  * 
  * <p>Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#qr_code_convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.</p>
  * 

@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This structure is similar to the {@link XrFrameEndInfo} structure, with an extra {@code XrViewConfigurationType} field to specify the view configuration for which the submitted layers will be rendered.</p>
  * 
- * <p>The application <b>should</b> render its content for both the primary and secondary view configurations using the same {@code predictedDisplayTime} reported by {@link XR10#xrWaitFrame WaitFrame}. The runtime <b>must</b> treat both the primary views and secondary views as being submitted for the same {@code displayTime} specified in the call to {@link XR10#xrEndFrame EndFrame}.</p>
+ * <p>The application <b>should</b> render its content for both the primary and secondary view configurations using the same {@link XrFrameState}{@code ::predictedDisplayTime} reported by {@link XR10#xrWaitFrame WaitFrame}. The runtime <b>must</b> treat both the primary views and secondary views as being submitted for the same {@link XrViewLocateInfo}{@code ::displayTime} specified in the call to {@link XR10#xrEndFrame EndFrame}.</p>
  * 
  * <p>For layers such as quad layers whose content is identical across view configurations, the application <b>can</b> submit the same {@link XrCompositionLayerBaseHeader} structures to multiple view configurations in the same {@link XR10#xrEndFrame EndFrame} function call.</p>
  * 

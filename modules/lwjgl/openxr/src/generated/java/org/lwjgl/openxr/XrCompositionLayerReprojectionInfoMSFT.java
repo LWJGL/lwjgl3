@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code reprojectionMode} <b>must</b> be a valid {@code XrReprojectionModeMSFT} value</li>
  * </ul>
  * 
- * <p>When the application chained this structure when calling {@link XR10#xrEndFrame EndFrame}, the {@code mode} <b>must</b> be one of the supported {@code XrReprojectionModeMSFT} returned by {@link MSFTCompositionLayerReprojection#xrEnumerateReprojectionModesMSFT EnumerateReprojectionModesMSFT} function for the corresponding {@code XrViewConfigurationType}. Otherwise, the runtime <b>must</b> return error {@link MSFTCompositionLayerReprojection#XR_ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT} on the {@link XR10#xrEndFrame EndFrame} function.</p>
+ * <p>When the application chained this structure when calling {@link XR10#xrEndFrame EndFrame}, the {@code reprojectionMode} <b>must</b> be one of the supported {@code XrReprojectionModeMSFT} returned by {@link MSFTCompositionLayerReprojection#xrEnumerateReprojectionModesMSFT EnumerateReprojectionModesMSFT} function for the corresponding {@code XrViewConfigurationType}. Otherwise, the runtime <b>must</b> return error {@link MSFTCompositionLayerReprojection#XR_ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT} on the {@link XR10#xrEndFrame EndFrame} function.</p>
  * 
  * <p>The runtime <b>must</b> only use the given information for the corresponding frame in {@link XR10#xrEndFrame EndFrame} function, and it <b>must</b> not affect other frames.</p>
  * 

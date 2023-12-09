@@ -105,7 +105,7 @@ public class XrScenePlaneMSFT extends Struct<XrScenePlaneMSFT> implements Native
     /** the alignment type of the plane specified by {@code XrScenePlaneAlignmentTypeMSFT}. */
     @NativeType("XrScenePlaneAlignmentTypeMSFT")
     public int alignment() { return nalignment(address()); }
-    /** the 2D size of the plane’s extent, where {@code size}{@code ::width} is the width of the plane along the X axis, and {@code size}{@code ::height} is the height of the plane along the Y axis. */
+    /** the 2D size of the plane’s extent, where {@link XrExtent2Df}{@code ::width} is the width of the plane along the X axis, and {@link XrExtent2Df}{@code ::height} is the height of the plane along the Y axis. */
     public XrExtent2Df size() { return nsize(address()); }
     /** the {@code uint64_t} identifier that specifies the scene mesh buffer of this plane’s triangle mesh. If {@code meshBufferId} is zero then this plane does not have a mesh. The triangles in a planar mesh are coplanar. */
     @NativeType("uint64_t")

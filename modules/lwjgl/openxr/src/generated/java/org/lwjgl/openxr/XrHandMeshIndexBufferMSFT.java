@@ -20,17 +20,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>An application <b>should</b> preallocate the indices array using the {@code maxHandMeshIndexCount} in {@link XrSystemHandTrackingMeshPropertiesMSFT} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}. In this way, the application can avoid possible insufficient buffer sizees for each query, and therefore avoid reallocating memory each frame.</p>
+ * <p>An application <b>should</b> preallocate the indices array using the {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshIndexCount} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}. In this way, the application can avoid possible insufficient buffer sizees for each query, and therefore avoid reallocating memory each frame.</p>
  * 
  * <p>The input {@code indexCapacityInput} <b>must</b> not be 0, and {@code indices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} on calls to the {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} function.</p>
  * 
  * <p>If the input {@code indexCapacityInput} is not sufficient to contain all output indices, the runtime <b>must</b> return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} on calls to {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}, not change the content in {@code indexBufferKey} and {@code indices}, and return 0 for {@code indexCountOutput}.</p>
  * 
- * <p>If the input {@code indexCapacityInput} is equal to or larger than the {@code maxHandMeshIndexCount} in {@link XrSystemHandTrackingMeshPropertiesMSFT} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}, the runtime <b>must</b> not return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} error on {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} because of insufficient index buffer size.</p>
+ * <p>If the input {@code indexCapacityInput} is equal to or larger than the {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshIndexCount} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}, the runtime <b>must</b> not return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} error on {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} because of insufficient index buffer size.</p>
  * 
  * <p>If the input {@code indexBufferKey} is 0, the capacity of indices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code indexBufferKey}, and fill in {@code indexCountOutput} and {@code indices}.</p>
  * 
- * <p>If the input {@code indexBufferKey} is not 0, the runtime <b>can</b> either return without changing {@code indexCountOutput} or content in {@code indices}, and return {@link XR10#XR_FALSE FALSE} for {@code indexBufferChanged} indicating the indices are not changed; or return a new non-zero {@code indexBufferKey} and fill in latest data in {@code indexCountOutput} and {@code indices}, and return {@link XR10#XR_TRUE TRUE} for {@code indexBufferChanged} indicating the indices are updated to a newer version.</p>
+ * <p>If the input {@code indexBufferKey} is not 0, the runtime <b>can</b> either return without changing {@code indexCountOutput} or content in {@code indices}, and return {@link XR10#XR_FALSE FALSE} for {@link XrHandMeshMSFT}{@code ::indexBufferChanged} indicating the indices are not changed; or return a new non-zero {@code indexBufferKey} and fill in latest data in {@code indexCountOutput} and {@code indices}, and return {@link XR10#XR_TRUE TRUE} for {@link XrHandMeshMSFT}{@code ::indexBufferChanged} indicating the indices are updated to a newer version.</p>
  * 
  * <p>An application <b>can</b> keep the {@link XrHandMeshIndexBufferMSFT} structure for each frame in a frame loop and use the returned {@code indexBufferKey} to identify different triangle list topology described in {@code indices}. The application can therefore avoid unnecessary processing of indices, such as coping them to GPU memory.</p>
  * 

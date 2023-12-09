@@ -110,7 +110,7 @@ public class MSFTHandTrackingMesh {
      * 
      * <p>If the underlying {@code XrHandTrackerEXT} is destroyed, the runtime <b>must</b> continue to support {@link XR10#xrLocateSpace LocateSpace} using the hand mesh space, and it <b>must</b> return space location with {@link XR10#XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT} and {@link XR10#XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} unset.</p>
      * 
-     * <p>The application <b>may</b> create a mesh space for the reference hand by setting {@code handPoseType} to {@link #XR_HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT}. Hand mesh spaces for the reference hand <b>must</b> only be locatable in reference to mesh spaces or joint spaces of the reference hand.</p>
+     * <p>The application <b>may</b> create a mesh space for the reference hand by setting {@link XrHandPoseTypeInfoMSFT}{@code ::handPoseType} to {@link #XR_HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT}. Hand mesh spaces for the reference hand <b>must</b> only be locatable in reference to mesh spaces or joint spaces of the reference hand.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -186,9 +186,9 @@ public class MSFTHandTrackingMesh {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The application <b>should</b> preallocate the index buffer and vertex buffer in {@link XrHandMeshMSFT} using the {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount} from the {@link XrSystemHandTrackingMeshPropertiesMSFT} returned from the {@link XR10#xrGetSystemProperties GetSystemProperties} function.</p>
+     * <p>The application <b>should</b> preallocate the index buffer and vertex buffer in {@link XrHandMeshMSFT} using the {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshIndexCount} and {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshVertexCount} from the {@link XrSystemHandTrackingMeshPropertiesMSFT} returned from the {@link XR10#xrGetSystemProperties GetSystemProperties} function.</p>
      * 
-     * <p>The application <b>should</b> preallocate the {@link XrHandMeshMSFT} structure and reuse it for each frame so as to reduce the copies of data when underlying tracking data is not changed. The application should use {@code indexBufferChanged} and {@code vertexBufferChanged} in {@link XrHandMeshMSFT} to detect changes and avoid unnecessary data processing when there is no changes.</p>
+     * <p>The application <b>should</b> preallocate the {@link XrHandMeshMSFT} structure and reuse it for each frame so as to reduce the copies of data when underlying tracking data is not changed. The application should use {@link XrHandMeshMSFT}{@code ::indexBufferChanged} and {@link XrHandMeshMSFT}{@code ::vertexBufferChanged} in {@link XrHandMeshMSFT} to detect changes and avoid unnecessary data processing when there is no changes.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

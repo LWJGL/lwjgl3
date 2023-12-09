@@ -27,7 +27,7 @@ import static org.lwjgl.openxr.MSFTControllerModel.*;
  * 
  * <p>If there are multiple nodes in the glTF file matches the condition above, the first matching node using depth-first traversal in the glTF scene <b>should</b> be animated and the rest <b>should</b> be ignored.</p>
  * 
- * <p>The runtime <b>must</b> not return any {@code nodeName} or {@code parentName} that does not match any gltTF nodes in the corresponding controller model.</p>
+ * <p>The runtime <b>must</b> not return any {@code nodeName} or {@code parentNodeName} that does not match any glTF nodes in the corresponding controller model.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>An application <b>may</b> inspect whether the system is capable of force feedback by chaining an {@link XrSystemForceFeedbackCurlPropertiesMNDX} structure to the {@link XrSystemProperties} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
  * 
- * <p>The runtime <b>should</b> return {@link XR10#XR_TRUE TRUE} for {@code supportsForceFeedback} when force feedback is available in the system, otherwise {@link XR10#XR_FALSE FALSE}. Force feedback calls <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} if force feedback is not available in the system.</p>
+ * <p>The runtime <b>should</b> return {@link XR10#XR_TRUE TRUE} for {@code supportsForceFeedbackCurl} when force feedback is available in the system, otherwise {@link XR10#XR_FALSE FALSE}. Force feedback calls <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} if force feedback is not available in the system.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

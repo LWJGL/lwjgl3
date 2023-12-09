@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * </dl>
  * </li>
- * <li>Either the persistent path or the role path can be be passed as a subaction path to indicate a specific tracker. For example, {@link XrActionCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateAction CreateAction} or {@link XrActionSpaceCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateActionSpace CreateActionSpace}. Please see Example 1 below.</li>
+ * <li>Either the persistent path or the role path can be be passed as a subaction path to indicate a specific tracker. For example, {@link XrActionCreateInfo}{@code ::subactionPaths} into function {@link XR10#xrCreateAction CreateAction} or {@link XrActionSpaceCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateActionSpace CreateActionSpace}. Please see Example 1 below.</li>
  * </ul>
  * 
  * <p><a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, and the application <b>may</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} to check if the tracker is active or not.</p>

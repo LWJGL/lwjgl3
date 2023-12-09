@@ -142,7 +142,7 @@ val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking
         <h5>Description</h5>
         An application <b>can</b> create an {@code XrFacialTrackerHTC} handle using #CreateFacialTrackerHTC().
 
-        If the system does not support eye tracking or lip tracking, runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() according to the corresponding case. In this case, the runtime <b>must</b> return #FALSE for {@code supportEyeFacialTracking} or {@code supportLipFacialTracking} in ##XrSystemFacialTrackingPropertiesHTC when the function #GetSystemProperties() is called, so that the application <b>may</b> avoid creating a facial tracker.
+        If the system does not support eye tracking or lip tracking, runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() according to the corresponding case. In this case, the runtime <b>must</b> return #FALSE for ##XrSystemFacialTrackingPropertiesHTC{@code ::supportEyeFacialTracking} or ##XrSystemFacialTrackingPropertiesHTC{@code ::supportLipFacialTracking} when the function #GetSystemProperties() is called, so that the application <b>may</b> avoid creating a facial tracker.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

@@ -26,6 +26,8 @@ val XrTriangleMeshFB = XR_DEFINE_HANDLE("XrTriangleMeshFB")
 val XrPassthroughFB = XR_DEFINE_HANDLE("XrPassthroughFB")
 val XrPassthroughLayerFB = XR_DEFINE_HANDLE("XrPassthroughLayerFB")
 val XrGeometryInstanceFB = XR_DEFINE_HANDLE("XrGeometryInstanceFB")
+val XrMarkerDetectorML = XR_DEFINE_HANDLE("XrMarkerDetectorML")
+val XrExportedLocalizationMapML = XR_DEFINE_HANDLE("XrExportedLocalizationMapML")
 val XrSpatialAnchorStoreConnectionMSFT = XR_DEFINE_HANDLE("XrSpatialAnchorStoreConnectionMSFT")
 val XrSpaceUserFB = XR_DEFINE_HANDLE("XrSpaceUserFB")
 val XrFaceTrackerFB = XR_DEFINE_HANDLE("XrFaceTrackerFB")
@@ -68,6 +70,20 @@ val XrFoveationLevelFB = "XrFoveationLevelFB".enumType
 val XrFoveationDynamicFB = "XrFoveationDynamicFB".enumType
 val XrWindingOrderFB = "XrWindingOrderFB".enumType
 val XrPassthroughLayerPurposeFB = "XrPassthroughLayerPurposeFB".enumType
+val XrMarkerDetectorProfileML = "XrMarkerDetectorProfileML".enumType
+val XrMarkerTypeML = "XrMarkerTypeML".enumType
+val XrMarkerArucoDictML = "XrMarkerArucoDictML".enumType
+val XrMarkerAprilTagDictML = "XrMarkerAprilTagDictML".enumType
+val XrMarkerDetectorFpsML = "XrMarkerDetectorFpsML".enumType
+val XrMarkerDetectorResolutionML = "XrMarkerDetectorResolutionML".enumType
+val XrMarkerDetectorCameraML = "XrMarkerDetectorCameraML".enumType
+val XrMarkerDetectorCornerRefineMethodML = "XrMarkerDetectorCornerRefineMethodML".enumType
+val XrMarkerDetectorFullAnalysisIntervalML = "XrMarkerDetectorFullAnalysisIntervalML".enumType
+val XrMarkerDetectorStatusML = "XrMarkerDetectorStatusML".enumType
+val XrLocalizationMapStateML = "XrLocalizationMapStateML".enumType
+val XrLocalizationMapTypeML = "XrLocalizationMapTypeML".enumType
+val XrLocalizationMapConfidenceML = "XrLocalizationMapConfidenceML".enumType
+val XrLocalizationMapErrorFlagBitsML = "XrLocalizationMapErrorFlagBitsML".enumType
 val XrHeadsetFitStatusML = "XrHeadsetFitStatusML".enumType
 val XrEyeCalibrationStatusML = "XrEyeCalibrationStatusML".enumType
 val XrSceneMarkerTypeMSFT = "XrSceneMarkerTypeMSFT".enumType
@@ -123,6 +139,7 @@ val XrPassthroughStateChangedFlagsFB = typedef(XrFlags64, "XrPassthroughStateCha
 val XrRenderModelFlagsFB = typedef(XrFlags64, "XrRenderModelFlagsFB")
 val XrFrameEndInfoFlagsML = typedef(XrFlags64, "XrFrameEndInfoFlagsML")
 val XrGlobalDimmerFrameEndInfoFlagsML = typedef(XrFlags64, "XrGlobalDimmerFrameEndInfoFlagsML")
+val XrLocalizationMapErrorFlagsML = typedef(XrFlags64, "XrLocalizationMapErrorFlagsML")
 val XrCompositionLayerSpaceWarpInfoFlagsFB = typedef(XrFlags64, "XrCompositionLayerSpaceWarpInfoFlagsFB")
 val XrSemanticLabelsSupportFlagsFB = typedef(XrFlags64, "XrSemanticLabelsSupportFlagsFB")
 val XrDigitalLensControlFlagsALMALENCE = typedef(XrFlags64, "XrDigitalLensControlFlagsALMALENCE")
@@ -1467,7 +1484,7 @@ val XrHandMeshUpdateInfoMSFT = struct(Module.OPENXR, "XrHandMeshUpdateInfoMSFT")
         The information to update a hand mesh.
 
         <h5>Description</h5>
-        A runtime <b>may</b> not maintain a full history of hand mesh data, therefore the returned ##XrHandMeshMSFT might return data that’s not exactly corresponding to the {@code time} input. If the runtime cannot return any tracking data for the given {@code time} at all, it <b>must</b> set {@code isActive} to #FALSE for the call to #UpdateHandMeshMSFT(). Otherwise, if the runtime returns {@code isActive} as #TRUE, the data in ##XrHandMeshMSFT must be valid to use.
+        A runtime <b>may</b> not maintain a full history of hand mesh data, therefore the returned ##XrHandMeshMSFT might return data that’s not exactly corresponding to the {@code time} input. If the runtime cannot return any tracking data for the given {@code time} at all, it <b>must</b> set ##XrHandMeshMSFT{@code ::isActive} to #FALSE for the call to #UpdateHandMeshMSFT(). Otherwise, if the runtime returns ##XrHandMeshMSFT{@code ::isActive} as #TRUE, the data in ##XrHandMeshMSFT must be valid to use.
 
         An application can choose different {@code handPoseType} values to query the hand mesh data. The returned hand mesh <b>must</b> be consistent to the hand joint space location on the same {@code XrHandTrackerEXT} when using the same {@code XrHandPoseTypeMSFT}.
 
@@ -1495,17 +1512,17 @@ val XrHandMeshIndexBufferMSFT = struct(Module.OPENXR, "XrHandMeshIndexBufferMSFT
         The index buffer of a hand mesh.
 
         <h5>Description</h5>
-        An application <b>should</b> preallocate the indices array using the {@code maxHandMeshIndexCount} in ##XrSystemHandTrackingMeshPropertiesMSFT returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizees for each query, and therefore avoid reallocating memory each frame.
+        An application <b>should</b> preallocate the indices array using the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshIndexCount} returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizees for each query, and therefore avoid reallocating memory each frame.
 
         The input {@code indexCapacityInput} <b>must</b> not be 0, and {@code indices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE on calls to the #UpdateHandMeshMSFT() function.
 
         If the input {@code indexCapacityInput} is not sufficient to contain all output indices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to #UpdateHandMeshMSFT(), not change the content in {@code indexBufferKey} and {@code indices}, and return 0 for {@code indexCountOutput}.
 
-        If the input {@code indexCapacityInput} is equal to or larger than the {@code maxHandMeshIndexCount} in ##XrSystemHandTrackingMeshPropertiesMSFT returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT error on #UpdateHandMeshMSFT() because of insufficient index buffer size.
+        If the input {@code indexCapacityInput} is equal to or larger than the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshIndexCount} returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT error on #UpdateHandMeshMSFT() because of insufficient index buffer size.
 
         If the input {@code indexBufferKey} is 0, the capacity of indices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code indexBufferKey}, and fill in {@code indexCountOutput} and {@code indices}.
 
-        If the input {@code indexBufferKey} is not 0, the runtime <b>can</b> either return without changing {@code indexCountOutput} or content in {@code indices}, and return #FALSE for {@code indexBufferChanged} indicating the indices are not changed; or return a new non-zero {@code indexBufferKey} and fill in latest data in {@code indexCountOutput} and {@code indices}, and return #TRUE for {@code indexBufferChanged} indicating the indices are updated to a newer version.
+        If the input {@code indexBufferKey} is not 0, the runtime <b>can</b> either return without changing {@code indexCountOutput} or content in {@code indices}, and return #FALSE for ##XrHandMeshMSFT{@code ::indexBufferChanged} indicating the indices are not changed; or return a new non-zero {@code indexBufferKey} and fill in latest data in {@code indexCountOutput} and {@code indices}, and return #TRUE for ##XrHandMeshMSFT{@code ::indexBufferChanged} indicating the indices are updated to a newer version.
 
         An application <b>can</b> keep the ##XrHandMeshIndexBufferMSFT structure for each frame in a frame loop and use the returned {@code indexBufferKey} to identify different triangle list topology described in {@code indices}. The application can therefore avoid unnecessary processing of indices, such as coping them to GPU memory.
 
@@ -1551,17 +1568,17 @@ val XrHandMeshVertexBufferMSFT = struct(Module.OPENXR, "XrHandMeshVertexBufferMS
         The vertex buffer of a hand mesh.
 
         <h5>Description</h5>
-        An application <b>should</b> preallocate the vertices array using the {@code maxHandMeshVertexCount} in ##XrSystemHandTrackingMeshPropertiesMSFT returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizes for each query, and therefore avoid reallocating memory each frame.
+        An application <b>should</b> preallocate the vertices array using the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshVertexCount} returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizes for each query, and therefore avoid reallocating memory each frame.
 
         The input {@code vertexCapacityInput} <b>must</b> not be 0, and {@code vertices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE on calls to the #UpdateHandMeshMSFT() function.
 
         If the input {@code vertexCapacityInput} is not sufficient to contain all output vertices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to the #UpdateHandMeshMSFT(), do not change content in {@code vertexUpdateTime} and {@code vertices}, and return 0 for {@code vertexCountOutput}.
 
-        If the input {@code vertexCapacityInput} is equal to or larger than the {@code maxHandMeshVertexCount} in ##XrSystemHandTrackingMeshPropertiesMSFT returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT on calls to the #UpdateHandMeshMSFT() because of insufficient vertex buffer size.
+        If the input {@code vertexCapacityInput} is equal to or larger than the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshVertexCount} returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT on calls to the #UpdateHandMeshMSFT() because of insufficient vertex buffer size.
 
         If the input {@code vertexUpdateTime} is 0, and the capacity of the vertices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code vertexUpdateTime}, and fill in the {@code vertexCountOutput} and {@code vertices} fields.
 
-        If the input {@code vertexUpdateTime} is not 0, the runtime <b>can</b> either return without changing {@code vertexCountOutput} or the content in {@code vertices}, and return #FALSE for {@code vertexBufferChanged} indicating the vertices are not changed; or return a new non-zero {@code vertexUpdateTime} and fill in latest data in {@code vertexCountOutput} and {@code vertices} and return #TRUE for {@code vertexBufferChanged} indicating the vertices are updated to a newer version.
+        If the input {@code vertexUpdateTime} is not 0, the runtime <b>can</b> either return without changing {@code vertexCountOutput} or the content in {@code vertices}, and return #FALSE for ##XrHandMeshMSFT{@code ::vertexBufferChanged} indicating the vertices are not changed; or return a new non-zero {@code vertexUpdateTime} and fill in latest data in {@code vertexCountOutput} and {@code vertices} and return #TRUE for ##XrHandMeshMSFT{@code ::vertexBufferChanged} indicating the vertices are updated to a newer version.
 
         An application <b>can</b> keep the ##XrHandMeshVertexBufferMSFT structure for each frame in frame loop and use the returned {@code vertexUpdateTime} to detect the changes of the content in {@code vertices}. The application can therefore avoid unnecessary processing of vertices, such as coping them to GPU memory.
 
@@ -1589,7 +1606,7 @@ val XrHandMeshMSFT = struct(Module.OPENXR, "XrHandMeshMSFT") {
         <h5>Description</h5>
         When the returned {@code isActive} value is #FALSE, the runtime indicates the hand is not actively tracked, for example, the hand is outside of sensor’s range, or the input focus is taken away from the application. When the runtime returns #FALSE to {@code isActive}, it <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to #FALSE, and <b>must</b> not change the content in {@code indexBuffer} or {@code vertexBuffer},
 
-        When the returned {@code isActive} value is #TRUE, the hand tracking mesh represented in {@code indexBuffer} and {@code vertexBuffer} are updated to the latest data of the {@code time} given to the #UpdateHandMeshMSFT() function. The runtime <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to reflect whether the index or vertex buffer’s content are changed during the update. In this way, the application can easily avoid unnecessary processing of buffers when there’s no new data.
+        When the returned {@code isActive} value is #TRUE, the hand tracking mesh represented in {@code indexBuffer} and {@code vertexBuffer} are updated to the latest data of the ##XrHandMeshUpdateInfoMSFT{@code ::time} given to the #UpdateHandMeshMSFT() function. The runtime <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to reflect whether the index or vertex buffer’s content are changed during the update. In this way, the application can easily avoid unnecessary processing of buffers when there’s no new data.
 
         The hand mesh is represented in triangle lists and each triangle’s vertices are in clockwise order when looking from outside of the hand. When hand tracking is active, i.e. when {@code isActive} is returned as #TRUE, the returned {@code indexBuffer.indexCountOutput} value <b>must</b> be positive and multiple of 3, and {@code vertexBuffer.vertexCountOutput} value <b>must</b> be equal to or larger than 3.
 
@@ -1733,7 +1750,7 @@ val XrSecondaryViewConfigurationLayerInfoMSFT = struct(Module.OPENXR, "XrSeconda
         <h5>Description</h5>
         This structure is similar to the ##XrFrameEndInfo structure, with an extra {@code XrViewConfigurationType} field to specify the view configuration for which the submitted layers will be rendered.
 
-        The application <b>should</b> render its content for both the primary and secondary view configurations using the same {@code predictedDisplayTime} reported by #WaitFrame(). The runtime <b>must</b> treat both the primary views and secondary views as being submitted for the same {@code displayTime} specified in the call to #EndFrame().
+        The application <b>should</b> render its content for both the primary and secondary view configurations using the same ##XrFrameState{@code ::predictedDisplayTime} reported by #WaitFrame(). The runtime <b>must</b> treat both the primary views and secondary views as being submitted for the same ##XrViewLocateInfo{@code ::displayTime} specified in the call to #EndFrame().
 
         For layers such as quad layers whose content is identical across view configurations, the application <b>can</b> submit the same ##XrCompositionLayerBaseHeader structures to multiple view configurations in the same #EndFrame() function call.
 
@@ -1859,7 +1876,7 @@ val XrControllerModelNodePropertiesMSFT = struct(Module.OPENXR, "XrControllerMod
 
         If there are multiple nodes in the glTF file matches the condition above, the first matching node using depth-first traversal in the glTF scene <b>should</b> be animated and the rest <b>should</b> be ignored.
 
-        The runtime <b>must</b> not return any {@code nodeName} or {@code parentName} that does not match any gltTF nodes in the corresponding controller model.
+        The runtime <b>must</b> not return any {@code nodeName} or {@code parentNodeName} that does not match any glTF nodes in the corresponding controller model.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1910,7 +1927,7 @@ val XrControllerModelNodeStateMSFT = struct(Module.OPENXR, "XrControllerModelNod
         Describes the state of a node in a controller model.
 
         <h5>Description</h5>
-        The state is corresponding to the glTF node identified by the {@code nodeName} and {@code nodeParentName} of the node property at the same array index in the {@code nodeProperties} in ##XrControllerModelPropertiesMSFT.
+        The state is corresponding to the glTF node identified by the ##XrControllerModelNodePropertiesMSFT{@code ::nodeName} and ##XrControllerModelNodePropertiesMSFT{@code ::parentNodeName} of the node property at the same array index in the ##XrControllerModelPropertiesMSFT{@code ::nodeProperties} in ##XrControllerModelPropertiesMSFT.
 
         The {@code nodePose} is based on the user’s interaction on the controller at the latest #SyncActions(), represented as the ##XrPosef of the node in it’s parent node space.
 
@@ -1951,7 +1968,7 @@ val XrControllerModelStateMSFT = struct(Module.OPENXR, "XrControllerModelStateMS
     nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("nodeStates", optional = true)..uint32_t("nodeCapacityInput", "the capacity of the {@code nodeStates} array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("nodeCountOutput", "filled in by the runtime with the count of elements in {@code nodeStates} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient.")
-    nullable..XrControllerModelNodeStateMSFT.p("nodeStates", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodeStateMSFT values. It <b>can</b> be {@code NULL} if {@code sourceCapacityInput} is 0.")
+    nullable..XrControllerModelNodeStateMSFT.p("nodeStates", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodeStateMSFT values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0.")
 }
 
 val XrViewConfigurationViewFovEPIC = struct(Module.OPENXR, "XrViewConfigurationViewFovEPIC") {
@@ -2020,7 +2037,7 @@ val XrCompositionLayerReprojectionInfoMSFT = struct(Module.OPENXR, "XrCompositio
             <li>{@code reprojectionMode} <b>must</b> be a valid {@code XrReprojectionModeMSFT} value</li>
         </ul>
 
-        When the application chained this structure when calling #EndFrame(), the {@code mode} <b>must</b> be one of the supported {@code XrReprojectionModeMSFT} returned by #EnumerateReprojectionModesMSFT() function for the corresponding {@code XrViewConfigurationType}. Otherwise, the runtime <b>must</b> return error #ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT on the #EndFrame() function.
+        When the application chained this structure when calling #EndFrame(), the {@code reprojectionMode} <b>must</b> be one of the supported {@code XrReprojectionModeMSFT} returned by #EnumerateReprojectionModesMSFT() function for the corresponding {@code XrViewConfigurationType}. Otherwise, the runtime <b>must</b> return error #ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT on the #EndFrame() function.
 
         The runtime <b>must</b> only use the given information for the corresponding frame in #EndFrame() function, and it <b>must</b> not affect other frames.
 
@@ -2706,7 +2723,7 @@ val XrSceneFrustumBoundMSFT = struct(Module.OPENXR, "XrSceneFrustumBoundMSFT") {
         """
 
     XrPosef("pose", "an ##XrPosef defining the position and orientation of the tip of the frustum bound within the reference frame of the corresponding ##XrSceneBoundsMSFT{@code ::space}.")
-    XrFovf("fov", "an ##XrFovf for the four sides of the frustum bound where {@code angleLeft} and {@code angleRight} are along the X axis and {@code angleUp} and {@code angleDown} are along the Y axis of the frustum bound space.")
+    XrFovf("fov", "an ##XrFovf for the four sides of the frustum bound where ##XrFovf{@code ::angleLeft} and ##XrFovf{@code ::angleRight} are along the X axis and ##XrFovf{@code ::angleUp} and ##XrFovf{@code ::angleDown} are along the Y axis of the frustum bound space.")
     float("farDistance", "the positive distance of the far plane of the frustum bound along the -Z direction of the frustum bound space.")
 }
 
@@ -3066,7 +3083,7 @@ val XrScenePlaneMSFT = struct(Module.OPENXR, "XrScenePlaneMSFT") {
         """
 
     XrScenePlaneAlignmentTypeMSFT("alignment", "the alignment type of the plane specified by {@code XrScenePlaneAlignmentTypeMSFT}.")
-    XrExtent2Df("size", "the 2D size of the plane’s extent, where {@code size}{@code ::width} is the width of the plane along the X axis, and {@code size}{@code ::height} is the height of the plane along the Y axis.")
+    XrExtent2Df("size", "the 2D size of the plane’s extent, where ##XrExtent2Df{@code ::width} is the width of the plane along the X axis, and ##XrExtent2Df{@code ::height} is the height of the plane along the Y axis.")
     uint64_t("meshBufferId", "the {@code uint64_t} identifier that specifies the scene mesh buffer of this plane’s triangle mesh. If {@code meshBufferId} is zero then this plane does not have a mesh. The triangles in a planar mesh are coplanar.")
     XrBool32("supportsIndicesUint16", "#TRUE if the mesh supports reading 16-bit unsigned indices.")
 }
@@ -3447,7 +3464,7 @@ val XrFacialExpressionsHTC = struct(Module.OPENXR, "XrFacialExpressionsHTC") {
 
         The application <b>must</b> set {@code expressionCount} as described by the {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC} otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
 
-        The runtime <b>must</b> update the {@code expressionWeightings} array ordered so that the application can index elements using the corresponding facial tracker enum (e.g. {@code XrEyeExpressionHTC} or {@code XrLipExpressionHTC}) as described by {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC}. For example, when the {@code XrFacialTrackerHTC} is created with {@code facialTrackingType} set to #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC, the application <b>must</b> set the {@code expressionCount} to #FACIAL_EXPRESSION_EYE_COUNT_HTC, and the runtime <b>must</b> fill the {@code expressionWeightings} array ordered with eye expression data so that it can be indexed by the {@code XrEyeExpressionHTC} enum.
+        The runtime <b>must</b> update the {@code expressionWeightings} array ordered so that the application can index elements using the corresponding facial tracker enum (e.g. {@code XrEyeExpressionHTC} or {@code XrLipExpressionHTC}) as described by {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC}. For example, when the {@code XrFacialTrackerHTC} is created with {@code XrFacialTrackerHTC}{@code ::facialTrackingType} set to #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC, the application <b>must</b> set the {@code expressionCount} to #FACIAL_EXPRESSION_EYE_COUNT_HTC, and the runtime <b>must</b> fill the {@code expressionWeightings} array ordered with eye expression data so that it can be indexed by the {@code XrEyeExpressionHTC} enum.
 
         If the returned {@code isActive} is true, the runtime <b>must</b> fill the {@code expressionWeightings} array ordered.
 
@@ -3811,7 +3828,7 @@ val XrUuidEXT = struct(Module.OPENXR, "XrUuidEXT") {
         </ul>
 
         <h5>See Also</h5>
-        ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceSaveCompleteFB, ##XrEventDataSpaceSetStatusCompleteFB, ##XrEventDataSpatialAnchorCreateCompleteFB, ##XrRoomLayoutFB, ##XrSpaceContainerFB, ##XrSpaceQueryResultFB, ##XrSpaceUuidFilterInfoFB, ##XrSystemHeadsetIdPropertiesMETA, #GetSpaceUuidFB()
+        ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceSaveCompleteFB, ##XrEventDataSpaceSetStatusCompleteFB, ##XrEventDataSpatialAnchorCreateCompleteFB, ##XrLocalizationMapML, ##XrMapLocalizationRequestInfoML, ##XrRoomLayoutFB, ##XrSpaceContainerFB, ##XrSpaceQueryResultFB, ##XrSpaceUuidFilterInfoFB, ##XrSystemHeadsetIdPropertiesMETA, #CreateExportedLocalizationMapML(), #GetSpaceUuidFB(), #ImportLocalizationMapML()
         """
 
     uint8_t("data", "a 128-bit Universally Unique Identifier.")["XR_UUID_SIZE_EXT"]
@@ -4944,6 +4961,371 @@ val XrCoordinateSpaceCreateInfoML = struct(Module.OPENXR, "XrCoordinateSpaceCrea
     XrPosef("poseInCoordinateSpace", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the {@code cfuid}.")
 }
 
+val XrSystemMarkerUnderstandingPropertiesML = struct(Module.OPENXR, "XrSystemMarkerUnderstandingPropertiesML", mutable = false) {
+    documentation =
+        """
+        System Property for Marker Understanding support.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrSystemMarkerUnderstandingPropertiesML</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+        """
+
+    Expression("#TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
+    XrBool32("supportsMarkerUnderstanding", "indicates whether marker detection and tracking is supported by this system.")
+}
+
+val XrMarkerDetectorCreateInfoML = struct(Module.OPENXR, "XrMarkerDetectorCreateInfoML") {
+    documentation =
+        """
+        Information to create a marker detection handle.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorCreateInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_CREATE_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrMarkerDetectorAprilTagInfoML, ##XrMarkerDetectorArucoInfoML, ##XrMarkerDetectorCustomProfileInfoML, ##XrMarkerDetectorSizeInfoML</li>
+            <li>{@code profile} <b>must</b> be a valid {@code XrMarkerDetectorProfileML} value</li>
+            <li>{@code markerType} <b>must</b> be a valid {@code XrMarkerTypeML} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateMarkerDetectorML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    PointerSetter(
+        "XrMarkerDetectorAprilTagInfoML", "XrMarkerDetectorArucoInfoML", "XrMarkerDetectorCustomProfileInfoML", "XrMarkerDetectorSizeInfoML",
+        prepend = true
+    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrMarkerDetectorProfileML("profile", "the marker tracker profile to be used.")
+    XrMarkerTypeML("markerType", "the detector type that this tracker enables.")
+}
+
+val XrMarkerDetectorArucoInfoML = struct(Module.OPENXR, "XrMarkerDetectorArucoInfoML") {
+    documentation =
+        """
+        Information to create a marker detection handle for Aruco markers.
+
+        <h5>Description</h5>
+        This structure is required by the #MARKER_TYPE_ARUCO_ML detector.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorArucoInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_ARUCO_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code arucoDict} <b>must</b> be a valid {@code XrMarkerArucoDictML} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_ARUCO_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrMarkerArucoDictML("arucoDict", "the ArUco dictionary name from which markers will be detected.")
+}
+
+val XrMarkerDetectorSizeInfoML = struct(Module.OPENXR, "XrMarkerDetectorSizeInfoML") {
+    documentation =
+        """
+        Information to create a marker detection handle for QR markers.
+
+        <h5>Description</h5>
+        Pose estimation accuracy depends on the accuracy of the specified {@code markerLength}.
+
+        This structure is used by #MARKER_TYPE_ARUCO_ML, #MARKER_TYPE_APRIL_TAG_ML, and #MARKER_TYPE_QR_ML detectors.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorSizeInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_SIZE_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_SIZE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    float("markerLength", "the physical length of one side of a marker.")
+}
+
+val XrMarkerDetectorAprilTagInfoML = struct(Module.OPENXR, "XrMarkerDetectorAprilTagInfoML") {
+    documentation =
+        """
+        Information to create a marker detection handle for AprilTag markers.
+
+        <h5>Description</h5>
+        This structure is required by the #MARKER_TYPE_APRIL_TAG_ML detector.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorAprilTagInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code aprilTagDict} <b>must</b> be a valid {@code XrMarkerAprilTagDictML} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrMarkerAprilTagDictML("aprilTagDict", "AprilTag Dictionary name from which markers will be detected.")
+}
+
+val XrMarkerDetectorCustomProfileInfoML = struct(Module.OPENXR, "XrMarkerDetectorCustomProfileInfoML") {
+    documentation =
+        """
+        A custom marker tracking profile.
+
+        <h5>Description</h5>
+        All marker detectors share some underlying hardware and resources, and thus not all combinations of profiles between multiple detectors are possible. If a profile (preset or custom) specified during marker detector creation is different from those used by existing marker detectors the runtime will attempt to honor the highest frame rate and fps requested.
+
+        CPU load due to marker tracking is a function of the chosen {@code XrMarkerTypeML}, {@code XrMarkerDetectorFpsML}, and {@code XrMarkerDetectorResolutionML}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorCustomProfileInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code fpsHint} <b>must</b> be a valid {@code XrMarkerDetectorFpsML} value</li>
+            <li>{@code resolutionHint} <b>must</b> be a valid {@code XrMarkerDetectorResolutionML} value</li>
+            <li>{@code cameraHint} <b>must</b> be a valid {@code XrMarkerDetectorCameraML} value</li>
+            <li>{@code cornerRefineMethod} <b>must</b> be a valid {@code XrMarkerDetectorCornerRefineMethodML} value</li>
+            <li>{@code fullAnalysisIntervalHint} <b>must</b> be a valid {@code XrMarkerDetectorFullAnalysisIntervalML} value</li>
+        </ul>
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrMarkerDetectorFpsML("fpsHint", "a suggestion of the category of frame rate for the detector to use.")
+    XrMarkerDetectorResolutionML("resolutionHint", "a suggestion of the category of camera resolution for the detector to use.")
+    XrMarkerDetectorCameraML("cameraHint", "a suggestion of the camera set for the detector to use")
+    XrMarkerDetectorCornerRefineMethodML("cornerRefineMethod", "selects a method for corner refinement for ArUco/AprilTag detectors. This member is ignored for detectors of other marker types.")
+    XrBool32("useEdgeRefinement", "specifies whether to run a refinement step that uses marker edges to generate even more accurate corners, but slow down tracking rate overall by consuming more compute. It affects ArUco/AprilTag markers only: this member is ignored for detectors of other marker types.")
+    XrMarkerDetectorFullAnalysisIntervalML("fullAnalysisIntervalHint", "the suggested interval between fully analyzed frames that introduce new detected markers, in addition to updating the state of already detected markers.")
+}
+
+val XrMarkerDetectorSnapshotInfoML = struct(Module.OPENXR, "XrMarkerDetectorSnapshotInfoML") {
+    documentation =
+        """
+        Marker snapshot parameters.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorSnapshotInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #SnapshotMarkerDetectorML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+}
+
+val XrMarkerDetectorStateML = struct(Module.OPENXR, "XrMarkerDetectorStateML", mutable = false) {
+    documentation =
+        """
+        Marker state query parameters.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorStateML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_STATE_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetMarkerDetectorStateML()
+        """
+
+    Expression("#TYPE_MARKER_DETECTOR_STATE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
+    XrMarkerDetectorStatusML("state", "the current state of the marker detector.")
+}
+
+val XrMarkerSpaceCreateInfoML = struct(Module.OPENXR, "XrMarkerSpaceCreateInfoML") {
+    documentation =
+        """
+        Specify marker space creation parameters.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerSpaceCreateInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MARKER_SPACE_CREATE_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code markerDetector} <b>must</b> be a valid {@code XrMarkerDetectorML} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrPosef, #CreateMarkerSpaceML()
+        """
+
+    Expression("#TYPE_MARKER_SPACE_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrMarkerDetectorML("markerDetector", "the detector object to retrieve marker information from.")
+    XrMarkerML("marker", "the marker atom to be examined.")
+    XrPosef("poseInMarkerSpace", "the offset from the marker’s origin of the new {@code XrSpace}. The origin of each marker is located at its center.")
+}
+
+val XrLocalizationMapML = struct(Module.OPENXR, "XrLocalizationMapML") {
+    javaImport("static org.lwjgl.openxr.MLLocalizationMap.*")
+    documentation =
+        """
+        Information on the localization map.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapML</li>
+            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_MAP_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_LOCALIZATION_MAP_NAME_LENGTH_ML</li>
+            <li>If {@code mapType} is not 0, {@code mapType} <b>must</b> be a valid {@code XrLocalizationMapTypeML} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrEventDataLocalizationChangedML, ##XrUuidEXT, #EnableLocalizationEventsML(), #QueryLocalizationMapsML()
+        """
+
+    Expression("#TYPE_LOCALIZATION_MAP_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    charUTF8("name", "a human readable name of the localization map, as a null terminated UTF-8 string. This name is set outside of this extension.")["XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML"]
+    XrUuidEXT("mapUuid", "the ##XrUuidEXT of the localization map.")
+    XrLocalizationMapTypeML("mapType", "the {@code XrLocalizationMapTypeML} of the map.")
+}
+
+val XrEventDataLocalizationChangedML = struct(Module.OPENXR, "XrEventDataLocalizationChangedML", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    documentation =
+        """
+        Event containing the current localization map state.
+
+        <h5>Description</h5>
+        By default the runtime does not send these events but calling #EnableLocalizationEventsML() function enables the events. When this function is called the ##XrEventDataLocalizationChangedML event will always be posted to the event queue, regardless of whether the map localization state has changed. This allows the application to synchronize with the current state.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The arrival of the event is asynchronous to this call.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrEventDataLocalizationChangedML</li>
+            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrLocalizationMapML, #EnableLocalizationEventsML()
+        """
+
+    Expression("#TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
+    XrSession("session", "the session to which this change event applies.")
+    XrLocalizationMapStateML("state", "the current {@code XrLocalizationMapStateML} of the map.")
+    XrLocalizationMapML("map", "the ##XrLocalizationMapML of the current map.")
+    XrLocalizationMapConfidenceML("confidence", "the {@code XrLocalizationMapConfidenceML} of the current map.")
+    XrLocalizationMapErrorFlagsML("errorFlags", "a a bitwise-OR of zero or more of the bits defined in {@code XrLocalizationMapErrorFlagBitsML} in the case that the localization map has low confidence.")
+}
+
+val XrLocalizationMapQueryInfoBaseHeaderML = struct(Module.OPENXR, "XrLocalizationMapQueryInfoBaseHeaderML") {
+    documentation =
+        """
+        Enumeration filter for the available localization maps.
+
+        <h5>Description</h5>
+        Currently no filters are available.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapQueryInfoBaseHeaderML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #QueryLocalizationMapsML()
+        """
+
+    XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+}
+
+val XrMapLocalizationRequestInfoML = struct(Module.OPENXR, "XrMapLocalizationRequestInfoML") {
+    documentation =
+        """
+        Information required to request a localization map.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrMapLocalizationRequestInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrUuidEXT, #RequestMapLocalizationML()
+        """
+
+    Expression("#TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrUuidEXT("mapUuid", "the ##XrUuidEXT of the localization map to request. This mapUuid <b>can</b> be obtained via #QueryLocalizationMapsML().")
+}
+
+val XrLocalizationMapImportInfoML = struct(Module.OPENXR, "XrLocalizationMapImportInfoML") {
+    documentation =
+        """
+        Data of a previously exported localization map.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapImportInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code data} <b>must</b> be a pointer to an array of {@code size} char values</li>
+            <li>The {@code size} parameter <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #ImportLocalizationMapML()
+        """
+
+    Expression("#TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    AutoSize("data")..uint32_t("size", "the size in bytes of the data member.")
+    char.p("data", "the byte data of the previously exported localization map.")
+}
+
+val XrLocalizationEnableEventsInfoML = struct(Module.OPENXR, "XrLocalizationEnableEventsInfoML") {
+    documentation =
+        """
+        Information to enable localization map events.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationEnableEventsInfoML</li>
+            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #EnableLocalizationEventsML()
+        """
+
+    Expression("#TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrBool32("enabled", "the flag to enable/disable localization status events.")
+}
+
 val XrEventDataHeadsetFitChangedML = struct(Module.OPENXR, "XrEventDataHeadsetFitChangedML", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
@@ -5060,7 +5442,7 @@ val XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT = struct(Module.OPENXR, "Xr
         Creation info for creating a spatial anchor handle from a persisted anchor.
 
         <h5>Description</h5>
-        The {@code name} is a character array of maximum size #MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, which <b>must</b> include a null terminator and <b>must</b> not be empty (i.e. the first element is the null terminator). If an empty {@code name} value is passed to any function as a parameter, that function <b>must</b> return #ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT.
+        The {@code spatialAnchorPersistenceName} is a character array of maximum size #MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, which <b>must</b> include a null terminator and <b>must</b> not be empty (i.e. the first element is the null terminator). If an empty {@code spatialAnchorPersistenceName} value is passed to any function as a parameter, that function <b>must</b> return #ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -5087,7 +5469,7 @@ val XrSceneMarkerMSFT = struct(Module.OPENXR, "XrSceneMarkerMSFT", mutable = fal
         The properties of a scene marker.
 
         <h5>Description</h5>
-        The ##XrSceneMarkerMSFT structure is an element in the array of {@code sceneMarkers} in ##XrSceneMarkersMSFT.
+        The ##XrSceneMarkerMSFT structure is an element in the array of ##XrSceneMarkersMSFT{@code ::sceneMarkers}.
 
         Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#qr_code_convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.
 
@@ -7627,7 +8009,7 @@ val XrFoveationApplyInfoHTC = struct(Module.OPENXR, "XrFoveationApplyInfoHTC") {
             <li>The specified ##XrSwapchainSubImage to the corresponding view.</li>
         </ul>
 
-        The {@code faceCount} of {@code XrSwapchain} in ##XrSwapchainSubImage <b>must</b> be 1 since this extension does not support cubemaps.
+        The {@code XrSwapchain}{@code ::faceCount} of the swapchain in ##XrSwapchainSubImage <b>must</b> be 1 since this extension does not support cubemaps.
 
         If {@code mode} is #FOVEATION_MODE_DYNAMIC_HTC, the {@code next} chain for this structure <b>must</b> include ##XrFoveationDynamicModeInfoHTC structure.
 
@@ -7728,6 +8110,77 @@ val XrFoveationCustomModeInfoHTC = struct(Module.OPENXR, "XrFoveationCustomModeI
     XrFoveationConfigurationHTC.const.p("configs", "an array of ##XrFoveationConfigurationHTC structure contains the custom foveation settings for the corresponding views.")
 }
 
+val XrSystemAnchorPropertiesHTC = struct(Module.OPENXR, "XrSystemAnchorPropertiesHTC", mutable = false) {
+    documentation =
+        """
+        System property for anchor.
+
+        <h5>Description</h5>
+        An application <b>can</b> inspect whether the system is capable of anchor functionality by chaining an ##XrSystemAnchorPropertiesHTC structure to the ##XrSystemProperties when calling #GetSystemProperties(). The runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if ##XrSystemAnchorPropertiesHTC{@code ::supportsAnchor} was #FALSE.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSystemAnchorPropertiesHTC</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSystemProperties, #GetSystemProperties()
+        """
+
+    Expression("#TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
+    XrBool32("supportsAnchor", "indicates if current system is capable of anchor functionality.")
+}
+
+val XrSpatialAnchorNameHTC = struct(Module.OPENXR, "XrSpatialAnchorNameHTC") {
+    javaImport("static org.lwjgl.openxr.HTCAnchor.*")
+    documentation =
+        """
+        The name of a spatial anchor.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorNameHTC</li>
+            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSpatialAnchorCreateInfoHTC, #GetSpatialAnchorNameHTC()
+        """
+
+    charUTF8("name", "a null-terminated UTF-8 string whose length is less than or equal to #MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC.")["XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC"]
+}
+
+val XrSpatialAnchorCreateInfoHTC = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoHTC") {
+    documentation =
+        """
+        Information to create a spatial anchor.
+
+        <h5>Description</h5>
+        The {@code poseInSpace} is transformed into world space to specify the point in the real world. The anchor tracks changes of the reality and <b>may</b> not be affected by the changes of {@code space}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorCreateInfoHTC</li>
+            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
+            <li>{@code name} <b>must</b> be a valid ##XrSpatialAnchorNameHTC structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrPosef, ##XrSpatialAnchorNameHTC, #CreateSpatialAnchorHTC()
+        """
+
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrSpace("space", "the {@code XrSpace} in which {@code poseInSpace} is specified.")
+    XrPosef("poseInSpace", "the ##XrPosef specifying the point in the real world within {@code space}.")
+    XrSpatialAnchorNameHTC("name", "the ##XrSpatialAnchorNameHTC containing the name of the anchor.")
+}
+
 val XrActiveActionSetPriorityEXT = struct(Module.OPENXR, "XrActiveActionSetPriorityEXT") {
     documentation =
         """
@@ -7785,7 +8238,7 @@ val XrSystemForceFeedbackCurlPropertiesMNDX = struct(Module.OPENXR, "XrSystemFor
         <h5>Description</h5>
         An application <b>may</b> inspect whether the system is capable of force feedback by chaining an ##XrSystemForceFeedbackCurlPropertiesMNDX structure to the ##XrSystemProperties structure when calling #GetSystemProperties().
 
-        The runtime <b>should</b> return #TRUE for {@code supportsForceFeedback} when force feedback is available in the system, otherwise #FALSE. Force feedback calls <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if force feedback is not available in the system.
+        The runtime <b>should</b> return #TRUE for {@code supportsForceFeedbackCurl} when force feedback is available in the system, otherwise #FALSE. Force feedback calls <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if force feedback is not available in the system.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

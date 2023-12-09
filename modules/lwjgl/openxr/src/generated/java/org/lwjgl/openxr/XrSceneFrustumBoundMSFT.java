@@ -94,7 +94,7 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
 
     /** an {@link XrPosef} defining the position and orientation of the tip of the frustum bound within the reference frame of the corresponding {@link XrSceneBoundsMSFT}{@code ::space}. */
     public XrPosef pose() { return npose(address()); }
-    /** an {@link XrFovf} for the four sides of the frustum bound where {@code angleLeft} and {@code angleRight} are along the X axis and {@code angleUp} and {@code angleDown} are along the Y axis of the frustum bound space. */
+    /** an {@link XrFovf} for the four sides of the frustum bound where {@link XrFovf}{@code ::angleLeft} and {@link XrFovf}{@code ::angleRight} are along the X axis and {@link XrFovf}{@code ::angleUp} and {@link XrFovf}{@code ::angleDown} are along the Y axis of the frustum bound space. */
     public XrFovf fov() { return nfov(address()); }
     /** the positive distance of the far plane of the frustum bound along the -Z direction of the frustum bound space. */
     public float farDistance() { return nfarDistance(address()); }
