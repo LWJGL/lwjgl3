@@ -3711,13 +3711,14 @@ public class GLFW {
      * 
      * <p>This function returns the platform dependent scancode of the specified key. This is intended for platform specific default keybindings.</p>
      * 
-     * <p>If the key is {@link #GLFW_KEY_UNKNOWN KEY_UNKNOWN} or does not exist on the keyboard this method will return {@code -1}.</p>
+     * <p>If the specified key token corresponds to a physical key not supported on the current platform then this method will return {@code -1}. Calling this
+     * function with anything other than a key token will return {@code -1} and generate an {@link #GLFW_INVALID_ENUM INVALID_ENUM} error.</p>
      * 
      * <p>This function may be called from any thread.</p>
      *
-     * @param key the key to query, or {@link #GLFW_KEY_UNKNOWN KEY_UNKNOWN}
+     * @param key any key token
      *
-     * @return the platform dependent scancode for the key, or {@code -1} if an errror occurred
+     * @return the platform-specific scancode for the key, or {@code -1} if the key is not supported on the current platform or an error occurred
      *
      * @since version 3.3
      */
@@ -4150,9 +4151,9 @@ public class GLFW {
      * <p>The key functions deal with physical keys, with layout independent key tokens named after their values in the standard US keyboard layout. If you want
      * to input text, use {@link #glfwSetCharCallback SetCharCallback} instead.</p>
      * 
-     * <p>When a window loses input focus, it will generate synthetic key release events for all pressed names keys. You can tell these events from
-     * user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
-     * callback has been called.</p>
+     * <p>When a window loses input focus, it will generate synthetic key release events for all pressed keys with associated key tokens. You can tell these
+     * events from user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the
+     * window focus callback has been called.</p>
      * 
      * <p>The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
      * a GLFW key token. Such keys have {@code key} set to {@link #GLFW_KEY_UNKNOWN KEY_UNKNOWN}, their state is not saved and so it cannot be queried with {@link #glfwGetKey GetKey}.</p>
@@ -5143,10 +5144,13 @@ public class GLFW {
     // --- [ glfwMakeContextCurrent ] ---
 
     /**
-     * Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context must only be made current on a single thread at
-     * a time and each thread can have only a single current context at a time.
+     * Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. It can also detach the current context from the calling
+     * thread without making a new one current by passing in {@code NULL}.
      * 
-     * <p>When moving a context between threads, you must make it non-current on the old thread before making it current on the new one.</p>
+     * <p>A context must only be made current on a single thread at a time and each thread can have only a single current context at a time. Making a context
+     * current detaches any previously current context on the calling thread.</p>
+     * 
+     * <p>When moving a context between threads, you must detach it (make it non-current) on the old thread before making it current on the new one.</p>
      * 
      * <p>By default, making a context non-current implicitly forces a pipeline flush. On machines that support
      * <a href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt">GL_KHR_context_flush_control</a>, you can control whether
@@ -5154,6 +5158,9 @@ public class GLFW {
      * <a href="https://www.glfw.org/docs/latest/window.html#window_hints_ctx">window hint</a>.</p>
      * 
      * <p>The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a {@link #GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} error.</p>
+     * 
+     * <p>If the previously current context was created via a different context creation API than the one passed to this function, GLFW will still detach the
+     * previous one from its API before making the new one current.</p>
      * 
      * <p>This function may be called from any thread.</p>
      *

@@ -2855,14 +2855,15 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         This function returns the platform dependent scancode of the specified key. This is intended for platform specific default keybindings.
 
-        If the key is #KEY_UNKNOWN or does not exist on the keyboard this method will return {@code -1}.
+        If the specified key token corresponds to a physical key not supported on the current platform then this method will return {@code -1}. Calling this
+        function with anything other than a key token will return {@code -1} and generate an #INVALID_ENUM error.
 
         This function may be called from any thread.
         """,
 
-        int("key", "the key to query, or #KEY_UNKNOWN"),
+        int("key", "any key token"),
 
-        returnDoc = "the platform dependent scancode for the key, or {@code -1} if an errror occurred",
+        returnDoc = "the platform-specific scancode for the key, or {@code -1} if the key is not supported on the current platform or an error occurred",
         since = "version 3.3"
     )
 
@@ -3161,9 +3162,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         The key functions deal with physical keys, with layout independent key tokens named after their values in the standard US keyboard layout. If you want
         to input text, use #SetCharCallback() instead.
 
-        When a window loses input focus, it will generate synthetic key release events for all pressed names keys. You can tell these events from
-        user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
-        callback has been called.
+        When a window loses input focus, it will generate synthetic key release events for all pressed keys with associated key tokens. You can tell these
+        events from user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the
+        window focus callback has been called.
 
         The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
         a GLFW key token. Such keys have {@code key} set to #KEY_UNKNOWN, their state is not saved and so it cannot be queried with #GetKey().
@@ -3787,10 +3788,13 @@ if (hats[2] & GLFW_HAT_RIGHT)
     void(
         "MakeContextCurrent",
         """
-        Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context must only be made current on a single thread at
-        a time and each thread can have only a single current context at a time.
+        Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. It can also detach the current context from the calling
+        thread without making a new one current by passing in #NULL.
 
-        When moving a context between threads, you must make it non-current on the old thread before making it current on the new one.
+        A context must only be made current on a single thread at a time and each thread can have only a single current context at a time. Making a context
+        current detaches any previously current context on the calling thread.
+
+        When moving a context between threads, you must detach it (make it non-current) on the old thread before making it current on the new one.
 
         By default, making a context non-current implicitly forces a pipeline flush. On machines that support
         ${url("https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt", "GL_KHR_context_flush_control")}, you can control whether
@@ -3798,6 +3802,9 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ${url("https://www.glfw.org/docs/latest/window.html\\#window_hints_ctx", "window hint")}.
 
         The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
+
+        If the previously current context was created via a different context creation API than the one passed to this function, GLFW will still detach the
+        previous one from its API before making the new one current.
 
         This function may be called from any thread.
         """,
