@@ -31,12 +31,12 @@ public class STBImageResize {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #STBIR_BGR BGR}</li>
      * <li>{@link #STBIR_1CHANNEL 1CHANNEL}</li>
      * <li>{@link #STBIR_2CHANNEL 2CHANNEL}</li>
      * <li>{@link #STBIR_RGB RGB}</li>
-     * <li>{@link #STBIR_RGBA RGBA}</li>
+     * <li>{@link #STBIR_BGR BGR}</li>
      * <li>{@link #STBIR_4CHANNEL 4CHANNEL}</li>
+     * <li>{@link #STBIR_RGBA RGBA}</li>
      * <li>{@link #STBIR_BGRA BGRA}</li>
      * <li>{@link #STBIR_ARGB ARGB}</li>
      * <li>{@link #STBIR_ABGR ABGR}</li>
@@ -48,26 +48,38 @@ public class STBImageResize {
      * <li>{@link #STBIR_ABGR_PM ABGR_PM}</li>
      * <li>{@link #STBIR_RA_PM RA_PM}</li>
      * <li>{@link #STBIR_AR_PM AR_PM}</li>
+     * <li>{@link #STBIR_RGBA_NO_AW RGBA_NO_AW}</li>
+     * <li>{@link #STBIR_BGRA_NO_AW BGRA_NO_AW}</li>
+     * <li>{@link #STBIR_ARGB_NO_AW ARGB_NO_AW}</li>
+     * <li>{@link #STBIR_ABGR_NO_AW ABGR_NO_AW}</li>
+     * <li>{@link #STBIR_RA_NO_AW RA_NO_AW}</li>
+     * <li>{@link #STBIR_AR_NO_AW AR_NO_AW}</li>
      * </ul>
      */
     public static final int
-        STBIR_BGR      = 0,
-        STBIR_1CHANNEL = 1,
-        STBIR_2CHANNEL = 2,
-        STBIR_RGB      = 3,
-        STBIR_RGBA     = 4,
-        STBIR_4CHANNEL = 5,
-        STBIR_BGRA     = 6,
-        STBIR_ARGB     = 7,
-        STBIR_ABGR     = 8,
-        STBIR_RA       = 9,
-        STBIR_AR       = 10,
-        STBIR_RGBA_PM  = 11,
-        STBIR_BGRA_PM  = 12,
-        STBIR_ARGB_PM  = 13,
-        STBIR_ABGR_PM  = 14,
-        STBIR_RA_PM    = 15,
-        STBIR_AR_PM    = 16;
+        STBIR_1CHANNEL   = 1,
+        STBIR_2CHANNEL   = 2,
+        STBIR_RGB        = 3,
+        STBIR_BGR        = 0,
+        STBIR_4CHANNEL   = 5,
+        STBIR_RGBA       = 4,
+        STBIR_BGRA       = 6,
+        STBIR_ARGB       = 7,
+        STBIR_ABGR       = 8,
+        STBIR_RA         = 9,
+        STBIR_AR         = 10,
+        STBIR_RGBA_PM    = 11,
+        STBIR_BGRA_PM    = 12,
+        STBIR_ARGB_PM    = 13,
+        STBIR_ABGR_PM    = 14,
+        STBIR_RA_PM      = 15,
+        STBIR_AR_PM      = 16,
+        STBIR_RGBA_NO_AW = 11,
+        STBIR_BGRA_NO_AW = 12,
+        STBIR_ARGB_NO_AW = 13,
+        STBIR_ABGR_NO_AW = 14,
+        STBIR_RA_NO_AW   = 15,
+        STBIR_AR_NO_AW   = 16;
 
     /**
      * {@code stbir_edge}

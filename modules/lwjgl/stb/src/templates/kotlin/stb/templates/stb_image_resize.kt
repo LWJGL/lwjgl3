@@ -29,13 +29,13 @@ val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR"
         )}
         """,
 
-        "BGR".enum("", "0"),
-        "1CHANNEL".enum,
+        "1CHANNEL".enum("", "1"),
         "2CHANNEL".enum,
         "RGB".enum,
-        "RGBA".enum,
-        "4CHANNEL".enum,
-        "BGRA".enum,
+        "BGR".enum("", "0"),
+        "4CHANNEL".enum("", "5"),
+        "RGBA".enum("", "4"),
+        "BGRA".enum("", "6"),
         "ARGB".enum,
         "ABGR".enum,
         "RA".enum,
@@ -45,7 +45,13 @@ val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR"
         "ARGB_PM".enum,
         "ABGR_PM".enum,
         "RA_PM".enum,
-        "AR_PM".enum
+        "AR_PM".enum,
+        "RGBA_NO_AW".enum("", "11"),
+        "BGRA_NO_AW".enum,
+        "ARGB_NO_AW".enum,
+        "ABGR_NO_AW".enum,
+        "RA_NO_AW".enum,
+        "AR_NO_AW".enum
     )
 
     customMethod("""
