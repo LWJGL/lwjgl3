@@ -229,7 +229,7 @@ public class BGFX {
     }
 
     /** API version */
-    public static final int BGFX_API_VERSION = 123;
+    public static final int BGFX_API_VERSION = 124;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -707,23 +707,21 @@ public class BGFX {
      * <li>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES} - OpenGL ES 2.0+</li>
      * <li>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL} - OpenGL 2.1+</li>
      * <li>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN} - Vulkan</li>
-     * <li>{@link #BGFX_BGFX_RENDERER_TYPE_WEBGPU BGFX_RENDERER_TYPE_WEBGPU} - WebGPU</li>
      * <li>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</li>
      * </ul>
      */
     public static final int
-        BGFX_RENDERER_TYPE_NOOP        = 0,
-        BGFX_RENDERER_TYPE_AGC         = 1,
-        BGFX_RENDERER_TYPE_DIRECT3D11  = 2,
-        BGFX_RENDERER_TYPE_DIRECT3D12  = 3,
-        BGFX_RENDERER_TYPE_GNM         = 4,
-        BGFX_RENDERER_TYPE_METAL       = 5,
-        BGFX_RENDERER_TYPE_NVN         = 6,
-        BGFX_RENDERER_TYPE_OPENGLES    = 7,
-        BGFX_RENDERER_TYPE_OPENGL      = 8,
-        BGFX_RENDERER_TYPE_VULKAN      = 9,
-        BGFX_BGFX_RENDERER_TYPE_WEBGPU = 10,
-        BGFX_RENDERER_TYPE_COUNT       = 11;
+        BGFX_RENDERER_TYPE_NOOP       = 0,
+        BGFX_RENDERER_TYPE_AGC        = 1,
+        BGFX_RENDERER_TYPE_DIRECT3D11 = 2,
+        BGFX_RENDERER_TYPE_DIRECT3D12 = 3,
+        BGFX_RENDERER_TYPE_GNM        = 4,
+        BGFX_RENDERER_TYPE_METAL      = 5,
+        BGFX_RENDERER_TYPE_NVN        = 6,
+        BGFX_RENDERER_TYPE_OPENGLES   = 7,
+        BGFX_RENDERER_TYPE_OPENGL     = 8,
+        BGFX_RENDERER_TYPE_VULKAN     = 9,
+        BGFX_RENDERER_TYPE_COUNT      = 10;
 
     /**
      * Access mode ({@code bgfx_access_t})
@@ -1259,7 +1257,7 @@ public class BGFX {
      * Start a vertex layout.
      *
      * @param _this     the vertex layout
-     * @param _renderer the renderer backend type. One of:<br><table><tr><td>{@link #BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link #BGFX_RENDERER_TYPE_AGC RENDERER_TYPE_AGC}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link #BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link #BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link #BGFX_BGFX_RENDERER_TYPE_WEBGPU BGFX_RENDERER_TYPE_WEBGPU}</td><td>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table>
+     * @param _renderer the renderer backend type. One of:<br><table><tr><td>{@link #BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link #BGFX_RENDERER_TYPE_AGC RENDERER_TYPE_AGC}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link #BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link #BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table>
      *
      * @return itself
      */
@@ -1688,7 +1686,7 @@ public class BGFX {
     /**
      * Returns name of renderer.
      *
-     * @param _type the renderer type. One of:<br><table><tr><td>{@link #BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link #BGFX_RENDERER_TYPE_AGC RENDERER_TYPE_AGC}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link #BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link #BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link #BGFX_BGFX_RENDERER_TYPE_WEBGPU BGFX_RENDERER_TYPE_WEBGPU}</td><td>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table>
+     * @param _type the renderer type. One of:<br><table><tr><td>{@link #BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link #BGFX_RENDERER_TYPE_AGC RENDERER_TYPE_AGC}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link #BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link #BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table>
      */
     @Nullable
     @NativeType("char const *")
@@ -2830,6 +2828,8 @@ public class BGFX {
 
     /**
      * Creates shader from memory buffer.
+     * 
+     * <p>Shader binary is obtained by compiling shader offline with shaderc command line tool.</p>
      *
      * @return shader handle
      */

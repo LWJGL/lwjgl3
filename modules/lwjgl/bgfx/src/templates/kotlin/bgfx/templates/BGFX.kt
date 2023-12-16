@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."123"
+        "API_VERSION".."124"
     )
 
     ShortConstant(
@@ -563,7 +563,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RENDERER_TYPE_OPENGLES".enum("OpenGL ES 2.0+"),
         "RENDERER_TYPE_OPENGL".enum("OpenGL 2.1+"),
         "RENDERER_TYPE_VULKAN".enum("Vulkan"),
-        "BGFX_RENDERER_TYPE_WEBGPU".enum("WebGPU"),
 
         "RENDERER_TYPE_COUNT".enum
     ).javaDocLinks
@@ -1457,7 +1456,11 @@ RGBA16S
 
     bgfx_shader_handle_t(
         "create_shader",
-        "Creates shader from memory buffer.",
+        """
+        Creates shader from memory buffer.
+
+        Shader binary is obtained by compiling shader offline with shaderc command line tool.
+        """,
 
         bgfx_memory_t.const.p("_mem", ""),
 
