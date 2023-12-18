@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Kernel parameters of {@code function} are specified via {@code pParams}, very much the same way as described in <a href="https://docs.nvidia.com/cuda/cuda-driver-api/{@link group__CUDA__EXEC.html#group__CUDA__EXEC_1gb8f3dc3031b40da29d5f9a7139e52e15}">cuLaunchKernel</a></p>
+ * <p>Kernel parameters of {@code function} are specified via {@code pParams}, very much the same way as described in <a href="https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__EXEC.html#group__CUDA__EXEC_1gb8f3dc3031b40da29d5f9a7139e52e15">cuLaunchKernel</a></p>
  * 
  * <p>If {@code function} has N parameters, then {@code pParams} <b>must</b> be an array of N pointers and {@code paramCount} <b>must</b> be set to N. Each of {@code kernelParams}[0] through {@code kernelParams}[N-1] <b>must</b> point to a region of memory from which the actual kernel parameter will be copied. The number of kernel parameters and their offsets and sizes are not specified here as that information is stored in the {@code VkCudaFunctionNV} object.</p>
  * 

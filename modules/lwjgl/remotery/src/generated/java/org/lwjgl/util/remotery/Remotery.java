@@ -48,9 +48,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Supported GPU Profiling APIs:</p>
  * 
  * <ul>
- * <li><s>D3D 11/12</s></li>
  * <li>OpenGL</li>
- * <li><s>CUDA</s></li>
+ * <li>CUDA</li>
  * <li>Metal</li>
  * </ul>
  * 

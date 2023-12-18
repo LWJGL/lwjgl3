@@ -41,9 +41,8 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
 
         Supported GPU Profiling APIs:
         ${ul(
-            "<s>D3D 11/12</s>",
             "OpenGL",
-            "<s>CUDA</s>",
+            "CUDA",
             "Metal"
         )}
 
