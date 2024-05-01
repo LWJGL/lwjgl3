@@ -40,7 +40,7 @@
                 <source/>
                 <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
 
-                <regexpmapper from="(\w+)\.(?:c|cc|cpp|S)$" to="\1.o"/>
+                <regexpmapper from="([\w\-]+)\.(?:c|cc|cpp|S)$" to="\1.o"/>
             </apply>
         </sequential>
     </macrodef>
@@ -212,6 +212,16 @@
         <build module="meshoptimizer" simple="true" lang="c++" if:true="${binding.meshoptimizer}">
             <beforeCompile>
                 <compile lang="c++" flags="-DMESHOPTIMIZER_NO_WRAPPERS">
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- msdfgen -->
+        <build module="msdfgen" simple="true" linker="clang++" if:true="${binding.msdfgen}">
+            <beforeCompile>
+                <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
                     <fileset dir="." includes="${src.main}/*.cpp"/>
                 </compile>
