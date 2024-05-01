@@ -24,6 +24,7 @@ bin/classes/lwjgl/llvm;^
 bin/classes/lwjgl/lz4;^
 bin/classes/lwjgl/meow;^
 bin/classes/lwjgl/meshoptimizer;^
+bin/classes/lwjgl/msdfgen;^
 bin/classes/lwjgl/nanovg;^
 bin/classes/lwjgl/nfd;^
 bin/classes/lwjgl/nuklear;^

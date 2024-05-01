@@ -225,6 +225,16 @@ EXPORTS
             </beforeCompile>
         </build>
 
+        <!-- msdfgen -->
+        <build module="msdfgen" simple="true" if:true="${binding.msdfgen}">
+            <beforeCompile>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">
             <compileargs>
