@@ -39,7 +39,7 @@
                 <source/>
                 <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
 
-                <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.obj"/>
+                <regexpmapper from="([\w\-]+)\.c(?:c|pp)?$" to="\1.obj"/>
             </apply>
         </sequential>
     </macrodef>
@@ -80,7 +80,7 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/${name}.dll">
-                <!--<srcfiles file="config/${platform}/build.xml"/>-->
+                <srcfiles file="config/${platform}/build.xml"/>
                 <srcfiles dir="${bin.native}/@{module}" includes="**"/>
             </uptodate>
             <local name="lib-dependencies-uptodate"/>
@@ -245,6 +245,16 @@ EXPORTS
                 </beforeCompile>
             </build>
         </sequential>
+
+        <!-- msdfgen -->
+        <build module="msdfgen" simple="true" if:true="${binding.msdfgen}">
+            <beforeCompile>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
 
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">

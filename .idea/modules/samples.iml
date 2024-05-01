@@ -42,6 +42,7 @@
     <orderEntry type="module" module-name="lwjgl.lz4" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.meow" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.meshoptimizer" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.msdfgen" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.nanovg" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.nfd" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.nuklear" scope="TEST" />
