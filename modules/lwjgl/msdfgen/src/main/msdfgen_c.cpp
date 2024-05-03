@@ -231,7 +231,7 @@ MSDF_API int msdf_shape_get_contour(msdf_shape_handle shape, const size_t index,
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_shape_get_edge_counts(msdf_shape_handle shape, size_t* edge_count) {
+MSDF_API int msdf_shape_get_edge_count(msdf_shape_handle shape, size_t* edge_count) {
     if(shape == nullptr || edge_count == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -274,12 +274,12 @@ MSDF_API int msdf_shape_bound(msdf_shape_handle shape, msdf_bounds_t* bounds) {
 MSDF_API int msdf_shape_bound_miters(msdf_shape_handle shape,
                                      msdf_bounds_t* bounds,
                                      const double border,
-                                     const double miterLimit,
+                                     const double miter_limit,
                                      const int polarity) {
     if(shape == nullptr || bounds == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    reinterpret_cast<msdfgen::Shape*>(shape)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miterLimit, polarity);
+    reinterpret_cast<msdfgen::Shape*>(shape)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miter_limit, polarity);
     return MSDF_SUCCESS;
 }
 
@@ -332,12 +332,12 @@ MSDF_API int msdf_contour_bound(msdf_contour_handle contour, msdf_bounds_t* boun
 MSDF_API int msdf_contour_bound_miters(msdf_contour_handle contour,
                                        msdf_bounds_t* bounds,
                                        const double border,
-                                       const double miterLimit,
+                                       const double miter_limit,
                                        const int polarity) {
     if(contour == nullptr || bounds == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    reinterpret_cast<msdfgen::Contour*>(contour)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miterLimit, polarity);
+    reinterpret_cast<msdfgen::Contour*>(contour)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miter_limit, polarity);
     return MSDF_SUCCESS;
 }
 

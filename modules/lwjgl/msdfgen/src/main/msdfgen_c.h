@@ -146,12 +146,12 @@ MSDF_API int msdf_shape_get_bounds(msdf_shape_handle shape, msdf_bounds_t* bound
 MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_handle* contour);
 MSDF_API int msdf_shape_get_contour_count(msdf_shape_handle shape, size_t* contour_count);
 MSDF_API int msdf_shape_get_contour(msdf_shape_handle shape, size_t index, msdf_contour_handle* contours);
-MSDF_API int msdf_shape_get_edge_counts(msdf_shape_handle shape, size_t* edge_count);
+MSDF_API int msdf_shape_get_edge_count(msdf_shape_handle shape, size_t* edge_count);
 MSDF_API int msdf_shape_has_inverse_y_axis(msdf_shape_handle shape, int* inverse_y_axis);
 MSDF_API int msdf_shape_normalize(msdf_shape_handle shape);
 MSDF_API int msdf_shape_validate(msdf_shape_handle shape, int* result);
 MSDF_API int msdf_shape_bound(msdf_shape_handle shape, msdf_bounds_t* bounds);
-MSDF_API int msdf_shape_bound_miters(msdf_shape_handle shape, msdf_bounds_t* bounds, double border, double miterLimit, int polarity);
+MSDF_API int msdf_shape_bound_miters(msdf_shape_handle shape, msdf_bounds_t* bounds, double border, double miter_limit, int polarity);
 MSDF_API void msdf_shape_free(msdf_shape_handle shape);
 
 MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour);
@@ -159,7 +159,7 @@ MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_edge_holder
 MSDF_API int msdf_contour_get_edge_count(msdf_contour_handle contour, size_t* edge_count);
 MSDF_API int msdf_contour_get_edge(msdf_contour_handle contour, size_t index, msdf_edge_holder_handle* edge);
 MSDF_API int msdf_contour_bound(msdf_contour_handle contour, msdf_bounds_t* bounds);
-MSDF_API int msdf_contour_bound_miters(msdf_contour_handle contour, msdf_bounds_t* bounds, double border, double miterLimit, int polarity);
+MSDF_API int msdf_contour_bound_miters(msdf_contour_handle contour, msdf_bounds_t* bounds, double border, double miter_limit, int polarity);
 MSDF_API int msdf_contour_get_winding(msdf_contour_handle contour, int* winding);
 MSDF_API int msdf_contour_reverse(msdf_contour_handle contour);
 MSDF_API void msdf_contour_free(msdf_contour_handle contour);
