@@ -415,7 +415,7 @@ enum class Module(
     MSDFGEN(
         "msdfgen",
         "org.lwjgl.util.msdfgen",
-        "Contains bindings to ${url("", "msdfgen")}, a multi-channel signed distance field generator library.",
+        "Contains bindings to ${url("https://github.com/Chlumsky/msdfgen", "msdfgen")}, a multi-channel signed distance field generator library.",
         library = JNILibrary.create("LibMsdfGen"),
         arrayOverloads = false
     ),

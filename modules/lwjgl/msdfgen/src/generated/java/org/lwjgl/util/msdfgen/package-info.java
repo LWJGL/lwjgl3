@@ -4,7 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 
-/** Contains bindings to <a href="">msdfgen</a>, a multi-channel signed distance field generator library. */
+/** Contains bindings to <a href="https://github.com/Chlumsky/msdfgen">msdfgen</a>, a multi-channel signed distance field generator library. */
 @org.lwjgl.system.NonnullDefault
 package org.lwjgl.util.msdfgen;
 
