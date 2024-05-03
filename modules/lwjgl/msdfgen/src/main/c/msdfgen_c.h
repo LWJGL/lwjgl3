@@ -13,6 +13,8 @@
  * operation on the triplet of sampled signed distance values.
  */
 
+#include "msdfgen-config.h"
+
 #include <stddef.h>// For size_t
 
 /*

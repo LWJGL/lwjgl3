@@ -1751,7 +1751,24 @@
         <release-module name="meshoptimizer" native-library="lwjgl_meshoptimizer" title="meshoptimizer" if:true="${binding.meshoptimizer}"/>
 
         <!-- msdfgen -->
-        <release-module name="msdfgen" native-library="lwjgl_msdfgen" title="msdfgen" if:true="${binding.msdfgen}"/>
+        <release-module name="msdfgen" native-library="lwjgl_msdfgen" title="msdfgen" if:true="${binding.msdfgen}">
+            <natives>
+                <get-release platform="freebsd" arch="x64" file="liblwjgl_msdfgen.so"/>
+
+                <get-release platform="linux" arch="x64" file="liblwjgl_msdfgen.so"/>
+                <get-release platform="linux" arch="arm64" file="liblwjgl_msdfgen.so"/>
+                <get-release platform="linux" arch="arm32" file="liblwjgl_msdfgen.so"/>
+                <get-release platform="linux" arch="ppc64le" file="liblwjgl_msdfgen.so"/>
+                <get-release platform="linux" arch="riscv64" file="liblwjgl_msdfgen.so"/>
+
+                <get-release platform="macos" arch="x64" file="liblwjgl_msdfgen.dylib"/>
+                <get-release platform="macos" arch="arm64" file="liblwjgl_msdfgen.dylib"/>
+
+                <get-release platform="windows" arch="x64" file="lwjgl_msdfgen.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_msdfgen.dll"/>
+                <get-release platform="windows" arch="arm64" file="lwjgl_msdfgen.dll"/>
+            </natives>
+        </release-module>
 
         <!-- NanoVG -->
         <release-module name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" if:true="${binding.nanovg}"/>

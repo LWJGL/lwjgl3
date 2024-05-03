@@ -1,5 +1,5 @@
 
-#include "../msdfgen.h"
+#include "msdfgen.h"
 
 #include <vector>
 #include "edge-selectors.h"
