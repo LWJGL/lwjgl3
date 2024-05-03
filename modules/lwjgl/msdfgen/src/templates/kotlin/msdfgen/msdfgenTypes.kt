@@ -6,9 +6,36 @@ package msdfgen
 
 import org.lwjgl.generator.*
 
-val msdf_allocator_alloc_callback = typedef(void.p, "msdf_allocator_alloc_callback")
-val msdf_allocator_realloc_callback = typedef(void.p, "msdf_allocator_realloc_callback")
-val msdf_allocator_free_callback = typedef(void.p, "msdf_free_allocator_free_callback")
+val msdf_allocator_alloc_callback = Module.MSDFGEN.callback {
+    void.p(
+        "msdf_allocator_alloc_callback",
+        "",
+        size_t("size", "")
+    ) {
+        documentation = ""
+    }
+}
+
+val msdf_allocator_realloc_callback = Module.MSDFGEN.callback {
+    void.p(
+        "msdf_allocator_realloc_callback",
+        "",
+        void.p("memory", ""),
+        size_t("size", "")
+    ) {
+        documentation = ""
+    }
+}
+
+val msdf_allocator_free_callback = Module.MSDFGEN.callback {
+    void.p(
+        "msdf_free_allocator_free_callback",
+        "",
+        void.p("memory", "")
+    ) {
+        documentation = ""
+    }
+}
 
 val msdf_allocator = struct(Module.MSDFGEN, "MSDFGenAllocator", nativeName = "struct msdf_allocator") {
     documentation = ""

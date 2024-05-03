@@ -128,4 +128,64 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1free(JN
     msdf_shape_free(shape);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1alloc(JNIEnv *__env, jclass clazz, jlong contourAddress) {
+    msdf_contour_handle *contour = (msdf_contour_handle *)(uintptr_t)contourAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_alloc(contour);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1add_1edge(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong edgeAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    msdf_edge_holder_handle *edge = (msdf_edge_holder_handle *)(uintptr_t)edgeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_add_edge(contour, edge);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1get_1edge_1count(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong countAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    size_t *count = (size_t *)(uintptr_t)countAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_get_edge_count(contour, count);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1get_1edge(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong index, jlong edgeAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    msdf_edge_holder_handle *edge = (msdf_edge_holder_handle *)(uintptr_t)edgeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_get_edge(contour, (size_t)index, edge);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1bound(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong boundsAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    struct msdf_bounds *bounds = (struct msdf_bounds *)(uintptr_t)boundsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_bound(contour, bounds);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1bound_1miters(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong boundsAddress, jdouble border, jdouble miter_limit, jint polarity) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    struct msdf_bounds *bounds = (struct msdf_bounds *)(uintptr_t)boundsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_bound_miters(contour, bounds, border, miter_limit, polarity);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1get_1winding(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong windingAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    int *winding = (int *)(uintptr_t)windingAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_get_winding(contour, winding);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1reverse(JNIEnv *__env, jclass clazz, jlong contourAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_reverse(contour);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1free(JNIEnv *__env, jclass clazz, jlong contourAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    UNUSED_PARAMS(__env, clazz)
+    msdf_contour_free(contour);
+}
+
 EXTERN_C_EXIT

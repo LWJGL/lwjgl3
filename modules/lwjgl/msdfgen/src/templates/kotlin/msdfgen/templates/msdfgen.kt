@@ -133,4 +133,105 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "",
         Unsafe..msdf_shape_handle("shape", "")
     )
+
+    // msdf_contour
+
+    int(
+        "contour_alloc",
+        "",
+        Unsafe..msdf_contour_handle.p("contour", "")
+    )
+    int(
+        "contour_add_edge",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_edge_holder_handle.p("edge", "")
+    )
+    int(
+        "contour_get_edge_count",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..size_t.p("count", "")
+    )
+    int(
+        "contour_get_edge",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        size_t("index", ""),
+        Unsafe..msdf_edge_holder_handle.p("edge", "")
+    )
+    int(
+        "contour_bound",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_bounds.p("bounds", "")
+    )
+    int(
+        "contour_bound_miters",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_bounds.p("bounds", ""),
+        double("border", ""),
+        double("miter_limit", ""),
+        int("polarity", "")
+    )
+    int(
+        "contour_get_winding",
+        "",
+        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..int.p("winding", "")
+    )
+    int(
+        "contour_reverse",
+        "",
+        Unsafe..msdf_contour_handle("contour", "")
+    )
+    void(
+        "contour_free",
+        "",
+        Unsafe..msdf_contour_handle("contour", "")
+    )
+
+    // msdf_edge
+
+    int(
+        "edge_alloc",
+        "",
+        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_edge_holder_handle.p("edge", "")
+    )
+    void(
+        "edge_free",
+        "",
+        Unsafe..msdf_edge_holder_handle("edge", "")
+    )
+
+    // msdf_segment
+
+    int(
+        "segment_alloc",
+        "",
+        int("type", ""),
+        Unsafe..msdf_segment.p("segment", "")
+    )
+    int(
+        "segment_get_point_count",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..size_t.p("count", "")
+    )
+    int(
+        "segment_get_point",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        size_t("index", ""),
+        Unsafe..msdf_vector2.p("point", "")
+    )
+    int(
+        "segment_set_point",
+        "",
+        Unsafe..msdf_segment.p("segment", ""),
+        size_t("index", ""),
+        Unsafe..msdf_vector2.const.p("point", "")
+    )
 }

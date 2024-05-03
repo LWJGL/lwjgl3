@@ -13,9 +13,9 @@
  * operation on the triplet of sampled signed distance values.
  */
 
-#include "msdfgen-config.h"
-
 #include <stddef.h>// For size_t
+
+#include "msdfgen-config.h"
 
 /*
  * A C-API modeled closely after the msdfgen C++ API
@@ -170,15 +170,15 @@ MSDF_API int msdf_edge_alloc(msdf_segment_t* segment, msdf_edge_holder_handle* e
 MSDF_API void msdf_edge_free(msdf_edge_holder_handle edge);
 
 MSDF_API int msdf_segment_alloc(int type, msdf_segment_t** segment);
-MSDF_API int msdf_segment_get_point_count(msdf_segment_t* segment, size_t* point_count);
-MSDF_API int msdf_segment_get_point(msdf_segment_t* segment, size_t index, msdf_vector2_t* point);
+MSDF_API int msdf_segment_get_point_count(const msdf_segment_t* segment, size_t* point_count);
+MSDF_API int msdf_segment_get_point(const msdf_segment_t* segment, size_t index, msdf_vector2_t* point);
 MSDF_API int msdf_segment_set_point(msdf_segment_t* segment, size_t index, const msdf_vector2_t* point);
 MSDF_API int msdf_segment_set_color(msdf_segment_t* segment, int color);
-MSDF_API int msdf_segment_get_color(msdf_segment_t* segment, int* color);
-MSDF_API int msdf_segment_get_direction(msdf_segment_t* segment, double param, msdf_vector2_t* direction);
-MSDF_API int msdf_segment_get_direction_change(msdf_segment_t* segment, double param, msdf_vector2_t* direction_change);
-MSDF_API int msdf_segment_point(msdf_segment_t* segment, double param, msdf_vector2_t* point);
-MSDF_API int msdf_segment_bound(msdf_segment_t* segment, msdf_bounds_t* bounds);
+MSDF_API int msdf_segment_get_color(const msdf_segment_t* segment, int* color);
+MSDF_API int msdf_segment_get_direction(const msdf_segment_t* segment, double param, msdf_vector2_t* direction);
+MSDF_API int msdf_segment_get_direction_change(const msdf_segment_t* segment, double param, msdf_vector2_t* direction_change);
+MSDF_API int msdf_segment_point(const msdf_segment_t* segment, double param, msdf_vector2_t* point);
+MSDF_API int msdf_segment_bound(const msdf_segment_t* segment, msdf_bounds_t* bounds);
 MSDF_API int msdf_segment_move_start_point(msdf_segment_t* segment, const msdf_vector2_t* point);
 MSDF_API int msdf_segment_move_end_point(msdf_segment_t* segment, const msdf_vector2_t* point);
 MSDF_API void msdf_segment_free(msdf_segment_t* segment);

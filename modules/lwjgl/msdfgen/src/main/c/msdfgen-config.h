@@ -15,7 +15,7 @@
 #define MSDFGEN_PUBLIC __attribute__((visibility("default")))
 #endif
 
-#define MSDFGEN_EXT_PUBLIC MSDFGEN_PUBLIC
+#define MSDFGEN_EXT_PUBLIC
 
 #define MSDFGEN_VERSION 1.11.0
 #define MSDFGEN_VERSION_MAJOR 1

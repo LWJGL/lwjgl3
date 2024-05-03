@@ -180,4 +180,76 @@ public class MSDFGen {
         nmsdf_shape_free(memAddress(shape));
     }
 
+    // --- [ msdf_contour_alloc ] ---
+
+    public static native int nmsdf_contour_alloc(long contour);
+
+    public static int msdf_contour_alloc(@NativeType("msdf_contour_handle *") PointerBuffer contour) {
+        return nmsdf_contour_alloc(memAddress(contour));
+    }
+
+    // --- [ msdf_contour_add_edge ] ---
+
+    public static native int nmsdf_contour_add_edge(long contour, long edge);
+
+    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("msdf_edge_holder_handle *") PointerBuffer edge) {
+        return nmsdf_contour_add_edge(memAddress(contour), memAddress(edge));
+    }
+
+    // --- [ msdf_contour_get_edge_count ] ---
+
+    public static native int nmsdf_contour_get_edge_count(long contour, long count);
+
+    public static int msdf_contour_get_edge_count(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("size_t *") PointerBuffer count) {
+        return nmsdf_contour_get_edge_count(memAddress(contour), memAddress(count));
+    }
+
+    // --- [ msdf_contour_get_edge ] ---
+
+    public static native int nmsdf_contour_get_edge(long contour, long index, long edge);
+
+    public static int msdf_contour_get_edge(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("size_t") long index, @NativeType("msdf_edge_holder_handle *") PointerBuffer edge) {
+        return nmsdf_contour_get_edge(memAddress(contour), index, memAddress(edge));
+    }
+
+    // --- [ msdf_contour_bound ] ---
+
+    public static native int nmsdf_contour_bound(long contour, long bounds);
+
+    public static int msdf_contour_bound(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        return nmsdf_contour_bound(memAddress(contour), bounds.address());
+    }
+
+    // --- [ msdf_contour_bound_miters ] ---
+
+    public static native int nmsdf_contour_bound_miters(long contour, long bounds, double border, double miter_limit, int polarity);
+
+    public static int msdf_contour_bound_miters(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
+        return nmsdf_contour_bound_miters(memAddress(contour), bounds.address(), border, miter_limit, polarity);
+    }
+
+    // --- [ msdf_contour_get_winding ] ---
+
+    public static native int nmsdf_contour_get_winding(long contour, long winding);
+
+    public static int msdf_contour_get_winding(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("int *") IntBuffer winding) {
+        return nmsdf_contour_get_winding(memAddress(contour), memAddress(winding));
+    }
+
+    // --- [ msdf_contour_reverse ] ---
+
+    public static native int nmsdf_contour_reverse(long contour);
+
+    public static int msdf_contour_reverse(@NativeType("msdf_contour_handle") ByteBuffer contour) {
+        return nmsdf_contour_reverse(memAddress(contour));
+    }
+
+    // --- [ msdf_contour_free ] ---
+
+    public static native void nmsdf_contour_free(long contour);
+
+    public static void msdf_contour_free(@NativeType("msdf_contour_handle") ByteBuffer contour) {
+        nmsdf_contour_free(memAddress(contour));
+    }
+
 }

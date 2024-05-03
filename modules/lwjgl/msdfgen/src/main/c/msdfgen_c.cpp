@@ -404,7 +404,7 @@ MSDF_API int msdf_segment_alloc(const int type, msdf_segment_t** segment) {
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_get_point_count(msdf_segment_t* segment, size_t* point_count) {
+MSDF_API int msdf_segment_get_point_count(const msdf_segment_t* segment, size_t* point_count) {
     if(segment == nullptr || point_count == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -425,7 +425,7 @@ MSDF_API int msdf_segment_get_point_count(msdf_segment_t* segment, size_t* point
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_get_point(msdf_segment_t* segment, const size_t index, msdf_vector2_t* point) {
+MSDF_API int msdf_segment_get_point(const msdf_segment_t* segment, const size_t index, msdf_vector2_t* point) {
     if(segment == nullptr || point == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -487,7 +487,7 @@ MSDF_API int msdf_segment_set_color(msdf_segment_t* segment, int color) {
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_get_color(msdf_segment_t* segment, int* color) {
+MSDF_API int msdf_segment_get_color(const msdf_segment_t* segment, int* color) {
     if(segment == nullptr || color == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -495,7 +495,7 @@ MSDF_API int msdf_segment_get_color(msdf_segment_t* segment, int* color) {
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_get_direction(msdf_segment_t* segment, double param, msdf_vector2_t* direction) {
+MSDF_API int msdf_segment_get_direction(const msdf_segment_t* segment, double param, msdf_vector2_t* direction) {
     if(segment == nullptr || direction == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -503,7 +503,7 @@ MSDF_API int msdf_segment_get_direction(msdf_segment_t* segment, double param, m
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_get_direction_change(msdf_segment_t* segment, double param, msdf_vector2_t* direction_change) {
+MSDF_API int msdf_segment_get_direction_change(const msdf_segment_t* segment, double param, msdf_vector2_t* direction_change) {
     if(segment == nullptr || direction_change == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -511,7 +511,7 @@ MSDF_API int msdf_segment_get_direction_change(msdf_segment_t* segment, double p
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_point(msdf_segment_t* segment, double param, msdf_vector2_t* point) {
+MSDF_API int msdf_segment_point(const msdf_segment_t* segment, double param, msdf_vector2_t* point) {
     if(segment == nullptr || point == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -519,7 +519,7 @@ MSDF_API int msdf_segment_point(msdf_segment_t* segment, double param, msdf_vect
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_segment_bound(msdf_segment_t* segment, msdf_bounds_t* bounds) {
+MSDF_API int msdf_segment_bound(const msdf_segment_t* segment, msdf_bounds_t* bounds) {
     if(segment == nullptr || bounds == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
