@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 
 val msdf_allocator_alloc_callback = Module.MSDFGEN.callback {
     void.p(
-        "msdf_allocator_alloc_callback",
+        "MSDFGenAllocatorAllocCallback",
         "",
         size_t("size", "")
     ) {
@@ -18,7 +18,7 @@ val msdf_allocator_alloc_callback = Module.MSDFGEN.callback {
 
 val msdf_allocator_realloc_callback = Module.MSDFGEN.callback {
     void.p(
-        "msdf_allocator_realloc_callback",
+        "MSDFGenAllocatorReallocCallback",
         "",
         void.p("memory", ""),
         size_t("size", "")
@@ -29,7 +29,7 @@ val msdf_allocator_realloc_callback = Module.MSDFGEN.callback {
 
 val msdf_allocator_free_callback = Module.MSDFGEN.callback {
     void.p(
-        "msdf_free_allocator_free_callback",
+        "MSDFGenAllocatorFreeCallback",
         "",
         void.p("memory", "")
     ) {

@@ -252,4 +252,58 @@ public class MSDFGen {
         nmsdf_contour_free(memAddress(contour));
     }
 
+    // --- [ msdf_edge_alloc ] ---
+
+    public static native int nmsdf_edge_alloc(long segment, long edge);
+
+    public static int msdf_edge_alloc(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment, @NativeType("msdf_edge_holder_handle *") PointerBuffer edge) {
+        return nmsdf_edge_alloc(segment.address(), memAddress(edge));
+    }
+
+    // --- [ msdf_edge_free ] ---
+
+    public static native void nmsdf_edge_free(long edge);
+
+    public static void msdf_edge_free(@NativeType("msdf_edge_holder_handle") ByteBuffer edge) {
+        nmsdf_edge_free(memAddress(edge));
+    }
+
+    // --- [ msdf_segment_alloc ] ---
+
+    public static native int nmsdf_segment_alloc(int type, long segment);
+
+    public static int msdf_segment_alloc(int type, @NativeType("struct msdf_segment **") PointerBuffer segment) {
+        return nmsdf_segment_alloc(type, memAddress(segment));
+    }
+
+    // --- [ msdf_segment_get_point_count ] ---
+
+    public static native int nmsdf_segment_get_point_count(long segment, long count);
+
+    public static int msdf_segment_get_point_count(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_get_point_count(segment.address(), memAddress(count));
+    }
+
+    // --- [ msdf_segment_get_point ] ---
+
+    public static native int nmsdf_segment_get_point(long segment, long index, long point);
+
+    public static int msdf_segment_get_point(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_get_point(segment.address(), index, point.address());
+    }
+
+    // --- [ msdf_segment_set_point ] ---
+
+    public static native int nmsdf_segment_set_point(long segment, long index, long point);
+
+    public static int msdf_segment_set_point(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        return nmsdf_segment_set_point(segment.address(), index, point.address());
+    }
+
 }

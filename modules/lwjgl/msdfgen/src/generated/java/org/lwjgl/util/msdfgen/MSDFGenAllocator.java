@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct msdf_allocator {
- *     msdf_allocator_alloc_callback alloc_callback;
- *     msdf_allocator_realloc_callback realloc_callback;
- *     msdf_free_allocator_free_callback free_callback;
+ *     void * (*{@link MSDFGenAllocatorAllocCallbackI alloc_callback}) (size_t size);
+ *     void * (*{@link MSDFGenAllocatorReallocCallbackI realloc_callback}) (void *memory, size_t size);
+ *     void * (*{@link MSDFGenAllocatorFreeCallbackI free_callback}) (void *memory);
  * }</code></pre>
  */
 @NativeType("struct msdf_allocator")
@@ -78,40 +78,28 @@ public class MSDFGenAllocator extends Struct<MSDFGenAllocator> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code alloc_callback} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
-    @NativeType("msdf_allocator_alloc_callback")
-    public ByteBuffer alloc_callback(int capacity) { return nalloc_callback(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code realloc_callback} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
-    @NativeType("msdf_allocator_realloc_callback")
-    public ByteBuffer realloc_callback(int capacity) { return nrealloc_callback(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code free_callback} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
-    @NativeType("msdf_free_allocator_free_callback")
-    public ByteBuffer free_callback(int capacity) { return nfree_callback(address(), capacity); }
+    /** @return the value of the {@code alloc_callback} field. */
+    @NativeType("void * (*) (size_t)")
+    public MSDFGenAllocatorAllocCallback alloc_callback() { return nalloc_callback(address()); }
+    /** @return the value of the {@code realloc_callback} field. */
+    @NativeType("void * (*) (void *, size_t)")
+    public MSDFGenAllocatorReallocCallback realloc_callback() { return nrealloc_callback(address()); }
+    /** @return the value of the {@code free_callback} field. */
+    @NativeType("void * (*) (void *)")
+    public MSDFGenAllocatorFreeCallback free_callback() { return nfree_callback(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code alloc_callback} field. */
-    public MSDFGenAllocator alloc_callback(@NativeType("msdf_allocator_alloc_callback") ByteBuffer value) { nalloc_callback(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code realloc_callback} field. */
-    public MSDFGenAllocator realloc_callback(@NativeType("msdf_allocator_realloc_callback") ByteBuffer value) { nrealloc_callback(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code free_callback} field. */
-    public MSDFGenAllocator free_callback(@NativeType("msdf_free_allocator_free_callback") ByteBuffer value) { nfree_callback(address(), value); return this; }
+    /** Sets the specified value to the {@code alloc_callback} field. */
+    public MSDFGenAllocator alloc_callback(@NativeType("void * (*) (size_t)") MSDFGenAllocatorAllocCallbackI value) { nalloc_callback(address(), value); return this; }
+    /** Sets the specified value to the {@code realloc_callback} field. */
+    public MSDFGenAllocator realloc_callback(@NativeType("void * (*) (void *, size_t)") MSDFGenAllocatorReallocCallbackI value) { nrealloc_callback(address(), value); return this; }
+    /** Sets the specified value to the {@code free_callback} field. */
+    public MSDFGenAllocator free_callback(@NativeType("void * (*) (void *)") MSDFGenAllocatorFreeCallbackI value) { nfree_callback(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public MSDFGenAllocator set(
-        ByteBuffer alloc_callback,
-        ByteBuffer realloc_callback,
-        ByteBuffer free_callback
+        MSDFGenAllocatorAllocCallbackI alloc_callback,
+        MSDFGenAllocatorReallocCallbackI realloc_callback,
+        MSDFGenAllocatorFreeCallbackI free_callback
     ) {
         alloc_callback(alloc_callback);
         realloc_callback(realloc_callback);
@@ -245,19 +233,19 @@ public class MSDFGenAllocator extends Struct<MSDFGenAllocator> implements Native
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #alloc_callback(int) alloc_callback}. */
-    public static ByteBuffer nalloc_callback(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + MSDFGenAllocator.ALLOC_CALLBACK), capacity); }
-    /** Unsafe version of {@link #realloc_callback(int) realloc_callback}. */
-    public static ByteBuffer nrealloc_callback(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + MSDFGenAllocator.REALLOC_CALLBACK), capacity); }
-    /** Unsafe version of {@link #free_callback(int) free_callback}. */
-    public static ByteBuffer nfree_callback(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + MSDFGenAllocator.FREE_CALLBACK), capacity); }
+    /** Unsafe version of {@link #alloc_callback}. */
+    public static MSDFGenAllocatorAllocCallback nalloc_callback(long struct) { return MSDFGenAllocatorAllocCallback.create(memGetAddress(struct + MSDFGenAllocator.ALLOC_CALLBACK)); }
+    /** Unsafe version of {@link #realloc_callback}. */
+    public static MSDFGenAllocatorReallocCallback nrealloc_callback(long struct) { return MSDFGenAllocatorReallocCallback.create(memGetAddress(struct + MSDFGenAllocator.REALLOC_CALLBACK)); }
+    /** Unsafe version of {@link #free_callback}. */
+    public static MSDFGenAllocatorFreeCallback nfree_callback(long struct) { return MSDFGenAllocatorFreeCallback.create(memGetAddress(struct + MSDFGenAllocator.FREE_CALLBACK)); }
 
-    /** Unsafe version of {@link #alloc_callback(ByteBuffer) alloc_callback}. */
-    public static void nalloc_callback(long struct, ByteBuffer value) { memPutAddress(struct + MSDFGenAllocator.ALLOC_CALLBACK, memAddress(value)); }
-    /** Unsafe version of {@link #realloc_callback(ByteBuffer) realloc_callback}. */
-    public static void nrealloc_callback(long struct, ByteBuffer value) { memPutAddress(struct + MSDFGenAllocator.REALLOC_CALLBACK, memAddress(value)); }
-    /** Unsafe version of {@link #free_callback(ByteBuffer) free_callback}. */
-    public static void nfree_callback(long struct, ByteBuffer value) { memPutAddress(struct + MSDFGenAllocator.FREE_CALLBACK, memAddress(value)); }
+    /** Unsafe version of {@link #alloc_callback(MSDFGenAllocatorAllocCallbackI) alloc_callback}. */
+    public static void nalloc_callback(long struct, MSDFGenAllocatorAllocCallbackI value) { memPutAddress(struct + MSDFGenAllocator.ALLOC_CALLBACK, value.address()); }
+    /** Unsafe version of {@link #realloc_callback(MSDFGenAllocatorReallocCallbackI) realloc_callback}. */
+    public static void nrealloc_callback(long struct, MSDFGenAllocatorReallocCallbackI value) { memPutAddress(struct + MSDFGenAllocator.REALLOC_CALLBACK, value.address()); }
+    /** Unsafe version of {@link #free_callback(MSDFGenAllocatorFreeCallbackI) free_callback}. */
+    public static void nfree_callback(long struct, MSDFGenAllocatorFreeCallbackI value) { memPutAddress(struct + MSDFGenAllocator.FREE_CALLBACK, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -308,34 +296,22 @@ public class MSDFGenAllocator extends Struct<MSDFGenAllocator> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code alloc_callback} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
-        @NativeType("msdf_allocator_alloc_callback")
-        public ByteBuffer alloc_callback(int capacity) { return MSDFGenAllocator.nalloc_callback(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code realloc_callback} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
-        @NativeType("msdf_allocator_realloc_callback")
-        public ByteBuffer realloc_callback(int capacity) { return MSDFGenAllocator.nrealloc_callback(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code free_callback} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
-        @NativeType("msdf_free_allocator_free_callback")
-        public ByteBuffer free_callback(int capacity) { return MSDFGenAllocator.nfree_callback(address(), capacity); }
+        /** @return the value of the {@code alloc_callback} field. */
+        @NativeType("void * (*) (size_t)")
+        public MSDFGenAllocatorAllocCallback alloc_callback() { return MSDFGenAllocator.nalloc_callback(address()); }
+        /** @return the value of the {@code realloc_callback} field. */
+        @NativeType("void * (*) (void *, size_t)")
+        public MSDFGenAllocatorReallocCallback realloc_callback() { return MSDFGenAllocator.nrealloc_callback(address()); }
+        /** @return the value of the {@code free_callback} field. */
+        @NativeType("void * (*) (void *)")
+        public MSDFGenAllocatorFreeCallback free_callback() { return MSDFGenAllocator.nfree_callback(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code alloc_callback} field. */
-        public MSDFGenAllocator.Buffer alloc_callback(@NativeType("msdf_allocator_alloc_callback") ByteBuffer value) { MSDFGenAllocator.nalloc_callback(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code realloc_callback} field. */
-        public MSDFGenAllocator.Buffer realloc_callback(@NativeType("msdf_allocator_realloc_callback") ByteBuffer value) { MSDFGenAllocator.nrealloc_callback(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code free_callback} field. */
-        public MSDFGenAllocator.Buffer free_callback(@NativeType("msdf_free_allocator_free_callback") ByteBuffer value) { MSDFGenAllocator.nfree_callback(address(), value); return this; }
+        /** Sets the specified value to the {@code alloc_callback} field. */
+        public MSDFGenAllocator.Buffer alloc_callback(@NativeType("void * (*) (size_t)") MSDFGenAllocatorAllocCallbackI value) { MSDFGenAllocator.nalloc_callback(address(), value); return this; }
+        /** Sets the specified value to the {@code realloc_callback} field. */
+        public MSDFGenAllocator.Buffer realloc_callback(@NativeType("void * (*) (void *, size_t)") MSDFGenAllocatorReallocCallbackI value) { MSDFGenAllocator.nrealloc_callback(address(), value); return this; }
+        /** Sets the specified value to the {@code free_callback} field. */
+        public MSDFGenAllocator.Buffer free_callback(@NativeType("void * (*) (void *)") MSDFGenAllocatorFreeCallbackI value) { MSDFGenAllocator.nfree_callback(address(), value); return this; }
 
     }
 

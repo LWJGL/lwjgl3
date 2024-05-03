@@ -212,7 +212,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "segment_alloc",
         "",
         int("type", ""),
-        Unsafe..msdf_segment.p("segment", "")
+        Unsafe..msdf_segment.p.p("segment", "")
     )
     int(
         "segment_get_point_count",

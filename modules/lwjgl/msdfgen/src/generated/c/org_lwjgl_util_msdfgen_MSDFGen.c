@@ -188,4 +188,44 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1free(
     msdf_contour_free(contour);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1edge_1alloc(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong edgeAddress) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    msdf_edge_holder_handle *edge = (msdf_edge_holder_handle *)(uintptr_t)edgeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_edge_alloc(segment, edge);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1edge_1free(JNIEnv *__env, jclass clazz, jlong edgeAddress) {
+    msdf_edge_holder_handle edge = (msdf_edge_holder_handle)(uintptr_t)edgeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    msdf_edge_free(edge);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1alloc(JNIEnv *__env, jclass clazz, jint type, jlong segmentAddress) {
+    struct msdf_segment **segment = (struct msdf_segment **)(uintptr_t)segmentAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_alloc(type, segment);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1point_1count(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong countAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    size_t *count = (size_t *)(uintptr_t)countAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_point_count(segment, count);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1point(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong index, jlong pointAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 *point = (struct msdf_vector2 *)(uintptr_t)pointAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_point(segment, (size_t)index, point);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1set_1point(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong index, jlong pointAddress) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 const *point = (struct msdf_vector2 const *)(uintptr_t)pointAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_set_point(segment, (size_t)index, point);
+}
+
 EXTERN_C_EXIT
