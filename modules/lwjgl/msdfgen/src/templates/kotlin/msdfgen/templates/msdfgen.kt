@@ -234,4 +234,60 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         size_t("index", ""),
         Unsafe..msdf_vector2.const.p("point", "")
     )
+    int(
+        "segment_get_color",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..int.p("color", "")
+    )
+    int(
+        "segment_set_color",
+        "",
+        Unsafe..msdf_segment.p("segment", ""),
+        int("color", "")
+    )
+    int(
+        "segment_get_direction",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        double("param", ""),
+        Unsafe..msdf_vector2.p("direction", "")
+    )
+    int(
+        "segment_get_direction_change",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        double("param", ""),
+        Unsafe..msdf_vector2.p("direction_change", "")
+    )
+    int(
+        "segment_point",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        double("param", ""),
+        Unsafe..msdf_vector2.p("point", "")
+    )
+    int(
+        "segment_bound",
+        "",
+        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_bounds.p("bounds", "")
+    )
+    int(
+        "segment_move_start_point",
+        "",
+        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_vector2.const.p("point", "")
+    )
+    int(
+        "segment_move_end_point",
+        "",
+        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_vector2.const.p("point", "")
+    )
+    void(
+        "segment_free",
+        "",
+        Unsafe..msdf_segment.p("segment", "")
+    )
 }

@@ -228,4 +228,65 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1set_1
     return (jint)msdf_segment_set_point(segment, (size_t)index, point);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1color(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong colorAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    int *color = (int *)(uintptr_t)colorAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_color(segment, color);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1set_1color(JNIEnv *__env, jclass clazz, jlong segmentAddress, jint color) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_set_color(segment, color);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1direction(JNIEnv *__env, jclass clazz, jlong segmentAddress, jdouble param, jlong directionAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 *direction = (struct msdf_vector2 *)(uintptr_t)directionAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_direction(segment, param, direction);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1direction_1change(JNIEnv *__env, jclass clazz, jlong segmentAddress, jdouble param, jlong direction_changeAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 *direction_change = (struct msdf_vector2 *)(uintptr_t)direction_changeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_direction_change(segment, param, direction_change);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1point(JNIEnv *__env, jclass clazz, jlong segmentAddress, jdouble param, jlong pointAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 *point = (struct msdf_vector2 *)(uintptr_t)pointAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_point(segment, param, point);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1bound(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong boundsAddress) {
+    struct msdf_segment const *segment = (struct msdf_segment const *)(uintptr_t)segmentAddress;
+    struct msdf_bounds *bounds = (struct msdf_bounds *)(uintptr_t)boundsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_bound(segment, bounds);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1move_1start_1point(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong pointAddress) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 const *point = (struct msdf_vector2 const *)(uintptr_t)pointAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_move_start_point(segment, point);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1move_1end_1point(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong pointAddress) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    struct msdf_vector2 const *point = (struct msdf_vector2 const *)(uintptr_t)pointAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_move_end_point(segment, point);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1free(JNIEnv *__env, jclass clazz, jlong segmentAddress) {
+    struct msdf_segment *segment = (struct msdf_segment *)(uintptr_t)segmentAddress;
+    UNUSED_PARAMS(__env, clazz)
+    msdf_segment_free(segment);
+}
+
 EXTERN_C_EXIT

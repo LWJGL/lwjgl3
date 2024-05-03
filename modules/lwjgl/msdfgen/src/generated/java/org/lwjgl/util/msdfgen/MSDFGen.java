@@ -306,4 +306,91 @@ public class MSDFGen {
         return nmsdf_segment_set_point(segment.address(), index, point.address());
     }
 
+    // --- [ msdf_segment_get_color ] ---
+
+    public static native int nmsdf_segment_get_color(long segment, long color);
+
+    public static int msdf_segment_get_color(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, @NativeType("int *") IntBuffer color) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_get_color(segment.address(), memAddress(color));
+    }
+
+    // --- [ msdf_segment_set_color ] ---
+
+    public static native int nmsdf_segment_set_color(long segment, int color);
+
+    public static int msdf_segment_set_color(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment, int color) {
+        return nmsdf_segment_set_color(segment.address(), color);
+    }
+
+    // --- [ msdf_segment_get_direction ] ---
+
+    public static native int nmsdf_segment_get_direction(long segment, double param, long direction);
+
+    public static int msdf_segment_get_direction(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_get_direction(segment.address(), param, direction.address());
+    }
+
+    // --- [ msdf_segment_get_direction_change ] ---
+
+    public static native int nmsdf_segment_get_direction_change(long segment, double param, long direction_change);
+
+    public static int msdf_segment_get_direction_change(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction_change) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_get_direction_change(segment.address(), param, direction_change.address());
+    }
+
+    // --- [ msdf_segment_point ] ---
+
+    public static native int nmsdf_segment_point(long segment, double param, long point);
+
+    public static int msdf_segment_point(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_point(segment.address(), param, point.address());
+    }
+
+    // --- [ msdf_segment_bound ] ---
+
+    public static native int nmsdf_segment_bound(long segment, long bounds);
+
+    public static int msdf_segment_bound(@NativeType("struct msdf_segment const *") MSDFGenSegment.Buffer segment, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            MSDFGenSegment.validate(segment.address());
+        }
+        return nmsdf_segment_bound(segment.address(), bounds.address());
+    }
+
+    // --- [ msdf_segment_move_start_point ] ---
+
+    public static native int nmsdf_segment_move_start_point(long segment, long point);
+
+    public static int msdf_segment_move_start_point(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        return nmsdf_segment_move_start_point(segment.address(), point.address());
+    }
+
+    // --- [ msdf_segment_move_end_point ] ---
+
+    public static native int nmsdf_segment_move_end_point(long segment, long point);
+
+    public static int msdf_segment_move_end_point(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        return nmsdf_segment_move_end_point(segment.address(), point.address());
+    }
+
+    // --- [ msdf_segment_free ] ---
+
+    public static native void nmsdf_segment_free(long segment);
+
+    public static void msdf_segment_free(@NativeType("struct msdf_segment *") MSDFGenSegment.Buffer segment) {
+        nmsdf_segment_free(segment.address());
+    }
+
 }
