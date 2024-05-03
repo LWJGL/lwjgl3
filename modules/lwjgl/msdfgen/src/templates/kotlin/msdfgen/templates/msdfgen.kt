@@ -32,7 +32,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         int("type", ""),
         int("width", ""),
         int("height", ""),
-        Unsafe..msdf_bitmap.p.p("bitmap", "")
+        Unsafe..msdf_bitmap.p("bitmap", "")
     )
     int(
         "bitmap_get_channel_count",
@@ -47,7 +47,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..void.p.p("pixels", "")
     )
     int(
-        "bitmap_get_size",
+        "bitmap_get_byte_size",
         "",
         Unsafe..msdf_bitmap.const.p("bitmap", ""),
         Unsafe..size_t.p("size", "")
@@ -68,7 +68,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "shape_get_bounds",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_bounds.p("bounds", "")
     )
     int(
@@ -80,26 +80,26 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "shape_get_contour_count",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..size_t.p("size", "")
     )
     int(
         "shape_get_contour",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         size_t("index", ""),
-        Unsafe..msdf_contour_handle.p("contour", "")
+        Unsafe..msdf_contour_const_handle.p("contour", "")
     )
     int(
         "shape_get_edge_count",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..size_t.p("count", "")
     )
     int(
         "shape_has_inverse_y_axis",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..int.p("inverse_y_axis", "")
     )
     int(
@@ -116,13 +116,13 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "shape_bound",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_bounds.p("bounds", "")
     )
     int(
         "shape_bound_miters",
         "",
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_bounds.p("bounds", ""),
         double("border", ""),
         double("miter_limit", ""),
@@ -145,31 +145,31 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "contour_add_edge",
         "",
         Unsafe..msdf_contour_handle("contour", ""),
-        Unsafe..msdf_edge_holder_handle.p("edge", "")
+        Unsafe..msdf_segment_handle.p("segment", "")
     )
     int(
         "contour_get_edge_count",
         "",
-        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_contour_const_handle("contour", ""),
         Unsafe..size_t.p("count", "")
     )
     int(
         "contour_get_edge",
         "",
-        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_contour_const_handle("contour", ""),
         size_t("index", ""),
-        Unsafe..msdf_edge_holder_handle.p("edge", "")
+        Unsafe..msdf_segment_const_handle.p("segment", "")
     )
     int(
         "contour_bound",
         "",
-        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_contour_const_handle("contour", ""),
         Unsafe..msdf_bounds.p("bounds", "")
     )
     int(
         "contour_bound_miters",
         "",
-        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_contour_const_handle("contour", ""),
         Unsafe..msdf_bounds.p("bounds", ""),
         double("border", ""),
         double("miter_limit", ""),
@@ -178,7 +178,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "contour_get_winding",
         "",
-        Unsafe..msdf_contour_handle("contour", ""),
+        Unsafe..msdf_contour_const_handle("contour", ""),
         Unsafe..int.p("winding", "")
     )
     int(
@@ -192,103 +192,89 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_contour_handle("contour", "")
     )
 
-    // msdf_edge
-
-    int(
-        "edge_alloc",
-        "",
-        Unsafe..msdf_segment.p("segment", ""),
-        Unsafe..msdf_edge_holder_handle.p("edge", "")
-    )
-    void(
-        "edge_free",
-        "",
-        Unsafe..msdf_edge_holder_handle("edge", "")
-    )
-
     // msdf_segment
 
     int(
         "segment_alloc",
         "",
         int("type", ""),
-        Unsafe..msdf_segment.p.p("segment", "")
+        Unsafe..msdf_segment_handle.p("segment", "")
     )
     int(
         "segment_get_point_count",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         Unsafe..size_t.p("count", "")
     )
     int(
         "segment_get_point",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         size_t("index", ""),
         Unsafe..msdf_vector2.p("point", "")
     )
     int(
         "segment_set_point",
         "",
-        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_segment_handle("segment", ""),
         size_t("index", ""),
         Unsafe..msdf_vector2.const.p("point", "")
     )
     int(
         "segment_get_color",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         Unsafe..int.p("color", "")
     )
     int(
         "segment_set_color",
         "",
-        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_segment_handle("segment", ""),
         int("color", "")
     )
     int(
         "segment_get_direction",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         double("param", ""),
         Unsafe..msdf_vector2.p("direction", "")
     )
     int(
         "segment_get_direction_change",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         double("param", ""),
         Unsafe..msdf_vector2.p("direction_change", "")
     )
     int(
         "segment_point",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         double("param", ""),
         Unsafe..msdf_vector2.p("point", "")
     )
     int(
         "segment_bound",
         "",
-        Unsafe..msdf_segment.const.p("segment", ""),
+        Unsafe..msdf_segment_const_handle("segment", ""),
         Unsafe..msdf_bounds.p("bounds", "")
     )
     int(
         "segment_move_start_point",
         "",
-        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_segment_handle("segment", ""),
         Unsafe..msdf_vector2.const.p("point", "")
     )
     int(
         "segment_move_end_point",
         "",
-        Unsafe..msdf_segment.p("segment", ""),
+        Unsafe..msdf_segment_handle("segment", ""),
         Unsafe..msdf_vector2.const.p("point", "")
     )
     void(
         "segment_free",
         "",
-        Unsafe..msdf_segment.p("segment", "")
+        Unsafe..msdf_segment_handle("segment", "")
     )
 
     // Main API functions
@@ -297,35 +283,35 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "generate_sdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", "")
     )
     int(
         "generate_psdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", "")
     )
     int(
         "generate_msdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", "")
     )
     int(
         "generate_mtsdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", "")
     )
     int(
         "generate_sdf_with_config",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
         Unsafe..msdf_config.const.p("config", "")
     )
@@ -333,7 +319,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "generate_psdf_with_config",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
         Unsafe..msdf_config.const.p("config", "")
     )
@@ -341,7 +327,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "generate_msdf_with_config",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
         Unsafe..msdf_multichannel_config.const.p("config", "")
     )
@@ -349,7 +335,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "generate_mtsdf_with_config",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
         Unsafe..msdf_multichannel_config.const.p("config", "")
     )

@@ -85,13 +85,6 @@ val msdf_bitmap = struct(Module.MSDFGEN, "MSDFGenBitmap", nativeName = "struct m
     void.p("handle", "")
 }
 
-val msdf_segment = struct(Module.MSDFGEN, "MSDFGenSegment", nativeName = "struct msdf_segment") {
-    documentation = ""
-
-    int("type", "")
-    void.p("handle", "")
-}
-
 val msdf_config = struct(Module.MSDFGEN, "MSDFGenConfig", nativeName = "struct msdf_config") {
     documentation = ""
 
@@ -109,5 +102,10 @@ val msdf_multichannel_config = struct(Module.MSDFGEN, "MSDFGenMultichannelConfig
 }
 
 val msdf_shape_handle = typedef(void.p, "msdf_shape_handle")
+val msdf_shape_const_handle = typedef(void.const.p, "msdf_shape_const_handle")
+
 val msdf_contour_handle = typedef(void.p, "msdf_contour_handle")
-val msdf_edge_holder_handle = typedef(void.p, "msdf_edge_holder_handle")
+val msdf_contour_const_handle = typedef(void.const.p, "msdf_contour_const_handle")
+
+val msdf_segment_handle = typedef(void.p, "msdf_segment_handle")
+val msdf_segment_const_handle = typedef(void.const.p, "msdf_segment_const_handle")
