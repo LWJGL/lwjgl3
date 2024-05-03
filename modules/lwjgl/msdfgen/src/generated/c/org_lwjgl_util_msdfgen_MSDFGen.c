@@ -289,4 +289,72 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1free(
     msdf_segment_free(segment);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1sdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_sdf(output, shape, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1psdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_psdf(output, shape, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1msdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_msdf(output, shape, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1mtsdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_mtsdf(output, shape, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1sdf_1with_1config(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress, jlong configAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    struct msdf_config const *config = (struct msdf_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_sdf_with_config(output, shape, transform, config);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1psdf_1with_1config(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress, jlong configAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    struct msdf_config const *config = (struct msdf_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_psdf_with_config(output, shape, transform, config);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1msdf_1with_1config(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress, jlong configAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    struct msdf_multichannel_config const *config = (struct msdf_multichannel_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_msdf_with_config(output, shape, transform, config);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1mtsdf_1with_1config(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress, jlong configAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    struct msdf_multichannel_config const *config = (struct msdf_multichannel_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_generate_mtsdf_with_config(output, shape, transform, config);
+}
+
 EXTERN_C_EXIT

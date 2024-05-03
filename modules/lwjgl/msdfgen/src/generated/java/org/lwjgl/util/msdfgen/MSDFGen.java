@@ -393,4 +393,68 @@ public class MSDFGen {
         nmsdf_segment_free(segment.address());
     }
 
+    // --- [ msdf_generate_sdf ] ---
+
+    public static native int nmsdf_generate_sdf(long output, long shape, long transform);
+
+    public static int msdf_generate_sdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        return nmsdf_generate_sdf(output.address(), memAddress(shape), transform.address());
+    }
+
+    // --- [ msdf_generate_psdf ] ---
+
+    public static native int nmsdf_generate_psdf(long output, long shape, long transform);
+
+    public static int msdf_generate_psdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        return nmsdf_generate_psdf(output.address(), memAddress(shape), transform.address());
+    }
+
+    // --- [ msdf_generate_msdf ] ---
+
+    public static native int nmsdf_generate_msdf(long output, long shape, long transform);
+
+    public static int msdf_generate_msdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        return nmsdf_generate_msdf(output.address(), memAddress(shape), transform.address());
+    }
+
+    // --- [ msdf_generate_mtsdf ] ---
+
+    public static native int nmsdf_generate_mtsdf(long output, long shape, long transform);
+
+    public static int msdf_generate_mtsdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        return nmsdf_generate_mtsdf(output.address(), memAddress(shape), transform.address());
+    }
+
+    // --- [ msdf_generate_sdf_with_config ] ---
+
+    public static native int nmsdf_generate_sdf_with_config(long output, long shape, long transform, long config);
+
+    public static int msdf_generate_sdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        return nmsdf_generate_sdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_psdf_with_config ] ---
+
+    public static native int nmsdf_generate_psdf_with_config(long output, long shape, long transform, long config);
+
+    public static int msdf_generate_psdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        return nmsdf_generate_psdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_msdf_with_config ] ---
+
+    public static native int nmsdf_generate_msdf_with_config(long output, long shape, long transform, long config);
+
+    public static int msdf_generate_msdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        return nmsdf_generate_msdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_mtsdf_with_config ] ---
+
+    public static native int nmsdf_generate_mtsdf_with_config(long output, long shape, long transform, long config);
+
+    public static int msdf_generate_mtsdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        return nmsdf_generate_mtsdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    }
+
 }

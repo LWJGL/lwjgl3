@@ -290,4 +290,67 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "",
         Unsafe..msdf_segment.p("segment", "")
     )
+
+    // Main API functions
+
+    int(
+        "generate_sdf",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", "")
+    )
+    int(
+        "generate_psdf",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", "")
+    )
+    int(
+        "generate_msdf",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", "")
+    )
+    int(
+        "generate_mtsdf",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", "")
+    )
+    int(
+        "generate_sdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_config.const.p("config", "")
+    )
+    int(
+        "generate_psdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_config.const.p("config", "")
+    )
+    int(
+        "generate_msdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_multichannel_config.const.p("config", "")
+    )
+    int(
+        "generate_mtsdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p("output", ""),
+        Unsafe..msdf_shape_handle("shape", ""),
+        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_multichannel_config.const.p("config", "")
+    )
 }
