@@ -194,6 +194,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1alloc
     return (jint)msdf_segment_alloc(type, segment);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1type(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong typeAddress) {
+    msdf_segment_const_handle segment = (msdf_segment_const_handle)(uintptr_t)segmentAddress;
+    int *type = (int *)(uintptr_t)typeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_segment_get_type(segment, type);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1get_1point_1count(JNIEnv *__env, jclass clazz, jlong segmentAddress, jlong countAddress) {
     msdf_segment_const_handle segment = (msdf_segment_const_handle)(uintptr_t)segmentAddress;
     size_t *count = (size_t *)(uintptr_t)countAddress;

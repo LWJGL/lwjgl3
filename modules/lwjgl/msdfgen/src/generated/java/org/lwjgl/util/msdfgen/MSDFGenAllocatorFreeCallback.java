@@ -12,6 +12,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
+ * Frees the given block of memory.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>

@@ -12,6 +12,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
+ * A pointer to a function used as allocation callback by the internal allocator.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>

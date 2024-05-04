@@ -20,8 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct msdf_range {
- *     double lower;
- *     double upper;
+ *     double {@link #lower};
+ *     double {@link #upper};
  * }</code></pre>
  */
 @NativeType("struct msdf_range")
@@ -73,14 +73,14 @@ public class MSDFGenRange extends Struct<MSDFGenRange> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code lower} field. */
+    /** The lower bound of this range. */
     public double lower() { return nlower(address()); }
-    /** @return the value of the {@code upper} field. */
+    /** The upper bound of this range. */
     public double upper() { return nupper(address()); }
 
-    /** Sets the specified value to the {@code lower} field. */
+    /** Sets the specified value to the {@link #lower} field. */
     public MSDFGenRange lower(double value) { nlower(address(), value); return this; }
-    /** Sets the specified value to the {@code upper} field. */
+    /** Sets the specified value to the {@link #upper} field. */
     public MSDFGenRange upper(double value) { nupper(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -267,14 +267,14 @@ public class MSDFGenRange extends Struct<MSDFGenRange> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code lower} field. */
+        /** @return the value of the {@link MSDFGenRange#lower} field. */
         public double lower() { return MSDFGenRange.nlower(address()); }
-        /** @return the value of the {@code upper} field. */
+        /** @return the value of the {@link MSDFGenRange#upper} field. */
         public double upper() { return MSDFGenRange.nupper(address()); }
 
-        /** Sets the specified value to the {@code lower} field. */
+        /** Sets the specified value to the {@link MSDFGenRange#lower} field. */
         public MSDFGenRange.Buffer lower(double value) { MSDFGenRange.nlower(address(), value); return this; }
-        /** Sets the specified value to the {@code upper} field. */
+        /** Sets the specified value to the {@link MSDFGenRange#upper} field. */
         public MSDFGenRange.Buffer upper(double value) { MSDFGenRange.nupper(address(), value); return this; }
 
     }

@@ -13,6 +13,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
+ * A pointer to a function used as allocation callback by the internal allocator.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>
@@ -41,6 +43,7 @@ public interface MSDFGenAllocatorAllocCallbackI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** @param size The size of the block of memory to allocate in bytes. */
     @NativeType("void *") long invoke(@NativeType("size_t") long size);
 
 }

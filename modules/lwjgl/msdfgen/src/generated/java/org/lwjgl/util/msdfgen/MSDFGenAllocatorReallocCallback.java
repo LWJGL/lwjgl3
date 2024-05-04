@@ -12,6 +12,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
+ * Reallocates a given block of memory to fit at least the given number of bytes.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>

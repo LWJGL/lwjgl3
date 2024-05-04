@@ -13,6 +13,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
+ * Reallocates a given block of memory to fit at least the given number of bytes.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>
@@ -43,6 +45,10 @@ public interface MSDFGenAllocatorReallocCallbackI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /**
+     * @param memory The address of the block of memory to reallocate.
+     * @param size   The new size of the block of memory after reallocation in bytes.
+     */
     @NativeType("void *") long invoke(@NativeType("void *") long memory, @NativeType("size_t") long size);
 
 }

@@ -13,6 +13,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
+ * Frees the given block of memory.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>
@@ -41,6 +43,7 @@ public interface MSDFGenAllocatorFreeCallbackI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** @param memory The address of the block of memory to free. */
     @NativeType("void *") long invoke(@NativeType("void *") long memory);
 
 }
