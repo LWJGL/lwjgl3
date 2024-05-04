@@ -403,7 +403,7 @@ MSDF_API int msdf_segment_get_type(msdf_segment_const_handle segment, int* type)
 /**
  * Retrieves the point count of the given segment.
  * @param segment A pointer to the segment of which to retrieve the number of points.
- * @param point_count A pointer to a variable which is populated with
+ * @param point_count A pointer to a variable which is populated with the number of points of the given segment.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
 MSDF_API int msdf_segment_get_point_count(msdf_segment_const_handle segment, size_t* point_count);

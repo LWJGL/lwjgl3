@@ -167,19 +167,22 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "contour_alloc",
         "Allocates a new contour object using the internal allocator.",
-        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly allocated contour object.")
+        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly allocated contour object."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_add_edge",
         "Adds a new edge to the given contour and returns its associated segment handle.",
         Unsafe..msdf_contour_handle("contour", "A pointer to the contour to add a new edge (segment) to."),
-        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly added edge segment.")
+        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly added edge segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_get_edge_count",
         "Retrieves the edge count of the given contour.",
         Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour to retrieve the edge count from."),
-        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the edge count of the given contour.")
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the edge count of the given contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_get_edge",
@@ -189,13 +192,15 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_segment_const_handle.p(
             "segment",
             "A pointer to an address which is populated with the address of the edge segment at the given index if present."
-        )
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_bound",
         "Adjusts the given bounding box to fit at least the given contour.",
         Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour which should at least fit into the given bounding box."),
-        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour into.")
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour into."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_bound_miters",
@@ -204,18 +209,21 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour including the specified border."),
         double("border", "The size of the border."),
         double("miter_limit", "The miter limit value."),
-        int("polarity", "The miter polarity.")
+        int("polarity", "The miter polarity."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_get_winding",
         "Retrieves the winding direction of the given contour.",
         Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour of which to retrieve the winding direction."),
-        Unsafe..int.p("winding", "A pointer to a variables which is populated with the winding direction of the given contour.")
+        Unsafe..int.p("winding", "A pointer to a variables which is populated with the winding direction of the given contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "contour_reverse",
         "Reverses the order of edges in the given contour.",
-        Unsafe..msdf_contour_handle("contour", "A pointer to the contour which to reverse the edge order for.")
+        Unsafe..msdf_contour_handle("contour", "A pointer to the contour which to reverse the edge order for."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     void(
         "contour_free",
@@ -227,85 +235,110 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
 
     int(
         "segment_alloc",
-        "",
-        int("type", ""),
-        Unsafe..msdf_segment_handle.p("segment", "")
+        "Allocates a new segment of the given type and populates the given address with the address of the newly allocated segment.",
+        int("type", "The type of segment to allocate. Can be one of MSDF_SEGMENT_TYPE_LINEAR, MSDF_SEGMENT_TYPE_QUADRATIC or MSDF_SEGMENT_TYPE_CUBIC."),
+        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly allocated segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_type",
+        "Retrieves the type of the given segment.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the type."),
+        Unsafe..int.p("type", "A pointer to a variable which is populated with the type of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_get_point_count",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        Unsafe..size_t.p("count", "")
+        "Retrieves the point count of the given segment.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the number of points."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the number of points of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_get_point",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        size_t("index", ""),
-        Unsafe..msdf_vector2.p("point", "")
+        "Retrieves a point at the given index from the given segment.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment from which to retrieve a point."),
+        size_t("index", "The index of the point to retrieve."),
+        Unsafe..msdf_vector2.p("point", "A pointer to a point which is populated with the coordinates of the point at the given index if present."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_set_point",
-        "",
-        Unsafe..msdf_segment_handle("segment", ""),
-        size_t("index", ""),
-        Unsafe..msdf_vector2.const.p("point", "")
+        "Sets the coordinates of a point at the given index in the given segment.",
+        Unsafe..msdf_segment_handle("segment", "A pointer to the segment of which to set the point."),
+        size_t("index", "The index of the point to set."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to a point which is copied to the given index within the segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_get_color",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        Unsafe..int.p("color", "")
+        "Retrieves the color of the given segment.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the color."),
+        Unsafe..int.p(
+            "color",
+            "A pointer to a variable which is populated with the color of the given segment. Will be one of the constants prefixed with MSDF_COLOR_."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_set_color",
-        "",
-        Unsafe..msdf_segment_handle("segment", ""),
-        int("color", "")
+        "Sets the color of the given segment.",
+        Unsafe..msdf_segment_handle("segment", "A pointer to the segment of which to set the color."),
+        int("color", "The color to set. Can be any MSDF_COLOR_ value."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_get_direction",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        double("param", ""),
-        Unsafe..msdf_vector2.p("direction", "")
+        "Retrieves the direction of the given segment at the given point.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the direction."),
+        double("param", "The point at which to retrieve the segment direction."),
+        Unsafe..msdf_vector2.p("direction", "A pointer to a variable which is populated with the direction of the given segment at the given point."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_get_direction_change",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        double("param", ""),
-        Unsafe..msdf_vector2.p("direction_change", "")
+        "Retrieves the direction change of the given segment at the given point.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the direction change."),
+        double("param", "The point at which to retrieve the segment direction change."),
+        Unsafe..msdf_vector2.p(
+            "direction_change",
+            "A pointer to a variable which is populated with the direction change of the given segment at the given point."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_point",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        double("param", ""),
-        Unsafe..msdf_vector2.p("point", "")
+        "Retrieves the point on the given edge segment specified by the given parameter.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the edge point."),
+        double("param", "The point at which to sample."),
+        Unsafe..msdf_vector2.p("point", "A pointer to a variable which is populated with the edge point at the given location from the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_bound",
-        "",
-        Unsafe..msdf_segment_const_handle("segment", ""),
-        Unsafe..msdf_bounds.p("bounds", "")
+        "Adjusts the given bounding box to fit at least the given segment.",
+        Unsafe..msdf_segment_const_handle("segment", "A pointer to the segment which should at least fit in the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box which should at least fit the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_move_start_point",
-        "",
-        Unsafe..msdf_segment_handle("segment", ""),
-        Unsafe..msdf_vector2.const.p("point", "")
+        "Moves the start point of the given segment.",
+        Unsafe..msdf_segment_handle("segment", "A pointer to the segment of which to adjust the start point."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to the new start point of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "segment_move_end_point",
-        "",
-        Unsafe..msdf_segment_handle("segment", ""),
-        Unsafe..msdf_vector2.const.p("point", "")
+        "Moves the end point of the given segment.",
+        Unsafe..msdf_segment_handle("segment", "A pointer to the segment of which to adjust the end point."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to the new end point of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     void(
         "segment_free",
-        "",
-        Unsafe..msdf_segment_handle("segment", "")
+        "Calls the destructor of the given segment and frees its memory using the internal allocator.",
+        Unsafe..msdf_segment_handle("segment", "A pointer to the segment to free.")
     )
 
     // Main API functions
@@ -315,28 +348,32 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "",
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", "")
+        Unsafe..msdf_transform.const.p("transform", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_psdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", "")
+        Unsafe..msdf_transform.const.p("transform", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_msdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", "")
+        Unsafe..msdf_transform.const.p("transform", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_mtsdf",
         "",
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", "")
+        Unsafe..msdf_transform.const.p("transform", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_sdf_with_config",
@@ -344,7 +381,8 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_config.const.p("config", "")
+        Unsafe..msdf_config.const.p("config", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_psdf_with_config",
@@ -352,7 +390,8 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_config.const.p("config", "")
+        Unsafe..msdf_config.const.p("config", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_msdf_with_config",
@@ -360,7 +399,8 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_multichannel_config.const.p("config", "")
+        Unsafe..msdf_multichannel_config.const.p("config", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_mtsdf_with_config",
@@ -368,6 +408,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_bitmap.p("output", ""),
         Unsafe..msdf_shape_const_handle("shape", ""),
         Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_multichannel_config.const.p("config", "")
+        Unsafe..msdf_multichannel_config.const.p("config", ""),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
 }
