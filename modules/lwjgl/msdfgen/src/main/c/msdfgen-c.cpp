@@ -27,9 +27,9 @@
  */
 
 namespace {
-    static_assert(sizeof(msdfgen::Point2) == sizeof(msdfgen::Vector2));
-    static_assert(sizeof(msdfgen::Vector2) == sizeof(msdf_vector2_t));
-    static_assert(sizeof(msdfgen::Range) == sizeof(msdfgen::Point2));
+    static_assert(sizeof(msdfgen::Point2) == sizeof(msdfgen::Vector2), "Structure size does not match");
+    static_assert(sizeof(msdfgen::Vector2) == sizeof(msdf_vector2_t), "Structure size does not match");
+    static_assert(sizeof(msdfgen::Range) == sizeof(msdfgen::Point2), "Structure size does not match");
 
     using SDFBitmap = msdfgen::Bitmap<float>;
     using SDFBitmapRef = msdfgen::BitmapRef<float>;
