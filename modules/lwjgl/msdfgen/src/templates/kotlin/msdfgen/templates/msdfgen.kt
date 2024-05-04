@@ -16,46 +16,54 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
 
     void(
         "allocator_set",
-        "",
-        Unsafe..msdf_allocator.const.p("allocator", "")
+        "Sets the allocation callbacks to use for allocating API objects.",
+        Unsafe..msdf_allocator.const.p("allocator", "The address of an msdf_allocator_t structure to copy the callback pointers from.")
     )
     Unsafe..msdf_allocator.const.p(
         "allocator_get",
-        ""
+        "Retrieves the address of the allocator used by the C API to allocate underlying objects.",
+        "The address of the allocator used by the C API to allocate underlying objects."
     )
 
     // msdf_bitmap
 
     int(
         "bitmap_alloc",
-        "",
-        int("type", ""),
-        int("width", ""),
-        int("height", ""),
-        Unsafe..msdf_bitmap.p("bitmap", "")
+        "Allocates a new MSDF bitmap object to render a shape into using the internal allocator.",
+        int(
+            "type",
+            "The type of bitmap to allocate. Can be one of MSDF_BITMAP_TYPE_SDF, MSDF_BITMAP_TYPE_PSDF, MSDF_BITMAP_TYPE_MSDF or MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        int("width", "The width of the bitmap in pixels."),
+        int("height", "The height of the bitmap in pixels."),
+        Unsafe..msdf_bitmap.p("bitmap", "A pointer to an msdf_bitmap_t structure to allocate a new bitmap into."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "bitmap_get_channel_count",
-        "",
-        Unsafe..msdf_bitmap.const.p("bitmap", ""),
-        Unsafe..int.p("channel_count", "")
+        "Retrieves the number of color channels used by the given bitmap.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the channel count from."),
+        Unsafe..int.p("channel_count", "A pointer to a variable which is populated with the number of color channels used by the given bitmap."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "bitmap_get_pixels",
-        "",
-        Unsafe..msdf_bitmap.const.p("bitmap", ""),
-        Unsafe..void.p.p("pixels", "")
+        "Retrieves the address of the raw pixel data of the given bitmap.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the raw pixel data from."),
+        Unsafe..void.p.p("pixels", "A pointer to an address which is populated with the raw pixel data of the given bitmap."), ,
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "bitmap_get_byte_size",
-        "",
-        Unsafe..msdf_bitmap.const.p("bitmap", ""),
-        Unsafe..size_t.p("size", "")
+        "Retrieves the size of the pixel data of the given bitmap in bytes.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the size of the raw pixel data from."),
+        Unsafe..size_t.p("size", "A pointer to a variable which is populated with the byte size of the raw pixel data of the given bitmap."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     void(
         "bitmap_free",
-        "",
-        Unsafe..msdf_bitmap.p("bitmap", "")
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        Unsafe..msdf_bitmap.p("bitmap", "A pointer to an msdf_bitmap_t structure to be freed.")
     )
 
     // msdf_shape
