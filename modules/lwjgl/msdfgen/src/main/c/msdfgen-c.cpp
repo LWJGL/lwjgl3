@@ -185,7 +185,6 @@ MSDF_API void msdf_bitmap_free(msdf_bitmap_t* bitmap) {
         default:
             return;
     }
-    msdf_free(bitmap);
 }
 
 // msdf_shape
@@ -551,6 +550,9 @@ MSDF_API int msdf_segment_move_end_point(msdf_segment_handle segment, const msdf
 }
 
 MSDF_API void msdf_segment_free(msdf_segment_handle segment) {
+    if(segment == nullptr) {
+        return;
+    }
     auto* p_segment = reinterpret_cast<msdfgen::EdgeSegment*>(segment);
     switch(p_segment->type()) {
         case msdfgen::LinearSegment::EdgeType::EDGE_TYPE:
