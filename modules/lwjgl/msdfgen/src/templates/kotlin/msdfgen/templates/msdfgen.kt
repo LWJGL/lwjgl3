@@ -10,6 +10,7 @@ import org.lwjgl.generator.*
 val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMethod = "msdf_") {
     nativeImport("msdfgen-c.h")
     javaImport("static org.lwjgl.system.Checks.*")
+    cpp = true
     documentation = ""
 
     // msdf_allocator
