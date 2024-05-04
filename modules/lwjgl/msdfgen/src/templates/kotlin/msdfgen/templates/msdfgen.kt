@@ -346,69 +346,93 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     int(
         "generate_sdf",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_psdf",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_msdf",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_mtsdf",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_sdf_with_config",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_config.const.p("config", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_psdf_with_config",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_config.const.p("config", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_msdf_with_config",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_multichannel_config.const.p("config", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_multichannel_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "generate_mtsdf_with_config",
         "",
-        Unsafe..msdf_bitmap.p("output", ""),
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_transform.const.p("transform", ""),
-        Unsafe..msdf_multichannel_config.const.p("config", ""),
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_multichannel_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
 }
