@@ -70,76 +70,96 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
 
     int(
         "shape_alloc",
-        "",
-        Unsafe..msdf_shape_handle.p("shape", "")
+        "Allocates a new MSDF shape object using the internal allocator.",
+        Unsafe..msdf_shape_handle.p("shape", "A pointer to an address which is populated with the address of the newly allocated shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_get_bounds",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_bounds.p("bounds", "")
+        "Retrieves the bounds of the given shape.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape object to retrieve the bounds from."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a variable which is populated with the bounds of the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_add_contour",
-        "",
-        Unsafe..msdf_shape_handle("shape", ""),
-        Unsafe..msdf_contour_handle.p("contour", "")
+        "Adds a new contour to the given shape.",
+        Unsafe..msdf_shape_handle("shape", "A pointer to a shape object to add a new contour to."),
+        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly created contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_get_contour_count",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..size_t.p("size", "")
+        "Retrieves the number of contours allocated within the given shape object.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape object from which to retrieve the contour count."),
+        Unsafe..size_t.p("size", "A pointer to a variable which is populated with the number of contours of the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_get_contour",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        size_t("index", ""),
-        Unsafe..msdf_contour_const_handle.p("contour", "")
+        "Retrieves a contour at a given index from the given shape.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape object from which to retrieve a contour."),
+        size_t("index", "The index of the contour to retrieve."),
+        Unsafe..msdf_contour_const_handle.p(
+            "contour",
+            "A pointer to an address which is populated with the address of the contour at the given index if present."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_get_edge_count",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..size_t.p("count", "")
+        "Retrieves the number of edges of the given shape.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape from which to retrieve the edge count."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the number of edges defined by the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_has_inverse_y_axis",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..int.p("inverse_y_axis", "")
+        "Retrieves the inverse-y-axis flag of the given shape.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape from which to fetch the inverse-y-axis flag."),
+        Unsafe..int.p(
+            "inverse_y_axis",
+            "A pointer to a variable which is populated with MSDF_TRUE when the y-axis of the given shape is inverted. Otherwise the variable will be set to MSDF_FALSE."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_normalize",
-        "",
-        Unsafe..msdf_shape_handle("shape", "")
+        "Normalizes the given shape.",
+        Unsafe..msdf_shape_handle("shape", "A pointer to a shape to normalize."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_validate",
-        "",
-        Unsafe..msdf_shape_handle("shape", ""),
-        Unsafe..int.p("result", "")
+        "Validates the given shape.",
+        Unsafe..msdf_shape_handle("shape", "A pointer to a shape to validate."),
+        Unsafe..int.p(
+            "result",
+            "A pointer to a variable which is populated with MSDF_TRUE when the validation was successful. Otherwise the variable will be set to MSDF_FALSE."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_bound",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_bounds.p("bounds", "")
+        "Adjusts the given bounding box to fit the given shape.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape to fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a bounding box which should at least fit the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
         "shape_bound_miters",
-        "",
-        Unsafe..msdf_shape_const_handle("shape", ""),
-        Unsafe..msdf_bounds.p("bounds", ""),
-        double("border", ""),
-        double("miter_limit", ""),
-        int("polarity", "")
+        "Adjusts the given bounding box to fit the given shape including a mitered border.",
+        Unsafe..msdf_shape_const_handle("shape", "A pointer to a shape to fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a bounding box which should at least fit the given shape including the specified border."),
+        double("border", "The size of the border."),
+        double("miter_limit", "The miter limit value."),
+        int("polarity", "The miter polarity."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     void(
         "shape_free",
-        "",
-        Unsafe..msdf_shape_handle("shape", "")
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        Unsafe..msdf_shape_handle("shape", "A pointer to a shape object to be freed.")
     )
 
     // msdf_contour
