@@ -50,7 +50,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "bitmap_get_pixels",
         "Retrieves the address of the raw pixel data of the given bitmap.",
         Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the raw pixel data from."),
-        Unsafe..void.p.p("pixels", "A pointer to an address which is populated with the raw pixel data of the given bitmap."), ,
+        Unsafe..void.p.p("pixels", "A pointer to an address which is populated with the raw pixel data of the given bitmap."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
