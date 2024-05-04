@@ -166,58 +166,61 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
 
     int(
         "contour_alloc",
-        "",
-        Unsafe..msdf_contour_handle.p("contour", "")
+        "Allocates a new contour object using the internal allocator.",
+        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly allocated contour object.")
     )
     int(
         "contour_add_edge",
-        "",
-        Unsafe..msdf_contour_handle("contour", ""),
-        Unsafe..msdf_segment_handle.p("segment", "")
+        "Adds a new edge to the given contour and returns its associated segment handle.",
+        Unsafe..msdf_contour_handle("contour", "A pointer to the contour to add a new edge (segment) to."),
+        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly added edge segment.")
     )
     int(
         "contour_get_edge_count",
-        "",
-        Unsafe..msdf_contour_const_handle("contour", ""),
-        Unsafe..size_t.p("count", "")
+        "Retrieves the edge count of the given contour.",
+        Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour to retrieve the edge count from."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the edge count of the given contour.")
     )
     int(
         "contour_get_edge",
-        "",
-        Unsafe..msdf_contour_const_handle("contour", ""),
-        size_t("index", ""),
-        Unsafe..msdf_segment_const_handle.p("segment", "")
+        "Retrieves an edge (segment) from the given contour at the given index.",
+        Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour from which to retrieve the given edge segment."),
+        size_t("index", "The index from which to retrieve the edge segment."),
+        Unsafe..msdf_segment_const_handle.p(
+            "segment",
+            "A pointer to an address which is populated with the address of the edge segment at the given index if present."
+        )
     )
     int(
         "contour_bound",
-        "",
-        Unsafe..msdf_contour_const_handle("contour", ""),
-        Unsafe..msdf_bounds.p("bounds", "")
+        "Adjusts the given bounding box to fit at least the given contour.",
+        Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour which should at least fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour into.")
     )
     int(
         "contour_bound_miters",
-        "",
-        Unsafe..msdf_contour_const_handle("contour", ""),
-        Unsafe..msdf_bounds.p("bounds", ""),
-        double("border", ""),
-        double("miter_limit", ""),
-        int("polarity", "")
+        "Adjust the given bounding box to fit at least the given contour including a specified border.",
+        Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour which should at least fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour including the specified border."),
+        double("border", "The size of the border."),
+        double("miter_limit", "The miter limit value."),
+        int("polarity", "The miter polarity.")
     )
     int(
         "contour_get_winding",
-        "",
-        Unsafe..msdf_contour_const_handle("contour", ""),
-        Unsafe..int.p("winding", "")
+        "Retrieves the winding direction of the given contour.",
+        Unsafe..msdf_contour_const_handle("contour", "A pointer to the contour of which to retrieve the winding direction."),
+        Unsafe..int.p("winding", "A pointer to a variables which is populated with the winding direction of the given contour.")
     )
     int(
         "contour_reverse",
-        "",
-        Unsafe..msdf_contour_handle("contour", "")
+        "Reverses the order of edges in the given contour.",
+        Unsafe..msdf_contour_handle("contour", "A pointer to the contour which to reverse the edge order for.")
     )
     void(
         "contour_free",
-        "",
-        Unsafe..msdf_contour_handle("contour", "")
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        Unsafe..msdf_contour_handle("contour", "A pointer to the contour to free.")
     )
 
     // msdf_segment
