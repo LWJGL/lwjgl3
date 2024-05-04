@@ -8,7 +8,7 @@ import msdfgen.*
 import org.lwjgl.generator.*
 
 val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMethod = "msdf_") {
-    nativeImport("msdfgen_c.h")
+    nativeImport("msdfgen-c.h")
     javaImport("static org.lwjgl.system.Checks.*")
     documentation = ""
 

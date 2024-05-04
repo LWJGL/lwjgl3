@@ -12,7 +12,7 @@
  *
  */
 
-#include "msdfgen_c.h"
+#include "msdfgen-c.h"
 #include "msdfgen.h"
 
 #include <utility>
