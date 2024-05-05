@@ -4410,7 +4410,7 @@ nk_style_pop_vec2(ctx);""")}
 
             cmd,
             float.p("points", ""),
-            AutoSize("points")..int("point_count", ""),
+            AutoSizeShr("1", "points")..int("point_count", ""),
             float("line_thickness", ""),
             nk_color("col", "")
         )
@@ -4421,7 +4421,7 @@ nk_style_pop_vec2(ctx);""")}
 
             cmd,
             float.p("points", ""),
-            AutoSize("points")..int("point_count", ""),
+            AutoSizeShr("1", "points")..int("point_count", ""),
             float("line_thickness", ""),
             nk_color("color", "")
         )
@@ -4490,7 +4490,7 @@ nk_style_pop_vec2(ctx);""")}
 
             cmd,
             float.p("points", ""),
-            AutoSize("points")..int("point_count", ""),
+            AutoSizeShr("1", "points")..int("point_count", ""),
             nk_color("color", "")
         )
 
