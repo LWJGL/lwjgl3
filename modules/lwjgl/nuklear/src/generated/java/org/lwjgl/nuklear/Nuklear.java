@@ -9271,7 +9271,7 @@ public class Nuklear {
     public static native void nnk_stroke_polyline(long b, long points, int point_count, float line_thickness, long col);
 
     public static void nk_stroke_polyline(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") FloatBuffer points, float line_thickness, @NativeType("struct nk_color") NkColor col) {
-        nnk_stroke_polyline(b.address(), memAddress(points), points.remaining(), line_thickness, col.address());
+        nnk_stroke_polyline(b.address(), memAddress(points), points.remaining() >> 1, line_thickness, col.address());
     }
 
     // --- [ nk_stroke_polygon ] ---
@@ -9279,7 +9279,7 @@ public class Nuklear {
     public static native void nnk_stroke_polygon(long b, long points, int point_count, float line_thickness, long color);
 
     public static void nk_stroke_polygon(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") FloatBuffer points, float line_thickness, @NativeType("struct nk_color") NkColor color) {
-        nnk_stroke_polygon(b.address(), memAddress(points), points.remaining(), line_thickness, color.address());
+        nnk_stroke_polygon(b.address(), memAddress(points), points.remaining() >> 1, line_thickness, color.address());
     }
 
     // --- [ nk_fill_rect ] ---
@@ -9327,7 +9327,7 @@ public class Nuklear {
     public static native void nnk_fill_polygon(long b, long points, int point_count, long color);
 
     public static void nk_fill_polygon(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") FloatBuffer points, @NativeType("struct nk_color") NkColor color) {
-        nnk_fill_polygon(b.address(), memAddress(points), points.remaining(), color.address());
+        nnk_fill_polygon(b.address(), memAddress(points), points.remaining() >> 1, color.address());
     }
 
     // --- [ nk_draw_image ] ---
@@ -11139,7 +11139,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_stroke_polyline stroke_polyline} */
     public static void nk_stroke_polyline(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") float[] points, float line_thickness, @NativeType("struct nk_color") NkColor col) {
-        nnk_stroke_polyline(b.address(), points, points.length, line_thickness, col.address());
+        nnk_stroke_polyline(b.address(), points, points.length >> 1, line_thickness, col.address());
     }
 
     /** Array version of: {@link #nnk_stroke_polygon} */
@@ -11147,7 +11147,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_stroke_polygon stroke_polygon} */
     public static void nk_stroke_polygon(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") float[] points, float line_thickness, @NativeType("struct nk_color") NkColor color) {
-        nnk_stroke_polygon(b.address(), points, points.length, line_thickness, color.address());
+        nnk_stroke_polygon(b.address(), points, points.length >> 1, line_thickness, color.address());
     }
 
     /** Array version of: {@link #nnk_fill_polygon} */
@@ -11155,7 +11155,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_fill_polygon fill_polygon} */
     public static void nk_fill_polygon(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") float[] points, @NativeType("struct nk_color") NkColor color) {
-        nnk_fill_polygon(b.address(), points, points.length, color.address());
+        nnk_fill_polygon(b.address(), points, points.length >> 1, color.address());
     }
 
     /** Array version of: {@link #nnk_font_atlas_bake} */
