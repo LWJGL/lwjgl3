@@ -20,51 +20,51 @@ public class MSDFGen {
 
     static { LibMsdfGen.initialize(); }
 
-    public static final int msdf_MSDF_FALSE = 0;
+    public static final int MSDF_FALSE = 0;
 
-    public static final int msdf_MSDF_TRUE = 1;
+    public static final int MSDF_TRUE = 1;
 
-    public static final int msdf_MSDF_SUCCESS = 0;
+    public static final int MSDF_SUCCESS = 0;
 
-    public static final int msdf_MSDF_ERR_FAILED = 1;
+    public static final int MSDF_ERR_FAILED = 1;
 
-    public static final int msdf_MSDF_ERR_INVALID_ARG = 2;
+    public static final int MSDF_ERR_INVALID_ARG = 2;
 
-    public static final int msdf_MSDF_ERR_INVALID_TYPE = 3;
+    public static final int MSDF_ERR_INVALID_TYPE = 3;
 
-    public static final int msdf_MSDF_ERR_INVALID_SIZE = 4;
+    public static final int MSDF_ERR_INVALID_SIZE = 4;
 
-    public static final int msdf_MSDF_ERR_INVALID_INDEX = 5;
+    public static final int MSDF_ERR_INVALID_INDEX = 5;
 
-    public static final int msdf_MSDF_BITMAP_TYPE_SDF = 0;
+    public static final int MSDF_BITMAP_TYPE_SDF = 0;
 
-    public static final int msdf_MSDF_BITMAP_TYPE_PSDF = 1;
+    public static final int MSDF_BITMAP_TYPE_PSDF = 1;
 
-    public static final int msdf_MSDF_BITMAP_TYPE_MSDF = 2;
+    public static final int MSDF_BITMAP_TYPE_MSDF = 2;
 
-    public static final int msdf_MSDF_BITMAP_TYPE_MTSDF = 3;
+    public static final int MSDF_BITMAP_TYPE_MTSDF = 3;
 
-    public static final int msdf_MSDF_SEGMENT_TYPE_LINEAR = 0;
+    public static final int MSDF_SEGMENT_TYPE_LINEAR = 0;
 
-    public static final int msdf_MSDF_SEGMENT_TYPE_QUADRATIC = 1;
+    public static final int MSDF_SEGMENT_TYPE_QUADRATIC = 1;
 
-    public static final int msdf_MSDF_SEGMENT_TYPE_CUBIC = 2;
+    public static final int MSDF_SEGMENT_TYPE_CUBIC = 2;
 
-    public static final int msdf_MSDF_EDGE_COLOR_BLACK = 0;
+    public static final int MSDF_EDGE_COLOR_BLACK = 0;
 
-    public static final int msdf_MSDF_EDGE_COLOR_RED = 1;
+    public static final int MSDF_EDGE_COLOR_RED = 1;
 
-    public static final int msdf_MSDF_EDGE_COLOR_GREEN = 2;
+    public static final int MSDF_EDGE_COLOR_GREEN = 2;
 
-    public static final int msdf_MSDF_EDGE_COLOR_YELLOW = 3;
+    public static final int MSDF_EDGE_COLOR_YELLOW = 3;
 
-    public static final int msdf_MSDF_EDGE_COLOR_BLUE = 4;
+    public static final int MSDF_EDGE_COLOR_BLUE = 4;
 
-    public static final int msdf_MSDF_EDGE_COLOR_MAGENTA = 5;
+    public static final int MSDF_EDGE_COLOR_MAGENTA = 5;
 
-    public static final int msdf_MSDF_EDGE_COLOR_CYAN = 6;
+    public static final int MSDF_EDGE_COLOR_CYAN = 6;
 
-    public static final int msdf_MSDF_EDGE_COLOR_WHITE = 7;
+    public static final int MSDF_EDGE_COLOR_WHITE = 7;
 
     protected MSDFGen() {
         throw new UnsupportedOperationException();

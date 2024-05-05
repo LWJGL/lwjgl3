@@ -15,33 +15,33 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
 
     // Constants
 
-    IntConstant("", "MSDF_FALSE".."0")
-    IntConstant("", "MSDF_TRUE".."1")
+    IntConstant("", "MSDF_FALSE".."0").noPrefix()
+    IntConstant("", "MSDF_TRUE".."1").noPrefix()
 
-    IntConstant("", "MSDF_SUCCESS".."0")
-    IntConstant("", "MSDF_ERR_FAILED".."1")
-    IntConstant("", "MSDF_ERR_INVALID_ARG".."2")
-    IntConstant("", "MSDF_ERR_INVALID_TYPE".."3")
-    IntConstant("", "MSDF_ERR_INVALID_SIZE".."4")
-    IntConstant("", "MSDF_ERR_INVALID_INDEX".."5")
+    IntConstant("", "MSDF_SUCCESS".."0").noPrefix()
+    IntConstant("", "MSDF_ERR_FAILED".."1").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_ARG".."2").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_TYPE".."3").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_SIZE".."4").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_INDEX".."5").noPrefix()
 
-    IntConstant("", "MSDF_BITMAP_TYPE_SDF".."0")
-    IntConstant("", "MSDF_BITMAP_TYPE_PSDF".."1")
-    IntConstant("", "MSDF_BITMAP_TYPE_MSDF".."2")
-    IntConstant("", "MSDF_BITMAP_TYPE_MTSDF".."3")
+    IntConstant("", "MSDF_BITMAP_TYPE_SDF".."0").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_PSDF".."1").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_MSDF".."2").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_MTSDF".."3").noPrefix()
 
-    IntConstant("", "MSDF_SEGMENT_TYPE_LINEAR".."0")
-    IntConstant("", "MSDF_SEGMENT_TYPE_QUADRATIC".."1")
-    IntConstant("", "MSDF_SEGMENT_TYPE_CUBIC".."2")
+    IntConstant("", "MSDF_SEGMENT_TYPE_LINEAR".."0").noPrefix()
+    IntConstant("", "MSDF_SEGMENT_TYPE_QUADRATIC".."1").noPrefix()
+    IntConstant("", "MSDF_SEGMENT_TYPE_CUBIC".."2").noPrefix()
 
-    IntConstant("", "MSDF_EDGE_COLOR_BLACK".."0")
-    IntConstant("", "MSDF_EDGE_COLOR_RED".."1")
-    IntConstant("", "MSDF_EDGE_COLOR_GREEN".."2")
-    IntConstant("", "MSDF_EDGE_COLOR_YELLOW".."3")
-    IntConstant("", "MSDF_EDGE_COLOR_BLUE".."4")
-    IntConstant("", "MSDF_EDGE_COLOR_MAGENTA".."5")
-    IntConstant("", "MSDF_EDGE_COLOR_CYAN".."6")
-    IntConstant("", "MSDF_EDGE_COLOR_WHITE".."7")
+    IntConstant("", "MSDF_EDGE_COLOR_BLACK".."0").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_RED".."1").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_GREEN".."2").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_YELLOW".."3").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_BLUE".."4").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_MAGENTA".."5").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_CYAN".."6").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_WHITE".."7").noPrefix()
 
     // msdf_allocator
 
