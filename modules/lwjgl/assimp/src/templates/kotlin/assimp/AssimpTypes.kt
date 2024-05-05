@@ -91,6 +91,13 @@ val aiMemoryInfo = struct(Module.ASSIMP, "AIMemoryInfo", nativeName = "struct ai
     unsigned_int("total", "Total storage allocated for the full import.")
 }
 
+/*val aiBuffer = struct(Module.ASSIMP, "AIBuffer", nativeName = "struct aiBuffer", mutable = false) {
+    documentation = "Type to store a in-memory data buffer."
+
+    char.const.p("data", "begin pointer")
+    char.const.p("end", "end pointer")
+}*/
+
 val aiTexel = struct(Module.ASSIMP, "AITexel", nativeName = "struct aiTexel", mutable = false) {
     documentation = "Helper structure to represent a texel in a ARGB8888 format. Used by aiTexture."
 
