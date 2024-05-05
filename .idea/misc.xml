@@ -9,7 +9,7 @@
     <option name="myDefaultNotNull" value="javax.annotation.Nonnull" />
     <option name="myNullables">
       <value>
-        <list size="14">
+        <list size="16">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
@@ -24,12 +24,14 @@
           <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
           <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
           <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
+          <item index="14" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="15" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="14">
+        <list size="17">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="javax.validation.constraints.NotNull" />
@@ -44,9 +46,15 @@
           <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
           <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="14" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="15" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+          <item index="16" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>
+  </component>
+  <component name="PWA">
+    <option name="wasEnabledAtLeastOnce" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8 x64" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/bin" />

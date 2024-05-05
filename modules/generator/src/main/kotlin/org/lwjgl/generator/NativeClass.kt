@@ -347,7 +347,7 @@ class NativeClass internal constructor(
                                         AutoSizeFactor.shl("${-value}")
                                     else
                                         AutoSizeFactor.shr("$value")
-                                } catch (e: NumberFormatException) {
+                                } catch (_: NumberFormatException) {
                                     return null
                                 }
                             }

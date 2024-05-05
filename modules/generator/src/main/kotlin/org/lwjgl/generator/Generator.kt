@@ -193,7 +193,7 @@ class Generator(private val moduleRoot: String) {
                             .methods
                             .asSequence()
                             .consume()
-                    } catch (e: ClassNotFoundException) {
+                    } catch (_: ClassNotFoundException) {
                         // ignore
                     }
                 }
