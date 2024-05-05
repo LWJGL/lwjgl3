@@ -101,11 +101,11 @@ val msdf_multichannel_config = struct(Module.MSDFGEN, "MSDFGenMultichannelConfig
     double("min_improve_ratio", "")
 }
 
-val msdf_shape_handle = typedef(void.p, "msdf_shape_handle")
-val msdf_shape_const_handle = typedef(void.const.p, "msdf_shape_const_handle")
+val msdf_shape_handle = "msdf_shape_handle".handle
+val msdf_shape_const_handle = "msdf_shape_const_handle".handle
 
-val msdf_contour_handle = typedef(void.p, "msdf_contour_handle")
-val msdf_contour_const_handle = typedef(void.const.p, "msdf_contour_const_handle")
+val msdf_contour_handle = "msdf_contour_handle".handle
+val msdf_contour_const_handle = "msdf_contour_const_handle".handle
 
-val msdf_segment_handle = typedef(void.p, "msdf_segment_handle")
-val msdf_segment_const_handle = typedef(void.const.p, "msdf_segment_const_handle")
+val msdf_segment_handle = "msdf_segment_handle".handle
+val msdf_segment_const_handle = "msdf_segment_const_handle".handle

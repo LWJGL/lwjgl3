@@ -163,8 +163,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_get_bounds(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
-        return nmsdf_shape_get_bounds(memAddress(shape), bounds.address());
+    public static int msdf_shape_get_bounds(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_bounds(shape, bounds.address());
     }
 
     // --- [ msdf_shape_add_contour ] ---
@@ -180,8 +183,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("msdf_contour_handle *") PointerBuffer contour) {
-        return nmsdf_shape_add_contour(memAddress(shape), memAddress(contour));
+    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_handle *") PointerBuffer contour) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_add_contour(shape, memAddress(contour));
     }
 
     // --- [ msdf_shape_get_contour_count ] ---
@@ -197,8 +203,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_get_contour_count(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("size_t *") PointerBuffer size) {
-        return nmsdf_shape_get_contour_count(memAddress(shape), memAddress(size));
+    public static int msdf_shape_get_contour_count(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t *") PointerBuffer size) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_contour_count(shape, memAddress(size));
     }
 
     // --- [ msdf_shape_get_contour ] ---
@@ -215,8 +224,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_get_contour(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("size_t") long index, @NativeType("msdf_contour_const_handle *") PointerBuffer contour) {
-        return nmsdf_shape_get_contour(memAddress(shape), index, memAddress(contour));
+    public static int msdf_shape_get_contour(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t") long index, @NativeType("msdf_contour_const_handle *") PointerBuffer contour) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_contour(shape, index, memAddress(contour));
     }
 
     // --- [ msdf_shape_get_edge_count ] ---
@@ -232,8 +244,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_get_edge_count(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("size_t *") PointerBuffer count) {
-        return nmsdf_shape_get_edge_count(memAddress(shape), memAddress(count));
+    public static int msdf_shape_get_edge_count(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_edge_count(shape, memAddress(count));
     }
 
     // --- [ msdf_shape_has_inverse_y_axis ] ---
@@ -249,8 +264,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_has_inverse_y_axis(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("int *") IntBuffer inverse_y_axis) {
-        return nmsdf_shape_has_inverse_y_axis(memAddress(shape), memAddress(inverse_y_axis));
+    public static int msdf_shape_has_inverse_y_axis(@NativeType("msdf_shape_const_handle") long shape, @NativeType("int *") IntBuffer inverse_y_axis) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_has_inverse_y_axis(shape, memAddress(inverse_y_axis));
     }
 
     // --- [ msdf_shape_normalize ] ---
@@ -265,8 +283,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_normalize(@NativeType("msdf_shape_handle") ByteBuffer shape) {
-        return nmsdf_shape_normalize(memAddress(shape));
+    public static int msdf_shape_normalize(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_normalize(shape);
     }
 
     // --- [ msdf_shape_validate ] ---
@@ -282,8 +303,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_validate(@NativeType("msdf_shape_handle") ByteBuffer shape, @NativeType("int *") IntBuffer result) {
-        return nmsdf_shape_validate(memAddress(shape), memAddress(result));
+    public static int msdf_shape_validate(@NativeType("msdf_shape_handle") long shape, @NativeType("int *") IntBuffer result) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_validate(shape, memAddress(result));
     }
 
     // --- [ msdf_shape_bound ] ---
@@ -299,8 +323,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_bound(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
-        return nmsdf_shape_bound(memAddress(shape), bounds.address());
+    public static int msdf_shape_bound(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_bound(shape, bounds.address());
     }
 
     // --- [ msdf_shape_bound_miters ] ---
@@ -319,8 +346,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_bound_miters(@NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
-        return nmsdf_shape_bound_miters(memAddress(shape), bounds.address(), border, miter_limit, polarity);
+    public static int msdf_shape_bound_miters(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_bound_miters(shape, bounds.address(), border, miter_limit, polarity);
     }
 
     // --- [ msdf_shape_free ] ---
@@ -333,8 +363,11 @@ public class MSDFGen {
      *
      * @param shape A pointer to a shape object to be freed.
      */
-    public static void msdf_shape_free(@NativeType("msdf_shape_handle") ByteBuffer shape) {
-        nmsdf_shape_free(memAddress(shape));
+    public static void msdf_shape_free(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        nmsdf_shape_free(shape);
     }
 
     // --- [ msdf_contour_alloc ] ---
@@ -366,8 +399,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") ByteBuffer contour, @NativeType("msdf_segment_handle *") PointerBuffer segment) {
-        return nmsdf_contour_add_edge(memAddress(contour), memAddress(segment));
+    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle *") PointerBuffer segment) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_add_edge(contour, memAddress(segment));
     }
 
     // --- [ msdf_contour_get_edge_count ] ---
@@ -383,8 +419,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_get_edge_count(@NativeType("msdf_contour_const_handle") ByteBuffer contour, @NativeType("size_t *") PointerBuffer count) {
-        return nmsdf_contour_get_edge_count(memAddress(contour), memAddress(count));
+    public static int msdf_contour_get_edge_count(@NativeType("msdf_contour_const_handle") long contour, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_edge_count(contour, memAddress(count));
     }
 
     // --- [ msdf_contour_get_edge ] ---
@@ -401,8 +440,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_get_edge(@NativeType("msdf_contour_const_handle") ByteBuffer contour, @NativeType("size_t") long index, @NativeType("msdf_segment_const_handle *") PointerBuffer segment) {
-        return nmsdf_contour_get_edge(memAddress(contour), index, memAddress(segment));
+    public static int msdf_contour_get_edge(@NativeType("msdf_contour_const_handle") long contour, @NativeType("size_t") long index, @NativeType("msdf_segment_const_handle *") PointerBuffer segment) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_edge(contour, index, memAddress(segment));
     }
 
     // --- [ msdf_contour_bound ] ---
@@ -418,8 +460,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_bound(@NativeType("msdf_contour_const_handle") ByteBuffer contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
-        return nmsdf_contour_bound(memAddress(contour), bounds.address());
+    public static int msdf_contour_bound(@NativeType("msdf_contour_const_handle") long contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_bound(contour, bounds.address());
     }
 
     // --- [ msdf_contour_bound_miters ] ---
@@ -438,8 +483,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_bound_miters(@NativeType("msdf_contour_const_handle") ByteBuffer contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
-        return nmsdf_contour_bound_miters(memAddress(contour), bounds.address(), border, miter_limit, polarity);
+    public static int msdf_contour_bound_miters(@NativeType("msdf_contour_const_handle") long contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_bound_miters(contour, bounds.address(), border, miter_limit, polarity);
     }
 
     // --- [ msdf_contour_get_winding ] ---
@@ -455,8 +503,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_get_winding(@NativeType("msdf_contour_const_handle") ByteBuffer contour, @NativeType("int *") IntBuffer winding) {
-        return nmsdf_contour_get_winding(memAddress(contour), memAddress(winding));
+    public static int msdf_contour_get_winding(@NativeType("msdf_contour_const_handle") long contour, @NativeType("int *") IntBuffer winding) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_winding(contour, memAddress(winding));
     }
 
     // --- [ msdf_contour_reverse ] ---
@@ -471,8 +522,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_reverse(@NativeType("msdf_contour_handle") ByteBuffer contour) {
-        return nmsdf_contour_reverse(memAddress(contour));
+    public static int msdf_contour_reverse(@NativeType("msdf_contour_handle") long contour) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_reverse(contour);
     }
 
     // --- [ msdf_contour_free ] ---
@@ -485,8 +539,11 @@ public class MSDFGen {
      *
      * @param contour A pointer to the contour to free.
      */
-    public static void msdf_contour_free(@NativeType("msdf_contour_handle") ByteBuffer contour) {
-        nmsdf_contour_free(memAddress(contour));
+    public static void msdf_contour_free(@NativeType("msdf_contour_handle") long contour) {
+        if (CHECKS) {
+            check(contour);
+        }
+        nmsdf_contour_free(contour);
     }
 
     // --- [ msdf_segment_alloc ] ---
@@ -519,8 +576,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_type(@NativeType("msdf_segment_const_handle") ByteBuffer segment, @NativeType("int *") IntBuffer type) {
-        return nmsdf_segment_get_type(memAddress(segment), memAddress(type));
+    public static int msdf_segment_get_type(@NativeType("msdf_segment_const_handle") long segment, @NativeType("int *") IntBuffer type) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_type(segment, memAddress(type));
     }
 
     // --- [ msdf_segment_get_point_count ] ---
@@ -536,8 +596,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_point_count(@NativeType("msdf_segment_const_handle") ByteBuffer segment, @NativeType("size_t *") PointerBuffer count) {
-        return nmsdf_segment_get_point_count(memAddress(segment), memAddress(count));
+    public static int msdf_segment_get_point_count(@NativeType("msdf_segment_const_handle") long segment, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_point_count(segment, memAddress(count));
     }
 
     // --- [ msdf_segment_get_point ] ---
@@ -554,8 +617,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_point(@NativeType("msdf_segment_const_handle") ByteBuffer segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
-        return nmsdf_segment_get_point(memAddress(segment), index, point.address());
+    public static int msdf_segment_get_point(@NativeType("msdf_segment_const_handle") long segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_point(segment, index, point.address());
     }
 
     // --- [ msdf_segment_set_point ] ---
@@ -572,8 +638,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_set_point(@NativeType("msdf_segment_handle") ByteBuffer segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
-        return nmsdf_segment_set_point(memAddress(segment), index, point.address());
+    public static int msdf_segment_set_point(@NativeType("msdf_segment_handle") long segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_set_point(segment, index, point.address());
     }
 
     // --- [ msdf_segment_get_color ] ---
@@ -589,8 +658,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_color(@NativeType("msdf_segment_const_handle") ByteBuffer segment, @NativeType("int *") IntBuffer color) {
-        return nmsdf_segment_get_color(memAddress(segment), memAddress(color));
+    public static int msdf_segment_get_color(@NativeType("msdf_segment_const_handle") long segment, @NativeType("int *") IntBuffer color) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_color(segment, memAddress(color));
     }
 
     // --- [ msdf_segment_set_color ] ---
@@ -606,8 +678,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_set_color(@NativeType("msdf_segment_handle") ByteBuffer segment, int color) {
-        return nmsdf_segment_set_color(memAddress(segment), color);
+    public static int msdf_segment_set_color(@NativeType("msdf_segment_handle") long segment, int color) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_set_color(segment, color);
     }
 
     // --- [ msdf_segment_get_direction ] ---
@@ -624,8 +699,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_direction(@NativeType("msdf_segment_const_handle") ByteBuffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction) {
-        return nmsdf_segment_get_direction(memAddress(segment), param, direction.address());
+    public static int msdf_segment_get_direction(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_direction(segment, param, direction.address());
     }
 
     // --- [ msdf_segment_get_direction_change ] ---
@@ -642,8 +720,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_get_direction_change(@NativeType("msdf_segment_const_handle") ByteBuffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction_change) {
-        return nmsdf_segment_get_direction_change(memAddress(segment), param, direction_change.address());
+    public static int msdf_segment_get_direction_change(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction_change) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_direction_change(segment, param, direction_change.address());
     }
 
     // --- [ msdf_segment_point ] ---
@@ -660,8 +741,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_point(@NativeType("msdf_segment_const_handle") ByteBuffer segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
-        return nmsdf_segment_point(memAddress(segment), param, point.address());
+    public static int msdf_segment_point(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_point(segment, param, point.address());
     }
 
     // --- [ msdf_segment_bound ] ---
@@ -677,8 +761,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_bound(@NativeType("msdf_segment_const_handle") ByteBuffer segment, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
-        return nmsdf_segment_bound(memAddress(segment), bounds.address());
+    public static int msdf_segment_bound(@NativeType("msdf_segment_const_handle") long segment, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_bound(segment, bounds.address());
     }
 
     // --- [ msdf_segment_move_start_point ] ---
@@ -694,8 +781,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_move_start_point(@NativeType("msdf_segment_handle") ByteBuffer segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
-        return nmsdf_segment_move_start_point(memAddress(segment), point.address());
+    public static int msdf_segment_move_start_point(@NativeType("msdf_segment_handle") long segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_move_start_point(segment, point.address());
     }
 
     // --- [ msdf_segment_move_end_point ] ---
@@ -711,8 +801,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_segment_move_end_point(@NativeType("msdf_segment_handle") ByteBuffer segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
-        return nmsdf_segment_move_end_point(memAddress(segment), point.address());
+    public static int msdf_segment_move_end_point(@NativeType("msdf_segment_handle") long segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_move_end_point(segment, point.address());
     }
 
     // --- [ msdf_segment_free ] ---
@@ -725,8 +818,11 @@ public class MSDFGen {
      *
      * @param segment A pointer to the segment to free.
      */
-    public static void msdf_segment_free(@NativeType("msdf_segment_handle") ByteBuffer segment) {
-        nmsdf_segment_free(memAddress(segment));
+    public static void msdf_segment_free(@NativeType("msdf_segment_handle") long segment) {
+        if (CHECKS) {
+            check(segment);
+        }
+        nmsdf_segment_free(segment);
     }
 
     // --- [ msdf_generate_sdf ] ---
@@ -741,8 +837,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_sdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
-        return nmsdf_generate_sdf(output.address(), memAddress(shape), transform.address());
+    public static int msdf_generate_sdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_sdf(output.address(), shape, transform.address());
     }
 
     // --- [ msdf_generate_psdf ] ---
@@ -757,8 +856,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_psdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
-        return nmsdf_generate_psdf(output.address(), memAddress(shape), transform.address());
+    public static int msdf_generate_psdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_psdf(output.address(), shape, transform.address());
     }
 
     // --- [ msdf_generate_msdf ] ---
@@ -773,8 +875,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_msdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
-        return nmsdf_generate_msdf(output.address(), memAddress(shape), transform.address());
+    public static int msdf_generate_msdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_msdf(output.address(), shape, transform.address());
     }
 
     // --- [ msdf_generate_mtsdf ] ---
@@ -789,8 +894,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_mtsdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
-        return nmsdf_generate_mtsdf(output.address(), memAddress(shape), transform.address());
+    public static int msdf_generate_mtsdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_mtsdf(output.address(), shape, transform.address());
     }
 
     // --- [ msdf_generate_sdf_with_config ] ---
@@ -806,8 +914,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_sdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
-        return nmsdf_generate_sdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    public static int msdf_generate_sdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_sdf_with_config(output.address(), shape, transform.address(), config.address());
     }
 
     // --- [ msdf_generate_psdf_with_config ] ---
@@ -823,8 +934,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_psdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
-        return nmsdf_generate_psdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    public static int msdf_generate_psdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_psdf_with_config(output.address(), shape, transform.address(), config.address());
     }
 
     // --- [ msdf_generate_msdf_with_config ] ---
@@ -840,8 +954,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_msdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
-        return nmsdf_generate_msdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    public static int msdf_generate_msdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_msdf_with_config(output.address(), shape, transform.address(), config.address());
     }
 
     // --- [ msdf_generate_mtsdf_with_config ] ---
@@ -857,8 +974,11 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_generate_mtsdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") ByteBuffer shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
-        return nmsdf_generate_mtsdf_with_config(output.address(), memAddress(shape), transform.address(), config.address());
+    public static int msdf_generate_mtsdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_mtsdf_with_config(output.address(), shape, transform.address(), config.address());
     }
 
 }
