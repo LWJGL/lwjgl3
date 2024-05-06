@@ -225,15 +225,16 @@ public class MSDFGen {
      * Adds a new contour to the given shape.
      *
      * @param shape   A pointer to a shape object to add a new contour to.
-     * @param contour A pointer to an address which is populated with the address of the newly created contour.
+     * @param contour A pointer to the contour to add to the shape.
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_handle *") PointerBuffer contour) {
+    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle") long contour) {
         if (CHECKS) {
             check(shape);
+            check(contour);
         }
-        return nmsdf_shape_add_contour(shape, memAddress(contour));
+        return nmsdf_shape_add_contour(shape, contour);
     }
 
     // --- [ msdf_shape_get_contour_count ] ---
@@ -441,15 +442,16 @@ public class MSDFGen {
      * Adds a new edge to the given contour and returns its associated segment handle.
      *
      * @param contour A pointer to the contour to add a new edge (segment) to.
-     * @param segment A pointer to an address which is populated with the address of the newly added edge segment.
+     * @param segment A pointer to the segment to add as an edge.
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle *") PointerBuffer segment) {
+    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle") long segment) {
         if (CHECKS) {
             check(contour);
+            check(segment);
         }
-        return nmsdf_contour_add_edge(contour, memAddress(segment));
+        return nmsdf_contour_add_edge(contour, segment);
     }
 
     // --- [ msdf_contour_get_edge_count ] ---

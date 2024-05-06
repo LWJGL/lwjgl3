@@ -220,10 +220,10 @@ MSDF_API int msdf_shape_get_bounds(msdf_shape_const_handle shape, msdf_bounds_t*
 /**
  * Adds a new contour to the given shape.
  * @param shape A pointer to a shape object to add a new contour to.
- * @param contour A pointer to an address which is populated with the address of the newly created contour.
+ * @param contour A pointer to the contour to add to the shape.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_handle* contour);
+MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle contour);
 
 /**
  * Retrieves the number of contours allocated within the given shape object.
@@ -313,11 +313,10 @@ MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour);
 /**
  * Adds a new edge to the given contour and returns its associated segment handle.
  * @param contour A pointer to the contour to add a new edge (segment) to.
- * @param segment A pointer to an address which is populated with the address of the newly
- *  added edge segment.
+ * @param segment A pointer to the segment to add as an edge.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle* segment);
+MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle segment);
 
 /**
  * Retrieves the edge count of the given contour.

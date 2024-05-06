@@ -205,11 +205,11 @@ MSDF_API int msdf_shape_get_bounds(msdf_shape_const_handle shape, msdf_bounds_t*
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_handle* contour) {
+MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle contour) {
     if(shape == nullptr || contour == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    *contour = reinterpret_cast<msdf_contour_handle>(&reinterpret_cast<msdfgen::Shape*>(shape)->addContour());
+    reinterpret_cast<msdfgen::Shape*>(shape)->addContour(*reinterpret_cast<const msdfgen::Contour*>(contour));
     return MSDF_SUCCESS;
 }
 
@@ -295,12 +295,11 @@ MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour) {
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle* segment) {
+MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle segment) {
     if(contour == nullptr || segment == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    msdfgen::EdgeSegment* p_segment = reinterpret_cast<msdfgen::Contour*>(contour)->addEdge();
-    *segment = reinterpret_cast<msdf_segment_handle>(p_segment);
+    reinterpret_cast<msdfgen::Contour*>(contour)->addEdge({reinterpret_cast<msdfgen::EdgeSegment*>(segment)});
     return MSDF_SUCCESS;
 }
 

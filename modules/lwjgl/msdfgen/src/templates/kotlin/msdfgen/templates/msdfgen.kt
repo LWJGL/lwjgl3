@@ -116,7 +116,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "shape_add_contour",
         "Adds a new contour to the given shape.",
         msdf_shape_handle("shape", "A pointer to a shape object to add a new contour to."),
-        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly created contour."),
+        msdf_contour_const_handle("contour", "A pointer to the contour to add to the shape."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
@@ -205,7 +205,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "contour_add_edge",
         "Adds a new edge to the given contour and returns its associated segment handle.",
         msdf_contour_handle("contour", "A pointer to the contour to add a new edge (segment) to."),
-        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly added edge segment."),
+        msdf_segment_handle("segment", "A pointer to the segment to add as an edge."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
