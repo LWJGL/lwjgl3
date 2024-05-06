@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."124"
+        "API_VERSION".."127"
     )
 
     ShortConstant(
@@ -1053,9 +1053,9 @@ RGBA16S
 
     void(
         "init_ctor",
-        "Updates the specified initialization parameters with default values.",
+        "Fill {@code bgfx_init_t} struct with default values, before using it to initialize the library.",
 
-        bgfx_init_t.p("_init", "initialization parameters")
+        bgfx_init_t.p("_init", "pointer to structure to be initialized")
     )
 
     bool(
@@ -1803,7 +1803,15 @@ RGBA16S
         MapToInt..uint16_t("_width", "texture width"),
         MapToInt..uint16_t("_height", "texture height"),
         bgfx_texture_format_t("_format", "texture format", TextureFormat),
-        uint64_t("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", "$TextureFlags $SamplerFlags"),
+        uint64_t(
+            "_textureFlags",
+            """
+            texture creation and sampler flags.
+
+            Default texture sampling mode is linear, and wrap mode is repeat.
+            """,
+            "$TextureFlags $SamplerFlags"
+        ),
 
         returnDoc = "handle to frame buffer object"
     )
@@ -1814,7 +1822,15 @@ RGBA16S
 
         bgfx_backbuffer_ratio_t("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
         bgfx_texture_format_t("_format", "texture format", TextureFormat),
-        uint64_t("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", "$TextureFlags $SamplerFlags"),
+        uint64_t(
+            "_textureFlags",
+            """
+            texture creation and sampler flags.
+
+            Default texture sampling mode is linear, and wrap mode is repeat.
+            """,
+            "$TextureFlags $SamplerFlags"
+        ),
 
         returnDoc = "handle to frame buffer object"
     )
@@ -1993,7 +2009,8 @@ RGBA16S
         """,
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
-        charASCII.const.p("_name", "view name")
+        charASCII.const.p("_name", "view name"),
+        AutoSize("_name")..int32_t("_len", "view name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)")
     )
 
     void(
@@ -2130,10 +2147,15 @@ RGBA16S
 
     void(
         "encoder_set_marker",
-        "Sets debug marker.",
+        """
+        Sets a debug marker.
+
+        This allows you to group graphics calls together for easy browsing in graphics debugging tools.
+        """,
 
         bgfx_encoder_t.p("_this", "the encoder"),
-        charASCII.const.p("_marker", "debug marker")
+        charASCII.const.p("_name", "marker name"),
+        AutoSize("_name")..int32_t("_len", "marker name length (if length is {@code INT32_MAX}, it's expected that {@code _nane} is zero terminated string)")
     )
 
     void(
@@ -2481,8 +2503,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_handle", "program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of draws"),
+        uint32_t("_start", "first element in indirect buffer"),
+        uint32_t("_num", "number of draws"),
         uint32_t("_depth", "depth for sorting"),
         MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
@@ -2499,10 +2521,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_program", "program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
+        uint32_t("_start", "first element in indirect buffer"),
         bgfx_index_buffer_handle_t("_numHandle", "buffer for number of draws. Must be created with #BUFFER_INDEX32 and #BUFFER_DRAW_INDIRECT"),
         uint32_t("_numIndex", "element in number buffer"),
-        MapToInt..uint16_t("_numMax", "max number of draws"),
+        uint32_t("_numMax", "max number of draws"),
         uint32_t("_depth", "depth for sorting"),
         MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
@@ -2590,8 +2612,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches"),
+        uint32_t("_start", "first element in indirect buffer"),
+        uint32_t("_num", "number of dispatches"),
         MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
@@ -2650,9 +2672,14 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_marker",
-        "Sets debug marker.",
+        """
+        Sets a debug marker.
 
-        charASCII.const.p("_marker", "debug marker")
+        This allows you to group graphics calls together for easy browsing in graphics debugging tools.
+        """,
+
+        charASCII.const.p("_name", "marker name"),
+        AutoSize("_name")..int32_t("_len", "marker name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)")
     )
 
     void(
@@ -2969,8 +2996,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_program", "program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of draws"),
+        uint32_t("_start", "first element in indirect buffer"),
+        uint32_t("_num", "number of draws"),
         uint32_t("_depth", "depth for sorting"),
         MapToInt..uint8_t("_flags", "which states to discard for next draw", DiscardFlags, LinkMode.BITFIELD)
     )
@@ -2986,10 +3013,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_program", "program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
+        uint32_t("_start", "first element in indirect buffer"),
         bgfx_index_buffer_handle_t("_numHandle", "buffer for number of draws. Must be created with #BUFFER_INDEX32 and #BUFFER_DRAW_INDIRECT"),
         uint32_t("_numIndex", "element in number buffer"),
-        MapToInt..uint16_t("_numMax", "max number of draws"),
+        uint32_t("_numMax", "max number of draws"),
         uint32_t("_depth", "depth for sorting"),
         MapToInt..uint8_t("_flags", "which states to discard for next draw", DiscardFlags, LinkMode.BITFIELD)
     )
@@ -3069,8 +3096,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_program", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches"),
+        uint32_t("_start", "first element in indirect buffer"),
+        uint32_t("_num", "number of dispatches"),
         MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
