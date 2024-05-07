@@ -24,8 +24,8 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
         returnDoc =
         """
         the {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.
-        
-        Possible errors include #NOT_INITIALIZED.
+
+        Possible errors include #NOT_INITIALIZED and #PLATFORM_UNAVAILABLE.
         """,
         since = "version 3.1"
     )
@@ -43,9 +43,27 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
         returnDoc =
         """
         the {@code NSWindow} of the specified window, or nil if an error occurred.
-        
-        Possible errors include #NOT_INITIALIZED.
+
+        Possible errors include #NOT_INITIALIZED and #PLATFORM_UNAVAILABLE.
         """,
         since = "version 3.0"
+    )
+
+    id(
+        "GetCocoaView",
+        """
+        Returns the {@code NSView} of the specified window.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        GLFWwindow.p("window", "the GLFW window"),
+        returnDoc =
+        """
+        the {@code NSView} of the specified window, or {@code nil} if an error occurred
+
+        Possible errors include #NOT_INITIALIZED and #PLATFORM_UNAVAILABLE.
+        """,
+        since = "version 3.4"
     )
 }
