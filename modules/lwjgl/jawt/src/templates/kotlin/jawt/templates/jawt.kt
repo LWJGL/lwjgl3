@@ -51,22 +51,26 @@ ENABLE_WARNINGS()
 
     IntConstant(
         """
-        When calling #GetAWT() with a JAWT version less than 1.7, you must pass this flag or you will not be able to get a valid drawing surface and #GetAWT()
-        will return false. This is to maintain compatibility with applications that used the interface with Java 6 which had multiple rendering models. This
-        flag is not necessary when JAWT version 1.7 or greater is used as this is the only supported rendering mode.
+        When calling #GetAWT() with a JAWT version less than 1.7, you must pass this flag or you will not be able to get a valid drawing surface and
+        {@code JAWT_GetAWT} will return false. This is to maintain compatibility with applications that used the interface with Java 6 which had multiple
+        rendering models. This flag is not necessary when JAWT version 1.7 or greater is used as this is the only supported rendering mode. Example:
+        ${codeBlock("""
+JAWT awt;
+awt.version = JAWT_VERSION_1_4 | JAWT_MACOSX_USE_CALAYER;
+jboolean success = JAWT_GetAWT(env, &awt);""")}
 
         When the native Cocoa toolkit is in use, the pointer stored in {@code JAWT_DrawingSurfaceInfo->platformInfo} points to a {@code NSObject} that conforms
-        to the {@code JAWT_SurfaceLayers} protocol. Setting the layer property of this object will cause the specified layer to be overlaid on the Component's
-        rectangle. If the window the Component belongs to has a {@code CALayer} attached to it, this layer will be accessible via the {@code windowLayer}
-        property.
+        to the {@code JAWT_SurfaceLayers} protocol. Setting the layer property of this object will cause the specified layer to be overlaid on the
+        {@code Component}'s rectangle. If the window the {@code Component} belongs to has a {@code CALayer} attached to it, this layer will be accessible via
+        the {@code windowLayer} property.
         ${codeBlock("""
-&#64;protocol JAWT_SurfaceLayers
-    &#64;property (readwrite, retain) CALayer *layer;
-    &#64;property (readonly) CALayer *windowLayer;
-&#64;end""")}
+@protocol JAWT_SurfaceLayers
+@property (readwrite, retain) CALayer *layer;
+@property (readonly) CALayer *windowLayer;
+@end """)}
         """,
 
-        "MACOSX_USE_CALAYER"..0x00010008
+        "MACOSX_USE_CALAYER"..0x80000000.i
     )
 
     IntConstant(

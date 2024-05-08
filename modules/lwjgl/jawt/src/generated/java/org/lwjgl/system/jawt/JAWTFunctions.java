@@ -57,22 +57,27 @@ public class JAWTFunctions {
         JAWT_VERSION_9   = 0x90000;
 
     /**
-     * When calling {@link #JAWT_GetAWT GetAWT} with a JAWT version less than 1.7, you must pass this flag or you will not be able to get a valid drawing surface and {@link #JAWT_GetAWT GetAWT}
-     * will return false. This is to maintain compatibility with applications that used the interface with Java 6 which had multiple rendering models. This
-     * flag is not necessary when JAWT version 1.7 or greater is used as this is the only supported rendering mode.
-     * 
-     * <p>When the native Cocoa toolkit is in use, the pointer stored in {@code JAWT_DrawingSurfaceInfo->platformInfo} points to a {@code NSObject} that conforms
-     * to the {@code JAWT_SurfaceLayers} protocol. Setting the layer property of this object will cause the specified layer to be overlaid on the Component's
-     * rectangle. If the window the Component belongs to has a {@code CALayer} attached to it, this layer will be accessible via the {@code windowLayer}
-     * property.</p>
+     * When calling {@link #JAWT_GetAWT GetAWT} with a JAWT version less than 1.7, you must pass this flag or you will not be able to get a valid drawing surface and
+     * {@code JAWT_GetAWT} will return false. This is to maintain compatibility with applications that used the interface with Java 6 which had multiple
+     * rendering models. This flag is not necessary when JAWT version 1.7 or greater is used as this is the only supported rendering mode. Example:
      * 
      * <pre><code>
-     * &#64;protocol JAWT_SurfaceLayers
-     *     &#64;property (readwrite, retain) CALayer *layer;
-     *     &#64;property (readonly) CALayer *windowLayer;
-     * &#64;end</code></pre>
+     * JAWT awt;
+     * awt.version = JAWT_VERSION_1_4 | JAWT_MACOSX_USE_CALAYER;
+     * jboolean success = JAWT_GetAWT(env, &amp;awt);</code></pre>
+     * 
+     * <p>When the native Cocoa toolkit is in use, the pointer stored in {@code JAWT_DrawingSurfaceInfo->platformInfo} points to a {@code NSObject} that conforms
+     * to the {@code JAWT_SurfaceLayers} protocol. Setting the layer property of this object will cause the specified layer to be overlaid on the
+     * {@code Component}'s rectangle. If the window the {@code Component} belongs to has a {@code CALayer} attached to it, this layer will be accessible via
+     * the {@code windowLayer} property.</p>
+     * 
+     * <pre><code>
+     * @protocol JAWT_SurfaceLayers
+     * @property (readwrite, retain) CALayer *layer;
+     * @property (readonly) CALayer *windowLayer;
+     * @end </code></pre>
      */
-    public static final int JAWT_MACOSX_USE_CALAYER = 0x10008;
+    public static final int JAWT_MACOSX_USE_CALAYER = 0x80000000;
 
     /** Bitmask values returned by {@code Lock()}. */
     public static final int
