@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------*-C-*-
    libffi @VERSION@
-     - Copyright (c) 2011, 2014, 2019, 2021, 2022 Anthony Green
+     - Copyright (c) 2011, 2014, 2019, 2021, 2022, 2024 Anthony Green
      - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 
    Permission is hereby granted, free of charge, to any person
@@ -229,21 +229,12 @@ FFI_EXTERN ffi_type ffi_type_sint64;
 FFI_EXTERN ffi_type ffi_type_float;
 FFI_EXTERN ffi_type ffi_type_double;
 FFI_EXTERN ffi_type ffi_type_pointer;
-
-#if HAVE_LONG_DOUBLE
 FFI_EXTERN ffi_type ffi_type_longdouble;
-#else
-#define ffi_type_longdouble ffi_type_double
-#endif
 
 #ifdef FFI_TARGET_HAS_COMPLEX_TYPE
 FFI_EXTERN ffi_type ffi_type_complex_float;
 FFI_EXTERN ffi_type ffi_type_complex_double;
-#if HAVE_LONG_DOUBLE
 FFI_EXTERN ffi_type ffi_type_complex_longdouble;
-#else
-#define ffi_type_complex_longdouble ffi_type_complex_double
-#endif
 #endif
 #endif /* LIBFFI_HIDE_BASIC_TYPES */
 
