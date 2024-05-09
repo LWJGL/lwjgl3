@@ -478,7 +478,7 @@ class CharMapping(
 open class PointerMapping private constructor(
     javaMethodType: KClass<*>,
     val byteShift: String,
-    internal val supportsArrayOverload: Boolean = false
+    val supportsArrayOverload: Boolean = false
 ) : TypeMapping("jlong", Long::class, javaMethodType) {
 
     private constructor(javaMethodType: KClass<*>, byteShift: Int) : this(javaMethodType, byteShift.toString(), byteShift != 0)

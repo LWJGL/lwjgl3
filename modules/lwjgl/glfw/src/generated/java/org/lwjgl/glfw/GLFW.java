@@ -68,6 +68,7 @@ public class GLFW {
             DestroyWindow                 = apiGetFunctionAddress(GLFW, "glfwDestroyWindow"),
             WindowShouldClose             = apiGetFunctionAddress(GLFW, "glfwWindowShouldClose"),
             SetWindowShouldClose          = apiGetFunctionAddress(GLFW, "glfwSetWindowShouldClose"),
+            GetWindowTitle                = apiGetFunctionAddress(GLFW, "glfwGetWindowTitle"),
             SetWindowTitle                = apiGetFunctionAddress(GLFW, "glfwSetWindowTitle"),
             SetWindowIcon                 = apiGetFunctionAddress(GLFW, "glfwSetWindowIcon"),
             GetWindowPos                  = apiGetFunctionAddress(GLFW, "glfwGetWindowPos"),
@@ -535,9 +536,9 @@ public class GLFW {
      * <li>{@link #GLFW_PLATFORM_UNAVAILABLE PLATFORM_UNAVAILABLE} - 
      * Platform unavailable or no matching platform was found.
      * 
-     * <p>If emitted during initialization, no matching platform was found. If {@link #GLFW_PLATFORM PLATFORM} is set to {@link #GLFW_ANY_PLATFORM ANY_PLATFORM}, GLFW could not detect any of the platforms
-     * supported by this library binary, except for the {@code Null} platform.  If set to a specific platform, it is either not supported by this library
-     * binary or GLFW was not able to detect it.</p>
+     * <p>If emitted during initialization, no matching platform was found. If the {@link #GLFW_PLATFORM PLATFORM} init hint was set to {@link #GLFW_ANY_PLATFORM ANY_PLATFORM}, GLFW could not detect any of
+     * the platforms supported by this library binary, except for the {@code Null} platform.  If the init hint was set to a specific platform, it is
+     * either not supported by this library binary or GLFW was not able to detect it.</p>
      * 
      * <p>If emitted by a native access function, GLFW was initialized for a different platform than the function is for.</p>
      * 
@@ -660,12 +661,13 @@ public class GLFW {
 
     /** Input options. */
     public static final int
-        GLFW_CURSOR               = 0x33001,
-        GLFW_STICKY_KEYS          = 0x33002,
-        GLFW_STICKY_MOUSE_BUTTONS = 0x33003,
-        GLFW_LOCK_KEY_MODS        = 0x33004,
-        GLFW_RAW_MOUSE_MOTION     = 0x33005,
-        GLFW_IME                  = 0x33006;
+        GLFW_CURSOR                  = 0x33001,
+        GLFW_STICKY_KEYS             = 0x33002,
+        GLFW_STICKY_MOUSE_BUTTONS    = 0x33003,
+        GLFW_LOCK_KEY_MODS           = 0x33004,
+        GLFW_RAW_MOUSE_MOTION        = 0x33005,
+        GLFW_UNLIMITED_MOUSE_BUTTONS = 0x33006,
+        GLFW_IME                     = 0x33007;
 
     /** Cursor state. */
     public static final int
@@ -709,8 +711,8 @@ public class GLFW {
      * 
      * <ul>
      * <li><b>macOS</b>: This shape is provided by a private system API and may fail with {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} in the future.</li>
-     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * </ul></div>
      */
     public static final int GLFW_RESIZE_NWSE_CURSOR = 0x36007;
@@ -724,8 +726,8 @@ public class GLFW {
      * 
      * <ul>
      * <li><b>macOS</b>: This shape is provided by a private system API and may fail with {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} in the future.</li>
-     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * </ul></div>
      */
     public static final int GLFW_RESIZE_NESW_CURSOR = 0x36008;
@@ -745,8 +747,8 @@ public class GLFW {
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <ul>
-     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
      * </ul></div>
      */
     public static final int GLFW_NOT_ALLOWED_CURSOR = 0x3600A;
@@ -944,6 +946,11 @@ public class GLFW {
      * <p>This hint only has an effect on platforms where screen coordinates and pixels always map 1:1 such as Windows and X11. On platforms like macOS the
      * resolution of the framebuffer is changed independently of the window size.</p>
      * </li>
+     * <li>{@link #GLFW_SCALE_FRAMEBUFFER SCALE_FRAMEBUFFER} - 
+     * Legacy name for compatibility.
+     * 
+     * <p>This is an alias for the {@code GLFW_SCALE_FRAMEBUFFER} window hint for compatibility with earlier versions.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -959,7 +966,8 @@ public class GLFW {
         GLFW_CONTEXT_RELEASE_BEHAVIOR = 0x22009,
         GLFW_CONTEXT_NO_ERROR         = 0x2200A,
         GLFW_CONTEXT_CREATION_API     = 0x2200B,
-        GLFW_SCALE_TO_MONITOR         = 0x2200C;
+        GLFW_SCALE_TO_MONITOR         = 0x2200C,
+        GLFW_SCALE_FRAMEBUFFER        = 0x2200D;
 
     /**
      * Specifies whether to use full resolution framebuffers on Retina displays.
@@ -998,6 +1006,9 @@ public class GLFW {
      * <p>This is ignored on other platforms.</p>
      */
     public static final int GLFW_WIN32_KEYBOARD_MENU = 0x25001;
+
+    /** Win32 specific [window hint](@ref GLFW_WIN32_SHOWDEFAULT_hint). */
+    public static final int GLFW_WIN32_SHOWDEFAULT = 0x25002;
 
     /**
      * Allows specification of the Wayland {@code app_id}.
@@ -1078,6 +1089,9 @@ public class GLFW {
      * assumed to contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry
      * opens a minimal about dialog with information from the application's bundle. The menu bar and dock icon can be disabled entirely with the
      * {@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR} init hint.</li>
+     * <li><b>Wayland</b>, <b>X11</b>: If the library was compiled with support for both Wayland and X11, and the {@link #GLFW_PLATFORM PLATFORM} init hint is set to {@link #GLFW_ANY_PLATFORM ANY_PLATFORM},
+     * the {@code XDG_SESSION_TYPE} environment variable affects which platform is picked. If the environment variable is not set, or is set to something
+     * other than {@code wayland} or {@code x11}, the regular detection mechanism will be used instead.</li>
      * <li><b>x11</b>: This function will set the {@code LC_CTYPE} category of the application locale according to the current environment if that category is
      * still "C". This is because the "C" locale breaks Unicode text input.</li>
      * </ul></div>
@@ -1168,8 +1182,11 @@ public class GLFW {
      * 
      * <p>To use the default allocator, call this function with a {@code NULL} argument.</p>
      * 
-     * <p>If you specify an allocator struct, every member must be a valid function pointer. If any member is {@code NULL}, this function emits {@link #GLFW_INVALID_VALUE INVALID_VALUE} and the
-     * init allocator is unchanged.</p>
+     * <p>If you specify an allocator struct, every member must be a valid function pointer. If any member is {@code NULL}, this function will emit {@link #GLFW_INVALID_VALUE INVALID_VALUE} and
+     * the init allocator will be unchanged.</p>
+     * 
+     * <p>The functions in the allocator must fulfil a number of requirements. See the documentation for {@link GLFWAllocateCallback}, {@link GLFWReallocateCallback} and
+     * {@link GLFWDeallocateCallback} for details.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -1575,6 +1592,8 @@ public class GLFW {
      * <p>The content scale may depend on both the monitor resolution and pixel density and on user settings. It may be very different from the raw DPI
      * calculated from the physical size and current resolution.</p>
      * 
+     * <p><b>Wayland</b>: Fractional scaling information is not yet available for monitors, so this function only returns integer content scales.</p>
+     * 
      * <p>This function must only be called from the main thread.</p>
      *
      * @param monitor the monitor to query
@@ -1968,7 +1987,7 @@ public class GLFW {
      * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td></tr><tr><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td></tr><tr><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td></tr><tr><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td></tr><tr><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td></tr><tr><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td><td>{@link #GLFW_SAMPLES SAMPLES}</td><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td></tr><tr><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
+     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td></tr><tr><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td></tr><tr><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td></tr><tr><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_SCALE_FRAMEBUFFER SCALE_FRAMEBUFFER}</td><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td></tr><tr><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td></tr><tr><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td><td>{@link #GLFW_SAMPLES SAMPLES}</td></tr><tr><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
      * @param value the new value of the window hint
      *
      * @since version 2.2
@@ -2122,23 +2141,20 @@ public class GLFW {
      * more information on bundles, see the
      * <a href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
      * Developer Library.</li>
-     * <li><b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
-     * {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
-     * more information, see <a href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>
+     * <li><b>macOS</b>: The window frame will not be rendered at full resolution on Retina displays unless the {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and
+     * the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For more information, see <a href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>
      * <li><b>macOS</b>: When activating frame autosaving with {@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}, the specified window size and position may be overridden by previously saved
      * values.</li>
+     * <li><b>Wayland</b>: GLFW uses <a href="https://gitlab.freedesktop.org/libdecor/libdecor">libdecor</a> where available to create its window decorations.
+     * This in turn uses server-side XDG decorations where available and provides high quality client-side decorations on compositors like GNOME. If both
+     * XDG decorations and libdecor are unavailable, GLFW falls back to a very simple set of window decorations that only support moving, resizing and the
+     * window manager's right-click menu.</li>
      * <li><b>X11</b>: Some window managers will not respect the placement of initially hidden windows.</li>
      * <li><b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
      * to query the final size, position or other attributes directly after window creation.</li>
      * <li><b>X11</b>: The class part of the {@code WM_CLASS} window property will by default be set to the window title passed to this function. The instance
      * part will use the contents of the {@code RESOURCE_NAME} environment variable, if present and not empty, or fall back to the window title. Set the
      * {@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME} and {@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME} window hints to override this.</li>
-     * <li><b>Wayland</b>: Compositors should implement the xdg-decoration protocol for GLFW to decorate the window properly. If this protocol isn't
-     * supported, or if the compositor prefers client-side decorations, a very simple fallback frame will be drawn using the {@code wp_viewporter}
-     * protocol. A compositor can still emit close, maximize or fullscreen events, using for instance a keybind mechanism. If neither of these protocols
-     * is supported, the window won't be decorated.</li>
-     * <li><b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.</li>
-     * <li><b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor.</li>
      * </ul></div>
      *
      * @param width   the desired width, in screen coordinates, of the window
@@ -2207,23 +2223,20 @@ public class GLFW {
      * more information on bundles, see the
      * <a href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
      * Developer Library.</li>
-     * <li><b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
-     * {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
-     * more information, see <a href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>
+     * <li><b>macOS</b>: The window frame will not be rendered at full resolution on Retina displays unless the {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and
+     * the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For more information, see <a href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>
      * <li><b>macOS</b>: When activating frame autosaving with {@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}, the specified window size and position may be overridden by previously saved
      * values.</li>
+     * <li><b>Wayland</b>: GLFW uses <a href="https://gitlab.freedesktop.org/libdecor/libdecor">libdecor</a> where available to create its window decorations.
+     * This in turn uses server-side XDG decorations where available and provides high quality client-side decorations on compositors like GNOME. If both
+     * XDG decorations and libdecor are unavailable, GLFW falls back to a very simple set of window decorations that only support moving, resizing and the
+     * window manager's right-click menu.</li>
      * <li><b>X11</b>: Some window managers will not respect the placement of initially hidden windows.</li>
      * <li><b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
      * to query the final size, position or other attributes directly after window creation.</li>
      * <li><b>X11</b>: The class part of the {@code WM_CLASS} window property will by default be set to the window title passed to this function. The instance
      * part will use the contents of the {@code RESOURCE_NAME} environment variable, if present and not empty, or fall back to the window title. Set the
      * {@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME} and {@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME} window hints to override this.</li>
-     * <li><b>Wayland</b>: Compositors should implement the xdg-decoration protocol for GLFW to decorate the window properly. If this protocol isn't
-     * supported, or if the compositor prefers client-side decorations, a very simple fallback frame will be drawn using the {@code wp_viewporter}
-     * protocol. A compositor can still emit close, maximize or fullscreen events, using for instance a keybind mechanism. If neither of these protocols
-     * is supported, the window won't be decorated.</li>
-     * <li><b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.</li>
-     * <li><b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor.</li>
      * </ul></div>
      *
      * @param width   the desired width, in screen coordinates, of the window
@@ -2313,6 +2326,44 @@ public class GLFW {
             check(window);
         }
         invokePV(window, value ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ glfwGetWindowTitle ] ---
+
+    /** Unsafe version of: {@link #glfwGetWindowTitle GetWindowTitle} */
+    public static long nglfwGetWindowTitle(long window) {
+        long __functionAddress = Functions.GetWindowTitle;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePP(window, __functionAddress);
+    }
+
+    /**
+     * Returns the title of the specified window.
+     * 
+     * <p>This function returns the window title, encoded as UTF-8, of the specified window. This is the title set previously by {@link #glfwCreateWindow CreateWindow} or
+     * {@link #glfwSetWindowTitle SetWindowTitle}.</p>
+     * 
+     * <p>The returned title is currently a copy of the title last set by {@link #glfwCreateWindow CreateWindow} or {@link #glfwSetWindowTitle SetWindowTitle}. It does not include any additional text which may
+     * be appended by the platform or another program.</p>
+     * 
+     * <p>The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to {@link #glfwGetWindowTitle GetWindowTitle} or
+     * {@link #glfwSetWindowTitle SetWindowTitle}, or until the library is terminated.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     *
+     * @param window the window to query
+     *
+     * @return the UTF-8 encoded window title, or {@code NULL} if an error occurred
+     *
+     * @since version 3.4
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String glfwGetWindowTitle(@NativeType("GLFWwindow *") long window) {
+        long __result = nglfwGetWindowTitle(window);
+        return memUTF8Safe(__result);
     }
 
     // --- [ glfwSetWindowTitle ] ---
@@ -2597,12 +2648,7 @@ public class GLFW {
      * 
      * <p>The window manager may put limits on what sizes are allowed. GLFW cannot and should not override these limits.</p>
      * 
-     * <p>Notes:</p>
-     * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size.</li>
-     * </ul>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window to resize
      * @param width  the desired width, in screen coordinates, of the window content area
@@ -2923,7 +2969,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: It is not possible for an application to set the input focus. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
+     * <li><b>Wayland</b>: The compositor will likely ignore focus requests unless another window created by the same application already has input focus.</li>
      * </ul>
      *
      * @param window the window to give input focus
@@ -3012,7 +3058,6 @@ public class GLFW {
      * <ul>
      * <li>This function must only be called from the main thread.</li>
      * <li><b>Wayland</b>: The desired window position is ignored, as there is no way for an application to set this property.</li>
-     * <li><b>Wayland</b>: Setting the window to full screen will not attempt to change the mode, no matter what the requested size or refresh rate.</li>
      * </ul>
      *
      * @param window      the window whose monitor, size or video mode to set
@@ -3048,7 +3093,7 @@ public class GLFW {
      * <p><b>Wayland</b>: The Wayland protocol provides no way to check whether a window is iconfied, so {@link #GLFW_ICONIFIED ICONIFIED} always returns {@link #GLFW_FALSE FALSE}.</p>
      *
      * @param window the window to query
-     * @param attrib the <a href="https://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td></tr><tr><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td></tr><tr><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
+     * @param attrib the <a href="https://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_POSITION_X POSITION_X}</td><td>{@link #GLFW_POSITION_Y POSITION_Y}</td><td>{@link #GLFW_SOFT_FULLSCREEN SOFT_FULLSCREEN}</td></tr><tr><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td></tr><tr><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_SCALE_FRAMEBUFFER SCALE_FRAMEBUFFER}</td></tr></table>
      *
      * @return the value of the attribute, or zero if an error occurred
      *
@@ -3076,7 +3121,9 @@ public class GLFW {
      *               
      *               <p>Some of these attributes are ignored for windowed mode windows. The new value will take effect if the window is later made full screen.</p>
      *               
-     *               <p>Calling {@link #glfwGetWindowAttrib GetWindowAttrib} will always return the latest value, even if that value is ignored by the current mode of the window. One of:<br></p><table><tr><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td></tr></table>
+     *               <p>Calling {@link #glfwGetWindowAttrib GetWindowAttrib} will always return the latest value, even if that value is ignored by the current mode of the window.</p>
+     *               
+     *               <p><b>Wayland</b>: The {@link #GLFW_FLOATING FLOATING} window attribute is not supported. Setting this will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}. One of:<br></p><table><tr><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td></tr></table>
      * @param value  the value to set
      *
      * @since version 3.3
@@ -3547,7 +3594,7 @@ public class GLFW {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window to query
-     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td><td>{@link #GLFW_IME IME}</td></tr></table>
+     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td><td>{@link #GLFW_UNLIMITED_MOUSE_BUTTONS UNLIMITED_MOUSE_BUTTONS}</td></tr><tr><td>{@link #GLFW_IME IME}</td></tr></table>
      *
      * @return the input mode value
      *
@@ -3592,12 +3639,15 @@ public class GLFW {
      * or {@link #GLFW_FALSE FALSE} to disable it. If raw motion is not supported, attempting to set this will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}. Call {@link #glfwRawMouseMotionSupported RawMouseMotionSupported} to
      * check for support.</p>
      * 
+     * <p>If the mode is {@link #GLFW_UNLIMITED_MOUSE_BUTTONS UNLIMITED_MOUSE_BUTTONS}, the value must be either {@link #GLFW_TRUE TRUE} to disable the mouse button limit when calling the mouse button callback, or
+     * {@link #GLFW_FALSE FALSE} to limit the mouse buttons sent to the callback to the mouse button token values up to {@link #GLFW_MOUSE_BUTTON_LAST MOUSE_BUTTON_LAST}.</p>
+     * 
      * <p>If the mode is {@link #GLFW_IME IME}, the value must be either {@link #GLFW_TRUE TRUE} to turn on IME, or {@link #GLFW_FALSE FALSE} to turn off it.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window whose input mode to set
-     * @param mode   the input mode to set. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td></tr></table>
+     * @param mode   the input mode to set. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td><td>{@link #GLFW_UNLIMITED_MOUSE_BUTTONS UNLIMITED_MOUSE_BUTTONS}</td></tr><tr><td>{@link #GLFW_IME IME}</td></tr></table>
      * @param value  the new value of the specified input mode
      *
      * @since GFLW 3.0
@@ -3774,10 +3824,12 @@ public class GLFW {
      * <p>If the {@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS} input mode is enabled, this function returns {@link #GLFW_PRESS PRESS} the first time you call it for a mouse button that was pressed, even
      * if that mouse button has already been released.</p>
      * 
+     * <p>The {@link #GLFW_UNLIMITED_MOUSE_BUTTONS UNLIMITED_MOUSE_BUTTONS} input mode does not effect the limit on buttons which can be polled with this function.</p>
+     * 
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the desired window
-     * @param button the desired mouse button
+     * @param button the desired mouse button token
      *
      * @return one of {@link #GLFW_PRESS PRESS} or {@link #GLFW_RELEASE RELEASE}
      *
@@ -4378,9 +4430,12 @@ public class GLFW {
     /**
      * Sets the mouse button callback of the specified window, which is called when a mouse button is pressed or released.
      * 
-     * <p>When a window loses input focus, it will generate synthetic mouse button release events for all pressed mouse buttons. You can tell these events from
-     * user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
-     * callback has been called.</p>
+     * <p>When a window loses input focus, it will generate synthetic mouse button release events for all pressed mouse buttons with associated button tokens.
+     * You can tell these events from user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed,
+     * i.e. after the window focus callback has been called.</p>
+     * 
+     * <p>The reported {@code button} value can be higher than {@link #GLFW_MOUSE_BUTTON_LAST MOUSE_BUTTON_LAST} if the button does not have an associated button token and the
+     * {@link #GLFW_UNLIMITED_MOUSE_BUTTONS UNLIMITED_MOUSE_BUTTONS} input mode is set.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -4504,12 +4559,7 @@ public class GLFW {
      * <p>Because the path array and its strings may have been generated specifically for that event, they are not guaranteed to be valid after the callback has
      * returned. If you wish to use them after the callback returns, you need to make a deep copy.</p>
      * 
-     * <p>Notes:</p>
-     * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: File drop is currently unimplemented.</li>
-     * </ul>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window whose callback to set
      * @param cbfun  the new callback or {@code NULL} to remove the currently set callback
@@ -4983,11 +5033,10 @@ public class GLFW {
      * 
      * <p>The specified string is copied before this function returns.</p>
      * 
-     * <p>Notes:</p>
+     * <p><b>Win32</b>: The clipboard on Windows has a single global lock for reading and writing. GLFW tries to acquire it a few times, which is almost always
+     * enough. If it cannot acquire the lock then this function emits {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR} and returns. It is safe to try this multiple times.</p>
      * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * </ul>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param window deprecated, any valid window or {@code NULL}.
      * @param string a UTF-8 encoded string
@@ -5006,11 +5055,10 @@ public class GLFW {
      * 
      * <p>The specified string is copied before this function returns.</p>
      * 
-     * <p>Notes:</p>
+     * <p><b>Win32</b>: The clipboard on Windows has a single global lock for reading and writing. GLFW tries to acquire it a few times, which is almost always
+     * enough. If it cannot acquire the lock then this function emits {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR} and returns. It is safe to try this multiple times.</p>
      * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * </ul>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param window deprecated, any valid window or {@code NULL}.
      * @param string a UTF-8 encoded string
@@ -5039,6 +5087,9 @@ public class GLFW {
     /**
      * Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents
      * cannot be converted, {@code NULL} is returned and a {@link #GLFW_FORMAT_UNAVAILABLE FORMAT_UNAVAILABLE} error is generated.
+     * 
+     * <p><b>Win32</b>: The clipboard on Windows has a single global lock for reading and writing. GLFW tries to acquire it a few times, which is almost always
+     * enough. If it cannot acquire the lock then this function emits {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR} and returns. It is safe to try this multiple times.</p>
      * 
      * <p>The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to {@link #glfwGetClipboardString GetClipboardString} or
      * {@link #glfwSetClipboardString SetClipboardString}, or until the library is terminated.</p>

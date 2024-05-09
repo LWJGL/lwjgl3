@@ -556,7 +556,7 @@ $indent}"""
                         } else
                             validate(m, "$t$t")
                     )
-                } else if (!m.has(nullable) && m.nativeType !is StructType) {
+                } else if (!m.has(nullable)) {
                     validations.add(validate(m, "$t$t"))
                 }
             }
@@ -1642,7 +1642,7 @@ ${validations.joinToString("\n")}
     private val StructMember.pointerValue get() = if (!Module.CHECKS || has(nullable)) "value" else "check(value)"
     private val StructMember.isNullable
         get() = has(nullable) ||
-                getReferenceMember<AutoSizeMember>(name)?.get<AutoSizeMember>()?.optional ?: false ||
+                getReferenceMember<AutoSizeMember>(name)?.get<AutoSizeMember>()?.optional == true ||
                 (this is StructMemberArray && this.validSize < this.size)
     private val StructMember.addressValue get() = if (isNullable) "memAddressSafe(value)" else "value.address()"
     private val StructMember.memAddressValue get() = if (isNullable) "memAddressSafe(value)" else "memAddress(value)"

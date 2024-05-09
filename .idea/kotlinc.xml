@@ -3,8 +3,15 @@
   <component name="Kotlin2JvmCompilerArguments">
     <option name="jvmTarget" value="1.8" />
   </component>
+  <component name="KotlinCommonCompilerArguments">
+    <option name="apiVersion" value="1.9" />
+    <option name="languageVersion" value="1.9" />
+  </component>
   <component name="KotlinCompilerSettings">
-    <option name="additionalArguments" value="-version -progressive -Xno-call-assertions -Xno-param-assertions -Xlambdas=indy -Xbackend-threads=0" />
+    <option name="additionalArguments" value="-version -progressive -Xno-call-assertions -Xno-param-assertions -Xlambdas=indy" />
     <option name="copyJsLibraryFiles" value="false" />
+  </component>
+  <component name="KotlinJpsPluginSettings">
+    <option name="version" value="2.0.0-RC2" />
   </component>
 </project>

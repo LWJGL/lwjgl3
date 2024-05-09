@@ -314,7 +314,7 @@ class Func(
 
             if (it.has<AutoSize>()) {
                 val autoSize = it.get<AutoSize>()
-                val nullableReference = paramMap[autoSize.reference]?.has(nullable) ?: false
+                val nullableReference = paramMap[autoSize.reference]?.has(nullable) == true
                 (sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).forEach { reference ->
                     if (autoSizeReferences.contains(reference))
                         it.error("An AutoSize reference already exists for: $reference")
@@ -910,7 +910,7 @@ class Func(
 
     private fun PrintWriter.printDocumentation(parameterFilter: (Parameter) -> Boolean) {
         val doc = documentation(parameterFilter)
-        val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false
+        val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) == true
         if (!custom && doc.isNotEmpty())
             println(doc)
     }
@@ -1046,7 +1046,7 @@ class Func(
                             expression.indexOf('(').run {
                                 if (this == -1) false else expression.substring(0, this).run {
                                     nativeClass.functions
-                                        .singleOrNull { it.nativeName == this }?.let { it.returns.nativeType.mapping !== PrimitiveMapping.INT } ?: false
+                                        .singleOrNull { it.nativeName == this }?.let { it.returns.nativeType.mapping !== PrimitiveMapping.INT } == true
                                 }
                             }
 
@@ -1575,7 +1575,7 @@ class Func(
         if (!constantMacro) {
             if (description != null) {
                 val doc = nativeClass.processDocumentation("$description $javaDocLink").toJavaDoc()
-                val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false
+                val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) == true
                 if (!custom && doc.isNotEmpty())
                     println(doc)
             } else {
