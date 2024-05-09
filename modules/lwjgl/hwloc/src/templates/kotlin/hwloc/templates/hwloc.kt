@@ -1412,6 +1412,14 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         hwloc_topology_t("topology", "")
     )
 
+    int(
+        "topology_free_group_object",
+        "",
+
+        hwloc_topology_t("topology", ""),
+        hwloc_obj_t("group", "")
+    )
+
     hwloc_obj_t(
         "topology_insert_group_object",
         "",

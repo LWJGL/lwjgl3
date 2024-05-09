@@ -166,6 +166,7 @@ public class HWLoc {
             topology_allow                        = apiGetFunctionAddress(HWLOC, "hwloc_topology_allow"),
             topology_insert_misc_object           = apiGetFunctionAddress(HWLOC, "hwloc_topology_insert_misc_object"),
             topology_alloc_group_object           = apiGetFunctionAddress(HWLOC, "hwloc_topology_alloc_group_object"),
+            topology_free_group_object            = apiGetFunctionAddress(HWLOC, "hwloc_topology_free_group_object"),
             topology_insert_group_object          = apiGetFunctionAddress(HWLOC, "hwloc_topology_insert_group_object"),
             obj_add_other_obj_sets                = apiGetFunctionAddress(HWLOC, "hwloc_obj_add_other_obj_sets"),
             topology_refresh                      = apiGetFunctionAddress(HWLOC, "hwloc_topology_refresh"),
@@ -2352,6 +2353,20 @@ public class HWLoc {
     public static hwloc_obj hwloc_topology_alloc_group_object(@NativeType("hwloc_topology_t") long topology) {
         long __result = nhwloc_topology_alloc_group_object(topology);
         return hwloc_obj.createSafe(__result);
+    }
+
+    // --- [ hwloc_topology_free_group_object ] ---
+
+    public static int nhwloc_topology_free_group_object(long topology, long group) {
+        long __functionAddress = Functions.topology_free_group_object;
+        if (CHECKS) {
+            check(topology);
+        }
+        return invokePPI(topology, group, __functionAddress);
+    }
+
+    public static int hwloc_topology_free_group_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj group) {
+        return nhwloc_topology_free_group_object(topology, group.address());
     }
 
     // --- [ hwloc_topology_insert_group_object ] ---
