@@ -1112,6 +1112,21 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "buffer_set_random_state",
+        "",
+
+        hb_buffer_t.p("buffer", ""),
+        unsigned("state", "")
+    )
+
+    unsigned(
+        "buffer_get_random_state",
+        "",
+
+        hb_buffer_t.const.p("buffer", "")
+    )
+
+    void(
         "buffer_clear_contents",
         "Content API.",
 
@@ -4156,10 +4171,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("", "VERSION_MAJOR".."8")
-    IntConstant("", "VERSION_MINOR".."3")
+    IntConstant("", "VERSION_MINOR".."4")
     IntConstant("", "VERSION_MICRO".."0")
 
-    StringConstant("", "VERSION_STRING".."8.3.0")
+    StringConstant("", "VERSION_STRING".."8.4.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

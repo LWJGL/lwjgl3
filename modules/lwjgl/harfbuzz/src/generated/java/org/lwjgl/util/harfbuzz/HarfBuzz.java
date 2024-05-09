@@ -144,6 +144,8 @@ public class HarfBuzz {
             buffer_get_invisible_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_invisible_glyph"),
             buffer_set_not_found_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_not_found_glyph"),
             buffer_get_not_found_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_not_found_glyph"),
+            buffer_set_random_state                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_random_state"),
+            buffer_get_random_state                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_random_state"),
             buffer_clear_contents                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_clear_contents"),
             buffer_pre_allocate                       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_pre_allocate"),
             buffer_allocation_successful              = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_allocation_successful"),
@@ -1486,11 +1488,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 8;
 
-    public static final int HB_VERSION_MINOR = 3;
+    public static final int HB_VERSION_MINOR = 4;
 
     public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "8.3.0";
+    public static final String HB_VERSION_STRING = "8.4.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -2401,6 +2403,27 @@ public class HarfBuzz {
     @NativeType("hb_codepoint_t")
     public static int hb_buffer_get_not_found_glyph(@NativeType("hb_buffer_t const *") long buffer) {
         long __functionAddress = Functions.buffer_get_not_found_glyph;
+        if (CHECKS) {
+            check(buffer);
+        }
+        return invokePI(buffer, __functionAddress);
+    }
+
+    // --- [ hb_buffer_set_random_state ] ---
+
+    public static void hb_buffer_set_random_state(@NativeType("hb_buffer_t *") long buffer, @NativeType("unsigned") int state) {
+        long __functionAddress = Functions.buffer_set_random_state;
+        if (CHECKS) {
+            check(buffer);
+        }
+        invokePV(buffer, state, __functionAddress);
+    }
+
+    // --- [ hb_buffer_get_random_state ] ---
+
+    @NativeType("unsigned")
+    public static int hb_buffer_get_random_state(@NativeType("hb_buffer_t const *") long buffer) {
+        long __functionAddress = Functions.buffer_get_random_state;
         if (CHECKS) {
             check(buffer);
         }
