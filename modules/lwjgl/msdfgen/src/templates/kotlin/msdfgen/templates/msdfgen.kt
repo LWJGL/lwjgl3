@@ -187,6 +187,12 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         int("polarity", "The miter polarity."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
+    int(
+        "shape_orient_contours",
+        "Orients all contours associated with the given shape before rendering.",
+        msdf_shape_handle("shape", "A pointer to a shape whose contours to orient."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
     void(
         "shape_free",
         "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",

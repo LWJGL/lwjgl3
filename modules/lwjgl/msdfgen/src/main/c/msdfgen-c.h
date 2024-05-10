@@ -295,6 +295,13 @@ MSDF_API int msdf_shape_bound(msdf_shape_const_handle shape, msdf_bounds_t* boun
 MSDF_API int msdf_shape_bound_miters(msdf_shape_const_handle shape, msdf_bounds_t* bounds, double border, double miter_limit, int polarity);
 
 /**
+ * Orients all contours associated with the given shape before rendering.
+ * @param shape A pointer to a shape whose contours to orient.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_shape_orient_contours(msdf_shape_handle shape);
+
+/**
  * Calls the destructor of the given bitmap and frees its memory using the
  * internal allocator.
  * @param shape A pointer to a shape object to be freed.

@@ -400,6 +400,25 @@ public class MSDFGen {
         return nmsdf_shape_bound_miters(shape, bounds.address(), border, miter_limit, polarity);
     }
 
+    // --- [ msdf_shape_orient_contours ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_orient_contours shape_orient_contours} */
+    public static native int nmsdf_shape_orient_contours(long shape);
+
+    /**
+     * Orients all contours associated with the given shape before rendering.
+     *
+     * @param shape A pointer to a shape whose contours to orient.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_orient_contours(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_orient_contours(shape);
+    }
+
     // --- [ msdf_shape_free ] ---
 
     /** Unsafe version of: {@link #msdf_shape_free shape_free} */

@@ -122,6 +122,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1bound_1
     return (jint)msdf_shape_bound_miters(shape, bounds, border, miter_limit, polarity);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1orient_1contours(JNIEnv *__env, jclass clazz, jlong shapeAddress) {
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_orient_contours(shape);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1free(JNIEnv *__env, jclass clazz, jlong shapeAddress) {
     msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
     UNUSED_PARAMS(__env, clazz)
