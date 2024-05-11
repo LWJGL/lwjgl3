@@ -42,7 +42,7 @@ import static org.lwjgl.util.opus.Opus.*;
  * 
  * <p>The output channels specified by the encoder should use the <a href="https://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-810004.3.9">Vorbis channel
  * ordering</a>. A decoder may wish to apply an additional permutation to the mapping the encoder used to achieve a different output channel order (e.g.
- * for outputing in WAV order).</p>
+ * for outputting in WAV order).</p>
  * 
  * <p>Each multistream packet contains an Opus packet for each stream, and all of the Opus packets in a single multistream packet must have the same
  * duration. Therefore the duration of a multistream packet can be extracted from the TOC sequence of the first stream, which is located at the beginning

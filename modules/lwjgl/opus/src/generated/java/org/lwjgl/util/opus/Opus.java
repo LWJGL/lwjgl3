@@ -69,8 +69,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * enc = malloc(size);
  * error = opus_encoder_init(enc, Fs, channels, application);</code></pre>
  * 
- * <p>where {@link #opus_encoder_get_size encoder_get_size} returns the required size for the encoder state. Note that future versions of this code may change the size, so no assuptions
- * should be made about it.</p>
+ * <p>where {@link #opus_encoder_get_size encoder_get_size} returns the required size for the encoder state. Note that future versions of this code may change the size, so no
+ * assumptions should be made about it.</p>
  * 
  * <p>The encoder state is always continuous in memory and only a shallow copy is sufficient to copy it (e.g. {@code memcpy()}).</p>
  * 
@@ -143,8 +143,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * dec = malloc(size);
  * error = opus_decoder_init(dec, Fs, channels);</code></pre>
  * 
- * <p>where {@link #opus_decoder_get_size decoder_get_size} returns the required size for the decoder state. Note that future versions of this code may change the size, so no assuptions
- * should be made about it.</p>
+ * <p>where {@link #opus_decoder_get_size decoder_get_size} returns the required size for the decoder state. Note that future versions of this code may change the size, so no
+ * assumptions should be made about it.</p>
  * 
  * <p>The decoder state is always continuous in memory and only a shallow copy is sufficient to copy it (e.g. {@code memcpy()}).</p>
  * 
@@ -324,12 +324,25 @@ public class Opus {
             decode_float                 = apiGetFunctionAddress(OPUS, "opus_decode_float"),
             decoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_decoder_ctl"),
             decoder_destroy              = apiGetFunctionAddress(OPUS, "opus_decoder_destroy"),
+            dre_decoder_get_size         = apiGetFunctionAddress(OPUS, "opus_dre_decoder_get_size"),
+            dred_decoder_create          = apiGetFunctionAddress(OPUS, "opus_dred_decoder_create"),
+            dred_decoder_init            = apiGetFunctionAddress(OPUS, "opus_dred_decoder_init"),
+            dred_decoder_destroy         = apiGetFunctionAddress(OPUS, "opus_dred_decoder_destroy"),
+            dred_decoder_ctl             = apiGetFunctionAddress(OPUS, "opus_dred_decoder_ctl"),
+            dred_get_size                = apiGetFunctionAddress(OPUS, "opus_dred_get_size"),
+            dred_alloc                   = apiGetFunctionAddress(OPUS, "opus_dred_alloc"),
+            dred_free                    = apiGetFunctionAddress(OPUS, "opus_dred_free"),
+            dred_parse                   = apiGetFunctionAddress(OPUS, "opus_dred_parse"),
+            dred_process                 = apiGetFunctionAddress(OPUS, "opus_dred_process"),
+            decoder_dred_decode          = apiGetFunctionAddress(OPUS, "opus_decoder_dred_decode"),
+            decoder_dred_decode_float    = apiGetFunctionAddress(OPUS, "opus_decoder_dred_decode_float"),
             packet_parse                 = apiGetFunctionAddress(OPUS, "opus_packet_parse"),
             packet_get_bandwidth         = apiGetFunctionAddress(OPUS, "opus_packet_get_bandwidth"),
             packet_get_samples_per_frame = apiGetFunctionAddress(OPUS, "opus_packet_get_samples_per_frame"),
             packet_get_nb_channels       = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_channels"),
             packet_get_nb_frames         = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_frames"),
             packet_get_nb_samples        = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_samples"),
+            packet_has_lbrr              = apiGetFunctionAddress(OPUS, "opus_packet_has_lbrr"),
             decoder_get_nb_samples       = apiGetFunctionAddress(OPUS, "opus_decoder_get_nb_samples"),
             pcm_soft_clip                = apiGetFunctionAddress(OPUS, "opus_pcm_soft_clip"),
             repacketizer_get_size        = apiGetFunctionAddress(OPUS, "opus_repacketizer_get_size"),
@@ -432,6 +445,9 @@ public class Opus {
      * <li>{@link #OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST SET_PHASE_INVERSION_DISABLED_REQUEST}</li>
      * <li>{@link #OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST GET_PHASE_INVERSION_DISABLED_REQUEST}</li>
      * <li>{@link #OPUS_GET_IN_DTX_REQUEST GET_IN_DTX_REQUEST}</li>
+     * <li>{@link #OPUS_SET_DRED_DURATION_REQUEST SET_DRED_DURATION_REQUEST}</li>
+     * <li>{@link #OPUS_GET_DRED_DURATION_REQUEST GET_DRED_DURATION_REQUEST}</li>
+     * <li>{@link #OPUS_SET_DNN_BLOB_REQUEST SET_DNN_BLOB_REQUEST}</li>
      * </ul>
      */
     public static final int
@@ -475,7 +491,10 @@ public class Opus {
         OPUS_GET_PREDICTION_DISABLED_REQUEST      = 4043,
         OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = 4046,
         OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = 4047,
-        OPUS_GET_IN_DTX_REQUEST                   = 4049;
+        OPUS_GET_IN_DTX_REQUEST                   = 4049,
+        OPUS_SET_DRED_DURATION_REQUEST            = 4050,
+        OPUS_GET_DRED_DURATION_REQUEST            = 4051,
+        OPUS_SET_DNN_BLOB_REQUEST                 = 4052;
 
     /** Values for the various encoder CTLs. */
     public static final int
@@ -925,6 +944,252 @@ public class Opus {
         invokePV(st, __functionAddress);
     }
 
+    // --- [ opus_dre_decoder_get_size ] ---
+
+    /**
+     * Gets the size of an {@code OpusDREDDecoder} structure.
+     *
+     * @return the size in bytes
+     */
+    public static int opus_dre_decoder_get_size() {
+        long __functionAddress = Functions.dre_decoder_get_size;
+        return invokeI(__functionAddress);
+    }
+
+    // --- [ opus_dred_decoder_create ] ---
+
+    /** Unsafe version of: {@link #opus_dred_decoder_create dred_decoder_create} */
+    public static long nopus_dred_decoder_create(long error) {
+        long __functionAddress = Functions.dred_decoder_create;
+        return invokePP(error, __functionAddress);
+    }
+
+    /**
+     * Allocates and initializes an {@code OpusDREDDecoder} state.
+     *
+     * @param error returns {@link #OPUS_OK OK} or an error code
+     */
+    @NativeType("OpusDREDDecoder *")
+    public static long opus_dred_decoder_create(@Nullable @NativeType("int *") IntBuffer error) {
+        if (CHECKS) {
+            checkSafe(error, 1);
+        }
+        return nopus_dred_decoder_create(memAddressSafe(error));
+    }
+
+    // --- [ opus_dred_decoder_init ] ---
+
+    /**
+     * Initializes an {@code OpusDREDDecoder} state.
+     *
+     * @param dec state to be initialized
+     */
+    public static int opus_dred_decoder_init(@NativeType("OpusDREDDecoder *") long dec) {
+        long __functionAddress = Functions.dred_decoder_init;
+        if (CHECKS) {
+            check(dec);
+        }
+        return invokePI(dec, __functionAddress);
+    }
+
+    // --- [ opus_dred_decoder_destroy ] ---
+
+    /**
+     * Frees an {@code OpusDREDDecoder} allocated by {@link #opus_dred_decoder_create dred_decoder_create}.
+     *
+     * @param dec state to be freed
+     */
+    public static void opus_dred_decoder_destroy(@NativeType("OpusDREDDecoder *") long dec) {
+        long __functionAddress = Functions.dred_decoder_destroy;
+        if (CHECKS) {
+            check(dec);
+        }
+        invokePV(dec, __functionAddress);
+    }
+
+    // --- [ opus_dred_decoder_ctl ] ---
+
+    /**
+     * Perform a CTL function on an Opus DRED decoder.
+     * 
+     * <p>Generally the request and subsequent arguments are generated by a convenience macro.</p>
+     *
+     * @param dred_dec DRED Decoder state
+     */
+    private static int opus_dred_decoder_ctl(@NativeType("OpusDREDDecoder *") long dred_dec) {
+        long __functionAddress = Functions.dred_decoder_ctl;
+        if (CHECKS) {
+            check(dred_dec);
+        }
+        return invokePI(dred_dec, __functionAddress);
+    }
+
+    // --- [ opus_dred_get_size ] ---
+
+    /**
+     * Gets the size of an {@code OpusDRED} structure.
+     *
+     * @return the size in bytes
+     */
+    public static int opus_dred_get_size() {
+        long __functionAddress = Functions.dred_get_size;
+        return invokeI(__functionAddress);
+    }
+
+    // --- [ opus_dred_alloc ] ---
+
+    /** Unsafe version of: {@link #opus_dred_alloc dred_alloc} */
+    public static long nopus_dred_alloc(long error) {
+        long __functionAddress = Functions.dred_alloc;
+        return invokePP(error, __functionAddress);
+    }
+
+    /**
+     * Allocates and initializes a DRED state.
+     *
+     * @param error returns {@link #OPUS_OK OK} or an error code
+     */
+    @NativeType("OpusDRED *")
+    public static long opus_dred_alloc(@Nullable @NativeType("int *") IntBuffer error) {
+        if (CHECKS) {
+            checkSafe(error, 1);
+        }
+        return nopus_dred_alloc(memAddressSafe(error));
+    }
+
+    // --- [ opus_dred_free ] ---
+
+    /**
+     * Frees an {@code OpusDRED} allocated by {@link #opus_dred_alloc dred_alloc}.
+     *
+     * @param dec state to be freed
+     */
+    public static void opus_dred_free(@NativeType("OpusDRED *") long dec) {
+        long __functionAddress = Functions.dred_free;
+        if (CHECKS) {
+            check(dec);
+        }
+        invokePV(dec, __functionAddress);
+    }
+
+    // --- [ opus_dred_parse ] ---
+
+    /**
+     * Unsafe version of: {@link #opus_dred_parse dred_parse}
+     *
+     * @param len number of bytes in payload
+     */
+    public static int nopus_dred_parse(long dred_dec, long dred, long data, int len, int max_dred_samples, int sampling_rate, long dred_end, int defer_processing) {
+        long __functionAddress = Functions.dred_parse;
+        if (CHECKS) {
+            check(dred_dec);
+            check(dred);
+        }
+        return invokePPPPI(dred_dec, dred, data, len, max_dred_samples, sampling_rate, dred_end, defer_processing, __functionAddress);
+    }
+
+    /**
+     * Decode an Opus DRED packet.
+     *
+     * @param dred_dec         DRED Decoder state
+     * @param dred             DRED state
+     * @param data             input payload
+     * @param max_dred_samples maximum number of DRED samples that may be needed (if available in the packet)
+     * @param sampling_rate    sampling rate used for {@code max_dred_samples} argument. Needs not match the actual sampling rate of the decoder
+     * @param dred_end         returns number of non-encoded (silence) samples between the DRED timestamp and the last DRED sample
+     * @param defer_processing flag (0 or 1). If set to one, the CPU-intensive part of the DRED decoding is deferred until {@link #opus_dred_process dred_process} is called
+     *
+     * @return offset (positive) of the first decoded DRED samples, zero if no DRED is present, or an error code
+     */
+    public static int opus_dred_parse(@NativeType("OpusDREDDecoder *") long dred_dec, @NativeType("OpusDRED *") long dred, @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int32") int max_dred_samples, @NativeType("opus_int32") int sampling_rate, @Nullable @NativeType("int *") IntBuffer dred_end, @NativeType("int") boolean defer_processing) {
+        if (CHECKS) {
+            checkSafe(dred_end, 1);
+        }
+        return nopus_dred_parse(dred_dec, dred, memAddress(data), data.remaining(), max_dred_samples, sampling_rate, memAddressSafe(dred_end), defer_processing ? 1 : 0);
+    }
+
+    // --- [ opus_dred_process ] ---
+
+    /**
+     * Finish decoding an Opus DRED packet.
+     * 
+     * <p>The function only needs to be called if {@link #opus_dred_parse dred_parse} was called with {@code defer_processing=1}. The source and destination will often be the same
+     * DRED state.</p>
+     *
+     * @param dred_dec DRED Decoder state
+     * @param src      source DRED state to start the processing from
+     * @param dst      destination DRED state to store the updated state after processing
+     */
+    public static int opus_dred_process(@NativeType("OpusDREDDecoder *") long dred_dec, @NativeType("OpusDRED const *") long src, @NativeType("OpusDRED *") long dst) {
+        long __functionAddress = Functions.dred_process;
+        if (CHECKS) {
+            check(dred_dec);
+            check(src);
+            check(dst);
+        }
+        return invokePPPI(dred_dec, src, dst, __functionAddress);
+    }
+
+    // --- [ opus_decoder_dred_decode ] ---
+
+    /** Unsafe version of: {@link #opus_decoder_dred_decode decoder_dred_decode} */
+    public static int nopus_decoder_dred_decode(long st, long dred, int dred_offset, long pcm, int frame_size) {
+        long __functionAddress = Functions.decoder_dred_decode;
+        if (CHECKS) {
+            check(st);
+            check(dred);
+        }
+        return invokePPPI(st, dred, dred_offset, pcm, frame_size, __functionAddress);
+    }
+
+    /**
+     * Decode audio from an Opus DRED packet.
+     *
+     * @param st          Decoder state
+     * @param dred        DRED state
+     * @param dred_offset position of the redundancy to decode (in samples before the beginning of the real audio data in the packet)
+     * @param pcm         output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)})
+     * @param frame_size  number of samples per channel to decode in pcm. {@code frame_size} must be a multiple of 2.5 ms.
+     *
+     * @return number of decoded samples or an error code
+     */
+    public static int opus_decoder_dred_decode(@NativeType("OpusDecoder *") long st, @NativeType("OpusDRED const *") long dred, @NativeType("opus_int32") int dred_offset, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + 8));
+        }
+        return nopus_decoder_dred_decode(st, dred, dred_offset, memAddress(pcm), frame_size);
+    }
+
+    // --- [ opus_decoder_dred_decode_float ] ---
+
+    /** Unsafe version of: {@link #opus_decoder_dred_decode_float decoder_dred_decode_float} */
+    public static int nopus_decoder_dred_decode_float(long st, long dred, int dred_offset, long pcm, int frame_size) {
+        long __functionAddress = Functions.decoder_dred_decode_float;
+        if (CHECKS) {
+            check(st);
+            check(dred);
+        }
+        return invokePPPI(st, dred, dred_offset, pcm, frame_size, __functionAddress);
+    }
+
+    /**
+     * Decode audio from an Opus DRED packet with floating point output.
+     *
+     * @param st          decoder state
+     * @param dred        DRED state
+     * @param dred_offset position of the redundancy to decode (in samples before the beginning of the real audio data in the packet)
+     * @param pcm         output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(float)})
+     * @param frame_size  number of samples per channel to decode in pcm. {@code frame_size} must be a multiple of 2.5 ms.
+     *
+     * @return number of decoded samples or an error code
+     */
+    public static int opus_decoder_dred_decode_float(@NativeType("OpusDecoder *") long st, @NativeType("OpusDRED const *") long dred, @NativeType("opus_int32") int dred_offset, @NativeType("float *") FloatBuffer pcm, int frame_size) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + 8));
+        }
+        return nopus_decoder_dred_decode_float(st, dred, dred_offset, memAddress(pcm), frame_size);
+    }
+
     // --- [ opus_packet_parse ] ---
 
     /**
@@ -1071,6 +1336,29 @@ public class Opus {
      */
     public static int opus_packet_get_nb_samples(@NativeType("unsigned char const *") ByteBuffer packet, @NativeType("opus_int32") int Fs) {
         return nopus_packet_get_nb_samples(memAddress(packet), packet.remaining(), Fs);
+    }
+
+    // --- [ opus_packet_has_lbrr ] ---
+
+    /**
+     * Unsafe version of: {@link #opus_packet_has_lbrr packet_has_lbrr}
+     *
+     * @param len length of packet
+     */
+    public static int nopus_packet_has_lbrr(long packet, int len) {
+        long __functionAddress = Functions.packet_has_lbrr;
+        return invokePI(packet, len, __functionAddress);
+    }
+
+    /**
+     * Checks whether an Opus packet has LBRR.
+     *
+     * @param packet Opus packet
+     *
+     * @return 1 is LBRR is present, 0 otherwise. {@link #OPUS_INVALID_PACKET INVALID_PACKET} if the compressed data passed is corrupted or of an unsupported type.
+     */
+    public static int opus_packet_has_lbrr(@NativeType("unsigned char const *") ByteBuffer packet) {
+        return nopus_packet_has_lbrr(memAddress(packet), packet.remaining());
     }
 
     // --- [ opus_decoder_get_nb_samples ] ---
@@ -1660,6 +1948,26 @@ public class Opus {
     }
 
     /**
+     * Performs a CTL function on an Opus DRED decoder.
+     *
+     * @param dred_dec decoder state
+     * @param request  CTL request
+     */
+    public static int opus_dred_decoder_ctl(@NativeType("OpusDredDecoder *") long dred_dec, int request) {
+        return new CTLRequestV(request).apply(dred_dec, Functions.dred_decoder_ctl);
+    }
+
+    /**
+     * Performs a CTL function on an Opus DRED decoder.
+     *
+     * @param dred_dec decoder state
+     * @param request  CTL request
+     */
+    public static int opus_dred_decoder_ctl(@NativeType("OpusDredDecoder *") long dred_dec, CTLRequest request) {
+        return request.apply(dred_dec, Functions.dred_decoder_ctl);
+    }
+
+    /**
      * Configures the encoder's computational complexity.
      *
      * <p>The supported range is 0-10 inclusive with 10 representing the highest complexity.</p>
@@ -2056,6 +2364,15 @@ public class Opus {
      * </dl>
      */
     public static CTLRequest OPUS_GET_PREDICTION_DISABLED(IntBuffer value) { return new CTLRequestP(OPUS_GET_PREDICTION_DISABLED_REQUEST, memAddress(value)); }
+
+    /** If non-zero, enables Deep Redundancy (DRED) and use the specified maximum number of 10-ms redundant frames. */
+    public static CTLRequest OPUS_SET_DRED_DURATION_REQUEST(int value) { return new CTLRequestI(OPUS_SET_DRED_DURATION_REQUEST, value); }
+
+    /** Gets the encoder's configured Deep Redundancy (DRED) maximum number of frames. */
+    public static CTLRequest OPUS_GET_DRED_DURATION_REQUEST(IntBuffer value) { return new CTLRequestP(OPUS_GET_DRED_DURATION_REQUEST, memAddress(value)); }
+
+    /** Provide external DNN weights from binary object (only when explicitly built without the weights). */
+    public static CTLRequest OPUS_SET_DNN_BLOB_REQUEST(ByteBuffer data, int len) { return new CTLRequestPI(OPUS_SET_DNN_BLOB_REQUEST, memAddress(data), len); }
 
     /**
      * Gets the final state of the codec's entropy coder.
