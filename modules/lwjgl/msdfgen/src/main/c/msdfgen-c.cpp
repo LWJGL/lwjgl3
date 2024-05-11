@@ -39,46 +39,9 @@ namespace {
     using MSDFBitmapRef = msdfgen::BitmapRef<float, 3>;
     using MTSDFBitmap = msdfgen::Bitmap<float, 4>;
     using MTSDFBitmapRef = msdfgen::BitmapRef<float, 4>;
-
-    msdf_allocator_t g_allocator = {malloc, realloc, free};
-
-    template<typename T>
-    [[nodiscard]] auto msdf_alloc(const size_t count = 1) noexcept -> T* {
-        return static_cast<T*>(g_allocator.alloc_callback(sizeof(T) * count));
-    }
-
-    auto msdf_free(void* memory) {
-        g_allocator.free_callback(memory);
-    }
-
-    template<typename T, typename... TArgs>
-    [[nodiscard]] auto msdf_new(TArgs&&... args) noexcept -> T* {
-        auto* memory = static_cast<T*>(g_allocator.alloc_callback(sizeof(T)));
-        new(memory) T(std::forward<TArgs>(args)...);
-        return memory;
-    }
-
-    template<typename T>
-    auto msdf_delete(T* memory) noexcept -> void {
-        if(memory == nullptr) {
-            return;
-        }
-        memory->~T();
-        g_allocator.free_callback(memory);
-    }
 }// namespace
 
 extern "C" {
-
-// msdf_allocator
-
-MSDF_API void msdf_allocator_set(const msdf_allocator_t* allocator) {
-    g_allocator = *allocator;
-}
-
-MSDF_API const msdf_allocator_t* msdf_allocator_get() {
-    return &g_allocator;
-}
 
 // msdf_bitmap
 
@@ -94,16 +57,16 @@ MSDF_API int msdf_bitmap_alloc(const int type, const int width, const int height
     bitmap->height = height;
     switch(type) {
         case MSDF_BITMAP_TYPE_SDF:
-            bitmap->handle = msdf_new<SDFBitmap>(width, height);
+            bitmap->handle = new SDFBitmap(width, height);
             break;
         case MSDF_BITMAP_TYPE_PSDF:
-            bitmap->handle = msdf_new<PSDFBitmap>(width, height);
+            bitmap->handle = new PSDFBitmap(width, height);
             break;
         case MSDF_BITMAP_TYPE_MSDF:
-            bitmap->handle = msdf_new<MSDFBitmap>(width, height);
+            bitmap->handle = new MSDFBitmap(width, height);
             break;
         case MSDF_BITMAP_TYPE_MTSDF:
-            bitmap->handle = msdf_new<MTSDFBitmap>(width, height);
+            bitmap->handle = new MTSDFBitmap(width, height);
             break;
         default:
             return MSDF_ERR_INVALID_ARG;
@@ -171,16 +134,16 @@ MSDF_API void msdf_bitmap_free(msdf_bitmap_t* bitmap) {
     }
     switch(bitmap->type) {
         case MSDF_BITMAP_TYPE_SDF:
-            msdf_delete(static_cast<SDFBitmap*>(bitmap->handle));
+            delete static_cast<SDFBitmap*>(bitmap->handle);
             break;
         case MSDF_BITMAP_TYPE_PSDF:
-            msdf_delete(static_cast<PSDFBitmap*>(bitmap->handle));
+            delete static_cast<PSDFBitmap*>(bitmap->handle);
             break;
         case MSDF_BITMAP_TYPE_MSDF:
-            msdf_delete(static_cast<MSDFBitmap*>(bitmap->handle));
+            delete static_cast<MSDFBitmap*>(bitmap->handle);
             break;
         case MSDF_BITMAP_TYPE_MTSDF:
-            msdf_delete(static_cast<MTSDFBitmap*>(bitmap->handle));
+            delete static_cast<MTSDFBitmap*>(bitmap->handle);
             break;
         default:
             return;
@@ -193,7 +156,7 @@ MSDF_API int msdf_shape_alloc(msdf_shape_handle* shape) {
     if(shape == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    *shape = reinterpret_cast<msdf_shape_handle>(msdf_new<msdfgen::Shape>());
+    *shape = reinterpret_cast<msdf_shape_handle>(new msdfgen::Shape());
     return MSDF_SUCCESS;
 }
 
@@ -282,12 +245,15 @@ MSDF_API int msdf_shape_bound_miters(msdf_shape_const_handle shape,
 }
 
 MSDF_API int msdf_shape_orient_contours(msdf_shape_handle shape) {
+    if(shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
     reinterpret_cast<msdfgen::Shape*>(shape)->orientContours();
     return MSDF_SUCCESS;
 }
 
 MSDF_API void msdf_shape_free(msdf_shape_handle shape) {
-    msdf_delete(reinterpret_cast<msdfgen::Shape*>(shape));
+    delete reinterpret_cast<msdfgen::Shape*>(shape);
 }
 
 // msdf_contour
@@ -296,7 +262,7 @@ MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour) {
     if(contour == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    *contour = reinterpret_cast<msdf_contour_handle>(msdf_new<msdfgen::Contour>());
+    *contour = reinterpret_cast<msdf_contour_handle>(new msdfgen::Contour());
     return MSDF_SUCCESS;
 }
 
@@ -341,7 +307,8 @@ MSDF_API int msdf_contour_bound_miters(msdf_contour_const_handle contour,
     if(contour == nullptr || bounds == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    reinterpret_cast<const msdfgen::Contour*>(contour)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miter_limit, polarity);
+    reinterpret_cast<const msdfgen::Contour*>(contour)->boundMiters(bounds->l, bounds->b, bounds->r, bounds->t, border, miter_limit,
+                                                                    polarity);
     return MSDF_SUCCESS;
 }
 
@@ -362,7 +329,7 @@ MSDF_API int msdf_contour_reverse(msdf_contour_handle contour) {
 }
 
 MSDF_API void msdf_contour_free(msdf_contour_handle contour) {
-    msdf_delete(reinterpret_cast<msdfgen::Contour*>(contour));
+    delete reinterpret_cast<msdfgen::Contour*>(contour);
 }
 
 // msdf_segment
@@ -376,15 +343,15 @@ MSDF_API int msdf_segment_alloc(const int type, msdf_segment_handle* segment) {
     }
     switch(type) {
         case MSDF_SEGMENT_TYPE_LINEAR:
-            *segment = reinterpret_cast<msdf_segment_handle>(msdf_new<msdfgen::LinearSegment>(msdfgen::Point2 {}, msdfgen::Point2 {}));
+            *segment = reinterpret_cast<msdf_segment_handle>(new msdfgen::LinearSegment(msdfgen::Point2 {}, msdfgen::Point2 {}));
             break;
         case MSDF_SEGMENT_TYPE_QUADRATIC:
             *segment = reinterpret_cast<msdf_segment_handle>(
-                msdf_new<msdfgen::QuadraticSegment>(msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}));
+                new msdfgen::QuadraticSegment(msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}));
             break;
         case MSDF_SEGMENT_TYPE_CUBIC:
             *segment = reinterpret_cast<msdf_segment_handle>(
-                msdf_new<msdfgen::CubicSegment>(msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}));
+                new msdfgen::CubicSegment(msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}, msdfgen::Point2 {}));
             break;
         default:
             return MSDF_ERR_INVALID_ARG;
@@ -560,13 +527,13 @@ MSDF_API void msdf_segment_free(msdf_segment_handle segment) {
     auto* p_segment = reinterpret_cast<msdfgen::EdgeSegment*>(segment);
     switch(p_segment->type()) {
         case msdfgen::LinearSegment::EdgeType::EDGE_TYPE:
-            msdf_delete(dynamic_cast<msdfgen::LinearSegment*>(p_segment));
+            delete dynamic_cast<msdfgen::LinearSegment*>(p_segment);
             break;
         case msdfgen::QuadraticSegment::EdgeType::EDGE_TYPE:
-            msdf_delete(dynamic_cast<msdfgen::QuadraticSegment*>(p_segment));
+            delete dynamic_cast<msdfgen::QuadraticSegment*>(p_segment);
             break;
         case msdfgen::CubicSegment::EdgeType::EDGE_TYPE:
-            msdf_delete(dynamic_cast<msdfgen::CubicSegment*>(p_segment));
+            delete dynamic_cast<msdfgen::CubicSegment*>(p_segment);
             break;
         default:
             return;

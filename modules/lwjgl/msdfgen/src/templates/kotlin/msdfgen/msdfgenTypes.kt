@@ -6,45 +6,6 @@ package msdfgen
 
 import org.lwjgl.generator.*
 
-val msdf_allocator_alloc_callback = Module.MSDFGEN.callback {
-    void.p(
-        "MSDFGenAllocatorAllocCallback",
-        "",
-        size_t("size", "The size of the block of memory to allocate in bytes.")
-    ) {
-        documentation = "A pointer to a function used as allocation callback by the internal allocator."
-    }
-}
-
-val msdf_allocator_realloc_callback = Module.MSDFGEN.callback {
-    void.p(
-        "MSDFGenAllocatorReallocCallback",
-        "",
-        void.p("memory", "The address of the block of memory to reallocate."),
-        size_t("size", "The new size of the block of memory after reallocation in bytes.")
-    ) {
-        documentation = "Reallocates a given block of memory to fit at least the given number of bytes."
-    }
-}
-
-val msdf_allocator_free_callback = Module.MSDFGEN.callback {
-    void.p(
-        "MSDFGenAllocatorFreeCallback",
-        "",
-        void.p("memory", "The address of the block of memory to free.")
-    ) {
-        documentation = "Frees the given block of memory."
-    }
-}
-
-val msdf_allocator = struct(Module.MSDFGEN, "MSDFGenAllocator", nativeName = "struct msdf_allocator") {
-    documentation = ""
-
-    msdf_allocator_alloc_callback("alloc_callback", "")
-    msdf_allocator_realloc_callback("realloc_callback", "")
-    msdf_allocator_free_callback("free_callback", "")
-}
-
 val msdf_range = struct(Module.MSDFGEN, "MSDFGenRange", nativeName = "struct msdf_range") {
     documentation = ""
 

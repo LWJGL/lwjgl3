@@ -8,12 +8,6 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1allocator_1set(JNIEnv *__env, jclass clazz, jlong allocatorAddress) {
-    struct msdf_allocator const *allocator = (struct msdf_allocator const *)(uintptr_t)allocatorAddress;
-    UNUSED_PARAMS(__env, clazz)
-    msdf_allocator_set(allocator);
-}
-
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1bitmap_1alloc(JNIEnv *__env, jclass clazz, jint type, jint width, jint height, jlong bitmapAddress) {
     struct msdf_bitmap *bitmap = (struct msdf_bitmap *)(uintptr_t)bitmapAddress;
     UNUSED_PARAMS(__env, clazz)

@@ -43,19 +43,6 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     IntConstant("", "MSDF_EDGE_COLOR_CYAN".."6").noPrefix()
     IntConstant("", "MSDF_EDGE_COLOR_WHITE".."7").noPrefix()
 
-    // msdf_allocator
-
-    void(
-        "allocator_set",
-        "Sets the allocation callbacks to use for allocating API objects.",
-        Unsafe..msdf_allocator.const.p("allocator", "The address of an msdf_allocator_t structure to copy the callback pointers from.")
-    )
-    Unsafe..msdf_allocator.const.p(
-        "allocator_get",
-        "Retrieves the address of the allocator used by the C API to allocate underlying objects.",
-        "The address of the allocator used by the C API to allocate underlying objects."
-    )
-
     // msdf_bitmap
 
     int(

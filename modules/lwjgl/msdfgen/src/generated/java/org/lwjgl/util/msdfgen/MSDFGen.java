@@ -70,23 +70,6 @@ public class MSDFGen {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ msdf_allocator_set ] ---
-
-    /** Unsafe version of: {@link #msdf_allocator_set allocator_set} */
-    public static native void nmsdf_allocator_set(long allocator);
-
-    /**
-     * Sets the allocation callbacks to use for allocating API objects.
-     *
-     * @param allocator The address of an msdf_allocator_t structure to copy the callback pointers from.
-     */
-    public static void msdf_allocator_set(@NativeType("struct msdf_allocator const *") MSDFGenAllocator.Buffer allocator) {
-        if (CHECKS) {
-            MSDFGenAllocator.validate(allocator.address());
-        }
-        nmsdf_allocator_set(allocator.address());
-    }
-
     // --- [ msdf_bitmap_alloc ] ---
 
     /** Unsafe version of: {@link #msdf_bitmap_alloc bitmap_alloc} */

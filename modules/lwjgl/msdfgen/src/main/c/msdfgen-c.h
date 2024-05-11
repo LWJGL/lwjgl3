@@ -80,16 +80,6 @@ extern "C" {
 
 // -------------------- Type definitions
 
-typedef void* (*msdf_allocator_alloc_callback_t)(size_t size);
-typedef void* (*msdf_allocator_realloc_callback_t)(void* memory, size_t size);
-typedef void (*msdf_allocator_free_callback_t)(void* memory);
-
-typedef struct msdf_allocator {
-    msdf_allocator_alloc_callback_t alloc_callback;
-    msdf_allocator_realloc_callback_t realloc_callback;
-    msdf_allocator_free_callback_t free_callback;
-} msdf_allocator_t;
-
 typedef struct msdf_vector2 {
     double x;
     double y;
@@ -139,22 +129,6 @@ MSDF_DEFINE_HANDLE_TYPE(msdf_contour);
 MSDF_DEFINE_HANDLE_TYPE(msdf_segment);
 
 // -------------------- Exported API functions
-// msdf_allocator
-
-/**
- * Sets the allocation callbacks to use for allocating API objects.
- * @param allocator The address of an msdf_allocator_t structure
- * to copy the callback pointers from.
- */
-MSDF_API void msdf_allocator_set(const msdf_allocator_t* allocator);
-
-/**
- * Retrieves the address of the allocator used by the C API
- * to allocate underlying objects.
- * @returns The address of the allocator used by the C API
- *  to allocate underlying objects.
- */
-MSDF_API const msdf_allocator_t* msdf_allocator_get();
 
 // msdf_bitmap
 
@@ -320,7 +294,8 @@ MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour);
 /**
  * Adds a new edge to the given contour and returns its associated segment handle.
  * @param contour A pointer to the contour to add a new edge (segment) to.
- * @param segment A pointer to the segment to add as an edge.
+ * @param segment A pointer to the segment to add as an edge. This segment must be heap-allocated
+ *  and may not be freed before the contour object that owns it.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
 MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle segment);
@@ -600,6 +575,10 @@ MSDF_API int msdf_generate_mtsdf_with_config(msdf_bitmap_t* output,
                                              msdf_shape_const_handle shape,
                                              const msdf_transform_t* transform,
                                              const msdf_multichannel_config_t* config);
+
+#ifdef MSDFGEN_EXTENSIONS
+
+#endif
 
 #ifdef __cplusplus
 }

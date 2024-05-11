@@ -6,6 +6,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/lwjgl/msdfgen">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/msdfgen/src/generated/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/msdfgen/src/main/java" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
