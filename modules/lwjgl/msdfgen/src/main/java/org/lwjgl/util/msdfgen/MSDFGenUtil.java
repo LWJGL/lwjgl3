@@ -12,6 +12,8 @@ import java.awt.image.*;
 /**
  * This class provides general utilities for working with msdfgen bitmaps
  * and transforming them into more workable formats.
+ *
+ * @author Alexander Hinze
  */
 public final class MSDFGenUtil {
     // @formatter:off

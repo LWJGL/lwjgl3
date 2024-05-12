@@ -4,6 +4,11 @@
  */
 package org.lwjgl.util.msdfgen;
 
+/**
+ * A general exception type used by {@link MSDFGenUtil} and {@link MSDFGenFont}.
+ *
+ * @author Alexander Hinze
+ */
 public class MSDFGenException extends RuntimeException {
     public MSDFGenException() {
         super();
