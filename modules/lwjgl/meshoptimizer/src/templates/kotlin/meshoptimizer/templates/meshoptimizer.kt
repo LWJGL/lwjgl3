@@ -878,6 +878,10 @@ nmeshopt_setAllocator(
             """
         ),
         AutoSize("attribute_weights")..size_t("attribute_count", "must be &le; 16"),
+        Check("vertex_count")..nullable..unsigned_char.const.p(
+            "vertex_lock",
+            "can be #NULL; when it's not #NULL, it should have a value for each vertex; 1 denotes vertices that can't be moved"
+        ),
         size_t("target_index_count", ""),
         float(
             "target_error",
@@ -1083,7 +1087,7 @@ nmeshopt_setAllocator(
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("max_vertices", "must not exceed implementation limits ({@code max_vertices} &le; 255 - not 256!)"),
-        size_t("max_triangles", "must not exceed implementation limits ({@code max_triangles} &le; 512)"),
+        size_t("max_triangles", "must not exceed implementation limits ({@code max_triangles} &le; 512, must be divisible by 4)"),
         float(
             "cone_weight",
             """
@@ -1113,6 +1117,20 @@ nmeshopt_setAllocator(
         size_t("index_count", ""),
         size_t("max_vertices", ""),
         size_t("max_triangles", "")
+    )
+
+    void(
+        "optimizeMeshlet",
+        """
+        Experimental: Meshlet optimizer. Reorders meshlet vertices and triangles to maximize locality to improve rasterizer throughput.
+
+        When {@code buildMeshlets*} is used, the index data needs to be computed from meshlet's {@code vertex_offset} and {@code triangle_offset}.
+        """,
+
+        unsigned_int.p("meshlet_vertices", "must refer to meshlet vertex index data"),
+        unsigned_char.p("meshlet_triangles", "must refer to meshlet triangle index data"),
+        AutoSizeDiv("3", "meshlet_triangles")..size_t("triangle_count", "must not exceed implementation limits ({@code triangle_count} &le; 512)"),
+        AutoSize("meshlet_vertices")..size_t("vertex_count", "must not exceed implementation limits ({@code vertex_count} &le; 255 - not 256!)")
     )
 
     meshopt_Bounds(

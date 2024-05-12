@@ -1073,7 +1073,7 @@ public class MeshOptimizer {
      *
      * @param attribute_count must be &le; 16
      */
-    public static native long nmeshopt_simplifyWithAttributes(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long target_index_count, float target_error, int options, long result_error);
+    public static native long nmeshopt_simplifyWithAttributes(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long vertex_lock, long target_index_count, float target_error, int options, long result_error);
 
     /**
      * Experimental: Mesh simplifier with attribute metric.
@@ -1087,19 +1087,21 @@ public class MeshOptimizer {
      * @param vertex_attributes should have {@code attribute_count} floats for each vertex
      * @param attribute_weights should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position. The
      *                          recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
+     * @param vertex_lock       can be {@code NULL}; when it's not {@code NULL}, it should have a value for each vertex; 1 denotes vertices that can't be moved
      * @param target_error      represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}
      * @param options           must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default
      * @param result_error      can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")
-    public static long meshopt_simplifyWithAttributes(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
+    public static long meshopt_simplifyWithAttributes(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @Nullable @NativeType("unsigned char const *") ByteBuffer vertex_lock, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
         if (CHECKS) {
             check(indices, destination.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
             check(vertex_attributes, vertex_count * (vertex_attributes_stride >>> 2));
+            checkSafe(vertex_lock, vertex_count);
             checkSafe(result_error, 1);
         }
-        return nmeshopt_simplifyWithAttributes(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_attributes), vertex_attributes_stride, memAddress(attribute_weights), attribute_weights.remaining(), target_index_count, target_error, options, memAddressSafe(result_error));
+        return nmeshopt_simplifyWithAttributes(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_attributes), vertex_attributes_stride, memAddress(attribute_weights), attribute_weights.remaining(), memAddressSafe(vertex_lock), target_index_count, target_error, options, memAddressSafe(result_error));
     }
 
     // --- [ meshopt_simplifySloppy ] ---
@@ -1292,7 +1294,7 @@ public class MeshOptimizer {
      * @param meshlet_triangles must contain enough space for all meshlets, worst case size is equal to {@code max_meshlets * max_triangles * 3}
      * @param vertex_positions  should have {@code float3} position in the first 12 bytes of each vertex
      * @param max_vertices      must not exceed implementation limits ({@code max_vertices} &le; 255 - not 256!)
-     * @param max_triangles     must not exceed implementation limits ({@code max_triangles} &le; 512)
+     * @param max_triangles     must not exceed implementation limits ({@code max_triangles} &le; 512, must be divisible by 4)
      * @param cone_weight       should be set to 0 when cone culling is not used, and a value between 0 and 1 otherwise to balance between cluster size and cone culling efficiency
      */
     @NativeType("size_t")
@@ -1325,6 +1327,28 @@ public class MeshOptimizer {
     /** See {@link #meshopt_buildMeshlets buildMeshlets}. */
     @NativeType("size_t")
     public static native long meshopt_buildMeshletsBound(@NativeType("size_t") long index_count, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles);
+
+    // --- [ meshopt_optimizeMeshlet ] ---
+
+    /**
+     * Unsafe version of: {@link #meshopt_optimizeMeshlet optimizeMeshlet}
+     *
+     * @param triangle_count must not exceed implementation limits ({@code triangle_count} &le; 512)
+     * @param vertex_count   must not exceed implementation limits ({@code vertex_count} &le; 255 - not 256!)
+     */
+    public static native void nmeshopt_optimizeMeshlet(long meshlet_vertices, long meshlet_triangles, long triangle_count, long vertex_count);
+
+    /**
+     * Experimental: Meshlet optimizer. Reorders meshlet vertices and triangles to maximize locality to improve rasterizer throughput.
+     * 
+     * <p>When {@code buildMeshlets*} is used, the index data needs to be computed from meshlet's {@code vertex_offset} and {@code triangle_offset}.</p>
+     *
+     * @param meshlet_vertices  must refer to meshlet vertex index data
+     * @param meshlet_triangles must refer to meshlet triangle index data
+     */
+    public static void meshopt_optimizeMeshlet(@NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles) {
+        nmeshopt_optimizeMeshlet(memAddress(meshlet_vertices), memAddress(meshlet_triangles), Integer.toUnsignedLong(meshlet_triangles.remaining()) / 3, meshlet_vertices.remaining());
+    }
 
     // --- [ meshopt_computeClusterBounds ] ---
 
