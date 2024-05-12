@@ -194,12 +194,16 @@ public class Spvc {
             constant_get_scalar_u8                                = apiGetFunctionAddress(SPVC, "spvc_constant_get_scalar_u8"),
             constant_get_scalar_i8                                = apiGetFunctionAddress(SPVC, "spvc_constant_get_scalar_i8"),
             constant_get_subconstants                             = apiGetFunctionAddress(SPVC, "spvc_constant_get_subconstants"),
+            constant_get_scalar_u64                               = apiGetFunctionAddress(SPVC, "spvc_constant_get_scalar_u64"),
+            constant_get_scalar_i64                               = apiGetFunctionAddress(SPVC, "spvc_constant_get_scalar_i64"),
             constant_get_type                                     = apiGetFunctionAddress(SPVC, "spvc_constant_get_type"),
             constant_set_scalar_fp16                              = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_fp16"),
             constant_set_scalar_fp32                              = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_fp32"),
             constant_set_scalar_fp64                              = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_fp64"),
             constant_set_scalar_u32                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_u32"),
             constant_set_scalar_i32                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_i32"),
+            constant_set_scalar_u64                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_u64"),
+            constant_set_scalar_i64                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_i64"),
             constant_set_scalar_u16                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_u16"),
             constant_set_scalar_i16                               = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_i16"),
             constant_set_scalar_u8                                = apiGetFunctionAddress(SPVC, "spvc_constant_set_scalar_u8"),
@@ -221,7 +225,7 @@ public class Spvc {
 
     public static final int SPVC_C_API_VERSION_MAJOR = 0;
 
-    public static final int SPVC_C_API_VERSION_MINOR = 57;
+    public static final int SPVC_C_API_VERSION_MINOR = 59;
 
     public static final int SPVC_C_API_VERSION_PATCH = 0;
 
@@ -893,6 +897,9 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_GLSL_ENABLE_ROW_MAJOR_LOAD_WORKAROUND COMPILER_OPTION_GLSL_ENABLE_ROW_MAJOR_LOAD_WORKAROUND}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_ARGUMENT_BUFFERS_TIER COMPILER_OPTION_MSL_ARGUMENT_BUFFERS_TIER}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_SAMPLE_DREF_LOD_ARRAY_AS_GRAD COMPILER_OPTION_MSL_SAMPLE_DREF_LOD_ARRAY_AS_GRAD}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_READWRITE_TEXTURE_FENCES COMPILER_OPTION_MSL_READWRITE_TEXTURE_FENCES}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_REPLACE_RECURSIVE_INPUTS COMPILER_OPTION_MSL_REPLACE_RECURSIVE_INPUTS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_AGX_MANUAL_CUBE_GRAD_FIXUP COMPILER_OPTION_MSL_AGX_MANUAL_CUBE_GRAD_FIXUP}</li>
      * </ul>
      */
     public static final int
@@ -983,7 +990,10 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_CHECK_DISCARDED_FRAG_STORES                = 82 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_GLSL_ENABLE_ROW_MAJOR_LOAD_WORKAROUND          = 83 | SPVC_COMPILER_OPTION_GLSL_BIT,
         SPVC_COMPILER_OPTION_MSL_ARGUMENT_BUFFERS_TIER                      = 84 | SPVC_COMPILER_OPTION_MSL_BIT,
-        SPVC_COMPILER_OPTION_MSL_SAMPLE_DREF_LOD_ARRAY_AS_GRAD              = 85 | SPVC_COMPILER_OPTION_MSL_BIT;
+        SPVC_COMPILER_OPTION_MSL_SAMPLE_DREF_LOD_ARRAY_AS_GRAD              = 85 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_READWRITE_TEXTURE_FENCES                   = 86 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_REPLACE_RECURSIVE_INPUTS                   = 87 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_AGX_MANUAL_CUBE_GRAD_FIXUP                 = 88 | SPVC_COMPILER_OPTION_MSL_BIT;
 
     protected Spvc() {
         throw new UnsupportedOperationException();
@@ -3139,6 +3149,28 @@ public class Spvc {
         nspvc_constant_get_subconstants(constant, memAddress(constituents), memAddress(count));
     }
 
+    // --- [ spvc_constant_get_scalar_u64 ] ---
+
+    @NativeType("unsigned long long")
+    public static long spvc_constant_get_scalar_u64(@NativeType("spvc_constant") long constant, @NativeType("unsigned") int column, @NativeType("unsigned") int row) {
+        long __functionAddress = Functions.constant_get_scalar_u64;
+        if (CHECKS) {
+            check(constant);
+        }
+        return invokePJ(constant, column, row, __functionAddress);
+    }
+
+    // --- [ spvc_constant_get_scalar_i64 ] ---
+
+    @NativeType("long long")
+    public static long spvc_constant_get_scalar_i64(@NativeType("spvc_constant") long constant, @NativeType("unsigned") int column, @NativeType("unsigned") int row) {
+        long __functionAddress = Functions.constant_get_scalar_i64;
+        if (CHECKS) {
+            check(constant);
+        }
+        return invokePJ(constant, column, row, __functionAddress);
+    }
+
     // --- [ spvc_constant_get_type ] ---
 
     @NativeType("spvc_type_id")
@@ -3198,6 +3230,26 @@ public class Spvc {
             check(constant);
         }
         invokePV(constant, column, row, value, __functionAddress);
+    }
+
+    // --- [ spvc_constant_set_scalar_u64 ] ---
+
+    public static void spvc_constant_set_scalar_u64(@NativeType("spvc_constant") long constant, @NativeType("unsigned") int column, @NativeType("unsigned") int row, @NativeType("unsigned long long") long value) {
+        long __functionAddress = Functions.constant_set_scalar_u64;
+        if (CHECKS) {
+            check(constant);
+        }
+        invokePJV(constant, column, row, value, __functionAddress);
+    }
+
+    // --- [ spvc_constant_set_scalar_i64 ] ---
+
+    public static void spvc_constant_set_scalar_i64(@NativeType("spvc_constant") long constant, @NativeType("unsigned") int column, @NativeType("unsigned") int row, @NativeType("long long") long value) {
+        long __functionAddress = Functions.constant_set_scalar_i64;
+        if (CHECKS) {
+            check(constant);
+        }
+        invokePJV(constant, column, row, value, __functionAddress);
     }
 
     // --- [ spvc_constant_set_scalar_u16 ] ---
