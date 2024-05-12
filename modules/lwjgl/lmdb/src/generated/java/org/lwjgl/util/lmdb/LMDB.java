@@ -137,13 +137,13 @@ public class LMDB {
     public static final int MDB_VERSION_MINOR = 9;
 
     /** Library patch version. */
-    public static final int MDB_VERSION_PATCH = 31;
+    public static final int MDB_VERSION_PATCH = 32;
 
     /** The full library version as a single integer. */
     public static final int MDB_VERSION_FULL = (MDB_VERSION_MAJOR << 24) | (MDB_VERSION_MINOR << 16) | MDB_VERSION_PATCH;
 
     /** The release date of this library version. */
-    public static final String MDB_VERSION_DATE = "July 10, 2023";
+    public static final String MDB_VERSION_DATE = "January 29, 2024";
 
     /** The full library version as a string. */
     public static final String MDB_VERSION_STRING = String.format("LMDB %d.%d.%d: (%s)", MDB_VERSION_MAJOR, MDB_VERSION_MINOR, MDB_VERSION_PATCH, MDB_VERSION_DATE);
