@@ -4,7 +4,6 @@
 #define LIBURING_ARCH_AARCH64_LIB_H
 
 #include <elf.h>
-#include <sys/auxv.h>
 #include "../../syscall.h"
 
 static inline long __get_page_size(void)

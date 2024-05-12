@@ -92,9 +92,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     /** @return the value of the {@code ops_len} field. */
     @NativeType("__u8")
     public byte ops_len() { return nops_len(address()); }
-    /** @return the value of the {@code resv} field. */
-    @NativeType("__u16")
-    public short resv() { return nresv(address()); }
     /** @return a {@link IOURingProbeOp}.Buffer view of the {@code ops} field. */
     @NativeType("struct io_uring_probe_op[0]")
     public IOURingProbeOp.Buffer ops() { return nops(address()); }
@@ -106,8 +103,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public IOURingProbe last_op(@NativeType("__u8") byte value) { nlast_op(address(), value); return this; }
     /** Sets the specified value to the {@code ops_len} field. */
     public IOURingProbe ops_len(@NativeType("__u8") byte value) { nops_len(address(), value); return this; }
-    /** Sets the specified value to the {@code resv} field. */
-    public IOURingProbe resv(@NativeType("__u16") short value) { nresv(address(), value); return this; }
     /** Copies the specified {@link IOURingProbeOp.Buffer} to the {@code ops} field. */
     public IOURingProbe ops(@NativeType("struct io_uring_probe_op[0]") IOURingProbeOp.Buffer value) { nops(address(), value); return this; }
     /** Copies the specified {@link IOURingProbeOp} at the specified index of the {@code ops} field. */
@@ -121,12 +116,10 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public IOURingProbe set(
         byte last_op,
         byte ops_len,
-        short resv,
         IOURingProbeOp.Buffer ops
     ) {
         last_op(last_op);
         ops_len(ops_len);
-        resv(resv);
         ops(ops);
 
         return this;
@@ -261,7 +254,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public static byte nlast_op(long struct) { return UNSAFE.getByte(null, struct + IOURingProbe.LAST_OP); }
     /** Unsafe version of {@link #ops_len}. */
     public static byte nops_len(long struct) { return UNSAFE.getByte(null, struct + IOURingProbe.OPS_LEN); }
-    /** Unsafe version of {@link #resv}. */
     public static short nresv(long struct) { return UNSAFE.getShort(null, struct + IOURingProbe.RESV); }
     public static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingProbe.RESV2, 3); }
     public static int nresv2(long struct, int index) {
@@ -278,7 +270,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public static void nlast_op(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingProbe.LAST_OP, value); }
     /** Unsafe version of {@link #ops_len(byte) ops_len}. */
     public static void nops_len(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingProbe.OPS_LEN, value); }
-    /** Unsafe version of {@link #resv(short) resv}. */
     public static void nresv(long struct, short value) { UNSAFE.putShort(null, struct + IOURingProbe.RESV, value); }
     public static void nresv2(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
@@ -341,9 +332,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
         /** @return the value of the {@code ops_len} field. */
         @NativeType("__u8")
         public byte ops_len() { return IOURingProbe.nops_len(address()); }
-        /** @return the value of the {@code resv} field. */
-        @NativeType("__u16")
-        public short resv() { return IOURingProbe.nresv(address()); }
         /** @return a {@link IOURingProbeOp}.Buffer view of the {@code ops} field. */
         @NativeType("struct io_uring_probe_op[0]")
         public IOURingProbeOp.Buffer ops() { return IOURingProbe.nops(address()); }
@@ -355,8 +343,6 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
         public IOURingProbe.Buffer last_op(@NativeType("__u8") byte value) { IOURingProbe.nlast_op(address(), value); return this; }
         /** Sets the specified value to the {@code ops_len} field. */
         public IOURingProbe.Buffer ops_len(@NativeType("__u8") byte value) { IOURingProbe.nops_len(address(), value); return this; }
-        /** Sets the specified value to the {@code resv} field. */
-        public IOURingProbe.Buffer resv(@NativeType("__u16") short value) { IOURingProbe.nresv(address(), value); return this; }
         /** Copies the specified {@link IOURingProbeOp.Buffer} to the {@code ops} field. */
         public IOURingProbe.Buffer ops(@NativeType("struct io_uring_probe_op[0]") IOURingProbeOp.Buffer value) { IOURingProbe.nops(address(), value); return this; }
         /** Copies the specified {@link IOURingProbeOp} at the specified index of the {@code ops} field. */

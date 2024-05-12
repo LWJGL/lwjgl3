@@ -212,22 +212,18 @@ static unsigned __io_uring_flush_sq(struct io_uring *ring)
 		 * Ensure kernel sees the SQE updates before the tail update.
 		 */
 		if (!(ring->flags & IORING_SETUP_SQPOLL))
-			IO_URING_WRITE_ONCE(*sq->ktail, tail);
+			*sq->ktail = tail;
 		else
 			io_uring_smp_store_release(sq->ktail, tail);
 	}
 	/*
-	 * This _may_ look problematic, as we're not supposed to be reading
-	 * SQ->head without acquire semantics. When we're in SQPOLL mode, the
-	 * kernel submitter could be updating this right now. For non-SQPOLL,
-	 * task itself does it, and there's no potential race. But even for
-	 * SQPOLL, the load is going to be potentially out-of-date the very
-	 * instant it's done, regardless or whether or not it's done
-	 * atomically. Worst case, we're going to be over-estimating what
-	 * we can submit. The point is, we need to be able to deal with this
-	 * situation regardless of any perceived atomicity.
-	 */
-	return tail - *sq->khead;
+	* This load needs to be atomic, since sq->khead is written concurrently
+	* by the kernel, but it doesn't need to be load_acquire, since the
+	* kernel doesn't store to the submission queue; it advances khead just
+	* to indicate that it's finished reading the submission queue entries
+	* so they're available for us to write to.
+	*/
+	return tail - IO_URING_READ_ONCE(*sq->khead);
 }
 
 /*

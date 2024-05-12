@@ -152,7 +152,7 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     /** @return the value of the {@code cq_entries} field. */
     @NativeType("__u32")
     public int cq_entries() { return ncq_entries(address()); }
-    /** one or more of:<br><table><tr><td>{@link LibIOURing#IORING_SETUP_IOPOLL SETUP_IOPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQPOLL SETUP_SQPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQ_AFF SETUP_SQ_AFF}</td><td>{@link LibIOURing#IORING_SETUP_CQSIZE SETUP_CQSIZE}</td><td>{@link LibIOURing#IORING_SETUP_CLAMP SETUP_CLAMP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_ATTACH_WQ SETUP_ATTACH_WQ}</td><td>{@link LibIOURing#IORING_SETUP_R_DISABLED SETUP_R_DISABLED}</td><td>{@link LibIOURing#IORING_SETUP_SUBMIT_ALL SETUP_SUBMIT_ALL}</td><td>{@link LibIOURing#IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_TASKRUN_FLAG SETUP_TASKRUN_FLAG}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_SQE128 SETUP_SQE128}</td><td>{@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}</td><td>{@link LibIOURing#IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER}</td><td>{@link LibIOURing#IORING_SETUP_DEFER_TASKRUN SETUP_DEFER_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_NO_MMAP SETUP_NO_MMAP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_REGISTERED_FD_ONLY SETUP_REGISTERED_FD_ONLY}</td></tr></table> */
+    /** one or more of:<br><table><tr><td>{@link LibIOURing#IORING_SETUP_IOPOLL SETUP_IOPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQPOLL SETUP_SQPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQ_AFF SETUP_SQ_AFF}</td><td>{@link LibIOURing#IORING_SETUP_CQSIZE SETUP_CQSIZE}</td><td>{@link LibIOURing#IORING_SETUP_CLAMP SETUP_CLAMP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_ATTACH_WQ SETUP_ATTACH_WQ}</td><td>{@link LibIOURing#IORING_SETUP_R_DISABLED SETUP_R_DISABLED}</td><td>{@link LibIOURing#IORING_SETUP_SUBMIT_ALL SETUP_SUBMIT_ALL}</td><td>{@link LibIOURing#IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_TASKRUN_FLAG SETUP_TASKRUN_FLAG}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_SQE128 SETUP_SQE128}</td><td>{@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}</td><td>{@link LibIOURing#IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER}</td><td>{@link LibIOURing#IORING_SETUP_DEFER_TASKRUN SETUP_DEFER_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_NO_MMAP SETUP_NO_MMAP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_REGISTERED_FD_ONLY SETUP_REGISTERED_FD_ONLY}</td><td>{@link LibIOURing#IORING_SETUP_NO_SQARRAY SETUP_NO_SQARRAY}</td></tr></table> */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
     /** @return the value of the {@code sq_thread_cpu} field. */
@@ -167,12 +167,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     /** @return the value of the {@code wq_fd} field. */
     @NativeType("__u32")
     public int wq_fd() { return nwq_fd(address()); }
-    /** @return a {@link IntBuffer} view of the {@code resv} field. */
-    @NativeType("__u32[3]")
-    public IntBuffer resv() { return nresv(address()); }
-    /** @return the value at the specified index of the {@code resv} field. */
-    @NativeType("__u32")
-    public int resv(int index) { return nresv(address(), index); }
     /**
      * The {@code flags} field is used by the kernel to communicate state information to the application. Currently, it is used to inform the application when
      * a call to {@link LibURing#io_uring_enter enter} is necessary.
@@ -206,10 +200,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public IOURingParams features(@NativeType("__u32") int value) { nfeatures(address(), value); return this; }
     /** Sets the specified value to the {@code wq_fd} field. */
     public IOURingParams wq_fd(@NativeType("__u32") int value) { nwq_fd(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code resv} field. */
-    public IOURingParams resv(@NativeType("__u32[3]") IntBuffer value) { nresv(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code resv} field. */
-    public IOURingParams resv(int index, @NativeType("__u32") int value) { nresv(address(), index, value); return this; }
     /** Copies the specified {@link IOSQRingOffsets} to the {@link #sq_off} field. */
     public IOURingParams sq_off(@NativeType("struct io_sqring_offsets") IOSQRingOffsets value) { nsq_off(address(), value); return this; }
     /** Passes the {@link #sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -228,7 +218,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         int sq_thread_idle,
         int features,
         int wq_fd,
-        IntBuffer resv,
         IOSQRingOffsets sq_off,
         IOCQRingOffsets cq_off
     ) {
@@ -239,7 +228,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         sq_thread_idle(sq_thread_idle);
         features(features);
         wq_fd(wq_fd);
-        resv(resv);
         sq_off(sq_off);
         cq_off(cq_off);
 
@@ -385,9 +373,7 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public static int nfeatures(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.FEATURES); }
     /** Unsafe version of {@link #wq_fd}. */
     public static int nwq_fd(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.WQ_FD); }
-    /** Unsafe version of {@link #resv}. */
     public static IntBuffer nresv(long struct) { return memIntBuffer(struct + IOURingParams.RESV, 3); }
-    /** Unsafe version of {@link #resv(int) resv}. */
     public static int nresv(long struct, int index) {
         return UNSAFE.getInt(null, struct + IOURingParams.RESV + check(index, 3) * 4);
     }
@@ -410,12 +396,10 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public static void nfeatures(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.FEATURES, value); }
     /** Unsafe version of {@link #wq_fd(int) wq_fd}. */
     public static void nwq_fd(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.WQ_FD, value); }
-    /** Unsafe version of {@link #resv(IntBuffer) resv}. */
     public static void nresv(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingParams.RESV, value.remaining() * 4);
     }
-    /** Unsafe version of {@link #resv(int, int) resv}. */
     public static void nresv(long struct, int index, int value) {
         UNSAFE.putInt(null, struct + IOURingParams.RESV + check(index, 3) * 4, value);
     }
@@ -483,12 +467,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         /** @return the value of the {@code wq_fd} field. */
         @NativeType("__u32")
         public int wq_fd() { return IOURingParams.nwq_fd(address()); }
-        /** @return a {@link IntBuffer} view of the {@code resv} field. */
-        @NativeType("__u32[3]")
-        public IntBuffer resv() { return IOURingParams.nresv(address()); }
-        /** @return the value at the specified index of the {@code resv} field. */
-        @NativeType("__u32")
-        public int resv(int index) { return IOURingParams.nresv(address(), index); }
         /** @return a {@link IOSQRingOffsets} view of the {@link IOURingParams#sq_off} field. */
         @NativeType("struct io_sqring_offsets")
         public IOSQRingOffsets sq_off() { return IOURingParams.nsq_off(address()); }
@@ -510,10 +488,6 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         public IOURingParams.Buffer features(@NativeType("__u32") int value) { IOURingParams.nfeatures(address(), value); return this; }
         /** Sets the specified value to the {@code wq_fd} field. */
         public IOURingParams.Buffer wq_fd(@NativeType("__u32") int value) { IOURingParams.nwq_fd(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code resv} field. */
-        public IOURingParams.Buffer resv(@NativeType("__u32[3]") IntBuffer value) { IOURingParams.nresv(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code resv} field. */
-        public IOURingParams.Buffer resv(int index, @NativeType("__u32") int value) { IOURingParams.nresv(address(), index, value); return this; }
         /** Copies the specified {@link IOSQRingOffsets} to the {@link IOURingParams#sq_off} field. */
         public IOURingParams.Buffer sq_off(@NativeType("struct io_sqring_offsets") IOSQRingOffsets value) { IOURingParams.nsq_off(address(), value); return this; }
         /** Passes the {@link IOURingParams#sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */

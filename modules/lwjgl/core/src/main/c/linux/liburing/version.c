@@ -17,5 +17,5 @@ bool io_uring_check_version(int major, int minor)
 {
 	return major > io_uring_major_version() ||
 		(major == io_uring_major_version() &&
-		 minor >= io_uring_minor_version());
+		 minor > io_uring_minor_version());
 }

@@ -33,6 +33,10 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
     union {
         __u64("addr", "pointer to buffer or {@code iovecs}")
         __u64("splice_off_in", "")
+        struct {
+            __u32("level", "")
+            __u32("optname", "")
+        }
     }
     __u32("len", "buffer size or number of {@code iovecs}")
     union {
@@ -65,6 +69,9 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
         __u32("xattr_flags", "")
         __u32("msg_ring_flags", "")
         __u32("uring_cmd_flags", "")
+        __u32("waitid_flags", "")
+		__u32("futex_flags", "")
+		__u32("install_fd_flags", "")
     }
     __u64("user_data", "an application-supplied value that will be copied into the completion queue entry")
     union {
@@ -82,6 +89,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
     union {
         __s32("splice_fd_in", "")
         __u32("file_index", "")
+        __u32("optlen", "")
         struct {
             __u16("addr_len", "")
             __u16("__pad3", "")[1].private()
@@ -92,6 +100,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
 			__u64("addr3", "")
 			__u64("__pad2", "")[1].private()
 		}
+        __u64("optval", "")
 		__u8("cmd", "If the ring is initialized with #SETUP_SQE128, then this field is used for 80 bytes of arbitrary command data")[0]
 	}
 }
@@ -198,7 +207,7 @@ ptr = mmap(0, cq_off.cqes + cq_entries * sizeof(struct io_uring_cqe),
     __u32("sq_thread_idle", "")
     __u32("features", "filled in by the kernel, which specifies various features supported by current kernel version").links("FEAT_\\w+", LinkMode.BITFIELD)
     __u32("wq_fd", "")
-    __u32("resv", "")[3]
+    __u32("resv", "")[3].private()
     io_sqring_offsets(
         "sq_off",
         """
@@ -220,37 +229,37 @@ index = tail & ring_mask;""")}
 val io_uring_rsrc_register = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCRegister", nativeName = "struct io_uring_rsrc_register") {
     __u32("nr", "")
     __u32("flags", "")
-    __u64("resv2", "")
+    __u64("resv2", "").private()
     __u64("data", "")
     __u64("tags", "")
 }
 
 val io_uring_rsrc_update = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdate", nativeName = "struct io_uring_rsrc_update") {
     __u32("offset", "")
-    __u32("resv", "")
+    __u32("resv", "").private()
     __u64("data", "")
 }
 
 val io_uring_rsrc_update2 = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdate2", nativeName = "struct io_uring_rsrc_update2") {
     __u32("offset", "")
-    __u32("resv", "")
+    __u32("resv", "").private()
     __u64("data", "")
     __u64("tags", "")
     __u32("nr", "")
-    __u32("resv2", "")
+    __u32("resv2", "").private()
 }
 
 val io_uring_probe_op = struct(Module.CORE_LINUX_LIBURING, "IOURingProbeOp", nativeName = "struct io_uring_probe_op") {
     __u8("op", "")
-    __u8("resv", "")
+    __u8("resv", "").private()
     __u16("flags", "").links("IO_URING_OP_\\w+", LinkMode.BITFIELD)
-    __u32("resv2", "")
+    __u32("resv2", "").private()
 }
 
 val io_uring_probe = struct(Module.CORE_LINUX_LIBURING, "IOURingProbe", nativeName = "struct io_uring_probe") {
     __u8("last_op", "")	/* last opcode supported */
     __u8("ops_len", "")	/* length of ops[] array below */
-    __u16("resv", "")
+    __u16("resv", "").private()
     __u32("resv2", "")[3].private()
     io_uring_probe_op("ops", "")[0]
 }
@@ -270,7 +279,7 @@ val io_uring_buf = struct(Module.CORE_LINUX_LIBURING, "IOURingBuf", nativeName =
 	__u64("addr", "")
 	__u32("len", "")
 	__u16("bid", "")
-	__u16("resv", "")
+	__u16("resv", "").private()
 }
 
 val io_uring_buf_ring = struct(Module.CORE_LINUX_LIBURING, "IOURingBufRing", nativeName = "struct io_uring_buf_ring") {
@@ -292,7 +301,24 @@ val io_uring_buf_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingBufReg", nativ
 	__u32("ring_entries", "")
 	__u16("bgid", "")
 	__u16("flags", "")
-	__u64("resv", "")[3]
+	__u64("resv", "")[3].private()
+}
+
+val io_uring_buf_status = struct(Module.CORE_LINUX_LIBURING, "IOURingBufStatus", nativeName = "struct io_uring_buf_status") {
+    documentation = "Argument for {@code IORING_REGISTER_PBUF_STATUS}."
+
+    __u32("buf_group", "input")
+    __u32("head", "output")
+    __u32("resv", "")[8].private()
+}
+
+val io_uring_napi = struct(Module.CORE_LINUX_LIBURING, "IOURingNAPI", nativeName = "struct io_uring_napi") {
+    documentation = "Argument for {@code IORING_(UN)REGISTER_NAPI}."
+
+    __u32("busy_poll_to", "")
+    __u8("prefer_busy_poll", "")
+    __u8("pad", "")[3].private()
+    __u64("resv", "").private()
 }
 
 val io_uring_getevents_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingGeteventsArg", nativeName = "struct io_uring_getevents_arg") {
@@ -323,7 +349,7 @@ val io_uring_file_index_range = struct(Module.CORE_LINUX_LIBURING, "IOURingFileI
 
     __u32("off", "")
     __u32("len", "")
-    __u64("resv", "")
+    __u64("resv", "").private()
 }
 
 val io_uring_recvmsg_out = struct(Module.CORE_LINUX_LIBURING, "IOURingRecvmsgOut", nativeName = "struct io_uring_recvmsg_out") {

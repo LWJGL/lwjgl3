@@ -91,9 +91,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     /** @return the value of the {@code flags} field. */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
-    /** @return the value of the {@code resv2} field. */
-    @NativeType("__u64")
-    public long resv2() { return nresv2(address()); }
     /** @return the value of the {@code data} field. */
     @NativeType("__u64")
     public long data() { return ndata(address()); }
@@ -105,8 +102,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public IOURingRSRCRegister nr(@NativeType("__u32") int value) { nnr(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public IOURingRSRCRegister flags(@NativeType("__u32") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code resv2} field. */
-    public IOURingRSRCRegister resv2(@NativeType("__u64") long value) { nresv2(address(), value); return this; }
     /** Sets the specified value to the {@code data} field. */
     public IOURingRSRCRegister data(@NativeType("__u64") long value) { ndata(address(), value); return this; }
     /** Sets the specified value to the {@code tags} field. */
@@ -116,13 +111,11 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public IOURingRSRCRegister set(
         int nr,
         int flags,
-        long resv2,
         long data,
         long tags
     ) {
         nr(nr);
         flags(flags);
-        resv2(resv2);
         data(data);
         tags(tags);
 
@@ -258,7 +251,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public static int nnr(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCRegister.NR); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCRegister.FLAGS); }
-    /** Unsafe version of {@link #resv2}. */
     public static long nresv2(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCRegister.RESV2); }
     /** Unsafe version of {@link #data}. */
     public static long ndata(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCRegister.DATA); }
@@ -269,7 +261,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public static void nnr(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCRegister.NR, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCRegister.FLAGS, value); }
-    /** Unsafe version of {@link #resv2(long) resv2}. */
     public static void nresv2(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCRegister.RESV2, value); }
     /** Unsafe version of {@link #data(long) data}. */
     public static void ndata(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCRegister.DATA, value); }
@@ -320,9 +311,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
         /** @return the value of the {@code flags} field. */
         @NativeType("__u32")
         public int flags() { return IOURingRSRCRegister.nflags(address()); }
-        /** @return the value of the {@code resv2} field. */
-        @NativeType("__u64")
-        public long resv2() { return IOURingRSRCRegister.nresv2(address()); }
         /** @return the value of the {@code data} field. */
         @NativeType("__u64")
         public long data() { return IOURingRSRCRegister.ndata(address()); }
@@ -334,8 +322,6 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
         public IOURingRSRCRegister.Buffer nr(@NativeType("__u32") int value) { IOURingRSRCRegister.nnr(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public IOURingRSRCRegister.Buffer flags(@NativeType("__u32") int value) { IOURingRSRCRegister.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code resv2} field. */
-        public IOURingRSRCRegister.Buffer resv2(@NativeType("__u64") long value) { IOURingRSRCRegister.nresv2(address(), value); return this; }
         /** Sets the specified value to the {@code data} field. */
         public IOURingRSRCRegister.Buffer data(@NativeType("__u64") long value) { IOURingRSRCRegister.ndata(address(), value); return this; }
         /** Sets the specified value to the {@code tags} field. */

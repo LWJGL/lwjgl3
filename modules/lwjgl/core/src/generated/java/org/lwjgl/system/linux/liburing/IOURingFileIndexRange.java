@@ -87,26 +87,19 @@ public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> impleme
     /** @return the value of the {@code len} field. */
     @NativeType("__u32")
     public int len() { return nlen(address()); }
-    /** @return the value of the {@code resv} field. */
-    @NativeType("__u64")
-    public long resv() { return nresv(address()); }
 
     /** Sets the specified value to the {@code off} field. */
     public IOURingFileIndexRange off(@NativeType("__u32") int value) { noff(address(), value); return this; }
     /** Sets the specified value to the {@code len} field. */
     public IOURingFileIndexRange len(@NativeType("__u32") int value) { nlen(address(), value); return this; }
-    /** Sets the specified value to the {@code resv} field. */
-    public IOURingFileIndexRange resv(@NativeType("__u64") long value) { nresv(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOURingFileIndexRange set(
         int off,
-        int len,
-        long resv
+        int len
     ) {
         off(off);
         len(len);
-        resv(resv);
 
         return this;
     }
@@ -240,14 +233,12 @@ public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> impleme
     public static int noff(long struct) { return UNSAFE.getInt(null, struct + IOURingFileIndexRange.OFF); }
     /** Unsafe version of {@link #len}. */
     public static int nlen(long struct) { return UNSAFE.getInt(null, struct + IOURingFileIndexRange.LEN); }
-    /** Unsafe version of {@link #resv}. */
     public static long nresv(long struct) { return UNSAFE.getLong(null, struct + IOURingFileIndexRange.RESV); }
 
     /** Unsafe version of {@link #off(int) off}. */
     public static void noff(long struct, int value) { UNSAFE.putInt(null, struct + IOURingFileIndexRange.OFF, value); }
     /** Unsafe version of {@link #len(int) len}. */
     public static void nlen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingFileIndexRange.LEN, value); }
-    /** Unsafe version of {@link #resv(long) resv}. */
     public static void nresv(long struct, long value) { UNSAFE.putLong(null, struct + IOURingFileIndexRange.RESV, value); }
 
     // -----------------------------------
@@ -294,16 +285,11 @@ public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> impleme
         /** @return the value of the {@code len} field. */
         @NativeType("__u32")
         public int len() { return IOURingFileIndexRange.nlen(address()); }
-        /** @return the value of the {@code resv} field. */
-        @NativeType("__u64")
-        public long resv() { return IOURingFileIndexRange.nresv(address()); }
 
         /** Sets the specified value to the {@code off} field. */
         public IOURingFileIndexRange.Buffer off(@NativeType("__u32") int value) { IOURingFileIndexRange.noff(address(), value); return this; }
         /** Sets the specified value to the {@code len} field. */
         public IOURingFileIndexRange.Buffer len(@NativeType("__u32") int value) { IOURingFileIndexRange.nlen(address(), value); return this; }
-        /** Sets the specified value to the {@code resv} field. */
-        public IOURingFileIndexRange.Buffer resv(@NativeType("__u64") long value) { IOURingFileIndexRange.nresv(address(), value); return this; }
 
     }
 

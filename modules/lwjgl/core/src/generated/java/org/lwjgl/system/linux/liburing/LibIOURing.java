@@ -452,6 +452,7 @@ public class LibIOURing {
      * </li>
      * <li>{@link #IORING_SETUP_NO_MMAP SETUP_NO_MMAP} - Application provides ring memory</li>
      * <li>{@link #IORING_SETUP_REGISTERED_FD_ONLY SETUP_REGISTERED_FD_ONLY} - Register the ring fd in itself for use with {@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}; return a registered fd index rather than an fd.</li>
+     * <li>{@link #IORING_SETUP_NO_SQARRAY SETUP_NO_SQARRAY} - Removes indirection through the SQ index array.</li>
      * </ul>
      */
     public static final int
@@ -470,7 +471,8 @@ public class LibIOURing {
         IORING_SETUP_SINGLE_ISSUER      = 1 << 12,
         IORING_SETUP_DEFER_TASKRUN      = 1 << 13,
         IORING_SETUP_NO_MMAP            = 1 << 14,
-        IORING_SETUP_REGISTERED_FD_ONLY = 1 << 15;
+        IORING_SETUP_REGISTERED_FD_ONLY = 1 << 15,
+        IORING_SETUP_NO_SQARRAY         = 1 << 16;
 
     /**
      * {@code io_uring_op}
@@ -877,60 +879,74 @@ public class LibIOURing {
      * <p>Available since 6.0.</p>
      * </li>
      * <li>{@link #IORING_OP_SENDMSG_ZC OP_SENDMSG_ZC}</li>
+     * <li>{@link #IORING_OP_READ_MULTISHOT OP_READ_MULTISHOT}</li>
+     * <li>{@link #IORING_OP_WAITID OP_WAITID}</li>
+     * <li>{@link #IORING_OP_FUTEX_WAIT OP_FUTEX_WAIT}</li>
+     * <li>{@link #IORING_OP_FUTEX_WAKE OP_FUTEX_WAKE}</li>
+     * <li>{@link #IORING_OP_FUTEX_WAITV OP_FUTEX_WAITV}</li>
+     * <li>{@link #IORING_OP_FIXED_FD_INSTALL OP_FIXED_FD_INSTALL}</li>
+     * <li>{@link #IORING_OP_FTRUNCATE OP_FTRUNCATE}</li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
     public static final byte
-        IORING_OP_NOP             = 0,
-        IORING_OP_READV           = 1,
-        IORING_OP_WRITEV          = 2,
-        IORING_OP_FSYNC           = 3,
-        IORING_OP_READ_FIXED      = 4,
-        IORING_OP_WRITE_FIXED     = 5,
-        IORING_OP_POLL_ADD        = 6,
-        IORING_OP_POLL_REMOVE     = 7,
-        IORING_OP_SYNC_FILE_RANGE = 8,
-        IORING_OP_SENDMSG         = 9,
-        IORING_OP_RECVMSG         = 10,
-        IORING_OP_TIMEOUT         = 11,
-        IORING_OP_TIMEOUT_REMOVE  = 12,
-        IORING_OP_ACCEPT          = 13,
-        IORING_OP_ASYNC_CANCEL    = 14,
-        IORING_OP_LINK_TIMEOUT    = 15,
-        IORING_OP_CONNECT         = 16,
-        IORING_OP_FALLOCATE       = 17,
-        IORING_OP_OPENAT          = 18,
-        IORING_OP_CLOSE           = 19,
-        IORING_OP_FILES_UPDATE    = 20,
-        IORING_OP_STATX           = 21,
-        IORING_OP_READ            = 22,
-        IORING_OP_WRITE           = 23,
-        IORING_OP_FADVISE         = 24,
-        IORING_OP_MADVISE         = 25,
-        IORING_OP_SEND            = 26,
-        IORING_OP_RECV            = 27,
-        IORING_OP_OPENAT2         = 28,
-        IORING_OP_EPOLL_CTL       = 29,
-        IORING_OP_SPLICE          = 30,
-        IORING_OP_PROVIDE_BUFFERS = 31,
-        IORING_OP_REMOVE_BUFFERS  = 32,
-        IORING_OP_TEE             = 33,
-        IORING_OP_SHUTDOWN        = 34,
-        IORING_OP_RENAMEAT        = 35,
-        IORING_OP_UNLINKAT        = 36,
-        IORING_OP_MKDIRAT         = 37,
-        IORING_OP_SYMLINKAT       = 38,
-        IORING_OP_LINKAT          = 39,
-        IORING_OP_MSG_RING        = 40,
-        IORING_OP_FSETXATTR       = 41,
-        IORING_OP_SETXATTR        = 42,
-        IORING_OP_FGETXATTR       = 43,
-        IORING_OP_GETXATTR        = 44,
-        IORING_OP_SOCKET          = 45,
-        IORING_OP_URING_CMD       = 46,
-        IORING_OP_SEND_ZC         = 47,
-        IORING_OP_SENDMSG_ZC      = 48,
-        IORING_OP_LAST            = 49;
+        IORING_OP_NOP              = 0,
+        IORING_OP_READV            = 1,
+        IORING_OP_WRITEV           = 2,
+        IORING_OP_FSYNC            = 3,
+        IORING_OP_READ_FIXED       = 4,
+        IORING_OP_WRITE_FIXED      = 5,
+        IORING_OP_POLL_ADD         = 6,
+        IORING_OP_POLL_REMOVE      = 7,
+        IORING_OP_SYNC_FILE_RANGE  = 8,
+        IORING_OP_SENDMSG          = 9,
+        IORING_OP_RECVMSG          = 10,
+        IORING_OP_TIMEOUT          = 11,
+        IORING_OP_TIMEOUT_REMOVE   = 12,
+        IORING_OP_ACCEPT           = 13,
+        IORING_OP_ASYNC_CANCEL     = 14,
+        IORING_OP_LINK_TIMEOUT     = 15,
+        IORING_OP_CONNECT          = 16,
+        IORING_OP_FALLOCATE        = 17,
+        IORING_OP_OPENAT           = 18,
+        IORING_OP_CLOSE            = 19,
+        IORING_OP_FILES_UPDATE     = 20,
+        IORING_OP_STATX            = 21,
+        IORING_OP_READ             = 22,
+        IORING_OP_WRITE            = 23,
+        IORING_OP_FADVISE          = 24,
+        IORING_OP_MADVISE          = 25,
+        IORING_OP_SEND             = 26,
+        IORING_OP_RECV             = 27,
+        IORING_OP_OPENAT2          = 28,
+        IORING_OP_EPOLL_CTL        = 29,
+        IORING_OP_SPLICE           = 30,
+        IORING_OP_PROVIDE_BUFFERS  = 31,
+        IORING_OP_REMOVE_BUFFERS   = 32,
+        IORING_OP_TEE              = 33,
+        IORING_OP_SHUTDOWN         = 34,
+        IORING_OP_RENAMEAT         = 35,
+        IORING_OP_UNLINKAT         = 36,
+        IORING_OP_MKDIRAT          = 37,
+        IORING_OP_SYMLINKAT        = 38,
+        IORING_OP_LINKAT           = 39,
+        IORING_OP_MSG_RING         = 40,
+        IORING_OP_FSETXATTR        = 41,
+        IORING_OP_SETXATTR         = 42,
+        IORING_OP_FGETXATTR        = 43,
+        IORING_OP_GETXATTR         = 44,
+        IORING_OP_SOCKET           = 45,
+        IORING_OP_URING_CMD        = 46,
+        IORING_OP_SEND_ZC          = 47,
+        IORING_OP_SENDMSG_ZC       = 48,
+        IORING_OP_READ_MULTISHOT   = 49,
+        IORING_OP_WAITID           = 50,
+        IORING_OP_FUTEX_WAIT       = 51,
+        IORING_OP_FUTEX_WAKE       = 52,
+        IORING_OP_FUTEX_WAITV      = 53,
+        IORING_OP_FIXED_FD_INSTALL = 54,
+        IORING_OP_FTRUNCATE        = 55,
+        IORING_OP_LAST             = 56;
 
     public static final int IORING_URING_CMD_FIXED = 1 << 0;
 
@@ -1090,6 +1106,17 @@ public class LibIOURing {
     public static final int
         IORING_MSG_RING_CQE_SKIP   = 1 << 0,
         IORING_MSG_RING_FLAGS_PASS = 1 << 1;
+
+    /**
+     * {@link #IORING_OP_FIXED_FD_INSTALL OP_FIXED_FD_INSTALL} flags ({@code sqe->install_fd_flags})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_FIXED_FD_NO_CLOEXEC FIXED_FD_NO_CLOEXEC} - Don't mark the fd as {@code O_CLOEXEC}.</li>
+     * </ul>
+     */
+    public static final int IORING_FIXED_FD_NO_CLOEXEC = 1 << 0;
 
     /**
      * {@code cqe->flags}
@@ -1594,6 +1621,9 @@ public class LibIOURing {
      * <li>{@link #IORING_UNREGISTER_PBUF_RING UNREGISTER_PBUF_RING} - unregister ring based provide buffer group</li>
      * <li>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL} - sync cancelation API</li>
      * <li>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE} - register a range of fixed file slots for automatic slot allocation</li>
+     * <li>{@link #IORING_REGISTER_PBUF_STATUS REGISTER_PBUF_STATUS} - return status information for a buffer group</li>
+     * <li>{@link #IORING_REGISTER_NAPI REGISTER_NAPI} - set busy poll settings</li>
+     * <li>{@link #IORING_UNREGISTER_NAPI UNREGISTER_NAPI} - clear busy poll settings</li>
      * <li>{@link #IORING_REGISTER_LAST REGISTER_LAST}</li>
      * <li>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</li>
      * </ul>
@@ -1625,7 +1655,10 @@ public class LibIOURing {
         IORING_UNREGISTER_PBUF_RING         = 23,
         IORING_REGISTER_SYNC_CANCEL         = 24,
         IORING_REGISTER_FILE_ALLOC_RANGE    = 25,
-        IORING_REGISTER_LAST                = 26,
+        IORING_REGISTER_PBUF_STATUS         = 26,
+        IORING_REGISTER_NAPI                = 27,
+        IORING_UNREGISTER_NAPI              = 28,
+        IORING_REGISTER_LAST                = 29,
         IORING_REGISTER_USE_REGISTERED_RING = 1 << 31;
 
     /** Register a fully sparse file space, rather than pass in an array of all -1 file descriptors. */
@@ -1680,11 +1713,15 @@ public class LibIOURing {
      * <ul>
      * <li>{@link #SOCKET_URING_OP_SIOCINQ SOCKET_URING_OP_SIOCINQ}</li>
      * <li>{@link #SOCKET_URING_OP_SIOCOUTQ SOCKET_URING_OP_SIOCOUTQ}</li>
+     * <li>{@link #SOCKET_URING_OP_GETSOCKOPT SOCKET_URING_OP_GETSOCKOPT}</li>
+     * <li>{@link #SOCKET_URING_OP_SETSOCKOPT SOCKET_URING_OP_SETSOCKOPT}</li>
      * </ul>
      */
     public static final int
-        SOCKET_URING_OP_SIOCINQ  = 0,
-        SOCKET_URING_OP_SIOCOUTQ = 1;
+        SOCKET_URING_OP_SIOCINQ    = 0,
+        SOCKET_URING_OP_SIOCOUTQ   = 1,
+        SOCKET_URING_OP_GETSOCKOPT = 2,
+        SOCKET_URING_OP_SETSOCKOPT = 3;
 
     protected LibIOURing() {
         throw new UnsupportedOperationException();
@@ -1730,7 +1767,7 @@ public class LibIOURing {
      * application memory, greatly reducing per-I/O overhead.</p>
      *
      * @param fd     the file descriptor returned by a call to {@link #io_uring_setup setup}
-     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td></tr><tr><td>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</td><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
+     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_PBUF_STATUS REGISTER_PBUF_STATUS}</td></tr><tr><td>{@link #IORING_REGISTER_NAPI REGISTER_NAPI}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td><td>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</td><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
      *
      * @return on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly.
      */

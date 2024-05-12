@@ -76,7 +76,9 @@ ENABLE_WARNINGS()""")
         io_uring.p("ring", ""),
         io_uring_params.p("p", ""),
         void.p("buf", ""),
-        AutoSize("buf")..size_t("buf_size", "")
+        AutoSize("buf")..size_t("buf_size", ""),
+
+        since = "version 2.5"
     )
 
     int(
@@ -416,14 +418,18 @@ ENABLE_WARNINGS()""")
 
         io_uring.p("ring", ""),
         io_uring_restriction.p("res", ""),
-        AutoSize("res")..unsigned("nr_res", "")
+        AutoSize("res")..unsigned("nr_res", ""),
+
+        since = "version 2.4"
     )
 
     int(
         "enable_rings",
         "",
 
-        io_uring.p("ring", "")
+        io_uring.p("ring", ""),
+
+        since = "version 2.4"
     )
 
     int(
@@ -504,7 +510,9 @@ ENABLE_WARNINGS()""")
         "close_ring_fd",
         "",
 
-        io_uring.p("ring", "")
+        io_uring.p("ring", ""),
+
+        since = "version 2.4"
     )
 
     int(
@@ -586,6 +594,17 @@ struct io_uring_buf {
     )
 
     int(
+        "buf_ring_head",
+        "",
+
+        io_uring.p("ring", ""),
+        int("buf_group", ""),
+        Check(1)..unsigned_short.p("head", ""),
+
+        since = "version 2.6"
+    )
+
+    int(
         "register_sync_cancel",
         "",
 
@@ -600,6 +619,26 @@ struct io_uring_buf {
         io_uring.p("ring", ""),
         unsigned("off", ""),
         unsigned("len", "")
+    )
+
+    int(
+        "register_napi",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_napi.p("napi", ""),
+
+        since = "version 2.6"
+    )
+
+    int(
+        "unregister_napi",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_napi.p("napi", ""),
+
+        since = "version 2.6"
     )
 
     int(
@@ -680,7 +719,9 @@ struct io_uring_buf {
         unsigned_int("nentries", ""),
         int("bgid", ""),
         unsigned_int("flags", ""),
-        Check(1)..int.p("ret", "")
+        Check(1)..int.p("ret", ""),
+
+        since = "version 2.4"
     )
 
     int(
@@ -690,7 +731,9 @@ struct io_uring_buf {
         io_uring.p("ring", ""),
         io_uring_buf_ring.p("br", ""),
         unsigned_int("nentries", ""),
-        int("bgid", "")
+        int("bgid", ""),
+
+        since = "version 2.4"
     )
 
     void(
@@ -1248,6 +1291,19 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_read_multishot",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        unsigned_int("nbytes", ""),
+        __u64("offset", ""),
+        int("buf_group", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
         "prep_write",
         """
         Prepares an IO write request.
@@ -1752,7 +1808,85 @@ struct io_uring_buf {
         int("level", ""),
         int("optname", ""),
         void.p("optval", ""),
-        AutoSize("optval")..int("optlen", "")
+        AutoSize("optval")..int("optlen", ""),
+
+        since = "version 2.5"
+    )
+
+    void(
+        "prep_waitid",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        idtype_t("idtype", ""), // TODO:
+        id_t("id", ""), // TODO:
+        "siginfo_t".opaque.p("infop", ""), // TODO:
+        int("options", ""),
+        unsigned_int("flags", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
+        "prep_futex_wake",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        Check(1)..uint32_t.p("futex", ""),
+        uint64_t("val", ""),
+        uint64_t("mask", ""),
+        uint32_t("futex_flags", ""),
+        unsigned_int("flags", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
+        "prep_futex_wait",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        Check(1)..uint32_t.p("futex", ""),
+        uint64_t("val", ""),
+        uint64_t("mask", ""),
+        uint32_t("futex_flags", ""),
+        unsigned_int("flags", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
+        "prep_futex_waitv",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        "futex_waitv".handle.p("futex", ""), // TODO:
+        AutoSize("futex")..unsigned_int("nr_futex", ""),
+        unsigned_int("flags", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
+        "prep_fixed_fd_install",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        unsigned_int("flags", ""),
+
+        since = "version 2.6"
+    )
+
+    void(
+        "prep_ftruncate",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        loff_t("len", ""),
+
+        since = "version 2.6"
     )
 
     unsigned_int(
@@ -1888,6 +2022,31 @@ struct io_uring_buf {
         int("count", "")
     )
 
+    int(
+        "buf_ring_available",
+        """
+        Returns the number of unconsumed (by the kernel) entries in the {@code br} provided buffer group belonging to the io_uring {@code ring} and identified
+        by the buffer group ID {@code bgid}.
+
+        Since the head of the provided buffer ring is only visible to the kernel, it's impossible to otherwise know how many unconsumed entries exist in the
+        given provided buffer ring. This function query the kernel to return that number.
+
+        The returned number of entries reflect the amount of unconsumed entries at the time that it was queried. If inflight IO exists that may consume
+        provided buffers from this buffer group, then the returned value is inherently racy.
+        """,
+
+        io_uring.p("ring", ""),
+        io_uring_buf_ring.p("br", ""),
+        unsigned_short("bgid", ""),
+
+        returnDoc =
+        """
+        the number of unconsumed entries on success, which may be 0. In case of error, may return {@code -ENOENT} if the specified buffer group doesn't
+        exist, or {@code -EINVAL} if the buffer group isn't of the correct type, or if the kernel doesn't support this feature.
+        """,
+        since = "version 2.6"
+    )
+
     io_uring_sqe.p(
         "get_sqe",
         """
@@ -1927,14 +2086,18 @@ struct io_uring_buf {
         "major_version",
         "",
 
-        void()
+        void(),
+
+        since = "version 2.4"
     )
 
     int(
         "minor_version",
         "",
 
-        void()
+        void(),
+
+        since = "version 2.4"
     )
 
     bool(
@@ -1942,6 +2105,8 @@ struct io_uring_buf {
         "",
 
         int("major", ""),
-        int("minor", "")
+        int("minor", ""),
+
+        since = "version 2.4"
     )
 }

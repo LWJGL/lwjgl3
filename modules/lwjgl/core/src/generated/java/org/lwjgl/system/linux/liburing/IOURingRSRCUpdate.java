@@ -80,28 +80,21 @@ public class IOURingRSRCUpdate extends Struct<IOURingRSRCUpdate> implements Nati
     /** @return the value of the {@code offset} field. */
     @NativeType("__u32")
     public int offset() { return noffset(address()); }
-    /** @return the value of the {@code resv} field. */
-    @NativeType("__u32")
-    public int resv() { return nresv(address()); }
     /** @return the value of the {@code data} field. */
     @NativeType("__u64")
     public long data() { return ndata(address()); }
 
     /** Sets the specified value to the {@code offset} field. */
     public IOURingRSRCUpdate offset(@NativeType("__u32") int value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code resv} field. */
-    public IOURingRSRCUpdate resv(@NativeType("__u32") int value) { nresv(address(), value); return this; }
     /** Sets the specified value to the {@code data} field. */
     public IOURingRSRCUpdate data(@NativeType("__u64") long value) { ndata(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOURingRSRCUpdate set(
         int offset,
-        int resv,
         long data
     ) {
         offset(offset);
-        resv(resv);
         data(data);
 
         return this;
@@ -234,14 +227,12 @@ public class IOURingRSRCUpdate extends Struct<IOURingRSRCUpdate> implements Nati
 
     /** Unsafe version of {@link #offset}. */
     public static int noffset(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCUpdate.OFFSET); }
-    /** Unsafe version of {@link #resv}. */
     public static int nresv(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCUpdate.RESV); }
     /** Unsafe version of {@link #data}. */
     public static long ndata(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCUpdate.DATA); }
 
     /** Unsafe version of {@link #offset(int) offset}. */
     public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCUpdate.OFFSET, value); }
-    /** Unsafe version of {@link #resv(int) resv}. */
     public static void nresv(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCUpdate.RESV, value); }
     /** Unsafe version of {@link #data(long) data}. */
     public static void ndata(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCUpdate.DATA, value); }
@@ -287,17 +278,12 @@ public class IOURingRSRCUpdate extends Struct<IOURingRSRCUpdate> implements Nati
         /** @return the value of the {@code offset} field. */
         @NativeType("__u32")
         public int offset() { return IOURingRSRCUpdate.noffset(address()); }
-        /** @return the value of the {@code resv} field. */
-        @NativeType("__u32")
-        public int resv() { return IOURingRSRCUpdate.nresv(address()); }
         /** @return the value of the {@code data} field. */
         @NativeType("__u64")
         public long data() { return IOURingRSRCUpdate.ndata(address()); }
 
         /** Sets the specified value to the {@code offset} field. */
         public IOURingRSRCUpdate.Buffer offset(@NativeType("__u32") int value) { IOURingRSRCUpdate.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code resv} field. */
-        public IOURingRSRCUpdate.Buffer resv(@NativeType("__u32") int value) { IOURingRSRCUpdate.nresv(address(), value); return this; }
         /** Sets the specified value to the {@code data} field. */
         public IOURingRSRCUpdate.Buffer data(@NativeType("__u64") long value) { IOURingRSRCUpdate.ndata(address(), value); return this; }
 

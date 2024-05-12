@@ -18,12 +18,16 @@ val ssize_t = IntegerType("ssize_t", PrimitiveMapping.POINTER)
 
 val mode_t = typedef(unsigned_int, "mode_t")
 val off_t = typedef(int64_t, "off_t")
+val loff_t = typedef(long_long, "loff_t")
 val pid_t = typedef(int, "pid_t")
+val id_t = typedef(int, "id_t")
 val pthread_t = typedef(unsigned_long_int, "pthread_t")
 val socklen_t = typedef(uint32_t, "socklen_t")
 
 val cpu_set_t = "cpu_set_t".opaque
 val sigset_t = "sigset_t".opaque
+
+val idtype_t = "idtype_t".enumType
 
 val flock = struct(Module.CORE_LINUX, "Flock", nativeName = "flock64") {
     short("l_type", "type of lock").links("#F_RDLCK #F_WRLCK #F_UNLCK")

@@ -326,6 +326,20 @@ int io_uring_unregister_buf_ring(struct io_uring *ring, int bgid)
 	return do_register(ring, IORING_UNREGISTER_PBUF_RING, &reg, 1);
 }
 
+int io_uring_buf_ring_head(struct io_uring *ring, int buf_group, uint16_t *head)
+{
+	struct io_uring_buf_status buf_status = {
+		.buf_group	= buf_group,
+	};
+	int ret;
+
+	ret = do_register(ring, IORING_REGISTER_PBUF_STATUS, &buf_status, 1);
+	if (ret)
+		return ret;
+	*head = buf_status.head;
+	return 0;
+}
+
 int io_uring_register_sync_cancel(struct io_uring *ring,
 				  struct io_uring_sync_cancel_reg *reg)
 {
@@ -341,4 +355,14 @@ int io_uring_register_file_alloc_range(struct io_uring *ring,
 	};
 
 	return do_register(ring, IORING_REGISTER_FILE_ALLOC_RANGE, &range, 0);
+}
+
+int io_uring_register_napi(struct io_uring *ring, struct io_uring_napi *napi)
+{
+	return do_register(ring, IORING_REGISTER_NAPI, napi, 1);
+}
+
+int io_uring_unregister_napi(struct io_uring *ring, struct io_uring_napi *napi)
+{
+	return do_register(ring, IORING_UNREGISTER_NAPI, napi, 1);
 }

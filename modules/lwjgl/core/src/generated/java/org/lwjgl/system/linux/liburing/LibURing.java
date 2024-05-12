@@ -92,8 +92,10 @@ public class LibURing {
 
     // --- [ io_uring_queue_init_mem ] ---
 
+    /** Unsafe version of: {@link #io_uring_queue_init_mem queue_init_mem} */
     public static native int nio_uring_queue_init_mem(int entries, long ring, long p, long buf, long buf_size);
 
+    /** @since version 2.5 */
     public static int io_uring_queue_init_mem(@NativeType("unsigned") int entries, @NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_params *") IOURingParams p, @NativeType("void *") ByteBuffer buf) {
         return nio_uring_queue_init_mem(entries, ring.address(), p.address(), memAddress(buf), buf.remaining());
     }
@@ -475,16 +477,20 @@ public class LibURing {
 
     // --- [ io_uring_register_restrictions ] ---
 
+    /** Unsafe version of: {@link #io_uring_register_restrictions register_restrictions} */
     public static native int nio_uring_register_restrictions(long ring, long res, int nr_res);
 
+    /** @since version 2.4 */
     public static int io_uring_register_restrictions(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_restriction *") IOURingRestriction.Buffer res) {
         return nio_uring_register_restrictions(ring.address(), res.address(), res.remaining());
     }
 
     // --- [ io_uring_enable_rings ] ---
 
+    /** Unsafe version of: {@link #io_uring_enable_rings enable_rings} */
     public static native int nio_uring_enable_rings(long ring);
 
+    /** @since version 2.4 */
     public static int io_uring_enable_rings(@NativeType("struct io_uring *") IOURing ring) {
         return nio_uring_enable_rings(ring.address());
     }
@@ -577,8 +583,10 @@ public class LibURing {
 
     // --- [ io_uring_close_ring_fd ] ---
 
+    /** Unsafe version of: {@link #io_uring_close_ring_fd close_ring_fd} */
     public static native int nio_uring_close_ring_fd(long ring);
 
+    /** @since version 2.4 */
     public static int io_uring_close_ring_fd(@NativeType("struct io_uring *") IOURing ring) {
         return nio_uring_close_ring_fd(ring.address());
     }
@@ -669,6 +677,19 @@ public class LibURing {
         return nio_uring_unregister_buf_ring(ring.address(), bgid);
     }
 
+    // --- [ io_uring_buf_ring_head ] ---
+
+    /** Unsafe version of: {@link #io_uring_buf_ring_head buf_ring_head} */
+    public static native int nio_uring_buf_ring_head(long ring, int buf_group, long head);
+
+    /** @since version 2.6 */
+    public static int io_uring_buf_ring_head(@NativeType("struct io_uring *") IOURing ring, int buf_group, @NativeType("unsigned short *") ShortBuffer head) {
+        if (CHECKS) {
+            check(head, 1);
+        }
+        return nio_uring_buf_ring_head(ring.address(), buf_group, memAddress(head));
+    }
+
     // --- [ io_uring_register_sync_cancel ] ---
 
     public static native int nio_uring_register_sync_cancel(long ring, long reg);
@@ -683,6 +704,26 @@ public class LibURing {
 
     public static int io_uring_register_file_alloc_range(@NativeType("struct io_uring *") IOURing ring, @NativeType("unsigned") int off, @NativeType("unsigned") int len) {
         return nio_uring_register_file_alloc_range(ring.address(), off, len);
+    }
+
+    // --- [ io_uring_register_napi ] ---
+
+    /** Unsafe version of: {@link #io_uring_register_napi register_napi} */
+    public static native int nio_uring_register_napi(long ring, long napi);
+
+    /** @since version 2.6 */
+    public static int io_uring_register_napi(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_napi *") IOURingNAPI napi) {
+        return nio_uring_register_napi(ring.address(), napi.address());
+    }
+
+    // --- [ io_uring_unregister_napi ] ---
+
+    /** Unsafe version of: {@link #io_uring_unregister_napi unregister_napi} */
+    public static native int nio_uring_unregister_napi(long ring, long napi);
+
+    /** @since version 2.6 */
+    public static int io_uring_unregister_napi(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_napi *") IOURingNAPI napi) {
+        return nio_uring_unregister_napi(ring.address(), napi.address());
     }
 
     // --- [ io_uring_get_events ] ---
@@ -763,8 +804,10 @@ public class LibURing {
 
     // --- [ io_uring_setup_buf_ring ] ---
 
+    /** Unsafe version of: {@link #io_uring_setup_buf_ring setup_buf_ring} */
     public static native long nio_uring_setup_buf_ring(long ring, int nentries, int bgid, int flags, long ret);
 
+    /** @since version 2.4 */
     @Nullable
     @NativeType("struct io_uring_buf_ring *")
     public static IOURingBufRing io_uring_setup_buf_ring(@NativeType("struct io_uring *") IOURing ring, @NativeType("unsigned int") int nentries, int bgid, @NativeType("unsigned int") int flags, @NativeType("int *") IntBuffer ret) {
@@ -777,8 +820,10 @@ public class LibURing {
 
     // --- [ io_uring_free_buf_ring ] ---
 
+    /** Unsafe version of: {@link #io_uring_free_buf_ring free_buf_ring} */
     public static native int nio_uring_free_buf_ring(long ring, long br, int nentries, int bgid);
 
+    /** @since version 2.4 */
     public static int io_uring_free_buf_ring(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_buf_ring *") IOURingBufRing br, @NativeType("unsigned int") int nentries, int bgid) {
         return nio_uring_free_buf_ring(ring.address(), br.address(), nentries, bgid);
     }
@@ -1337,6 +1382,16 @@ public class LibURing {
      */
     public static void io_uring_prep_read(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, int offset) {
         nio_uring_prep_read(sqe.address(), fd, memAddress(buf), buf.remaining(), offset);
+    }
+
+    // --- [ io_uring_prep_read_multishot ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_read_multishot prep_read_multishot} */
+    public static native void nio_uring_prep_read_multishot(long sqe, int fd, int nbytes, long offset, int buf_group);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_read_multishot(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int nbytes, @NativeType("__u64") long offset, int buf_group) {
+        nio_uring_prep_read_multishot(sqe.address(), fd, nbytes, offset, buf_group);
     }
 
     // --- [ io_uring_prep_write ] ---
@@ -2003,10 +2058,81 @@ public class LibURing {
 
     // --- [ io_uring_prep_cmd_sock ] ---
 
+    /** Unsafe version of: {@link #io_uring_prep_cmd_sock prep_cmd_sock} */
     public static native void nio_uring_prep_cmd_sock(long sqe, int cmd_op, int fd, int level, int optname, long optval, int optlen);
 
+    /** @since version 2.5 */
     public static void io_uring_prep_cmd_sock(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int cmd_op, int fd, int level, int optname, @NativeType("void *") ByteBuffer optval) {
         nio_uring_prep_cmd_sock(sqe.address(), cmd_op, fd, level, optname, memAddress(optval), optval.remaining());
+    }
+
+    // --- [ io_uring_prep_waitid ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_waitid prep_waitid} */
+    public static native void nio_uring_prep_waitid(long sqe, int idtype, int id, long infop, int options, int flags);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_waitid(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("idtype_t") int idtype, @NativeType("id_t") int id, @NativeType("siginfo_t *") long infop, int options, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            check(infop);
+        }
+        nio_uring_prep_waitid(sqe.address(), idtype, id, infop, options, flags);
+    }
+
+    // --- [ io_uring_prep_futex_wake ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_futex_wake prep_futex_wake} */
+    public static native void nio_uring_prep_futex_wake(long sqe, long futex, long val, long mask, int futex_flags, int flags);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_futex_wake(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("uint32_t *") IntBuffer futex, @NativeType("uint64_t") long val, @NativeType("uint64_t") long mask, @NativeType("uint32_t") int futex_flags, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            check(futex, 1);
+        }
+        nio_uring_prep_futex_wake(sqe.address(), memAddress(futex), val, mask, futex_flags, flags);
+    }
+
+    // --- [ io_uring_prep_futex_wait ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_futex_wait prep_futex_wait} */
+    public static native void nio_uring_prep_futex_wait(long sqe, long futex, long val, long mask, int futex_flags, int flags);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_futex_wait(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("uint32_t *") IntBuffer futex, @NativeType("uint64_t") long val, @NativeType("uint64_t") long mask, @NativeType("uint32_t") int futex_flags, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            check(futex, 1);
+        }
+        nio_uring_prep_futex_wait(sqe.address(), memAddress(futex), val, mask, futex_flags, flags);
+    }
+
+    // --- [ io_uring_prep_futex_waitv ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_futex_waitv prep_futex_waitv} */
+    public static native void nio_uring_prep_futex_waitv(long sqe, long futex, int nr_futex, int flags);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_futex_waitv(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("futex_waitv *") PointerBuffer futex, @NativeType("unsigned int") int flags) {
+        nio_uring_prep_futex_waitv(sqe.address(), memAddress(futex), futex.remaining(), flags);
+    }
+
+    // --- [ io_uring_prep_fixed_fd_install ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_fixed_fd_install prep_fixed_fd_install} */
+    public static native void nio_uring_prep_fixed_fd_install(long sqe, int fd, int flags);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_fixed_fd_install(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int flags) {
+        nio_uring_prep_fixed_fd_install(sqe.address(), fd, flags);
+    }
+
+    // --- [ io_uring_prep_ftruncate ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_ftruncate prep_ftruncate} */
+    public static native void nio_uring_prep_ftruncate(long sqe, int fd, long len);
+
+    /** @since version 2.6 */
+    public static void io_uring_prep_ftruncate(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("loff_t") long len) {
+        nio_uring_prep_ftruncate(sqe.address(), fd, len);
     }
 
     // --- [ io_uring_sq_ready ] ---
@@ -2176,6 +2302,30 @@ public class LibURing {
         nio_uring_buf_ring_cq_advance(ring.address(), br.address(), count);
     }
 
+    // --- [ io_uring_buf_ring_available ] ---
+
+    /** Unsafe version of: {@link #io_uring_buf_ring_available buf_ring_available} */
+    public static native int nio_uring_buf_ring_available(long ring, long br, short bgid);
+
+    /**
+     * Returns the number of unconsumed (by the kernel) entries in the {@code br} provided buffer group belonging to the io_uring {@code ring} and identified
+     * by the buffer group ID {@code bgid}.
+     * 
+     * <p>Since the head of the provided buffer ring is only visible to the kernel, it's impossible to otherwise know how many unconsumed entries exist in the
+     * given provided buffer ring. This function query the kernel to return that number.</p>
+     * 
+     * <p>The returned number of entries reflect the amount of unconsumed entries at the time that it was queried. If inflight IO exists that may consume
+     * provided buffers from this buffer group, then the returned value is inherently racy.</p>
+     *
+     * @return the number of unconsumed entries on success, which may be 0. In case of error, may return {@code -ENOENT} if the specified buffer group doesn't
+     *         exist, or {@code -EINVAL} if the buffer group isn't of the correct type, or if the kernel doesn't support this feature.
+     *
+     * @since version 2.6
+     */
+    public static int io_uring_buf_ring_available(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_buf_ring *") IOURingBufRing br, @NativeType("unsigned short") short bgid) {
+        return nio_uring_buf_ring_available(ring.address(), br.address(), bgid);
+    }
+
     // --- [ io_uring_get_sqe ] ---
 
     /** Unsafe version of: {@link #io_uring_get_sqe get_sqe} */
@@ -2222,14 +2372,17 @@ public class LibURing {
 
     // --- [ io_uring_major_version ] ---
 
+    /** @since version 2.4 */
     public static native int io_uring_major_version();
 
     // --- [ io_uring_minor_version ] ---
 
+    /** @since version 2.4 */
     public static native int io_uring_minor_version();
 
     // --- [ io_uring_check_version ] ---
 
+    /** @since version 2.4 */
     @NativeType("bool")
     public static native boolean io_uring_check_version(int major, int minor);
 
