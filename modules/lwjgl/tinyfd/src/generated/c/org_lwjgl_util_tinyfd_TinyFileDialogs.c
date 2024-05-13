@@ -56,22 +56,22 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1inpu
     return (jlong)(uintptr_t)tinyfd_inputBox(aTitle, aMessage, aDefaultInput);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1saveFileDialog(JNIEnv *__env, jclass clazz, jlong aTitleAddress, jlong aDefaultPathAndFileAddress, jint aNumOfFilterPatterns, jlong aFilterPatternsAddress, jlong aSingleFilterDescriptionAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1saveFileDialog(JNIEnv *__env, jclass clazz, jlong aTitleAddress, jlong aDefaultPathAndOrFileAddress, jint aNumOfFilterPatterns, jlong aFilterPatternsAddress, jlong aSingleFilterDescriptionAddress) {
     char const *aTitle = (char const *)(uintptr_t)aTitleAddress;
-    char const *aDefaultPathAndFile = (char const *)(uintptr_t)aDefaultPathAndFileAddress;
+    char const *aDefaultPathAndOrFile = (char const *)(uintptr_t)aDefaultPathAndOrFileAddress;
     char const * const *aFilterPatterns = (char const * const *)(uintptr_t)aFilterPatternsAddress;
     char const *aSingleFilterDescription = (char const *)(uintptr_t)aSingleFilterDescriptionAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(uintptr_t)tinyfd_saveFileDialog(aTitle, aDefaultPathAndFile, aNumOfFilterPatterns, aFilterPatterns, aSingleFilterDescription);
+    return (jlong)(uintptr_t)tinyfd_saveFileDialog(aTitle, aDefaultPathAndOrFile, aNumOfFilterPatterns, aFilterPatterns, aSingleFilterDescription);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1openFileDialog(JNIEnv *__env, jclass clazz, jlong aTitleAddress, jlong aDefaultPathAndFileAddress, jint aNumOfFilterPatterns, jlong aFilterPatternsAddress, jlong aSingleFilterDescriptionAddress, jint aAllowMultipleSelects) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1openFileDialog(JNIEnv *__env, jclass clazz, jlong aTitleAddress, jlong aDefaultPathAndOrFileAddress, jint aNumOfFilterPatterns, jlong aFilterPatternsAddress, jlong aSingleFilterDescriptionAddress, jint aAllowMultipleSelects) {
     char const *aTitle = (char const *)(uintptr_t)aTitleAddress;
-    char const *aDefaultPathAndFile = (char const *)(uintptr_t)aDefaultPathAndFileAddress;
+    char const *aDefaultPathAndOrFile = (char const *)(uintptr_t)aDefaultPathAndOrFileAddress;
     char const * const *aFilterPatterns = (char const * const *)(uintptr_t)aFilterPatternsAddress;
     char const *aSingleFilterDescription = (char const *)(uintptr_t)aSingleFilterDescriptionAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(uintptr_t)tinyfd_openFileDialog(aTitle, aDefaultPathAndFile, aNumOfFilterPatterns, aFilterPatterns, aSingleFilterDescription, aAllowMultipleSelects);
+    return (jlong)(uintptr_t)tinyfd_openFileDialog(aTitle, aDefaultPathAndOrFile, aNumOfFilterPatterns, aFilterPatterns, aSingleFilterDescription, aAllowMultipleSelects);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1selectFolderDialog(JNIEnv *__env, jclass clazz, jlong aTitleAddress, jlong aDefaultPathAddress) {

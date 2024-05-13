@@ -64,7 +64,7 @@ dialog whiptail basicinput no_solution""")}
         0 (default) or 1. For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
 
         0: try to use a graphic solution, if it fails then it uses console mode.
-        
+
         1: forces all dialogs into console mode even when an X server is present, it can use the package dialog or dialog.exe. On windows it only make sense
         for console applications
         """,
@@ -72,7 +72,7 @@ dialog whiptail basicinput no_solution""")}
     StringConstant(
         """
          0 (default) or 1.
-         
+
          Some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell tinyfiledialogs to
          assume the existence of a graphic display.
         """,
@@ -80,7 +80,7 @@ dialog whiptail basicinput no_solution""")}
     StringConstant(
         """
         On windows, set to 1 if you want to use UTF-8.
-        
+
         <b>LWJGL note</b>: this is automatically set to 1.
         """,
 
@@ -160,7 +160,7 @@ dialog whiptail basicinput no_solution""")}
         "Displays a file save dialog.",
 
         messageBox["aTitle"],
-        nullable..charUTF8.const.p("aDefaultPathAndFile", "the default path and/or file or #NULL"),
+        nullable..charUTF8.const.p("aDefaultPathAndOrFile", "#NULL or the default path and/or file, ends with / to set only a directory"),
         AutoSize("aFilterPatterns")..int("aNumOfFilterPatterns", "the number of patterns in {@code aFilterPatterns}"),
         nullable..charUTF8.const.p.const.p("aFilterPatterns", """an array of file type patterns (#NULL or {"*.jpg","*.png"}"""),
         nullable..charUTF8.const.p("aSingleFilterDescription", "#NULL or \"image files\""),
@@ -173,7 +173,7 @@ dialog whiptail basicinput no_solution""")}
         "Displays a file open dialog.",
 
         messageBox["aTitle"],
-        saveFileDialog["aDefaultPathAndFile"],
+        saveFileDialog["aDefaultPathAndOrFile"],
         saveFileDialog["aNumOfFilterPatterns"],
         saveFileDialog["aFilterPatterns"],
         saveFileDialog["aSingleFilterDescription"],
