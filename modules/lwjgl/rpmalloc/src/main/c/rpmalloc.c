@@ -850,11 +850,11 @@ rpmalloc_set_main_thread(void) {
 static void
 _rpmalloc_spin(void) {
 #if defined(_MSC_VER)
-    #if defined(_M_ARM64)
-        __yield();
-    #else
-	    _mm_pause();
-	#endif
+#if defined(_M_ARM64)
+	__yield();
+#else
+	_mm_pause();
+#endif
 #elif defined(__x86_64__) || defined(__i386__)
 	__asm__ volatile("pause" ::: "memory");
 #elif defined(__aarch64__) || (defined(__arm__) && __ARM_ARCH >= 7)
@@ -1871,15 +1871,15 @@ _rpmalloc_heap_extract_new_span(heap_t* heap, heap_size_class_t* heap_size_class
 			_rpmalloc_inc_span_statistics(heap, span_count, class_idx);
 			return span;
 		}
-		span = _rpmalloc_heap_reserved_extract(heap, span_count);
-		if (EXPECTED(span != 0)) {
-			_rpmalloc_stat_inc(&heap->size_class_use[class_idx].spans_from_reserved);
-			_rpmalloc_inc_span_statistics(heap, span_count, class_idx);
-			return span;
-		}
 		span = _rpmalloc_heap_global_cache_extract(heap, span_count);
 		if (EXPECTED(span != 0)) {
 			_rpmalloc_stat_inc(&heap->size_class_use[class_idx].spans_from_cache);
+			_rpmalloc_inc_span_statistics(heap, span_count, class_idx);
+			return span;
+		}
+		span = _rpmalloc_heap_reserved_extract(heap, span_count);
+		if (EXPECTED(span != 0)) {
+			_rpmalloc_stat_inc(&heap->size_class_use[class_idx].spans_from_reserved);
 			_rpmalloc_inc_span_statistics(heap, span_count, class_idx);
 			return span;
 		}
@@ -3289,8 +3289,21 @@ rpmalloc_global_statistics(rpmalloc_global_statistics_t* stats) {
 	stats->huge_alloc_peak = (size_t)_huge_pages_peak * _memory_page_size;
 #endif
 #if ENABLE_GLOBAL_CACHE
-	for (size_t iclass = 0; iclass < LARGE_CLASS_COUNT; ++iclass)
-		stats->cached += _memory_span_cache[iclass].count * (iclass + 1) * _memory_span_size;
+	for (size_t iclass = 0; iclass < LARGE_CLASS_COUNT; ++iclass) {
+		global_cache_t* cache = &_memory_span_cache[iclass];
+		while (!atomic_cas32_acquire(&cache->lock, 1, 0))
+			_rpmalloc_spin();
+		uint32_t count = cache->count;
+#if ENABLE_UNLIMITED_CACHE
+		span_t* current_span = cache->overflow;
+		while (current_span) {
+			++count;
+			current_span = current_span->next;
+		}
+#endif
+		atomic_store32_release(&cache->lock, 0);
+		stats->cached += count * (iclass + 1) * _memory_span_size;
+	}
 #endif
 }
 
@@ -3545,6 +3558,11 @@ rpmalloc_heap_free_all(rpmalloc_heap_t* heap) {
 			_rpmalloc_heap_cache_insert(heap, span);
 			span = next_span;
 		}
+
+		span = heap->size_class[iclass].cache;
+		if (span)
+			_rpmalloc_heap_cache_insert(heap, span);
+		heap->size_class[iclass].cache = 0;
 	}
 	memset(heap->size_class, 0, sizeof(heap->size_class));
 	memset(heap->full_span, 0, sizeof(heap->full_span));
