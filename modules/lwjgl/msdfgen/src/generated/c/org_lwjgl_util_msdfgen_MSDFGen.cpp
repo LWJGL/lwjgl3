@@ -122,10 +122,22 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1orient_
     return (jint)msdf_shape_orient_contours(shape);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1simple_1edge_1colors(JNIEnv *__env, jclass clazz, jlong shapeAddress, jdouble angle_threshold) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1edge_1colors_1simple(JNIEnv *__env, jclass clazz, jlong shapeAddress, jdouble angle_threshold) {
     msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)msdf_shape_simple_edge_colors(shape, angle_threshold);
+    return (jint)msdf_shape_edge_colors_simple(shape, angle_threshold);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1edge_1colors_1ink_1trap(JNIEnv *__env, jclass clazz, jlong shapeAddress, jdouble angle_threshold) {
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_edge_colors_ink_trap(shape, angle_threshold);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1edge_1colors_1by_1distance(JNIEnv *__env, jclass clazz, jlong shapeAddress, jdouble angle_threshold) {
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_edge_colors_by_distance(shape, angle_threshold);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1free(JNIEnv *__env, jclass clazz, jlong shapeAddress) {

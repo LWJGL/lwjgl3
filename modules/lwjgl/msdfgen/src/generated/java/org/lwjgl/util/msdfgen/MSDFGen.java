@@ -402,10 +402,10 @@ public class MSDFGen {
         return nmsdf_shape_orient_contours(shape);
     }
 
-    // --- [ msdf_shape_simple_edge_colors ] ---
+    // --- [ msdf_shape_edge_colors_simple ] ---
 
-    /** Unsafe version of: {@link #msdf_shape_simple_edge_colors shape_simple_edge_colors} */
-    public static native int nmsdf_shape_simple_edge_colors(long shape, double angle_threshold);
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_simple shape_edge_colors_simple} */
+    public static native int nmsdf_shape_edge_colors_simple(long shape, double angle_threshold);
 
     /**
      * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants.
@@ -415,11 +415,51 @@ public class MSDFGen {
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_simple_edge_colors(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+    public static int msdf_shape_edge_colors_simple(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
         if (CHECKS) {
             check(shape);
         }
-        return nmsdf_shape_simple_edge_colors(shape, angle_threshold);
+        return nmsdf_shape_edge_colors_simple(shape, angle_threshold);
+    }
+
+    // --- [ msdf_shape_edge_colors_ink_trap ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_ink_trap shape_edge_colors_ink_trap} */
+    public static native int nmsdf_shape_edge_colors_ink_trap(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the ink trap algorithm.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_edge_colors_ink_trap(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_edge_colors_ink_trap(shape, angle_threshold);
+    }
+
+    // --- [ msdf_shape_edge_colors_by_distance ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_by_distance shape_edge_colors_by_distance} */
+    public static native int nmsdf_shape_edge_colors_by_distance(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the distance.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_edge_colors_by_distance(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_edge_colors_by_distance(shape, angle_threshold);
     }
 
     // --- [ msdf_shape_free ] ---

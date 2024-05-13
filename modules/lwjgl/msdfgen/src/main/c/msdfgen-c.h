@@ -282,7 +282,25 @@ MSDF_API int msdf_shape_orient_contours(msdf_shape_handle shape);
  * @param angle_threshold The threshold angle in degrees.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_shape_simple_edge_colors(msdf_shape_handle shape, double angle_threshold);
+MSDF_API int msdf_shape_edge_colors_simple(msdf_shape_handle shape, double angle_threshold);
+
+/**
+ * Colors the edges of the given shape using the default MSDF colors specified by the
+ * MSDF_COLOR_ prefixed constants using the ink trap algorithm.
+ * @param shape A pointer to a shape whose edges to color with the default MSDF colors.
+ * @param angle_threshold The threshold angle in degrees.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_shape_edge_colors_ink_trap(msdf_shape_handle shape, double angle_threshold);
+
+/**
+ * Colors the edges of the given shape using the default MSDF colors specified by the
+ * MSDF_COLOR_ prefixed constants using the distance.
+ * @param shape A pointer to a shape whose edges to color with the default MSDF colors.
+ * @param angle_threshold The threshold angle in degrees.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_shape_edge_colors_by_distance(msdf_shape_handle shape, double angle_threshold);
 
 /**
  * Calls the destructor of the given bitmap and frees its memory using the
@@ -494,6 +512,14 @@ MSDF_API int msdf_segment_move_end_point(msdf_segment_handle segment, const msdf
  * @param segment A pointer to the segment to free.
  */
 MSDF_API void msdf_segment_free(msdf_segment_handle segment);
+
+// Error correction functions
+
+MSDF_API int msdf_error_correction(msdf_bitmap_t* bitmap, msdf_shape_const_handle shape, const msdf_transform_t* transform);
+
+MSDF_API int msdf_error_correction_fast_distance(msdf_bitmap_t* bitmap, const msdf_transform_t* transform);
+
+MSDF_API int msdf_error_correction_fast_edge(msdf_bitmap_t* bitmap, const msdf_transform_t* transform);
 
 // msdfgen-core API functions
 

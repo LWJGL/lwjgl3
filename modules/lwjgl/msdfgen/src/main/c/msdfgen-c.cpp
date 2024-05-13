@@ -252,11 +252,27 @@ MSDF_API int msdf_shape_orient_contours(msdf_shape_handle shape) {
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_shape_simple_edge_colors(msdf_shape_handle shape, const double angle_threshold) {
+MSDF_API int msdf_shape_edge_colors_simple(msdf_shape_handle shape, const double angle_threshold) {
     if(shape == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
     msdfgen::edgeColoringSimple(*reinterpret_cast<msdfgen::Shape*>(shape), angle_threshold);
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_shape_edge_colors_ink_trap(msdf_shape_handle shape, const double angle_threshold) {
+    if(shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::edgeColoringInkTrap(*reinterpret_cast<msdfgen::Shape*>(shape), angle_threshold);
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_shape_edge_colors_by_distance(msdf_shape_handle shape, const double angle_threshold) {
+    if(shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::edgeColoringByDistance(*reinterpret_cast<msdfgen::Shape*>(shape), angle_threshold);
     return MSDF_SUCCESS;
 }
 
@@ -548,9 +564,73 @@ MSDF_API void msdf_segment_free(msdf_segment_handle segment) {
     }
 }
 
+// Error correction functions
+
+MSDF_API int msdf_error_correction(msdf_bitmap_t* bitmap, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
+    if(bitmap == nullptr || shape == nullptr || transform == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    const msdfgen::Projection projection(*reinterpret_cast<const msdfgen::Vector2*>(&transform->scale),
+                                         *reinterpret_cast<const msdfgen::Vector2*>(&transform->translation));
+    const msdfgen::SDFTransformation actual_transform(projection, *reinterpret_cast<const msdfgen::Range*>(&transform->distance_mapping));
+    switch(bitmap->type) {
+        case MSDF_BITMAP_TYPE_MSDF:
+            msdfgen::msdfErrorCorrection(*static_cast<MSDFBitmap*>(bitmap->handle), *reinterpret_cast<const msdfgen::Shape*>(shape),
+                                         actual_transform);
+            break;
+        case MSDF_BITMAP_TYPE_MTSDF:
+            msdfgen::msdfErrorCorrection(*static_cast<MTSDFBitmap*>(bitmap->handle), *reinterpret_cast<const msdfgen::Shape*>(shape),
+                                         actual_transform);
+            break;
+        default:
+            return MSDF_ERR_INVALID_TYPE;
+    }
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_error_correction_fast_distance(msdf_bitmap_t* bitmap, const msdf_transform_t* transform) {
+    if(bitmap == nullptr || transform == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    const msdfgen::Projection projection(*reinterpret_cast<const msdfgen::Vector2*>(&transform->scale),
+                                         *reinterpret_cast<const msdfgen::Vector2*>(&transform->translation));
+    const msdfgen::SDFTransformation actual_transform(projection, *reinterpret_cast<const msdfgen::Range*>(&transform->distance_mapping));
+    switch(bitmap->type) {
+        case MSDF_BITMAP_TYPE_MSDF:
+            msdfgen::msdfFastDistanceErrorCorrection(*static_cast<MSDFBitmap*>(bitmap->handle), actual_transform);
+            break;
+        case MSDF_BITMAP_TYPE_MTSDF:
+            msdfgen::msdfFastDistanceErrorCorrection(*static_cast<MTSDFBitmap*>(bitmap->handle), actual_transform);
+            break;
+        default:
+            return MSDF_ERR_INVALID_TYPE;
+    }
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_error_correction_fast_edge(msdf_bitmap_t* bitmap, const msdf_transform_t* transform) {
+    if(bitmap == nullptr || transform == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    const msdfgen::Projection projection(*reinterpret_cast<const msdfgen::Vector2*>(&transform->scale),
+                                         *reinterpret_cast<const msdfgen::Vector2*>(&transform->translation));
+    const msdfgen::SDFTransformation actual_transform(projection, *reinterpret_cast<const msdfgen::Range*>(&transform->distance_mapping));
+    switch(bitmap->type) {
+        case MSDF_BITMAP_TYPE_MSDF:
+            msdfgen::msdfFastEdgeErrorCorrection(*static_cast<MSDFBitmap*>(bitmap->handle), actual_transform);
+            break;
+        case MSDF_BITMAP_TYPE_MTSDF:
+            msdfgen::msdfFastEdgeErrorCorrection(*static_cast<MTSDFBitmap*>(bitmap->handle), actual_transform);
+            break;
+        default:
+            return MSDF_ERR_INVALID_TYPE;
+    }
+    return MSDF_SUCCESS;
+}
+
 // Main msdfgen APIs
 
-int msdf_generate_sdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
+MSDF_API int msdf_generate_sdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
     if(output == nullptr || shape == nullptr || transform == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -564,7 +644,7 @@ int msdf_generate_sdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, cons
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_psdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
+MSDF_API int msdf_generate_psdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
     if(output == nullptr || shape == nullptr || transform == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -578,7 +658,7 @@ int msdf_generate_psdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, con
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_msdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
+MSDF_API int msdf_generate_msdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
     if(output == nullptr || shape == nullptr || transform == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -592,7 +672,7 @@ int msdf_generate_msdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, con
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_mtsdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
+MSDF_API int msdf_generate_mtsdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, const msdf_transform_t* transform) {
     if(output == nullptr || shape == nullptr || transform == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -606,10 +686,10 @@ int msdf_generate_mtsdf(msdf_bitmap_t* output, msdf_shape_const_handle shape, co
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_sdf_with_config(msdf_bitmap_t* output,
-                                  msdf_shape_const_handle shape,
-                                  const msdf_transform_t* transform,
-                                  const msdf_config_t* config) {
+MSDF_API int msdf_generate_sdf_with_config(msdf_bitmap_t* output,
+                                           msdf_shape_const_handle shape,
+                                           const msdf_transform_t* transform,
+                                           const msdf_config_t* config) {
     if(output == nullptr || shape == nullptr || transform == nullptr || config == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -625,10 +705,10 @@ int msdf_generate_sdf_with_config(msdf_bitmap_t* output,
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_psdf_with_config(msdf_bitmap_t* output,
-                                   msdf_shape_const_handle shape,
-                                   const msdf_transform_t* transform,
-                                   const msdf_config_t* config) {
+MSDF_API int msdf_generate_psdf_with_config(msdf_bitmap_t* output,
+                                            msdf_shape_const_handle shape,
+                                            const msdf_transform_t* transform,
+                                            const msdf_config_t* config) {
     if(output == nullptr || shape == nullptr || transform == nullptr || config == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -644,10 +724,10 @@ int msdf_generate_psdf_with_config(msdf_bitmap_t* output,
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_msdf_with_config(msdf_bitmap_t* output,
-                                   msdf_shape_const_handle shape,
-                                   const msdf_transform_t* transform,
-                                   const msdf_multichannel_config_t* config) {
+MSDF_API int msdf_generate_msdf_with_config(msdf_bitmap_t* output,
+                                            msdf_shape_const_handle shape,
+                                            const msdf_transform_t* transform,
+                                            const msdf_multichannel_config_t* config) {
     if(output == nullptr || shape == nullptr || transform == nullptr || config == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
@@ -667,10 +747,10 @@ int msdf_generate_msdf_with_config(msdf_bitmap_t* output,
     return MSDF_SUCCESS;
 }
 
-int msdf_generate_mtsdf_with_config(msdf_bitmap_t* output,
-                                    msdf_shape_const_handle shape,
-                                    const msdf_transform_t* transform,
-                                    const msdf_multichannel_config_t* config) {
+MSDF_API int msdf_generate_mtsdf_with_config(msdf_bitmap_t* output,
+                                             msdf_shape_const_handle shape,
+                                             const msdf_transform_t* transform,
+                                             const msdf_multichannel_config_t* config) {
     if(output == nullptr || shape == nullptr || transform == nullptr || config == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
