@@ -761,7 +761,7 @@ static rmtU64 AtomicAddU64(rmtAtomicU64* value, rmtU64 add)
 #elif defined(RMT_USE_CPP_ATOMICS)
     return value->fetch_add(add);
 #elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
-    return (rmtU64)_InterlockedExchangeAdd64((long long volatile*)value, (long long)add);
+    return (rmtU64)InterlockedExchangeAdd64((long long volatile*)value, (long long)add);
 #elif defined(RMT_PLATFORM_POSIX) || defined(__MINGW32__)
     return (rmtU64)__sync_fetch_and_add(value, add);
 #endif

@@ -240,16 +240,16 @@ typedef unsigned int rmtBool;
 #define RMT_FALSE ((rmtBool)0)
 
 // Unsigned integer types
-typedef unsigned char rmtU8;
-typedef unsigned short rmtU16;
-typedef unsigned int rmtU32;
-typedef unsigned long long rmtU64;
+typedef uint8_t rmtU8;
+typedef uint16_t rmtU16;
+typedef uint32_t rmtU32;
+typedef uint64_t rmtU64;
 
 // Signed integer types
-typedef char rmtS8;
-typedef short rmtS16;
-typedef int rmtS32;
-typedef long long rmtS64;
+typedef int8_t rmtS8;
+typedef int16_t rmtS16;
+typedef int32_t rmtS32;
+typedef int64_t rmtS64;
 
 // Float types
 typedef float rmtF32;
