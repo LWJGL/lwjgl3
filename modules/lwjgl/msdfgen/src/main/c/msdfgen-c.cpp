@@ -252,6 +252,14 @@ MSDF_API int msdf_shape_orient_contours(msdf_shape_handle shape) {
     return MSDF_SUCCESS;
 }
 
+MSDF_API int msdf_shape_simple_edge_colors(msdf_shape_handle shape, const double angle_threshold) {
+    if(shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::edgeColoringSimple(*reinterpret_cast<msdfgen::Shape*>(shape), angle_threshold);
+    return MSDF_SUCCESS;
+}
+
 MSDF_API void msdf_shape_free(msdf_shape_handle shape) {
     delete reinterpret_cast<msdfgen::Shape*>(shape);
 }

@@ -402,6 +402,26 @@ public class MSDFGen {
         return nmsdf_shape_orient_contours(shape);
     }
 
+    // --- [ msdf_shape_simple_edge_colors ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_simple_edge_colors shape_simple_edge_colors} */
+    public static native int nmsdf_shape_simple_edge_colors(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_simple_edge_colors(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_simple_edge_colors(shape, angle_threshold);
+    }
+
     // --- [ msdf_shape_free ] ---
 
     /** Unsafe version of: {@link #msdf_shape_free shape_free} */

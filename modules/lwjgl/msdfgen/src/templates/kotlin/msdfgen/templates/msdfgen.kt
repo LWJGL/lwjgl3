@@ -180,6 +180,13 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         msdf_shape_handle("shape", "A pointer to a shape whose contours to orient."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
+    int(
+        "shape_simple_edge_colors",
+        "Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants.",
+        msdf_shape_handle("shape", "A pointer to a shape whose edges to color with the default MSDF colors."),
+        double("angle_threshold", "The threshold angle in degrees."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
     void(
         "shape_free",
         "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
