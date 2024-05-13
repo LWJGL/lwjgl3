@@ -10,6 +10,7 @@ fun NativeClass.remoteryIncludes(type: String) {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define RMT_USE_OPENGL 1
+#define RMT_USE_VULKAN 1
 #define RMT_ASSUME_LITTLE_ENDIAN 1
 #ifdef LWJGL_LINUX
     #define RMT_USE_POSIX_THREADNAMES 1
@@ -156,9 +157,9 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
         "enableThreadSampler",
         """
         Whether to enable runtime thread sampling that discovers which processors a thread is running on.
-        
+
         This will suspend and resume threads from outside repeatdly and inject code into each thread that automatically instruments the processor.
-        
+
         Default: Enabled 
         """
     )
@@ -255,3 +256,48 @@ val rmtPropertyIterator = struct(Module.REMOTERY, "RMTPropertyIterator", nativeN
 // Metal
 
 val id = "id".handle
+
+// Vulkan
+
+val rmtVulkanFunctions = struct(Module.REMOTERY, "RMTVulkanFunctions", nativeName = "rmtVulkanFunctions") {
+    documentation =
+        """
+        Function pointers to Vulkan functions
+
+        Untyped so that the Vulkan headers are not required.
+        """
+
+    opaque_p("vkGetPhysicalDeviceProperties", "")
+
+    opaque_p("vkQueueSubmit", "")
+    opaque_p("vkQueueWaitIdle", "")
+    opaque_p("vkCreateQueryPool", "")
+    opaque_p("vkDestroyQueryPool", "")
+    opaque_p(
+        "vkResetQueryPool",
+        "{@code vkResetQueryPool} (Vulkan 1.2+ with {@code hostQueryReset}) or {@code vkResetQueryPoolEXT} (VK_EXT_host_query_reset)"
+    )
+    opaque_p("vkGetQueryPoolResults", "")
+    opaque_p("vkCmdWriteTimestamp", "")
+    opaque_p("vkCreateSemaphore", "")
+    opaque_p("vkDestroySemaphore", "")
+    opaque_p(
+        "vkSignalSemaphore",
+        "{@code vkSignalSemaphore} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkSignalSemaphoreKHR} (VK_KHR_timeline_semaphore)"
+    )
+    opaque_p(
+        "vkGetSemaphoreCounterValue",
+        "{@code vkGetSemaphoreCounterValue} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkGetSemaphoreCounterValueKHR} (VK_KHR_timeline_semaphore)"
+    )
+    opaque_p(
+        "vkGetCalibratedTimestampsEXT",
+        "{@code vkGetCalibratedTimestampsKHR} (VK_KHR_calibrated_timestamps) or {@code vkGetCalibratedTimestampsEXT} (VK_EXT_calibrated_timestamps)"
+    )
+}
+
+val rmtVulkanBind = struct(Module.REMOTERY, "RMTVulkanBind", nativeName = "rmtVulkanBind", mutable = false) {
+    "VkInstance".handle("instance", "The Vulkan instance, of type {@code VkInstance}")
+    "VkPhysicalDevice".handle("physical_device", "The physical Vulkan device, of type {@code VkPhysicalDevice}")
+    "VkDevice".handle("device", "The logical Vulkan device, of type {@code VkDevice}")
+    "VkQueue".handle("queue", "The queue command buffers are executed on for profiling, of type {@code VkQueue}")
+}

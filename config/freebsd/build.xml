@@ -305,6 +305,7 @@
         <build module="remotery" if:true="${binding.remotery}">
             <source>
                 <arg value="-I${src.main.rel}"/>
+                <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
                 <fileset dir="." includes="${src.generated}/*.c" excludes="**/*Metal.c"/>
             </source>
             <link>

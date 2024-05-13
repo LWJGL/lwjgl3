@@ -51,6 +51,7 @@
     @D3D12:         Direct3D 12 event sampling
     @OPENGL:        OpenGL event sampling
     @METAL:         Metal event sampling
+    @VULKAN:        Vulkan event sampling
     @SAMPLEAPI:     Sample API for user callbacks
     @PROPERTYAPI:   Property API for user callbacks
     @PROPERTIES:    Property API
@@ -115,6 +116,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 
     #ifdef RMT_PLATFORM_WINDOWS
         #include <winsock2.h>
+        #include <timeapi.h>
         #ifndef __MINGW32__
             #include <intrin.h>
         #endif
@@ -391,6 +393,14 @@ static void usTimer_Init(usTimer* timer)
 #endif
 }
 
+#if defined(RMT_PLATFORM_WINDOWS)
+    #define usTimer_FromRawTicks(timer, ticks) (rmtU64)(((ticks) - (timer)->counter_start.QuadPart) * (timer)->counter_scale)
+#elif defined(RMT_PLATFORM_MACOS)
+    #define usTimer_FromRawTicks(timer, ticks) (rmtU64)(((ticks) - (timer)->counter_start) * (timer)->counter_scale)
+#elif defined(RMT_PLATFORM_LINUX)
+    #define usTimer_FromRawTicks(timer, ticks) (rmtU64)((ticks) - (timer)->counter_start)
+#endif
+
 static rmtU64 usTimer_Get(usTimer* timer)
 {
 #if defined(RMT_PLATFORM_WINDOWS)
@@ -400,18 +410,19 @@ static rmtU64 usTimer_Get(usTimer* timer)
 
     // Read counter and convert to microseconds
     QueryPerformanceCounter(&performance_count);
-    return (rmtU64)((performance_count.QuadPart - timer->counter_start.QuadPart) * timer->counter_scale);
+    return usTimer_FromRawTicks(timer, performance_count.QuadPart);
 
 #elif defined(RMT_PLATFORM_MACOS)
 
     rmtU64 curr_time = mach_absolute_time();
-    return (rmtU64)((curr_time - timer->counter_start) * timer->counter_scale);
+    return usTimer_FromRawTicks(timer, curr_time);
 
 #elif defined(RMT_PLATFORM_LINUX)
 
     struct timespec tv;
     clock_gettime(CLOCK_REALTIME, &tv);
-    return ((rmtU64)(tv.tv_sec * (rmtU64)1000000) + (rmtU64)(tv.tv_nsec * 0.001)) - timer->counter_start;
+    rmtU64 ticks = (rmtU64)(tv.tv_sec * (rmtU64)1000000) + (rmtU64)(tv.tv_nsec * 0.001);
+    return usTimer_FromRawTicks(timer, ticks);
 
 #endif
 }
@@ -743,6 +754,19 @@ static rmtU32 AtomicAddU32(rmtAtomicU32* value, rmtU32 add)
 #endif
 }
 
+static rmtU64 AtomicAddU64(rmtAtomicU64* value, rmtU64 add)
+{
+#if defined(RMT_USE_C11_ATOMICS)
+    return atomic_fetch_add(value, add);
+#elif defined(RMT_USE_CPP_ATOMICS)
+    return value->fetch_add(add);
+#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+    return (rmtU64)_InterlockedExchangeAdd64((long long volatile*)value, (long long)add);
+#elif defined(RMT_PLATFORM_POSIX) || defined(__MINGW32__)
+    return (rmtU64)__sync_fetch_and_add(value, add);
+#endif
+}
+
 static void AtomicSubS32(rmtAtomicS32* value, rmtS32 sub)
 {
     // Not all platforms have an implementation so just negate and add
@@ -762,6 +786,19 @@ static rmtU32 AtomicStoreU32(rmtAtomicU32* value, rmtU32 set)
 #endif
 }
 
+static rmtU64 AtomicStoreU64(rmtAtomicU64* value, rmtU64 set)
+{
+#if defined(RMT_USE_C11_ATOMICS)
+    return atomic_exchange(value, set);
+#elif defined(RMT_USE_CPP_ATOMICS)
+    return value->exchange(set);
+#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+    return (rmtU64)_InterlockedExchange64((long long volatile*)value, (long long)set);
+#elif defined(RMT_PLATFORM_POSIX) || defined(__MINGW32__)
+    return (rmtU64)__sync_lock_test_and_set(value, set);
+#endif
+}
+
 static rmtU32 AtomicLoadU32(rmtAtomicU32* value)
 {
 #if defined(RMT_USE_C11_ATOMICS)
@@ -772,6 +809,19 @@ static rmtU32 AtomicLoadU32(rmtAtomicU32* value)
     return (rmtU32)_InterlockedExchangeAdd((long volatile*)value, (long)0);
 #elif defined(RMT_PLATFORM_POSIX) || defined(__MINGW32__)
     return (rmtU32)__sync_fetch_and_add(value, 0);
+#endif
+}
+
+static rmtU64 AtomicLoadU64(rmtAtomicU64* value)
+{
+#if defined(RMT_USE_C11_ATOMICS)
+    return atomic_load(value);
+#elif defined(RMT_USE_CPP_ATOMICS)
+    return value->load();
+#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+    return (rmtU64)_InterlockedExchangeAdd64((long long volatile*)value, (long long)0);
+#elif defined(RMT_PLATFORM_POSIX) || defined(__MINGW32__)
+    return (rmtU64)__sync_fetch_and_add(value, 0);
 #endif
 }
 
@@ -804,6 +854,13 @@ static rmtU32 LoadAcquire(rmtAtomicU32* address)
     return value;
 }
 
+static rmtU64 LoadAcquire64(rmtAtomicU64* address)
+{
+    rmtU64 value = *address;
+    CompilerReadFence();
+    return value;
+}
+
 static long* LoadAcquirePointer(long* volatile* ptr)
 {
     long* value = *ptr;
@@ -812,6 +869,12 @@ static long* LoadAcquirePointer(long* volatile* ptr)
 }
 
 static void StoreRelease(rmtAtomicU32* address, rmtU32 value)
+{
+    CompilerWriteFence();
+    *address = value;
+}
+
+static void StoreRelease64(rmtAtomicU64* address, rmtU64 value)
 {
     CompilerWriteFence();
     *address = value;
@@ -2178,6 +2241,14 @@ static void rmtGetThreadName(rmtThreadId thread_id, rmtThreadHandle thread_handl
     strncat_s(out_thread_name, thread_name_size, "!", 1);
     len = strnlen_s(out_thread_name, thread_name_size);
     itoahex_s(out_thread_name + len, thread_name_size - len, thread_id);
+
+#elif defined(RMT_PLATFORM_MACOS)
+
+    int ret = pthread_getname_np(pthread_self(), out_thread_name, thread_name_size);
+    if (ret != 0 || out_thread_name[0] == '\0')
+    {
+        rmtGetThreadNameFallback(out_thread_name, thread_name_size);
+    }
 
 #elif defined(RMT_PLATFORM_LINUX) && RMT_USE_POSIX_THREADNAMES && !defined(__FreeBSD__) && !defined(__OpenBSD__)
 
@@ -5161,6 +5232,12 @@ static rmtError D3D12ThreadData_Create(D3D12ThreadData** d3d12);
 static void D3D12ThreadData_Destructor(D3D12ThreadData* d3d12);
 #endif
 
+#if RMT_USE_VULKAN
+typedef struct VulkanThreadData VulkanThreadData;
+static rmtError VulkanThreadData_Create(VulkanThreadData** vulkan);
+static void VulkanThreadData_Destructor(VulkanThreadData* vulkan);
+#endif
+
 typedef struct ThreadProfiler
 {
     // Storage for backing up initial register values when modifying a thread's context
@@ -5193,6 +5270,10 @@ typedef struct ThreadProfiler
 #if RMT_USE_D3D12
     D3D12ThreadData* d3d12ThreadData;
 #endif
+
+#if RMT_USE_VULKAN
+    VulkanThreadData* vulkanThreadData;
+#endif
 } ThreadProfiler;
 
 static rmtError ThreadProfiler_Constructor(rmtMessageQueue* mq_to_rmt, ThreadProfiler* thread_profiler, rmtThreadId thread_id)
@@ -5212,6 +5293,10 @@ static rmtError ThreadProfiler_Constructor(rmtMessageQueue* mq_to_rmt, ThreadPro
 
 #if RMT_USE_D3D12
     thread_profiler->d3d12ThreadData = NULL;
+#endif
+
+#if RMT_USE_VULKAN
+    thread_profiler->vulkanThreadData = NULL;
 #endif
 
     // Pre-open the thread handle
@@ -5236,12 +5321,20 @@ static rmtError ThreadProfiler_Constructor(rmtMessageQueue* mq_to_rmt, ThreadPro
     rmtTry(D3D12ThreadData_Create(&thread_profiler->d3d12ThreadData));
 #endif
 
+#if RMT_USE_VULKAN
+    rmtTry(VulkanThreadData_Create(&thread_profiler->vulkanThreadData));
+#endif
+
     return RMT_ERROR_NONE;
 }
 
 static void ThreadProfiler_Destructor(ThreadProfiler* thread_profiler)
 {
     rmtU32 index;
+
+#if RMT_USE_VULKAN
+    rmtDelete(VulkanThreadData, thread_profiler->vulkanThreadData);
+#endif
 
 #if RMT_USE_D3D12
     rmtDelete(D3D12ThreadData, thread_profiler->d3d12ThreadData);
@@ -6221,6 +6314,12 @@ struct Remotery
     struct D3D12BindImpl* d3d12Binds;
 #endif
 
+#if RMT_USE_VULKAN
+    // Linked list of all Vulkan queue samplers
+    rmtMutex vulkanBindsMutex;
+    struct VulkanBindImpl* vulkanBinds;
+#endif
+
     ThreadProfilers* threadProfilers;
 
     // Root of all registered properties, guarded by mutex as property register can come from any thread
@@ -6408,6 +6507,10 @@ static rmtError bin_SampleTree(Buffer* buffer, Msg_SampleTree* msg)
     if (root_sample->type == RMT_SampleType_Metal)
     {
         strncat_s(thread_name, sizeof(thread_name), " (Metal)", 8);
+    }
+    if (root_sample->type == RMT_SampleType_Vulkan)
+    {
+        strncat_s(thread_name, sizeof(thread_name), " (Vulkan)", 9);
     }
 
     // Get digest hash of samples so that viewer can efficiently rebuild its tables
@@ -6960,6 +7063,11 @@ static rmtError Remotery_Constructor(Remotery* rmt)
     rmt->d3d12Binds = NULL;
 #endif
 
+#if RMT_USE_VULKAN
+    mtxInit(&rmt->vulkanBindsMutex);
+    rmt->vulkanBinds = NULL;
+#endif
+
     // Kick-off the timer
     usTimer_Init(&rmt->timer);
 
@@ -7045,19 +7153,20 @@ static void Remotery_Destructor(Remotery* rmt)
 {
     assert(rmt != NULL);
 
+#if RMT_USE_VULKAN
+    while (rmt->vulkanBinds != NULL)
+    {
+        _rmt_UnbindVulkan((rmtVulkanBind*)rmt->vulkanBinds);
+    }
+    mtxDelete(&rmt->vulkanBindsMutex);
+#endif
+
     // Join the remotery thread before clearing the global object as the thread is profiling itself
     rmtDelete(rmtThread, rmt->thread);
 
-    if (g_RemoteryCreated)
-    {
-        g_Remotery = NULL;
-        g_RemoteryCreated = RMT_FALSE;
-    }
+    rmtDelete(ThreadProfilers, rmt->threadProfilers);
 
     rmtDelete(ObjectAllocator, rmt->propertyAllocator);
-
-
-    rmtDelete(ThreadProfilers, rmt->threadProfilers);
 
 #if RMT_USE_D3D12
     while (rmt->d3d12Binds != NULL)
@@ -7074,6 +7183,12 @@ static void Remotery_Destructor(Remotery* rmt)
 #if RMT_USE_METAL
     rmtDelete(Metal, rmt->metal);
 #endif
+
+    if (g_RemoteryCreated)
+    {
+        g_Remotery = NULL;
+        g_RemoteryCreated = RMT_FALSE;
+    }
 
     rmtCloseFile(rmt->logfile);
 
@@ -7263,6 +7378,8 @@ static void SetDebuggerThreadName(const char* name)
     {
     }
 #endif
+#elif defined(RMT_PLATFORM_MACOS)
+    pthread_setname_np(name);
 #else
     RMT_UNREFERENCED_PARAMETER(name);
 #endif
@@ -7302,7 +7419,7 @@ RMT_API void _rmt_SetCurrentThreadName(rmtPStr thread_name)
     SetDebuggerThreadName(thread_name);
 
     // Send the thread name for lookup
-#ifdef RMT_PLATFORM_WINDOWS
+#if defined(RMT_PLATFORM_WINDOWS) || defined(RMT_PLATFORM_MACOS)
     name_length = strnlen_s(thread_profiler->threadName, 64);
     QueueAddToStringTable(g_Remotery->mq_to_rmt_thread, thread_profiler->threadNameHash, thread_name, name_length, NULL);
 #endif
@@ -7445,6 +7562,10 @@ RMT_API void _rmt_EndCPUSample(void)
 static rmtError D3D12MarkFrame(struct D3D12BindImpl* bind);
 #endif
 
+#if RMT_USE_VULKAN
+static rmtError VulkanMarkFrame(struct VulkanBindImpl* bind, rmtBool recurse);
+#endif
+
 RMT_API rmtError _rmt_MarkFrame(void)
 {
     if (g_Remotery == NULL)
@@ -7457,10 +7578,15 @@ RMT_API rmtError _rmt_MarkFrame(void)
         rmtTry(D3D12MarkFrame(g_Remotery->d3d12Binds));
     #endif
 
+    #if RMT_USE_VULKAN
+        // This will kick off mark frames on the complete chain of binds
+        rmtTry(VulkanMarkFrame(g_Remotery->vulkanBinds, RMT_TRUE));
+    #endif
+
     return RMT_ERROR_NONE;
 }
 
-#if RMT_USE_OPENGL || RMT_USE_D3D11 || RMT_USE_D3D12
+#if RMT_USE_OPENGL || RMT_USE_D3D11 || RMT_USE_D3D12 || RMT_USE_VULKAN
 static void Remotery_DeleteSampleTree(Remotery* rmt, enum rmtSampleType sample_type)
 {
     ThreadProfiler* thread_profiler;
@@ -8660,7 +8786,7 @@ static rmtError CreateQueryFence(D3D12BindImpl* bind, ID3D12Device* d3d_device)
     return RMT_ERROR_NONE;
 }
 
-static rmtError CopyTimestamps(D3D12BindImpl* bind, rmtU32 ring_pos_a, rmtU32 ring_pos_b, double gpu_ticks_to_us, rmtS64 gpu_to_cpu_timestamp_us)
+static rmtError CopyD3D12Timestamps(D3D12BindImpl* bind, rmtU32 ring_pos_a, rmtU32 ring_pos_b, double gpu_ticks_to_us, rmtS64 gpu_to_cpu_timestamp_us)
 {
     rmtU32 query_index;
     D3D12_RANGE map;
@@ -8737,7 +8863,7 @@ static rmtError D3D12MarkFrame(D3D12BindImpl* bind)
         gpu_timestamp_us = (rmtU64)(gpu_timestamp_ticks * gpu_ticks_to_us);
 
         // Convert CPU ticks to microseconds, offset from the global timer start
-        cpu_timestamp_us = (rmtU64)((cpu_timestamp_ticks - g_Remotery->timer.counter_start.QuadPart) * g_Remotery->timer.counter_scale);
+        cpu_timestamp_us = usTimer_FromRawTicks(&g_Remotery->timer, cpu_timestamp_ticks);
 
         // And we now have the offset from GPU microseconds to CPU microseconds
         gpu_to_cpu_timestamp_us = cpu_timestamp_us - gpu_timestamp_us;
@@ -8746,12 +8872,12 @@ static rmtError D3D12MarkFrame(D3D12BindImpl* bind)
         // Will have to split the copies into two passes if they cross the ring buffer wrap around
         if (ring_pos_b < ring_pos_a)
         {
-            rmtTry(CopyTimestamps(bind, ring_pos_a, bind->maxNbQueries, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
-            rmtTry(CopyTimestamps(bind, 0, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+            rmtTry(CopyD3D12Timestamps(bind, ring_pos_a, bind->maxNbQueries, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+            rmtTry(CopyD3D12Timestamps(bind, 0, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
         }
         else
         {
-            rmtTry(CopyTimestamps(bind, ring_pos_a, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+            rmtTry(CopyD3D12Timestamps(bind, ring_pos_a, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
         }
 
         // Release the ring buffer entries just processed
@@ -8911,7 +9037,7 @@ static rmtError AllocateD3D12SampleTree(SampleTree** d3d_tree)
     return RMT_ERROR_NONE;
 }
 
-static rmtError AllocQueryPair(D3D12BindImpl* d3d_bind, rmtAtomicU32* out_allocation_index)
+static rmtError AllocD3D12QueryPair(D3D12BindImpl* d3d_bind, rmtAtomicU32* out_allocation_index)
 {
     // Check for overflow against a tail which is only ever written by one thread
     rmtU32 read = LoadAcquire(&d3d_bind->ringBufferRead);
@@ -8965,7 +9091,7 @@ RMT_API void _rmt_BeginD3D12Sample(rmtD3D12Bind* bind, void* command_list, rmtPS
             d3d_sample->commandList = d3d_command_list;
             d3d_sample->base.usGpuIssueOnCpu = usTimer_Get(&g_Remotery->timer);
 
-            error = AllocQueryPair(d3d_bind, &d3d_sample->queryIndex);
+            error = AllocD3D12QueryPair(d3d_bind, &d3d_sample->queryIndex);
             if (error == RMT_ERROR_NONE)
             {
                 rmtU32 physical_query_index = d3d_sample->queryIndex & (d3d_bind->maxNbQueries - 1);
@@ -9884,6 +10010,675 @@ RMT_API void _rmt_EndMetalSample(void)
 }
 
 #endif // RMT_USE_METAL
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+   @VULKAN: Vulkan event sampling
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+#if RMT_USE_VULKAN
+
+#include <vulkan/vulkan.h>
+
+#define VULKAN_CALL(bind, fn) ((PFN_ ## fn)bind->funcs.fn)
+
+typedef struct VulkanThreadData
+{
+    rmtU32 lastAllocatedQueryIndex;
+
+    // Sample trees in transit in the message queue for release on shutdown
+    Buffer* flushSamples;
+} VulkanThreadData;
+
+static rmtError VulkanThreadData_Create(VulkanThreadData** vulkan_thread_data)
+{
+    assert(vulkan_thread_data != NULL);
+
+    // Allocate space for the Vulkan data
+    rmtTryMalloc(VulkanThreadData, *vulkan_thread_data);
+
+    // Set defaults
+    (*vulkan_thread_data)->lastAllocatedQueryIndex = 0;
+    (*vulkan_thread_data)->flushSamples = NULL;
+
+    rmtTryNew(Buffer, (*vulkan_thread_data)->flushSamples, 8 * 1024);
+
+    return RMT_ERROR_NONE;
+}
+
+static void VulkanThreadData_Destructor(VulkanThreadData* vulkan_thread_data)
+{
+    assert(vulkan_thread_data != NULL);
+    rmtDelete(Buffer, vulkan_thread_data->flushSamples);
+}
+
+typedef struct VulkanSample
+{
+    // IS-A inheritance relationship
+    Sample base;
+
+    // Cached bind and command buffer used to create the sample so that the user doesn't have to pass it
+    struct VulkanBindImpl* bind;
+    VkCommandBuffer commandBuffer;
+
+    // Begin/End timestamp indices in the query heap
+    rmtU32 queryIndex;
+
+} VulkanSample;
+
+static rmtError VulkanSample_Constructor(VulkanSample* sample)
+{
+    assert(sample != NULL);
+
+    // Chain to sample constructor
+    Sample_Constructor((Sample*)sample);
+    sample->base.type = RMT_SampleType_Vulkan;
+    sample->bind = NULL;
+    sample->commandBuffer = NULL;
+    sample->queryIndex = 0;
+
+    return RMT_ERROR_NONE;
+}
+
+static void VulkanSample_Destructor(VulkanSample* sample)
+{
+    Sample_Destructor((Sample*)sample);
+}
+
+typedef struct VulkanBindImpl
+{
+    rmtVulkanBind base;
+    rmtVulkanFunctions funcs;
+
+    // Ring buffer of GPU timestamp destinations for all queries
+    rmtU32 maxNbQueries;
+    VkQueryPool gpuTimestampRingBuffer;
+
+    // CPU-accessible copy destination for all timestamps
+    rmtU64* cpuTimestampRingBuffer;
+
+    // Pointers to samples that expect the result of timestamps
+    VulkanSample** sampleRingBuffer;
+
+    // Read/write positions of the ring buffer allocator, synchronising access to all the ring buffers at once
+    // NOTE(valakor): These are 64-bit instead of 32-bit so that we can reasonably assume they never wrap.
+    // TODO(valakor): Separate by cache line?
+    rmtAtomicU64 ringBufferRead;
+    rmtAtomicU64 ringBufferWrite;
+
+    VkSemaphore gpuQuerySemaphore;
+
+    // Convert gpu ticks to us, retrieved from physical device properties
+    double gpu_ticks_to_us;
+
+    // Queue to the Vulkan main update thread
+    rmtMessageQueue* mqToVulkanUpdate;
+
+    struct VulkanBindImpl* next;
+
+} VulkanBindImpl;
+
+static rmtError CreateQueryPool(VulkanBindImpl* bind, VkDevice vulkan_device, rmtU32 nb_queries)
+{
+    VkQueryPoolCreateInfo create_info;
+    memset(&create_info, 0, sizeof(create_info));
+    create_info.sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
+    create_info.queryType = VK_QUERY_TYPE_TIMESTAMP;
+    create_info.queryCount = nb_queries;
+
+    if (VULKAN_CALL(bind, vkCreateQueryPool)(vulkan_device, &create_info, NULL, &bind->gpuTimestampRingBuffer) != VK_SUCCESS)
+    {
+        return rmtMakeError(RMT_ERROR_RESOURCE_CREATE_FAIL, "Failed to create Vulkan Query Pool");
+    }
+
+    VULKAN_CALL(bind, vkResetQueryPool)(vulkan_device, bind->gpuTimestampRingBuffer, 0, nb_queries);
+
+    return RMT_ERROR_NONE;
+}
+
+static rmtError CreateQuerySemaphore(VulkanBindImpl* bind, VkDevice vulkan_device)
+{
+    VkSemaphoreTypeCreateInfoKHR type_info;
+    memset(&type_info, 0, sizeof(type_info));
+    type_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR;
+    type_info.semaphoreType = VK_SEMAPHORE_TYPE_TIMELINE_KHR;
+    type_info.initialValue = 0;
+
+    VkSemaphoreCreateInfo create_info;
+    memset(&create_info, 0, sizeof(create_info));
+    create_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    create_info.pNext = &type_info;
+
+    if (VULKAN_CALL(bind, vkCreateSemaphore)(vulkan_device, &create_info, NULL, &bind->gpuQuerySemaphore) != VK_SUCCESS)
+    {
+        return rmtMakeError(RMT_ERROR_RESOURCE_CREATE_FAIL, "Failed to create Vulkan Query Semaphore");
+    }
+
+    return RMT_ERROR_NONE;
+}
+
+static rmtError CopyVulkanTimestamps(VulkanBindImpl* bind, VkDevice vulkan_device, rmtU32 ring_pos_a, rmtU32 ring_pos_b, double gpu_ticks_to_us, rmtS64 gpu_to_cpu_timestamp_us)
+{
+    rmtU32 query_index;
+    VulkanSample** cpu_sample_buffer = bind->sampleRingBuffer;
+    rmtU64* cpu_timestamps = bind->cpuTimestampRingBuffer;
+
+    rmtU32 query_count = ring_pos_b - ring_pos_a;
+    rmtU64 query_size = query_count * sizeof(rmtU64);
+
+    if (query_count == 0)
+        return RMT_ERROR_NONE;
+
+    VULKAN_CALL(bind, vkGetQueryPoolResults)(vulkan_device, bind->gpuTimestampRingBuffer, ring_pos_a, query_count, query_size, cpu_timestamps + ring_pos_a,
+                              sizeof(rmtU64), VK_QUERY_RESULT_64_BIT);
+
+    // Copy all timestamps to their expectant samples
+    for (query_index = ring_pos_a; query_index < ring_pos_b; query_index += 2)
+    {
+        rmtU64 us_start = (rmtU64)(cpu_timestamps[query_index] * gpu_ticks_to_us + gpu_to_cpu_timestamp_us);
+        rmtU64 us_end = (rmtU64)(cpu_timestamps[query_index + 1] * gpu_ticks_to_us + gpu_to_cpu_timestamp_us);
+
+        VulkanSample* sample = cpu_sample_buffer[query_index >> 1];
+        sample->base.us_start = us_start;
+        Sample_Close(&sample->base, us_end);
+        sample->base.us_end = us_end;
+    }
+
+    // Reset the query pool indices
+    VULKAN_CALL(bind, vkResetQueryPool)(vulkan_device, bind->gpuTimestampRingBuffer, ring_pos_a, query_count);
+
+    return RMT_ERROR_NONE;
+}
+
+static rmtError UpdateGpuTicksToUs(VulkanBindImpl* bind, VkPhysicalDevice vulkan_physical_device)
+{
+    // TODO(valakor): Is this slow? We could cache timestampPeriod during initialization, but on some devices
+    //  (namely some Apple devices using Vulkan via MoltenVK, potentially others) the value is dynamic and can
+    //  change on every call. For more information see:
+    //  https://github.com/KhronosGroup/MoltenVK/blob/main/Docs/MoltenVK_Runtime_UserGuide.md
+
+    VkPhysicalDeviceProperties device_properties;
+    memset(&device_properties, 0, sizeof(device_properties));
+    VULKAN_CALL(bind, vkGetPhysicalDeviceProperties)(vulkan_physical_device, &device_properties);
+
+    float gpu_ns_per_tick = device_properties.limits.timestampPeriod;
+    bind->gpu_ticks_to_us = gpu_ns_per_tick / 1000.0;
+
+    return RMT_ERROR_NONE;
+}
+
+static rmtError GetTimestampCalibration(VulkanBindImpl* bind, VkPhysicalDevice vulkan_physical_device, VkDevice vulkan_device, double* gpu_ticks_to_us, rmtS64* gpu_to_cpu_timestamp_us)
+{
+    // TODO(valakor): Honor RMT_GPU_CPU_SYNC_SECONDS? It's unclear to me how expensive vkGetCalibratedTimestampsEXT is
+    //  on all supported platforms, but at least on my Windows/NVIDIA machine it was on the order of 100-150us.
+
+    rmtU64 gpu_timestamp_ticks;
+    rmtU64 cpu_timestamp_ticks;
+    rmtU64 gpu_timestamp_us;
+    rmtU64 cpu_timestamp_us;
+    float gpu_tick_period;
+
+    // Always query a device timestamp
+    rmtU32 timestamp_count = 1;
+    rmtU64 max_deviation;
+    rmtU64 timestamps[2];
+    VkCalibratedTimestampInfoEXT timestamp_infos[2];
+    memset(timestamp_infos, 0, sizeof(timestamp_infos));
+    timestamp_infos[0].sType = VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT;
+    timestamp_infos[0].timeDomain = VK_TIME_DOMAIN_DEVICE_EXT;
+
+    // TODO(valakor): Reconsider whether we bother asking Vulkan to give us a CPU timestamp at all. It'd be much
+    //  simpler to just query the device timestamp (supported by all platforms) and manually query our timer instead
+    //  of all this platform-specific code. All we need is something "close enough".
+
+    // Potentially also query a cpu timestamp if supported
+#if defined(RMT_PLATFORM_WINDOWS)
+    timestamp_count = 2;
+    timestamp_infos[1].sType = VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT;
+    timestamp_infos[1].timeDomain = VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT;
+#elif 0 // defined(RMT_PLATFORM_MACOS)
+    // TODO(valakor): We have to fall back to manually querying CPU time due to the following issue:
+    //  On Apple platforms MoltenVK reports support for VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT, which matches the time
+    //  domain of mach_continuous_time(). To support mach_absolute_time() Vulkan would have to extend the available
+    //  time domains to include something like "VK_TIME_DOMAIN_CLOCK_UPTIME_RAW_EXT". See the comments here:
+    //  https://github.com/KhronosGroup/MoltenVK/blob/main/MoltenVK/MoltenVK/GPUObjects/MVKDevice.mm
+    //
+    //  Alternatively, Remotery could switch to using mach_continuous_time(). The difference between the two is that
+    //  mach_continuous_time() (CLOCK_MONOTONIC_RAW) includes system sleep time, whereas mach_absolute_time()
+    //  (CLOCK_UPTIME_RAW) does not. I'm not 100% convinced that's what we would want, but I think it is technically
+    //  more secure.
+    timestamp_count = 2;
+    timestamp_infos[1].sType = VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT;
+    timestamp_infos[1].timeDomain = VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT;
+#else
+    // On Linux Remotery uses CLOCK_REALTIME (though it probably shouldn't), but Vulkan only provides time domains for
+    //  CLOCK_MONOTONIC and CLOCK_MONOTONIC_RAW. For now we'll just query the CPU here manually and hope it's close enough.
+    timestamp_count = 1;
+#endif
+
+    // TODO(valakor): Consider taking max_deviation into account. Docs state that users may want to call vkGetCalibratedTimestamps
+    //  multiple times in a row until retrieving a max deviation that is "acceptable". We could just call it a set number of
+    //  times and take the min, or determine a reasonable average during init and ensure we get something close to that here.
+
+    if (VULKAN_CALL(bind, vkGetCalibratedTimestampsEXT)(vulkan_device, timestamp_count, timestamp_infos, timestamps, &max_deviation) != VK_SUCCESS)
+    {
+        return rmtMakeError(RMT_ERROR_RESOURCE_ACCESS_FAIL, "Failed to get Vulkan calibrated timestamps");
+    }
+
+    // Convert CPU ticks to microseconds, offset from the global timer start
+#if defined(RMT_PLATFORM_WINDOWS) // || defined(RMT_PLATFORM_MACOS)
+    cpu_timestamp_ticks = timestamps[1];
+    cpu_timestamp_us = usTimer_FromRawTicks(&g_Remotery->timer, cpu_timestamp_ticks);
+#else
+    cpu_timestamp_us = usTimer_Get(&g_Remotery->timer);
+#endif
+
+    UpdateGpuTicksToUs(bind, vulkan_physical_device);
+    *gpu_ticks_to_us = bind->gpu_ticks_to_us;
+
+    // Convert GPU ticks to microseconds
+    gpu_timestamp_ticks = timestamps[0];
+    gpu_timestamp_us = (rmtU64)(gpu_timestamp_ticks * bind->gpu_ticks_to_us);
+
+    // And we now have the offset from GPU microseconds to CPU microseconds
+    *gpu_to_cpu_timestamp_us = cpu_timestamp_us - gpu_timestamp_us;
+
+    return RMT_ERROR_NONE;
+}
+
+static rmtError VulkanMarkFrame(VulkanBindImpl* bind, rmtBool recurse)
+{
+    if (bind == NULL)
+    {
+        return RMT_ERROR_NONE;
+    }
+
+    VkPhysicalDevice vulkan_physical_device = (VkPhysicalDevice)bind->base.physical_device;
+    VkDevice vulkan_device = (VkDevice)bind->base.device;
+    VkQueue vulkan_queue = (VkQueue)bind->base.queue;
+
+    rmtU64 index_mask = (rmtU64)bind->maxNbQueries - 1;
+    rmtU64 current_read_cpu = LoadAcquire64(&bind->ringBufferRead);
+    rmtU64 current_write_cpu = LoadAcquire64(&bind->ringBufferWrite);
+    rmtU32 current_read_cpu_index = (rmtU32)(current_read_cpu & index_mask);
+
+    // Has the GPU processed any writes?
+    rmtU64 current_write_gpu = 0;
+    if (VULKAN_CALL(bind, vkGetSemaphoreCounterValue)(vulkan_device, bind->gpuQuerySemaphore, &current_write_gpu) != VK_SUCCESS)
+    {
+        return rmtMakeError(RMT_ERROR_RESOURCE_ACCESS_FAIL, "Failed to get Vulkan Semaphore value");
+    }
+
+    if (current_write_cpu > current_write_gpu)
+    {
+        // Tell the GPU where the CPU write position is
+        // NOTE(valakor): Vulkan spec states that signalling a timeline semaphore must strictly increase its value
+        VkTimelineSemaphoreSubmitInfoKHR semaphore_submit_info;
+        memset(&semaphore_submit_info, 0, sizeof(semaphore_submit_info));
+        semaphore_submit_info.sType = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR;
+        semaphore_submit_info.signalSemaphoreValueCount = 1;
+        semaphore_submit_info.pSignalSemaphoreValues = &current_write_cpu;
+
+        VkSubmitInfo submit_info;
+        memset(&submit_info, 0, sizeof(submit_info));
+        submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+        submit_info.pNext = &semaphore_submit_info;
+        submit_info.signalSemaphoreCount = 1;
+        submit_info.pSignalSemaphores = &bind->gpuQuerySemaphore;
+        if (VULKAN_CALL(bind, vkQueueSubmit)(vulkan_queue, 1, &submit_info, NULL) != VK_SUCCESS)
+        {
+            return rmtMakeError(RMT_ERROR_RESOURCE_ACCESS_FAIL, "Failed to submit Vulkan Semaphore update to queue");
+        }
+    }
+
+    if (current_write_gpu > current_read_cpu)
+    {
+        double gpu_ticks_to_us;
+        rmtS64 gpu_to_cpu_timestamp_us;
+
+        // Physical ring buffer positions
+        rmtU32 ring_pos_a = current_read_cpu_index;
+        rmtU32 ring_pos_b = (rmtU32)(current_write_gpu & index_mask);
+
+        rmtTry(GetTimestampCalibration(bind, vulkan_physical_device, vulkan_device, &gpu_ticks_to_us, &gpu_to_cpu_timestamp_us));
+
+        // Copy resulting timestamps to their samples
+        // Will have to split the copies into two passes if they cross the ring buffer wrap around
+        if (ring_pos_b < ring_pos_a)
+        {
+            rmtTry(CopyVulkanTimestamps(bind, vulkan_device, ring_pos_a, bind->maxNbQueries, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+            rmtTry(CopyVulkanTimestamps(bind, vulkan_device, 0, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+        }
+        else
+        {
+            rmtTry(CopyVulkanTimestamps(bind, vulkan_device, ring_pos_a, ring_pos_b, gpu_ticks_to_us, gpu_to_cpu_timestamp_us));
+        }
+
+        // Release the ring buffer entries just processed
+        StoreRelease64(&bind->ringBufferRead, current_write_gpu);
+    }
+
+    // Attempt to empty the queue of complete message trees
+    Message* message;
+    while ((message = rmtMessageQueue_PeekNextMessage(bind->mqToVulkanUpdate)))
+    {
+        Msg_SampleTree* msg_sample_tree;
+        Sample* root_sample;
+
+        // Ensure only Vulkan sample tree messages come through here
+        assert(message->id == MsgID_SampleTree);
+        msg_sample_tree = (Msg_SampleTree*)message->payload;
+        root_sample = msg_sample_tree->rootSample;
+        assert(root_sample->type == RMT_SampleType_Vulkan);
+
+        // If the last-allocated query in this tree has been GPU-processed it's safe to now send the tree to Remotery thread
+        rmtU32 sample_tree_write_index = msg_sample_tree->userData;
+        rmtU64 sample_tree_write = (rmtU64)(sample_tree_write_index - current_read_cpu_index) + current_read_cpu;
+        if (current_write_gpu > sample_tree_write)
+        {
+            QueueSampleTree(g_Remotery->mq_to_rmt_thread, root_sample, msg_sample_tree->allocator, msg_sample_tree->threadName,
+                                0, message->threadProfiler, RMT_FALSE);
+            rmtMessageQueue_ConsumeNextMessage(bind->mqToVulkanUpdate, message);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // Chain to the next bind here so that root calling code doesn't need to know the definition of VulkanBindImpl
+    if (recurse)
+    {
+        rmtTry(VulkanMarkFrame(bind->next, recurse));
+    }
+
+    return RMT_ERROR_NONE;
+}
+
+RMT_API rmtError _rmt_BindVulkan(void* instance, void* physical_device, void* device, void* queue, const rmtVulkanFunctions* funcs, rmtVulkanBind** out_bind)
+{
+    VulkanBindImpl* bind;
+    VkInstance vulkan_instance = (VkInstance)instance;
+    VkPhysicalDevice vulkan_physical_device = (VkPhysicalDevice)physical_device;
+    VkDevice vulkan_device = (VkDevice)device;
+    VkQueue vulkan_queue = (VkQueue)queue;
+
+    if (g_Remotery == NULL)
+        return RMT_ERROR_REMOTERY_NOT_CREATED;
+
+    if (instance == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing instance");
+
+    if (physical_device == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing physical_device");
+
+    if (device == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing device");
+
+    if (queue == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing queue");
+
+    if (funcs == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing funcs");
+
+    if (out_bind == NULL)
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing out_bind");
+
+ #define CHECK_VK_FUNC(fn)                                               \
+    if (funcs->fn == NULL)                                               \
+        return rmtMakeError(RMT_ERROR_INVALID_INPUT, "Missing " #fn)
+
+    CHECK_VK_FUNC(vkGetPhysicalDeviceProperties);
+    CHECK_VK_FUNC(vkQueueSubmit);
+    CHECK_VK_FUNC(vkQueueWaitIdle);
+    CHECK_VK_FUNC(vkCreateQueryPool);
+    CHECK_VK_FUNC(vkDestroyQueryPool);
+    CHECK_VK_FUNC(vkResetQueryPool);
+    CHECK_VK_FUNC(vkGetQueryPoolResults);
+    CHECK_VK_FUNC(vkCmdWriteTimestamp);
+    CHECK_VK_FUNC(vkCreateSemaphore);
+    CHECK_VK_FUNC(vkDestroySemaphore);
+    CHECK_VK_FUNC(vkSignalSemaphore);
+    CHECK_VK_FUNC(vkGetSemaphoreCounterValue);
+    CHECK_VK_FUNC(vkGetCalibratedTimestampsEXT);
+
+#undef CHECK_VK_FUNC
+
+    // Allocate the bind container
+    // TODO(valakor): If anything after this fails we'll leak this bind instance
+    rmtTryMalloc(VulkanBindImpl, bind);
+
+    // Set default state
+    bind->base.physical_device = physical_device;
+    bind->base.device = device;
+    bind->base.queue = queue;
+    bind->funcs = *funcs;
+#ifdef RMT_PLATFORM_MACOS
+    // NOTE(valakor): Vulkan on MacOS via MoltenVK only supports timestamp query pools of up to 4k 64-bit queries. See
+    //  https://github.com/KhronosGroup/MoltenVK/blob/main/MoltenVK/MoltenVK/GPUObjects/MVKQueryPool.mm
+    bind->maxNbQueries = 4 * 1024;
+#else
+    bind->maxNbQueries = 32 * 1024;
+#endif
+    bind->gpuTimestampRingBuffer = NULL;
+    bind->cpuTimestampRingBuffer = NULL;
+    bind->sampleRingBuffer = NULL;
+    bind->ringBufferRead = 0;
+    bind->ringBufferWrite = 0;
+    bind->gpuQuerySemaphore = NULL;
+    bind->gpu_ticks_to_us = 1.0;
+    bind->mqToVulkanUpdate = NULL;
+    bind->next = NULL;
+
+    // Create the independent ring buffer storage items
+    // TODO(valakor): Leave space beetween start and end to stop invalidating cache lines?
+    // NOTE(valakor): ABA impossible due to non-wrapping ring buffer indices
+    rmtTry(CreateQueryPool(bind, vulkan_device, bind->maxNbQueries));
+    rmtTryMallocArray(VulkanSample*, bind->sampleRingBuffer, bind->maxNbQueries / 2);
+    rmtTryMallocArray(rmtU64, bind->cpuTimestampRingBuffer, bind->maxNbQueries);
+    rmtTry(CreateQuerySemaphore(bind, vulkan_device));
+
+    rmtTryNew(rmtMessageQueue, bind->mqToVulkanUpdate, g_Settings.messageQueueSizeInBytes);
+
+    // Add to the global linked list of binds
+    {
+        mtxLock(&g_Remotery->vulkanBindsMutex);
+        bind->next = g_Remotery->vulkanBinds;
+        g_Remotery->vulkanBinds = bind;
+        mtxUnlock(&g_Remotery->vulkanBindsMutex);
+    }
+
+    *out_bind = &bind->base;
+
+    return RMT_ERROR_NONE;
+}
+
+RMT_API void _rmt_UnbindVulkan(rmtVulkanBind* bind)
+{
+    VulkanBindImpl* vulkan_bind = (VulkanBindImpl*)bind;
+    VkDevice vulkan_device = (VkDevice)vulkan_bind->base.device;
+    VkQueue vulkan_queue = (VkQueue)vulkan_bind->base.queue;
+
+    assert(bind != NULL);
+
+    // Remove from the linked list
+    {
+        mtxLock(&g_Remotery->vulkanBindsMutex);
+        VulkanBindImpl* cur = g_Remotery->vulkanBinds;
+        VulkanBindImpl* prev = NULL;
+        for ( ; cur != NULL; cur = cur->next)
+        {
+            if (cur == vulkan_bind)
+            {
+                if (prev != NULL)
+                {
+                    prev->next = cur->next;
+                }
+                else
+                {
+                    g_Remotery->vulkanBinds = cur->next;
+                }
+
+                break;
+            }
+        }
+        mtxUnlock(&g_Remotery->vulkanBindsMutex);
+    }
+
+    // Ensure all samples submitted to the GPU are consumed for clean shutdown
+    if (LoadAcquire64(&vulkan_bind->ringBufferWrite) > LoadAcquire64(&vulkan_bind->ringBufferRead))
+    {
+        VulkanMarkFrame(vulkan_bind, RMT_FALSE);
+        VULKAN_CALL(vulkan_bind, vkQueueWaitIdle)(vulkan_queue);
+        VulkanMarkFrame(vulkan_bind, RMT_FALSE);
+    }
+
+    // Clean up bind resources
+
+    rmtDelete(rmtMessageQueue, vulkan_bind->mqToVulkanUpdate);
+
+    if (vulkan_bind->gpuQuerySemaphore != NULL)
+    {
+        VULKAN_CALL(vulkan_bind, vkDestroySemaphore)(vulkan_device, vulkan_bind->gpuQuerySemaphore, NULL);
+    }
+
+    rmtFree(vulkan_bind->sampleRingBuffer);
+    rmtFree(vulkan_bind->cpuTimestampRingBuffer);
+
+    if (vulkan_bind->gpuTimestampRingBuffer != NULL)
+    {
+        VULKAN_CALL(vulkan_bind, vkDestroyQueryPool)(vulkan_device, vulkan_bind->gpuTimestampRingBuffer, NULL);
+    }
+}
+
+static rmtError AllocateVulkanSampleTree(SampleTree** vulkan_tree)
+{
+    rmtTryNew(SampleTree, *vulkan_tree, sizeof(VulkanSample), (ObjConstructor)VulkanSample_Constructor,
+            (ObjDestructor)VulkanSample_Destructor);
+    return RMT_ERROR_NONE;
+}
+
+static rmtError AllocVulkanQueryPair(VulkanBindImpl* vulkan_bind, rmtU32* out_allocation_index)
+{
+    // Check for overflow against a tail which is only ever written by one thread
+    rmtU64 read = LoadAcquire64(&vulkan_bind->ringBufferRead);
+    rmtU64 write = LoadAcquire64(&vulkan_bind->ringBufferWrite);
+    rmtU32 nb_queries = (rmtU32)(write - read);
+    rmtU32 queries_left = vulkan_bind->maxNbQueries - nb_queries;
+    if (queries_left < 2)
+    {
+        return rmtMakeError(RMT_ERROR_RESOURCE_CREATE_FAIL, "Vulkan query ring buffer overflow");
+    }
+
+    rmtU64 index_mask = (rmtU64)vulkan_bind->maxNbQueries - 1;
+    *out_allocation_index = (rmtU32)(AtomicAddU64(&vulkan_bind->ringBufferWrite, 2) & index_mask);
+    return RMT_ERROR_NONE;
+}
+
+RMT_API void _rmt_BeginVulkanSample(rmtVulkanBind* bind, void* command_buffer, rmtPStr name, rmtU32* hash_cache)
+{
+    ThreadProfiler* thread_profiler;
+
+    if (g_Remotery == NULL || bind == NULL)
+        return;
+
+    assert(command_buffer != NULL);
+
+    if (ThreadProfilers_GetCurrentThreadProfiler(g_Remotery->threadProfilers, &thread_profiler) == RMT_ERROR_NONE)
+    {
+        Sample* sample;
+        rmtU32 name_hash;
+        SampleTree** vulkan_tree;
+
+        name_hash = ThreadProfiler_GetNameHash(thread_profiler, g_Remotery->mq_to_rmt_thread, name, hash_cache);
+
+        // Create the Vulkan tree on-demand as the tree needs an up-front-created root.
+        // This is not possible to create on initialisation as a Vulkan binding is not yet available.
+        vulkan_tree = &thread_profiler->sampleTrees[RMT_SampleType_Vulkan];
+        if (*vulkan_tree == NULL)
+        {
+            AllocateVulkanSampleTree(vulkan_tree);
+        }
+
+        // Push the sample and activate the timestamp
+        if (ThreadProfiler_Push(*vulkan_tree, name_hash, 0, &sample) == RMT_ERROR_NONE)
+        {
+            rmtError error;
+
+            VulkanBindImpl* vulkan_bind = (VulkanBindImpl*)bind;
+            VkCommandBuffer vulkan_command_buffer = (VkCommandBuffer)command_buffer;
+
+            VulkanSample* vulkan_sample = (VulkanSample*)sample;
+            vulkan_sample->bind = vulkan_bind;
+            vulkan_sample->commandBuffer = vulkan_command_buffer;
+            vulkan_sample->base.usGpuIssueOnCpu = usTimer_Get(&g_Remotery->timer);
+
+            error = AllocVulkanQueryPair(vulkan_bind, &vulkan_sample->queryIndex);
+            if (error == RMT_ERROR_NONE)
+            {
+                rmtU32 physical_query_index = vulkan_sample->queryIndex & (vulkan_bind->maxNbQueries - 1);
+                VULKAN_CALL(vulkan_bind, vkCmdWriteTimestamp)(vulkan_command_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, vulkan_bind->gpuTimestampRingBuffer, physical_query_index);
+
+                // Track which Vulkan sample expects the timestamp results
+                vulkan_bind->sampleRingBuffer[physical_query_index / 2] = vulkan_sample;
+
+                // Keep track of the last allocated query so we can check when the GPU has finished with them all
+                thread_profiler->vulkanThreadData->lastAllocatedQueryIndex = vulkan_sample->queryIndex;
+            }
+            else
+            {
+                // SET QUERY INDEX TO INVALID so that pop doesn't release it
+            }
+        }
+    }
+}
+
+RMT_API void _rmt_EndVulkanSample()
+{
+    ThreadProfiler* thread_profiler;
+
+    if (g_Remotery == NULL)
+        return;
+
+    if (ThreadProfilers_GetCurrentThreadProfiler(g_Remotery->threadProfilers, &thread_profiler) == RMT_ERROR_NONE)
+    {
+        VulkanThreadData* vulkan_thread_data = thread_profiler->vulkanThreadData;
+        VulkanSample* vulkan_sample;
+
+        // Sample tree isn't there if Vulkan hasn't been initialised
+        SampleTree* vulkan_tree = thread_profiler->sampleTrees[RMT_SampleType_Vulkan];
+        if (vulkan_tree == NULL)
+        {
+            return;
+        }
+
+        // Close the timestamp
+        vulkan_sample = (VulkanSample*)vulkan_tree->currentParent;
+        if (vulkan_sample->base.recurse_depth > 0)
+        {
+            vulkan_sample->base.recurse_depth--;
+        }
+        else
+        {
+            // Issue the timestamp query for the end of the sample
+            VulkanBindImpl* vulkan_bind = vulkan_sample->bind;
+            VkCommandBuffer vulkan_command_buffer = vulkan_sample->commandBuffer;
+            rmtU32 query_index = vulkan_sample->queryIndex & (vulkan_bind->maxNbQueries - 1);
+            VULKAN_CALL(vulkan_bind, vkCmdWriteTimestamp)(vulkan_command_buffer, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+                                           vulkan_bind->gpuTimestampRingBuffer, query_index + 1);
+
+            if (ThreadProfiler_Pop(thread_profiler, vulkan_bind->mqToVulkanUpdate, (Sample*)vulkan_sample,
+                                   vulkan_thread_data->lastAllocatedQueryIndex))
+            {
+            }
+        }
+    }
+}
+
+#endif // RMT_USE_VULKAN
 
 /*
 ------------------------------------------------------------------------------------------------------------------------

@@ -11,7 +11,7 @@ import remotery.*
 val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("c")
 
-    val COMMIT = "cc32849f1075154c087fccdfff829662be69a23f"
+    val COMMIT = "c3e8a2f38603c054be479bcefeaa54ad455dd4b9"
     documentation =
         """
         Bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
@@ -72,6 +72,7 @@ git branch -D @{-1}""")}
         "SampleType_D3D12".enum,
         "SampleType_OpenGL".enum,
         "SampleType_Metal".enum,
+        "SampleType_Vulkan".enum,
         "SampleType_Count".enum,
     )
 
@@ -280,9 +281,9 @@ git branch -D @{-1}""")}
         """
         Used for both CPU and GPU profiling.
 
-        Essential to call this every frame, ever since D3D12 support was added.
+        Essential to call this every frame, ever since D3D12/Vulkan support was added
 
-        D3D12 Requirements: Don't sample any command lists that begin before this call and end after it
+        D3D12/Vulkan Requirements: Don't sample any command lists that begin before this call and end after it
         """,
 
         void()

@@ -54,14 +54,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  * 
  * <p><b>LWJGL</b>: The current version of the Remotery bindings is compatible with commit
- * <a href="https://github.com/Celtoys/Remotery/tree/cc32849f1075154c087fccdfff829662be69a23f/vis">cc32849</a>. Run the following commands to clone the
+ * <a href="https://github.com/Celtoys/Remotery/tree/c3e8a2f38603c054be479bcefeaa54ad455dd4b9/vis">c3e8a2f</a>. Run the following commands to clone the
  * Remotery repository at that commit:</p>
  * 
  * <pre><code>
  * git clone --depth=1 https://github.com/Celtoys/Remotery.git
  * cd Remotery
- * git fetch --depth=1 origin cc32849f1075154c087fccdfff829662be69a23f
- * git branch --no-track lwjgl cc32849f1075154c087fccdfff829662be69a23f
+ * git fetch --depth=1 origin c3e8a2f38603c054be479bcefeaa54ad455dd4b9
+ * git branch --no-track lwjgl c3e8a2f38603c054be479bcefeaa54ad455dd4b9
  * git checkout lwjgl
  * git branch -D @{-1}</code></pre>
  * 
@@ -89,6 +89,7 @@ public class Remotery {
      * <li>{@link #RMT_SampleType_D3D12 SampleType_D3D12}</li>
      * <li>{@link #RMT_SampleType_OpenGL SampleType_OpenGL}</li>
      * <li>{@link #RMT_SampleType_Metal SampleType_Metal}</li>
+     * <li>{@link #RMT_SampleType_Vulkan SampleType_Vulkan}</li>
      * <li>{@link #RMT_SampleType_Count SampleType_Count}</li>
      * </ul>
      */
@@ -99,7 +100,8 @@ public class Remotery {
         RMT_SampleType_D3D12  = 3,
         RMT_SampleType_OpenGL = 4,
         RMT_SampleType_Metal  = 5,
-        RMT_SampleType_Count  = 6;
+        RMT_SampleType_Vulkan = 6,
+        RMT_SampleType_Count  = 7;
 
     /**
      * All possible error codes ({@code rmtError}).
@@ -456,9 +458,9 @@ public class Remotery {
     /**
      * Used for both CPU and GPU profiling.
      * 
-     * <p>Essential to call this every frame, ever since D3D12 support was added.</p>
+     * <p>Essential to call this every frame, ever since D3D12/Vulkan support was added</p>
      * 
-     * <p>D3D12 Requirements: Don't sample any command lists that begin before this call and end after it</p>
+     * <p>D3D12/Vulkan Requirements: Don't sample any command lists that begin before this call and end after it</p>
      */
     @NativeType("rmtError")
     public static native int rmt_MarkFrame();

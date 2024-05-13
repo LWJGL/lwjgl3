@@ -252,6 +252,9 @@
 
         <!-- Remotery -->
         <build module="remotery" simple="true" if:true="${binding.remotery}">
+            <source>
+                <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
+            </source>
             <link>
                 <arg line="-framework Foundation"/>
             </link>

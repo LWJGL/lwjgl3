@@ -6,6 +6,7 @@
 #include "common_tools.h"
 DISABLE_WARNINGS()
 #define RMT_USE_OPENGL 1
+#define RMT_USE_VULKAN 1
 #define RMT_ASSUME_LITTLE_ENDIAN 1
 #ifdef LWJGL_LINUX
     #define RMT_USE_POSIX_THREADNAMES 1
