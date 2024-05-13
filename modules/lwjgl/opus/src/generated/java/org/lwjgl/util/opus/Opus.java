@@ -324,7 +324,7 @@ public class Opus {
             decode_float                 = apiGetFunctionAddress(OPUS, "opus_decode_float"),
             decoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_decoder_ctl"),
             decoder_destroy              = apiGetFunctionAddress(OPUS, "opus_decoder_destroy"),
-            dre_decoder_get_size         = apiGetFunctionAddress(OPUS, "opus_dre_decoder_get_size"),
+            dred_decoder_get_size        = apiGetFunctionAddress(OPUS, "opus_dred_decoder_get_size"),
             dred_decoder_create          = apiGetFunctionAddress(OPUS, "opus_dred_decoder_create"),
             dred_decoder_init            = apiGetFunctionAddress(OPUS, "opus_dred_decoder_init"),
             dred_decoder_destroy         = apiGetFunctionAddress(OPUS, "opus_dred_decoder_destroy"),
@@ -944,15 +944,15 @@ public class Opus {
         invokePV(st, __functionAddress);
     }
 
-    // --- [ opus_dre_decoder_get_size ] ---
+    // --- [ opus_dred_decoder_get_size ] ---
 
     /**
      * Gets the size of an {@code OpusDREDDecoder} structure.
      *
      * @return the size in bytes
      */
-    public static int opus_dre_decoder_get_size() {
-        long __functionAddress = Functions.dre_decoder_get_size;
+    public static int opus_dred_decoder_get_size() {
+        long __functionAddress = Functions.dred_decoder_get_size;
         return invokeI(__functionAddress);
     }
 

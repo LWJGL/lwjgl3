@@ -663,7 +663,7 @@ if (nb_packets > 0)
     )
 
     int(
-        "dre_decoder_get_size",
+        "dred_decoder_get_size",
         "Gets the size of an {@code OpusDREDDecoder} structure.",
 
         void(),

@@ -43,6 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int randomSeed;
  *     int maxConvolutionThreads;
  *     int maxOpusCodecs;
+ *     int maxSpatialObjects;
  * }</code></pre>
  */
 public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> implements NativeResource {
@@ -76,7 +77,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         RESAMPLERMETHOD,
         RANDOMSEED,
         MAXCONVOLUTIONTHREADS,
-        MAXOPUSCODECS;
+        MAXOPUSCODECS,
+        MAXSPATIALOBJECTS;
 
     static {
         Layout layout = __struct(
@@ -94,6 +96,7 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
             __member(4),
             __member(4),
             __member(2),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -129,6 +132,7 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         RANDOMSEED = layout.offsetof(19);
         MAXCONVOLUTIONTHREADS = layout.offsetof(20);
         MAXOPUSCODECS = layout.offsetof(21);
+        MAXSPATIALOBJECTS = layout.offsetof(22);
     }
 
     protected FMOD_ADVANCEDSETTINGS(long address, @Nullable ByteBuffer container) {
@@ -204,6 +208,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     public int maxConvolutionThreads() { return nmaxConvolutionThreads(address()); }
     /** @return the value of the {@code maxOpusCodecs} field. */
     public int maxOpusCodecs() { return nmaxOpusCodecs(address()); }
+    /** @return the value of the {@code maxSpatialObjects} field. */
+    public int maxSpatialObjects() { return nmaxSpatialObjects(address()); }
 
     /** Sets the specified value to the {@code cbSize} field. */
     public FMOD_ADVANCEDSETTINGS cbSize(int value) { ncbSize(address(), value); return this; }
@@ -249,6 +255,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     public FMOD_ADVANCEDSETTINGS maxConvolutionThreads(int value) { nmaxConvolutionThreads(address(), value); return this; }
     /** Sets the specified value to the {@code maxOpusCodecs} field. */
     public FMOD_ADVANCEDSETTINGS maxOpusCodecs(int value) { nmaxOpusCodecs(address(), value); return this; }
+    /** Sets the specified value to the {@code maxSpatialObjects} field. */
+    public FMOD_ADVANCEDSETTINGS maxSpatialObjects(int value) { nmaxSpatialObjects(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public FMOD_ADVANCEDSETTINGS set(
@@ -273,7 +281,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         int resamplerMethod,
         int randomSeed,
         int maxConvolutionThreads,
-        int maxOpusCodecs
+        int maxOpusCodecs,
+        int maxSpatialObjects
     ) {
         cbSize(cbSize);
         maxMPEGCodecs(maxMPEGCodecs);
@@ -297,6 +306,7 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         randomSeed(randomSeed);
         maxConvolutionThreads(maxConvolutionThreads);
         maxOpusCodecs(maxOpusCodecs);
+        maxSpatialObjects(maxSpatialObjects);
 
         return this;
     }
@@ -470,6 +480,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     public static int nmaxConvolutionThreads(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS); }
     /** Unsafe version of {@link #maxOpusCodecs}. */
     public static int nmaxOpusCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS); }
+    /** Unsafe version of {@link #maxSpatialObjects}. */
+    public static int nmaxSpatialObjects(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
     public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.CBSIZE, value); }
@@ -515,6 +527,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     public static void nmaxConvolutionThreads(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS, value); }
     /** Unsafe version of {@link #maxOpusCodecs(int) maxOpusCodecs}. */
     public static void nmaxOpusCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS, value); }
+    /** Unsafe version of {@link #maxSpatialObjects(int) maxSpatialObjects}. */
+    public static void nmaxSpatialObjects(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -615,6 +629,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         public int maxConvolutionThreads() { return FMOD_ADVANCEDSETTINGS.nmaxConvolutionThreads(address()); }
         /** @return the value of the {@code maxOpusCodecs} field. */
         public int maxOpusCodecs() { return FMOD_ADVANCEDSETTINGS.nmaxOpusCodecs(address()); }
+        /** @return the value of the {@code maxSpatialObjects} field. */
+        public int maxSpatialObjects() { return FMOD_ADVANCEDSETTINGS.nmaxSpatialObjects(address()); }
 
         /** Sets the specified value to the {@code cbSize} field. */
         public FMOD_ADVANCEDSETTINGS.Buffer cbSize(int value) { FMOD_ADVANCEDSETTINGS.ncbSize(address(), value); return this; }
@@ -660,6 +676,8 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
         public FMOD_ADVANCEDSETTINGS.Buffer maxConvolutionThreads(int value) { FMOD_ADVANCEDSETTINGS.nmaxConvolutionThreads(address(), value); return this; }
         /** Sets the specified value to the {@code maxOpusCodecs} field. */
         public FMOD_ADVANCEDSETTINGS.Buffer maxOpusCodecs(int value) { FMOD_ADVANCEDSETTINGS.nmaxOpusCodecs(address(), value); return this; }
+        /** Sets the specified value to the {@code maxSpatialObjects} field. */
+        public FMOD_ADVANCEDSETTINGS.Buffer maxSpatialObjects(int value) { FMOD_ADVANCEDSETTINGS.nmaxSpatialObjects(address(), value); return this; }
 
     }
 
