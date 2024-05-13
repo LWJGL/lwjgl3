@@ -725,7 +725,7 @@ typedef struct HmdRect2_t
 
     TrackedDeviceIndex_t(
         "GetPrimaryDashboardDevice",
-        "Returns the tracked device that has the laser pointer in the dashboard.",
+        "Returns the tracked device index that has the laser pointer in the dashboard, or the last one that was used.",
         void()
     )
 

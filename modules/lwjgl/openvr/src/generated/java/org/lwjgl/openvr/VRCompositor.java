@@ -23,6 +23,42 @@ public class VRCompositor {
 
     static { OpenVR.initialize(); }
 
+    /**
+     * Compositor frame timing reprojection flags.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VRCompositor_ReprojectionReason_Cpu ReprojectionReason_Cpu}</li>
+     * <li>{@link #VRCompositor_ReprojectionReason_Gpu ReprojectionReason_Gpu}</li>
+     * <li>{@link #VRCompositor_ReprojectionAsync ReprojectionAsync} - 
+     * This flag indicates the async reprojection mode is active, but does not indicate if reprojection actually happened or not.
+     * 
+     * <p>Use the ReprojectionReason flags above to check if reprojection was actually applied (i.e. scene texture was reused). {@code NumFramePresents > 1}
+     * also indicates the scene texture was reused, and also the number of times that it was presented in total.</p>
+     * </li>
+     * <li>{@link #VRCompositor_ReprojectionMotion ReprojectionMotion} - This flag indicates whether or not motion smoothing was triggered for this frame.</li>
+     * <li>{@link #VRCompositor_PredictionMask PredictionMask} - 
+     * The runtime may predict more than one frame ahead if it detects the application is taking too long to render.
+     * 
+     * <p>These bits will contain the count of additional frames (normally zero). Use the {@code VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES} macro to read
+     * from the latest frame timing entry.</p>
+     * </li>
+     * <li>{@link #VRCompositor_ThrottleMask ThrottleMask} - 
+     * Number of frames the compositor is throttling the application.
+     * 
+     * <p>Use the {@code VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES} macro to read from the latest frame timing entry.</p>
+     * </li>
+     * </ul>
+     */
+    public static final int
+        VRCompositor_ReprojectionReason_Cpu = 0x01,
+        VRCompositor_ReprojectionReason_Gpu = 0x02,
+        VRCompositor_ReprojectionAsync      = 0x04,
+        VRCompositor_ReprojectionMotion     = 0x08,
+        VRCompositor_PredictionMask         = 0xF0,
+        VRCompositor_ThrottleMask           = 0xF00;
+
     protected VRCompositor() {
         throw new UnsupportedOperationException();
     }
@@ -155,6 +191,29 @@ public class VRCompositor {
     @NativeType("EVRCompositorError")
     public static int VRCompositor_Submit(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @Nullable @NativeType("VRTextureBounds_t const *") VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
         return nVRCompositor_Submit(eEye, pTexture.address(), memAddressSafe(pBounds), nSubmitFlags);
+    }
+
+    // --- [ VRCompositor_SubmitWithArrayIndex ] ---
+
+    /** Unsafe version of: {@link #VRCompositor_SubmitWithArrayIndex SubmitWithArrayIndex} */
+    public static int nVRCompositor_SubmitWithArrayIndex(int eEye, long pTexture, int unTextureArrayIndex, long pBounds, int nSubmitFlags) {
+        long __functionAddress = OpenVR.VRCompositor.SubmitWithArrayIndex;
+        if (CHECKS) {
+            check(__functionAddress);
+            Texture.validate(pTexture);
+        }
+        return callPPI(eEye, pTexture, unTextureArrayIndex, pBounds, nSubmitFlags, __functionAddress);
+    }
+
+    /**
+     * See {@link #VRCompositor_Submit Submit}.
+     *
+     * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
+     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_IsEgl}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved3}</td></tr></table>
+     */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_SubmitWithArrayIndex(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("uint32_t") int unTextureArrayIndex, @Nullable @NativeType("VRTextureBounds_t const *") VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
+        return nVRCompositor_SubmitWithArrayIndex(eEye, pTexture.address(), unTextureArrayIndex, memAddressSafe(pBounds), nSubmitFlags);
     }
 
     // --- [ VRCompositor_ClearLastSubmittedFrame ] ---
@@ -935,6 +994,14 @@ public class VRCompositor {
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetPosesForFrame(@NativeType("uint32_t") int unPosePredictionID, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pPoseArray) {
         return nVRCompositor_GetPosesForFrame(unPosePredictionID, pPoseArray.address(), pPoseArray.remaining());
+    }
+
+    public static int VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES(CompositorFrameTiming timing) {
+        return (timing.m_nReprojectionFlags() & VRCompositor_PredictionMask) >> 4;
+    }
+
+    public static int VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES(CompositorFrameTiming timing) {
+        return (timing.m_nReprojectionFlags() & VRCompositor_ThrottleMask) >> 6;
     }
 
 }

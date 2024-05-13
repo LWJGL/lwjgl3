@@ -1484,7 +1484,7 @@ public class VROverlay {
 
     // --- [ VROverlay_GetPrimaryDashboardDevice ] ---
 
-    /** Returns the tracked device that has the laser pointer in the dashboard. */
+    /** Returns the tracked device index that has the laser pointer in the dashboard, or the last one that was used. */
     @NativeType("TrackedDeviceIndex_t")
     public static int VROverlay_GetPrimaryDashboardDevice() {
         long __functionAddress = OpenVR.VROverlay.GetPrimaryDashboardDevice;

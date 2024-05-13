@@ -1825,6 +1825,10 @@
                 <get-release platform="linux" arch="x64" file="libopenvr_api.so"/>
                 <get-release platform="linux" arch="x64" file="libopenvr_api.so.git"/>
 
+                <get-release platform="linux" arch="arm64" file="liblwjgl_openvr.so"/>
+                <get-release platform="linux" arch="arm64" file="libopenvr_api.so"/>
+                <get-release platform="linux" arch="arm64" file="libopenvr_api.so.git"/>
+
                 <get-release platform="macos" arch="x64" file="liblwjgl_openvr.dylib"/>
                 <get-release platform="macos" arch="x64" file="libopenvr_api.dylib"/>
                 <get-release platform="macos" arch="x64" file="libopenvr_api.dylib.git"/>

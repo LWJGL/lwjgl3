@@ -43,6 +43,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventInputBindingLoad VREvent_InputBindingLoad_t} inputBinding;
  *     {@link VREventInputActionManifestLoad VREvent_InputActionManifestLoad_t} actionManifest;
  *     {@link VREventSpatialAnchor VREvent_SpatialAnchor_t} spatialAnchor;
+ *     {@link VREventProgressUpdate VREvent_ProgressUpdate_t} progressUpdate;
+ *     {@link VREventShowUI VREvent_ShowUI_t} showUi;
+ *     {@link VREventShowDevTools VREvent_ShowDevTools_t} showDevTools;
+ *     {@link VREventHDCPError VREvent_HDCPError_t} hdcpError;
+ *     {@link VREventAudioVolumeControl VREvent_AudioVolumeControl_t} audioVolumeControl;
+ *     {@link VREventAudioMuteControl VREvent_AudioMuteControl_t} audioMuteControl;
  * }</code></pre>
  */
 @NativeType("union VREvent_Data_t")
@@ -80,7 +86,13 @@ public class VREventData extends Struct<VREventData> {
         WEBCONSOLE,
         INPUTBINDING,
         ACTIONMANIFEST,
-        SPATIALANCHOR;
+        SPATIALANCHOR,
+        PROGRESSUPDATE,
+        SHOWUI,
+        SHOWDEVTOOLS,
+        HDCPERROR,
+        AUDIOVOLUMECONTROL,
+        AUDIOMUTECONTROL;
 
     static {
         Layout layout = __union(
@@ -108,7 +120,13 @@ public class VREventData extends Struct<VREventData> {
             __member(VREventWebConsole.SIZEOF, VREventWebConsole.ALIGNOF),
             __member(VREventInputBindingLoad.SIZEOF, VREventInputBindingLoad.ALIGNOF),
             __member(VREventInputActionManifestLoad.SIZEOF, VREventInputActionManifestLoad.ALIGNOF),
-            __member(VREventSpatialAnchor.SIZEOF, VREventSpatialAnchor.ALIGNOF)
+            __member(VREventSpatialAnchor.SIZEOF, VREventSpatialAnchor.ALIGNOF),
+            __member(VREventProgressUpdate.SIZEOF, VREventProgressUpdate.ALIGNOF),
+            __member(VREventShowUI.SIZEOF, VREventShowUI.ALIGNOF),
+            __member(VREventShowDevTools.SIZEOF, VREventShowDevTools.ALIGNOF),
+            __member(VREventHDCPError.SIZEOF, VREventHDCPError.ALIGNOF),
+            __member(VREventAudioVolumeControl.SIZEOF, VREventAudioVolumeControl.ALIGNOF),
+            __member(VREventAudioMuteControl.SIZEOF, VREventAudioMuteControl.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -139,6 +157,12 @@ public class VREventData extends Struct<VREventData> {
         INPUTBINDING = layout.offsetof(22);
         ACTIONMANIFEST = layout.offsetof(23);
         SPATIALANCHOR = layout.offsetof(24);
+        PROGRESSUPDATE = layout.offsetof(25);
+        SHOWUI = layout.offsetof(26);
+        SHOWDEVTOOLS = layout.offsetof(27);
+        HDCPERROR = layout.offsetof(28);
+        AUDIOVOLUMECONTROL = layout.offsetof(29);
+        AUDIOMUTECONTROL = layout.offsetof(30);
     }
 
     protected VREventData(long address, @Nullable ByteBuffer container) {
@@ -238,6 +262,24 @@ public class VREventData extends Struct<VREventData> {
     /** @return a {@link VREventSpatialAnchor} view of the {@code spatialAnchor} field. */
     @NativeType("VREvent_SpatialAnchor_t")
     public VREventSpatialAnchor spatialAnchor() { return nspatialAnchor(address()); }
+    /** @return a {@link VREventProgressUpdate} view of the {@code progressUpdate} field. */
+    @NativeType("VREvent_ProgressUpdate_t")
+    public VREventProgressUpdate progressUpdate() { return nprogressUpdate(address()); }
+    /** @return a {@link VREventShowUI} view of the {@code showUi} field. */
+    @NativeType("VREvent_ShowUI_t")
+    public VREventShowUI showUi() { return nshowUi(address()); }
+    /** @return a {@link VREventShowDevTools} view of the {@code showDevTools} field. */
+    @NativeType("VREvent_ShowDevTools_t")
+    public VREventShowDevTools showDevTools() { return nshowDevTools(address()); }
+    /** @return a {@link VREventHDCPError} view of the {@code hdcpError} field. */
+    @NativeType("VREvent_HDCPError_t")
+    public VREventHDCPError hdcpError() { return nhdcpError(address()); }
+    /** @return a {@link VREventAudioVolumeControl} view of the {@code audioVolumeControl} field. */
+    @NativeType("VREvent_AudioVolumeControl_t")
+    public VREventAudioVolumeControl audioVolumeControl() { return naudioVolumeControl(address()); }
+    /** @return a {@link VREventAudioMuteControl} view of the {@code audioMuteControl} field. */
+    @NativeType("VREvent_AudioMuteControl_t")
+    public VREventAudioMuteControl audioMuteControl() { return naudioMuteControl(address()); }
 
     // -----------------------------------
 
@@ -320,6 +362,18 @@ public class VREventData extends Struct<VREventData> {
     public static VREventInputActionManifestLoad nactionManifest(long struct) { return VREventInputActionManifestLoad.create(struct + VREventData.ACTIONMANIFEST); }
     /** Unsafe version of {@link #spatialAnchor}. */
     public static VREventSpatialAnchor nspatialAnchor(long struct) { return VREventSpatialAnchor.create(struct + VREventData.SPATIALANCHOR); }
+    /** Unsafe version of {@link #progressUpdate}. */
+    public static VREventProgressUpdate nprogressUpdate(long struct) { return VREventProgressUpdate.create(struct + VREventData.PROGRESSUPDATE); }
+    /** Unsafe version of {@link #showUi}. */
+    public static VREventShowUI nshowUi(long struct) { return VREventShowUI.create(struct + VREventData.SHOWUI); }
+    /** Unsafe version of {@link #showDevTools}. */
+    public static VREventShowDevTools nshowDevTools(long struct) { return VREventShowDevTools.create(struct + VREventData.SHOWDEVTOOLS); }
+    /** Unsafe version of {@link #hdcpError}. */
+    public static VREventHDCPError nhdcpError(long struct) { return VREventHDCPError.create(struct + VREventData.HDCPERROR); }
+    /** Unsafe version of {@link #audioVolumeControl}. */
+    public static VREventAudioVolumeControl naudioVolumeControl(long struct) { return VREventAudioVolumeControl.create(struct + VREventData.AUDIOVOLUMECONTROL); }
+    /** Unsafe version of {@link #audioMuteControl}. */
+    public static VREventAudioMuteControl naudioMuteControl(long struct) { return VREventAudioMuteControl.create(struct + VREventData.AUDIOMUTECONTROL); }
 
     // -----------------------------------
 
@@ -434,6 +488,24 @@ public class VREventData extends Struct<VREventData> {
         /** @return a {@link VREventSpatialAnchor} view of the {@code spatialAnchor} field. */
         @NativeType("VREvent_SpatialAnchor_t")
         public VREventSpatialAnchor spatialAnchor() { return VREventData.nspatialAnchor(address()); }
+        /** @return a {@link VREventProgressUpdate} view of the {@code progressUpdate} field. */
+        @NativeType("VREvent_ProgressUpdate_t")
+        public VREventProgressUpdate progressUpdate() { return VREventData.nprogressUpdate(address()); }
+        /** @return a {@link VREventShowUI} view of the {@code showUi} field. */
+        @NativeType("VREvent_ShowUI_t")
+        public VREventShowUI showUi() { return VREventData.nshowUi(address()); }
+        /** @return a {@link VREventShowDevTools} view of the {@code showDevTools} field. */
+        @NativeType("VREvent_ShowDevTools_t")
+        public VREventShowDevTools showDevTools() { return VREventData.nshowDevTools(address()); }
+        /** @return a {@link VREventHDCPError} view of the {@code hdcpError} field. */
+        @NativeType("VREvent_HDCPError_t")
+        public VREventHDCPError hdcpError() { return VREventData.nhdcpError(address()); }
+        /** @return a {@link VREventAudioVolumeControl} view of the {@code audioVolumeControl} field. */
+        @NativeType("VREvent_AudioVolumeControl_t")
+        public VREventAudioVolumeControl audioVolumeControl() { return VREventData.naudioVolumeControl(address()); }
+        /** @return a {@link VREventAudioMuteControl} view of the {@code audioMuteControl} field. */
+        @NativeType("VREvent_AudioMuteControl_t")
+        public VREventAudioMuteControl audioMuteControl() { return VREventData.naudioMuteControl(address()); }
 
     }
 

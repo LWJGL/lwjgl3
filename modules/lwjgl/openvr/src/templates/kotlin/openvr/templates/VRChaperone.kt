@@ -53,10 +53,12 @@ typedef struct HmdColor_t
     bool(
         "GetPlayAreaRect",
         """
-        Returns the 4 corner positions of the Play Area (formerly named Soft Bounds).
+        Returns a quad describing the Play Area (formerly named Soft Bounds).
 
-        Corners are in counter-clockwise order. Standing center (0,0,0) is the center of the Play Area. It's a rectangle. 2 sides are parallel to the X axis
-        and 2 sides are parallel to the Z axis. Height of every corner is 0Y (on the floor).
+        The corners form a rectangle. Corners are in counter-clockwise order, starting at the front-right. The positions are given relative to the standing
+        origin. The center of the rectangle is the center of the user's calibrated play space, not necessarily the standing origin. The Play Area's forward
+        direction goes from its center through the mid-point of a line drawn between the first and second corner. The quad lies on the XZ plane (height = 0y),
+        with 2 sides parallel to the X-axis and two sides parallel to the Z-axis of the user's calibrated Play Area.
         """,
 
         HmdQuad_t.p("rect", "")

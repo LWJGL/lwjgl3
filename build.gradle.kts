@@ -219,7 +219,7 @@ enum class Artifacts(
     OPENVR(
         "lwjgl-openvr", "LWJGL - OpenVR bindings",
         "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     OPENXR(
         "lwjgl-openxr", "LWJGL - OpenXR bindings",

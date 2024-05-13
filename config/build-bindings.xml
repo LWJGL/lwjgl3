@@ -50,7 +50,15 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
-    <condition property="binding.openvr" value="true" else="false"><isset property="build.arch.x64|x86"/></condition>
+    <condition property="binding.openvr" value="true" else="false">
+        <or>
+            <isset property="build.arch.x64|x86"/>
+            <and>
+                <isset property="platform.linux"/>
+                <isset property="build.arch.arm"/>
+            </and>
+        </or>
+    </condition>
     <property name="binding.openxr" value="true"/>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>

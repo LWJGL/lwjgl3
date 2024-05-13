@@ -323,6 +323,7 @@ public final class OpenVR {
             GetLastPoses,
             GetLastPoseForTrackedDeviceIndex,
             Submit,
+            SubmitWithArrayIndex,
             ClearLastSubmittedFrame,
             PostPresentHandoff,
             GetFrameTiming,
@@ -370,58 +371,59 @@ public final class OpenVR {
             GetPosesForFrame;
 
         public IVRCompositor(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 51);
+            PointerBuffer table = memPointerBuffer(tableAddress, 52);
             SetTrackingSpace = table.get(0);
             GetTrackingSpace = table.get(1);
             WaitGetPoses = table.get(2);
             GetLastPoses = table.get(3);
             GetLastPoseForTrackedDeviceIndex = table.get(4);
             Submit = table.get(5);
-            ClearLastSubmittedFrame = table.get(6);
-            PostPresentHandoff = table.get(7);
-            GetFrameTiming = table.get(8);
-            GetFrameTimings = table.get(9);
-            GetFrameTimeRemaining = table.get(10);
-            GetCumulativeStats = table.get(11);
-            FadeToColor = table.get(12);
-            GetCurrentFadeColor = table.get(13);
-            FadeGrid = table.get(14);
-            GetCurrentGridAlpha = table.get(15);
-            SetSkyboxOverride = table.get(16);
-            ClearSkyboxOverride = table.get(17);
-            CompositorBringToFront = table.get(18);
-            CompositorGoToBack = table.get(19);
-            CompositorQuit = table.get(20);
-            IsFullscreen = table.get(21);
-            GetCurrentSceneFocusProcess = table.get(22);
-            GetLastFrameRenderer = table.get(23);
-            CanRenderScene = table.get(24);
-            ShowMirrorWindow = table.get(25);
-            HideMirrorWindow = table.get(26);
-            IsMirrorWindowVisible = table.get(27);
-            CompositorDumpImages = table.get(28);
-            ShouldAppRenderWithLowResources = table.get(29);
-            ForceInterleavedReprojectionOn = table.get(30);
-            ForceReconnectProcess = table.get(31);
-            SuspendRendering = table.get(32);
-            GetMirrorTextureD3D11 = table.get(33);
-            ReleaseMirrorTextureD3D11 = table.get(34);
-            GetMirrorTextureGL = table.get(35);
-            ReleaseSharedGLTexture = table.get(36);
-            LockGLSharedTextureForAccess = table.get(37);
-            UnlockGLSharedTextureForAccess = table.get(38);
-            GetVulkanInstanceExtensionsRequired = table.get(39);
-            GetVulkanDeviceExtensionsRequired = table.get(40);
-            SetExplicitTimingMode = table.get(41);
-            SubmitExplicitTimingData = table.get(42);
-            IsMotionSmoothingEnabled = table.get(43);
-            IsMotionSmoothingSupported = table.get(44);
-            IsCurrentSceneFocusAppLoading = table.get(45);
-            SetStageOverride_Async = table.get(46);
-            ClearStageOverride = table.get(47);
-            GetCompositorBenchmarkResults = table.get(48);
-            GetLastPosePredictionIDs = table.get(49);
-            GetPosesForFrame = table.get(50);
+            SubmitWithArrayIndex = table.get(6);
+            ClearLastSubmittedFrame = table.get(7);
+            PostPresentHandoff = table.get(8);
+            GetFrameTiming = table.get(9);
+            GetFrameTimings = table.get(10);
+            GetFrameTimeRemaining = table.get(11);
+            GetCumulativeStats = table.get(12);
+            FadeToColor = table.get(13);
+            GetCurrentFadeColor = table.get(14);
+            FadeGrid = table.get(15);
+            GetCurrentGridAlpha = table.get(16);
+            SetSkyboxOverride = table.get(17);
+            ClearSkyboxOverride = table.get(18);
+            CompositorBringToFront = table.get(19);
+            CompositorGoToBack = table.get(20);
+            CompositorQuit = table.get(21);
+            IsFullscreen = table.get(22);
+            GetCurrentSceneFocusProcess = table.get(23);
+            GetLastFrameRenderer = table.get(24);
+            CanRenderScene = table.get(25);
+            ShowMirrorWindow = table.get(26);
+            HideMirrorWindow = table.get(27);
+            IsMirrorWindowVisible = table.get(28);
+            CompositorDumpImages = table.get(29);
+            ShouldAppRenderWithLowResources = table.get(30);
+            ForceInterleavedReprojectionOn = table.get(31);
+            ForceReconnectProcess = table.get(32);
+            SuspendRendering = table.get(33);
+            GetMirrorTextureD3D11 = table.get(34);
+            ReleaseMirrorTextureD3D11 = table.get(35);
+            GetMirrorTextureGL = table.get(36);
+            ReleaseSharedGLTexture = table.get(37);
+            LockGLSharedTextureForAccess = table.get(38);
+            UnlockGLSharedTextureForAccess = table.get(39);
+            GetVulkanInstanceExtensionsRequired = table.get(40);
+            GetVulkanDeviceExtensionsRequired = table.get(41);
+            SetExplicitTimingMode = table.get(42);
+            SubmitExplicitTimingData = table.get(43);
+            IsMotionSmoothingEnabled = table.get(44);
+            IsMotionSmoothingSupported = table.get(45);
+            IsCurrentSceneFocusAppLoading = table.get(46);
+            SetStageOverride_Async = table.get(47);
+            ClearStageOverride = table.get(48);
+            GetCompositorBenchmarkResults = table.get(49);
+            GetLastPosePredictionIDs = table.get(50);
+            GetPosesForFrame = table.get(51);
         }
 
     }

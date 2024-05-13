@@ -48,6 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link TrackedDevicePose TrackedDevicePose_t} {@link #m_HmdPose};
  *     uint32_t m_nNumVSyncsReadyForUse;
  *     uint32_t m_nNumVSyncsToFirstView;
+ *     float m_flTransferLatencyMs;
  * }</code></pre>
  */
 @NativeType("struct Compositor_FrameTiming")
@@ -86,7 +87,8 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
         M_FLCOMPOSITORRENDERSTARTMS,
         M_HMDPOSE,
         M_NNUMVSYNCSREADYFORUSE,
-        M_NNUMVSYNCSTOFIRSTVIEW;
+        M_NNUMVSYNCSTOFIRSTVIEW,
+        M_FLTRANSFERLATENCYMS;
 
     static {
         Layout layout = __struct(
@@ -114,6 +116,7 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
             __member(4),
             __member(4),
             __member(TrackedDevicePose.SIZEOF, TrackedDevicePose.ALIGNOF),
+            __member(4),
             __member(4),
             __member(4)
         );
@@ -147,6 +150,7 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
         M_HMDPOSE = layout.offsetof(23);
         M_NNUMVSYNCSREADYFORUSE = layout.offsetof(24);
         M_NNUMVSYNCSTOFIRSTVIEW = layout.offsetof(25);
+        M_FLTRANSFERLATENCYMS = layout.offsetof(26);
     }
 
     protected CompositorFrameTiming(long address, @Nullable ByteBuffer container) {
@@ -232,6 +236,8 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
     /** @return the value of the {@code m_nNumVSyncsToFirstView} field. */
     @NativeType("uint32_t")
     public int m_nNumVSyncsToFirstView() { return nm_nNumVSyncsToFirstView(address()); }
+    /** @return the value of the {@code m_flTransferLatencyMs} field. */
+    public float m_flTransferLatencyMs() { return nm_flTransferLatencyMs(address()); }
 
     // -----------------------------------
 
@@ -417,6 +423,8 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
     public static int nm_nNumVSyncsReadyForUse(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSREADYFORUSE); }
     /** Unsafe version of {@link #m_nNumVSyncsToFirstView}. */
     public static int nm_nNumVSyncsToFirstView(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSTOFIRSTVIEW); }
+    /** Unsafe version of {@link #m_flTransferLatencyMs}. */
+    public static float nm_flTransferLatencyMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLTRANSFERLATENCYMS); }
 
     // -----------------------------------
 
@@ -517,6 +525,8 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
         /** @return the value of the {@code m_nNumVSyncsToFirstView} field. */
         @NativeType("uint32_t")
         public int m_nNumVSyncsToFirstView() { return CompositorFrameTiming.nm_nNumVSyncsToFirstView(address()); }
+        /** @return the value of the {@code m_flTransferLatencyMs} field. */
+        public float m_flTransferLatencyMs() { return CompositorFrameTiming.nm_flTransferLatencyMs(address()); }
 
     }
 

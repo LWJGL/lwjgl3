@@ -9,6 +9,7 @@ import openvr.*
 
 val VRCompositor = "VRCompositor".nativeClass(
     Module.OPENVR,
+    prefix = "VRCompositor_",
     prefixMethod = "VRCompositor_",
     binding = OPENVR_FNTABLE_BINDING
 ) {
@@ -33,28 +34,70 @@ typedef struct HmdColor_t
 /** Compositor frame timing reprojection flags. */
 const uint32_t VRCompositor_ReprojectionReason_Cpu = 0x01;
 const uint32_t VRCompositor_ReprojectionReason_Gpu = 0x02;
-const uint32_t VRCompositor_ReprojectionAsync = 0x04;	// This flag indicates the async reprojection mode is active,
+const uint32_t VRCompositor_ReprojectionAsync = 0x04;		// This flag indicates the async reprojection mode is active,
 															// but does not indicate if reprojection actually happened or not.
 															// Use the ReprojectionReason flags above to check if reprojection
 															// was actually applied (i.e. scene texture was reused).
 															// NumFramePresents > 1 also indicates the scene texture was reused,
 															// and also the number of times that it was presented in total.
 
-const uint32_t VRCompositor_ReprojectionMotion = 0x08;	// This flag indicates whether or not motion smoothing was triggered for this frame
+const uint32_t VRCompositor_ReprojectionMotion = 0x08;		// This flag indicates whether or not motion smoothing was triggered for this frame
 
-const uint32_t VRCompositor_PredictionMask = 0x30;	// The runtime may predict more than one frame (up to four) ahead if
-															// it detects the application is taking too long to render. These two
+const uint32_t VRCompositor_PredictionMask = 0xF0;			// The runtime may predict more than one frame ahead if
+															// it detects the application is taking too long to render. These
 															// bits will contain the count of additional frames (normally zero).
 															// Use the VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES macro to read from
 															// the latest frame timing entry.
 
-const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the compositor is throttling the application.
+const uint32_t VRCompositor_ThrottleMask = 0xF00;			// Number of frames the compositor is throttling the application.
 															// Use the VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES macro to read from
 															// the latest frame timing entry.
 
-#define VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES( timing ) ( ( ( timing ).m_nReprojectionFlags & vr::VRCompositor_PredictionMask ) >> 4 )
-#define VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES( timing ) ( ( ( timing ).m_nReprojectionFlags & vr::VRCompositor_ThrottleMask ) >> 6 )
+
  */
+
+    EnumConstant(
+        "Compositor frame timing reprojection flags.",
+
+        "ReprojectionReason_Cpu".enum("", "0x01"),
+        "ReprojectionReason_Gpu".enum("", "0x02"),
+        "ReprojectionAsync".enum(
+            """
+            This flag indicates the async reprojection mode is active, but does not indicate if reprojection actually happened or not.
+
+            Use the ReprojectionReason flags above to check if reprojection was actually applied (i.e. scene texture was reused). {@code NumFramePresents > 1}
+            also indicates the scene texture was reused, and also the number of times that it was presented in total.
+            """,
+            "0x04"
+        ),
+        "ReprojectionMotion".enum("This flag indicates whether or not motion smoothing was triggered for this frame.", "0x08"),
+        "PredictionMask".enum(
+            """
+            The runtime may predict more than one frame ahead if it detects the application is taking too long to render.
+
+            These bits will contain the count of additional frames (normally zero). Use the {@code VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES} macro to read
+            from the latest frame timing entry.
+            """,
+            "0xF0"
+        ),
+        "ThrottleMask".enum(
+            """
+            Number of frames the compositor is throttling the application.
+
+            Use the {@code VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES} macro to read from the latest frame timing entry.
+            """,
+            "0xF00"
+        )
+    )
+
+    customMethod("""
+    public static int VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES(CompositorFrameTiming timing) {
+        return (timing.m_nReprojectionFlags() & VRCompositor_PredictionMask) >> 4;
+    }
+
+    public static int VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES(CompositorFrameTiming timing) {
+        return (timing.m_nReprojectionFlags() & VRCompositor_ThrottleMask) >> 6;
+    }""")
 
     void(
         "SetTrackingSpace",
@@ -142,6 +185,17 @@ const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the composi
             "AlreadySubmitted (app has submitted two left textures or two right textures in a single frame - i.e. before calling WaitGetPoses again)"
         )}
         """
+    )
+
+    EVRCompositorError(
+        "SubmitWithArrayIndex",
+        "See #Submit().",
+
+        EVREye("eEye", "", "EVREye_\\w+"),
+        Texture_t.const.p("pTexture", ""),
+        uint32_t("unTextureArrayIndex", ""),
+        nullable..VRTextureBounds_t.const.p("pBounds", ""),
+        EVRSubmitFlags("nSubmitFlags", "", "EVRSubmitFlags_\\w+"),
     )
 
     void(

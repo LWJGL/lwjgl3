@@ -482,6 +482,14 @@ val VREvent_HDCPError_t = struct(Module.OPENVR, "VREventHDCPError", nativeName =
 	EHDCPError("eCode", "")
 }
 
+val VREvent_AudioVolumeControl_t = struct(Module.OPENVR, "VREventAudioVolumeControl", nativeName = "VREvent_AudioVolumeControl_t", mutable = false) {
+    float("fVolumeLevel", "")
+}
+
+val VREvent_AudioMuteControl_t = struct(Module.OPENVR, "VREventAudioMuteControl", nativeName = "VREvent_AudioMuteControl_t", mutable = false) {
+    bool("bMute", "")
+}
+
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
     VREvent_Reserved_t("reserved", "")
     VREvent_Controller_t("controller", "")
@@ -508,6 +516,12 @@ val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_D
     VREvent_InputBindingLoad_t("inputBinding", "")
 	VREvent_InputActionManifestLoad_t("actionManifest", "")
 	VREvent_SpatialAnchor_t("spatialAnchor", "")
+    VREvent_ProgressUpdate_t("progressUpdate", "")
+    VREvent_ShowUI_t("showUi", "")
+    VREvent_ShowDevTools_t("showDevTools", "")
+    VREvent_HDCPError_t("hdcpError", "")
+    VREvent_AudioVolumeControl_t("audioVolumeControl", "")
+    VREvent_AudioMuteControl_t("audioMuteControl", "")
 }
 
 val VREvent_t = struct(Module.OPENVR, "VREvent", nativeName = "VREvent_t", mutable = false) {
@@ -661,6 +675,7 @@ val Compositor_FrameTiming = struct(Module.OPENVR, "CompositorFrameTiming", nati
 
     uint32_t("m_nNumVSyncsReadyForUse", "")
 	uint32_t("m_nNumVSyncsToFirstView", "")
+    float("m_flTransferLatencyMs", "")
 }
 
 val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStats", nativeName = "Compositor_CumulativeStats", mutable = false) {
