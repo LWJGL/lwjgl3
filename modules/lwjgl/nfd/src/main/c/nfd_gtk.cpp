@@ -410,6 +410,8 @@ void NFD_FreePathN(nfdnchar_t* filePath) {
     g_free(filePath);
 }
 
+void NFD_FreePathU8(nfdu8char_t* filePath) __attribute__((alias("NFD_FreePathN")));
+
 nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
@@ -441,6 +443,12 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
         return NFD_CANCEL;
     }
 }
+
+nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_OpenDialogN")));
 
 nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
@@ -477,6 +485,12 @@ nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
         return NFD_CANCEL;
     }
 }
+
+nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
+                                     const nfdu8filteritem_t* filterList,
+                                     nfdfiltersize_t filterCount,
+                                     const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_OpenDialogMultipleN")));
 
 nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
@@ -534,6 +548,13 @@ nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
     }
 }
 
+nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath,
+                             const nfdu8char_t* defaultName)
+    __attribute__((alias("NFD_SaveDialogN")));
+
 nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath) {
     GtkWidget* widget = gtk_file_chooser_dialog_new("Select folder",
                                                     nullptr,
@@ -560,6 +581,9 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
     }
 }
 
+nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_PickFolderN")));
+
 nfdresult_t NFD_PathSet_GetCount(const nfdpathset_t* pathSet, nfdpathsetsize_t* count) {
     assert(pathSet);
     // const_cast because methods on GSList aren't const, but it should act
@@ -584,11 +608,19 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
     return NFD_OKAY;
 }
 
-void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
+nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
+                                  nfdpathsetsize_t index,
+                                  nfdu8char_t** outPath)
+    __attribute__((alias("NFD_PathSet_GetPathN")));
+
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
     assert(filePath);
     (void)filePath;  // prevent warning in release build
     // no-op, because NFD_PathSet_Free does the freeing for us
 }
+
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath)
+    __attribute__((alias("NFD_PathSet_FreePathN")));
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {
     assert(pathSet);
@@ -629,3 +661,6 @@ nfdresult_t NFD_PathSet_EnumNextN(nfdpathsetenum_t* enumerator, nfdnchar_t** out
 
     return NFD_OKAY;
 }
+
+nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath)
+    __attribute__((alias("NFD_PathSet_EnumNextN")));

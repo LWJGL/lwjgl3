@@ -639,6 +639,10 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
     return NFD_OKAY;
 }
 
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
+    NFD_FreePathN(const_cast<nfdnchar_t*>(filePath));
+}
+
 nfdresult_t NFD_PathSet_GetEnum(const nfdpathset_t* pathSet, nfdpathsetenum_t* outEnumerator) {
     assert(pathSet);
     // const_cast because methods on IShellItemArray aren't const, but it should act like const to
@@ -943,6 +947,10 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
     // free the native out path, and return the result
     NFD_FreePathN(outPathN);
     return res;
+}
+
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath) {
+    NFD_FreePathU8(const_cast<nfdu8char_t*>(filePath));
 }
 
 nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath) {

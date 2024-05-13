@@ -1371,6 +1371,8 @@ void NFD_FreePathN(nfdnchar_t* filePath) {
     NFDi_Free(filePath);
 }
 
+void NFD_FreePathU8(nfdu8char_t* filePath) __attribute__((alias("NFD_FreePathN")));
+
 nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
@@ -1396,6 +1398,12 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
     return AllocAndCopyFilePath(uri, *outPath);
 }
 
+nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_OpenDialogN")));
+
 nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
                                     nfdfiltersize_t filterCount,
@@ -1419,6 +1427,12 @@ nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
     *outPaths = msg;
     return NFD_OKAY;
 }
+
+nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
+                                     const nfdu8filteritem_t* filterList,
+                                     nfdfiltersize_t filterCount,
+                                     const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_OpenDialogMultipleN")));
 
 nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
@@ -1459,6 +1473,13 @@ nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
 #endif
 }
 
+nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath,
+                             const nfdu8char_t* defaultName)
+    __attribute__((alias("NFD_SaveDialogN")));
+
 nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath) {
     (void)defaultPath;  // Default path not supported for portal backend
 
@@ -1498,6 +1519,9 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
     return AllocAndCopyFilePath(uri, *outPath);
 }
 
+nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_PickFolderN")));
+
 nfdresult_t NFD_PathSet_GetCount(const nfdpathset_t* pathSet, nfdpathsetsize_t* count) {
     assert(pathSet);
     DBusMessage* msg = const_cast<DBusMessage*>(static_cast<const DBusMessage*>(pathSet));
@@ -1533,10 +1557,18 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
     return AllocAndCopyFilePath(uri, *outPath);
 }
 
-void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
+nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
+                                  nfdpathsetsize_t index,
+                                  nfdu8char_t** outPath)
+    __attribute__((alias("NFD_PathSet_GetPathN")));
+
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
     assert(filePath);
     NFD_FreePathN(filePath);
 }
+
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath)
+    __attribute__((alias("NFD_PathSet_FreePathN")));
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {
     assert(pathSet);
@@ -1573,3 +1605,6 @@ nfdresult_t NFD_PathSet_EnumNextN(nfdpathsetenum_t* enumerator, nfdnchar_t** out
     dbus_message_iter_next(&uri_iter);
     return NFD_OKAY;
 }
+
+nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath)
+    __attribute__((alias("NFD_PathSet_EnumNextN")));

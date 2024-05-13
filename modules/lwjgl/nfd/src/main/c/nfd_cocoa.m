@@ -188,6 +188,10 @@ void NFD_FreePathN(nfdnchar_t* filePath) {
     NFDi_Free((void*)filePath);
 }
 
+void NFD_FreePathU8(nfdu8char_t* filePath) {
+    NFD_FreePathN(filePath);
+}
+
 static NSApplicationActivationPolicy old_app_policy;
 
 nfdresult_t NFD_Init(void) {
@@ -236,6 +240,13 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
     return result;
 }
 
+nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath) {
+    return NFD_OpenDialogN(outPath, filterList, filterCount, defaultPath);
+}
+
 nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
                                     nfdfiltersize_t filterCount,
@@ -268,6 +279,13 @@ nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
         [keyWindow makeKeyAndOrderFront:nil];
     }
     return result;
+}
+
+nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
+                                     const nfdu8filteritem_t* filterList,
+                                     nfdfiltersize_t filterCount,
+                                     const nfdu8char_t* defaultPath) {
+    return NFD_OpenDialogMultipleN(outPaths, filterList, filterCount, defaultPath);
 }
 
 nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
@@ -306,6 +324,14 @@ nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
     return result;
 }
 
+nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
+                             const nfdu8filteritem_t* filterList,
+                             nfdfiltersize_t filterCount,
+                             const nfdu8char_t* defaultPath,
+                             const nfdu8char_t* defaultName) {
+    return NFD_SaveDialogN(outPath, filterList, filterCount, defaultPath, defaultName);
+}
+
 nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath) {
     nfdresult_t result = NFD_CANCEL;
     @autoreleasepool {
@@ -332,6 +358,10 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
     return result;
 }
 
+nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath) {
+    return NFD_PickFolderN(outPath, defaultPath);
+}
+
 nfdresult_t NFD_PathSet_GetCount(const nfdpathset_t* pathSet, nfdpathsetsize_t* count) {
     const NSArray* urls = (const NSArray*)pathSet;
     *count = [urls count];
@@ -349,6 +379,36 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
         const char* utf8Path = [[url path] UTF8String];
         return CopyUtf8String(utf8Path, outPath);
     }
+}
+
+nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
+                                  nfdpathsetsize_t index,
+                                  nfdu8char_t** outPath) {
+    return NFD_PathSet_GetPathN(pathSet, index, outPath);
+}
+
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
+    // const_cast not supported on Mac
+    union {
+        const nfdnchar_t* constPath;
+        nfdnchar_t* nonConstPath;
+    } pathUnion;
+
+    pathUnion.constPath = filePath;
+
+    NFD_FreePathN(pathUnion.nonConstPath);
+}
+
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath) {
+    // const_cast not supported on Mac
+    union {
+        const nfdu8char_t* constPath;
+        nfdu8char_t* nonConstPath;
+    } pathUnion;
+
+    pathUnion.constPath = filePath;
+
+    NFD_FreePathU8(pathUnion.nonConstPath);
 }
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {
@@ -388,4 +448,8 @@ nfdresult_t NFD_PathSet_EnumNextN(nfdpathsetenum_t* enumerator, nfdnchar_t** out
             return NFD_OKAY;
         }
     }
+}
+
+nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath) {
+    return NFD_PathSet_EnumNextN(enumerator, outPath);
 }
