@@ -27,6 +27,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float border;
  *     float rounding;
  *     {@link NkVec2 struct nk_vec2} padding;
+ *     float color_factor;
+ *     float disabled_factor;
+ *     nk_bool show_markers;
  * }</code></pre>
  */
 @NativeType("struct nk_style_chart")
@@ -46,7 +49,10 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         COLOR,
         BORDER,
         ROUNDING,
-        PADDING;
+        PADDING,
+        COLOR_FACTOR,
+        DISABLED_FACTOR,
+        SHOW_MARKERS;
 
     static {
         Layout layout = __struct(
@@ -56,7 +62,10 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),
             __member(4),
             __member(4),
-            __member(NkVec2.SIZEOF, NkVec2.ALIGNOF)
+            __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
+            __member(4),
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
@@ -69,6 +78,9 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         BORDER = layout.offsetof(4);
         ROUNDING = layout.offsetof(5);
         PADDING = layout.offsetof(6);
+        COLOR_FACTOR = layout.offsetof(7);
+        DISABLED_FACTOR = layout.offsetof(8);
+        SHOW_MARKERS = layout.offsetof(9);
     }
 
     protected NkStyleChart(long address, @Nullable ByteBuffer container) {
@@ -112,6 +124,13 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
+    /** @return the value of the {@code color_factor} field. */
+    public float color_factor() { return ncolor_factor(address()); }
+    /** @return the value of the {@code disabled_factor} field. */
+    public float disabled_factor() { return ndisabled_factor(address()); }
+    /** @return the value of the {@code show_markers} field. */
+    @NativeType("nk_bool")
+    public boolean show_markers() { return nshow_markers(address()); }
 
     /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
     public NkStyleChart background(@NativeType("struct nk_style_item") NkStyleItem value) { nbackground(address(), value); return this; }
@@ -137,6 +156,12 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     public NkStyleChart padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
     /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleChart padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+    /** Sets the specified value to the {@code color_factor} field. */
+    public NkStyleChart color_factor(float value) { ncolor_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code disabled_factor} field. */
+    public NkStyleChart disabled_factor(float value) { ndisabled_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code show_markers} field. */
+    public NkStyleChart show_markers(@NativeType("nk_bool") boolean value) { nshow_markers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyleChart set(
@@ -146,7 +171,10 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         NkColor color,
         float border,
         float rounding,
-        NkVec2 padding
+        NkVec2 padding,
+        float color_factor,
+        float disabled_factor,
+        boolean show_markers
     ) {
         background(background);
         border_color(border_color);
@@ -155,6 +183,9 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         border(border);
         rounding(rounding);
         padding(padding);
+        color_factor(color_factor);
+        disabled_factor(disabled_factor);
+        show_markers(show_markers);
 
         return this;
     }
@@ -317,6 +348,12 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleChart.ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleChart.PADDING); }
+    /** Unsafe version of {@link #color_factor}. */
+    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleChart.COLOR_FACTOR); }
+    /** Unsafe version of {@link #disabled_factor}. */
+    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleChart.DISABLED_FACTOR); }
+    /** Unsafe version of {@link #show_markers}. */
+    public static boolean nshow_markers(long struct) { return UNSAFE.getByte(null, struct + NkStyleChart.SHOW_MARKERS) != 0; }
 
     /** Unsafe version of {@link #background(NkStyleItem) background}. */
     public static void nbackground(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleChart.BACKGROUND, NkStyleItem.SIZEOF); }
@@ -332,6 +369,12 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleChart.ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleChart.PADDING, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #color_factor(float) color_factor}. */
+    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleChart.COLOR_FACTOR, value); }
+    /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
+    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleChart.DISABLED_FACTOR, value); }
+    /** Unsafe version of {@link #show_markers(boolean) show_markers}. */
+    public static void nshow_markers(long struct, boolean value) { UNSAFE.putByte(null, struct + NkStyleChart.SHOW_MARKERS, value ? (byte)1 : (byte)0); }
 
     // -----------------------------------
 
@@ -390,6 +433,13 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleChart.npadding(address()); }
+        /** @return the value of the {@code color_factor} field. */
+        public float color_factor() { return NkStyleChart.ncolor_factor(address()); }
+        /** @return the value of the {@code disabled_factor} field. */
+        public float disabled_factor() { return NkStyleChart.ndisabled_factor(address()); }
+        /** @return the value of the {@code show_markers} field. */
+        @NativeType("nk_bool")
+        public boolean show_markers() { return NkStyleChart.nshow_markers(address()); }
 
         /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
         public NkStyleChart.Buffer background(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleChart.nbackground(address(), value); return this; }
@@ -415,6 +465,12 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         public NkStyleChart.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleChart.npadding(address(), value); return this; }
         /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleChart.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+        /** Sets the specified value to the {@code color_factor} field. */
+        public NkStyleChart.Buffer color_factor(float value) { NkStyleChart.ncolor_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code disabled_factor} field. */
+        public NkStyleChart.Buffer disabled_factor(float value) { NkStyleChart.ndisabled_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code show_markers} field. */
+        public NkStyleChart.Buffer show_markers(@NativeType("nk_bool") boolean value) { NkStyleChart.nshow_markers(address(), value); return this; }
 
     }
 

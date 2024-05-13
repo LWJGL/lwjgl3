@@ -38,6 +38,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     {@link NkVec2 struct nk_vec2} touch_padding;
  *     {@link NkVec2 struct nk_vec2} image_padding;
+ *     float color_factor;
+ *     float disabled_factor;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
@@ -72,6 +74,8 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         PADDING,
         TOUCH_PADDING,
         IMAGE_PADDING,
+        COLOR_FACTOR,
+        DISABLED_FACTOR,
         USERDATA,
         DRAW_BEGIN,
         DRAW_END;
@@ -96,6 +100,8 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
+            __member(4),
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)
@@ -122,9 +128,11 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         PADDING = layout.offsetof(15);
         TOUCH_PADDING = layout.offsetof(16);
         IMAGE_PADDING = layout.offsetof(17);
-        USERDATA = layout.offsetof(18);
-        DRAW_BEGIN = layout.offsetof(19);
-        DRAW_END = layout.offsetof(20);
+        COLOR_FACTOR = layout.offsetof(18);
+        DISABLED_FACTOR = layout.offsetof(19);
+        USERDATA = layout.offsetof(20);
+        DRAW_BEGIN = layout.offsetof(21);
+        DRAW_END = layout.offsetof(22);
     }
 
     protected NkStyleSelectable(long address, @Nullable ByteBuffer container) {
@@ -202,6 +210,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     /** @return a {@link NkVec2} view of the {@code image_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 image_padding() { return nimage_padding(address()); }
+    /** @return the value of the {@code color_factor} field. */
+    public float color_factor() { return ncolor_factor(address()); }
+    /** @return the value of the {@code disabled_factor} field. */
+    public float disabled_factor() { return ndisabled_factor(address()); }
     /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
@@ -282,6 +294,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     public NkStyleSelectable image_padding(@NativeType("struct nk_vec2") NkVec2 value) { nimage_padding(address(), value); return this; }
     /** Passes the {@code image_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleSelectable image_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(image_padding()); return this; }
+    /** Sets the specified value to the {@code color_factor} field. */
+    public NkStyleSelectable color_factor(float value) { ncolor_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code disabled_factor} field. */
+    public NkStyleSelectable disabled_factor(float value) { ndisabled_factor(address(), value); return this; }
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkStyleSelectable userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
     /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -311,6 +327,8 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         NkVec2 padding,
         NkVec2 touch_padding,
         NkVec2 image_padding,
+        float color_factor,
+        float disabled_factor,
         NkHandle userdata,
         NkDrawBeginCallbackI draw_begin,
         NkDrawEndCallbackI draw_end
@@ -333,6 +351,8 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         padding(padding);
         touch_padding(touch_padding);
         image_padding(image_padding);
+        color_factor(color_factor);
+        disabled_factor(disabled_factor);
         userdata(userdata);
         draw_begin(draw_begin);
         draw_end(draw_end);
@@ -520,6 +540,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     public static NkVec2 ntouch_padding(long struct) { return NkVec2.create(struct + NkStyleSelectable.TOUCH_PADDING); }
     /** Unsafe version of {@link #image_padding}. */
     public static NkVec2 nimage_padding(long struct) { return NkVec2.create(struct + NkStyleSelectable.IMAGE_PADDING); }
+    /** Unsafe version of {@link #color_factor}. */
+    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSelectable.COLOR_FACTOR); }
+    /** Unsafe version of {@link #disabled_factor}. */
+    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSelectable.DISABLED_FACTOR); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleSelectable.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
@@ -563,6 +587,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     public static void ntouch_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSelectable.TOUCH_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #image_padding(NkVec2) image_padding}. */
     public static void nimage_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSelectable.IMAGE_PADDING, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #color_factor(float) color_factor}. */
+    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSelectable.COLOR_FACTOR, value); }
+    /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
+    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSelectable.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkStyleSelectable.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #draw_begin(NkDrawBeginCallbackI) draw_begin}. */
@@ -661,6 +689,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         /** @return a {@link NkVec2} view of the {@code image_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 image_padding() { return NkStyleSelectable.nimage_padding(address()); }
+        /** @return the value of the {@code color_factor} field. */
+        public float color_factor() { return NkStyleSelectable.ncolor_factor(address()); }
+        /** @return the value of the {@code disabled_factor} field. */
+        public float disabled_factor() { return NkStyleSelectable.ndisabled_factor(address()); }
         /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkStyleSelectable.nuserdata(address()); }
@@ -741,6 +773,10 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
         public NkStyleSelectable.Buffer image_padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleSelectable.nimage_padding(address(), value); return this; }
         /** Passes the {@code image_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleSelectable.Buffer image_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(image_padding()); return this; }
+        /** Sets the specified value to the {@code color_factor} field. */
+        public NkStyleSelectable.Buffer color_factor(float value) { NkStyleSelectable.ncolor_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code disabled_factor} field. */
+        public NkStyleSelectable.Buffer disabled_factor(float value) { NkStyleSelectable.ndisabled_factor(address(), value); return this; }
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkStyleSelectable.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkStyleSelectable.nuserdata(address(), value); return this; }
         /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */

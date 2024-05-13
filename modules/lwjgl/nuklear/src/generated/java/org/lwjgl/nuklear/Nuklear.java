@@ -240,7 +240,8 @@ public class Nuklear {
     /** Constants. */
     public static final float
         NK_UNDEFINED                = -1.0f,
-        NK_SCROLLBAR_HIDING_TIMEOUT = 4.0f;
+        NK_SCROLLBAR_HIDING_TIMEOUT = 4.0f,
+        NK_WIDGET_DISABLED_FACTOR   = 0.5f;
 
     /** Implementation limits. */
     public static final int
@@ -712,12 +713,14 @@ public class Nuklear {
      * <li>{@link #NK_WIDGET_INVALID WIDGET_INVALID} - The widget cannot be seen and is completely out of view</li>
      * <li>{@link #NK_WIDGET_VALID WIDGET_VALID} - The widget is completely inside the window and can be updated and drawn</li>
      * <li>{@link #NK_WIDGET_ROM WIDGET_ROM} - The widget is partially visible and cannot be updated</li>
+     * <li>{@link #NK_WIDGET_DISABLED WIDGET_DISABLED} - The widget is manually disabled and acts like {@code NK_WIDGET_ROM}</li>
      * </ul>
      */
     public static final int
-        NK_WIDGET_INVALID = 0,
-        NK_WIDGET_VALID   = 1,
-        NK_WIDGET_ROM     = 2;
+        NK_WIDGET_INVALID  = 0,
+        NK_WIDGET_VALID    = 1,
+        NK_WIDGET_ROM      = 2,
+        NK_WIDGET_DISABLED = 3;
 
     /**
      * nk_widget_states
@@ -888,6 +891,44 @@ public class Nuklear {
         NK_WINDOW_BACKGROUND       = 1 << 8,
         NK_WINDOW_SCALE_LEFT       = 1 << 9,
         NK_WINDOW_NO_INPUT         = 1 << 10;
+
+    /**
+     * {@code nk_widget_align}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #NK_WIDGET_ALIGN_LEFT WIDGET_ALIGN_LEFT}</li>
+     * <li>{@link #NK_WIDGET_ALIGN_CENTERED WIDGET_ALIGN_CENTERED}</li>
+     * <li>{@link #NK_WIDGET_ALIGN_RIGHT WIDGET_ALIGN_RIGHT}</li>
+     * <li>{@link #NK_WIDGET_ALIGN_TOP WIDGET_ALIGN_TOP}</li>
+     * <li>{@link #NK_WIDGET_ALIGN_MIDDLE WIDGET_ALIGN_MIDDLE}</li>
+     * <li>{@link #NK_WIDGET_ALIGN_BOTTOM WIDGET_ALIGN_BOTTOM}</li>
+     * </ul>
+     */
+    public static final int
+        NK_WIDGET_ALIGN_LEFT     = 0x01,
+        NK_WIDGET_ALIGN_CENTERED = 0x02,
+        NK_WIDGET_ALIGN_RIGHT    = 0x04,
+        NK_WIDGET_ALIGN_TOP      = 0x08,
+        NK_WIDGET_ALIGN_MIDDLE   = 0x10,
+        NK_WIDGET_ALIGN_BOTTOM   = 0x20;
+
+    /**
+     * {@code nk_widget_alignment}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #NK_WIDGET_LEFT WIDGET_LEFT}</li>
+     * <li>{@link #NK_WIDGET_CENTERED WIDGET_CENTERED}</li>
+     * <li>{@link #NK_WIDGET_RIGHT WIDGET_RIGHT}</li>
+     * </ul>
+     */
+    public static final int
+        NK_WIDGET_LEFT     = NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_LEFT,
+        NK_WIDGET_CENTERED = NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_CENTERED,
+        NK_WIDGET_RIGHT    = NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_RIGHT;
 
     /**
      * nk_allocation_type
@@ -3962,6 +4003,30 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_check_text_align ] ---
+
+    /** Unsafe version of: {@link #nk_check_text_align check_text_align} */
+    public static native boolean nnk_check_text_align(long ctx, long str, int len, boolean active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_check_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        return nnk_check_text_align(ctx.address(), memAddress(str), str.remaining(), active, widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_check_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int strEncodedLength = stack.nUTF8(str, false);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_check_text_align(ctx.address(), strEncoded, strEncodedLength, active, widget_alignment, text_alignment);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nk_check_flags_label ] ---
 
     /** Unsafe version of: {@link #nk_check_flags_label check_flags_label} */
@@ -4044,6 +4109,37 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_checkbox_label_align ] ---
+
+    /** Unsafe version of: {@link #nk_checkbox_label_align checkbox_label_align} */
+    public static native boolean nnk_checkbox_label_align(long ctx, long str, long active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_checkbox_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            checkNT1(str);
+            check(active, 1);
+        }
+        return nnk_checkbox_label_align(ctx.address(), memAddress(str), memAddress(active), widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_checkbox_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(str, true);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_checkbox_label_align(ctx.address(), strEncoded, memAddress(active), widget_alignment, text_alignment);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nk_checkbox_text ] ---
 
     /** Unsafe version of: {@link #nk_checkbox_text checkbox_text} */
@@ -4069,6 +4165,36 @@ public class Nuklear {
             int strEncodedLength = stack.nUTF8(str, false);
             long strEncoded = stack.getPointerAddress();
             return nnk_checkbox_text(ctx.address(), strEncoded, strEncodedLength, memAddress(active));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_checkbox_text_align ] ---
+
+    /** Unsafe version of: {@link #nk_checkbox_text_align checkbox_text_align} */
+    public static native boolean nnk_checkbox_text_align(long ctx, long str, int len, long active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_checkbox_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        return nnk_checkbox_text_align(ctx.address(), memAddress(str), str.remaining(), memAddress(active), widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_checkbox_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int strEncodedLength = stack.nUTF8(str, false);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_checkbox_text_align(ctx.address(), strEncoded, strEncodedLength, memAddress(active), widget_alignment, text_alignment);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4166,6 +4292,37 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_radio_label_align ] ---
+
+    /** Unsafe version of: {@link #nk_radio_label_align radio_label_align} */
+    public static native boolean nnk_radio_label_align(long ctx, long str, long active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_radio_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            checkNT1(str);
+            check(active, 1);
+        }
+        return nnk_radio_label_align(ctx.address(), memAddress(str), memAddress(active), widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_radio_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(str, true);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_radio_label_align(ctx.address(), strEncoded, memAddress(active), widget_alignment, text_alignment);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nk_radio_text ] ---
 
     /** Unsafe version of: {@link #nk_radio_text radio_text} */
@@ -4191,6 +4348,36 @@ public class Nuklear {
             int strEncodedLength = stack.nUTF8(str, false);
             long strEncoded = stack.getPointerAddress();
             return nnk_radio_text(ctx.address(), strEncoded, strEncodedLength, memAddress(active));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_radio_text_align ] ---
+
+    /** Unsafe version of: {@link #nk_radio_text_align radio_text_align} */
+    public static native boolean nnk_radio_text_align(long ctx, long str, int len, long active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_radio_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        return nnk_radio_text_align(ctx.address(), memAddress(str), str.remaining(), memAddress(active), widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_radio_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool *") ByteBuffer active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            check(active, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int strEncodedLength = stack.nUTF8(str, false);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_radio_text_align(ctx.address(), strEncoded, strEncodedLength, memAddress(active), widget_alignment, text_alignment);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4223,6 +4410,33 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_option_label_align ] ---
+
+    /** Unsafe version of: {@link #nk_option_label_align option_label_align} */
+    public static native boolean nnk_option_label_align(long ctx, long str, boolean active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_option_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        if (CHECKS) {
+            checkNT1(str);
+        }
+        return nnk_option_label_align(ctx.address(), memAddress(str), active, widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_option_label_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(str, true);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_option_label_align(ctx.address(), strEncoded, active, widget_alignment, text_alignment);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nk_option_text ] ---
 
     /** Unsafe version of: {@link #nk_option_text option_text} */
@@ -4242,6 +4456,30 @@ public class Nuklear {
             int strEncodedLength = stack.nUTF8(str, false);
             long strEncoded = stack.getPointerAddress();
             return nnk_option_text(ctx.address(), strEncoded, strEncodedLength, active);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_option_text_align ] ---
+
+    /** Unsafe version of: {@link #nk_option_text_align option_text_align} */
+    public static native boolean nnk_option_text_align(long ctx, long str, int len, boolean active, int widget_alignment, int text_alignment);
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_option_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        return nnk_option_text_align(ctx.address(), memAddress(str), str.remaining(), active, widget_alignment, text_alignment);
+    }
+
+    /** @param ctx the nuklear context */
+    @NativeType("nk_bool")
+    public static boolean nk_option_text_align(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence str, @NativeType("nk_bool") boolean active, @NativeType("nk_flags") int widget_alignment, @NativeType("nk_flags") int text_alignment) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int strEncodedLength = stack.nUTF8(str, false);
+            long strEncoded = stack.getPointerAddress();
+            return nnk_option_text_align(ctx.address(), strEncoded, strEncodedLength, active, widget_alignment, text_alignment);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7107,6 +7345,26 @@ public class Nuklear {
         nnk_spacing(ctx.address(), cols);
     }
 
+    // --- [ nk_widget_disable_begin ] ---
+
+    /** Unsafe version of: {@link #nk_widget_disable_begin widget_disable_begin} */
+    public static native void nnk_widget_disable_begin(long ctx);
+
+    /** @param ctx the nuklear context */
+    public static void nk_widget_disable_begin(@NativeType("struct nk_context *") NkContext ctx) {
+        nnk_widget_disable_begin(ctx.address());
+    }
+
+    // --- [ nk_widget_disable_end ] ---
+
+    /** Unsafe version of: {@link #nk_widget_disable_end widget_disable_end} */
+    public static native void nnk_widget_disable_end(long ctx);
+
+    /** @param ctx the nuklear context */
+    public static void nk_widget_disable_end(@NativeType("struct nk_context *") NkContext ctx) {
+        nnk_widget_disable_end(ctx.address());
+    }
+
     // --- [ nk_widget ] ---
 
     /** Unsafe version of: {@link #nk_widget widget} */
@@ -7225,6 +7483,16 @@ public class Nuklear {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ nk_rgb_factor ] ---
+
+    public static native void nnk_rgb_factor(long col, float factor, long __result);
+
+    @NativeType("struct nk_color")
+    public static NkColor nk_rgb_factor(@NativeType("struct nk_color") NkColor col, float factor, @NativeType("struct nk_color") NkColor __result) {
+        nnk_rgb_factor(col.address(), factor, __result.address());
+        return __result;
     }
 
     // --- [ nk_rgba ] ---

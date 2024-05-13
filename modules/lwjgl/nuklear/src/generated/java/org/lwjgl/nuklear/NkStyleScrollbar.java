@@ -33,6 +33,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float border_cursor;
  *     float rounding_cursor;
  *     {@link NkVec2 struct nk_vec2} padding;
+ *     float color_factor;
+ *     float disabled_factor;
  *     int show_buttons;
  *     {@link NkStyleButton struct nk_style_button} inc_button;
  *     {@link NkStyleButton struct nk_style_button} dec_button;
@@ -67,6 +69,8 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         BORDER_CURSOR,
         ROUNDING_CURSOR,
         PADDING,
+        COLOR_FACTOR,
+        DISABLED_FACTOR,
         SHOW_BUTTONS,
         INC_BUTTON,
         DEC_BUTTON,
@@ -91,6 +95,8 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
             __member(4),
             __member(4),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
+            __member(4),
             __member(4),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
@@ -117,14 +123,16 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         BORDER_CURSOR = layout.offsetof(10);
         ROUNDING_CURSOR = layout.offsetof(11);
         PADDING = layout.offsetof(12);
-        SHOW_BUTTONS = layout.offsetof(13);
-        INC_BUTTON = layout.offsetof(14);
-        DEC_BUTTON = layout.offsetof(15);
-        INC_SYMBOL = layout.offsetof(16);
-        DEC_SYMBOL = layout.offsetof(17);
-        USERDATA = layout.offsetof(18);
-        DRAW_BEGIN = layout.offsetof(19);
-        DRAW_END = layout.offsetof(20);
+        COLOR_FACTOR = layout.offsetof(13);
+        DISABLED_FACTOR = layout.offsetof(14);
+        SHOW_BUTTONS = layout.offsetof(15);
+        INC_BUTTON = layout.offsetof(16);
+        DEC_BUTTON = layout.offsetof(17);
+        INC_SYMBOL = layout.offsetof(18);
+        DEC_SYMBOL = layout.offsetof(19);
+        USERDATA = layout.offsetof(20);
+        DRAW_BEGIN = layout.offsetof(21);
+        DRAW_END = layout.offsetof(22);
     }
 
     protected NkStyleScrollbar(long address, @Nullable ByteBuffer container) {
@@ -184,6 +192,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
+    /** @return the value of the {@code color_factor} field. */
+    public float color_factor() { return ncolor_factor(address()); }
+    /** @return the value of the {@code disabled_factor} field. */
+    public float disabled_factor() { return ndisabled_factor(address()); }
     /** @return the value of the {@code show_buttons} field. */
     public int show_buttons() { return nshow_buttons(address()); }
     /** @return a {@link NkStyleButton} view of the {@code inc_button} field. */
@@ -254,6 +266,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     public NkStyleScrollbar padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
     /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleScrollbar padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+    /** Sets the specified value to the {@code color_factor} field. */
+    public NkStyleScrollbar color_factor(float value) { ncolor_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code disabled_factor} field. */
+    public NkStyleScrollbar disabled_factor(float value) { ndisabled_factor(address(), value); return this; }
     /** Sets the specified value to the {@code show_buttons} field. */
     public NkStyleScrollbar show_buttons(int value) { nshow_buttons(address(), value); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */
@@ -292,6 +308,8 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         float border_cursor,
         float rounding_cursor,
         NkVec2 padding,
+        float color_factor,
+        float disabled_factor,
         int show_buttons,
         NkStyleButton inc_button,
         NkStyleButton dec_button,
@@ -314,6 +332,8 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         border_cursor(border_cursor);
         rounding_cursor(rounding_cursor);
         padding(padding);
+        color_factor(color_factor);
+        disabled_factor(disabled_factor);
         show_buttons(show_buttons);
         inc_button(inc_button);
         dec_button(dec_button);
@@ -496,6 +516,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     public static float nrounding_cursor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleScrollbar.ROUNDING_CURSOR); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleScrollbar.PADDING); }
+    /** Unsafe version of {@link #color_factor}. */
+    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleScrollbar.COLOR_FACTOR); }
+    /** Unsafe version of {@link #disabled_factor}. */
+    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleScrollbar.DISABLED_FACTOR); }
     /** Unsafe version of {@link #show_buttons}. */
     public static int nshow_buttons(long struct) { return UNSAFE.getInt(null, struct + NkStyleScrollbar.SHOW_BUTTONS); }
     /** Unsafe version of {@link #inc_button}. */
@@ -539,6 +563,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     public static void nrounding_cursor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleScrollbar.ROUNDING_CURSOR, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleScrollbar.PADDING, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #color_factor(float) color_factor}. */
+    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleScrollbar.COLOR_FACTOR, value); }
+    /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
+    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleScrollbar.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #show_buttons(int) show_buttons}. */
     public static void nshow_buttons(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleScrollbar.SHOW_BUTTONS, value); }
     /** Unsafe version of {@link #inc_button(NkStyleButton) inc_button}. */
@@ -629,6 +657,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleScrollbar.npadding(address()); }
+        /** @return the value of the {@code color_factor} field. */
+        public float color_factor() { return NkStyleScrollbar.ncolor_factor(address()); }
+        /** @return the value of the {@code disabled_factor} field. */
+        public float disabled_factor() { return NkStyleScrollbar.ndisabled_factor(address()); }
         /** @return the value of the {@code show_buttons} field. */
         public int show_buttons() { return NkStyleScrollbar.nshow_buttons(address()); }
         /** @return a {@link NkStyleButton} view of the {@code inc_button} field. */
@@ -699,6 +731,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         public NkStyleScrollbar.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleScrollbar.npadding(address(), value); return this; }
         /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleScrollbar.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+        /** Sets the specified value to the {@code color_factor} field. */
+        public NkStyleScrollbar.Buffer color_factor(float value) { NkStyleScrollbar.ncolor_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code disabled_factor} field. */
+        public NkStyleScrollbar.Buffer disabled_factor(float value) { NkStyleScrollbar.ndisabled_factor(address(), value); return this; }
         /** Sets the specified value to the {@code show_buttons} field. */
         public NkStyleScrollbar.Buffer show_buttons(int value) { NkStyleScrollbar.nshow_buttons(address(), value); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */

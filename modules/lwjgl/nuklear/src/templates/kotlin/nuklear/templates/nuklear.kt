@@ -251,7 +251,8 @@ nk_style_pop_vec2(ctx);""")}
         "Constants.",
 
         "UNDEFINED"..-1.0f,
-        "SCROLLBAR_HIDING_TIMEOUT"..4.0f
+        "SCROLLBAR_HIDING_TIMEOUT"..4.0f,
+        "WIDGET_DISABLED_FACTOR"..0.5f
     )
 
     IntConstant(
@@ -503,7 +504,8 @@ nk_style_pop_vec2(ctx);""")}
 
         "WIDGET_INVALID".enum("The widget cannot be seen and is completely out of view"),
         "WIDGET_VALID".enum("The widget is completely inside the window and can be updated and drawn"),
-        "WIDGET_ROM".enum("The widget is partially visible and cannot be updated")
+        "WIDGET_ROM".enum("The widget is partially visible and cannot be updated"),
+        "WIDGET_DISABLED".enum("The widget is manually disabled and acts like {@code NK_WIDGET_ROM}")
     )
 
     EnumConstant(
@@ -590,6 +592,25 @@ nk_style_pop_vec2(ctx);""")}
         "WINDOW_SCALE_LEFT".enum("Puts window scaler in the left-bottom corner instead right-bottom", 9.NK_FLAG),
         "WINDOW_NO_INPUT".enum("Prevents window of scaling, moving or getting focus", 10.NK_FLAG)
     ).javaDocLinks
+
+    EnumConstant(
+        "{@code nk_widget_align}",
+
+        "WIDGET_ALIGN_LEFT".."0x01",
+        "WIDGET_ALIGN_CENTERED".."0x02",
+        "WIDGET_ALIGN_RIGHT".."0x04",
+        "WIDGET_ALIGN_TOP".."0x08",
+        "WIDGET_ALIGN_MIDDLE".."0x10",
+        "WIDGET_ALIGN_BOTTOM".."0x20"
+    )
+
+    EnumConstant(
+        "{@code nk_widget_alignment}",
+
+        "WIDGET_LEFT".."NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_LEFT",
+        "WIDGET_CENTERED".."NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_CENTERED",
+        "WIDGET_RIGHT".."NK_WIDGET_ALIGN_MIDDLE|NK_WIDGET_ALIGN_RIGHT"
+    )
 
     EnumConstant(
         "nk_allocation_type",
@@ -1715,6 +1736,18 @@ nk_style_pop_vec2(ctx);""")}
             nk_bool("active", "")
         )
 
+        nk_bool(
+            "check_text_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_bool("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
+        )
+
         unsigned_int(
             "check_flags_label",
             "",
@@ -1746,6 +1779,17 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_bool(
+            "checkbox_label_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            Check(1)..nk_bool.p("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
+        )
+
+        nk_bool(
             "checkbox_text",
             "",
 
@@ -1753,6 +1797,18 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             Check(1)..nk_bool.p("active", "")
+        )
+
+        nk_bool(
+            "checkbox_text_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            Check(1)..nk_bool.p("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
         )
 
         nk_bool(
@@ -1786,6 +1842,17 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_bool(
+            "radio_label_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            Check(1)..nk_bool.p("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
+        )
+
+        nk_bool(
             "radio_text",
             "",
 
@@ -1793,6 +1860,18 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             Check(1)..nk_bool.p("active", "")
+        )
+
+        nk_bool(
+            "radio_text_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            Check(1)..nk_bool.p("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
         )
 
         nk_bool(
@@ -1805,6 +1884,17 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_bool(
+            "option_label_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            nk_bool("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
+        )
+
+        nk_bool(
             "option_text",
             "",
 
@@ -1812,6 +1902,18 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             nk_bool("active", "")
+        )
+
+        nk_bool(
+            "option_text_align",
+            "",
+
+            ctx,
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_bool("active", ""),
+            nk_flags("widget_alignment", ""),
+            nk_flags("text_alignment", "")
         )
 
         nk_bool(
@@ -3015,6 +3117,20 @@ nk_style_pop_vec2(ctx);""")}
             int("cols", "")
         )
 
+        void(
+            "widget_disable_begin",
+            "",
+
+            ctx
+        )
+
+        void(
+            "widget_disable_end",
+            "",
+
+            ctx
+        )
+
         nk_widget_layout_states(
             "widget",
             "",
@@ -3083,6 +3199,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(6)..charASCII.const.p("rgb", "")
+        )
+
+        nk_color(
+            "rgb_factor",
+            "",
+
+            nk_color("col", ""),
+            float("factor", "")
         )
 
         nk_color(

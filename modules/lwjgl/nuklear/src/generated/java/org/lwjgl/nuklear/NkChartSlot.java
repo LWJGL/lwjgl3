@@ -27,6 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     int count;
  *     {@link NkVec2 struct nk_vec2} last;
  *     int index;
+ *     nk_bool show_markers;
  * }</code></pre>
  */
 @NativeType("struct nk_chart_slot")
@@ -48,7 +49,8 @@ public class NkChartSlot extends Struct<NkChartSlot> {
         RANGE,
         COUNT,
         LAST,
-        INDEX;
+        INDEX,
+        SHOW_MARKERS;
 
     static {
         Layout layout = __struct(
@@ -60,7 +62,8 @@ public class NkChartSlot extends Struct<NkChartSlot> {
             __member(4),
             __member(4),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
-            __member(4)
+            __member(4),
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
@@ -75,6 +78,7 @@ public class NkChartSlot extends Struct<NkChartSlot> {
         COUNT = layout.offsetof(6);
         LAST = layout.offsetof(7);
         INDEX = layout.offsetof(8);
+        SHOW_MARKERS = layout.offsetof(9);
     }
 
     protected NkChartSlot(long address, @Nullable ByteBuffer container) {
@@ -121,6 +125,9 @@ public class NkChartSlot extends Struct<NkChartSlot> {
     public NkVec2 last() { return nlast(address()); }
     /** @return the value of the {@code index} field. */
     public int index() { return nindex(address()); }
+    /** @return the value of the {@code show_markers} field. */
+    @NativeType("nk_bool")
+    public boolean show_markers() { return nshow_markers(address()); }
 
     // -----------------------------------
 
@@ -171,6 +178,8 @@ public class NkChartSlot extends Struct<NkChartSlot> {
     public static NkVec2 nlast(long struct) { return NkVec2.create(struct + NkChartSlot.LAST); }
     /** Unsafe version of {@link #index}. */
     public static int nindex(long struct) { return UNSAFE.getInt(null, struct + NkChartSlot.INDEX); }
+    /** Unsafe version of {@link #show_markers}. */
+    public static boolean nshow_markers(long struct) { return UNSAFE.getByte(null, struct + NkChartSlot.SHOW_MARKERS) != 0; }
 
     // -----------------------------------
 
@@ -232,6 +241,9 @@ public class NkChartSlot extends Struct<NkChartSlot> {
         public NkVec2 last() { return NkChartSlot.nlast(address()); }
         /** @return the value of the {@code index} field. */
         public int index() { return NkChartSlot.nindex(address()); }
+        /** @return the value of the {@code show_markers} field. */
+        @NativeType("nk_bool")
+        public boolean show_markers() { return NkChartSlot.nshow_markers(address()); }
 
     }
 

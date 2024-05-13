@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float border;
  *     float rounding;
  *     {@link NkVec2 struct nk_vec2} padding;
+ *     float color_factor;
+ *     float disabled_factor;
  *     {@link NkStyleEdit struct nk_style_edit} edit;
  *     {@link NkStyleButton struct nk_style_button} inc_button;
  *     {@link NkStyleButton struct nk_style_button} dec_button;
@@ -63,6 +65,8 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         BORDER,
         ROUNDING,
         PADDING,
+        COLOR_FACTOR,
+        DISABLED_FACTOR,
         EDIT,
         INC_BUTTON,
         DEC_BUTTON,
@@ -84,6 +88,8 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
             __member(4),
             __member(4),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
+            __member(4),
             __member(NkStyleEdit.SIZEOF, NkStyleEdit.ALIGNOF),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
@@ -107,12 +113,14 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         BORDER = layout.offsetof(9);
         ROUNDING = layout.offsetof(10);
         PADDING = layout.offsetof(11);
-        EDIT = layout.offsetof(12);
-        INC_BUTTON = layout.offsetof(13);
-        DEC_BUTTON = layout.offsetof(14);
-        USERDATA = layout.offsetof(15);
-        DRAW_BEGIN = layout.offsetof(16);
-        DRAW_END = layout.offsetof(17);
+        COLOR_FACTOR = layout.offsetof(12);
+        DISABLED_FACTOR = layout.offsetof(13);
+        EDIT = layout.offsetof(14);
+        INC_BUTTON = layout.offsetof(15);
+        DEC_BUTTON = layout.offsetof(16);
+        USERDATA = layout.offsetof(17);
+        DRAW_BEGIN = layout.offsetof(18);
+        DRAW_END = layout.offsetof(19);
     }
 
     protected NkStyleProperty(long address, @Nullable ByteBuffer container) {
@@ -171,6 +179,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
+    /** @return the value of the {@code color_factor} field. */
+    public float color_factor() { return ncolor_factor(address()); }
+    /** @return the value of the {@code disabled_factor} field. */
+    public float disabled_factor() { return ndisabled_factor(address()); }
     /** @return a {@link NkStyleEdit} view of the {@code edit} field. */
     @NativeType("struct nk_style_edit")
     public NkStyleEdit edit() { return nedit(address()); }
@@ -232,6 +244,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     public NkStyleProperty padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
     /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleProperty padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+    /** Sets the specified value to the {@code color_factor} field. */
+    public NkStyleProperty color_factor(float value) { ncolor_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code disabled_factor} field. */
+    public NkStyleProperty disabled_factor(float value) { ndisabled_factor(address(), value); return this; }
     /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
     public NkStyleProperty edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { nedit(address(), value); return this; }
     /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -267,6 +283,8 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         float border,
         float rounding,
         NkVec2 padding,
+        float color_factor,
+        float disabled_factor,
         NkStyleEdit edit,
         NkStyleButton inc_button,
         NkStyleButton dec_button,
@@ -286,6 +304,8 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         border(border);
         rounding(rounding);
         padding(padding);
+        color_factor(color_factor);
+        disabled_factor(disabled_factor);
         edit(edit);
         inc_button(inc_button);
         dec_button(dec_button);
@@ -464,6 +484,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleProperty.PADDING); }
+    /** Unsafe version of {@link #color_factor}. */
+    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.COLOR_FACTOR); }
+    /** Unsafe version of {@link #disabled_factor}. */
+    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.DISABLED_FACTOR); }
     /** Unsafe version of {@link #edit}. */
     public static NkStyleEdit nedit(long struct) { return NkStyleEdit.create(struct + NkStyleProperty.EDIT); }
     /** Unsafe version of {@link #inc_button}. */
@@ -501,6 +525,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleProperty.PADDING, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #color_factor(float) color_factor}. */
+    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.COLOR_FACTOR, value); }
+    /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
+    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #edit(NkStyleEdit) edit}. */
     public static void nedit(long struct, NkStyleEdit value) { memCopy(value.address(), struct + NkStyleProperty.EDIT, NkStyleEdit.SIZEOF); }
     /** Unsafe version of {@link #inc_button(NkStyleButton) inc_button}. */
@@ -586,6 +614,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleProperty.npadding(address()); }
+        /** @return the value of the {@code color_factor} field. */
+        public float color_factor() { return NkStyleProperty.ncolor_factor(address()); }
+        /** @return the value of the {@code disabled_factor} field. */
+        public float disabled_factor() { return NkStyleProperty.ndisabled_factor(address()); }
         /** @return a {@link NkStyleEdit} view of the {@code edit} field. */
         @NativeType("struct nk_style_edit")
         public NkStyleEdit edit() { return NkStyleProperty.nedit(address()); }
@@ -647,6 +679,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         public NkStyleProperty.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleProperty.npadding(address(), value); return this; }
         /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleProperty.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
+        /** Sets the specified value to the {@code color_factor} field. */
+        public NkStyleProperty.Buffer color_factor(float value) { NkStyleProperty.ncolor_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code disabled_factor} field. */
+        public NkStyleProperty.Buffer disabled_factor(float value) { NkStyleProperty.ndisabled_factor(address(), value); return this; }
         /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
         public NkStyleProperty.Buffer edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { NkStyleProperty.nedit(address(), value); return this; }
         /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */

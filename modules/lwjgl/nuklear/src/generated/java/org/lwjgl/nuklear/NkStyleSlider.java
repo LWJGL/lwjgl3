@@ -37,6 +37,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     {@link NkVec2 struct nk_vec2} spacing;
  *     {@link NkVec2 struct nk_vec2} cursor_size;
+ *     float color_factor;
+ *     float disabled_factor;
  *     int show_buttons;
  *     {@link NkStyleButton struct nk_style_button} inc_button;
  *     {@link NkStyleButton struct nk_style_button} dec_button;
@@ -75,6 +77,8 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         PADDING,
         SPACING,
         CURSOR_SIZE,
+        COLOR_FACTOR,
+        DISABLED_FACTOR,
         SHOW_BUTTONS,
         INC_BUTTON,
         DEC_BUTTON,
@@ -103,6 +107,8 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
+            __member(4),
             __member(4),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
             __member(NkStyleButton.SIZEOF, NkStyleButton.ALIGNOF),
@@ -133,14 +139,16 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         PADDING = layout.offsetof(14);
         SPACING = layout.offsetof(15);
         CURSOR_SIZE = layout.offsetof(16);
-        SHOW_BUTTONS = layout.offsetof(17);
-        INC_BUTTON = layout.offsetof(18);
-        DEC_BUTTON = layout.offsetof(19);
-        INC_SYMBOL = layout.offsetof(20);
-        DEC_SYMBOL = layout.offsetof(21);
-        USERDATA = layout.offsetof(22);
-        DRAW_BEGIN = layout.offsetof(23);
-        DRAW_END = layout.offsetof(24);
+        COLOR_FACTOR = layout.offsetof(17);
+        DISABLED_FACTOR = layout.offsetof(18);
+        SHOW_BUTTONS = layout.offsetof(19);
+        INC_BUTTON = layout.offsetof(20);
+        DEC_BUTTON = layout.offsetof(21);
+        INC_SYMBOL = layout.offsetof(22);
+        DEC_SYMBOL = layout.offsetof(23);
+        USERDATA = layout.offsetof(24);
+        DRAW_BEGIN = layout.offsetof(25);
+        DRAW_END = layout.offsetof(26);
     }
 
     protected NkStyleSlider(long address, @Nullable ByteBuffer container) {
@@ -213,6 +221,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     /** @return a {@link NkVec2} view of the {@code cursor_size} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 cursor_size() { return ncursor_size(address()); }
+    /** @return the value of the {@code color_factor} field. */
+    public float color_factor() { return ncolor_factor(address()); }
+    /** @return the value of the {@code disabled_factor} field. */
+    public float disabled_factor() { return ndisabled_factor(address()); }
     /** @return the value of the {@code show_buttons} field. */
     public int show_buttons() { return nshow_buttons(address()); }
     /** @return a {@link NkStyleButton} view of the {@code inc_button} field. */
@@ -301,6 +313,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     public NkStyleSlider cursor_size(@NativeType("struct nk_vec2") NkVec2 value) { ncursor_size(address(), value); return this; }
     /** Passes the {@code cursor_size} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleSlider cursor_size(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(cursor_size()); return this; }
+    /** Sets the specified value to the {@code color_factor} field. */
+    public NkStyleSlider color_factor(float value) { ncolor_factor(address(), value); return this; }
+    /** Sets the specified value to the {@code disabled_factor} field. */
+    public NkStyleSlider disabled_factor(float value) { ndisabled_factor(address(), value); return this; }
     /** Sets the specified value to the {@code show_buttons} field. */
     public NkStyleSlider show_buttons(int value) { nshow_buttons(address(), value); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */
@@ -343,6 +359,8 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         NkVec2 padding,
         NkVec2 spacing,
         NkVec2 cursor_size,
+        float color_factor,
+        float disabled_factor,
         int show_buttons,
         NkStyleButton inc_button,
         NkStyleButton dec_button,
@@ -369,6 +387,8 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         padding(padding);
         spacing(spacing);
         cursor_size(cursor_size);
+        color_factor(color_factor);
+        disabled_factor(disabled_factor);
         show_buttons(show_buttons);
         inc_button(inc_button);
         dec_button(dec_button);
@@ -559,6 +579,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     public static NkVec2 nspacing(long struct) { return NkVec2.create(struct + NkStyleSlider.SPACING); }
     /** Unsafe version of {@link #cursor_size}. */
     public static NkVec2 ncursor_size(long struct) { return NkVec2.create(struct + NkStyleSlider.CURSOR_SIZE); }
+    /** Unsafe version of {@link #color_factor}. */
+    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSlider.COLOR_FACTOR); }
+    /** Unsafe version of {@link #disabled_factor}. */
+    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSlider.DISABLED_FACTOR); }
     /** Unsafe version of {@link #show_buttons}. */
     public static int nshow_buttons(long struct) { return UNSAFE.getInt(null, struct + NkStyleSlider.SHOW_BUTTONS); }
     /** Unsafe version of {@link #inc_button}. */
@@ -610,6 +634,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     public static void nspacing(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSlider.SPACING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #cursor_size(NkVec2) cursor_size}. */
     public static void ncursor_size(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSlider.CURSOR_SIZE, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #color_factor(float) color_factor}. */
+    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSlider.COLOR_FACTOR, value); }
+    /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
+    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSlider.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #show_buttons(int) show_buttons}. */
     public static void nshow_buttons(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleSlider.SHOW_BUTTONS, value); }
     /** Unsafe version of {@link #inc_button(NkStyleButton) inc_button}. */
@@ -713,6 +741,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         /** @return a {@link NkVec2} view of the {@code cursor_size} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 cursor_size() { return NkStyleSlider.ncursor_size(address()); }
+        /** @return the value of the {@code color_factor} field. */
+        public float color_factor() { return NkStyleSlider.ncolor_factor(address()); }
+        /** @return the value of the {@code disabled_factor} field. */
+        public float disabled_factor() { return NkStyleSlider.ndisabled_factor(address()); }
         /** @return the value of the {@code show_buttons} field. */
         public int show_buttons() { return NkStyleSlider.nshow_buttons(address()); }
         /** @return a {@link NkStyleButton} view of the {@code inc_button} field. */
@@ -801,6 +833,10 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         public NkStyleSlider.Buffer cursor_size(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleSlider.ncursor_size(address(), value); return this; }
         /** Passes the {@code cursor_size} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleSlider.Buffer cursor_size(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(cursor_size()); return this; }
+        /** Sets the specified value to the {@code color_factor} field. */
+        public NkStyleSlider.Buffer color_factor(float value) { NkStyleSlider.ncolor_factor(address(), value); return this; }
+        /** Sets the specified value to the {@code disabled_factor} field. */
+        public NkStyleSlider.Buffer disabled_factor(float value) { NkStyleSlider.ndisabled_factor(address(), value); return this; }
         /** Sets the specified value to the {@code show_buttons} field. */
         public NkStyleSlider.Buffer show_buttons(int value) { NkStyleSlider.nshow_buttons(address(), value); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */
