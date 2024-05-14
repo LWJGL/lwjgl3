@@ -127,7 +127,7 @@ ENABLE_WARNINGS()""")
     IntConstant("", "LDM_BUCKETSIZELOG_MIN".."1")
     IntConstant("", "LDM_BUCKETSIZELOG_MAX".."8")
     IntConstant("", "LDM_HASHRATELOG_MIN".."0")
-    IntConstant("", "TARGETCBLOCKSIZE_MIN".."64")
+    IntConstant("Suitable to fit into an ethernet / wifi / 4G transport frame.", "TARGETCBLOCKSIZE_MIN".."1340")
     IntConstant("", "TARGETCBLOCKSIZE_MAX".."ZSTD_BLOCKSIZE_MAX")
     IntConstant("", "SRCSIZEHINT_MIN".."0")
     IntConstant("", "SRCSIZEHINT_MAX".."Integer.MAX_VALUE")
@@ -186,14 +186,6 @@ ENABLE_WARNINGS()""")
         specifically, negative compression levels do not use literal compression.
         """,
         "c_literalCompressionMode".."ZSTD_c_experimentalParam5"
-    )
-    IntConstant(
-        """
-        Tries to fit compressed block size to be around {@code targetCBlockSize}.
-
-        No target when {@code targetCBlockSize == 0}. There is no guarantee on compressed block size. (default:0)
-        """,
-        "c_targetCBlockSize".."ZSTD_c_experimentalParam6"
     )
     IntConstant(
         """
@@ -492,6 +484,19 @@ ENABLE_WARNINGS()""")
         """,
         "d_disableHuffmanAssembly".."ZSTD_d_experimentalParam5"
     )
+    IntConstant(
+        """
+        Allowed values are between 1KB and #BLOCKSIZE_MAX (128KB). The default is {@code ZSTD_BLOCKSIZE_MAX}, and setting to 0 will set to the default.
+
+        Forces the decompressor to reject blocks whose content size is larger than the configured {@code maxBlockSize}. When {@code maxBlockSize} is larger
+        than the {@code windowSize}, the {@code windowSize} is used instead. This saves memory on the decoder when you know all blocks are small.
+
+        This option is typically used in conjunction with #c_maxBlockSize.
+
+        WARNING: This causes the decoder to reject otherwise valid frames that have block sizes larger than the configured {@code maxBlockSize}.
+        """,
+        "d_maxBlockSize".."ZSTD_d_experimentalParam6"
+    )
 
     EnumConstant(
         "{@code ZSTD_literalCompressionMode_e}",
@@ -669,28 +674,6 @@ v                                       v                      v
     )
 
     size_t(
-        "generateSequences",
-        """
-        Generate sequences using #compress2(), given a source buffer.
-
-        Each block will end with a dummy sequence with {@code offset == 0}, {@code matchLength == 0}, and {@code litLength == length} of last literals.
-        {@code litLength} may be {@code == 0}, and if so, then the sequence of {@code (of: 0 ml: 0 ll: 0)} simply acts as a block delimiter.
-
-        {@code zc} can be used to insert custom compression params. This function invokes #compress2()
-
-        The output of this function can be fed into #compressSequences() with {@code CCtx} setting of #c_blockDelimiters as #sf_explicitBlockDelimiters.
-        """,
-
-        ZSTD_CCtx.p("zc", ""),
-        ZSTD_Sequence.p("outSeqs", ""),
-        AutoSize("outSeqs")..size_t("outSeqsSize", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", ""),
-
-        returnDoc = "number of sequences generated"
-    )
-
-    size_t(
         "mergeBlockDelimiters",
         """
         Given an array of {@code ZSTD_Sequence}, remove all sequences that represent block delimiters/last literals by merging them into the literals of the
@@ -817,27 +800,25 @@ v                                       v                      v
     size_t(
         "estimateCCtxSize",
         """
-        Estimages memory usage of a future {@code CCtx}, before its creation.
+        Estimages memory usage of a future {@code CCtx}, before its creation. This is useful in combination with #initStaticCCtx(), which makes it possible to
+        employ a static buffer for {@code ZSTD_CCtx*} state.
 
-        {@code ZSTD_estimateCCtxSize()} will provide a memory budget large enough for any compression level up to selected one.
+        {@code ZSTD_estimateCCtxSize()} will provide a memory budget large enough to compress data of any size using one-shot compression #compressCCtx() or
+        #compress2() associated with any compression level up to max specified one. The estimate will assume the input may be arbitrarily large, which is the
+        worst case.
 
-        Note: Unlike {@code ZSTD_estimateCStreamSize*()}, this estimate does not include space for a window buffer. Therefore, the estimation is only
-        guaranteed for single-shot compressions, not streaming.
+        Note that the size estimation is specific for one-shot compression, it is not valid for streaming (see {@code ZSTD_estimateCStreamSize*()}) nor other
+        potential ways of using a {@code ZSTD_CCtx*} state.
 
-        The estimate will assume the input may be arbitrarily large, which is the worst case.
-
-         When {@code srcSize} can be bound by a known and rather "small" value, this fact can be used to provide a tighter estimation because the CCtx
-        compression context will need less memory. This tighter estimation can be provided by more advanced functions #estimateCCtxSize_usingCParams(), which
-        can be used in tandem with #getCParams(), and #estimateCCtxSize_usingCCtxParams(), which can be used in tandem with #CCtxParams_setParameter(). Both
-        can be used to estimate memory using custom compression parameters and arbitrary {@code srcSize} limits.
+        When {@code srcSize} can be bound by a known and rather "small" value, this knowledge can be used to provide a tighter budget estimation because the
+        {@code ZSTD_CCtx*} state will need less memory for small inputs. This tighter estimation can be provided by employing more advanced functions
+        #estimateCCtxSize_usingCParams(), which can be used in tandem with #getCParams(), and #estimateCCtxSize_usingCCtxParams(), which can be used in tandem
+        with #CCtxParams_setParameter(). Both can be used to estimate memory using custom compression parameters and arbitrary {@code srcSize} limits.
 
         Note: only single-threaded compression is supported. #estimateCCtxSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
-
-        Note 2: {@code ZSTD_estimateCCtxSize*} functions are not compatible with the Block-Level Sequence Producer API at this time. Size estimates assume that
-        no external sequence producer is registered.
         """,
 
-        int("compressionLevel", "")
+        int("maxCompressionLevel", "")
     )
     size_t("estimateCCtxSize_usingCParams", "", ZSTD_compressionParameters("cParams", ""))
     size_t("estimateCCtxSize_usingCCtxParams", "", ZSTD_CCtx_params.const.p("params", ""))
@@ -846,33 +827,30 @@ v                                       v                      v
     size_t(
         "estimateCStreamSize",
         """
-        Provides a budget large enough for any compression level up to selected one.
+        Provides a memory budget large enough for streaming compression using any compression level up to the max specified one.
 
-        It will also consider {@code src} size to be arbitrarily "large", which is worst case. If {@code srcSize} is known to always be small,
+        It will also consider {@code src} size to be arbitrarily "large", which is a worst case scenario. If {@code srcSize} is known to always be small,
         #estimateCStreamSize_usingCParams() can provide a tighter estimation. {@code ZSTD_estimateCStreamSize_usingCParams()} can be used in tandem with
         #getCParams() to create {@code cParams} from compressionLevel. #estimateCStreamSize_usingCCtxParams() can be used in tandem with
         #CCtxParams_setParameter(). Only single-threaded compression is supported.
 
         This function will return an error code if #c_nbWorkers is &ge; 1.
 
-        Note: {@code CStream} size estimation is only correct for single-threaded compression. {@code ZSTD_DStream} memory budget depends on window
-        {@code Size}. This information can be passed manually, using #estimateDStreamSize(), or deducted from a valid frame {@code Header}, using
-        #estimateDStreamSize_fromFrame().
+        Note: {@code CStream} size estimation is only correct for single-threaded compression. #estimateCStreamSize_usingCCtxParams() will return an error code
+        if #c_nbWorkers is &ge; 1. {@code ZSTD_estimateCStreamSize*} functions are not compatible with the Block-Level Sequence Producer API at this time. Size
+        estimates assume that no external sequence producer is registered. {@code ZSTD_DStream} memory budget depends on frame's window {@code Size}. This
+        information can be passed manually, using #estimateDStreamSize(), or deducted from a valid frame {@code Header}, using
+        #estimateDStreamSize_fromFrame(). Any frame requesting a window size larger than max specified one will be rejected.
 
         Note: if streaming is init with function {@code ZSTD_init?Stream_usingDict()}, an internal Dict will be created, which additional size is not estimated
         here. In this case, get total size by adding {@code ZSTD_estimate?DictSize}.
-
-        Note 2: only single-threaded compression is supported. #estimateCStreamSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
-
-        Note 3: {@code ZSTD_estimateCStreamSize*} functions are not compatible with the Block-Level Sequence Producer API at this time. Size estimates assume
-        that no external sequence producer is registered.
         """,
 
-        int("compressionLevel", "")
+        int("maxCompressionLevel", "")
     )
     size_t("estimateCStreamSize_usingCParams", "", ZSTD_compressionParameters("cParams", ""))
     size_t("estimateCStreamSize_usingCCtxParams", "", ZSTD_CCtx_params.const.p("params", ""))
-    size_t("estimateDStreamSize", "", size_t("windowSize", ""))
+    size_t("estimateDStreamSize", "", size_t("maxWindowSize", ""))
     size_t(
         "estimateDStreamSize_fromFrame",
         "",
@@ -1456,6 +1434,25 @@ v                                       v                      v
         """,
 
         ZSTD_CCtx.p("cctx", ""),
+        nullable..opaque_p("sequenceProducerState", ""),
+        nullable..ZSTD_sequenceProducer_F("sequenceProducer", "")
+    )
+
+    void(
+        "CCtxParams_registerSequenceProducer",
+        """
+        Same as #registerSequenceProducer(), but operates on {@code ZSTD_CCtx_params}.
+
+        This is used for accurate size estimation with #estimateCCtxSize_usingCCtxParams(), which is needed when creating a {@code ZSTD_CCtx} with
+        #initStaticCCtx().
+
+        If you are using the external sequence producer API in a scenario where {@code ZSTD_initStaticCCtx()} is required, then this function is for you.
+        Otherwise, you probably don't need it.
+
+        See {@code tests/zstreamtest.c} for example usage.
+        """,
+
+        ZSTD_CCtx_params.p("params", ""),
         nullable..opaque_p("sequenceProducerState", ""),
         nullable..ZSTD_sequenceProducer_F("sequenceProducer", "")
     )

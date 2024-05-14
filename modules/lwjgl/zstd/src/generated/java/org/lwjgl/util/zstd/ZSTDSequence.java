@@ -117,8 +117,7 @@ public class ZSTDSequence extends Struct<ZSTDSequence> implements NativeResource
      *         rep == 2 --&gt; offset == repeat_offset_3
      *         rep == 3 --&gt; offset == repeat_offset_1 - 1</code></pre>
      * 
-     * <p>Note: This field is optional. {@link ZstdX#ZSTD_generateSequences generateSequences} will calculate the value of {@code rep}, but repeat offsets do not necessarily need to be calculated
-     * from an external sequence provider's perspective. For example, {@link ZstdX#ZSTD_compressSequences compressSequences} does not use this {@code rep} field at all (as of now).</p>
+     * <p>Note: This field is optional.</p>
      */
     @NativeType("unsigned int")
     public int rep() { return nrep(address()); }

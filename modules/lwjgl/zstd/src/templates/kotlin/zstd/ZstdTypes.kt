@@ -89,9 +89,8 @@ If rep > 0:
         rep == 1 --> offset == repeat_offset_2
         rep == 2 --> offset == repeat_offset_3
         rep == 3 --> offset == repeat_offset_1 - 1""")}
-        
-        Note: This field is optional. #generateSequences() will calculate the value of {@code rep}, but repeat offsets do not necessarily need to be calculated
-        from an external sequence provider's perspective. For example, #compressSequences() does not use this {@code rep} field at all (as of now).
+
+        Note: This field is optional.
         """
     )
 }
@@ -193,6 +192,6 @@ val ZSTD_sequenceProducer_F = Module.ZSTD.callback {
         int("compressionLevel", ""),
         size_t("windowSize", ""),
 
-        nativeType = "ZSTD_sequenceProducer_F *"
+        nativeType = "ZSTD_sequenceProducer_F"
     )
 }

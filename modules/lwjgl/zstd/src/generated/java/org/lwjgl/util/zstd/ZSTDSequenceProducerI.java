@@ -29,7 +29,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("ZSTD_sequenceProducer_F *")
+@NativeType("ZSTD_sequenceProducer_F")
 public interface ZSTDSequenceProducerI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
