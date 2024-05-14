@@ -328,6 +328,15 @@ public class EGLCapabilities {
     public final boolean EGL_EXT_protected_content;
     /** When true, {@link EXTProtectedSurface} is supported. */
     public final boolean EGL_EXT_protected_surface;
+    /**
+     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_query_reset_notification_strategy.txt">EXT_query_reset_notification_strategy</a> extension is supported.
+     * 
+     * <p>This extension complements {@code EXT_create_context_robustness} and enables an application or framework to retrieve an existing context's reset
+     * notification strategy in order to create a compatible shared context.</p>
+     * 
+     * <p>Requires {@link EGL14 EGL 1.4} and {@link EXTCreateContextRobustness EXT_create_context_robustness}.</p>
+     */
+    public final boolean EGL_EXT_query_reset_notification_strategy;
     /** When true, {@link EXTStreamConsumerEGLOutput} is supported. */
     public final boolean EGL_EXT_stream_consumer_egloutput;
     /** When true, {@link EXTSurfaceCompression} is supported. */
@@ -1106,6 +1115,7 @@ public class EGLCapabilities {
         EGL_EXT_present_opaque = ext.contains("EGL_EXT_present_opaque");
         EGL_EXT_protected_content = ext.contains("EGL_EXT_protected_content");
         EGL_EXT_protected_surface = ext.contains("EGL_EXT_protected_surface");
+        EGL_EXT_query_reset_notification_strategy = ext.contains("EGL_EXT_query_reset_notification_strategy");
         EGL_EXT_stream_consumer_egloutput = check_EXT_stream_consumer_egloutput(ext);
         EGL_EXT_surface_compression = check_EXT_surface_compression(ext);
         EGL_EXT_surface_CTA861_3_metadata = ext.contains("EGL_EXT_surface_CTA861_3_metadata");

@@ -71,6 +71,18 @@ val EXT_explicit_device = EXT_FLAG.nativeClassEGL("EXT_explicit_device", postfix
         """
 }
 
+val EXT_query_reset_notification_strategy = EXT_FLAG.nativeClassEGL("EXT_query_reset_notification_strategy", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension complements {@code EXT_create_context_robustness} and enables an application or framework to retrieve an existing context's reset
+        notification strategy in order to create a compatible shared context.
+
+        Requires ${EGL14.core} and ${EXT_create_context_robustness.link}.
+        """
+}
+
 val KHR_client_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_client_get_all_proc_addresses", postfix = KHR) {
     documentation =
         """
