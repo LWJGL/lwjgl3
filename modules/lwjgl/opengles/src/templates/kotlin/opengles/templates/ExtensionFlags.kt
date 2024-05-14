@@ -1163,9 +1163,21 @@ val OVR_multiview2 = EXT_FLAG.nativeClassGLES("OVR_multiview2", postfix = OVR) {
         """
 }
 
+val QCOM_render_sRGB_R8_RG8 = EXT_FLAG.nativeClassGLES("QCOM_render_sRGB_R8_RG8", postfix = QCOM) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        OpenGL ES 3.2 supports an sRGB formats SR8 and SRG8 which are not color-renderable. This extension enables the sRGB formats SR8 and SRG8 to be
+        color-renderable using framebuffer objects.
+        """
+}
+
 val QCOM_shader_framebuffer_fetch_rate = EXT_FLAG.nativeClassGLES("QCOM_shader_framebuffer_fetch_rate", postfix = QCOM) {
     documentation =
         """
+        When true, the $registryLink extension is supported.
+
         When certain built-ins (e.g. {@code gl_LastFragData}, {@code gl_LastFragStencilARM}) are referenced in the shader, the shader is required to execute at
         sample-rate if the attachments are multisampled. In some use-cases executing such shaders at fragment-rate is actually the preferred behavior. When
         this extension is enabled, such GLSL shaders will execute at fragment-rate and the built-in will return a per-fragment value. This avoids the
@@ -1189,6 +1201,8 @@ val QCOM_shader_framebuffer_fetch_rate = EXT_FLAG.nativeClassGLES("QCOM_shader_f
 val QCOM_YUV_texture_gather = EXT_FLAG.nativeClassGLES("QCOM_YUV_texture_gather", postfix = QCOM) {
     documentation =
         """
+        When true, the $registryLink extension is supported.
+
         Extension ${EXT_gpu_shader5.cap} introduced the texture gather built-in functions. Extension ${EXT_YUV_target.link} adds the ability to sample from YUV
         textures, but does not include gather functions. This extension allows gather function to be used in combination with the YUV textures exposed in
         {@code EXT_YUV_target}.

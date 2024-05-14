@@ -60,4 +60,16 @@ val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OV
         GLint("baseViewIndex", ""),
         GLsizei("numViews", "")
     )
+
+    DependsOn("hasDSA(ext)")..void(
+        "NamedFramebufferTextureMultiviewOVR",
+        "",
+
+        GLuint("framebuffer", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("baseViewIndex", ""),
+        GLsizei("numViews", "")
+    )
 }

@@ -8,11 +8,11 @@ package org.lwjgl.opengles;
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_render_snorm.txt">EXT_render_snorm</a> extension.
  * 
- * <p>OpenGL ES 3.1 supports a variety of signed normalized texture and renderbuffer formats which are not color-renderable.</p>
+ * <p>OpenGL ES 3.0 supports a variety of signed normalized texture and renderbuffer formats which are not color-renderable.</p>
  * 
  * <p>This extension enables signed normalized texture and renderbuffer formats to be color-renderable.</p>
  * 
- * <p>Requires {@link GLES31 GLES 3.1}.</p>
+ * <p>Requires {@link GLES30 GLES 3.0}.</p>
  */
 public final class EXTRenderSnorm {
 

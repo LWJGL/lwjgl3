@@ -12,11 +12,11 @@ val EXT_render_snorm = "EXTRenderSnorm".nativeClassGLES("EXT_render_snorm", post
         """
         Native bindings to the $registryLink extension.
 
-        OpenGL ES 3.1 supports a variety of signed normalized texture and renderbuffer formats which are not color-renderable.
+        OpenGL ES 3.0 supports a variety of signed normalized texture and renderbuffer formats which are not color-renderable.
 
         This extension enables signed normalized texture and renderbuffer formats to be color-renderable.
 
-        Requires ${GLES31.core}.
+        Requires ${GLES30.core}.
         """
 
     IntConstant(
