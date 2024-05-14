@@ -51,8 +51,8 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkBindBufferMemory2KHR {@link #vkBindBufferMemory2KHR};
  *     PFN_vkBindImageMemory2KHR {@link #vkBindImageMemory2KHR};
  *     PFN_vkGetPhysicalDeviceMemoryProperties2KHR vkGetPhysicalDeviceMemoryProperties2KHR;
- *     PFN_vkGetDeviceBufferMemoryRequirements vkGetDeviceBufferMemoryRequirements;
- *     PFN_vkGetDeviceImageMemoryRequirements vkGetDeviceImageMemoryRequirements;
+ *     PFN_vkGetDeviceBufferMemoryRequirementsKHR vkGetDeviceBufferMemoryRequirements;
+ *     PFN_vkGetDeviceImageMemoryRequirementsKHR vkGetDeviceImageMemoryRequirements;
  * }</code></pre>
  */
 public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements NativeResource {
@@ -254,10 +254,10 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     @NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR")
     public long vkGetPhysicalDeviceMemoryProperties2KHR() { return nvkGetPhysicalDeviceMemoryProperties2KHR(address()); }
     /** @return the value of the {@code vkGetDeviceBufferMemoryRequirements} field. */
-    @NativeType("PFN_vkGetDeviceBufferMemoryRequirements")
+    @NativeType("PFN_vkGetDeviceBufferMemoryRequirementsKHR")
     public long vkGetDeviceBufferMemoryRequirements() { return nvkGetDeviceBufferMemoryRequirements(address()); }
     /** @return the value of the {@code vkGetDeviceImageMemoryRequirements} field. */
-    @NativeType("PFN_vkGetDeviceImageMemoryRequirements")
+    @NativeType("PFN_vkGetDeviceImageMemoryRequirementsKHR")
     public long vkGetDeviceImageMemoryRequirements() { return nvkGetDeviceImageMemoryRequirements(address()); }
 
     /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
@@ -309,9 +309,9 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     /** Sets the specified value to the {@code vkGetPhysicalDeviceMemoryProperties2KHR} field. */
     public VmaVulkanFunctions vkGetPhysicalDeviceMemoryProperties2KHR(@NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR") long value) { nvkGetPhysicalDeviceMemoryProperties2KHR(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetDeviceBufferMemoryRequirements} field. */
-    public VmaVulkanFunctions vkGetDeviceBufferMemoryRequirements(@NativeType("PFN_vkGetDeviceBufferMemoryRequirements") long value) { nvkGetDeviceBufferMemoryRequirements(address(), value); return this; }
+    public VmaVulkanFunctions vkGetDeviceBufferMemoryRequirements(@NativeType("PFN_vkGetDeviceBufferMemoryRequirementsKHR") long value) { nvkGetDeviceBufferMemoryRequirements(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetDeviceImageMemoryRequirements} field. */
-    public VmaVulkanFunctions vkGetDeviceImageMemoryRequirements(@NativeType("PFN_vkGetDeviceImageMemoryRequirements") long value) { nvkGetDeviceImageMemoryRequirements(address(), value); return this; }
+    public VmaVulkanFunctions vkGetDeviceImageMemoryRequirements(@NativeType("PFN_vkGetDeviceImageMemoryRequirementsKHR") long value) { nvkGetDeviceImageMemoryRequirements(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaVulkanFunctions set(

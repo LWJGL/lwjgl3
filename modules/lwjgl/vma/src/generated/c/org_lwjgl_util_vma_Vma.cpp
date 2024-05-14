@@ -21,6 +21,8 @@ DISABLE_WARNINGS()
 #define VMA_BUFFER_DEVICE_ADDRESS 1
 #define VMA_MEMORY_PRIORITY 1
 #define VMA_EXTERNAL_MEMORY 1
+#define VMA_KHR_MAINTENANCE4 1
+#define VMA_KHR_MAINTENANCE5 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()
 
@@ -227,6 +229,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationInfo(JNIEnv 
     vmaGetAllocationInfo(allocator, allocation, pAllocationInfo);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationInfo2(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pAllocationInfoAddress) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
+    VmaAllocationInfo2 *pAllocationInfo = (VmaAllocationInfo2 *)(uintptr_t)pAllocationInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaGetAllocationInfo2(allocator, allocation, pAllocationInfo);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetAllocationUserData(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pUserDataAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
     VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
@@ -296,6 +306,22 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaInvalidateAllocations(JNI
     VkDeviceSize const *sizes = (VkDeviceSize const *)(uintptr_t)sizesAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)vmaInvalidateAllocations(allocator, (uint32_t)allocationCount, allocations, offsets, sizes);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCopyMemoryToAllocation(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pSrcHostPointerAddress, jlong dstAllocationAddress, jlong dstAllocationLocalOffset, jlong size) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    void const *pSrcHostPointer = (void const *)(uintptr_t)pSrcHostPointerAddress;
+    VmaAllocation dstAllocation = (VmaAllocation)(uintptr_t)dstAllocationAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaCopyMemoryToAllocation(allocator, pSrcHostPointer, dstAllocation, (VkDeviceSize)dstAllocationLocalOffset, (VkDeviceSize)size);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCopyAllocationToMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong srcAllocationAddress, jlong srcAllocationLocalOffset, jlong pDstHostPointerAddress, jlong size) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    VmaAllocation srcAllocation = (VmaAllocation)(uintptr_t)srcAllocationAddress;
+    void *pDstHostPointer = (void *)(uintptr_t)pDstHostPointerAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaCopyAllocationToMemory(allocator, srcAllocation, (VkDeviceSize)srcAllocationLocalOffset, pDstHostPointer, (VkDeviceSize)size);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCheckCorruption(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jint memoryTypeBits) {

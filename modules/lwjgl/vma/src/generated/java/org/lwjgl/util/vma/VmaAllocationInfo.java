@@ -18,6 +18,8 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Parameters of {@code VmaAllocation} objects, that can be retrieved using function {@link Vma#vmaGetAllocationInfo GetAllocationInfo}.
  * 
+ * <p>There is also an extended version of this structure that carries additional parameters: {@link VmaAllocationInfo2}.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

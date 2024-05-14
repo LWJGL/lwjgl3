@@ -122,8 +122,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
         "{@code vkBindImageMemory2} on Vulkan &ge; 1.1, {@code vkBindImageMemory2KHR} when using {@code VK_KHR_bind_memory2} extension."
     )
     nullable.."PFN_vkGetPhysicalDeviceMemoryProperties2KHR".handle("vkGetPhysicalDeviceMemoryProperties2KHR", "")
-    nullable.."PFN_vkGetDeviceBufferMemoryRequirements".handle("vkGetDeviceBufferMemoryRequirements", "")
-    nullable.."PFN_vkGetDeviceImageMemoryRequirements".handle("vkGetDeviceImageMemoryRequirements", "")
+    nullable.."PFN_vkGetDeviceBufferMemoryRequirementsKHR".handle("vkGetDeviceBufferMemoryRequirements", "")
+    nullable.."PFN_vkGetDeviceImageMemoryRequirementsKHR".handle("vkGetDeviceImageMemoryRequirements", "")
 
     customMethod("""
     /**
@@ -218,14 +218,17 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
     uint32_t(
         "vulkanApiVersion",
         """
-        the highest version of Vulkan that the application is designed to use. (optional)
+        Vulkan version that the application uses. (optional)
 
         It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
-        {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
-        (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1, 1.2 and 1.3 are
-        supported by the current implementation.
+        {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. Only versions 1.0, 1.1,
+        1.2 and 1.3 are supported by the current implementation.
 
         Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.
+
+        It must match the Vulkan version used by the application and supported on the selected physical device, so it must be no higher than
+        {@code VkApplicationInfo::apiVersion} passed to {@code vkCreateInstance} and no higher than {@code VkPhysicalDeviceProperties::apiVersion} found on the
+        physical device used.
         """
     )
     nullable..VkExternalMemoryHandleTypeFlagsKHR.const.p(
@@ -532,7 +535,12 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
 }
 
 val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false) {
-    documentation = "Parameters of {@code VmaAllocation} objects, that can be retrieved using function #GetAllocationInfo()."
+    documentation =
+        """
+        Parameters of {@code VmaAllocation} objects, that can be retrieved using function #GetAllocationInfo().
+
+        There is also an extended version of this structure that carries additional parameters: ##VmaAllocationInfo2.
+        """
 
     uint32_t(
         "memoryType",
@@ -604,6 +612,37 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
 
         Another way to set custom name is to pass it in ##VmaAllocationCreateInfo{@code ::pUserData} with additional flag
         #ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT set (DEPRECATED).
+        """
+    )
+}
+
+val VmaAllocationInfo2 = struct(Module.VMA, "VmaAllocationInfo2", mutable = false) {
+    documentation =
+        "Extended parameters of a {@code VmaAllocation} object that can be retrieved using function #GetAllocationInfo2()."
+
+    VmaAllocationInfo(
+        "allocationInfo",
+        """
+        Basic parameters of the allocation.
+
+        If you need only these, you can use function #GetAllocationInfo() and structure {@code VmaAllocationInfo} instead.
+        """
+    )
+    VkDeviceSize(
+        "blockSize",
+        """
+        Size of the {@code VkDeviceMemory} block that the allocation belongs to.
+
+        In case of an allocation with dedicated memory, it will be equal to {@code allocationInfo.size}.
+        """
+    )
+    VkBool32(
+        "dedicatedMemory",
+        """
+        {@code VK_TRUE} if the allocation has dedicated memory, {@code VK_FALSE} if it was placed as part of a larger memory block.
+
+        When {@code VK_TRUE}, it also means {@code VkMemoryDedicatedAllocateInfo} was used when creating the allocation (if {@code VK_KHR_dedicated_allocation}
+        extension or Vulkan version &ge; 1.1 is enabled).
         """
     )
 }

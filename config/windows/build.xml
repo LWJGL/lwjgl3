@@ -366,6 +366,7 @@ EXPORTS
         <!-- Vulkan Memory Allocator -->
         <build module="vma" if:true="${binding.vma}">
             <compileargs>
+                <arg value="/std:c++20"/>
                 <arg value="/I${src.main}"/>
                 <arg value="/I${module.lwjgl}\vulkan\src\main\c"/>
             </compileargs>
