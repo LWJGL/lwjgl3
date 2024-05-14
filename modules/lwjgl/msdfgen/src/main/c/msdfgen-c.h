@@ -62,6 +62,17 @@
 #define MSDF_EDGE_COLOR_CYAN 6
 #define MSDF_EDGE_COLOR_WHITE 7
 
+// Error correction modes for generator config
+#define MSDF_ERROR_CORRECTION_MODE_DISABLED 0
+#define MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE 1
+#define MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY 2
+#define MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY 3
+
+// Distance check mode for generator config
+#define MSDF_DISTANCE_CHECK_MODE_NONE 0
+#define MSDF_DISTANCE_CHECK_MODE_AT_EDGE 1
+#define MSDF_DISTANCE_CHECK_MODE_ALWAYS 2
+
 // NOLINTBEGIN
 #define MSDF_DEFINE_HANDLE_TYPE(n) \
     typedef struct n* n##_handle;  \
@@ -194,10 +205,18 @@ MSDF_API int msdf_shape_get_bounds(msdf_shape_const_handle shape, msdf_bounds_t*
 /**
  * Adds a new contour to the given shape.
  * @param shape A pointer to a shape object to add a new contour to.
- * @param contour A pointer to the contour to add to the shape.
+ * @param contour A pointer to a contour handle to be populated with a new contour that was added to the shape.
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle contour);
+MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle* contour);
+
+/**
+ * Removes the given contour from the given shape if present.
+ * @param shape A pointer to a shape object to remove the given contour from.
+ * @param contour A pointer to the contour to remove from the shape.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_shape_remove_contour(msdf_shape_handle shape, msdf_contour_const_handle contour);
 
 /**
  * Retrieves the number of contours allocated within the given shape object.
@@ -303,6 +322,16 @@ MSDF_API int msdf_shape_edge_colors_ink_trap(msdf_shape_handle shape, double ang
 MSDF_API int msdf_shape_edge_colors_by_distance(msdf_shape_handle shape, double angle_threshold);
 
 /**
+ * Finds the distance between shape and origin.
+ * Does not allocate result cache used to optimize performance of multiple queries.
+ * @param shape A pointer to the shape to find the distance to.
+ * @param origin The point to find the distance relative to the given shape to.
+ * @param distance A pointer to a variable to be populated with the calculated distance to the given shape.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_shape_one_shot_distance(msdf_shape_const_handle shape, const msdf_vector2_t* origin, double* distance);
+
+/**
  * Calls the destructor of the given bitmap and frees its memory using the
  * internal allocator.
  * @param shape A pointer to a shape object to be freed.
@@ -326,6 +355,14 @@ MSDF_API int msdf_contour_alloc(msdf_contour_handle* contour);
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
 MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_handle segment);
+
+/**
+ * Removes the given edge from the given contour if present.
+ * @param contour A pointer to the contour to remove the given edge (segment) from.
+ * @param segment A pointer to the segment to remove from the given contour.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_contour_remove_edge(msdf_contour_handle contour, msdf_segment_handle segment);
 
 /**
  * Retrieves the edge count of the given contour.

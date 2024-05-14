@@ -14,6 +14,7 @@
 
 #include "msdfgen-c.h"
 #include "msdfgen.h"
+#include "ShapeDistanceFinder.h"
 
 #include <utility>
 
@@ -168,11 +169,33 @@ MSDF_API int msdf_shape_get_bounds(msdf_shape_const_handle shape, msdf_bounds_t*
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle contour) {
+MSDF_API int msdf_shape_add_contour(msdf_shape_handle shape, msdf_contour_const_handle* contour) {
     if(shape == nullptr || contour == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    reinterpret_cast<msdfgen::Shape*>(shape)->addContour(*reinterpret_cast<const msdfgen::Contour*>(contour));
+    *contour = reinterpret_cast<msdf_contour_const_handle>(&reinterpret_cast<msdfgen::Shape*>(shape)->addContour());
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_shape_remove_contour(msdf_shape_handle shape, msdf_contour_const_handle contour) {
+    if(shape == nullptr || contour == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    auto& contours = reinterpret_cast<msdfgen::Shape*>(shape)->contours;//NOLINT
+    ptrdiff_t index = 0;
+    bool found = false;
+    for(const auto& contour_ref : contours) {
+        if(&contour_ref != reinterpret_cast<const msdfgen::Contour*>(contour)) {
+            ++index;
+            continue;
+        }
+        found = true;
+        break;
+    }
+    if(!found) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    contours.erase(contours.cbegin() + index);
     return MSDF_SUCCESS;
 }
 
@@ -276,6 +299,15 @@ MSDF_API int msdf_shape_edge_colors_by_distance(msdf_shape_handle shape, const d
     return MSDF_SUCCESS;
 }
 
+MSDF_API int msdf_shape_one_shot_distance(msdf_shape_const_handle shape, const msdf_vector2_t* origin, double* distance) {
+    if(shape == nullptr || origin == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    *distance = msdfgen::SimpleTrueShapeDistanceFinder::oneShotDistance(*reinterpret_cast<const msdfgen::Shape*>(shape),
+                                                                        *reinterpret_cast<const msdfgen::Point2*>(origin));
+    return MSDF_SUCCESS;
+}
+
 MSDF_API void msdf_shape_free(msdf_shape_handle shape) {
     delete reinterpret_cast<msdfgen::Shape*>(shape);
 }
@@ -295,6 +327,28 @@ MSDF_API int msdf_contour_add_edge(msdf_contour_handle contour, msdf_segment_han
         return MSDF_ERR_INVALID_ARG;
     }
     reinterpret_cast<msdfgen::Contour*>(contour)->addEdge({reinterpret_cast<msdfgen::EdgeSegment*>(segment)});
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_contour_remove_edge(msdf_contour_handle contour, msdf_segment_handle segment) {
+    if(contour == nullptr || segment == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    auto& edges = reinterpret_cast<msdfgen::Contour*>(contour)->edges;
+    ptrdiff_t index = 0;
+    bool found = false;
+    for(const msdfgen::EdgeSegment* edge : edges) {
+        if(edge != reinterpret_cast<const msdfgen::EdgeSegment*>(segment)) {
+            ++index;
+            continue;
+        }
+        found = true;
+        break;
+    }
+    if(!found) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    edges.erase(edges.cbegin() + index);
     return MSDF_SUCCESS;
 }
 

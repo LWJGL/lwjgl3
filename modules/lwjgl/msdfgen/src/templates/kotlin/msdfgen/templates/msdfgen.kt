@@ -43,6 +43,15 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
     IntConstant("", "MSDF_EDGE_COLOR_CYAN".."6").noPrefix()
     IntConstant("", "MSDF_EDGE_COLOR_WHITE".."7").noPrefix()
 
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_DISABLED".."0").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE".."1").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY".."2").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY".."3").noPrefix()
+
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_NONE".."0").noPrefix()
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_AT_EDGE".."1").noPrefix()
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_ALWAYS".."2").noPrefix()
+
     // msdf_bitmap
 
     int(
@@ -103,7 +112,14 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "shape_add_contour",
         "Adds a new contour to the given shape.",
         msdf_shape_handle("shape", "A pointer to a shape object to add a new contour to."),
-        msdf_contour_const_handle("contour", "A pointer to the contour to add to the shape."),
+        Unsafe..msdf_contour_const_handle.p("contour", "A pointer to a contour handle to be populated with a new contour that was added to the shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_remove_contour",
+        "Removes the given contour from the given shape if present.",
+        msdf_shape_handle("shape", "A pointer to a shape object to remove the given contour from."),
+        msdf_contour_const_handle("contour", "A pointer to the contour to remove from the shape."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(
@@ -201,6 +217,14 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         double("angle_threshold", "The threshold angle in degrees."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
+    int(
+        "shape_one_shot_distance",
+        "Finds the distance between shape and origin.",
+        msdf_shape_const_handle("shape", "A pointer to the shape to find the distance to."),
+        Unsafe..msdf_vector2.const.p("origin", "The point to find the distance relative to the given shape to."),
+        Unsafe..double.p("distance", "A pointer to a variable to be populated with the calculated distance to the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
     void(
         "shape_free",
         "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
@@ -220,6 +244,13 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         "Adds a new edge to the given contour and returns its associated segment handle.",
         msdf_contour_handle("contour", "A pointer to the contour to add a new edge (segment) to."),
         msdf_segment_handle("segment", "A pointer to the segment to add as an edge."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_remove_edge",
+        "Removes the given edge from the given contour if present.",
+        msdf_contour_handle("contour", "A pointer to the contour to remove the given edge (segment) from."),
+        msdf_segment_handle("segment", "A pointer to the segment to remove from the given contour."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
     )
     int(

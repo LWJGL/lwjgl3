@@ -56,9 +56,16 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1get_1bo
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1add_1contour(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong contourAddress) {
     msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
-    msdf_contour_const_handle contour = (msdf_contour_const_handle)(uintptr_t)contourAddress;
+    msdf_contour_const_handle *contour = (msdf_contour_const_handle *)(uintptr_t)contourAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)msdf_shape_add_contour(shape, contour);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1remove_1contour(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong contourAddress) {
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    msdf_contour_const_handle contour = (msdf_contour_const_handle)(uintptr_t)contourAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_remove_contour(shape, contour);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1get_1contour_1count(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong sizeAddress) {
@@ -140,6 +147,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1edge_1c
     return (jint)msdf_shape_edge_colors_by_distance(shape, angle_threshold);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1one_1shot_1distance(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong originAddress, jlong distanceAddress) {
+    msdf_shape_const_handle shape = (msdf_shape_const_handle)(uintptr_t)shapeAddress;
+    struct msdf_vector2 const *origin = (struct msdf_vector2 const *)(uintptr_t)originAddress;
+    double *distance = (double *)(uintptr_t)distanceAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_one_shot_distance(shape, origin, distance);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1free(JNIEnv *__env, jclass clazz, jlong shapeAddress) {
     msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -157,6 +172,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1add_1
     msdf_segment_handle segment = (msdf_segment_handle)(uintptr_t)segmentAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)msdf_contour_add_edge(contour, segment);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1remove_1edge(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong segmentAddress) {
+    msdf_contour_handle contour = (msdf_contour_handle)(uintptr_t)contourAddress;
+    msdf_segment_handle segment = (msdf_segment_handle)(uintptr_t)segmentAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_contour_remove_edge(contour, segment);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1contour_1get_1edge_1count(JNIEnv *__env, jclass clazz, jlong contourAddress, jlong countAddress) {

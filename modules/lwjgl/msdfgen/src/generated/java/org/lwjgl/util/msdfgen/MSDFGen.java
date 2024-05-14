@@ -66,6 +66,20 @@ public class MSDFGen {
 
     public static final int MSDF_EDGE_COLOR_WHITE = 7;
 
+    public static final int MSDF_ERROR_CORRECTION_MODE_DISABLED = 0;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE = 1;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY = 2;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY = 3;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_NONE = 0;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_AT_EDGE = 1;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_ALWAYS = 2;
+
     protected MSDFGen() {
         throw new UnsupportedOperationException();
     }
@@ -208,16 +222,36 @@ public class MSDFGen {
      * Adds a new contour to the given shape.
      *
      * @param shape   A pointer to a shape object to add a new contour to.
-     * @param contour A pointer to the contour to add to the shape.
+     * @param contour A pointer to a contour handle to be populated with a new contour that was added to the shape.
      *
      * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
      */
-    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle") long contour) {
+    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle *") PointerBuffer contour) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_add_contour(shape, memAddress(contour));
+    }
+
+    // --- [ msdf_shape_remove_contour ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_remove_contour shape_remove_contour} */
+    public static native int nmsdf_shape_remove_contour(long shape, long contour);
+
+    /**
+     * Removes the given contour from the given shape if present.
+     *
+     * @param shape   A pointer to a shape object to remove the given contour from.
+     * @param contour A pointer to the contour to remove from the shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_remove_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle") long contour) {
         if (CHECKS) {
             check(shape);
             check(contour);
         }
-        return nmsdf_shape_add_contour(shape, contour);
+        return nmsdf_shape_remove_contour(shape, contour);
     }
 
     // --- [ msdf_shape_get_contour_count ] ---
@@ -462,6 +496,27 @@ public class MSDFGen {
         return nmsdf_shape_edge_colors_by_distance(shape, angle_threshold);
     }
 
+    // --- [ msdf_shape_one_shot_distance ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_one_shot_distance shape_one_shot_distance} */
+    public static native int nmsdf_shape_one_shot_distance(long shape, long origin, long distance);
+
+    /**
+     * Finds the distance between shape and origin.
+     *
+     * @param shape    A pointer to the shape to find the distance to.
+     * @param origin   The point to find the distance relative to the given shape to.
+     * @param distance A pointer to a variable to be populated with the calculated distance to the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_one_shot_distance(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer origin, @NativeType("double *") DoubleBuffer distance) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_one_shot_distance(shape, origin.address(), memAddress(distance));
+    }
+
     // --- [ msdf_shape_free ] ---
 
     /** Unsafe version of: {@link #msdf_shape_free shape_free} */
@@ -514,6 +569,27 @@ public class MSDFGen {
             check(segment);
         }
         return nmsdf_contour_add_edge(contour, segment);
+    }
+
+    // --- [ msdf_contour_remove_edge ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_remove_edge contour_remove_edge} */
+    public static native int nmsdf_contour_remove_edge(long contour, long segment);
+
+    /**
+     * Removes the given edge from the given contour if present.
+     *
+     * @param contour A pointer to the contour to remove the given edge (segment) from.
+     * @param segment A pointer to the segment to remove from the given contour.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_remove_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle") long segment) {
+        if (CHECKS) {
+            check(contour);
+            check(segment);
+        }
+        return nmsdf_contour_remove_edge(contour, segment);
     }
 
     // --- [ msdf_contour_get_edge_count ] ---
