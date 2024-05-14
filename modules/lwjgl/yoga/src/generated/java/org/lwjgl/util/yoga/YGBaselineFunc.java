@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * float (*{@link #invoke}) (
- *     YGNodeRef node,
+ *     YGNodeConstRef node,
  *     float width,
  *     float height
  * )</code></pre>

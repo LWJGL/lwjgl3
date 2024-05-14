@@ -8,7 +8,6 @@ import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
-import org.lwjgl.util.yoga.*;
 
 import java.nio.*;
 import java.util.*;
@@ -213,20 +212,10 @@ public final class HolyGrail {
             ((color >> 8) & 255) / 255.0f
         );
 
-		/* Public API with 4x JNI call overhead
         float l = YGNodeLayoutGetLeft(node);
-		float t = YGNodeLayoutGetTop(node);
-		float w = YGNodeLayoutGetWidth(node);
-		float h = YGNodeLayoutGetHeight(node);
-		*/
-
-        // Internal API without overhead (plain memory accesses, assuming allocations are eliminated via EA)
-        YGLayout layout = YGNode.create(node).layout();
-
-        float l = layout.positions(YGEdgeLeft);
-        float t = layout.positions(YGEdgeTop);
-        float w = layout.dimensions(YGDimensionWidth);
-        float h = layout.dimensions(YGDimensionHeight);
+        float t = YGNodeLayoutGetTop(node);
+        float w = YGNodeLayoutGetWidth(node);
+        float h = YGNodeLayoutGetHeight(node);
 
         glBegin(GL_QUADS);
         glVertex2f(l, t);

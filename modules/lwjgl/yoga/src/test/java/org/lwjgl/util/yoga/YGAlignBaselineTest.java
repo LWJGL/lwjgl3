@@ -1,17 +1,17 @@
 /*
- * Copyright LWJGL. All rights reserved.
- * License terms: https://www.lwjgl.org/license
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 package org.lwjgl.util.yoga;
 
 import org.testng.annotations.*;
 
-import java.util.*;
-
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.AssertJUnit.*;
+import static org.testng.AssertJUnit.assertEquals;
 
-@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YGAlignBaselineTest {
 
     private static YGBaselineFuncI getBaselineFunc() {
@@ -20,7 +20,7 @@ public class YGAlignBaselineTest {
 
     @Test
     public void test_align_baseline_parent_using_child_in_column_as_reference() {
-        YogaConfig config = new YogaConfig();
+        YogaConfig config = YogaConfigFactory.create();
 
         YogaNode root = createYGNode(config, YogaFlexDirection.ROW, 1000f, 1000f, true);
 
@@ -54,12 +54,12 @@ public class YGAlignBaselineTest {
         assertEquals(0f, root_child1_child1.getLayoutX(), 0.0f);
         assertEquals(300f, root_child1_child1.getLayoutY(), 0.0f);
 
-        Objects.requireNonNull(root_child1_child1.getBaselineFunction()).free();
+        root_child1_child1.freeBaselineFunction();
     }
 
     @Test
     public void test_align_baseline_parent_using_child_in_row_as_reference() {
-        YogaConfig config = new YogaConfig();
+        YogaConfig config = YogaConfigFactory.create();
 
         YogaNode root = createYGNode(config, YogaFlexDirection.ROW, 1000f, 1000f, true);
 
@@ -93,7 +93,7 @@ public class YGAlignBaselineTest {
         assertEquals(500f, root_child1_child1.getLayoutX(), 0.0f);
         assertEquals(300f, root_child1_child1.getLayoutY(), 0.0f);
 
-        Objects.requireNonNull(root_child1_child1.getBaselineFunction()).free();
+        root_child1_child1.freeBaselineFunction();
     }
 
     private static YogaNode createYGNode(
@@ -112,5 +112,4 @@ public class YGAlignBaselineTest {
         }
         return node;
     }
-
 }

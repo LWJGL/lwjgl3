@@ -16,8 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * int (*{@link #invoke}) (
- *     YGConfigRef config,
- *     YGNodeRef node,
+ *     YGConfigConstRef config,
+ *     YGNodeConstRef node,
  *     YGLogLevel level,
  *     char const *format,
  *     va_list args

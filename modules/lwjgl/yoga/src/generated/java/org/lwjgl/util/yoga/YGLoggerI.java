@@ -17,8 +17,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * 
  * <pre><code>
  * int (*{@link #invoke}) (
- *     YGConfigRef config,
- *     YGNodeRef node,
+ *     YGConfigConstRef config,
+ *     YGNodeConstRef node,
  *     YGLogLevel level,
  *     char const *format,
  *     va_list args
@@ -49,6 +49,6 @@ public interface YGLoggerI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    int invoke(@NativeType("YGConfigRef") long config, @NativeType("YGNodeRef") long node, @NativeType("YGLogLevel") int level, @NativeType("char const *") long format, @NativeType("va_list") long args);
+    int invoke(@NativeType("YGConfigConstRef") long config, @NativeType("YGNodeConstRef") long node, @NativeType("YGLogLevel") int level, @NativeType("char const *") long format, @NativeType("va_list") long args);
 
 }

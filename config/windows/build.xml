@@ -381,6 +381,7 @@ EXPORTS
         <build module="yoga" simple="true" if:true="${binding.yoga}">
             <beforeCompile>
                 <compile>
+                    <arg value="/std:c++20"/>
                     <arg value="/I${src.main}"/>
                     <fileset dir="." includes="${src.main}/**/*.cpp"/>
                 </compile>

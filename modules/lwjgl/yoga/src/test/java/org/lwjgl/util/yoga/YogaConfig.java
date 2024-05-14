@@ -34,7 +34,11 @@ public class YogaConfig {
         YGConfigSetCloneNodeFunc(handle, cloneNodeFunc = callback == null ? null : YGCloneNodeFunc.create(callback));
     }
 
-    void setExperimentalFeatureEnabled(YogaNode.YogaExperimentalFeature feature, boolean enabled) {
+    void setErrata(YogaErrata errata) {
+        YGConfigSetErrata(handle, errata.getValue());
+    }
+
+    void setExperimentalFeatureEnabled(YogaExperimentalFeature feature, boolean enabled) {
         YGConfigSetExperimentalFeatureEnabled(handle, feature.value, enabled);
     }
 
@@ -45,5 +49,39 @@ public class YogaConfig {
     void setUseWebDefaults(boolean enabled) {
         YGConfigSetUseWebDefaults(handle, enabled);
     }
+
+    enum YogaErrata implements EnumWrapper {
+        NONE(YGErrataNone),
+        STRETCH_FLEX_BASIS(YGErrataStretchFlexBasis),
+        ABSOLUTE_POSITIONING_INCORRECT(YGErrataAbsolutePositioningIncorrect),
+        ABSOLUTE_PERCENT_AGAINST_INNER_SIZE(YGErrataAbsolutePercentAgainstInnerSize),
+        CLASSIC(YGErrataClassic),
+        ALL(YGErrataAll);
+
+        final int value;
+
+        YogaErrata(int value) {
+            this.value = value;
+        }
+
+        @Override public int getValue() {
+            return value;
+        }
+    }
+
+    enum YogaExperimentalFeature implements EnumWrapper {
+        WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis);
+
+        final int value;
+
+        YogaExperimentalFeature(int value) {
+            this.value = value;
+        }
+
+        @Override public int getValue() {
+            return value;
+        }
+    }
+
 
 }

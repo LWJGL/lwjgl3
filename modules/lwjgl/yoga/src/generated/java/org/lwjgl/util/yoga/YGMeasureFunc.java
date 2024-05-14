@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * YGSize (*{@link #invoke}) (
- *     YGNodeRef node,
+ *     YGNodeConstRef node,
  *     float width,
  *     YGMeasureMode widthMode,
  *     float height,

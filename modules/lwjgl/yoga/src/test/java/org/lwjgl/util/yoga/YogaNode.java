@@ -4,12 +4,14 @@
  */
 package org.lwjgl.util.yoga;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
+import static java.lang.Float.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
@@ -23,14 +25,14 @@ import static org.lwjgl.util.yoga.Yoga.*;
  */
 class YogaNode {
 
-    /** Set to true to access Yoga data structures directly, instead of going through the JNI bindings. */
-    private static final boolean INTERNAL_API = false;
-
     final long node;
 
-    private final YGNode internal;
-
     private final long weakGlobalRef;
+
+    @Nullable
+    private YGMeasureFunc  measureFunc;
+    @Nullable
+    private YGBaselineFunc baselineFunc;
 
     private final List<YogaNode> children;
 
@@ -47,7 +49,6 @@ class YogaNode {
 
     private YogaNode(long node) {
         this.node = check(node);
-        this.internal = YGNode.create(node);
         this.weakGlobalRef = NewWeakGlobalRef(this);
         YGNodeSetContext(node, weakGlobalRef);
         children = new ArrayList<>();
@@ -69,12 +70,6 @@ class YogaNode {
     public YogaNode clone() {
         YogaNode clone = new YogaNode(YGNodeClone(node));
         clone.children.addAll(children);
-        return clone;
-    }
-
-    public YogaNode clone(long owner) {
-        YogaNode clone = clone();
-        clone.owner = create(owner);
         return clone;
     }
 
@@ -123,7 +118,7 @@ class YogaNode {
     }
 
     int getChildCount() {
-        return YGNodeGetChildCount(node);
+        return (int)YGNodeGetChildCount(node);
     }
 
     @Nullable
@@ -182,6 +177,10 @@ class YogaNode {
 
     void setJustifyContent(YogaJustify justifyContent) {
         YGNodeStyleSetJustifyContent(node, justifyContent.value);
+    }
+
+    void setGap(YogaGutter gutter, float gap) {
+        YGNodeStyleSetGap(node, gutter.value, gap);
     }
 
     void setWidth(float width) {
@@ -281,23 +280,23 @@ class YogaNode {
     }
 
     void setMeasureFunction(YGMeasureFuncI measureFunction) {
-        YGNodeSetMeasureFunc(node, measureFunction);
+        YGMeasureFunc func = YGMeasureFunc.create(measureFunction);
+        this.measureFunc = func;
+        YGNodeSetMeasureFunc(node, func);
     }
 
     void setBaselineFunction(YGBaselineFuncI baselineFunc) {
-        YGNodeSetBaselineFunc(node, baselineFunc);
+        YGBaselineFunc func = YGBaselineFunc.create(baselineFunc);
+        this.baselineFunc = func;
+        YGNodeSetBaselineFunc(node, func);
     }
 
     boolean isMeasureDefined() {
-        return INTERNAL_API
-            ? internal.measure_noContext() != null
-            : YGNodeHasMeasureFunc(node);
+        return YGNodeHasMeasureFunc(node);
     }
 
     boolean isBaselineDefined() {
-        return INTERNAL_API
-            ? internal.baseline_noContext() != null
-            : YGNodeHasBaselineFunc(node);
+        return YGNodeHasBaselineFunc(node);
     }
 
     void setIsReferenceBaseline(boolean isReferenceBaseline) {
@@ -309,69 +308,47 @@ class YogaNode {
     }
 
     float getLayoutX() {
-        return INTERNAL_API
-            ? internal.layout().positions(YGEdgeLeft)
-            : YGNodeLayoutGetLeft(node);
+        return YGNodeLayoutGetLeft(node);
     }
 
     float getLayoutY() {
-        return INTERNAL_API
-            ? internal.layout().positions(YGEdgeTop)
-            : YGNodeLayoutGetTop(node);
+        return YGNodeLayoutGetTop(node);
     }
 
     float getLayoutWidth() {
-        return INTERNAL_API
-            ? internal.layout().dimensions(YGDimensionWidth)
-            : YGNodeLayoutGetWidth(node);
+        return YGNodeLayoutGetWidth(node);
     }
 
     float getLayoutHeight() {
-        return INTERNAL_API
-            ? internal.layout().dimensions(YGDimensionHeight)
-            : YGNodeLayoutGetHeight(node);
+        return YGNodeLayoutGetHeight(node);
     }
 
     YGValue getWidth(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().dimensions(YGDimensionWidth).decode(__result)
-            : YGNodeStyleGetWidth(node, __result);
+        return YGNodeStyleGetWidth(node, __result);
     }
 
     YGValue getHeight(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().dimensions(YGDimensionHeight).decode(__result)
-            : YGNodeStyleGetHeight(node, __result);
+        return YGNodeStyleGetHeight(node, __result);
     }
 
     YGValue getMinWidth(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().minDimensions(YGDimensionWidth).decode(__result)
-            : YGNodeStyleGetMinWidth(node, __result);
+        return YGNodeStyleGetMinWidth(node, __result);
     }
 
     YGValue getMinHeight(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().minDimensions(YGDimensionHeight).decode(__result)
-            : YGNodeStyleGetMinHeight(node, __result);
+        return YGNodeStyleGetMinHeight(node, __result);
     }
 
     YGValue getMaxWidth(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().maxDimensions(YGDimensionWidth).decode(__result)
-            : YGNodeStyleGetMaxWidth(node, __result);
+        return YGNodeStyleGetMaxWidth(node, __result);
     }
 
     YGValue getMaxHeight(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().maxDimensions(YGDimensionHeight).decode(__result)
-            : YGNodeStyleGetMaxHeight(node, __result);
+        return YGNodeStyleGetMaxHeight(node, __result);
     }
 
     float getAspectRatio() {
-        return INTERNAL_API
-            ? internal.style().aspectRatio().value()
-            : YGNodeStyleGetAspectRatio(node);
+        return YGNodeStyleGetAspectRatio(node);
     }
 
     void copyStyle(YogaNode src) {
@@ -379,61 +356,49 @@ class YogaNode {
     }
 
     float getLayoutBorder(YogaEdge edge) {
-        return INTERNAL_API
-            ? internal.layout().border(edge.value)
-            : YGNodeLayoutGetBorder(node, edge.value);
+        return YGNodeLayoutGetBorder(node, edge.value);
     }
 
     float getLayoutMargin(YogaEdge edge) {
-        return INTERNAL_API
-            ? internal.layout().margin(edge.value)
-            : YGNodeLayoutGetMargin(node, edge.value);
+        return YGNodeLayoutGetMargin(node, edge.value);
     }
 
     float getLayoutPadding(YogaEdge edge) {
-        return INTERNAL_API
-            ? internal.layout().padding(edge.value)
-            : YGNodeLayoutGetPadding(node, edge.value);
+        return YGNodeLayoutGetPadding(node, edge.value);
     }
 
     float getBorder(YogaEdge edge) {
-        return INTERNAL_API
-            ? internal.style().border(edge.value).decode()
-            : YGNodeStyleGetBorder(node, edge.value);
+        return YGNodeStyleGetBorder(node, edge.value);
     }
 
     int getFlexDirection() {
-        return INTERNAL_API
-            ? internal.style().flexDirection()
-            : YGNodeStyleGetFlexDirection(node);
+        return YGNodeStyleGetFlexDirection(node);
     }
 
-    YGValue getMargin(YogaEdge edge, YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().margin(edge.value).decode(__result)
-            : YGNodeStyleGetMargin(node, edge.value, __result);
+    YGValue getMargin(YogaEdge edge, YogaValue __result) {
+        return YGNodeStyleGetMargin(node, edge.value, __result);
     }
 
-    YGValue getPadding(YogaEdge edge, YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().padding(edge.value).decode(__result)
-            : YGNodeStyleGetPadding(node, edge.value, __result);
+    YGValue getPadding(YogaEdge edge, YogaValue __result) {
+        return YGNodeStyleGetPadding(node, edge.value, __result);
     }
 
-    YGValue getPosition(YogaEdge edge, YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().positions(edge.value).decode(__result)
-            : YGNodeStyleGetPosition(node, edge.value, __result);
+    YGValue getPosition(YogaEdge edge, YogaValue __result) {
+        return YGNodeStyleGetPosition(node, edge.value, __result);
     }
 
-    @Nullable
-    YGMeasureFunc getMeasureFunction() {
-        return internal.measure_noContext();
+    void freeMeasureFunction() {
+        if (measureFunc != null) {
+            measureFunc.free();
+            measureFunc = null;
+        }
     }
 
-    @Nullable
-    YGBaselineFunc getBaselineFunction() {
-        return internal.baseline_noContext();
+    void freeBaselineFunction() {
+        if (baselineFunc != null) {
+            baselineFunc.free();
+            baselineFunc = null;
+        }
     }
 
     public void markLayoutSeen() {
@@ -441,25 +406,13 @@ class YogaNode {
     }
 
     public boolean hasNewLayout() {
-        return INTERNAL_API
-            ? internal.flags().hasNewLayout()
-            : YGNodeGetHasNewLayout(node);
+        return YGNodeGetHasNewLayout(node);
     }
 
     public void reset() {
-        YGMeasureFunc measureFunc = getMeasureFunction();
-        if (measureFunc != null) {
-            measureFunc.free();
-        }
-        YGBaselineFunc baselineFunc = getBaselineFunction();
-        if (baselineFunc != null) {
-            baselineFunc.free();
-        }
+        freeMeasureFunction();
+        freeBaselineFunction();
         YGNodeReset(node);
-    }
-
-    private interface EnumWrapper {
-        int getValue();
     }
 
     private static <T extends EnumWrapper> T getEnumFromValue(T[] values, int value) {
@@ -508,25 +461,16 @@ class YogaNode {
     }
 
     float getFlexGrow() {
-        if (INTERNAL_API) {
-            YGFloatOptional value = internal.style().flexGrow();
-            return value.isUndefined() ? 0.0f : value.value();
-        }
         return YGNodeStyleGetFlexGrow(node);
     }
 
     float getFlexShrink() {
-        if (INTERNAL_API) {
-            YGFloatOptional value = internal.style().flexShrink();
-            return value.isUndefined() ? 0.0f : value.value();
-        }
         return YGNodeStyleGetFlexShrink(node);
     }
 
-    YGValue getFlexBasis(YGValue __result) {
-        return INTERNAL_API
-            ? internal.style().flexBasis().decode(__result)
-            : YGNodeStyleGetFlexBasis(node, __result);
+    YogaValue getFlexBasis(YogaValue __result) {
+        YGNodeStyleGetFlexBasis(node, __result);
+        return __result;
     }
 
     static <T extends Struct<T>> boolean assertEquals(T a, T b) {
@@ -564,18 +508,36 @@ class YogaNode {
     }
 
     static final class YogaValue extends YGValue {
-        static final YGValue UNDEFINED = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.UNDEFINED);
-        static final YGValue ZERO      = YGValue.create().set(0, YogaUnit.POINT);
-        static final YGValue AUTO      = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.AUTO);
+        static final YogaValue UNDEFINED = YogaValue.create(YogaConstants.UNDEFINED, YogaUnit.UNDEFINED);
+        static final YogaValue ZERO      = YogaValue.create(0.0f, YogaUnit.POINT);
+        static final YogaValue AUTO      = YogaValue.create(YogaConstants.UNDEFINED, YogaUnit.AUTO);
 
         YogaValue(long address, @Nullable ByteBuffer container) {
             super(address, container);
         }
 
-        public static YogaValue create(MemoryStack stack, float value, int unit) {
-            YogaValue v = new YogaValue(stack.nmalloc(ALIGNOF, SIZEOF), null);
+        public static YogaValue create(float value, int unit) {
+            ByteBuffer container = BufferUtils.createByteBuffer(YGValue.SIZEOF);
+            YogaValue v = new YogaValue(memAddress(container), container);
             v.set(value, unit);
             return v;
+        }
+
+        public static YogaValue malloc(MemoryStack stack) {
+            return new YogaValue(stack.nmalloc(ALIGNOF, SIZEOF), null);
+        }
+
+        public static YogaValue create(MemoryStack stack, float value, int unit) {
+            YogaValue v = malloc(stack);
+            v.set(value, unit);
+            return v;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            YogaValue other = (YogaValue)o;
+
+            return floatToRawIntBits(this.value()) == floatToRawIntBits(other.value()) && this.unit() == other.unit();
         }
     }
 
@@ -587,7 +549,8 @@ class YogaNode {
         STRETCH(YGAlignStretch),
         BASELINE(YGAlignBaseline),
         SPACE_BETWEEN(YGAlignSpaceBetween),
-        SPACE_AROUND(YGAlignSpaceAround);
+        SPACE_AROUND(YGAlignSpaceAround),
+        SPACE_EVENLY(YGAlignSpaceEvenly);
 
         final int value;
 
@@ -653,20 +616,6 @@ class YogaNode {
         }
     }
 
-    enum YogaExperimentalFeature implements EnumWrapper {
-        WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis);
-
-        final int value;
-
-        YogaExperimentalFeature(int value) {
-            this.value = value;
-        }
-
-        @Override public int getValue() {
-            return value;
-        }
-    }
-
     enum YogaFlexDirection implements EnumWrapper {
         COLUMN(YGFlexDirectionColumn),
         COLUMN_REVERSE(YGFlexDirectionColumnReverse),
@@ -683,6 +632,23 @@ class YogaNode {
             return value;
         }
     }
+
+    enum YogaGutter implements EnumWrapper {
+        COLUMN(YGGutterColumn),
+        ROW(YGGutterRow),
+        ALL(YGGutterAll);
+
+        final int value;
+
+        YogaGutter(int value) {
+            this.value = value;
+        }
+
+        @Override public int getValue() {
+            return value;
+        }
+    }
+
 
     enum YogaJustify implements EnumWrapper {
         FLEX_START(YGJustifyFlexStart),

@@ -17,8 +17,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * 
  * <pre><code>
  * YGNodeRef (*{@link #invoke}) (
- *     YGNodeRef oldNode,
- *     YGNodeRef owner,
+ *     YGNodeConstRef oldNode,
+ *     YGNodeConstRef owner,
  *     int childIndex
  * )</code></pre>
  */
@@ -45,6 +45,6 @@ public interface YGCloneNodeFuncI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    @NativeType("YGNodeRef") long invoke(@NativeType("YGNodeRef") long oldNode, @NativeType("YGNodeRef") long owner, int childIndex);
+    @NativeType("YGNodeRef") long invoke(@NativeType("YGNodeConstRef") long oldNode, @NativeType("YGNodeConstRef") long owner, int childIndex);
 
 }

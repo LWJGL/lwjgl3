@@ -1,29 +1,22 @@
 /*
- * Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 package org.lwjgl.util.yoga;
 
 import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
-import java.lang.ref.*;
-import java.util.*;
-import java.util.concurrent.atomic.*;
-
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.util.yoga.Yoga.*;
+import static org.lwjgl.util.yoga.YogaConfig.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.*;
 
-@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YogaNodeTest {
-
     @Test
     public void testBaseline() {
         YogaNode root = createNode();
@@ -40,7 +33,7 @@ public class YogaNodeTest {
         YogaNode child2 = createNode();
         child2.setWidth(40);
         child2.setHeight(40);
-        YGNodeSetBaselineFunc(child2.node, (node, width, height) -> 0);
+        child2.setBaselineFunction((node, width, height) -> 0);
         root.addChildAt(child2, 1);
 
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
@@ -48,60 +41,60 @@ public class YogaNodeTest {
         assertEquals(0, (int)child1.getLayoutY());
         assertEquals(40, (int)child2.getLayoutY());
 
-        Objects.requireNonNull(child2.getBaselineFunction()).free();
-    }
-
-    private static YGMeasureFunc getTestMeasureFunc(float testWidth, float testHeight) {
-        return YGMeasureFunc.create((node, width, widthMode, height, heightMode, __result) -> __result
-            .width(testWidth)
-            .height(testHeight));
+        child2.freeBaselineFunction();
     }
 
     @Test
     public void testMeasure() {
         YogaNode node = createNode();
+        node.setMeasureFunction((it, width, widthMode, height, heightMode, __result) -> __result
+            .width(200)
+            .height(100));
+        node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertEquals(200, (int)node.getLayoutWidth());
+        assertEquals(100, (int)node.getLayoutHeight());
 
-        try (YGMeasureFunc measureFunc = getTestMeasureFunc(200, 100)) {
-            YGNodeSetMeasureFunc(node.node, measureFunc);
-            node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(200, (int)node.getLayoutWidth());
-            assertEquals(100, (int)node.getLayoutHeight());
-        }
+        node.freeMeasureFunction();
     }
 
     @Test
     public void testMeasureFloat() {
         YogaNode node = createNode();
+        node.setMeasureFunction((it, width, widthMode, height, heightMode, __result) -> __result
+            .width(200.5f)
+            .height(100.5f));
+        node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertEquals(201f, node.getLayoutWidth(), 0.01f);
+        assertEquals(101f, node.getLayoutHeight(), 0.01f);
 
-        try (YGMeasureFunc measureFunc = getTestMeasureFunc(200.5f, 100.5f)) {
-            YGNodeSetMeasureFunc(node.node, measureFunc);
-            node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(201.0f, node.getLayoutWidth(), 0.01f);
-            assertEquals(101.0f, node.getLayoutHeight(), 0.01f);
-        }
+        node.freeMeasureFunction();
     }
 
     @Test
     public void testMeasureFloatMin() {
         YogaNode node = createNode();
-        try (YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MIN_VALUE, Float.MIN_VALUE)) {
-            YGNodeSetMeasureFunc(node.node, measureFunc);
-            node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(Float.MIN_VALUE, node.getLayoutWidth(), 0.01f);
-            assertEquals(Float.MIN_VALUE, node.getLayoutHeight(), 0.01f);
-        }
+        node.setMeasureFunction((it, width, widthMode, height, heightMode, __result) -> __result
+            .width(Float.MIN_VALUE)
+            .height(Float.MIN_VALUE));
+        node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertEquals(Float.MIN_VALUE, node.getLayoutWidth(), 0.01f);
+        assertEquals(Float.MIN_VALUE, node.getLayoutHeight(), 0.01f);
+
+        node.freeMeasureFunction();
     }
 
     @Test
-    public void testMeasureFloatMax() {
-        YogaNode node      = createNode();
-        float    bigNumber = (float)10E5;
-        try (YGMeasureFunc measureFunc = getTestMeasureFunc(bigNumber, bigNumber)) {
-            YGNodeSetMeasureFunc(node.node, measureFunc);
-            node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(bigNumber, node.getLayoutWidth(), 0.01f);
-            assertEquals(bigNumber, node.getLayoutHeight(), 0.01f);
-        }
+    public void testMeasureFloatBigNumber() {
+        YogaNode    node      = createNode();
+        final float bigNumber = (float)10E5;
+        node.setMeasureFunction((it, width, widthMode, height, heightMode, __result) -> __result
+            .width(bigNumber)
+            .height(bigNumber));
+        node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertEquals(bigNumber, node.getLayoutWidth(), 0.01f);
+        assertEquals(bigNumber, node.getLayoutHeight(), 0.01f);
+
+        node.freeMeasureFunction();
     }
 
     @Test
@@ -173,10 +166,10 @@ public class YogaNodeTest {
 
     @Test
     public void testUseWebDefaults() {
-        YogaConfig config = new YogaConfig();
+        YogaConfig config = YogaConfigFactory.create();
         config.setUseWebDefaults(true);
         YogaNode node = createNode(config);
-        assertEquals(YogaFlexDirection.ROW.value, node.getFlexDirection());
+        assertEquals(YogaFlexDirection.ROW.getValue(), node.getFlexDirection());
     }
 
     @Test
@@ -196,7 +189,7 @@ public class YogaNodeTest {
         YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
-            YGValue v = YGValue.malloc(stack);
+            YogaValue v = YogaValue.malloc(stack);
 
             for (YogaEdge edge : YogaEdge.values()) {
                 assertEquals(YogaUnit.UNDEFINED, node.getMargin(edge, v).unit());
@@ -205,106 +198,6 @@ public class YogaNodeTest {
                 assertTrue(YogaConstants.isUndefined(node.getBorder(edge)));
             }
         }
-    }
-
-    @Test
-    public void testCloneNode() {
-        YogaConfig config     = new YogaConfig();
-        YogaNode   root       = createNode(config);
-        YogaNode   child      = createNode(config);
-        YogaNode   grandChild = createNode(config);
-        root.addChildAt(child, 0);
-        child.addChildAt(grandChild, 0);
-        child.setFlexDirection(YogaFlexDirection.ROW);
-
-        YogaNode clonedChild = child.clone();
-
-        assertNotSame(clonedChild, child);
-
-        assertEquals(YogaFlexDirection.ROW.value, child.getFlexDirection());
-        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
-
-        // Verify the cloning is shallow on the List of children
-        assertEquals(1, child.getChildCount());
-        assertEquals(child.getChildCount(), clonedChild.getChildCount());
-        assertEquals(child.getChildAt(0), clonedChild.getChildAt(0));
-
-        child.removeChildAt(0);
-        assertEquals(0, child.getChildCount());
-        assertEquals(1, clonedChild.getChildCount());
-    }
-
-    @Test
-    public void testCloneWithNewChildren() {
-        YogaConfig config     = new YogaConfig();
-        YogaNode   root       = createNode(config);
-        YogaNode   child      = createNode(config);
-        YogaNode   grandChild = createNode(config);
-        root.addChildAt(child, 0);
-        child.addChildAt(grandChild, 0);
-        child.setFlexDirection(YogaFlexDirection.ROW);
-
-        YogaNode clonedChild = child.cloneWithNewChildren();
-
-        assertNotSame(clonedChild, child);
-        assertEquals(YogaFlexDirection.ROW.value, clonedChild.getFlexDirection());
-        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
-        assertEquals(0, clonedChild.getChildCount());
-        assertEquals(1, child.getChildCount());
-    }
-
-    @Test
-    public void testCloneNodeListener() {
-        AtomicBoolean onNodeClonedExecuted = new AtomicBoolean(false);
-        YogaConfig    config               = new YogaConfig();
-        config.setOnCloneNode((oldNode, owner, childIndex) -> {
-            onNodeClonedExecuted.set(true);
-            return YogaNode.create(oldNode).clone(owner).node;
-        });
-        YogaNode root = createNode(config);
-        root.setWidth(100f);
-        root.setHeight(100f);
-        YogaNode child0 = createNode(config);
-        root.addChildAt(child0, 0);
-        child0.setWidth(50f);
-        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-
-        // Force a clone to happen.
-        YogaNode root2 = root.clone();
-        root2.setWidth(200f);
-        root2.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-
-        assertTrue(onNodeClonedExecuted.get());
-        assertEquals(1, root2.getChildCount());
-        YogaNode clonedNode = root2.getChildAt(0);
-        assertNotSame(child0, clonedNode);
-        try (MemoryStack stack = stackPush()) {
-            YGValue v = YGValue.malloc(stack);
-
-            assertEquals(child0.getWidth(v).value(), clonedNode.getWidth(v).value());
-            assertEquals(50f, clonedNode.getWidth(v).value(), 0.01f);
-        }
-    }
-
-    @Test
-    public void testOnNodeClonedLeak() throws Exception {
-        YogaConfig config = new YogaConfig();
-        config.setOnCloneNode((oldNode, owner, childIndex) -> YGNodeClone(oldNode));
-        config.setOnCloneNode(null);
-        WeakReference<Object> ref = new WeakReference<>(config);
-        // noinspection UnusedAssignment
-        config = null;
-        // try and free for the next 5 seconds, usually it works after the
-        // first GC attempt.
-        for (int i = 0; i < 50; i++) {
-            System.gc();
-            if (ref.get() == null) {
-                // free successfully
-                return;
-            }
-            Thread.sleep(100);
-        }
-        fail("YogaConfig leaked");
     }
 
     @Test
@@ -365,8 +258,8 @@ public class YogaNodeTest {
 
     @Test
     public void testResetApiShouldResetAllLayoutOutputs() {
-        YogaConfig config = new YogaConfig();
-        config.setUseLegacyStretchBehaviour(true);
+        YogaConfig config = YogaConfigFactory.create();
+        config.setErrata(YogaErrata.STRETCH_FLEX_BASIS);
         YogaNode node = createNode(config);
         node.setWidth(100);
         node.setHeight(100);
@@ -384,12 +277,13 @@ public class YogaNodeTest {
         node.setBorder(YogaEdge.BOTTOM, 4);
         node.setDirection(YogaDirection.RTL);
         node.markLayoutSeen();
-        node.setMeasureFunction((n, width, widthMode, height, heightMode, __result) -> __result
+        node.setMeasureFunction((it, width, widthMode, height, heightMode, __result) -> __result
             .width(100)
             .height(100));
-        node.setBaselineFunction((n, width, height) -> height);
+        node.setBaselineFunction((node1, width, height) -> height);
 
         node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
         node.reset();
 
         assertEquals(0, (int)node.getLayoutHeight());
@@ -411,5 +305,4 @@ public class YogaNodeTest {
         assertFalse(node.isMeasureDefined());
         assertFalse(node.isBaselineDefined());
     }
-
 }

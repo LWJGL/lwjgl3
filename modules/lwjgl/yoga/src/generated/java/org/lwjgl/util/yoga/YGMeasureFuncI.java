@@ -17,7 +17,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * 
  * <pre><code>
  * YGSize (*{@link #invoke}) (
- *     YGNodeRef node,
+ *     YGNodeConstRef node,
  *     float width,
  *     YGMeasureMode widthMode,
  *     float height,
@@ -49,6 +49,16 @@ public interface YGMeasureFuncI extends CallbackI {
         );
     }
 
-    void invoke(@NativeType("YGNodeRef") long node, float width, @NativeType("YGMeasureMode") int widthMode, float height, @NativeType("YGMeasureMode") int heightMode, YGSize __result);
+    /**
+     * Returns the computed dimensions of the node, following the contraints of {@code widthMode} and {@code heightMode}:
+     * 
+     * <p>{@link Yoga#YGMeasureModeUndefined MeasureModeUndefined}: The parent has not imposed any constraint on the child. It can be whatever size it wants.</p>
+     * 
+     * <p>{@link Yoga#YGMeasureModeAtMost MeasureModeAtMost}: The child can be as large as it wants up to the specified size.</p>
+     * 
+     * <p>{@link Yoga#YGMeasureModeExactly MeasureModeExactly}: The parent has determined an exact size for the child. The child is going to be given those bounds regardless of how big it wants
+     * to be.</p>
+     */
+    void invoke(@NativeType("YGNodeConstRef") long node, float width, @NativeType("YGMeasureMode") int widthMode, float height, @NativeType("YGMeasureMode") int heightMode, YGSize __result);
 
 }
