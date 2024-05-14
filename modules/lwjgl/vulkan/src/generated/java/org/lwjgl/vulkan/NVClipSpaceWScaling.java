@@ -101,8 +101,6 @@ import static org.lwjgl.system.JNI.*;
  *     Color = texture(tex, P * 0.5 + 0.5);
  * }</code></pre>
  * 
- * <h5>VK_NV_clip_space_w_scaling</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_clip_space_w_scaling}</dd>

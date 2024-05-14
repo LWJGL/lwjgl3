@@ -11,9 +11,8 @@ import vulkan.*
 val ARM_scheduling_controls = "ARMSchedulingControls".nativeClassVK("ARM_scheduling_controls", type = "device", postfix = "ARM") {
     documentation =
         """
-        This extension exposes a collection of controls to modify the scheduling behaviour of Arm Mali devices.
+        This extension exposes a collection of controls to modify the scheduling behavior of Arm Mali devices.
 
-        <h5>VK_ARM_scheduling_controls</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_ARM_scheduling_controls}</dd>

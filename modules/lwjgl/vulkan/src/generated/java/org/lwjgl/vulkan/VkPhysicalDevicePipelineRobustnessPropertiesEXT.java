@@ -110,16 +110,16 @@ public class VkPhysicalDevicePipelineRobustnessPropertiesEXT extends Struct<VkPh
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** describes the behaviour of out of bounds accesses made to storage buffers when no robustness features are enabled */
+    /** describes the behavior of out of bounds accesses made to storage buffers when no robustness features are enabled */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int defaultRobustnessStorageBuffers() { return ndefaultRobustnessStorageBuffers(address()); }
-    /** describes the behaviour of out of bounds accesses made to uniform buffers when no robustness features are enabled */
+    /** describes the behavior of out of bounds accesses made to uniform buffers when no robustness features are enabled */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int defaultRobustnessUniformBuffers() { return ndefaultRobustnessUniformBuffers(address()); }
-    /** describes the behaviour of out of bounds accesses made to vertex input attributes when no robustness features are enabled */
+    /** describes the behavior of out of bounds accesses made to vertex input attributes when no robustness features are enabled */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int defaultRobustnessVertexInputs() { return ndefaultRobustnessVertexInputs(address()); }
-    /** describes the behaviour of out of bounds accesses made to images when no robustness features are enabled */
+    /** describes the behavior of out of bounds accesses made to images when no robustness features are enabled */
     @NativeType("VkPipelineRobustnessImageBehaviorEXT")
     public int defaultRobustnessImages() { return ndefaultRobustnessImages(address()); }
 

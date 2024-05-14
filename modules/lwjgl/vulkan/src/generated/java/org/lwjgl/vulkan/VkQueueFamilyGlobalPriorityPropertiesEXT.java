@@ -61,28 +61,15 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends VkQueueFamilyGloba
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkQueueFamilyGlobalPriorityPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code priorityCount} field. */
-    @Override
-    public VkQueueFamilyGlobalPriorityPropertiesEXT priorityCount(@NativeType("uint32_t") int value) { npriorityCount(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code priorities} field. */
-    @Override
-    public VkQueueFamilyGlobalPriorityPropertiesEXT priorities(@NativeType("VkQueueGlobalPriorityKHR[VK_MAX_GLOBAL_PRIORITY_SIZE_KHR]") IntBuffer value) { npriorities(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code priorities} field. */
-    @Override
-    public VkQueueFamilyGlobalPriorityPropertiesEXT priorities(int index, @NativeType("VkQueueGlobalPriorityKHR") int value) { npriorities(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkQueueFamilyGlobalPriorityPropertiesEXT set(
         int sType,
-        long pNext,
-        int priorityCount,
-        IntBuffer priorities
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        priorityCount(priorityCount);
-        priorities(priorities);
 
         return this;
     }
@@ -257,15 +244,6 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends VkQueueFamilyGloba
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyGlobalPriorityPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code priorityCount} field. */
-        @Override
-        public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer priorityCount(@NativeType("uint32_t") int value) { VkQueueFamilyGlobalPriorityPropertiesEXT.npriorityCount(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code priorities} field. */
-        @Override
-        public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer priorities(@NativeType("VkQueueGlobalPriorityKHR[VK_MAX_GLOBAL_PRIORITY_SIZE_KHR]") IntBuffer value) { VkQueueFamilyGlobalPriorityPropertiesEXT.npriorities(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code priorities} field. */
-        @Override
-        public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer priorities(int index, @NativeType("VkQueueGlobalPriorityKHR") int value) { VkQueueFamilyGlobalPriorityPropertiesEXT.npriorities(address(), index, value); return this; }
 
     }
 

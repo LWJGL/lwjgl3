@@ -144,7 +144,6 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿    submit_info.pCommandBuffers = &amp;cmd_buf;
 ￿    vkQueueSubmit(queue, 1, &amp;submit_info, VK_NULL_HANDLE);</code></pre>
 
-        <h5>VK_NV_win32_keyed_mutex</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_win32_keyed_mutex}</dd>

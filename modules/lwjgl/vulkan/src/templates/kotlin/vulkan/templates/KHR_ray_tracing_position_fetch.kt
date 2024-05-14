@@ -15,7 +15,6 @@ val KHR_ray_tracing_position_fetch = "KHRRayTracingPositionFetch".nativeClassVK(
 
         An application adds #BUILD_ACCELERATION_STRUCTURE_ALLOW_DATA_ACCESS_KHR to the acceleration structure at build time. Then, if the hit is a triangle geometry, the shader (any-hit or closest hit for ray pipelines or using ray query) <b>can</b> fetch the three, three-component vertex positions in object space, of the triangle which was hit.
 
-        <h5>VK_KHR_ray_tracing_position_fetch</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_ray_tracing_position_fetch}</dd>
@@ -53,7 +52,7 @@ val KHR_ray_tracing_position_fetch = "KHRRayTracingPositionFetch".nativeClassVK(
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_ray_tracing_position_fetch.txt">{@code GLSL_EXT_ray_tracing_position_fetch}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_ray_tracing_position_fetch.txt">{@code GLSL_EXT_ray_tracing_position_fetch}</a></li>
                 <li>Interacts with {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
                 <li>Interacts with {@link KHRRayQuery VK_KHR_ray_query}</li>
             </ul></dd>

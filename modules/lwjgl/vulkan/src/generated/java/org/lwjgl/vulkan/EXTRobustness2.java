@@ -16,8 +16,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>None.</p>
  * 
- * <h5>VK_EXT_robustness2</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_robustness2}</dd>

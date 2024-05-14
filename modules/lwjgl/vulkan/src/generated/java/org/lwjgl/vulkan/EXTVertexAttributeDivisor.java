@@ -42,8 +42,6 @@ package org.lwjgl.vulkan;
  *     };
  *     //...</code></pre>
  * 
- * <h5>VK_EXT_vertex_attribute_divisor</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_vertex_attribute_divisor}</dd>

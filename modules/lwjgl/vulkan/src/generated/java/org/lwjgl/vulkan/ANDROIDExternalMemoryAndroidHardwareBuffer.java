@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Some {@code AHardwareBuffer} images have implementation-defined <em>external formats</em> that <b>may</b> not correspond to Vulkan formats. Sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>can</b> be used to sample from these images and convert them to a known color space.</p>
  * 
- * <h5>VK_ANDROID_external_memory_android_hardware_buffer</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_ANDROID_external_memory_android_hardware_buffer}</dd>
@@ -30,9 +28,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation}</dd>
+ * <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign}</dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_3</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>

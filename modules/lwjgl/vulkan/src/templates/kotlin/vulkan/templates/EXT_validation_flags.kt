@@ -16,7 +16,6 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
         <h5>Deprecation by {@code VK_EXT_layer_settings}</h5>
         Functionality in this extension is subsumed into the {@link EXTLayerSettings VK_EXT_layer_settings} extension.
 
-        <h5>VK_EXT_validation_flags</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_validation_flags}</dd>

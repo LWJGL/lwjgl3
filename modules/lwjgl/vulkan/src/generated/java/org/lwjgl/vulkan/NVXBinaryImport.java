@@ -230,8 +230,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>If {@code extraCount} is not 0, {@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
  * </ul>
  * 
- * <h5>VK_NVX_binary_import</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NVX_binary_import}</dd>

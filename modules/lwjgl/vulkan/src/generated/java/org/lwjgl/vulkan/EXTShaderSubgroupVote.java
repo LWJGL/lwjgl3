@@ -58,8 +58,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.</p>
  * 
- * <h5>VK_EXT_shader_subgroup_vote</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_shader_subgroup_vote}</dd>

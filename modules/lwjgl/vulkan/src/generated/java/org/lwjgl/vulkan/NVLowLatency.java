@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds the {@link VkQueryLowLatencySupportNV} structure, a structure used to query support for NVIDIA Reflex.
  * 
- * <h5>VK_NV_low_latency</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_low_latency}</dd>

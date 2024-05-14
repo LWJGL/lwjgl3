@@ -13,7 +13,6 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         """
         This extension enables an application to import host allocations and host mapped foreign device memory to Vulkan memory objects.
 
-        <h5>VK_EXT_external_memory_host</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_external_memory_host}</dd>

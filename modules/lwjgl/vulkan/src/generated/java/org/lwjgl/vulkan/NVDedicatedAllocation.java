@@ -78,8 +78,6 @@ package org.lwjgl.vulkan;
  *         memory,
  *         0);</code></pre>
  * 
- * <h5>VK_NV_dedicated_allocation</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_dedicated_allocation}</dd>

@@ -27,7 +27,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code descriptorSetCount} is not zero, {@code descriptorSetCount} <b>must</b> equal {@link VkDescriptorSetAllocateInfo}{@code ::descriptorSetCount}</li>
- * <li>If {@link VkDescriptorSetAllocateInfo}{@code ::pSetLayouts}[i] has a variable-sized descriptor binding, then {@code pDescriptorCounts}[i] <b>must</b> be less than or equal to the descriptor count specified for that binding when the descriptor set layout was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersAddInfoKHR}, {@link VkVideoDecodeH265SessionParametersAddInfoKHR}, {@link VkVideoEncodeH264SessionParametersAddInfoEXT}, or {@link VkVideoEncodeH265SessionParametersAddInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersAddInfoKHR}, {@link VkVideoDecodeH265SessionParametersAddInfoKHR}, {@link VkVideoEncodeH264SessionParametersAddInfoKHR}, or {@link VkVideoEncodeH265SessionParametersAddInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -110,10 +110,10 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
     public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH264SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
     public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH265SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH264SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH265SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #updateSequenceCount} field. */
     public VkVideoSessionParametersUpdateInfoKHR updateSequenceCount(@NativeType("uint32_t") int value) { nupdateSequenceCount(address(), value); return this; }
 
@@ -327,10 +327,10 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersAddInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#updateSequenceCount} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer updateSequenceCount(@NativeType("uint32_t") int value) { VkVideoSessionParametersUpdateInfoKHR.nupdateSequenceCount(address(), value); return this; }
 

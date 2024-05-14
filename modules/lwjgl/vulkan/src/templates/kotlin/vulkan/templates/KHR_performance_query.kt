@@ -229,7 +229,6 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 ￿    break;
 ￿}</code></pre>
 
-        <h5>VK_KHR_performance_query</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_performance_query}</dd>

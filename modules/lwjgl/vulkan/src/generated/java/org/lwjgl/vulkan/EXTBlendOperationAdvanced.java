@@ -23,8 +23,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>In addition to the coherency issues on implementations not supporting {@code advancedBlendCoherentOperations}, this extension has several limitations worth noting. First, the new blend operations have a limit on the number of color attachments they <b>can</b> be used with, as indicated by {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT}{@code ::advancedBlendMaxColorAttachments}. Additionally, blending precision <b>may</b> be limited to 16-bit floating-point, which <b>may</b> result in a loss of precision and dynamic range for framebuffer formats with 32-bit floating-point components, and in a loss of precision for formats with 12- and 16-bit signed or unsigned normalized integer components.</p>
  * 
- * <h5>VK_EXT_blend_operation_advanced</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_blend_operation_advanced}</dd>

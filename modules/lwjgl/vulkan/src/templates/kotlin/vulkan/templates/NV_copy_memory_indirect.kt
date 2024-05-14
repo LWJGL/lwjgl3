@@ -13,7 +13,6 @@ val NV_copy_memory_indirect = "NVCopyMemoryIndirect".nativeClassVK("NV_copy_memo
         """
         This extension adds support for performing copies between memory and image regions using indirect parameters that are read by the device from a buffer during execution. This functionality <b>may</b> be useful for performing copies where the copy parameters are not known during the command buffer creation time.
 
-        <h5>VK_NV_copy_memory_indirect</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_copy_memory_indirect}</dd>
@@ -28,7 +27,7 @@ val NV_copy_memory_indirect = "NVCopyMemoryIndirect".nativeClassVK("NV_copy_memo
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -143,7 +142,7 @@ val NV_copy_memory_indirect = "NVCopyMemoryIndirect".nativeClassVK("NV_copy_memo
 ￿    const VkImageSubresourceLayers*             pImageSubresources);</code></pre>
 
         <h5>Description</h5>
-        Each region in {@code copyBufferAddress} is copied from the source memory region to an image region in the destination image. If the destination image is of type #IMAGE_TYPE_3D, the starting slice and number of slices to copy are specified in {@code pImageSubresources}{@code ::baseArrayLayer} and {@code pImageSubresources}{@code ::layerCount} respectively. The copy <b>must</b> be performed on a queue that supports indirect copy operations, see ##VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.
+        Each region in {@code copyBufferAddress} is copied from the source memory region to an image region in the destination image. If the destination image is of type #IMAGE_TYPE_3D, the starting slice and number of slices to copy are specified in {@code pImageSubresources→baseArrayLayer} and {@code pImageSubresources→layerCount} respectively. The copy <b>must</b> be performed on a queue that supports indirect copy operations, see ##VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.
 
         <h5>Valid Usage</h5>
         <ul>

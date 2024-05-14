@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>For any submission to be tracked with low latency mode pacing, it needs to be associated with other submissions in a given present. Applications :must include the VkLatencySubmissionPresentIdNV in the pNext chain of {@link VK10#vkQueueSubmit QueueSubmit} to associate that submission with the {@code presentId} present for low latency mode.</p>
+ * <p>For any submission to be tracked with low latency mode pacing, it needs to be associated with other submissions in a given present. Applications <b>must</b> include the VkLatencySubmissionPresentIdNV in the pNext chain of {@link VK10#vkQueueSubmit QueueSubmit} to associate that submission with the {@code presentId} present for low latency mode.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

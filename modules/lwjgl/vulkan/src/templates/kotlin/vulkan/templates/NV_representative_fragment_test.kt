@@ -17,7 +17,6 @@ val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClass
 
         The representative fragment test has no effect if early fragment tests are not enabled via the fragment shader. The set of fragments discarded by the representative fragment test is implementation-dependent and may vary from frame to frame. In some cases, the representative fragment test may not discard any fragments for a given primitive.
 
-        <h5>VK_NV_representative_fragment_test</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_representative_fragment_test}</dd>
@@ -32,7 +31,7 @@ val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClass
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

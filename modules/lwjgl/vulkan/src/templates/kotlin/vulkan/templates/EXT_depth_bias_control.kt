@@ -15,7 +15,6 @@ val EXT_depth_bias_control = "EXTDepthBiasControl".nativeClassVK("EXT_depth_bias
 
         This state can also be set dynamically by using the new structure mentioned above in combination with the new {@code vkCmdSetDepthBias2EXT} command.
 
-        <h5>VK_EXT_depth_bias_control</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_depth_bias_control}</dd>
@@ -30,7 +29,7 @@ val EXT_depth_bias_control = "EXTDepthBiasControl".nativeClassVK("EXT_depth_bias
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
@@ -97,8 +96,8 @@ val EXT_depth_bias_control = "EXTDepthBiasControl".nativeClassVK("EXT_depth_bias
 
         <h5>Description</h5>
         <ul>
-            <li>#DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORMAT_EXT specifies that the depth bias representation is a factor of the format’s <code>r</code> as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-depthbias-computation">primsrast-depthbias-computation</a>.</li>
-            <li>#DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT specifies that the depth bias representation is a factor of a constant <code>r</code> defined by the bit-size or mantissa of the format as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-depthbias-computation">primsrast-depthbias-computation</a>.</li>
+            <li>#DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORMAT_EXT specifies that the depth bias representation is a factor of the format’s <code>r</code> as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-depthbias-computation">Depth Bias</a>.</li>
+            <li>#DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT specifies that the depth bias representation is a factor of a constant <code>r</code> defined by the bit-size or mantissa of the format as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-depthbias-computation">Depth Bias</a>.</li>
             <li>#DEPTH_BIAS_REPRESENTATION_FLOAT_EXT specifies that the depth bias representation is a factor of constant <code>r</code> equal to 1.</li>
         </ul>
 

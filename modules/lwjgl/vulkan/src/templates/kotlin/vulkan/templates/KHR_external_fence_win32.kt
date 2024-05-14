@@ -15,7 +15,6 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         """
         An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to export fence payload to and import fence payload from Windows handles.
 
-        <h5>VK_KHR_external_fence_win32</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_external_fence_win32}</dd>

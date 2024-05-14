@@ -17,7 +17,6 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
 
         These properties and built-ins <b>should</b> typically only be used for debugging purposes.
 
-        <h5>VK_NV_shader_sm_builtins</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_shader_sm_builtins}</dd>
@@ -52,7 +51,7 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_sm_builtins.txt">{@code GL_NV_shader_sm_builtins}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/nv/GLSL_NV_shader_sm_builtins.txt">{@code GL_NV_shader_sm_builtins}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sliceOffset} <b>must</b> be less than the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
- * <li>If {@code sliceCount} is not {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}, it <b>must</b> be be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
+ * <li>If {@code sliceCount} is not {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}, it <b>must</b> be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
  * <li>{@code image} <b>must</b> have been created with {@code imageType} equal to {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
  * <li>{@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
  * <li>The image view <b>must</b> reference exactly 1 mip level</li>

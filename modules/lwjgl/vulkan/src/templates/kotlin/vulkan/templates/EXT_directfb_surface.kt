@@ -13,7 +13,6 @@ val EXT_directfb_surface = "EXTDirectfbSurface".nativeClassVK("EXT_directfb_surf
         """
         The {@code VK_EXT_directfb_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a DirectFB {@code IDirectFBSurface}, as well as a query to determine support for rendering via DirectFB.
 
-        <h5>VK_EXT_directfb_surface</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_directfb_surface}</dd>

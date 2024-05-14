@@ -16,8 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension adds almost all of the remaining pipeline state as dynamic state to help applications further reduce the number of monolithic pipelines they need to create and bind.
  * 
- * <h5>VK_EXT_extended_dynamic_state3</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_extended_dynamic_state3}</dd>
@@ -28,9 +26,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_1</li>
+ * <li>Interacts with VK_EXT_blend_operation_advanced</li>
+ * <li>Interacts with VK_EXT_conservative_rasterization</li>
+ * <li>Interacts with VK_EXT_depth_clip_control</li>
+ * <li>Interacts with VK_EXT_depth_clip_enable</li>
+ * <li>Interacts with VK_EXT_line_rasterization</li>
+ * <li>Interacts with VK_EXT_provoking_vertex</li>
+ * <li>Interacts with VK_EXT_sample_locations</li>
+ * <li>Interacts with VK_EXT_transform_feedback</li>
+ * <li>Interacts with VK_KHR_maintenance2</li>
  * <li>Interacts with VK_NV_clip_space_w_scaling</li>
  * <li>Interacts with VK_NV_coverage_reduction_mode</li>
  * <li>Interacts with VK_NV_fragment_coverage_to_color</li>
@@ -97,7 +105,6 @@ public class EXTExtendedDynamicState3 {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_DEPTH_CLAMP_ENABLE_EXT DYNAMIC_STATE_DEPTH_CLAMP_ENABLE_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_POLYGON_MODE_EXT DYNAMIC_STATE_POLYGON_MODE_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT}</li>
@@ -108,40 +115,68 @@ public class EXTExtendedDynamicState3 {
      * <li>{@link #VK_DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT}</li>
      * <li>{@link #VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT DYNAMIC_STATE_COLOR_WRITE_MASK_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_RASTERIZATION_STREAM_EXT DYNAMIC_STATE_RASTERIZATION_STREAM_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_ENABLE_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT}</li>
      * </ul>
      */
     public static final int
-        VK_DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT          = 1000455002,
-        VK_DYNAMIC_STATE_DEPTH_CLAMP_ENABLE_EXT                  = 1000455003,
-        VK_DYNAMIC_STATE_POLYGON_MODE_EXT                        = 1000455004,
-        VK_DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT               = 1000455005,
-        VK_DYNAMIC_STATE_SAMPLE_MASK_EXT                         = 1000455006,
-        VK_DYNAMIC_STATE_ALPHA_TO_COVERAGE_ENABLE_EXT            = 1000455007,
-        VK_DYNAMIC_STATE_ALPHA_TO_ONE_ENABLE_EXT                 = 1000455008,
-        VK_DYNAMIC_STATE_LOGIC_OP_ENABLE_EXT                     = 1000455009,
-        VK_DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT                  = 1000455010,
-        VK_DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT                = 1000455011,
-        VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT                    = 1000455012,
-        VK_DYNAMIC_STATE_RASTERIZATION_STREAM_EXT                = 1000455013,
+        VK_DYNAMIC_STATE_DEPTH_CLAMP_ENABLE_EXT       = 1000455003,
+        VK_DYNAMIC_STATE_POLYGON_MODE_EXT             = 1000455004,
+        VK_DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT    = 1000455005,
+        VK_DYNAMIC_STATE_SAMPLE_MASK_EXT              = 1000455006,
+        VK_DYNAMIC_STATE_ALPHA_TO_COVERAGE_ENABLE_EXT = 1000455007,
+        VK_DYNAMIC_STATE_ALPHA_TO_ONE_ENABLE_EXT      = 1000455008,
+        VK_DYNAMIC_STATE_LOGIC_OP_ENABLE_EXT          = 1000455009,
+        VK_DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT       = 1000455010,
+        VK_DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT     = 1000455011,
+        VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT         = 1000455012;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT = 1000455002;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_RASTERIZATION_STREAM_EXT = 1000455013;
+
+    /**
+     * Extends {@code VkDynamicState}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT}</li>
+     * </ul>
+     */
+    public static final int
         VK_DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT     = 1000455014,
-        VK_DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT = 1000455015,
-        VK_DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT                   = 1000455016,
-        VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_ENABLE_EXT             = 1000455017,
-        VK_DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT                = 1000455018,
-        VK_DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT               = 1000455019,
-        VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT             = 1000455020,
-        VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT                 = 1000455021,
-        VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT      = 1000455022;
+        VK_DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT = 1000455015;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT = 1000455016;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_ENABLE_EXT = 1000455017;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT = 1000455018;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT = 1000455019;
+
+    /**
+     * Extends {@code VkDynamicState}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT = 1000455020,
+        VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT     = 1000455021;
+
+    /** Extends {@code VkDynamicState}. */
+    public static final int VK_DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT = 1000455022;
 
     /** Extends {@code VkDynamicState}. */
     public static final int VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV = 1000455023;
@@ -190,71 +225,6 @@ public class EXTExtendedDynamicState3 {
 
     protected EXTExtendedDynamicState3() {
         throw new UnsupportedOperationException();
-    }
-
-    // --- [ vkCmdSetTessellationDomainOriginEXT ] ---
-
-    /**
-     * Specify the origin of the tessellation domain space dynamically for a command buffer.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the origin of the tessellation domain space, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdSetTessellationDomainOriginEXT(
-     *     VkCommandBuffer                             commandBuffer,
-     *     VkTessellationDomainOrigin                  domainOrigin);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command sets the origin of the tessellation domain space for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineTessellationDomainOriginStateCreateInfo}{@code ::domainOrigin} value used to create the currently active pipeline.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>At least one of the following <b>must</b> be true:
-     * 
-     * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3TessellationDomainOrigin">{@code extendedDynamicState3TessellationDomainOrigin}</a> feature is enabled</li>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
-     * </ul>
-     * </li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code domainOrigin} <b>must</b> be a valid {@code VkTessellationDomainOrigin} value</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
-     * </table>
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param domainOrigin  specifies the origin of the tessellation domain space.
-     */
-    public static void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, @NativeType("VkTessellationDomainOrigin") int domainOrigin) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetTessellationDomainOriginEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(commandBuffer.address(), domainOrigin, __functionAddress);
     }
 
     // --- [ vkCmdSetDepthClampEnableEXT ] ---
@@ -966,6 +936,71 @@ public class EXTExtendedDynamicState3 {
         nvkCmdSetColorWriteMaskEXT(commandBuffer, firstAttachment, pColorWriteMasks.remaining(), memAddress(pColorWriteMasks));
     }
 
+    // --- [ vkCmdSetTessellationDomainOriginEXT ] ---
+
+    /**
+     * Specify the origin of the tessellation domain space dynamically for a command buffer.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the origin of the tessellation domain space, call:</p>
+     * 
+     * <pre><code>
+     * void vkCmdSetTessellationDomainOriginEXT(
+     *     VkCommandBuffer                             commandBuffer,
+     *     VkTessellationDomainOrigin                  domainOrigin);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the origin of the tessellation domain space for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineTessellationDomainOriginStateCreateInfo}{@code ::domainOrigin} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>At least one of the following <b>must</b> be true:
+     * 
+     * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3TessellationDomainOrigin">{@code extendedDynamicState3TessellationDomainOrigin}</a> feature is enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+     * <li>{@code domainOrigin} <b>must</b> be a valid {@code VkTessellationDomainOrigin} value</li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
+     * <h5>Command Properties</h5>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+     * </table>
+     *
+     * @param commandBuffer the command buffer into which the command will be recorded.
+     * @param domainOrigin  specifies the origin of the tessellation domain space.
+     */
+    public static void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, @NativeType("VkTessellationDomainOrigin") int domainOrigin) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetTessellationDomainOriginEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(commandBuffer.address(), domainOrigin, __functionAddress);
+    }
+
     // --- [ vkCmdSetRasterizationStreamEXT ] ---
 
     /**
@@ -1456,7 +1491,7 @@ public class EXTExtendedDynamicState3 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineRasterizationMode} value used to create the currently active pipeline.</p>
+     * <p>This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoKHR}{@code ::lineRasterizationMode} value used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -1468,9 +1503,9 @@ public class EXTExtendedDynamicState3 {
      * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
      * </ul>
      * </li>
-     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT LINE_RASTERIZATION_MODE_BRESENHAM_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_KHR LINE_RASTERIZATION_MODE_RECTANGULAR_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_BRESENHAM_KHR LINE_RASTERIZATION_MODE_BRESENHAM_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code lineRasterizationMode} is {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1524,7 +1559,7 @@ public class EXTExtendedDynamicState3 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::stippledLineEnable} value used to create the currently active pipeline.</p>
+     * <p>This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoKHR}{@code ::stippledLineEnable} value used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

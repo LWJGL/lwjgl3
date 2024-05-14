@@ -26,6 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the render pass is going to be used with an external format resolve attachment, a {@link VkExternalFormatANDROID} structure <b>must</b> also be included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, defining the external format of the resolve attachment that will be used.</p>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

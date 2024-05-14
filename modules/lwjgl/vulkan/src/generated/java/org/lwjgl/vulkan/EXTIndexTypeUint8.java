@@ -8,7 +8,9 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows {@code uint8_t} indices to be used with {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}.
  * 
- * <h5>VK_EXT_index_type_uint8</h5>
+ * <h5>Promotion to {@code VK_KHR_index_type_uint8}</h5>
+ * 
+ * <p>All functionality in this extension is included in {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8}, with the suffix changed to KHR. The original enum names are still available as aliases of the KHR functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -21,6 +23,10 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dt><b>Deprecation State</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_index_type_uint8]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_index_type_uint8%20extension*">pdaniell-nv</a></li>

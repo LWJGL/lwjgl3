@@ -14,8 +14,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>Implementations can process degenerate triangles and lines by either discarding them or generating conservative fragments for them. Degenerate triangles are those that end up with zero area after the rasterizer quantizes them to the fixed-point pixel grid. Degenerate lines are those with zero length after quantization.</p>
  * 
- * <h5>VK_EXT_conservative_rasterization</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_conservative_rasterization}</dd>

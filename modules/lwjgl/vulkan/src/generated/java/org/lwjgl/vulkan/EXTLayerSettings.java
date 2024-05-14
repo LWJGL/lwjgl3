@@ -61,8 +61,6 @@ package org.lwjgl.vulkan;
  * <p>The {@link EXTLayerSettings VK_EXT_layer_settings} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension and the {@link EXTValidationFeatures VK_EXT_validation_features} extension.</p>
  * </div>
  * 
- * <h5>VK_EXT_layer_settings</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_layer_settings}</dd>

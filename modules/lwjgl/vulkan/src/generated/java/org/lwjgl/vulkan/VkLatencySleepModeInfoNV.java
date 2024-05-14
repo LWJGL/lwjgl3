@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #pNext};
  *     VkBool32 {@link #lowLatencyMode};
  *     VkBool32 {@link #lowLatencyBoost};
- *     uint32_t minimumIntervalUs;
+ *     uint32_t {@link #minimumIntervalUs};
  * }</code></pre>
  */
 public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> implements NativeResource {
@@ -112,7 +112,7 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
     /** allows an application to hint to the GPU to increase performance to provide additional latency savings at a cost of increased power consumption. */
     @NativeType("VkBool32")
     public boolean lowLatencyBoost() { return nlowLatencyBoost(address()) != 0; }
-    /** @return the value of the {@code minimumIntervalUs} field. */
+    /** the microseconds between {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} calls for a given swapchain that {@link NVLowLatency2#vkLatencySleepNV LatencySleepNV} will enforce. */
     @NativeType("uint32_t")
     public int minimumIntervalUs() { return nminimumIntervalUs(address()); }
 
@@ -126,7 +126,7 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
     public VkLatencySleepModeInfoNV lowLatencyMode(@NativeType("VkBool32") boolean value) { nlowLatencyMode(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #lowLatencyBoost} field. */
     public VkLatencySleepModeInfoNV lowLatencyBoost(@NativeType("VkBool32") boolean value) { nlowLatencyBoost(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code minimumIntervalUs} field. */
+    /** Sets the specified value to the {@link #minimumIntervalUs} field. */
     public VkLatencySleepModeInfoNV minimumIntervalUs(@NativeType("uint32_t") int value) { nminimumIntervalUs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,7 +343,7 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
         /** @return the value of the {@link VkLatencySleepModeInfoNV#lowLatencyBoost} field. */
         @NativeType("VkBool32")
         public boolean lowLatencyBoost() { return VkLatencySleepModeInfoNV.nlowLatencyBoost(address()) != 0; }
-        /** @return the value of the {@code minimumIntervalUs} field. */
+        /** @return the value of the {@link VkLatencySleepModeInfoNV#minimumIntervalUs} field. */
         @NativeType("uint32_t")
         public int minimumIntervalUs() { return VkLatencySleepModeInfoNV.nminimumIntervalUs(address()); }
 
@@ -357,7 +357,7 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
         public VkLatencySleepModeInfoNV.Buffer lowLatencyMode(@NativeType("VkBool32") boolean value) { VkLatencySleepModeInfoNV.nlowLatencyMode(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#lowLatencyBoost} field. */
         public VkLatencySleepModeInfoNV.Buffer lowLatencyBoost(@NativeType("VkBool32") boolean value) { VkLatencySleepModeInfoNV.nlowLatencyBoost(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code minimumIntervalUs} field. */
+        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#minimumIntervalUs} field. */
         public VkLatencySleepModeInfoNV.Buffer minimumIntervalUs(@NativeType("uint32_t") int value) { VkLatencySleepModeInfoNV.nminimumIntervalUs(address(), value); return this; }
 
     }

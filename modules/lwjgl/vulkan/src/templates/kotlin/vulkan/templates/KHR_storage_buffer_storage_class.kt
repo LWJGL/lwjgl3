@@ -22,7 +22,6 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1.
 
-        <h5>VK_KHR_storage_buffer_storage_class</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_storage_buffer_storage_class}</dd>

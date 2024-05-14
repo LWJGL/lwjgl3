@@ -13,7 +13,6 @@ val EXT_frame_boundary = "EXTFrameBoundary".nativeClassVK("EXT_frame_boundary", 
         """
         {@link EXTFrameBoundary VK_EXT_frame_boundary} is a device extension that helps <b>tools</b> (such as debuggers) to group queue submissions per frames in non-trivial scenarios, typically when #QueuePresentKHR() is not a relevant frame boundary delimiter.
 
-        <h5>VK_EXT_frame_boundary</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_frame_boundary}</dd>

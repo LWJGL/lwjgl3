@@ -6,9 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension exposes a collection of controls to modify the scheduling behaviour of Arm Mali devices.
- * 
- * <h5>VK_ARM_scheduling_controls</h5>
+ * This extension exposes a collection of controls to modify the scheduling behavior of Arm Mali devices.
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

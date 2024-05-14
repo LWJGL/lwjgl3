@@ -13,7 +13,6 @@ val EXT_attachment_feedback_loop_layout = "EXTAttachmentFeedbackLoopLayout".nati
         """
         This extension adds a new image layout, #IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT, which allows applications to have an image layout in which they are able to both render to and sample/fetch from the same subresource of an image in a given render pass.
 
-        <h5>VK_EXT_attachment_feedback_loop_layout</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_attachment_feedback_loop_layout}</dd>
@@ -28,7 +27,7 @@ val EXT_attachment_feedback_loop_layout = "EXTAttachmentFeedbackLoopLayout".nati
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

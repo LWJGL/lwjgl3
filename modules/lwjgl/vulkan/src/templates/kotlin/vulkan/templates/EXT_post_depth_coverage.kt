@@ -23,7 +23,6 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
         When using GLSL source-based shading languages, the {@code post_depth_coverage} layout qualifier from GL_ARB_post_depth_coverage or GL_EXT_post_depth_coverage maps to the {@code PostDepthCoverage} execution mode.
 
-        <h5>VK_EXT_post_depth_coverage</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_post_depth_coverage}</dd>

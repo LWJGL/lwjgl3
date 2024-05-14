@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code maxSequencesCount} <b>must</b> be less or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::maxIndirectSequenceCount}</li>
  * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}, then {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
  * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}, and the {@code indirectCommandsLayout} was not created with a {@link NVDeviceGeneratedCommandsCompute#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV} token, then the {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}, and the {@code indirectCommandsLayout} contains a {@link NVDeviceGeneratedCommandsCompute#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV} token, then the {@code pipeline} <b>must</b> be {@code NULL}</li>
+ * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}, and the {@code indirectCommandsLayout} contains a {@link NVDeviceGeneratedCommandsCompute#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV} token, then the {@code pipeline} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

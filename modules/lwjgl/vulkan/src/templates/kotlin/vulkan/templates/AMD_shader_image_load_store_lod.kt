@@ -17,7 +17,6 @@ val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK
             <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">{@code SPV_AMD_shader_image_load_store_lod}</a></li>
         </ul>
 
-        <h5>VK_AMD_shader_image_load_store_lod</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_shader_image_load_store_lod}</dd>

@@ -64,7 +64,6 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
 ￿
 ￿    vkCreateRenderPass(...);</code></pre>
 
-        <h5>VK_KHR_maintenance2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_maintenance2}</dd>

@@ -223,8 +223,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // End the queue label region
  *     pfnQueueEndDebugUtilsLabelEXT(queue);</code></pre>
  * 
- * <h5>VK_EXT_debug_utils</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_debug_utils}</dd>

@@ -15,7 +15,6 @@ val QCOM_multiview_per_view_viewports = "QCOMMultiviewPerViewViewports".nativeCl
 
         This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview-per-view-viewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview render pass instance will use a viewport and scissor index equal to the {@code ViewIndex}.
 
-        <h5>VK_QCOM_multiview_per_view_viewports</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_QCOM_multiview_per_view_viewports}</dd>
@@ -30,11 +29,11 @@ val QCOM_multiview_per_view_viewports = "QCOMMultiviewPerViewViewports".nativeCl
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_viewports]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_viewports%20extension*">jackohound</a></li>
+                <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_viewports]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_viewports%20extension*">mnetsch</a></li>
             </ul></dd>
         </dl>
 

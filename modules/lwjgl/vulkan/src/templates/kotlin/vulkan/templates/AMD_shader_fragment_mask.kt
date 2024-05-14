@@ -51,7 +51,6 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
 ￿    fragColor = fragOne;
 ￿}</code></pre>
 
-        <h5>VK_AMD_shader_fragment_mask</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_shader_fragment_mask}</dd>
@@ -86,7 +85,7 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/amd/GL_AMD_shader_fragment_mask.txt">{@code GL_AMD_shader_fragment_mask}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/amd/GL_AMD_shader_fragment_mask.txt">{@code GL_AMD_shader_fragment_mask}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

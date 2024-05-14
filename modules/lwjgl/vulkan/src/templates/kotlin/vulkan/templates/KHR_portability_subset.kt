@@ -13,7 +13,7 @@ val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portabili
         """
         The {@link KHRPortabilitySubset VK_KHR_portability_subset} extension allows a non-conformant Vulkan implementation to be built on top of another non-Vulkan graphics API, and identifies differences between that implementation and a fully-conformant native Vulkan implementation.
 
-        This extension provides Vulkan implementations with the ability to mark otherwise-required capabilities as unsupported, or to establish additional properties and limits that the application should adhere to in order to guarantee portable behaviour and operation across platforms, including platforms where Vulkan is not natively supported.
+        This extension provides Vulkan implementations with the ability to mark otherwise-required capabilities as unsupported, or to establish additional properties and limits that the application should adhere to in order to guarantee portable behavior and operation across platforms, including platforms where Vulkan is not natively supported.
 
         The goal of this specification is to document, and make queryable, capabilities which are required to be supported by a fully-conformant Vulkan 1.0 implementation, but may be optional for an implementation of the Vulkan 1.0 Portability Subset.
 
@@ -23,7 +23,6 @@ val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portabili
 
         This extension defines several new structures that can be chained to the existing structures used by certain standard Vulkan calls, in order to query for non-conformant portable behavior.
 
-        <h5>VK_KHR_portability_subset</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_portability_subset}</dd>
@@ -38,7 +37,7 @@ val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portabili
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a>
 
             <ul>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>

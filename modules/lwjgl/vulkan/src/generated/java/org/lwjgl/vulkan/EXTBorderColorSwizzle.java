@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension also defines the behavior between samplers with an opaque black border color and image views with a non-identity component swizzle, which was previously left undefined.</p>
  * 
- * <h5>VK_EXT_border_color_swizzle</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_border_color_swizzle}</dd>

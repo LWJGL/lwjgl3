@@ -102,7 +102,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {
  *     case VK_SUCCESS:
  *         {
- *             // deferred operation has finished.  Query its result
+ *             // deferred operation has finished.  Query its result.
  *             result = vkGetDeferredOperationResultKHR(device, hOp);
  *         }
  *         break;
@@ -126,8 +126,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  *     return result;
  * }</code></pre>
- * 
- * <h5>VK_KHR_deferred_host_operations</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

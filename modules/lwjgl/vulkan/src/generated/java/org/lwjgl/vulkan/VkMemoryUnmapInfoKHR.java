@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code memory} <b>must</b> be currently host mapped</li>
+ * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-memoryUnmapReserve">{@code memoryUnmapReserve}</a> <b>must</b> be enabled</li>
+ * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT} or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -29,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRMapMemory2#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryUnmapFlagBitsKHR} values</li>
  * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
  * </ul>
  * 
@@ -113,7 +115,7 @@ public class VkMemoryUnmapInfoKHR extends Struct<VkMemoryUnmapInfoKHR> implement
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkMemoryUnmapFlagBitsKHR} specifying additional parameters of the memory map operation. */
     @NativeType("VkMemoryUnmapFlagsKHR")
     public int flags() { return nflags(address()); }
     /** the {@code VkDeviceMemory} object to be unmapped. */

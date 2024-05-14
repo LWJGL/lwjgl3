@@ -13,7 +13,6 @@ val ANDROID_external_format_resolve = "ANDROIDExternalFormatResolve".nativeClass
         """
         This extension enables rendering to Android Hardware Buffers with external formats which cannot be directly represented as renderable in Vulkan, including Y′C<sub>B</sub>C<sub>R</sub> formats.
 
-        <h5>VK_ANDROID_external_format_resolve</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_ANDROID_external_format_resolve}</dd>
@@ -32,6 +31,7 @@ val ANDROID_external_format_resolve = "ANDROIDExternalFormatResolve".nativeClass
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
                 <li>Interacts with VK_KHR_dynamic_rendering</li>
             </ul></dd>
 

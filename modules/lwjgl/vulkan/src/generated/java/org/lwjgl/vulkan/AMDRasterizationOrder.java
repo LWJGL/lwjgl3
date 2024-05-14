@@ -30,8 +30,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>None</p>
  * 
- * <h5>VK_AMD_rasterization_order</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_rasterization_order}</dd>

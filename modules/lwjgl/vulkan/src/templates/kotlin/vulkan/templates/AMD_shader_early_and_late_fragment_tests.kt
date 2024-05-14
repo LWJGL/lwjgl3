@@ -15,7 +15,6 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
 
         If {@link EXTShaderStencilExport VK_EXT_shader_stencil_export} is supported, additional execution modes allowing early depth tests similar to {@code DepthUnchanged}, {@code DepthLess}, and {@code DepthGreater} are provided.
 
-        <h5>VK_AMD_shader_early_and_late_fragment_tests</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_shader_early_and_late_fragment_tests}</dd>
@@ -30,7 +29,7 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>

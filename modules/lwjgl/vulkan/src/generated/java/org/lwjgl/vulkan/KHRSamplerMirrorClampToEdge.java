@@ -35,8 +35,6 @@ package org.lwjgl.vulkan;
  *         &amp;createInfo,
  *         &amp;sampler);</code></pre>
  * 
- * <h5>VK_KHR_sampler_mirror_clamp_to_edge</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_sampler_mirror_clamp_to_edge}</dd>

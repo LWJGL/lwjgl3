@@ -18,7 +18,6 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_descriptor_update_template</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_descriptor_update_template}</dd>

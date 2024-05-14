@@ -83,8 +83,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * vkGetMemoryRemoteAddressNV(device, &amp;getMemoryRemoteAddressInfo, &amp;rdmaAddress);
  * // address returned in 'rdmaAddress' can be used by external devices to initiate RDMA transfers</code></pre>
  * 
- * <h5>VK_NV_external_memory_rdma</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_external_memory_rdma}</dd>
@@ -95,7 +93,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRExternalMemory VK_KHR_external_memory}</dd>
+ * <dd>{@link KHRExternalMemory VK_KHR_external_memory} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Carsten Rohde <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_external_memory_rdma]%20@crohde%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_external_memory_rdma%20extension*">crohde</a></li>

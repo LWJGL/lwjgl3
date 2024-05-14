@@ -12,7 +12,7 @@ package org.lwjgl.vulkan;
  * <li>{@code SPV_KHR_shader_ballot}</li>
  * </ul>
  * 
- * <p>This extension provides the ability for a group of invocations, which execute in parallel, to do limited forms of cross-invocation communication via a group broadcast of a invocation value, or broadcast of a bitarray representing a predicate value from each invocation in the group.</p>
+ * <p>This extension provides the ability for a group of invocations, which execute in parallel, to do limited forms of cross-invocation communication via a group broadcast of an invocation value, or broadcast of a bit array representing a predicate value from each invocation in the group.</p>
  * 
  * <p>This extension provides access to a number of additional built-in shader variables in Vulkan:</p>
  * 
@@ -52,8 +52,6 @@ package org.lwjgl.vulkan;
  * <h5>Deprecated by Vulkan 1.2</h5>
  * 
  * <p>Most of the functionality in this extension is superseded by the core Vulkan 1.1 <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>. However, Vulkan 1.1 required the {@code OpGroupNonUniformBroadcast} “{@code Id}” to be constant. This restriction was removed in Vulkan 1.2 with the addition of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subgroupBroadcastDynamicId">{@code subgroupBroadcastDynamicId}</a> feature.</p>
- * 
- * <h5>VK_EXT_shader_subgroup_ballot</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

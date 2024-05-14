@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDepthBiasRepresentationInfoEXT}, {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}, {@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}, {@link VkPipelineRasterizationStateRasterizationOrderAMD}, or {@link VkPipelineRasterizationStateStreamCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDepthBiasRepresentationInfoEXT}, {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}, {@link VkPipelineRasterizationLineStateCreateInfoKHR}, {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}, {@link VkPipelineRasterizationStateRasterizationOrderAMD}, or {@link VkPipelineRasterizationStateStreamCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code polygonMode} <b>must</b> be a valid {@code VkPolygonMode} value</li>
@@ -197,6 +197,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
     public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationLineStateCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationStateRasterizationOrderAMD} value to the {@code pNext} chain. */
@@ -545,6 +547,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationLineStateCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationStateRasterizationOrderAMD} value to the {@code pNext} chain. */

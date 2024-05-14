@@ -13,7 +13,6 @@ val LUNARG_direct_driver_loading = "LUNARGDirectDriverLoading".nativeClassVK("LU
         """
         This extension provides a mechanism for applications to add drivers to the implementation. This allows drivers to be included with an application without requiring installation and is capable of being used in any execution environment, such as a process running with elevated privileges.
 
-        <h5>VK_LUNARG_direct_driver_loading</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_LUNARG_direct_driver_loading}</dd>

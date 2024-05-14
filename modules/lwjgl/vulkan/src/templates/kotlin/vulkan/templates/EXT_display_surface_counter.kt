@@ -13,7 +13,6 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
         """
         This extension defines a vertical blanking period counter associated with display surfaces. It provides a mechanism to query support for such a counter from a {@code VkSurfaceKHR} object.
 
-        <h5>VK_EXT_display_surface_counter</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_display_surface_counter}</dd>

@@ -95,7 +95,7 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityEXT} */
+    /** the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityKHR} */
     @NativeType("VkQueueGlobalPriorityKHR")
     public int globalPriority() { return nglobalPriority(address()); }
 

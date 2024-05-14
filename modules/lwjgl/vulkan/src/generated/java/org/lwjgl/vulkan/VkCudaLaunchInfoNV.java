@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code gridDimX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0]</li>
  * <li>{@code gridDimY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1]</li>
  * <li>{@code gridDimZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2]</li>
- * <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table.</li>
- * <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}.</li>
+ * <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table</li>
+ * <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}</li>
  * <li>{@code extraCount} must be 0</li>
  * <li>{@code pExtras} must be NULL</li>
  * </ul>
@@ -44,8 +44,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code function} <b>must</b> be a valid {@code VkCudaFunctionNV} handle</li>
- * <li>If {@code paramCount} is not 0, and {@code pParams} is not {@code NULL}, {@code pParams} <b>must</b> be a valid pointer to an array of {@code paramCount} bytes</li>
- * <li>If {@code extraCount} is not 0, and {@code pExtras} is not {@code NULL}, {@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
  * </ul>
  * 
  * <h5>See Also</h5>

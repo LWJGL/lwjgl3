@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
- * <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
+ * <li>If {@code pMessage} is not {@code NULL}, {@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
  * <li>If {@code queueLabelCount} is not 0, {@code pQueueLabels} <b>must</b> be a valid pointer to an array of {@code queueLabelCount} valid {@link VkDebugUtilsLabelEXT} structures</li>
  * <li>If {@code cmdBufLabelCount} is not 0, {@code pCmdBufLabels} <b>must</b> be a valid pointer to an array of {@code cmdBufLabelCount} valid {@link VkDebugUtilsLabelEXT} structures</li>
  * <li>If {@code objectCount} is not 0, {@code pObjects} <b>must</b> be a valid pointer to an array of {@code objectCount} valid {@link VkDebugUtilsObjectNameInfoEXT} structures</li>
@@ -158,21 +158,23 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     /** 0 and is reserved for future use. */
     @NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a null-terminated string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
+    /** {@code NULL} or a null-terminated UTF-8 string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
     @Nullable
     @NativeType("char const *")
     public ByteBuffer pMessageIdName() { return npMessageIdName(address()); }
-    /** a null-terminated string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
+    /** {@code NULL} or a null-terminated UTF-8 string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
     @Nullable
     @NativeType("char const *")
     public String pMessageIdNameString() { return npMessageIdNameString(address()); }
     /** the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered. */
     @NativeType("int32_t")
     public int messageIdNumber() { return nmessageIdNumber(address()); }
-    /** a null-terminated string detailing the trigger conditions. */
+    /** {@code NULL} if {@code messageTypes} is equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}, or a null-terminated UTF-8 string detailing the trigger conditions. */
+    @Nullable
     @NativeType("char const *")
     public ByteBuffer pMessage() { return npMessage(address()); }
-    /** a null-terminated string detailing the trigger conditions. */
+    /** {@code NULL} if {@code messageTypes} is equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}, or a null-terminated UTF-8 string detailing the trigger conditions. */
+    @Nullable
     @NativeType("char const *")
     public String pMessageString() { return npMessageString(address()); }
     /** a count of items contained in the {@code pQueueLabels} array. */
@@ -212,7 +214,7 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     /** Sets the specified value to the {@link #messageIdNumber} field. */
     public VkDebugUtilsMessengerCallbackDataEXT messageIdNumber(@NativeType("int32_t") int value) { nmessageIdNumber(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@link #pMessage} field. */
-    public VkDebugUtilsMessengerCallbackDataEXT pMessage(@NativeType("char const *") ByteBuffer value) { npMessage(address(), value); return this; }
+    public VkDebugUtilsMessengerCallbackDataEXT pMessage(@Nullable @NativeType("char const *") ByteBuffer value) { npMessage(address(), value); return this; }
     /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link #pQueueLabels} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pQueueLabels(@Nullable @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.Buffer value) { npQueueLabels(address(), value); return this; }
     /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link #pCmdBufLabels} field. */
@@ -227,7 +229,7 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
         int flags,
         @Nullable ByteBuffer pMessageIdName,
         int messageIdNumber,
-        ByteBuffer pMessage,
+        @Nullable ByteBuffer pMessage,
         @Nullable VkDebugUtilsLabelEXT.Buffer pQueueLabels,
         @Nullable VkDebugUtilsLabelEXT.Buffer pCmdBufLabels,
         @Nullable VkDebugUtilsObjectNameInfoEXT.Buffer pObjects
@@ -402,9 +404,9 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     /** Unsafe version of {@link #messageIdNumber}. */
     public static int nmessageIdNumber(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER); }
     /** Unsafe version of {@link #pMessage}. */
-    public static ByteBuffer npMessage(long struct) { return memByteBufferNT1(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
+    @Nullable public static ByteBuffer npMessage(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
     /** Unsafe version of {@link #pMessageString}. */
-    public static String npMessageString(long struct) { return memUTF8(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
+    @Nullable public static String npMessageString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
     /** Unsafe version of {@link #queueLabelCount}. */
     public static int nqueueLabelCount(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT); }
     /** Unsafe version of {@link #pQueueLabels}. */
@@ -432,9 +434,9 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     /** Unsafe version of {@link #messageIdNumber(int) messageIdNumber}. */
     public static void nmessageIdNumber(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER, value); }
     /** Unsafe version of {@link #pMessage(ByteBuffer) pMessage}. */
-    public static void npMessage(long struct, ByteBuffer value) {
-        if (CHECKS) { checkNT1(value); }
-        memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE, memAddress(value));
+    public static void npMessage(long struct, @Nullable ByteBuffer value) {
+        if (CHECKS) { checkNT1Safe(value); }
+        memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE, memAddressSafe(value));
     }
     /** Sets the specified value to the {@code queueLabelCount} field of the specified {@code struct}. */
     public static void nqueueLabelCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT, value); }
@@ -455,7 +457,6 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE));
         int queueLabelCount = nqueueLabelCount(struct);
         if (queueLabelCount != 0) {
             long pQueueLabels = memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PQUEUELABELS);
@@ -532,9 +533,11 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
         @NativeType("int32_t")
         public int messageIdNumber() { return VkDebugUtilsMessengerCallbackDataEXT.nmessageIdNumber(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
+        @Nullable
         @NativeType("char const *")
         public ByteBuffer pMessage() { return VkDebugUtilsMessengerCallbackDataEXT.npMessage(address()); }
         /** @return the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
+        @Nullable
         @NativeType("char const *")
         public String pMessageString() { return VkDebugUtilsMessengerCallbackDataEXT.npMessageString(address()); }
         /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#queueLabelCount} field. */
@@ -574,7 +577,7 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#messageIdNumber} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer messageIdNumber(@NativeType("int32_t") int value) { VkDebugUtilsMessengerCallbackDataEXT.nmessageIdNumber(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
-        public VkDebugUtilsMessengerCallbackDataEXT.Buffer pMessage(@NativeType("char const *") ByteBuffer value) { VkDebugUtilsMessengerCallbackDataEXT.npMessage(address(), value); return this; }
+        public VkDebugUtilsMessengerCallbackDataEXT.Buffer pMessage(@Nullable @NativeType("char const *") ByteBuffer value) { VkDebugUtilsMessengerCallbackDataEXT.npMessage(address(), value); return this; }
         /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link VkDebugUtilsMessengerCallbackDataEXT#pQueueLabels} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pQueueLabels(@Nullable @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.Buffer value) { VkDebugUtilsMessengerCallbackDataEXT.npQueueLabels(address(), value); return this; }
         /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link VkDebugUtilsMessengerCallbackDataEXT#pCmdBufLabels} field. */

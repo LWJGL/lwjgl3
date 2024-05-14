@@ -16,7 +16,6 @@ val ARM_render_pass_striped = "ARMRenderPassStriped".nativeClassVK("ARM_render_p
         <h5>Examples</h5>
         None.
 
-        <h5>VK_ARM_render_pass_striped</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_ARM_render_pass_striped}</dd>
@@ -31,7 +30,7 @@ val ARM_render_pass_striped = "ARMRenderPassStriped".nativeClassVK("ARM_render_p
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

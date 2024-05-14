@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension is intended to communicate information from layered API implementations such as ANGLE to internal proprietary system schedulers. It has no behavioural implications beyond enabling more intelligent behaviour from the system scheduler.
+ * This extension is intended to communicate information from layered API implementations such as ANGLE to internal proprietary system schedulers. It has no behavioral implications beyond enabling more intelligent behavior from the system scheduler.
  * 
  * <p>Application developers should avoid using this extension. It is documented solely for the benefit of tools and layer developers, who may need to manipulate {@code pNext} chains that include these structures.</p>
  * 
@@ -53,8 +53,6 @@ package org.lwjgl.vulkan;
  * <li>{@code sType} <b>must</b> be {@link #VK_STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC}</li>
  * </ul>
  * 
- * <h5>VK_SEC_amigo_profiling</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_SEC_amigo_profiling}</dd>
@@ -65,7 +63,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Ralph Potter r_potter</li>

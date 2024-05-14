@@ -18,7 +18,6 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, both the {@code shaderFloat16} and {@code shaderInt8} capabilities are optional. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_shader_float16_int8</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_float16_int8}</dd>
@@ -33,7 +32,7 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
@@ -56,7 +55,7 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
                 <li>This extension interacts with {@link KHR8bitStorage VK_KHR_8bit_storage}</li>
                 <li>This extension interacts with {@link KHR16bitStorage VK_KHR_16bit_storage}</li>
                 <li>This extension interacts with {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_explicit_arithmetic_types.txt">{@code GL_EXT_shader_explicit_arithmetic_types}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_shader_explicit_arithmetic_types.txt">{@code GL_EXT_shader_explicit_arithmetic_types}</a></li>
             </ul></dd>
 
             <dt><b>IP Status</b></dt>

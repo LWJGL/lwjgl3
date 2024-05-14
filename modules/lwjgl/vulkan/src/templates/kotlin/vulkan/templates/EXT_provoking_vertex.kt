@@ -15,7 +15,6 @@ val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassVK("EXT_provoking_ver
 
         This extension is intended for use by API-translation layers that implement APIs like OpenGL on top of Vulkan, and need to match the source API’s provoking vertex convention. Applications using Vulkan directly should use Vulkan’s default convention.
 
-        <h5>VK_EXT_provoking_vertex</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_provoking_vertex}</dd>
@@ -30,7 +29,7 @@ val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassVK("EXT_provoking_ver
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>

@@ -136,7 +136,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct<VkPipelineRobustne
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /**
-     * sets the behaviour of out of bounds accesses made to resources bound as:
+     * sets the behavior of out of bounds accesses made to resources bound as:
      * 
      * <ul>
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}</li>
@@ -147,7 +147,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct<VkPipelineRobustne
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int storageBuffers() { return nstorageBuffers(address()); }
     /**
-     * describes the behaviour of out of bounds accesses made to resources bound as:
+     * describes the behavior of out of bounds accesses made to resources bound as:
      * 
      * <ul>
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}</li>
@@ -158,11 +158,11 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct<VkPipelineRobustne
      */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int uniformBuffers() { return nuniformBuffers(address()); }
-    /** describes the behaviour of out of bounds accesses made to vertex input attributes */
+    /** describes the behavior of out of bounds accesses made to vertex input attributes */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int vertexInputs() { return nvertexInputs(address()); }
     /**
-     * describes the behaviour of out of bounds accesses made to resources bound as:
+     * describes the behavior of out of bounds accesses made to resources bound as:
      * 
      * <ul>
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}</li>

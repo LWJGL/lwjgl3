@@ -62,7 +62,6 @@ val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader
         <h5>Deprecated by Vulkan 1.1</h5>
         All functionality in this extension is superseded by the core Vulkan 1.1 <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.
 
-        <h5>VK_EXT_shader_subgroup_vote</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_subgroup_vote}</dd>

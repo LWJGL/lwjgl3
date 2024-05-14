@@ -13,7 +13,6 @@ val EXT_nested_command_buffer = "EXTNestedCommandBuffer".nativeClassVK("EXT_nest
         """
         With core Vulkan it is not legal to call #CmdExecuteCommands() when recording a secondary command buffer. This extension relaxes that restriction, allowing secondary command buffers to execute other secondary command buffers.
 
-        <h5>VK_EXT_nested_command_buffer</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_nested_command_buffer}</dd>
@@ -28,7 +27,7 @@ val EXT_nested_command_buffer = "EXTNestedCommandBuffer".nativeClassVK("EXT_nest
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

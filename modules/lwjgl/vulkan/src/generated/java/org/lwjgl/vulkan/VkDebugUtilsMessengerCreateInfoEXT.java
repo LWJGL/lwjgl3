@@ -45,12 +45,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A callback <b>can</b> be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pfnUserCallback} <b>must</b> be a valid {@link VkDebugUtilsMessengerCallbackEXT}</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

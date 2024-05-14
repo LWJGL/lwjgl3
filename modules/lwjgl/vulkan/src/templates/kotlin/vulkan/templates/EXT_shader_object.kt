@@ -299,7 +299,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿// Draw another triangle
 ￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);</code></pre>
 
-        <h5>VK_EXT_shader_object</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_object}</dd>
@@ -314,15 +313,23 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>     {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and      {@link KHRDynamicRendering VK_KHR_dynamic_rendering}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRDynamicRendering VK_KHR_dynamic_rendering} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
                 <li>Interacts with VK_VERSION_1_1</li>
                 <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_EXT_blend_operation_advanced</li>
+                <li>Interacts with VK_EXT_conservative_rasterization</li>
+                <li>Interacts with VK_EXT_depth_clip_control</li>
+                <li>Interacts with VK_EXT_depth_clip_enable</li>
                 <li>Interacts with VK_EXT_fragment_density_map</li>
+                <li>Interacts with VK_EXT_line_rasterization</li>
                 <li>Interacts with VK_EXT_mesh_shader</li>
+                <li>Interacts with VK_EXT_provoking_vertex</li>
+                <li>Interacts with VK_EXT_sample_locations</li>
                 <li>Interacts with VK_EXT_subgroup_size_control</li>
+                <li>Interacts with VK_EXT_transform_feedback</li>
                 <li>Interacts with VK_KHR_device_group</li>
                 <li>Interacts with VK_KHR_fragment_shading_rate</li>
                 <li>Interacts with VK_NV_clip_space_w_scaling</li>
@@ -423,6 +430,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
     EnumConstant(
         "Extends {@code VkResult}.",
 
+        "INCOMPATIBLE_SHADER_BINARY_EXT".."1000482000",
         "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT".."1000482000"
     )
 
@@ -518,7 +526,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         <h5>Valid Usage</h5>
         <ul>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code createInfoCount} is 1, there <b>must</b> be no element of {@code pCreateInfos} whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT or #SHADER_STAGE_MESH_BIT_EXT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT or #SHADER_STAGE_MESH_BIT_EXT includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, there <b>must</b> be no member of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_VERTEX_BIT and whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
@@ -531,6 +538,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
             <li>If {@code pCreateInfos} contains elements with both #SHADER_STAGE_TESSELLATION_CONTROL_BIT and #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, both elements' {@code flags} include #SHADER_CREATE_LINK_STAGE_BIT_EXT, both elements' {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the #SHADER_STAGE_TESSELLATION_CONTROL_BIT stage’s {@code pCode} contains an {@code OpExecutionMode} instruction specifying {@code PointMode}, the #SHADER_STAGE_TESSELLATION_EVALUATION_BIT stage <b>must</b> also contain an {@code OpExecutionMode} instruction specifying {@code PointMode}</li>
             <li>If {@code pCreateInfos} contains elements with both #SHADER_STAGE_TESSELLATION_CONTROL_BIT and #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, both elements' {@code flags} include #SHADER_CREATE_LINK_STAGE_BIT_EXT, both elements' {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the #SHADER_STAGE_TESSELLATION_CONTROL_BIT stage’s {@code pCode} contains an {@code OpExecutionMode} instruction specifying the spacing of segments on the edges of tessellated primitives, it <b>must</b> match the segment spacing specified in the #SHADER_STAGE_TESSELLATION_EVALUATION_BIT stage</li>
             <li>If {@code pCreateInfos} contains elements with both #SHADER_STAGE_TESSELLATION_CONTROL_BIT and #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, both elements' {@code flags} include #SHADER_CREATE_LINK_STAGE_BIT_EXT, both elements' {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the #SHADER_STAGE_TESSELLATION_CONTROL_BIT stage’s {@code pCode} contains an {@code OpExecutionMode} instruction specifying the output patch size, it <b>must</b> match the output patch size specified in the #SHADER_STAGE_TESSELLATION_EVALUATION_BIT stage</li>
+            <li>If {@code pCreateInfos} contains a #SHADER_STAGE_MESH_BIT_EXT with {@code codeType} of #SHADER_CODE_TYPE_SPIRV_EXT and #SHADER_CREATE_NO_TASK_SHADER_BIT_EXT is not set, then the mesh shader’s entry point <b>must</b> not declare a variable with a {@code DrawIndex} {@code BuiltIn} decoration</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -547,6 +555,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
             <dt>On success, this command returns</dt>
             <dd><ul>
                 <li>#SUCCESS</li>
+                <li>#INCOMPATIBLE_SHADER_BINARY_EXT</li>
             </ul></dd>
 
             <dt>On failure, this command returns</dt>
@@ -554,7 +563,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
                 <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_INCOMPATIBLE_SHADER_BINARY_EXT</li>
             </ul></dd>
         </dl>
 
@@ -597,9 +605,9 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
+            <li>If {@code shader} is not #NULL_HANDLE, {@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
             <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code shader} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+            <li>If {@code shader} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -635,7 +643,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         If {@code pData} is {@code NULL}, then the size of the binary shader code of the shader object, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}. If {@code pDataSize} is less than the size of the binary shader code, nothing is written to {@code pData}, and #INCOMPLETE will be returned instead of #SUCCESS.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The behavior of this command when {@code pDataSize} is too small differs from how some other getter-type commands work in Vulkan. Because shader binary data is only usable in its entirety, it would never be useful for the implementation to return partial data. Because of this, nothing is written to {@code pData} unless {@code pDataSize} is large enough to fit the data it its entirety.
+        The behavior of this command when {@code pDataSize} is too small differs from how some other getter-type commands work in Vulkan. Because shader binary data is only usable in its entirety, it would never be useful for the implementation to return partial data. Because of this, nothing is written to {@code pData} unless {@code pDataSize} is large enough to fit the data in its entirety.
         </div>
 
         Binary shader code retrieved using {@code vkGetShaderBinaryDataEXT} <b>can</b> be passed to a subsequent call to #CreateShadersEXT() on a compatible physical device by specifying #SHADER_CODE_TYPE_BINARY_EXT in the {@code codeType} member of ##VkShaderCreateInfoEXT.
@@ -1662,7 +1670,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkColorComponentFlags.const.p("pColorWriteMasks", "an array of {@code VkColorComponentFlags} values that specify the color write masks of the corresponding attachments.")
     )
 
-    void(
+    DependsOn("VK_EXT_transform_feedback")..void(
         "CmdSetRasterizationStreamEXT",
         """
         Specify the rasterization stream dynamically for a command buffer.
@@ -1717,7 +1725,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         uint32_t("rasterizationStream", "specifies the {@code rasterizationStream} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_conservative_rasterization")..void(
         "CmdSetConservativeRasterizationModeEXT",
         """
         Specify the conservative rasterization mode dynamically for a command buffer.
@@ -1770,7 +1778,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkConservativeRasterizationModeEXT("conservativeRasterizationMode", "specifies the {@code conservativeRasterizationMode} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_conservative_rasterization")..void(
         "CmdSetExtraPrimitiveOverestimationSizeEXT",
         """
         Specify the conservative rasterization extra primitive overestimation size dynamically for a command buffer.
@@ -1823,7 +1831,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         float("extraPrimitiveOverestimationSize", "specifies the {@code extraPrimitiveOverestimationSize}.")
     )
 
-    void(
+    DependsOn("VK_EXT_depth_clip_enable")..void(
         "CmdSetDepthClipEnableEXT",
         """
         Specify dynamically whether depth clipping is enabled in the command buffer.
@@ -1876,7 +1884,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("depthClipEnable", "specifies whether depth clipping is enabled.")
     )
 
-    void(
+    DependsOn("VK_EXT_sample_locations")..void(
         "CmdSetSampleLocationsEnableEXT",
         """
         Specify the samples locations enable state dynamically for a command buffer.
@@ -1928,7 +1936,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("sampleLocationsEnable", "specifies the {@code sampleLocationsEnable} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_blend_operation_advanced")..void(
         "CmdSetColorBlendAdvancedEXT",
         """
         Specify the advanced color blend state dynamically for a command buffer.
@@ -1989,7 +1997,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkColorBlendAdvancedEXT.const.p("pColorBlendAdvanced", "an array of ##VkColorBlendAdvancedEXT structs that specify the advanced color blend parameters for the corresponding attachments.")
     )
 
-    void(
+    DependsOn("VK_EXT_provoking_vertex")..void(
         "CmdSetProvokingVertexModeEXT",
         """
         Specify the provoking vertex mode dynamically for a command buffer.
@@ -2043,7 +2051,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkProvokingVertexModeEXT("provokingVertexMode", "specifies the {@code provokingVertexMode} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_line_rasterization")..void(
         "CmdSetLineRasterizationModeEXT",
         """
         Specify the line rasterization mode dynamically for a command buffer.
@@ -2057,7 +2065,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿    VkLineRasterizationModeEXT                  lineRasterizationMode);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineRasterizationMode} value used to create the currently active pipeline.
+        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::lineRasterizationMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2068,9 +2076,9 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
                     <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
                 </ul>
             </li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2099,7 +2107,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkLineRasterizationModeEXT("lineRasterizationMode", "specifies the {@code lineRasterizationMode} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_line_rasterization")..void(
         "CmdSetLineStippleEnableEXT",
         """
         Specify the line stipple enable dynamically for a command buffer.
@@ -2113,7 +2121,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿    VkBool32                                    stippledLineEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::stippledLineEnable} value used to create the currently active pipeline.
+        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::stippledLineEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2151,7 +2159,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkBool32("stippledLineEnable", "specifies the {@code stippledLineEnable} state.")
     )
 
-    void(
+    DependsOn("VK_EXT_depth_clip_control")..void(
         "CmdSetDepthClipNegativeOneToOneEXT",
         """
         Specify the negative one to one depth clip mode dynamically for a command buffer.

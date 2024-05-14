@@ -13,7 +13,6 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
         """
         This extension provides new queries for device display properties and capabilities that can be easily extended by other extensions, without introducing any further queries. This extension can be considered the {@link KHRDisplay VK_KHR_display} equivalent of the {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} extension.
 
-        <h5>VK_KHR_get_display_properties2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_get_display_properties2}</dd>

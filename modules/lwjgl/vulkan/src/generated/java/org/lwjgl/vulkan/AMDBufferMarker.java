@@ -19,8 +19,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>None.</p>
  * 
- * <h5>VK_AMD_buffer_marker</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_buffer_marker}</dd>

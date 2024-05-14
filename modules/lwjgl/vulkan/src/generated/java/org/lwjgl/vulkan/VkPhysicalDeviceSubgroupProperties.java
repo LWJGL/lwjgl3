@@ -24,6 +24,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code supportedOperations} includes <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subgroup-quad">{@link VK11#VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT}</a>, or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderSubgroupUniformControlFlow">{@code shaderSubgroupUniformControlFlow}</a> is enabled, {@code subgroupSize} <b>must</b> be greater than or equal to 4.</p>
  * 
+ * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderQuadControl">{@code shaderQuadControl}</a> feature is supported, {@code supportedOperations} <b>must</b> include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-subgroup-quad">{@link VK11#VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT}</a>.</p>
+ * 
+ * <p>If {@link KHRShaderSubgroupRotate VK_KHR_shader_subgroup_rotate} is supported, and the implementation advertises support with a {@link VkExtensionProperties}{@code ::specVersion} greater than or equal to 2, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderSubgroupRotate">{@code shaderSubgroupRotate}</a> is supported, {@link KHRShaderSubgroupRotate#VK_SUBGROUP_FEATURE_ROTATE_BIT_KHR SUBGROUP_FEATURE_ROTATE_BIT_KHR} <b>must</b> be returned in {@code subgroupSupportedOperations}. If {@link KHRShaderSubgroupRotate VK_KHR_shader_subgroup_rotate} is supported, and the implementation advertises support with a {@link VkExtensionProperties}{@code ::specVersion} greater than or equal to 2, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderSubgroupRotateClustered">{@code shaderSubgroupRotateClustered}</a> is supported, {@link KHRShaderSubgroupRotate#VK_SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT_KHR SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT_KHR} <b>must</b> be returned in {@code subgroupSupportedOperations}.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>{@link KHRShaderSubgroupRotate#VK_SUBGROUP_FEATURE_ROTATE_BIT_KHR SUBGROUP_FEATURE_ROTATE_BIT_KHR} and {@link KHRShaderSubgroupRotate#VK_SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT_KHR SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT_KHR} were added in version 2 of the {@link KHRShaderSubgroupRotate VK_KHR_shader_subgroup_rotate} extension, after the initial release, so there are implementations that do not advertise these bits. Applications should use the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderSubgroupRotate">{@code shaderSubgroupRotate}</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderSubgroupRotateClustered">{@code shaderSubgroupRotateClustered}</a> features to determine and enable support. These bits are advertised here for consistency and for future dependencies.</p>
+ * </div>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

@@ -100,7 +100,6 @@ val VALVE_descriptor_set_host_mapping = "VALVEDescriptorSetHostMapping".nativeCl
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        <h5>VK_VALVE_descriptor_set_host_mapping</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_VALVE_descriptor_set_host_mapping}</dd>
@@ -115,7 +114,7 @@ val VALVE_descriptor_set_host_mapping = "VALVEDescriptorSetHostMapping".nativeCl
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>

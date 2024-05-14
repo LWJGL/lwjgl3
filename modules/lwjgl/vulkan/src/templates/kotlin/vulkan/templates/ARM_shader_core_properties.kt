@@ -15,7 +15,6 @@ val ARM_shader_core_properties = "ARMShaderCoreProperties".nativeClassVK("ARM_sh
 
         It exposes properties for the number of texel, pixel, and fused multiply-add operations per clock per shader core. This can be used in combination with the {@link ARMShaderCoreBuiltins VK_ARM_shader_core_builtins} extension that provides the ability to query the number of shader cores on the physical device.
 
-        <h5>VK_ARM_shader_core_properties</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_ARM_shader_core_properties}</dd>

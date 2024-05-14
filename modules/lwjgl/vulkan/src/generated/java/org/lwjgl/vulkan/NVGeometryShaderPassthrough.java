@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension provides access to the {@code PassthroughNV} decoration under the {@code GeometryShaderPassthroughNV} capability. Adding this to a geometry shader input variable specifies that the values of this input are copied to the corresponding vertex of the output primitive.</p>
  * 
- * <p>When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behaviour is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.</p>
+ * <p>When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behavior is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.</p>
  * 
  * <h5>Sample Code</h5>
  * 
@@ -77,8 +77,6 @@ package org.lwjgl.vulkan;
  *     // loop over three vertices or call EmitVertex().
  *     gl_Layer = compute_layer();
  * }</code></pre>
- * 
- * <h5>VK_NV_geometry_shader_passthrough</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

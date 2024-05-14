@@ -146,7 +146,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     /** @return the value of the {@code sps_range_extension_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_range_extension_flag() { return nsps_range_extension_flag(address()) != 0; }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
+    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
     @NativeType("uint32_t")
     public boolean transform_skip_rotation_enabled_flag() { return ntransform_skip_rotation_enabled_flag(address()) != 0; }
     /** @return the value of the {@code transform_skip_context_enabled_flag} field. */
@@ -176,7 +176,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     /** @return the value of the {@code sps_scc_extension_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_scc_extension_flag() { return nsps_scc_extension_flag(address()) != 0; }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
+    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
     @NativeType("uint32_t")
     public boolean sps_curr_pic_ref_enabled_flag() { return nsps_curr_pic_ref_enabled_flag(address()) != 0; }
     /** @return the value of the {@code palette_mode_enabled_flag} field. */

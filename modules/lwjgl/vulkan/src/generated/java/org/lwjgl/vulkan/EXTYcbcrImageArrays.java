@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows images of a format that requires <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
  * 
- * <h5>VK_EXT_ycbcr_image_arrays</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_ycbcr_image_arrays}</dd>

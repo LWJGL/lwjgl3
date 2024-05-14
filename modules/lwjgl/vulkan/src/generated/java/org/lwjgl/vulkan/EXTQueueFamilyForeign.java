@@ -14,8 +14,6 @@ package org.lwjgl.vulkan;
  * <li>Applications should expect transitions to/from {@link #VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT} to be more expensive than transitions to/from {@link KHRExternalMemory#VK_QUEUE_FAMILY_EXTERNAL_KHR QUEUE_FAMILY_EXTERNAL_KHR}.</li>
  * </ul>
  * 
- * <h5>VK_EXT_queue_family_foreign</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_queue_family_foreign}</dd>

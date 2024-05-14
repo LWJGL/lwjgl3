@@ -15,7 +15,6 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 
         To support initializing a new image in preparation for a host copy, it is now possible to transition a new image to #IMAGE_LAYOUT_GENERAL or other host-copyable layouts via #TransitionImageLayoutEXT(). Additionally, it is possible to perform copies that preserve the swizzling layout of the image by using the #HOST_IMAGE_COPY_MEMCPY_EXT flag. In that case, the memory size needed for copies to or from a buffer can be retrieved by chaining ##VkSubresourceHostMemcpySizeEXT to {@code pLayout} in #GetImageSubresourceLayout2EXT().
 
-        <h5>VK_EXT_host_image_copy</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_host_image_copy}</dd>
@@ -30,7 +29,7 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRCopyCommands2 VK_KHR_copy_commands2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRCopyCommands2 VK_KHR_copy_commands2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

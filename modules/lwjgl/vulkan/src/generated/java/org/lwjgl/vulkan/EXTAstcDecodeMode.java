@@ -46,8 +46,6 @@ package org.lwjgl.vulkan;
  *         NULL,
  *         &amp;imageView);</code></pre>
  * 
- * <h5>VK_EXT_astc_decode_mode</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_astc_decode_mode}</dd>

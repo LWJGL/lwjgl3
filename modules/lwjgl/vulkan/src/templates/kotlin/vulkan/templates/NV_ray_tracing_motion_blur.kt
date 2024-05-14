@@ -22,7 +22,6 @@ val NV_ray_tracing_motion_blur = "NVRayTracingMotionBlur".nativeClassVK("NV_ray_
 
         The motion represented here is parameterized across a normalized timestep between 0.0 and 1.0. A motion trace using {@code OpTraceRayMotionNV} provides a time within that normalized range to be used when intersecting that ray with geometry. The geometry can be provided with motion by a combination of adding a second vertex position for time of 1.0 using ##VkAccelerationStructureGeometryMotionTrianglesDataNV and providing multiple transforms in the instance using ##VkAccelerationStructureMotionInstanceNV.
 
-        <h5>VK_NV_ray_tracing_motion_blur</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_ray_tracing_motion_blur}</dd>
@@ -57,7 +56,7 @@ val NV_ray_tracing_motion_blur = "NVRayTracingMotionBlur".nativeClassVK("NV_ray_
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_ray_tracing_motion_blur.txt">{@code GL_NV_ray_tracing_motion_blur}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/nv/GLSL_NV_ray_tracing_motion_blur.txt">{@code GL_NV_ray_tracing_motion_blur}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

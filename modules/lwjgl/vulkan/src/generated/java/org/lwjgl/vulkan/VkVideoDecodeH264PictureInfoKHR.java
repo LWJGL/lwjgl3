@@ -51,6 +51,11 @@ import org.lwjgl.vulkan.video.*;
  * <li>{@code seq_parameter_set_id} and {@code pic_parameter_set_id} are used to identify the active parameter sets, as described below;</li>
  * <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>.</li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <p>Reference picture setup is controlled by the value of {@code StdVideoDecodeH264PictureInfo}{@code ::flags.is_reference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoDecodeH264PictureInfo}{@code ::flags.is_reference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">DPB Slot States</a> section.</p>
+ * 
+ * <dl>
  * <dt>Active Parameter Sets</dt>
  * <dd><ul>
  * <li>The <em>active SPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h264-sps">SPS</a> identified by the key specified in {@code StdVideoDecodeH264PictureInfo}{@code ::seq_parameter_set_id}.</li>

@@ -19,8 +19,6 @@ package org.lwjgl.vulkan;
  * <p>The {@code VkAttachmentStoreOp} {@link VK10#VK_ATTACHMENT_STORE_OP_STORE ATTACHMENT_STORE_OP_STORE} <b>may</b> force an implementation to assume that the attachment was written and force an implementation to flush data to memory or to a higher level cache. The {@code VkAttachmentStoreOp} {@link #VK_ATTACHMENT_STORE_OP_NONE_QCOM ATTACHMENT_STORE_OP_NONE_QCOM} <b>may</b> allow an implementation to assume that the attachment was not written and allow an implementation to avoid such a flush.</p>
  * </div>
  * 
- * <h5>VK_QCOM_render_pass_store_ops</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_QCOM_render_pass_store_ops}</dd>
@@ -32,7 +30,7 @@ package org.lwjgl.vulkan;
  * <dd>2</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Bill Licea-Kane <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_store_ops]%20@wwlk%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_store_ops%20extension*">wwlk</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_store_ops]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_store_ops%20extension*">mnetsch</a></li>
  * </ul></dd>
  * </dl>
  * 

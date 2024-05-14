@@ -15,7 +15,6 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
 
         
 
-        <h5>VK_KHR_present_wait</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_present_wait}</dd>

@@ -15,7 +15,6 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle
 
         This new viewport swizzle is useful for a number of algorithms, including single-pass cube map rendering (broadcasting a primitive to multiple faces and reorienting the vertex position for each face) and voxel rasterization. The per-viewport component remapping and negation provided by the swizzle allows application code to re-orient three-dimensional geometry with a view along any of the <b>X</b>, <b>Y</b>, or <b>Z</b> axes. If a perspective projection and depth buffering is required, <code>1/W</code> buffering should be used, as described in the single-pass cube map rendering example in the “{@code Issues}” section below.
 
-        <h5>VK_NV_viewport_swizzle</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_viewport_swizzle}</dd>

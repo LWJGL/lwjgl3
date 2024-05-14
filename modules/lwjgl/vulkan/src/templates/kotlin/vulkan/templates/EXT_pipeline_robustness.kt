@@ -15,7 +15,6 @@ val EXT_pipeline_robustness = "EXTPipelineRobustness".nativeClassVK("EXT_pipelin
 
         As <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> and other robustness features may have an adverse effect on performance, this extension is designed to allow users to request robust behavior only where it may be needed.
 
-        <h5>VK_EXT_pipeline_robustness</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_pipeline_robustness}</dd>
@@ -30,7 +29,7 @@ val EXT_pipeline_robustness = "EXTPipelineRobustness".nativeClassVK("EXT_pipelin
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

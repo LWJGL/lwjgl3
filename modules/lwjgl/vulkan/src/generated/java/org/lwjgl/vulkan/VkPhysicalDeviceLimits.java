@@ -805,7 +805,7 @@ public class VkPhysicalDeviceLimits extends Struct<VkPhysicalDeviceLimits> {
     /** the maximum number of cull distances that <b>can</b> be used in a single shader stage. The size of any array declared with the {@code CullDistance} built-in decoration in a shader module <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxCullDistances() { return nmaxCullDistances(address()); }
-    /** the maximum combined number of clip and cull distances that <b>can</b> be used in a single shader stage. The sum of the sizes of any pair of arrays declared with the {@code ClipDistance} and {@code CullDistance} built-in decoration used by a single shader stage in a shader module <b>must</b> be less than or equal to this limit. */
+    /** the maximum combined number of clip and cull distances that <b>can</b> be used in a single shader stage. The sum of the sizes of all arrays declared with the {@code ClipDistance} and {@code CullDistance} built-in decoration used by a single shader stage in a shader module <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxCombinedClipAndCullDistances() { return nmaxCombinedClipAndCullDistances(address()); }
     /** the number of discrete priorities that <b>can</b> be assigned to a queue based on the value of each member of {@link VkDeviceQueueCreateInfo}{@code ::pQueuePriorities}. This <b>must</b> be at least 2, and levels <b>must</b> be spread evenly over the range, with at least one level at 1.0, and another at 0.0. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#devsandqueues-priority">Queue Priority</a>. */

@@ -10,8 +10,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>It documents cubic filtering of other image view types. It adds new structures that <b>can</b> be added to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} and {@link VkImageFormatProperties2} that <b>can</b> be used to determine which image types and which image view types support cubic filtering.</p>
  * 
- * <h5>VK_EXT_filter_cubic</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_filter_cubic}</dd>
@@ -23,7 +21,7 @@ package org.lwjgl.vulkan;
  * <dd>3</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Bill Licea-Kane <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_filter_cubic]%20@wwlk%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_filter_cubic%20extension*">wwlk</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_filter_cubic]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_filter_cubic%20extension*">mnetsch</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -13,7 +13,6 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
         """
         This extension extends {@link KHRSwapchain VK_KHR_swapchain} to enable creation of a shared presentable image. This allows the application to use the image while the presention engine is accessing it, in order to reduce the latency between rendering and presentation.
 
-        <h5>VK_KHR_shared_presentable_image</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shared_presentable_image}</dd>
@@ -28,7 +27,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and      {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

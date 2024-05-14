@@ -44,7 +44,6 @@ val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type =
 ￿    }
 ￿}</code></pre>
 
-        <h5>VK_EXT_tooling_info</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_tooling_info}</dd>

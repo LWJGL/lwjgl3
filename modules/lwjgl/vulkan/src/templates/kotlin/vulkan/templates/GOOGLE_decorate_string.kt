@@ -13,7 +13,6 @@ val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decora
         """
         The {@code VK_GOOGLE_decorate_string} extension allows use of the {@code SPV_GOOGLE_decorate_string} extension in SPIR-V shader modules.
 
-        <h5>VK_GOOGLE_decorate_string</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_GOOGLE_decorate_string}</dd>

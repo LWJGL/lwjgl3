@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not included in the {@code pNext} chain, {@code conservativeRasterizationMode} is considered to be {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT}, and and conservative rasterization is disabled.</p>
+ * <p>If this structure is not included in the {@code pNext} chain, {@code conservativeRasterizationMode} is considered to be {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT}, and conservative rasterization is disabled.</p>
  * 
  * <p>Polygon rasterization <b>can</b> be made conservative by setting {@code conservativeRasterizationMode} to {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT} or {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT} in {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}.</p>
  * 

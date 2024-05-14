@@ -61,7 +61,6 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb2);
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
 
-        <h5>VK_EXT_debug_report</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_debug_report}</dd>
@@ -397,6 +396,6 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         size_t("location", "an application defined value."),
         int32_t("messageCode", "an application defined value."),
         charUTF8.const.p("pLayerPrefix", "the abbreviation of the component making this event/message."),
-        charUTF8.const.p("pMessage", "a null-terminated string detailing the trigger conditions.")
+        charUTF8.const.p("pMessage", "a null-terminated UTF-8 string detailing the trigger conditions.")
     )
 }

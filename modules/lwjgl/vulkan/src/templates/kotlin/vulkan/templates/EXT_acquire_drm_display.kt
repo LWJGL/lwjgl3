@@ -13,7 +13,6 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
         """
         This extension allows an application to take exclusive control of a display using the Direct Rendering Manager (DRM) interface. When acquired, the display will be under full control of the application until the display is either released or the connector is unplugged.
 
-        <h5>VK_EXT_acquire_drm_display</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_acquire_drm_display}</dd>
@@ -80,7 +79,7 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
         <h5>Description</h5>
         All permissions necessary to control the display are granted to the Vulkan instance associated with the provided {@code physicalDevice} until the display is either released or the connector is unplugged. The provided {@code drmFd} must correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN must be returned. The DRM FD must have DRM master permissions. If any error is encountered during the acquisition of the display, the call must return the error code #ERROR_INITIALIZATION_FAILED.
 
-        The provided DRM fd should not be closed before the display is released, attempting to do it may result in undefined behaviour.
+        The provided DRM fd should not be closed before the display is released, attempting to do it may result in undefined behavior.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

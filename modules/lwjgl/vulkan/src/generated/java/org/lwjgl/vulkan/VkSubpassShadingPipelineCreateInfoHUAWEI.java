@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI}</li>
+ * <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -113,14 +114,22 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
     public VkSubpassShadingPipelineCreateInfoHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassShadingPipelineCreateInfoHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@link #renderPass} field. */
+    public VkSubpassShadingPipelineCreateInfoHUAWEI renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
+    /** Sets the specified value to the {@link #subpass} field. */
+    public VkSubpassShadingPipelineCreateInfoHUAWEI subpass(@NativeType("uint32_t") int value) { nsubpass(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSubpassShadingPipelineCreateInfoHUAWEI set(
         int sType,
-        long pNext
+        long pNext,
+        long renderPass,
+        int subpass
     ) {
         sType(sType);
         pNext(pNext);
+        renderPass(renderPass);
+        subpass(subpass);
 
         return this;
     }
@@ -263,6 +272,10 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.PNEXT, value); }
+    /** Unsafe version of {@link #renderPass(long) renderPass}. */
+    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.RENDERPASS, value); }
+    /** Unsafe version of {@link #subpass(int) subpass}. */
+    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.SUBPASS, value); }
 
     // -----------------------------------
 
@@ -321,6 +334,10 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
         public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI); }
         /** Sets the specified value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#pNext} field. */
         public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkSubpassShadingPipelineCreateInfoHUAWEI.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#renderPass} field. */
+        public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkSubpassShadingPipelineCreateInfoHUAWEI.nrenderPass(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#subpass} field. */
+        public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer subpass(@NativeType("uint32_t") int value) { VkSubpassShadingPipelineCreateInfoHUAWEI.nsubpass(address(), value); return this; }
 
     }
 

@@ -19,7 +19,6 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
             <li>Applications should expect transitions to/from #QUEUE_FAMILY_FOREIGN_EXT to be more expensive than transitions to/from #QUEUE_FAMILY_EXTERNAL_KHR.</li>
         </ul>
 
-        <h5>VK_EXT_queue_family_foreign</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_queue_family_foreign}</dd>

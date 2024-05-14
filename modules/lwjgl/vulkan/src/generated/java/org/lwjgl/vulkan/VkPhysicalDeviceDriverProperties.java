@@ -131,7 +131,7 @@ public class VkPhysicalDeviceDriverProperties extends Struct<VkPhysicalDeviceDri
     /** an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver. */
     @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
     public String driverInfoString() { return ndriverInfoString(address()); }
-    /** the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}). */
+    /** the latest version of the Vulkan conformance test that the implementor has successfully tested this driver against prior to release (see {@link VkConformanceVersion}). */
     public VkConformanceVersion conformanceVersion() { return nconformanceVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

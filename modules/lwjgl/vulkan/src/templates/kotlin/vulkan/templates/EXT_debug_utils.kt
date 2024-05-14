@@ -217,7 +217,6 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    // End the queue label region
 ￿    pfnQueueEndDebugUtilsLabelEXT(queue);</code></pre>
 
-        <h5>VK_EXT_debug_utils</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_debug_utils}</dd>

@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows a single slice of a 3D image to be used as a 2D view in image descriptors, matching both the functionality of glBindImageTexture in OpenGL with the {@code layer} parameter set to true and 2D view binding provided by the extension EGL_KHR_gl_texture_3D_image. It is primarily intended to support GL emulation.
  * 
- * <h5>VK_EXT_image_2d_view_of_3d</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_image_2d_view_of_3d}</dd>
@@ -20,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRMaintenance1 VK_KHR_maintenance1} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+ * <dd>{@link KHRMaintenance1 VK_KHR_maintenance1} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
  * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>

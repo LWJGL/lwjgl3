@@ -16,7 +16,6 @@ val MSFT_layered_driver = "MSFTLayeredDriver".nativeClassVK("MSFT_layered_driver
         <h5>Examples</h5>
         None.
 
-        <h5>VK_MSFT_layered_driver</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_MSFT_layered_driver}</dd>
@@ -31,7 +30,7 @@ val MSFT_layered_driver = "MSFTLayeredDriver".nativeClassVK("MSFT_layered_driver
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -36,7 +36,6 @@ val KHR_ray_query = "KHRRayQuery".nativeClassVK("KHR_ray_query", type = "device"
 ￿    // Not in shadow
 ￿}</code></pre>
 
-        <h5>VK_KHR_ray_query</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_ray_query}</dd>
@@ -71,7 +70,7 @@ val KHR_ray_query = "KHRRayQuery".nativeClassVK("KHR_ray_query", type = "device"
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_ray_query.txt">{@code GLSL_EXT_ray_query}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_ray_query.txt">{@code GLSL_EXT_ray_query}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

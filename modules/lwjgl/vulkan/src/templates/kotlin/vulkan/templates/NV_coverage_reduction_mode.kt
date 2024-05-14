@@ -22,7 +22,6 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
 
         The new command #GetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV() can be used to query the various raster, color, depth/stencil sample count and reduction mode combinations that are supported by the implementation. This extension would allow an implementation to support the behavior of both {@code VK_NV_framebuffer_mixed_samples} and {@code VK_AMD_mixed_attachment_samples} extensions simultaneously.
 
-        <h5>VK_NV_coverage_reduction_mode</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_coverage_reduction_mode}</dd>
@@ -37,7 +36,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

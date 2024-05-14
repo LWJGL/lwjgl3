@@ -20,8 +20,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Applications can choose between explicitly disallowing or allowing this behavior, letting the implementation decide, or managing this mode of operation directly using the new {@link #vkAcquireFullScreenExclusiveModeEXT AcquireFullScreenExclusiveModeEXT} and {@link #vkReleaseFullScreenExclusiveModeEXT ReleaseFullScreenExclusiveModeEXT} commands.</p>
  * 
- * <h5>VK_EXT_full_screen_exclusive</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_full_screen_exclusive}</dd>
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRSurface VK_KHR_surface} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and {@link KHRSwapchain VK_KHR_swapchain}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRSurface VK_KHR_surface} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and {@link KHRSwapchain VK_KHR_swapchain}</dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_1</li>
@@ -288,7 +286,7 @@ public class EXTFullScreenExclusive {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Applications will not be able to present to {@code swapchain} after this call until exclusive full-screen access is reacquired. This is usually useful to handle when an application is minimised or otherwise intends to stop presenting for a time.</p>
+     * <p>Applications will not be able to present to {@code swapchain} after this call until exclusive full-screen access is reacquired. This is usually useful to handle when an application is minimized or otherwise intends to stop presenting for a time.</p>
      * </div>
      * 
      * <h5>Valid Usage</h5>
@@ -297,6 +295,29 @@ public class EXTFullScreenExclusive {
      * <li>{@code swapchain} <b>must</b> not be in the retired state</li>
      * <li>{@code swapchain} <b>must</b> be a swapchain created with a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure, with {@code fullScreenExclusive} set to {@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}</li>
      * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+     * <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Return Codes</h5>
+     * 
+     * <dl>
+     * <dt>On success, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
+     * <li>{@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}</li>
+     * </ul></dd>
+     * </dl>
      *
      * @param device    the device associated with {@code swapchain}.
      * @param swapchain the swapchain to release exclusive full-screen access from.

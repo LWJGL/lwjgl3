@@ -17,7 +17,6 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         Some implementations <b>may</b> need to evaluate depth image values while performing image layout transitions. To accommodate this, instances of the ##VkSampleLocationsInfoEXT structure <b>can</b> be specified for each situation where an explicit or automatic layout transition has to take place. ##VkSampleLocationsInfoEXT <b>can</b> be chained from ##VkImageMemoryBarrier structures to provide sample locations for layout transitions performed by #CmdWaitEvents() and #CmdPipelineBarrier() calls, and ##VkRenderPassSampleLocationsBeginInfoEXT <b>can</b> be chained from ##VkRenderPassBeginInfo to provide sample locations for layout transitions performed implicitly by a render pass instance.
 
-        <h5>VK_EXT_sample_locations</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_sample_locations}</dd>

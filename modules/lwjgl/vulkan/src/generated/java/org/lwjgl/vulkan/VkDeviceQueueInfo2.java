@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Such implementations will return {@code NULL} for either the protected or unprotected queues when calling {@code vkGetDeviceQueue2} with {@code queueIndex} in the range zero to {@link VkDeviceQueueCreateInfo}{@code ::queueCount} minus one. In cases where these implementations returned {@code NULL}, the corresponding queues are instead located in the extended range described in the preceding two paragraphs.</p>
  * 
- * <p>This behaviour will not be observed on any driver that has passed Vulkan conformance test suite version 1.3.3.0, or any subsequent version. This information can be found by querying {@link VkPhysicalDeviceDriverProperties}{@code ::conformanceVersion}.</p>
+ * <p>This behavior will not be observed on any driver that has passed Vulkan conformance test suite version 1.3.3.0, or any subsequent version. This information can be found by querying {@link VkPhysicalDeviceDriverProperties}{@code ::conformanceVersion}.</p>
  * </div>
  * 
  * <h5>Valid Usage</h5>

@@ -270,7 +270,7 @@ public class VkShaderModuleIdentifierEXT extends Struct<VkShaderModuleIdentifier
     /** Unsafe version of {@link #identifierSize}. */
     public static int nidentifierSize(long struct) { return UNSAFE.getInt(null, struct + VkShaderModuleIdentifierEXT.IDENTIFIERSIZE); }
     /** Unsafe version of {@link #identifier}. */
-    public static ByteBuffer nidentifier(long struct) { return memByteBuffer(struct + VkShaderModuleIdentifierEXT.IDENTIFIER, VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT); }
+    public static ByteBuffer nidentifier(long struct) { return memByteBuffer(struct + VkShaderModuleIdentifierEXT.IDENTIFIER, nidentifierSize(struct)); }
     /** Unsafe version of {@link #identifier(int) identifier}. */
     public static byte nidentifier(long struct, int index) {
         return UNSAFE.getByte(null, struct + VkShaderModuleIdentifierEXT.IDENTIFIER + check(index, VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT) * 1);

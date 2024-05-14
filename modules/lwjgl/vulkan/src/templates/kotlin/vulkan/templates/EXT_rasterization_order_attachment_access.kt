@@ -16,7 +16,6 @@ val EXT_rasterization_order_attachment_access = "EXTRasterizationOrderAttachment
         <h5>Examples</h5>
         None.
 
-        <h5>VK_EXT_rasterization_order_attachment_access</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_rasterization_order_attachment_access}</dd>
@@ -31,7 +30,7 @@ val EXT_rasterization_order_attachment_access = "EXTRasterizationOrderAttachment
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

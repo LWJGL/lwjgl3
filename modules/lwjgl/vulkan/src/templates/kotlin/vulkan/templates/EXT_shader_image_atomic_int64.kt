@@ -17,7 +17,6 @@ val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("E
 
         64-bit integer atomic support is guaranteed for optimally tiled images with the #FORMAT_R64_UINT and #FORMAT_R64_SINT formats.
 
-        <h5>VK_EXT_shader_image_atomic_int64</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_image_atomic_int64}</dd>
@@ -55,7 +54,7 @@ val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("E
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

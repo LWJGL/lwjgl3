@@ -38,8 +38,6 @@ package org.lwjgl.vulkan;
  *     //..
  * }</code></pre>
  * 
- * <h5>VK_EXT_shader_tile_image</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_shader_tile_image}</dd>
@@ -72,7 +70,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension provides API support for <a href="https://raw.githubusercontent.com/KhronosGroup/GLSL/master/extensions/ext/GLSL_EXT_shader_tile_image.txt">{@code GL_EXT_shader_tile_image}</a></li>
+ * <li>This extension provides API support for <a href="https://raw.githubusercontent.com/KhronosGroup/GLSL/main/extensions/ext/GLSL_EXT_shader_tile_image.txt">{@code GL_EXT_shader_tile_image}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

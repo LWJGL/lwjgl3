@@ -65,7 +65,6 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkDevice device;
 ￿    vkCreateDevice(physicalDevice, &amp;deviceCreateInfo, NULL, &amp;device);</code></pre>
 
-        <h5>VK_KHR_get_physical_device_properties2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_get_physical_device_properties2}</dd>

@@ -84,8 +84,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     return b0 | (b1 &lt;&lt; 1u);
  * }</code></pre>
  * 
- * <h5>VK_EXT_opacity_micromap</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_opacity_micromap}</dd>
@@ -96,7 +94,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRAccelerationStructure VK_KHR_acceleration_structure} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
+ * <dd>{@link KHRAccelerationStructure VK_KHR_acceleration_structure} and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>SPIR-V Dependencies</b></dt>
  * <dd><ul>
  * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_opacity_micromap.html">SPV_EXT_opacity_micromap</a></li>
@@ -117,7 +115,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>2022-08-24</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_opacity_micromap.txt">{@code GLSL_EXT_opacity_micromap}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_opacity_micromap.txt">{@code GLSL_EXT_opacity_micromap}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
@@ -750,7 +748,6 @@ public class EXTOpacityMicromap {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code deferredOperation} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
      * <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
      * <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
      * <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to host-visible device memory</li>
@@ -830,7 +827,6 @@ public class EXTOpacityMicromap {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code deferredOperation} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
      * <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
      * <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
      * <li>{@code pInfo→dst.hostAddress} <b>must</b> be a valid host pointer</li>
@@ -910,7 +906,6 @@ public class EXTOpacityMicromap {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code deferredOperation} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
      * <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
      * <li>{@code pInfo→src.hostAddress} <b>must</b> be a valid host pointer</li>
      * <li>{@code pInfo→src.hostAddress} <b>must</b> be aligned to 16 bytes</li>

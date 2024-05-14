@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>The {@link #VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV} flag lets the application allocate more than {@link VkDescriptorPoolCreateInfo}{@code ::maxSets} descriptor sets, and the {@link #VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV} lets the application allocate more descriptors than initially specified by {@link VkDescriptorPoolSize}{@code ::descriptorCount} for any descriptor types.</p>
  * 
- * <h5>VK_NV_descriptor_pool_overallocation</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_descriptor_pool_overallocation}</dd>

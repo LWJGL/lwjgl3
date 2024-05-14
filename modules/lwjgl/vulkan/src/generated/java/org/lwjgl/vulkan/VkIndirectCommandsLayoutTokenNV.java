@@ -167,7 +167,7 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the token command type. */
+    /** a {@code VkIndirectCommandsTokenTypeNV} specifying the token command type. */
     @NativeType("VkIndirectCommandsTokenTypeNV")
     public int tokenType() { return ntokenType(address()); }
     /** the index of the input stream containing the token argument data. */
@@ -194,7 +194,7 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     /** the size used for the push constant command. */
     @NativeType("uint32_t")
     public int pushconstantSize() { return npushconstantSize(address()); }
-    /** are the active states for the state flag command. */
+    /** a {@code VkIndirectStateFlagsNV} bitfield indicating the active states for the state flag command. */
     @NativeType("VkIndirectStateFlagsNV")
     public int indirectStateFlags() { return nindirectStateFlags(address()); }
     /** the optional size of the {@code pIndexTypes} and {@code pIndexTypeValues} array pairings. If not zero, it allows to register a custom {@code uint32_t} value to be treated as specific {@code VkIndexType}. */

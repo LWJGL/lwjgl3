@@ -195,70 +195,14 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     public VkLatencyTimingsFrameReportNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkLatencyTimingsFrameReportNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code presentID} field. */
-    public VkLatencyTimingsFrameReportNV presentID(@NativeType("uint64_t") long value) { npresentID(address(), value); return this; }
-    /** Sets the specified value to the {@code inputSampleTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV inputSampleTimeUs(@NativeType("uint64_t") long value) { ninputSampleTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #simStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV simStartTimeUs(@NativeType("uint64_t") long value) { nsimStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #simEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV simEndTimeUs(@NativeType("uint64_t") long value) { nsimEndTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@code renderSubmitStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV renderSubmitStartTimeUs(@NativeType("uint64_t") long value) { nrenderSubmitStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@code renderSubmitEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV renderSubmitEndTimeUs(@NativeType("uint64_t") long value) { nrenderSubmitEndTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV presentStartTimeUs(@NativeType("uint64_t") long value) { npresentStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV presentEndTimeUs(@NativeType("uint64_t") long value) { npresentEndTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #driverStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV driverStartTimeUs(@NativeType("uint64_t") long value) { ndriverStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #driverEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV driverEndTimeUs(@NativeType("uint64_t") long value) { ndriverEndTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #osRenderQueueStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV osRenderQueueStartTimeUs(@NativeType("uint64_t") long value) { nosRenderQueueStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #osRenderQueueEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV osRenderQueueEndTimeUs(@NativeType("uint64_t") long value) { nosRenderQueueEndTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #gpuRenderStartTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV gpuRenderStartTimeUs(@NativeType("uint64_t") long value) { ngpuRenderStartTimeUs(address(), value); return this; }
-    /** Sets the specified value to the {@link #gpuRenderEndTimeUs} field. */
-    public VkLatencyTimingsFrameReportNV gpuRenderEndTimeUs(@NativeType("uint64_t") long value) { ngpuRenderEndTimeUs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkLatencyTimingsFrameReportNV set(
         int sType,
-        long pNext,
-        long presentID,
-        long inputSampleTimeUs,
-        long simStartTimeUs,
-        long simEndTimeUs,
-        long renderSubmitStartTimeUs,
-        long renderSubmitEndTimeUs,
-        long presentStartTimeUs,
-        long presentEndTimeUs,
-        long driverStartTimeUs,
-        long driverEndTimeUs,
-        long osRenderQueueStartTimeUs,
-        long osRenderQueueEndTimeUs,
-        long gpuRenderStartTimeUs,
-        long gpuRenderEndTimeUs
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        presentID(presentID);
-        inputSampleTimeUs(inputSampleTimeUs);
-        simStartTimeUs(simStartTimeUs);
-        simEndTimeUs(simEndTimeUs);
-        renderSubmitStartTimeUs(renderSubmitStartTimeUs);
-        renderSubmitEndTimeUs(renderSubmitEndTimeUs);
-        presentStartTimeUs(presentStartTimeUs);
-        presentEndTimeUs(presentEndTimeUs);
-        driverStartTimeUs(driverStartTimeUs);
-        driverEndTimeUs(driverEndTimeUs);
-        osRenderQueueStartTimeUs(osRenderQueueStartTimeUs);
-        osRenderQueueEndTimeUs(osRenderQueueEndTimeUs);
-        gpuRenderStartTimeUs(gpuRenderStartTimeUs);
-        gpuRenderEndTimeUs(gpuRenderEndTimeUs);
 
         return this;
     }
@@ -425,34 +369,6 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencyTimingsFrameReportNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencyTimingsFrameReportNV.PNEXT, value); }
-    /** Unsafe version of {@link #presentID(long) presentID}. */
-    public static void npresentID(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTID, value); }
-    /** Unsafe version of {@link #inputSampleTimeUs(long) inputSampleTimeUs}. */
-    public static void ninputSampleTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.INPUTSAMPLETIMEUS, value); }
-    /** Unsafe version of {@link #simStartTimeUs(long) simStartTimeUs}. */
-    public static void nsimStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.SIMSTARTTIMEUS, value); }
-    /** Unsafe version of {@link #simEndTimeUs(long) simEndTimeUs}. */
-    public static void nsimEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.SIMENDTIMEUS, value); }
-    /** Unsafe version of {@link #renderSubmitStartTimeUs(long) renderSubmitStartTimeUs}. */
-    public static void nrenderSubmitStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITSTARTTIMEUS, value); }
-    /** Unsafe version of {@link #renderSubmitEndTimeUs(long) renderSubmitEndTimeUs}. */
-    public static void nrenderSubmitEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITENDTIMEUS, value); }
-    /** Unsafe version of {@link #presentStartTimeUs(long) presentStartTimeUs}. */
-    public static void npresentStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTSTARTTIMEUS, value); }
-    /** Unsafe version of {@link #presentEndTimeUs(long) presentEndTimeUs}. */
-    public static void npresentEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTENDTIMEUS, value); }
-    /** Unsafe version of {@link #driverStartTimeUs(long) driverStartTimeUs}. */
-    public static void ndriverStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.DRIVERSTARTTIMEUS, value); }
-    /** Unsafe version of {@link #driverEndTimeUs(long) driverEndTimeUs}. */
-    public static void ndriverEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.DRIVERENDTIMEUS, value); }
-    /** Unsafe version of {@link #osRenderQueueStartTimeUs(long) osRenderQueueStartTimeUs}. */
-    public static void nosRenderQueueStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUESTARTTIMEUS, value); }
-    /** Unsafe version of {@link #osRenderQueueEndTimeUs(long) osRenderQueueEndTimeUs}. */
-    public static void nosRenderQueueEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUEENDTIMEUS, value); }
-    /** Unsafe version of {@link #gpuRenderStartTimeUs(long) gpuRenderStartTimeUs}. */
-    public static void ngpuRenderStartTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.GPURENDERSTARTTIMEUS, value); }
-    /** Unsafe version of {@link #gpuRenderEndTimeUs(long) gpuRenderEndTimeUs}. */
-    public static void ngpuRenderEndTimeUs(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencyTimingsFrameReportNV.GPURENDERENDTIMEUS, value); }
 
     // -----------------------------------
 
@@ -547,34 +463,6 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         public VkLatencyTimingsFrameReportNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkLatencyTimingsFrameReportNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencyTimingsFrameReportNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code presentID} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer presentID(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.npresentID(address(), value); return this; }
-        /** Sets the specified value to the {@code inputSampleTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer inputSampleTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.ninputSampleTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#simStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer simStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nsimStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#simEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer simEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nsimEndTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@code renderSubmitStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer renderSubmitStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nrenderSubmitStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@code renderSubmitEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer renderSubmitEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nrenderSubmitEndTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#presentStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer presentStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.npresentStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#presentEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer presentEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.npresentEndTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#driverStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer driverStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.ndriverStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#driverEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer driverEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.ndriverEndTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#osRenderQueueStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer osRenderQueueStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nosRenderQueueStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#osRenderQueueEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer osRenderQueueEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.nosRenderQueueEndTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#gpuRenderStartTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer gpuRenderStartTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.ngpuRenderStartTimeUs(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencyTimingsFrameReportNV#gpuRenderEndTimeUs} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer gpuRenderEndTimeUs(@NativeType("uint64_t") long value) { VkLatencyTimingsFrameReportNV.ngpuRenderEndTimeUs(address(), value); return this; }
 
     }
 

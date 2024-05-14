@@ -13,7 +13,6 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         """
         This extension defines a set of utility functions for use with the {@link KHRDisplay VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions.
 
-        <h5>VK_EXT_display_control</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_display_control}</dd>

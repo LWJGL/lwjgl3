@@ -16,8 +16,6 @@ package org.lwjgl.vulkan;
  * <li>Allow querying a surface for the set of presentation modes which can be easily switched between without requiring swapchain recreation.</li>
  * </ul>
  * 
- * <h5>VK_EXT_surface_maintenance1</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_surface_maintenance1}</dd>

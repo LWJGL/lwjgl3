@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * The {@code VK_GOOGLE_hlsl_functionality1} extension allows use of the {@code SPV_GOOGLE_hlsl_functionality1} extension in SPIR-V shader modules.
  * 
- * <h5>VK_GOOGLE_hlsl_functionality1</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_GOOGLE_hlsl_functionality1}</dd>

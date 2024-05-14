@@ -21,7 +21,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 
         This extension provides access to the {@code PassthroughNV} decoration under the {@code GeometryShaderPassthroughNV} capability. Adding this to a geometry shader input variable specifies that the values of this input are copied to the corresponding vertex of the output primitive.
 
-        When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behaviour is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.
+        When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behavior is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.
 
         <h5>Sample Code</h5>
         Consider the following simple geometry shader in unextended GLSL:
@@ -82,7 +82,6 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 ￿    gl_Layer = compute_layer();
 ￿}</code></pre>
 
-        <h5>VK_NV_geometry_shader_passthrough</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_geometry_shader_passthrough}</dd>

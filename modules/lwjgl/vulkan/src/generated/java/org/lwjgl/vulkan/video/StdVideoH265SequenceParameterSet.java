@@ -293,7 +293,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     /** @return the value of the {@code log2_diff_max_min_pcm_luma_coding_block_size} field. */
     @NativeType("uint8_t")
     public byte log2_diff_max_min_pcm_luma_coding_block_size() { return nlog2_diff_max_min_pcm_luma_coding_block_size(address()); }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
+    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
     @NativeType("uint8_t")
     public byte palette_max_size() { return npalette_max_size(address()); }
     /** @return the value of the {@code delta_palette_max_predictor_size} field. */

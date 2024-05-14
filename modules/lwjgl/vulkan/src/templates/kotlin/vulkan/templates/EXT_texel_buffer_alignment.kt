@@ -16,7 +16,6 @@ val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_te
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, only the properties structure is promoted. The feature structure is not promoted and {@code texelBufferAlignment} is enabled if using a Vulkan 1.3 instance. The original type name is still available as an alias of the core functionality.
 
-        <h5>VK_EXT_texel_buffer_alignment</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_texel_buffer_alignment}</dd>

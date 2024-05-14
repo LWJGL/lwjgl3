@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code acquireUnmodifiedMemory} is {@link VK10#VK_TRUE TRUE}, and the memory barrier’s {@code srcQueueFamilyIndex} is a special queue family reserved for external memory ownership transfers (as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-queue-transfers">Queue Family Ownership Transfer</a>), then each range of {@code VkDeviceMemory} bound to the resource <b>must</b> have remained unmodified during all time since the resource’s most recent release of ownership to the queue family.</li>
+ * <li>If {@code acquireUnmodifiedMemory} is {@link VK10#VK_TRUE TRUE}, and the memory barrier’s {@code srcQueueFamilyIndex} is a special queue family reserved for external memory ownership transfers (as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-queue-transfers">Queue Family Ownership Transfer</a>), then each range of {@code VkDeviceMemory} bound to the resource <b>must</b> have remained unmodified during all time since the resource’s most recent release of ownership to the queue family</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -16,7 +16,6 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
         <h5>Deprecation by {@code VK_EXT_metal_surface}</h5>
         The {@code VK_MVK_macos_surface} extension is considered deprecated and has been superseded by the {@link EXTMetalSurface VK_EXT_metal_surface} extension.
 
-        <h5>VK_MVK_macos_surface</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_MVK_macos_surface}</dd>
@@ -91,6 +90,11 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
 ￿    const VkMacOSSurfaceCreateInfoMVK*          pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
 ￿    VkSurfaceKHR*                               pSurface);</code></pre>
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The {@code vkCreateMacOSSurfaceMVK} function is considered deprecated and has been superseded by #CreateMetalSurfaceEXT() from the {@link EXTMetalSurface VK_EXT_metal_surface} extension.
+        </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

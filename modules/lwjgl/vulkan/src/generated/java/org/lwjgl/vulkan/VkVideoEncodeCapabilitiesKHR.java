@@ -16,13 +16,25 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying encode capabilities.
+ * Structure describing general video encode capabilities for a video profile.
  * 
  * <h5>Description</h5>
  * 
  * <p>Implementations <b>must</b> include support for at least {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR} and {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR} in {@code supportedEncodeFeedbackFlags}.</p>
  * 
- * <p>The input content and encode resolution (specified in {@link VkVideoEncodeInfoKHR}{@code ::codedExtent}) may not be aligned with the codec-specific coding block size. For example, the input content may be 1920x1080 and the coding block size may be 16x16 pixel blocks. In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with the coding block size. Encoding of the last row of blocks may be impacted by contents of the input image in pixel rows 1081 to 1088 (the next vertical alignment with the coding block size). In general, to ensure efficient encoding for the last row/column of blocks, and/or to ensure consistent encoding results between repeated encoding of the same input content, these extra pixel rows/columns should be filled to known values up to the coding block size alignment before encoding operations are performed. Some implementations support performing auto-fill of unaligned pixels beyond a specific alignment for the purposes of encoding, which is reported in {@code encodeInputPictureGranularity}. For example, if an implementation reports 1x1 in {@code encodeInputPictureGranularity}, then the implementation will perform auto-fill for any unaligned pixels beyond the encode resolution up to the next coding block size. For a coding block size of 16x16, if the implementation reports 16x16 in {@code encodeInputPictureGranularity}, then it is the application’s responsibility to fill any unaligned pixels, if desired. When the application does not fill these unaligned pixels, there <b>may</b> be an impact on the encoding efficiency but there will be no effect on the validity of the generated bitstream. If the implementation reports 8x8 in {@code encodeInputPictureGranularity}, then for the 1920x1080 example, since the content is aligned to 8 pixels vertically, the implementation will auto-fill pixel rows 1081 to 1088 (up to the 16x16 coding block size in the example). The auto-fill value(s) are implementation-specific. The auto-fill value(s) are not written to the input image memory, but are used as part of the encoding operation on the input image.</p>
+ * <p>{@code encodeInputPictureGranularity} provides information about the way <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">encode input picture</a> data is used as input to video encode operations. In particular, some implementations <b>may</b> not be able to limit the set of texels used to encode the output video bitstream to the image subregion specified in the {@link VkVideoPictureResourceInfoKHR} structure corresponding to the encode input picture (i.e. to the resolution of the image data to encode specified in its {@code codedExtent} member).</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>For example, the application requests the coded extent to be 1920x1080, but the implementation is only able to source the encode input picture data at the granularity of the codec-specific coding block size which is 16x16 pixels (or as otherwise indicated in {@code encodeInputPictureGranularity}). In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with it. Thus encoding of the last row of coding blocks will be impacted by the contents of the input image at texel rows 1080 to 1087 (the latter being the next row which is vertically aligned with the coding block size, assuming a zero-based texel row index).</p>
+ * </div>
+ * 
+ * <p>If {@code codedExtent} rounded up to the next integer multiple of {@code encodeInputPictureGranularity} is greater than the extent of the image subresource specified for the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">encode input picture</a>, then the texel values corresponding to texel coordinates outside of the bounds of the image subresource <b>may</b> be undefined. However, implementations <b>should</b> use well-defined default values for such texels in order to maximize the encoding efficiency for the last coding block row/column, and/or to ensure consistent encoding results across repeated encoding of the same input content. Nonetheless, the values used for such texels <b>must</b> not have an effect on whether the video encode operation produces a compliant bitstream, and <b>must</b> not have any other effects on the encoded picture data beyond what <b>may</b> otherwise result from using these texel values as input to any compression algorithm, as defined in the used video compression standard.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>While not required, it is generally a good practice for applications to make sure that the image subresource used for the encode input picture has an extent that is an integer multiple of the codec-specific coding block size (or at least {@code encodeInputPictureGranularity}) and that this padding area is filled with known values in order to improve encoding efficiency, portability, and reproducibility.</p>
+ * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -127,19 +139,19 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
     /** a bitmask of {@code VkVideoEncodeCapabilityFlagBitsKHR} describing supported encoding features. */
     @NativeType("VkVideoEncodeCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} indicating supported rate control modes. */
+    /** a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} indicating supported <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control modes</a>. */
     @NativeType("VkVideoEncodeRateControlModeFlagsKHR")
     public int rateControlModes() { return nrateControlModes(address()); }
-    /** indicates the maximum number of rate control layers supported. */
+    /** indicates the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-layers">rate control layers</a> supported. */
     @NativeType("uint32_t")
     public int maxRateControlLayers() { return nmaxRateControlLayers(address()); }
     /** indicates the maximum supported bitrate. */
     @NativeType("uint64_t")
     public long maxBitrate() { return nmaxBitrate(address()); }
-    /** indicates the number of discrete video encode quality levels supported. Implementations <b>must</b> report at least 1. */
+    /** indicates the number of discrete <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-quality-level">video encode quality levels</a> supported. Implementations <b>must</b> support at least one quality level. */
     @NativeType("uint32_t")
     public int maxQualityLevels() { return nmaxQualityLevels(address()); }
-    /** indicates the granularity at which <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">encode input picture</a> data is encoded. */
+    /** indicates the granularity at which <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">encode input picture</a> data is encoded and <b>may</b> indicate a texel granularity up to the size of the codec-specific coding block size. This capability does not impose any valid usage constraints on the application, however, depending on the contents of the encode input picture, it <b>may</b> have effects on the encoded bitstream, as described in more detail below. */
     public VkExtent2D encodeInputPictureGranularity() { return nencodeInputPictureGranularity(address()); }
     /** a bitmask of {@code VkVideoEncodeFeedbackFlagBitsKHR} values specifying the supported flags for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-video-encode-feedback">video encode feedback queries</a>. */
     @NativeType("VkVideoEncodeFeedbackFlagsKHR")

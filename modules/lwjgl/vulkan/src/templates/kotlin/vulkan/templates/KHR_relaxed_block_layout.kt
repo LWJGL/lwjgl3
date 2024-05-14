@@ -18,7 +18,6 @@ val KHR_relaxed_block_layout = "KHRRelaxedBlockLayout".nativeClassVK("KHR_relaxe
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_relaxed_block_layout</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_relaxed_block_layout}</dd>

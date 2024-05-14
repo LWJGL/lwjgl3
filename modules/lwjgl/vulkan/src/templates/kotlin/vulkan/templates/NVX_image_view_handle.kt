@@ -13,7 +13,6 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
         """
         This extension allows applications to query an opaque handle from an image view for use as a sampled image or storage image. This provides no direct functionality itself.
 
-        <h5>VK_NVX_image_view_handle</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NVX_image_view_handle}</dd>
@@ -125,7 +124,6 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
             <dt>On failure, this command returns</dt>
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_UNKNOWN</li>
             </ul></dd>
         </dl>
 

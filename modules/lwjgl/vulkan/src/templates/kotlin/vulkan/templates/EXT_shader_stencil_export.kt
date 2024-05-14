@@ -13,7 +13,6 @@ val EXT_shader_stencil_export = "EXTShaderStencilExport".nativeClassVK("EXT_shad
         """
         This extension adds support for the SPIR-V extension {@code SPV_EXT_shader_stencil_export}, providing a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this allows the test to be performed against the value generated in the shader.
 
-        <h5>VK_EXT_shader_stencil_export</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_stencil_export}</dd>

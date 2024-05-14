@@ -18,13 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Container for value and types of parameters that can be queried.
  * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be a valid {@code VkPerformanceValueTypeINTEL} value</li>
- * <li>If {@code type} is {@link INTELPerformanceQuery#VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL PERFORMANCE_VALUE_TYPE_STRING_INTEL}, the {@code valueString} member of {@code data} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkPerformanceValueDataINTEL}, {@link INTELPerformanceQuery#vkGetPerformanceParameterINTEL GetPerformanceParameterINTEL}</p>
@@ -90,36 +83,6 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     public int type() { return ntype(address()); }
     /** a {@link VkPerformanceValueDataINTEL} union specifying the value of the returned data. */
     public VkPerformanceValueDataINTEL data() { return ndata(address()); }
-
-    /** Sets the specified value to the {@link #type} field. */
-    public VkPerformanceValueINTEL type(@NativeType("VkPerformanceValueTypeINTEL") int value) { ntype(address(), value); return this; }
-    /** Copies the specified {@link VkPerformanceValueDataINTEL} to the {@link #data} field. */
-    public VkPerformanceValueINTEL data(VkPerformanceValueDataINTEL value) { ndata(address(), value); return this; }
-    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPerformanceValueINTEL data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkPerformanceValueINTEL set(
-        int type,
-        VkPerformanceValueDataINTEL data
-    ) {
-        type(type);
-        data(data);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkPerformanceValueINTEL set(VkPerformanceValueINTEL src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
 
     // -----------------------------------
 
@@ -258,11 +221,6 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     /** Unsafe version of {@link #data}. */
     public static VkPerformanceValueDataINTEL ndata(long struct) { return VkPerformanceValueDataINTEL.create(struct + VkPerformanceValueINTEL.DATA); }
 
-    /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceValueINTEL.TYPE, value); }
-    /** Unsafe version of {@link #data(VkPerformanceValueDataINTEL) data}. */
-    public static void ndata(long struct, VkPerformanceValueDataINTEL value) { memCopy(value.address(), struct + VkPerformanceValueINTEL.DATA, VkPerformanceValueDataINTEL.SIZEOF); }
-
     // -----------------------------------
 
     /** An array of {@link VkPerformanceValueINTEL} structs. */
@@ -306,13 +264,6 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
         public int type() { return VkPerformanceValueINTEL.ntype(address()); }
         /** @return a {@link VkPerformanceValueDataINTEL} view of the {@link VkPerformanceValueINTEL#data} field. */
         public VkPerformanceValueDataINTEL data() { return VkPerformanceValueINTEL.ndata(address()); }
-
-        /** Sets the specified value to the {@link VkPerformanceValueINTEL#type} field. */
-        public VkPerformanceValueINTEL.Buffer type(@NativeType("VkPerformanceValueTypeINTEL") int value) { VkPerformanceValueINTEL.ntype(address(), value); return this; }
-        /** Copies the specified {@link VkPerformanceValueDataINTEL} to the {@link VkPerformanceValueINTEL#data} field. */
-        public VkPerformanceValueINTEL.Buffer data(VkPerformanceValueDataINTEL value) { VkPerformanceValueINTEL.ndata(address(), value); return this; }
-        /** Passes the {@link VkPerformanceValueINTEL#data} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPerformanceValueINTEL.Buffer data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
 
     }
 

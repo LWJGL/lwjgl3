@@ -27,7 +27,6 @@ val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descrip
         <h5>Promotion to Vulkan 1.2</h5>
         Functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code descriptorIndexing} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_EXT_descriptor_indexing</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_descriptor_indexing}</dd>
@@ -42,7 +41,7 @@ val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descrip
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRMaintenance3 VK_KHR_maintenance3}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRMaintenance3 VK_KHR_maintenance3} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>
@@ -67,7 +66,7 @@ val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descrip
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_nonuniform_qualifier.txt">{@code GL_EXT_nonuniform_qualifier}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_nonuniform_qualifier.txt">{@code GL_EXT_nonuniform_qualifier}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

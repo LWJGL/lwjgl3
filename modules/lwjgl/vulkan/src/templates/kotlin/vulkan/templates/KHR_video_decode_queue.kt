@@ -17,7 +17,6 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
 
         This extension is to be used in conjunction with other codec specific video decode extensions that enable decoding video sequences of specific video compression standards.
 
-        <h5>VK_KHR_video_decode_queue</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_video_decode_queue}</dd>
@@ -29,13 +28,14 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <dd>25</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>7</dd>
+            <dd>8</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
+            <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
                 <li>Interacts with VK_KHR_format_feature_flags2</li>
             </ul></dd>
 
@@ -51,7 +51,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-09-29</dd>
+            <dd>2023-12-05</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -73,7 +73,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."7"
+        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."8"
     )
 
     StringConstant(
@@ -153,12 +153,17 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <h5>Description</h5>
         <ul>
             <li>#VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR indicates support for using the same video picture resource as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed picture</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-output-picture">decode output picture</a> in a video decode operation.</li>
-            <li>#VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR indicates support for using distinct video picture resources as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed picture</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-output-picture">decode output picture</a> in a video decode operation.</li>
+            <li>
+                #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR indicates support for using distinct video picture resources as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed picture</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-output-picture">decode output picture</a> in a video decode operation.
+                <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Some video profiles allow using distinct video picture resources as the reconstructed picture and decode output picture in specific video decode operations even when the video decode profile does not support #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR. Even if the implementation only reports coincide, the decode output picture for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain</a> enabled frames must be a different video picture resource from the reconstructed picture because film grain is applied outside of the coding loop.
+                </div>
+            </li>
         </ul>
 
         Implementations are only <b>required</b> to support one of #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR and #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR. Accordingly, applications <b>should</b> handle both cases to maximize portability.
 
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         If both #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR and #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR are supported, an application can choose to create separate images for decode DPB and decode output. E.g. in cases when linear tiling is preferred (and supported) for the decode output picture and the DPB requires optimal tiling, this avoids the need for a separate copy at the expense of additional memory bandwidth requirements during decoding.
         </div>
         """,
@@ -207,6 +212,8 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
 
         Currently each call to this command results in the issue of a single video decode operation.
 
+        If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR and the {@code pNext} chain of {@code pDecodeInfo} includes a ##VkVideoInlineQueryInfoKHR structure with its {@code queryPool} member specifying a valid {@code VkQueryPool} handle, then this command will execute a query for each video decode operation issued by it.
+
         <dl>
             <dt>Active Reference Picture Information</dt>
             <dd><ul>
@@ -220,10 +227,18 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <dt>Reconstructed Picture Information</dt>
             <dd><ul>
                 <li>The image subregion within the image subresource <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-image-subresource-reference">referred</a> to by the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> used as the reconstructed picture.</li>
-                <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> with the reconstructed picture.</li>
+                <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index to use for picture reconstruction.</li>
                 <li>The codec-specific reference information related to the reconstructed picture.</li>
             </ul></dd>
         </dl>
+
+        Specifying a valid ##VkVideoReferenceSlotInfoKHR structure in {@code pDecodeInfo→pSetupReferenceSlot} is always required, unless the video session was created with ##VkVideoSessionCreateInfoKHR{@code ::maxDpbSlot} equal to zero. However, the DPB slot identified by {@code pDecodeInfo→pSetupReferenceSlot→slotIndex} is only <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activated</a> with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed picture</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} if reference picture setup is requested according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-codec-specific-semantics">codec-specific semantics</a>.
+
+        If reconstructed picture information is specified, and {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} refers to a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> different than that of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-output-picture">decode output picture</a>, but reference picture setup is not requested, the contents of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> corresponding to the reconstructed picture will be undefined after the video decode operation.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Some implementations may always output the reconstructed picture or use it as temporary storage during the video decode operation even when the reconstructed picture is not marked for future reference.
+        </div>
 
         <dl>
             <dt>Decode Output Picture Information</dt>
@@ -283,15 +298,29 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>The bound video session <b>must</b> have been created with a decode operation</li>
             <li>The bound video session <b>must</b> not be in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-uninitialized">uninitialized</a> state at the time the command is executed on the device</li>
             <li>For each <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active">active</a> query, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active-query-index">active query index</a> corresponding to the query type of that query plus {@code opCount} <b>must</b> be less than or equal to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-last-activatable-query-index">last activatable query index</a> corresponding to the query type of that query plus one</li>
+            <li>If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, and the {@code pNext} chain of {@code pDecodeInfo} includes a ##VkVideoInlineQueryInfoKHR structure with its {@code queryPool} member specifying a valid {@code VkQueryPool} handle, then ##VkVideoInlineQueryInfoKHR::queryCount <b>must</b> equal {@code opCount}</li>
+            <li>If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, and the {@code pNext} chain of {@code pDecodeInfo} includes a ##VkVideoInlineQueryInfoKHR structure with its {@code queryPool} member specifying a valid {@code VkQueryPool} handle, then all the queries used by the command, as specified by the ##VkVideoInlineQueryInfoKHR structure, <b>must</b> be <em>unavailable</em></li>
+            <li>If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, then the {@code queryType} used to create the {@code queryPool} specified in the ##VkVideoInlineQueryInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> be #QUERY_TYPE_RESULT_STATUS_ONLY_KHR</li>
+            <li>If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, then the {@code queryPool} specified in the ##VkVideoInlineQueryInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> have been created with a ##VkVideoProfileInfoKHR structure included in the {@code pNext} chain of ##VkQueryPoolCreateInfo identical to the one specified in ##VkVideoSessionCreateInfoKHR{@code ::pVideoProfile} the bound video session was created with</li>
+            <li>If the bound video session was created with #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, and the {@code queryType} used to create the {@code queryPool} specified in the ##VkVideoInlineQueryInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} is #QUERY_TYPE_RESULT_STATUS_ONLY_KHR, then the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> have been created with a queue family index that supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-result-status-only">result status queries</a>, as indicated by ##VkQueueFamilyQueryResultStatusPropertiesKHR{@code ::queryResultStatusSupport}</li>
             <li>{@code pDecodeInfo→srcBuffer} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-compatibility">compatible</a> with the video profile the bound video session was created with</li>
             <li>If {@code commandBuffer} is an unprotected command buffer and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pDecodeInfo→srcBuffer} <b>must</b> not be a protected buffer</li>
             <li>If {@code commandBuffer} is a protected command buffer and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pDecodeInfo→srcBuffer} <b>must</b> be a protected buffer</li>
             <li>{@code pDecodeInfo→srcBufferOffset} <b>must</b> be an integer multiple of ##VkVideoCapabilitiesKHR{@code ::minBitstreamBufferOffsetAlignment}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the bound video session was created with</li>
             <li>{@code pDecodeInfo→srcBufferRange} <b>must</b> be an integer multiple of ##VkVideoCapabilitiesKHR{@code ::minBitstreamBufferSizeAlignment}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the bound video session was created with</li>
             <li>If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL} and ##VkVideoDecodeCapabilitiesKHR{@code ::flags} does not include #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the bound video session was created with, then the video picture resources specified by {@code pDecodeInfo→dstPictureResource} and {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} <b>must</b> not <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a></li>
-            <li>If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL} and ##VkVideoDecodeCapabilitiesKHR{@code ::flags} does not include #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the bound video session was created with, then the video picture resources specified by {@code pDecodeInfo→dstPictureResource} and {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} <b>must</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a></li>
+            <li>
+                If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL} and none of the following is true:
+                <ul>
+                    <li>##VkVideoDecodeCapabilitiesKHR{@code ::flags} includes #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the bound video session was created with</li>
+                    <li>the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR and ##VkVideoDecodeAV1ProfileInfoKHR{@code ::filmGrainSupport} set to #TRUE, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain</a> is enabled for the decoded picture</li>
+                </ul>
+
+                then the video picture resources specified by {@code pDecodeInfo→dstPictureResource} and {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} <b>must</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a>
+            </li>
             <li>{@code pDecodeInfo→dstPictureResource.imageViewBinding} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-compatibility">compatible</a> with the video profile the bound video session was created with</li>
             <li>The format of {@code pDecodeInfo→dstPictureResource.imageViewBinding} <b>must</b> match the ##VkVideoSessionCreateInfoKHR{@code ::pictureFormat} the bound video session was created with</li>
             <li>{@code pDecodeInfo→dstPictureResource.codedOffset} <b>must</b> be an integer multiple of {@code codedOffsetGranularity}</li>
@@ -299,6 +328,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <li>{@code pDecodeInfo→dstPictureResource.imageViewBinding} <b>must</b> have been created with #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</li>
             <li>If {@code commandBuffer} is an unprotected command buffer and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pDecodeInfo→dstPictureResource.imageViewBinding} <b>must</b> not have been created from a protected image</li>
             <li>If {@code commandBuffer} is a protected command buffer and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pDecodeInfo→dstPictureResource.imageViewBinding} <b>must</b> have been created from a protected image</li>
+            <li>{@code pDecodeInfo→pSetupReferenceSlot} <b>must</b> not be {@code NULL} unless the bound video session was created with ##VkVideoSessionCreateInfoKHR{@code ::maxDpbSlots} equal to zero</li>
             <li>If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, then {@code pDecodeInfo→pSetupReferenceSlot→slotIndex} <b>must</b> be less than the ##VkVideoSessionCreateInfoKHR{@code ::maxDpbSlots} specified when the bound video session was created</li>
             <li>If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, then {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource→codedOffset} <b>must</b> be an integer multiple of {@code codedOffsetGranularity}</li>
             <li>If {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, then {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} <b>must</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a> one of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#bound-reference-picture-resources">bound reference picture resource</a></li>
@@ -336,6 +366,16 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the bound video session parameters object <b>must</b> contain a {@code StdVideoH265PictureParameterSet} entry with {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id} matching {@code StdVideoDecodeH265PictureInfo}{@code ::sps_video_parameter_set_id}, {@code StdVideoDecodeH265PictureInfo}{@code ::pps_seq_parameter_set_id}, and {@code StdVideoDecodeH265PictureInfo}{@code ::pps_pic_parameter_set_id}, respectively, that are provided in the {@code pStdPictureInfo} member of the ##VkVideoDecodeH265PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo}</li>
             <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR and {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, then the {@code pNext} chain of {@code pDecodeInfo→pSetupReferenceSlot} <b>must</b> include a ##VkVideoDecodeH265DpbSlotInfoKHR structure</li>
             <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the {@code pNext} chain of each element of {@code pDecodeInfo→pReferenceSlots} <b>must</b> include a ##VkVideoDecodeH265DpbSlotInfoKHR structure</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR and ##VkVideoDecodeAV1ProfileInfoKHR{@code ::filmGrainSupport} set to #FALSE, then <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain</a> <b>must</b> not be enabled for the decoded picture</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain</a> is enabled for the decoded picture, then the video picture resources specified by {@code pDecodeInfo→dstPictureResource} and {@code pDecodeInfo→pSetupReferenceSlot→pPictureResource} <b>must</b> not <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a></li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> include a ##VkVideoDecodeAV1PictureInfoKHR structure</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code frameHeaderOffset} member of the ##VkVideoDecodeAV1PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> be less than the minimum of {@code pDecodeInfo→srcBufferRange}</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then all elements of the {@code pTileOffsets} member of the ##VkVideoDecodeAV1PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> be less than {@code pDecodeInfo→srcBufferRange}</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then for each element <code>i</code> of the {@code pTileOffsets} and {@code pTileSizes} members of the ##VkVideoDecodeAV1PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} the sum of {@code pTileOffsets}[i] and {@code pTileSizes}[i] <b>must</b> be less than or equal to {@code pDecodeInfo→srcBufferRange}</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR and {@code pDecodeInfo→pSetupReferenceSlot} is not {@code NULL}, then the {@code pNext} chain of {@code pDecodeInfo→pSetupReferenceSlot} <b>must</b> include a ##VkVideoDecodeAV1DpbSlotInfoKHR structure</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code pNext} chain of each element of {@code pDecodeInfo→pReferenceSlots} <b>must</b> include a ##VkVideoDecodeAV1DpbSlotInfoKHR structure</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then each element of the {@code referenceNameSlotIndices} array member of the ##VkVideoDecodeAV1PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo} <b>must</b> either be negative or <b>must</b> equal the {@code slotIndex} member of one of the elements of {@code pDecodeInfo→pReferenceSlots}</li>
+            <li>If the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code slotIndex} member of each element of {@code pDecodeInfo→pReferenceSlots} <b>must</b> equal one of the elements of the {@code referenceNameSlotIndices} array member of the ##VkVideoDecodeAV1PictureInfoKHR structure included in the {@code pNext} chain of {@code pDecodeInfo}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

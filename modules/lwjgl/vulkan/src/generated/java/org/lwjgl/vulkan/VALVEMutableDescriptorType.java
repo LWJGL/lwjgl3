@@ -14,8 +14,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>These features together allow much more efficient emulation of the raw D3D12 binding model. This extension is primarily intended to be useful for API layering efforts.</p>
  * 
- * <h5>VK_VALVE_mutable_descriptor_type</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_VALVE_mutable_descriptor_type}</dd>

@@ -13,7 +13,6 @@ val EXT_depth_range_unrestricted = "EXTDepthRangeUnrestricted".nativeClassVK("EX
         """
         This extension removes the ##VkViewport {@code minDepth} and {@code maxDepth} restrictions that the values must be between {@code 0.0} and {@code 1.0}, inclusive. It also removes the same restriction on ##VkPipelineDepthStencilStateCreateInfo {@code minDepthBounds} and {@code maxDepthBounds}. Finally it removes the restriction on the {@code depth} value in ##VkClearDepthStencilValue.
 
-        <h5>VK_EXT_depth_range_unrestricted</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_depth_range_unrestricted}</dd>

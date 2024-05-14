@@ -15,7 +15,6 @@ val IMG_relaxed_line_rasterization = "IMGRelaxedLineRasterization".nativeClassVK
 
         This extension allows OpenGL emulation layers to enable the OpenGL compatible line rasterization mode of such implementations.
 
-        <h5>VK_IMG_relaxed_line_rasterization</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_IMG_relaxed_line_rasterization}</dd>

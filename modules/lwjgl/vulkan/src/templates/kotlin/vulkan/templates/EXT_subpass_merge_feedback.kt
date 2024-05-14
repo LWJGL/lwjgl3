@@ -13,7 +13,6 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
         """
         This extension adds a mechanism to provide feedback to an application about whether the subpasses specified on render pass creation are merged by the implementation. Additionally, it provides a control to enable or disable subpass merging in the render pass.
 
-        <h5>VK_EXT_subpass_merge_feedback</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_subpass_merge_feedback}</dd>
@@ -28,7 +27,7 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

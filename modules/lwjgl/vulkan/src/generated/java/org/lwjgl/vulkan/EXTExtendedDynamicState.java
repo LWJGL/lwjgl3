@@ -22,8 +22,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension has been partially promoted. All dynamic state enumerants and entry points in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The feature structure is not promoted. Extension interfaces that were promoted remain available as aliases of the core functionality.</p>
  * 
- * <h5>VK_EXT_extended_dynamic_state</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_extended_dynamic_state}</dd>

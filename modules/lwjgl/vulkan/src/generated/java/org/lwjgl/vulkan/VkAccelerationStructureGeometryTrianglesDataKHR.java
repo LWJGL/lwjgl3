@@ -146,7 +146,7 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct<VkAc
     /** the stride in bytes between each vertex. */
     @NativeType("VkDeviceSize")
     public long vertexStride() { return nvertexStride(address()); }
-    /** the highest index of a vertex that will be addressed by a build command using this structure. */
+    /** the number of vertices in {@code vertexData} minus one. */
     @NativeType("uint32_t")
     public int maxVertex() { return nmaxVertex(address()); }
     /** the {@code VkIndexType} of each index element. */

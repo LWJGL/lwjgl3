@@ -10,8 +10,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension adds a query for the extended limit, and the supported usages that are allowed for that limit. This limit is an increase to {@link VkPhysicalDeviceLimits}{@code ::sparseAddressSpaceSize} when the {@code VkImage} or {@code VkBuffer} uses only usages that are supported.</p>
  * 
- * <h5>VK_NV_extended_sparse_address_space</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_extended_sparse_address_space}</dd>

@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM}</li>
- * <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} {@link VkRenderPassStripeInfoARM} structures</li>
+ * <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} valid {@link VkRenderPassStripeInfoARM} structures</li>
  * <li>{@code stripeInfoCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
  *     uint32_t {@link #stripeInfoCount};
- *     {@link VkRenderPassStripeInfoARM VkRenderPassStripeInfoARM} * {@link #pStripeInfos};
+ *     {@link VkRenderPassStripeInfoARM VkRenderPassStripeInfoARM} const * {@link #pStripeInfos};
  * }</code></pre>
  */
 public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeginInfoARM> implements NativeResource {
@@ -116,7 +116,7 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
     @NativeType("uint32_t")
     public int stripeInfoCount() { return nstripeInfoCount(address()); }
     /** a pointer to an array of {@code stripeInfoCount} {@link VkRenderPassStripeInfoARM} structures describing the stripes used by the render pass instance. */
-    @NativeType("VkRenderPassStripeInfoARM *")
+    @NativeType("VkRenderPassStripeInfoARM const *")
     public VkRenderPassStripeInfoARM.Buffer pStripeInfos() { return npStripeInfos(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
@@ -126,7 +126,7 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassStripeBeginInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@link #pStripeInfos} field. */
-    public VkRenderPassStripeBeginInfoARM pStripeInfos(@NativeType("VkRenderPassStripeInfoARM *") VkRenderPassStripeInfoARM.Buffer value) { npStripeInfos(address(), value); return this; }
+    public VkRenderPassStripeBeginInfoARM pStripeInfos(@NativeType("VkRenderPassStripeInfoARM const *") VkRenderPassStripeInfoARM.Buffer value) { npStripeInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkRenderPassStripeBeginInfoARM set(
@@ -341,7 +341,7 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
         @NativeType("uint32_t")
         public int stripeInfoCount() { return VkRenderPassStripeBeginInfoARM.nstripeInfoCount(address()); }
         /** @return a {@link VkRenderPassStripeInfoARM.Buffer} view of the struct array pointed to by the {@link VkRenderPassStripeBeginInfoARM#pStripeInfos} field. */
-        @NativeType("VkRenderPassStripeInfoARM *")
+        @NativeType("VkRenderPassStripeInfoARM const *")
         public VkRenderPassStripeInfoARM.Buffer pStripeInfos() { return VkRenderPassStripeBeginInfoARM.npStripeInfos(address()); }
 
         /** Sets the specified value to the {@link VkRenderPassStripeBeginInfoARM#sType} field. */
@@ -351,7 +351,7 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
         /** Sets the specified value to the {@link VkRenderPassStripeBeginInfoARM#pNext} field. */
         public VkRenderPassStripeBeginInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassStripeBeginInfoARM.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@link VkRenderPassStripeBeginInfoARM#pStripeInfos} field. */
-        public VkRenderPassStripeBeginInfoARM.Buffer pStripeInfos(@NativeType("VkRenderPassStripeInfoARM *") VkRenderPassStripeInfoARM.Buffer value) { VkRenderPassStripeBeginInfoARM.npStripeInfos(address(), value); return this; }
+        public VkRenderPassStripeBeginInfoARM.Buffer pStripeInfos(@NativeType("VkRenderPassStripeInfoARM const *") VkRenderPassStripeInfoARM.Buffer value) { VkRenderPassStripeBeginInfoARM.npStripeInfos(address(), value); return this; }
 
     }
 

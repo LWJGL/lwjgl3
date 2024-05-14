@@ -15,8 +15,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>To support initializing a new image in preparation for a host copy, it is now possible to transition a new image to {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or other host-copyable layouts via {@link #vkTransitionImageLayoutEXT TransitionImageLayoutEXT}. Additionally, it is possible to perform copies that preserve the swizzling layout of the image by using the {@link #VK_HOST_IMAGE_COPY_MEMCPY_EXT HOST_IMAGE_COPY_MEMCPY_EXT} flag. In that case, the memory size needed for copies to or from a buffer can be retrieved by chaining {@link VkSubresourceHostMemcpySizeEXT} to {@code pLayout} in {@link #vkGetImageSubresourceLayout2EXT GetImageSubresourceLayout2EXT}.</p>
  * 
- * <h5>VK_EXT_host_image_copy</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_host_image_copy}</dd>
@@ -27,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRCopyCommands2 VK_KHR_copy_commands2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRCopyCommands2 VK_KHR_copy_commands2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Shahbaz Youssefi <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_host_image_copy]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_host_image_copy%20extension*">syoussefi</a></li>

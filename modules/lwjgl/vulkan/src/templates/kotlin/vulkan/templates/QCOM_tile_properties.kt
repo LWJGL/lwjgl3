@@ -13,7 +13,6 @@ val QCOM_tile_properties = "QCOMTileProperties".nativeClassVK("QCOM_tile_propert
         """
         This extension allows an application to query the tile properties. This extension supports both renderpasses and dynamic rendering.
 
-        <h5>VK_QCOM_tile_properties</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_QCOM_tile_properties}</dd>
@@ -28,16 +27,17 @@ val QCOM_tile_properties = "QCOMTileProperties".nativeClassVK("QCOM_tile_propert
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
                 <li>Interacts with VK_KHR_dynamic_rendering</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_tile_properties]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_tile_properties%20extension*">jackohound</a></li>
+                <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_tile_properties]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_tile_properties%20extension*">mnetsch</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>

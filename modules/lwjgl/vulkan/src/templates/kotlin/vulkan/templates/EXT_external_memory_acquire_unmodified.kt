@@ -13,7 +13,6 @@ val EXT_external_memory_acquire_unmodified = "EXTExternalMemoryAcquireUnmodified
         """
         A memory barrier <b>may</b> have a performance penalty when acquiring ownership of a subresource range from an external queue family. This extension provides API that <b>may</b> reduce the performance penalty if ownership of the subresource range was previously released to the external queue family and if the resource’s memory has remained unmodified between the release and acquire operations.
 
-        <h5>VK_EXT_external_memory_acquire_unmodified</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_external_memory_acquire_unmodified}</dd>
@@ -28,7 +27,7 @@ val EXT_external_memory_acquire_unmodified = "EXTExternalMemoryAcquireUnmodified
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRExternalMemory VK_KHR_external_memory}</dd>
+            <dd>{@link KHRExternalMemory VK_KHR_external_memory} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

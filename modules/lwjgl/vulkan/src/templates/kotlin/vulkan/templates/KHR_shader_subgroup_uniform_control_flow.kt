@@ -15,7 +15,6 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
 
         Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirv-spec">Khronos SPIR-V Specification</a>).
 
-        <h5>VK_KHR_shader_subgroup_uniform_control_flow</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_subgroup_uniform_control_flow}</dd>
@@ -54,7 +53,7 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Requires SPIR-V 1.3.</li>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_subgroupuniform_qualifier.txt">{@code GL_EXT_subgroupuniform_qualifier}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_subgroupuniform_qualifier.txt">{@code GL_EXT_subgroupuniform_qualifier}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

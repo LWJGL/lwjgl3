@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * The {@code VK_GOOGLE_user_type} extension allows use of the {@code SPV_GOOGLE_user_type} extension in SPIR-V shader modules.
  * 
- * <h5>VK_GOOGLE_user_type</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_GOOGLE_user_type}</dd>

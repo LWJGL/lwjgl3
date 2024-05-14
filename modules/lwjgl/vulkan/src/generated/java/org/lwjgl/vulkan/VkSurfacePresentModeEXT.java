@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code presentMode} <b>must</b> be a value reported by {@link KHRSurface#vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR} for the specified surface.</li>
+ * <li>{@code presentMode} <b>must</b> be a value reported by {@link KHRSurface#vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR} for the specified surface</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

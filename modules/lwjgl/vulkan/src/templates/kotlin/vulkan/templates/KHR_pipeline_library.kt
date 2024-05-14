@@ -13,7 +13,6 @@ val KHR_pipeline_library = "KHRPipelineLibrary".nativeClassVK("KHR_pipeline_libr
         """
         A pipeline library is a special pipeline that cannot be bound, instead it defines a set of shaders and shader groups which can be linked into other pipelines. This extension defines the infrastructure for pipeline libraries, but does not specify the creation or usage of pipeline libraries. This is left to additional dependent extensions.
 
-        <h5>VK_KHR_pipeline_library</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_pipeline_library}</dd>

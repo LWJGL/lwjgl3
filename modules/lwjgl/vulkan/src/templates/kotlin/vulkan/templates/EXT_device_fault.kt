@@ -15,7 +15,6 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
 
         This extension introduces a new command: #GetDeviceFaultInfoEXT(), which may be called subsequent to a #ERROR_DEVICE_LOST error code having been returned by the implementation. This command allows developers to query for additional information on GPU faults which may have caused device loss, and to generate binary crash dumps, which may be loaded into external tools for further diagnosis.
 
-        <h5>VK_EXT_device_fault</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_device_fault}</dd>
@@ -30,7 +29,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -165,9 +164,9 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code device} <b>must</b> be in the <em>lost</em> state</li>
-            <li>If the value referenced by {@code pFaultCounts→addressInfoCount} is not 0, and {@code pFaultInfo→pAddressInfos} is not {@code NULL}, {@code pFaultInfo→pAddressInfos} must be a valid pointer to an array of {@code pFaultCounts→addressInfoCount} ##VkDeviceFaultAddressInfoEXT structures</li>
-            <li>If the value referenced by {@code pFaultCounts→vendorInfoCount} is not 0, and {@code pFaultInfo→pVendorInfos} is not {@code NULL}, {@code pFaultInfo→pVendorInfos} must be a valid pointer to an array of {@code pFaultCounts→vendorInfoCount} ##VkDeviceFaultVendorInfoEXT structures</li>
-            <li>If the value referenced by {@code pFaultCounts→vendorBinarySize} is not 0, and {@code pFaultInfo→pVendorBinaryData} is not {@code NULL}, {@code pFaultInfo→pVendorBinaryData} must be a valid pointer to an array of {@code pFaultCounts→vendorBinarySize} bytes</li>
+            <li>If the value referenced by {@code pFaultCounts→addressInfoCount} is not 0, and {@code pFaultInfo→pAddressInfos} is not {@code NULL}, {@code pFaultInfo→pAddressInfos} <b>must</b> be a valid pointer to an array of {@code pFaultCounts→addressInfoCount} ##VkDeviceFaultAddressInfoEXT structures</li>
+            <li>If the value referenced by {@code pFaultCounts→vendorInfoCount} is not 0, and {@code pFaultInfo→pVendorInfos} is not {@code NULL}, {@code pFaultInfo→pVendorInfos} <b>must</b> be a valid pointer to an array of {@code pFaultCounts→vendorInfoCount} ##VkDeviceFaultVendorInfoEXT structures</li>
+            <li>If the value referenced by {@code pFaultCounts→vendorBinarySize} is not 0, and {@code pFaultInfo→pVendorBinaryData} is not {@code NULL}, {@code pFaultInfo→pVendorBinaryData} <b>must</b> be a valid pointer to an array of {@code pFaultCounts→vendorBinarySize} bytes</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

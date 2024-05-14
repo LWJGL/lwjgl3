@@ -119,26 +119,14 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
     public VkAccelerationStructureBuildSizesInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureBuildSizesInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructureSize} field. */
-    public VkAccelerationStructureBuildSizesInfoKHR accelerationStructureSize(@NativeType("VkDeviceSize") long value) { naccelerationStructureSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #updateScratchSize} field. */
-    public VkAccelerationStructureBuildSizesInfoKHR updateScratchSize(@NativeType("VkDeviceSize") long value) { nupdateScratchSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #buildScratchSize} field. */
-    public VkAccelerationStructureBuildSizesInfoKHR buildScratchSize(@NativeType("VkDeviceSize") long value) { nbuildScratchSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkAccelerationStructureBuildSizesInfoKHR set(
         int sType,
-        long pNext,
-        long accelerationStructureSize,
-        long updateScratchSize,
-        long buildScratchSize
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        accelerationStructureSize(accelerationStructureSize);
-        updateScratchSize(updateScratchSize);
-        buildScratchSize(buildScratchSize);
 
         return this;
     }
@@ -283,12 +271,6 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildSizesInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureBuildSizesInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #accelerationStructureSize(long) accelerationStructureSize}. */
-    public static void naccelerationStructureSize(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.ACCELERATIONSTRUCTURESIZE, value); }
-    /** Unsafe version of {@link #updateScratchSize(long) updateScratchSize}. */
-    public static void nupdateScratchSize(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.UPDATESCRATCHSIZE, value); }
-    /** Unsafe version of {@link #buildScratchSize(long) buildScratchSize}. */
-    public static void nbuildScratchSize(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.BUILDSCRATCHSIZE, value); }
 
     // -----------------------------------
 
@@ -350,12 +332,6 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
         public VkAccelerationStructureBuildSizesInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#pNext} field. */
         public VkAccelerationStructureBuildSizesInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureBuildSizesInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#accelerationStructureSize} field. */
-        public VkAccelerationStructureBuildSizesInfoKHR.Buffer accelerationStructureSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureBuildSizesInfoKHR.naccelerationStructureSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#updateScratchSize} field. */
-        public VkAccelerationStructureBuildSizesInfoKHR.Buffer updateScratchSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureBuildSizesInfoKHR.nupdateScratchSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#buildScratchSize} field. */
-        public VkAccelerationStructureBuildSizesInfoKHR.Buffer buildScratchSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureBuildSizesInfoKHR.nbuildScratchSize(address(), value); return this; }
 
     }
 

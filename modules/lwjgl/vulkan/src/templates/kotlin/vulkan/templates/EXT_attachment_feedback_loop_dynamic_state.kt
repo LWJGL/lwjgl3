@@ -13,7 +13,6 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
         """
         This extension adds support for setting attachment feedback loops dynamically on command buffers.
 
-        <h5>VK_EXT_attachment_feedback_loop_dynamic_state</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_attachment_feedback_loop_dynamic_state}</dd>
@@ -28,7 +27,7 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link EXTAttachmentFeedbackLoopLayout VK_EXT_attachment_feedback_loop_layout}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTAttachmentFeedbackLoopLayout VK_EXT_attachment_feedback_loop_layout}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

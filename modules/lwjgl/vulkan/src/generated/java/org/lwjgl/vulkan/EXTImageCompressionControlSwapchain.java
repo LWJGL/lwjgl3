@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension enables fixed-rate image compression and adds the ability to control when this kind of compression can be applied to swapchain images.
  * 
- * <h5>VK_EXT_image_compression_control_swapchain</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_image_compression_control_swapchain}</dd>

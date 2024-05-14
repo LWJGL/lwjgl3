@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union specifying a acceleration structure motion instance data for building into an acceleration structure geometry.
+ * Union specifying an acceleration structure motion instance data for building into an acceleration structure geometry.
  * 
  * <h5>See Also</h5>
  * 

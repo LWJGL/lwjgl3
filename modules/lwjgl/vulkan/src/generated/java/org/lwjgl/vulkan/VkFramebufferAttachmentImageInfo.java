@@ -23,6 +23,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Images that <b>can</b> be used with the framebuffer when beginning a render pass, as specified by {@link VkRenderPassAttachmentBeginInfo}, <b>must</b> be created with parameters that are identical to those specified here.</p>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If {@code viewFormatCount} is not 0, and the render pass is not being used with an external format resolve attachment, each element of {@code pViewFormats} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

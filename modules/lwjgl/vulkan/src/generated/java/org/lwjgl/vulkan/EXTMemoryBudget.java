@@ -14,8 +14,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>With this information, the idea is for an application at some interval (once per frame, per few seconds, etc) to query {@code heapBudget} and {@code heapUsage}. From here the application can notice if it is over budget and decide how it wants to handle the memory situation (free it, move to host memory, changing mipmap levels, etc). This extension is designed to be used in concert with {@link EXTMemoryPriority VK_EXT_memory_priority} to help with this part of memory management.</p>
  * 
- * <h5>VK_EXT_memory_budget</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_memory_budget}</dd>

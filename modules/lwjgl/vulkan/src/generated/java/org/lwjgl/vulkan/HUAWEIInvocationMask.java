@@ -46,8 +46,6 @@ import static org.lwjgl.system.JNI.*;
  *     swapChainExtent.width,
  *     swapChainExtent.height, 1);</code></pre>
  * 
- * <h5>VK_HUAWEI_invocation_mask</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_HUAWEI_invocation_mask}</dd>
@@ -58,7 +56,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
+ * <dd>{@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Pan Gao <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@PanGao-h%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension*">PanGao-h</a></li>
@@ -134,7 +132,7 @@ public class HUAWEIInvocationMask {
      * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have a format of {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
      * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created with {@link #VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI} set</li>
      * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageLayout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL}</li>
-     * <li>Thread mask image resolution must match the {@code width} and {@code height} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}</li>
+     * <li>Thread mask image resolution <b>must</b> match the {@code width} and {@code height} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}</li>
      * <li>Each element in the invocation mask image <b>must</b> have the value 0 or 1. The value 1 means the invocation is active</li>
      * <li>{@code depth} in {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR} <b>must</b> be 1</li>
      * </ul>

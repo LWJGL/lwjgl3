@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Depending on the used video encode operation, additional codec-specific structures <b>may</b> need to be included in the {@code pNext} chain of this structure to capture feedback information about the requested parameter data, as described in the corresponding sections.</p>
+ * <p>Depending on the used video encode operation, additional codec-specific structures <b>can</b> be included in the {@code pNext} chain of this structure to capture codec-specific feedback information about the requested parameter data, as described in the corresponding sections.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264SessionParametersFeedbackInfoEXT} or {@link VkVideoEncodeH265SessionParametersFeedbackInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR} or {@link VkVideoEncodeH265SessionParametersFeedbackInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -100,7 +100,7 @@ public class VkVideoEncodeSessionParametersFeedbackInfoKHR extends Struct<VkVide
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether any of the requested parameter data were overridden by the implementation. */
+    /** indicates whether any of the requested parameter data were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasOverrides() { return nhasOverrides(address()) != 0; }
 
@@ -110,10 +110,10 @@ public class VkVideoEncodeSessionParametersFeedbackInfoKHR extends Struct<VkVide
     public VkVideoEncodeSessionParametersFeedbackInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeSessionParametersFeedbackInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoEncodeH264SessionParametersFeedbackInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeSessionParametersFeedbackInfoKHR pNext(VkVideoEncodeH264SessionParametersFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265SessionParametersFeedbackInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeSessionParametersFeedbackInfoKHR pNext(VkVideoEncodeH265SessionParametersFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeSessionParametersFeedbackInfoKHR pNext(VkVideoEncodeH264SessionParametersFeedbackInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265SessionParametersFeedbackInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeSessionParametersFeedbackInfoKHR pNext(VkVideoEncodeH265SessionParametersFeedbackInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeSessionParametersFeedbackInfoKHR set(
@@ -317,10 +317,10 @@ public class VkVideoEncodeSessionParametersFeedbackInfoKHR extends Struct<VkVide
         public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeSessionParametersFeedbackInfoKHR#pNext} field. */
         public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeSessionParametersFeedbackInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoEncodeH264SessionParametersFeedbackInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265SessionParametersFeedbackInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersFeedbackInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265SessionParametersFeedbackInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeSessionParametersFeedbackInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersFeedbackInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

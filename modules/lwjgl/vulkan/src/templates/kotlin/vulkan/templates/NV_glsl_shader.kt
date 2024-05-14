@@ -39,7 +39,6 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
 ￿    VkShaderModule vertexShader;
 ￿    vkCreateShaderModule(device, &amp;vertexShaderInfo, 0, &amp;vertexShader);</code></pre>
 
-        <h5>VK_NV_glsl_shader</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_glsl_shader}</dd>

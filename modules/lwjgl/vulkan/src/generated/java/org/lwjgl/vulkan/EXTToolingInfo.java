@@ -51,8 +51,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     }
  * }</code></pre>
  * 
- * <h5>VK_EXT_tooling_info</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_tooling_info}</dd>

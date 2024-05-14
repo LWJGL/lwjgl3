@@ -13,7 +13,6 @@ val KHR_map_memory2 = "KHRMapMemory2".nativeClassVK("KHR_map_memory2", type = "d
         """
         This extension provides extensible versions of the Vulkan memory map and unmap entry points. The new entry points are functionally identical to the core entry points, except that their parameters are specified using extensible structures that can be used to pass extension-specific information.
 
-        <h5>VK_KHR_map_memory2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_map_memory2}</dd>
@@ -148,6 +147,11 @@ val KHR_map_memory2 = "KHRMapMemory2".nativeClassVK("KHR_map_memory2", type = "d
             <dt>On success, this command returns</dt>
             <dd><ul>
                 <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_MEMORY_MAP_FAILED</li>
             </ul></dd>
         </dl>
 

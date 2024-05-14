@@ -402,6 +402,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#SUBGROUP_FEATURE_CLUSTERED_BIT specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformClustered} capability.</li>
             <li>#SUBGROUP_FEATURE_QUAD_BIT specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformQuad} capability.</li>
             <li>#SUBGROUP_FEATURE_PARTITIONED_BIT_NV specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformPartitionedNV} capability.</li>
+            <li>#SUBGROUP_FEATURE_ROTATE_BIT_KHR specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformRotateKHR} capability.</li>
+            <li>#SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT_KHR specifies the device will accept SPIR-V shader modules that use the {@code ClusterSize} operand to {@code OpGroupNonUniformRotateKHR}.</li>
         </ul>
         """,
 
@@ -841,7 +843,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The intended behaviour of #EnumerateInstanceVersion() is that an implementation <b>should</b> not need to perform memory allocations and <b>should</b> unconditionally return #SUCCESS. The loader, and any enabled layers, <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY in the case of a failed memory allocation.
+        The intended behavior of #EnumerateInstanceVersion() is that an implementation <b>should</b> not need to perform memory allocations and <b>should</b> unconditionally return #SUCCESS. The loader, and any enabled layers, <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY in the case of a failed memory allocation.
         </div>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -893,8 +895,14 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
 
+        If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-maintenance6">{@code maintenance6}</a> feature is enabled, this command <b>must</b> attempt to perform all of the memory binding operations described by {@code pBindInfos}, and <b>must</b> not early exit on the first failure.
+
+        If any of the memory binding operations described by {@code pBindInfos} fail, the {@code VkResult} returned by this command <b>must</b> be the return value of any one of the memory binding operations which did not return #SUCCESS.
+
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        If {@code vkBindBufferMemory2} fails, and {@code bindInfoCount} was greater than one, then the buffers referenced by {@code pBindInfos} will be in an indeterminate state, and must not be used. Applications should destroy these buffers.
+        If the {@code vkBindBufferMemory2} command failed, ##VkBindMemoryStatusKHR structures were not included in the {@code pNext} chains of each element of {@code pBindInfos}, and {@code bindInfoCount} was greater than one, then the buffers referenced by {@code pBindInfos} will be in an indeterminate state, and must not be used.
+
+        Applications should destroy these buffers.
         </div>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -953,8 +961,14 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
 
+        If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-maintenance6">{@code maintenance6}</a> feature is enabled, this command <b>must</b> attempt to perform all of the memory binding operations described by {@code pBindInfos}, and <b>must</b> not early exit on the first failure.
+
+        If any of the memory binding operations described by {@code pBindInfos} fail, the {@code VkResult} returned by this command <b>must</b> be the return value of any one of the memory binding operations which did not return #SUCCESS.
+
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        If {@code vkBindImageMemory2} fails, and {@code bindInfoCount} was greater than one, then the images referenced by {@code pBindInfos} will be in an indeterminate state, and must not be used. Applications should destroy these images.
+        If the {@code vkBindImageMemory2} command failed, ##VkBindMemoryStatusKHR structures were not included in the {@code pNext} chains of each element of {@code pBindInfos}, and {@code bindInfoCount} was greater than one, then the images referenced by {@code pBindInfos} will be in an indeterminate state, and must not be used.
+
+        Applications should destroy these images.
         </div>
 
         <h5>Valid Usage</h5>
@@ -1135,8 +1149,12 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If a {@code VkSampler} created with {@code magFilter} or {@code minFilter} equal to #FILTER_LINEAR and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
-            <li>If a {@code VkSampler} created with {@code mipmapMode} equal to #SAMPLER_MIPMAP_MODE_LINEAR and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
+            <li>If a {@code VkSampler} created with {@code magFilter} or {@code minFilter} equal to #FILTER_LINEAR, {@code reductionMode} equal to #SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE, and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
+            <li>If a {@code VkSampler} created with {@code magFilter} or {@code minFilter} equal to #FILTER_LINEAR and {@code reductionMode} equal to either #SAMPLER_REDUCTION_MODE_MIN or #SAMPLER_REDUCTION_MODE_MAX is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT</li>
+            <li>If a {@code VkSampler} created with {@code mipmapMode} equal to #SAMPLER_MIPMAP_MODE_LINEAR, {@code reductionMode} equal to #SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE, and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
+            <li>If a {@code VkSampler} created with {@code mipmapMode} equal to #SAMPLER_MIPMAP_MODE_LINEAR and {@code reductionMode} equal to either #SAMPLER_REDUCTION_MODE_MIN or #SAMPLER_REDUCTION_MODE_MAX is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT</li>
+            <li>If a {@code VkSampler} created with {@code unnormalizedCoordinates} equal to #TRUE is used to sample a {@code VkImageView} as a result of this command, then the image view’s {@code levelCount} and {@code layerCount} <b>must</b> be 1</li>
+            <li>If a {@code VkSampler} created with {@code unnormalizedCoordinates} equal to #TRUE is used to sample a {@code VkImageView} as a result of this command, then the image view’s {@code viewType} <b>must</b> be #IMAGE_VIEW_TYPE_1D or #IMAGE_VIEW_TYPE_2D</li>
             <li>If a {@code VkImageView} is sampled with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-depth-compare-operation">depth comparison</a>, the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT</li>
             <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT</li>
             <li>If a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor is accessed using atomic operations as a result of this command, then the storage texel buffer’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-buffer-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT</li>
@@ -1175,7 +1193,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>If {@code commandBuffer} is an unprotected command buffer and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, any resource accessed by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-binding">bound shaders</a> <b>must</b> not be a protected resource</li>
             <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-binding">a bound shader</a> accesses a {@code VkSampler} or {@code VkImageView} object that enables <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>, that object <b>must</b> only be used with {@code OpImageSample*} or {@code OpImageSparseSample*} instructions</li>
             <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-binding">a bound shader</a> accesses a {@code VkSampler} or {@code VkImageView} object that enables <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>, that object <b>must</b> not use the {@code ConstOffset} and {@code Offset} operands</li>
-            <li>If a {@code VkImageView} is accessed as a result of this command, then the image view’s {@code viewType} <b>must</b> match the {@code Dim} operand of the {@code OpTypeImage} as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-operation-validation">textures-operation-validation</a></li>
+            <li>If a {@code VkImageView} is accessed as a result of this command, then the image view’s {@code viewType} <b>must</b> match the {@code Dim} operand of the {@code OpTypeImage} as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-operation-validation">Instruction/Sampler/Image validation</a></li>
             <li>If a {@code VkImageView} is accessed as a result of this command, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-numericformat">numeric type</a> of the image view’s {@code format} and the {@code Sampled} {@code Type} operand of the {@code OpTypeImage} <b>must</b> match</li>
             <li>If a {@code VkImageView} created with a format other than #FORMAT_A8_UNORM_KHR is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the image view’s format</li>
             <li>If a {@code VkImageView} created with the format #FORMAT_A8_UNORM_KHR is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have four components</li>
@@ -1195,9 +1213,10 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>If {@code OpImageWeightedSampleQCOM}, {@code OpImageBoxFilterQCOM}, {@code OpImageBlockMatchWindowSSDQCOM}, {@code OpImageBlockMatchWindowSADQCOM}, {@code OpImageBlockMatchGatherSSDQCOM}, {@code OpImageBlockMatchGatherSADQCOM}, {@code OpImageBlockMatchSSDQCOM}, or {@code OpImageBlockMatchSADQCOM} uses a {@code VkSampler} as a result of this command, then the sampler <b>must</b> have been created with #SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM</li>
             <li>If any command other than {@code OpImageWeightedSampleQCOM}, {@code OpImageBoxFilterQCOM}, {@code OpImageBlockMatchWindowSSDQCOM}, {@code OpImageBlockMatchWindowSADQCOM}, {@code OpImageBlockMatchGatherSSDQCOM}, {@code OpImageBlockMatchGatherSADQCOM}, {@code OpImageBlockMatchSSDQCOM}, or {@code OpImageBlockMatchSADQCOM} uses a {@code VkSampler} as a result of this command, then the sampler <b>must</b> not have been created with #SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM</li>
             <li>If a {@code OpImageBlockMatchWindow*QCOM} or {@code OpImageBlockMatchGather*QCOM} instruction is used to read from an {@code VkImageView} as a result of this command, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_2_BLOCK_MATCHING_BIT_QCOM</li>
-            <li>If a {@code OpImageBlockMatchWindow*QCOM} or {@code OpImageBlockMatchGather*QCOM} instruction is used to read from an {@code VkImageView} as a result of this command, then the image view’s format <b>must</b> be a single-component format.</li>
+            <li>If a {@code OpImageBlockMatchWindow*QCOM} or {@code OpImageBlockMatchGather*QCOM} instruction is used to read from an {@code VkImageView} as a result of this command, then the image view’s format <b>must</b> be a single-component format</li>
             <li>If a {@code OpImageBlockMatchWindow*QCOM} or {@code OpImageBlockMatchGather*QCOM} read from a reference image as result of this command, then the specified reference coordinates <b>must</b> not fail <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-integer-coordinate-validation">integer texel coordinate validation</a></li>
             <li>Any shader invocation executed by this command <b>must</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-termination">terminate</a></li>
+            <li>If a descriptor with type equal to any of #DESCRIPTOR_TYPE_SAMPLE_WEIGHT_IMAGE_QCOM, #DESCRIPTOR_TYPE_BLOCK_MATCH_IMAGE_QCOM, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT is accessed as a result of this command, the image subresource identified by that descriptor <b>must</b> be in the image layout identified when the descriptor was written</li>
         </ul>
 
         <ul>
@@ -1210,7 +1229,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>{@code groupCountX} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[0] minus {@code baseGroupX}</li>
             <li>{@code groupCountY} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[1] minus {@code baseGroupY}</li>
             <li>{@code groupCountZ} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[2] minus {@code baseGroupZ}</li>
-            <li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the bound compute pipeline <b>must</b> have been created with the #PIPELINE_CREATE_DISPATCH_BASE flag</li>
+            <li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the bound compute pipeline <b>must</b> have been created with the #PIPELINE_CREATE_DISPATCH_BASE flag or the bound compute shader object <b>must</b> have been created with the #SHADER_CREATE_DISPATCH_BASE_BIT_EXT flag</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1695,7 +1714,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         Retrieve properties of an image format applied to sparse images.
 
         <h5>C Specification</h5>
-        {@code vkGetPhysicalDeviceSparseImageFormatProperties2} returns an array of ##VkSparseImageFormatProperties2. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
+        {@code vkGetPhysicalDeviceSparseImageFormatProperties2} returns an array of ##VkSparseImageFormatProperties2. Each element describes properties for one set of image aspects that are bound simultaneously for a {@code VkImage} created with the provided image creation parameters. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
 
         <pre><code>
 ￿void vkGetPhysicalDeviceSparseImageFormatProperties2(

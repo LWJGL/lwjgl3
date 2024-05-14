@@ -16,7 +16,6 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_get_memory_requirements2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_get_memory_requirements2}</dd>

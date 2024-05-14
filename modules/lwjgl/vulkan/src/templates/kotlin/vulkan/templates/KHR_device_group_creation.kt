@@ -46,7 +46,6 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
 ￿    vkCreateDevice(props[0].physicalDevices[0], &amp;devCreateInfo, NULL, &amp;g_vkDevice);
 ￿    free(props);</code></pre>
 
-        <h5>VK_KHR_device_group_creation</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_device_group_creation}</dd>

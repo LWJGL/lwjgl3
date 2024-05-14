@@ -19,8 +19,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>Version 2 of this extension introduces new dynamic states {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT} and {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT}, and the corresponding functions {@link #vkCmdSetDiscardRectangleEnableEXT CmdSetDiscardRectangleEnableEXT} and {@link #vkCmdSetDiscardRectangleModeEXT CmdSetDiscardRectangleModeEXT}. Applications that use these dynamic states must ensure the implementation advertises at least {@code specVersion} 2 of this extension.</p>
  * 
- * <h5>VK_EXT_discard_rectangles</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_discard_rectangles}</dd>

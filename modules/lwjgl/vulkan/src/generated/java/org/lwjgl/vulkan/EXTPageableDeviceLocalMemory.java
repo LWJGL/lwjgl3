@@ -19,8 +19,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>To take best advantage of pageable device-local memory the application must create the Vulkan device with the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT}{@code ::pageableDeviceLocalMemory} feature enabled. When enabled the Vulkan implementation will allow device-local memory allocations to be paged in and out by the operating system, and <b>may</b> not return VK_ERROR_OUT_OF_DEVICE_MEMORY even if device-local memory appears to be full, but will instead page this, or other allocations, out to make room. The Vulkan implementation will also ensure that host-local memory allocations will never be promoted to device-local memory by the operating system, or consume device-local memory.</p>
  * 
- * <h5>VK_EXT_pageable_device_local_memory</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_pageable_device_local_memory}</dd>

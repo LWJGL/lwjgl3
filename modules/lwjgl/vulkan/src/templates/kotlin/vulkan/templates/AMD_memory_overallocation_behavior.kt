@@ -13,7 +13,6 @@ val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativ
         """
         This extension allows controlling whether explicit overallocation beyond the device memory heap sizes (reported by ##VkPhysicalDeviceMemoryProperties) is allowed or not. Overallocation may lead to performance loss and is not supported for all platforms.
 
-        <h5>VK_AMD_memory_overallocation_behavior</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_memory_overallocation_behavior}</dd>

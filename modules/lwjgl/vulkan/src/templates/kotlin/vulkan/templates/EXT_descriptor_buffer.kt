@@ -13,7 +13,6 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         """
         This extension introduces new commands to put shader-accessible descriptors directly in memory, making the management of descriptor data more explicit.
 
-        <h5>VK_EXT_descriptor_buffer</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_descriptor_buffer}</dd>
@@ -28,7 +27,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link KHRSynchronization2 VK_KHR_synchronization2} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a> and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
@@ -288,8 +287,9 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         <h5>Valid Usage</h5>
         <ul>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-            <li>{@code dataSize} <b>must</b> equal the size of a descriptor of type ##VkDescriptorGetInfoEXT{@code ::type} determined by the value in ##VkPhysicalDeviceDescriptorBufferPropertiesEXT , or determined by ##VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT{@code ::combinedImageSamplerDensityMapDescriptorSize} if {@code pDescriptorInfo} specifies a #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER whose {@code VkSampler} was created with #SAMPLER_CREATE_SUBSAMPLED_BIT_EXT set</li>
-            <li>{@code pDescriptor} <b>must</b> be a valid pointer to an array of at least {@code dataSize} bytes</li>
+            <li>If {@code pDescriptorInfo→type} is not #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER or {@code pDescriptorInfo→data.pCombinedImageSampler} has an {@code imageView} member that was not created with a ##VkSamplerYcbcrConversionInfo structure in its {@code pNext} chain, {@code dataSize} <b>must</b> equal the size of a descriptor of type ##VkDescriptorGetInfoEXT{@code ::type} determined by the value in ##VkPhysicalDeviceDescriptorBufferPropertiesEXT , or determined by ##VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT{@code ::combinedImageSamplerDensityMapDescriptorSize} if {@code pDescriptorInfo} specifies a #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER whose {@code VkSampler} was created with #SAMPLER_CREATE_SUBSAMPLED_BIT_EXT set</li>
+            <li>If {@code pDescriptorInfo→type} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER and {@code pDescriptorInfo→data.pCombinedImageSampler} has an {@code imageView} member that was created with a ##VkSamplerYcbcrConversionInfo structure in its {@code pNext} chain, {@code dataSize} <b>must</b> equal the size of ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::combinedImageSamplerDescriptorSize} times ##VkSamplerYcbcrConversionImageFormatProperties{@code ::combinedImageSamplerDescriptorCount}</li>
+            <li>If {@code pDescriptorInfo→type} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER and it has a {@code imageView} that is #NULL_HANDLE then {@code dataSize} <b>must</b> be equal to the size of ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::combinedImageSamplerDescriptorSize}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -414,7 +414,6 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
             <li>The offsets in {@code pOffsets} <b>must</b> be aligned to ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::descriptorBufferOffsetAlignment}</li>
             <li>The offsets in {@code pOffsets} <b>must</b> be small enough such that any descriptor binding referenced by {@code layout} without the #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT flag computes a valid address inside the underlying {@code VkBuffer}</li>
             <li>The offsets in {@code pOffsets} <b>must</b> be small enough such that any location accessed by a shader as a sampler descriptor <b>must</b> be within ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxSamplerDescriptorBufferRange} of the sampler descriptor buffer binding</li>
@@ -422,8 +421,9 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
             <li>Each element of {@code pBufferIndices} <b>must</b> be less than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxDescriptorBufferBindings}</li>
             <li>Each element of {@code pBufferIndices} <b>must</b> reference a valid descriptor buffer binding set by a previous call to #CmdBindDescriptorBuffersEXT() in {@code commandBuffer}</li>
             <li>The sum of {@code firstSet} and {@code setCount} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
-            <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
             <li>The {@code VkDescriptorSetLayout} for each set from {@code firstSet} to <code>firstSet + setCount</code> when {@code layout} was created <b>must</b> have been created with the #DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT bit set</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+            <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -482,10 +482,10 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-            <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
             <li>The {@code VkDescriptorSetLayout} at index {@code set} when {@code layout} was created <b>must</b> have been created with the #DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT bit set</li>
             <li>{@code set} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+            <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

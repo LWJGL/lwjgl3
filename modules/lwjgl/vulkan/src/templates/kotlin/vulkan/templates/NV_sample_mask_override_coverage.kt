@@ -21,7 +21,6 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
 
         When using GLSL source-based shader languages, the {@code override_coverage} layout qualifier from {@code GL_NV_sample_mask_override_coverage} maps to the {@code OverrideCoverageNV} decoration. To use the {@code override_coverage} layout qualifier in GLSL the {@code GL_NV_sample_mask_override_coverage} extension must be enabled. Behavior is described in the {@code GL_NV_sample_mask_override_coverage} extension spec.
 
-        <h5>VK_NV_sample_mask_override_coverage</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_sample_mask_override_coverage}</dd>

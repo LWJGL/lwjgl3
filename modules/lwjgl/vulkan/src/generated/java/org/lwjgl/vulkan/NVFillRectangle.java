@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds a new {@code VkPolygonMode} {@code enum} where a triangle is rasterized by computing and filling its axis-aligned screen-space bounding box, disregarding the actual triangle edges. This can be useful for drawing a rectangle without being split into two triangles with an internal edge. It is also useful to minimize the number of primitives that need to be drawn, particularly for a user interface.
  * 
- * <h5>VK_NV_fill_rectangle</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_fill_rectangle}</dd>

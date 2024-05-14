@@ -11,7 +11,7 @@ import vulkan.*
 val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_performance_query", type = "device", postfix = "INTEL") {
     documentation =
         """
-        This extension allows an application to capture performance data to be interpreted by a external application or library.
+        This extension allows an application to capture performance data to be interpreted by an external application or library.
 
         Such a library is available at : <a href="https://github.com/intel/metrics-discovery">https://github.com/intel/metrics-discovery</a>
 
@@ -150,7 +150,6 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 ￿// The data can then be passed back to metrics-discovery from which
 ￿// human readable values can be queried.</code></pre>
 
-        <h5>VK_INTEL_performance_query</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_INTEL_performance_query}</dd>
@@ -380,6 +379,9 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkPerformanceMarkerInfoINTEL*         pMarkerInfo);</code></pre>
 
+        <h5>Description</h5>
+        The last marker set onto a command buffer before the end of a query will be part of the query result.
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -475,8 +477,8 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         ##VkPerformanceStreamMarkerInfoINTEL
         """,
 
-        VkCommandBuffer("commandBuffer", ""),
-        VkPerformanceStreamMarkerInfoINTEL.const.p("pMarkerInfo", "")
+        VkCommandBuffer("commandBuffer", "a {@code VkCommandBuffer} into which a stream marker is added."),
+        VkPerformanceStreamMarkerInfoINTEL.const.p("pMarkerInfo", "a pointer to a ##VkPerformanceStreamMarkerInfoINTEL structure describing the marker to insert.")
     )
 
     VkResult(

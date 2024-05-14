@@ -13,7 +13,6 @@ val NV_low_latency = "NVLowLatency".nativeClassVK("NV_low_latency", type = "devi
         """
         This extension adds the ##VkQueryLowLatencySupportNV structure, a structure used to query support for NVIDIA Reflex.
 
-        <h5>VK_NV_low_latency</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_low_latency}</dd>

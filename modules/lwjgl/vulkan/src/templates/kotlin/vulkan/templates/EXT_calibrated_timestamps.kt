@@ -16,7 +16,6 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
         <h5>Promotion to {@code VK_KHR_calibrated_timestamps}</h5>
         All functionality in this extension is included in {@link KHRCalibratedTimestamps VK_KHR_calibrated_timestamps}, with the suffix changed to KHR. The original enum names are still available as aliases of the KHR functionality.
 
-        <h5>VK_EXT_calibrated_timestamps</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_calibrated_timestamps}</dd>

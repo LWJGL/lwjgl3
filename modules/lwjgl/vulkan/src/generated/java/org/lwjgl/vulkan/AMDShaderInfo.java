@@ -79,8 +79,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     free(disassembly);
  * }</code></pre>
  * 
- * <h5>VK_AMD_shader_info</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_shader_info}</dd>
@@ -186,7 +184,7 @@ public class AMDShaderInfo {
      * 
      * <p>For {@code infoType} {@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD}, a {@link VkShaderStatisticsInfoAMD} structure will be written to the buffer pointed to by {@code pInfo}. This structure will be populated with statistics regarding the physical device resources used by that shader along with other miscellaneous information and is described in further detail below.</p>
      * 
-     * <p>For {@code infoType} {@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD}, {@code pInfo} is a pointer to a UTF-8 null-terminated string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.</p>
+     * <p>For {@code infoType} {@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD}, {@code pInfo} is a pointer to a null-terminated UTF-8 string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.</p>
      * 
      * <p>The formatting and contents of all other types of information, including {@code infoType} {@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD}, are left to the vendor and are not further specified by this extension.</p>
      * 

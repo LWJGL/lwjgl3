@@ -62,8 +62,6 @@ package org.lwjgl.vulkan;
  * 
  *     vkCreateRenderPass(...);</code></pre>
  * 
- * <h5>VK_KHR_maintenance2</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_maintenance2}</dd>

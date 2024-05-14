@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>64-bit integer atomic support is guaranteed for optimally tiled images with the {@link VK10#VK_FORMAT_R64_UINT FORMAT_R64_UINT} and {@link VK10#VK_FORMAT_R64_SINT FORMAT_R64_SINT} formats.</p>
  * 
- * <h5>VK_EXT_shader_image_atomic_int64</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_shader_image_atomic_int64}</dd>
@@ -44,7 +42,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

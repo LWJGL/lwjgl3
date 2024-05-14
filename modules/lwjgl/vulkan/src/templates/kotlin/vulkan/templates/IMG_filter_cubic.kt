@@ -32,7 +32,6 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
 ￿        &amp;createInfo,
 ￿        &amp;sampler);</code></pre>
 
-        <h5>VK_IMG_filter_cubic</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_IMG_filter_cubic}</dd>

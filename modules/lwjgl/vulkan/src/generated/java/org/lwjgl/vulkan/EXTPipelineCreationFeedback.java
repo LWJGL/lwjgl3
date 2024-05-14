@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
- * <h5>VK_EXT_pipeline_creation_feedback</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_pipeline_creation_feedback}</dd>

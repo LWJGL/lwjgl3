@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension provides a way to query if a protected swapchain created for a surface (and thus a specific windowing system) <b>can</b> be displayed on screen. It extends the existing {@link VkSurfaceCapabilities2KHR} structure with a new {@link VkSurfaceProtectedCapabilitiesKHR} structure from which the application <b>can</b> obtain information about support for protected swapchain creation through {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR}.</p>
  * 
- * <h5>VK_KHR_surface_protected_capabilities</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_surface_protected_capabilities}</dd>

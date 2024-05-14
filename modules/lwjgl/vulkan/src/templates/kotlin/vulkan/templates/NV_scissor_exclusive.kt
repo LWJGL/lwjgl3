@@ -15,7 +15,6 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
 
         Version 2 of this extension introduces #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV and #CmdSetExclusiveScissorEnableNV(). Applications that use this dynamic state must ensure the implementation advertises at least {@code specVersion} 2 of this extension.
 
-        <h5>VK_NV_scissor_exclusive</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_scissor_exclusive}</dd>
@@ -30,7 +29,7 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

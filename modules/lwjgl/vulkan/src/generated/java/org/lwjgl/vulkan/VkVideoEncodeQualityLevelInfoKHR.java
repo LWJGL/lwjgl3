@@ -27,6 +27,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>In the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} to change the video encode quality level state of the bound video session.</li>
  * </ul>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>{@code qualityLevel} <b>must</b> be less than {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxQualityLevels}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

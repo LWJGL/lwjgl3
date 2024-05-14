@@ -37,6 +37,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code memory} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code memory} and {@code memoryOffset} <b>must</b> match the memory requirements of the resource, as described in section <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-association">Resource Memory Association</a></li>
+ * <li>If the resource being bound is a {@code VkBuffer}, {@code resourceOffset}, {@code memoryOffset} and {@code size} <b>must</b> be an integer multiple of the {@code alignment} of the {@link VkMemoryRequirements} structure returned from a call to {@link VK10#vkGetBufferMemoryRequirements GetBufferMemoryRequirements} with the buffer resource</li>
+ * <li>If the resource being bound is a {@code VkImage}, {@code resourceOffset} and {@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} of the {@link VkMemoryRequirements} structure returned from a call to {@link VK10#vkGetImageMemoryRequirements GetImageMemoryRequirements} with the image resource</li>
  * <li>If {@code memory} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code memory} <b>must</b> not have been created with a memory type that reports {@link VK10#VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT} bit set</li>
  * <li>{@code size} <b>must</b> be greater than 0</li>
  * <li>{@code resourceOffset} <b>must</b> be less than the size of the resource</li>

@@ -14,7 +14,7 @@ val QCOM_image_processing2 = "QCOMImageProcessing2".nativeClassVK("QCOM_image_pr
         This extension enables support for the SPIR-V {@code TextureBlockMatch2QCOM} capability. It builds on the functionality of QCOM_image_processing with the addition of 4 new image processing operations.
 
         <ul>
-            <li>The {@code opImageBlockMatchWindowSADQCOM}` SPIR-V instruction builds upon the functionality of {@code opImageBlockMatchSADQCOM}` by repeatedly performing block match operations across a 2D window. The “2D windowExtent” and “compareMode” are are specified by ##VkSamplerBlockMatchWindowCreateInfoQCOM in the sampler used to create the <em>target image</em>. Like {@code OpImageBlockMatchSADQCOM}, {@code opImageBlockMatchWindowSADQCOM} computes an error metric, that describes whether a block of texels in the <em>target image</em> matches a corresponding block of texels in the <em>reference image</em>. Unlike {@code OpImageBlockMatchSADQCOM}, this instruction computes an error metric at each (X,Y) location within the 2D window and returns either the minimum or maximum error. The instruction only supports single-component formats. Refer to the pseudocode below for details.</li>
+            <li>The {@code opImageBlockMatchWindowSADQCOM}` SPIR-V instruction builds upon the functionality of {@code opImageBlockMatchSADQCOM}` by repeatedly performing block match operations across a 2D window. The “2D windowExtent” and “compareMode” are specified by ##VkSamplerBlockMatchWindowCreateInfoQCOM in the sampler used to create the <em>target image</em>. Like {@code OpImageBlockMatchSADQCOM}, {@code opImageBlockMatchWindowSADQCOM} computes an error metric, that describes whether a block of texels in the <em>target image</em> matches a corresponding block of texels in the <em>reference image</em>. Unlike {@code OpImageBlockMatchSADQCOM}, this instruction computes an error metric at each (X,Y) location within the 2D window and returns either the minimum or maximum error. The instruction only supports single-component formats. Refer to the pseudocode below for details.</li>
             <li>The {@code opImageBlockMatchWindowSSDQCOM} follows the same pattern, computing the SSD error metric at each location within the 2D window.</li>
             <li>The {@code opImageBlockMatchGatherSADQCOM} builds upon {@code OpImageBlockMatchSADQCOM}. This instruction computes an error metric, that describes whether a block of texels in the <em>target image</em> matches a corresponding block of texels in the <em>reference image</em>. The instruction computes the SAD error metric at 4 texel offsets and returns the error metric for each offset in the X,Y,Z,and W components. The instruction only supports single-component texture formats. Refer to the pseudocode below for details.</li>
             <li>The {@code opImageBlockMatchGatherSSDQCOM} follows the same pattern, computing the SSD error metric for 4 offsets.</li>
@@ -83,7 +83,6 @@ val QCOM_image_processing2 = "QCOMImageProcessing2".nativeClassVK("QCOM_image_pr
 ￿    return out;
 ￿}</code></pre>
 
-        <h5>VK_QCOM_image_processing2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_QCOM_image_processing2}</dd>
@@ -107,7 +106,7 @@ val QCOM_image_processing2 = "QCOMImageProcessing2".nativeClassVK("QCOM_image_pr
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_image_processing2]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_image_processing2%20extension*">jackohound</a></li>
+                <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_image_processing2]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_image_processing2%20extension*">mnetsch</a></li>
             </ul></dd>
         </dl>
 
@@ -118,7 +117,7 @@ val QCOM_image_processing2 = "QCOMImageProcessing2".nativeClassVK("QCOM_image_pr
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/qcom/GLSL_QCOM_image_processing2.txt">{@code GL_QCOM_image_processing2}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/qcom/GLSL_QCOM_image_processing2.txt">{@code GL_QCOM_image_processing2}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>These properties and built-ins <b>should</b> typically only be used for debugging purposes.</p>
  * 
- * <h5>VK_NV_shader_sm_builtins</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_shader_sm_builtins}</dd>
@@ -42,7 +40,7 @@ package org.lwjgl.vulkan;
  * <dd>2019-05-28</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_sm_builtins.txt">{@code GL_NV_shader_sm_builtins}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/nv/GLSL_NV_shader_sm_builtins.txt">{@code GL_NV_shader_sm_builtins}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

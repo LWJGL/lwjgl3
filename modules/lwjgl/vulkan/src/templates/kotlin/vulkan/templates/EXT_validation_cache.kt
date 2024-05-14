@@ -15,7 +15,6 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
         The new struct ##VkShaderModuleValidationCacheCreateInfoEXT can be included in the {@code pNext} chain at #CreateShaderModule() time. It contains a {@code VkValidationCacheEXT} to use when validating the {@code VkShaderModule}.
 
-        <h5>VK_EXT_validation_cache</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_validation_cache}</dd>

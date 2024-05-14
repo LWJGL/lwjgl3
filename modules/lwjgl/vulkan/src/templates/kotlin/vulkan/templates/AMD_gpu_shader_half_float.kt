@@ -16,7 +16,6 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
         <h5>Deprecation by {@code VK_KHR_shader_float16_int8}</h5>
         Functionality in this extension was included in {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension, when ##VkPhysicalDeviceShaderFloat16Int8FeaturesKHR{@code ::shaderFloat16} is enabled.
 
-        <h5>VK_AMD_gpu_shader_half_float</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_gpu_shader_half_float}</dd>

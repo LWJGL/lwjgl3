@@ -13,11 +13,10 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
         """
         This extension adds support for using cooperative matrix types in SPIR-V. Cooperative matrix types are medium-sized matrices that are primarily supported in compute shaders, where the storage for the matrix is spread across all invocations in some scope (usually a subgroup) and those invocations cooperate to efficiently perform matrix multiplies.
 
-        Cooperative matrix types are defined by the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_cooperative_matrix.html">{@code SPV_KHR_cooperative_matrix}</a> SPIR-V extension and can be used with the <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a> GLSL extension.
+        Cooperative matrix types are defined by the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_cooperative_matrix.html">{@code SPV_KHR_cooperative_matrix}</a> SPIR-V extension and can be used with the <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a> GLSL extension.
 
         This extension includes support for enumerating the matrix types and dimensions that are supported by the implementation.
 
-        <h5>VK_KHR_cooperative_matrix</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_cooperative_matrix}</dd>
@@ -32,7 +31,7 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>
@@ -43,6 +42,9 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
             <dd><ul>
                 <li>Kevin Petit <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_cooperative_matrix]%20@kpet%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_cooperative_matrix%20extension*">kpet</a></li>
             </ul></dd>
+
+            <dt><b>Extension Proposal</b></dt>
+            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_cooperative_matrix.adoc">VK_KHR_cooperative_matrix</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -52,7 +54,7 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/khr/GLSL_KHR_cooperative_matrix.txt">{@code GLSL_KHR_cooperative_matrix}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -21,7 +21,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>Acceleration structure copy commands</li>
         </ul>
 
-        <h5>VK_KHR_acceleration_structure</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_acceleration_structure}</dd>
@@ -36,10 +35,11 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <dd>13</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}</dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a> and {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}</dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
                 <li>Interacts with VK_EXT_debug_report</li>
                 <li>Interacts with VK_KHR_format_feature_flags2</li>
             </ul></dd>
@@ -421,6 +421,10 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         The expected usage for a trace capture/replay tool is that it will serialize and later deserialize the acceleration structure data using acceleration structure copy commands. During capture the tool will use #CopyAccelerationStructureToMemoryKHR() or #CmdCopyAccelerationStructureToMemoryKHR() with a {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR, and #CopyMemoryToAccelerationStructureKHR() or #CmdCopyMemoryToAccelerationStructureKHR() with a {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR during replay.
         </div>
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Memory does not need to be bound to the underlying buffer when #CreateAccelerationStructureKHR() is called.
+        </div>
+
         The input buffers passed to acceleration structure build commands will be referenced by the implementation for the duration of the command. After the command completes, the acceleration structure <b>may</b> hold a reference to any acceleration structure specified by an active instance contained therein. Apart from this referencing, acceleration structures <b>must</b> be fully self-contained. The application <b>can</b> reuse or free any memory which was used by the command as an input or as scratch without affecting the results of ray traversal.
 
         <h5>Valid Usage</h5>
@@ -602,6 +606,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, {@code geometry.instances.data.deviceAddress} <b>must</b> be a valid device address obtained from #GetBufferDeviceAddress()</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, if {@code geometry.instances.data.deviceAddress} is the address of a non-sparse buffer then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, each ##VkAccelerationStructureInstanceKHR{@code ::accelerationStructureReference} value in {@code geometry.instances.data.deviceAddress} <b>must</b> be a valid device address containing a value obtained from #GetAccelerationStructureDeviceAddressKHR() or 0</li>
+            <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
         </ul>
 
         <ul>
@@ -735,12 +740,12 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, {@code geometry.instances.data.deviceAddress} <b>must</b> be a valid device address obtained from #GetBufferDeviceAddress()</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, if {@code geometry.instances.data.deviceAddress} is the address of a non-sparse buffer then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, each ##VkAccelerationStructureInstanceKHR{@code ::accelerationStructureReference} value in {@code geometry.instances.data.deviceAddress} <b>must</b> be a valid device address containing a value obtained from #GetAccelerationStructureDeviceAddressKHR() or 0</li>
+            <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
             <li>For any element of {@code pIndirectDeviceAddresses}, if the buffer from which it was queried is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>For any element of {@code pIndirectDeviceAddresses}[i], all device addresses between {@code pIndirectDeviceAddresses}[i] and <code>pIndirectDeviceAddresses[i] + (pInfos[i].geometryCount × pIndirectStrides[i]) - 1</code> <b>must</b> be in the buffer device address range of the same buffer</li>
             <li>For any element of {@code pIndirectDeviceAddresses}, the buffer from which it was queried <b>must</b> have been created with the #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set</li>
             <li>Each element of {@code pIndirectDeviceAddresses} <b>must</b> be a multiple of 4</li>
             <li>Each element of {@code pIndirectStrides} <b>must</b> be a multiple of 4</li>
-            <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
             <li>Each ##VkAccelerationStructureBuildRangeInfoKHR structure referenced by any element of {@code pIndirectDeviceAddresses} <b>must</b> be a valid ##VkAccelerationStructureBuildRangeInfoKHR structure</li>
             <li>{@code pInfos}[i].{@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and <code>pMaxPrimitiveCounts = ppMaxPrimitiveCounts[i]</code></li>
             <li>Each {@code ppMaxPrimitiveCounts}[i][j] <b>must</b> be greater than or equal to the {@code primitiveCount} value specified by the ##VkAccelerationStructureBuildRangeInfoKHR structure located at <code>pIndirectDeviceAddresses[i] + (j × pIndirectStrides[i])</code></li>
@@ -856,7 +861,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <ul>
-            <li>If {@code deferredOperation} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
             <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
             <li>For each element of {@code pInfos}, the {@code buffer} used to create its {@code dstAccelerationStructure} member <b>must</b> be bound to host-visible device memory</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR the {@code buffer} used to create its {@code srcAccelerationStructure} member <b>must</b> be bound to host-visible device memory</li>
@@ -871,8 +875,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR the {@code buffer} used to create its {@code srcAccelerationStructure} member <b>must</b> be bound to memory that was not allocated with multiple instances</li>
             <li>For each element of {@code pInfos}, the {@code buffer} used to create each acceleration structure referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR <b>must</b> be bound to memory that was not allocated with multiple instances</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, {@code geometry.instances.data.hostAddress} <b>must</b> be a valid host address</li>
-            <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, each ##VkAccelerationStructureInstanceKHR{@code ::accelerationStructureReference} value in {@code geometry.instances.data.hostAddress} must be a valid {@code VkAccelerationStructureKHR} object</li>
-            <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR with #BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV set, each {@code accelerationStructureReference} in any structure in ##VkAccelerationStructureMotionInstanceNV value in {@code geometry.instances.data.hostAddress} must be a valid {@code VkAccelerationStructureKHR} object</li>
+            <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, each ##VkAccelerationStructureInstanceKHR{@code ::accelerationStructureReference} value in {@code geometry.instances.data.hostAddress} <b>must</b> be a valid {@code VkAccelerationStructureKHR} object</li>
+            <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR with #BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV set, each {@code accelerationStructureReference} in any structure in ##VkAccelerationStructureMotionInstanceNV value in {@code geometry.instances.data.hostAddress} <b>must</b> be a valid {@code VkAccelerationStructureKHR} object</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -931,14 +935,13 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a></li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <ul>
-            <li>If {@code deferredOperation} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
             <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
-            <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to host-visible device memory feature <b>must</b> be enabled</li>
+            <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to host-visible device memory</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
             <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
         </ul>
@@ -1001,7 +1004,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <ul>
-            <li>If {@code deferredOperation} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
             <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
             <li>{@code pInfo→dst.hostAddress} <b>must</b> be a valid host pointer</li>
@@ -1067,7 +1069,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <ul>
-            <li>If {@code deferredOperation} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkDeferredOperationKHR} object</li>
             <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
             <li>{@code pInfo→src.hostAddress} <b>must</b> be a valid host pointer</li>
             <li>{@code pInfo→src.hostAddress} <b>must</b> be aligned to 16 bytes</li>
@@ -1399,6 +1400,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <ul>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructure">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructure}</a> feature <b>must</b> be enabled</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+            <li>If the buffer on which {@code pInfo→accelerationStructure} was placed is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+            <li>The buffer on which {@code pInfo→accelerationStructure} was placed <b>must</b> have been created with the #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT usage flag</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1446,7 +1449,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>{@code queryPool} <b>must</b> have been created with a {@code queryType} matching {@code queryType}</li>
             <li>The queries identified by {@code queryPool} and {@code firstQuery} <b>must</b> be <em>unavailable</em></li>
             <li>The {@code buffer} used to create each acceleration structure in {@code pAccelerationStructures} <b>must</b> be bound to device memory</li>
-            <li>The sum of {@code query} plus {@code accelerationStructureCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+            <li>The sum of {@code firstQuery} plus {@code accelerationStructureCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
         </ul>
 
         <ul>

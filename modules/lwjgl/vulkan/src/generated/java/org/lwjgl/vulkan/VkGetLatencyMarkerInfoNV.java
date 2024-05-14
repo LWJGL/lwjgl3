@@ -103,7 +103,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     /** either {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** an integer related to the number of of previous frames of latency data available or queried, as described below. */
+    /** an integer related to the number of previous frames of latency data available or queried, as described below. */
     @NativeType("uint32_t")
     public int timingCount() { return ntimingCount(address()); }
     /** either {@code NULL} or a pointer to an array of {@link VkLatencyTimingsFrameReportNV} structures. */

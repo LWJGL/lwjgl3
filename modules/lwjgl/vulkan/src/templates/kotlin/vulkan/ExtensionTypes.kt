@@ -56,14 +56,14 @@ val VkVideoCodingControlFlagBitsKHR = "VkVideoCodingControlFlagBitsKHR".enumType
 val VkQueryResultStatusKHR = "VkQueryResultStatusKHR".enumType
 val VkVideoDecodeCapabilityFlagBitsKHR = "VkVideoDecodeCapabilityFlagBitsKHR".enumType
 val VkVideoDecodeUsageFlagBitsKHR = "VkVideoDecodeUsageFlagBitsKHR".enumType
-val VkVideoEncodeH264CapabilityFlagBitsEXT = "VkVideoEncodeH264CapabilityFlagBitsEXT".enumType
-val VkVideoEncodeH264StdFlagBitsEXT = "VkVideoEncodeH264StdFlagBitsEXT".enumType
-val VkVideoEncodeH264RateControlFlagBitsEXT = "VkVideoEncodeH264RateControlFlagBitsEXT".enumType
-val VkVideoEncodeH265CapabilityFlagBitsEXT = "VkVideoEncodeH265CapabilityFlagBitsEXT".enumType
-val VkVideoEncodeH265StdFlagBitsEXT = "VkVideoEncodeH265StdFlagBitsEXT".enumType
-val VkVideoEncodeH265CtbSizeFlagBitsEXT = "VkVideoEncodeH265CtbSizeFlagBitsEXT".enumType
-val VkVideoEncodeH265TransformBlockSizeFlagBitsEXT = "VkVideoEncodeH265TransformBlockSizeFlagBitsEXT".enumType
-val VkVideoEncodeH265RateControlFlagBitsEXT = "VkVideoEncodeH265RateControlFlagBitsEXT".enumType
+val VkVideoEncodeH264CapabilityFlagBitsKHR = "VkVideoEncodeH264CapabilityFlagBitsKHR".enumType
+val VkVideoEncodeH264StdFlagBitsKHR = "VkVideoEncodeH264StdFlagBitsKHR".enumType
+val VkVideoEncodeH264RateControlFlagBitsKHR = "VkVideoEncodeH264RateControlFlagBitsKHR".enumType
+val VkVideoEncodeH265CapabilityFlagBitsKHR = "VkVideoEncodeH265CapabilityFlagBitsKHR".enumType
+val VkVideoEncodeH265StdFlagBitsKHR = "VkVideoEncodeH265StdFlagBitsKHR".enumType
+val VkVideoEncodeH265CtbSizeFlagBitsKHR = "VkVideoEncodeH265CtbSizeFlagBitsKHR".enumType
+val VkVideoEncodeH265TransformBlockSizeFlagBitsKHR = "VkVideoEncodeH265TransformBlockSizeFlagBitsKHR".enumType
+val VkVideoEncodeH265RateControlFlagBitsKHR = "VkVideoEncodeH265RateControlFlagBitsKHR".enumType
 val VkVideoDecodeH264PictureLayoutFlagBitsKHR = "VkVideoDecodeH264PictureLayoutFlagBitsKHR".enumType
 val VkShaderInfoTypeAMD = "VkShaderInfoTypeAMD".enumType
 val VkRenderingFlagBitsKHR = "VkRenderingFlagBitsKHR".enumType
@@ -157,9 +157,11 @@ val VkScopeNV = "VkScopeNV".enumType
 val VkCoverageReductionModeNV = "VkCoverageReductionModeNV".enumType
 val VkProvokingVertexModeEXT = "VkProvokingVertexModeEXT".enumType
 val VkFullScreenExclusiveEXT = "VkFullScreenExclusiveEXT".enumType
+val VkLineRasterizationModeKHR = "VkLineRasterizationModeKHR".enumType
 val VkLineRasterizationModeEXT = "VkLineRasterizationModeEXT".enumType
 val VkPipelineExecutableStatisticFormatKHR = "VkPipelineExecutableStatisticFormatKHR".enumType
 val VkHostImageCopyFlagBitsEXT = "VkHostImageCopyFlagBitsEXT".enumType
+val VkMemoryUnmapFlagBitsKHR = "VkMemoryUnmapFlagBitsKHR".enumType
 val VkPresentScalingFlagBitsEXT = "VkPresentScalingFlagBitsEXT".enumType
 val VkPresentGravityFlagBitsEXT = "VkPresentGravityFlagBitsEXT".enumType
 val VkIndirectStateFlagBitsNV = "VkIndirectStateFlagBitsNV".enumType
@@ -253,14 +255,14 @@ val VkVideoDecodeCapabilityFlagsKHR = typedef(VkFlags, "VkVideoDecodeCapabilityF
 val VkVideoDecodeUsageFlagsKHR = typedef(VkFlags, "VkVideoDecodeUsageFlagsKHR")
 val VkVideoDecodeFlagsKHR = typedef(VkFlags, "VkVideoDecodeFlagsKHR")
 val VkPipelineRasterizationStateStreamCreateFlagsEXT = typedef(VkFlags, "VkPipelineRasterizationStateStreamCreateFlagsEXT")
-val VkVideoEncodeH264CapabilityFlagsEXT = typedef(VkFlags, "VkVideoEncodeH264CapabilityFlagsEXT")
-val VkVideoEncodeH264StdFlagsEXT = typedef(VkFlags, "VkVideoEncodeH264StdFlagsEXT")
-val VkVideoEncodeH264RateControlFlagsEXT = typedef(VkFlags, "VkVideoEncodeH264RateControlFlagsEXT")
-val VkVideoEncodeH265CapabilityFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CapabilityFlagsEXT")
-val VkVideoEncodeH265StdFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265StdFlagsEXT")
-val VkVideoEncodeH265CtbSizeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CtbSizeFlagsEXT")
-val VkVideoEncodeH265TransformBlockSizeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265TransformBlockSizeFlagsEXT")
-val VkVideoEncodeH265RateControlFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265RateControlFlagsEXT")
+val VkVideoEncodeH264CapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeH264CapabilityFlagsKHR")
+val VkVideoEncodeH264StdFlagsKHR = typedef(VkFlags, "VkVideoEncodeH264StdFlagsKHR")
+val VkVideoEncodeH264RateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeH264RateControlFlagsKHR")
+val VkVideoEncodeH265CapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeH265CapabilityFlagsKHR")
+val VkVideoEncodeH265StdFlagsKHR = typedef(VkFlags, "VkVideoEncodeH265StdFlagsKHR")
+val VkVideoEncodeH265CtbSizeFlagsKHR = typedef(VkFlags, "VkVideoEncodeH265CtbSizeFlagsKHR")
+val VkVideoEncodeH265TransformBlockSizeFlagsKHR = typedef(VkFlags, "VkVideoEncodeH265TransformBlockSizeFlagsKHR")
+val VkVideoEncodeH265RateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeH265RateControlFlagsKHR")
 val VkVideoDecodeH264PictureLayoutFlagsKHR = typedef(VkFlags, "VkVideoDecodeH264PictureLayoutFlagsKHR")
 val VkRenderingFlagsKHR = typedef(VkFlags, "VkRenderingFlagsKHR")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
@@ -363,8 +365,8 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
         uint64_t("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
         size_t("location", "a component (layer, driver, loader) defined value specifying the <em>location</em> of the trigger. This is an <b>optional</b> value."),
         int32_t("messageCode", "a layer-defined value indicating what test triggered this callback."),
-        charUTF8.const.p("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
-        charUTF8.const.p("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
+        charUTF8.const.p("pLayerPrefix", "a null-terminated UTF-8 string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+        charUTF8.const.p("pMessage", "a null-terminated UTF-8 string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
         opaque_p("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created."),
 
         nativeType = "PFN_vkDebugReportCallbackEXT"
@@ -1420,7 +1422,7 @@ val VkVideoProfileInfoKHR = struct(Module.VULKAN, "VkVideoProfileInfoKHR") {
 
         The full description of a video profile is specified by an instance of this structure, and the codec-specific and auxiliary structures provided in its {@code pNext} chain.
 
-        When this structure is specified as an input parameter to #GetPhysicalDeviceVideoCapabilitiesKHR(), or through the {@code pProfiles} member of an ##VkVideoProfileListInfoKHR structure in the {@code pNext} chain of the input parameter of a query command such as #GetPhysicalDeviceVideoFormatPropertiesKHR() or #GetPhysicalDeviceImageFormatProperties2(), the following error codes indicate specific causes of the failure of the query operation:
+        When this structure is specified as an input parameter to #GetPhysicalDeviceVideoCapabilitiesKHR(), or through the {@code pProfiles} member of a ##VkVideoProfileListInfoKHR structure in the {@code pNext} chain of the input parameter of a query command such as #GetPhysicalDeviceVideoFormatPropertiesKHR() or #GetPhysicalDeviceImageFormatProperties2(), the following error codes indicate specific causes of the failure of the query operation:
 
         <ul>
             <li>#ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR indicates that the requested video picture layout (e.g. through the {@code pictureLayout} member of a ##VkVideoDecodeH264ProfileInfoKHR structure included in the {@code pNext} chain of ##VkVideoProfileInfoKHR) is not supported.</li>
@@ -1436,8 +1438,9 @@ val VkVideoProfileInfoKHR = struct(Module.VULKAN, "VkVideoProfileInfoKHR") {
             <li>If {@code chromaSubsampling} is not #VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR, then {@code chromaBitDepth} <b>must</b> have a single bit set</li>
             <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoDecodeH264ProfileInfoKHR structure</li>
             <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoDecodeH265ProfileInfoKHR structure</li>
-            <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH264ProfileInfoEXT structure</li>
-            <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH265ProfileInfoEXT structure</li>
+            <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoDecodeAV1ProfileInfoKHR structure</li>
+            <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH264ProfileInfoKHR structure</li>
+            <li>If {@code videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH265ProfileInfoKHR structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1457,7 +1460,7 @@ val VkVideoProfileInfoKHR = struct(Module.VULKAN, "VkVideoProfileInfoKHR") {
 
     Expression("#STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoDecodeH264ProfileInfoKHR", "VkVideoDecodeH265ProfileInfoKHR", "VkVideoDecodeUsageInfoKHR", "VkVideoEncodeH264ProfileInfoEXT", "VkVideoEncodeH265ProfileInfoEXT", "VkVideoEncodeUsageInfoKHR",
+        "VkVideoDecodeAV1ProfileInfoKHR", "VkVideoDecodeH264ProfileInfoKHR", "VkVideoDecodeH265ProfileInfoKHR", "VkVideoDecodeUsageInfoKHR", "VkVideoEncodeH264ProfileInfoKHR", "VkVideoEncodeH265ProfileInfoKHR", "VkVideoEncodeUsageInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoCodecOperationFlagBitsKHR("videoCodecOperation", "a {@code VkVideoCodecOperationFlagBitsKHR} value specifying a video codec operation.")
@@ -1472,7 +1475,7 @@ val VkVideoProfileListInfoKHR = struct(Module.VULKAN, "VkVideoProfileListInfoKHR
         Structure specifying one or more video profiles used in conjunction.
 
         <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Video transcoding is an example of a use case that necessitates the specification of multiple profiles in various contexts.
         </div>
 
@@ -1505,14 +1508,14 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
         Structure describing general video capabilities for a video profile.
 
         <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         It is common for video compression standards to allow using all reference pictures associated with active DPB slots as active reference pictures, hence for video decode profiles the values returned in {@code maxDpbSlots} and {@code maxActiveReferencePictures} are often equal. Similarly, in case of video decode profiles supporting field pictures the value of {@code maxActiveReferencePictures} often equals <code>maxDpbSlots × 2</code>.
         </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeCapabilitiesKHR, ##VkVideoDecodeH264CapabilitiesKHR, ##VkVideoDecodeH265CapabilitiesKHR, ##VkVideoEncodeCapabilitiesKHR, ##VkVideoEncodeH264CapabilitiesEXT, or ##VkVideoEncodeH265CapabilitiesEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeAV1CapabilitiesKHR, ##VkVideoDecodeCapabilitiesKHR, ##VkVideoDecodeH264CapabilitiesKHR, ##VkVideoDecodeH265CapabilitiesKHR, ##VkVideoEncodeCapabilitiesKHR, ##VkVideoEncodeH264CapabilitiesKHR, or ##VkVideoEncodeH265CapabilitiesKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -1522,7 +1525,7 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
 
     Expression("#STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     PointerSetter(
-        "VkVideoDecodeCapabilitiesKHR", "VkVideoDecodeH264CapabilitiesKHR", "VkVideoDecodeH265CapabilitiesKHR", "VkVideoEncodeCapabilitiesKHR", "VkVideoEncodeH264CapabilitiesEXT", "VkVideoEncodeH265CapabilitiesEXT",
+        "VkVideoDecodeAV1CapabilitiesKHR", "VkVideoDecodeCapabilitiesKHR", "VkVideoDecodeH264CapabilitiesKHR", "VkVideoDecodeH265CapabilitiesKHR", "VkVideoEncodeCapabilitiesKHR", "VkVideoEncodeH264CapabilitiesKHR", "VkVideoEncodeH265CapabilitiesKHR",
         prepend = true
     )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkVideoCapabilityFlagsKHR("flags", "a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags.")
@@ -1635,7 +1638,7 @@ val VkVideoReferenceSlotInfoKHR = struct(Module.VULKAN, "VkVideoReferenceSlotInf
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264DpbSlotInfoKHR, ##VkVideoDecodeH265DpbSlotInfoKHR, ##VkVideoEncodeH264DpbSlotInfoEXT, or ##VkVideoEncodeH265DpbSlotInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeAV1DpbSlotInfoKHR, ##VkVideoDecodeH264DpbSlotInfoKHR, ##VkVideoDecodeH265DpbSlotInfoKHR, ##VkVideoEncodeH264DpbSlotInfoKHR, or ##VkVideoEncodeH265DpbSlotInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>If {@code pPictureResource} is not {@code NULL}, {@code pPictureResource} <b>must</b> be a valid pointer to a valid ##VkVideoPictureResourceInfoKHR structure</li>
         </ul>
@@ -1646,7 +1649,7 @@ val VkVideoReferenceSlotInfoKHR = struct(Module.VULKAN, "VkVideoReferenceSlotInf
 
     Expression("#STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoDecodeH264DpbSlotInfoKHR", "VkVideoDecodeH265DpbSlotInfoKHR", "VkVideoEncodeH264DpbSlotInfoEXT", "VkVideoEncodeH265DpbSlotInfoEXT",
+        "VkVideoDecodeAV1DpbSlotInfoKHR", "VkVideoDecodeH264DpbSlotInfoKHR", "VkVideoDecodeH265DpbSlotInfoKHR", "VkVideoEncodeH264DpbSlotInfoKHR", "VkVideoEncodeH265DpbSlotInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     int32_t("slotIndex", "the index of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#dpb-slot\">DPB slot</a> or a negative integer value.")
@@ -1712,6 +1715,7 @@ val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInf
         <h5>Valid Usage</h5>
         <ul>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-protectedMemory">{@code protectedMemory}</a> feature is not enabled or if ##VkVideoCapabilitiesKHR{@code ::flags} does not include #VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pVideoProfile}, then {@code flags} <b>must</b> not include #VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR</li>
+            <li>If {@code flags} includes #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR, then <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-videoMaintenance1">{@code videoMaintenance1}</a> <b>must</b> be enabled</li>
             <li>{@code pVideoProfile} <b>must</b> be a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-support">supported video profile</a></li>
             <li>{@code maxDpbSlots} <b>must</b> be less than or equal to ##VkVideoCapabilitiesKHR{@code ::maxDpbSlots}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pVideoProfile}</li>
             <li>{@code maxActiveReferencePictures} <b>must</b> be less than or equal to ##VkVideoCapabilitiesKHR{@code ::maxActiveReferencePictures}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pVideoProfile}</li>
@@ -1723,12 +1727,14 @@ val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInf
             <li>If {@code pVideoProfile→videoCodecOperation} specifies an encode operation, then {@code pictureFormat} <b>must</b> be one of the supported encode input formats, as returned by #GetPhysicalDeviceVideoFormatPropertiesKHR() in ##VkVideoFormatPropertiesKHR{@code ::format} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing #IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR, and with a ##VkVideoProfileListInfoKHR structure specified in the {@code pNext} chain of its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an element matching {@code pVideoProfile}</li>
             <li>{@code pStdHeaderVersion→extensionName} <b>must</b> match ##VkVideoCapabilitiesKHR{@code ::stdHeaderVersion.extensionName}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pVideoProfile}</li>
             <li>{@code pStdHeaderVersion→specVersion} <b>must</b> be less than or equal to ##VkVideoCapabilitiesKHR{@code ::stdHeaderVersion.specVersion}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pVideoProfile}</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR and the {@code pNext} chain of this structure includes a ##VkVideoEncodeH264SessionCreateInfoKHR structure, then its {@code maxLevelIdc} member <b>must</b> be less than or equal to ##VkVideoEncodeH264CapabilitiesKHR{@code ::maxLevelIdc}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified in {@code pVideoProfile}</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR and the {@code pNext} chain of this structure includes a ##VkVideoEncodeH265SessionCreateInfoKHR structure, then its {@code maxLevelIdc} member <b>must</b> be less than or equal to ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxLevelIdc}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified in {@code pVideoProfile}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionCreateInfoEXT or ##VkVideoEncodeH265SessionCreateInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionCreateInfoKHR or ##VkVideoEncodeH265SessionCreateInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoSessionCreateFlagBitsKHR} values</li>
             <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid ##VkVideoProfileInfoKHR structure</li>
@@ -1743,7 +1749,7 @@ val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInf
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264SessionCreateInfoEXT", "VkVideoEncodeH265SessionCreateInfoEXT",
+        "VkVideoEncodeH264SessionCreateInfoKHR", "VkVideoEncodeH265SessionCreateInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("queueFamilyIndex", "the index of the queue family the created video session will be used with.")
@@ -1801,11 +1807,54 @@ val VkVideoSessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
                     <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265PictureParameterSet} entry stored in it with {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, or {@code pps_pic_parameter_set_id} not matching any of the entries already in {@code ppsAddList} is added to {@code ppsAddList}.</li>
                 </ul>
             </li>
+            <li>
+                If {@code videoSession} was created with an encode operation, then let {@code uint32_t qualityLevel} be the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-quality-level">video encode quality level</a> of the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pNext} chain of this structure includes a ##VkVideoEncodeQualityLevelInfoKHR structure, then {@code qualityLevel} is equal to ##VkVideoEncodeQualityLevelInfoKHR{@code ::qualityLevel}.</li>
+                    <li>Otherwise {@code qualityLevel} is 0</li>
+                </ul>
+            </li>
+            <li>
+                If {@code videoSession} was created with the codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then let {@code StdVideoH264SequenceParameterSet spsAddList[]} be the list of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-sps">H.264 SPS</a> entries to add to the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure provided in the {@code pNext} chain is not {@code NULL}, then the set of {@code StdVideoH264SequenceParameterSet} entries specified in {@code pParametersAddInfo→pStdSPSs} are added to {@code spsAddList};</li>
+                    <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH264SequenceParameterSet} entry stored in it with {@code seq_parameter_set_id} not matching any of the entries already in {@code spsAddList} is added to {@code spsAddList}.</li>
+                </ul>
+            </li>
+            <li>
+                If {@code videoSession} was created with the codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then let {@code StdVideoH264PictureParameterSet ppsAddList[]} be the list of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-pps">H.264 PPS</a> entries to add to the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure provided in the {@code pNext} chain is not {@code NULL}, then the set of {@code StdVideoH264PictureParameterSet} entries specified in {@code pParametersAddInfo→pStdPPSs} are added to {@code ppsAddList};</li>
+                    <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH264PictureParameterSet} entry stored in it with {@code seq_parameter_set_id} or {@code pic_parameter_set_id} not matching any of the entries already in {@code ppsAddList} is added to {@code ppsAddList}.</li>
+                </ul>
+            </li>
+            <li>
+                If {@code videoSession} was created with the codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then let {@code StdVideoH265VideoParameterSet vpsAddList[]} be the list of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-vps">H.265 VPS</a> entries to add to the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure provided in the {@code pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265VideoParameterSet} entries specified in {@code pParametersAddInfo→pStdVPSs} are added to {@code vpsAddList};</li>
+                    <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265VideoParameterSet} entry stored in it with {@code vps_video_parameter_set_id} not matching any of the entries already in {@code vpsAddList} is added to {@code vpsAddList}.</li>
+                </ul>
+            </li>
+            <li>
+                If {@code videoSession} was created with the codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then let {@code StdVideoH265SequenceParameterSet spsAddList[]} be the list of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-sps">H.265 SPS</a> entries to add to the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure provided in the {@code pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265SequenceParameterSet} entries specified in {@code pParametersAddInfo→pStdSPSs} are added to {@code spsAddList};</li>
+                    <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265SequenceParameterSet} entry stored in it with {@code sps_video_parameter_set_id} or {@code sps_seq_parameter_set_id} not matching any of the entries already in {@code spsAddList} is added to {@code spsAddList}.</li>
+                </ul>
+            </li>
+            <li>
+                If {@code videoSession} was created with the codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then let {@code StdVideoH265PictureParameterSet ppsAddList[]} be the list of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-pps">H.265 PPS</a> entries to add to the created video session parameters object, defined as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure provided in the {@code pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265PictureParameterSet} entries specified in {@code pParametersAddInfo→pStdPPSs} are added to {@code ppsAddList};</li>
+                    <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265PictureParameterSet} entry stored in it with {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, or {@code pps_pic_parameter_set_id} not matching any of the entries already in {@code ppsAddList} is added to {@code ppsAddList}.</li>
+                </ul>
+            </li>
         </ul>
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code videoSessionParametersTemplate} represents a valid handle, it <b>must</b> have been created against {@code videoSession}</li>
+            <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, it <b>must</b> have been created against {@code videoSession}</li>
+            <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE and {@code videoSession} was created with an encode operation, then {@code qualityLevel} <b>must</b> equal the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-quality-level">video encode quality</a> level {@code videoSessionParametersTemplate} was created with</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoDecodeH264SessionParametersCreateInfoKHR structure</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the number of elements of {@code spsAddList} <b>must</b> be less than or equal to the {@code maxStdSPSCount} specified in the ##VkVideoDecodeH264SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the number of elements of {@code ppsAddList} <b>must</b> be less than or equal to the {@code maxStdPPSCount} specified in the ##VkVideoDecodeH264SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
@@ -1813,14 +1862,23 @@ val VkVideoSessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of elements of {@code vpsAddList} <b>must</b> be less than or equal to the {@code maxStdVPSCount} specified in the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of elements of {@code spsAddList} <b>must</b> be less than or equal to the {@code maxStdSPSCount} specified in the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of elements of {@code ppsAddList} <b>must</b> be less than or equal to the {@code maxStdPPSCount} specified in the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
-            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH264SessionParametersCreateInfoEXT structure</li>
-            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH265SessionParametersCreateInfoEXT structure</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then {@code videoSessionParametersTemplate} <b>must</b> be #NULL_HANDLE</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoDecodeAV1SessionParametersCreateInfoKHR structure</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then the number of elements of {@code spsAddList} <b>must</b> be less than or equal to the {@code maxStdSPSCount} specified in the ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then the number of elements of {@code ppsAddList} <b>must</b> be less than or equal to the {@code maxStdPPSCount} specified in the ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the number of elements of {@code vpsAddList} <b>must</b> be less than or equal to the {@code maxStdVPSCount} specified in the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the number of elements of {@code spsAddList} <b>must</b> be less than or equal to the {@code maxStdSPSCount} specified in the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the number of elements of {@code ppsAddList} <b>must</b> be less than or equal to the {@code maxStdPPSCount} specified in the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure included in the {@code pNext} chain</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then {@code num_tile_columns_minus1} <b>must</b> be less than ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxTiles.width}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile {@code videoSession} was created with, for each element of {@code ppsAddList}</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then {@code num_tile_rows_minus1} <b>must</b> be less than ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxTiles.height}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile {@code videoSession} was created with, for each element of {@code ppsAddList}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264SessionParametersCreateInfoKHR, ##VkVideoDecodeH265SessionParametersCreateInfoKHR, ##VkVideoEncodeH264SessionParametersCreateInfoEXT, ##VkVideoEncodeH265SessionParametersCreateInfoEXT, or ##VkVideoEncodeQualityLevelInfoKHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeAV1SessionParametersCreateInfoKHR, ##VkVideoDecodeH264SessionParametersCreateInfoKHR, ##VkVideoDecodeH265SessionParametersCreateInfoKHR, ##VkVideoEncodeH264SessionParametersCreateInfoKHR, ##VkVideoEncodeH265SessionParametersCreateInfoKHR, or ##VkVideoEncodeQualityLevelInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>If {@code videoSessionParametersTemplate} is not #NULL_HANDLE, {@code videoSessionParametersTemplate} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
@@ -1835,7 +1893,7 @@ val VkVideoSessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoDecodeH264SessionParametersCreateInfoKHR", "VkVideoDecodeH265SessionParametersCreateInfoKHR", "VkVideoEncodeH264SessionParametersCreateInfoEXT", "VkVideoEncodeH265SessionParametersCreateInfoEXT", "VkVideoEncodeQualityLevelInfoKHR",
+        "VkVideoDecodeAV1SessionParametersCreateInfoKHR", "VkVideoDecodeH264SessionParametersCreateInfoKHR", "VkVideoDecodeH265SessionParametersCreateInfoKHR", "VkVideoEncodeH264SessionParametersCreateInfoKHR", "VkVideoEncodeH265SessionParametersCreateInfoKHR", "VkVideoEncodeQualityLevelInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoSessionParametersCreateFlagsKHR("flags", "reserved for future use.")
@@ -1851,7 +1909,7 @@ val VkVideoSessionParametersUpdateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264SessionParametersAddInfoKHR, ##VkVideoDecodeH265SessionParametersAddInfoKHR, ##VkVideoEncodeH264SessionParametersAddInfoEXT, or ##VkVideoEncodeH265SessionParametersAddInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264SessionParametersAddInfoKHR, ##VkVideoDecodeH265SessionParametersAddInfoKHR, ##VkVideoEncodeH264SessionParametersAddInfoKHR, or ##VkVideoEncodeH265SessionParametersAddInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -1861,7 +1919,7 @@ val VkVideoSessionParametersUpdateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoDecodeH264SessionParametersAddInfoKHR", "VkVideoDecodeH265SessionParametersAddInfoKHR", "VkVideoEncodeH264SessionParametersAddInfoEXT", "VkVideoEncodeH265SessionParametersAddInfoEXT",
+        "VkVideoDecodeH264SessionParametersAddInfoKHR", "VkVideoDecodeH265SessionParametersAddInfoKHR", "VkVideoEncodeH264SessionParametersAddInfoKHR", "VkVideoEncodeH265SessionParametersAddInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("updateSequenceCount", "the new <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-session-parameters\">update sequence count</a> to set for the video session parameters object.")
@@ -1898,15 +1956,16 @@ val VkVideoBeginCodingInfoKHR = struct(Module.VULKAN, "VkVideoBeginCodingInfoKHR
             <li>If {@code videoSession} was created with an encode operation and the {@code slotIndex} member of any element of {@code pReferenceSlots} is not negative, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> have been created with #IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
             <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
-            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
-            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then {@code videoSessionParameters} <b>must</b> not be #NULL_HANDLE</li>
             <li>If {@code videoSessionParameters} is not #NULL_HANDLE, it <b>must</b> have been created with {@code videoSession} specified in ##VkVideoSessionParametersCreateInfoKHR{@code ::videoSession}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264GopRemainingFrameInfoEXT, ##VkVideoEncodeH264RateControlInfoEXT, ##VkVideoEncodeH265GopRemainingFrameInfoEXT, ##VkVideoEncodeH265RateControlInfoEXT, or ##VkVideoEncodeRateControlInfoKHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264GopRemainingFrameInfoKHR, ##VkVideoEncodeH264RateControlInfoKHR, ##VkVideoEncodeH265GopRemainingFrameInfoKHR, ##VkVideoEncodeH265RateControlInfoKHR, or ##VkVideoEncodeRateControlInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
@@ -1922,7 +1981,7 @@ val VkVideoBeginCodingInfoKHR = struct(Module.VULKAN, "VkVideoBeginCodingInfoKHR
 
     Expression("#STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264GopRemainingFrameInfoEXT", "VkVideoEncodeH264RateControlInfoEXT", "VkVideoEncodeH265GopRemainingFrameInfoEXT", "VkVideoEncodeH265RateControlInfoEXT", "VkVideoEncodeRateControlInfoKHR",
+        "VkVideoEncodeH264GopRemainingFrameInfoKHR", "VkVideoEncodeH264RateControlInfoKHR", "VkVideoEncodeH265GopRemainingFrameInfoKHR", "VkVideoEncodeH265RateControlInfoKHR", "VkVideoEncodeRateControlInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoBeginCodingFlagsKHR("flags", "reserved for future use.")
@@ -1961,16 +2020,13 @@ val VkVideoCodingControlInfoKHR = struct(Module.VULKAN, "VkVideoCodingControlInf
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeRateControlInfoKHR structure</li>
-            <li>If {@code flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, the {@code rateControlMode} member of ##VkVideoEncodeRateControlInfoKHR included in the {@code pNext} chain is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, and the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH264RateControlInfoEXT structure</li>
-            <li>If the {@code pNext} chain includes a ##VkVideoEncodeRateControlInfoKHR, and ##VkVideoEncodeRateControlInfoKHR{@code ::layerCount} is greater than 1, then ##VkVideoEncodeH264RateControlInfoEXT{@code ::temporalLayerCount} <b>must</b> be equal to {@code layerCount}</li>
-            <li>If {@code flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, the {@code rateControlMode} member of ##VkVideoEncodeRateControlInfoKHR included in the {@code pNext} chain is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, and the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeH265RateControlInfoEXT structure</li>
-            <li>If the {@code pNext} chain includes a ##VkVideoEncodeRateControlInfoKHR, and ##VkVideoEncodeRateControlInfoKHR{@code ::layerCount} is greater than 1, then ##VkVideoEncodeH265RateControlInfoEXT{@code ::subLayerCount} <b>must</b> be equal to {@code layerCount}</li>
+            <li>If {@code flags} includes #VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR, then the {@code pNext} chain <b>must</b> include a ##VkVideoEncodeQualityLevelInfoKHR structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264RateControlInfoEXT, ##VkVideoEncodeH265RateControlInfoEXT, ##VkVideoEncodeQualityLevelInfoKHR, or ##VkVideoEncodeRateControlInfoKHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264RateControlInfoKHR, ##VkVideoEncodeH265RateControlInfoKHR, ##VkVideoEncodeQualityLevelInfoKHR, or ##VkVideoEncodeRateControlInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoCodingControlFlagBitsKHR} values</li>
             <li>{@code flags} <b>must</b> not be 0</li>
@@ -1982,7 +2038,7 @@ val VkVideoCodingControlInfoKHR = struct(Module.VULKAN, "VkVideoCodingControlInf
 
     Expression("#STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264RateControlInfoEXT", "VkVideoEncodeH265RateControlInfoEXT", "VkVideoEncodeQualityLevelInfoKHR", "VkVideoEncodeRateControlInfoKHR",
+        "VkVideoEncodeH264RateControlInfoKHR", "VkVideoEncodeH265RateControlInfoKHR", "VkVideoEncodeQualityLevelInfoKHR", "VkVideoEncodeRateControlInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoCodingControlFlagsKHR("flags", "a bitmask of {@code VkVideoCodingControlFlagsKHR} specifying control flags.")
@@ -2040,7 +2096,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264PictureInfoKHR or ##VkVideoDecodeH265PictureInfoKHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeAV1PictureInfoKHR, ##VkVideoDecodeH264PictureInfoKHR, ##VkVideoDecodeH265PictureInfoKHR, or ##VkVideoInlineQueryInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -2055,7 +2111,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoDecodeH264PictureInfoKHR", "VkVideoDecodeH265PictureInfoKHR",
+        "VkVideoDecodeAV1PictureInfoKHR", "VkVideoDecodeH264PictureInfoKHR", "VkVideoDecodeH265PictureInfoKHR", "VkVideoInlineQueryInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoDecodeFlagsKHR("flags", "reserved for future use.")
@@ -2063,7 +2119,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
     VkDeviceSize("srcBufferOffset", "the starting offset in bytes from the start of {@code srcBuffer} to read the encoded bitstream from.")
     VkDeviceSize("srcBufferRange", "the size in bytes of the encoded bitstream to decode from {@code srcBuffer}, starting from {@code srcBufferOffset}.")
     VkVideoPictureResourceInfoKHR("dstPictureResource", "the video picture resource to use as the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-output-picture\">decode output picture</a>.")
-    nullable..VkVideoReferenceSlotInfoKHR.const.p("pSetupReferenceSlot", "{@code NULL} or a pointer to a ##VkVideoReferenceSlotInfoKHR structure describing the DPB slot to <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#dpb-slot-states\">activate</a> and the video picture resource to use as the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#reconstructed-picture\">reconstructed picture</a> to activate the DPB slot with.")
+    nullable..VkVideoReferenceSlotInfoKHR.const.p("pSetupReferenceSlot", "{@code NULL} or a pointer to a ##VkVideoReferenceSlotInfoKHR structure specifying the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-reconstructed-picture-info\">reconstructed picture information</a>.")
     AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of elements in the {@code pReferenceSlots} array.")
     VkVideoReferenceSlotInfoKHR.const.p("pReferenceSlots", "{@code NULL} or a pointer to an array of ##VkVideoReferenceSlotInfoKHR structures describing the DPB slots and corresponding <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#reference-picture\">reference picture</a> resources to use in this video decode operation (the set of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#active-reference-pictures\">active reference pictures</a>).")
 }
@@ -2351,80 +2407,85 @@ val VkImageViewAddressPropertiesNVX = struct(Module.VULKAN, "VkImageViewAddressP
     VkDeviceSize("size", "the size in bytes of the image view device memory.")
 }
 
-val VkVideoEncodeH264CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH264CapabilitiesEXT", mutable = false) {
+val VkVideoEncodeH264CapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeH264CapabilitiesKHR", mutable = false) {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifying H.264 encode capabilities.
-
-        <h5>Description</h5>
-        When #GetPhysicalDeviceVideoCapabilitiesKHR() is called to query the capabilities with parameter {@code videoCodecOperation} specified as #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, a ##VkVideoEncodeH264CapabilitiesEXT structure <b>can</b> be chained to ##VkVideoCapabilitiesKHR to retrieve H.264 extension specific capabilities.
+        Structure describing H.264 encode capabilities.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkVideoEncodeH264CapabilityFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsEXT} indicating supported H.264 encoding capabilities.")
-    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value indicating the maximum H.264 level supported.")
+    VkVideoEncodeH264CapabilityFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsKHR} indicating supported H.264 encoding capabilities.")
+    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value indicating the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
     uint32_t("maxSliceCount", "indicates the maximum number of slices that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of slices that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules.")
-    uint32_t("maxPPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures.")
-    uint32_t("maxBPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported.")
-    uint32_t("maxL1ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported.")
+    uint32_t("maxPPictureL0ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-p-pic">P pictures</a>.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxPPictureL0ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 reference list for P pictures. However, if {@code maxPPictureL0ReferenceCount} is zero, then the use of P pictures is not allowed.
+        </div>""")
+    uint32_t("maxBPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-b-pic\">B pictures</a>.")
+    uint32_t("maxL1ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-b-pic">B pictures</a> is supported.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 and L1 reference lists for B pictures. However, if {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} are both zero, then the use of B pictures is not allowed.
+        </div>""")
     uint32_t("maxTemporalLayerCount", "indicates the maximum number of H.264 temporal layers supported by the implementation.")
-    VkBool32("expectDyadicTemporalLayerPattern", "indicates that the implementation’s rate control algorithms expect the application to use a dyadic temporal layer pattern when encoding multiple temporal layers.")
+    VkBool32("expectDyadicTemporalLayerPattern", "indicates that the implementation’s rate control algorithms expect the application to use a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-layer-pattern-dyadic\">dyadic temporal layer pattern</a> when encoding multiple temporal layers.")
     int32_t("minQp", "indicates the minimum QP value supported.")
     int32_t("maxQp", "indicates the maximum QP value supported.")
-    VkBool32("prefersGopRemainingFrames", "indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type remaining in the current group of pictures.")
-    VkBool32("requiresGopRemainingFrames", "indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type remaining in the current group of pictures.")
-    VkVideoEncodeH264StdFlagsEXT("stdSyntaxFlags", "a bitmask of {@code VkVideoEncodeH264StdFlagBitsEXT} indicating capabilities related to H.264 syntax elements.")
+    VkBool32("prefersGopRemainingFrames", "indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop-remaining-frames\">remaining</a> in the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">group of pictures</a> when beginning a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-coding-scope\">video coding scope</a>.")
+    VkBool32("requiresGopRemainingFrames", "indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop-remaining-frames\">remaining</a> in the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">group of pictures</a> when beginning a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-coding-scope\">video coding scope</a>.")
+    VkVideoEncodeH264StdFlagsKHR("stdSyntaxFlags", "a bitmask of {@code VkVideoEncodeH264StdFlagBitsKHR} indicating capabilities related to H.264 syntax elements.")
 }
 
-val VkVideoEncodeH264QpEXT = struct(Module.VULKAN, "VkVideoEncodeH264QpEXT") {
+val VkVideoEncodeH264QpKHR = struct(Module.VULKAN, "VkVideoEncodeH264QpKHR") {
     documentation =
         """
         Structure describing H.264 QP values per picture type.
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264QualityLevelPropertiesEXT, ##VkVideoEncodeH264RateControlLayerInfoEXT
+        ##VkVideoEncodeH264QualityLevelPropertiesKHR, ##VkVideoEncodeH264RateControlLayerInfoKHR
         """
 
-    int32_t("qpI", "the QP to be used for I-frames.")
-    int32_t("qpP", "the QP to be used for P-frames.")
-    int32_t("qpB", "the QP to be used for B-frames.")
+    int32_t("qpI", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-i-pic\">I pictures</a>.")
+    int32_t("qpP", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-p-pic\">P pictures</a>.")
+    int32_t("qpB", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-b-pic\">B pictures</a>.")
 }
 
-val VkVideoEncodeH264QualityLevelPropertiesEXT = struct(Module.VULKAN, "VkVideoEncodeH264QualityLevelPropertiesEXT", mutable = false) {
+val VkVideoEncodeH264QualityLevelPropertiesKHR = struct(Module.VULKAN, "VkVideoEncodeH264QualityLevelPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing the H.264 encode quality level properties.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_KHR</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264QpEXT
+        ##VkVideoEncodeH264QpKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkVideoEncodeH264RateControlFlagsEXT("preferredRateControlFlags", "a bitmask of {@code VkVideoEncodeH264RateControlFlagBitsEXT} values indicating the preferred flags to use for ##VkVideoEncodeH264RateControlInfoEXT{@code ::flags}.")
-    uint32_t("preferredGopFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoEXT{@code ::gopFrameCount}.")
-    uint32_t("preferredIdrPeriod", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoEXT{@code ::idrPeriod}.")
-    uint32_t("preferredConsecutiveBFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoEXT{@code ::consecutiveBFrameCount}.")
-    uint32_t("preferredTemporalLayerCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoEXT{@code ::temporalLayerCount}.")
-    VkVideoEncodeH264QpEXT("preferredConstantQp", "indicates the preferred values to use for ##VkVideoEncodeH264NaluSliceInfoEXT{@code ::constantQp} for each picture type when using rate control mode #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
+    VkVideoEncodeH264RateControlFlagsKHR("preferredRateControlFlags", "a bitmask of {@code VkVideoEncodeH264RateControlFlagBitsKHR} values indicating the preferred flags to use for ##VkVideoEncodeH264RateControlInfoKHR{@code ::flags}.")
+    uint32_t("preferredGopFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoKHR{@code ::gopFrameCount}.")
+    uint32_t("preferredIdrPeriod", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoKHR{@code ::idrPeriod}.")
+    uint32_t("preferredConsecutiveBFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoKHR{@code ::consecutiveBFrameCount}.")
+    uint32_t("preferredTemporalLayerCount", "indicates the preferred value to use for ##VkVideoEncodeH264RateControlInfoKHR{@code ::temporalLayerCount}.")
+    VkVideoEncodeH264QpKHR("preferredConstantQp", "indicates the preferred values to use for ##VkVideoEncodeH264NaluSliceInfoKHR{@code ::constantQp} for each picture type when using <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a> #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
     uint32_t("preferredMaxL0ReferenceCount", "indicates the preferred maximum number of reference pictures to use in the reference list L0.")
     uint32_t("preferredMaxL1ReferenceCount", "indicates the preferred maximum number of reference pictures to use in the reference list L1.")
     VkBool32("preferredStdEntropyCodingModeFlag", "indicates the preferred value to use for {@code entropy_coding_mode_flag} in {@code StdVideoH264PpsFlags}.")
 }
 
-val VkVideoEncodeH264SessionCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264SessionCreateInfoEXT") {
+val VkVideoEncodeH264SessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264SessionCreateInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
@@ -2432,75 +2493,78 @@ val VkVideoEncodeH264SessionCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncode
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("useMaxLevelIdc", "indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is set to #FALSE, the implementation ignores the value of {@code maxLevelIdc} and uses the value of ##VkVideoEncodeH264CapabilitiesEXT{@code ::maxLevelIdc}, as reported by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile.")
-    StdVideoH264LevelIdc("maxLevelIdc", "provides the upper bound on the H.264 level for the video bitstreams produced by the created video session.")
+    VkBool32("useMaxLevelIdc", "indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is set to #FALSE, the implementation ignores the value of {@code maxLevelIdc} and uses the value of ##VkVideoEncodeH264CapabilitiesKHR{@code ::maxLevelIdc}, as reported by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile.")
+    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value specifying the upper bound on the H.264 level for the video bitstreams produced by the created video session, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
 }
 
-val VkVideoEncodeH264SessionParametersAddInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersAddInfoEXT") {
+val VkVideoEncodeH264SessionParametersAddInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersAddInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.264 encoder parameter set information.
 
+        <h5>Description</h5>
+        This structure <b>can</b> be specified in the following places:
+
+        <ul>
+            <li>In the {@code pParametersAddInfo} member of the ##VkVideoEncodeH264SessionParametersCreateInfoKHR structure specified in the {@code pNext} chain of ##VkVideoSessionParametersCreateInfoKHR used to create a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">video session parameters</a> object. In this case, if the video codec operation the video session parameters object is created with is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then it defines the set of initial parameters to add to the created object (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#creating-video-session-parameters">Creating Video Session Parameters</a>).</li>
+            <li>In the {@code pNext} chain of ##VkVideoSessionParametersUpdateInfoKHR. In this case, if the video codec operation the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">video session parameters</a> object to be updated was created with is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then it defines the set of parameters to add to it (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters-update">Updating Video Session Parameters</a>).</li>
+        </ul>
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>The values of {@code stdSPSCount} and {@code stdPPSCount} <b>must</b> be less than or equal to the values of {@code maxStdSPSCount} and {@code maxStdPPSCount}, respectively</li>
-            <li>When the {@code maxStdSPSCount} number of parameters of type StdVideoH264SequenceParameterSet in the Video Session Parameters object is reached, no additional parameters of that type can be added to the object. #ERROR_TOO_MANY_OBJECTS will be returned if an attempt is made to add additional data to this object at this point</li>
-            <li>When the {@code maxStdPPSCount} number of parameters of type StdVideoH264PictureParameterSet in the Video Session Parameters object is reached, no additional parameters of that type can be added to the object. #ERROR_TOO_MANY_OBJECTS will be returned if an attempt is made to add additional data to this object at this point</li>
-            <li>Each entry to be added <b>must</b> have a unique, to the rest of the parameter array entries and the existing parameters in the Video Session Parameters Object that is being updated, SPS-PPS IDs</li>
-            <li>Parameter entries that already exist in Video Session Parameters object with a particular SPS-PPS IDs <b>cannot</b> be replaced nor updated</li>
-            <li>When creating a new object using a Video Session Parameters as a template, the array’s parameters with the same SPS-PPS IDs as the ones from the template take precedence</li>
-            <li>SPS/PPS parameters <b>must</b> comply with the limits specified in ##VkVideoSessionCreateInfoKHR during Video Session creation</li>
+            <li>The {@code seq_parameter_set_id} member of each {@code StdVideoH264SequenceParameterSet} structure specified in the elements of {@code pStdSPSs} <b>must</b> be unique within {@code pStdSPSs}</li>
+            <li>The pair constructed from the {@code seq_parameter_set_id} and {@code pic_parameter_set_id} members of each {@code StdVideoH264PictureParameterSet} structure specified in the elements of {@code pStdPPSs} <b>must</b> be unique within {@code pStdPPSs}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR</li>
             <li>If {@code stdSPSCount} is not 0, and {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH264SequenceParameterSet} values</li>
             <li>If {@code stdPPSCount} is not 0, and {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH264PictureParameterSet} values</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264SessionParametersCreateInfoEXT
+        ##VkVideoEncodeH264SessionParametersCreateInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pStdSPSs", optional = true)..uint32_t("stdSPSCount", "the number of SPS elements in the {@code pStdSPSs}. Its value <b>must</b> be less than or equal to the value of {@code maxStdSPSCount}.")
-    nullable..StdVideoH264SequenceParameterSet.const.p("pStdSPSs", "a pointer to an array of {@code StdVideoH264SequenceParameterSet} structures representing H.264 sequence parameter sets. Each element of the array <b>must</b> have a unique H.264 SPS ID.")
-    AutoSize("pStdPPSs", optional = true)..uint32_t("stdPPSCount", "the number of PPS provided in {@code pStdPPSs}. Its value <b>must</b> be less than or equal to the value of {@code maxStdPPSCount}.")
-    nullable..StdVideoH264PictureParameterSet.const.p("pStdPPSs", "a pointer to an array of {@code StdVideoH264PictureParameterSet} structures representing H.264 picture parameter sets. Each element of the array <b>must</b> have a unique H.264 SPS-PPS ID pair.")
+    AutoSize("pStdSPSs", optional = true)..uint32_t("stdSPSCount", "the number of elements in the {@code pStdSPSs} array.")
+    nullable..StdVideoH264SequenceParameterSet.const.p("pStdSPSs", "a pointer to an array of {@code StdVideoH264SequenceParameterSet} structures describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-sps\">H.264 SPS</a> entries to add.")
+    AutoSize("pStdPPSs", optional = true)..uint32_t("stdPPSCount", "the number of elements in the {@code pStdPPSs} array.")
+    nullable..StdVideoH264PictureParameterSet.const.p("pStdPPSs", "a pointer to an array of {@code StdVideoH264PictureParameterSet} structures describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-pps\">H.264 PPS</a> entries to add.")
 }
 
-val VkVideoEncodeH264SessionParametersCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersCreateInfoEXT") {
+val VkVideoEncodeH264SessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersCreateInfoKHR") {
     documentation =
         """
         Structure specifies H.264 encoder parameter set information.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT</li>
-            <li>If {@code pParametersAddInfo} is not {@code NULL}, {@code pParametersAddInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH264SessionParametersAddInfoEXT structure</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR</li>
+            <li>If {@code pParametersAddInfo} is not {@code NULL}, {@code pParametersAddInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH264SessionParametersAddInfoKHR structure</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264SessionParametersAddInfoEXT
+        ##VkVideoEncodeH264SessionParametersAddInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    uint32_t("maxStdSPSCount", "the maximum number of SPS parameters that the {@code VkVideoSessionParametersKHR} can contain.")
-    uint32_t("maxStdPPSCount", "the maximum number of PPS parameters that the {@code VkVideoSessionParametersKHR} can contain.")
-    nullable..VkVideoEncodeH264SessionParametersAddInfoEXT.const.p("pParametersAddInfo", "{@code NULL} or a pointer to a ##VkVideoEncodeH264SessionParametersAddInfoEXT structure specifying H.264 parameters to add upon object creation.")
+    uint32_t("maxStdSPSCount", "the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-sps\">H.264 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain.")
+    uint32_t("maxStdPPSCount", "the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-pps\">H.264 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain.")
+    nullable..VkVideoEncodeH264SessionParametersAddInfoKHR.const.p("pParametersAddInfo", "{@code NULL} or a pointer to a ##VkVideoEncodeH264SessionParametersAddInfoKHR structure specifying H.264 parameters to add upon object creation.")
 }
 
-val VkVideoEncodeH264SessionParametersGetInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersGetInfoEXT") {
+val VkVideoEncodeH264SessionParametersGetInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersGetInfoKHR") {
     documentation =
         """
         Structure specifying parameters for retrieving encoded H.264 parameter set data.
@@ -2509,262 +2573,415 @@ val VkVideoEncodeH264SessionParametersGetInfoEXT = struct(Module.VULKAN, "VkVide
         When this structure is specified in the {@code pNext} chain of the ##VkVideoEncodeSessionParametersGetInfoKHR structure passed to #GetEncodedVideoSessionParametersKHR(), the command will write encoded parameter data to the output buffer in the following order:
 
         <ul>
-            <li>The H.264 sequence parameter set identified by {@code stdSPSId}, if {@code writeStdSPS} is set to #TRUE.</li>
-            <li>The H.264 picture parameter set identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId}, if {@code writeStdPPS} is set to #TRUE.</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-sps">H.264 sequence parameter set</a> identified by {@code stdSPSId}, if {@code writeStdSPS} is set to #TRUE.</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-pps">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId}, if {@code writeStdPPS} is set to #TRUE.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>At least one of {@code writeStdSPS} and {@code writeStdPPS} <b>must</b> be set to #TRUE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("writeStdSPS", "indicates whether the encoded H.264 sequence parameter set identified by {@code stdSPSId} is requested to be retrieved.")
-    VkBool32("writeStdPPS", "indicates whether the encoded H.264 picture parameter set identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId} is requested to be retrieved.")
+    VkBool32("writeStdSPS", "indicates whether the encoded <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-sps\">H.264 sequence parameter set</a> identified by {@code stdSPSId} is requested to be retrieved.")
+    VkBool32("writeStdPPS", "indicates whether the encoded <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-pps\">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId} is requested to be retrieved.")
     uint32_t("stdSPSId", "specifies the H.264 sequence parameter set ID used to identify the retrieved H.264 sequence and/or picture parameter set(s).")
     uint32_t("stdPPSId", "specifies the H.264 picture parameter set ID used to identify the retrieved H.264 picture parameter set when {@code writeStdPPS} is set to #TRUE.")
 }
 
-val VkVideoEncodeH264SessionParametersFeedbackInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersFeedbackInfoEXT", mutable = false) {
+val VkVideoEncodeH264SessionParametersFeedbackInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264SessionParametersFeedbackInfoKHR", mutable = false) {
     documentation =
         """
         Structure providing feedback about the requested H.264 video session parameters.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkBool32("hasStdSPSOverrides", "indicates whether any of the parameters of the requested H.264 sequence parameter set, if one was requested via ##VkVideoEncodeH264SessionParametersGetInfoEXT{@code ::writeStdSPS}, were overridden by the implementation.")
-    VkBool32("hasStdPPSOverrides", "indicates whether any of the parameters of the requested H.264 picture parameter set, if one was requested via ##VkVideoEncodeH264SessionParametersGetInfoEXT{@code ::writeStdPPS}, were overridden by the implementation.")
+    VkBool32("hasStdSPSOverrides", "indicates whether any of the parameters of the requested <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-sps\">H.264 sequence parameter set</a>, if one was requested via ##VkVideoEncodeH264SessionParametersGetInfoKHR{@code ::writeStdSPS}, were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
+    VkBool32("hasStdPPSOverrides", "indicates whether any of the parameters of the requested <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-pps\">H.264 picture parameter set</a>, if one was requested via ##VkVideoEncodeH264SessionParametersGetInfoKHR{@code ::writeStdPPS}, were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
 }
 
-val VkVideoEncodeH264NaluSliceInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264NaluSliceInfoEXT") {
+val VkVideoEncodeH264NaluSliceInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264NaluSliceInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.264 encode slice NALU parameters.
 
+        <h5>Description</h5>
+        <dl>
+            <dt>Std Slice Header Parameters</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                <li>
+                    if {@code pWeightTable} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH264WeightTable} that is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>all other members of {@code StdVideoEncodeH264WeightTable} are interpreted as defined in section 7.4.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code pStdSliceHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264SliceHeader} value</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264PictureInfoEXT
+        ##VkVideoEncodeH264PictureInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    int32_t("constantQp", "the QP to use for the slice if the current rate control mode configured for the video session is #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
-    StdVideoEncodeH264SliceHeader.const.p("pStdSliceHeader", "a pointer to a {@code StdVideoEncodeH264SliceHeader} structure specifying the slice header for the current slice.")
+    int32_t("constantQp", "the QP to use for the slice if the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a> configured for the video session is #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
+    StdVideoEncodeH264SliceHeader.const.p("pStdSliceHeader", "a pointer to a {@code StdVideoEncodeH264SliceHeader} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-slice-header-params\">H.264 slice header parameters</a> for the slice.")
 }
 
-val VkVideoEncodeH264PictureInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264PictureInfoEXT") {
+val VkVideoEncodeH264PictureInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264PictureInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.264 encode frame parameters.
 
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of the ##VkVideoEncodeInfoKHR structure passed to #CmdEncodeVideoKHR() to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264">H.264 encode operation</a>.
+
+        <dl>
+            <dt>Encode Input Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-picture-data-access">H.264 Encode Picture Data Access</a> section.</li>
+                <li>The encode input picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-picture-info">H.264 picture information</a> provided in {@code pStdPictureInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Picture Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                <li>{@code flags.IdrPicFlag} as defined in section 7.4.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code flags.is_reference} as defined in section 3.136 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code seq_parameter_set_id} and {@code pic_parameter_set_id} are used to identify the active parameter sets, as described below;</li>
+                <li>{@code primary_pic_type} as defined in section 7.4.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code PicOrderCnt} as defined in section 8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code temporal_id} as defined in section G.7.4.1.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>
+                    if {@code pRefLists} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH264ReferenceListsInfo} structure that is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>{@code ref_pic_list_modification_flag_l0} and {@code ref_pic_list_modification_flag_l1} as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                        <li>{@code num_ref_idx_l0_active_minus1} and {@code num_ref_idx_l1_active_minus1} as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                        <li>{@code RefPicList0} and {@code RefPicList1} as defined in section 8.2.4 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a> where each element of these arrays either identifies an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-active-reference-picture-info">active reference picture</a> using its <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index or contains the value {@code STD_VIDEO_H264_NO_REFERENCE_PICTURE} to indicate “no reference picture”;</li>
+                        <li>if {@code refList0ModOpCount} is not zero, then {@code pRefList0ModOperations} is a pointer to an array of {@code refList0ModOpCount} number of {@code StdVideoEncodeH264RefListModEntry} structures specifying the modification parameters for the reference list L0 as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                        <li>if {@code refList1ModOpCount} is not zero, then {@code pRefList1ModOperations} is a pointer to an array of {@code refList1ModOpCount} number of {@code StdVideoEncodeH264RefListModEntry} structures specifying the modification parameters for the reference list L1 as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                        <li>if {@code refPicMarkingOpCount} is not zero, then {@code refPicMarkingOperations} is a pointer to an array of {@code refPicMarkingOpCount} number of {@code StdVideoEncodeH264RefPicMarkingEntry} structures specifying the reference picture marking parameters as defined in section 7.4.3.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
+        Reference picture setup is controlled by the value of {@code StdVideoEncodeH264PictureInfo}{@code ::flags.is_reference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> specified in {@code pEncodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoEncodeH264PictureInfo}{@code ::flags.is_reference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">DPB Slot States</a> section.
+
+        <dl>
+            <dt>Active Parameter Sets</dt>
+            <dd><ul>
+                <li>The <em>active SPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-sps">SPS</a> identified by the key specified in {@code StdVideoEncodeH264PictureInfo}{@code ::seq_parameter_set_id}.</li>
+                <li>The <em>active PPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-pps">PPS</a> identified by the key specified by the pair constructed from {@code StdVideoEncodeH264PictureInfo}{@code ::seq_parameter_set_id} and {@code StdVideoEncodeH264PictureInfo}{@code ::pic_parameter_set_id}.</li>
+            </ul></dd>
+        </dl>
+
+        H.264 encoding uses <em>explicit weighted sample prediction</em> for a slice, as defined in section 8.4.2.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>, if any of the following conditions are true for the active <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-pps">PPS</a> and the {@code pStdSliceHeader} member of the corresponding element of {@code pNaluSliceEntries}:
+
+        <ul>
+            <li>{@code pStdSliceHeader→slice_type} is {@code STD_VIDEO_H264_SLICE_TYPE_P} and {@code weighted_pred_flag} is enabled in the active PPS.</li>
+            <li>{@code pStdSliceHeader→slice_type} is {@code STD_VIDEO_H264_SLICE_TYPE_B} and {@code weighted_bipred_idc} in the active PPS equals {@code STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT}.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code naluSliceEntryCount} <b>must</b> be between 1 and ##VkVideoEncodeH264CapabilitiesKHR{@code ::maxSliceCount}, inclusive, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_GENERATE_PREFIX_NALU_BIT_KHR, then {@code generatePrefixNalu} <b>must</b> be #FALSE</li>
+            <li>If ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_PREDICTION_WEIGHT_TABLE_GENERATED_BIT_KHR and the slice corresponding to any element of {@code pNaluSliceEntries} uses <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-weighted-pred">explicit weighted sample prediction</a>, then ##VkVideoEncodeH264NaluSliceInfoKHR{@code ::pStdSliceHeader→pWeightTable} <b>must</b> not be {@code NULL} for that element of {@code pNaluSliceEntries}</li>
+            <li>If ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_KHR, then ##VkVideoEncodeH264NaluSliceInfoKHR{@code ::pStdSliceHeader→slice_type} <b>must</b> be identical for all elements of {@code pNaluSliceEntries}</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_EXT</li>
-            <li>{@code pNaluSliceEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceEntryCount} valid ##VkVideoEncodeH264NaluSliceInfoEXT structures</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR</li>
+            <li>{@code pNaluSliceEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceEntryCount} valid ##VkVideoEncodeH264NaluSliceInfoKHR structures</li>
             <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264PictureInfo} value</li>
             <li>{@code naluSliceEntryCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264NaluSliceInfoEXT
+        ##VkVideoEncodeH264NaluSliceInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pNaluSliceEntries")..uint32_t("naluSliceEntryCount", "the number of slice NALUs in the frame.")
-    VkVideoEncodeH264NaluSliceInfoEXT.const.p("pNaluSliceEntries", "a pointer to an array of {@code naluSliceEntryCount} ##VkVideoEncodeH264NaluSliceInfoEXT structures specifying the division of the current picture into slices and the properties of these slices. This is an ordered sequence; the NALUs are generated consecutively in ##VkVideoEncodeInfoKHR{@code ::dstBuffer} in the same order as in this array.")
-    StdVideoEncodeH264PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying the syntax and other codec-specific information from the H.264 specification associated with this picture. The information provided <b>must</b> reflect the decoded picture marking operations that are applicable to this frame.")
-    VkBool32("generatePrefixNalu", "controls whether prefix NALUs are generated before slice NALUs into the target bitstream.")
+    AutoSize("pNaluSliceEntries")..uint32_t("naluSliceEntryCount", "the number of elements in {@code pNaluSliceEntries}.")
+    VkVideoEncodeH264NaluSliceInfoKHR.const.p("pNaluSliceEntries", "a pointer to an array of {@code naluSliceEntryCount} ##VkVideoEncodeH264NaluSliceInfoKHR structures specifying the parameters of the individual H.264 slices to encode for the input picture.")
+    StdVideoEncodeH264PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-picture-info\">H.264 picture information</a>.")
+    VkBool32("generatePrefixNalu", "controls whether prefix NALUs are generated before slice NALUs into the target bitstream, as defined in sections 7.3.2.12 and 7.4.2.12 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
 }
 
-val VkVideoEncodeH264DpbSlotInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264DpbSlotInfoEXT") {
+val VkVideoEncodeH264DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264DpbSlotInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.264 encode DPB picture information.
 
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of ##VkVideoEncodeInfoKHR{@code ::pSetupReferenceSlot}, if not {@code NULL}, and the {@code pNext} chain of the elements of ##VkVideoEncodeInfoKHR{@code ::pReferenceSlots} to specify the codec-specific reference picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264">H.264 encode operation</a>.
+
+        <dl>
+            <dt>Active Reference Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-picture-data-access">H.264 Encode Picture Data Access</a> section.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index specified in the {@code slotIndex} member of the corresponding element of ##VkVideoEncodeInfoKHR{@code ::pReferenceSlots}.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-reference-info">H.264 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Reconstructed Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-picture-data-access">H.264 Encode Picture Data Access</a> section.</li>
+                <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoEncodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
+                <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-reference-info">H.264 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Reference Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                <li>{@code flags.used_for_long_term_reference} is used to indicate whether the picture is marked as “used for long-term reference” as defined in section 8.2.5.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code primary_pic_type} as defined in section 7.4.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code long_term_pic_num} and {@code long_term_frame_idx} as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>{@code temporal_id} as defined in section G.7.4.1.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+                <li>all other members are interpreted as defined in section 8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_KHR</li>
             <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264ReferenceInfo} value</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoEncodeH264ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoEncodeH264ReferenceInfo} structure specifying the syntax and other codec-specific information from the H.264 specification associated with this reference picture.")
+    StdVideoEncodeH264ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoEncodeH264ReferenceInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-reference-info\">H.264 reference information</a>.")
 }
 
-val VkVideoEncodeH264ProfileInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264ProfileInfoEXT") {
+val VkVideoEncodeH264ProfileInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264ProfileInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifying H.264 encode profile.
-
-        <h5>Description</h5>
-        An H.264 encode profile is specified by including a ##VkVideoEncodeH264ProfileInfoEXT structure in the {@code pNext} chain of the ##VkVideoProfileInfoKHR structure when ##VkVideoProfileInfoKHR{@code ::videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT.
+        Structure specifying H.264 encode-specific video profile parameters.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoH264ProfileIdc("stdProfileIdc", "a {@code StdVideoH264ProfileIdc} value specifying the H.264 codec profile IDC.")
+    StdVideoH264ProfileIdc("stdProfileIdc", "a {@code StdVideoH264ProfileIdc} value specifying the H.264 codec profile IDC, as defined in section A.2 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
 }
 
-val VkVideoEncodeH264RateControlInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264RateControlInfoEXT") {
+val VkVideoEncodeH264RateControlInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264RateControlInfoKHR") {
     documentation =
         """
         Structure describing H.264 stream rate control parameters.
 
         <h5>Description</h5>
-        In order to provide H.264-specific stream rate control parameters, add a ##VkVideoEncodeH264RateControlInfoEXT structure to the {@code pNext} chain of the ##VkVideoEncodeRateControlInfoKHR structure in the {@code pNext} chain of the ##VkVideoCodingControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command.
+        When an instance of this structure is included in the {@code pNext} chain of the ##VkVideoCodingControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command, and ##VkVideoCodingControlInfoKHR{@code ::flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-control">Video Coding Control</a>).
 
-        The parameters from this structure act as a guidance for implementations to apply various rate control heuristics.
+        If {@code flags} includes #VIDEO_ENCODE_H264_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR, then the rate control state is reset to an initial state to meet HRD compliance requirements. Otherwise the new rate control state <b>may</b> be applied without a reset depending on the implementation and the specified rate control parameters.
 
-        It is possible to infer the picture type to be used when encoding a frame, on the basis of the values provided for {@code consecutiveBFrameCount}, {@code idrPeriod}, and {@code gopFrameCount}, but this inferred picture type will not be used by implementations to override the picture type provided in #CmdEncodeVideoKHR(). Additionally, it is not required for the video session to be reset if the inferred picture type does not match the actual picture type.
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        It would be possible to infer the picture type to be used when encoding a frame, on the basis of the values provided for {@code consecutiveBFrameCount}, {@code idrPeriod}, and {@code gopFrameCount}, but this inferred picture type will not be used by implementations to override the picture type provided to the video encode operation.
+        </div>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_HRD_COMPLIANCE_BIT_KHR, then {@code flags} <b>must</b> not contain #VIDEO_ENCODE_H264_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H264_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR or #VIDEO_ENCODE_H264_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR, then it <b>must</b> also contain #VIDEO_ENCODE_H264_RATE_CONTROL_REGULAR_GOP_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H264_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR, then it <b>must</b> not also contain #VIDEO_ENCODE_H264_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H264_RATE_CONTROL_REGULAR_GOP_BIT_KHR, then {@code gopFrameCount} <b>must</b> be greater than 0</li>
+            <li>If {@code idrPeriod} is not 0, then it <b>must</b> be greater than or equal to {@code gopFrameCount}</li>
+            <li>If {@code consecutiveBFrameCount} is not 0, then it <b>must</b> be less than {@code gopFrameCount}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264RateControlFlagBitsEXT} values</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_KHR</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264RateControlFlagBitsKHR} values</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkVideoEncodeH264RateControlFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH264RateControlFlagBitsEXT} specifying H.264 rate control flags.")
-    uint32_t("gopFrameCount", "the number of frames contained within the group of pictures (GOP), starting from an intra frame and until the next intra frame. If it is set to 0, the implementation chooses a suitable value. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite.")
-    uint32_t("idrPeriod", "the interval, in terms of number of frames, between two IDR frames. If it is set to 0, the implementation chooses a suitable value. If it is set to {@code UINT32_MAX}, the IDR period is treated as infinite.")
-    uint32_t("consecutiveBFrameCount", "the number of consecutive B-frames between I- and/or P-frames within the GOP.")
-    uint32_t("temporalLayerCount", "specifies the number of temporal layers enabled in the stream.")
+    VkVideoEncodeH264RateControlFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeH264RateControlFlagBitsKHR} specifying H.264 rate control flags.")
+    uint32_t("gopFrameCount", "the number of frames within a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">group of pictures (GOP)</a> intended to be used by the application. If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite.")
+    uint32_t("idrPeriod", "the interval, in terms of number of frames, between two <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-idr-pic\">IDR frames</a> (see <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-idr-period\">IDR period</a>). If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent IDR period. If it is set to {@code UINT32_MAX}, the IDR period is treated as infinite.")
+    uint32_t("consecutiveBFrameCount", "the number of consecutive B frames between I and/or P frames within the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">GOP</a>.")
+    uint32_t("temporalLayerCount", "specifies the number of H.264 temporal layers that the application intends to use.")
 }
 
-val VkVideoEncodeH264FrameSizeEXT = struct(Module.VULKAN, "VkVideoEncodeH264FrameSizeEXT") {
+val VkVideoEncodeH264FrameSizeKHR = struct(Module.VULKAN, "VkVideoEncodeH264FrameSizeKHR") {
     documentation =
         """
         Structure describing frame size values per H.264 picture type.
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264RateControlLayerInfoEXT
+        ##VkVideoEncodeH264RateControlLayerInfoKHR
         """
 
-    uint32_t("frameISize", "the size in bytes to be used for I-frames.")
-    uint32_t("framePSize", "the size in bytes to be used for P-frames.")
-    uint32_t("frameBSize", "the size in bytes to be used for B-frames.")
+    uint32_t("frameISize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-i-pic\">I pictures</a>.")
+    uint32_t("framePSize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-p-pic\">P pictures</a>.")
+    uint32_t("frameBSize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-b-pic\">B pictures</a>.")
 }
 
-val VkVideoEncodeH264RateControlLayerInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264RateControlLayerInfoEXT") {
+val VkVideoEncodeH264RateControlLayerInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264RateControlLayerInfoKHR") {
     documentation =
         """
         Structure describing H.264 per-layer rate control parameters.
 
         <h5>Description</h5>
-        H.264-specific per-layer rate control parameters <b>must</b> be specified by adding a ##VkVideoEncodeH264RateControlLayerInfoEXT structure to the {@code pNext} chain of each ##VkVideoEncodeRateControlLayerInfoKHR structure in a call to #CmdControlVideoCodingKHR() command, when the command buffer context has an active video encode H.264 session.
+        When used, the values in {@code minQp} and {@code maxQp} guarantee that the effective QP values used by the implementation will respect those lower and upper bounds, respectively. However, limiting the range of QP values that the implementation is able to use will also limit the capabilities of the implementation’s rate control algorithm to comply to other constraints. In particular, the implementation <b>may</b> not be able to comply to the following:
+
+        <ul>
+            <li>The average and/or peak <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-bitrate">bitrate</a> values to be used for the encoded bitstream specified in the {@code averageBitrate} and {@code maxBitrate} members of the ##VkVideoEncodeRateControlLayerInfoKHR structure.</li>
+            <li>The upper bounds on the encoded frame size, for each picture type, specified in the {@code maxFrameSize} member of ##VkVideoEncodeH264RateControlLayerInfoKHR.</li>
+        </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        In general, applications need to configure rate control parameters appropriately in order to be able to get the desired rate control behavior, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-rate-control">Video Encode Rate Control</a> section.
+        </div>
+
+        When an instance of this structure is included in the {@code pNext} chain of a ##VkVideoEncodeRateControlLayerInfoKHR structure specified in one of the elements of the {@code pLayers} array member of the ##VkVideoEncodeRateControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command, ##VkVideoCodingControlInfoKHR{@code ::flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, and the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, it specifies the H.264-specific rate control parameters of the rate control layer corresponding to that element of {@code pLayers}.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code useMinQp} is #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be between ##VkVideoEncodeH264CapabilitiesKHR{@code ::minQp} and ##VkVideoEncodeH264CapabilitiesKHR{@code ::maxQp}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If {@code useMaxQp} is #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all be between ##VkVideoEncodeH264CapabilitiesKHR{@code ::minQp} and ##VkVideoEncodeH264CapabilitiesKHR{@code ::maxQp}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If {@code useMinQp} is #TRUE and ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all specify the same value</li>
+            <li>If {@code useMaxQp} is #TRUE and ##VkVideoEncodeH264CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all specify the same value</li>
+            <li>If {@code useMinQp} and {@code useMaxQp} are both #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be less than or equal to the respective members of {@code maxQp}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT</li>
-            <li>{@code minQp} <b>must</b> be a valid ##VkVideoEncodeH264QpEXT structure</li>
-            <li>{@code maxQp} <b>must</b> be a valid ##VkVideoEncodeH264QpEXT structure</li>
-            <li>{@code maxFrameSize} <b>must</b> be a valid ##VkVideoEncodeH264FrameSizeEXT structure</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR</li>
+            <li>{@code minQp} <b>must</b> be a valid ##VkVideoEncodeH264QpKHR structure</li>
+            <li>{@code maxQp} <b>must</b> be a valid ##VkVideoEncodeH264QpKHR structure</li>
+            <li>{@code maxFrameSize} <b>must</b> be a valid ##VkVideoEncodeH264FrameSizeKHR structure</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264FrameSizeEXT, ##VkVideoEncodeH264QpEXT
+        ##VkVideoEncodeH264FrameSizeKHR, ##VkVideoEncodeH264QpKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("useMinQp", "indicates whether the values within {@code minQp} should be used by the implementation. When it is set to #FALSE, the implementation ignores the values in {@code minQp} and chooses suitable values.")
-    VkVideoEncodeH264QpEXT("minQp", "provides the lower bound on the QP values for each picture type, to be used in rate control calculations.")
-    VkBool32("useMaxQp", "indicates whether the values within {@code maxQp} should be used by the implementation. When it is set to #FALSE, the implementation ignores the values in {@code maxQp} and chooses suitable values.")
-    VkVideoEncodeH264QpEXT("maxQp", "provides the upper bound on the QP values for each picture type, to be used in rate control calculations.")
-    VkBool32("useMaxFrameSize", "indicates whether the values within {@code maxFrameSize} should be used by the implementation.")
-    VkVideoEncodeH264FrameSizeEXT("maxFrameSize", "provides the upper bound on the encoded frame size for each picture type. The implementation does not guarantee the encoded frame sizes will be within the specified limits, however these limits <b>may</b> be used as a guide in rate control calculations. If enabled and not set properly, the {@code maxQp} limit may prevent the implementation from respecting the {@code maxFrameSize} limit.")
+    VkBool32("useMinQp", "indicates whether the QP values determined by rate control will be clamped to the lower bounds on the QP values specified in {@code minQp}.")
+    VkVideoEncodeH264QpKHR("minQp", "specifies the lower bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMinQp} is set to #TRUE.")
+    VkBool32("useMaxQp", "indicates whether the QP values determined by rate control will be clamped to the upper bounds on the QP values specified in {@code maxQp}.")
+    VkVideoEncodeH264QpKHR("maxQp", "specifies the upper bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMaxQp} is set to #TRUE.")
+    VkBool32("useMaxFrameSize", "indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code maxFrameSize} as the upper bounds on the encoded frame size for each picture type.")
+    VkVideoEncodeH264FrameSizeKHR("maxFrameSize", "specifies the upper bounds on the encoded frame size, for each picture type, when {@code useMaxFrameSize} is set to #TRUE.")
 }
 
-val VkVideoEncodeH264GopRemainingFrameInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264GopRemainingFrameInfoEXT") {
+val VkVideoEncodeH264GopRemainingFrameInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH264GopRemainingFrameInfoKHR") {
     documentation =
         """
         Structure specifying H.264 encode rate control GOP remaining frame counts.
 
         <h5>Description</h5>
-        Setting {@code useGopRemainingFrames} to #TRUE and including this structure in the {@code pNext} chain of ##VkVideoEncodeInfoKHR is only mandatory if the ##VkVideoEncodeH264CapabilitiesEXT{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> is #TRUE. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a regular GOP structure, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.
+        Setting {@code useGopRemainingFrames} to #TRUE and including this structure in the {@code pNext} chain of ##VkVideoBeginCodingInfoKHR is only mandatory if the ##VkVideoEncodeH264CapabilitiesKHR{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> is #TRUE. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-regular-gop">regular GOP structure</a>, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.
 
-        The ##VkVideoEncodeH264CapabilitiesEXT{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.
+        The ##VkVideoEncodeH264CapabilitiesKHR{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.
 
         As with other rate control guidance values, if the effective order and number of frames encoded by the application are not in line with the remaining frame counts specified in this structure at any given point, then the behavior of the implementation’s rate control algorithm <b>may</b> deviate from the one expected by the application.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("useGopRemainingFrames", "indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB}. If {@code useGopRemainingFrames} is #FALSE, then the values of {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB} are ignored.")
-    uint32_t("gopRemainingI", "specifies the number of I-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
-    uint32_t("gopRemainingP", "specifies the number of P-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
-    uint32_t("gopRemainingB", "specifies the number of B-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
+    uint32_t("gopRemainingI", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-i-pic\">I frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">GOP</a> prior to executing the video encode operation.")
+    uint32_t("gopRemainingP", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-p-pic\">P frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">GOP</a> prior to executing the video encode operation.")
+    uint32_t("gopRemainingB", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-b-pic\">B frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h264-gop\">GOP</a> prior to executing the video encode operation.")
 }
 
-val VkVideoEncodeH265CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH265CapabilitiesEXT", mutable = false) {
+val VkVideoEncodeH265CapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeH265CapabilitiesKHR", mutable = false) {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifying H.265 encode capabilities.
+        Structure describing H.265 encode capabilities.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_KHR</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkExtent2D
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkVideoEncodeH265CapabilityFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} indicating supported H.265 encoding capabilities.")
-    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value indicating the maximum H.265 level supported.")
+    VkVideoEncodeH265CapabilityFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsKHR} indicating supported H.265 encoding capabilities.")
+    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value indicating the maximum H.265 level supported by the profile, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
     uint32_t("maxSliceSegmentCount", "indicates the maximum number of slice segments that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of slice segments that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules.")
-    VkExtent2D("maxTiles", "indicates the maximum number of H.265 tile columns and rows that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of H.265 tiles that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules.")
-    VkVideoEncodeH265CtbSizeFlagsEXT("ctbSizes", "a bitmask of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} describing the supported CTB sizes.")
-    VkVideoEncodeH265TransformBlockSizeFlagsEXT("transformBlockSizes", "a bitmask of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} describing the supported transform block sizes.")
-    uint32_t("maxPPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures.")
-    uint32_t("maxBPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported.")
-    uint32_t("maxL1ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported.")
+    VkExtent2D("maxTiles", "indicates the maximum number of H.265 tile columns and rows, as defined in sections 3.175 and 3.176 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a> that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of H.265 tiles that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules.")
+    VkVideoEncodeH265CtbSizeFlagsKHR("ctbSizes", "a bitmask of {@code VkVideoEncodeH265CtbSizeFlagBitsKHR} describing the supported CTB sizes.")
+    VkVideoEncodeH265TransformBlockSizeFlagsKHR("transformBlockSizes", "a bitmask of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsKHR} describing the supported transform block sizes.")
+    uint32_t("maxPPictureL0ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-p-pic">P pictures</a>.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxPPictureL0ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 reference list for P pictures. However, if {@code maxPPictureL0ReferenceCount} is zero, then the use of P pictures is not allowed. In case of H.265 encoding, backward-only predictive pictures <b>can</b> be encoded even if P pictures are not supported, as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> supports <em>generalized P &amp; B frames</em> (also known as low delay B frames) whereas B frames <b>can</b> refer to past frames through both the L0 and L1 reference lists.
+        </div>""")
+    uint32_t("maxBPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-b-pic\">B pictures</a>.")
+    uint32_t("maxL1ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-b-pic">B pictures</a> is supported.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 and L1 reference lists for B pictures. However, if {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} are both zero, then the use of B pictures is not allowed.
+        </div>""")
     uint32_t("maxSubLayerCount", "indicates the maximum number of H.265 sub-layers supported by the implementation.")
-    VkBool32("expectDyadicTemporalSubLayerPattern", "indicates that the implementation’s rate control algorithms expect the application to use a dyadic temporal sub-layer pattern when encoding multiple temporal sub-layers.")
+    VkBool32("expectDyadicTemporalSubLayerPattern", "indicates that the implementation’s rate control algorithms expect the application to use a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-layer-pattern-dyadic\">dyadic temporal sub-layer pattern</a> when encoding multiple temporal sub-layers.")
     int32_t("minQp", "indicates the minimum QP value supported.")
     int32_t("maxQp", "indicates the maximum QP value supported.")
-    VkBool32("prefersGopRemainingFrames", "indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type remaining in the current group of pictures.")
-    VkBool32("requiresGopRemainingFrames", "indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type remaining in the current group of pictures.")
-    VkVideoEncodeH265StdFlagsEXT("stdSyntaxFlags", "a bitmask of {@code VkVideoEncodeH265StdFlagBitsEXT} indicating capabilities related to H.265 syntax elements.")
+    VkBool32("prefersGopRemainingFrames", "indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop-remaining-frames\">remaining</a> in the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">group of pictures</a> when beginning a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-coding-scope\">video coding scope</a>.")
+    VkBool32("requiresGopRemainingFrames", "indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop-remaining-frames\">remaining</a> in the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">group of pictures</a> when beginning a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-coding-scope\">video coding scope</a>.")
+    VkVideoEncodeH265StdFlagsKHR("stdSyntaxFlags", "a bitmask of {@code VkVideoEncodeH265StdFlagBitsKHR} indicating capabilities related to H.265 syntax elements.")
 }
 
-val VkVideoEncodeH265SessionCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265SessionCreateInfoEXT") {
+val VkVideoEncodeH265SessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265SessionCreateInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
@@ -2772,65 +2989,73 @@ val VkVideoEncodeH265SessionCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncode
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("useMaxLevelIdc", "indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is set to #FALSE, the implementation ignores the value of {@code maxLevelIdc} and uses the value of ##VkVideoEncodeH265CapabilitiesEXT{@code ::maxLevelIdc}, as reported by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile.")
-    StdVideoH265LevelIdc("maxLevelIdc", "provides the upper bound on the H.265 level for the video bitstreams produced by the created video session.")
+    VkBool32("useMaxLevelIdc", "indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is set to #FALSE, the implementation ignores the value of {@code maxLevelIdc} and uses the value of ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxLevelIdc}, as reported by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile.")
+    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value specifying the upper bound on the H.265 level for the video bitstreams produced by the created video session, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
 }
 
-val VkVideoEncodeH265QpEXT = struct(Module.VULKAN, "VkVideoEncodeH265QpEXT") {
+val VkVideoEncodeH265QpKHR = struct(Module.VULKAN, "VkVideoEncodeH265QpKHR") {
     documentation =
         """
         Structure describing H.265 QP values per picture type.
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265QualityLevelPropertiesEXT, ##VkVideoEncodeH265RateControlLayerInfoEXT
+        ##VkVideoEncodeH265QualityLevelPropertiesKHR, ##VkVideoEncodeH265RateControlLayerInfoKHR
         """
 
-    int32_t("qpI", "the QP to be used for I-frames.")
-    int32_t("qpP", "the QP to be used for P-frames.")
-    int32_t("qpB", "the QP to be used for B-frames.")
+    int32_t("qpI", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-i-pic\">I pictures</a>.")
+    int32_t("qpP", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-p-pic\">P pictures</a>.")
+    int32_t("qpB", "the QP to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-b-pic\">B pictures</a>.")
 }
 
-val VkVideoEncodeH265QualityLevelPropertiesEXT = struct(Module.VULKAN, "VkVideoEncodeH265QualityLevelPropertiesEXT", mutable = false) {
+val VkVideoEncodeH265QualityLevelPropertiesKHR = struct(Module.VULKAN, "VkVideoEncodeH265QualityLevelPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing the H.265 encode quality level properties.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265QpEXT
+        ##VkVideoEncodeH265QpKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkVideoEncodeH265RateControlFlagsEXT("preferredRateControlFlags", "a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsEXT} values indicating the preferred flags to use for ##VkVideoEncodeH265RateControlInfoEXT{@code ::flags}.")
-    uint32_t("preferredGopFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoEXT{@code ::gopFrameCount}.")
-    uint32_t("preferredIdrPeriod", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoEXT{@code ::idrPeriod}.")
-    uint32_t("preferredConsecutiveBFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoEXT{@code ::consecutiveBFrameCount}.")
-    uint32_t("preferredSubLayerCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoEXT{@code ::subLayerCount}.")
-    VkVideoEncodeH265QpEXT("preferredConstantQp", "indicates the preferred values to use for ##VkVideoEncodeH265NaluSliceSegmentInfoEXT{@code ::constantQp} for each picture type when using rate control mode #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
+    VkVideoEncodeH265RateControlFlagsKHR("preferredRateControlFlags", "a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsKHR} values indicating the preferred flags to use for ##VkVideoEncodeH265RateControlInfoKHR{@code ::flags}.")
+    uint32_t("preferredGopFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoKHR{@code ::gopFrameCount}.")
+    uint32_t("preferredIdrPeriod", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoKHR{@code ::idrPeriod}.")
+    uint32_t("preferredConsecutiveBFrameCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoKHR{@code ::consecutiveBFrameCount}.")
+    uint32_t("preferredSubLayerCount", "indicates the preferred value to use for ##VkVideoEncodeH265RateControlInfoKHR{@code ::subLayerCount}.")
+    VkVideoEncodeH265QpKHR("preferredConstantQp", "indicates the preferred values to use for ##VkVideoEncodeH265NaluSliceSegmentInfoKHR{@code ::constantQp} for each picture type when using <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a> #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
     uint32_t("preferredMaxL0ReferenceCount", "indicates the preferred maximum number of reference pictures to use in the reference list L0.")
     uint32_t("preferredMaxL1ReferenceCount", "indicates the preferred maximum number of reference pictures to use in the reference list L1.")
 }
 
-val VkVideoEncodeH265SessionParametersAddInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersAddInfoEXT") {
+val VkVideoEncodeH265SessionParametersAddInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersAddInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifies H.265 encoder parameter set info.
+        Structure specifies H.265 encoder parameter set information.
+
+        <h5>Description</h5>
+        This structure <b>can</b> be specified in the following places:
+
+        <ul>
+            <li>In the {@code pParametersAddInfo} member of the ##VkVideoEncodeH265SessionParametersCreateInfoKHR structure specified in the {@code pNext} chain of ##VkVideoSessionParametersCreateInfoKHR used to create a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">video session parameters</a> object. In this case, if the video codec operation the video session parameters object is created with is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then it defines the set of initial parameters to add to the created object (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#creating-video-session-parameters">Creating Video Session Parameters</a>).</li>
+            <li>In the {@code pNext} chain of ##VkVideoSessionParametersUpdateInfoKHR. In this case, if the video codec operation the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">video session parameters</a> object to be updated was created with is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then it defines the set of parameters to add to it (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters-update">Updating Video Session Parameters</a>).</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR</li>
             <li>If {@code stdVPSCount} is not 0, and {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
             <li>If {@code stdSPSCount} is not 0, and {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
             <li>If {@code stdPPSCount} is not 0, and {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
@@ -2838,57 +3063,49 @@ val VkVideoEncodeH265SessionParametersAddInfoEXT = struct(Module.VULKAN, "VkVide
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The values of {@code stdVPSCount}, {@code stdSPSCount} and {@code stdPPSCount} <b>must</b> be less than or equal to the values of ##VkVideoEncodeH265SessionParametersCreateInfoEXT{@code ::maxStdVPSCount}, ##VkVideoEncodeH265SessionParametersCreateInfoEXT:{@code maxStdSPSCount}, and ##VkVideoEncodeH265SessionParametersCreateInfoEXT:{@code maxStdPPSCount}, respectively</li>
-            <li>Each {@code StdVideoH265VideoParameterSet} entry in {@code pStdVPSs} <b>must</b> have a unique H.265 VPS ID</li>
-            <li>Each {@code StdVideoH265SequenceParameterSet} entry in {@code pStdSPSs} <b>must</b> have a unique H.265 VPS-SPS ID pair</li>
-            <li>Each {@code StdVideoH265PictureParameterSet} entry in {@code pStdPPSs} <b>must</b> have a unique H.265 VPS-SPS-PPS ID tuple</li>
-            <li>Each entry to be added <b>must</b> have a unique, to the rest of the parameter array entries and the existing parameters in the Video Session Parameters Object that is being updated, VPS-SPS-PPS IDs</li>
-            <li>Parameter entries that already exist in Video Session Parameters object with a particular VPS-SPS-PPS IDs <b>must</b> not be replaced nor updated</li>
-            <li>When creating a new object using a Video Session Parameters as a template, the array’s parameters with the same VPS-SPS-PPS IDs as the ones from the template take precedence</li>
-            <li>VPS/SPS/PPS parameters <b>must</b> comply with the limits specified in ##VkVideoSessionCreateInfoKHR during Video Session creation</li>
+            <li>The {@code vps_video_parameter_set_id} member of each {@code StdVideoH265VideoParameterSet} structure specified in the elements of {@code pStdVPSs} <b>must</b> be unique within {@code pStdVPSs}</li>
+            <li>The pair constructed from the {@code sps_video_parameter_set_id} and {@code sps_seq_parameter_set_id} members of each {@code StdVideoH265SequenceParameterSet} structure specified in the elements of {@code pStdSPSs} <b>must</b> be unique within {@code pStdSPSs}</li>
+            <li>The triplet constructed from the {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id} members of each {@code StdVideoH265PictureParameterSet} structure specified in the elements of {@code pStdPPSs} <b>must</b> be unique within {@code pStdPPSs}</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265SessionParametersCreateInfoEXT
+        ##VkVideoEncodeH265SessionParametersCreateInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pStdVPSs", optional = true)..uint32_t("stdVPSCount", "the number of VPS elements in {@code pStdVPSs}.")
-    nullable..StdVideoH265VideoParameterSet.const.p("pStdVPSs", "a pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} structures representing H.265 video parameter sets.")
-    AutoSize("pStdSPSs", optional = true)..uint32_t("stdSPSCount", "the number of SPS elements in {@code pStdSPSs}.")
-    nullable..StdVideoH265SequenceParameterSet.const.p("pStdSPSs", "a pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} structures representing H.265 sequence parameter sets.")
-    AutoSize("pStdPPSs", optional = true)..uint32_t("stdPPSCount", "the number of PPS elements in {@code pStdPPSs}.")
-    nullable..StdVideoH265PictureParameterSet.const.p("pStdPPSs", "a pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} structures representing H.265 picture parameter sets.")
+    AutoSize("pStdVPSs", optional = true)..uint32_t("stdVPSCount", "the number of elements in the {@code pStdVPSs} array.")
+    nullable..StdVideoH265VideoParameterSet.const.p("pStdVPSs", "a pointer to an array of {@code StdVideoH265VideoParameterSet} structures describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-vps\">H.265 VPS</a> entries to add.")
+    AutoSize("pStdSPSs", optional = true)..uint32_t("stdSPSCount", "the number of elements in the {@code pStdSPSs} array.")
+    nullable..StdVideoH265SequenceParameterSet.const.p("pStdSPSs", "a pointer to an array of {@code StdVideoH265SequenceParameterSet} structures describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-sps\">H.265 SPS</a> entries to add.")
+    AutoSize("pStdPPSs", optional = true)..uint32_t("stdPPSCount", "the number of elements in the {@code pStdPPSs} array.")
+    nullable..StdVideoH265PictureParameterSet.const.p("pStdPPSs", "a pointer to an array of {@code StdVideoH265PictureParameterSet} structures describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-pps\">H.265 PPS</a> entries to add.")
 }
 
-val VkVideoEncodeH265SessionParametersCreateInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersCreateInfoEXT") {
+val VkVideoEncodeH265SessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersCreateInfoKHR") {
     documentation =
         """
-        Structure specifies H.265 encoder parameter set info.
-
-        <h5>Description</h5>
-        When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdVPSCount} {@code StdVideoH265VideoParameterSet} entries, no additional {@code StdVideoH265VideoParameterSet} entries can be added to it, and #ERROR_TOO_MANY_OBJECTS will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdSPSCount} {@code StdVideoH265SequenceParameterSet} entries, no additional {@code StdVideoH265SequenceParameterSet} entries can be added to it, and #ERROR_TOO_MANY_OBJECTS will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdPPSCount} {@code StdVideoH265PictureParameterSet} entries, no additional {@code StdVideoH265PictureParameterSet} entries can be added to it, and #ERROR_TOO_MANY_OBJECTS will be returned if an attempt is made to add these entries.
+        Structure specifies H.265 encoder parameter set information.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT</li>
-            <li>If {@code pParametersAddInfo} is not {@code NULL}, {@code pParametersAddInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH265SessionParametersAddInfoEXT structure</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR</li>
+            <li>If {@code pParametersAddInfo} is not {@code NULL}, {@code pParametersAddInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH265SessionParametersAddInfoKHR structure</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265SessionParametersAddInfoEXT
+        ##VkVideoEncodeH265SessionParametersAddInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    uint32_t("maxStdVPSCount", "the maximum number of entries of type {@code StdVideoH265VideoParameterSet} within {@code VkVideoSessionParametersKHR}.")
-    uint32_t("maxStdSPSCount", "the maximum number of entries of type {@code StdVideoH265SequenceParameterSet} within {@code VkVideoSessionParametersKHR}.")
-    uint32_t("maxStdPPSCount", "the maximum number of entries of type {@code StdVideoH265PictureParameterSet} within {@code VkVideoSessionParametersKHR}.")
-    nullable..VkVideoEncodeH265SessionParametersAddInfoEXT.const.p("pParametersAddInfo", "{@code NULL} or a pointer to a ##VkVideoEncodeH265SessionParametersAddInfoEXT structure specifying the video session parameters to add upon creation of this object.")
+    uint32_t("maxStdVPSCount", "the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-vps\">H.265 VPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain.")
+    uint32_t("maxStdSPSCount", "the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-sps\">H.265 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain.")
+    uint32_t("maxStdPPSCount", "the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-pps\">H.265 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain.")
+    nullable..VkVideoEncodeH265SessionParametersAddInfoKHR.const.p("pParametersAddInfo", "{@code NULL} or a pointer to a ##VkVideoEncodeH265SessionParametersAddInfoKHR structure specifying H.265 parameters to add upon object creation.")
 }
 
-val VkVideoEncodeH265SessionParametersGetInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersGetInfoEXT") {
+val VkVideoEncodeH265SessionParametersGetInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersGetInfoKHR") {
     documentation =
         """
         Structure specifying parameters for retrieving encoded H.265 parameter set data.
@@ -2897,224 +3114,388 @@ val VkVideoEncodeH265SessionParametersGetInfoEXT = struct(Module.VULKAN, "VkVide
         When this structure is specified in the {@code pNext} chain of the ##VkVideoEncodeSessionParametersGetInfoKHR structure passed to #GetEncodedVideoSessionParametersKHR(), the command will write encoded parameter data to the output buffer in the following order:
 
         <ul>
-            <li>The H.265 video parameter set identified by {@code stdVPSId}, if {@code writeStdVPS} is set to #TRUE.</li>
-            <li>The H.265 sequence parameter set identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId}, if {@code writeStdSPS} is set to #TRUE.</li>
-            <li>The H.265 picture parameter set identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId}, if {@code writeStdPPS} is set to #TRUE.</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-vps">H.265 video parameter set</a> identified by {@code stdVPSId}, if {@code writeStdVPS} is set to #TRUE.</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-sps">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId}, if {@code writeStdSPS} is set to #TRUE.</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-pps">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId}, if {@code writeStdPPS} is set to #TRUE.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>At least one of {@code writeStdVPS}, {@code writeStdSPS}, and {@code writeStdPPS} <b>must</b> be set to #TRUE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("writeStdVPS", "indicates whether the encoded H.265 video parameter set identified by {@code stdVPSId} is requested to be retrieved.")
-    VkBool32("writeStdSPS", "indicates whether the encoded H.265 sequence parameter set identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId} is requested to be retrieved.")
-    VkBool32("writeStdPPS", "indicates whether the encoded H.265 picture parameter set identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId} is requested to be retrieved.")
+    VkBool32("writeStdVPS", "indicates whether the encoded <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-vps\">H.265 video parameter set</a> identified by {@code stdVPSId} is requested to be retrieved.")
+    VkBool32("writeStdSPS", "indicates whether the encoded <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-sps\">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId} is requested to be retrieved.")
+    VkBool32("writeStdPPS", "indicates whether the encoded <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-pps\">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId} is requested to be retrieved.")
     uint32_t("stdVPSId", "specifies the H.265 video parameter set ID used to identify the retrieved H.265 video, sequence, and/or picture parameter set(s).")
     uint32_t("stdSPSId", "specifies the H.265 sequence parameter set ID used to identify the retrieved H.265 sequence and/or picture parameter set(s) when {@code writeStdSPS} and/or {@code writeStdPPS} is set to #TRUE.")
     uint32_t("stdPPSId", "specifies the H.265 picture parameter set ID used to identify the retrieved H.265 picture parameter set when {@code writeStdPPS} is set to #TRUE.")
 }
 
-val VkVideoEncodeH265SessionParametersFeedbackInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersFeedbackInfoEXT", mutable = false) {
+val VkVideoEncodeH265SessionParametersFeedbackInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265SessionParametersFeedbackInfoKHR", mutable = false) {
     documentation =
         """
         Structure providing feedback about the requested H.265 video session parameters.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkBool32("hasStdVPSOverrides", "indicates whether any of the parameters of the requested H.265 video parameter set, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoEXT{@code ::writeStdVPS}, were overridden by the implementation.")
-    VkBool32("hasStdSPSOverrides", "indicates whether any of the parameters of the requested H.265 sequence parameter set, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoEXT{@code ::writeStdSPS}, were overridden by the implementation.")
-    VkBool32("hasStdPPSOverrides", "indicates whether any of the parameters of the requested H.265 picture parameter set, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoEXT{@code ::writeStdPPS}, were overridden by the implementation.")
+    VkBool32("hasStdVPSOverrides", "indicates whether any of the parameters of the requested <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-vps\">H.265 video parameter set</a>, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoKHR{@code ::writeStdVPS}, were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
+    VkBool32("hasStdSPSOverrides", "indicates whether any of the parameters of the requested <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-sps\">H.265 sequence parameter set</a>, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoKHR{@code ::writeStdSPS}, were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
+    VkBool32("hasStdPPSOverrides", "indicates whether any of the parameters of the requested <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-pps\">H.265 picture parameter set</a>, if one was requested via ##VkVideoEncodeH265SessionParametersGetInfoKHR{@code ::writeStdPPS}, were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
 }
 
-val VkVideoEncodeH265NaluSliceSegmentInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265NaluSliceSegmentInfoEXT") {
+val VkVideoEncodeH265NaluSliceSegmentInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265NaluSliceSegmentInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.265 encode slice segment NALU parameters.
 
+        <h5>Description</h5>
+        <dl>
+            <dt>Std Slice Segment Header Parameters</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                <li>
+                    if {@code pWeightTable} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH265WeightTable} that is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.luma_weight_l0_flag}, {@code flags.chroma_weight_l0_flag}, {@code flags.luma_weight_l1_flag}, and {@code flags.chroma_weight_l1_flag} are bitmasks where bit index <code>i</code> corresponds to {@code luma_weight_l0_flag[i]}, {@code chroma_weight_l0_flag[i]}, {@code luma_weight_l1_flag[i]}, and {@code chroma_weight_l1_flag[i]}, respectively, as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                        <li>all other members of {@code StdVideoEncodeH265WeightTable} are interpreted as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>all other members are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code pStdSliceSegmentHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265SliceSegmentHeader} value</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265PictureInfoEXT
+        ##VkVideoEncodeH265PictureInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    int32_t("constantQp", "the QP to use for the slice segment if the current rate control mode configured for the video session is #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
-    StdVideoEncodeH265SliceSegmentHeader.const.p("pStdSliceSegmentHeader", "a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying the slice segment header for the current slice segment.")
+    int32_t("constantQp", "the QP to use for the slice segment if the current <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a> configured for the video session is #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR.")
+    StdVideoEncodeH265SliceSegmentHeader.const.p("pStdSliceSegmentHeader", "a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-slice-segment-header-params\">H.265 slice segment header parameters</a> for the slice segment.")
 }
 
-val VkVideoEncodeH265PictureInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265PictureInfoEXT") {
+val VkVideoEncodeH265PictureInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265PictureInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.265 encode frame parameters.
 
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of the ##VkVideoEncodeInfoKHR structure passed to #CmdEncodeVideoKHR() to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265">H.265 encode operation</a>.
+
+        <dl>
+            <dt>Encode Input Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-picture-data-access">H.265 Encode Picture Data Access</a> section.</li>
+                <li>The encode input picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-picture-info">H.265 picture information</a> provided in {@code pStdPictureInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Picture Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                <li>{@code flags.is_reference} as defined in section 3.132 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code flags.IrapPicFlag} as defined in section 3.73 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code flags.used_for_long_term_reference} is used to indicate whether the picture is marked as “used for long-term reference” as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code flags.discardable_flag} and {@code cross_layer_bla_flag} as defined in section F.7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code pic_type} as defined in section 7.4.3.5 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id} are used to identify the active parameter sets, as described below;</li>
+                <li>{@code PicOrderCntVal} as defined in section 8.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code TemporalId} as defined in section 7.4.2.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>
+                    if {@code pRefLists} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH265ReferenceListsInfo} structure that is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>{@code ref_pic_list_modification_flag_l0} and {@code ref_pic_list_modification_flag_l1} as defined in section 7.4.7.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                        <li>{@code num_ref_idx_l0_active_minus1} and {@code num_ref_idx_l1_active_minus1} as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                        <li>{@code RefPicList0} and {@code RefPicList1} as defined in section 8.3.4 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> where each element of these arrays either identifies an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-active-reference-picture-info">active reference picture</a> using its <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index or contains the value {@code STD_VIDEO_H265_NO_REFERENCE_PICTURE} to indicate “no reference picture”;</li>
+                        <li>{@code list_entry_l0} and {@code list_entry_l1} as defined in section 7.4.7.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>if {@code flags.short_term_ref_pic_set_sps_flag} is set, then the {@code StdVideoH265ShortTermRefPicSet} structure pointed to by {@code pShortTermRefPicSet} is interpreted as defined for the elements of the {@code pShortTermRefPicSet} array specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-sps">H.265 sequence parameter sets</a>.</li>
+                <li>
+                    if {@code flags.long_term_ref_pics_present_flag} is set in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-active-sps">active SPS</a>, then the {@code StdVideoEncodeH265LongTermRefPics} structure pointed to by {@code pLongTermRefPics} is interpreted as follows:
+                    <ul>
+                        <li>{@code used_by_curr_pic_lt_flag} is a bitmask where bit index <code>i</code> corresponds to {@code used_by_curr_pic_lt_flag[i]} as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                        <li>all other members of {@code StdVideoEncodeH265LongTermRefPics} are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>all other members are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
+        Reference picture setup is controlled by the value of {@code StdVideoEncodeH265PictureInfo}{@code ::flags.is_reference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> specified in {@code pEncodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoEncodeH265PictureInfo}{@code ::flags.is_reference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">DPB Slot States</a> section.
+
+        <dl>
+            <dt>Active Parameter Sets</dt>
+            <dd><ul>
+                <li>The <em>active VPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-vps">VPS</a> identified by the key specified in {@code StdVideoEncodeH265PictureInfo}{@code ::sps_video_parameter_set_id}.</li>
+                <li>The <em>active SPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-sps">SPS</a> identified by the key specified by the pair constructed from {@code StdVideoEncodeH265PictureInfo}{@code ::sps_video_parameter_set_id} and {@code StdVideoEncodeH265PictureInfo}{@code ::pps_seq_parameter_set_id}.</li>
+                <li>The <em>active PPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-pps">PPS</a> identified by the key specified by the triplet constructed from {@code StdVideoEncodeH265PictureInfo}{@code ::sps_video_parameter_set_id}, {@code StdVideoEncodeH265PictureInfo}{@code ::pps_seq_parameter_set_id}, and {@code StdVideoEncodeH265PictureInfo}{@code ::pps_pic_parameter_set_id}.</li>
+            </ul></dd>
+        </dl>
+
+        H.265 encoding uses <em>explicit weighted sample prediction</em> for a slice segment, as defined in section 8.5.3.3.4 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>, if any of the following conditions are true for the active <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-pps">PPS</a> and the {@code pStdSliceSegmentHeader} member of the corresponding element of {@code pNaluSliceSegmentEntries}:
+
+        <ul>
+            <li>{@code pStdSliceSegmentHeader→slice_type} is {@code STD_VIDEO_H265_SLICE_TYPE_P} and {@code weighted_pred_flag} is enabled in the active PPS.</li>
+            <li>{@code pStdSliceSegmentHeader→slice_type} is {@code STD_VIDEO_H265_SLICE_TYPE_B} and {@code weighted_bipred_flag} is enabled in the active PPS.</li>
+        </ul>
+
+        The number of H.265 tiles, as defined in section 3.174 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>, is derived from the {@code num_tile_columns_minus1} and {@code num_tile_rows_minus1} members of the active <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-pps">PPS</a> as follows:
+
+        <dl>
+            <dd><code>(num_tile_columns_minus1 + 1) × (num_tile_rows_minus1 + 1)</code></dd>
+        </dl>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code naluSliceSegmentEntryCount} <b>must</b> be between 1 and ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxSliceSegmentCount}, inclusive, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_MULTIPLE_TILES_PER_SLICE_SEGMENT_BIT_KHR, then {@code naluSliceSegmentEntryCount} <b>must</b> be greater than or equal to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-tile-count">number of H.265 tiles in the picture</a></li>
+            <li>If ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_MULTIPLE_SLICE_SEGMENTS_PER_TILE_BIT_KHR, then {@code naluSliceSegmentEntryCount} <b>must</b> be less than or equal to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-tile-count">number of H.265 tiles in the picture</a></li>
+            <li>If ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_PREDICTION_WEIGHT_TABLE_GENERATED_BIT_KHR and the slice segment corresponding to any element of {@code pNaluSliceSegmentEntries} uses <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-weighted-pred">explicit weighted sample prediction</a>, then ##VkVideoEncodeH265NaluSliceSegmentInfoKHR{@code ::pStdSliceSegmentHeader→pWeightTable} <b>must</b> not be {@code NULL} for that element of {@code pNaluSliceSegmentEntries}</li>
+            <li>If ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_DIFFERENT_SLICE_SEGMENT_TYPE_BIT_KHR, then ##VkVideoEncodeH265NaluSliceSegmentInfoKHR{@code ::pStdSliceSegmentHeader→slice_type} <b>must</b> be identical for all elements of {@code pNaluSliceSegmentEntries}</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_PICTURE_INFO_EXT</li>
-            <li>{@code pNaluSliceSegmentEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceSegmentEntryCount} valid ##VkVideoEncodeH265NaluSliceSegmentInfoEXT structures</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_PICTURE_INFO_KHR</li>
+            <li>{@code pNaluSliceSegmentEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceSegmentEntryCount} valid ##VkVideoEncodeH265NaluSliceSegmentInfoKHR structures</li>
             <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265PictureInfo} value</li>
             <li>{@code naluSliceSegmentEntryCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265NaluSliceSegmentInfoEXT
+        ##VkVideoEncodeH265NaluSliceSegmentInfoKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_PICTURE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_PICTURE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pNaluSliceSegmentEntries")..uint32_t("naluSliceSegmentEntryCount", "the number of slice segment NALUs in the frame.")
-    VkVideoEncodeH265NaluSliceSegmentInfoEXT.const.p("pNaluSliceSegmentEntries", "a pointer to an array of ##VkVideoEncodeH265NaluSliceSegmentInfoEXT structures specifying the division of the current picture into slice segments and the properties of these slice segments.")
-    StdVideoEncodeH265PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoEncodeH265PictureInfo} structure specifying the syntax and other codec-specific information from the H.265 specification, associated with this picture.")
+    AutoSize("pNaluSliceSegmentEntries")..uint32_t("naluSliceSegmentEntryCount", "the number of elements in {@code pNaluSliceSegmentEntries}.")
+    VkVideoEncodeH265NaluSliceSegmentInfoKHR.const.p("pNaluSliceSegmentEntries", "a pointer to an array of {@code naluSliceSegmentEntryCount} ##VkVideoEncodeH265NaluSliceSegmentInfoKHR structures specifying the parameters of the individual H.265 slice segments to encode for the input picture.")
+    StdVideoEncodeH265PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoEncodeH265PictureInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-picture-info\">H.265 picture information</a>.")
 }
 
-val VkVideoEncodeH265DpbSlotInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265DpbSlotInfoEXT") {
+val VkVideoEncodeH265DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265DpbSlotInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifies H.265 encode decoded pic info.
+        Structure specifies H.265 encode DPB picture information.
+
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of ##VkVideoEncodeInfoKHR{@code ::pSetupReferenceSlot}, if not {@code NULL}, and the {@code pNext} chain of the elements of ##VkVideoEncodeInfoKHR{@code ::pReferenceSlots} to specify the codec-specific reference picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265">H.265 encode operation</a>.
+
+        <dl>
+            <dt>Active Reference Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-picture-data-access">H.265 Encode Picture Data Access</a> section.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index specified in the {@code slotIndex} member of the corresponding element of ##VkVideoEncodeInfoKHR{@code ::pReferenceSlots}.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-reference-info">H.265 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Reconstructed Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-picture-data-access">H.265 Encode Picture Data Access</a> section.</li>
+                <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoEncodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
+                <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-reference-info">H.265 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Reference Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                <li>{@code flags.used_for_long_term_reference} is used to indicate whether the picture is marked as “used for long-term reference” as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code flags.unused_for_reference} is used to indicate whether the picture is marked as “unused for reference” as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code pic_type} as defined in section 7.4.3.5 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code PicOrderCntVal} as defined in section 8.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+                <li>{@code TemporalId} as defined in section 7.4.2.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>.</li>
+            </ul></dd>
+        </dl>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_KHR</li>
             <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265ReferenceInfo} value</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoEncodeH265ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoEncodeH265ReferenceInfo} structure specifying the syntax and other codec-specific information from the H.265 specification, associated with this reference picture.")
+    StdVideoEncodeH265ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoEncodeH265ReferenceInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-reference-info\">H.265 reference information</a>.")
 }
 
-val VkVideoEncodeH265ProfileInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265ProfileInfoEXT") {
+val VkVideoEncodeH265ProfileInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265ProfileInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifying H.265 encode profile.
+        Structure specifying H.265 encode-specific video profile parameters.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoH265ProfileIdc("stdProfileIdc", "a {@code StdVideoH265ProfileIdc} value specifying the H.265 codec profile IDC.")
+    StdVideoH265ProfileIdc("stdProfileIdc", "a {@code StdVideoH265ProfileIdc} value specifying the H.265 codec profile IDC, as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
 }
 
-val VkVideoEncodeH265RateControlInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265RateControlInfoEXT") {
+val VkVideoEncodeH265RateControlInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265RateControlInfoKHR") {
     documentation =
         """
         Structure describing H.265 stream rate control parameters.
 
         <h5>Description</h5>
-        In order to provide H.265-specific stream rate control parameters, add a ##VkVideoEncodeH265RateControlInfoEXT structure to the {@code pNext} chain of the ##VkVideoEncodeRateControlInfoKHR structure in the {@code pNext} chain of the ##VkVideoCodingControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command.
+        When an instance of this structure is included in the {@code pNext} chain of the ##VkVideoCodingControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command, and ##VkVideoCodingControlInfoKHR{@code ::flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-control">Video Coding Control</a>).
 
-        The parameters from this structure act as a guidance for implementations to apply various rate control heuristics.
+        If {@code flags} includes #VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR, then the rate control state is reset to an initial state to meet HRD compliance requirements. Otherwise the new rate control state <b>may</b> be applied without a reset depending on the implementation and the specified rate control parameters.
 
-        It is possible to infer the picture type to be used when encoding a frame, on the basis of the values provided for {@code consecutiveBFrameCount}, {@code idrPeriod}, and {@code gopFrameCount}, but this inferred picture type will not be used by implementations to override the picture type provided in #CmdEncodeVideoKHR(). Additionally, it is not required for the video session to be reset if the inferred picture type does not match the actual picture type.
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        It would be possible to infer the picture type to be used when encoding a frame, on the basis of the values provided for {@code consecutiveBFrameCount}, {@code idrPeriod}, and {@code gopFrameCount}, but this inferred picture type will not be used by implementations to override the picture type provided to the video encode operation.
+        </div>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_HRD_COMPLIANCE_BIT_KHR, then {@code flags} <b>must</b> not contain #VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR or #VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR, then it <b>must</b> also contain #VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR, then it <b>must</b> not also contain #VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR</li>
+            <li>If {@code flags} contains #VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR, then {@code gopFrameCount} <b>must</b> be greater than 0</li>
+            <li>If {@code idrPeriod} is not 0, then it <b>must</b> be greater than or equal to {@code gopFrameCount}</li>
+            <li>If {@code consecutiveBFrameCount} is not 0, then it <b>must</b> be less than {@code gopFrameCount}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265RateControlFlagBitsEXT} values</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265RateControlFlagBitsKHR} values</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkVideoEncodeH265RateControlFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsEXT} specifying H.265 rate control flags.")
-    uint32_t("gopFrameCount", "the number of frames contained within the group of pictures (GOP), starting from an intra frame and until the next intra frame. If it is set to 0, the implementation chooses a suitable value. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite.")
-    uint32_t("idrPeriod", "the interval, in terms of number of frames, between two IDR frames. If it is set to 0, the implementation chooses a suitable value. If it is set to {@code UINT32_MAX}, the IDR period is treated as infinite.")
-    uint32_t("consecutiveBFrameCount", "the number of consecutive B-frames between I- and/or P-frames within the GOP.")
-    uint32_t("subLayerCount", "specifies the number of sub layers enabled in the stream.")
+    VkVideoEncodeH265RateControlFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsKHR} specifying H.265 rate control flags.")
+    uint32_t("gopFrameCount", "the number of frames within a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">group of pictures (GOP)</a> intended to be used by the application. If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite.")
+    uint32_t("idrPeriod", "the interval, in terms of number of frames, between two <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-idr-pic\">IDR frames</a> (see <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-idr-period\">IDR period</a>). If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent IDR period. If it is set to {@code UINT32_MAX}, the IDR period is treated as infinite.")
+    uint32_t("consecutiveBFrameCount", "the number of consecutive B frames between I and/or P frames within the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">GOP</a>.")
+    uint32_t("subLayerCount", "")
 }
 
-val VkVideoEncodeH265FrameSizeEXT = struct(Module.VULKAN, "VkVideoEncodeH265FrameSizeEXT") {
+val VkVideoEncodeH265FrameSizeKHR = struct(Module.VULKAN, "VkVideoEncodeH265FrameSizeKHR") {
     documentation =
         """
         Structure describing frame size values per H.265 picture type.
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265RateControlLayerInfoEXT
+        ##VkVideoEncodeH265RateControlLayerInfoKHR
         """
 
-    uint32_t("frameISize", "the size in bytes to be used for I-frames.")
-    uint32_t("framePSize", "the size in bytes to be used for P-frames.")
-    uint32_t("frameBSize", "the size in bytes to be used for B-frames.")
+    uint32_t("frameISize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-i-pic\">I frames</a>.")
+    uint32_t("framePSize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-p-pic\">P frames</a>.")
+    uint32_t("frameBSize", "the size in bytes to be used for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-b-pic\">B frames</a>.")
 }
 
-val VkVideoEncodeH265RateControlLayerInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265RateControlLayerInfoEXT") {
+val VkVideoEncodeH265RateControlLayerInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265RateControlLayerInfoKHR") {
     documentation =
         """
         Structure describing H.265 per-layer rate control parameters.
 
         <h5>Description</h5>
-        H.265-specific per-layer rate control parameters <b>must</b> be specified by adding a ##VkVideoEncodeH265RateControlLayerInfoEXT structure to the {@code pNext} chain of each ##VkVideoEncodeRateControlLayerInfoKHR structure in a call to #CmdControlVideoCodingKHR() command, when the command buffer context has an active video encode H.265 session.
+        When used, the values in {@code minQp} and {@code maxQp} guarantee that the effective QP values used by the implementation will respect those lower and upper bounds, respectively. However, limiting the range of QP values that the implementation is able to use will also limit the capabilities of the implementation’s rate control algorithm to comply to other constraints. In particular, the implementation <b>may</b> not be able to comply to the following:
+
+        <ul>
+            <li>The average and/or peak <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-bitrate">bitrate</a> values to be used for the encoded bitstream specified in the {@code averageBitrate} and {@code maxBitrate} members of the ##VkVideoEncodeRateControlLayerInfoKHR structure.</li>
+            <li>The upper bounds on the encoded frame size, for each picture type, specified in the {@code maxFrameSize} member of ##VkVideoEncodeH265RateControlLayerInfoKHR.</li>
+        </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        In general, applications need to configure rate control parameters appropriately in order to be able to get the desired rate control behavior, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-rate-control">Video Encode Rate Control</a> section.
+        </div>
+
+        When an instance of this structure is included in the {@code pNext} chain of a ##VkVideoEncodeRateControlLayerInfoKHR structure specified in one of the elements of the {@code pLayers} array member of the ##VkVideoEncodeRateControlInfoKHR structure passed to the #CmdControlVideoCodingKHR() command, ##VkVideoCodingControlInfoKHR{@code ::flags} includes #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR, and the bound video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, it specifies the H.265-specific rate control parameters of the rate control layer corresponding to that element of {@code pLayers}.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code useMinQp} is #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be between ##VkVideoEncodeH265CapabilitiesKHR{@code ::minQp} and ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxQp}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If {@code useMaxQp} is #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all be between ##VkVideoEncodeH265CapabilitiesKHR{@code ::minQp} and ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxQp}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If {@code useMinQp} is #TRUE and ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all specify the same value</li>
+            <li>If {@code useMaxQp} is #TRUE and ##VkVideoEncodeH265CapabilitiesKHR{@code ::flags}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile, does not include #VIDEO_ENCODE_H265_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all specify the same value</li>
+            <li>If {@code useMinQp} and {@code useMaxQp} are both #TRUE, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be less than or equal to the respective members of {@code maxQp}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT</li>
-            <li>{@code minQp} <b>must</b> be a valid ##VkVideoEncodeH265QpEXT structure</li>
-            <li>{@code maxQp} <b>must</b> be a valid ##VkVideoEncodeH265QpEXT structure</li>
-            <li>{@code maxFrameSize} <b>must</b> be a valid ##VkVideoEncodeH265FrameSizeEXT structure</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_KHR</li>
+            <li>{@code minQp} <b>must</b> be a valid ##VkVideoEncodeH265QpKHR structure</li>
+            <li>{@code maxQp} <b>must</b> be a valid ##VkVideoEncodeH265QpKHR structure</li>
+            <li>{@code maxFrameSize} <b>must</b> be a valid ##VkVideoEncodeH265FrameSizeKHR structure</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265FrameSizeEXT, ##VkVideoEncodeH265QpEXT
+        ##VkVideoEncodeH265FrameSizeKHR, ##VkVideoEncodeH265QpKHR
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("useMinQp", "indicates whether the values within {@code minQp} should be used by the implementation. When it is set to #FALSE, the implementation ignores the values in {@code minQp} and chooses suitable values.")
-    VkVideoEncodeH265QpEXT("minQp", "provides the lower bound on the QP values for each picture type, to be used in rate control calculations.")
-    VkBool32("useMaxQp", "indicates whether the values within {@code maxQp} should be used by the implementation. When it is set to #FALSE, the implementation ignores the values in {@code maxQp} and chooses suitable values.")
-    VkVideoEncodeH265QpEXT("maxQp", "provides the upper bound on the QP values for each picture type, to be used in rate control calculations.")
-    VkBool32("useMaxFrameSize", "indicates whether the values within {@code maxFrameSize} should be used by the implementation.")
-    VkVideoEncodeH265FrameSizeEXT("maxFrameSize", "provides the upper bound on the encoded frame size for each picture type. The implementation does not guarantee the encoded frame sizes will be within the specified limits, however these limits <b>may</b> be used as a guide in rate control calculations. If enabled and not set properly, the {@code maxQp} limit may prevent the implementation from respecting the {@code maxFrameSize} limit.")
+    VkBool32("useMinQp", "indicates whether the QP values determined by rate control will be clamped to the lower bounds on the QP values specified in {@code minQp}.")
+    VkVideoEncodeH265QpKHR("minQp", "specifies the lower bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMinQp} is set to #TRUE.")
+    VkBool32("useMaxQp", "indicates whether the QP values determined by rate control will be clamped to the upper bounds on the QP values specified in {@code maxQp}.")
+    VkVideoEncodeH265QpKHR("maxQp", "specifies the upper bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMaxQp} is set to #TRUE.")
+    VkBool32("useMaxFrameSize", "indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code maxFrameSize} as the upper bounds on the encoded frame size for each picture type.")
+    VkVideoEncodeH265FrameSizeKHR("maxFrameSize", "specifies the upper bounds on the encoded frame size, for each picture type, when {@code useMaxFrameSize} is set to #TRUE.")
 }
 
-val VkVideoEncodeH265GopRemainingFrameInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265GopRemainingFrameInfoEXT") {
+val VkVideoEncodeH265GopRemainingFrameInfoKHR = struct(Module.VULKAN, "VkVideoEncodeH265GopRemainingFrameInfoKHR") {
     documentation =
         """
         Structure specifying H.265 encode rate control GOP remaining frame counts.
 
         <h5>Description</h5>
-        Setting {@code useGopRemainingFrames} to #TRUE and including this structure in the {@code pNext} chain of ##VkVideoEncodeInfoKHR is only mandatory if the ##VkVideoEncodeH265CapabilitiesEXT{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> is #TRUE. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a regular GOP structure, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.
+        Setting {@code useGopRemainingFrames} to #TRUE and including this structure in the {@code pNext} chain of ##VkVideoBeginCodingInfoKHR is only mandatory if the ##VkVideoEncodeH265CapabilitiesKHR{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> is #TRUE. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-regular-gop">regular GOP structure</a>, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.
 
-        The ##VkVideoEncodeH265CapabilitiesEXT{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.
+        The ##VkVideoEncodeH265CapabilitiesKHR{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.
 
         As with other rate control guidance values, if the effective order and number of frames encoded by the application are not in line with the remaining frame counts specified in this structure at any given point, then the behavior of the implementation’s rate control algorithm <b>may</b> deviate from the one expected by the application.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_KHR</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("useGopRemainingFrames", "indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB}. If {@code useGopRemainingFrames} is #FALSE, then the values of {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB} are ignored.")
-    uint32_t("gopRemainingI", "specifies the number of I-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
-    uint32_t("gopRemainingP", "specifies the number of P-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
-    uint32_t("gopRemainingB", "specifies the number of B-frames the implementation’s rate control algorithm <b>should</b> assume to be remaining in the GOP prior to executing the video encode operation.")
+    uint32_t("gopRemainingI", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-i-pic\">I frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">GOP</a> prior to executing the video encode operation.")
+    uint32_t("gopRemainingP", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-p-pic\">P frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">GOP</a> prior to executing the video encode operation.")
+    uint32_t("gopRemainingB", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-b-pic\">B frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-gop\">GOP</a> prior to executing the video encode operation.")
 }
 
 val VkVideoDecodeH264ProfileInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH264ProfileInfoKHR") {
@@ -3153,7 +3534,7 @@ val VkVideoDecodeH264CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeH264C
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value specifying the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
+    StdVideoH264LevelIdc("maxLevelIdc", "a {@code StdVideoH264LevelIdc} value indicating the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h264\">ITU-T H.264 Specification</a>.")
     VkOffset2D("fieldOffsetGranularity", "the minimum alignment for ##VkVideoPictureResourceInfoKHR{@code ::codedOffset} specified for a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#video-picture-resources\">video picture resource</a> when using the picture layout #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR.")
 }
 
@@ -3253,7 +3634,11 @@ val VkVideoDecodeH264PictureInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH264Pi
                 <li>{@code seq_parameter_set_id} and {@code pic_parameter_set_id} are used to identify the active parameter sets, as described below;</li>
                 <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h264">ITU-T H.264 Specification</a>.</li>
             </ul></dd>
+        </dl>
 
+        Reference picture setup is controlled by the value of {@code StdVideoDecodeH264PictureInfo}{@code ::flags.is_reference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoDecodeH264PictureInfo}{@code ::flags.is_reference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">DPB Slot States</a> section.
+
+        <dl>
             <dt>Active Parameter Sets</dt>
             <dd><ul>
                 <li>The <em>active SPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-sps">SPS</a> identified by the key specified in {@code StdVideoDecodeH264PictureInfo}{@code ::seq_parameter_set_id}.</li>
@@ -3309,7 +3694,7 @@ val VkVideoDecodeH264DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH264Dp
                 <li>If {@code pStdReferenceInfo→flags.top_field_flag} is set, then the picture represents a field, specifically, the top field of the frame.</li>
                 <li>If {@code pStdReferenceInfo→flags.bottom_field_flag} is set, then the picture represents a field, specifically, the bottom field of the frame.</li>
                 <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-picture-data-access">H.264 Decode Picture Data Access</a> section.</li>
-                <li>The reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
+                <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
                 <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-reference-info">H.264 reference information</a> provided in {@code pStdReferenceInfo}.</li>
             </ul></dd>
         </dl>
@@ -3506,10 +3891,10 @@ val VkRenderingFragmentDensityMapAttachmentInfoEXT = struct(Module.VULKAN, "VkRe
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with #IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> not have been created with #IMAGE_CREATE_SUBSAMPLED_BIT_EXT</li>
-            <li>If {@link KHRMultiview VK_KHR_multiview} is not enabled, ##VkPhysicalDeviceProperties{@code ::apiVersion} is less than Vulkan 1.1, and {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a {@code layerCount} equal to 1</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview">{@code multiview}</a> feature is not enabled, ##VkPhysicalDeviceProperties{@code ::apiVersion} is less than Vulkan 1.1, and {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a {@code layerCount} equal to 1</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4029,10 +4414,10 @@ val VkPhysicalDevicePipelineRobustnessPropertiesEXT = struct(Module.VULKAN, "VkP
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessStorageBuffers", "describes the behaviour of out of bounds accesses made to storage buffers when no robustness features are enabled")
-    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessUniformBuffers", "describes the behaviour of out of bounds accesses made to uniform buffers when no robustness features are enabled")
-    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessVertexInputs", "describes the behaviour of out of bounds accesses made to vertex input attributes when no robustness features are enabled")
-    VkPipelineRobustnessImageBehaviorEXT("defaultRobustnessImages", "describes the behaviour of out of bounds accesses made to images when no robustness features are enabled")
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessStorageBuffers", "describes the behavior of out of bounds accesses made to storage buffers when no robustness features are enabled")
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessUniformBuffers", "describes the behavior of out of bounds accesses made to uniform buffers when no robustness features are enabled")
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessVertexInputs", "describes the behavior of out of bounds accesses made to vertex input attributes when no robustness features are enabled")
+    VkPipelineRobustnessImageBehaviorEXT("defaultRobustnessImages", "describes the behavior of out of bounds accesses made to images when no robustness features are enabled")
 }
 
 val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustnessCreateInfoEXT") {
@@ -4079,14 +4464,14 @@ val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustn
 
     Expression("#STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkPipelineRobustnessBufferBehaviorEXT("storageBuffers", """sets the behaviour of out of bounds accesses made to resources bound as:
+    VkPipelineRobustnessBufferBehaviorEXT("storageBuffers", """sets the behavior of out of bounds accesses made to resources bound as:
 
         <ul>
             <li>#DESCRIPTOR_TYPE_STORAGE_BUFFER</li>
             <li>#DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER</li>
             <li>#DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</li>
         </ul>""")
-    VkPipelineRobustnessBufferBehaviorEXT("uniformBuffers", """describes the behaviour of out of bounds accesses made to resources bound as:
+    VkPipelineRobustnessBufferBehaviorEXT("uniformBuffers", """describes the behavior of out of bounds accesses made to resources bound as:
 
         <ul>
             <li>#DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER</li>
@@ -4094,8 +4479,8 @@ val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustn
             <li>#DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC</li>
             <li>#DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</li>
         </ul>""")
-    VkPipelineRobustnessBufferBehaviorEXT("vertexInputs", "describes the behaviour of out of bounds accesses made to vertex input attributes")
-    VkPipelineRobustnessImageBehaviorEXT("images", """describes the behaviour of out of bounds accesses made to resources bound as:
+    VkPipelineRobustnessBufferBehaviorEXT("vertexInputs", "describes the behavior of out of bounds accesses made to vertex input attributes")
+    VkPipelineRobustnessImageBehaviorEXT("images", """describes the behavior of out of bounds accesses made to resources bound as:
 
         <ul>
             <li>#DESCRIPTOR_TYPE_SAMPLED_IMAGE</li>
@@ -4109,7 +4494,7 @@ val VkPhysicalDeviceGroupPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevice
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES")..VkStructureType("sType", "").mutable()
     nullable..opaque_p("pNext", "").mutable()
-    uint32_t("physicalDeviceCount", "")
+    AutoSize("physicalDevices")..uint32_t("physicalDeviceCount", "")
     VkPhysicalDevice("physicalDevices", "")["VK_MAX_DEVICE_GROUP_SIZE"]
     VkBool32("subsetAllocation", "")
 }
@@ -5368,7 +5753,7 @@ val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN
         Structure specifying conservative raster state.
 
         <h5>Description</h5>
-        If this structure is not included in the {@code pNext} chain, {@code conservativeRasterizationMode} is considered to be #CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT, and and conservative rasterization is disabled.
+        If this structure is not included in the {@code pNext} chain, {@code conservativeRasterizationMode} is considered to be #CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT, and conservative rasterization is disabled.
 
         Polygon rasterization <b>can</b> be made conservative by setting {@code conservativeRasterizationMode} to #CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT or #CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT in ##VkPipelineRasterizationConservativeStateCreateInfoEXT.
 
@@ -6125,7 +6510,7 @@ val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSur
         <h5>Valid Usage</h5>
         <ul>
             <li>If the {@code pNext} chain includes a ##VkSurfaceFullScreenExclusiveInfoEXT structure with its {@code fullScreenExclusive} member set to #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, and {@code surface} was created using #CreateWin32SurfaceKHR(), a ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>must</b> be included in the {@code pNext} chain</li>
-            <li>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If surface is not VK_NULL_HANDLE, and the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -6133,7 +6518,6 @@ val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSur
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkSurfaceFullScreenExclusiveInfoEXT, ##VkSurfaceFullScreenExclusiveWin32InfoEXT, or ##VkSurfacePresentModeEXT</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>If {@code surface} is not #NULL_HANDLE, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
         </ul>
 
         <h5>See Also</h5>
@@ -6476,7 +6860,7 @@ val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMe
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
-            <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>If {@code pMessage} is not {@code NULL}, {@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
             <li>If {@code queueLabelCount} is not 0, {@code pQueueLabels} <b>must</b> be a valid pointer to an array of {@code queueLabelCount} valid ##VkDebugUtilsLabelEXT structures</li>
             <li>If {@code cmdBufLabelCount} is not 0, {@code pCmdBufLabels} <b>must</b> be a valid pointer to an array of {@code cmdBufLabelCount} valid ##VkDebugUtilsLabelEXT structures</li>
             <li>If {@code objectCount} is not 0, {@code pObjects} <b>must</b> be a valid pointer to an array of {@code objectCount} valid ##VkDebugUtilsObjectNameInfoEXT structures</li>
@@ -6492,9 +6876,9 @@ val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMe
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDebugUtilsMessengerCallbackDataFlagsEXT("flags", "0 and is reserved for future use.")
-    nullable..charUTF8.const.p("pMessageIdName", "a null-terminated string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated.")
+    nullable..charUTF8.const.p("pMessageIdName", "{@code NULL} or a null-terminated UTF-8 string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated.")
     int32_t("messageIdNumber", "the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered.")
-    charUTF8.const.p("pMessage", "a null-terminated string detailing the trigger conditions.")
+    nullable..charUTF8.const.p("pMessage", "{@code NULL} if {@code messageTypes} is equal to #DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT, or a null-terminated UTF-8 string detailing the trigger conditions.")
     AutoSize("pQueueLabels", optional = true)..uint32_t("queueLabelCount", "a count of items contained in the {@code pQueueLabels} array.")
     VkDebugUtilsLabelEXT.const.p("pQueueLabels", "{@code NULL} or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
     AutoSize("pCmdBufLabels", optional = true)..uint32_t("cmdBufLabelCount", "a count of items contained in the {@code pCmdBufLabels} array.")
@@ -6532,11 +6916,6 @@ val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMess
         An application <b>can</b> receive multiple callbacks if multiple {@code VkDebugUtilsMessengerEXT} objects are created. A callback will always be executed in the same thread as the originating Vulkan call.
 
         A callback <b>can</b> be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pfnUserCallback} <b>must</b> be a valid ##VkDebugUtilsMessengerCallbackEXT</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6921,6 +7300,7 @@ val VkExecutionGraphPipelineCreateInfoAMDX = struct(Module.VULKAN, "VkExecutionG
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If the {@code pNext} chain does not include a ##VkPipelineCreateFlags2CreateInfoKHR structure, {@code flags} must be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid execution graph {@code VkPipeline} handle</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command’s {@code pCreateInfos} parameter</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
@@ -6961,7 +7341,6 @@ val VkExecutionGraphPipelineCreateInfoAMDX = struct(Module.VULKAN, "VkExecutionG
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCompilerControlCreateInfoAMD or ##VkPipelineCreationFeedbackCreateInfo</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code stageCount} is not 0, and {@code pStages} is not {@code NULL}, {@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
             <li>If {@code pLibraryInfo} is not {@code NULL}, {@code pLibraryInfo} <b>must</b> be a valid pointer to a valid ##VkPipelineLibraryCreateInfoKHR structure</li>
             <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
@@ -7135,7 +7514,7 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code sampleLocationsPerPixel} <b>must</b> be a bit value that is set in ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::sampleLocationSampleCounts}</li>
+            <li>{@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value that is set in ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::sampleLocationSampleCounts}</li>
             <li>{@code sampleLocationsCount} <b>must</b> equal <code>sampleLocationsPerPixel × sampleLocationGridSize.width × sampleLocationGridSize.height</code></li>
         </ul>
 
@@ -7578,7 +7957,7 @@ val VkAccelerationStructureGeometryTrianglesDataKHR = struct(Module.VULKAN, "VkA
     VkFormat("vertexFormat", "the {@code VkFormat} of each vertex element.")
     VkDeviceOrHostAddressConstKHR("vertexData", "a device or host address to memory containing vertex data for this geometry.")
     VkDeviceSize("vertexStride", "the stride in bytes between each vertex.")
-    uint32_t("maxVertex", "the highest index of a vertex that will be addressed by a build command using this structure.")
+    uint32_t("maxVertex", "the number of vertices in {@code vertexData} minus one.")
     VkIndexType("indexType", "the {@code VkIndexType} of each index element.")
     VkDeviceOrHostAddressConstKHR("indexData", "a device or host address to memory containing index data for this geometry.")
     VkDeviceOrHostAddressConstKHR("transformData", "a device or host address to memory containing an optional reference to a ##VkTransformMatrixKHR structure describing a transformation from the space in which the vertices in this geometry are described to the space in which the acceleration structure is defined.")
@@ -7711,7 +8090,7 @@ val VkAccelerationStructureBuildGeometryInfoKHR = struct(Module.VULKAN, "VkAccel
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code type} <b>must</b> not be #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
-            <li>Only one of {@code pGeometries} or {@code ppGeometries} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
+            <li>If {@code geometryCount} is not 0, exactly one of {@code pGeometries} or {@code ppGeometries} <b>must</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
             <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, the {@code geometryType} member of elements of either {@code pGeometries} or {@code ppGeometries} <b>must</b> be #GEOMETRY_TYPE_INSTANCES_KHR</li>
             <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, {@code geometryCount} <b>must</b> be 1</li>
             <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR the {@code geometryType} member of elements of either {@code pGeometries} or {@code ppGeometries} <b>must</b> not be #GEOMETRY_TYPE_INSTANCES_KHR</li>
@@ -7746,7 +8125,7 @@ val VkAccelerationStructureBuildGeometryInfoKHR = struct(Module.VULKAN, "VkAccel
     VkAccelerationStructureTypeKHR("type", "a {@code VkAccelerationStructureTypeKHR} value specifying the type of acceleration structure being built.")
     VkBuildAccelerationStructureFlagsKHR("flags", "a bitmask of {@code VkBuildAccelerationStructureFlagBitsKHR} specifying additional parameters of the acceleration structure.")
     VkBuildAccelerationStructureModeKHR("mode", "a {@code VkBuildAccelerationStructureModeKHR} value specifying the type of operation to perform.")
-    VkAccelerationStructureKHR("srcAccelerationStructure", "a pointer to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure when {@code mode} is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR.")
+    VkAccelerationStructureKHR("srcAccelerationStructure", "a pointer to an existing acceleration structure that is to be used to update the {@code dstAccelerationStructure} acceleration structure when {@code mode} is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR.")
     VkAccelerationStructureKHR("dstAccelerationStructure", "a pointer to the target acceleration structure for the build.")
     AutoSize("pGeometries", "ppGeometries", optional = true)..uint32_t("geometryCount", "specifies the number of geometries that will be built into {@code dstAccelerationStructure}.")
     nullable..VkAccelerationStructureGeometryKHR.const.p("pGeometries", "a pointer to an array of ##VkAccelerationStructureGeometryKHR structures.")
@@ -7809,10 +8188,6 @@ val VkAccelerationStructureCreateInfoKHR = struct(Module.VULKAN, "VkAcceleration
         Structure specifying the parameters of a newly created acceleration structure object.
 
         <h5>Description</h5>
-        If {@code deviceAddress} is zero, no specific address is requested.
-
-        If {@code deviceAddress} is not zero, {@code deviceAddress} <b>must</b> be an address retrieved from an identically created acceleration structure on the same implementation. The acceleration structure <b>must</b> also be placed on an identically created {@code buffer} and at the same {@code offset}.
-
         Applications <b>should</b> avoid creating acceleration structures with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of #ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR errors.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -7834,6 +8209,9 @@ val VkAccelerationStructureCreateInfoKHR = struct(Module.VULKAN, "VkAcceleration
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code deviceAddress} is not zero, {@code createFlags} <b>must</b> include #ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</li>
+            <li>If {@code deviceAddress} is not zero, it <b>must</b> have been retrieved from an identically created acceleration structure, except for {@code buffer} and {@code deviceAddress}</li>
+            <li>If {@code deviceAddress} is not zero, {@code buffer} <b>must</b> have been created identically to the {@code buffer} used to create the acceleration structure from which {@code deviceAddress} was retrieved, except for ##VkBufferOpaqueCaptureAddressCreateInfo{@code ::opaqueCaptureAddress}</li>
+            <li>If {@code deviceAddress} is not zero, {@code buffer} <b>must</b> have been created with a ##VkBufferOpaqueCaptureAddressCreateInfo{@code ::opaqueCaptureAddress} that was retrieved from #GetBufferOpaqueCaptureAddress() for the {@code buffer} that was used to create the acceleration structure from which {@code deviceAddress} was retrieved</li>
             <li>If {@code createFlags} includes #ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR, ##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureCaptureReplay} <b>must</b> be #TRUE</li>
             <li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing #BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR</li>
             <li>{@code buffer} <b>must</b> not have been created with #BUFFER_CREATE_SPARSE_RESIDENCY_BIT</li>
@@ -7869,7 +8247,7 @@ val VkAccelerationStructureCreateInfoKHR = struct(Module.VULKAN, "VkAcceleration
     VkDeviceSize("offset", "an offset in bytes from the base address of the buffer at which the acceleration structure will be stored, and <b>must</b> be a multiple of 256.")
     VkDeviceSize("size", "the size required for the acceleration structure.")
     VkAccelerationStructureTypeKHR("type", "a {@code VkAccelerationStructureTypeKHR} value specifying the type of acceleration structure that will be created.")
-    VkDeviceAddress("deviceAddress", "the device address requested for the acceleration structure if the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-accelerationStructureCaptureReplay\">{@code accelerationStructureCaptureReplay}</a> feature is being used.")
+    VkDeviceAddress("deviceAddress", "the device address requested for the acceleration structure if the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-accelerationStructureCaptureReplay\">{@code accelerationStructureCaptureReplay}</a> feature is being used. If {@code deviceAddress} is zero, no specific address is requested.")
 }
 
 val VkWriteDescriptorSetAccelerationStructureKHR = struct(Module.VULKAN, "VkWriteDescriptorSetAccelerationStructureKHR") {
@@ -8074,7 +8452,6 @@ val VkCopyAccelerationStructureInfoKHR = struct(Module.VULKAN, "VkCopyAccelerati
             <li>The {@code buffer} used to create {@code src} <b>must</b> be bound to device memory</li>
             <li>The {@code buffer} used to create {@code dst} <b>must</b> be bound to device memory</li>
             <li>The range of memory backing {@code dst} that is accessed by this command <b>must</b> not overlap the memory backing {@code src} that is accessed by this command</li>
-            <li>{@code dst} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via #BindAccelerationStructureMemoryNV()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -8098,7 +8475,7 @@ val VkCopyAccelerationStructureInfoKHR = struct(Module.VULKAN, "VkCopyAccelerati
     VkCopyAccelerationStructureModeKHR("mode", "a {@code VkCopyAccelerationStructureModeKHR} value specifying additional operations to perform during the copy.")
 }
 
-val VkAccelerationStructureBuildSizesInfoKHR = struct(Module.VULKAN, "VkAccelerationStructureBuildSizesInfoKHR") {
+val VkAccelerationStructureBuildSizesInfoKHR = struct(Module.VULKAN, "VkAccelerationStructureBuildSizesInfoKHR", mutable = false) {
     documentation =
         """
         Structure specifying build sizes for an acceleration structure.
@@ -8113,8 +8490,8 @@ val VkAccelerationStructureBuildSizesInfoKHR = struct(Module.VULKAN, "VkAccelera
         #GetAccelerationStructureBuildSizesKHR()
         """
 
-    Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkDeviceSize("accelerationStructureSize", "the size in bytes required in a {@code VkAccelerationStructureKHR} for a build or update operation.")
     VkDeviceSize("updateScratchSize", "the size in bytes required in a scratch buffer for an update operation.")
     VkDeviceSize("buildScratchSize", "the size in bytes required in a scratch buffer for a build operation.")
@@ -8214,6 +8591,7 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If the {@code pNext} chain does not include a ##VkPipelineCreateFlags2CreateInfoKHR structure, {@code flags} must be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid ray tracing {@code VkPipeline} handle</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command’s {@code pCreateInfos} parameter</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
@@ -8264,7 +8642,6 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCreateFlags2CreateInfoKHR, ##VkPipelineCreationFeedbackCreateInfo, or ##VkPipelineRobustnessCreateInfoEXT</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code stageCount} is not 0, {@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
             <li>If {@code groupCount} is not 0, {@code pGroups} <b>must</b> be a valid pointer to an array of {@code groupCount} valid ##VkRayTracingShaderGroupCreateInfoKHR structures</li>
             <li>If {@code pLibraryInfo} is not {@code NULL}, {@code pLibraryInfo} <b>must</b> be a valid pointer to a valid ##VkPipelineLibraryCreateInfoKHR structure</li>
@@ -8349,7 +8726,7 @@ val VkPhysicalDeviceRayTracingPipelinePropertiesKHR = struct(Module.VULKAN, "VkP
     uint32_t("shaderGroupBaseAlignment", "the <b>required</b> alignment in bytes for the base of the shader binding table.")
     uint32_t("shaderGroupHandleCaptureReplaySize", "the number of bytes for the information required to do capture and replay for shader group handles.")
     uint32_t("maxRayDispatchInvocationCount", "the maximum number of ray generation shader invocations which <b>may</b> be produced by a single #CmdTraceRaysIndirectKHR() or #CmdTraceRaysKHR() command.")
-    uint32_t("shaderGroupHandleAlignment", "the <b>required</b> alignment in bytes for each shader binding table entry. The value <b>must</b> be a power of two.")
+    uint32_t("shaderGroupHandleAlignment", "the <b>required</b> alignment in bytes for each entry in a shader binding table. The value <b>must</b> be a power of two.")
     uint32_t("maxRayHitAttributeSize", "the maximum size in bytes for a ray attribute structure")
 }
 
@@ -9216,6 +9593,7 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If the {@code pNext} chain does not include a ##VkPipelineCreateFlags2CreateInfoKHR structure, {@code flags} must be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid ray tracing {@code VkPipeline} handle</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command’s {@code pCreateInfos} parameter</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
@@ -9253,7 +9631,6 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCreateFlags2CreateInfoKHR or ##VkPipelineCreationFeedbackCreateInfo</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>{@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
             <li>{@code pGroups} <b>must</b> be a valid pointer to an array of {@code groupCount} valid ##VkRayTracingShaderGroupCreateInfoNV structures</li>
             <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
@@ -9776,6 +10153,12 @@ val VkImportMemoryHostPointerInfoEXT = struct(Module.VULKAN, "VkImportMemoryHost
 
         Whether device memory objects imported from a host pointer hold a reference to their payload is undefined. As such, the application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.
 
+        Implementations <b>may</b> support importing host pointers for memory types which are not host-visible. In this case, after a successful call to #AllocateMemory(), the memory range imported from {@code pHostPointer} <b>must</b> not be accessed by the application until the {@code VkDeviceMemory} has been destroyed. Memory contents for the host memory becomes undefined on import, and is left undefined after the {@code VkDeviceMemory} has been destroyed. Applications <b>must</b> also not access host memory which is mapped to the same physical memory as {@code pHostPointer}, but mapped to a different host pointer while the {@code VkDeviceMemory} handle is valid. Implementations running on general-purpose operating systems <b>should</b> not support importing host pointers for memory types which are not host-visible.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Using host pointers to back non-host visible allocations is a platform-specific use case, and applications should not attempt to do this unless instructed by the platform.
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported in ##VkExternalMemoryProperties</li>
@@ -9805,7 +10188,7 @@ val VkMemoryHostPointerPropertiesEXT = struct(Module.VULKAN, "VkMemoryHostPointe
         Properties of external memory host pointer.
 
         <h5>Description</h5>
-        The value returned by {@code memoryTypeBits} <b>must</b> only include bits that identify memory types which are host visible.
+        The value returned by {@code memoryTypeBits} <b>should</b> only include bits that identify memory types which are host visible. Implementations <b>may</b> include bits that identify memory types which are not host visible. Behavior for imported pointers of such types is defined by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#host-memory-import-non-visible-type">##VkImportMemoryHostPointerInfoEXT</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -9968,7 +10351,7 @@ val VkVideoDecodeH265ProfileInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH265Pr
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoH265ProfileIdc("stdProfileIdc", "a {@code StdVideoH265ProfileIdc} value specifying the H.265 codec profile IDC, as defined in section A3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
+    StdVideoH265ProfileIdc("stdProfileIdc", "a {@code StdVideoH265ProfileIdc} value specifying the H.265 codec profile IDC, as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
 }
 
 val VkVideoDecodeH265CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeH265CapabilitiesKHR", mutable = false) {
@@ -9985,7 +10368,7 @@ val VkVideoDecodeH265CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeH265C
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value specifying the maximum H.265 level supported by the profile, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
+    StdVideoH265LevelIdc("maxLevelIdc", "a {@code StdVideoH265LevelIdc} value indicating the maximum H.265 level supported by the profile, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#itu-t-h265\">ITU-T H.265 Specification</a>.")
 }
 
 val VkVideoDecodeH265SessionParametersAddInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH265SessionParametersAddInfoKHR") {
@@ -10082,10 +10465,14 @@ val VkVideoDecodeH265PictureInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH265Pi
                 <li>{@code PicOrderCntVal} as defined in section 8.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
                 <li>{@code NumBitsForSTRefPicSetInSlice} is the number of bits used in {@code st_ref_pic_set} when {@code short_term_ref_pic_set_sps_flag} is 0, or 0 otherwise, as defined in sections 7.4.7 and 7.4.8 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
                 <li>{@code NumDeltaPocsOfRefRpsIdx} is the value of {@code NumDeltaPocs[RefRpsIdx]} when {@code short_term_ref_pic_set_sps_flag} is 1, or 0 otherwise, as defined in sections 7.4.7 and 7.4.8 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>;</li>
-                <li>{@code RefPicSetStCurrBefore}, {@code RefPicSetStCurrAfter}, and {@code RefPicSetLtCurr} are interpreted as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> where each element of these arrays either identifies an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-active-reference-picture-info">active reference picture</a> using its <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index or contains the value 0xFF to indicate "no reference picture";</li>
+                <li>{@code RefPicSetStCurrBefore}, {@code RefPicSetStCurrAfter}, and {@code RefPicSetLtCurr} are interpreted as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> where each element of these arrays either identifies an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-active-reference-picture-info">active reference picture</a> using its <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index or contains the value {@code STD_VIDEO_H265_NO_REFERENCE_PICTURE} to indicate “no reference picture”;</li>
                 <li>all other members are interpreted as defined in section 8.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a>.</li>
             </ul></dd>
+        </dl>
 
+        Reference picture setup is controlled by the value of {@code StdVideoDecodeH265PictureInfo}{@code ::flags.IsReference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the corresponding <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a>. If {@code StdVideoDecodeH265PictureInfo}{@code ::flags.IsReference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">DPB Slot States</a> section.
+
+        <dl>
             <dt>Active Parameter Sets</dt>
             <dd><ul>
                 <li>The <em>active VPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-vps">VPS</a> identified by the key specified in {@code StdVideoDecodeH265PictureInfo}{@code ::sps_video_parameter_set_id}.</li>
@@ -10132,7 +10519,7 @@ val VkVideoDecodeH265DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoDecodeH265Dp
             <dt>Reconstructed Picture Information</dt>
             <dd><ul>
                 <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-picture-data-access">H.265 Decode Picture Data Access</a> section.</li>
-                <li>The reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
+                <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
                 <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-reference-info">H.265 reference information</a> provided in {@code pStdReferenceInfo}.</li>
             </ul></dd>
         </dl>
@@ -10175,7 +10562,7 @@ val VkDeviceQueueGlobalPriorityCreateInfoKHR = struct(Module.VULKAN, "VkDeviceQu
 
     Expression("#STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkQueueGlobalPriorityKHR("globalPriority", "the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityEXT}")
+    VkQueueGlobalPriorityKHR("globalPriority", "the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityKHR}")
 }
 
 val VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR") {
@@ -10197,7 +10584,7 @@ val VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR = struct(Module.VULKAN, "VkPh
     VkBool32("globalPriorityQuery", "indicates whether the implementation supports the ability to query global queue priorities.")
 }
 
-val VkQueueFamilyGlobalPriorityPropertiesKHR = struct(Module.VULKAN, "VkQueueFamilyGlobalPriorityPropertiesKHR") {
+val VkQueueFamilyGlobalPriorityPropertiesKHR = struct(Module.VULKAN, "VkQueueFamilyGlobalPriorityPropertiesKHR", mutable = false) {
     javaImport("static org.lwjgl.vulkan.KHRGlobalPriority.*")
     documentation =
         """
@@ -10217,14 +10604,13 @@ val VkQueueFamilyGlobalPriorityPropertiesKHR = struct(Module.VULKAN, "VkQueueFam
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR</li>
-            <li>Each element of {@code priorities} <b>must</b> be a valid {@code VkQueueGlobalPriorityKHR} value</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    uint32_t("priorityCount", "the number of supported global queue priorities in this queue family, and it <b>must</b> be greater than 0.")
-    VkQueueGlobalPriorityKHR("priorities", "an array of #MAX_GLOBAL_PRIORITY_SIZE_EXT {@code VkQueueGlobalPriorityEXT} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid.")["VK_MAX_GLOBAL_PRIORITY_SIZE_KHR"]
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    AutoSize("priorities")..uint32_t("priorityCount", "the number of supported global queue priorities in this queue family, and it <b>must</b> be greater than 0.")
+    VkQueueGlobalPriorityKHR("priorities", "an array of #MAX_GLOBAL_PRIORITY_SIZE_KHR {@code VkQueueGlobalPriorityKHR} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid.")["VK_MAX_GLOBAL_PRIORITY_SIZE_KHR"]
 }
 
 val VkDeviceMemoryOverallocationCreateInfoAMD = struct(Module.VULKAN, "VkDeviceMemoryOverallocationCreateInfoAMD") {
@@ -10531,7 +10917,7 @@ val VkPipelineViewportExclusiveScissorStateCreateInfoNV = struct(Module.VULKAN, 
         <h5>Description</h5>
         If the #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV dynamic state is enabled for a pipeline, the {@code pExclusiveScissors} member is ignored.
 
-        When this structure is included in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it defines parameters of the exclusive scissor test. If this structure is not included in the {@code pNext} chain, it is equivalent to specifying this structure with a {@code exclusiveScissorCount} of 0.
+        When this structure is included in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it defines parameters of the exclusive scissor test. If this structure is not included in the {@code pNext} chain, it is equivalent to specifying this structure with an {@code exclusiveScissorCount} of 0.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -10713,16 +11099,10 @@ val VkPerformanceValueDataINTEL = union(Module.VULKAN, "VkPerformanceValueDataIN
     charUTF8.const.p("valueString", "represents a pointer to a null-terminated UTF-8 string.")
 }
 
-val VkPerformanceValueINTEL = struct(Module.VULKAN, "VkPerformanceValueINTEL") {
+val VkPerformanceValueINTEL = struct(Module.VULKAN, "VkPerformanceValueINTEL", mutable = false) {
     documentation =
         """
         Container for value and types of parameters that can be queried.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code type} <b>must</b> be a valid {@code VkPerformanceValueTypeINTEL} value</li>
-            <li>If {@code type} is #PERFORMANCE_VALUE_TYPE_STRING_INTEL, the {@code valueString} member of {@code data} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
 
         <h5>See Also</h5>
         ##VkPerformanceValueDataINTEL, #GetPerformanceParameterINTEL()
@@ -11280,6 +11660,137 @@ val VkPhysicalDeviceCoherentMemoryFeaturesAMD = struct(Module.VULKAN, "VkPhysica
     VkBool32("deviceCoherentMemory", "indicates that the implementation supports device coherent memory ({@code VkMemoryPropertyFlagBits}).")
 }
 
+val VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR") {
+    documentation =
+        """
+        Structure indicating support for local reads in dynamic render pass instances.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("dynamicRenderingLocalRead", "specifies that the implementation supports local reads inside dynamic render pass instances using the #CmdBeginRendering() command.")
+}
+
+val VkRenderingAttachmentLocationInfoKHR = struct(Module.VULKAN, "VkRenderingAttachmentLocationInfoKHR") {
+    documentation =
+        """
+        Structure specifying attachment locations.
+
+        <h5>Description</h5>
+        This structure allows applications to remap the locations of color attachments to different fragment shader output locations.
+
+        Each element of {@code pColorAttachmentLocations} set to #ATTACHMENT_UNUSED will be inaccessible to this pipeline as a color attachment; no location will map to it. Each element of {@code pColorAttachmentLocations} set to any other value will map the specified location value to the color attachment specified in the render pass at the corresponding index in the {@code pColorAttachmentLocations} array. Any writes to a fragment output location that is not mapped to an attachment <b>must</b> be discarded.
+
+        If {@code pColorAttachmentLocations} is {@code NULL}, it is equivalent to setting each element to its index within the array.
+
+        This structure <b>can</b> be included in the {@code pNext} chain of a ##VkGraphicsPipelineCreateInfo structure to set this state for a pipeline. If this structure is not included in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it is equivalent to specifying this structure with the following properties:
+
+        <ul>
+            <li>{@code colorAttachmentCount} set to ##VkPipelineRenderingCreateInfo{@code ::colorAttachmentCount}.</li>
+            <li>{@code pColorAttachmentLocations} set to {@code NULL}.</li>
+        </ul>
+
+        This structure <b>can</b> be included in the {@code pNext} chain of a ##VkCommandBufferInheritanceInfo structure to specify inherited state from the primary command buffer. If ##VkCommandBufferInheritanceInfo::renderPass is not #NULL_HANDLE, or #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT is not specified in ##VkCommandBufferBeginInfo::flags, members of this structure are ignored. If this structure is not included in the {@code pNext} chain of ##VkCommandBufferInheritanceInfo, it is equivalent to specifying this structure with the following properties:
+
+        <ul>
+            <li>{@code colorAttachmentCount} set to ##VkCommandBufferInheritanceRenderingInfo{@code ::colorAttachmentCount}.</li>
+            <li>{@code pColorAttachmentLocations} set to {@code NULL}.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, and {@code pColorAttachmentLocations} is not {@code NULL}, each element <b>must</b> be set to the value of its index within the array</li>
+            <li>Elements of {@code pColorAttachmentLocations} that are not #ATTACHMENT_UNUSED <b>must</b> each be unique</li>
+            <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
+            <li>Each element of {@code pColorAttachmentLocations} <b>must</b> be less than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO_KHR</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetRenderingAttachmentLocationsKHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pColorAttachmentLocations", optional = true)..uint32_t("colorAttachmentCount", "the number of elements in {@code pColorAttachmentLocations}.")
+    nullable..uint32_t.const.p("pColorAttachmentLocations", "a pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values defining remapped locations for color attachments.")
+}
+
+val VkRenderingInputAttachmentIndexInfoKHR = struct(Module.VULKAN, "VkRenderingInputAttachmentIndexInfoKHR") {
+    documentation =
+        """
+        Structure specifying input attachment indices.
+
+        <h5>Description</h5>
+        This structure allows applications to remap attachments to different input attachment indices.
+
+        Each element of {@code pColorAttachmentInputIndices} set to a value of #ATTACHMENT_UNUSED indicates that the corresponding attachment will not be used as an input attachment in this pipeline. Any other value in each of those elements will map the corresponding attachment to a {@code InputAttachmentIndex} value defined in shader code.
+
+        If {@code pColorAttachmentInputIndices} is {@code NULL}, it is equivalent to setting each element to its index within the array.
+
+        If {@code pDepthInputAttachmentIndex} or {@code pStencilInputAttachmentIndex} are set to {@code NULL}, they map to input attachments without a {@code InputAttachmentIndex} decoration. If they point to a value of #ATTACHMENT_UNUSED, it indicates that the corresponding attachment will not be used as an input attachment in this pipeline. If they point to any other value it maps the corresponding attachment to a {@code InputAttachmentIndex} value defined in shader code.
+
+        This structure <b>can</b> be included in the {@code pNext} chain of a ##VkGraphicsPipelineCreateInfo structure to set this state for a pipeline. If this structure is not included in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it is equivalent to specifying this structure with the following properties:
+
+        <ul>
+            <li>{@code colorAttachmentCount} set to ##VkPipelineRenderingCreateInfo{@code ::colorAttachmentCount}.</li>
+            <li>{@code pColorAttachmentInputIndices} set to {@code NULL}.</li>
+            <li>{@code pDepthInputAttachmentIndex} set to {@code NULL}.</li>
+            <li>{@code pStencilInputAttachmentIndex} set to {@code NULL}.</li>
+        </ul>
+
+        This structure <b>can</b> be included in the {@code pNext} chain of a ##VkCommandBufferInheritanceInfo structure to specify inherited state from the primary command buffer. If this structure is not included in the {@code pNext} chain of ##VkCommandBufferInheritanceInfo, it is equivalent to specifying this structure with the following properties:
+
+        <ul>
+            <li>{@code colorAttachmentCount} set to ##VkCommandBufferInheritanceRenderingInfo{@code ::colorAttachmentCount}.</li>
+            <li>{@code pColorAttachmentInputIndices} set to {@code NULL}.</li>
+            <li>{@code pDepthInputAttachmentIndex} set to {@code NULL}.</li>
+            <li>{@code pStencilInputAttachmentIndex} set to {@code NULL}.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, and {@code pColorAttachmentInputIndices} is not {@code NULL}, each element <b>must</b> be set to #ATTACHMENT_UNUSED</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code pDepthInputAttachmentIndex} <b>must</b> be a valid pointer to a value of #ATTACHMENT_UNUSED</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code pStencilInputAttachmentIndex} <b>must</b> be a valid pointer to a value of #ATTACHMENT_UNUSED</li>
+            <li>Elements of {@code pColorAttachmentInputIndices} that are not #ATTACHMENT_UNUSED <b>must</b> each be unique</li>
+            <li>Elements of {@code pColorAttachmentInputIndices} that are not #ATTACHMENT_UNUSED <b>must</b> not take the same value as the content of {@code pDepthInputAttachmentIndex}</li>
+            <li>Elements of {@code pColorAttachmentInputIndices} that are not #ATTACHMENT_UNUSED <b>must</b> not take the same value as the content of {@code pStencilInputAttachmentIndex}</li>
+            <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR</li>
+            <li>If {@code colorAttachmentCount} is not 0, and {@code pColorAttachmentInputIndices} is not {@code NULL}, {@code pColorAttachmentInputIndices} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values</li>
+            <li>If {@code pDepthInputAttachmentIndex} is not {@code NULL}, {@code pDepthInputAttachmentIndex} <b>must</b> be a valid pointer to a valid {@code uint32_t} value</li>
+            <li>If {@code pStencilInputAttachmentIndex} is not {@code NULL}, {@code pStencilInputAttachmentIndex} <b>must</b> be a valid pointer to a valid {@code uint32_t} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetRenderingInputAttachmentIndicesKHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pColorAttachmentInputIndices", optional = true)..uint32_t("colorAttachmentCount", "the number of elements in {@code pColorAttachmentInputIndices}.")
+    nullable..uint32_t.const.p("pColorAttachmentInputIndices", "a pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values defining indices for color attachments to be used as input attachments.")
+    nullable..uint32_t.const.p("pDepthInputAttachmentIndex", "either {@code NULL}, or a pointer to a {@code uint32_t} value defining the index for the depth attachment to be used as an input attachment.")
+    nullable..uint32_t.const.p("pStencilInputAttachmentIndex", "either {@code NULL}, or a pointer to a {@code uint32_t} value defining the index for the stencil attachment to be used as an input attachment.")
+}
+
 val VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT") {
     documentation =
         """
@@ -11298,6 +11809,25 @@ val VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT = struct(Module.VULKAN, "V
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderImageInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on images.")
     VkBool32("sparseImageInt64Atomics", "indicates whether 64-bit integer atomics <b>can</b> be used on sparse images.")
+}
+
+val VkPhysicalDeviceShaderQuadControlFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderQuadControlFeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether quad scopes are supported by the implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderQuadControlFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderQuadControlFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("shaderQuadControl", "indicates whether the implementation supports shaders with the {@code QuadControlKHR} capability.")
 }
 
 val VkPhysicalDeviceMemoryBudgetPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMemoryBudgetPropertiesEXT", mutable = false) {
@@ -11565,7 +12095,7 @@ val VkPhysicalDevicePresentWaitFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDe
     VkBool32("presentWait", "indicates that the implementation supports {@code vkWaitForPresentKHR}.")
 }
 
-val VkCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkCooperativeMatrixPropertiesNV") {
+val VkCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkCooperativeMatrixPropertiesNV", mutable = false) {
     documentation =
         """
         Structure specifying cooperative matrix properties.
@@ -11579,19 +12109,14 @@ val VkCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkCooperativeMatrix
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code AType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
-            <li>{@code BType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
-            <li>{@code CType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
-            <li>{@code DType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
-            <li>{@code scope} <b>must</b> be a valid {@code VkScopeNV} value</li>
         </ul>
 
         <h5>See Also</h5>
         #GetPhysicalDeviceCooperativeMatrixPropertiesNV()
         """
 
-    Expression("#STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("MSize", "the number of rows in matrices A, C, and D.")
     uint32_t("NSize", "the number of columns in matrices B, C, D.")
     uint32_t("KSize", "the number of columns in matrix A and rows in matrix B.")
@@ -11963,81 +12488,39 @@ val VkDeviceMemoryOpaqueCaptureAddressInfoKHR = struct(Module.VULKAN, "VkDeviceM
     VkDeviceMemory("memory", "")
 }
 
-val VkPhysicalDeviceLineRasterizationFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeaturesEXT") {
-    documentation =
-        """
-        Structure describing the line rasterization features that can be supported by an implementation.
+val _VkPhysicalDeviceLineRasterizationFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeaturesKHR")
+val VkPhysicalDeviceLineRasterizationFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeaturesEXT", alias = _VkPhysicalDeviceLineRasterizationFeaturesKHR) {
+    documentation = "See ##VkPhysicalDeviceLineRasterizationFeaturesKHR."
 
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceLineRasterizationFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceLineRasterizationFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT</li>
-        </ul>
-        """
-
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("rectangularLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines\">rectangular line rasterization</a>.")
-    VkBool32("bresenhamLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-bresenham\">Bresenham-style line rasterization</a>.")
-    VkBool32("smoothLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-smooth\">smooth line rasterization</a>.")
-    VkBool32("stippledRectangularLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT lines.")
-    VkBool32("stippledBresenhamLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_BRESENHAM_EXT lines.")
-    VkBool32("stippledSmoothLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT lines.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("rectangularLines", "")
+    VkBool32("bresenhamLines", "")
+    VkBool32("smoothLines", "")
+    VkBool32("stippledRectangularLines", "")
+    VkBool32("stippledBresenhamLines", "")
+    VkBool32("stippledSmoothLines", "")
 }
 
-val VkPhysicalDeviceLineRasterizationPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationPropertiesEXT", mutable = false) {
-    documentation =
-        """
-        Structure describing line rasterization properties supported by an implementation.
+val _VkPhysicalDeviceLineRasterizationPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationPropertiesKHR")
+val VkPhysicalDeviceLineRasterizationPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationPropertiesEXT", mutable = false, alias = _VkPhysicalDeviceLineRasterizationPropertiesKHR) {
+    documentation = "See ##VkPhysicalDeviceLineRasterizationPropertiesKHR."
 
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceLineRasterizationPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT</li>
-        </ul>
-        """
-
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    uint32_t("lineSubPixelPrecisionBits", "the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines\">line segments</a>.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    uint32_t("lineSubPixelPrecisionBits", "")
 }
 
-val VkPipelineRasterizationLineStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfoEXT") {
-    documentation =
-        """
-        Structure specifying parameters of a newly created pipeline line rasterization state.
+val _VkPipelineRasterizationLineStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfoKHR")
+val VkPipelineRasterizationLineStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfoEXT", alias = _VkPipelineRasterizationLineStateCreateInfoKHR) {
+    documentation = "See ##VkPipelineRasterizationLineStateCreateInfoKHR."
 
-        <h5>Description</h5>
-        If {@code stippledLineEnable} is #FALSE, the values of {@code lineStippleFactor} and {@code lineStipplePattern} are ignored.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledBresenhamLines">{@code stippledBresenhamLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledSmoothLines">{@code stippledSmoothLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_DEFAULT_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled and ##VkPhysicalDeviceLimits{@code ::strictLines} <b>must</b> be #TRUE</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT</li>
-            <li>{@code lineRasterizationMode} <b>must</b> be a valid {@code VkLineRasterizationModeEXT} value</li>
-        </ul>
-        """
-
-    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkLineRasterizationModeEXT("lineRasterizationMode", "a {@code VkLineRasterizationModeEXT} value selecting the style of line rasterization.")
-    VkBool32("stippledLineEnable", "enables <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a>.")
-    uint32_t("lineStippleFactor", "the repeat factor used in stippled line rasterization.")
-    uint16_t("lineStipplePattern", "the bit pattern used in stippled line rasterization.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    VkLineRasterizationModeKHR("lineRasterizationMode", "")
+    VkBool32("stippledLineEnable", "")
+    uint32_t("lineStippleFactor", "")
+    uint16_t("lineStipplePattern", "")
 }
 
 val VkPhysicalDeviceShaderAtomicFloatFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT") {
@@ -12078,23 +12561,13 @@ val VkPhysicalDeviceHostQueryResetFeaturesEXT = struct(Module.VULKAN, "VkPhysica
     VkBool32("hostQueryReset", "")
 }
 
-val VkPhysicalDeviceIndexTypeUint8FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceIndexTypeUint8FeaturesEXT") {
-    documentation =
-        """
-        Structure describing whether uint8 index type can be used.
+val _VkPhysicalDeviceIndexTypeUint8FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIndexTypeUint8FeaturesKHR")
+val VkPhysicalDeviceIndexTypeUint8FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", alias = _VkPhysicalDeviceIndexTypeUint8FeaturesKHR) {
+    documentation = "See ##VkPhysicalDeviceIndexTypeUint8FeaturesKHR."
 
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceIndexTypeUint8FeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceIndexTypeUint8FeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT</li>
-        </ul>
-        """
-
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("indexTypeUint8", "indicates that #INDEX_TYPE_UINT8_EXT can be used with #CmdBindIndexBuffer2KHR() and #CmdBindIndexBuffer().")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("indexTypeUint8", "")
 }
 
 val VkPhysicalDeviceExtendedDynamicStateFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT") {
@@ -12756,6 +13229,7 @@ val VkHostImageLayoutTransitionInfoEXT = struct(Module.VULKAN, "VkHostImageLayou
             <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_DEPTH_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
             <li>If the {@code aspectMask} member of {@code subresourceRange} includes #IMAGE_ASPECT_STENCIL_BIT, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</li>
+            <li>{@code subresourceRange.aspectMask} <b>must</b> be valid for the {@code format} the {@code image} was created with</li>
             <li>{@code oldLayout} <b>must</b> be either #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources as specified in {@code subresourceRange}</li>
             <li>If {@code oldLayout} is not #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED, it <b>must</b> be one of the layouts in ##VkPhysicalDeviceHostImageCopyPropertiesEXT{@code ::pCopySrcLayouts}</li>
             <li>{@code newLayout} <b>must</b> be one of the layouts in ##VkPhysicalDeviceHostImageCopyPropertiesEXT{@code ::pCopyDstLayouts}</li>
@@ -12911,13 +13385,22 @@ val VkMemoryMapInfoKHR = struct(Module.VULKAN, "VkMemoryMapInfoKHR") {
             <li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be less than or equal to the size of the {@code memory} minus {@code offset}</li>
             <li>{@code memory} <b>must</b> have been created with a memory type that reports #MEMORY_PROPERTY_HOST_VISIBLE_BIT</li>
             <li>{@code memory} <b>must</b> not have been allocated with multiple instances</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-memoryMapPlaced">{@code memoryMapPlaced}</a> feature <b>must</b> be enabled</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags}, the {@code pNext} chain <b>must</b> include a ##VkMemoryMapPlacedInfoEXT structure and ##VkMemoryMapPlacedInfoEXT{@code ::pPlacedAddress} <b>must</b> not be {@code NULL}</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is not enabled, {@code offset} <b>must</b> be zero</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is not enabled, {@code size} <b>must</b> be #WHOLE_SIZE or ##VkMemoryAllocateInfo{@code ::allocationSize}</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is enabled, {@code offset} <b>must</b> be aligned to an integer multiple of ##VkPhysicalDeviceMapMemoryPlacedPropertiesEXT{@code ::minPlacedMemoryMapAlignment}</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags} and {@code size} is not #WHOLE_SIZE, {@code size} <b>must</b> be aligned to an integer multiple of ##VkPhysicalDeviceMapMemoryPlacedPropertiesEXT{@code ::minPlacedMemoryMapAlignment}</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags} and {@code size} is #WHOLE_SIZE, ##VkMemoryAllocateInfo{@code ::allocationSize} <b>must</b> be aligned to an integer multiple of ##VkPhysicalDeviceMapMemoryPlacedPropertiesEXT{@code ::minPlacedMemoryMapAlignment}</li>
+            <li>If #MEMORY_MAP_PLACED_BIT_EXT is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code flags} <b>must</b> be 0</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkMemoryMapPlacedInfoEXT</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryMapFlagBits} values</li>
             <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
         </ul>
 
@@ -12931,8 +13414,11 @@ val VkMemoryMapInfoKHR = struct(Module.VULKAN, "VkMemoryMapInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkMemoryMapFlags("flags", "reserved for future use.")
+    PointerSetter(
+        "VkMemoryMapPlacedInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkMemoryMapFlags("flags", "a bitmask of {@code VkMemoryMapFlagBits} specifying additional parameters of the memory map operation.")
     VkDeviceMemory("memory", "the {@code VkDeviceMemory} object to be mapped.")
     VkDeviceSize("offset", "a zero-based byte offset from the beginning of the memory object.")
     VkDeviceSize("size", "the size of the memory range to map, or #WHOLE_SIZE to map from {@code offset} to the end of the allocation.")
@@ -12946,13 +13432,15 @@ val VkMemoryUnmapInfoKHR = struct(Module.VULKAN, "VkMemoryUnmapInfoKHR") {
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code memory} <b>must</b> be currently host mapped</li>
+            <li>If #MEMORY_UNMAP_RESERVE_BIT_EXT is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-memoryUnmapReserve">{@code memoryUnmapReserve}</a> <b>must</b> be enabled</li>
+            <li>If #MEMORY_UNMAP_RESERVE_BIT_EXT is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code flags} <b>must</b> be 0</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryUnmapFlagBitsKHR} values</li>
             <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
         </ul>
 
@@ -12967,8 +13455,71 @@ val VkMemoryUnmapInfoKHR = struct(Module.VULKAN, "VkMemoryUnmapInfoKHR") {
 
     Expression("#STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkMemoryUnmapFlagsKHR("flags", "reserved for future use.")
+    VkMemoryUnmapFlagsKHR("flags", "a bitmask of {@code VkMemoryUnmapFlagBitsKHR} specifying additional parameters of the memory map operation.")
     VkDeviceMemory("memory", "the {@code VkDeviceMemory} object to be unmapped.")
+}
+
+val VkPhysicalDeviceMapMemoryPlacedFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMapMemoryPlacedFeaturesEXT") {
+    documentation =
+        """
+        Structure describing placed memory map features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMapMemoryPlacedFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceMapMemoryPlacedFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("memoryMapPlaced", "indicates that the implementation supports placing memory maps at client-specified virtual addresses.")
+    VkBool32("memoryMapRangePlaced", "indicates that the implementation supports placing memory maps of a subrange of a memory object at client-specified virtual addresses.")
+    VkBool32("memoryUnmapReserve", "indicates that the implementation supports leaving the memory range reserved when unmapping a memory object.")
+}
+
+val VkPhysicalDeviceMapMemoryPlacedPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMapMemoryPlacedPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure describing the alignment requirements of placed memory maps for a physical device.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMapMemoryPlacedPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    VkDeviceSize("minPlacedMemoryMapAlignment", "the minimum alignment required for memory object offsets and virtual address ranges when using placed memory mapping.")
+}
+
+val VkMemoryMapPlacedInfoEXT = struct(Module.VULKAN, "VkMemoryMapPlacedInfoEXT") {
+    documentation =
+        """
+        Structure containing memory map placement parameters.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If ##VkMemoryMapInfoKHR{@code ::flags} contains #MEMORY_MAP_PLACED_BIT_EXT, {@code pPlacedAddress} <b>must</b> not be {@code NULL}</li>
+            <li>{@code pPlacedAddress} <b>must</b> be aligned to an integer multiple of ##VkPhysicalDeviceMapMemoryPlacedPropertiesEXT{@code ::minPlacedMemoryMapAlignment}</li>
+            <li>The address range specified by {@code pPlacedAddress} and ##VkMemoryMapInfoKHR{@code ::size} <b>must</b> not overlap any existing Vulkan memory object mapping</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    nullable..opaque_p("pPlacedAddress", "the virtual address at which to place the address. If ##VkMemoryMapInfoKHR{@code ::flags} does not contain #MEMORY_MAP_PLACED_BIT_EXT, this value is ignored.")
 }
 
 val VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT") {
@@ -13017,7 +13568,7 @@ val VkSurfacePresentModeEXT = struct(Module.VULKAN, "VkSurfacePresentModeEXT") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code presentMode} <b>must</b> be a value reported by #GetPhysicalDeviceSurfacePresentModesKHR() for the specified surface.</li>
+            <li>{@code presentMode} <b>must</b> be a value reported by #GetPhysicalDeviceSurfacePresentModesKHR() for the specified surface</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -13554,7 +14105,7 @@ val VkIndirectCommandsLayoutTokenNV = struct(Module.VULKAN, "VkIndirectCommandsL
 
     Expression("#STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkIndirectCommandsTokenTypeNV("tokenType", "specifies the token command type.")
+    VkIndirectCommandsTokenTypeNV("tokenType", "a {@code VkIndirectCommandsTokenTypeNV} specifying the token command type.")
     uint32_t("stream", "the index of the input stream containing the token argument data.")
     uint32_t("offset", "a relative starting offset within the input stream memory for the token argument data.")
     uint32_t("vertexBindingUnit", "used for the vertex buffer binding command.")
@@ -13563,7 +14114,7 @@ val VkIndirectCommandsLayoutTokenNV = struct(Module.VULKAN, "VkIndirectCommandsL
     VkShaderStageFlags("pushconstantShaderStageFlags", "are the shader stage flags used for the push constant command.")
     uint32_t("pushconstantOffset", "the offset used for the push constant command.")
     uint32_t("pushconstantSize", "the size used for the push constant command.")
-    VkIndirectStateFlagsNV("indirectStateFlags", "are the active states for the state flag command.")
+    VkIndirectStateFlagsNV("indirectStateFlags", "a {@code VkIndirectStateFlagsNV} bitfield indicating the active states for the state flag command.")
     AutoSize("pIndexTypes", "pIndexTypeValues", optional = true)..uint32_t("indexTypeCount", "the optional size of the {@code pIndexTypes} and {@code pIndexTypeValues} array pairings. If not zero, it allows to register a custom {@code uint32_t} value to be treated as specific {@code VkIndexType}.")
     VkIndexType.const.p("pIndexTypes", "the used {@code VkIndexType} for the corresponding {@code uint32_t} value entry in {@code pIndexTypeValues}.")
     uint32_t.const.p("pIndexTypeValues", "")
@@ -13607,9 +14158,10 @@ val VkIndirectCommandsLayoutCreateInfoNV = struct(Module.VULKAN, "VkIndirectComm
             <li>The {@code pipelineBindPoint} <b>must</b> be #PIPELINE_BIND_POINT_GRAPHICS or #PIPELINE_BIND_POINT_COMPUTE</li>
             <li>{@code tokenCount} <b>must</b> be greater than 0 and less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::maxIndirectCommandsTokenCount}</li>
             <li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV it <b>must</b> be the first element of the array and there <b>must</b> be only a single element of such token type</li>
+            <li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV it <b>must</b> be the first element of the array and there <b>must</b> be only a single element of such token type</li>
             <li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV there <b>must</b> be only a single element of such token type</li>
-            <li>All state tokens in {@code pTokens} <b>must</b> occur before any work provoking tokens (#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV , #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NV )</li>
-            <li>The content of {@code pTokens} <b>must</b> include one single work provoking token that is compatible with the {@code pipelineBindPoint}</li>
+            <li>All state tokens in {@code pTokens} <b>must</b> occur before any action command tokens (#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV , #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NV )</li>
+            <li>The content of {@code pTokens} <b>must</b> include one single action command token that is compatible with the {@code pipelineBindPoint}</li>
             <li>{@code streamCount} <b>must</b> be greater than 0 and less or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::maxIndirectCommandsStreamCount}</li>
             <li>each element of {@code pStreamStrides} <b>must</b> be greater than 0 and less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::maxIndirectCommandsStreamStride}. Furthermore the alignment of each token input <b>must</b> be ensured</li>
             <li>If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCompute">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedCompute}</a> feature <b>must</b> be enabled</li>
@@ -13653,7 +14205,7 @@ val VkGeneratedCommandsInfoNV = struct(Module.VULKAN, "VkGeneratedCommandsInfoNV
             <li>The provided {@code pipeline} <b>must</b> match the pipeline bound at execution time</li>
             <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV, then the {@code pipeline} <b>must</b> have been created with multiple shader groups</li>
             <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV, then the {@code pipeline} <b>must</b> have been created with #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV set in ##VkGraphicsPipelineCreateInfo{@code ::flags}</li>
-            <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV, then the {@code pipeline}`s {@code VkPipelineLayout} <b>must</b> match the ##VkIndirectCommandsLayoutTokenNV{@code ::pushconstantPipelineLayout}</li>
+            <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV, then the {@code pipeline}’s {@code VkPipelineLayout} <b>must</b> match the ##VkIndirectCommandsLayoutTokenNV{@code ::pushconstantPipelineLayout}</li>
             <li>{@code streamCount} <b>must</b> match the {@code indirectCommandsLayout}’s {@code streamCount}</li>
             <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_COMPUTE, then the {@code pipeline} <b>must</b> have been created with the flag #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV</li>
             <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_COMPUTE, then the {@code pipeline} <b>must</b> have been created with a ##VkComputePipelineIndirectBufferInfoNV structure specifying a valid address where its metadata will be saved</li>
@@ -13681,7 +14233,7 @@ val VkGeneratedCommandsInfoNV = struct(Module.VULKAN, "VkGeneratedCommandsInfoNV
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
-            <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+            <li>If {@code pipeline} is not #NULL_HANDLE, {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
             <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNV} handle</li>
             <li>{@code pStreams} <b>must</b> be a valid pointer to an array of {@code streamCount} valid ##VkIndirectCommandsStreamNV structures</li>
             <li>{@code preprocessBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -13703,7 +14255,7 @@ val VkGeneratedCommandsInfoNV = struct(Module.VULKAN, "VkGeneratedCommandsInfoNV
     AutoSize("pStreams")..uint32_t("streamCount", "defines the number of input streams")
     VkIndirectCommandsStreamNV.const.p("pStreams", "a pointer to an array of {@code streamCount} ##VkIndirectCommandsStreamNV structures providing the input data for the tokens used in {@code indirectCommandsLayout}.")
     uint32_t("sequencesCount", "the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is #NULL_HANDLE, this is also the actual number of sequences generated.")
-    VkBuffer("preprocessBuffer", "the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with #CmdExecuteGeneratedCommandsNV() with its {@code isPreprocessed} set to #TRUE, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse.")
+    VkBuffer("preprocessBuffer", "the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with #CmdExecuteGeneratedCommandsNV() with its {@code isPreprocessed} set to #TRUE, then the preprocessing step is skipped and data in this buffer will not be modified. The contents and the layout of this buffer are opaque to applications and <b>must</b> not be modified outside functions related to device-generated commands or copied to another buffer for reuse.")
     VkDeviceSize("preprocessOffset", "the byte offset into {@code preprocessBuffer} where the preprocessed data is stored.")
     VkDeviceSize("preprocessSize", "the maximum byte size within the {@code preprocessBuffer} after the {@code preprocessOffset} that is available for preprocessing.")
     VkBuffer("sequencesCountBuffer", "a {@code VkBuffer} in which the actual number of sequences is provided as single {@code uint32_t} value.")
@@ -13722,7 +14274,7 @@ val VkGeneratedCommandsMemoryRequirementsInfoNV = struct(Module.VULKAN, "VkGener
             <li>{@code maxSequencesCount} <b>must</b> be less or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::maxIndirectSequenceCount}</li>
             <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_GRAPHICS, then {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
             <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_COMPUTE, and the {@code indirectCommandsLayout} was not created with a #INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV token, then the {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
-            <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_COMPUTE, and the {@code indirectCommandsLayout} contains a #INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV token, then the {@code pipeline} <b>must</b> be {@code NULL}</li>
+            <li>If {@code pipelineBindPoint} is of type #PIPELINE_BIND_POINT_COMPUTE, and the {@code indirectCommandsLayout} contains a #INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV token, then the {@code pipeline} <b>must</b> be #NULL_HANDLE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -14399,22 +14951,23 @@ val VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT = struct(Module.VULK
 val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
     documentation =
         """
-        Structure to chain codec-specific structures to.
-
-        <h5>Description</h5>
-        The coded size of the encode operation is specified in {@code codedExtent} of {@code srcPictureResource}.
-
-        Multiple #CmdEncodeVideoKHR() commands <b>may</b> be recorded within a Vulkan Video Encode Context. The execution of each #CmdEncodeVideoKHR() command will result in generating codec-specific bitstream units. These bitstream units are generated consecutively into the bitstream buffer specified in {@code dstBuffer} of a ##VkVideoEncodeInfoKHR structure within the #CmdBeginVideoCodingKHR() command. The produced bitstream is the sum of all these bitstream units, including any padding between the bitstream units. Any bitstream padding <b>must</b> be filled with data compliant to the codec standard so as not to cause any syntax errors during decoding of the bitstream units with the padding included. The range of the bitstream buffer written <b>can</b> be queried via <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-video-encode-feedback">video encode feedback queries</a>.
+        Structure specifying video encode parameters.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The bound video session <b>must</b> not be in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-uninitialized">uninitialized</a> state at the time the command is executed on the device</li>
+            <li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR set</li>
+            <li>{@code dstBufferOffset} <b>must</b> be less than the size of {@code dstBuffer}</li>
+            <li>{@code dstBufferRange} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus {@code dstBufferOffset}</li>
+            <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code slotIndex} member <b>must</b> not be negative</li>
+            <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code pPictureResource} <b>must</b> not be {@code NULL}</li>
+            <li>The {@code slotIndex} member of each element of {@code pReferenceSlots} <b>must</b> not be negative</li>
+            <li>The {@code pPictureResource} member of each element of {@code pReferenceSlots} <b>must</b> not be {@code NULL}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264PictureInfoEXT or ##VkVideoEncodeH265PictureInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264PictureInfoKHR, ##VkVideoEncodeH265PictureInfoKHR, or ##VkVideoInlineQueryInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -14429,29 +14982,39 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264PictureInfoEXT", "VkVideoEncodeH265PictureInfoEXT",
+        "VkVideoEncodeH264PictureInfoKHR", "VkVideoEncodeH265PictureInfoKHR", "VkVideoInlineQueryInfoKHR",
         prepend = true
-    )..nullable..opaque_const_p("pNext", "a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation.")
+    )..nullable..opaque_const_p("pNext", "a pointer to a structure extending this structure.")
     VkVideoEncodeFlagsKHR("flags", "reserved for future use.")
     VkBuffer("dstBuffer", "the destination video bitstream buffer to write the encoded bitstream to.")
-    VkDeviceSize("dstBufferOffset", "the starting offset in bytes from the start of {@code dstBuffer} to write the encoded bitstream to. {@code dstBufferOffset}’s value <b>must</b> be aligned to ##VkVideoCapabilitiesKHR{@code ::minBitstreamBufferOffsetAlignment}, as reported by the implementation.")
-    VkDeviceSize("dstBufferRange", "the maximum size in bytes of the encoded bitstream written to {@code dstBuffer}, starting from {@code dstBufferOffset}. {@code dstBufferRange}’s value <b>must</b> be aligned to ##VkVideoCapabilitiesKHR{@code ::minBitstreamBufferSizeAlignment}, as reported by the implementation.")
-    VkVideoPictureResourceInfoKHR("srcPictureResource", "the Picture Resource of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-input-picture\">Input Picture</a> to be encoded by the operation.")
-    nullable..VkVideoReferenceSlotInfoKHR.const.p("pSetupReferenceSlot", "a pointer to a ##VkVideoReferenceSlotInfoKHR structure used for generating a reconstructed reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the Reconstructed (DPB) data. {@code pSetupReferenceSlot} <b>must</b> be one of the entries provided in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Encode Context for this command.")
-    AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of Reconstructed Reference Pictures that will be used when this encoding operation is executing.")
-    VkVideoReferenceSlotInfoKHR.const.p("pReferenceSlots", "{@code NULL} or a pointer to an array of ##VkVideoReferenceSlotInfoKHR structures that will be used when this encoding operation is executing. Each entry in {@code pReferenceSlots} <b>must</b> be one of the entries provided in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Encode Context for this command.")
-    uint32_t("precedingExternallyEncodedBytes", "the number of bytes externally encoded for insertion in the active video encode session overall bitstream prior to the bitstream that will be generated by the implementation for this instance of ##VkVideoEncodeInfoKHR. The value provided is used to update the implementation’s rate control algorithm for the rate control layer this instance of ##VkVideoEncodeInfoKHR belongs to, by accounting for the bitrate budget consumed by these externally encoded bytes. See ##VkVideoEncodeRateControlInfoKHR for additional information about encode rate control.")
+    VkDeviceSize("dstBufferOffset", "the starting offset in bytes from the start of {@code dstBuffer} to write the encoded bitstream to.")
+    VkDeviceSize("dstBufferRange", "the maximum bitstream size in bytes that <b>can</b> be written to {@code dstBuffer}, starting from {@code dstBufferOffset}.")
+    VkVideoPictureResourceInfoKHR("srcPictureResource", "the video picture resource to use as the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-input-picture\">encode input picture</a>.")
+    nullable..VkVideoReferenceSlotInfoKHR.const.p("pSetupReferenceSlot", "{@code NULL} or a pointer to a ##VkVideoReferenceSlotInfoKHR structure specifying the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-reconstructed-picture-info\">reconstructed picture information</a>.")
+    AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of elements in the {@code pReferenceSlots} array.")
+    VkVideoReferenceSlotInfoKHR.const.p("pReferenceSlots", "{@code NULL} or a pointer to an array of ##VkVideoReferenceSlotInfoKHR structures describing the DPB slots and corresponding <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#reference-picture\">reference picture</a> resources to use in this video encode operation (the set of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#active-reference-pictures\">active reference pictures</a>).")
+    uint32_t("precedingExternallyEncodedBytes", "the number of bytes externally encoded by the application to the video bitstream and is used to update the internal state of the implementation’s <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control\">rate control</a> algorithm to account for the bitrate budget consumed by these externally encoded bytes.")
 }
 
 val VkVideoEncodeCapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeCapabilitiesKHR", mutable = false) {
     documentation =
         """
-        Structure specifying encode capabilities.
+        Structure describing general video encode capabilities for a video profile.
 
         <h5>Description</h5>
         Implementations <b>must</b> include support for at least #VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR and #VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR in {@code supportedEncodeFeedbackFlags}.
 
-        The input content and encode resolution (specified in ##VkVideoEncodeInfoKHR{@code ::codedExtent}) may not be aligned with the codec-specific coding block size. For example, the input content may be 1920x1080 and the coding block size may be 16x16 pixel blocks. In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with the coding block size. Encoding of the last row of blocks may be impacted by contents of the input image in pixel rows 1081 to 1088 (the next vertical alignment with the coding block size). In general, to ensure efficient encoding for the last row/column of blocks, and/or to ensure consistent encoding results between repeated encoding of the same input content, these extra pixel rows/columns should be filled to known values up to the coding block size alignment before encoding operations are performed. Some implementations support performing auto-fill of unaligned pixels beyond a specific alignment for the purposes of encoding, which is reported in {@code encodeInputPictureGranularity}. For example, if an implementation reports 1x1 in {@code encodeInputPictureGranularity}, then the implementation will perform auto-fill for any unaligned pixels beyond the encode resolution up to the next coding block size. For a coding block size of 16x16, if the implementation reports 16x16 in {@code encodeInputPictureGranularity}, then it is the application’s responsibility to fill any unaligned pixels, if desired. When the application does not fill these unaligned pixels, there <b>may</b> be an impact on the encoding efficiency but there will be no effect on the validity of the generated bitstream. If the implementation reports 8x8 in {@code encodeInputPictureGranularity}, then for the 1920x1080 example, since the content is aligned to 8 pixels vertically, the implementation will auto-fill pixel rows 1081 to 1088 (up to the 16x16 coding block size in the example). The auto-fill value(s) are implementation-specific. The auto-fill value(s) are not written to the input image memory, but are used as part of the encoding operation on the input image.
+        {@code encodeInputPictureGranularity} provides information about the way <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-input-picture">encode input picture</a> data is used as input to video encode operations. In particular, some implementations <b>may</b> not be able to limit the set of texels used to encode the output video bitstream to the image subregion specified in the ##VkVideoPictureResourceInfoKHR structure corresponding to the encode input picture (i.e. to the resolution of the image data to encode specified in its {@code codedExtent} member).
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For example, the application requests the coded extent to be 1920x1080, but the implementation is only able to source the encode input picture data at the granularity of the codec-specific coding block size which is 16x16 pixels (or as otherwise indicated in {@code encodeInputPictureGranularity}). In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with it. Thus encoding of the last row of coding blocks will be impacted by the contents of the input image at texel rows 1080 to 1087 (the latter being the next row which is vertically aligned with the coding block size, assuming a zero-based texel row index).
+        </div>
+
+        If {@code codedExtent} rounded up to the next integer multiple of {@code encodeInputPictureGranularity} is greater than the extent of the image subresource specified for the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-input-picture">encode input picture</a>, then the texel values corresponding to texel coordinates outside of the bounds of the image subresource <b>may</b> be undefined. However, implementations <b>should</b> use well-defined default values for such texels in order to maximize the encoding efficiency for the last coding block row/column, and/or to ensure consistent encoding results across repeated encoding of the same input content. Nonetheless, the values used for such texels <b>must</b> not have an effect on whether the video encode operation produces a compliant bitstream, and <b>must</b> not have any other effects on the encoded picture data beyond what <b>may</b> otherwise result from using these texel values as input to any compression algorithm, as defined in the used video compression standard.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        While not required, it is generally a good practice for applications to make sure that the image subresource used for the encode input picture has an extent that is an integer multiple of the codec-specific coding block size (or at least {@code encodeInputPictureGranularity}) and that this padding area is filled with known values in order to improve encoding efficiency, portability, and reproducibility.
+        </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -14465,11 +15028,11 @@ val VkVideoEncodeCapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeCapabilit
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkVideoEncodeCapabilityFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeCapabilityFlagBitsKHR} describing supported encoding features.")
-    VkVideoEncodeRateControlModeFlagsKHR("rateControlModes", "a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} indicating supported rate control modes.")
-    uint32_t("maxRateControlLayers", "indicates the maximum number of rate control layers supported.")
+    VkVideoEncodeRateControlModeFlagsKHR("rateControlModes", "a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} indicating supported <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control modes</a>.")
+    uint32_t("maxRateControlLayers", "indicates the maximum number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-layers\">rate control layers</a> supported.")
     uint64_t("maxBitrate", "indicates the maximum supported bitrate.")
-    uint32_t("maxQualityLevels", "indicates the number of discrete video encode quality levels supported. Implementations <b>must</b> report at least 1.")
-    VkExtent2D("encodeInputPictureGranularity", "indicates the granularity at which <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-input-picture\">encode input picture</a> data is encoded.")
+    uint32_t("maxQualityLevels", "indicates the number of discrete <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-quality-level\">video encode quality levels</a> supported. Implementations <b>must</b> support at least one quality level.")
+    VkExtent2D("encodeInputPictureGranularity", "indicates the granularity at which <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-input-picture\">encode input picture</a> data is encoded and <b>may</b> indicate a texel granularity up to the size of the codec-specific coding block size. This capability does not impose any valid usage constraints on the application, however, depending on the contents of the encode input picture, it <b>may</b> have effects on the encoded bitstream, as described in more detail below.")
     VkVideoEncodeFeedbackFlagsKHR("supportedEncodeFeedbackFlags", "a bitmask of {@code VkVideoEncodeFeedbackFlagBitsKHR} values specifying the supported flags for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#queries-video-encode-feedback\">video encode feedback queries</a>.")
 }
 
@@ -14518,16 +15081,28 @@ val VkVideoEncodeRateControlLayerInfoKHR = struct(Module.VULKAN, "VkVideoEncodeR
         Structure to set encode per-layer rate control parameters.
 
         <h5>Description</h5>
-        A codec-specific structure specifying additional per-layer rate control settings <b>must</b> be chained to ##VkVideoEncodeRateControlLayerInfoKHR. If multiple rate control layers are enabled (##VkVideoEncodeRateControlInfoKHR{@code ::layerCount} is greater than 1), then the chained codec-specific extension structure also identifies the specific video coding layer its parent ##VkVideoEncodeRateControlLayerInfoKHR applies to. If multiple rate control layers are enabled, the number of rate control layers <b>must</b> match the number of video coding layers. The specification for an encode codec-specific extension would describe how multiple video coding layers are enabled for the corresponding codec.
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The ability of the implementation’s rate control algorithm to be able to match the requested average and/or peak bitrates <b>may</b> be limited by the set of other codec-independent and codec-specific rate control parameters specified by the application, the input content, as well as the application conforming to the rate control guidance provided to the implementation, as described <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-rate-control">earlier</a>.
+        </div>
 
-        Per-layer rate control settings for all enabled rate control layers <b>must</b> be initialized or re-initialized whenever stream rate control settings are provided via ##VkVideoEncodeRateControlInfoKHR. This is done by specifying settings for all enabled rate control layers in ##VkVideoEncodeRateControlInfoKHR{@code ::pLayers}.
+        Additional structures providing codec-specific rate control parameters <b>can</b> be included in the {@code pNext} chain of ##VkVideoEncodeRateControlLayerInfoKHR depending on the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> the bound video session was created with. For further details see:
 
-        It is possible for an application to enable multiple video coding layers (via codec-specific extensions to encoding operations) while only enabling a single layer of rate control for the entire video stream. To achieve this, {@code layerCount} in ##VkVideoEncodeRateControlInfoKHR <b>must</b> be set to 1, and the single ##VkVideoEncodeRateControlLayerInfoKHR provided in {@code pLayers} would apply to all encoded segments of the video stream, regardless of which codec-defined video coding layer they belong to. In this case, the implementation decides bitrate distribution across video coding layers (if applicable to the specified stream rate control mode).
+        <ul>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-control">Video Coding Control</a></li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code frameRateNumerator} <b>must</b> be greater than zero</li>
+            <li>{@code frameRateDenominator} <b>must</b> be greater than zero</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264RateControlLayerInfoEXT or ##VkVideoEncodeH265RateControlLayerInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264RateControlLayerInfoKHR or ##VkVideoEncodeH265RateControlLayerInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -14537,13 +15112,13 @@ val VkVideoEncodeRateControlLayerInfoKHR = struct(Module.VULKAN, "VkVideoEncodeR
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264RateControlLayerInfoEXT", "VkVideoEncodeH265RateControlLayerInfoEXT",
+        "VkVideoEncodeH264RateControlLayerInfoKHR", "VkVideoEncodeH265RateControlLayerInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "a pointer to a structure extending this structure.")
-    uint64_t("averageBitrate", "the average bitrate in bits/second. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR.")
-    uint64_t("maxBitrate", "the peak bitrate in bits/second. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR.")
-    uint32_t("frameRateNumerator", "the numerator of the frame rate. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR.")
-    uint32_t("frameRateDenominator", "the denominator of the frame rate. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR.")
+    uint64_t("averageBitrate", "the average <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-bitrate\">bitrate</a> to be targeted by the implementation’s rate control algorithm.")
+    uint64_t("maxBitrate", "the peak <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-bitrate\">bitrate</a> to be targeted by the implementation’s rate control algorithm.")
+    uint32_t("frameRateNumerator", "the numerator of the frame rate assumed by the implementation’s rate control algorithm.")
+    uint32_t("frameRateDenominator", "the denominator of the frame rate assumed by the implementation’s rate control algorithm.")
 }
 
 val VkVideoEncodeRateControlInfoKHR = struct(Module.VULKAN, "VkVideoEncodeRateControlInfoKHR") {
@@ -14552,13 +15127,49 @@ val VkVideoEncodeRateControlInfoKHR = struct(Module.VULKAN, "VkVideoEncodeRateCo
         Structure to set encode stream rate control parameters.
 
         <h5>Description</h5>
-        Including this structure in the {@code pNext} chain of ##VkVideoCodingControlInfoKHR and including #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR in ##VkVideoCodingControlInfoKHR{@code ::flags} will define stream rate control settings for video encoding.
+        If {@code layerCount} is zero then the values of {@code virtualBufferSizeInMs} and {@code initialVirtualBufferSizeInMs} are ignored.
 
-        Additional structures providing codec-specific rate control parameters <b>may</b> need to be included in the {@code pNext} chain of ##VkVideoCodingControlInfoKHR depending on the codec profile the bound video session was created with and the parameters specified in ##VkVideoEncodeRateControlInfoKHR (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-control">Video Coding Control</a>).
+        This structure <b>can</b> be specified in the following places:
 
-        To ensure that the video session is properly initialized with stream-level rate control settings, the application <b>must</b> call #CmdControlVideoCodingKHR() with stream-level rate control settings at least once in execution order before the first #CmdEncodeVideoKHR() command that is executed after video session reset. If not provided, default implementation-specific stream rate control settings will be used.
+        <ul>
+            <li>In the {@code pNext} chain of ##VkVideoBeginCodingInfoKHR to specify the current rate control state expected to be configured when beginning a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-scope">video coding scope</a>.</li>
+            <li>In the {@code pNext} chain of ##VkVideoCodingControlInfoKHR to change the rate control configuration of the bound video session.</li>
+        </ul>
 
-        Stream rate control settings <b>can</b> also be re-initialized during an active video encoding session. The re-initialization takes effect whenever the ##VkVideoEncodeRateControlInfoKHR structure is included in the {@code pNext} chain of the ##VkVideoCodingControlInfoKHR structure in the call to #CmdControlVideoCodingKHR(), and only impacts #CmdEncodeVideoKHR() operations that follow in execution order.
+        Including this structure in the {@code pNext} chain of ##VkVideoCodingControlInfoKHR and including #VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR in ##VkVideoCodingControlInfoKHR{@code ::flags} enables updating the rate control configuration of the bound video session. This replaces the entire rate control configuration of the bound video session and <b>may</b> reset the state of all enabled rate control layers to an initial state according to the codec-specific rate control semantics defined in the corresponding sections listed below.
+
+        When {@code layerCount} is greater than one, multiple <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-rate-control-layers">rate control layers</a> are configured, and each rate control layer is applied to the corresponding video coding layer identified by the index of the corresponding element of {@code pLayer}.
+
+        <ul>
+            <li>If the video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then this index specifies the H.264 temporal layer ID of the video coding layer the rate control layer is applied to.</li>
+            <li>If the video session was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then this index specifies the H.265 temporal ID of the video coding layer the rate control layer is applied to.</li>
+        </ul>
+
+        Additional structures providing codec-specific rate control parameters <b>can</b> be included in the {@code pNext} chain of ##VkVideoCodingControlInfoKHR depending on the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> the bound video session was created. For further details see:
+
+        <ul>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-coding-control">Video Coding Control</a></li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
+        </ul>
+
+        The new rate control configuration takes effect when the corresponding #CmdControlVideoCodingKHR() is executed on the device, and only impacts video encode operations that follow in execution order.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code rateControlMode} is #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, then {@code layerCount} <b>must</b> be 0</li>
+            <li>If {@code rateControlMode} is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR, then {@code layerCount} <b>must</b> be greater than 0</li>
+            <li>If {@code rateControlMode} is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR, then it <b>must</b> specify one of the bits included in ##VkVideoEncodeCapabilitiesKHR{@code ::rateControlModes}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>{@code layerCount} member <b>must</b> be less than or equal to ##VkVideoEncodeCapabilitiesKHR{@code ::maxRateControlLayers}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>For each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> be between 1 and ##VkVideoEncodeCapabilitiesKHR{@code ::maxBitrate}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>For each element of {@code pLayers}, its {@code maxBitrate} member <b>must</b> be between 1 and ##VkVideoEncodeCapabilitiesKHR{@code ::maxBitrate}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
+            <li>If {@code rateControlMode} is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR, then for each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> equal its {@code maxBitrate} member</li>
+            <li>If {@code rateControlMode} is #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR, then for each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> be less than or equal to its {@code maxBitrate} member</li>
+            <li>If {@code layerCount} is not zero, then {@code virtualBufferSizeInMs} <b>must</b> be greater than zero</li>
+            <li>If {@code layerCount} is not zero, then {@code initialVirtualBufferSizeInMs} <b>must</b> be less than {@code virtualBufferSizeInMs}</li>
+            <li>If the {@code videoCodecOperation} of the used video profile is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, the {@code pNext} chain this structure is included in also includes an instance of the ##VkVideoEncodeH264RateControlInfoKHR structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal ##VkVideoEncodeH264RateControlInfoKHR{@code ::temporalLayerCount}</li>
+            <li>If the {@code videoCodecOperation} of the used video profile is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, the {@code pNext} chain this structure is included in also includes an instance of the ##VkVideoEncodeH265RateControlInfoKHR structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal ##VkVideoEncodeH265RateControlInfoKHR{@code ::subLayerCount}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -14575,17 +15186,24 @@ val VkVideoEncodeRateControlInfoKHR = struct(Module.VULKAN, "VkVideoEncodeRateCo
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoEncodeRateControlFlagsKHR("flags", "reserved for future use.")
-    VkVideoEncodeRateControlModeFlagBitsKHR("rateControlMode", "a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value specifying the encode stream rate control mode.")
-    AutoSize("pLayers", optional = true)..uint32_t("layerCount", "specifies the number of rate control layers in the video encode stream.")
-    VkVideoEncodeRateControlLayerInfoKHR.const.p("pLayers", "a pointer to an array of ##VkVideoEncodeRateControlLayerInfoKHR structures specifying the rate control configurations of {@code layerCount} rate control layers.")
-    uint32_t("virtualBufferSizeInMs", "the leaky bucket model virtual buffer size in milliseconds, with respect to peak bitrate. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR. For example, virtual buffer size is ({@code virtualBufferSizeInMs} × {@code maxBitrate} / 1000).")
-    uint32_t("initialVirtualBufferSizeInMs", "the initial occupancy in milliseconds of the virtual buffer in the leaky bucket model. Valid when rate control mode is #VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR.")
+    VkVideoEncodeRateControlModeFlagBitsKHR("rateControlMode", "a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value specifying the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a>.")
+    AutoSize("pLayers", optional = true)..uint32_t("layerCount", "specifies the number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-layers\">rate control layers</a> to use.")
+    VkVideoEncodeRateControlLayerInfoKHR.const.p("pLayers", "a pointer to an array of {@code layerCount} ##VkVideoEncodeRateControlLayerInfoKHR structures, each specifying the rate control configuration of the corresponding rate control layer.")
+    uint32_t("virtualBufferSizeInMs", "the size in milliseconds of the virtual buffer used by the implementation’s rate control algorithm for the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-leaky-bucket-model\">leaky bucket model</a>, with respect to the average bitrate of the stream calculated by summing the values of the {@code averageBitrate} members of the elements of the {@code pLayers} array.")
+    uint32_t("initialVirtualBufferSizeInMs", "the initial occupancy in milliseconds of the virtual buffer used by the implementation’s rate control algorithm for the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-leaky-bucket-model\">leaky bucket model</a>.")
 }
 
 val VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR") {
     documentation =
         """
         Structure describing the video encode profile and quality level to query properties for.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pVideoProfile} <b>must</b> be a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-support">supported video profile</a></li>
+            <li>{@code pVideoProfile→videoCodecOperation} <b>must</b> specify an encode operation</li>
+            <li>{@code qualityLevel} <b>must</b> be less than ##VkVideoEncodeCapabilitiesKHR{@code ::maxQualityLevels}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified in {@code pVideoProfile}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -14612,7 +15230,7 @@ val VkVideoEncodeQualityLevelPropertiesKHR = struct(Module.VULKAN, "VkVideoEncod
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264QualityLevelPropertiesEXT or ##VkVideoEncodeH265QualityLevelPropertiesEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264QualityLevelPropertiesKHR or ##VkVideoEncodeH265QualityLevelPropertiesKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -14622,11 +15240,11 @@ val VkVideoEncodeQualityLevelPropertiesKHR = struct(Module.VULKAN, "VkVideoEncod
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     PointerSetter(
-        "VkVideoEncodeH264QualityLevelPropertiesEXT", "VkVideoEncodeH265QualityLevelPropertiesEXT",
+        "VkVideoEncodeH264QualityLevelPropertiesKHR", "VkVideoEncodeH265QualityLevelPropertiesKHR",
         prepend = true
     )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkVideoEncodeRateControlModeFlagBitsKHR("preferredRateControlMode", "a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value indicating the preferred rate control mode to use with the video encode quality level.")
-    uint32_t("preferredRateControlLayerCount", "indicates the preferred number of rate control layers to use with the quality level.")
+    VkVideoEncodeRateControlModeFlagBitsKHR("preferredRateControlMode", "a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value indicating the preferred <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-modes\">rate control mode</a> to use with the video encode quality level.")
+    uint32_t("preferredRateControlLayerCount", "indicates the preferred number of <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-rate-control-layers\">rate control layers</a> to use with the video encode quality level.")
 }
 
 val VkVideoEncodeQualityLevelInfoKHR = struct(Module.VULKAN, "VkVideoEncodeQualityLevelInfoKHR") {
@@ -14640,6 +15258,11 @@ val VkVideoEncodeQualityLevelInfoKHR = struct(Module.VULKAN, "VkVideoEncodeQuali
         <ul>
             <li>In the {@code pNext} chain of ##VkVideoSessionParametersCreateInfoKHR to specify the video encode quality level to use for a video session parameters object created for a video encode session. If no instance of this structure is included in the {@code pNext} chain of ##VkVideoSessionParametersCreateInfoKHR, then the video session parameters object is created with a video encode quality level of zero.</li>
             <li>In the {@code pNext} chain of ##VkVideoCodingControlInfoKHR to change the video encode quality level state of the bound video session.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code qualityLevel} <b>must</b> be less than ##VkVideoEncodeCapabilitiesKHR{@code ::maxQualityLevels}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the used video profile</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -14664,7 +15287,7 @@ val VkVideoEncodeSessionParametersGetInfoKHR = struct(Module.VULKAN, "VkVideoEnc
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionParametersGetInfoEXT or ##VkVideoEncodeH265SessionParametersGetInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionParametersGetInfoKHR or ##VkVideoEncodeH265SessionParametersGetInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
         </ul>
@@ -14675,7 +15298,7 @@ val VkVideoEncodeSessionParametersGetInfoKHR = struct(Module.VULKAN, "VkVideoEnc
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     PointerSetter(
-        "VkVideoEncodeH264SessionParametersGetInfoEXT", "VkVideoEncodeH265SessionParametersGetInfoEXT",
+        "VkVideoEncodeH264SessionParametersGetInfoKHR", "VkVideoEncodeH265SessionParametersGetInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoSessionParametersKHR("videoSessionParameters", "the {@code VkVideoSessionParametersKHR} object to retrieve encoded parameter data from.")
@@ -14687,12 +15310,12 @@ val VkVideoEncodeSessionParametersFeedbackInfoKHR = struct(Module.VULKAN, "VkVid
         Structure providing feedback about the requested video session parameters.
 
         <h5>Description</h5>
-        Depending on the used video encode operation, additional codec-specific structures <b>may</b> need to be included in the {@code pNext} chain of this structure to capture feedback information about the requested parameter data, as described in the corresponding sections.
+        Depending on the used video encode operation, additional codec-specific structures <b>can</b> be included in the {@code pNext} chain of this structure to capture codec-specific feedback information about the requested parameter data, as described in the corresponding sections.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionParametersFeedbackInfoEXT or ##VkVideoEncodeH265SessionParametersFeedbackInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoEncodeH264SessionParametersFeedbackInfoKHR or ##VkVideoEncodeH265SessionParametersFeedbackInfoKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -14702,10 +15325,10 @@ val VkVideoEncodeSessionParametersFeedbackInfoKHR = struct(Module.VULKAN, "VkVid
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     PointerSetter(
-        "VkVideoEncodeH264SessionParametersFeedbackInfoEXT", "VkVideoEncodeH265SessionParametersFeedbackInfoEXT",
+        "VkVideoEncodeH264SessionParametersFeedbackInfoKHR", "VkVideoEncodeH265SessionParametersFeedbackInfoKHR",
         prepend = true
     )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkBool32("hasOverrides", "indicates whether any of the requested parameter data were overridden by the implementation.")
+    VkBool32("hasOverrides", "indicates whether any of the requested parameter data were <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-overrides\">overridden</a> by the implementation.")
 }
 
 val VkPhysicalDeviceDiagnosticsConfigFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceDiagnosticsConfigFeaturesNV") {
@@ -14751,7 +15374,7 @@ val VkCudaModuleCreateInfoNV = struct(Module.VULKAN, "VkCudaModuleCreateInfoNV")
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code dataSize} <b>must</b> be the total size in bytes of the PTX files or binary cache passed to {@code pData}.</li>
+            <li>{@code dataSize} <b>must</b> be the total size in bytes of the PTX files or binary cache passed to {@code pData}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -14812,8 +15435,8 @@ val VkCudaLaunchInfoNV = struct(Module.VULKAN, "VkCudaLaunchInfoNV") {
             <li>{@code gridDimX} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[0]</li>
             <li>{@code gridDimY} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[1]</li>
             <li>{@code gridDimZ} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[2]</li>
-            <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table.</li>
-            <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}.</li>
+            <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table</li>
+            <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}</li>
             <li>{@code extraCount} must be 0</li>
             <li>{@code pExtras} must be NULL</li>
         </ul>
@@ -14823,8 +15446,6 @@ val VkCudaLaunchInfoNV = struct(Module.VULKAN, "VkCudaLaunchInfoNV") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code function} <b>must</b> be a valid {@code VkCudaFunctionNV} handle</li>
-            <li>If {@code paramCount} is not 0, and {@code pParams} is not {@code NULL}, {@code pParams} <b>must</b> be a valid pointer to an array of {@code paramCount} bytes</li>
-            <li>If {@code extraCount} is not 0, and {@code pExtras} is not {@code NULL}, {@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
         </ul>
 
         <h5>See Also</h5>
@@ -15404,6 +16025,7 @@ val VkDescriptorAddressInfoEXT = struct(Module.VULKAN, "VkDescriptorAddressInfoE
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If {@code address} is not zero, and the descriptor is of type #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code address} <b>must</b> not be zero</li>
             <li>If {@code address} is zero, {@code range} <b>must</b> be #WHOLE_SIZE</li>
             <li>If {@code address} is not zero, {@code range} <b>must</b> not be #WHOLE_SIZE</li>
@@ -15438,10 +16060,12 @@ val VkDescriptorBufferBindingInfoEXT = struct(Module.VULKAN, "VkDescriptorBuffer
         Structure specifying descriptor buffer binding information.
 
         <h5>Description</h5>
-        If a ##VkPipelineCreateFlags2CreateInfoKHR structure is present in the {@code pNext} chain, ##VkPipelineCreateFlags2CreateInfoKHR{@code ::flags} from that structure is used instead of {@code flags} from this structure.
+        If a ##VkBufferUsageFlags2CreateInfoKHR structure is present in the {@code pNext} chain, ##VkBufferUsageFlags2CreateInfoKHR{@code ::usage} from that structure is used instead of {@code usage} from this structure.
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If the {@code pNext} chain does not include a ##VkBufferUsageFlags2CreateInfoKHR structure, {@code usage} must be a valid combination of {@code VkBufferUsageFlagBits} values</li>
+            <li>If the {@code pNext} chain does not include a ##VkBufferUsageFlags2CreateInfoKHR structure, {@code usage} must not be 0</li>
             <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-bufferlessPushDescriptors">##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::bufferlessPushDescriptors}</a> is #FALSE, and {@code usage} contains #BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT, then the {@code pNext} chain <b>must</b> include a ##VkDescriptorBufferBindingPushDescriptorBufferHandleEXT structure</li>
             <li>{@code address} <b>must</b> be aligned to ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::descriptorBufferOffsetAlignment}</li>
             <li>If {@code usage} includes #BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT, {@code address} <b>must</b> be an address within a valid buffer that was created with #BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT</li>
@@ -15454,8 +16078,6 @@ val VkDescriptorBufferBindingInfoEXT = struct(Module.VULKAN, "VkDescriptorBuffer
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkBufferUsageFlags2CreateInfoKHR or ##VkDescriptorBufferBindingPushDescriptorBufferHandleEXT</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
-            <li>{@code usage} <b>must</b> not be 0</li>
         </ul>
 
         <h5>See Also</h5>
@@ -15549,10 +16171,10 @@ val VkDescriptorGetInfoEXT = struct(Module.VULKAN, "VkDescriptorGetInfoEXT") {
             <li>If {@code type} is #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code pInputAttachmentImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE, and if {@code pSampledImage} is not {@code NULL}, the {@code pSampledImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}, or #NULL_HANDLE</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, and if {@code pStorageImage} is not {@code NULL}, the {@code pStorageImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}, or #NULL_HANDLE</li>
-            <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, {@code pUniformTexelBuffer} is not {@code NULL} and {@code pUniformTexelBuffer→address} is not zero, {@code pUniformTexelBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
-            <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pStorageTexelBuffer} is not {@code NULL} and {@code pStorageTexelBuffer→address} is not zero, {@code pStorageTexelBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
-            <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, {@code pUniformBuffer} is not {@code NULL} and {@code pUniformBuffer→address} is not zero, {@code pUniformBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
-            <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_BUFFER, {@code pStorageBuffer} is not {@code NULL} and {@code pStorageBuffer→address} is not zero, {@code pStorageBuffer→address} must be an address within a {@code VkBuffer} created on {@code device}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, {@code pUniformTexelBuffer} is not {@code NULL} and {@code pUniformTexelBuffer→address} is not zero, {@code pUniformTexelBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pStorageTexelBuffer} is not {@code NULL} and {@code pStorageTexelBuffer→address} is not zero, {@code pStorageTexelBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, {@code pUniformBuffer} is not {@code NULL} and {@code pUniformBuffer→address} is not zero, {@code pUniformBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
+            <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_BUFFER, {@code pStorageBuffer} is not {@code NULL} and {@code pStorageBuffer→address} is not zero, {@code pStorageBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, {@code pUniformBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pUniformBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility">Compatible Formats</a> table for {@code pUniformBuffer→format}, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pStorageBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pStorageBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility">Compatible Formats</a> table for {@code pStorageBuffer→format}, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
             <li>If {@code type} is #DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR and {@code accelerationStructure} is not 0, {@code accelerationStructure} <b>must</b> contain the address of a {@code VkAccelerationStructureKHR} created on {@code device}</li>
@@ -16182,7 +16804,7 @@ val VkAccelerationStructureSRTMotionInstanceNV = struct(Module.VULKAN, "VkAccele
 val VkAccelerationStructureMotionInstanceDataNV = union(Module.VULKAN, "VkAccelerationStructureMotionInstanceDataNV") {
     documentation =
         """
-        Union specifying a acceleration structure motion instance data for building into an acceleration structure geometry.
+        Union specifying an acceleration structure motion instance data for building into an acceleration structure geometry.
 
         <h5>See Also</h5>
         ##VkAccelerationStructureInstanceKHR, ##VkAccelerationStructureMatrixMotionInstanceNV, ##VkAccelerationStructureMotionInstanceNV, ##VkAccelerationStructureSRTMotionInstanceNV
@@ -16815,7 +17437,7 @@ val VkDeviceFaultVendorInfoEXT = struct(Module.VULKAN, "VkDeviceFaultVendorInfoE
     uint64_t("vendorFaultData", "the vendor-specific fault data associated with this fault.")
 }
 
-val VkDeviceFaultInfoEXT = struct(Module.VULKAN, "VkDeviceFaultInfoEXT") {
+val VkDeviceFaultInfoEXT = struct(Module.VULKAN, "VkDeviceFaultInfoEXT", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
         """
@@ -16841,16 +17463,14 @@ val VkDeviceFaultInfoEXT = struct(Module.VULKAN, "VkDeviceFaultInfoEXT") {
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code pAddressInfos} is not {@code NULL}, {@code pAddressInfos} <b>must</b> be a valid pointer to a ##VkDeviceFaultAddressInfoEXT structure</li>
-            <li>If {@code pVendorInfos} is not {@code NULL}, {@code pVendorInfos} <b>must</b> be a valid pointer to a ##VkDeviceFaultVendorInfoEXT structure</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkDeviceFaultAddressInfoEXT, ##VkDeviceFaultVendorInfoEXT, #GetDeviceFaultInfoEXT()
         """
 
-    Expression("#STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     charUTF8("description", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a human readable description of the fault.")["VK_MAX_DESCRIPTION_SIZE"]
     nullable..VkDeviceFaultAddressInfoEXT.p("pAddressInfos", "{@code NULL} or a pointer to an array of ##VkDeviceFaultAddressInfoEXT structures describing either memory accesses which <b>may</b> have caused a page fault, or describing active instruction pointers at the time of the fault. If not {@code NULL}, each element of {@code pAddressInfos} describes the a bounded region of GPU virtual address space containing either the GPU virtual address accessed, or the value of an active instruction pointer.")
     nullable..VkDeviceFaultVendorInfoEXT.p("pVendorInfos", "{@code NULL} or a pointer to an array of ##VkDeviceFaultVendorInfoEXT structures describing vendor-specific fault information.")
@@ -17151,7 +17771,7 @@ val VkDeviceAddressBindingCallbackDataEXT = struct(Module.VULKAN, "VkDeviceAddre
 
         <ul>
             <li>{@code messageSeverity} equal to #DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT</li>
-            <li>{@code messageType} equal to #DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT</li>
+            <li>{@code messageTypes} equal to #DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT</li>
             <li>##VkDebugUtilsMessengerCallbackDataEXT{@code ::pObjects} <b>must</b> identify the associated Vulkan object</li>
             <li>##VkDeviceAddressBindingCallbackDataEXT <b>must</b> be included in the {@code pNext} chain of ##VkDebugUtilsMessengerCallbackDataEXT</li>
         </ul>
@@ -17250,7 +17870,7 @@ val VkFormatProperties3KHR = struct(Module.VULKAN, "VkFormatProperties3KHR", mut
     VkFormatFeatureFlags2("bufferFeatures", "")
 }
 
-val VkSubpassShadingPipelineCreateInfoHUAWEI = struct(Module.VULKAN, "VkSubpassShadingPipelineCreateInfoHUAWEI", mutable = false) {
+val VkSubpassShadingPipelineCreateInfoHUAWEI = struct(Module.VULKAN, "VkSubpassShadingPipelineCreateInfoHUAWEI") {
     documentation =
         """
         Structure specifying parameters of a newly created subpass shading pipeline.
@@ -17263,11 +17883,12 @@ val VkSubpassShadingPipelineCreateInfoHUAWEI = struct(Module.VULKAN, "VkSubpassS
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI</li>
+            <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPass("renderPass", "a handle to a render pass object describing the environment in which the pipeline will be used. The pipeline <b>must</b> only be used with a render pass instance compatible with the one provided. See <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for more information.")
     uint32_t("subpass", "the index of the subpass in the render pass where this pipeline will be used.")
 }
@@ -17384,7 +18005,7 @@ val VkPipelineInfoEXT = struct(Module.VULKAN, "VkPipelineInfoEXT", alias = VkPip
     VkPipeline("pipeline", "")
 }
 
-val VkPipelinePropertiesIdentifierEXT = struct(Module.VULKAN, "VkPipelinePropertiesIdentifierEXT") {
+val VkPipelinePropertiesIdentifierEXT = struct(Module.VULKAN, "VkPipelinePropertiesIdentifierEXT", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
         """
@@ -17397,8 +18018,8 @@ val VkPipelinePropertiesIdentifierEXT = struct(Module.VULKAN, "VkPipelinePropert
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint8_t("pipelineIdentifier", "an array of #UUID_SIZE {@code uint8_t} values into which the pipeline identifier will be written.")["VK_UUID_SIZE"]
 }
 
@@ -17755,13 +18376,13 @@ val VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT = struct(Module.VULKAN, "VkPh
     VkBool32("globalPriorityQuery", "")
 }
 
-val VkQueueFamilyGlobalPriorityPropertiesEXT = struct(Module.VULKAN, "VkQueueFamilyGlobalPriorityPropertiesEXT", alias = VkQueueFamilyGlobalPriorityPropertiesKHR) {
+val VkQueueFamilyGlobalPriorityPropertiesEXT = struct(Module.VULKAN, "VkQueueFamilyGlobalPriorityPropertiesEXT", mutable = false, alias = VkQueueFamilyGlobalPriorityPropertiesKHR) {
     javaImport("static org.lwjgl.vulkan.KHRGlobalPriority.*")
     documentation = "See ##VkQueueFamilyGlobalPriorityPropertiesKHR."
 
-    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
-    uint32_t("priorityCount", "")
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    AutoSize("priorities")..uint32_t("priorityCount", "")
     VkQueueGlobalPriorityKHR("priorities", "")["VK_MAX_GLOBAL_PRIORITY_SIZE_KHR"]
 }
 
@@ -18391,6 +19012,8 @@ val VkAccelerationStructureTrianglesDisplacementMicromapNV = struct(Module.VULKA
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>{@code displacementBiasAndScaleFormat} <b>must</b> not be #FORMAT_UNDEFINED</li>
+            <li>{@code displacementVectorFormat} <b>must</b> not be #FORMAT_UNDEFINED</li>
             <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
         </ul>
 
@@ -18614,6 +19237,26 @@ val VkPhysicalDeviceShaderCorePropertiesARM = struct(Module.VULKAN, "VkPhysicalD
     uint32_t("fmaRate", "an unsigned integer value indicating the maximum number of single-precision fused multiply-add operations per clock per shader core.")
 }
 
+val VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether subgroup rotation is enabled.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderSubgroupRotate", "specifies whether shader modules <b>can</b> declare the {@code GroupNonUniformRotateKHR} capability.")
+    VkBool32("shaderSubgroupRotateClustered", "specifies whether shader modules <b>can</b> use the {@code ClusterSize} operand to {@code OpGroupNonUniformRotateKHR}.")
+}
+
 val VkDeviceQueueShaderCoreControlCreateInfoARM = struct(Module.VULKAN, "VkDeviceQueueShaderCoreControlCreateInfoARM") {
     documentation =
         """
@@ -18624,7 +19267,7 @@ val VkDeviceQueueShaderCoreControlCreateInfoARM = struct(Module.VULKAN, "VkDevic
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code shaderCoreCount} <b>must</b> be greater than 0 and less than or equal to the total number of shader cores as reported via ##VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM{@code ::shaderCoreCount}.</li>
+            <li>{@code shaderCoreCount} <b>must</b> be greater than 0 and less than or equal to the total number of shader cores as reported via ##VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM{@code ::shaderCoreCount}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -18714,7 +19357,7 @@ val VkImageViewSlicedCreateInfoEXT = struct(Module.VULKAN, "VkImageViewSlicedCre
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code sliceOffset} <b>must</b> be less than the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
-            <li>If {@code sliceCount} is not #REMAINING_3D_SLICES_EXT, it <b>must</b> be be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
+            <li>If {@code sliceCount} is not #REMAINING_3D_SLICES_EXT, it <b>must</b> be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
             <li>{@code image} <b>must</b> have been created with {@code imageType} equal to #IMAGE_TYPE_3D</li>
             <li>{@code viewType} <b>must</b> be #IMAGE_VIEW_TYPE_3D</li>
             <li>The image view <b>must</b> reference exactly 1 mip level</li>
@@ -18920,7 +19563,7 @@ val VkRenderPassStripeBeginInfoARM = struct(Module.VULKAN, "VkRenderPassStripeBe
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM</li>
-            <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} ##VkRenderPassStripeInfoARM structures</li>
+            <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} valid ##VkRenderPassStripeInfoARM structures</li>
             <li>{@code stripeInfoCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -18931,7 +19574,7 @@ val VkRenderPassStripeBeginInfoARM = struct(Module.VULKAN, "VkRenderPassStripeBe
     Expression("#STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pStripeInfos")..uint32_t("stripeInfoCount", "the number of stripes in this render pass instance")
-    VkRenderPassStripeInfoARM.p("pStripeInfos", "a pointer to an array of {@code stripeInfoCount} ##VkRenderPassStripeInfoARM structures describing the stripes used by the render pass instance.")
+    VkRenderPassStripeInfoARM.const.p("pStripeInfos", "a pointer to an array of {@code stripeInfoCount} ##VkRenderPassStripeInfoARM structures describing the stripes used by the render pass instance.")
 }
 
 val VkRenderPassStripeSubmitInfoARM = struct(Module.VULKAN, "VkRenderPassStripeSubmitInfoARM") {
@@ -19255,7 +19898,6 @@ val VkComputePipelineIndirectBufferInfoNV = struct(Module.VULKAN, "VkComputePipe
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
         """
 
@@ -19330,6 +19972,25 @@ val VkPhysicalDeviceLinearColorAttachmentFeaturesNV = struct(Module.VULKAN, "VkP
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("linearColorAttachment", "indicates whether the implementation supports renderable <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#glossary-linear-color-attachment\">Linear Color Attachment</a>")
+}
+
+val VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR") {
+    documentation =
+        """
+        Structure describing support for shader maximal reconvergence by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDevicePrivateDataFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDevicePrivateDataFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderMaximalReconvergence", "specifies whether the implementation supports the shader execution mode {@code MaximallyReconvergesKHR}")
 }
 
 val VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT") {
@@ -19495,7 +20156,7 @@ val VkExternalMemoryAcquireUnmodifiedEXT = struct(Module.VULKAN, "VkExternalMemo
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code acquireUnmodifiedMemory} is #TRUE, and the memory barrier’s {@code srcQueueFamilyIndex} is a special queue family reserved for external memory ownership transfers (as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-queue-transfers">Queue Family Ownership Transfer</a>), then each range of {@code VkDeviceMemory} bound to the resource <b>must</b> have remained unmodified during all time since the resource’s most recent release of ownership to the queue family.</li>
+            <li>If {@code acquireUnmodifiedMemory} is #TRUE, and the memory barrier’s {@code srcQueueFamilyIndex} is a special queue family reserved for external memory ownership transfers (as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-queue-transfers">Queue Family Ownership Transfer</a>), then each range of {@code VkDeviceMemory} bound to the resource <b>must</b> have remained unmodified during all time since the resource’s most recent release of ownership to the queue family</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -20024,7 +20685,7 @@ val VkShaderModuleIdentifierEXT = struct(Module.VULKAN, "VkShaderModuleIdentifie
 
     Expression("#STRUCTURE_TYPE_SHADER_MODULE_IDENTIFIER_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    uint32_t("identifierSize", "the size, in bytes, of valid data returned in {@code identifier}.")
+    AutoSize("identifier")..uint32_t("identifierSize", "the size, in bytes, of valid data returned in {@code identifier}.")
     uint8_t("identifier", "a buffer of opaque data specifying an identifier.")["VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT"]
 }
 
@@ -20618,7 +21279,7 @@ val VkShaderCreateInfoEXT = struct(Module.VULKAN, "VkShaderCreateInfoEXT") {
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> be aligned to 4 bytes</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code ClipDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxClipDistances}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code CullDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxCullDistances}</li>
-            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variables in its interface that are declared with the {@code ClipDistance} or {@code CullDistance} {@code BuiltIn} decoration, those variables <b>must</b> not have array sizes which sum to more than ##VkPhysicalDeviceLimits{@code ::maxCombinedClipAndCullDistances}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes variables in its interface that are declared with the {@code ClipDistance} {@code BuiltIn} decoration and variables in its interface that are declared with the {@code CullDistance} {@code BuiltIn} decoration, those variables <b>must</b> not have array sizes which sum to more than ##VkPhysicalDeviceLimits{@code ::maxCombinedClipAndCullDistances}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code SampleMask} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxSampleMaskWords}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_VERTEX_BIT, the identified entry point <b>must</b> not include any input variable in its interface that is decorated with {@code CullDistance}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_TESSELLATION_CONTROL_BIT or #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, and the identified entry point has an {@code OpExecutionMode} instruction specifying a patch size with {@code OutputVertices}, the patch size <b>must</b> be greater than 0 and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTessellationPatchSize}</li>
@@ -20927,6 +21588,44 @@ val VkMutableDescriptorTypeCreateInfoEXT = struct(Module.VULKAN, "VkMutableDescr
     VkMutableDescriptorTypeListEXT.const.p("pMutableDescriptorTypeLists", "a pointer to an array of ##VkMutableDescriptorTypeListEXT structures.")
 }
 
+val VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT") {
+    documentation =
+        """
+        Structure describing compatibility features for vertex attributes.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("legacyVertexAttributes", "specifies whether compatibility features for vertex attributes are supported when using dynamic vertex input state.")
+}
+
+val VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT") {
+    documentation =
+        """
+        Structure describing properties for legacy vertex attributes.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("nativeUnalignedPerformance", "specifies whether unaligned vertex fetches do not incur significant performance penalties as compared to aligned fetches.")
+}
+
 val VkLayerSettingEXT = struct(Module.VULKAN, "VkLayerSettingEXT") {
     documentation =
         """
@@ -21050,7 +21749,7 @@ val VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT = struct(Module
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("dynamicRenderingUnusedAttachments", "indicates that the implementation supports binding graphics pipelines within a render pass instance where any pipeline ##VkPipelineRenderingCreateInfo{@code ::pColorAttachmentFormats} element with a format other than #FORMAT_UNDEFINED is allowed with a corresponding ##VkRenderingInfo{@code ::pColorAttachments} element with a {@code imageView} equal to #NULL_HANDLE, or any pipeline ##VkPipelineRenderingCreateInfo{@code ::pColorAttachmentFormats} element with a #FORMAT_UNDEFINED format is allowed with a corresponding ##VkRenderingInfo{@code ::pColorAttachments} element with a non-#NULL_HANDLE {@code imageView}. Also a ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} other than #FORMAT_UNDEFINED is allowed with a #NULL_HANDLE ##VkRenderingInfo{@code ::pDepthAttachment}, or a ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} of #FORMAT_UNDEFINED is allowed with a non-#NULL_HANDLE ##VkRenderingInfo{@code ::pDepthAttachment}. Also a ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} other than #FORMAT_UNDEFINED is allowed with a #NULL_HANDLE ##VkRenderingInfo{@code ::pStencilAttachment}, or a ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} of #FORMAT_UNDEFINED is allowed with a non-#NULL_HANDLE ##VkRenderingInfo{@code ::pStencilAttachment}. Any writes to a ##VkRenderingInfo{@code ::pColorAttachments}, ##VkRenderingInfo{@code ::pDepthAttachment}, or ##VkRenderingInfo{@code ::pStencilAttachment} with #NULL_HANDLE are discarded.")
+    VkBool32("dynamicRenderingUnusedAttachments", "indicates that the implementation supports binding graphics pipelines within a render pass instance where any pipeline ##VkPipelineRenderingCreateInfo{@code ::pColorAttachmentFormats} element with a format other than #FORMAT_UNDEFINED is allowed with a corresponding ##VkRenderingInfo{@code ::pColorAttachments} element with an {@code imageView} equal to #NULL_HANDLE, or any pipeline ##VkPipelineRenderingCreateInfo{@code ::pColorAttachmentFormats} element with a #FORMAT_UNDEFINED format is allowed with a corresponding ##VkRenderingInfo{@code ::pColorAttachments} element with a non-#NULL_HANDLE {@code imageView}. Also a ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} other than #FORMAT_UNDEFINED is allowed with a #NULL_HANDLE ##VkRenderingInfo{@code ::pDepthAttachment}, or a ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} of #FORMAT_UNDEFINED is allowed with a non-#NULL_HANDLE ##VkRenderingInfo{@code ::pDepthAttachment}. Also a ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} other than #FORMAT_UNDEFINED is allowed with a #NULL_HANDLE ##VkRenderingInfo{@code ::pStencilAttachment}, or a ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} of #FORMAT_UNDEFINED is allowed with a non-#NULL_HANDLE ##VkRenderingInfo{@code ::pStencilAttachment}. Any writes to a ##VkRenderingInfo{@code ::pColorAttachments}, ##VkRenderingInfo{@code ::pDepthAttachment}, or ##VkRenderingInfo{@code ::pStencilAttachment} with #NULL_HANDLE are discarded.")
 }
 
 val VkLatencySleepModeInfoNV = struct(Module.VULKAN, "VkLatencySleepModeInfoNV") {
@@ -21074,7 +21773,7 @@ val VkLatencySleepModeInfoNV = struct(Module.VULKAN, "VkLatencySleepModeInfoNV")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("lowLatencyMode", "the toggle to enable or disable low latency mode.")
     VkBool32("lowLatencyBoost", "allows an application to hint to the GPU to increase performance to provide additional latency savings at a cost of increased power consumption.")
-    uint32_t("minimumIntervalUs", "")
+    uint32_t("minimumIntervalUs", "the microseconds between #QueuePresentKHR() calls for a given swapchain that #LatencySleepNV() will enforce.")
 }
 
 val VkLatencySleepInfoNV = struct(Module.VULKAN, "VkLatencySleepInfoNV") {
@@ -21124,7 +21823,7 @@ val VkSetLatencyMarkerInfoNV = struct(Module.VULKAN, "VkSetLatencyMarkerInfoNV")
     VkLatencyMarkerNV("marker", "the type of timestamp to be recorded.")
 }
 
-val VkLatencyTimingsFrameReportNV = struct(Module.VULKAN, "VkLatencyTimingsFrameReportNV") {
+val VkLatencyTimingsFrameReportNV = struct(Module.VULKAN, "VkLatencyTimingsFrameReportNV", mutable = false) {
     documentation =
         """
         Structure containing latency data.
@@ -21138,8 +21837,8 @@ val VkLatencyTimingsFrameReportNV = struct(Module.VULKAN, "VkLatencyTimingsFrame
         ##VkGetLatencyMarkerInfoNV
         """
 
-    Expression("#STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV")..VkStructureType("sType", "")
-    nullable..opaque_const_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV")..VkStructureType("sType", "").mutable()
+    nullable..opaque_const_p("pNext", "").mutable()
     uint64_t("presentID", "")
     uint64_t("inputSampleTimeUs", "")
     uint64_t("simStartTimeUs", "the timestamp written when {@code vkSetLatencyMarkerNV} is called with the {@code VkLatencyMarkerNV} enum #LATENCY_MARKER_SIMULATION_START_NV.")
@@ -21176,7 +21875,7 @@ val VkGetLatencyMarkerInfoNV = struct(Module.VULKAN, "VkGetLatencyMarkerInfoNV")
 
     Expression("#STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "either {@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pTimings", optional = true)..uint32_t("timingCount", "an integer related to the number of of previous frames of latency data available or queried, as described below.")
+    AutoSize("pTimings", optional = true)..uint32_t("timingCount", "an integer related to the number of previous frames of latency data available or queried, as described below.")
     nullable..VkLatencyTimingsFrameReportNV.p("pTimings", "either {@code NULL} or a pointer to an array of ##VkLatencyTimingsFrameReportNV structures.")
 }
 
@@ -21186,7 +21885,7 @@ val VkLatencySubmissionPresentIdNV = struct(Module.VULKAN, "VkLatencySubmissionP
         Structure used to associate a queueSubmit with a presentId.
 
         <h5>Description</h5>
-        For any submission to be tracked with low latency mode pacing, it needs to be associated with other submissions in a given present. Applications :must include the VkLatencySubmissionPresentIdNV in the pNext chain of #QueueSubmit() to associate that submission with the {@code presentId} present for low latency mode.
+        For any submission to be tracked with low latency mode pacing, it needs to be associated with other submissions in a given present. Applications <b>must</b> include the VkLatencySubmissionPresentIdNV in the pNext chain of #QueueSubmit() to associate that submission with the {@code presentId} present for low latency mode.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -21256,7 +21955,7 @@ val VkLatencySurfaceCapabilitiesNV = struct(Module.VULKAN, "VkLatencySurfaceCapa
     nullable..VkPresentModeKHR.p("pPresentModes", "list of presentation modes optimized for use with low latency mode with {@code presentModeCount} entries.")
 }
 
-val VkCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkCooperativeMatrixPropertiesKHR") {
+val VkCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkCooperativeMatrixPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying cooperative matrix properties.
@@ -21272,19 +21971,14 @@ val VkCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkCooperativeMatri
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code AType} <b>must</b> be a valid {@code VkComponentTypeKHR} value</li>
-            <li>{@code BType} <b>must</b> be a valid {@code VkComponentTypeKHR} value</li>
-            <li>{@code CType} <b>must</b> be a valid {@code VkComponentTypeKHR} value</li>
-            <li>{@code ResultType} <b>must</b> be a valid {@code VkComponentTypeKHR} value</li>
-            <li>{@code scope} <b>must</b> be a valid {@code VkScopeKHR} value</li>
         </ul>
 
         <h5>See Also</h5>
         #GetPhysicalDeviceCooperativeMatrixPropertiesKHR()
         """
 
-    Expression("#STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("MSize", "the number of rows in matrices {@code A}, {@code C}, and {@code Result}.")
     uint32_t("NSize", "the number of columns in matrices {@code B}, {@code C}, {@code Result}.")
     uint32_t("KSize", "the number of columns in matrix {@code A} and rows in matrix {@code B}.")
@@ -21366,7 +22060,7 @@ val VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM = struct(Module.VULKAN,
 
         The per-view render areas define per-view regions of attachments that are loaded, stored, and resolved according to the {@code loadOp}, {@code storeOp}, and {@code resolveMode} values of the render pass instance. When per-view render areas are defined, the value of ##VkRenderPassBeginInfo{@code ::renderArea} or ##VkRenderingInfo{@code ::renderArea} <b>must</b> be set to a render area that includes the union of all per-view render areas, <b>may</b> be used by the implementation for optimizations, but does not affect loads, stores, or resolves.
 
-        If this structure is present and if {@code perViewRenderAreaCount} is not zero, then {@code perViewRenderAreaCount} <b>must</b> be at least least one greater than the most significant bit set in any any element of ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks}. or ##VkRenderingInfo{@code ::viewMask}
+        If this structure is present and if {@code perViewRenderAreaCount} is not zero, then {@code perViewRenderAreaCount} <b>must</b> be at least one greater than the most significant bit set in any element of ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks}. or ##VkRenderingInfo{@code ::viewMask}
 
         If this structure is not present or if {@code perViewRenderAreaCount} is zero, ##VkRenderPassBeginInfo{@code ::renderArea} or ##VkRenderingInfo{@code ::renderArea} is used for all views.
 
@@ -21376,8 +22070,8 @@ val VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM = struct(Module.VULKAN,
             <li>The {@code offset.y} member of any element of {@code pPerViewRenderAreas} <b>must</b> be greater than or equal to 0</li>
             <li>The sum of the {@code offset.x} and {@code extent.width} members of any element of {@code pPerViewRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxFramebufferWidth">{@code maxFramebufferWidth}</a></li>
             <li>The sum of the {@code offset.y} and {@code extent.height} members of any element of {@code pPerViewRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxFramebufferHeight">{@code maxFramebufferHeight}</a></li>
-            <li>If this structure is in the {@code pNext} chain of ##VkRenderPassBeginInfo and if the render pass object included an element in ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks} that set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}.</li>
-            <li>If this structure is in the {@code pNext} chain of ##VkRenderingInfo and if ##VkRenderingInfo{@code ::viewMask} set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}.</li>
+            <li>If this structure is in the {@code pNext} chain of ##VkRenderPassBeginInfo and if the render pass object included an element in ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks} that set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}</li>
+            <li>If this structure is in the {@code pNext} chain of ##VkRenderingInfo and if ##VkRenderingInfo{@code ::viewMask} set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -21394,6 +22088,324 @@ val VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM = struct(Module.VULKAN,
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pPerViewRenderAreas", optional = true)..uint32_t("perViewRenderAreaCount", "the number of elements in the {@code pPerViewRenderAreas} array.")
     VkRect2D.const.p("pPerViewRenderAreas", "a pointer to an array of ##VkRect2D structures defining the render area for each view.")
+}
+
+val VkVideoDecodeAV1ProfileInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1ProfileInfoKHR") {
+    javaImport("org.lwjgl.vulkan.video.*")
+    documentation =
+        """
+        Structure specifying AV1 decode profile.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Enabling {@code filmGrainSupport} <b>may</b> increase the memory requirements of video sessions and/or video picture resources on some implementations.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    StdVideoAV1Profile("stdProfile", "a {@code StdVideoAV1Profile} value specifying the AV1 codec profile, as defined in section A.2 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#aomedia-av1\">AV1 Specification</a>.")
+    VkBool32("filmGrainSupport", "specifies whether AV1 film grain, as defined in section 7.8.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#aomedia-av1\">AV1 Specification</a>, <b>can</b> be used with the video profile. When this member is set to #TRUE, video session objects created against the video profile will be able to decode pictures that have <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-av1-film-grain\">film grain</a> enabled.")
+}
+
+val VkVideoDecodeAV1CapabilitiesKHR = struct(Module.VULKAN, "VkVideoDecodeAV1CapabilitiesKHR", mutable = false) {
+    javaImport("org.lwjgl.vulkan.video.*")
+    documentation =
+        """
+        Structure describing AV1 decode capabilities.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    StdVideoAV1Level("maxLevel", "a {@code StdVideoAV1Level} value specifying the maximum AV1 level supported by the profile, as defined in section A.3 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#aomedia-av1\">AV1 Specification</a>.")
+}
+
+val VkVideoDecodeAV1SessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1SessionParametersCreateInfoKHR") {
+    javaImport("org.lwjgl.vulkan.video.*")
+    documentation =
+        """
+        Structure specifies AV1 decoder parameter set information.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As AV1 video session parameters objects will only ever contain a single AV1 sequence header, this has to be specified at object creation time and such video session parameters objects cannot be updated using the #UpdateVideoSessionParametersKHR() command. When a new AV1 sequence header is decoded from the input video bitstream the application needs to create a new video session parameters object to store it.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR</li>
+            <li>{@code pStdSequenceHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoAV1SequenceHeader} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    StdVideoAV1SequenceHeader.const.p("pStdSequenceHeader", "a pointer to a {@code StdVideoAV1SequenceHeader} structure describing the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-av1-sequence-header\">AV1 sequence header</a> entry to store in the created object.")
+}
+
+val VkVideoDecodeAV1PictureInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1PictureInfoKHR") {
+    javaImport("org.lwjgl.vulkan.video.*")
+    javaImport("static org.lwjgl.vulkan.KHRVideoDecodeAV1.*")
+    documentation =
+        """
+        Structure specifies AV1 picture information when decoding a frame.
+
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of the ##VkVideoDecodeInfoKHR structure passed to #CmdDecodeVideoKHR() to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1">AV1 decode operation</a>.
+
+        <dl>
+            <dt>Decode Output Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
+                <li>The decode output picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-picture-info">AV1 picture information</a> provided in {@code pStdPictureInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Picture Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved}, {@code reserved1}, and {@code reserved2} are used only for padding purposes and are otherwise ignored;</li>
+                <li>{@code flags.apply_grain} indicates that film grain is enabled for the decoded picture, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code tg_start} and {@code tg_end} are interpreted as defined in section 6.10.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code OrderHint}, {@code OrderHints}, and {@code expectedFrameId} are interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>
+                    the {@code StdVideoAV1TileInfo} structure pointed to by {@code pTileInfo} is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                        <li>{@code pMiColStarts} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code MiColStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>{@code pMiRowStarts} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code MiRowStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>{@code pWidthInSbsMinus1} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code width_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>{@code pHeightInSbsMinus1} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code height_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>all other members of {@code StdVideoAV1TileInfo} are interpreted as defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>
+                    the {@code StdVideoAV1Quantization} structure pointed to by {@code pQuantization} is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>all other members of {@code StdVideoAV1Quantization} are interpreted as defined in section 6.8.11 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>
+                    if {@code flags.segmentation_enabled} is set, then the {@code StdVideoAV1Segmentation} structure pointed to by {@code pSegmentation} is interpreted as follows:
+                    <ul>
+                        <li>the elements of {@code FeatureEnabled} are bitmasks where bit index <code>j</code> of element <code>i</code> corresponds to {@code FeatureEnabled[i][j]} as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>{@code FeatureData} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>
+                    the {@code StdVideoAV1LoopFilter} structure pointed to by {@code pLoopFilter} is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>{@code update_ref_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_ref_delta} corresponding to element <code>i</code> of {@code loop_filter_ref_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>{@code update_mode_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_mode_delta} corresponding to element <code>i</code> of {@code loop_filter_mode_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>all other members of {@code StdVideoAV1LoopFilter} are interpreted as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>
+                    if {@code flags.enable_cdef} is set in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-active-sequence-header">active sequence header</a>, then the members of the {@code StdVideoAV1CDEF} structure pointed to by {@code pCDEF} are interpreted as follows:
+                    <ul>
+                        <li>{@code cdef_y_sec_strength} and {@code cdef_uv_sec_strength} are the bitstream values of the corresponding syntax elements defined in section 5.9.19 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                        <li>all other members of {@code StdVideoAV1CDEF} are interpreted as defined in section 6.10.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>
+                    the {@code StdVideoAV1LoopRestoration} structure pointed to by {@code pLoopRestoration} is interpreted as follows:
+                    <ul>
+                        <li>{@code LoopRestorationSize}[{@code plane}] is interpreted as <code>log2(size) - 5</code>, where {@code size} is the value of {@code LoopRestorationSize}[{@code plane}] as defined in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>.</li>
+                        <li>all other members of {@code StdVideoAV1LoopRestoration} are defined as in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>the members of the {@code StdVideoAV1GlobalMotion} structure provided in {@code global_motion} are interpreted as defined in section 7.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>
+                    if {@code flags.film_grain_params_present} is set in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-active-sequence-header">active sequence header</a>, then the {@code StdVideoAV1FilmGrain} structure pointed to by {@code pFilmGrain} is interpreted as follows:
+                    <ul>
+                        <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
+                        <li>all other members of {@code StdVideoAV1FilmGrain} are interpreted as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                    </ul>
+                </li>
+                <li>all other members are interpreted as defined in section 6.8 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>.</li>
+            </ul></dd>
+        </dl>
+
+        When <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the {@code flags.update_grain} and {@code film_grain_params_ref_idx} values specified in {@code StdVideoAV1FilmGrain} are ignored by AV1 decode operations and the {@code load_grain_params} function, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>, is not executed. Instead, the application is responsible for specifying the effective film grain parameters for the frame in {@code StdVideoAV1FilmGrain}.
+
+        When <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the application is required to specify a different decode output picture resource in ##VkVideoDecodeInfoKHR{@code ::dstPictureResource} compared to the reconstructed picture specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→pPictureResource} even if the implementation does not report support for #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR in ##VkVideoDecodeCapabilitiesKHR{@code ::flags} for the video decode profile.
+
+        Reference picture setup is controlled by the value of {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags}. If it is not zero and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags} is zero, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">DPB Slot States</a> section.
+
+        <dl>
+            <dt>Active Parameter Sets</dt>
+            <dd>The <em>active sequence header</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-sequence-header">AV1 sequence header</a> stored in the bound video session parameters object.</dd>
+        </dl>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_AV1_PICTURE_INFO_KHR</li>
+            <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeAV1PictureInfo} value</li>
+            <li>{@code pTileOffsets} <b>must</b> be a valid pointer to an array of {@code tileCount} {@code uint32_t} values</li>
+            <li>{@code pTileSizes} <b>must</b> be a valid pointer to an array of {@code tileCount} {@code uint32_t} values</li>
+            <li>{@code tileCount} <b>must</b> be greater than 0</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_PICTURE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    StdVideoDecodeAV1PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoDecodeAV1PictureInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-av1-picture-info\">AV1 picture information</a>.")
+    int32_t("referenceNameSlotIndices", "an array of seven (#MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR, which is equal to the Video Std definition {@code STD_VIDEO_AV1_REFS_PER_FRAME}) signed integer values specifying the index of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#dpb-slot\">DPB slot</a> or a negative integer value for each <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-av1-reference-names\">AV1 reference name</a> used for inter coding. In particular, the DPB slot index for the AV1 reference name {@code frame} is specified in {@code referenceNameSlotIndices}[{@code frame} - {@code STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME}].")["VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR"]
+    uint32_t("frameHeaderOffset", "the byte offset of the AV1 frame header OBU, as defined in section 5.9 of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#aomedia-av1\">AV1 Specification</a>, within the video bitstream buffer range specified in ##VkVideoDecodeInfoKHR.")
+    AutoSize("pTileOffsets", "pTileSizes")..uint32_t("tileCount", "the number of elements in {@code pTileOffsets} and {@code pTileSizes}.")
+    uint32_t.const.p("pTileOffsets", "a pointer to an array of {@code tileCount} integers specifying the byte offset of the tiles of the picture within the video bitstream buffer range specified in ##VkVideoDecodeInfoKHR.")
+    uint32_t.const.p("pTileSizes", "a pointer to an array of {@code tileCount} integers specifying the byte size of the tiles of the picture within the video bitstream buffer range specified in ##VkVideoDecodeInfoKHR.")
+}
+
+val VkVideoDecodeAV1DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1DpbSlotInfoKHR") {
+    javaImport("org.lwjgl.vulkan.video.*")
+    documentation =
+        """
+        Structure specifies AV1 DPB information when decoding a frame.
+
+        <h5>Description</h5>
+        This structure is specified in the {@code pNext} chain of ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot}, if not {@code NULL}, and the {@code pNext} chain of the elements of ##VkVideoDecodeInfoKHR{@code ::pReferenceSlots} to specify the codec-specific reference picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1">AV1 decode operation</a>.
+
+        <dl>
+            <dt>Active Reference Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index specified in the {@code slotIndex} member of the corresponding element of ##VkVideoDecodeInfoKHR{@code ::pReferenceSlots}.</li>
+                <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-reference-info">AV1 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Reconstructed Picture Information</dt>
+            <dd><ul>
+                <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
+                <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> with the index specified in ##VkVideoDecodeInfoKHR{@code ::pSetupReferenceSlot→slotIndex}.</li>
+                <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-reference-info">AV1 reference information</a> provided in {@code pStdReferenceInfo}.</li>
+            </ul></dd>
+        </dl>
+
+        <dl>
+            <dt>Std Reference Information</dt>
+            <dd><ul>
+                <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
+                <li>{@code flags.disable_frame_end_update_cdf} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code flags.segmentation_enabled} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code frame_type} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code RefFrameSignBias} is a bitmask where bit index <code>i</code> corresponds to {@code RefFrameSignBias[i]} as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>{@code OrderHint} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>
+                    {@code SavedOrderHints} is interpreted as defined in section 7.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>.
+                    <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the AV1 reference information is provided for the reconstructed picture, certain parameters (e.g. {@code frame_type}) are specified both in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-av1-picture-info">AV1 picture information</a> and in the AV1 reference information. This is necessary because unlike the AV1 picture information, which is only used for the purposes of the video decode operation in question, the AV1 reference information specified for the reconstructed picture <b>may</b> be associated with the activated DPB slot, meaning that some implementations <b>may</b> maintain it as part of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reference-metadata">reference picture metadata</a> corresponding to the video picture resource associated with the DPB slot. When the AV1 reference information is provided for an active reference picture, the specified parameters correspond to the parameters specified when the DPB slot was activated (set up) with the reference picture, as usual, in order to communicate these parameters for implementations that do not maintain any subset of these parameters as part of the DPB slot’s <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reference-metadata">reference picture metadata</a>.
+                    </div>
+                </li>
+            </ul></dd>
+        </dl>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR</li>
+            <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeAV1ReferenceInfo} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    StdVideoDecodeAV1ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoDecodeAV1ReferenceInfo} structure specifying <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#decode-av1-reference-info\">AV1 reference information</a>.")
+}
+
+val VkPhysicalDeviceVideoMaintenance1FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVideoMaintenance1FeaturesKHR") {
+    documentation =
+        """
+        Structure describing the video maintenance features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceVideoMaintenance1FeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceVideoMaintenance1FeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("videoMaintenance1", """indicates that the implementation supports the following:
+
+        <ul>
+            <li>The new buffer creation flag #BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR.</li>
+            <li>The new image creation flag #IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR.</li>
+            <li>The new video session creation flag #VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR.</li>
+        </ul>""")
+}
+
+val VkVideoInlineQueryInfoKHR = struct(Module.VULKAN, "VkVideoInlineQueryInfoKHR") {
+    documentation =
+        """
+        Structure specifying inline query information for video coding commands.
+
+        <h5>Description</h5>
+        This structure <b>can</b> be included in the {@code pNext} chain of the input parameter structure of video coding commands.
+
+        <ul>
+            <li>In the {@code pNext} chain of the {@code pDecodeInfo} parameter of the #CmdDecodeVideoKHR() command to execute a query for each video decode operation issued by the command.</li>
+            <li>In the {@code pNext} chain of the {@code pEncodeInfo} parameter of the #CmdEncodeVideoKHR() command to execute a query for each video encode operation issued by the command.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code queryPool} is not #NULL_HANDLE, then {@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+            <li>If {@code queryPool} is not #NULL_HANDLE, then the sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR</li>
+            <li>If {@code queryPool} is not #NULL_HANDLE, {@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkQueryPool("queryPool", "#NULL_HANDLE or a valid handle to a {@code VkQueryPool} object that will manage the results of the queries.")
+    uint32_t("firstQuery", "the query index within the query pool that will contain the query results for the first video coding operation. The query results of subsequent video coding operations will be contained by subsequent query indices.")
+    uint32_t("queryCount", """the number of queries to execute.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        In practice, if {@code queryPool} is not #NULL_HANDLE, then {@code queryCount} will always have to match the number of video coding operations issued by the video coding command this structure is specified to, meaning that using inline queries in a video coding command will always execute a query for each issued video coding operation.
+        </div>""")
+}
+
+val VkPhysicalDevicePerStageDescriptorSetFeaturesNV = struct(Module.VULKAN, "VkPhysicalDevicePerStageDescriptorSetFeaturesNV") {
+    documentation =
+        """
+        Structure describing feature to allow descriptor set layout bindings to be per-stage.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDevicePerStageDescriptorSetFeaturesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDevicePerStageDescriptorSetFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("perStageDescriptorSet", "indicates that the implementation allows the #DESCRIPTOR_SET_LAYOUT_CREATE_PER_STAGE_BIT_NV descriptor set layout creation flag to be used so the bindings are specified per-stage rather than across all stages.")
+    VkBool32("dynamicPipelineLayout", "indicates the implementation allows the {@code layout} member of ##VkBindDescriptorSetsInfoKHR, ##VkPushConstantsInfoKHR, ##VkPushDescriptorSetInfoKHR, ##VkPushDescriptorSetWithTemplateInfoKHR, ##VkSetDescriptorBufferOffsetsInfoEXT and ##VkBindDescriptorBufferEmbeddedSamplersInfoEXT to be #NULL_HANDLE and ##VkPipelineLayoutCreateInfo <b>can</b> be chained off those structures' {@code pNext} instead.")
 }
 
 val VkPhysicalDeviceImageProcessing2FeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceImageProcessing2FeaturesQCOM") {
@@ -21446,7 +22458,7 @@ val VkSamplerBlockMatchWindowCreateInfoQCOM = struct(Module.VULKAN, "VkSamplerBl
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code WindowExtent} <b>must</b> not be larger than ##VkPhysicalDeviceImageProcessing2PropertiesQCOM{@code ::maxBlockMatchWindow}.</li>
+            <li>{@code WindowExtent} <b>must</b> not be larger than ##VkPhysicalDeviceImageProcessing2PropertiesQCOM{@code ::maxBlockMatchWindow}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -21659,6 +22671,25 @@ val VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR = struct(Module.VULKAN, "V
     VkBool32("vertexAttributeInstanceRateZeroDivisor", "specifies whether a zero value for ##VkVertexInputBindingDivisorDescriptionEXT{@code ::divisor} is supported.")
 }
 
+val VkPhysicalDeviceShaderFloatControls2FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderFloatControls2FeaturesKHR") {
+    documentation =
+        """
+        Structure describing shader float controls 2 features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderFloatControls2FeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderFloatControls2FeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderFloatControls2", "specifies whether shader modules <b>can</b> declare the {@code FloatControls2} capability.")
+}
+
 val VkPhysicalDeviceLayeredDriverPropertiesMSFT = struct(Module.VULKAN, "VkPhysicalDeviceLayeredDriverPropertiesMSFT", mutable = false) {
     documentation =
         """
@@ -21678,6 +22709,489 @@ val VkPhysicalDeviceLayeredDriverPropertiesMSFT = struct(Module.VULKAN, "VkPhysi
     VkLayeredDriverUnderlyingApiMSFT("underlyingAPI", "a {@code VkLayeredDriverUnderlyingApiMSFT} value indicating which underlying API is used to implement the layered driver, or #LAYERED_DRIVER_UNDERLYING_API_NONE_MSFT if the driver is not layered.")
 }
 
+val VkPhysicalDeviceIndexTypeUint8FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIndexTypeUint8FeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether uint8 index type can be used.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceIndexTypeUint8FeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceIndexTypeUint8FeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("indexTypeUint8", "indicates that #INDEX_TYPE_UINT8_KHR can be used with #CmdBindIndexBuffer2KHR() and #CmdBindIndexBuffer().")
+}
+
+val VkPhysicalDeviceLineRasterizationFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeaturesKHR") {
+    documentation =
+        """
+        Structure describing the line rasterization features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceLineRasterizationFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceLineRasterizationFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("rectangularLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines\">rectangular line rasterization</a>.")
+    VkBool32("bresenhamLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-bresenham\">Bresenham-style line rasterization</a>.")
+    VkBool32("smoothLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-smooth\">smooth line rasterization</a>.")
+    VkBool32("stippledRectangularLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR lines.")
+    VkBool32("stippledBresenhamLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_BRESENHAM_KHR lines.")
+    VkBool32("stippledSmoothLines", "indicates whether the implementation supports <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR lines.")
+}
+
+val VkPhysicalDeviceLineRasterizationPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationPropertiesKHR", mutable = false) {
+    documentation =
+        """
+        Structure describing line rasterization properties supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceLineRasterizationPropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("lineSubPixelPrecisionBits", "the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines\">line segments</a>.")
+}
+
+val VkPipelineRasterizationLineStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfoKHR") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created pipeline line rasterization state.
+
+        <h5>Description</h5>
+        If {@code stippledLineEnable} is #FALSE, the values of {@code lineStippleFactor} and {@code lineStipplePattern} are ignored.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledBresenhamLines">{@code stippledBresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledSmoothLines">{@code stippledSmoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_DEFAULT_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled and ##VkPhysicalDeviceLimits{@code ::strictLines} <b>must</b> be #TRUE</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR</li>
+            <li>{@code lineRasterizationMode} <b>must</b> be a valid {@code VkLineRasterizationModeKHR} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkLineRasterizationModeKHR("lineRasterizationMode", "a {@code VkLineRasterizationModeKHR} value selecting the style of line rasterization.")
+    VkBool32("stippledLineEnable", "enables <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a>.")
+    uint32_t("lineStippleFactor", "the repeat factor used in stippled line rasterization.")
+    uint16_t("lineStipplePattern", "the bit pattern used in stippled line rasterization.")
+}
+
+val VkPhysicalDeviceShaderExpectAssumeFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderExpectAssumeFeaturesKHR") {
+    documentation =
+        """
+        Structure describing shader expect assume features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderExpectAssumeFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderExpectAssumeFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderExpectAssume", "specifies whether shader modules <b>can</b> declare the {@code ExpectAssumeKHR} capability.")
+}
+
+val VkPhysicalDeviceMaintenance6FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance6FeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether the implementation supports maintenance6 functionality.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMaintenance6FeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceMaintenance6FeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("maintenance6", """indicates that the implementation supports the following:
+
+        <ul>
+            <li>#NULL_HANDLE <b>can</b> be used when binding an index buffer</li>
+            <li>##VkBindMemoryStatusKHR <b>can</b> be included in the {@code pNext} chain of the ##VkBindBufferMemoryInfo and ##VkBindImageMemoryInfo structures, enabling applications to retrieve {@code VkResult} values for individual memory binding operations.</li>
+            <li>##VkPhysicalDeviceMaintenance6PropertiesKHR{@code ::blockTexelViewCompatibleMultipleLayers} property to indicate that the implementation supports creating image views with #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT where the {@code layerCount} member of {@code subresourceRange} is greater than 1.</li>
+            <li>##VkPhysicalDeviceMaintenance6PropertiesKHR{@code ::maxCombinedImageSamplerDescriptorCount} property which indicates the maximum descriptor size required for any <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation.</li>
+            <li>A ##VkPhysicalDeviceMaintenance6PropertiesKHR{@code ::fragmentShadingRateClampCombinerInputs} property which indicates whether the implementation clamps the inputs to fragment shading rate combiner operations.</li>
+        </ul>""")
+}
+
+val VkPhysicalDeviceMaintenance6PropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance6PropertiesKHR", mutable = false) {
+    documentation =
+        """
+        Structure describing various implementation-defined properties introduced with VK_KHR_maintenance6.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMaintenance6PropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkBool32("blockTexelViewCompatibleMultipleLayers", "a boolean value indicating that an implementation supports creating image views with #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT where the {@code layerCount} member of {@code subresourceRange} is greater than 1.")
+    uint32_t("maxCombinedImageSamplerDescriptorCount", "the maximum number of combined image sampler descriptors that the implementation uses to access any of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation.")
+    VkBool32("fragmentShadingRateClampCombinerInputs", "a boolean value indicating that an implementation clamps the inputs to <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-combining\">combiner operations</a>.")
+}
+
+val VkBindMemoryStatusKHR = struct(Module.VULKAN, "VkBindMemoryStatusKHR") {
+    documentation =
+        """
+        Structure specifying where to return memory binding status.
+
+        <h5>Description</h5>
+        If the {@code pNext} chain of ##VkBindBufferMemoryInfo or ##VkBindImageMemoryInfo includes a ##VkBindMemoryStatusKHR structure, then the ##VkBindMemoryStatusKHR{@code ::pResult} will be populated with a value describing the result of the corresponding memory binding operation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_MEMORY_STATUS_KHR</li>
+            <li>{@code pResult} <b>must</b> be a valid pointer to a {@code VkResult} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_BIND_MEMORY_STATUS_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkResult.p("pResult", "a pointer to a {@code VkResult} value.")
+}
+
+val VkBindDescriptorSetsInfoKHR = struct(Module.VULKAN, "VkBindDescriptorSetsInfoKHR") {
+    documentation =
+        """
+        Structure specifying a descriptor set binding operation.
+
+        <h5>Description</h5>
+        If {@code stageFlags} specifies a subset of all stages corresponding to one or more pipeline bind points, the binding operation still affects all stages corresponding to the given pipeline bind point(s) as if the equivalent original version of this command had been called with the same parameters. For example, specifying a {@code stageFlags} value of #SHADER_STAGE_VERTEX_BIT | #SHADER_STAGE_FRAGMENT_BIT | #SHADER_STAGE_COMPUTE_BIT is equivalent to calling the original version of this command once with #PIPELINE_BIND_POINT_GRAPHICS and once with #PIPELINE_BIND_POINT_COMPUTE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Each element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or identically defined as) the {@code VkDescriptorSetLayout} at set <em>n</em> in {@code layout}, where <em>n</em> is the sum of {@code firstSet} and the index into {@code pDescriptorSets}</li>
+            <li>{@code dynamicOffsetCount} <b>must</b> be equal to the total number of dynamic descriptors in {@code pDescriptorSets}</li>
+            <li>The sum of {@code firstSet} and {@code descriptorSetCount} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+            <li>Each element of {@code pDynamicOffsets} which corresponds to a descriptor binding with type #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
+            <li>Each element of {@code pDynamicOffsets} which corresponds to a descriptor binding with type #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
+            <li>For each dynamic uniform or storage buffer binding in {@code pDescriptorSets}, the sum of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dynamic-effective-offset">effective offset</a> and the range of the binding <b>must</b> be less than or equal to the size of the buffer</li>
+            <li>For each dynamic uniform or storage buffer binding in {@code pDescriptorSets}, if the range was set with #WHOLE_SIZE then {@code pDynamicOffsets} which corresponds to the descriptor binding <b>must</b> be 0</li>
+            <li>Each element of {@code pDescriptorSets} <b>must</b> not have been allocated from a {@code VkDescriptorPool} with the #DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT flag set</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> is not enabled, each element of {@code pDescriptorSets} <b>must</b> be a valid {@code VkDescriptorSet}</li>
+            <li>Each element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} which was not created with #DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code stageFlags} <b>must</b> not be 0</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code pDescriptorSets} <b>must</b> be a valid pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSet} handles</li>
+            <li>If {@code dynamicOffsetCount} is not 0, and {@code pDynamicOffsets} is not {@code NULL}, {@code pDynamicOffsets} <b>must</b> be a valid pointer to an array of {@code dynamicOffsetCount} or #NULL_HANDLE {@code uint32_t} values</li>
+            <li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
+            <li>Both of {@code layout}, and the elements of {@code pDescriptorSets} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdBindDescriptorSets2KHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderStageFlags("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages the descriptor sets will be bound to.")
+    VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining the ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    uint32_t("firstSet", "the set number of the first descriptor set to be bound.")
+    AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array.")
+    VkDescriptorSet.const.p("pDescriptorSets", "a pointer to an array of handles to {@code VkDescriptorSet} objects describing the descriptor sets to bind to.")
+    AutoSize("pDynamicOffsets", optional = true)..uint32_t("dynamicOffsetCount", "the number of dynamic offsets in the {@code pDynamicOffsets} array.")
+    nullable..uint32_t.const.p("pDynamicOffsets", "a pointer to an array of {@code uint32_t} values specifying dynamic offsets.")
+}
+
+val VkPushConstantsInfoKHR = struct(Module.VULKAN, "VkPushConstantsInfoKHR") {
+    documentation =
+        """
+        Structure specifying a push constant update operation.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>For each byte in the range specified by {@code offset} and {@code size} and for each shader stage in {@code stageFlags}, there <b>must</b> be a push constant range in {@code layout} that includes that byte and that stage</li>
+            <li>For each byte in the range specified by {@code offset} and {@code size} and for each push constant range that overlaps that byte, {@code stageFlags} <b>must</b> include all stages in that push constant range’s ##VkPushConstantRange{@code ::stageFlags}</li>
+            <li>{@code offset} <b>must</b> be a multiple of 4</li>
+            <li>{@code size} <b>must</b> be a multiple of 4</li>
+            <li>{@code offset} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize}</li>
+            <li>{@code size} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize} minus {@code offset}</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PUSH_CONSTANTS_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code stageFlags} <b>must</b> not be 0</li>
+            <li>{@code pValues} <b>must</b> be a valid pointer to an array of {@code size} bytes</li>
+            <li>{@code size} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdPushConstants2KHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_PUSH_CONSTANTS_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkPipelineLayout("layout", "the pipeline layout used to program the push constant updates. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    VkShaderStageFlags("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.")
+    uint32_t("offset", "the start offset of the push constant range to update, in units of bytes.")
+    AutoSize("pValues")..uint32_t("size", "the size of the push constant range to update, in units of bytes.")
+    void.const.p("pValues", "a pointer to an array of {@code size} bytes containing the new push constant values.")
+}
+
+val VkPushDescriptorSetInfoKHR = struct(Module.VULKAN, "VkPushDescriptorSetInfoKHR") {
+    documentation =
+        """
+        Structure specifying a descriptor set push operation.
+
+        <h5>Description</h5>
+        If {@code stageFlags} specifies a subset of all stages corresponding to one or more pipeline bind points, the binding operation still affects all stages corresponding to the given pipeline bind point(s) as if the equivalent original version of this command had been called with the same parameters. For example, specifying a {@code stageFlags} value of #SHADER_STAGE_VERTEX_BIT | #SHADER_STAGE_FRAGMENT_BIT | #SHADER_STAGE_COMPUTE_BIT is equivalent to calling the original version of this command once with #PIPELINE_BIND_POINT_GRAPHICS and once with #PIPELINE_BIND_POINT_COMPUTE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code set} <b>must</b> be less than ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+            <li>{@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</li>
+            <li>For each element <code>i</code> where {@code pDescriptorWrites}[i].{@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pDescriptorWrites}[i].{@code pImageInfo} <b>must</b> be a valid pointer to an array of {@code pDescriptorWrites}[i].{@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code stageFlags} <b>must</b> not be 0</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code pDescriptorWrites} <b>must</b> be a valid pointer to an array of {@code descriptorWriteCount} valid ##VkWriteDescriptorSet structures</li>
+            <li>{@code descriptorWriteCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkWriteDescriptorSet, #CmdPushDescriptorSet2KHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderStageFlags("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the descriptors.")
+    VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated.")
+    AutoSize("pDescriptorWrites")..uint32_t("descriptorWriteCount", "the number of elements in the {@code pDescriptorWrites} array.")
+    VkWriteDescriptorSet.const.p("pDescriptorWrites", "a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptors to be updated.")
+}
+
+val VkPushDescriptorSetWithTemplateInfoKHR = struct(Module.VULKAN, "VkPushDescriptorSetWithTemplateInfoKHR") {
+    documentation =
+        """
+        Structure specifying a descriptor set push operation using a descriptor update template.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code pipelineBindPoint} specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
+            <li>{@code pData} <b>must</b> be a valid pointer to a memory containing one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplate()</li>
+            <li>{@code layout} <b>must</b> be compatible with the layout used to create {@code descriptorUpdateTemplate}</li>
+            <li>{@code descriptorUpdateTemplate} <b>must</b> have been created with a {@code templateType} of #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR</li>
+            <li>{@code set} <b>must</b> be the same value used to create {@code descriptorUpdateTemplate}</li>
+            <li>{@code set} <b>must</b> be less than ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+            <li>{@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code descriptorUpdateTemplate} <b>must</b> be a valid {@code VkDescriptorUpdateTemplate} handle</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code pData} <b>must</b> be a pointer value</li>
+            <li>Both of {@code descriptorUpdateTemplate}, and {@code layout} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdPushDescriptorSetWithTemplate2KHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a descriptor update template defining how to interpret the descriptor information in {@code pData}.")
+    VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle.")
+    opaque_const_p("pData", "a pointer to memory containing descriptors for the templated update.")
+}
+
+val VkSetDescriptorBufferOffsetsInfoEXT = struct(Module.VULKAN, "VkSetDescriptorBufferOffsetsInfoEXT") {
+    documentation =
+        """
+        Structure specifying descriptor buffer offsets to set in a command buffer.
+
+        <h5>Description</h5>
+        If {@code stageFlags} specifies a subset of all stages corresponding to one or more pipeline bind points, the binding operation still affects all stages corresponding to the given pipeline bind point(s) as if the equivalent original version of this command had been called with the same parameters. For example, specifying a {@code stageFlags} value of #SHADER_STAGE_VERTEX_BIT | #SHADER_STAGE_FRAGMENT_BIT | #SHADER_STAGE_COMPUTE_BIT is equivalent to calling the original version of this command once with #PIPELINE_BIND_POINT_GRAPHICS and once with #PIPELINE_BIND_POINT_COMPUTE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The offsets in {@code pOffsets} <b>must</b> be aligned to ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::descriptorBufferOffsetAlignment}</li>
+            <li>The offsets in {@code pOffsets} <b>must</b> be small enough such that any descriptor binding referenced by {@code layout} without the #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT flag computes a valid address inside the underlying {@code VkBuffer}</li>
+            <li>The offsets in {@code pOffsets} <b>must</b> be small enough such that any location accessed by a shader as a sampler descriptor <b>must</b> be within ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxSamplerDescriptorBufferRange} of the sampler descriptor buffer binding</li>
+            <li>The offsets in {@code pOffsets} <b>must</b> be small enough such that any location accessed by a shader as a resource descriptor <b>must</b> be within ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxResourceDescriptorBufferRange} of the resource descriptor buffer binding</li>
+            <li>Each element of {@code pBufferIndices} <b>must</b> be less than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxDescriptorBufferBindings}</li>
+            <li>Each element of {@code pBufferIndices} <b>must</b> reference a valid descriptor buffer binding set by a previous call to #CmdBindDescriptorBuffersEXT() in {@code commandBuffer}</li>
+            <li>The sum of {@code firstSet} and {@code setCount} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+            <li>The {@code VkDescriptorSetLayout} for each set from {@code firstSet} to <code>firstSet + setCount</code> when {@code layout} was created <b>must</b> have been created with the #DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT bit set</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code stageFlags} <b>must</b> not be 0</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code pBufferIndices} <b>must</b> be a valid pointer to an array of {@code setCount} {@code uint32_t} values</li>
+            <li>{@code pOffsets} <b>must</b> be a valid pointer to an array of {@code setCount} {@code VkDeviceSize} values</li>
+            <li>{@code setCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetDescriptorBufferOffsets2EXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderStageFlags("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages the descriptor sets will be bound to")
+    VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    uint32_t("firstSet", "the number of the first set to be bound.")
+    AutoSize("pBufferIndices", "pOffsets")..uint32_t("setCount", "the number of elements in the {@code pBufferIndices} and {@code pOffsets} arrays.")
+    uint32_t.const.p("pBufferIndices", "a pointer to an array of indices into the descriptor buffer binding points set by #CmdBindDescriptorBuffersEXT().")
+    VkDeviceSize.const.p("pOffsets", "a pointer to an array of {@code VkDeviceSize} offsets to apply to the bound descriptor buffers.")
+}
+
+val VkBindDescriptorBufferEmbeddedSamplersInfoEXT = struct(Module.VULKAN, "VkBindDescriptorBufferEmbeddedSamplersInfoEXT") {
+    documentation =
+        """
+        Structure specifying embedded immutable sampler offsets to set in a command buffer.
+
+        <h5>Description</h5>
+        If {@code stageFlags} specifies a subset of all stages corresponding to one or more pipeline bind points, the binding operation still affects all stages corresponding to the given pipeline bind point(s) as if the equivalent original version of this command had been called with the same parameters. For example, specifying a {@code stageFlags} value of #SHADER_STAGE_VERTEX_BIT | #SHADER_STAGE_FRAGMENT_BIT | #SHADER_STAGE_COMPUTE_BIT is equivalent to calling the original version of this command once with #PIPELINE_BIND_POINT_GRAPHICS and once with #PIPELINE_BIND_POINT_COMPUTE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code VkDescriptorSetLayout} at index {@code set} when {@code layout} was created <b>must</b> have been created with the #DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT bit set</li>
+            <li>{@code set} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+        </ul>
+
+        <ul>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>If {@code layout} is #NULL_HANDLE, the {@code pNext} chain <b>must</b> include a valid ##VkPipelineLayoutCreateInfo structure</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code stageFlags} <b>must</b> not be 0</li>
+            <li>If {@code layout} is not #NULL_HANDLE, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdBindDescriptorBufferEmbeddedSamplers2EXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderStageFlags("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the embedded immutable samplers.")
+    VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicPipelineLayout\">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    uint32_t("set", "the number of the set to be bound.")
+}
+
 val VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV") {
     documentation =
         """
@@ -21695,4 +23209,127 @@ val VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct(Module.VULKA
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("descriptorPoolOverallocation", "indicates that the implementation allows the application to opt into descriptor pool overallocation by creating the descriptor pool with #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV and/or #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV flags.")
+}
+
+val VkPhysicalDeviceRawAccessChainsFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceRawAccessChainsFeaturesNV") {
+    documentation =
+        """
+        Structure describing shader raw access chains features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRawAccessChainsFeaturesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRawAccessChainsFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderRawAccessChains", "specifies whether shader modules <b>can</b> declare the {@code RawAccessChainsNV} capability.")
+}
+
+val VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV") {
+    documentation =
+        """
+        Structure describing features supported by VK_NV_shader_atomic_float16_vector.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderFloat16VectorAtomics", "indicates whether shaders <b>can</b> perform 16-bit floating-point, 2- and 4-component vector atomic operations.")
+}
+
+val VkPhysicalDeviceRayTracingValidationFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceRayTracingValidationFeaturesNV") {
+    documentation =
+        """
+        Structure describing the ray tracing validation features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRayTracingValidationFeaturesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRayTracingValidationFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("rayTracingValidation", "indicates whether the implementation supports the ray tracing validation feature.")
+}
+
+val VkPhysicalDeviceImageAlignmentControlFeaturesMESA = struct(Module.VULKAN, "VkPhysicalDeviceImageAlignmentControlFeaturesMESA") {
+    documentation =
+        """
+        Structure describing features supported by VK_MESA_image_alignment_control.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceImageAlignmentControlFeaturesMESA structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceImageAlignmentControlFeaturesMESA <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("imageAlignmentControl", "specifies that ##VkImageAlignmentControlCreateInfoMESA <b>can</b> be chained in ##VkImageCreateInfo")
+}
+
+val VkPhysicalDeviceImageAlignmentControlPropertiesMESA = struct(Module.VULKAN, "VkPhysicalDeviceImageAlignmentControlPropertiesMESA") {
+    documentation =
+        """
+        Structure describing supported image alignments for a physical device.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceImageAlignmentControlPropertiesMESA structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    uint32_t("supportedImageAlignmentMask", "a bitwise-or of all potentially supported image alignments for a given physical device when using #IMAGE_TILING_OPTIMAL. If a given alignment is supported, the application <b>can</b> request an image to have that alignment. A given set of image creation parameters <b>may</b> support a subset of these alignments. To determine if a particular alignment is supported for a given set of image creation parameters, check ##VkMemoryRequirements{@code ::alignment} after chaining in ##VkImageAlignmentControlCreateInfoMESA.")
+}
+
+val VkImageAlignmentControlCreateInfoMESA = struct(Module.VULKAN, "VkImageAlignmentControlCreateInfoMESA") {
+    documentation =
+        """
+        Specify image alignment.
+
+        <h5>Description</h5>
+        If {@code maximumRequestedAlignment} is not 0, the implementation <b>should</b> choose an image memory layout that requires an alignment no larger than {@code maximumRequestedAlignment} as reported in ##VkMemoryRequirements{@code ::alignment}. If such a layout does not exist for the given image creation parameters, the implementation <b>should</b> return the smallest alignment which is supported in ##VkMemoryRequirements.
+
+        If an implementation needs to disable image compression for {@code maximumRequestedAlignment} to be honored - where a larger alignment would enable image compression - the implementation <b>should</b> not use {@code maximumRequestedAlignment}, and <b>should</b> return the smallest alignment which does not compromise compression. If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCompressionControl">{@code imageCompressionControl}</a> is enabled, the application <b>can</b> chain a ##VkImageCompressionControlEXT with #IMAGE_COMPRESSION_DISABLED_EXT. In this case, image compression considerations <b>should</b> not apply when implementation decides alignment.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code maximumRequestedAlignment} is not 0, {@code maximumRequestedAlignment} <b>must</b> be a power of two</li>
+            <li>If {@code maximumRequestedAlignment} is not 0, the bitwise-and of {@code maximumRequestedAlignment} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedImageAlignmentMask">{@code supportedImageAlignmentMask}</a> <b>must</b> be non-zero</li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageAlignmentControl">{@code imageAlignmentControl}</a> <b>must</b> be enabled on the device</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    uint32_t("maximumRequestedAlignment", "specifies the maximum alignment for the image.")
 }

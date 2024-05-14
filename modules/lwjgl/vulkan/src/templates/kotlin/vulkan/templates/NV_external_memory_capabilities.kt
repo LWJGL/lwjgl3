@@ -13,7 +13,6 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
         """
         Applications may wish to import memory from the Direct 3D API, or export memory to other Vulkan instances. This extension provides a set of capability queries that allow applications determine what types of win32 memory handles an implementation supports for a given set of use cases.
 
-        <h5>VK_NV_external_memory_capabilities</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_external_memory_capabilities}</dd>

@@ -13,8 +13,6 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This device extension allows an application that uses the {@link KHRSwapchain VK_KHR_swapchain} extension to wait for present operations to complete. An application can use this to monitor and control the pacing of the application by managing the number of outstanding images yet to be presented.
  * 
- * <h5>VK_KHR_present_wait</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_present_wait}</dd>

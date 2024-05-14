@@ -252,7 +252,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** @return the value of the {@code log2_parallel_merge_level_minus2} field. */
     @NativeType("uint8_t")
     public byte log2_parallel_merge_level_minus2() { return nlog2_parallel_merge_level_minus2(address()); }
-    /** extension PPS, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
+    /** extension PPS, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
     @NativeType("uint8_t")
     public byte log2_max_transform_skip_block_size_minus2() { return nlog2_max_transform_skip_block_size_minus2(address()); }
     /** @return the value of the {@code diff_cu_chroma_qp_offset_depth} field. */

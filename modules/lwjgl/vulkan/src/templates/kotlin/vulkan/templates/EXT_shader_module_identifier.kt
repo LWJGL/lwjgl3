@@ -19,7 +19,6 @@ val EXT_shader_module_identifier = "EXTShaderModuleIdentifier".nativeClassVK("EX
 
         The main motivation for identifying the module itself and not the entire pipeline is that pipeline identifiers change when a driver is updated, but module identifiers are expected to be stable for any particular driver implementation. This approach is helpful for shader pre-compilation systems which can prime pipeline caches ahead of time. When on-disk pipeline caches are updated, the same shader identifiers could lead to a pipeline cache hit.
 
-        <h5>VK_EXT_shader_module_identifier</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_module_identifier}</dd>
@@ -34,7 +33,7 @@ val EXT_shader_module_identifier = "EXTShaderModuleIdentifier".nativeClassVK("EX
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

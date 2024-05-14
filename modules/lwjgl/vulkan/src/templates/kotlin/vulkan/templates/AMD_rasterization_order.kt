@@ -34,7 +34,6 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
         <h5>Examples</h5>
         None
 
-        <h5>VK_AMD_rasterization_order</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_rasterization_order}</dd>

@@ -18,7 +18,6 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_copy_commands2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_copy_commands2}</dd>

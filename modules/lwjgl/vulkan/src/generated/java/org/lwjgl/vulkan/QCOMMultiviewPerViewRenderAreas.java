@@ -10,8 +10,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>The extension enables a multiview render pass instance to define per-view render areas. For each view of a multiview render pass instance, only those pixels in the per-view render area are affected by load, store and resolve operations.</p>
  * 
- * <h5>VK_QCOM_multiview_per_view_render_areas</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_QCOM_multiview_per_view_render_areas}</dd>
@@ -23,7 +21,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_render_areas]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_render_areas%20extension*">jackohound</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_render_areas]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_render_areas%20extension*">mnetsch</a></li>
  * </ul></dd>
  * </dl>
  * 

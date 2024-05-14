@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code WindowExtent} <b>must</b> not be larger than {@link VkPhysicalDeviceImageProcessing2PropertiesQCOM}{@code ::maxBlockMatchWindow}.</li>
+ * <li>{@code WindowExtent} <b>must</b> not be larger than {@link VkPhysicalDeviceImageProcessing2PropertiesQCOM}{@code ::maxBlockMatchWindow}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

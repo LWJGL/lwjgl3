@@ -51,7 +51,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."273"
+            "HEADER_VERSION".."285"
         )
 
         LongConstant(
@@ -453,7 +453,7 @@ fun templateCustomization() {
                 EXT_texel_buffer_alignment.link,
                 EXT_texture_compression_astc_hdr.link,
                 EXT_tooling_info.link,
-                EXT_ycbcr_2plane_444_formats.link                
+                EXT_ycbcr_2plane_444_formats.link
             )}
 
             All differences in behavior between these extensions and the corresponding Vulkan 1.3 functionality are summarized below.

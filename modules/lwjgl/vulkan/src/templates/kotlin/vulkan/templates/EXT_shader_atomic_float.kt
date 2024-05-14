@@ -13,7 +13,6 @@ val EXT_shader_atomic_float = "EXTShaderAtomicFloat".nativeClassVK("EXT_shader_a
         """
         This extension allows a shader to contain floating-point atomic operations on buffer, workgroup, and image memory. It also advertises the SPIR-V {@code AtomicFloat32AddEXT} and {@code AtomicFloat64AddEXT} capabilities that allows atomic addition on floating-points numbers. The supported operations include {@code OpAtomicFAddEXT}, {@code OpAtomicExchange}, {@code OpAtomicLoad} and {@code OpAtomicStore}.
 
-        <h5>VK_EXT_shader_atomic_float</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_atomic_float}</dd>
@@ -51,7 +50,7 @@ val EXT_shader_atomic_float = "EXTShaderAtomicFloat".nativeClassVK("EXT_shader_a
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_atomic_float.txt">{@code GL_EXT_shader_atomic_float}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_shader_atomic_float.txt">{@code GL_EXT_shader_atomic_float}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -17,8 +17,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>Some implementations <b>may</b> need to evaluate depth image values while performing image layout transitions. To accommodate this, instances of the {@link VkSampleLocationsInfoEXT} structure <b>can</b> be specified for each situation where an explicit or automatic layout transition has to take place. {@link VkSampleLocationsInfoEXT} <b>can</b> be chained from {@link VkImageMemoryBarrier} structures to provide sample locations for layout transitions performed by {@link VK10#vkCmdWaitEvents CmdWaitEvents} and {@link VK10#vkCmdPipelineBarrier CmdPipelineBarrier} calls, and {@link VkRenderPassSampleLocationsBeginInfoEXT} <b>can</b> be chained from {@link VkRenderPassBeginInfo} to provide sample locations for layout transitions performed implicitly by a render pass instance.</p>
  * 
- * <h5>VK_EXT_sample_locations</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_sample_locations}</dd>

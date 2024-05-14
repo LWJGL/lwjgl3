@@ -18,9 +18,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>Each of the image processing instructions operate only on 2D images. The instructions do not-support sampling of mipmap, multi-plane, multi-layer, multi-sampled, or depth/stencil images. The instructions can be used in any shader stage.</p>
  * 
- * <p>Implementations of this this extension should support these operations natively at the HW instruction level, offering potential performance gains as well as ease of development.</p>
- * 
- * <h5>VK_QCOM_image_processing</h5>
+ * <p>Implementations of this extension should support these operations natively at the HW instruction level, offering potential performance gains as well as ease of development.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -32,9 +30,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2}</dd>
+ * <dd>{@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_3</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
  * </ul></dd>
  * <dt><b>SPIR-V Dependencies</b></dt>
@@ -43,7 +42,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_image_processing]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_image_processing%20extension*">jackohound</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_image_processing]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_image_processing%20extension*">mnetsch</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
  * <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_QCOM_image_processing.adoc">VK_QCOM_image_processing</a></dd>
@@ -56,7 +55,7 @@ package org.lwjgl.vulkan;
  * <dd>2022-07-08</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/qcom/GLSL_QCOM_image_processing.txt">{@code GL_QCOM_image_processing}</a></li>
+ * <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/qcom/GLSL_QCOM_image_processing.txt">{@code GL_QCOM_image_processing}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

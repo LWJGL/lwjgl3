@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code sampleLocationsPerPixel} <b>must</b> be a bit value that is set in {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::sampleLocationSampleCounts}</li>
+ * <li>{@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value that is set in {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::sampleLocationSampleCounts}</li>
  * <li>{@code sampleLocationsCount} <b>must</b> equal <code>sampleLocationsPerPixel × sampleLocationGridSize.width × sampleLocationGridSize.height</code></li>
  * </ul>
  * 

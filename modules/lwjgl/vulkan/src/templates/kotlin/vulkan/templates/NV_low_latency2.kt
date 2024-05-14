@@ -22,7 +22,6 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
         <h5>Description</h5>
         This extension gives applications timing suggestions on when to start the recording of new frames to reduce the latency between input sampling and frame presentation. Applications can accomplish this through the extension by calling #SetLatencySleepModeNV() to allow the driver to pace a given swapchain, then calling #LatencySleepNV() before input sampling to delay the start of the CPU side work. Additional methods and structures are provided to give insight into the latency pipeline of an application through the latency markers. {@link NVLowLatency VK_NV_low_latency} provides legacy support for applications that make use of the NVIDIA Reflex SDK whereas new implementations should use the {@link NVLowLatency2 VK_NV_low_latency2} extension.
 
-        <h5>VK_NV_low_latency2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_low_latency2}</dd>
@@ -205,7 +204,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 ￿    const VkLatencySleepInfoNV*                 pSleepInfo);</code></pre>
 
         <h5>Description</h5>
-        {@code vkLatencySleepNV} returns immediately. Applications <b>should</b> use #WaitSemaphores() with {@code pSleepInfo}{@code ::signalSemaphore} to delay host CPU work. CPU work refers to application work done before presenting which includes but is not limited to: input sampling, simulation, command buffer recording, command buffer submission, and present submission. It is recommended to call this function before input sampling. When using this function, it <b>should</b> be called exactly once between presents.
+        {@code vkLatencySleepNV} returns immediately. Applications <b>should</b> use #WaitSemaphores() with {@code pSleepInfo→signalSemaphore} to delay host CPU work. CPU work refers to application work done before presenting which includes but is not limited to: input sampling, simulation, command buffer recording, command buffer submission, and present submission. It is recommended to call this function before input sampling. When using this function, it <b>should</b> be called exactly once between presents.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -220,11 +219,6 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
             <dt>On success, this command returns</dt>
             <dd><ul>
                 <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_UNKNOWN</li>
             </ul></dd>
         </dl>
 

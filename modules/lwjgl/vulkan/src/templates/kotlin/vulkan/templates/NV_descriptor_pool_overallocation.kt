@@ -17,7 +17,6 @@ val NV_descriptor_pool_overallocation = "NVDescriptorPoolOverallocation".nativeC
 
         The #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV flag lets the application allocate more than ##VkDescriptorPoolCreateInfo{@code ::maxSets} descriptor sets, and the #DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV lets the application allocate more descriptors than initially specified by ##VkDescriptorPoolSize{@code ::descriptorCount} for any descriptor types.
 
-        <h5>VK_NV_descriptor_pool_overallocation</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_descriptor_pool_overallocation}</dd>

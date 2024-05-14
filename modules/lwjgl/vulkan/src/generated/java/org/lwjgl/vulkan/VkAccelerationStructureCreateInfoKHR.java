@@ -20,10 +20,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code deviceAddress} is zero, no specific address is requested.</p>
- * 
- * <p>If {@code deviceAddress} is not zero, {@code deviceAddress} <b>must</b> be an address retrieved from an identically created acceleration structure on the same implementation. The acceleration structure <b>must</b> also be placed on an identically created {@code buffer} and at the same {@code offset}.</p>
- * 
  * <p>Applications <b>should</b> avoid creating acceleration structures with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link KHRBufferDeviceAddress#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR} errors.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -48,6 +44,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code deviceAddress} is not zero, {@code createFlags} <b>must</b> include {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR}</li>
+ * <li>If {@code deviceAddress} is not zero, it <b>must</b> have been retrieved from an identically created acceleration structure, except for {@code buffer} and {@code deviceAddress}</li>
+ * <li>If {@code deviceAddress} is not zero, {@code buffer} <b>must</b> have been created identically to the {@code buffer} used to create the acceleration structure from which {@code deviceAddress} was retrieved, except for {@link VkBufferOpaqueCaptureAddressCreateInfo}{@code ::opaqueCaptureAddress}</li>
+ * <li>If {@code deviceAddress} is not zero, {@code buffer} <b>must</b> have been created with a {@link VkBufferOpaqueCaptureAddressCreateInfo}{@code ::opaqueCaptureAddress} that was retrieved from {@link VK12#vkGetBufferOpaqueCaptureAddress GetBufferOpaqueCaptureAddress} for the {@code buffer} that was used to create the acceleration structure from which {@code deviceAddress} was retrieved</li>
  * <li>If {@code createFlags} includes {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR}, {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR}{@code ::accelerationStructureCaptureReplay} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
  * <li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing {@link KHRAccelerationStructure#VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR}</li>
  * <li>{@code buffer} <b>must</b> not have been created with {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}</li>
@@ -175,7 +174,7 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct<VkAccelerationS
     /** a {@code VkAccelerationStructureTypeKHR} value specifying the type of acceleration structure that will be created. */
     @NativeType("VkAccelerationStructureTypeKHR")
     public int type() { return ntype(address()); }
-    /** the device address requested for the acceleration structure if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature is being used. */
+    /** the device address requested for the acceleration structure if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature is being used. If {@code deviceAddress} is zero, no specific address is requested. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 

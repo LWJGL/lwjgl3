@@ -17,7 +17,6 @@ val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = 
 
         As a consequence, applications should always check for the presence of the extension string for each individual physical device for which they intend to issue the new query for and should not have any assumptions about the availability of the extension on any given platform.
 
-        <h5>VK_EXT_pci_bus_info</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_pci_bus_info}</dd>

@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Version 2 of this extension introduces {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV} and {@link #vkCmdSetExclusiveScissorEnableNV CmdSetExclusiveScissorEnableNV}. Applications that use this dynamic state must ensure the implementation advertises at least {@code specVersion} 2 of this extension.</p>
  * 
- * <h5>VK_NV_scissor_exclusive</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_scissor_exclusive}</dd>
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Pat Brown <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_scissor_exclusive]%20@nvpbrown%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_scissor_exclusive%20extension*">nvpbrown</a></li>

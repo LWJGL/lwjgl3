@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * The {@code VK_KHR_xcb_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to an X11 {@code Window}, using the XCB client-side library, as well as a query to determine support for rendering via XCB.
  * 
- * <h5>VK_KHR_xcb_surface</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_xcb_surface}</dd>

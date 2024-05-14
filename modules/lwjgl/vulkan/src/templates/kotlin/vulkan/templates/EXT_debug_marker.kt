@@ -43,7 +43,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 
         <b>Example 2</b>
 
-        Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualisation of the commands submitted.
+        Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualization of the commands submitted.
 
         <pre><code>
 ￿    extern VkDevice device;
@@ -104,7 +104,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    // End the house annotation started above
 ￿    pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
 
-        <h5>VK_EXT_debug_marker</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_debug_marker}</dd>

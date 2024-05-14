@@ -15,7 +15,6 @@ val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassVK("N
 
         This functionality may be useful for deferred rendering algorithms, where the second pass needs to know which samples belong to which original fragments.
 
-        <h5>VK_NV_fragment_coverage_to_color</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_fragment_coverage_to_color}</dd>

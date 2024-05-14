@@ -16,7 +16,6 @@ val EXT_shader_demote_to_helper_invocation = "EXTShaderDemoteToHelperInvocation"
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_EXT_shader_demote_to_helper_invocation</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_demote_to_helper_invocation}</dd>
@@ -59,7 +58,7 @@ val EXT_shader_demote_to_helper_invocation = "EXTShaderDemoteToHelperInvocation"
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_demote_to_helper_invocation.txt">{@code GL_EXT_demote_to_helper_invocation}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_demote_to_helper_invocation.txt">{@code GL_EXT_demote_to_helper_invocation}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

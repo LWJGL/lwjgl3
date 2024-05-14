@@ -153,8 +153,6 @@ import org.lwjgl.system.windows.*;
  *     // Get the external memory opaque FD handle
  *     vkGetMemoryWin32HandleNV(device, memory, &amp;memoryHnd);</code></pre>
  * 
- * <h5>VK_NV_external_memory_win32</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_external_memory_win32}</dd>

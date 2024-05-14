@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> not be {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR}</li>
- * <li>Only one of {@code pGeometries} or {@code ppGeometries} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
+ * <li>If {@code geometryCount} is not 0, exactly one of {@code pGeometries} or {@code ppGeometries} <b>must</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
  * <li>If {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR}, the {@code geometryType} member of elements of either {@code pGeometries} or {@code ppGeometries} <b>must</b> be {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}</li>
  * <li>If {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR}, {@code geometryCount} <b>must</b> be 1</li>
  * <li>If {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR} the {@code geometryType} member of elements of either {@code pGeometries} or {@code ppGeometries} <b>must</b> not be {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}</li>
@@ -174,7 +174,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     /** a {@code VkBuildAccelerationStructureModeKHR} value specifying the type of operation to perform. */
     @NativeType("VkBuildAccelerationStructureModeKHR")
     public int mode() { return nmode(address()); }
-    /** a pointer to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure when {@code mode} is {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR}. */
+    /** a pointer to an existing acceleration structure that is to be used to update the {@code dstAccelerationStructure} acceleration structure when {@code mode} is {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR}. */
     @NativeType("VkAccelerationStructureKHR")
     public long srcAccelerationStructure() { return nsrcAccelerationStructure(address()); }
     /** a pointer to the target acceleration structure for the build. */

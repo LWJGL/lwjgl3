@@ -23,7 +23,6 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 
         As with {@code VkPipelineCache}, the binary cache depends on the hardware architecture. The application must assume the cache might fail, and need to handle falling back to the original PTX code as necessary. Most often, the cache will succeed if the same GPU driver and architecture is used between the cache generation from PTX and the use of this cache. In the event of a new driver version, or if using a different GPU architecture, the cache is likely to become invalid.
 
-        <h5>VK_NV_cuda_kernel_launch</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_cuda_kernel_launch}</dd>

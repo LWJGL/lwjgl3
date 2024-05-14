@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension provides an interface to query calibrated timestamps obtained quasi simultaneously from two time domains.
  * 
- * <h5>VK_KHR_calibrated_timestamps</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_calibrated_timestamps}</dd>
@@ -202,7 +200,7 @@ public class KHRCalibratedTimestamps {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The {@code timeDomain} value of each {@link VkCalibratedTimestampInfoEXT} in {@code pTimestampInfos} <b>must</b> be unique</li>
+     * <li>The {@code timeDomain} value of each {@link VkCalibratedTimestampInfoKHR} in {@code pTimestampInfos} <b>must</b> be unique</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

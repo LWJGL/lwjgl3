@@ -15,7 +15,6 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
 
         This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.
 
-        <h5>VK_KHR_incremental_present</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_incremental_present}</dd>

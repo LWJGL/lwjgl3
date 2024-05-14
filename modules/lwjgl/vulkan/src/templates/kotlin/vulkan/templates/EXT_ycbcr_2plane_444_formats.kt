@@ -16,7 +16,6 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
         <h5>Promotion to Vulkan 1.3</h5>
         This extension has been partially promoted. The format enumerants introduced by the extension are included in core Vulkan 1.3, with the EXT suffix omitted. However, runtime support for these formats is optional in core Vulkan 1.3, while if this extension is supported, runtime support is mandatory. The feature structure is not promoted. The original enum names are still available as aliases of the core functionality.
 
-        <h5>VK_EXT_ycbcr_2plane_444_formats</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_ycbcr_2plane_444_formats}</dd>

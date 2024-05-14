@@ -38,7 +38,6 @@ import static org.lwjgl.vulkan.KHRGlobalPriority.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR}</li>
- * <li>Each element of {@code priorities} <b>must</b> be a valid {@code VkQueueGlobalPriorityKHR} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -114,10 +113,10 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     /** the number of supported global queue priorities in this queue family, and it <b>must</b> be greater than 0. */
     @NativeType("uint32_t")
     public int priorityCount() { return npriorityCount(address()); }
-    /** an array of {@link EXTGlobalPriorityQuery#VK_MAX_GLOBAL_PRIORITY_SIZE_EXT MAX_GLOBAL_PRIORITY_SIZE_EXT} {@code VkQueueGlobalPriorityEXT} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid. */
+    /** an array of {@link KHRGlobalPriority#VK_MAX_GLOBAL_PRIORITY_SIZE_KHR MAX_GLOBAL_PRIORITY_SIZE_KHR} {@code VkQueueGlobalPriorityKHR} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid. */
     @NativeType("VkQueueGlobalPriorityKHR[VK_MAX_GLOBAL_PRIORITY_SIZE_KHR]")
     public IntBuffer priorities() { return npriorities(address()); }
-    /** an array of {@link EXTGlobalPriorityQuery#VK_MAX_GLOBAL_PRIORITY_SIZE_EXT MAX_GLOBAL_PRIORITY_SIZE_EXT} {@code VkQueueGlobalPriorityEXT} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid. */
+    /** an array of {@link KHRGlobalPriority#VK_MAX_GLOBAL_PRIORITY_SIZE_KHR MAX_GLOBAL_PRIORITY_SIZE_KHR} {@code VkQueueGlobalPriorityKHR} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid. */
     @NativeType("VkQueueGlobalPriorityKHR")
     public int priorities(int index) { return npriorities(address(), index); }
 
@@ -127,24 +126,14 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     public VkQueueFamilyGlobalPriorityPropertiesKHR sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyGlobalPriorityPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #priorityCount} field. */
-    public VkQueueFamilyGlobalPriorityPropertiesKHR priorityCount(@NativeType("uint32_t") int value) { npriorityCount(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@link #priorities} field. */
-    public VkQueueFamilyGlobalPriorityPropertiesKHR priorities(@NativeType("VkQueueGlobalPriorityKHR[VK_MAX_GLOBAL_PRIORITY_SIZE_KHR]") IntBuffer value) { npriorities(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #priorities} field. */
-    public VkQueueFamilyGlobalPriorityPropertiesKHR priorities(int index, @NativeType("VkQueueGlobalPriorityKHR") int value) { npriorities(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyGlobalPriorityPropertiesKHR set(
         int sType,
-        long pNext,
-        int priorityCount,
-        IntBuffer priorities
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        priorityCount(priorityCount);
-        priorities(priorities);
 
         return this;
     }
@@ -281,7 +270,7 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     /** Unsafe version of {@link #priorityCount}. */
     public static int npriorityCount(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITYCOUNT); }
     /** Unsafe version of {@link #priorities}. */
-    public static IntBuffer npriorities(long struct) { return memIntBuffer(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR); }
+    public static IntBuffer npriorities(long struct) { return memIntBuffer(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES, npriorityCount(struct)); }
     /** Unsafe version of {@link #priorities(int) priorities}. */
     public static int npriorities(long struct, int index) {
         return UNSAFE.getInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES + check(index, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR) * 4);
@@ -291,17 +280,6 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #priorityCount(int) priorityCount}. */
-    public static void npriorityCount(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITYCOUNT, value); }
-    /** Unsafe version of {@link #priorities(IntBuffer) priorities}. */
-    public static void npriorities(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR); }
-        memCopy(memAddress(value), struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES, value.remaining() * 4);
-    }
-    /** Unsafe version of {@link #priorities(int, int) priorities}. */
-    public static void npriorities(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES + check(index, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR) * 4, value);
-    }
 
     // -----------------------------------
 
@@ -363,12 +341,6 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
         public VkQueueFamilyGlobalPriorityPropertiesKHR.Buffer sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkQueueFamilyGlobalPriorityPropertiesKHR#pNext} field. */
         public VkQueueFamilyGlobalPriorityPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyGlobalPriorityPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueueFamilyGlobalPriorityPropertiesKHR#priorityCount} field. */
-        public VkQueueFamilyGlobalPriorityPropertiesKHR.Buffer priorityCount(@NativeType("uint32_t") int value) { VkQueueFamilyGlobalPriorityPropertiesKHR.npriorityCount(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@link VkQueueFamilyGlobalPriorityPropertiesKHR#priorities} field. */
-        public VkQueueFamilyGlobalPriorityPropertiesKHR.Buffer priorities(@NativeType("VkQueueGlobalPriorityKHR[VK_MAX_GLOBAL_PRIORITY_SIZE_KHR]") IntBuffer value) { VkQueueFamilyGlobalPriorityPropertiesKHR.npriorities(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkQueueFamilyGlobalPriorityPropertiesKHR#priorities} field. */
-        public VkQueueFamilyGlobalPriorityPropertiesKHR.Buffer priorities(int index, @NativeType("VkQueueGlobalPriorityKHR") int value) { VkQueueFamilyGlobalPriorityPropertiesKHR.npriorities(address(), index, value); return this; }
 
     }
 

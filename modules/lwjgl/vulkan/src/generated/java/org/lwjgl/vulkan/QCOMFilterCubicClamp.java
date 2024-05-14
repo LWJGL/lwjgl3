@@ -14,8 +14,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension extends {@code VkSamplerReductionMode}, adding {@link #VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_RANGECLAMP_QCOM SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_RANGECLAMP_QCOM} which enables the range clamp operation.</p>
  * 
- * <h5>VK_QCOM_filter_cubic_clamp</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_QCOM_filter_cubic_clamp}</dd>
@@ -26,10 +24,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link EXTFilterCubic VK_EXT_filter_cubic} and      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a>      or      {@link EXTSamplerFilterMinmax VK_EXT_sampler_filter_minmax}</dd>
+ * <dd>{@link EXTFilterCubic VK_EXT_filter_cubic} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a> or {@link EXTSamplerFilterMinmax VK_EXT_sampler_filter_minmax}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_filter_cubic_clamp]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_filter_cubic_clamp%20extension*">jackohound</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_filter_cubic_clamp]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_filter_cubic_clamp%20extension*">mnetsch</a></li>
  * </ul></dd>
  * </dl>
  * 

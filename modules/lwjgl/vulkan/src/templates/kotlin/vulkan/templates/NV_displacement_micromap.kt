@@ -21,7 +21,6 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
             <li>enums extending {@code VkBuildAccelerationStructureFlagBitsKHR} to allow for updates.</li>
         </ul>
 
-        <h5>VK_NV_displacement_micromap</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_displacement_micromap}</dd>

@@ -323,7 +323,7 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct<VkPhysicalDeviceV
     /** an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver. */
     @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
     public String driverInfoString() { return ndriverInfoString(address()); }
-    /** the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}). */
+    /** the latest version of the Vulkan conformance test that the implementor has successfully tested this driver against prior to release (see {@link VkConformanceVersion}). */
     public VkConformanceVersion conformanceVersion() { return nconformanceVersion(address()); }
     /** a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths. */
     @NativeType("VkShaderFloatControlsIndependence")

@@ -13,8 +13,6 @@ package org.lwjgl.vulkan;
  * <pre><code>
  *     // TODO: Write some sample code here.</code></pre>
  * 
- * <h5>VK_NV_external_memory</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_external_memory}</dd>

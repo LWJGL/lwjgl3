@@ -17,7 +17,6 @@ val EXT_pipeline_library_group_handles = "EXTPipelineLibraryGroupHandles".native
 
         With this feature, the extension also improves compatibility with DXR 1.1 AddToStateObject(), which guarantees that group handles returned remain bitwise identical between parent and child pipelines. In addition, querying group handles from COLLECTION objects is also supported with that API.
 
-        <h5>VK_EXT_pipeline_library_group_handles</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_pipeline_library_group_handles}</dd>

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code dataSize} <b>must</b> be the total size in bytes of the PTX files or binary cache passed to {@code pData}.</li>
+ * <li>{@code dataSize} <b>must</b> be the total size in bytes of the PTX files or binary cache passed to {@code pData}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

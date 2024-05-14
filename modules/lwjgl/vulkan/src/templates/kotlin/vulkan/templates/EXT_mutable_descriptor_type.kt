@@ -19,7 +19,6 @@ val EXT_mutable_descriptor_type = "EXTMutableDescriptorType".nativeClassVK("EXT_
 
         These features together allow much more efficient emulation of the raw D3D12 binding model. This extension is primarily intended to be useful for API layering efforts.
 
-        <h5>VK_EXT_mutable_descriptor_type</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_mutable_descriptor_type}</dd>

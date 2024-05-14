@@ -16,7 +16,6 @@ val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_se
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_EXT_separate_stencil_usage</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_separate_stencil_usage}</dd>

@@ -102,8 +102,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * "submit command buffer"</code></pre>
  * 
- * <h5>VK_NV_optical_flow</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_optical_flow}</dd>
@@ -114,7 +112,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Carsten Rohde <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_optical_flow]%20@crohde%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_optical_flow%20extension*">crohde</a></li>
@@ -167,8 +165,19 @@ public class NVOpticalFlow {
         VK_STRUCTURE_TYPE_OPTICAL_FLOW_EXECUTE_INFO_NV                     = 1000464005,
         VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV = 1000464010;
 
-    /** Extends {@code VkFormat}. */
-    public static final int VK_FORMAT_R16G16_S10_5_NV = 1000464000;
+    /**
+     * Extends {@code VkFormat}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_FORMAT_R16G16_SFIXED5_NV FORMAT_R16G16_SFIXED5_NV}</li>
+     * <li>{@link #VK_FORMAT_R16G16_S10_5_NV FORMAT_R16G16_S10_5_NV}</li>
+     * </ul>
+     */
+    public static final int
+        VK_FORMAT_R16G16_SFIXED5_NV = 1000464000,
+        VK_FORMAT_R16G16_S10_5_NV   = 1000464000;
 
     /** Extends {@code VkObjectType}. */
     public static final int VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV = 1000464000;
@@ -297,11 +306,11 @@ public class NVOpticalFlow {
      * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_INPUT_NV OPTICAL_FLOW_SESSION_BINDING_POINT_INPUT_NV} specifies the binding point for the input frame.</li>
      * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_REFERENCE_NV OPTICAL_FLOW_SESSION_BINDING_POINT_REFERENCE_NV} specifies the binding point for the input reference frame.</li>
      * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_HINT_NV OPTICAL_FLOW_SESSION_BINDING_POINT_HINT_NV} specifies the binding point for the optional external hint flow vectors.</li>
-     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV} specifies the binding point for output flow vectors of default forward flow calcution.</li>
-     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_FLOW_VECTOR_NV OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_FLOW_VECTOR_NV} specifies the binding point for the optional output flow vector map of optional backward flow calcution.</li>
-     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_COST_NV OPTICAL_FLOW_SESSION_BINDING_POINT_COST_NV} specifies the binding point for the optional output cost map of default forward flow calcution.</li>
-     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_COST_NV OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_COST_NV} specifies the binding point for the optional output cost map of optional backward flow calcution.</li>
-     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_GLOBAL_FLOW_NV OPTICAL_FLOW_SESSION_BINDING_POINT_GLOBAL_FLOW_NV} specifies the binding point for the optional global flow value of default forward flow calcution.</li>
+     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV} specifies the binding point for output flow vectors of default forward flow calculation.</li>
+     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_FLOW_VECTOR_NV OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_FLOW_VECTOR_NV} specifies the binding point for the optional output flow vector map of optional backward flow calculation.</li>
+     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_COST_NV OPTICAL_FLOW_SESSION_BINDING_POINT_COST_NV} specifies the binding point for the optional output cost map of default forward flow calculation.</li>
+     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_COST_NV OPTICAL_FLOW_SESSION_BINDING_POINT_BACKWARD_COST_NV} specifies the binding point for the optional output cost map of optional backward flow calculation.</li>
+     * <li>{@link #VK_OPTICAL_FLOW_SESSION_BINDING_POINT_GLOBAL_FLOW_NV OPTICAL_FLOW_SESSION_BINDING_POINT_GLOBAL_FLOW_NV} specifies the binding point for the optional global flow value of default forward flow calculation.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -426,7 +435,7 @@ public class NVOpticalFlow {
      * 
      * <p>{@link VK10#VK_FORMAT_B8G8R8A8_UNORM FORMAT_B8G8R8A8_UNORM}, {@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM} and {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} are initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical usage</a> {@link #VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV OPTICAL_FLOW_USAGE_INPUT_BIT_NV}.</p>
      * 
-     * <p>{@link #VK_FORMAT_R16G16_S10_5_NV FORMAT_R16G16_S10_5_NV} is initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV}, {@link #VK_OPTICAL_FLOW_USAGE_HINT_BIT_NV OPTICAL_FLOW_USAGE_HINT_BIT_NV} and {@link #VK_OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV}.</p>
+     * <p>{@link #VK_FORMAT_R16G16_SFIXED5_NV FORMAT_R16G16_SFIXED5_NV} is initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV}, {@link #VK_OPTICAL_FLOW_USAGE_HINT_BIT_NV OPTICAL_FLOW_USAGE_HINT_BIT_NV} and {@link #VK_OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV}.</p>
      * 
      * <p>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} and {@link VK10#VK_FORMAT_R32_UINT FORMAT_R32_UINT} are initially supported for images with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#opticalflow-usage">optical flow usage</a> {@link #VK_OPTICAL_FLOW_USAGE_COST_BIT_NV OPTICAL_FLOW_USAGE_COST_BIT_NV}. It is recommended to use {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT} because of the lower bandwidth.</p>
      * </div>

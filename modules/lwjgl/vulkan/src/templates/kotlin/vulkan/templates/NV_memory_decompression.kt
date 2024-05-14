@@ -13,7 +13,6 @@ val NV_memory_decompression = "NVMemoryDecompression".nativeClassVK("NV_memory_d
         """
         This extension adds support for performing memory to memory decompression.
 
-        <h5>VK_NV_memory_decompression</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_memory_decompression}</dd>
@@ -28,7 +27,7 @@ val NV_memory_decompression = "NVMemoryDecompression".nativeClassVK("NV_memory_d
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

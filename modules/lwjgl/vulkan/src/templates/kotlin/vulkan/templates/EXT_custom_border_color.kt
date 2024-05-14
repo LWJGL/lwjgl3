@@ -22,7 +22,6 @@ val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_b
 
         When #BORDER_COLOR_FLOAT_CUSTOM_EXT or #BORDER_COLOR_INT_CUSTOM_EXT is used, applications must provide a ##VkSamplerCustomBorderColorCreateInfoEXT in the {@code pNext} chain for ##VkSamplerCreateInfo.
 
-        <h5>VK_EXT_custom_border_color</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_custom_border_color}</dd>

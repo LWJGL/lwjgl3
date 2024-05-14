@@ -75,8 +75,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>GBM, a graphics buffer manager for Linux, allows creation of a {@code gbm_bo} (that is, a graphics <em>buffer object</em>) by importing data similar to that in {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup>; and symmetrically allows exporting the same data from the {@code gbm_bo}. See the references to <em>modifier</em> and <em>plane</em> in {@code gbm.h}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn5">5</a></sup>.</p>
  * 
- * <h5>VK_EXT_image_drm_format_modifier</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_image_drm_format_modifier}</dd>
@@ -87,9 +85,10 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2}          and          {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}          and          {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and      {@link KHRImageFormatList VK_KHR_image_format_list}      or      <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a></dd>
+ * <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRImageFormatList VK_KHR_image_format_list} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_3</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>

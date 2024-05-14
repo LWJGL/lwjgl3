@@ -32,8 +32,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.1. However, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderDrawParameters">{@code shaderDrawParameters}</a> feature bit was added to distinguish whether it is actually available or not.</p>
  * 
- * <h5>VK_KHR_shader_draw_parameters</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_draw_parameters}</dd>

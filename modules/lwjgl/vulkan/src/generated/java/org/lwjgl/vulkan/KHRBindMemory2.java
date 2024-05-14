@@ -19,8 +19,6 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
- * <h5>VK_KHR_bind_memory2</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_bind_memory2}</dd>

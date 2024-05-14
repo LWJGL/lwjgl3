@@ -16,8 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension builds on the fragment shading rate functionality provided by the VK_KHR_fragment_shading_rate extension, adding support for “{@code supersample}” fragment shading rates that trigger multiple fragment shader invocations per pixel as well as a “{@code no invocations}” shading rate that discards any portions of a primitive that would use that shading rate.
  * 
- * <h5>VK_NV_fragment_shading_rate_enums</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_fragment_shading_rate_enums}</dd>

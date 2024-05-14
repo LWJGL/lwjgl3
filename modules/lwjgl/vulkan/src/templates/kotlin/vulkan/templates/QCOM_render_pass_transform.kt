@@ -38,7 +38,6 @@ val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_r
             <li>If this extension is used with {@link QCOMTileProperties VK_QCOM_tile_properties}, then #GetFramebufferTilePropertiesQCOM() and #GetDynamicRenderingTilePropertiesQCOM() return tile properties in the rotated coordinate space.</li>
         </ul>
 
-        <h5>VK_QCOM_render_pass_transform</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_QCOM_render_pass_transform}</dd>
@@ -50,25 +49,23 @@ val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_r
             <dd>283</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRSurface VK_KHR_surface}</dd>
+            <dd>4</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_transform]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_transform%20extension*">jackohound</a></li>
+                <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_transform]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_render_pass_transform%20extension*">mnetsch</a></li>
             </ul></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-07-21</dd>
+            <dd>2023-12-13</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires {@link KHRSwapchain VK_KHR_swapchain}</li>
+                <li>This extension interacts with {@link KHRSwapchain VK_KHR_swapchain}</li>
+                <li>This extension interacts with {@link KHRSurface VK_KHR_surface}</li>
                 <li>This extension interacts with {@link EXTFragmentDensityMap VK_EXT_fragment_density_map}</li>
                 <li>This extension interacts with {@link KHRFragmentShadingRate VK_KHR_fragment_shading_rate}</li>
                 <li>This extension interacts with {@link QCOMTileProperties VK_QCOM_tile_properties}</li>
@@ -79,6 +76,7 @@ val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_r
                 <li>Jeff Leger, Qualcomm Technologies, Inc.</li>
                 <li>Brandon Light, Qualcomm Technologies, Inc.</li>
                 <li>Matthew Netsch, Qualcomm Technologies, Inc.</li>
+                <li>Arpit Agarwal, Qualcomm Technologies, Inc.</li>
             </ul></dd>
         </dl>
         """
@@ -86,7 +84,7 @@ val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_r
     IntConstant(
         "The extension specification version.",
 
-        "QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION".."3"
+        "QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION".."4"
     )
 
     StringConstant(

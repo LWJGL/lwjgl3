@@ -45,7 +45,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         <h5>Examples</h5>
         See <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples">https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples</a>
 
-        <h5>VK_KHR_synchronization2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_synchronization2}</dd>

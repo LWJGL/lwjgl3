@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_ballot.html">{@code SPV_AMD_shader_ballot}</a></li>
  * </ul>
  * 
- * <h5>VK_AMD_shader_ballot</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_shader_ballot}</dd>

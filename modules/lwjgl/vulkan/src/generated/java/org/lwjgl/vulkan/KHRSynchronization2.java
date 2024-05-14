@@ -52,8 +52,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>See <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples">https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples</a></p>
  * 
- * <h5>VK_KHR_synchronization2</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_synchronization2}</dd>

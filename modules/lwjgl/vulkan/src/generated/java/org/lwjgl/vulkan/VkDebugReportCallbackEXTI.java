@@ -78,8 +78,8 @@ public interface VkDebugReportCallbackEXTI extends CallbackI {
      * @param object       the object where the issue was detected. If {@code objectType} is {@link EXTDebugReport#VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT}, {@code object} is undefined.
      * @param location     a component (layer, driver, loader) defined value specifying the <em>location</em> of the trigger. This is an <b>optional</b> value.
      * @param messageCode  a layer-defined value indicating what test triggered this callback.
-     * @param pLayerPrefix a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback.
-     * @param pMessage     a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback.
+     * @param pLayerPrefix a null-terminated UTF-8 string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback.
+     * @param pMessage     a null-terminated UTF-8 string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback.
      * @param pUserData    the user data given when the {@code VkDebugReportCallbackEXT} was created.
      */
     @NativeType("VkBool32") int invoke(@NativeType("VkDebugReportFlagsEXT") int flags, @NativeType("VkDebugReportObjectTypeEXT") int objectType, @NativeType("uint64_t") long object, @NativeType("size_t") long location, @NativeType("int32_t") int messageCode, @NativeType("char const *") long pLayerPrefix, @NativeType("char const *") long pMessage, @NativeType("void *") long pUserData);

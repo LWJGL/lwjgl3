@@ -8,8 +8,6 @@ package org.lwjgl.vulkan;
 /**
  * This extension is based on the {@link EXTVertexAttributeDivisor VK_EXT_vertex_attribute_divisor} extension. The only difference is the new property {@code supportsNonZeroFirstInstance}, which indicates support for non-zero values in {@code firstInstance}. This allows the extension to be supported on implementations that have traditionally only supported OpenGL ES.
  * 
- * <h5>VK_KHR_vertex_attribute_divisor</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_vertex_attribute_divisor}</dd>

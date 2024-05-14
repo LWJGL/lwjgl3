@@ -16,7 +16,6 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code shaderBufferInt64Atomics} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_KHR_shader_atomic_int64</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_atomic_int64}</dd>
@@ -31,7 +30,7 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
@@ -51,7 +50,7 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a></li>
+                <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

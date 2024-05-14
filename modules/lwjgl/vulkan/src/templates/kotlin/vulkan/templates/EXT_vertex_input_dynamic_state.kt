@@ -15,7 +15,6 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 
         This extension adds dynamic state support for what is normally static state in ##VkPipelineVertexInputStateCreateInfo.
 
-        <h5>VK_EXT_vertex_input_dynamic_state</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_vertex_input_dynamic_state}</dd>

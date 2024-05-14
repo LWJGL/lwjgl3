@@ -601,7 +601,7 @@ val StdVideoH265SpsFlags = struct(Module.VULKAN, "StdVideoH265SpsFlags") {
     uint32_tb("vui_parameters_present_flag", "", bits = 1)
     uint32_tb("sps_extension_present_flag", "", bits = 1)
     uint32_tb("sps_range_extension_flag", "", bits = 1)
-    uint32_tb("transform_skip_rotation_enabled_flag", "extension SPS flags, valid when #VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set", bits = 1)
+    uint32_tb("transform_skip_rotation_enabled_flag", "extension SPS flags, valid when #H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set", bits = 1)
     uint32_tb("transform_skip_context_enabled_flag", "", bits = 1)
     uint32_tb("implicit_rdpcm_enabled_flag", "", bits = 1)
     uint32_tb("explicit_rdpcm_enabled_flag", "", bits = 1)
@@ -611,7 +611,7 @@ val StdVideoH265SpsFlags = struct(Module.VULKAN, "StdVideoH265SpsFlags") {
     uint32_tb("persistent_rice_adaptation_enabled_flag", "", bits = 1)
     uint32_tb("cabac_bypass_alignment_enabled_flag", "", bits = 1)
     uint32_tb("sps_scc_extension_flag", "", bits = 1)
-    uint32_tb("sps_curr_pic_ref_enabled_flag", "extension SPS flags, valid when #VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS is set", bits = 1)
+    uint32_tb("sps_curr_pic_ref_enabled_flag", "extension SPS flags, valid when #H265_PROFILE_IDC_SCC_EXTENSIONS is set", bits = 1)
     uint32_tb("palette_mode_enabled_flag", "", bits = 1)
     uint32_tb("sps_palette_predictor_initializers_present_flag", "", bits = 1)
     uint32_tb("sps_palette_predictor_initializer_present_flag", "", bits = 1)
@@ -681,7 +681,7 @@ val StdVideoH265SequenceParameterSet = struct(Module.VULKAN, "StdVideoH265Sequen
     uint8_t("log2_diff_max_min_pcm_luma_coding_block_size", "")
     uint8_t("reserved1", "").private()
     uint8_t("reserved2", "").private()
-    uint8_t("palette_max_size", "extension SPS flags, valid when #VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS is set")
+    uint8_t("palette_max_size", "extension SPS flags, valid when #H265_PROFILE_IDC_SCC_EXTENSIONS is set")
     uint8_t("delta_palette_max_predictor_size", "")
     uint8_t("motion_vector_resolution_control_idc", "")
     uint8_t("sps_num_palette_predictor_initializer_minus1", "")
@@ -727,9 +727,9 @@ val StdVideoH265PpsFlags = struct(Module.VULKAN, "StdVideoH265PpsFlags") {
     uint32_tb("lists_modification_present_flag", "", bits = 1)
     uint32_tb("slice_segment_header_extension_present_flag", "", bits = 1)
     uint32_tb("pps_extension_present_flag", "", bits = 1)
-    uint32_tb("cross_component_prediction_enabled_flag", "extension PPS flags, valid when #VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set", bits = 1)
+    uint32_tb("cross_component_prediction_enabled_flag", "extension PPS flags, valid when #H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set", bits = 1)
     uint32_tb("chroma_qp_offset_list_enabled_flag", "", bits = 1)
-    uint32_tb("pps_curr_pic_ref_enabled_flag", "extension PPS flags, valid when #VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS is set", bits = 1)
+    uint32_tb("pps_curr_pic_ref_enabled_flag", "extension PPS flags, valid when #H265_PROFILE_IDC_SCC_EXTENSIONS is set", bits = 1)
     uint32_tb("residual_adaptive_colour_transform_enabled_flag", "", bits = 1)
     uint32_tb("pps_slice_act_qp_offsets_present_flag", "", bits = 1)
     uint32_tb("pps_palette_predictor_initializers_present_flag", "", bits = 1)
@@ -755,7 +755,7 @@ val StdVideoH265PictureParameterSet = struct(Module.VULKAN, "StdVideoH265Picture
     int8_t("pps_beta_offset_div2", "")
     int8_t("pps_tc_offset_div2", "")
     uint8_t("log2_parallel_merge_level_minus2", "")
-    uint8_t("log2_max_transform_skip_block_size_minus2", "extension PPS, valid when #VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set")
+    uint8_t("log2_max_transform_skip_block_size_minus2", "extension PPS, valid when #H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS is set")
     uint8_t("diff_cu_chroma_qp_offset_depth", "")
     uint8_t("chroma_qp_offset_list_len_minus1", "")
     int8_t("cb_qp_offset_list", "")["STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE"]
@@ -978,4 +978,330 @@ val StdVideoEncodeH265ReferenceInfo = struct(Module.VULKAN, "StdVideoEncodeH265R
     StdVideoH265PictureType("pic_type", "")
     int32_t("PicOrderCntVal", "")
     uint8_t("TemporalId", "")
+}
+
+// vulkan_video_codec_av1std.h
+
+val StdVideoAV1Profile = "StdVideoAV1Profile".enumType
+val StdVideoAV1Level = "StdVideoAV1Level".enumType
+val StdVideoAV1ColorPrimaries = "StdVideoAV1ColorPrimaries".enumType
+val StdVideoAV1TransferCharacteristics = "StdVideoAV1TransferCharacteristics".enumType
+val StdVideoAV1MatrixCoefficients = "StdVideoAV1MatrixCoefficients".enumType
+val StdVideoAV1ChromaSamplePosition = "StdVideoAV1ChromaSamplePosition".enumType
+val StdVideoAV1FrameRestorationType = "StdVideoAV1FrameRestorationType".enumType
+val StdVideoAV1FrameType = "StdVideoAV1FrameType".enumType
+val StdVideoAV1InterpolationFilter = "StdVideoAV1InterpolationFilter".enumType
+val StdVideoAV1TxMode = "StdVideoAV1TxMode".enumType
+
+val StdVideoAV1ColorConfigFlags = struct(Module.VULKAN, "StdVideoAV1ColorConfigFlags") {
+    subpackage = "video"
+
+    uint32_tb("mono_chrome", "", bits = 1)
+    uint32_tb("color_range", "", bits = 1)
+    uint32_tb("separate_uv_delta_q", "", bits = 1)
+    uint32_tb("color_description_present_flag", "", bits = 1)
+    uint32_t("reserved", "", bits = 28).private()
+}
+
+val StdVideoAV1ColorConfig = struct(Module.VULKAN, "StdVideoAV1ColorConfig") {
+    subpackage = "video"
+
+    StdVideoAV1ColorConfigFlags("flags", "")
+    uint8_t("BitDepth", "")
+    uint8_t("subsampling_x", "")
+    uint8_t("subsampling_y", "")
+    uint8_t("reserved1", "").private()
+    StdVideoAV1ColorPrimaries("color_primaries", "")
+    StdVideoAV1TransferCharacteristics("transfer_characteristics", "")
+    StdVideoAV1MatrixCoefficients("matrix_coefficients", "")
+    StdVideoAV1ChromaSamplePosition("chroma_sample_position", "")
+}
+
+val StdVideoAV1TimingInfoFlags = struct(Module.VULKAN, "StdVideoAV1TimingInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("equal_picture_interval", "", bits = 1)
+    uint32_t("reserved", "", bits = 31).private()
+}
+
+val StdVideoAV1TimingInfo = struct(Module.VULKAN, "StdVideoAV1TimingInfo") {
+    subpackage = "video"
+
+    StdVideoAV1TimingInfoFlags("flags", "")
+    uint32_t("num_units_in_display_tick", "")
+    uint32_t("time_scale", "")
+    uint32_t("num_ticks_per_picture_minus_1", "")
+}
+
+val StdVideoAV1LoopFilterFlags = struct(Module.VULKAN, "StdVideoAV1LoopFilterFlags") {
+    subpackage = "video"
+
+    uint32_tb("loop_filter_delta_enabled", "", bits = 1)
+    uint32_tb("loop_filter_delta_update", "", bits = 1)
+    uint32_t("reserved", "", bits = 30).private()
+}
+
+val StdVideoAV1LoopFilter = struct(Module.VULKAN, "StdVideoAV1LoopFilter") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoAV1LoopFilterFlags("flags", "")
+    uint8_t("loop_filter_level", "")["STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS"]
+    uint8_t("loop_filter_sharpness", "")
+    uint8_t("update_ref_delta", "")
+    int8_t("loop_filter_ref_deltas", "")["STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME"]
+    uint8_t("update_mode_delta", "")
+    int8_t("loop_filter_mode_deltas", "")["STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS"]
+}
+
+val StdVideoAV1QuantizationFlags = struct(Module.VULKAN, "StdVideoAV1QuantizationFlags") {
+    subpackage = "video"
+
+    uint32_tb("using_qmatrix", "", bits = 1)
+    uint32_tb("diff_uv_delta", "", bits = 1)
+    uint32_t("reserved", "", bits = 30).private()
+}
+
+val StdVideoAV1Quantization = struct(Module.VULKAN, "StdVideoAV1Quantization") {
+    subpackage = "video"
+
+    StdVideoAV1QuantizationFlags("flags", "")
+    uint8_t("base_q_idx", "")
+    int8_t("DeltaQYDc", "")
+    int8_t("DeltaQUDc", "")
+    int8_t("DeltaQUAc", "")
+    int8_t("DeltaQVDc", "")
+    int8_t("DeltaQVAc", "")
+    uint8_t("qm_y", "")
+    uint8_t("qm_u", "")
+    uint8_t("qm_v", "")
+}
+
+val StdVideoAV1Segmentation = struct(Module.VULKAN, "StdVideoAV1Segmentation") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    uint8_t("FeatureEnabled", "")["STD_VIDEO_AV1_MAX_SEGMENTS"]
+    int16_t("FeatureData", "")["STD_VIDEO_AV1_MAX_SEGMENTS"]["STD_VIDEO_AV1_SEG_LVL_MAX"] // TODO:
+}
+
+val StdVideoAV1TileInfoFlag = struct(Module.VULKAN, "StdVideoAV1TileInfoFlag") {
+    subpackage = "video"
+
+    uint32_tb("uniform_tile_spacing_flag", "", bits = 1)
+    uint32_t("reserved", "", bits = 31).private()
+}
+
+val StdVideoAV1TileInfo = struct(Module.VULKAN, "StdVideoAV1TileInfo") {
+    subpackage = "video"
+
+    StdVideoAV1TileInfoFlag("flags", "")
+    AutoSize("pMiColStarts", "pWidthInSbsMinus1")..uint8_t("TileCols", "")
+    AutoSize("pMiRowStarts", "pHeightInSbsMinus1")..uint8_t("TileRows", "")
+    uint16_t("context_update_tile_id", "")
+    uint8_t("tile_size_bytes_minus_1", "")
+    uint8_t("reserved1", "")[7].private()
+    uint16_t.const.p("pMiColStarts", "")
+    uint16_t.const.p("pMiRowStarts", "")
+    uint16_t.const.p("pWidthInSbsMinus1", "")
+    uint16_t.const.p("pHeightInSbsMinus1", "")
+}
+
+val StdVideoAV1CDEF = struct(Module.VULKAN, "StdVideoAV1CDEF") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    uint8_t("cdef_damping_minus_3", "")
+    uint8_t("cdef_bits", "")
+    uint8_t("cdef_y_pri_strength", "")["STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS"]
+    uint8_t("cdef_y_sec_strength", "")["STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS"]
+    uint8_t("cdef_uv_pri_strength", "")["STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS"]
+    uint8_t("cdef_uv_sec_strength", "")["STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS"]
+}
+
+val StdVideoAV1LoopRestoration = struct(Module.VULKAN, "StdVideoAV1LoopRestoration") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoAV1FrameRestorationType("FrameRestorationType", "")["STD_VIDEO_AV1_MAX_NUM_PLANES"]
+    uint16_t("LoopRestorationSize", "")["STD_VIDEO_AV1_MAX_NUM_PLANES"]
+}
+
+val StdVideoAV1GlobalMotion = struct(Module.VULKAN, "StdVideoAV1GlobalMotion") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    uint8_t("GmType", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
+    int32_t("gm_params", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]["STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS"]
+}
+
+val StdVideoAV1FilmGrainFlags = struct(Module.VULKAN, "StdVideoAV1FilmGrainFlags") {
+    subpackage = "video"
+
+    uint32_tb("chroma_scaling_from_luma", "", bits = 1)
+    uint32_tb("overlap_flag", "", bits = 1)
+    uint32_tb("clip_to_restricted_range", "", bits = 1)
+    uint32_tb("update_grain", "", bits = 1)
+    uint32_t("reserved", "", bits = 28).private()
+}
+
+val StdVideoAV1FilmGrain = struct(Module.VULKAN, "StdVideoAV1FilmGrain") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoAV1FilmGrainFlags("flags", "")
+    uint8_t("grain_scaling_minus_8", "")
+    uint8_t("ar_coeff_lag", "")
+    uint8_t("ar_coeff_shift_minus_6", "")
+    uint8_t("grain_scale_shift", "")
+    uint16_t("grain_seed", "")
+    uint8_t("film_grain_params_ref_idx", "")
+    uint8_t("num_y_points", "")
+    uint8_t("point_y_value", "")["STD_VIDEO_AV1_MAX_NUM_Y_POINTS"]
+    uint8_t("point_y_scaling", "")["STD_VIDEO_AV1_MAX_NUM_Y_POINTS"]
+    uint8_t("num_cb_points", "")
+    uint8_t("point_cb_value", "")["STD_VIDEO_AV1_MAX_NUM_CB_POINTS"]
+    uint8_t("point_cb_scaling", "")["STD_VIDEO_AV1_MAX_NUM_CB_POINTS"]
+    uint8_t("num_cr_points", "")
+    uint8_t("point_cr_value", "")["STD_VIDEO_AV1_MAX_NUM_CR_POINTS"]
+    uint8_t("point_cr_scaling", "")["STD_VIDEO_AV1_MAX_NUM_CR_POINTS"]
+    int8_t("ar_coeffs_y_plus_128", "")["STD_VIDEO_AV1_MAX_NUM_POS_LUMA"]
+    int8_t("ar_coeffs_cb_plus_128", "")["STD_VIDEO_AV1_MAX_NUM_POS_CHROMA"]
+    int8_t("ar_coeffs_cr_plus_128", "")["STD_VIDEO_AV1_MAX_NUM_POS_CHROMA"]
+    uint8_t("cb_mult", "")
+    uint8_t("cb_luma_mult", "")
+    uint16_t("cb_offset", "")
+    uint8_t("cr_mult", "")
+    uint8_t("cr_luma_mult", "")
+    uint16_t("cr_offset", "")
+}
+
+val StdVideoAV1SequenceHeaderFlags = struct(Module.VULKAN, "StdVideoAV1SequenceHeaderFlags") {
+    subpackage = "video"
+
+    uint32_tb("still_picture", "", bits = 1)
+    uint32_tb("reduced_still_picture_header", "", bits = 1)
+    uint32_tb("use_128x128_superblock", "", bits = 1)
+    uint32_tb("enable_filter_intra", "", bits = 1)
+    uint32_tb("enable_intra_edge_filter", "", bits = 1)
+    uint32_tb("enable_interintra_compound", "", bits = 1)
+    uint32_tb("enable_masked_compound", "", bits = 1)
+    uint32_tb("enable_warped_motion", "", bits = 1)
+    uint32_tb("enable_dual_filter", "", bits = 1)
+    uint32_tb("enable_order_hint", "", bits = 1)
+    uint32_tb("enable_jnt_comp", "", bits = 1)
+    uint32_tb("enable_ref_frame_mvs", "", bits = 1)
+    uint32_tb("frame_id_numbers_present_flag", "", bits = 1)
+    uint32_tb("enable_superres", "", bits = 1)
+    uint32_tb("enable_cdef", "", bits = 1)
+    uint32_tb("enable_restoration", "", bits = 1)
+    uint32_tb("film_grain_params_present", "", bits = 1)
+    uint32_tb("timing_info_present_flag", "", bits = 1)
+    uint32_tb("initial_display_delay_present_flag", "", bits = 1)
+    uint32_t("reserved", "", bits = 13).private()
+}
+
+val StdVideoAV1SequenceHeader = struct(Module.VULKAN, "StdVideoAV1SequenceHeader") {
+    subpackage = "video"
+
+    StdVideoAV1SequenceHeaderFlags("flags", "")
+    StdVideoAV1Profile("seq_profile", "")
+    uint8_t("frame_width_bits_minus_1", "")
+    uint8_t("frame_height_bits_minus_1", "")
+    uint16_t("max_frame_width_minus_1", "")
+    uint16_t("max_frame_height_minus_1", "")
+    uint8_t("delta_frame_id_length_minus_2", "")
+    uint8_t("additional_frame_id_length_minus_1", "")
+    uint8_t("order_hint_bits_minus_1", "")
+    uint8_t("seq_force_integer_mv", "")
+    uint8_t("seq_force_screen_content_tools", "")
+    uint8_t("reserved1", "")[5].private()
+    StdVideoAV1ColorConfig.const.p("pColorConfig", "")
+    StdVideoAV1TimingInfo.const.p("pTimingInfo", "")
+}
+
+// vulkan_video_code_av1std_decode
+
+val StdVideoDecodeAV1PictureInfoFlags = struct(Module.VULKAN, "StdVideoDecodeAV1PictureInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("error_resilient_mode", "", bits = 1)
+    uint32_tb("disable_cdf_update", "", bits = 1)
+    uint32_tb("use_superres", "", bits = 1)
+    uint32_tb("render_and_frame_size_different", "", bits = 1)
+    uint32_tb("allow_screen_content_tools", "", bits = 1)
+    uint32_tb("is_filter_switchable", "", bits = 1)
+    uint32_tb("force_integer_mv", "", bits = 1)
+    uint32_tb("frame_size_override_flag", "", bits = 1)
+    uint32_tb("buffer_removal_time_present_flag", "", bits = 1)
+    uint32_tb("allow_intrabc", "", bits = 1)
+    uint32_tb("frame_refs_short_signaling", "", bits = 1)
+    uint32_tb("allow_high_precision_mv", "", bits = 1)
+    uint32_tb("is_motion_mode_switchable", "", bits = 1)
+    uint32_tb("use_ref_frame_mvs", "", bits = 1)
+    uint32_tb("disable_frame_end_update_cdf", "", bits = 1)
+    uint32_tb("allow_warped_motion", "", bits = 1)
+    uint32_tb("reduced_tx_set", "", bits = 1)
+    uint32_tb("reference_select", "", bits = 1)
+    uint32_tb("skip_mode_present", "", bits = 1)
+    uint32_tb("delta_q_present", "", bits = 1)
+    uint32_tb("delta_lf_present", "", bits = 1)
+    uint32_tb("delta_lf_multi", "", bits = 1)
+    uint32_tb("segmentation_enabled", "", bits = 1)
+    uint32_tb("segmentation_update_map", "", bits = 1)
+    uint32_tb("segmentation_temporal_update", "", bits = 1)
+    uint32_tb("segmentation_update_data", "", bits = 1)
+    uint32_tb("UsesLr", "", bits = 1)
+    uint32_tb("usesChromaLr", "", bits = 1)
+    uint32_tb("apply_grain", "", bits = 1)
+    uint32_t("reserved", "", bits = 3).private()
+}
+
+val StdVideoDecodeAV1PictureInfo = struct(Module.VULKAN, "StdVideoDecodeAV1PictureInfo") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoDecodeAV1PictureInfoFlags("flags", "")
+    StdVideoAV1FrameType("frame_type", "")
+    uint32_t("current_frame_id", "")
+    uint8_t("OrderHint", "")
+    uint8_t("primary_ref_frame", "")
+    uint8_t("refresh_frame_flags", "")
+    uint8_t("reserved1", "").private()
+    StdVideoAV1InterpolationFilter("interpolation_filter", "")
+    StdVideoAV1TxMode("TxMode", "")
+    uint8_t("delta_q_res", "")
+    uint8_t("delta_lf_res", "")
+    uint8_t("SkipModeFrame", "")["STD_VIDEO_AV1_SKIP_MODE_FRAMES"]
+    uint8_t("coded_denom", "")
+    uint8_t("reserved2", "")[3].private()
+    uint8_t("OrderHints", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
+    uint32_t("expectedFrameId", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
+    StdVideoAV1TileInfo.const.p("pTileInfo", "")
+    StdVideoAV1Quantization.const.p("pQuantization", "")
+    StdVideoAV1Segmentation.const.p("pSegmentation", "")
+    StdVideoAV1LoopFilter.const.p("pLoopFilter", "")
+    StdVideoAV1CDEF.const.p("pCDEF", "")
+    StdVideoAV1LoopRestoration.const.p("pLoopRestoration", "")
+    StdVideoAV1GlobalMotion.const.p("pGlobalMotion", "")
+    StdVideoAV1FilmGrain.const.p("pFilmGrain", "")
+}
+
+val StdVideoDecodeAV1ReferenceInfoFlags = struct(Module.VULKAN, "StdVideoDecodeAV1ReferenceInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("disable_frame_end_update_cdf", "", bits = 1)
+    uint32_tb("segmentation_enabled", "", bits = 1)
+    uint32_t("reserved", "", bits = 30).private()
+}
+
+val StdVideoDecodeAV1ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeAV1ReferenceInfo") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoDecodeAV1ReferenceInfoFlags("flags", "")
+    uint8_t("frame_type", "")
+    uint8_t("RefFrameSignBias", "")
+    uint8_t("OrderHint", "")
+    uint8_t("SavedOrderHints", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
 }

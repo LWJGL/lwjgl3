@@ -13,7 +13,9 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
         """
         This extension adds some line rasterization features that are commonly used in CAD applications and supported in other APIs like OpenGL. Bresenham-style line rasterization is supported, smooth rectangular lines (coverage to alpha) are supported, and stippled lines are supported for all three line rasterization modes.
 
-        <h5>VK_EXT_line_rasterization</h5>
+        <h5>Promotion to {@code VK_KHR_line_rasterization}</h5>
+        All functionality in this extension is included in {@link KHRLineRasterization VK_KHR_line_rasterization}, with the suffix changed to KHR. The original enum names are still available as aliases of the KHR functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_line_rasterization}</dd>
@@ -29,6 +31,11 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to {@link KHRLineRasterization VK_KHR_line_rasterization} extension</li>
+            </ul></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
@@ -86,68 +93,33 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
     EnumConstant(
         """
-        VkLineRasterizationModeEXT - Line rasterization modes
+        VkLineRasterizationModeKHR - Line rasterization modes
 
         <h5>Description</h5>
         <ul>
-            <li>#LINE_RASTERIZATION_MODE_DEFAULT_EXT is equivalent to #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE, otherwise lines are drawn as non-{@code strictLines} parallelograms. Both of these modes are defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-basic">Basic Line Segment Rasterization</a>.</li>
-            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_EXT specifies lines drawn as if they were rectangles extruded from the line</li>
-            <li>#LINE_RASTERIZATION_MODE_BRESENHAM_EXT specifies lines drawn by determining which pixel diamonds the line intersects and exits, as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-bresenham">Bresenham Line Segment Rasterization</a>.</li>
-            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT specifies lines drawn if they were rectangles extruded from the line, with alpha falloff, as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-smooth">Smooth Lines</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_DEFAULT_KHR is equivalent to #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE, otherwise lines are drawn as non-{@code strictLines} parallelograms. Both of these modes are defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-basic">Basic Line Segment Rasterization</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_KHR specifies lines drawn as if they were rectangles extruded from the line</li>
+            <li>#LINE_RASTERIZATION_MODE_BRESENHAM_KHR specifies lines drawn by determining which pixel diamonds the line intersects and exits, as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-bresenham">Bresenham Line Segment Rasterization</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR specifies lines drawn if they were rectangles extruded from the line, with alpha falloff, as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-lines-smooth">Smooth Lines</a>.</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkPipelineRasterizationLineStateCreateInfoEXT, #CmdSetLineRasterizationModeEXT()
+        ##VkPipelineRasterizationLineStateCreateInfoKHR, #CmdSetLineRasterizationModeEXT()
         """,
 
+        "LINE_RASTERIZATION_MODE_DEFAULT_KHR".."0",
         "LINE_RASTERIZATION_MODE_DEFAULT_EXT".."0",
+        "LINE_RASTERIZATION_MODE_RECTANGULAR_KHR".."1",
         "LINE_RASTERIZATION_MODE_RECTANGULAR_EXT".."1",
+        "LINE_RASTERIZATION_MODE_BRESENHAM_KHR".."2",
         "LINE_RASTERIZATION_MODE_BRESENHAM_EXT".."2",
+        "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR".."3",
         "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT".."3"
     )
 
     void(
         "CmdSetLineStippleEXT",
-        """
-        Set line stipple dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the line stipple state, call:
-
-        <pre><code>
-￿void vkCmdSetLineStippleEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    lineStippleFactor,
-￿    uint16_t                                    lineStipplePattern);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the line stipple state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStippleFactor} and ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStipplePattern} values used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code lineStippleFactor} <b>must</b> be in the range <code>[1,256]</code></li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-            <li>This command <b>must</b> only be called outside of a video coding scope</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetLineStippleKHR().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         uint32_t("lineStippleFactor", "the repeat factor used in stippled line rasterization."),

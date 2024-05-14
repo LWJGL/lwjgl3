@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension adds dynamic state support for what is normally static state in {@link VkPipelineVertexInputStateCreateInfo}.</p>
  * 
- * <h5>VK_EXT_vertex_input_dynamic_state</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_vertex_input_dynamic_state}</dd>

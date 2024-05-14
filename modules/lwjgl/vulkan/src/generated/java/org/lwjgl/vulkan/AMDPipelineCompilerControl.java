@@ -12,8 +12,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>None.</p>
  * 
- * <h5>VK_AMD_pipeline_compiler_control</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_pipeline_compiler_control}</dd>

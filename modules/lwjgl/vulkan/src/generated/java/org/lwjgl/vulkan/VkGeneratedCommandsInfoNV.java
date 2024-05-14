@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The provided {@code pipeline} <b>must</b> match the pipeline bound at execution time</li>
  * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV}, then the {@code pipeline} <b>must</b> have been created with multiple shader groups</li>
  * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV}, then the {@code pipeline} <b>must</b> have been created with {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV} set in {@link VkGraphicsPipelineCreateInfo}{@code ::flags}</li>
- * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, then the {@code pipeline}`s {@code VkPipelineLayout} <b>must</b> match the {@link VkIndirectCommandsLayoutTokenNV}{@code ::pushconstantPipelineLayout}</li>
+ * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, then the {@code pipeline}’s {@code VkPipelineLayout} <b>must</b> match the {@link VkIndirectCommandsLayoutTokenNV}{@code ::pushconstantPipelineLayout}</li>
  * <li>{@code streamCount} <b>must</b> match the {@code indirectCommandsLayout}’s {@code streamCount}</li>
  * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}, then the {@code pipeline} <b>must</b> have been created with the flag {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV}</li>
  * <li>If {@code pipelineBindPoint} is of type {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}, then the {@code pipeline} <b>must</b> have been created with a {@link VkComputePipelineIndirectBufferInfoNV} structure specifying a valid address where its metadata will be saved</li>
@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
- * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+ * <li>If {@code pipeline} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
  * <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNV} handle</li>
  * <li>{@code pStreams} <b>must</b> be a valid pointer to an array of {@code streamCount} valid {@link VkIndirectCommandsStreamNV} structures</li>
  * <li>{@code preprocessBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -200,7 +200,7 @@ public class VkGeneratedCommandsInfoNV extends Struct<VkGeneratedCommandsInfoNV>
     /** the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated. */
     @NativeType("uint32_t")
     public int sequencesCount() { return nsequencesCount(address()); }
-    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@link VK10#VK_TRUE TRUE}, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse. */
+    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@link VK10#VK_TRUE TRUE}, then the preprocessing step is skipped and data in this buffer will not be modified. The contents and the layout of this buffer are opaque to applications and <b>must</b> not be modified outside functions related to device-generated commands or copied to another buffer for reuse. */
     @NativeType("VkBuffer")
     public long preprocessBuffer() { return npreprocessBuffer(address()); }
     /** the byte offset into {@code preprocessBuffer} where the preprocessed data is stored. */

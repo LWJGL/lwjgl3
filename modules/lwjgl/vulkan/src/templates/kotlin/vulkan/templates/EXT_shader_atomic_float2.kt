@@ -13,7 +13,6 @@ val EXT_shader_atomic_float2 = "EXTShaderAtomicFloat2".nativeClassVK("EXT_shader
         """
         This extension allows a shader to perform 16-bit floating-point atomic operations on buffer and workgroup memory as well as floating-point atomic minimum and maximum operations on buffer, workgroup, and image memory. It advertises the SPIR-V {@code AtomicFloat16AddEXT} capability which allows atomic add operations on 16-bit floating-point numbers and the SPIR-V {@code AtomicFloat16MinMaxEXT}, {@code AtomicFloat32MinMaxEXT} and {@code AtomicFloat64MinMaxEXT} capabilities which allow atomic minimum and maximum operations on floating-point numbers. The supported operations include {@code OpAtomicFAddEXT}, {@code OpAtomicFMinEXT} and {@code OpAtomicFMaxEXT}.
 
-        <h5>VK_EXT_shader_atomic_float2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_shader_atomic_float2}</dd>
@@ -52,7 +51,7 @@ val EXT_shader_atomic_float2 = "EXTShaderAtomicFloat2".nativeClassVK("EXT_shader
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_atomic_float2.txt">{@code GLSL_EXT_shader_atomic_float2}</a></li>
+                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_shader_atomic_float2.txt">{@code GLSL_EXT_shader_atomic_float2}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

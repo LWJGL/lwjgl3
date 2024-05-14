@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The per-view render areas define per-view regions of attachments that are loaded, stored, and resolved according to the {@code loadOp}, {@code storeOp}, and {@code resolveMode} values of the render pass instance. When per-view render areas are defined, the value of {@link VkRenderPassBeginInfo}{@code ::renderArea} or {@link VkRenderingInfo}{@code ::renderArea} <b>must</b> be set to a render area that includes the union of all per-view render areas, <b>may</b> be used by the implementation for optimizations, but does not affect loads, stores, or resolves.</p>
  * 
- * <p>If this structure is present and if {@code perViewRenderAreaCount} is not zero, then {@code perViewRenderAreaCount} <b>must</b> be at least least one greater than the most significant bit set in any any element of {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewMasks}. or {@link VkRenderingInfo}{@code ::viewMask}</p>
+ * <p>If this structure is present and if {@code perViewRenderAreaCount} is not zero, then {@code perViewRenderAreaCount} <b>must</b> be at least one greater than the most significant bit set in any element of {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewMasks}. or {@link VkRenderingInfo}{@code ::viewMask}</p>
  * 
  * <p>If this structure is not present or if {@code perViewRenderAreaCount} is zero, {@link VkRenderPassBeginInfo}{@code ::renderArea} or {@link VkRenderingInfo}{@code ::renderArea} is used for all views.</p>
  * 
@@ -36,8 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code offset.y} member of any element of {@code pPerViewRenderAreas} <b>must</b> be greater than or equal to 0</li>
  * <li>The sum of the {@code offset.x} and {@code extent.width} members of any element of {@code pPerViewRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxFramebufferWidth">{@code maxFramebufferWidth}</a></li>
  * <li>The sum of the {@code offset.y} and {@code extent.height} members of any element of {@code pPerViewRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxFramebufferHeight">{@code maxFramebufferHeight}</a></li>
- * <li>If this structure is in the {@code pNext} chain of {@link VkRenderPassBeginInfo} and if the render pass object included an element in {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewMasks} that set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}.</li>
- * <li>If this structure is in the {@code pNext} chain of {@link VkRenderingInfo} and if {@link VkRenderingInfo}{@code ::viewMask} set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}.</li>
+ * <li>If this structure is in the {@code pNext} chain of {@link VkRenderPassBeginInfo} and if the render pass object included an element in {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewMasks} that set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}</li>
+ * <li>If this structure is in the {@code pNext} chain of {@link VkRenderingInfo} and if {@link VkRenderingInfo}{@code ::viewMask} set bit {@code n}, then {@code perViewRenderAreaCount} <b>must</b> be at least equal to {@code n+1}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

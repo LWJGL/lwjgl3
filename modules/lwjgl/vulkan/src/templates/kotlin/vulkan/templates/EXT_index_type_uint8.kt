@@ -13,7 +13,9 @@ val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uin
         """
         This extension allows {@code uint8_t} indices to be used with #CmdBindIndexBuffer().
 
-        <h5>VK_EXT_index_type_uint8</h5>
+        <h5>Promotion to {@code VK_KHR_index_type_uint8}</h5>
+        All functionality in this extension is included in {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8}, with the suffix changed to KHR. The original enum names are still available as aliases of the KHR functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_index_type_uint8}</dd>
@@ -29,6 +31,11 @@ val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uin
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension</li>
+            </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

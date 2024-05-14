@@ -18,8 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * The {@code VK_EXT_metal_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) from {@code CAMetalLayer}, which is the native rendering surface of Apple’s Metal framework.
  * 
- * <h5>VK_EXT_metal_surface</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_metal_surface}</dd>

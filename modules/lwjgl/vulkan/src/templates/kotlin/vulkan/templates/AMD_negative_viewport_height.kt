@@ -20,7 +20,6 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
         <h5>Obsoletion by {@code VK_KHR_maintenance1} and Vulkan 1.1</h5>
         Functionality in this extension is included in {@code VK_KHR_maintenance1} and subsequently Vulkan 1.1. Due to some slight behavioral differences, this extension <b>must</b> not be enabled alongside {@code VK_KHR_maintenance1}, or in an instance created with version 1.1 or later requested in ##VkApplicationInfo{@code ::apiVersion}.
 
-        <h5>VK_AMD_negative_viewport_height</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_negative_viewport_height}</dd>

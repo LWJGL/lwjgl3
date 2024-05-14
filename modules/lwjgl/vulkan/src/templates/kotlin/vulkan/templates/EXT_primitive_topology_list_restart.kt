@@ -13,7 +13,6 @@ val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nati
         """
         This extension allows list primitives to use the primitive restart index value. This provides a more efficient implementation when layering OpenGL functionality on Vulkan by avoiding emulation which incurs data copies.
 
-        <h5>VK_EXT_primitive_topology_list_restart</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_primitive_topology_list_restart}</dd>
@@ -28,7 +27,7 @@ val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nati
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>

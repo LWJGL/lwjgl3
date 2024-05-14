@@ -13,8 +13,6 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension allows applications to query an opaque handle from an image view for use as a sampled image or storage image. This provides no direct functionality itself.
  * 
- * <h5>VK_NVX_image_view_handle</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NVX_image_view_handle}</dd>
@@ -154,7 +152,6 @@ public class NVXImageViewHandle {
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * <li>{@link VK10#VK_ERROR_UNKNOWN ERROR_UNKNOWN}</li>
      * </ul></dd>
      * </dl>
      * 

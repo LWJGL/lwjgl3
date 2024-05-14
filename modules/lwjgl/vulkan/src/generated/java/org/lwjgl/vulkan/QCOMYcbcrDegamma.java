@@ -10,8 +10,6 @@ package org.lwjgl.vulkan;
  * 
  * <p>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} adds support for Y′C<sub>B</sub>C<sub>R</sub> conversion, but allows texture sampling in a non-linear space which can cause artifacts. This extension allows implementations to expose sRGB degamma for Y′C<sub>B</sub>C<sub>R</sub> formats, which is performed during texture filtering, allowing texture filtering to operate in a linear space.</p>
  * 
- * <h5>VK_QCOM_ycbcr_degamma</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_QCOM_ycbcr_degamma}</dd>
@@ -23,7 +21,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_ycbcr_degamma]%20@jackohound%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_ycbcr_degamma%20extension*">jackohound</a></li>
+ * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_ycbcr_degamma]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_ycbcr_degamma%20extension*">mnetsch</a></li>
  * </ul></dd>
  * </dl>
  * 

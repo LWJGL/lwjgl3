@@ -38,8 +38,6 @@ import static org.lwjgl.system.JNI.*;
  * <li>Clarification that copies between images of any type are allowed, treating 1D images as 2D images with a height of 1.</li>
  * </ul>
  * 
- * <h5>VK_KHR_maintenance5</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_maintenance5}</dd>
@@ -50,7 +48,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRDynamicRendering VK_KHR_dynamic_rendering}</dd>
+ * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRDynamicRendering VK_KHR_dynamic_rendering} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_1</li>
@@ -439,6 +437,7 @@ public class KHRMaintenance5 {
      * <li>{@link #VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV} specifies that the ray tracing pipeline <b>can</b> be used with acceleration structures which reference a displacement micromap array.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT} specifies that the pipeline <b>must</b> not be bound to a protected command buffer.</li>
      * <li>{@link #VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT} specifies that the pipeline <b>must</b> not be bound to an unprotected command buffer.</li>
+     * <li>{@link #VK_PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT} specifies that the pipeline will be used in a render pass that is begun with {@link EXTLegacyDithering#VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT}.</li>
      * </ul>
      * 
      * <p>It is valid to set both {@link #VK_PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR} and {@link #VK_PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR}. This allows a pipeline to be both a parent and possibly a child in a pipeline hierarchy. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-pipeline-derivatives">Pipeline Derivatives</a> for more information.</p>
@@ -451,9 +450,10 @@ public class KHRMaintenance5 {
      * </div>
      */
     public static final long
-        VK_PIPELINE_CREATE_2_DISABLE_OPTIMIZATION_BIT_KHR = 0x1L,
-        VK_PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR    = 0x2L,
-        VK_PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR           = 0x4L;
+        VK_PIPELINE_CREATE_2_DISABLE_OPTIMIZATION_BIT_KHR    = 0x1L,
+        VK_PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR       = 0x2L,
+        VK_PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR              = 0x4L,
+        VK_PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x0L;
 
     /**
      * VkBufferUsageFlagBits2KHR - Bitmask controlling how a pipeline is created
@@ -524,6 +524,8 @@ public class KHRMaintenance5 {
      * 
      * <p>{@code size} specifies the bound size of the index buffer starting from {@code offset}. If {@code size} is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} then the bound size is from {@code offset} to the end of the {@code buffer}.</p>
      * 
+     * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance6">{@code maintenance6}</a> feature is enabled, {@code buffer} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. If {@code buffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, every index fetched results in a value of zero.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
@@ -532,7 +534,9 @@ public class KHRMaintenance5 {
      * <li>{@code buffer} <b>must</b> have been created with the {@link VK10#VK_BUFFER_USAGE_INDEX_BUFFER_BIT BUFFER_USAGE_INDEX_BUFFER_BIT} flag</li>
      * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>{@code indexType} <b>must</b> not be {@link KHRAccelerationStructure#VK_INDEX_TYPE_NONE_KHR INDEX_TYPE_NONE_KHR}</li>
-     * <li>If {@code indexType} is {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-indexTypeUint8">{@code indexTypeUint8}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code indexType} is {@link KHRIndexTypeUint8#VK_INDEX_TYPE_UINT8_KHR INDEX_TYPE_UINT8_KHR}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-indexTypeUint8">{@code indexTypeUint8}</a> feature <b>must</b> be enabled</li>
+     * <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance6">{@code maintenance6}</a> is not enabled, {@code buffer} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+     * <li>If {@code buffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, offset <b>must</b> be zero</li>
      * <li>If {@code size} is not {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be a multiple of the size of the type indicated by {@code indexType}</li>
      * <li>If {@code size} is not {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the sum of {@code offset} and {@code size} <b>must</b> be less than or equal to the size of {@code buffer}</li>
      * </ul>
@@ -541,12 +545,12 @@ public class KHRMaintenance5 {
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+     * <li>If {@code buffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
      * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>
-     * <li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code buffer}, and {@code commandBuffer} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -608,8 +612,8 @@ public class KHRMaintenance5 {
      * <ul>
      * <li>the {@code offset.x} member in {@code renderArea} is a multiple of the {@code width} member of the returned {@link VkExtent2D} (the horizontal granularity).</li>
      * <li>the {@code offset.y} member in {@code renderArea} is a multiple of the {@code height} member of the returned {@link VkExtent2D} (the vertical granularity).</li>
-     * <li>either the {@code extent.width} member in {@code renderArea} is a multiple of the horizontal granularity or {@code offset.x}+{@code extent.width} is equal to the {@code width} of the {@code framebuffer} in the {@link VkRenderPassBeginInfo}.</li>
-     * <li>either the {@code extent.height} member in {@code renderArea} is a multiple of the vertical granularity or {@code offset.y}+{@code extent.height} is equal to the {@code height} of the {@code framebuffer} in the {@link VkRenderPassBeginInfo}.</li>
+     * <li>either the {@code extent.width} member in {@code renderArea} is a multiple of the horizontal granularity or {@code offset.x}+{@code extent.width} is equal to the {@code width} of each attachment used in the render pass instance.</li>
+     * <li>either the {@code extent.height} member in {@code renderArea} is a multiple of the vertical granularity or {@code offset.y}+{@code extent.height} is equal to the {@code height} of each attachment used in the render pass instance.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -719,7 +723,7 @@ public class KHRMaintenance5 {
      * 
      * <p>{@code vkGetImageSubresourceLayout2KHR} behaves similarly to {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
      * 
-     * <p>It is legal to call {@code vkGetImageSubresourceLayout2KHR} with a {@code image} created with {@code tiling} equal to {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, but the members of {@link VkSubresourceLayout2KHR}{@code ::subresourceLayout} will have undefined values in this case.</p>
+     * <p>It is legal to call {@code vkGetImageSubresourceLayout2KHR} with an {@code image} created with {@code tiling} equal to {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, but the members of {@link VkSubresourceLayout2KHR}{@code ::subresourceLayout} will have undefined values in this case.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 

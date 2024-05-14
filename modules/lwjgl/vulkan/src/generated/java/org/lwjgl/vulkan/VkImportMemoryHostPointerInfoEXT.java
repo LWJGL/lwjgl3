@@ -29,6 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Whether device memory objects imported from a host pointer hold a reference to their payload is undefined. As such, the application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.</p>
  * 
+ * <p>Implementations <b>may</b> support importing host pointers for memory types which are not host-visible. In this case, after a successful call to {@link VK10#vkAllocateMemory AllocateMemory}, the memory range imported from {@code pHostPointer} <b>must</b> not be accessed by the application until the {@code VkDeviceMemory} has been destroyed. Memory contents for the host memory becomes undefined on import, and is left undefined after the {@code VkDeviceMemory} has been destroyed. Applications <b>must</b> also not access host memory which is mapped to the same physical memory as {@code pHostPointer}, but mapped to a different host pointer while the {@code VkDeviceMemory} handle is valid. Implementations running on general-purpose operating systems <b>should</b> not support importing host pointers for memory types which are not host-visible.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Using host pointers to back non-host visible allocations is a platform-specific use case, and applications should not attempt to do this unless instructed by the platform.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

@@ -20,7 +20,6 @@ val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "
         <h5>Examples</h5>
         None.
 
-        <h5>VK_EXT_robustness2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_robustness2}</dd>

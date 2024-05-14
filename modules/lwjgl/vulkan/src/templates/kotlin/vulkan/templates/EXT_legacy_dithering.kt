@@ -13,7 +13,6 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
         """
         This extension exposes a hardware feature used by some vendors to implement OpenGL’s dithering. The purpose of this extension is to support layering OpenGL over Vulkan, by allowing the layer to take advantage of the same hardware feature and provide equivalent dithering to OpenGL applications.
 
-        <h5>VK_EXT_legacy_dithering</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_legacy_dithering}</dd>
@@ -25,14 +24,16 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
             <dd>466</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
                 <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_KHR_dynamic_rendering</li>
+                <li>Interacts with VK_KHR_maintenance5</li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>
@@ -52,7 +53,7 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-03-31</dd>
+            <dd>2024-02-22</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -66,7 +67,7 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
     IntConstant(
         "The extension specification version.",
 
-        "EXT_LEGACY_DITHERING_SPEC_VERSION".."1"
+        "EXT_LEGACY_DITHERING_SPEC_VERSION".."2"
     )
 
     StringConstant(

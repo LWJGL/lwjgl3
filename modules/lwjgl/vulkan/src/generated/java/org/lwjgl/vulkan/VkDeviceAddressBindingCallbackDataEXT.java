@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code messageSeverity} equal to {@link EXTDebugUtils#VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT}</li>
- * <li>{@code messageType} equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}</li>
+ * <li>{@code messageTypes} equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}</li>
  * <li>{@link VkDebugUtilsMessengerCallbackDataEXT}{@code ::pObjects} <b>must</b> identify the associated Vulkan object</li>
  * <li>{@link VkDeviceAddressBindingCallbackDataEXT} <b>must</b> be included in the {@code pNext} chain of {@link VkDebugUtilsMessengerCallbackDataEXT}</li>
  * </ul>

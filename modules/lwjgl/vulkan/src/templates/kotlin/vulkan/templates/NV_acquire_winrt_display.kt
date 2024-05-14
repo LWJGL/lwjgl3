@@ -15,7 +15,6 @@ val NV_acquire_winrt_display = "NVAcquireWinrtDisplay".nativeClassVK("NV_acquire
 
         When control is acquired the application has exclusive access to the display until control is released or the application terminates. An application’s attempt to acquire is denied if a different application has already acquired the display.
 
-        <h5>VK_NV_acquire_winrt_display</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_acquire_winrt_display}</dd>

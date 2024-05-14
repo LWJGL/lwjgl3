@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code shaderCoreCount} <b>must</b> be greater than 0 and less than or equal to the total number of shader cores as reported via {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM}{@code ::shaderCoreCount}.</li>
+ * <li>{@code shaderCoreCount} <b>must</b> be greater than 0 and less than or equal to the total number of shader cores as reported via {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM}{@code ::shaderCoreCount}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

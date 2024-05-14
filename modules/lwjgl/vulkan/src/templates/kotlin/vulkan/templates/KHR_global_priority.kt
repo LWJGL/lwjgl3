@@ -15,7 +15,7 @@ val KHR_global_priority = "KHRGlobalPriority".nativeClassVK("KHR_global_priority
 
         Implementations can report which global priority levels are treated differently by the implementation. It is intended primarily for use in system integration along with certain platform-specific priority enforcement rules.
 
-        The driver implementation will attempt to skew hardware resource allocation in favour of the higher-priority task. Therefore, higher-priority work may retain similar latency and throughput characteristics even if the system is congested with lower priority work.
+        The driver implementation will attempt to skew hardware resource allocation in favor of the higher-priority task. Therefore, higher-priority work may retain similar latency and throughput characteristics even if the system is congested with lower priority work.
 
         The global priority level of a queue shall take precedence over the per-process queue priority (##VkDeviceQueueCreateInfo{@code ::pQueuePriorities}).
 
@@ -23,7 +23,6 @@ val KHR_global_priority = "KHRGlobalPriority".nativeClassVK("KHR_global_priority
 
         The driver implementation may fail the queue allocation request if resources required to complete the operation have been exhausted (either by the same process or a different process). In this scenario #ERROR_INITIALIZATION_FAILED is returned.
 
-        <h5>VK_KHR_global_priority</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_global_priority}</dd>
@@ -38,7 +37,7 @@ val KHR_global_priority = "KHRGlobalPriority".nativeClassVK("KHR_global_priority
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -19,7 +19,6 @@ val EXT_image_robustness = "EXTImageRobustness".nativeClassVK("EXT_image_robustn
         <h5>Examples</h5>
         None.
 
-        <h5>VK_EXT_image_robustness</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_image_robustness}</dd>

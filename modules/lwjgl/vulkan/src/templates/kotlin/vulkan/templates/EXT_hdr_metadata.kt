@@ -15,7 +15,6 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
 
         While the intended purpose of the metadata is to assist in the transformation between different color volumes of different displays and help achieve better color reproduction, it is not in the scope of this extension to define how exactly the metadata should be used in such a process. It is up to the implementation to determine how to make use of the metadata.
 
-        <h5>VK_EXT_hdr_metadata</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_hdr_metadata}</dd>

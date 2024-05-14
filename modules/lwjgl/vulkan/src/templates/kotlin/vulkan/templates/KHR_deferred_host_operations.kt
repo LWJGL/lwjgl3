@@ -96,7 +96,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 ￿    {
 ￿    case VK_SUCCESS:
 ￿        {
-￿            // deferred operation has finished.  Query its result
+￿            // deferred operation has finished.  Query its result.
 ￿            result = vkGetDeferredOperationResultKHR(device, hOp);
 ￿        }
 ￿        break;
@@ -121,7 +121,6 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 ￿    return result;
 ￿}</code></pre>
 
-        <h5>VK_KHR_deferred_host_operations</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_deferred_host_operations}</dd>

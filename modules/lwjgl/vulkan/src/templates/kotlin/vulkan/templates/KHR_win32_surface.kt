@@ -15,7 +15,6 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
         """
         The {@code VK_KHR_win32_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a Win32 {@code HWND}, as well as a query to determine support for rendering to the windows desktop.
 
-        <h5>VK_KHR_win32_surface</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_win32_surface}</dd>
@@ -123,6 +122,21 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
             </ul></dd>
         </dl>
+
+        Some Vulkan functions <b>may</b> call the {@code SendMessage} system API when interacting with a {@code VkSurfaceKHR} through a {@code VkSwapchainKHR}. In a multithreaded environment, calling {@code SendMessage} from a thread that is not the thread associated with {@code pCreateInfo}{@code ::hwnd} will block until the application has processed the window message. Thus, applications <b>should</b> either call these Vulkan functions on the message pump thread, or make sure their message pump is actively running. Failing to do so <b>may</b> result in deadlocks.
+
+        The functions subject to this requirement are:
+
+        <ul>
+            <li>#CreateSwapchainKHR()</li>
+            <li>#DestroySwapchainKHR()</li>
+            <li>#AcquireNextImageKHR() and #AcquireNextImage2KHR()</li>
+            <li>#QueuePresentKHR()</li>
+            <li>#ReleaseSwapchainImagesEXT()</li>
+            <li>#AcquireFullScreenExclusiveModeEXT()</li>
+            <li>#ReleaseFullScreenExclusiveModeEXT()</li>
+            <li>#SetHdrMetadataEXT()</li>
+        </ul>
 
         <h5>See Also</h5>
         ##VkAllocationCallbacks, ##VkWin32SurfaceCreateInfoKHR

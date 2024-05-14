@@ -21,13 +21,50 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Including this structure in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} and including {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR} in {@link VkVideoCodingControlInfoKHR}{@code ::flags} will define stream rate control settings for video encoding.</p>
+ * <p>If {@code layerCount} is zero then the values of {@code virtualBufferSizeInMs} and {@code initialVirtualBufferSizeInMs} are ignored.</p>
  * 
- * <p>Additional structures providing codec-specific rate control parameters <b>may</b> need to be included in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} depending on the codec profile the bound video session was created with and the parameters specified in {@link VkVideoEncodeRateControlInfoKHR} (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-coding-control">Video Coding Control</a>).</p>
+ * <p>This structure <b>can</b> be specified in the following places:</p>
  * 
- * <p>To ensure that the video session is properly initialized with stream-level rate control settings, the application <b>must</b> call {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} with stream-level rate control settings at least once in execution order before the first {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command that is executed after video session reset. If not provided, default implementation-specific stream rate control settings will be used.</p>
+ * <ul>
+ * <li>In the {@code pNext} chain of {@link VkVideoBeginCodingInfoKHR} to specify the current rate control state expected to be configured when beginning a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-coding-scope">video coding scope</a>.</li>
+ * <li>In the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} to change the rate control configuration of the bound video session.</li>
+ * </ul>
  * 
- * <p>Stream rate control settings <b>can</b> also be re-initialized during an active video encoding session. The re-initialization takes effect whenever the {@link VkVideoEncodeRateControlInfoKHR} structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure in the call to {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR}, and only impacts {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} operations that follow in execution order.</p>
+ * <p>Including this structure in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} and including {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR} in {@link VkVideoCodingControlInfoKHR}{@code ::flags} enables updating the rate control configuration of the bound video session. This replaces the entire rate control configuration of the bound video session and <b>may</b> reset the state of all enabled rate control layers to an initial state according to the codec-specific rate control semantics defined in the corresponding sections listed below.</p>
+ * 
+ * <p>When {@code layerCount} is greater than one, multiple <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-layers">rate control layers</a> are configured, and each rate control layer is applied to the corresponding video coding layer identified by the index of the corresponding element of {@code pLayer}.</p>
+ * 
+ * <ul>
+ * <li>If the video session was created with the video codec operation {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, then this index specifies the H.264 temporal layer ID of the video coding layer the rate control layer is applied to.</li>
+ * <li>If the video session was created with the video codec operation {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, then this index specifies the H.265 temporal ID of the video coding layer the rate control layer is applied to.</li>
+ * </ul>
+ * 
+ * <p>Additional structures providing codec-specific rate control parameters <b>can</b> be included in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} depending on the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profiles">video profile</a> the bound video session was created. For further details see:</p>
+ * 
+ * <ul>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-coding-control">Video Coding Control</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
+ * </ul>
+ * 
+ * <p>The new rate control configuration takes effect when the corresponding {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} is executed on the device, and only impacts video encode operations that follow in execution order.</p>
+ * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If {@code rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}, then {@code layerCount} <b>must</b> be 0</li>
+ * <li>If {@code rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}, then {@code layerCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code rateControlMode} is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR}, then it <b>must</b> specify one of the bits included in {@link VkVideoEncodeCapabilitiesKHR}{@code ::rateControlModes}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
+ * <li>{@code layerCount} member <b>must</b> be less than or equal to {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxRateControlLayers}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
+ * <li>For each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> be between 1 and {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxBitrate}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
+ * <li>For each element of {@code pLayers}, its {@code maxBitrate} member <b>must</b> be between 1 and {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxBitrate}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
+ * <li>If {@code rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR}, then for each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> equal its {@code maxBitrate} member</li>
+ * <li>If {@code rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}, then for each element of {@code pLayers}, its {@code averageBitrate} member <b>must</b> be less than or equal to its {@code maxBitrate} member</li>
+ * <li>If {@code layerCount} is not zero, then {@code virtualBufferSizeInMs} <b>must</b> be greater than zero</li>
+ * <li>If {@code layerCount} is not zero, then {@code initialVirtualBufferSizeInMs} <b>must</b> be less than {@code virtualBufferSizeInMs}</li>
+ * <li>If the {@code videoCodecOperation} of the used video profile is {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, the {@code pNext} chain this structure is included in also includes an instance of the {@link VkVideoEncodeH264RateControlInfoKHR} structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal {@link VkVideoEncodeH264RateControlInfoKHR}{@code ::temporalLayerCount}</li>
+ * <li>If the {@code videoCodecOperation} of the used video profile is {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, the {@code pNext} chain this structure is included in also includes an instance of the {@link VkVideoEncodeH265RateControlInfoKHR} structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::subLayerCount}</li>
+ * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -131,20 +168,20 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct<VkVideoEncodeRateCon
     /** reserved for future use. */
     @NativeType("VkVideoEncodeRateControlFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value specifying the encode stream rate control mode. */
+    /** a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value specifying the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a>. */
     @NativeType("VkVideoEncodeRateControlModeFlagBitsKHR")
     public int rateControlMode() { return nrateControlMode(address()); }
-    /** specifies the number of rate control layers in the video encode stream. */
+    /** specifies the number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-layers">rate control layers</a> to use. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** a pointer to an array of {@link VkVideoEncodeRateControlLayerInfoKHR} structures specifying the rate control configurations of {@code layerCount} rate control layers. */
+    /** a pointer to an array of {@code layerCount} {@link VkVideoEncodeRateControlLayerInfoKHR} structures, each specifying the rate control configuration of the corresponding rate control layer. */
     @Nullable
     @NativeType("VkVideoEncodeRateControlLayerInfoKHR const *")
     public VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayers() { return npLayers(address()); }
-    /** the leaky bucket model virtual buffer size in milliseconds, with respect to peak bitrate. Valid when rate control mode is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. For example, virtual buffer size is ({@code virtualBufferSizeInMs} × {@code maxBitrate} / 1000). */
+    /** the size in milliseconds of the virtual buffer used by the implementation’s rate control algorithm for the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-leaky-bucket-model">leaky bucket model</a>, with respect to the average bitrate of the stream calculated by summing the values of the {@code averageBitrate} members of the elements of the {@code pLayers} array. */
     @NativeType("uint32_t")
     public int virtualBufferSizeInMs() { return nvirtualBufferSizeInMs(address()); }
-    /** the initial occupancy in milliseconds of the virtual buffer in the leaky bucket model. Valid when rate control mode is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. */
+    /** the initial occupancy in milliseconds of the virtual buffer used by the implementation’s rate control algorithm for the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-leaky-bucket-model">leaky bucket model</a>. */
     @NativeType("uint32_t")
     public int initialVirtualBufferSizeInMs() { return ninitialVirtualBufferSizeInMs(address()); }
 

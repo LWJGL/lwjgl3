@@ -18,7 +18,6 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
         <h5>Examples</h5>
         None.
 
-        <h5>VK_AMD_buffer_marker</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_buffer_marker}</dd>

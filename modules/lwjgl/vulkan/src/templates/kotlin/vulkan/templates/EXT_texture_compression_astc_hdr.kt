@@ -18,7 +18,6 @@ val EXT_texture_compression_astc_hdr = "EXTTextureCompressionAstcHdr".nativeClas
         <h5>Promotion to Vulkan 1.3</h5>
         This extension has been partially promoted. Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.3. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>VK_EXT_texture_compression_astc_hdr</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_texture_compression_astc_hdr}</dd>

@@ -22,8 +22,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The new struct {@link VkShaderModuleValidationCacheCreateInfoEXT} can be included in the {@code pNext} chain at {@link VK10#vkCreateShaderModule CreateShaderModule} time. It contains a {@code VkValidationCacheEXT} to use when validating the {@code VkShaderModule}.</p>
  * 
- * <h5>VK_EXT_validation_cache</h5>
- * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_validation_cache}</dd>
