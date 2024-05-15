@@ -387,28 +387,12 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
     return NFD_PathSet_GetPathN(pathSet, index, outPath);
 }
 
-void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
-    // const_cast not supported on Mac
-    union {
-        const nfdnchar_t* constPath;
-        nfdnchar_t* nonConstPath;
-    } pathUnion;
-
-    pathUnion.constPath = filePath;
-
-    NFD_FreePathN(pathUnion.nonConstPath);
+void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
+    NFD_FreePathN(filePath);
 }
 
-void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath) {
-    // const_cast not supported on Mac
-    union {
-        const nfdu8char_t* constPath;
-        nfdu8char_t* nonConstPath;
-    } pathUnion;
-
-    pathUnion.constPath = filePath;
-
-    NFD_FreePathU8(pathUnion.nonConstPath);
+void NFD_PathSet_FreePathU8(nfdu8char_t* filePath) {
+    NFD_FreePathU8(filePath);
 }
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {

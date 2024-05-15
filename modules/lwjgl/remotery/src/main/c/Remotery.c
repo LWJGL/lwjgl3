@@ -10328,7 +10328,7 @@ static rmtError VulkanMarkFrame(VulkanBindImpl* bind, rmtBool recurse)
         submit_info.pNext = &semaphore_submit_info;
         submit_info.signalSemaphoreCount = 1;
         submit_info.pSignalSemaphores = &bind->gpuQuerySemaphore;
-        if (VULKAN_CALL(bind, vkQueueSubmit)(vulkan_queue, 1, &submit_info, NULL) != VK_SUCCESS)
+        if (VULKAN_CALL(bind, vkQueueSubmit)(vulkan_queue, 1, &submit_info, VK_NULL_HANDLE) != VK_SUCCESS)
         {
             return rmtMakeError(RMT_ERROR_RESOURCE_ACCESS_FAIL, "Failed to submit Vulkan Semaphore update to queue");
         }
@@ -10463,12 +10463,12 @@ RMT_API rmtError _rmt_BindVulkan(void* instance, void* physical_device, void* de
 #else
     bind->maxNbQueries = 32 * 1024;
 #endif
-    bind->gpuTimestampRingBuffer = NULL;
+    bind->gpuTimestampRingBuffer = VK_NULL_HANDLE;
     bind->cpuTimestampRingBuffer = NULL;
     bind->sampleRingBuffer = NULL;
     bind->ringBufferRead = 0;
     bind->ringBufferWrite = 0;
-    bind->gpuQuerySemaphore = NULL;
+    bind->gpuQuerySemaphore = VK_NULL_HANDLE;
     bind->gpu_ticks_to_us = 1.0;
     bind->mqToVulkanUpdate = NULL;
     bind->next = NULL;
@@ -10540,7 +10540,7 @@ RMT_API void _rmt_UnbindVulkan(rmtVulkanBind* bind)
 
     rmtDelete(rmtMessageQueue, vulkan_bind->mqToVulkanUpdate);
 
-    if (vulkan_bind->gpuQuerySemaphore != NULL)
+    if (vulkan_bind->gpuQuerySemaphore != VK_NULL_HANDLE)
     {
         VULKAN_CALL(vulkan_bind, vkDestroySemaphore)(vulkan_device, vulkan_bind->gpuQuerySemaphore, NULL);
     }
@@ -10548,7 +10548,7 @@ RMT_API void _rmt_UnbindVulkan(rmtVulkanBind* bind)
     rmtFree(vulkan_bind->sampleRingBuffer);
     rmtFree(vulkan_bind->cpuTimestampRingBuffer);
 
-    if (vulkan_bind->gpuTimestampRingBuffer != NULL)
+    if (vulkan_bind->gpuTimestampRingBuffer != VK_NULL_HANDLE)
     {
         VULKAN_CALL(vulkan_bind, vkDestroyQueryPool)(vulkan_device, vulkan_bind->gpuTimestampRingBuffer, NULL);
     }

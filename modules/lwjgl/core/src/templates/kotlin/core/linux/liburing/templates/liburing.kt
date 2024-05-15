@@ -1860,7 +1860,7 @@ struct io_uring_buf {
         "",
 
         io_uring_sqe.p("sqe", ""),
-        "futex_waitv".handle.p("futex", ""), // TODO:
+        "struct futex_waitv".handle.p("futex", ""),
         AutoSize("futex")..unsigned_int("nr_futex", ""),
         unsigned_int("flags", ""),
 

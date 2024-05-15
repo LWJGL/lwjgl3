@@ -1032,7 +1032,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1futex_1waitv(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong futexAddress, jint nr_futex, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
-    futex_waitv *futex = (futex_waitv *)(uintptr_t)futexAddress;
+    struct futex_waitv *futex = (struct futex_waitv *)(uintptr_t)futexAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_prep_futex_waitv(sqe, futex, (unsigned int)nr_futex, (unsigned int)flags);
 }

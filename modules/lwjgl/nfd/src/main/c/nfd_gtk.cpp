@@ -613,13 +613,13 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
                                   nfdu8char_t** outPath)
     __attribute__((alias("NFD_PathSet_GetPathN")));
 
-void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
+void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
     assert(filePath);
     (void)filePath;  // prevent warning in release build
     // no-op, because NFD_PathSet_Free does the freeing for us
 }
 
-void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath)
+void NFD_PathSet_FreePathU8(nfdu8char_t* filePath)
     __attribute__((alias("NFD_PathSet_FreePathN")));
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {

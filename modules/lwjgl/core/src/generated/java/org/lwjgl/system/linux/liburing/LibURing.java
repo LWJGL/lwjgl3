@@ -2111,7 +2111,7 @@ public class LibURing {
     public static native void nio_uring_prep_futex_waitv(long sqe, long futex, int nr_futex, int flags);
 
     /** @since version 2.6 */
-    public static void io_uring_prep_futex_waitv(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("futex_waitv *") PointerBuffer futex, @NativeType("unsigned int") int flags) {
+    public static void io_uring_prep_futex_waitv(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct futex_waitv *") PointerBuffer futex, @NativeType("unsigned int") int flags) {
         nio_uring_prep_futex_waitv(sqe.address(), memAddress(futex), futex.remaining(), flags);
     }
 

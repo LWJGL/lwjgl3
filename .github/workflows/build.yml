@@ -25,7 +25,7 @@ jobs:
       - name: Download JDK
         run: |
           mkdir jdk8
-          curl https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Compile templates
         run: |
           git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
@@ -76,7 +76,7 @@ jobs:
         run: |
           yum -y install libX11-devel libXt-devel gtk3-devel libdbus-1-dev
           mkdir jdk8
-          curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -98,6 +98,9 @@ jobs:
         run: |
           source scl_source enable devtoolset-11 || true
           ant -emacs tests
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
       - name: Run demo with OpenJDK
         run: |
           source scl_source enable devtoolset-11 || true
@@ -105,9 +108,9 @@ jobs:
       - name: Build GraalVM Native Image
         run: |
           source scl_source enable devtoolset-11 || true
-          mkdir jdk-graalvm-21
-          curl -L https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm-21 --strip-components 1
-          jdk-graalvm-21/bin/native-image -cp \
+          mkdir jdk-graalvm-22
+          curl -L https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm-22 --strip-components 1
+          jdk-graalvm-22/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -119,16 +122,14 @@ jobs:
       - name: Run demo with GraalVM JIT
         run: |
           source scl_source enable devtoolset-11 || true
-          JAVA_HOME=jdk-graalvm-21 ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+          JAVA_HOME=jdk-graalvm-22 ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
         run: ./org.lwjgl.demo.util.lz4.hellolz4
 
   linux-cross:
     name: Linux Cross
     needs: cache-kotlinc
-    runs-on: ubuntu-latest
-    container:
-      image: ${{matrix.CONTAINER}}
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -137,22 +138,18 @@ jobs:
           # ----
           - ARCH: arm32
             CROSS_ARCH: armhf
-            CONTAINER: ubuntu:18.04
             TRIPLET: arm-linux-gnueabihf
           # ----
           - ARCH: arm64
             CROSS_ARCH: arm64
-            CONTAINER: ubuntu:18.04
             TRIPLET: aarch64-linux-gnu
           # ----
           - ARCH: ppc64le
             CROSS_ARCH: ppc64el
-            CONTAINER: ubuntu:18.04
             TRIPLET: powerpc64le-linux-gnu
           # ----
           - ARCH: riscv64
             CROSS_ARCH: riscv64
-            CONTAINER: ubuntu:20.04
             TRIPLET: riscv64-linux-gnu
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
@@ -160,39 +157,26 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Upgrade git
-        run: |
-          apt-get -y update
-          apt-get -y install software-properties-common
-          apt-get -y install --reinstall ca-certificates
-          apt-get -y update
-          apt-get -y upgrade
-          add-apt-repository -y ppa:git-core/ppa
-        if: ${{ matrix.CONTAINER == 'ubuntu:18.04' }}
-      - run: |
-          apt-get -y update
-          apt-get install -y git
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
       - name: Install dependencies
         run: |
           git config --global --add safe.directory $(pwd)
-          DEBIAN_FRONTEND=noninteractive apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross
           mkdir jdk8
-          curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
         run: |
-          sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
-          grep "ubuntu.com/ubuntu" /etc/apt/sources.list | tee /etc/apt/sources.list.d/ports.list
-          sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
-          sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
-          dpkg --add-architecture ${{matrix.CROSS_ARCH}}
-          apt-get clean
-          apt-get update || true
+          sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/' /etc/apt/sources.list
+          sudo grep "mirror+file" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
+          sudo sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
+          sudo sed -i 's#mirror+file:/etc/apt/apt-mirrors.txt#http://ports.ubuntu.com/ubuntu-ports/#' /etc/apt/sources.list.d/ports.list
+          sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
+          sudo apt-get update || true
       - name: Install cross-compilation dependencies
-        run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install libgtk-3-dev:${{matrix.CROSS_ARCH}} libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} libglu-dev:${{matrix.CROSS_ARCH}} libgl1-mesa-glx:${{matrix.CROSS_ARCH}} libx11-dev:${{matrix.CROSS_ARCH}} libxt-dev:${{matrix.CROSS_ARCH}} libdbus-1-dev:${{matrix.CROSS_ARCH}} -o Dpkg::Options::="--force-overwrite"
+        run: sudo apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install libgtk-3-dev:${{matrix.CROSS_ARCH}} libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} libglu-dev:${{matrix.CROSS_ARCH}} libgl1-mesa-glx:${{matrix.CROSS_ARCH}} libx11-dev:${{matrix.CROSS_ARCH}} libxt-dev:${{matrix.CROSS_ARCH}} libdbus-1-dev:${{matrix.CROSS_ARCH}} -o Dpkg::Options::="--force-overwrite"
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -212,7 +196,7 @@ jobs:
   freebsd-cross:
     name: FreeBSD Cross
     needs: cache-kotlinc
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
       fail-fast: false
@@ -225,7 +209,7 @@ jobs:
       - name: Install dependencies
         run: |
           mkdir jdk8
-          curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-macosx_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -240,7 +224,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build & Test
-        uses: cross-platform-actions/action@v0.21.1
+        uses: cross-platform-actions/action@v0.24.0
         with:
           operating_system: freebsd
           architecture: x86-64
@@ -251,7 +235,7 @@ jobs:
           run: |
             sudo pkg install -y openjdk8 apache-ant git gtk3 dbus
             ant -emacs compile-native
-            ant -emacs tests
+            ant -emacs tests || (cat bin/test/testng-results.xml ; exit 1) 
             ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
 
   macos:
@@ -262,6 +246,11 @@ jobs:
       fail-fast: false
       matrix:
         ARCH: [x64, arm64]
+        include:
+          - ARCH: x64
+            JDK: x64
+          - ARCH: arm64
+            JDK: aarch64
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
@@ -272,7 +261,7 @@ jobs:
       - name: Install dependencies
         run: |
           mkdir jdk8
-          curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-macosx_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -290,15 +279,16 @@ jobs:
         run: ant -emacs compile-native
       - name: Run tests
         run: ant -emacs tests
-        if: matrix.ARCH == 'x64'
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
       - name: Run demo with OpenJDK
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
-        if: matrix.ARCH == 'x64'
       - name: Build GraalVM Native Image
         run: |
-          mkdir jdk-graalvm-21
-          curl -L https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_macos-x64_bin.tar.gz | tar xz -C jdk-graalvm-21 --strip-components 1
-          jdk-graalvm-21/Contents/Home/bin/native-image -cp \
+          mkdir jdk-graalvm-22
+          curl -L https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm-22 --strip-components 1
+          jdk-graalvm-22/Contents/Home/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -307,13 +297,10 @@ jobs:
           bin/libs/native:\
           config/native-image \
           org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
-        if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM JIT
-        run: JAVA_HOME=jdk-graalvm-21/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
-        if: matrix.ARCH == 'x64'
+        run: JAVA_HOME=jdk-graalvm-22/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
         run: ./org.lwjgl.demo.util.lz4.hellolz4
-        if: matrix.ARCH == 'x64'
 
   windows:
     name: Windows
@@ -387,14 +374,14 @@ jobs:
         if: matrix.ARCH == 'x64'
       - name: Download GraalVM
         run: |
-          Invoke-WebRequest https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_windows-x64_bin.zip -OutFile jdk-graalvm.zip
+          Invoke-WebRequest https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_windows-x64_bin.zip -OutFile jdk-graalvm.zip
           Expand-Archive -Path jdk-graalvm.zip -DestinationPath .\
-          Get-ChildItem graalvm-jdk-21* | Rename-Item -newname jdk-graalvm-21
+          Get-ChildItem graalvm-jdk-22* | Rename-Item -newname jdk-graalvm-22
         shell: pwsh
         if: matrix.ARCH == 'x64'
       - name: Build GraalVM Native Image
         run: |
-          jdk-graalvm-21\bin\native-image -cp ^
+          jdk-graalvm-22\bin\native-image -cp ^
           bin/classes/lwjgl/core;^
           bin/classes/lwjgl/lz4;^
           bin/classes/samples;^
@@ -406,7 +393,7 @@ jobs:
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM JIT
         run: |
-          set JAVA_HOME=jdk-graalvm-21
+          set JAVA_HOME=jdk-graalvm-22
           ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM Native Image

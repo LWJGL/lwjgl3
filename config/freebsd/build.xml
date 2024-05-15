@@ -23,13 +23,11 @@
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
-                <arg line="-c -std=c++17" if:set="cpp"/>
+                <arg line="-c -std=c++20" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-O3 -flto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_FREEBSD -DLWJGL_${build.arch}"/>
                 <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_BSD_SOURCE"/>
                 <arg line="-D_FILE_OFFSET_BITS=64"/>
-
-                <arg value="-I/usr/local/include"/>
 
                 <arg value="-I${jni.headers}"/>
                 <arg value="-I${jni.headers}/freebsd"/>
@@ -146,6 +144,7 @@
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
             <source>
+                <arg value="-I/usr/local/include"/>
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
@@ -233,6 +232,7 @@
         <build module="nfd" simple="true" linker="clang++" if:true="${binding.nfd}">
             <beforeCompile>
                 <compile lang="c++">
+                    <arg value="-I/usr/local/include"/>
                     <arg value="-I/usr/local/include/gtk-3.0"/>
                     <arg value="-I/usr/local/include/glib-2.0"/>
                     <arg value="-I/usr/local/include/pango-1.0"/>
@@ -423,10 +423,6 @@
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
                 </compile>
             </beforeCompile>
-            <source>
-                <arg value="-I${src.main.rel}/common"/>
-                <arg value="-I${src.main.rel}/dictBuilder"/>
-            </source>
         </build>
 
         </parallel>

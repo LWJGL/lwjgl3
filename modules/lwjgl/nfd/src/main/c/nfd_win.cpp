@@ -949,8 +949,8 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
     return res;
 }
 
-void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath) {
-    NFD_FreePathU8(const_cast<nfdu8char_t*>(filePath));
+void NFD_PathSet_FreePathU8(nfdu8char_t* filePath) {
+    NFD_FreePathU8(filePath);
 }
 
 nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath) {

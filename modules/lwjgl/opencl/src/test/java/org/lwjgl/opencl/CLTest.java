@@ -27,14 +27,7 @@ public class CLTest {
     @BeforeClass
     private void createCL() {
         try {
-            CL.getFunctionProvider();
-
-            try (MemoryStack stack = stackPush()) {
-                IntBuffer pi = stack.mallocInt(1);
-                checkCLError(clGetPlatformIDs(null, pi));
-            }
-
-            CL.destroy();
+            testLifecycle();
         } catch (Throwable t) {
             throw new SkipException("Skipped because OpenCL initialization failed [" + t.getMessage() + "]");
         }

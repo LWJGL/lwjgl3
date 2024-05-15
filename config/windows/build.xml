@@ -401,10 +401,6 @@ EXPORTS
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.main}\common"/>
-                <arg value="/I${src.main}\dictBuilder"/>
-            </compileargs>
         </build>
 
         </parallel>

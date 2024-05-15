@@ -10,7 +10,10 @@
         <arg line="--show-sdk-path --sdk macosx"/>
     </exec>
 
-    <condition property="macosx-version-min" value="11.0" else="10.9">
+    <condition property="macosx-version-min" value="11.0" else="10.11">
+        <isset property="build.arch.arm"/>
+    </condition>
+    <condition property="macosx-version-min-vma" value="11.0" else="10.13">
         <isset property="build.arch.arm"/>
     </condition>
 
@@ -22,6 +25,7 @@
         <attribute name="flags" default=""/>
         <attribute name="simple" default="false"/>
         <attribute name="relative" default="true"/>
+        <attribute name="macos" default="${macosx-version-min}"/>
         <element name="source" implicit="true" optional="true"/>
         <sequential>
             <local name="cpp"/>
@@ -32,8 +36,9 @@
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -ObjC" unless:set="cpp"/>
-                <arg line="-c -std=c++14" if:set="cpp"/>
-                <arg line="-O3 -flto -fPIC @{flags} -DNDEBUG -DLWJGL_MACOS -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+                <arg line="-c -std=c++20" if:set="cpp"/>
+                <arg line="-O3 -flto -fPIC @{flags} -DNDEBUG -DLWJGL_MACOS -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=@{macos}"/>
+                <arg line="-target x64-apple-darwin -arch x86_64" unless:set="build.arch.arm"/>
                 <arg line="-target aarch64-apple-darwin -arch arm64" if:set="build.arch.arm"/>
 
                 <arg value="-I${jni.headers}"/>
@@ -58,6 +63,7 @@
         <attribute name="lang" default="c"/>
         <attribute name="flags" default="-Werror -Wfatal-errors"/>
         <attribute name="simple" default="false"/>
+        <attribute name="macos" default="${macosx-version-min}"/>
         <element name="beforeCompile" optional="true"/>
         <element name="source" optional="true"/>
         <element name="beforeLink" optional="true"/>
@@ -79,7 +85,7 @@
             <property name="dest" value="${bin.native}/@{module}"/>
 
             <beforeCompile/>
-            <compile lang="@{lang}" flags="@{flags}" simple="@{simple}">
+            <compile lang="@{lang}" flags="@{flags}" simple="@{simple}" macos="@{macos}">
                 <source/>
             </compile>
 
@@ -108,7 +114,8 @@
             <beforeLink unless:set="lib-uptodate"/>
             <apply executable="${clang}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
-                <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib.arch}/lib${name}.dylib -O3 -flto -fPIC'/>
+                <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=@{macos} -o ${lib.arch}/lib${name}.dylib -O3 -flto -fPIC'/>
+                <arg line="-target x64-apple-darwin -arch x86_64" unless:set="build.arch.arm"/>
                 <arg line="-target aarch64-apple-darwin -arch arm64" if:set="build.arch.arm"/>
                 <fileset dir="${dest}" includes="*.o"/>
                 <link/>
@@ -325,7 +332,7 @@
         </build>
 
         <!-- Vulkan Memory Allocator -->
-        <build module="vma" lang="c++" if:true="${binding.vma}">
+        <build module="vma" lang="c++" macos="${macosx-version-min-vma}" if:true="${binding.vma}">
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
@@ -358,10 +365,6 @@
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
                 </compile>
             </beforeCompile>
-            <source>
-                <arg value="-I${src.main.rel}/common"/>
-                <arg value="-I${src.main.rel}/dictBuilder"/>
-            </source>
         </build>
 
         </parallel>

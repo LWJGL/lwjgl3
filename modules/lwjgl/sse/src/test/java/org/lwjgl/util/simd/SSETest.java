@@ -4,6 +4,8 @@
  */
 package org.lwjgl.util.simd;
 
+import org.lwjgl.system.*;
+import org.testng.*;
 import org.testng.annotations.*;
 
 import static java.lang.Math.*;
@@ -15,6 +17,10 @@ import static org.testng.Assert.*;
 public class SSETest {
 
     public void testControlRegister() {
+        if (!(Platform.getArchitecture() == Platform.Architecture.X64 || Platform.getArchitecture() == Platform.Architecture.X86)) {
+            throw new SkipException("This test may only run on x86 architectures.");
+        }
+
         int flushZeroMode     = _MM_GET_FLUSH_ZERO_MODE();
         int roundingMode      = _MM_GET_ROUNDING_MODE();
         int denormalsZeroMode = _MM_GET_DENORMALS_ZERO_MODE();

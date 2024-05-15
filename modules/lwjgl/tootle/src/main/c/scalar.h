@@ -62,7 +62,7 @@ typedef unsigned long Ulong;
 
 inline double Limit(const Uchar& c) { (void) c; return UCHAR_MAX; }
 inline double Limit(const Ushort& c) { (void) c; return USHRT_MAX; }
-inline double Limit(const Ulong& c) { (void) c; return ULONG_MAX; }
+inline double Limit(const Ulong& c) { (void) c; return (double)ULONG_MAX; }
 inline double Limit(const float& c) { (void) c; return 1.0; }
 inline double Limit(const double& c) { (void) c; return 1.0; }
 

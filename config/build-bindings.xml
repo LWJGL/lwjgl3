@@ -55,7 +55,7 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.x64|x86"/>
             <and>
                 <isset property="platform.linux"/>
-                <isset property="build.arch.arm"/>
+                <isset property="build.arch.arm64"/>
             </and>
         </or>
     </condition>
