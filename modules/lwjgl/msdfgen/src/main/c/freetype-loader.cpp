@@ -5,7 +5,8 @@
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #define MSDFGEN_WINDOWS
-#include <libloaderapi.h>
+#define WIN32_MEAN_AND_LEAN
+#include <Windows.h>
 #else
 #include <dlfcn.h>
 #endif
