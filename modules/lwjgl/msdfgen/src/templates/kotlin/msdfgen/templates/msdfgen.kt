@@ -9,6 +9,7 @@ import org.lwjgl.generator.*
 
 val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMethod = "msdf_") {
     nativeImport("msdfgen-c.h")
+    nativeImport("msdfgen-ext-c.h")
     javaImport("static org.lwjgl.system.Checks.*")
     cpp = true
     documentation = ""
@@ -510,5 +511,67 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMetho
         Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
         Unsafe..msdf_multichannel_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
         returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+
+    // FreeType extensions
+
+    int(
+        "ft_set_load_callback",
+        "Overrides the default load callback function used for resolving FreeTypee function at runtime.",
+        msdf_ft_load_callback("callback", "A pointer to the function to call for resolving FreeType functions at runtime."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    msdf_ft_load_callback(
+        "ft_get_load_callback",
+        "Retrieves the current FreeType load callback.",
+        returnDoc = "A pointer to the current FreeType load callback function."
+    )
+    int(
+        "ft_init",
+        "Initializes a new FreeType instance to be used with msdfgen.",
+        Unsafe..msdf_ft_handle.p("handle", "A pointer to a handle to be populated with a new FreeType context."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_load_font",
+        "Loads a TrueType font from the given file(path) and populates the given font handle with the address of the newly loaded font.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to use for loading the font."),
+        Unsafe..char.const.p("fileName", "The name or path of/to the font file to load."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to a font handle to be populated with the address of the newly loaded font."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_adopt_font",
+        "Adopts the given FreeType FT_Face pointer as a font handle.",
+        Unsafe..void.p("face", "An opaque pointer to the FT_Face to adopt."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to an address to be populated with the newly allocated font handle."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_load_font_data",
+        "Loads a TrueType font from the given buffer and populates the given font handle with the address of the newly loaded font.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to use for loading the font."),
+        Unsafe..void.const.p("data", "A pointer to the raw data of the TrueType font to load."),
+        size_t("size", "The size of the data buffer in bytes."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to a font handle to be populated with the address of the newly loaded font."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_font_load_glyph",
+        "Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.",
+        msdf_ft_font_handle("font", "A handle to the font to use for generating the glyph shape."),
+        unsigned("cp", "The codepoint to generate a shape for."),
+        Unsafe..msdf_shape_handle.p("shape", "A pointer to a handle to be populated with the address of the newly created shape. This shape must later be freed using msdf_shape_free!"),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "ft_font_destroy",
+        "Frees the underlying instance of the given FreeType font.",
+        msdf_ft_font_handle("font", "The handle to the font to free.")
+    )
+    void(
+        "ft_deinit",
+        "Frees the underlying FreeType instance of the given context.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to free.")
     )
 }

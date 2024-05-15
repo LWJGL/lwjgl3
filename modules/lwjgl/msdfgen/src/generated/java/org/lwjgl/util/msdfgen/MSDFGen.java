@@ -5,6 +5,8 @@
  */
 package org.lwjgl.util.msdfgen;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.*;
@@ -1165,6 +1167,169 @@ public class MSDFGen {
             check(shape);
         }
         return nmsdf_generate_mtsdf_with_config(output.address(), shape, transform.address(), config.address());
+    }
+
+    // --- [ msdf_ft_set_load_callback ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_set_load_callback ft_set_load_callback} */
+    public static native int nmsdf_ft_set_load_callback(long callback);
+
+    /**
+     * Overrides the default load callback function used for resolving FreeTypee function at runtime.
+     *
+     * @param callback A pointer to the function to call for resolving FreeType functions at runtime.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_set_load_callback(@NativeType("void * (*) (char const *)") MSDFGenFTLoadCallbackI callback) {
+        return nmsdf_ft_set_load_callback(callback.address());
+    }
+
+    // --- [ msdf_ft_get_load_callback ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_get_load_callback ft_get_load_callback} */
+    public static native long nmsdf_ft_get_load_callback();
+
+    /**
+     * Retrieves the current FreeType load callback.
+     *
+     * @return A pointer to the current FreeType load callback function.
+     */
+    @Nullable
+    @NativeType("void * (*) (char const *)")
+    public static MSDFGenFTLoadCallback msdf_ft_get_load_callback() {
+        return MSDFGenFTLoadCallback.createSafe(nmsdf_ft_get_load_callback());
+    }
+
+    // --- [ msdf_ft_init ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_init ft_init} */
+    public static native int nmsdf_ft_init(long handle);
+
+    /**
+     * Initializes a new FreeType instance to be used with msdfgen.
+     *
+     * @param handle A pointer to a handle to be populated with a new FreeType context.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_init(@NativeType("msdf_ft_handle *") PointerBuffer handle) {
+        return nmsdf_ft_init(memAddress(handle));
+    }
+
+    // --- [ msdf_ft_load_font ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_load_font ft_load_font} */
+    public static native int nmsdf_ft_load_font(long handle, long fileName, long font);
+
+    /**
+     * Loads a TrueType font from the given file(path) and populates the given font handle with the address of the newly loaded font.
+     *
+     * @param handle   The handle to the FreeType context to use for loading the font.
+     * @param fileName The name or path of/to the font file to load.
+     * @param font     A pointer to a font handle to be populated with the address of the newly loaded font.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_load_font(@NativeType("msdf_ft_handle") long handle, @NativeType("char const *") ByteBuffer fileName, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        if (CHECKS) {
+            check(handle);
+        }
+        return nmsdf_ft_load_font(handle, memAddress(fileName), memAddress(font));
+    }
+
+    // --- [ msdf_ft_adopt_font ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_adopt_font ft_adopt_font} */
+    public static native int nmsdf_ft_adopt_font(long face, long font);
+
+    /**
+     * Adopts the given FreeType FT_Face pointer as a font handle.
+     *
+     * @param face An opaque pointer to the FT_Face to adopt.
+     * @param font A pointer to an address to be populated with the newly allocated font handle.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_adopt_font(@NativeType("void *") ByteBuffer face, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        return nmsdf_ft_adopt_font(memAddress(face), memAddress(font));
+    }
+
+    // --- [ msdf_ft_load_font_data ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_load_font_data ft_load_font_data} */
+    public static native int nmsdf_ft_load_font_data(long handle, long data, long size, long font);
+
+    /**
+     * Loads a TrueType font from the given buffer and populates the given font handle with the address of the newly loaded font.
+     *
+     * @param handle The handle to the FreeType context to use for loading the font.
+     * @param data   A pointer to the raw data of the TrueType font to load.
+     * @param size   The size of the data buffer in bytes.
+     * @param font   A pointer to a font handle to be populated with the address of the newly loaded font.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_load_font_data(@NativeType("msdf_ft_handle") long handle, @NativeType("void const *") ByteBuffer data, @NativeType("size_t") long size, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        if (CHECKS) {
+            check(handle);
+        }
+        return nmsdf_ft_load_font_data(handle, memAddress(data), size, memAddress(font));
+    }
+
+    // --- [ msdf_ft_font_load_glyph ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_load_glyph ft_font_load_glyph} */
+    public static native int nmsdf_ft_font_load_glyph(long font, int cp, long shape);
+
+    /**
+     * Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.
+     *
+     * @param font  A handle to the font to use for generating the glyph shape.
+     * @param cp    The codepoint to generate a shape for.
+     * @param shape A pointer to a handle to be populated with the address of the newly created shape. This shape must later be freed using msdf_shape_free!
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_font_load_glyph(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
+        if (CHECKS) {
+            check(font);
+        }
+        return nmsdf_ft_font_load_glyph(font, cp, memAddress(shape));
+    }
+
+    // --- [ msdf_ft_font_destroy ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_destroy ft_font_destroy} */
+    public static native void nmsdf_ft_font_destroy(long font);
+
+    /**
+     * Frees the underlying instance of the given FreeType font.
+     *
+     * @param font The handle to the font to free.
+     */
+    public static void msdf_ft_font_destroy(@NativeType("msdf_ft_font_handle") long font) {
+        if (CHECKS) {
+            check(font);
+        }
+        nmsdf_ft_font_destroy(font);
+    }
+
+    // --- [ msdf_ft_deinit ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_deinit ft_deinit} */
+    public static native void nmsdf_ft_deinit(long handle);
+
+    /**
+     * Frees the underlying FreeType instance of the given context.
+     *
+     * @param handle The handle to the FreeType context to free.
+     */
+    public static void msdf_ft_deinit(@NativeType("msdf_ft_handle") long handle) {
+        if (CHECKS) {
+            check(handle);
+        }
+        nmsdf_ft_deinit(handle);
     }
 
 }

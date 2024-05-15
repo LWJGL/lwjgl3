@@ -70,3 +70,16 @@ val msdf_contour_const_handle = "msdf_contour_const_handle".handle
 
 val msdf_segment_handle = "msdf_segment_handle".handle
 val msdf_segment_const_handle = "msdf_segment_const_handle".handle
+
+val msdf_ft_handle = "msdf_ft_handle".handle
+val msdf_ft_font_handle = "msdf_ft_font_handle".handle
+
+val msdf_ft_load_callback = Module.MSDFGEN.callback {
+    void.p(
+        "MSDFGenFTLoadCallback",
+        "",
+        Unsafe..char.const.p("name", "")
+    ) {
+        documentation = "A callback invoked for resolving FreeTypee functions at runtime."
+    }
+}
