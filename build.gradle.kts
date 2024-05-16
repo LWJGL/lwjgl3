@@ -178,6 +178,11 @@ enum class Artifacts(
         "A library that provides algorithms to help optimize meshes.",
         *Platforms.ALL
     ),
+    MSDFGEN(
+        "lwjgl-msdfgen", "LWJGL - msdfgen bindings",
+        "Multi-channel signed distance field generator.",
+        *Platforms.ALL
+    ),
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
         "A small antialiased vector graphics rendering library for OpenGL. Also includes NanoSVG, a simple SVG parser.",

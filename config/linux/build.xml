@@ -255,6 +255,16 @@
             </beforeCompile>
         </build>
 
+        <!-- msdfgen -->
+        <build module="msdfgen" simple="true" lang="c++" if:true="${binding.msdfgen}">
+            <beforeCompile>
+                <compile lang="c++">
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">
             <source>

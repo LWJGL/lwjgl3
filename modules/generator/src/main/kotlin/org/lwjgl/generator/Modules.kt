@@ -412,6 +412,13 @@ enum class Module(
         library = JNILibrary.create("LibMeshOptimizer"),
         arrayOverloads = false
     ),
+    MSDFGEN(
+        "msdfgen",
+        "org.lwjgl.util.msdfgen",
+        "Contains bindings to ${url("https://github.com/Chlumsky/msdfgen", "msdfgen")}, a multi-channel signed distance field generator library.",
+        library = JNILibrary.create("LibMsdfGen"),
+        arrayOverloads = false
+    ),
     NANOVG(
         "nanovg",
         "org.lwjgl.nanovg",

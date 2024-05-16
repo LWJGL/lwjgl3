@@ -1,0 +1,577 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ */
+package msdfgen.templates
+
+import msdfgen.*
+import org.lwjgl.generator.*
+
+val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "msdf", prefixMethod = "msdf_") {
+    nativeImport("msdfgen-c.h")
+    nativeImport("msdfgen-ext-c.h")
+    javaImport("static org.lwjgl.system.Checks.*")
+    cpp = true
+    documentation = ""
+
+    // Constants
+
+    IntConstant("", "MSDF_FALSE".."0").noPrefix()
+    IntConstant("", "MSDF_TRUE".."1").noPrefix()
+
+    IntConstant("", "MSDF_SUCCESS".."0").noPrefix()
+    IntConstant("", "MSDF_ERR_FAILED".."1").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_ARG".."2").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_TYPE".."3").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_SIZE".."4").noPrefix()
+    IntConstant("", "MSDF_ERR_INVALID_INDEX".."5").noPrefix()
+
+    IntConstant("", "MSDF_BITMAP_TYPE_SDF".."0").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_PSDF".."1").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_MSDF".."2").noPrefix()
+    IntConstant("", "MSDF_BITMAP_TYPE_MTSDF".."3").noPrefix()
+
+    IntConstant("", "MSDF_SEGMENT_TYPE_LINEAR".."0").noPrefix()
+    IntConstant("", "MSDF_SEGMENT_TYPE_QUADRATIC".."1").noPrefix()
+    IntConstant("", "MSDF_SEGMENT_TYPE_CUBIC".."2").noPrefix()
+
+    IntConstant("", "MSDF_EDGE_COLOR_BLACK".."0").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_RED".."1").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_GREEN".."2").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_YELLOW".."3").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_BLUE".."4").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_MAGENTA".."5").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_CYAN".."6").noPrefix()
+    IntConstant("", "MSDF_EDGE_COLOR_WHITE".."7").noPrefix()
+
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_DISABLED".."0").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE".."1").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY".."2").noPrefix()
+    IntConstant("", "MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY".."3").noPrefix()
+
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_NONE".."0").noPrefix()
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_AT_EDGE".."1").noPrefix()
+    IntConstant("", "MSDF_DISTANCE_CHECK_MODE_ALWAYS".."2").noPrefix()
+
+    // msdf_bitmap
+
+    int(
+        "bitmap_alloc",
+        "Allocates a new MSDF bitmap object to render a shape into using the internal allocator.",
+        int(
+            "type",
+            "The type of bitmap to allocate. Can be one of MSDF_BITMAP_TYPE_SDF, MSDF_BITMAP_TYPE_PSDF, MSDF_BITMAP_TYPE_MSDF or MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        int("width", "The width of the bitmap in pixels."),
+        int("height", "The height of the bitmap in pixels."),
+        Unsafe..msdf_bitmap.p("bitmap", "A pointer to an msdf_bitmap_t structure to allocate a new bitmap into."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "bitmap_get_channel_count",
+        "Retrieves the number of color channels used by the given bitmap.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the channel count from."),
+        Unsafe..int.p("channel_count", "A pointer to a variable which is populated with the number of color channels used by the given bitmap."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "bitmap_get_pixels",
+        "Retrieves the address of the raw pixel data of the given bitmap.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the raw pixel data from."),
+        Unsafe..void.p.p("pixels", "A pointer to an address which is populated with the raw pixel data of the given bitmap."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "bitmap_get_byte_size",
+        "Retrieves the size of the pixel data of the given bitmap in bytes.",
+        Unsafe..msdf_bitmap.const.p("bitmap", "A pointer to an msdf_bitmap_t structure to retrieve the size of the raw pixel data from."),
+        Unsafe..size_t.p("size", "A pointer to a variable which is populated with the byte size of the raw pixel data of the given bitmap."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "bitmap_free",
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        Unsafe..msdf_bitmap.p("bitmap", "A pointer to an msdf_bitmap_t structure to be freed.")
+    )
+
+    // msdf_shape
+
+    int(
+        "shape_alloc",
+        "Allocates a new MSDF shape object using the internal allocator.",
+        Unsafe..msdf_shape_handle.p("shape", "A pointer to an address which is populated with the address of the newly allocated shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_get_bounds",
+        "Retrieves the bounds of the given shape.",
+        msdf_shape_const_handle("shape", "A pointer to a shape object to retrieve the bounds from."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a variable which is populated with the bounds of the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_add_contour",
+        "Adds a new contour to the given shape.",
+        msdf_shape_handle("shape", "A pointer to a shape object to add a new contour to."),
+        Unsafe..msdf_contour_const_handle.p("contour", "A pointer to a contour handle to be populated with a new contour that was added to the shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_remove_contour",
+        "Removes the given contour from the given shape if present.",
+        msdf_shape_handle("shape", "A pointer to a shape object to remove the given contour from."),
+        msdf_contour_const_handle("contour", "A pointer to the contour to remove from the shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_get_contour_count",
+        "Retrieves the number of contours allocated within the given shape object.",
+        msdf_shape_const_handle("shape", "A pointer to a shape object from which to retrieve the contour count."),
+        Unsafe..size_t.p("size", "A pointer to a variable which is populated with the number of contours of the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_get_contour",
+        "Retrieves a contour at a given index from the given shape.",
+        msdf_shape_const_handle("shape", "A pointer to a shape object from which to retrieve a contour."),
+        size_t("index", "The index of the contour to retrieve."),
+        Unsafe..msdf_contour_const_handle.p(
+            "contour",
+            "A pointer to an address which is populated with the address of the contour at the given index if present."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_get_edge_count",
+        "Retrieves the number of edges of the given shape.",
+        msdf_shape_const_handle("shape", "A pointer to a shape from which to retrieve the edge count."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the number of edges defined by the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_has_inverse_y_axis",
+        "Retrieves the inverse-y-axis flag of the given shape.",
+        msdf_shape_const_handle("shape", "A pointer to a shape from which to fetch the inverse-y-axis flag."),
+        Unsafe..int.p(
+            "inverse_y_axis",
+            "A pointer to a variable which is populated with MSDF_TRUE when the y-axis of the given shape is inverted. Otherwise the variable will be set to MSDF_FALSE."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_normalize",
+        "Normalizes the given shape.",
+        msdf_shape_handle("shape", "A pointer to a shape to normalize."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_validate",
+        "Validates the given shape.",
+        msdf_shape_handle("shape", "A pointer to a shape to validate."),
+        Unsafe..int.p(
+            "result",
+            "A pointer to a variable which is populated with MSDF_TRUE when the validation was successful. Otherwise the variable will be set to MSDF_FALSE."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_bound",
+        "Adjusts the given bounding box to fit the given shape.",
+        msdf_shape_const_handle("shape", "A pointer to a shape to fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a bounding box which should at least fit the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_bound_miters",
+        "Adjusts the given bounding box to fit the given shape including a mitered border.",
+        msdf_shape_const_handle("shape", "A pointer to a shape to fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to a bounding box which should at least fit the given shape including the specified border."),
+        double("border", "The size of the border."),
+        double("miter_limit", "The miter limit value."),
+        int("polarity", "The miter polarity."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_orient_contours",
+        "Orients all contours associated with the given shape before rendering.",
+        msdf_shape_handle("shape", "A pointer to a shape whose contours to orient."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_edge_colors_simple",
+        "Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants.",
+        msdf_shape_handle("shape", "A pointer to a shape whose edges to color with the default MSDF colors."),
+        double("angle_threshold", "The threshold angle in degrees."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_edge_colors_ink_trap",
+        "Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the ink trap algorithm.",
+        msdf_shape_handle("shape", "A pointer to a shape whose edges to color with the default MSDF colors."),
+        double("angle_threshold", "The threshold angle in degrees."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_edge_colors_by_distance",
+        "Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the distance.",
+        msdf_shape_handle("shape", "A pointer to a shape whose edges to color with the default MSDF colors."),
+        double("angle_threshold", "The threshold angle in degrees."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "shape_one_shot_distance",
+        "Finds the distance between shape and origin.",
+        msdf_shape_const_handle("shape", "A pointer to the shape to find the distance to."),
+        Unsafe..msdf_vector2.const.p("origin", "The point to find the distance relative to the given shape to."),
+        Unsafe..double.p("distance", "A pointer to a variable to be populated with the calculated distance to the given shape."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "shape_free",
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        msdf_shape_handle("shape", "A pointer to a shape object to be freed.")
+    )
+
+    // msdf_contour
+
+    int(
+        "contour_alloc",
+        "Allocates a new contour object using the internal allocator.",
+        Unsafe..msdf_contour_handle.p("contour", "A pointer to an address which is populated with the address of the newly allocated contour object."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_add_edge",
+        "Adds a new edge to the given contour and returns its associated segment handle.",
+        msdf_contour_handle("contour", "A pointer to the contour to add a new edge (segment) to."),
+        msdf_segment_handle("segment", "A pointer to the segment to add as an edge."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_remove_edge",
+        "Removes the given edge from the given contour if present.",
+        msdf_contour_handle("contour", "A pointer to the contour to remove the given edge (segment) from."),
+        msdf_segment_handle("segment", "A pointer to the segment to remove from the given contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_get_edge_count",
+        "Retrieves the edge count of the given contour.",
+        msdf_contour_const_handle("contour", "A pointer to the contour to retrieve the edge count from."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the edge count of the given contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_get_edge",
+        "Retrieves an edge (segment) from the given contour at the given index.",
+        msdf_contour_const_handle("contour", "A pointer to the contour from which to retrieve the given edge segment."),
+        size_t("index", "The index from which to retrieve the edge segment."),
+        Unsafe..msdf_segment_const_handle.p(
+            "segment",
+            "A pointer to an address which is populated with the address of the edge segment at the given index if present."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_bound",
+        "Adjusts the given bounding box to fit at least the given contour.",
+        msdf_contour_const_handle("contour", "A pointer to the contour which should at least fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour into."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_bound_miters",
+        "Adjust the given bounding box to fit at least the given contour including a specified border.",
+        msdf_contour_const_handle("contour", "A pointer to the contour which should at least fit into the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box to fit the given contour including the specified border."),
+        double("border", "The size of the border."),
+        double("miter_limit", "The miter limit value."),
+        int("polarity", "The miter polarity."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_get_winding",
+        "Retrieves the winding direction of the given contour.",
+        msdf_contour_const_handle("contour", "A pointer to the contour of which to retrieve the winding direction."),
+        Unsafe..int.p("winding", "A pointer to a variables which is populated with the winding direction of the given contour."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "contour_reverse",
+        "Reverses the order of edges in the given contour.",
+        msdf_contour_handle("contour", "A pointer to the contour which to reverse the edge order for."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "contour_free",
+        "Calls the destructor of the given bitmap and frees its memory using the internal allocator.",
+        msdf_contour_handle("contour", "A pointer to the contour to free.")
+    )
+
+    // msdf_segment
+
+    int(
+        "segment_alloc",
+        "Allocates a new segment of the given type and populates the given address with the address of the newly allocated segment.",
+        int("type", "The type of segment to allocate. Can be one of MSDF_SEGMENT_TYPE_LINEAR, MSDF_SEGMENT_TYPE_QUADRATIC or MSDF_SEGMENT_TYPE_CUBIC."),
+        Unsafe..msdf_segment_handle.p("segment", "A pointer to an address which is populated with the address of the newly allocated segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_type",
+        "Retrieves the type of the given segment.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the type."),
+        Unsafe..int.p("type", "A pointer to a variable which is populated with the type of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_point_count",
+        "Retrieves the point count of the given segment.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the number of points."),
+        Unsafe..size_t.p("count", "A pointer to a variable which is populated with the number of points of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_point",
+        "Retrieves a point at the given index from the given segment.",
+        msdf_segment_const_handle("segment", "A pointer to the segment from which to retrieve a point."),
+        size_t("index", "The index of the point to retrieve."),
+        Unsafe..msdf_vector2.p("point", "A pointer to a point which is populated with the coordinates of the point at the given index if present."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_set_point",
+        "Sets the coordinates of a point at the given index in the given segment.",
+        msdf_segment_handle("segment", "A pointer to the segment of which to set the point."),
+        size_t("index", "The index of the point to set."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to a point which is copied to the given index within the segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_color",
+        "Retrieves the color of the given segment.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the color."),
+        Unsafe..int.p(
+            "color",
+            "A pointer to a variable which is populated with the color of the given segment. Will be one of the constants prefixed with MSDF_COLOR_."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_set_color",
+        "Sets the color of the given segment.",
+        msdf_segment_handle("segment", "A pointer to the segment of which to set the color."),
+        int("color", "The color to set. Can be any MSDF_COLOR_ value."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_direction",
+        "Retrieves the direction of the given segment at the given point.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the direction."),
+        double("param", "The point at which to retrieve the segment direction."),
+        Unsafe..msdf_vector2.p("direction", "A pointer to a variable which is populated with the direction of the given segment at the given point."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_get_direction_change",
+        "Retrieves the direction change of the given segment at the given point.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the direction change."),
+        double("param", "The point at which to retrieve the segment direction change."),
+        Unsafe..msdf_vector2.p(
+            "direction_change",
+            "A pointer to a variable which is populated with the direction change of the given segment at the given point."
+        ),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_point",
+        "Retrieves the point on the given edge segment specified by the given parameter.",
+        msdf_segment_const_handle("segment", "A pointer to the segment of which to retrieve the edge point."),
+        double("param", "The point at which to sample."),
+        Unsafe..msdf_vector2.p("point", "A pointer to a variable which is populated with the edge point at the given location from the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_bound",
+        "Adjusts the given bounding box to fit at least the given segment.",
+        msdf_segment_const_handle("segment", "A pointer to the segment which should at least fit in the given bounding box."),
+        Unsafe..msdf_bounds.p("bounds", "A pointer to the bounding box which should at least fit the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_move_start_point",
+        "Moves the start point of the given segment.",
+        msdf_segment_handle("segment", "A pointer to the segment of which to adjust the start point."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to the new start point of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "segment_move_end_point",
+        "Moves the end point of the given segment.",
+        msdf_segment_handle("segment", "A pointer to the segment of which to adjust the end point."),
+        Unsafe..msdf_vector2.const.p("point", "A pointer to the new end point of the given segment."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "segment_free",
+        "Calls the destructor of the given segment and frees its memory using the internal allocator.",
+        msdf_segment_handle("segment", "A pointer to the segment to free.")
+    )
+
+    // Main API functions
+
+    int(
+        "generate_sdf",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_psdf",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_msdf",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_mtsdf",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_sdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_psdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_msdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_multichannel_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "generate_mtsdf_with_config",
+        "",
+        Unsafe..msdf_bitmap.p(
+            "output",
+            "A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF."
+        ),
+        msdf_shape_const_handle("shape", "A pointer to the shape to render to the given bitmap."),
+        Unsafe..msdf_transform.const.p("transform", "The transform which is applied to the given shape during rendering."),
+        Unsafe..msdf_multichannel_config.const.p("config", "A pointer to the config which is applied to the sprite generator before rendering."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+
+    // FreeType extensions
+
+    int(
+        "ft_set_load_callback",
+        "Overrides the default load callback function used for resolving FreeTypee function at runtime.",
+        msdf_ft_load_callback("callback", "A pointer to the function to call for resolving FreeType functions at runtime."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    msdf_ft_load_callback(
+        "ft_get_load_callback",
+        "Retrieves the current FreeType load callback.",
+        returnDoc = "A pointer to the current FreeType load callback function."
+    )
+    int(
+        "ft_init",
+        "Initializes a new FreeType instance to be used with msdfgen.",
+        Unsafe..msdf_ft_handle.p("handle", "A pointer to a handle to be populated with a new FreeType context."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_load_font",
+        "Loads a TrueType font from the given file(path) and populates the given font handle with the address of the newly loaded font.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to use for loading the font."),
+        Unsafe..char.const.p("fileName", "The name or path of/to the font file to load."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to a font handle to be populated with the address of the newly loaded font."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_adopt_font",
+        "Adopts the given FreeType FT_Face pointer as a font handle.",
+        Unsafe..void.p("face", "An opaque pointer to the FT_Face to adopt."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to an address to be populated with the newly allocated font handle."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_load_font_data",
+        "Loads a TrueType font from the given buffer and populates the given font handle with the address of the newly loaded font.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to use for loading the font."),
+        Unsafe..void.const.p("data", "A pointer to the raw data of the TrueType font to load."),
+        size_t("size", "The size of the data buffer in bytes."),
+        Unsafe..msdf_ft_font_handle.p("font", "A pointer to a font handle to be populated with the address of the newly loaded font."),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    int(
+        "ft_font_load_glyph",
+        "Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.",
+        msdf_ft_font_handle("font", "A handle to the font to use for generating the glyph shape."),
+        unsigned("cp", "The codepoint to generate a shape for."),
+        Unsafe..msdf_shape_handle.p("shape", "A pointer to a handle to be populated with the address of the newly created shape. This shape must later be freed using msdf_shape_free!"),
+        returnDoc = "MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_."
+    )
+    void(
+        "ft_font_destroy",
+        "Frees the underlying instance of the given FreeType font.",
+        msdf_ft_font_handle("font", "The handle to the font to free.")
+    )
+    void(
+        "ft_deinit",
+        "Frees the underlying FreeType instance of the given context.",
+        msdf_ft_handle("handle", "The handle to the FreeType context to free.")
+    )
+}

@@ -1,0 +1,1335 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.util.msdfgen;
+
+import javax.annotation.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
+
+import static org.lwjgl.system.Checks.*;
+
+public class MSDFGen {
+
+    static { LibMsdfGen.initialize(); }
+
+    public static final int MSDF_FALSE = 0;
+
+    public static final int MSDF_TRUE = 1;
+
+    public static final int MSDF_SUCCESS = 0;
+
+    public static final int MSDF_ERR_FAILED = 1;
+
+    public static final int MSDF_ERR_INVALID_ARG = 2;
+
+    public static final int MSDF_ERR_INVALID_TYPE = 3;
+
+    public static final int MSDF_ERR_INVALID_SIZE = 4;
+
+    public static final int MSDF_ERR_INVALID_INDEX = 5;
+
+    public static final int MSDF_BITMAP_TYPE_SDF = 0;
+
+    public static final int MSDF_BITMAP_TYPE_PSDF = 1;
+
+    public static final int MSDF_BITMAP_TYPE_MSDF = 2;
+
+    public static final int MSDF_BITMAP_TYPE_MTSDF = 3;
+
+    public static final int MSDF_SEGMENT_TYPE_LINEAR = 0;
+
+    public static final int MSDF_SEGMENT_TYPE_QUADRATIC = 1;
+
+    public static final int MSDF_SEGMENT_TYPE_CUBIC = 2;
+
+    public static final int MSDF_EDGE_COLOR_BLACK = 0;
+
+    public static final int MSDF_EDGE_COLOR_RED = 1;
+
+    public static final int MSDF_EDGE_COLOR_GREEN = 2;
+
+    public static final int MSDF_EDGE_COLOR_YELLOW = 3;
+
+    public static final int MSDF_EDGE_COLOR_BLUE = 4;
+
+    public static final int MSDF_EDGE_COLOR_MAGENTA = 5;
+
+    public static final int MSDF_EDGE_COLOR_CYAN = 6;
+
+    public static final int MSDF_EDGE_COLOR_WHITE = 7;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_DISABLED = 0;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE = 1;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY = 2;
+
+    public static final int MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY = 3;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_NONE = 0;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_AT_EDGE = 1;
+
+    public static final int MSDF_DISTANCE_CHECK_MODE_ALWAYS = 2;
+
+    protected MSDFGen() {
+        throw new UnsupportedOperationException();
+    }
+
+    // --- [ msdf_bitmap_alloc ] ---
+
+    /** Unsafe version of: {@link #msdf_bitmap_alloc bitmap_alloc} */
+    public static native int nmsdf_bitmap_alloc(int type, int width, int height, long bitmap);
+
+    /**
+     * Allocates a new MSDF bitmap object to render a shape into using the internal allocator.
+     *
+     * @param type   The type of bitmap to allocate. Can be one of MSDF_BITMAP_TYPE_SDF, MSDF_BITMAP_TYPE_PSDF, MSDF_BITMAP_TYPE_MSDF or MSDF_BITMAP_TYPE_MTSDF.
+     * @param width  The width of the bitmap in pixels.
+     * @param height The height of the bitmap in pixels.
+     * @param bitmap A pointer to an msdf_bitmap_t structure to allocate a new bitmap into.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_bitmap_alloc(int type, int width, int height, @NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer bitmap) {
+        return nmsdf_bitmap_alloc(type, width, height, bitmap.address());
+    }
+
+    // --- [ msdf_bitmap_get_channel_count ] ---
+
+    /** Unsafe version of: {@link #msdf_bitmap_get_channel_count bitmap_get_channel_count} */
+    public static native int nmsdf_bitmap_get_channel_count(long bitmap, long channel_count);
+
+    /**
+     * Retrieves the number of color channels used by the given bitmap.
+     *
+     * @param bitmap        A pointer to an msdf_bitmap_t structure to retrieve the channel count from.
+     * @param channel_count A pointer to a variable which is populated with the number of color channels used by the given bitmap.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_bitmap_get_channel_count(@NativeType("struct msdf_bitmap const *") MSDFGenBitmap.Buffer bitmap, @NativeType("int *") IntBuffer channel_count) {
+        if (CHECKS) {
+            MSDFGenBitmap.validate(bitmap.address());
+        }
+        return nmsdf_bitmap_get_channel_count(bitmap.address(), memAddress(channel_count));
+    }
+
+    // --- [ msdf_bitmap_get_pixels ] ---
+
+    /** Unsafe version of: {@link #msdf_bitmap_get_pixels bitmap_get_pixels} */
+    public static native int nmsdf_bitmap_get_pixels(long bitmap, long pixels);
+
+    /**
+     * Retrieves the address of the raw pixel data of the given bitmap.
+     *
+     * @param bitmap A pointer to an msdf_bitmap_t structure to retrieve the raw pixel data from.
+     * @param pixels A pointer to an address which is populated with the raw pixel data of the given bitmap.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_bitmap_get_pixels(@NativeType("struct msdf_bitmap const *") MSDFGenBitmap.Buffer bitmap, @NativeType("void **") PointerBuffer pixels) {
+        if (CHECKS) {
+            MSDFGenBitmap.validate(bitmap.address());
+        }
+        return nmsdf_bitmap_get_pixels(bitmap.address(), memAddress(pixels));
+    }
+
+    // --- [ msdf_bitmap_get_byte_size ] ---
+
+    /** Unsafe version of: {@link #msdf_bitmap_get_byte_size bitmap_get_byte_size} */
+    public static native int nmsdf_bitmap_get_byte_size(long bitmap, long size);
+
+    /**
+     * Retrieves the size of the pixel data of the given bitmap in bytes.
+     *
+     * @param bitmap A pointer to an msdf_bitmap_t structure to retrieve the size of the raw pixel data from.
+     * @param size   A pointer to a variable which is populated with the byte size of the raw pixel data of the given bitmap.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_bitmap_get_byte_size(@NativeType("struct msdf_bitmap const *") MSDFGenBitmap.Buffer bitmap, @NativeType("size_t *") PointerBuffer size) {
+        if (CHECKS) {
+            MSDFGenBitmap.validate(bitmap.address());
+        }
+        return nmsdf_bitmap_get_byte_size(bitmap.address(), memAddress(size));
+    }
+
+    // --- [ msdf_bitmap_free ] ---
+
+    /** Unsafe version of: {@link #msdf_bitmap_free bitmap_free} */
+    public static native void nmsdf_bitmap_free(long bitmap);
+
+    /**
+     * Calls the destructor of the given bitmap and frees its memory using the internal allocator.
+     *
+     * @param bitmap A pointer to an msdf_bitmap_t structure to be freed.
+     */
+    public static void msdf_bitmap_free(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer bitmap) {
+        nmsdf_bitmap_free(bitmap.address());
+    }
+
+    // --- [ msdf_shape_alloc ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_alloc shape_alloc} */
+    public static native int nmsdf_shape_alloc(long shape);
+
+    /**
+     * Allocates a new MSDF shape object using the internal allocator.
+     *
+     * @param shape A pointer to an address which is populated with the address of the newly allocated shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_alloc(@NativeType("msdf_shape_handle *") PointerBuffer shape) {
+        return nmsdf_shape_alloc(memAddress(shape));
+    }
+
+    // --- [ msdf_shape_get_bounds ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_get_bounds shape_get_bounds} */
+    public static native int nmsdf_shape_get_bounds(long shape, long bounds);
+
+    /**
+     * Retrieves the bounds of the given shape.
+     *
+     * @param shape  A pointer to a shape object to retrieve the bounds from.
+     * @param bounds A pointer to a variable which is populated with the bounds of the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_get_bounds(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_bounds(shape, bounds.address());
+    }
+
+    // --- [ msdf_shape_add_contour ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_add_contour shape_add_contour} */
+    public static native int nmsdf_shape_add_contour(long shape, long contour);
+
+    /**
+     * Adds a new contour to the given shape.
+     *
+     * @param shape   A pointer to a shape object to add a new contour to.
+     * @param contour A pointer to a contour handle to be populated with a new contour that was added to the shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_add_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle *") PointerBuffer contour) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_add_contour(shape, memAddress(contour));
+    }
+
+    // --- [ msdf_shape_remove_contour ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_remove_contour shape_remove_contour} */
+    public static native int nmsdf_shape_remove_contour(long shape, long contour);
+
+    /**
+     * Removes the given contour from the given shape if present.
+     *
+     * @param shape   A pointer to a shape object to remove the given contour from.
+     * @param contour A pointer to the contour to remove from the shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_remove_contour(@NativeType("msdf_shape_handle") long shape, @NativeType("msdf_contour_const_handle") long contour) {
+        if (CHECKS) {
+            check(shape);
+            check(contour);
+        }
+        return nmsdf_shape_remove_contour(shape, contour);
+    }
+
+    // --- [ msdf_shape_get_contour_count ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_get_contour_count shape_get_contour_count} */
+    public static native int nmsdf_shape_get_contour_count(long shape, long size);
+
+    /**
+     * Retrieves the number of contours allocated within the given shape object.
+     *
+     * @param shape A pointer to a shape object from which to retrieve the contour count.
+     * @param size  A pointer to a variable which is populated with the number of contours of the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_get_contour_count(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t *") PointerBuffer size) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_contour_count(shape, memAddress(size));
+    }
+
+    // --- [ msdf_shape_get_contour ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_get_contour shape_get_contour} */
+    public static native int nmsdf_shape_get_contour(long shape, long index, long contour);
+
+    /**
+     * Retrieves a contour at a given index from the given shape.
+     *
+     * @param shape   A pointer to a shape object from which to retrieve a contour.
+     * @param index   The index of the contour to retrieve.
+     * @param contour A pointer to an address which is populated with the address of the contour at the given index if present.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_get_contour(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t") long index, @NativeType("msdf_contour_const_handle *") PointerBuffer contour) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_contour(shape, index, memAddress(contour));
+    }
+
+    // --- [ msdf_shape_get_edge_count ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_get_edge_count shape_get_edge_count} */
+    public static native int nmsdf_shape_get_edge_count(long shape, long count);
+
+    /**
+     * Retrieves the number of edges of the given shape.
+     *
+     * @param shape A pointer to a shape from which to retrieve the edge count.
+     * @param count A pointer to a variable which is populated with the number of edges defined by the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_get_edge_count(@NativeType("msdf_shape_const_handle") long shape, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_get_edge_count(shape, memAddress(count));
+    }
+
+    // --- [ msdf_shape_has_inverse_y_axis ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_has_inverse_y_axis shape_has_inverse_y_axis} */
+    public static native int nmsdf_shape_has_inverse_y_axis(long shape, long inverse_y_axis);
+
+    /**
+     * Retrieves the inverse-y-axis flag of the given shape.
+     *
+     * @param shape          A pointer to a shape from which to fetch the inverse-y-axis flag.
+     * @param inverse_y_axis A pointer to a variable which is populated with MSDF_TRUE when the y-axis of the given shape is inverted. Otherwise the variable will be set to MSDF_FALSE.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_has_inverse_y_axis(@NativeType("msdf_shape_const_handle") long shape, @NativeType("int *") IntBuffer inverse_y_axis) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_has_inverse_y_axis(shape, memAddress(inverse_y_axis));
+    }
+
+    // --- [ msdf_shape_normalize ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_normalize shape_normalize} */
+    public static native int nmsdf_shape_normalize(long shape);
+
+    /**
+     * Normalizes the given shape.
+     *
+     * @param shape A pointer to a shape to normalize.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_normalize(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_normalize(shape);
+    }
+
+    // --- [ msdf_shape_validate ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_validate shape_validate} */
+    public static native int nmsdf_shape_validate(long shape, long result);
+
+    /**
+     * Validates the given shape.
+     *
+     * @param shape  A pointer to a shape to validate.
+     * @param result A pointer to a variable which is populated with MSDF_TRUE when the validation was successful. Otherwise the variable will be set to MSDF_FALSE.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_validate(@NativeType("msdf_shape_handle") long shape, @NativeType("int *") IntBuffer result) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_validate(shape, memAddress(result));
+    }
+
+    // --- [ msdf_shape_bound ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_bound shape_bound} */
+    public static native int nmsdf_shape_bound(long shape, long bounds);
+
+    /**
+     * Adjusts the given bounding box to fit the given shape.
+     *
+     * @param shape  A pointer to a shape to fit into the given bounding box.
+     * @param bounds A pointer to a bounding box which should at least fit the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_bound(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_bound(shape, bounds.address());
+    }
+
+    // --- [ msdf_shape_bound_miters ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_bound_miters shape_bound_miters} */
+    public static native int nmsdf_shape_bound_miters(long shape, long bounds, double border, double miter_limit, int polarity);
+
+    /**
+     * Adjusts the given bounding box to fit the given shape including a mitered border.
+     *
+     * @param shape       A pointer to a shape to fit into the given bounding box.
+     * @param bounds      A pointer to a bounding box which should at least fit the given shape including the specified border.
+     * @param border      The size of the border.
+     * @param miter_limit The miter limit value.
+     * @param polarity    The miter polarity.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_bound_miters(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_bound_miters(shape, bounds.address(), border, miter_limit, polarity);
+    }
+
+    // --- [ msdf_shape_orient_contours ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_orient_contours shape_orient_contours} */
+    public static native int nmsdf_shape_orient_contours(long shape);
+
+    /**
+     * Orients all contours associated with the given shape before rendering.
+     *
+     * @param shape A pointer to a shape whose contours to orient.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_orient_contours(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_orient_contours(shape);
+    }
+
+    // --- [ msdf_shape_edge_colors_simple ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_simple shape_edge_colors_simple} */
+    public static native int nmsdf_shape_edge_colors_simple(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_edge_colors_simple(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_edge_colors_simple(shape, angle_threshold);
+    }
+
+    // --- [ msdf_shape_edge_colors_ink_trap ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_ink_trap shape_edge_colors_ink_trap} */
+    public static native int nmsdf_shape_edge_colors_ink_trap(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the ink trap algorithm.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_edge_colors_ink_trap(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_edge_colors_ink_trap(shape, angle_threshold);
+    }
+
+    // --- [ msdf_shape_edge_colors_by_distance ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_edge_colors_by_distance shape_edge_colors_by_distance} */
+    public static native int nmsdf_shape_edge_colors_by_distance(long shape, double angle_threshold);
+
+    /**
+     * Colors the edges of the given shape using the default MSDF colors specified by the MSDF_COLOR_ prefixed constants using the distance.
+     *
+     * @param shape           A pointer to a shape whose edges to color with the default MSDF colors.
+     * @param angle_threshold The threshold angle in degrees.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_edge_colors_by_distance(@NativeType("msdf_shape_handle") long shape, double angle_threshold) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_edge_colors_by_distance(shape, angle_threshold);
+    }
+
+    // --- [ msdf_shape_one_shot_distance ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_one_shot_distance shape_one_shot_distance} */
+    public static native int nmsdf_shape_one_shot_distance(long shape, long origin, long distance);
+
+    /**
+     * Finds the distance between shape and origin.
+     *
+     * @param shape    A pointer to the shape to find the distance to.
+     * @param origin   The point to find the distance relative to the given shape to.
+     * @param distance A pointer to a variable to be populated with the calculated distance to the given shape.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_shape_one_shot_distance(@NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer origin, @NativeType("double *") DoubleBuffer distance) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_one_shot_distance(shape, origin.address(), memAddress(distance));
+    }
+
+    // --- [ msdf_shape_free ] ---
+
+    /** Unsafe version of: {@link #msdf_shape_free shape_free} */
+    public static native void nmsdf_shape_free(long shape);
+
+    /**
+     * Calls the destructor of the given bitmap and frees its memory using the internal allocator.
+     *
+     * @param shape A pointer to a shape object to be freed.
+     */
+    public static void msdf_shape_free(@NativeType("msdf_shape_handle") long shape) {
+        if (CHECKS) {
+            check(shape);
+        }
+        nmsdf_shape_free(shape);
+    }
+
+    // --- [ msdf_contour_alloc ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_alloc contour_alloc} */
+    public static native int nmsdf_contour_alloc(long contour);
+
+    /**
+     * Allocates a new contour object using the internal allocator.
+     *
+     * @param contour A pointer to an address which is populated with the address of the newly allocated contour object.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_alloc(@NativeType("msdf_contour_handle *") PointerBuffer contour) {
+        return nmsdf_contour_alloc(memAddress(contour));
+    }
+
+    // --- [ msdf_contour_add_edge ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_add_edge contour_add_edge} */
+    public static native int nmsdf_contour_add_edge(long contour, long segment);
+
+    /**
+     * Adds a new edge to the given contour and returns its associated segment handle.
+     *
+     * @param contour A pointer to the contour to add a new edge (segment) to.
+     * @param segment A pointer to the segment to add as an edge.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_add_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle") long segment) {
+        if (CHECKS) {
+            check(contour);
+            check(segment);
+        }
+        return nmsdf_contour_add_edge(contour, segment);
+    }
+
+    // --- [ msdf_contour_remove_edge ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_remove_edge contour_remove_edge} */
+    public static native int nmsdf_contour_remove_edge(long contour, long segment);
+
+    /**
+     * Removes the given edge from the given contour if present.
+     *
+     * @param contour A pointer to the contour to remove the given edge (segment) from.
+     * @param segment A pointer to the segment to remove from the given contour.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_remove_edge(@NativeType("msdf_contour_handle") long contour, @NativeType("msdf_segment_handle") long segment) {
+        if (CHECKS) {
+            check(contour);
+            check(segment);
+        }
+        return nmsdf_contour_remove_edge(contour, segment);
+    }
+
+    // --- [ msdf_contour_get_edge_count ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_get_edge_count contour_get_edge_count} */
+    public static native int nmsdf_contour_get_edge_count(long contour, long count);
+
+    /**
+     * Retrieves the edge count of the given contour.
+     *
+     * @param contour A pointer to the contour to retrieve the edge count from.
+     * @param count   A pointer to a variable which is populated with the edge count of the given contour.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_get_edge_count(@NativeType("msdf_contour_const_handle") long contour, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_edge_count(contour, memAddress(count));
+    }
+
+    // --- [ msdf_contour_get_edge ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_get_edge contour_get_edge} */
+    public static native int nmsdf_contour_get_edge(long contour, long index, long segment);
+
+    /**
+     * Retrieves an edge (segment) from the given contour at the given index.
+     *
+     * @param contour A pointer to the contour from which to retrieve the given edge segment.
+     * @param index   The index from which to retrieve the edge segment.
+     * @param segment A pointer to an address which is populated with the address of the edge segment at the given index if present.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_get_edge(@NativeType("msdf_contour_const_handle") long contour, @NativeType("size_t") long index, @NativeType("msdf_segment_const_handle *") PointerBuffer segment) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_edge(contour, index, memAddress(segment));
+    }
+
+    // --- [ msdf_contour_bound ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_bound contour_bound} */
+    public static native int nmsdf_contour_bound(long contour, long bounds);
+
+    /**
+     * Adjusts the given bounding box to fit at least the given contour.
+     *
+     * @param contour A pointer to the contour which should at least fit into the given bounding box.
+     * @param bounds  A pointer to the bounding box to fit the given contour into.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_bound(@NativeType("msdf_contour_const_handle") long contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_bound(contour, bounds.address());
+    }
+
+    // --- [ msdf_contour_bound_miters ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_bound_miters contour_bound_miters} */
+    public static native int nmsdf_contour_bound_miters(long contour, long bounds, double border, double miter_limit, int polarity);
+
+    /**
+     * Adjust the given bounding box to fit at least the given contour including a specified border.
+     *
+     * @param contour     A pointer to the contour which should at least fit into the given bounding box.
+     * @param bounds      A pointer to the bounding box to fit the given contour including the specified border.
+     * @param border      The size of the border.
+     * @param miter_limit The miter limit value.
+     * @param polarity    The miter polarity.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_bound_miters(@NativeType("msdf_contour_const_handle") long contour, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds, double border, double miter_limit, int polarity) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_bound_miters(contour, bounds.address(), border, miter_limit, polarity);
+    }
+
+    // --- [ msdf_contour_get_winding ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_get_winding contour_get_winding} */
+    public static native int nmsdf_contour_get_winding(long contour, long winding);
+
+    /**
+     * Retrieves the winding direction of the given contour.
+     *
+     * @param contour A pointer to the contour of which to retrieve the winding direction.
+     * @param winding A pointer to a variables which is populated with the winding direction of the given contour.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_get_winding(@NativeType("msdf_contour_const_handle") long contour, @NativeType("int *") IntBuffer winding) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_get_winding(contour, memAddress(winding));
+    }
+
+    // --- [ msdf_contour_reverse ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_reverse contour_reverse} */
+    public static native int nmsdf_contour_reverse(long contour);
+
+    /**
+     * Reverses the order of edges in the given contour.
+     *
+     * @param contour A pointer to the contour which to reverse the edge order for.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_contour_reverse(@NativeType("msdf_contour_handle") long contour) {
+        if (CHECKS) {
+            check(contour);
+        }
+        return nmsdf_contour_reverse(contour);
+    }
+
+    // --- [ msdf_contour_free ] ---
+
+    /** Unsafe version of: {@link #msdf_contour_free contour_free} */
+    public static native void nmsdf_contour_free(long contour);
+
+    /**
+     * Calls the destructor of the given bitmap and frees its memory using the internal allocator.
+     *
+     * @param contour A pointer to the contour to free.
+     */
+    public static void msdf_contour_free(@NativeType("msdf_contour_handle") long contour) {
+        if (CHECKS) {
+            check(contour);
+        }
+        nmsdf_contour_free(contour);
+    }
+
+    // --- [ msdf_segment_alloc ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_alloc segment_alloc} */
+    public static native int nmsdf_segment_alloc(int type, long segment);
+
+    /**
+     * Allocates a new segment of the given type and populates the given address with the address of the newly allocated segment.
+     *
+     * @param type    The type of segment to allocate. Can be one of MSDF_SEGMENT_TYPE_LINEAR, MSDF_SEGMENT_TYPE_QUADRATIC or MSDF_SEGMENT_TYPE_CUBIC.
+     * @param segment A pointer to an address which is populated with the address of the newly allocated segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_alloc(int type, @NativeType("msdf_segment_handle *") PointerBuffer segment) {
+        return nmsdf_segment_alloc(type, memAddress(segment));
+    }
+
+    // --- [ msdf_segment_get_type ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_type segment_get_type} */
+    public static native int nmsdf_segment_get_type(long segment, long type);
+
+    /**
+     * Retrieves the type of the given segment.
+     *
+     * @param segment A pointer to the segment of which to retrieve the type.
+     * @param type    A pointer to a variable which is populated with the type of the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_type(@NativeType("msdf_segment_const_handle") long segment, @NativeType("int *") IntBuffer type) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_type(segment, memAddress(type));
+    }
+
+    // --- [ msdf_segment_get_point_count ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_point_count segment_get_point_count} */
+    public static native int nmsdf_segment_get_point_count(long segment, long count);
+
+    /**
+     * Retrieves the point count of the given segment.
+     *
+     * @param segment A pointer to the segment of which to retrieve the number of points.
+     * @param count   A pointer to a variable which is populated with the number of points of the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_point_count(@NativeType("msdf_segment_const_handle") long segment, @NativeType("size_t *") PointerBuffer count) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_point_count(segment, memAddress(count));
+    }
+
+    // --- [ msdf_segment_get_point ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_point segment_get_point} */
+    public static native int nmsdf_segment_get_point(long segment, long index, long point);
+
+    /**
+     * Retrieves a point at the given index from the given segment.
+     *
+     * @param segment A pointer to the segment from which to retrieve a point.
+     * @param index   The index of the point to retrieve.
+     * @param point   A pointer to a point which is populated with the coordinates of the point at the given index if present.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_point(@NativeType("msdf_segment_const_handle") long segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_point(segment, index, point.address());
+    }
+
+    // --- [ msdf_segment_set_point ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_set_point segment_set_point} */
+    public static native int nmsdf_segment_set_point(long segment, long index, long point);
+
+    /**
+     * Sets the coordinates of a point at the given index in the given segment.
+     *
+     * @param segment A pointer to the segment of which to set the point.
+     * @param index   The index of the point to set.
+     * @param point   A pointer to a point which is copied to the given index within the segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_set_point(@NativeType("msdf_segment_handle") long segment, @NativeType("size_t") long index, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_set_point(segment, index, point.address());
+    }
+
+    // --- [ msdf_segment_get_color ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_color segment_get_color} */
+    public static native int nmsdf_segment_get_color(long segment, long color);
+
+    /**
+     * Retrieves the color of the given segment.
+     *
+     * @param segment A pointer to the segment of which to retrieve the color.
+     * @param color   A pointer to a variable which is populated with the color of the given segment. Will be one of the constants prefixed with MSDF_COLOR_.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_color(@NativeType("msdf_segment_const_handle") long segment, @NativeType("int *") IntBuffer color) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_color(segment, memAddress(color));
+    }
+
+    // --- [ msdf_segment_set_color ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_set_color segment_set_color} */
+    public static native int nmsdf_segment_set_color(long segment, int color);
+
+    /**
+     * Sets the color of the given segment.
+     *
+     * @param segment A pointer to the segment of which to set the color.
+     * @param color   The color to set. Can be any MSDF_COLOR_ value.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_set_color(@NativeType("msdf_segment_handle") long segment, int color) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_set_color(segment, color);
+    }
+
+    // --- [ msdf_segment_get_direction ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_direction segment_get_direction} */
+    public static native int nmsdf_segment_get_direction(long segment, double param, long direction);
+
+    /**
+     * Retrieves the direction of the given segment at the given point.
+     *
+     * @param segment   A pointer to the segment of which to retrieve the direction.
+     * @param param     The point at which to retrieve the segment direction.
+     * @param direction A pointer to a variable which is populated with the direction of the given segment at the given point.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_direction(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_direction(segment, param, direction.address());
+    }
+
+    // --- [ msdf_segment_get_direction_change ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_get_direction_change segment_get_direction_change} */
+    public static native int nmsdf_segment_get_direction_change(long segment, double param, long direction_change);
+
+    /**
+     * Retrieves the direction change of the given segment at the given point.
+     *
+     * @param segment          A pointer to the segment of which to retrieve the direction change.
+     * @param param            The point at which to retrieve the segment direction change.
+     * @param direction_change A pointer to a variable which is populated with the direction change of the given segment at the given point.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_get_direction_change(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer direction_change) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_get_direction_change(segment, param, direction_change.address());
+    }
+
+    // --- [ msdf_segment_point ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_point segment_point} */
+    public static native int nmsdf_segment_point(long segment, double param, long point);
+
+    /**
+     * Retrieves the point on the given edge segment specified by the given parameter.
+     *
+     * @param segment A pointer to the segment of which to retrieve the edge point.
+     * @param param   The point at which to sample.
+     * @param point   A pointer to a variable which is populated with the edge point at the given location from the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_point(@NativeType("msdf_segment_const_handle") long segment, double param, @NativeType("struct msdf_vector2 *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_point(segment, param, point.address());
+    }
+
+    // --- [ msdf_segment_bound ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_bound segment_bound} */
+    public static native int nmsdf_segment_bound(long segment, long bounds);
+
+    /**
+     * Adjusts the given bounding box to fit at least the given segment.
+     *
+     * @param segment A pointer to the segment which should at least fit in the given bounding box.
+     * @param bounds  A pointer to the bounding box which should at least fit the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_bound(@NativeType("msdf_segment_const_handle") long segment, @NativeType("struct msdf_bounds *") MSDFGenBounds.Buffer bounds) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_bound(segment, bounds.address());
+    }
+
+    // --- [ msdf_segment_move_start_point ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_move_start_point segment_move_start_point} */
+    public static native int nmsdf_segment_move_start_point(long segment, long point);
+
+    /**
+     * Moves the start point of the given segment.
+     *
+     * @param segment A pointer to the segment of which to adjust the start point.
+     * @param point   A pointer to the new start point of the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_move_start_point(@NativeType("msdf_segment_handle") long segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_move_start_point(segment, point.address());
+    }
+
+    // --- [ msdf_segment_move_end_point ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_move_end_point segment_move_end_point} */
+    public static native int nmsdf_segment_move_end_point(long segment, long point);
+
+    /**
+     * Moves the end point of the given segment.
+     *
+     * @param segment A pointer to the segment of which to adjust the end point.
+     * @param point   A pointer to the new end point of the given segment.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_segment_move_end_point(@NativeType("msdf_segment_handle") long segment, @NativeType("struct msdf_vector2 const *") MSDFGenVector2.Buffer point) {
+        if (CHECKS) {
+            check(segment);
+        }
+        return nmsdf_segment_move_end_point(segment, point.address());
+    }
+
+    // --- [ msdf_segment_free ] ---
+
+    /** Unsafe version of: {@link #msdf_segment_free segment_free} */
+    public static native void nmsdf_segment_free(long segment);
+
+    /**
+     * Calls the destructor of the given segment and frees its memory using the internal allocator.
+     *
+     * @param segment A pointer to the segment to free.
+     */
+    public static void msdf_segment_free(@NativeType("msdf_segment_handle") long segment) {
+        if (CHECKS) {
+            check(segment);
+        }
+        nmsdf_segment_free(segment);
+    }
+
+    // --- [ msdf_generate_sdf ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_sdf generate_sdf} */
+    public static native int nmsdf_generate_sdf(long output, long shape, long transform);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_sdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_sdf(output.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_generate_psdf ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_psdf generate_psdf} */
+    public static native int nmsdf_generate_psdf(long output, long shape, long transform);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_psdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_psdf(output.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_generate_msdf ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_msdf generate_msdf} */
+    public static native int nmsdf_generate_msdf(long output, long shape, long transform);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_msdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_msdf(output.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_generate_mtsdf ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_mtsdf generate_mtsdf} */
+    public static native int nmsdf_generate_mtsdf(long output, long shape, long transform);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_mtsdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_mtsdf(output.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_generate_sdf_with_config ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_sdf_with_config generate_sdf_with_config} */
+    public static native int nmsdf_generate_sdf_with_config(long output, long shape, long transform, long config);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_SDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     * @param config    A pointer to the config which is applied to the sprite generator before rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_sdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_sdf_with_config(output.address(), shape, transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_psdf_with_config ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_psdf_with_config generate_psdf_with_config} */
+    public static native int nmsdf_generate_psdf_with_config(long output, long shape, long transform, long config);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_PSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     * @param config    A pointer to the config which is applied to the sprite generator before rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_psdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_config const *") MSDFGenConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_psdf_with_config(output.address(), shape, transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_msdf_with_config ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_msdf_with_config generate_msdf_with_config} */
+    public static native int nmsdf_generate_msdf_with_config(long output, long shape, long transform, long config);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     * @param config    A pointer to the config which is applied to the sprite generator before rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_msdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_msdf_with_config(output.address(), shape, transform.address(), config.address());
+    }
+
+    // --- [ msdf_generate_mtsdf_with_config ] ---
+
+    /** Unsafe version of: {@link #msdf_generate_mtsdf_with_config generate_mtsdf_with_config} */
+    public static native int nmsdf_generate_mtsdf_with_config(long output, long shape, long transform, long config);
+
+    /**
+     * @param output    A pointer to a bitmap that was allocated with msdf_bitmap_alloc to which the given shape is rendered. The bitmap must be of type MSDF_BITMAP_TYPE_MTSDF.
+     * @param shape     A pointer to the shape to render to the given bitmap.
+     * @param transform The transform which is applied to the given shape during rendering.
+     * @param config    A pointer to the config which is applied to the sprite generator before rendering.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_generate_mtsdf_with_config(@NativeType("struct msdf_bitmap *") MSDFGenBitmap.Buffer output, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform.Buffer transform, @NativeType("struct msdf_multichannel_config const *") MSDFGenMultichannelConfig.Buffer config) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_generate_mtsdf_with_config(output.address(), shape, transform.address(), config.address());
+    }
+
+    // --- [ msdf_ft_set_load_callback ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_set_load_callback ft_set_load_callback} */
+    public static native int nmsdf_ft_set_load_callback(long callback);
+
+    /**
+     * Overrides the default load callback function used for resolving FreeTypee function at runtime.
+     *
+     * @param callback A pointer to the function to call for resolving FreeType functions at runtime.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_set_load_callback(@NativeType("void * (*) (char const *)") MSDFGenFTLoadCallbackI callback) {
+        return nmsdf_ft_set_load_callback(callback.address());
+    }
+
+    // --- [ msdf_ft_get_load_callback ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_get_load_callback ft_get_load_callback} */
+    public static native long nmsdf_ft_get_load_callback();
+
+    /**
+     * Retrieves the current FreeType load callback.
+     *
+     * @return A pointer to the current FreeType load callback function.
+     */
+    @Nullable
+    @NativeType("void * (*) (char const *)")
+    public static MSDFGenFTLoadCallback msdf_ft_get_load_callback() {
+        return MSDFGenFTLoadCallback.createSafe(nmsdf_ft_get_load_callback());
+    }
+
+    // --- [ msdf_ft_init ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_init ft_init} */
+    public static native int nmsdf_ft_init(long handle);
+
+    /**
+     * Initializes a new FreeType instance to be used with msdfgen.
+     *
+     * @param handle A pointer to a handle to be populated with a new FreeType context.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_init(@NativeType("msdf_ft_handle *") PointerBuffer handle) {
+        return nmsdf_ft_init(memAddress(handle));
+    }
+
+    // --- [ msdf_ft_load_font ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_load_font ft_load_font} */
+    public static native int nmsdf_ft_load_font(long handle, long fileName, long font);
+
+    /**
+     * Loads a TrueType font from the given file(path) and populates the given font handle with the address of the newly loaded font.
+     *
+     * @param handle   The handle to the FreeType context to use for loading the font.
+     * @param fileName The name or path of/to the font file to load.
+     * @param font     A pointer to a font handle to be populated with the address of the newly loaded font.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_load_font(@NativeType("msdf_ft_handle") long handle, @NativeType("char const *") ByteBuffer fileName, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        if (CHECKS) {
+            check(handle);
+        }
+        return nmsdf_ft_load_font(handle, memAddress(fileName), memAddress(font));
+    }
+
+    // --- [ msdf_ft_adopt_font ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_adopt_font ft_adopt_font} */
+    public static native int nmsdf_ft_adopt_font(long face, long font);
+
+    /**
+     * Adopts the given FreeType FT_Face pointer as a font handle.
+     *
+     * @param face An opaque pointer to the FT_Face to adopt.
+     * @param font A pointer to an address to be populated with the newly allocated font handle.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_adopt_font(@NativeType("void *") ByteBuffer face, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        return nmsdf_ft_adopt_font(memAddress(face), memAddress(font));
+    }
+
+    // --- [ msdf_ft_load_font_data ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_load_font_data ft_load_font_data} */
+    public static native int nmsdf_ft_load_font_data(long handle, long data, long size, long font);
+
+    /**
+     * Loads a TrueType font from the given buffer and populates the given font handle with the address of the newly loaded font.
+     *
+     * @param handle The handle to the FreeType context to use for loading the font.
+     * @param data   A pointer to the raw data of the TrueType font to load.
+     * @param size   The size of the data buffer in bytes.
+     * @param font   A pointer to a font handle to be populated with the address of the newly loaded font.
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_load_font_data(@NativeType("msdf_ft_handle") long handle, @NativeType("void const *") ByteBuffer data, @NativeType("size_t") long size, @NativeType("msdf_ft_font_handle *") PointerBuffer font) {
+        if (CHECKS) {
+            check(handle);
+        }
+        return nmsdf_ft_load_font_data(handle, memAddress(data), size, memAddress(font));
+    }
+
+    // --- [ msdf_ft_font_load_glyph ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_load_glyph ft_font_load_glyph} */
+    public static native int nmsdf_ft_font_load_glyph(long font, int cp, long shape);
+
+    /**
+     * Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.
+     *
+     * @param font  A handle to the font to use for generating the glyph shape.
+     * @param cp    The codepoint to generate a shape for.
+     * @param shape A pointer to a handle to be populated with the address of the newly created shape. This shape must later be freed using msdf_shape_free!
+     *
+     * @return MSDF_SUCCESS on success, otherwise one of the constants prefixed with MSDF_ERR_.
+     */
+    public static int msdf_ft_font_load_glyph(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
+        if (CHECKS) {
+            check(font);
+        }
+        return nmsdf_ft_font_load_glyph(font, cp, memAddress(shape));
+    }
+
+    // --- [ msdf_ft_font_destroy ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_destroy ft_font_destroy} */
+    public static native void nmsdf_ft_font_destroy(long font);
+
+    /**
+     * Frees the underlying instance of the given FreeType font.
+     *
+     * @param font The handle to the font to free.
+     */
+    public static void msdf_ft_font_destroy(@NativeType("msdf_ft_font_handle") long font) {
+        if (CHECKS) {
+            check(font);
+        }
+        nmsdf_ft_font_destroy(font);
+    }
+
+    // --- [ msdf_ft_deinit ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_deinit ft_deinit} */
+    public static native void nmsdf_ft_deinit(long handle);
+
+    /**
+     * Frees the underlying FreeType instance of the given context.
+     *
+     * @param handle The handle to the FreeType context to free.
+     */
+    public static void msdf_ft_deinit(@NativeType("msdf_ft_handle") long handle) {
+        if (CHECKS) {
+            check(handle);
+        }
+        nmsdf_ft_deinit(handle);
+    }
+
+}
