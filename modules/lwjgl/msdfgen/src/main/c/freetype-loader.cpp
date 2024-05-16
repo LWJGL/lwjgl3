@@ -24,7 +24,7 @@ struct DynamicLibrary {
         : handle(nullptr) {
         for(const auto& name : names) {
 #if defined(MSDFGEN_WINDOWS)
-            handle = LoadLibraryA(namee.c_str());
+            handle = LoadLibraryA(name.c_str());
 #else
             handle = dlopen(name.c_str(), RTLD_LAZY);
 #endif
