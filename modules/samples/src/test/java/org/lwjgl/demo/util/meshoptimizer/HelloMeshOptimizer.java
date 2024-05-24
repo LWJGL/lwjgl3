@@ -76,9 +76,9 @@ public class HelloMeshOptimizer {
     }
 
     private static void remap(FloatBuffer vertexBuffer, IntBuffer indexBuffer, FloatBuffer normalBuffer, IntBuffer remap) {
-        meshopt_remapIndexBuffer(indexBuffer, indexBuffer, remap);
-        meshopt_remapVertexBuffer(memByteBuffer(vertexBuffer), memByteBuffer(vertexBuffer), 3 * Float.BYTES, remap);
-        meshopt_remapVertexBuffer(memByteBuffer(normalBuffer), memByteBuffer(normalBuffer), 3 * Float.BYTES, remap);
+        meshopt_remapIndexBuffer(indexBuffer, indexBuffer, indexBuffer.remaining(), remap);
+        meshopt_remapVertexBuffer(memByteBuffer(vertexBuffer), memByteBuffer(vertexBuffer), vertexBuffer.remaining(), 3 * Float.BYTES, remap);
+        meshopt_remapVertexBuffer(memByteBuffer(normalBuffer), memByteBuffer(normalBuffer), normalBuffer.remaining(), 3 * Float.BYTES, remap);
     }
 
     private static void printStats(ParShapesMesh mesh) {

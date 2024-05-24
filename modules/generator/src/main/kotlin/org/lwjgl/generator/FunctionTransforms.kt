@@ -109,9 +109,9 @@ private class AutoSizeBytesTransform(
             } catch(e: NumberFormatException) {
                 // non-numeric expressions
                 expression = if (type.mapping.let { it === PrimitiveMapping.POINTER || it === PrimitiveMapping.LONG })
-                    "($expression << $byteShift) ${factor.operator} ${factor.expression}"
+                    "($expression << $byteShift) ${factor.operator} ${if (factor.expression.contains(' ')) "(${factor.expression})" else factor.expression}"
                 else
-                    "(${type.javaMethodType})(((long)$expression << $byteShift) ${factor.operator} ${factor.expression})"
+                    "(${type.javaMethodType})(((long)$expression << $byteShift) ${factor.operator} ${if (factor.expression.contains(' ')) "(${factor.expression})" else factor.expression})"
             }
         }
 

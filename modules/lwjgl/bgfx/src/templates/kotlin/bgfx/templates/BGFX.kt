@@ -970,7 +970,7 @@ RGBA16S
         )..void.p("_output", "welded vertices remapping table. The size of buffer must be the same as number of vertices."),
         bgfx_vertex_layout_t.const.p("_layout", "vertex stream layout"),
         Unsafe..void.const.p("_data", "vertex stream"),
-        AutoSizeShr("(_index32 ? 2 : 1)", "_output")..uint32_t("_num", "number of vertices in vertex stream"),
+        AutoSizeShr("_index32 ? 2 : 1", "_output")..uint32_t("_num", "number of vertices in vertex stream"),
         bool("_index32", "set to {@code true} if input indices are 32-bit"),
         float("_epsilon", "error tolerance for vertex position comparison"),
 
@@ -997,7 +997,7 @@ RGBA16S
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT
         )..void.const.p("_indices", "source indices"),
-        AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t("_numIndices", "number of input indices"),
+        AutoSizeShr("_index32 ? 2 : 1", "_indices")..uint32_t("_numIndices", "number of input indices"),
         bool("_index32", "set to {@code true} if input indices are 32-bit"),
 
         returnDoc = "number of output indices after conversion"
@@ -1030,7 +1030,7 @@ RGBA16S
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT
         )..void.const.p("_indices", "source indices"),
-        AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t("_numIndices", "number of input indices"),
+        AutoSizeShr("_index32 ? 2 : 1", "_indices")..uint32_t("_numIndices", "number of input indices"),
         bool("_index32", "set to {@code true} if input indices are 32-bit")
     )
 
