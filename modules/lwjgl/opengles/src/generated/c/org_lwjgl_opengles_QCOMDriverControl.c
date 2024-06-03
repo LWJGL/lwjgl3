@@ -14,7 +14,7 @@ typedef void (APIENTRY *glDisableDriverControlQCOMPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_nglGetDriverControlsQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong numAddress, jint size, jlong driverControlsAddress) {
-    glGetDriverControlsQCOMPROC glGetDriverControlsQCOM = (glGetDriverControlsQCOMPROC)tlsGetFunction(847);
+    glGetDriverControlsQCOMPROC glGetDriverControlsQCOM = (glGetDriverControlsQCOMPROC)tlsGetFunction(849);
     uintptr_t num = (uintptr_t)numAddress;
     uintptr_t driverControls = (uintptr_t)driverControlsAddress;
     UNUSED_PARAM(clazz)
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_nglGetDriverCon
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_nglGetDriverControlStringQCOM__IIJJ(JNIEnv *__env, jclass clazz, jint driverControl, jint bufSize, jlong lengthAddress, jlong driverControlStringAddress) {
-    glGetDriverControlStringQCOMPROC glGetDriverControlStringQCOM = (glGetDriverControlStringQCOMPROC)tlsGetFunction(848);
+    glGetDriverControlStringQCOMPROC glGetDriverControlStringQCOM = (glGetDriverControlStringQCOMPROC)tlsGetFunction(850);
     uintptr_t length = (uintptr_t)lengthAddress;
     uintptr_t driverControlString = (uintptr_t)driverControlStringAddress;
     UNUSED_PARAM(clazz)
@@ -30,13 +30,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_nglGetDriverCon
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_glEnableDriverControlQCOM(JNIEnv *__env, jclass clazz, jint driverControl) {
-    glEnableDriverControlQCOMPROC glEnableDriverControlQCOM = (glEnableDriverControlQCOMPROC)tlsGetFunction(849);
+    glEnableDriverControlQCOMPROC glEnableDriverControlQCOM = (glEnableDriverControlQCOMPROC)tlsGetFunction(851);
     UNUSED_PARAM(clazz)
     glEnableDriverControlQCOM(driverControl);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMDriverControl_glDisableDriverControlQCOM(JNIEnv *__env, jclass clazz, jint driverControl) {
-    glDisableDriverControlQCOMPROC glDisableDriverControlQCOM = (glDisableDriverControlQCOMPROC)tlsGetFunction(850);
+    glDisableDriverControlQCOMPROC glDisableDriverControlQCOM = (glDisableDriverControlQCOMPROC)tlsGetFunction(852);
     UNUSED_PARAM(clazz)
     glDisableDriverControlQCOM(driverControl);
 }

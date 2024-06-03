@@ -14,28 +14,28 @@ typedef jint (APIENTRY *glGetProgramResourceLocationIndexEXTPROC) (jint, jint, u
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBlendFuncExtended_nglBindFragDataLocationIndexedEXT(JNIEnv *__env, jclass clazz, jint program, jint colorNumber, jint index, jlong nameAddress) {
-    glBindFragDataLocationIndexedEXTPROC glBindFragDataLocationIndexedEXT = (glBindFragDataLocationIndexedEXTPROC)tlsGetFunction(390);
+    glBindFragDataLocationIndexedEXTPROC glBindFragDataLocationIndexedEXT = (glBindFragDataLocationIndexedEXTPROC)tlsGetFunction(391);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glBindFragDataLocationIndexedEXT(program, colorNumber, index, name);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_EXTBlendFuncExtended_nglGetFragDataIndexEXT(JNIEnv *__env, jclass clazz, jint program, jlong nameAddress) {
-    glGetFragDataIndexEXTPROC glGetFragDataIndexEXT = (glGetFragDataIndexEXTPROC)tlsGetFunction(391);
+    glGetFragDataIndexEXTPROC glGetFragDataIndexEXT = (glGetFragDataIndexEXTPROC)tlsGetFunction(392);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return glGetFragDataIndexEXT(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBlendFuncExtended_nglBindFragDataLocationEXT(JNIEnv *__env, jclass clazz, jint program, jint colorNumber, jlong nameAddress) {
-    glBindFragDataLocationEXTPROC glBindFragDataLocationEXT = (glBindFragDataLocationEXTPROC)tlsGetFunction(392);
+    glBindFragDataLocationEXTPROC glBindFragDataLocationEXT = (glBindFragDataLocationEXTPROC)tlsGetFunction(393);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glBindFragDataLocationEXT(program, colorNumber, name);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_EXTBlendFuncExtended_nglGetProgramResourceLocationIndexEXT(JNIEnv *__env, jclass clazz, jint program, jint programInterface, jlong nameAddress) {
-    glGetProgramResourceLocationIndexEXTPROC glGetProgramResourceLocationIndexEXT = (glGetProgramResourceLocationIndexEXTPROC)tlsGetFunction(393);
+    glGetProgramResourceLocationIndexEXTPROC glGetProgramResourceLocationIndexEXT = (glGetProgramResourceLocationIndexEXTPROC)tlsGetFunction(394);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return glGetProgramResourceLocationIndexEXT(program, programInterface, name);
