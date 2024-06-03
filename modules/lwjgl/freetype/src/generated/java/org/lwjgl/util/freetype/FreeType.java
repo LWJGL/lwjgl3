@@ -1252,6 +1252,12 @@ public class FreeType {
 
     public static final int FT_LCD_FILTER_FIVE_TAPS = 5;
 
+    public static final int T1_MAX_MM_AXIS = 4;
+
+    public static final int T1_MAX_MM_DESIGNS = 16;
+
+    public static final int T1_MAX_MM_MAP_POINTS = 20;
+
     public static final int FT_VAR_AXIS_FLAG_HIDDEN = 1;
 
     public static final int FT_MODULE_FONT_DRIVER = 1;
@@ -1503,12 +1509,6 @@ public class FreeType {
         T1_BLEND_FAMILY_OTHER_BLUES  = 12,
         T1_BLEND_FORCE_BOLD          = 13,
         T1_BLEND_MAX                 = 14;
-
-    public static final int T1_MAX_MM_DESIGNS = 16;
-
-    public static final int T1_MAX_MM_AXIS = 4;
-
-    public static final int T1_MAX_MM_MAP_POINTS = 20;
 
     /**
      * {@code T1_EncodingType}
