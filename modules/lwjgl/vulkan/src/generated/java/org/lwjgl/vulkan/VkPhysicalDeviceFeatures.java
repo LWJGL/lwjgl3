@@ -346,12 +346,9 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * 
      * <ul>
      * <li>{@code vertexBufferRangeSize}, if <code>bindingStride == 0</code>; or</li>
-     * <li><code>(vertexBufferRangeSize - (vertexBufferRangeSize % bindingStride))</code></li>
-     * </ul>
-     * 
-     * <p>where {@code vertexBufferRangeSize} is the byte size of the memory range bound to the vertex buffer binding and {@code bindingStride} is the byte stride of the corresponding vertex input binding. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.</p>
-     * 
-     * <ul>
+     * <li><code>(vertexBufferRangeSize - (vertexBufferRangeSize % bindingStride))</code>
+     * where {@code vertexBufferRangeSize} is the byte size of the memory range bound to the vertex buffer binding and {@code bindingStride} is the byte stride of the corresponding vertex input binding. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.
+     * </li>
      * <li>If a vertex input attribute is out of bounds, it will be assigned one of the following values:
      * 
      * <ul>
@@ -453,10 +450,10 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * <li>{@link VK10#VK_FORMAT_EAC_R11_UNORM_BLOCK FORMAT_EAC_R11_UNORM_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_EAC_R11_SNORM_BLOCK FORMAT_EAC_R11_SNORM_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_EAC_R11G11_UNORM_BLOCK FORMAT_EAC_R11G11_UNORM_BLOCK}</li>
-     * <li>{@link VK10#VK_FORMAT_EAC_R11G11_SNORM_BLOCK FORMAT_EAC_R11G11_SNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_EAC_R11G11_SNORM_BLOCK FORMAT_EAC_R11G11_SNORM_BLOCK}
+     * To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.
+     * </li>
      * </ul>
-     * 
-     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
      */
     @NativeType("VkBool32")
     public boolean textureCompressionETC2() { return ntextureCompressionETC2(address()) != 0; }
@@ -491,10 +488,10 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * <li>{@link VK10#VK_FORMAT_ASTC_12x10_UNORM_BLOCK FORMAT_ASTC_12x10_UNORM_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_ASTC_12x10_SRGB_BLOCK FORMAT_ASTC_12x10_SRGB_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_ASTC_12x12_UNORM_BLOCK FORMAT_ASTC_12x12_UNORM_BLOCK}</li>
-     * <li>{@link VK10#VK_FORMAT_ASTC_12x12_SRGB_BLOCK FORMAT_ASTC_12x12_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_12x12_SRGB_BLOCK FORMAT_ASTC_12x12_SRGB_BLOCK}
+     * To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.
+     * </li>
      * </ul>
-     * 
-     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
      */
     @NativeType("VkBool32")
     public boolean textureCompressionASTC_LDR() { return ntextureCompressionASTC_LDR(address()) != 0; }
@@ -517,10 +514,10 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * <li>{@link VK10#VK_FORMAT_BC6H_UFLOAT_BLOCK FORMAT_BC6H_UFLOAT_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_BC6H_SFLOAT_BLOCK FORMAT_BC6H_SFLOAT_BLOCK}</li>
      * <li>{@link VK10#VK_FORMAT_BC7_UNORM_BLOCK FORMAT_BC7_UNORM_BLOCK}</li>
-     * <li>{@link VK10#VK_FORMAT_BC7_SRGB_BLOCK FORMAT_BC7_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC7_SRGB_BLOCK FORMAT_BC7_SRGB_BLOCK}
+     * To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.
+     * </li>
      * </ul>
-     * 
-     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
      */
     @NativeType("VkBool32")
     public boolean textureCompressionBC() { return ntextureCompressionBC(address()) != 0; }
@@ -568,8 +565,7 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * <li>{@link VK10#VK_FORMAT_R16G16_UINT FORMAT_R16G16_UINT}</li>
      * <li>{@link VK10#VK_FORMAT_R8G8_UINT FORMAT_R8G8_UINT}</li>
      * <li>{@link VK10#VK_FORMAT_R16_UINT FORMAT_R16_UINT}</li>
-     * <li>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
-     * </ul>
+     * <li>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -579,6 +575,8 @@ public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> i
      * 
      * <p>{@link VK10#VK_FORMAT_R32G32_UINT FORMAT_R32G32_UINT}, {@link VK10#VK_FORMAT_R32G32_SINT FORMAT_R32G32_SINT}, and {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT} from {@code StorageImageExtendedFormats} SPIR-V capability, are already covered by core Vulkan <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-mandatory-features-32bit">mandatory format support</a>.</p>
      * </div>
+     * </li>
+     * </ul>
      */
     @NativeType("VkBool32")
     public boolean shaderStorageImageExtendedFormats() { return nshaderStorageImageExtendedFormats(address()) != 0; }

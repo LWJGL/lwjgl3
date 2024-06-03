@@ -32,7 +32,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
                 </ul>
             </li>
             <li>Queue family ownership transfer parameters are simplified in some cases.</li>
-            <li>Where two synchronization commands need to be matched up (queue transfer operations, events), the dependency information specified in each place must now match completely for consistency.</li>
             <li>Extensions with commands or functions with a {@code VkPipelineStageFlags} or {@code VkPipelineStageFlagBits} parameter have had those APIs replaced with equivalents using {@code VkPipelineStageFlags2KHR}.</li>
             <li>The new event and barrier interfaces are now more extensible for future changes.</li>
             <li>Relevant pipeline stage masks can now be specified as empty with the new #PIPELINE_STAGE_NONE_KHR and #PIPELINE_STAGE_2_NONE_KHR values.</li>

@@ -2964,7 +2964,7 @@ val VkVideoEncodeH265CapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeH265C
     uint32_t("maxPPictureL0ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-p-pic">P pictures</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxPPictureL0ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 reference list for P pictures. However, if {@code maxPPictureL0ReferenceCount} is zero, then the use of P pictures is not allowed. In case of H.265 encoding, backward-only predictive pictures <b>can</b> be encoded even if P pictures are not supported, as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> supports <em>generalized P &amp; B frames</em> (also known as low delay B frames) whereas B frames <b>can</b> refer to past frames through both the L0 and L1 reference lists.
+        As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-overrides">override</a> the reference lists, {@code maxPPictureL0ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 reference list for P pictures. However, if {@code maxPPictureL0ReferenceCount} is zero, then the use of P pictures is not allowed. In case of H.265 encoding, pictures <b>can</b> be encoded using only forward prediction even if P pictures are not supported, as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#itu-t-h265">ITU-T H.265 Specification</a> supports <em>generalized P &amp; B frames</em> (also known as low delay B frames) whereas B frames <b>can</b> refer to past frames through both the L0 and L1 reference lists.
         </div>""")
     uint32_t("maxBPictureL0ReferenceCount", "indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#encode-h265-b-pic\">B pictures</a>.")
     uint32_t("maxL1ReferenceCount", """indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#encode-h265-b-pic">B pictures</a> is supported.
@@ -11896,7 +11896,7 @@ val VkMemoryPriorityAllocateInfoEXT = struct(Module.VULKAN, "VkMemoryPriorityAll
     float("priority", "a floating-point value between 0 and 1, indicating the priority of the allocation relative to other memory allocations. Larger values are higher priority. The granularity of the priorities is implementation-dependent.")
 }
 
-val VkSurfaceProtectedCapabilitiesKHR = struct(Module.VULKAN, "VkSurfaceProtectedCapabilitiesKHR") {
+val VkSurfaceProtectedCapabilitiesKHR = struct(Module.VULKAN, "VkSurfaceProtectedCapabilitiesKHR", mutable = false) {
     documentation =
         """
         Structure describing capability of a surface to be protected.
@@ -11910,8 +11910,8 @@ val VkSurfaceProtectedCapabilitiesKHR = struct(Module.VULKAN, "VkSurfaceProtecte
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("supportsProtected", "specifies whether a protected swapchain created from ##VkPhysicalDeviceSurfaceInfo2KHR{@code ::surface} for a particular windowing system <b>can</b> be displayed on screen or not. If {@code supportsProtected} is #TRUE, then creation of swapchains with the #SWAPCHAIN_CREATE_PROTECTED_BIT_KHR flag set <b>must</b> be supported for {@code surface}.")
 }
 
@@ -12373,7 +12373,7 @@ val VkSurfaceFullScreenExclusiveInfoEXT = struct(Module.VULKAN, "VkSurfaceFullSc
     VkFullScreenExclusiveEXT("fullScreenExclusive", "a {@code VkFullScreenExclusiveEXT} value specifying the preferred full-screen transition behavior.")
 }
 
-val VkSurfaceCapabilitiesFullScreenExclusiveEXT = struct(Module.VULKAN, "VkSurfaceCapabilitiesFullScreenExclusiveEXT") {
+val VkSurfaceCapabilitiesFullScreenExclusiveEXT = struct(Module.VULKAN, "VkSurfaceCapabilitiesFullScreenExclusiveEXT", mutable = false) {
     documentation =
         """
         Structure describing full screen exclusive capabilities of a surface.
@@ -12389,8 +12389,8 @@ val VkSurfaceCapabilitiesFullScreenExclusiveEXT = struct(Module.VULKAN, "VkSurfa
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("fullScreenExclusiveSupported", "")
 }
 
@@ -13205,10 +13205,16 @@ val VkHostImageLayoutTransitionInfoEXT = struct(Module.VULKAN, "VkHostImageLayou
         Structure specifying the parameters of a host-side image layout transition.
 
         <h5>Description</h5>
-        {@code vkTransitionImageLayoutEXT} does not check whether the device memory associated with an image is currently in use before performing the layout transition. The application <b>must</b> guarantee that any previously submitted command that reads from or writes to this subresource has completed before the host performs the layout transition.
+        {@code vkTransitionImageLayoutEXT} does not check whether the device memory associated with an image is currently in use before performing the layout transition. The application <b>must</b> guarantee that any previously submitted command that reads from or writes to this subresource has completed before the host performs the layout transition. The memory of {@code image} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-coherent">coherent</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Image layout transitions performed on the host do not require queue family ownership transfers as the physical layout of the image will not vary between queue families for the layouts supported by this function.
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        If the device has written to the image memory, it is not automatically made available to the host. Before this command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> including #PIPELINE_STAGE_HOST_BIT and #ACCESS_HOST_READ_BIT.
+
+        Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this layout transition on the device.
         </div>
 
         <h5>Valid Usage</h5>
@@ -13583,7 +13589,7 @@ val VkSurfacePresentModeEXT = struct(Module.VULKAN, "VkSurfacePresentModeEXT") {
     VkPresentModeKHR("presentMode", "the presentation mode the swapchain will use.")
 }
 
-val VkSurfacePresentScalingCapabilitiesEXT = struct(Module.VULKAN, "VkSurfacePresentScalingCapabilitiesEXT") {
+val VkSurfacePresentScalingCapabilitiesEXT = struct(Module.VULKAN, "VkSurfacePresentScalingCapabilitiesEXT", mutable = false) {
     documentation =
         """
         Structure describing the presentation scaling capabilities of the surface.
@@ -13594,17 +13600,14 @@ val VkSurfacePresentScalingCapabilitiesEXT = struct(Module.VULKAN, "VkSurfacePre
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT</li>
-            <li>{@code supportedPresentScaling} <b>must</b> be a valid combination of {@code VkPresentScalingFlagBitsEXT} values</li>
-            <li>{@code supportedPresentGravityX} <b>must</b> be a valid combination of {@code VkPresentGravityFlagBitsEXT} values</li>
-            <li>{@code supportedPresentGravityY} <b>must</b> be a valid combination of {@code VkPresentGravityFlagBitsEXT} values</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkExtent2D
         """
 
-    Expression("#STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPresentScalingFlagsEXT("supportedPresentScaling", "a bitmask of {@code VkPresentScalingFlagBitsEXT} representing the scaling methods supported by the surface, or 0 if application-defined scaling is not supported.")
     VkPresentGravityFlagsEXT("supportedPresentGravityX", "a bitmask of {@code VkPresentGravityFlagBitsEXT} representing the X-axis pixel gravity supported by the surface, or 0 if Vulkan-defined pixel gravity is not supported for the X axis.")
     VkPresentGravityFlagsEXT("supportedPresentGravityY", "a bitmask of {@code VkPresentGravityFlagBitsEXT} representing the Y-axis pixel gravity supported by the surface, or 0 if Vulkan-defined pixel gravity is not supported for the Y axis.")
@@ -14825,7 +14828,7 @@ val VkPhysicalDevicePresentBarrierFeaturesNV = struct(Module.VULKAN, "VkPhysical
     VkBool32("presentBarrier", "indicates that the implementation supports the present barrier feature.")
 }
 
-val VkSurfaceCapabilitiesPresentBarrierNV = struct(Module.VULKAN, "VkSurfaceCapabilitiesPresentBarrierNV") {
+val VkSurfaceCapabilitiesPresentBarrierNV = struct(Module.VULKAN, "VkSurfaceCapabilitiesPresentBarrierNV", mutable = false) {
     documentation =
         """
         Structure describing present barrier capabilities of a surface.
@@ -14839,8 +14842,8 @@ val VkSurfaceCapabilitiesPresentBarrierNV = struct(Module.VULKAN, "VkSurfaceCapa
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("presentBarrierSupported", "a boolean describing whether the surface is able to make use of the present barrier feature.")
 }
 
@@ -21550,12 +21553,10 @@ val VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT = struct(Module.VULKAN, "Vk
             <li>#DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER</li>
             <li>#DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER</li>
             <li>#DESCRIPTOR_TYPE_UNIFORM_BUFFER</li>
-            <li>#DESCRIPTOR_TYPE_STORAGE_BUFFER</li>
-        </ul>
-
-        Additionally, {@code mutableDescriptorType} indicates that:
-
-        <ul>
+            <li>
+                #DESCRIPTOR_TYPE_STORAGE_BUFFER
+                Additionally, {@code mutableDescriptorType} indicates that:
+            </li>
             <li>Non-uniform descriptor indexing <b>must</b> be supported if all descriptor types in a ##VkMutableDescriptorTypeListEXT for #DESCRIPTOR_TYPE_MUTABLE_EXT have the corresponding non-uniform indexing features enabled in ##VkPhysicalDeviceDescriptorIndexingFeatures.</li>
             <li>#DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT with {@code descriptorType} of #DESCRIPTOR_TYPE_MUTABLE_EXT relaxes the list of required descriptor types to the descriptor types which have the corresponding update-after-bind feature enabled in ##VkPhysicalDeviceDescriptorIndexingFeatures.</li>
             <li>Dynamically uniform descriptor indexing <b>must</b> be supported if all descriptor types in a ##VkMutableDescriptorTypeListEXT for #DESCRIPTOR_TYPE_MUTABLE_EXT have the corresponding dynamic indexing features enabled.</li>
@@ -22302,7 +22303,12 @@ val VkVideoDecodeAV1DpbSlotInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1DpbS
                 <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
                 <li>{@code flags.disable_frame_end_update_cdf} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
                 <li>{@code flags.segmentation_enabled} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
-                <li>{@code frame_type} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
+                <li>
+                    {@code frame_type} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;
+                    <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The {@code frame_type} member is defined with the type {@code uint8_t}, but it takes the same values defined in the {@code StdVideoAV1FrameType} enumeration type as {@code StdVideoDecodeAV1PictureInfo}{@code ::frame_type}.
+                    </div>
+                </li>
                 <li>{@code RefFrameSignBias} is a bitmask where bit index <code>i</code> corresponds to {@code RefFrameSignBias[i]} as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
                 <li>{@code OrderHint} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#aomedia-av1">AV1 Specification</a>;</li>
                 <li>
@@ -23247,6 +23253,25 @@ val VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV = struct(Module.VULKAN, 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderFloat16VectorAtomics", "indicates whether shaders <b>can</b> perform 16-bit floating-point, 2- and 4-component vector atomic operations.")
+}
+
+val VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether support for replicated composites in SPIR-V is enabled.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderReplicatedComposites", "specifies whether shader modules <b>can</b> declare the {@code ReplicatedCompositesEXT} capability.")
 }
 
 val VkPhysicalDeviceRayTracingValidationFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceRayTracingValidationFeaturesNV") {

@@ -104,18 +104,14 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     public VkSurfaceProtectedCapabilitiesKHR sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsProtected} field. */
-    public VkSurfaceProtectedCapabilitiesKHR supportsProtected(@NativeType("VkBool32") boolean value) { nsupportsProtected(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSurfaceProtectedCapabilitiesKHR set(
         int sType,
-        long pNext,
-        boolean supportsProtected
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        supportsProtected(supportsProtected);
 
         return this;
     }
@@ -275,8 +271,6 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceProtectedCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceProtectedCapabilitiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #supportsProtected(boolean) supportsProtected}. */
-    public static void nsupportsProtected(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceProtectedCapabilitiesKHR.SUPPORTSPROTECTED, value); }
 
     // -----------------------------------
 
@@ -332,8 +326,6 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#supportsProtected} field. */
-        public VkSurfaceProtectedCapabilitiesKHR.Buffer supportsProtected(@NativeType("VkBool32") boolean value) { VkSurfaceProtectedCapabilitiesKHR.nsupportsProtected(address(), value ? 1 : 0); return this; }
 
     }
 

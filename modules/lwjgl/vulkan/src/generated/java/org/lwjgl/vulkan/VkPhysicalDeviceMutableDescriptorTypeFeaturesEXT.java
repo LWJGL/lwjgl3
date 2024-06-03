@@ -103,12 +103,9 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT extends Struct<VkP
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}</li>
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}</li>
      * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}</li>
-     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}</li>
-     * </ul>
-     * 
-     * <p>Additionally, {@code mutableDescriptorType} indicates that:</p>
-     * 
-     * <ul>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}
+     * Additionally, {@code mutableDescriptorType} indicates that:
+     * </li>
      * <li>Non-uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListEXT} for {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} have the corresponding non-uniform indexing features enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
      * <li>{@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} with {@code descriptorType} of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} relaxes the list of required descriptor types to the descriptor types which have the corresponding update-after-bind feature enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
      * <li>Dynamically uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListEXT} for {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} have the corresponding dynamic indexing features enabled.</li>

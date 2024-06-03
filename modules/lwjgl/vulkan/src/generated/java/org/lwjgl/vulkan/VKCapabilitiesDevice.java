@@ -1167,6 +1167,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_shader_module_identifier;
     /** When true, {@link EXTShaderObject} is supported. */
     public final boolean VK_EXT_shader_object;
+    /** When true, {@link EXTShaderReplicatedComposites} is supported. */
+    public final boolean VK_EXT_shader_replicated_composites;
     /** When true, {@link EXTShaderStencilExport} is supported. */
     public final boolean VK_EXT_shader_stencil_export;
     /** When true, {@link EXTShaderSubgroupBallot} is supported. */
@@ -1713,6 +1715,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_shader_image_atomic_int64 = ext.contains("VK_EXT_shader_image_atomic_int64");
         VK_EXT_shader_module_identifier = check_EXT_shader_module_identifier(provider, caps, ext);
         VK_EXT_shader_object = check_EXT_shader_object(provider, caps, ext);
+        VK_EXT_shader_replicated_composites = ext.contains("VK_EXT_shader_replicated_composites");
         VK_EXT_shader_stencil_export = ext.contains("VK_EXT_shader_stencil_export");
         VK_EXT_shader_subgroup_ballot = ext.contains("VK_EXT_shader_subgroup_ballot");
         VK_EXT_shader_subgroup_vote = ext.contains("VK_EXT_shader_subgroup_vote");

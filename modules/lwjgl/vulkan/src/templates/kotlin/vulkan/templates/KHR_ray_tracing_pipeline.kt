@@ -463,6 +463,7 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>{@code device} <b>must</b> support at least one queue family with the #QUEUE_COMPUTE_BIT capability</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the {@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} <b>must</b> be less than the index into {@code pCreateInfos} that corresponds to that element</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, the base pipeline <b>must</b> have been created with the #PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT flag set</li>
             <li>{@code flags} <b>must</b> not contain the #PIPELINE_CREATE_DISPATCH_BASE flag</li>

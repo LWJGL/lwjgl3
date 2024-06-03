@@ -525,6 +525,9 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>{@code device} <b>must</b> support at least one queue family with one of the #QUEUE_COMPUTE_BIT or #QUEUE_GRAPHICS_BIT capabilities</li>
+            <li>If the {@code stage} member of any element of {@code pCreateInfos} is #SHADER_STAGE_COMPUTE_BIT, {@code device} <b>must</b> support at least one queue family with the #QUEUE_COMPUTE_BIT capability</li>
+            <li>If the {@code stage} member of any element of {@code pCreateInfos} is #SHADER_STAGE_TASK_BIT_EXT, #SHADER_STAGE_MESH_BIT_EXT, #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT, {@code device} <b>must</b> support at least one queue family with the #QUEUE_GRAPHICS_BIT capability</li>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
             <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT or #SHADER_STAGE_MESH_BIT_EXT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>

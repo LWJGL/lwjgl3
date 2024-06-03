@@ -124,7 +124,11 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 ￿    const VkCopyMemoryToImageInfoEXT*           pCopyMemoryToImageInfo);</code></pre>
 
         <h5>Description</h5>
-        This command is functionally similar to #CmdCopyBufferToImage2(), except it is executed on the host and reads from host memory instead of a buffer.
+        This command is functionally similar to #CmdCopyBufferToImage2(), except it is executed on the host and reads from host memory instead of a buffer. The memory of {@code pCopyMemoryToImageInfo→dstImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-coherent">coherent</a>.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation on the device.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -175,7 +179,11 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 ￿    const VkCopyImageToMemoryInfoEXT*           pCopyImageToMemoryInfo);</code></pre>
 
         <h5>Description</h5>
-        This command is functionally similar to #CmdCopyImageToBuffer2(), except it is executed on the host and writes to host memory instead of a buffer.
+        This command is functionally similar to #CmdCopyImageToBuffer2(), except it is executed on the host and writes to host memory instead of a buffer. The memory of {@code pCopyImageToMemoryInfo→srcImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-coherent">coherent</a>.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        If the device has written to the image memory, it is not automatically made available to the host. Before this copy command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> including #PIPELINE_STAGE_HOST_BIT and #ACCESS_HOST_READ_BIT.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -226,7 +234,13 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 ￿    const VkCopyImageToImageInfoEXT*            pCopyImageToImageInfo);</code></pre>
 
         <h5>Description</h5>
-        This command is functionally similar to #CmdCopyImage2(), except it is executed on the host.
+        This command is functionally similar to #CmdCopyImage2(), except it is executed on the host. The memory of {@code pCopyImageToImageInfo→srcImage} and {@code pCopyImageToImageInfo→dstImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-coherent">coherent</a>.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        If the device has written to the memory of {@code pCopyImageToImageInfo→srcImage}, it is not automatically made available to the host. Before this copy command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> including #PIPELINE_STAGE_HOST_BIT and #ACCESS_HOST_READ_BIT.
+
+        Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation in {@code pCopyMemoryToImageInfo→dstImage} on the device.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -259,7 +273,7 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
         ##VkCopyImageToImageInfoEXT
         """,
 
-        VkDevice("device", "the device which owns {@code pCopyImageToMemoryInfo→srcImage}."),
+        VkDevice("device", "the device which owns {@code pCopyImageToImageInfo→srcImage} and {@code pCopyImageToImageInfo→dstImage}."),
         VkCopyImageToImageInfoEXT.const.p("pCopyImageToImageInfo", "a pointer to a ##VkCopyImageToImageInfoEXT structure describing the copy parameters.")
     )
 

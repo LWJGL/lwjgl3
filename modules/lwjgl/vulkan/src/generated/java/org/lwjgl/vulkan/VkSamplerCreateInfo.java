@@ -284,12 +284,9 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
      * 
      * <ul>
      * <li>The {@code viewType} <b>must</b> be either {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}.</li>
-     * <li>The image view <b>must</b> have a single layer and a single mip level.</li>
-     * </ul>
-     * 
-     * <p>When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, image built-in functions in the shader that use the sampler have the following requirements:</p>
-     * 
-     * <ul>
+     * <li>The image view <b>must</b> have a single layer and a single mip level.
+     * When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, image built-in functions in the shader that use the sampler have the following requirements:
+     * </li>
      * <li>The functions <b>must</b> not use projection.</li>
      * <li>The functions <b>must</b> not use offsets.</li>
      * </ul>
