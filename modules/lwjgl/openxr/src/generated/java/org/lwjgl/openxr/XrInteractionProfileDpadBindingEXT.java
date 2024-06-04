@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code wedgeAngle} outside the half-open range <code>[0, π)</code></li>
  * </ul>
  * 
- * <p>If more than one {@link XrInteractionProfileDpadBindingEXT} is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#input-action-creation">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.</p>
+ * <p>If more than one {@link XrInteractionProfileDpadBindingEXT} is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-action-sets">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.</p>
  * 
  * <p>For example, a Valve Index controller binding with a "Walking" action set can have a dpad on each of:</p>
  * 

@@ -11,7 +11,7 @@ import openxr.*
 val KHR_convert_timespec_time = "KHRConvertTimespecTime".nativeClassXR("KHR_convert_timespec_time", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_convert_timespec_time">XR_KHR_convert_timespec_time</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_convert_timespec_time">XR_KHR_convert_timespec_time</a> extension.
 
         This extension provides two functions for converting between timespec monotonic time and {@code XrTime}. The #ConvertTimespecTimeToTimeKHR() function converts from timespec time to {@code XrTime}, while the #ConvertTimeToTimespecTimeKHR() function converts {@code XrTime} to timespec monotonic time. The primary use case for this functionality is to be able to synchronize events between the local system and the OpenXR system.
         """

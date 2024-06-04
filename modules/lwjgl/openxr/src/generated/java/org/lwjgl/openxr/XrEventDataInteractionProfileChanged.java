@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@link XrEventDataInteractionProfileChanged} event is sent to the application to notify it that the active input form factor for one or more top level user paths has changed. This event <b>must</b> only be sent for interaction profiles that the application indicated its support for via {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}. This event <b>must</b> only be sent for running sessions.</p>
+ * <p>The {@link XrEventDataInteractionProfileChanged} event is queued to notify the application that the current interaction profile for one or more top level user paths has changed. This event <b>must</b> only be sent for interaction profiles that the application indicated its support for via {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}. This event <b>must</b> only be queued for running sessions.</p>
  * 
- * <p>The application <b>can</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} if it wants to change its own behavior based on the active hardware.</p>
+ * <p>Upon receiving this event, an application <b>can</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} for each top level user path in use, if its behavior depends on the current interaction profile.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

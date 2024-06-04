@@ -5,11 +5,11 @@
  */
 package org.lwjgl.openxr;
 
-/** The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#META_headset_id">META_headset_id</a> extension. */
+/** The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#META_headset_id">META_headset_id</a> extension. */
 public final class METAHeadsetId {
 
     /** The extension specification version. */
-    public static final int XR_META_headset_id_SPEC_VERSION = 1;
+    public static final int XR_META_headset_id_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_META_HEADSET_ID_EXTENSION_NAME = "XR_META_headset_id";

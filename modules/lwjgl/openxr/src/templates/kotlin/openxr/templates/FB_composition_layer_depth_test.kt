@@ -11,7 +11,7 @@ import openxr.*
 val FB_composition_layer_depth_test = "FBCompositionLayerDepthTest".nativeClassXR("FB_composition_layer_depth_test", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_composition_layer_depth_test">XR_FB_composition_layer_depth_test</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_composition_layer_depth_test">XR_FB_composition_layer_depth_test</a> extension.
 
         This extension enables depth-tested layer composition. The compositor will maintain a depth buffer in addition to a color buffer. The depth buffer is cleared to a depth corresponding to the infinitely far distance at the beginning of composition.
 

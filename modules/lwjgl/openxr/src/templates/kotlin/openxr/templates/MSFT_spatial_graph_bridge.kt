@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_spatial_graph_bridge = "MSFTSpatialGraphBridge".nativeClassXR("MSFT_spatial_graph_bridge", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_spatial_graph_bridge">XR_MSFT_spatial_graph_bridge</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_spatial_graph_bridge">XR_MSFT_spatial_graph_bridge</a> extension.
 
         This extension enables applications to interop between {@code XrSpace} handles and other Windows Mixed Reality device platform libraries or APIs. These libraries represent a spatially tracked point, also known as a "spatial graph node", with a GUID value. This extension enables applications to create {@code XrSpace} handles from spatial graph nodes. Applications can also try to get a spatial graph node from an {@code XrSpace} handle.
         """

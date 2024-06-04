@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_eye_tracking_social">XR_FB_eye_tracking_social</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_eye_tracking_social">XR_FB_eye_tracking_social</a> extension.
  * 
  * <p>This extension enables applications to obtain position and orientation of the user’s eyes. It enables applications to render eyes in XR experiences.</p>
  * 

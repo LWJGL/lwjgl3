@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_haptic_amplitude_envelope">XR_FB_haptic_amplitude_envelope</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_haptic_amplitude_envelope">XR_FB_haptic_amplitude_envelope</a> extension.
  * 
  * <p>This extension enables applications to trigger haptic effect using an Amplitude Envelope buffer.</p>
  */

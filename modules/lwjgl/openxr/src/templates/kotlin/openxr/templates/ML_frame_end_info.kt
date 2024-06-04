@@ -11,7 +11,7 @@ import openxr.*
 val ML_frame_end_info = "MLFrameEndInfo".nativeClassXR("ML_frame_end_info", type = "instance", postfix = "ML") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_ML_frame_end_info">XR_ML_frame_end_info</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ML_frame_end_info">XR_ML_frame_end_info</a> extension.
 
         This extension provides access to Magic Leap specific extensions to frame settings like focus distance, vignette, and protection.
         """

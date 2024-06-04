@@ -11,7 +11,7 @@ import openxr.*
 val FB_keyboard_tracking = "FBKeyboardTracking".nativeClassXR("FB_keyboard_tracking", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_keyboard_tracking">XR_FB_keyboard_tracking</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_keyboard_tracking">XR_FB_keyboard_tracking</a> extension.
 
         This extension allows the application to query the system for a supported trackable keyboard type and obtain an {@code XrSpace} handle to track it. It also provides relevant metadata about the keyboard itself, including bounds and a human readable identifier.
         """

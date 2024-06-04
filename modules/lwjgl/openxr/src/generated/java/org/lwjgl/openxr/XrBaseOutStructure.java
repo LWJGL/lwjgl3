@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link XrBaseOutStructure} can be used to facilitate iterating through a structure pointer chain that returns data back to the application.</p>
+ * <p>{@link XrBaseOutStructure} <b>can</b> be used to facilitate iterating through a structure pointer chain that returns data back to the application.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -86,7 +86,7 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
     /** the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("XrBaseOutStructure *")
     public XrBaseOutStructure next() { return nnext(address()); }
 

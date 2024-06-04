@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_perception_anchor_interop">XR_MSFT_perception_anchor_interop</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_MSFT_perception_anchor_interop">XR_MSFT_perception_anchor_interop</a> extension.
  * 
  * <p>This extension supports conversion between {@code XrSpatialAnchorMSFT} and <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchor">Windows.Perception.Spatial.SpatialAnchor</a>. An application <b>can</b> use this extension to persist spatial anchors on the Windows device through <a href="https://docs.microsoft.com/uwp/api/Windows.Perception.Spatial.SpatialAnchorStore">SpatialAnchorStore</a> or transfer spatial anchors between devices through <a href="https://docs.microsoft.com/uwp/api/windows.perception.spatial.spatialanchortransfermanager">SpatialAnchorTransferManager</a>.</p>
  */

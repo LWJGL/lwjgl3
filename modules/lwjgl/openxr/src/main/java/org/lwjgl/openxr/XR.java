@@ -153,7 +153,7 @@ public final class XR {
         short minorVersion = XR_VERSION_MINOR(apiVersion);
 
         int[] XR_VERSIONS = {
-            0 // 1.0
+            1 // OpenXR 1.0 to 1.1
         };
 
         int maxMajor = min(majorVersion, XR_VERSIONS.length);

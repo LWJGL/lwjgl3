@@ -11,7 +11,7 @@ import openxr.*
 val FB_haptic_pcm = "FBHapticPcm".nativeClassXR("FB_haptic_pcm", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_haptic_pcm">XR_FB_haptic_pcm</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_haptic_pcm">XR_FB_haptic_pcm</a> extension.
 
         This extension enables applications to trigger haptic effects using Pulse Code Modulation (PCM) buffers.
         """

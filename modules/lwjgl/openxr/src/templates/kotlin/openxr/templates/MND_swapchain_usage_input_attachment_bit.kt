@@ -11,7 +11,7 @@ import openxr.*
 val MND_swapchain_usage_input_attachment_bit = "MNDSwapchainUsageInputAttachmentBit".nativeClassXR("MND_swapchain_usage_input_attachment_bit", type = "instance", postfix = "MND") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MND_swapchain_usage_input_attachment_bit">XR_MND_swapchain_usage_input_attachment_bit</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MND_swapchain_usage_input_attachment_bit">XR_MND_swapchain_usage_input_attachment_bit</a> extension.
 
         This extension enables an application to specify that swapchain images should be created in a way so that they can be used as input attachments. At the time of writing this bit only affects Vulkan swapchains.
         """

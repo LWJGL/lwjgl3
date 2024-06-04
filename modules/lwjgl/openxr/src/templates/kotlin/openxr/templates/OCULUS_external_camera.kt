@@ -11,7 +11,7 @@ import openxr.*
 val OCULUS_external_camera = "OCULUSExternalCamera".nativeClassXR("OCULUS_external_camera", type = "instance", postfix = "OCULUS") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_OCULUS_external_camera">XR_OCULUS_external_camera</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_OCULUS_external_camera">XR_OCULUS_external_camera</a> extension.
 
         This extension enables the querying of external camera information for a session. This extension is intended to enable mixed reality capture support for applications.
 

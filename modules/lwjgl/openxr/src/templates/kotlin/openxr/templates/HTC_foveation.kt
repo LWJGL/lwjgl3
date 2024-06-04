@@ -11,7 +11,7 @@ import openxr.*
 val HTC_foveation = "HTCFoveation".nativeClassXR("HTC_foveation", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_foveation">XR_HTC_foveation</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_HTC_foveation">XR_HTC_foveation</a> extension.
 
         This extension enables an application to gain rendering performance improvement by reducing the pixel density of areas in the peripheral vision. The areas near the focal point still sustains the original pixel density than periphery.
 

@@ -18,7 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Notifies the application that a reference space is changing.
  * 
- * <h5>Valid Usage (Implicit)</h5>
+ * <h5>Description</h5>
+ * 
+ * <p>The {@link XrEventDataReferenceSpaceChangePending} event is sent to the application to notify it that the origin (and perhaps the bounds) of a reference space is changing. This may occur due to the user recentering the space explicitly, or the runtime otherwise switching to a different space definition.</p>
+ * 
+ * <p>The reference space change <b>must</b> only take effect for {@link XR10#xrLocateSpace LocateSpace} or {@link XR10#xrLocateViews LocateViews} calls whose {@code XrTime} parameter is greater than or equal to the {@code changeTime} provided in that event. Runtimes <b>should</b> provide a {@code changeTime} to applications that allows for a deep render pipeline to present frames that are already in flight using the previous definition of the space. Runtimes <b>should</b> choose a {@code changeTime} that is midway between the {@link XrFrameState}{@code ::predictedDisplayTime} of future frames to avoid threshold issues with applications that calculate future frame times using {@link XrFrameState}{@code ::predictedDisplayPeriod}.</p>
+ * 
+ * <p>The {@code poseInPreviousSpace} provided here <b>must</b> only describe the change in the natural origin of the reference space and <b>must</b> not incorporate any origin offsets specified by the application during calls to {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}. If the runtime does not know the location of the space’s new origin relative to its previous origin, {@code poseValid} <b>must</b> be false, and the position and orientation of {@code poseInPreviousSpace} are undefined. .Valid Usage (Implicit)</p>
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}</li>

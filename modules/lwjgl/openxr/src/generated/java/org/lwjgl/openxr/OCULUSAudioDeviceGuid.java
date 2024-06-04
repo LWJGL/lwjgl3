@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
  * 
  * <p>This extension enables the querying of audio device information associated with an OpenXR instance.</p>
  * 

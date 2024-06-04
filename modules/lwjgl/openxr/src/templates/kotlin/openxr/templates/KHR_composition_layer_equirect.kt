@@ -11,7 +11,7 @@ import openxr.*
 val KHR_composition_layer_equirect = "KHRCompositionLayerEquirect".nativeClassXR("KHR_composition_layer_equirect", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_composition_layer_equirect">XR_KHR_composition_layer_equirect</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_composition_layer_equirect">XR_KHR_composition_layer_equirect</a> extension.
 
         This extension adds an additional layer type where the XR runtime must map an equirectangular coded image stemming from a swapchain onto the inside of a sphere.
 

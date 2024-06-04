@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_QCOM_tracking_optimization_settings">XR_QCOM_tracking_optimization_settings</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_QCOM_tracking_optimization_settings">XR_QCOM_tracking_optimization_settings</a> extension.
  * 
  * <p>This extension defines an API for the application to give optimization hints to the runtime for tracker domains.</p>
  * 

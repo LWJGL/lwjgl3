@@ -11,7 +11,7 @@ import openxr.*
 val HTC_anchor = "HTCAnchor".nativeClassXR("HTC_anchor", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_anchor">XR_HTC_anchor</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_HTC_anchor">XR_HTC_anchor</a> extension.
 
         This extension allows an application to create a spatial anchor to track a point in the physical environment. The runtime adjusts the pose of the anchor over time to align it with the real world.
         """
@@ -118,7 +118,7 @@ val HTC_anchor = "HTCAnchor".nativeClassXR("HTC_anchor", type = "instance", post
 ￿    XrSpatialAnchorNameHTC*                     name);</code></pre>
 
         <h5>Description</h5>
-        The #GetSpatialAnchorNameHTC() function gets the name of an anchor. If the provided {@code space} is a valid space handle but was <b>not</b> created with #CreateSpatialAnchorHTC(), the runtime <b>must</b> return #ERROR_NOT_AN_ANCHOR_HTC.
+        The #GetSpatialAnchorNameHTC() function gets the name of an anchor. If the provided {@code anchor} is a valid space handle but was <b>not</b> created with #CreateSpatialAnchorHTC(), the runtime <b>must</b> return #ERROR_NOT_AN_ANCHOR_HTC.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

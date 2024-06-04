@@ -11,7 +11,7 @@ import openxr.*
 val ML_user_calibration = "MLUserCalibration".nativeClassXR("ML_user_calibration", type = "instance", postfix = "ML") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_ML_user_calibration">XR_ML_user_calibration</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ML_user_calibration">XR_ML_user_calibration</a> extension.
 
         This extension <b>can</b> be used to determine how well the device is calibrated for the current user of the device. The extension provides two events for this purpose:
 

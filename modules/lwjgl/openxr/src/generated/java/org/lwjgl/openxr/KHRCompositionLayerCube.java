@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_composition_layer_cube">XR_KHR_composition_layer_cube</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_composition_layer_cube">XR_KHR_composition_layer_cube</a> extension.
  * 
  * <p>This extension adds an additional layer type that enables direct sampling from cubemaps.</p>
  * 

@@ -11,7 +11,7 @@ import openxr.*
 val KHR_visibility_mask = "KHRVisibilityMask".nativeClassXR("KHR_visibility_mask", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_visibility_mask">XR_KHR_visibility_mask</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_visibility_mask">XR_KHR_visibility_mask</a> extension.
 
         This extension support the providing of a per-view drawing mask for applications. The primary purpose of this is to enable performance improvements that result from avoiding drawing on areas that are not visible to the user. A common occurrence in head-mounted VR hardware is that the optical system’s frustum does not intersect precisely with the rectangular display it is viewing. As a result, it may be that there are parts of the display that are not visible to the user, such as the corners of the display. In such cases it would be unnecessary for the application to draw into those parts.
         """
@@ -72,7 +72,7 @@ val KHR_visibility_mask = "KHRVisibilityMask".nativeClassXR("KHR_visibility_mask
 ￿    XrVisibilityMaskKHR*                        visibilityMask);</code></pre>
 
         <h5>Description</h5>
-        #GetVisibilityMaskKHR() retrieves the view mask for a given view. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Specifically, if either ##XrVisibilityMaskKHR{@code ::vertexCapacityInput} or ##XrVisibilityMaskKHR{@code ::indexCapacityInput} is 0, the runtime <b>must</b> respond as if both fields were set to 0, returning the vertex count and index count through ##XrVisibilityMaskKHR{@code ::vertexCountOutput} or ##XrVisibilityMaskKHR{@code ::indexCountOutput} respectively. If a view mask for the specified view isn’t available, the returned vertex and index counts <b>must</b> be 0.
+        #GetVisibilityMaskKHR() retrieves the view mask for a given view. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Specifically, if either ##XrVisibilityMaskKHR{@code ::vertexCapacityInput} or ##XrVisibilityMaskKHR{@code ::indexCapacityInput} is 0, the runtime <b>must</b> respond as if both fields were set to 0, returning the vertex count and index count through ##XrVisibilityMaskKHR{@code ::vertexCountOutput} or ##XrVisibilityMaskKHR{@code ::indexCountOutput} respectively. If a view mask for the specified view isn’t available, the returned vertex and index counts <b>must</b> be 0.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

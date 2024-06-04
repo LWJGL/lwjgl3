@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>An {@link XrSceneMarkerQRCodesMSFT} structure can be chained to the {@code next} pointer of {@link XrSceneComponentsMSFT} when calling {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} function to retrieve the QR Code specific properties through an array of {@link XrSceneMarkerQRCodeMSFT} structures.</p>
  * 
- * <p>{@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@link XrSceneComponentsMSFT} structure to which an {@link XrSceneMarkerQRCodesMSFT} structure <b>can</b> be chained.</p>
+ * <p>{@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@link XrSceneComponentsMSFT} structure to which an {@link XrSceneMarkerQRCodesMSFT} structure <b>can</b> be chained.</p>
  * 
  * <p>The {@code qrCodeCapacityInput} <b>must</b> be equal to or greater than the corresponding {@link XrSceneComponentsMSFT}::componentCapacityInput, otherwise the runtime <b>must</b> return the success code {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} from {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}.</p>
  * 

@@ -11,7 +11,7 @@ import openxr.*
 val ML_marker_understanding = "MLMarkerUnderstanding".nativeClassXR("ML_marker_understanding", type = "instance", postfix = "ML") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_ML_marker_understanding">XR_ML_marker_understanding</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ML_marker_understanding">XR_ML_marker_understanding</a> extension.
 
         This extension <b>can</b> be used to track and query fiducial markers like QR codes, AprilTag markers, and ArUco markers, and detect, but not locate, 1D barcodes like Code 128, UPC-A.
 
@@ -347,6 +347,13 @@ val ML_marker_understanding = "MLMarkerUnderstanding".nativeClassXR("ML_marker_u
 ￿    const XrMarkerDetectorCreateInfoML*         createInfo,
 ￿    XrMarkerDetectorML*                         markerDetector);</code></pre>
 
+        <h5>Parameter Descriptions</h5>
+        <ul>
+            <li>{@code session} is an {@code XrSession} in which the marker detection will be active.</li>
+            <li>{@code createInfo} is the ##XrMarkerDetectorCreateInfoML used to specify the marker detection.</li>
+            <li>{@code markerDetector} is the returned {@code XrMarkerDetectorML} handle.</li>
+        </ul>
+
         <h5>Description</h5>
         If a runtime is unable to create a marker detector due to some internal limit, the runtime <b>must</b> return #ERROR_LIMIT_REACHED.
 
@@ -568,7 +575,7 @@ val ML_marker_understanding = "MLMarkerUnderstanding".nativeClassXR("ML_marker_u
 
         Note that {@code XrMarkerML} atoms are only usable with the {@code XrMarkerDetectorML} that returned them.
 
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code markers}.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code markers}.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -804,7 +811,7 @@ val ML_marker_understanding = "MLMarkerUnderstanding".nativeClassXR("ML_marker_u
 
         If #GetMarkerDetectorStateML() has not been called and returned #MARKER_DETECTOR_STATUS_READY_ML since the last invocation of #SnapshotMarkerDetectorML(), the runtime <b>must</b> return #ERROR_CALL_ORDER_INVALID.
 
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code buffer}.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code buffer}.
 
         The runtime <b>must</b> return #ERROR_MARKER_INVALID_ML if the marker atom is invalid.
 

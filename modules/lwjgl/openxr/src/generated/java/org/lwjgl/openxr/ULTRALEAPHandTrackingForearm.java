@@ -6,9 +6,9 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_ULTRALEAP_hand_tracking_forearm">XR_ULTRALEAP_hand_tracking_forearm</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_ULTRALEAP_hand_tracking_forearm">XR_ULTRALEAP_hand_tracking_forearm</a> extension.
  * 
- * <p>This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension to enable applications to request the default set of 26 hand joints, with the addition a joint representing the user’s elbow.</p>
+ * <p>This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension to enable applications to request the default set of 26 hand joints, with the addition of a joint representing the user’s elbow.</p>
  * 
  * <p>The application <b>must</b> also enable the {@link EXTHandTracking XR_EXT_hand_tracking} extension in order to use this extension.</p>
  */

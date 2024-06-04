@@ -13,7 +13,7 @@ val KHR_win32_convert_performance_counter_time = "KHRWin32ConvertPerformanceCoun
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_win32_convert_performance_counter_time">XR_KHR_win32_convert_performance_counter_time</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_win32_convert_performance_counter_time">XR_KHR_win32_convert_performance_counter_time</a> extension.
 
         This extension provides two functions for converting between the Windows performance counter (QPC) time stamps and {@code XrTime}. The #ConvertWin32PerformanceCounterToTimeKHR() function converts from Windows performance counter time stamps to {@code XrTime}, while the #ConvertTimeToWin32PerformanceCounterKHR() function converts {@code XrTime} to Windows performance counter time stamps. The primary use case for this functionality is to be able to synchronize events between the local system and the OpenXR system.
         """

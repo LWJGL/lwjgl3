@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_hp_mixed_reality_controller">XR_EXT_hp_mixed_reality_controller</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_hp_mixed_reality_controller">XR_EXT_hp_mixed_reality_controller</a> extension.
  * 
  * <p>This extension added a new interaction profile path for the HP Reverb G2 Controllers:</p>
  * 
@@ -57,6 +57,24 @@ package org.lwjgl.openxr;
  * </ul>
  * </li>
  * </ul>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>When the runtime supports {@link VERSION11 XR_VERSION_1_1} and use of OpenXR 1.1 is requested by the application, this interaction profile <b>must</b> also support</p>
+ * 
+ * <ul>
+ * <li>subpathname:/input/grip_surface/pose</li>
+ * </ul>
+ * </div>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>When the {@link KHRMaintenance1 XR_KHR_maintenance1} extension is available and enabled, this interaction profile <b>must</b> also support</p>
+ * 
+ * <ul>
+ * <li>subpathname:/input/grip_surface/pose</li>
+ * </ul>
+ * </div>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 

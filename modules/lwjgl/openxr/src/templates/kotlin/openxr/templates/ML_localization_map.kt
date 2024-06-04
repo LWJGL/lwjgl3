@@ -11,7 +11,7 @@ import openxr.*
 val ML_localization_map = "MLLocalizationMap".nativeClassXR("ML_localization_map", type = "instance", postfix = "ML") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_ML_localization_map">XR_ML_localization_map</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ML_localization_map">XR_ML_localization_map</a> extension.
 
         A Magic Leap localization map is a container that holds metadata about the scanned environment. It is a digital copy of a physical place. A localization map holds spatial anchors, dense mesh, planes, feature points, and positional data.
 

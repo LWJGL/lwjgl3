@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTC_passthrough">XR_HTC_passthrough</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_HTC_passthrough">XR_HTC_passthrough</a> extension.
  * 
  * <p>This extension enables an application to show the passthrough image to see the surrounding environment from the VR headset. The application is allowed to configure the passthrough image with the different appearances according to the demand of the application.</p>
  * 

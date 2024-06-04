@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_vulkan_swapchain_format_list">XR_KHR_vulkan_swapchain_format_list</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_vulkan_swapchain_format_list">XR_KHR_vulkan_swapchain_format_list</a> extension.
  * 
  * <p>Vulkan has the {@code VK_KHR_image_format_list} extension which allows applications to tell the {@code vkCreateImage} function which formats the application intends to use when {@code VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT} is specified. This OpenXR extension exposes that Vulkan extension to OpenXR applications. In the same way that a Vulkan-based application can pass a {@code VkImageFormatListCreateInfo} struct to the {@code vkCreateImage} function, an OpenXR application can pass an identically configured {@link XrVulkanSwapchainFormatListCreateInfoKHR} structure to {@link XR10#xrCreateSwapchain CreateSwapchain}.</p>
  * 

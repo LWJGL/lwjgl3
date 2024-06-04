@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scene_understanding", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_scene_understanding">XR_MSFT_scene_understanding</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_scene_understanding">XR_MSFT_scene_understanding</a> extension.
 
         Scene understanding provides applications with a structured, high-level representation of the planes, meshes, and objects in the user’s environment, enabling the development of spatially-aware applications.
 
@@ -265,7 +265,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
         <h5>C Specification</h5>
         The #EnumerateSceneComputeFeaturesMSFT() function enumerates the supported scene compute features of the given system.
 
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code features} array.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code features} array.
 
         <pre><code>
 ￿XrResult xrEnumerateSceneComputeFeaturesMSFT(
@@ -686,7 +686,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
         Get scene components from a scene.
 
         <h5>C Specification</h5>
-        Scene components are read from an {@code XrSceneMSFT} using #GetSceneComponentsMSFT() and passing one {@code XrSceneComponentTypeMSFT}. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Different scene component types <b>may</b> have additional properties that <b>can</b> be read by chaining additional structures to ##XrSceneComponentsMSFT. Those additional structures <b>must</b> have an array size that is at least as large as ##XrSceneComponentsMSFT::componentCapacityInput, otherwise the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT.
+        Scene components are read from an {@code XrSceneMSFT} using #GetSceneComponentsMSFT() and passing one {@code XrSceneComponentTypeMSFT}. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling multiple buffers in a struct. Different scene component types <b>may</b> have additional properties that <b>can</b> be read by chaining additional structures to ##XrSceneComponentsMSFT. Those additional structures <b>must</b> have an array size that is at least as large as ##XrSceneComponentsMSFT::componentCapacityInput, otherwise the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT.
 
         <ul>
             <li>If #SCENE_COMPONENT_TYPE_OBJECT_MSFT is passed to #GetSceneComponentsMSFT(), then ##XrSceneObjectsMSFT may be included in the ##XrSceneComponentsMSFT{@code ::next} chain.</li>

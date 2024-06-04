@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HUAWEI_controller_interaction">XR_HUAWEI_controller_interaction</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_HUAWEI_controller_interaction">XR_HUAWEI_controller_interaction</a> extension.
  * 
  * <p>This extension defines a new interaction profile for the Huawei Controller, including but not limited to Huawei VR Glasses Controller.</p>
  */

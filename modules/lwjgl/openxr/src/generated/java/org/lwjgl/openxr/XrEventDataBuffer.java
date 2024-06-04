@@ -19,6 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Event buffer.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The {@link XrEventDataBuffer} is a structure passed to {@link XR10#xrPollEvent PollEvent} large enough to contain any returned event data element. The maximum size is specified by {@link XR10#XR_MAX_EVENT_DATA_SIZE MAX_EVENT_DATA_SIZE}.</p>
+ * 
+ * <p>An application <b>can</b> set (or reset) only the {@code type} member and clear the {@code next} member of an {@link XrEventDataBuffer} before passing it as an input to {@link XR10#xrPollEvent PollEvent}. The runtime <b>must</b> ignore the contents of the {@code varying} field and overwrite it without reading it.</p>
+ * 
+ * <p>A pointer to an {@link XrEventDataBuffer} <b>may</b> be type-cast to an {@link XrEventDataBaseHeader} pointer, or a pointer to any other appropriate event data based on the {@code type} parameter.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

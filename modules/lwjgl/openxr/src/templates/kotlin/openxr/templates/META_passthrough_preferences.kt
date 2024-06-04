@@ -11,7 +11,7 @@ import openxr.*
 val META_passthrough_preferences = "METAPassthroughPreferences".nativeClassXR("META_passthrough_preferences", type = "instance", postfix = "META") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_META_passthrough_preferences">XR_META_passthrough_preferences</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_META_passthrough_preferences">XR_META_passthrough_preferences</a> extension.
 
         This extension provides applications with access to system preferences concerning passthrough. For more information on how applications can control the display of passthrough, see {@link FBPassthrough XR_FB_passthrough}.
         """

@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXTX_overlay">XR_EXTX_overlay</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXTX_overlay">XR_EXTX_overlay</a> extension.
  * 
  * <p>Application developers may desire to implement an OpenXR application that renders content on top of another OpenXR application. These additional applications will execute in a separate process, create a separate session, generate separate content, but want the OpenXR runtime to composite their content on top of the main OpenXR application. Examples of these applications might include:</p>
  * 
@@ -25,7 +25,7 @@ package org.lwjgl.openxr;
  * <li>The ability for an overlay session to get information about what is going on with the main application</li>
  * </ul>
  * 
- * <p>To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * <p>To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">fundamentals-extensions</a> section.</p>
  * 
  * <p>To create an overlay session, an application <b>must</b> pass an {@link XrSessionCreateInfoOverlayEXTX} structure to {@link XR10#xrCreateSession CreateSession} via the {@link XrSessionCreateInfo} structure’s {@code next} parameter.</p>
  * 

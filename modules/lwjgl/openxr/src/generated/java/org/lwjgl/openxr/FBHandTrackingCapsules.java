@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_hand_tracking_capsules">XR_FB_hand_tracking_capsules</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_hand_tracking_capsules">XR_FB_hand_tracking_capsules</a> extension.
  * 
  * <p>The {@link EXTHandTracking XR_EXT_hand_tracking} extension provides a list of hand joint poses which include a collision sphere for each joint. However some physics systems prefer to use capsules as a collision stand in for the hands.</p>
  * 

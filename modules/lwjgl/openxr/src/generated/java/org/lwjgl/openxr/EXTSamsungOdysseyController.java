@@ -6,11 +6,11 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_samsung_odyssey_controller">XR_EXT_samsung_odyssey_controller</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_samsung_odyssey_controller">XR_EXT_samsung_odyssey_controller</a> extension.
  * 
- * <p>This extension enables the application to differentiate the newer form factor of motion controller released with the Samsung Odyssey headset. It enables the application to customize the appearance and experience of the controller differently from the original <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_microsoft_mixed_reality_motion_controller_profile">mixed reality motion controller</a>.</p>
+ * <p>This extension enables the application to differentiate the newer form factor of motion controller released with the Samsung Odyssey headset. It enables the application to customize the appearance and experience of the controller differently from the original <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#_microsoft_mixed_reality_motion_controller_profile">mixed reality motion controller</a>.</p>
  * 
- * <p>This extension added a new interaction profile pathname:/interaction_profiles/samsung/odyssey_controller to describe the Odyssey controller. The action bindings of this interaction profile work exactly the same as the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#_microsoft_mixed_reality_motion_controller_profile">pathname:/interaction_profiles/microsoft/motion_controller</a> in terms of valid user paths and supported input and output component paths.</p>
+ * <p>This extension added a new interaction profile pathname:/interaction_profiles/samsung/odyssey_controller to describe the Odyssey controller. The action bindings of this interaction profile work exactly the same as the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#_microsoft_mixed_reality_motion_controller_profile">pathname:/interaction_profiles/microsoft/motion_controller</a> in terms of valid user paths and supported input and output component paths.</p>
  * 
  * <h5>Note</h5>
  * 

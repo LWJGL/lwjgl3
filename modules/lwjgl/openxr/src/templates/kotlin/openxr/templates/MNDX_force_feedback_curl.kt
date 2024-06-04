@@ -11,7 +11,7 @@ import openxr.*
 val MNDX_force_feedback_curl = "MNDXForceFeedbackCurl".nativeClassXR("MNDX_force_feedback_curl", type = "instance", postfix = "MNDX") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MNDX_force_feedback_curl">XR_MNDX_force_feedback_curl</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MNDX_force_feedback_curl">XR_MNDX_force_feedback_curl</a> extension.
 
         This extension provides APIs for force feedback devices capable of restricting physical movement in a single direction along a single dimension.
 

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>A pose action <b>must</b> not be bound to multiple input sources, according to <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#multiple_inputs">the previously defined rule</a>.</p>
+ * <p>A pose action <b>must</b> not be bound to multiple input sources, according to <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-multiple">the previously defined rule</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

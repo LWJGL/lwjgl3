@@ -165,7 +165,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** a count of items contained in the {@code sessionLabels} array. This may be 0. */
     @NativeType("uint32_t")
     public int sessionLabelCount() { return nsessionLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#session-labels">Session Labels</a> for more information. */
+    /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_debug_utils-session-labels">ext_debug_utils-session-labels</a> for more information. */
     @Nullable
     @NativeType("XrDebugUtilsLabelEXT *")
     public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return nsessionLabels(address()); }

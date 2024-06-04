@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_thermal_query">XR_EXT_thermal_query</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_thermal_query">XR_EXT_thermal_query</a> extension.
  * 
  * <p>This extension provides an API to query a domain’s current thermal warning level and current thermal trend.</p>
  */
@@ -53,6 +53,8 @@ public class EXTThermalQuery {
      *     XrPerfSettingsNotificationLevelEXT*         notificationLevel,
      *     float*                                      tempHeadroom,
      *     float*                                      tempSlope);</code></pre>
+     * 
+     * <p>Allows to query the current temperature warning level of a domain, the remaining headroom and the trend.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

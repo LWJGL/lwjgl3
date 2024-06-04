@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTC_anchor">XR_HTC_anchor</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_HTC_anchor">XR_HTC_anchor</a> extension.
  * 
  * <p>This extension allows an application to create a spatial anchor to track a point in the physical environment. The runtime adjusts the pose of the anchor over time to align it with the real world.</p>
  */
@@ -152,7 +152,7 @@ public class HTCAnchor {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #xrGetSpatialAnchorNameHTC GetSpatialAnchorNameHTC} function gets the name of an anchor. If the provided {@code space} is a valid space handle but was <b>not</b> created with {@link #xrCreateSpatialAnchorHTC CreateSpatialAnchorHTC}, the runtime <b>must</b> return {@link #XR_ERROR_NOT_AN_ANCHOR_HTC ERROR_NOT_AN_ANCHOR_HTC}.</p>
+     * <p>The {@link #xrGetSpatialAnchorNameHTC GetSpatialAnchorNameHTC} function gets the name of an anchor. If the provided {@code anchor} is a valid space handle but was <b>not</b> created with {@link #xrCreateSpatialAnchorHTC CreateSpatialAnchorHTC}, the runtime <b>must</b> return {@link #XR_ERROR_NOT_AN_ANCHOR_HTC ERROR_NOT_AN_ANCHOR_HTC}.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

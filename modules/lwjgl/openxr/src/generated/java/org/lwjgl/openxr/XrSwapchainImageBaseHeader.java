@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages}</p>
+ * <p>{@link METAEnvironmentDepth#xrEnumerateEnvironmentDepthSwapchainImagesMETA EnumerateEnvironmentDepthSwapchainImagesMETA}, {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages}</p>
  * 
  * <h3>Layout</h3>
  * 

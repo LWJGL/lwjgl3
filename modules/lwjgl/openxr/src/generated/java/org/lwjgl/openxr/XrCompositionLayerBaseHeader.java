@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrFrameEndInfo}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSwapchainSubImage}</p>
+ * <p>{@link XrFrameEndInfo}, {@link XrRecommendedLayerResolutionGetInfoMETA}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSwapchainSubImage}</p>
  * 
  * <h3>Layout</h3>
  * 

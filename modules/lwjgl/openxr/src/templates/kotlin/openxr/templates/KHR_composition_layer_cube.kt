@@ -11,7 +11,7 @@ import openxr.*
 val KHR_composition_layer_cube = "KHRCompositionLayerCube".nativeClassXR("KHR_composition_layer_cube", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_composition_layer_cube">XR_KHR_composition_layer_cube</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_composition_layer_cube">XR_KHR_composition_layer_cube</a> extension.
 
         This extension adds an additional layer type that enables direct sampling from cubemaps.
 

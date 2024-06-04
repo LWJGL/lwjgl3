@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_BD_controller_interaction">XR_BD_controller_interaction</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_BD_controller_interaction">XR_BD_controller_interaction</a> extension.
  * 
  * <p>This extension defines the interaction profile for PICO Neo3, PICO 4, and PICO G3 Controllers.</p>
  */

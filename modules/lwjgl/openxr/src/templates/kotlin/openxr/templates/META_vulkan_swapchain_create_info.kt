@@ -11,7 +11,7 @@ import openxr.*
 val META_vulkan_swapchain_create_info = "METAVulkanSwapchainCreateInfo".nativeClassXR("META_vulkan_swapchain_create_info", type = "instance", postfix = "META") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_META_vulkan_swapchain_create_info">XR_META_vulkan_swapchain_create_info</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_META_vulkan_swapchain_create_info">XR_META_vulkan_swapchain_create_info</a> extension.
 
         Using this extension, a Vulkan-based application <b>can</b> pass through additional {@code VkImageCreateFlags} or {@code VkImageUsageFlags} by chaining an ##XrVulkanSwapchainCreateInfoMETA structure to the ##XrSwapchainCreateInfo when calling #CreateSwapchain().
 

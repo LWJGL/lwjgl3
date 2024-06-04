@@ -11,7 +11,7 @@ import openxr.*
 val EXT_performance_settings = "EXTPerformanceSettings".nativeClassXR("EXT_performance_settings", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_performance_settings">XR_EXT_performance_settings</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_performance_settings">XR_EXT_performance_settings</a> extension.
 
         This extension defines an API for the application to give performance hints to the runtime and for the runtime to send performance related notifications back to the application. This allows both sides to dial in a suitable compromise between needed CPU and GPU performance, thermal sustainability and a consistent good user experience throughout the session.
 

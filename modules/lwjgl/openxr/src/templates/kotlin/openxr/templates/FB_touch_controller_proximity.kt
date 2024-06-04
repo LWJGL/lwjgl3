@@ -11,7 +11,7 @@ import openxr.*
 val FB_touch_controller_proximity = "FBTouchControllerProximity".nativeClassXR("FB_touch_controller_proximity", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_touch_controller_proximity">XR_FB_touch_controller_proximity</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_touch_controller_proximity">XR_FB_touch_controller_proximity</a> extension.
 
         This extension introduces a new component path, proximity_fb, and adds support for it for the pathname:/interaction_profiles/oculus/touch_controller interaction profile.
         """

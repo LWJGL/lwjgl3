@@ -11,7 +11,7 @@ import openxr.*
 val ML_global_dimmer = "MLGlobalDimmer".nativeClassXR("ML_global_dimmer", type = "instance", postfix = "ML") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_ML_global_dimmer">XR_ML_global_dimmer</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ML_global_dimmer">XR_ML_global_dimmer</a> extension.
 
         This extension provides control over the global dimmer panel of the Magic Leap 2. The Global Dimming™ feature dims the entire display without dimming digital content to make text and images more solid and precise.
 

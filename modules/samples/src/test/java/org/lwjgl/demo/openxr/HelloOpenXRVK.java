@@ -314,7 +314,7 @@ public class HelloOpenXRVK {
                 .createFlags(0)
                 .applicationInfo(XrApplicationInfo.malloc(stack)
                     .applicationName(stack.UTF8("DummyXRVK"))
-                    .apiVersion(XR_CURRENT_API_VERSION))
+                    .apiVersion(XR_API_VERSION_1_0))
                 .enabledApiLayerNames(wantedLayers)
                 .enabledExtensionNames(wantedExtensions);
 

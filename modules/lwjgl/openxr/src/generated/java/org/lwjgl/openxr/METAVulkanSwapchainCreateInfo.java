@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_vulkan_swapchain_create_info">XR_META_vulkan_swapchain_create_info</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_vulkan_swapchain_create_info">XR_META_vulkan_swapchain_create_info</a> extension.
  * 
  * <p>Using this extension, a Vulkan-based application <b>can</b> pass through additional {@code VkImageCreateFlags} or {@code VkImageUsageFlags} by chaining an {@link XrVulkanSwapchainCreateInfoMETA} structure to the {@link XrSwapchainCreateInfo} when calling {@link XR10#xrCreateSwapchain CreateSwapchain}.</p>
  * 

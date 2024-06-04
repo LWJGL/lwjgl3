@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_ML_marker_understanding">XR_ML_marker_understanding</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_ML_marker_understanding">XR_ML_marker_understanding</a> extension.
  * 
  * <p>This extension <b>can</b> be used to track and query fiducial markers like QR codes, AprilTag markers, and ArUco markers, and detect, but not locate, 1D barcodes like Code 128, UPC-A.</p>
  * 
@@ -393,6 +393,14 @@ public class MLMarkerUnderstanding {
      *     const XrMarkerDetectorCreateInfoML*         createInfo,
      *     XrMarkerDetectorML*                         markerDetector);</code></pre>
      * 
+     * <h5>Parameter Descriptions</h5>
+     * 
+     * <ul>
+     * <li>{@code session} is an {@code XrSession} in which the marker detection will be active.</li>
+     * <li>{@code createInfo} is the {@link XrMarkerDetectorCreateInfoML} used to specify the marker detection.</li>
+     * <li>{@code markerDetector} is the returned {@code XrMarkerDetectorML} handle.</li>
+     * </ul>
+     * 
      * <h5>Description</h5>
      * 
      * <p>If a runtime is unable to create a marker detector due to some internal limit, the runtime <b>must</b> return {@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}.</p>
@@ -678,7 +686,7 @@ public class MLMarkerUnderstanding {
      * 
      * <p>Note that {@code XrMarkerML} atoms are only usable with the {@code XrMarkerDetectorML} that returned them.</p>
      * 
-     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code markers}.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code markers}.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -992,7 +1000,7 @@ public class MLMarkerUnderstanding {
      * 
      * <p>If {@link #xrGetMarkerDetectorStateML GetMarkerDetectorStateML} has not been called and returned {@link #XR_MARKER_DETECTOR_STATUS_READY_ML MARKER_DETECTOR_STATUS_READY_ML} since the last invocation of {@link #xrSnapshotMarkerDetectorML SnapshotMarkerDetectorML}, the runtime <b>must</b> return {@link XR10#XR_ERROR_CALL_ORDER_INVALID ERROR_CALL_ORDER_INVALID}.</p>
      * 
-     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code buffer}.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code buffer}.</p>
      * 
      * <p>The runtime <b>must</b> return {@link #XR_ERROR_MARKER_INVALID_ML ERROR_MARKER_INVALID_ML} if the marker atom is invalid.</p>
      * 

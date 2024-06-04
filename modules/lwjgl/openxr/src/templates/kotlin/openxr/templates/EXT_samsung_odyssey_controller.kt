@@ -11,11 +11,11 @@ import openxr.*
 val EXT_samsung_odyssey_controller = "EXTSamsungOdysseyController".nativeClassXR("EXT_samsung_odyssey_controller", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_samsung_odyssey_controller">XR_EXT_samsung_odyssey_controller</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_samsung_odyssey_controller">XR_EXT_samsung_odyssey_controller</a> extension.
 
-        This extension enables the application to differentiate the newer form factor of motion controller released with the Samsung Odyssey headset. It enables the application to customize the appearance and experience of the controller differently from the original <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#_microsoft_mixed_reality_motion_controller_profile">mixed reality motion controller</a>.
+        This extension enables the application to differentiate the newer form factor of motion controller released with the Samsung Odyssey headset. It enables the application to customize the appearance and experience of the controller differently from the original <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#_microsoft_mixed_reality_motion_controller_profile">mixed reality motion controller</a>.
 
-        This extension added a new interaction profile pathname:/interaction_profiles/samsung/odyssey_controller to describe the Odyssey controller. The action bindings of this interaction profile work exactly the same as the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#_microsoft_mixed_reality_motion_controller_profile">pathname:/interaction_profiles/microsoft/motion_controller</a> in terms of valid user paths and supported input and output component paths.
+        This extension added a new interaction profile pathname:/interaction_profiles/samsung/odyssey_controller to describe the Odyssey controller. The action bindings of this interaction profile work exactly the same as the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#_microsoft_mixed_reality_motion_controller_profile">pathname:/interaction_profiles/microsoft/motion_controller</a> in terms of valid user paths and supported input and output component paths.
 
         <h5>Note</h5>
         The interaction profile path pathname:{legacy-path} defined here does not follow current rules for interaction profile names. If this extension were introduced today, it would be called pathname:{properly-suffixed-path}, to allow for modifications when promoted to a KHR extension or the core specification.

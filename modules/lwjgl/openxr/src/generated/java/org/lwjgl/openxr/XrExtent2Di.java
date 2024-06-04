@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant <b>must</b> be used instead.</p>
+ * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant {@link XrExtent2Df} is used instead.</p>
  * 
  * <p>The {@code width} and {@code height} value <b>must</b> be non-negative.</p>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrExternalCameraIntrinsicsOCULUS}, {@link XrOffset2Di}, {@link XrRect2Di}</p>
+ * <p>{@link XrExternalCameraIntrinsicsOCULUS}, {@link XrOffset2Di}, {@link XrRecommendedLayerResolutionMETA}, {@link XrRect2Di}</p>
  * 
  * <h3>Layout</h3>
  * 

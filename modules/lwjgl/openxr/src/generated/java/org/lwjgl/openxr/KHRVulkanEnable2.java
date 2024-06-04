@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_vulkan_enable2">XR_KHR_vulkan_enable2</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_vulkan_enable2">XR_KHR_vulkan_enable2</a> extension.
  * 
  * <p>This extension enables the use of the Vulkan graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime may not be able to use any Vulkan swapchain images.</p>
  * 

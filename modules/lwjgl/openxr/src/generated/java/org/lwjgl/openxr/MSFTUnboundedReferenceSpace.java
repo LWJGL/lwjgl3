@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_unbounded_reference_space">XR_MSFT_unbounded_reference_space</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_MSFT_unbounded_reference_space">XR_MSFT_unbounded_reference_space</a> extension.
  * 
  * <p>This extension allows an application to create an {@code UNBOUNDED_MSFT} reference space. This reference space enables the viewer to move freely through a complex environment, often many meters from where they started, while always optimizing for coordinate system stability near the viewer. This is done by allowing the origin of the reference space to drift as necessary to keep the viewer’s coordinates relative to the space’s origin stable.</p>
  * 

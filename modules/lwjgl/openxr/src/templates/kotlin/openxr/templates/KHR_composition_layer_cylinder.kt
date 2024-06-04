@@ -11,7 +11,7 @@ import openxr.*
 val KHR_composition_layer_cylinder = "KHRCompositionLayerCylinder".nativeClassXR("KHR_composition_layer_cylinder", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_composition_layer_cylinder">XR_KHR_composition_layer_cylinder</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_composition_layer_cylinder">XR_KHR_composition_layer_cylinder</a> extension.
 
         This extension adds an additional layer type where the XR runtime <b>must</b> map a texture stemming from a swapchain onto the inside of a cylinder section. It can be imagined much the same way a curved television display looks to a viewer. This is not a projection type of layer but rather an object-in-world type of layer, similar to ##XrCompositionLayerQuad. Only the interior of the cylinder surface <b>must</b> be visible; the exterior of the cylinder is not visible and <b>must</b> not be drawn by the runtime.
 

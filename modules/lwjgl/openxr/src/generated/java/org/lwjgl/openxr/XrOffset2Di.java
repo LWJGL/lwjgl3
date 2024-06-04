@@ -20,11 +20,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant <b>must</b> be used instead.</p>
+ * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant {@link XrOffset2Df} is used instead.</p>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrExtent2Di}, {@link XrRect2Di}</p>
+ * <p>{@link XrExtent2Di}, {@link XrOffset2Df}, {@link XrRect2Di}</p>
  * 
  * <h3>Layout</h3>
  * 

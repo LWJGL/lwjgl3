@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_passthrough_preferences">XR_META_passthrough_preferences</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_passthrough_preferences">XR_META_passthrough_preferences</a> extension.
  * 
  * <p>This extension provides applications with access to system preferences concerning passthrough. For more information on how applications can control the display of passthrough, see {@link FBPassthrough XR_FB_passthrough}.</p>
  */

@@ -49,9 +49,12 @@ fun templateCustomization() {
     generateDispatchableHandle(XrAction, XrActionSet)
     generateDispatchableHandle(XrBodyTrackerFB, XrSession)
     generateDispatchableHandle(XrDebugUtilsMessengerEXT, XrInstance)
+    generateDispatchableHandle(XrEnvironmentDepthProviderMETA, XrSession)
+    generateDispatchableHandle(XrEnvironmentDepthSwapchainMETA, XrEnvironmentDepthProviderMETA)
     generateDispatchableHandle(XrEyeTrackerFB, XrSession)
     generateDispatchableHandle(XrExportedLocalizationMapML, XrSession)
     generateDispatchableHandle(XrFaceTrackerFB, XrSession)
+    generateDispatchableHandle(XrFaceTracker2FB, XrSession)
     generateDispatchableHandle(XrFacialTrackerHTC, XrSession)
     generateDispatchableHandle(XrFoveationProfileFB, XrSession)
     generateDispatchableHandle(XrGeometryInstanceFB, XrSession)
@@ -78,7 +81,17 @@ fun templateCustomization() {
         LongConstant(
             "OpenXR current version number.",
 
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 0, 32)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 37)"
+        )
+
+        LongConstant(
+            """
+            The version of the OpenXR 1.0 API.
+
+            The "major" and "minor" components are always 1.0, while the "patch" component matches #CURRENT_API_VERSION.
+            """,
+
+            "API_VERSION_1_0".."XR_MAKE_VERSION(1, 0, XR_VERSION_PATCH(XR_CURRENT_API_VERSION))"
         )
 
         macro(expression = "((major & 0xFFFFL) << 48) | ((minor & 0xFFFFL) << 32) | (patch & 0xFFFF_FFFFL)")..uint64_t(
@@ -175,7 +188,8 @@ fun templateCustomization() {
             "MAX_ACTION_NAME_SIZE".."64",
             "MAX_LOCALIZED_ACTION_SET_NAME_SIZE".."128",
             "MAX_LOCALIZED_ACTION_NAME_SIZE".."128",
-            "MIN_COMPOSITION_LAYERS_SUPPORTED".."16"
+            "MIN_COMPOSITION_LAYERS_SUPPORTED".."16",
+            "UUID_SIZE".."16"
         )
 
         macro(expression = "result >= 0")..bool(
@@ -206,6 +220,41 @@ fun templateCustomization() {
         )
 
         nullable..this["GetInstanceProcAddr"].getParam("instance")
+    }
+
+    XR11.apply {
+        javaImport("static org.lwjgl.openxr.XR10.*")
+        documentation =
+            """
+            The core OpenXR 1.1 functionality.
+
+            OpenXR version 1.1 <em>promoted</em> a number of key extensions into the core API:
+
+            ${ul(
+                KHR_locate_spaces.link,
+                KHR_maintenance1.link,
+                EXT_hp_mixed_reality_controller.link,
+                EXT_local_floor.link,
+                EXT_palm_pose.link,
+                EXT_samsung_odyssey_controller.link,
+                EXT_uuid.link,
+                BD_controller_interaction.link,
+                HTC_vive_cosmos_controller_interaction.link,
+                HTC_vive_focus3_controller_interaction.link,
+                ML_ml2_controller_interaction.link,
+                VARJO_quad_views.link
+            )}
+            """
+
+        LongConstant(
+            """
+            The version of the OpenXR 1.1 API.
+
+            The "major" and "minor" components are always 1.1, while the "patch" component matches #CURRENT_API_VERSION.
+            """,
+
+            "API_VERSION_1_1".."XR_MAKE_VERSION(1, 1, XR_VERSION_PATCH(XR_CURRENT_API_VERSION))"
+        )
     }
 
     EXT_hand_tracking.apply {

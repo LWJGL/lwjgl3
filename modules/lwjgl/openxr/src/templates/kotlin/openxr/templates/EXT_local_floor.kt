@@ -11,7 +11,7 @@ import openxr.*
 val EXT_local_floor = "EXTLocalFloor".nativeClassXR("EXT_local_floor", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_local_floor">XR_EXT_local_floor</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_local_floor">XR_EXT_local_floor</a> extension.
 
         The core OpenXR spec contains two world-locked reference space {@code XrSpace} types in {@code XrReferenceSpaceType}, #REFERENCE_SPACE_TYPE_LOCAL and #REFERENCE_SPACE_TYPE_STAGE with a design goal that {@code LOCAL} space gets the user positioned correctly in {@code XZ} space and {@code STAGE} gets the user positioned correctly in {@code Y} space.
 

@@ -11,7 +11,7 @@ import openxr.*
 val EXT_debug_utils = "EXTDebugUtils".nativeClassXR("EXT_debug_utils", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_debug_utils">XR_EXT_debug_utils</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_debug_utils">XR_EXT_debug_utils</a> extension.
 
         Due to the nature of the OpenXR interface, there is very little error information available to the developer and application. By using the {@link EXTDebugUtils XR_EXT_debug_utils} extension, developers <b>can</b> obtain more information. When combined with validation layers, even more detailed feedback on the application’s use of OpenXR will be provided.
 

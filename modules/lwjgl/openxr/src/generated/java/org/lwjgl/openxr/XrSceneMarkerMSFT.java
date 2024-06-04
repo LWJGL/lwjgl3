@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The {@link XrSceneMarkerMSFT} structure is an element in the array of {@link XrSceneMarkersMSFT}{@code ::sceneMarkers}.</p>
  * 
- * <p>Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#qr_code_convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.</p>
+ * <p>Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#msft_scene_marker-qr-code-convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.</p>
  * 
  * <p>When the runtime updates the location or properties of an observed marker, the runtime <b>must</b> set the {@link XrSceneMarkerMSFT}{@code ::lastSeenTime} to the new timestamp of the update.</p>
  * 

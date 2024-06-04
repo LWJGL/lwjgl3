@@ -11,7 +11,7 @@ import openxr.*
 val VARJO_marker_tracking = "VARJOMarkerTracking".nativeClassXR("VARJO_marker_tracking", type = "instance", postfix = "VARJO") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_VARJO_marker_tracking">XR_VARJO_marker_tracking</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_VARJO_marker_tracking">XR_VARJO_marker_tracking</a> extension.
 
         Varjo Markers are physical markers tracked by the video cameras of the HMD. Different types of markers <b>can</b> be used for different purposes. As an example, Varjo Markers <b>can</b> be used as cheap replacements for electronic trackers. The cost per printed tracker is significantly lower and the markers require no power to function.
 

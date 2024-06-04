@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_local_dimming">XR_META_local_dimming</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_local_dimming">XR_META_local_dimming</a> extension.
  * 
  * <p>Local dimming allows to adjust backlight intensity of dark areas on the screen in order to increase content dynamic range. Local dimming feature is not intended for optical see-through HMDs.</p>
  * 

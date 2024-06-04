@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_spatial_anchor = "MSFTSpatialAnchor".nativeClassXR("MSFT_spatial_anchor", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_spatial_anchor">XR_MSFT_spatial_anchor</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_spatial_anchor">XR_MSFT_spatial_anchor</a> extension.
 
         This extension allows an application to create a <b>spatial anchor</b>, an arbitrary freespace point in the user’s physical environment that will then be tracked by the runtime. The runtime <b>should</b> then adjust the position and orientation of that anchor’s origin over time as needed, independently of all other spaces and anchors, to ensure that it maintains its original mapping to the real world.
         """

@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_composition_layer_color_scale_bias">XR_KHR_composition_layer_color_scale_bias</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_composition_layer_color_scale_bias">XR_KHR_composition_layer_color_scale_bias</a> extension.
  * 
  * <p>Color scale and bias are applied to a layer color during composition, after its conversion to premultiplied alpha representation.</p>
  * 

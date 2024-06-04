@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This structure is used for component values that may be fractional (floating-point).</p>
+ * <p>This structure is used for component values that may be real numbers, represented with single-precision floating point.</p>
  * 
- * <p>The {@code offset} is the position of the rectangle corner with minimum value coordinates. The other three corners are computed by adding the {@link XrExtent2Di}{@code ::width} to the {@code x} offset, {@link XrExtent2Di}{@code ::height} to the {@code y} offset, or both.</p>
+ * <p>The {@code offset} is the position of the rectangle corner with minimum value coordinates. The other three corners are computed by adding the {@link XrExtent2Df}{@code ::width} to the {@code x} offset, {@link XrExtent2Df}{@code ::height} to the {@code y} offset, or both.</p>
  * 
  * <h5>See Also</h5>
  * 

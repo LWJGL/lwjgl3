@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension.
  * 
  * <p>This extension adds an optional structure that can be included on the {@link XrInteractionProfileSuggestedBinding}{@code ::next} chain passed to {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings} to specify additional information to modify default binding behavior.</p>
  * 

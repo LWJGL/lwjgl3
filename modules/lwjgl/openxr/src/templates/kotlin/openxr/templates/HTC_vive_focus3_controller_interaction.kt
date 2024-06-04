@@ -11,7 +11,7 @@ import openxr.*
 val HTC_vive_focus3_controller_interaction = "HTCViveFocus3ControllerInteraction".nativeClassXR("HTC_vive_focus3_controller_interaction", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_vive_focus3_controller_interaction">XR_HTC_vive_focus3_controller_interaction</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_HTC_vive_focus3_controller_interaction">XR_HTC_vive_focus3_controller_interaction</a> extension.
 
         This extension defines a new interaction profile for the VIVE Focus 3 Controller.
         """

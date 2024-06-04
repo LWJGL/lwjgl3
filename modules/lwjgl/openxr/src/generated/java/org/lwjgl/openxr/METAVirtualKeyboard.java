@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_virtual_keyboard">XR_META_virtual_keyboard</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_virtual_keyboard">XR_META_virtual_keyboard</a> extension.
  * 
  * <p>The virtual keyboard extension provides a system-driven localized keyboard that the application has full control over in terms of positioning and rendering.</p>
  * 
@@ -586,7 +586,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the {@link XrVirtualKeyboardModelAnimationStatesMETA} structure. Note that new animations may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the {@link XrVirtualKeyboardModelAnimationStatesMETA} structure. Note that new animations may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -660,7 +660,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -730,7 +730,7 @@ public class METAVirtualKeyboard {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the {@link XrVirtualKeyboardTextureDataMETA} structure. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
+     * <p>This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the {@link XrVirtualKeyboardTextureDataMETA} structure. Note that new texture data may be added after the runtime processes inputs from {@link #xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}. Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

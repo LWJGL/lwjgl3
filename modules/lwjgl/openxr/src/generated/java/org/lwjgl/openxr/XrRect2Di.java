@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant <b>must</b> be used instead.</p>
+ * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant {@link XrRect2Df} is used instead.</p>
  * 
  * <p>The {@code offset} is the position of the rectangle corner with minimum value coordinates. The other three corners are computed by adding the {@link XrExtent2Di}{@code ::width} to the {@code x} offset, {@link XrExtent2Di}{@code ::height} to the {@code y} offset, or both.</p>
  * 

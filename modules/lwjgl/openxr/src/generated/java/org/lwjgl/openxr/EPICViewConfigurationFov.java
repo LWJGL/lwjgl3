@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EPIC_view_configuration_fov">XR_EPIC_view_configuration_fov</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EPIC_view_configuration_fov">XR_EPIC_view_configuration_fov</a> extension.
  * 
  * <p>This extension allows the application to retrieve the recommended and maximum field-of-view using {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews}. These field-of-view parameters can be used during initialization of the application before creating a session.</p>
  * 

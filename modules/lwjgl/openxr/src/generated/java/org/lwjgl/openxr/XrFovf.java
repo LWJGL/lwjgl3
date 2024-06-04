@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrCompositionLayerProjectionView}, {@link XrExternalCameraIntrinsicsOCULUS}, {@link XrSceneFrustumBoundMSFT}, {@link XrView}, {@link XrViewConfigurationViewFovEPIC}</p>
+ * <p>{@link XrCompositionLayerProjectionView}, {@link XrEnvironmentDepthImageViewMETA}, {@link XrExternalCameraIntrinsicsOCULUS}, {@link XrFrustumf}, {@link XrSceneFrustumBoundMSFT}, {@link XrView}, {@link XrViewConfigurationViewFovEPIC}</p>
  * 
  * <h3>Layout</h3>
  * 

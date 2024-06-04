@@ -11,7 +11,7 @@ import openxr.*
 val OCULUS_audio_device_guid = "OCULUSAudioDeviceGuid".nativeClassXR("OCULUS_audio_device_guid", type = "instance", postfix = "OCULUS") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
 
         This extension enables the querying of audio device information associated with an OpenXR instance.
 

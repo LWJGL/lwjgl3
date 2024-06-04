@@ -119,7 +119,7 @@ public class XrHandTrackingAimStateFB extends Struct<XrHandTrackingAimStateFB> i
     /** a bitmask of {@code XrHandTrackingAimFlagBitsFB} describing the availability and state of other signals. */
     @NativeType("XrHandTrackingAimFlagsFB")
     public long status() { return nstatus(address()); }
-    /** a system-determined "aim" pose, similar in intent and convention to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#aim-pose">aim poses</a> used with the action system, based on hand data. */
+    /** a system-determined "aim" pose, similar in intent and convention to the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-aim-pose">aim poses</a> used with the action system, based on hand data. */
     public XrPosef aimPose() { return naimPose(address()); }
     /** the current pinching strength for the index finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning index and thumb are fully touching. */
     public float pinchStrengthIndex() { return npinchStrengthIndex(address()); }

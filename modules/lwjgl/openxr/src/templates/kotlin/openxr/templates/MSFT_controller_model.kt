@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_controller_model = "MSFTControllerModel".nativeClassXR("MSFT_controller_model", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_controller_model">XR_MSFT_controller_model</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_controller_model">XR_MSFT_controller_model</a> extension.
 
         This extension provides a mechanism to load a GLTF model for controllers. An application <b>can</b> render the controller model using the real time pose input from controller’s grip action pose and animate controller parts representing the user’s interactions, such as pressing a button, or pulling a trigger.
 

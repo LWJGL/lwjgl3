@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tracking_mesh", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_hand_tracking_mesh">XR_MSFT_hand_tracking_mesh</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_hand_tracking_mesh">XR_MSFT_hand_tracking_mesh</a> extension.
 
         This extension enables hand tracking inputs represented as a dynamic hand mesh. It enables applications to render hands in XR experiences and interact with virtual objects using hand meshes.
 

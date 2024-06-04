@@ -11,7 +11,7 @@ import openxr.*
 val MNDX_egl_enable = "MNDXEGLEnable".nativeClassXR("MNDX_egl_enable", type = "instance", postfix = "MNDX") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MNDX_egl_enable">XR_MNDX_egl_enable</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MNDX_egl_enable">XR_MNDX_egl_enable</a> extension.
 
         This extension must be provided by runtimes supporting applications using the EGL API to create rendering contexts.
 
@@ -23,7 +23,7 @@ val MNDX_egl_enable = "MNDXEGLEnable".nativeClassXR("MNDX_egl_enable", type = "i
     IntConstant(
         "The extension specification version.",
 
-        "MNDX_egl_enable_SPEC_VERSION".."1"
+        "MNDX_egl_enable_SPEC_VERSION".."2"
     )
 
     StringConstant(

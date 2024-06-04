@@ -11,7 +11,7 @@ import openxr.*
 val KHR_binding_modification = "KHRBindingModification".nativeClassXR("KHR_binding_modification", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_binding_modification">XR_KHR_binding_modification</a> extension.
 
         This extension adds an optional structure that can be included on the ##XrInteractionProfileSuggestedBinding{@code ::next} chain passed to #SuggestInteractionProfileBindings() to specify additional information to modify default binding behavior.
 

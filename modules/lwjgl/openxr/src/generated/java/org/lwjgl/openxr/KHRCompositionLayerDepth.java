@@ -6,11 +6,11 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_composition_layer_depth">XR_KHR_composition_layer_depth</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_composition_layer_depth">XR_KHR_composition_layer_depth</a> extension.
  * 
  * <p>This extension defines an extra layer type which allows applications to submit depth images along with color images in projection layers, i.e. {@link XrCompositionLayerProjection}.</p>
  * 
- * <p>The XR runtime <b>may</b> use this information to perform more accurate reprojections taking depth into account. Use of this extension does not affect the order of layer composition as described in <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#Compositing">Compositing</a>.</p>
+ * <p>The XR runtime <b>may</b> use this information to perform more accurate reprojections taking depth into account. Use of this extension does not affect the order of layer composition as described in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#rendering-compositing">rendering-compositing</a>.</p>
  */
 public final class KHRCompositionLayerDepth {
 

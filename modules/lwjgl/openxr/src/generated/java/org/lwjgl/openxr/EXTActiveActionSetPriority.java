@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_active_action_set_priority">XR_EXT_active_action_set_priority</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_active_action_set_priority">XR_EXT_active_action_set_priority</a> extension.
  * 
  * <p>The properties of an {@code XrActionSet} become immutable after it has been attached to a session. This currently includes the priority of the action set preventing the application from changing the priority number for the duration of the session.</p>
  * 

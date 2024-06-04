@@ -11,7 +11,7 @@ import openxr.*
 val VARJO_quad_views = "VARJOQuadViews".nativeClassXR("VARJO_quad_views", type = "instance", postfix = "VARJO") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_VARJO_quad_views">XR_VARJO_quad_views</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_VARJO_quad_views">XR_VARJO_quad_views</a> extension.
 
         This extension adds a new view configuration type - #VIEW_CONFIGURATION_TYPE_PRIMARY_QUAD_VARJO to {@code XrViewConfigurationType} which can be returned by #EnumerateViewConfigurations() to indicate that the runtime supports 4 viewports.
 

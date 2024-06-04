@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_plane_detection">XR_EXT_plane_detection</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_plane_detection">XR_EXT_plane_detection</a> extension.
  * 
  * <p>This extension enables applications to detect planes in the scene.</p>
  */

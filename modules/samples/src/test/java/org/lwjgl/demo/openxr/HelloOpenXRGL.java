@@ -219,7 +219,7 @@ public class HelloOpenXRGL {
                 .createFlags(0)
                 .applicationInfo(XrApplicationInfo.calloc(stack)
                     .applicationName(stack.UTF8("HelloOpenXR"))
-                    .apiVersion(XR_CURRENT_API_VERSION))
+                    .apiVersion(XR_API_VERSION_1_0))
                 .enabledApiLayerNames(wantedLayers)
                 .enabledExtensionNames(extensions);
 

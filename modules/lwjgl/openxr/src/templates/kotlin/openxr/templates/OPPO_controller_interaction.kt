@@ -11,7 +11,7 @@ import openxr.*
 val OPPO_controller_interaction = "OPPOControllerInteraction".nativeClassXR("OPPO_controller_interaction", type = "instance", postfix = "OPPO") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_OPPO_controller_interaction">XR_OPPO_controller_interaction</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_OPPO_controller_interaction">XR_OPPO_controller_interaction</a> extension.
 
         This extension defines a new interaction profile for the OPPO Controller, including but not limited to OPPO MR Glasses Controller.
         """

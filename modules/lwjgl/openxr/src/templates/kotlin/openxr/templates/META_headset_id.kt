@@ -11,13 +11,13 @@ import openxr.*
 val META_headset_id = "METAHeadsetId".nativeClassXR("META_headset_id", type = "instance", postfix = "META") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#META_headset_id">META_headset_id</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#META_headset_id">META_headset_id</a> extension.
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "META_headset_id_SPEC_VERSION".."1"
+        "META_headset_id_SPEC_VERSION".."2"
     )
 
     StringConstant(

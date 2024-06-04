@@ -21,6 +21,10 @@ import static org.lwjgl.openxr.XR10.*;
 /**
  * Structure specifying application info.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Useful values for {@code apiVersion} include {@link XR10#XR_API_VERSION_1_0 API_VERSION_1_0} and {@link XR11#XR_API_VERSION_1_1 API_VERSION_1_1}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -37,7 +41,7 @@ import static org.lwjgl.openxr.XR10.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrInstanceCreateInfo}</p>
+ * <p>{@link XR10#XR_API_VERSION_1_0 API_VERSION_1_0}, {@link XR11#XR_API_VERSION_1_1 API_VERSION_1_1}, {@link XrInstanceCreateInfo}, {@link XR10#xrCreateInstance CreateInstance}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -125,7 +129,7 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
     /** an unsigned integer variable containing the developer-supplied version number of the engine used to create the application. May be zero to indicate no specified engine. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** the version of this API against which the application will run, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return {@link XR10#XR_ERROR_API_VERSION_UNSUPPORTED ERROR_API_VERSION_UNSUPPORTED}. */
+    /** the version of this API against which the application will run, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-api-version-numbers-and-semantics">fundamentals-api-version-numbers-and-semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return {@link XR10#XR_ERROR_API_VERSION_UNSUPPORTED ERROR_API_VERSION_UNSUPPORTED}. */
     @NativeType("XrVersion")
     public long apiVersion() { return napiVersion(address()); }
 

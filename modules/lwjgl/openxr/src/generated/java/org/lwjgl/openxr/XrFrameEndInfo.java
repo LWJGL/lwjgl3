@@ -112,7 +112,7 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     /** the {@code XrTime} at which this frame <b>should</b> be displayed. */
     @NativeType("XrTime")
     public long displayTime() { return ndisplayTime(address()); }
-    /** the {@code XrEnvironmentBlendMode} value representing the desired <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#environment_blend_mode">environment blend mode</a> for this frame. */
+    /** the {@code XrEnvironmentBlendMode} value representing the desired <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#rendering-environment-blend-mode">environment blend mode</a> for this frame. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
     /** the number of composition layers in this frame. The maximum supported layer count is identified by {@link XrSystemGraphicsProperties}::maxLayerCount. If layerCount is greater than the maximum supported layer count then {@link XR10#XR_ERROR_LAYER_LIMIT_EXCEEDED ERROR_LAYER_LIMIT_EXCEEDED} <b>must</b> be returned. */

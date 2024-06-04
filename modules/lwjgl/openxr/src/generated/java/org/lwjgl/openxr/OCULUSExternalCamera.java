@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_OCULUS_external_camera">XR_OCULUS_external_camera</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_OCULUS_external_camera">XR_OCULUS_external_camera</a> extension.
  * 
  * <p>This extension enables the querying of external camera information for a session. This extension is intended to enable mixed reality capture support for applications.</p>
  * 

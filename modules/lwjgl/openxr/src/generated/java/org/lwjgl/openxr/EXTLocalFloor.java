@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_local_floor">XR_EXT_local_floor</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_local_floor">XR_EXT_local_floor</a> extension.
  * 
  * <p>The core OpenXR spec contains two world-locked reference space {@code XrSpace} types in {@code XrReferenceSpaceType}, {@link XR10#XR_REFERENCE_SPACE_TYPE_LOCAL REFERENCE_SPACE_TYPE_LOCAL} and {@link XR10#XR_REFERENCE_SPACE_TYPE_STAGE REFERENCE_SPACE_TYPE_STAGE} with a design goal that {@code LOCAL} space gets the user positioned correctly in {@code XZ} space and {@code STAGE} gets the user positioned correctly in {@code Y} space.</p>
  * 

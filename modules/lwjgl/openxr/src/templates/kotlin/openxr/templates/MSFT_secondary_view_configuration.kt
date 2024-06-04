@@ -11,7 +11,7 @@ import openxr.*
 val MSFT_secondary_view_configuration = "MSFTSecondaryViewConfiguration".nativeClassXR("MSFT_secondary_view_configuration", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_secondary_view_configuration">XR_MSFT_secondary_view_configuration</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_MSFT_secondary_view_configuration">XR_MSFT_secondary_view_configuration</a> extension.
 
         This extension allows an application to enable support for one or more <b>secondary view configurations</b>. A secondary view configuration is a well-known set of views that the runtime can make active while a session is running. In a frame where a secondary view configuration is active, the application’s single frame loop should additionally render into those active secondary views, sharing the frame waiting logic and update loop with the primary view configuration for that running session.
 

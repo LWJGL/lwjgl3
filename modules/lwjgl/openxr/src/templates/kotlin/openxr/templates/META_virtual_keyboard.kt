@@ -11,7 +11,7 @@ import openxr.*
 val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_keyboard", type = "instance", postfix = "META") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_META_virtual_keyboard">XR_META_virtual_keyboard</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_META_virtual_keyboard">XR_META_virtual_keyboard</a> extension.
 
         The virtual keyboard extension provides a system-driven localized keyboard that the application has full control over in terms of positioning and rendering.
 
@@ -458,7 +458,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    XrVirtualKeyboardModelAnimationStatesMETA*  animationStates);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the ##XrVirtualKeyboardModelAnimationStatesMETA structure. Note that new animations may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code animationStates} array in the ##XrVirtualKeyboardModelAnimationStatesMETA structure. Note that new animations may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any animation data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -512,7 +512,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    uint64_t*                                   textureIds);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code textureIds} array. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -565,7 +565,7 @@ val META_virtual_keyboard = "METAVirtualKeyboard".nativeClassXR("META_virtual_ke
 ￿    XrVirtualKeyboardTextureDataMETA*           textureData);</code></pre>
 
         <h5>Description</h5>
-        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the ##XrVirtualKeyboardTextureDataMETA structure. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
+        This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code textureData} array in the ##XrVirtualKeyboardTextureDataMETA structure. Note that new texture data may be added after the runtime processes inputs from #SendVirtualKeyboardInputMETA(). Therefore, after sending new keyboard inputs the application <b>should</b> query the buffer size again before getting any texture data.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

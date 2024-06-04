@@ -11,7 +11,7 @@ import openxr.*
 val KHR_loader_init = "KHRLoaderInit".nativeClassXR("KHR_loader_init", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_loader_init">XR_KHR_loader_init</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_loader_init">XR_KHR_loader_init</a> extension.
 
         On some platforms, before loading can occur the loader must be initialized with platform-specific parameters.
 

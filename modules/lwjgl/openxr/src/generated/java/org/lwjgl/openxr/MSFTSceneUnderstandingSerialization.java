@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_scene_understanding_serialization">XR_MSFT_scene_understanding_serialization</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_MSFT_scene_understanding_serialization">XR_MSFT_scene_understanding_serialization</a> extension.
  * 
  * <p>This extension extends the scene understanding extension and enables scenes to be serialized or deserialized. It enables computing a new scene into a serialized binary stream and it enables deserializing a binary stream into an {@code XrSceneMSFT} handle.</p>
  */

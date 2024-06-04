@@ -115,7 +115,7 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     /** a string specifying the name of the API layer. Use this name in the {@link XrInstanceCreateInfo}{@code ::enabledApiLayerNames} array to enable this API layer for an instance. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** the API version the API layer was written to, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. */
+    /** the API version the API layer was written to, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-api-version-numbers-and-semantics">fundamentals-api-version-numbers-and-semantics</a> section. */
     @NativeType("XrVersion")
     public long specVersion() { return nspecVersion(address()); }
     /** the version of this API layer. It is an integer, increasing with backward compatible changes. */

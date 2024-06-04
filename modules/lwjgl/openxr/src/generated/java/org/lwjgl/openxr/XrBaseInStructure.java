@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link XrBaseInStructure} can be used to facilitate iterating through a read-only structure pointer chain.</p>
+ * <p>{@link XrBaseInStructure} <b>can</b> be used to facilitate iterating through a read-only structure pointer chain.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -86,7 +86,7 @@ public class XrBaseInStructure extends Struct<XrBaseInStructure> implements Nati
     /** the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("XrBaseInStructure const *")
     public XrBaseInStructure next() { return nnext(address()); }
 

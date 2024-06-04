@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_passthrough_color_lut">XR_META_passthrough_color_lut</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_passthrough_color_lut">XR_META_passthrough_color_lut</a> extension.
  * 
  * <p>This extension adds the capability to define and apply RGB to RGB(A) color look-up tables (LUTs) to passthrough layers created using {@link FBPassthrough XR_FB_passthrough}.</p>
  * 

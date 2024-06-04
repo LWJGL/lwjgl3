@@ -11,7 +11,7 @@ import openxr.*
 val EXT_eye_gaze_interaction = "EXTEyeGazeInteraction".nativeClassXR("EXT_eye_gaze_interaction", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_eye_gaze_interaction">XR_EXT_eye_gaze_interaction</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_eye_gaze_interaction">XR_EXT_eye_gaze_interaction</a> extension.
 
         This extension provides an {@code XrPath} for getting eye gaze input from an eye tracker to enable eye gaze interactions.
 

@@ -115,7 +115,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct<XrSpaceComponentStat
     /** the value to set the component to. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
-    /** the number of nanoseconds before the operation should be cancelled. A value of {@link XR10#XR_INFINITE_DURATION INFINITE_DURATION} indicates to never time out. See <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#duration">duration</a> for more details. */
+    /** the number of nanoseconds before the operation should be cancelled. A value of {@link XR10#XR_INFINITE_DURATION INFINITE_DURATION} indicates to never time out. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-duration">fundamentals-duration</a> for more details. */
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
 

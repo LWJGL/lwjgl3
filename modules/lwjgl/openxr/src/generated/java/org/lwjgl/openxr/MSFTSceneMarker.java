@@ -16,9 +16,9 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_scene_marker">XR_MSFT_scene_marker</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_MSFT_scene_marker">XR_MSFT_scene_marker</a> extension.
  * 
- * <p>This extension enables the application to observe the tracked markers, such as the QR Code markers in {uri-iso-iec-18004-2015}[ISO/IEC 18004:2015]. This extension also enables future extensions to easily add new types of marker tracking.</p>
+ * <p>This extension enables the application to observe the tracked markers, such as the QR Code markers in <a href="https://www.iso.org/standard/62021.html">ISO/IEC 18004:2015</a>. This extension also enables future extensions to easily add new types of marker tracking.</p>
  * 
  * <p>The application <b>must</b> enable both {@link MSFTSceneMarker XR_MSFT_scene_marker} and {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} in order to use this extension.</p>
  * 
@@ -83,7 +83,7 @@ public class MSFTSceneMarker {
      * <h5>Enumerant Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SCENE_MARKER_TYPE_QR_CODE_MSFT SCENE_MARKER_TYPE_QR_CODE_MSFT} represents a marker that follows the ISO standard for QR code in {uri-iso-iec-18004-2015}[ISO/IEC 18004:2015].</li>
+     * <li>{@link #XR_SCENE_MARKER_TYPE_QR_CODE_MSFT SCENE_MARKER_TYPE_QR_CODE_MSFT} represents a marker that follows the ISO standard for QR code in <a href="https://www.iso.org/standard/62021.html">ISO/IEC 18004:2015</a>.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -234,7 +234,7 @@ public class MSFTSceneMarker {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #xrGetSceneMarkerDecodedStringMSFT GetSceneMarkerDecodedStringMSFT} function retrieves the string stored in the scene marker as an UTF-8 string, including the terminating '\0'. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#buffer-size-parameters">two-call idiom</a> for filling the {@code buffer} array.</p>
+     * <p>The {@link #xrGetSceneMarkerDecodedStringMSFT GetSceneMarkerDecodedStringMSFT} function retrieves the string stored in the scene marker as an UTF-8 string, including the terminating '\0'. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code buffer} array.</p>
      * 
      * <p>If the stored data in the marker is not an encoded string, the runtime <b>must</b> return the success code {@link #XR_SCENE_MARKER_DATA_NOT_STRING_MSFT SCENE_MARKER_DATA_NOT_STRING_MSFT}, set {@code bufferCountOutput} to 1, and make {@code buffer} an empty string.</p>
      * 

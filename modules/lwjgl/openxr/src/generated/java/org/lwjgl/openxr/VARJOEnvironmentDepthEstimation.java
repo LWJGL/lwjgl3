@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_VARJO_environment_depth_estimation">XR_VARJO_environment_depth_estimation</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_VARJO_environment_depth_estimation">XR_VARJO_environment_depth_estimation</a> extension.
  * 
  * <p>This extension provides a mechanism for enabling depth estimation of the environment in the runtime-supplied compositor. This is an extension to {@link XR10#XR_ENVIRONMENT_BLEND_MODE_ALPHA_BLEND ENVIRONMENT_BLEND_MODE_ALPHA_BLEND} mode to not only use the color but also depth for composition of the final image.</p>
  * 

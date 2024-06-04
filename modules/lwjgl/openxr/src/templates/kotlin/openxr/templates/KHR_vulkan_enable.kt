@@ -13,7 +13,7 @@ val KHR_vulkan_enable = "KHRVulkanEnable".nativeClassXR("KHR_vulkan_enable", typ
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_vulkan_enable">XR_KHR_vulkan_enable</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_vulkan_enable">XR_KHR_vulkan_enable</a> extension.
 
         This extension enables the use of the Vulkan graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime may not be able to use any Vulkan swapchain images.
 

@@ -11,7 +11,7 @@ import openxr.*
 val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_render_model">XR_FB_render_model</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_render_model">XR_FB_render_model</a> extension.
 
         This extension allows applications to request GLTF models for certain connected devices supported by the runtime. Paths that correspond to these devices will be provided through the extension and can be used to get information about the models as well as loading them.
         """

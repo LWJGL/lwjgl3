@@ -11,7 +11,7 @@ import openxr.*
 val FB_touch_controller_pro = "FBTouchControllerPro".nativeClassXR("FB_touch_controller_pro", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_touch_controller_pro">XR_FB_touch_controller_pro</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_touch_controller_pro">XR_FB_touch_controller_pro</a> extension.
 
         This extension defines a new interaction profile for the Meta Quest Touch Pro Controller.
 

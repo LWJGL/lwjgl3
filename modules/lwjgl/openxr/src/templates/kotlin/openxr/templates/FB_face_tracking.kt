@@ -11,7 +11,7 @@ import openxr.*
 val FB_face_tracking = "FBFaceTracking".nativeClassXR("FB_face_tracking", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_face_tracking">XR_FB_face_tracking</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_face_tracking">XR_FB_face_tracking</a> extension.
 
         This extension enables applications to get weights of blend shapes. It also enables applications to render facial expressions in XR experiences.
 

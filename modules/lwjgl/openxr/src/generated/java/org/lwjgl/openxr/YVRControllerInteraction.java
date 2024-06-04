@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_YVR_controller_interaction">XR_YVR_controller_interaction</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_YVR_controller_interaction">XR_YVR_controller_interaction</a> extension.
  * 
  * <p>This extension defines a new interaction profile for the YVR Controller, including but not limited to YVR1 and YVR2 Controller.</p>
  */

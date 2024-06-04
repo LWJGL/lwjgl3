@@ -11,7 +11,7 @@ import openxr.*
 val EXT_uuid = "EXTUUIUD".nativeClassXR("EXT_uuid", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_uuid">XR_EXT_uuid</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_EXT_uuid">XR_EXT_uuid</a> extension.
 
         This extension defines a Universally Unique Identifier that follows <a href="https://www.rfc-editor.org/rfc/rfc4122.html">RFC 4122</a>.
         """

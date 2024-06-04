@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The {@link XrEventDataBaseHeader} is a generic structure used to identify the common event data elements.</p>
  * 
- * <p>Upon receipt, the {@link XrEventDataBaseHeader} pointer should be type-cast to a pointer of the appropriate event data based on the {@code type} parameter.</p>
+ * <p>Upon receipt, the {@link XrEventDataBaseHeader} pointer <b>should</b> be type-cast to a pointer of the appropriate event data type based on the {@code type} parameter.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_opengl_enable">XR_KHR_opengl_enable</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_KHR_opengl_enable">XR_KHR_opengl_enable</a> extension.
  * 
  * <p>This extension enables the use of the OpenGL graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime <b>may</b> not be able to provide any OpenGL swapchain images.</p>
  * 
@@ -19,7 +19,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>This extension provides mechanisms for the application to interact with images acquired by calling {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages}.</p>
  * 
- * <p>In order to expose the structures, types, and functions of this extension, the application <b>must</b> define {@link XR10#XR_USE_GRAPHICS_API_OPENGL USE_GRAPHICS_API_OPENGL}, as well as an appropriate <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:</p>
+ * <p>In order to expose the structures, types, and functions of this extension, the application <b>must</b> define {@link XR10#XR_USE_GRAPHICS_API_OPENGL USE_GRAPHICS_API_OPENGL}, as well as an appropriate <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#appendix-window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:</p>
  * 
  * <ul>
  * <li>{@link XR10#XR_USE_PLATFORM_WIN32 USE_PLATFORM_WIN32}</li>

@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_passthrough_keyboard_hands">XR_FB_passthrough_keyboard_hands</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_passthrough_keyboard_hands">XR_FB_passthrough_keyboard_hands</a> extension.
  * 
  * <p>This extension enables applications to show passthrough hands when hands are placed over the tracked keyboard. It enables users to see their hands over the keyboard in a mixed reality application. This extension is dependent on {@link FBPassthrough XR_FB_passthrough} extension which can be used to create a passthrough layer for hand presence use-case.</p>
  * 

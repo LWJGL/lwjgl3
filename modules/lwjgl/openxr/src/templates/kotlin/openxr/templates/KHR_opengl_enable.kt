@@ -11,7 +11,7 @@ import openxr.*
 val KHR_opengl_enable = "KHROpenGLEnable".nativeClassXR("KHR_opengl_enable", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_opengl_enable">XR_KHR_opengl_enable</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_KHR_opengl_enable">XR_KHR_opengl_enable</a> extension.
 
         This extension enables the use of the OpenGL graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime <b>may</b> not be able to provide any OpenGL swapchain images.
 
@@ -19,7 +19,7 @@ val KHR_opengl_enable = "KHROpenGLEnable".nativeClassXR("KHR_opengl_enable", typ
 
         This extension provides mechanisms for the application to interact with images acquired by calling #EnumerateSwapchainImages().
 
-        In order to expose the structures, types, and functions of this extension, the application <b>must</b> define #USE_GRAPHICS_API_OPENGL, as well as an appropriate <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:
+        In order to expose the structures, types, and functions of this extension, the application <b>must</b> define #USE_GRAPHICS_API_OPENGL, as well as an appropriate <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#appendix-window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:
 
         <ul>
             <li>#USE_PLATFORM_WIN32</li>

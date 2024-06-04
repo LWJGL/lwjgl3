@@ -16,54 +16,19 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.openxr.EXTUUIUD.*;
+import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Universally Unique Identifier.
- * 
- * <h5>Description</h5>
- * 
- * <p>The structure is composed of 16 octets, with the size and order of the fields defined in <a href="https://www.rfc-editor.org/rfc/rfc4122.html#section-4.1.2">RFC 4122 section 4.1.2</a>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using {@link XrUuidEXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrLocalizationMapML}, {@link XrMapLocalizationRequestInfoML}, {@link XrRoomLayoutFB}, {@link XrSpaceContainerFB}, {@link XrSpaceQueryResultFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSystemHeadsetIdPropertiesMETA}, {@link MLLocalizationMap#xrCreateExportedLocalizationMapML CreateExportedLocalizationMapML}, {@link FBSpatialEntity#xrGetSpaceUuidFB GetSpaceUuidFB}, {@link MLLocalizationMap#xrImportLocalizationMapML ImportLocalizationMapML}</p>
+ * See {@link XrUuid}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XrUuidEXT {
- *     uint8_t {@link #data}[XR_UUID_SIZE_EXT];
+ *     uint8_t data[XR_UUID_SIZE];
  * }</code></pre>
  */
-public class XrUuidEXT extends Struct<XrUuidEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        DATA;
-
-    static {
-        Layout layout = __struct(
-            __array(1, XR_UUID_SIZE_EXT)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        DATA = layout.offsetof(0);
-    }
+public class XrUuidEXT extends XrUuid {
 
     protected XrUuidEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -81,22 +46,14 @@ public class XrUuidEXT extends Struct<XrUuidEXT> implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public XrUuidEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Copies the specified {@link ByteBuffer} to the {@code data} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a 128-bit Universally Unique Identifier. */
-    @NativeType("uint8_t[XR_UUID_SIZE_EXT]")
-    public ByteBuffer data() { return ndata(address()); }
-    /** a 128-bit Universally Unique Identifier. */
-    @NativeType("uint8_t")
-    public byte data(int index) { return ndata(address(), index); }
-
-    /** Copies the specified {@link ByteBuffer} to the {@link #data} field. */
-    public XrUuidEXT data(@NativeType("uint8_t[XR_UUID_SIZE_EXT]") ByteBuffer value) { ndata(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #data} field. */
+    public XrUuidEXT data(@NativeType("uint8_t[XR_UUID_SIZE]") ByteBuffer value) { ndata(address(), value); return this; }
+    /** Sets the specified value at the specified index of the {@code data} field. */
+    @Override
     public XrUuidEXT data(int index, @NativeType("uint8_t") byte value) { ndata(address(), index, value); return this; }
 
     /**
@@ -224,27 +181,8 @@ public class XrUuidEXT extends Struct<XrUuidEXT> implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #data}. */
-    public static ByteBuffer ndata(long struct) { return memByteBuffer(struct + XrUuidEXT.DATA, XR_UUID_SIZE_EXT); }
-    /** Unsafe version of {@link #data(int) data}. */
-    public static byte ndata(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrUuidEXT.DATA + check(index, XR_UUID_SIZE_EXT) * 1);
-    }
-
-    /** Unsafe version of {@link #data(ByteBuffer) data}. */
-    public static void ndata(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, XR_UUID_SIZE_EXT); }
-        memCopy(memAddress(value), struct + XrUuidEXT.DATA, value.remaining() * 1);
-    }
-    /** Unsafe version of {@link #data(int, byte) data}. */
-    public static void ndata(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrUuidEXT.DATA + check(index, XR_UUID_SIZE_EXT) * 1, value);
-    }
-
-    // -----------------------------------
-
     /** An array of {@link XrUuidEXT} structs. */
-    public static class Buffer extends StructBuffer<XrUuidEXT, Buffer> implements NativeResource {
+    public static class Buffer extends XrUuid.Buffer {
 
         private static final XrUuidEXT ELEMENT_FACTORY = XrUuidEXT.create(-1L);
 
@@ -258,7 +196,7 @@ public class XrUuidEXT extends Struct<XrUuidEXT> implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -279,16 +217,11 @@ public class XrUuidEXT extends Struct<XrUuidEXT> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrUuidEXT#data} field. */
-        @NativeType("uint8_t[XR_UUID_SIZE_EXT]")
-        public ByteBuffer data() { return XrUuidEXT.ndata(address()); }
-        /** @return the value at the specified index of the {@link XrUuidEXT#data} field. */
-        @NativeType("uint8_t")
-        public byte data(int index) { return XrUuidEXT.ndata(address(), index); }
-
-        /** Copies the specified {@link ByteBuffer} to the {@link XrUuidEXT#data} field. */
-        public XrUuidEXT.Buffer data(@NativeType("uint8_t[XR_UUID_SIZE_EXT]") ByteBuffer value) { XrUuidEXT.ndata(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link XrUuidEXT#data} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code data} field. */
+        @Override
+        public XrUuidEXT.Buffer data(@NativeType("uint8_t[XR_UUID_SIZE]") ByteBuffer value) { XrUuidEXT.ndata(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@code data} field. */
+        @Override
         public XrUuidEXT.Buffer data(int index, @NativeType("uint8_t") byte value) { XrUuidEXT.ndata(address(), index, value); return this; }
 
     }

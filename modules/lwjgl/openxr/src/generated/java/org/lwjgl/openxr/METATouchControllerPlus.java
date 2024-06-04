@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_META_touch_controller_plus">XR_META_touch_controller_plus</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_touch_controller_plus">XR_META_touch_controller_plus</a> extension.
  * 
  * <p>This extension defines a new interaction profile for the Meta Quest Touch Plus Controller.</p>
  * 

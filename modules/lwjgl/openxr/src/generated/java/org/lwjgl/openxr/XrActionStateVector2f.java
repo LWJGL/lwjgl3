@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When multiple input sources are bound to this action, the {@code currentState} follows <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#multiple_inputs">the previously defined rule to resolve ambiguity</a>.</p>
+ * <p>When multiple input sources are bound to this action, the {@code currentState} follows <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-multiple">the previously defined rule to resolve ambiguity</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -116,7 +116,7 @@ public class XrActionStateVector2f extends Struct<XrActionStateVector2f> impleme
     /** {@link XR10#XR_TRUE TRUE} if the value of {@code currentState} is different than it was before the most recent call to {@link XR10#xrSyncActions SyncActions}. */
     @NativeType("XrBool32")
     public boolean changedSinceLastSync() { return nchangedSinceLastSync(address()) != 0; }
-    /** the {@code XrTime} in nanoseconds since this action’s value last changed. */
+    /** the {@code XrTime} associated with the most recent change to this action’s state. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
     /** {@link XR10#XR_TRUE TRUE} if and only if there exists an input source that is contributing to the current state of this action. */

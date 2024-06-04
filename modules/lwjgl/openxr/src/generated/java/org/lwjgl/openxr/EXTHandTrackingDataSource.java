@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_hand_tracking_data_source">XR_EXT_hand_tracking_data_source</a> extension.
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_hand_tracking_data_source">XR_EXT_hand_tracking_data_source</a> extension.
  * 
  * <p>This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</p>
  * 

@@ -11,11 +11,11 @@ import openxr.*
 val FB_spatial_entity_sharing = "FBSpatialEntitySharing".nativeClassXR("FB_spatial_entity_sharing", type = "instance", postfix = "FB") {
     documentation =
         """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_spatial_entity_sharing">XR_FB_spatial_entity_sharing</a> extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_spatial_entity_sharing">XR_FB_spatial_entity_sharing</a> extension.
 
         This extension enables spatial entities to be shared between users. If the #SPACE_COMPONENT_TYPE_SHARABLE_FB component has been enabled on the spatial entity, application developers <b>may</b> share {@code XrSpace} entities between users.
 
-        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-extensions">fundamentals-extensions</a> section.
         """
 
     IntConstant(
