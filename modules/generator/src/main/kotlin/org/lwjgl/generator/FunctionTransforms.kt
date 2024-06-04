@@ -106,7 +106,7 @@ private class AutoSizeBytesTransform(
                     else
                         "$expression >> $s"
                 }
-            } catch(e: NumberFormatException) {
+            } catch(_: NumberFormatException) {
                 // non-numeric expressions
                 expression = if (type.mapping.let { it === PrimitiveMapping.POINTER || it === PrimitiveMapping.LONG })
                     "($expression << $byteShift) ${factor.operator} ${if (factor.expression.contains(' ')) "(${factor.expression})" else factor.expression}"

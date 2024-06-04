@@ -228,8 +228,9 @@ private fun paramMultilineAligment(alignment: Int): String {
     val whitespace = " @param ".length + alignment + 1
     return StringBuilder("$t *".length + whitespace).apply {
         append("$t *")
-        for (i in 0 until whitespace)
+        (0 until whitespace).forEach {
             append(' ')
+        }
     }.toString()
 }
 
@@ -238,8 +239,9 @@ private fun StringBuilder.printParam(name: String, documentation: String, indent
     append("@param $name")
 
     // Align
-    for (i in 0..(alignment - name.length))
+    (0..(alignment - name.length)).forEach {
         append(' ')
+    }
 
     append(documentation.cleanup(multilineAligment))
 }

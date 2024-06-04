@@ -132,7 +132,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 print("return ")
                 val resultType = it.returnType.jniFunctionType
                 if (it.returnType.abiType != resultType)
-                    print("($resultType)");
+                    print("($resultType)")
             }
             print("((${it.returnType.abiType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(if (it.arguments.isEmpty())
@@ -174,7 +174,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 val resultType = it.returnType.jniFunctionType
                 print("$resultType $RESULT = ")
                 if (it.returnType.abiType != resultType)
-                    print("($resultType)");
+                    print("($resultType)")
             }
             print("((${it.returnType.abiType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(it.arguments.asSequence()

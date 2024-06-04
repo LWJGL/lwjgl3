@@ -123,11 +123,10 @@ class ConstantBlock<T : Any>(
                         try {
                             value = Integer.parseInt(ev.expression) + 1 // decimal
                             formatType = 1 // next values will be decimal
-                        } catch(e: NumberFormatException) {
+                        } catch(_: NumberFormatException) {
                             try {
                                 value = Integer.parseInt(ev.expression, 16) + 1 // hex
-                            } catch(e: Exception) {
-                                // ignore
+                            } catch(_: Exception) {
                             }
                             formatType = 0 // next values will be hex
                         }
@@ -165,11 +164,10 @@ class ConstantBlock<T : Any>(
                         try {
                             value = java.lang.Byte.parseByte(ev.expression) + 1L // decimal
                             formatType = 1 // next values will be decimal
-                        } catch(e: NumberFormatException) {
+                        } catch(_: NumberFormatException) {
                             try {
                                 value = java.lang.Byte.parseByte(ev.expression, 16) + 1L // hex
-                            } catch(e: Exception) {
-                                // ignore
+                            } catch(_: Exception) {
                             }
                             formatType = 0 // next values will be hex
                         }
@@ -207,11 +205,10 @@ class ConstantBlock<T : Any>(
                         try {
                             value = java.lang.Long.parseLong(ev.expression) + 1L // decimal
                             formatType = 1 // next values will be decimal
-                        } catch(e: NumberFormatException) {
+                        } catch(_: NumberFormatException) {
                             try {
                                 value = java.lang.Long.parseLong(ev.expression, 16) + 1L // hex
-                            } catch(e: Exception) {
-                                // ignore
+                            } catch(_: Exception) {
                             }
                             formatType = 0 // next values will be hex
                         }
@@ -325,8 +322,9 @@ class ConstantBlock<T : Any>(
 
     private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
         print("$indent${getConstantName(constant.name)}")
-        for (i in 0 until alignment - constant.name.length)
+        (0 until alignment - constant.name.length).forEach {
             print(' ')
+        }
 
         print(" = ")
         if (constant is ConstantExpression) {

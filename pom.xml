@@ -13,7 +13,7 @@
 
     <groupId>org.lwjgl</groupId>
     <artifactId>lwjgl</artifactId>
-    <version>3.2.3</version>
+    <version>3.3.3</version>
 
     <name>LWJGL</name>
     <description>The LWJGL core library.</description>

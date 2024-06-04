@@ -148,6 +148,8 @@
         <echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
         <mkdir dir="${bin.generator}"/>
         <kotlinc moduleName="generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
+            <compilerarg line="-language-version 2.0"/>
+            <compilerarg line="-api-version 2.0"/>
             <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
@@ -214,6 +216,8 @@
                 <pathelement location="${bin.generator}"/>
             </classpath>
 
+            <compilerarg line="-language-version 2.0"/>
+            <compilerarg line="-api-version 2.0"/>
             <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
@@ -591,7 +595,6 @@
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
-                <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
             </classpath>
 
             <compilerarg line="-jvm-target 1.8"/>
@@ -621,7 +624,6 @@
                 <pathelement path="${bin.extract}"/>
                 <pathelement path="${test.resources}"/>
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
-                <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
                 <pathelement path="${lib}/native"/>
             </classpath>
 
