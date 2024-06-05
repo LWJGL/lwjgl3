@@ -67,7 +67,7 @@ jboolean success = JAWT_GetAWT(env, &awt);""")}
 @protocol JAWT_SurfaceLayers
 @property (readwrite, retain) CALayer *layer;
 @property (readonly) CALayer *windowLayer;
-@end """)}
+@end""", javadocBlock = true)}
         """,
 
         "MACOSX_USE_CALAYER"..0x80000000.i

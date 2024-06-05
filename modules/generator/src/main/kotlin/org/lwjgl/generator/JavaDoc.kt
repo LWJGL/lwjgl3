@@ -334,13 +334,13 @@ private val CODE_BLOCK_ESCAPE_PATTERN = "^".toRegex(RegexOption.MULTILINE) // li
 private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
 /** Useful for pre-formatted code blocks. HTML markup is not allowed and will be escaped. */
-fun codeBlock(code: String) = """<pre><code>
+fun codeBlock(code: String, javadocBlock: Boolean = false) = """<pre>${if (javadocBlock) "{@code" else "<code>"}
 ${code
     .htmlEscaped
     .replace(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
     .replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF") // ...escape
     .replace(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
-}</code></pre>"""
+}${if (javadocBlock) "}" else "</code>"}</pre>"""
 
 fun note(content: String) = "<div style=\"margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;\"><h5>Note</h5>\n$content</div>"
 
