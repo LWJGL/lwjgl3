@@ -165,8 +165,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ColdCallConv".enum,
         "GHCCallConv".enum,
         "HiPECallConv".enum,
-        "WebKitJSCallConv".enum,
-        "AnyRegCallConv".enum,
+        "AnyRegCallConv".enum("", "13"),
         "PreserveMostCallConv".enum,
         "PreserveAllCallConv".enum,
         "SwiftCallConv".enum,
@@ -380,6 +379,37 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         "AttributeReturnIndex".enum("", "0"),
         "AttributeFunctionIndex".enum("ISO C restricts enumerator values to range of 'int' (4294967295 is too large)", "-1")
+    )
+
+    EnumConstant(
+        """
+        Tail call kind for #SetTailCallKind() and #GetTailCallKind(). ({@code LLVMTailCallKind})
+
+        Note that {@code musttail} implies {@code tail}.
+        """,
+
+        "TailCallKindNone".enum("", "0"),
+        "TailCallKindTail".enum,
+        "TailCallKindMustTail".enum,
+        "TailCallKindNoTail".enum
+    )
+
+    EnumConstant(
+        "",
+
+        "FastMathAllowReassoc".enum("", "1 << 0"),
+        "FastMathNoNaNs".enum("", "1 << 1"),
+        "FastMathNoInfs".enum("", "1 << 2"),
+        "FastMathNoSignedZeros".enum("", "1 << 3"),
+        "FastMathAllowReciprocal".enum("", "1 << 4"),
+        "FastMathAllowContract".enum("", "1 << 5"),
+        "FastMathApproxFunc".enum("", "1 << 6"),
+        "FastMathNone".enum("", "0"),
+        "FastMathAll".enum("", """
+            LLVMFastMathAllowReassoc | LLVMFastMathNoNaNs |
+            LLVMFastMathNoInfs | LLVMFastMathNoSignedZeros |
+            LLVMFastMathAllowReciprocal | LLVMFastMathAllowContract |
+            LLVMFastMathApproxFunc""")
     )
 
     IgnoreMissing..void(
@@ -916,14 +946,79 @@ val LLVMCore = "LLVMCore".nativeClass(
         "Create the specified uniqued inline asm string.",
 
         LLVMTypeRef("Ty", ""),
-        charUTF8.p("AsmString", ""),
+        charUTF8.const.p("AsmString", ""),
         AutoSize("AsmString")..size_t("AsmStringSize", ""),
-        charUTF8.p("Constraints", ""),
+        charUTF8.const.p("Constraints", ""),
         AutoSize("Constraints")..size_t("ConstraintsSize", ""),
         LLVMBool("HasSideEffects", ""),
         LLVMBool("IsAlignStack", ""),
         LLVMInlineAsmDialect("Dialect", ""),
         LLVMBool("CanThrow", "")
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "GetInlineAsmAsmString",
+        "Get the template string used for an inline assembly snippet.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+        AutoSizeResult..size_t.p("Len", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "GetInlineAsmConstraintString",
+        "Get the raw constraint string for an inline assembly snippet.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+        AutoSizeResult..size_t.p("Len", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMInlineAsmDialect(
+        "GetInlineAsmDialect",
+        "Get the dialect used by the inline asm snippet.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "GetInlineAsmFunctionType",
+        "Get the function type of the inline assembly snippet. The same type that was passed into LLVMGetInlineAsm originally.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "GetInlineAsmHasSideEffects",
+        "Get if the inline asm snippet has side effects.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "GetInlineAsmNeedsAlignedStack",
+        "Get if the inline asm snippet needs an aligned stack.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "GetInlineAsmCanUnwind",
+        "Get if the inline asm snippet may unwind the stack.",
+
+        LLVMValueRef("InlineAsmVal", ""),
+
+        since = "18"
     )
 
     LLVMContextRef(
@@ -2464,17 +2559,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstAnd",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("LHSConstant", ""),
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstOr",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("LHSConstant", ""),
         LLVMValueRef("RHSConstant", "")
@@ -2514,17 +2609,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstLShr",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("LHSConstant", ""),
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstAShr",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("LHSConstant", ""),
         LLVMValueRef("RHSConstant", "")
@@ -2580,65 +2675,65 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSExt",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstZExt",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFPTrunc",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFPExt",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstUIToFP",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSIToFP",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFPToUI",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFPToSI",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
@@ -2676,17 +2771,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstZExtOrBitCast",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSExtOrBitCast",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
@@ -2708,18 +2803,18 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("ToType", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstIntCast",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", ""),
         LLVMBool("isSigned", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFPCast",
-        "",
+        "Removed in LLVM 18.",
 
         LLVMValueRef("ConstantVal", ""),
         LLVMTypeRef("ToType", "")
@@ -3742,6 +3837,67 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Vals")..unsigned_int("Count", "")
     )
 
+    IgnoreMissing..LLVMOperandBundleRef(
+        "CreateOperandBundle",
+        """
+        Create a new operand bundle.
+
+        Every invocation should be paired with #DisposeOperandBundle() or memory will be leaked.
+        """,
+
+        charUTF8.const.p("Tag", "tag name of the operand bundle"),
+        AutoSize("Tag")..size_t("TagLen", "length of {@code Tag}"),
+        LLVMValueRef.p("Args", "memory address of an array of bundle operands"),
+        AutoSize("Args")..unsigned("NumArgs", "length of {@code Args}"),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "DisposeOperandBundle",
+        """
+        Destroy an operand bundle.
+
+        This must be called for every created operand bundle or memory will be leaked.
+        """,
+
+        LLVMOperandBundleRef("Bundle", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "GetOperandBundleTag",
+        "Obtain the tag of an operand bundle as a string.",
+
+        LLVMOperandBundleRef("Bundle", "operand bundle to obtain tag of"),
+        AutoSizeResult..size_t.p("Len", "out parameter which holds the length of the returned string"),
+
+        returnDoc = "the tag name of {@code Bundle}",
+        since = "18"
+    )
+
+    IgnoreMissing..unsigned(
+        "GetNumOperandBundleArgs",
+        "Obtain the number of operands for an operand bundle.",
+
+        LLVMOperandBundleRef("Bundle", "operand bundle to obtain operand count of"),
+
+        returnDoc = "the number of operands",
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetOperandBundleArgAtIndex",
+        "Obtain the operand for an operand bundle at the given index.",
+
+        LLVMOperandBundleRef("Bundle", "operand bundle to obtain operand of"),
+        unsigned("Index", "an operand index, must be less than #GetNumOperandBundleArgs()"),
+
+        returnDoc = "the operand",
+        since = "18"
+    )
+
     LLVMValueRef(
         "MetadataAsValue",
         "Obtain a {@code Metadata} as a Value.",
@@ -4329,6 +4485,35 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Instr", "")
     )
 
+    IgnoreMissing..unsigned(
+        "GetNumOperandBundles",
+        """
+        Obtain the number of operand bundles attached to this instruction.
+
+        This only works on {@code llvm::CallInst} and {@code llvm::InvokeInst} instructions.
+        """,
+
+        LLVMValueRef("C", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMOperandBundleRef(
+        "GetOperandBundleAtIndex",
+        """
+        Obtain the operand bundle attached to this instruction at the given index.
+ 
+        Use #DisposeOperandBundle() to free the operand bundle.
+
+        This only works on {@code llvm::CallInst} and {@code llvm::InvokeInst} instructions.
+        """,
+
+        LLVMValueRef("C", ""),
+        unsigned("Index", ""),
+
+        since = "18"
+    )
+
     LLVMBool(
         "IsTailCall",
         """
@@ -4350,6 +4535,25 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         LLVMValueRef("CallInst", ""),
         LLVMBool("IsTailCall", "")
+    )
+
+    IgnoreMissing..LLVMTailCallKind(
+        "GetTailCallKind",
+        "Obtain a tail call kind of the call instruction.",
+
+        LLVMValueRef("CallInst", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "SetTailCallKind",
+        "Set the call kind of the call instruction.",
+
+        LLVMValueRef("CallInst", ""),
+        LLVMTailCallKind("kind", ""),
+
+        since = "18"
     )
 
     LLVMBasicBlockRef(
@@ -4801,6 +5005,24 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", ""),
 
         since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildInvokeWithOperandBundles",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Fn", ""),
+        LLVMValueRef.p("Args", ""),
+        AutoSize("Args")..unsigned("NumArgs", ""),
+        LLVMBasicBlockRef("Then", ""),
+        LLVMBasicBlockRef("Catch", ""),
+        LLVMOperandBundleRef.p("Bundles", ""),
+        AutoSize("Bundles")..unsigned("NumBundles", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "18"
     )
 
     LLVMValueRef(
@@ -5318,6 +5540,74 @@ val LLVMCore = "LLVMCore".nativeClass(
     void("SetNSW", "", LLVMValueRef("ArithInst", ""), LLVMBool("HasNSW", ""), since = "17")
     LLVMBool("GetExact", "", LLVMValueRef("DivOrShrInst", ""), since = "17")
     void("SetExact", "", LLVMValueRef("DivOrShrInst", ""), LLVMBool("IsExact", ""), since = "17")
+
+    IgnoreMissing..LLVMBool(
+        "GetNNeg",
+        "Gets if the instruction has the non-negative flag set. Only valid for zext instructions.",
+
+        LLVMValueRef("NonNegInst", ""),
+
+        since = "18"
+    )
+    IgnoreMissing..void(
+        "SetNNeg",
+        "Sets the non-negative flag for the instruction. Only valid for zext instructions.",
+
+        LLVMValueRef("NonNegInst", ""),
+        LLVMBool("IsNonNeg", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMFastMathFlags(
+        "GetFastMathFlags",
+        "Get the flags for which fast-math-style optimizations are allowed for this value. Only valid on floating point instructions.",
+
+        LLVMValueRef("FPMathInst", ""),
+
+        since = "18"
+    )
+    IgnoreMissing..void(
+        "SetFastMathFlags",
+        "Sets the flags for which fast-math-style optimizations are allowed for this value. Only valid on floating point instructions.",
+
+        LLVMValueRef("FPMathInst", ""),
+        LLVMFastMathFlags("FMF", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "CanValueUseFastMathFlags",
+        """
+        Check if a given value can potentially have fast math flags.
+
+        Will return true for floating point arithmetic instructions, and for select, phi, and call instructions whose type is a floating point type, or a
+        vector or array thereof. See ${url("https://llvm.org/docs/LangRef.html#fast-math-flags", "fast-math-flags")}.
+        """,
+
+        LLVMValueRef("Inst", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "GetIsDisjoint",
+        "Gets whether the instruction has the disjoint flag set. Only valid for or instructions.",
+
+        LLVMValueRef("Inst", ""),
+
+        since = "18"
+    )
+    IgnoreMissing..void(
+        "SetIsDisjoint",
+        "Sets the disjoint flag for the instruction. Only valid for or instructions.",
+
+        LLVMValueRef("Inst", ""),
+        LLVMBool("IsDisjoint", ""),
+
+        since = "18"
+    )
 
     LLVMValueRef(
         "BuildNot",
@@ -5883,6 +6173,22 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", ""),
 
         since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildCallWithOperandBundles",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Fn", ""),
+        LLVMValueRef.p("Args", ""),
+        AutoSize("Args")..unsigned_int("NumArgs", ""),
+        LLVMOperandBundleRef.p("Bundles", ""),
+        AutoSize("Bundles")..unsigned("NumBundles", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "18"
     )
 
     LLVMValueRef(

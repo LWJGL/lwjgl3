@@ -32,7 +32,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         Dispose of an {@code LLVMOrcLLJITBuilderRef}.
 
         This should only be called if ownership has not been passed to {@code LLVMOrcCreateLLJIT} (e.g. because some error prevented that function from being
-        called).        
+        called).
         """,
 
         LLVMOrcLLJITBuilderRef("Builder", "")

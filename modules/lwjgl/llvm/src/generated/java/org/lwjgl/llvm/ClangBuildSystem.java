@@ -210,7 +210,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the framework module name that the module.map describes.
+     * Sets the framework module name that the module.modulemap describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */
@@ -223,7 +223,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the framework module name that the module.map describes.
+     * Sets the framework module name that the module.modulemap describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */
@@ -251,7 +251,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the umbrella header name that the module.map describes.
+     * Sets the umbrella header name that the module.modulemap describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */
@@ -264,7 +264,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the umbrella header name that the module.map describes.
+     * Sets the umbrella header name that the module.modulemap describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */

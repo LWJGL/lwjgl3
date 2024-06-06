@@ -55,6 +55,14 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
         "ObjectFile".enum
     )
 
+    EnumConstant(
+        "{@code LLVMGlobalISelAbortMode}",
+
+        "GlobalISelAbortEnable".enum("", "0"),
+        "GlobalISelAbortDisable".enum,
+        "GlobalISelAbortDisableWithDiag".enum
+    )
+
     LLVMTargetRef(
         "GetFirstTarget",
         "Returns the first {@code llvm::Target} in the registered targets list.",
@@ -121,6 +129,99 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
         "Returns if the target as an ASM backend (required for emitting output)",
 
         LLVMTargetRef("T", "")
+    )
+
+    IgnoreMissing..LLVMTargetMachineOptionsRef(
+        "CreateTargetMachineOptions",
+        """
+        Create a new set of options for an {@code llvm::TargetMachine}.
+
+        The returned option structure must be released with #DisposeTargetMachineOptions() after the call to {@code LLVMCreateTargetMachineWithOptions()}.
+        """,
+
+        void(),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "DisposeTargetMachineOptions",
+        "Dispose of an {@code LLVMTargetMachineOptionsRef} instance.",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetCPU",
+        "",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        charUTF8.const.p("CPU", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetFeatures",
+        "Set the list of features for the target machine.",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        charUTF8.const.p("Features", "a comma-separated list of features"),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetABI",
+        "",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        charUTF8.const.p("ABI", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetCodeGenOptLevel",
+        "",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        LLVMCodeGenOptLevel("Level", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetRelocMode",
+        "",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        LLVMRelocMode("Reloc", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "TargetMachineOptionsSetCodeModel",
+        "",
+
+        LLVMTargetMachineOptionsRef("Options", ""),
+        LLVMCodeModel("CodeModel", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..LLVMTargetMachineRef(
+        "CreateTargetMachineWithOptions",
+        "Create a new {@code llvm::TargetMachine}.",
+
+        LLVMTargetRef("T", "the target to create a machine for"),
+        charUTF8.const.p("Triple", "a triple describing the target machine"),
+        LLVMTargetMachineOptionsRef("Options", "additional configuration"),
+
+        since = "18"
     )
 
     LLVMTargetMachineRef(
@@ -190,6 +291,46 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
 
         LLVMTargetMachineRef("T", ""),
         LLVMBool("VerboseAsm", "")
+    )
+
+    IgnoreMissing..void(
+        "SetTargetMachineFastISel",
+        "Enable fast-path instruction selection.",
+
+        LLVMTargetMachineRef("T", ""),
+        LLVMBool("Enable", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "SetTargetMachineGlobalISel",
+        "Enable global instruction selection.",
+
+        LLVMTargetMachineRef("T", ""),
+        LLVMBool("Enable", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "SetTargetMachineGlobalISelAbort",
+        "Set abort behaviour when global instruction selection fails to lower/select an instruction.",
+
+        LLVMTargetMachineRef("T", ""),
+        LLVMGlobalISelAbortMode("Mode", ""),
+
+        since = "18"
+    )
+
+    IgnoreMissing..void(
+        "SetTargetMachineMachineOutliner",
+        "Enable the {@code MachineOutliner} pass.",
+
+        LLVMTargetMachineRef("T", ""),
+        LLVMBool("Enable", ""),
+
+        since = "18"
     )
 
     LLVMBool(

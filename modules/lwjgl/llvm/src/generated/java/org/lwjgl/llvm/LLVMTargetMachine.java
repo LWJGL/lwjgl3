@@ -28,30 +28,43 @@ public class LLVMTargetMachine {
 
         /** Function address. */
         public static final long
-            GetFirstTarget                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetFirstTarget"),
-            GetNextTarget                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetNextTarget"),
-            GetTargetFromName               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromName"),
-            GetTargetFromTriple             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromTriple"),
-            GetTargetName                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetName"),
-            GetTargetDescription            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetDescription"),
-            TargetHasJIT                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasJIT"),
-            TargetHasTargetMachine          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasTargetMachine"),
-            TargetHasAsmBackend             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasAsmBackend"),
-            CreateTargetMachine             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetMachine"),
-            DisposeTargetMachine            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTargetMachine"),
-            GetTargetMachineTarget          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTarget"),
-            GetTargetMachineTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTriple"),
-            GetTargetMachineCPU             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineCPU"),
-            GetTargetMachineFeatureString   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineFeatureString"),
-            CreateTargetDataLayout          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetDataLayout"),
-            SetTargetMachineAsmVerbosity    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetTargetMachineAsmVerbosity"),
-            TargetMachineEmitToFile         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
-            TargetMachineEmitToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
-            GetDefaultTargetTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
-            NormalizeTargetTriple           = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMNormalizeTargetTriple"),
-            GetHostCPUName                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUName"),
-            GetHostCPUFeatures              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUFeatures"),
-            AddAnalysisPasses               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
+            GetFirstTarget                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetFirstTarget"),
+            GetNextTarget                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetNextTarget"),
+            GetTargetFromName                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromName"),
+            GetTargetFromTriple                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromTriple"),
+            GetTargetName                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetName"),
+            GetTargetDescription                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetDescription"),
+            TargetHasJIT                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasJIT"),
+            TargetHasTargetMachine                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasTargetMachine"),
+            TargetHasAsmBackend                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasAsmBackend"),
+            CreateTargetMachineOptions             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMCreateTargetMachineOptions"),
+            DisposeTargetMachineOptions            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDisposeTargetMachineOptions"),
+            TargetMachineOptionsSetCPU             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetCPU"),
+            TargetMachineOptionsSetFeatures        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetFeatures"),
+            TargetMachineOptionsSetABI             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetABI"),
+            TargetMachineOptionsSetCodeGenOptLevel = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetCodeGenOptLevel"),
+            TargetMachineOptionsSetRelocMode       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetRelocMode"),
+            TargetMachineOptionsSetCodeModel       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMTargetMachineOptionsSetCodeModel"),
+            CreateTargetMachineWithOptions         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMCreateTargetMachineWithOptions"),
+            CreateTargetMachine                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetMachine"),
+            DisposeTargetMachine                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTargetMachine"),
+            GetTargetMachineTarget                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTarget"),
+            GetTargetMachineTriple                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTriple"),
+            GetTargetMachineCPU                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineCPU"),
+            GetTargetMachineFeatureString          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineFeatureString"),
+            CreateTargetDataLayout                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetDataLayout"),
+            SetTargetMachineAsmVerbosity           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetTargetMachineAsmVerbosity"),
+            SetTargetMachineFastISel               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMSetTargetMachineFastISel"),
+            SetTargetMachineGlobalISel             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMSetTargetMachineGlobalISel"),
+            SetTargetMachineGlobalISelAbort        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMSetTargetMachineGlobalISelAbort"),
+            SetTargetMachineMachineOutliner        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMSetTargetMachineMachineOutliner"),
+            TargetMachineEmitToFile                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
+            TargetMachineEmitToMemoryBuffer        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
+            GetDefaultTargetTriple                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
+            NormalizeTargetTriple                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMNormalizeTargetTriple"),
+            GetHostCPUName                         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUName"),
+            GetHostCPUFeatures                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUFeatures"),
+            AddAnalysisPasses                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
 
     }
 
@@ -134,6 +147,22 @@ public class LLVMTargetMachine {
     public static final int
         LLVMAssemblyFile = 0,
         LLVMObjectFile   = 1;
+
+    /**
+     * {@code LLVMGlobalISelAbortMode}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMGlobalISelAbortEnable GlobalISelAbortEnable}</li>
+     * <li>{@link #LLVMGlobalISelAbortDisable GlobalISelAbortDisable}</li>
+     * <li>{@link #LLVMGlobalISelAbortDisableWithDiag GlobalISelAbortDisableWithDiag}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMGlobalISelAbortEnable          = 0,
+        LLVMGlobalISelAbortDisable         = 1,
+        LLVMGlobalISelAbortDisableWithDiag = 2;
 
     protected LLVMTargetMachine() {
         throw new UnsupportedOperationException();
@@ -306,6 +335,235 @@ public class LLVMTargetMachine {
         return invokePI(T, __functionAddress) != 0;
     }
 
+    // --- [ LLVMCreateTargetMachineOptions ] ---
+
+    /**
+     * Create a new set of options for an {@code llvm::TargetMachine}.
+     * 
+     * <p>The returned option structure must be released with {@link #LLVMDisposeTargetMachineOptions DisposeTargetMachineOptions} after the call to {@code LLVMCreateTargetMachineWithOptions()}.</p>
+     *
+     * @since 18
+     */
+    @NativeType("LLVMTargetMachineOptionsRef")
+    public static long LLVMCreateTargetMachineOptions() {
+        long __functionAddress = Functions.CreateTargetMachineOptions;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokeP(__functionAddress);
+    }
+
+    // --- [ LLVMDisposeTargetMachineOptions ] ---
+
+    /**
+     * Dispose of an {@code LLVMTargetMachineOptionsRef} instance.
+     *
+     * @since 18
+     */
+    public static void LLVMDisposeTargetMachineOptions(@NativeType("LLVMTargetMachineOptionsRef") long Options) {
+        long __functionAddress = Functions.DisposeTargetMachineOptions;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePV(Options, __functionAddress);
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetCPU ] ---
+
+    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetCPU TargetMachineOptionsSetCPU} */
+    public static void nLLVMTargetMachineOptionsSetCPU(long Options, long CPU) {
+        long __functionAddress = Functions.TargetMachineOptionsSetCPU;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePPV(Options, CPU, __functionAddress);
+    }
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetCPU(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer CPU) {
+        if (CHECKS) {
+            checkNT1(CPU);
+        }
+        nLLVMTargetMachineOptionsSetCPU(Options, memAddress(CPU));
+    }
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetCPU(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence CPU) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(CPU, true);
+            long CPUEncoded = stack.getPointerAddress();
+            nLLVMTargetMachineOptionsSetCPU(Options, CPUEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetFeatures ] ---
+
+    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetFeatures TargetMachineOptionsSetFeatures} */
+    public static void nLLVMTargetMachineOptionsSetFeatures(long Options, long Features) {
+        long __functionAddress = Functions.TargetMachineOptionsSetFeatures;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePPV(Options, Features, __functionAddress);
+    }
+
+    /**
+     * Set the list of features for the target machine.
+     *
+     * @param Features a comma-separated list of features
+     *
+     * @since 18
+     */
+    public static void LLVMTargetMachineOptionsSetFeatures(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer Features) {
+        if (CHECKS) {
+            checkNT1(Features);
+        }
+        nLLVMTargetMachineOptionsSetFeatures(Options, memAddress(Features));
+    }
+
+    /**
+     * Set the list of features for the target machine.
+     *
+     * @param Features a comma-separated list of features
+     *
+     * @since 18
+     */
+    public static void LLVMTargetMachineOptionsSetFeatures(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence Features) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Features, true);
+            long FeaturesEncoded = stack.getPointerAddress();
+            nLLVMTargetMachineOptionsSetFeatures(Options, FeaturesEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetABI ] ---
+
+    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetABI TargetMachineOptionsSetABI} */
+    public static void nLLVMTargetMachineOptionsSetABI(long Options, long ABI) {
+        long __functionAddress = Functions.TargetMachineOptionsSetABI;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePPV(Options, ABI, __functionAddress);
+    }
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetABI(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer ABI) {
+        if (CHECKS) {
+            checkNT1(ABI);
+        }
+        nLLVMTargetMachineOptionsSetABI(Options, memAddress(ABI));
+    }
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetABI(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence ABI) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(ABI, true);
+            long ABIEncoded = stack.getPointerAddress();
+            nLLVMTargetMachineOptionsSetABI(Options, ABIEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetCodeGenOptLevel ] ---
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetCodeGenOptLevel(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMCodeGenOptLevel") int Level) {
+        long __functionAddress = Functions.TargetMachineOptionsSetCodeGenOptLevel;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePV(Options, Level, __functionAddress);
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetRelocMode ] ---
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetRelocMode(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMRelocMode") int Reloc) {
+        long __functionAddress = Functions.TargetMachineOptionsSetRelocMode;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePV(Options, Reloc, __functionAddress);
+    }
+
+    // --- [ LLVMTargetMachineOptionsSetCodeModel ] ---
+
+    /** @since 18 */
+    public static void LLVMTargetMachineOptionsSetCodeModel(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMCodeModel") int CodeModel) {
+        long __functionAddress = Functions.TargetMachineOptionsSetCodeModel;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePV(Options, CodeModel, __functionAddress);
+    }
+
+    // --- [ LLVMCreateTargetMachineWithOptions ] ---
+
+    /** Unsafe version of: {@link #LLVMCreateTargetMachineWithOptions CreateTargetMachineWithOptions} */
+    public static long nLLVMCreateTargetMachineWithOptions(long T, long Triple, long Options) {
+        long __functionAddress = Functions.CreateTargetMachineWithOptions;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(T);
+            check(Options);
+        }
+        return invokePPPP(T, Triple, Options, __functionAddress);
+    }
+
+    /**
+     * Create a new {@code llvm::TargetMachine}.
+     *
+     * @param T       the target to create a machine for
+     * @param Triple  a triple describing the target machine
+     * @param Options additional configuration
+     *
+     * @since 18
+     */
+    @NativeType("LLVMTargetMachineRef")
+    public static long LLVMCreateTargetMachineWithOptions(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") ByteBuffer Triple, @NativeType("LLVMTargetMachineOptionsRef") long Options) {
+        if (CHECKS) {
+            checkNT1(Triple);
+        }
+        return nLLVMCreateTargetMachineWithOptions(T, memAddress(Triple), Options);
+    }
+
+    /**
+     * Create a new {@code llvm::TargetMachine}.
+     *
+     * @param T       the target to create a machine for
+     * @param Triple  a triple describing the target machine
+     * @param Options additional configuration
+     *
+     * @since 18
+     */
+    @NativeType("LLVMTargetMachineRef")
+    public static long LLVMCreateTargetMachineWithOptions(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") CharSequence Triple, @NativeType("LLVMTargetMachineOptionsRef") long Options) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            return nLLVMCreateTargetMachineWithOptions(T, TripleEncoded, Options);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMCreateTargetMachine ] ---
 
     /** Unsafe version of: {@link #LLVMCreateTargetMachine CreateTargetMachine} */
@@ -452,6 +710,70 @@ public class LLVMTargetMachine {
             check(T);
         }
         invokePV(T, VerboseAsm ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ LLVMSetTargetMachineFastISel ] ---
+
+    /**
+     * Enable fast-path instruction selection.
+     *
+     * @since 18
+     */
+    public static void LLVMSetTargetMachineFastISel(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
+        long __functionAddress = Functions.SetTargetMachineFastISel;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(T);
+        }
+        invokePV(T, Enable ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ LLVMSetTargetMachineGlobalISel ] ---
+
+    /**
+     * Enable global instruction selection.
+     *
+     * @since 18
+     */
+    public static void LLVMSetTargetMachineGlobalISel(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
+        long __functionAddress = Functions.SetTargetMachineGlobalISel;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(T);
+        }
+        invokePV(T, Enable ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ LLVMSetTargetMachineGlobalISelAbort ] ---
+
+    /**
+     * Set abort behaviour when global instruction selection fails to lower/select an instruction.
+     *
+     * @since 18
+     */
+    public static void LLVMSetTargetMachineGlobalISelAbort(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMGlobalISelAbortMode") int Mode) {
+        long __functionAddress = Functions.SetTargetMachineGlobalISelAbort;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(T);
+        }
+        invokePV(T, Mode, __functionAddress);
+    }
+
+    // --- [ LLVMSetTargetMachineMachineOutliner ] ---
+
+    /**
+     * Enable the {@code MachineOutliner} pass.
+     *
+     * @since 18
+     */
+    public static void LLVMSetTargetMachineMachineOutliner(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
+        long __functionAddress = Functions.SetTargetMachineMachineOutliner;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(T);
+        }
+        invokePV(T, Enable ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMTargetMachineEmitToFile ] ---

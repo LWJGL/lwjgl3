@@ -835,7 +835,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPMaskedTaskLoopSimdDirective".enum("OpenMP masked taskloop simd directive."),
         "Cursor_OMPParallelMaskedTaskLoopDirective".enum("OpenMP parallel masked taskloop directive."),
         "Cursor_OMPParallelMaskedTaskLoopSimdDirective".enum("OpenMP parallel masked taskloop simd directive."),
-        "Cursor_OMPErrDirective".enum("OpenMP error directive."),
+        "Cursor_OMPErrorDirective".enum("OpenMP error directive."),
+        "Cursor_OMPScopeDirective".enum("OpenMP scope directive."),
         "Cursor_LastStmt".enum("", "CXCursor_OMPErrDirective"),
         "Cursor_TranslationUnit".enum(
             """
@@ -1128,6 +1129,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CallingConv_AArch64VectorCall".enum(""),
         "CallingConv_SwiftAsync".enum(""),
         "CallingConv_AArch64SVEPCS".enum,
+        "CallingConv_M68kRTD".enum,
         "CallingConv_Invalid".enum("", "100"),
         "CallingConv_Unexposed".enum("", "200")
     )

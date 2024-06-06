@@ -81,7 +81,7 @@ val ClangBuildSystem = "ClangBuildSystem".nativeClass(
 
     CXErrorCode(
         "ModuleMapDescriptor_setFrameworkModuleName",
-        "Sets the framework module name that the module.map describes.",
+        "Sets the framework module name that the module.modulemap describes.",
 
         CXModuleMapDescriptor("descriptor", ""),
         charUTF8.const.p("name", ""),
@@ -91,7 +91,7 @@ val ClangBuildSystem = "ClangBuildSystem".nativeClass(
 
     CXErrorCode(
         "ModuleMapDescriptor_setUmbrellaHeader",
-        "Sets the umbrella header name that the module.map describes.",
+        "Sets the umbrella header name that the module.modulemap describes.",
 
         CXModuleMapDescriptor("descriptor", ""),
         charUTF8.const.p("name", ""),

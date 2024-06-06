@@ -1190,7 +1190,8 @@ public class ClangIndex {
      * <li>{@link #CXCursor_OMPMaskedTaskLoopSimdDirective Cursor_OMPMaskedTaskLoopSimdDirective} - OpenMP masked taskloop simd directive.</li>
      * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopDirective Cursor_OMPParallelMaskedTaskLoopDirective} - OpenMP parallel masked taskloop directive.</li>
      * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopSimdDirective Cursor_OMPParallelMaskedTaskLoopSimdDirective} - OpenMP parallel masked taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPErrDirective Cursor_OMPErrDirective} - OpenMP error directive.</li>
+     * <li>{@link #CXCursor_OMPErrorDirective Cursor_OMPErrorDirective} - OpenMP error directive.</li>
+     * <li>{@link #CXCursor_OMPScopeDirective Cursor_OMPScopeDirective} - OpenMP scope directive.</li>
      * <li>{@link #CXCursor_LastStmt Cursor_LastStmt}</li>
      * <li>{@link #CXCursor_TranslationUnit Cursor_TranslationUnit} - 
      * Cursor that represents the translation unit itself.
@@ -1484,7 +1485,8 @@ public class ClangIndex {
         CXCursor_OMPMaskedTaskLoopSimdDirective                   = 302,
         CXCursor_OMPParallelMaskedTaskLoopDirective               = 303,
         CXCursor_OMPParallelMaskedTaskLoopSimdDirective           = 304,
-        CXCursor_OMPErrDirective                                  = 305,
+        CXCursor_OMPErrorDirective                                = 305,
+        CXCursor_OMPScopeDirective                                = 306,
         CXCursor_LastStmt                                         = CXCursor_OMPErrDirective,
         CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
@@ -1921,6 +1923,7 @@ public class ClangIndex {
      * <li>{@link #CXCallingConv_AArch64VectorCall CallingConv_AArch64VectorCall}</li>
      * <li>{@link #CXCallingConv_SwiftAsync CallingConv_SwiftAsync}</li>
      * <li>{@link #CXCallingConv_AArch64SVEPCS CallingConv_AArch64SVEPCS}</li>
+     * <li>{@link #CXCallingConv_M68kRTD CallingConv_M68kRTD}</li>
      * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid}</li>
      * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed}</li>
      * </ul>
@@ -1946,6 +1949,7 @@ public class ClangIndex {
         CXCallingConv_AArch64VectorCall = 16,
         CXCallingConv_SwiftAsync        = 17,
         CXCallingConv_AArch64SVEPCS     = 18,
+        CXCallingConv_M68kRTD           = 19,
         CXCallingConv_Invalid           = 100,
         CXCallingConv_Unexposed         = 200;
 

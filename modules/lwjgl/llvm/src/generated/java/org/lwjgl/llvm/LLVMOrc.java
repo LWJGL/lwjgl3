@@ -803,7 +803,7 @@ public class LLVMOrc {
      * 
      * <p>This method will return an error if any symbols being resolved have been moved to the error state due to the failure of a dependency. If this method
      * returns an error then clients should log it and call {@link #LLVMOrcMaterializationResponsibilityFailMaterialization OrcMaterializationResponsibilityFailMaterialization}. If no dependencies have been registered
-     * for the symbols covered by this {@code MaterializationResponsibiility} then this method is guaranteed to return {@link LLVMError#LLVMErrorSuccess ErrorSuccess}.</p>
+     * for the symbols covered by this {@code MaterializationResponsibility} then this method is guaranteed to return {@link LLVMError#LLVMErrorSuccess ErrorSuccess}.</p>
      *
      * @since 13
      */
@@ -848,7 +848,7 @@ public class LLVMOrc {
 
     /**
      * Notify all not-yet-emitted covered by this {@code MaterializationResponsibility} instance that an error has occurred. This will remove all symbols
-     * covered by this {@code MaterializationResponsibilty} from the target {@code JITDylib}, and send an error to any queries waiting on these symbols.
+     * covered by this {@code MaterializationResponsibility} from the target {@code JITDylib}, and send an error to any queries waiting on these symbols.
      *
      * @since 13
      */
