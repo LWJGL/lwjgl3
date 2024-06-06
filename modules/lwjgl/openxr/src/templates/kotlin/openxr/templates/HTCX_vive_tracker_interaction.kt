@@ -92,9 +92,9 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
         <pre><code>
 ￿XrResult xrEnumerateViveTrackerPathsHTCX(
 ￿    XrInstance                                  instance,
-￿    uint32_t                                    pathsCapacityInput,
-￿    uint32_t*                                   pathsCountOutput,
-￿    XrViveTrackerPathsHTCX*                     viveTrackerPaths);</code></pre>
+￿    uint32_t                                    pathCapacityInput,
+￿    uint32_t*                                   pathCountOutput,
+￿    XrViveTrackerPathsHTCX*                     paths);</code></pre>
 
         <h5>Description</h5>
         #EnumerateViveTrackerPathsHTCX() enumerates all connected VIVE trackers to retrieve their paths under current instance.
@@ -103,8 +103,8 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
         <ul>
             <li>The {@link HTCXViveTrackerInteraction XR_HTCX_vive_tracker_interaction} extension <b>must</b> be enabled prior to calling #EnumerateViveTrackerPathsHTCX()</li>
             <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-            <li>{@code pathsCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If {@code pathsCapacityInput} is not 0, {@code viveTrackerPaths} <b>must</b> be a pointer to an array of {@code pathsCapacityInput} ##XrViveTrackerPathsHTCX structures</li>
+            <li>{@code pathCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+            <li>If {@code pathCapacityInput} is not 0, {@code paths} <b>must</b> be a pointer to an array of {@code pathCapacityInput} ##XrViveTrackerPathsHTCX structures</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -130,8 +130,8 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
         """,
 
         XrInstance("instance", "an instance previously created."),
-        AutoSize("viveTrackerPaths")..uint32_t("pathsCapacityInput", ""),
-        Check(1)..uint32_t.p("pathsCountOutput", ""),
-        nullable..XrViveTrackerPathsHTCX.p("viveTrackerPaths", "")
+        AutoSize("paths")..uint32_t("pathCapacityInput", "the capacity of the {@code paths}, or 0 to retrieve the required capacity."),
+        Check(1)..uint32_t.p("pathCountOutput", "a pointer to the count of ##XrViveTrackerPathsHTCX {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is insufficient."),
+        nullable..XrViveTrackerPathsHTCX.p("paths", "a pointer to an array of ##XrViveTrackerPathsHTCX VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0.")
     )
 }

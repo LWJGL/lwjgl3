@@ -33,13 +33,13 @@ public class KHRConvertTimespecTime {
     // --- [ xrConvertTimespecTimeToTimeKHR ] ---
 
     /** Unsafe version of: {@link #xrConvertTimespecTimeToTimeKHR ConvertTimespecTimeToTimeKHR} */
-    public static int nxrConvertTimespecTimeToTimeKHR(XrInstance instance, long unixTime, long time) {
+    public static int nxrConvertTimespecTimeToTimeKHR(XrInstance instance, long timespecTime, long time) {
         long __functionAddress = instance.getCapabilities().xrConvertTimespecTimeToTimeKHR;
         if (CHECKS) {
             check(__functionAddress);
-            check(unixTime);
+            check(timespecTime);
         }
-        return callPPPI(instance.address(), unixTime, time, __functionAddress);
+        return callPPPI(instance.address(), timespecTime, time, __functionAddress);
     }
 
     /**
@@ -52,7 +52,7 @@ public class KHRConvertTimespecTime {
      * <pre><code>
      * XrResult xrConvertTimespecTimeToTimeKHR(
      *     XrInstance                                  instance,
-     *     const struct timespec*                      unixTime,
+     *     const struct timespec*                      timespecTime,
      *     XrTime*                                     time);</code></pre>
      * 
      * <h5>Description</h5>
@@ -66,7 +66,7 @@ public class KHRConvertTimespecTime {
      * <ul>
      * <li>The {@link KHRConvertTimespecTime XR_KHR_convert_timespec_time} extension <b>must</b> be enabled prior to calling {@link #xrConvertTimespecTimeToTimeKHR ConvertTimespecTimeToTimeKHR}</li>
      * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-     * <li>{@code unixTime} <b>must</b> be a pointer to a valid {@code timespec} value</li>
+     * <li>{@code timespecTime} <b>must</b> be a pointer to a valid {@code timespec} value</li>
      * <li>{@code time} <b>must</b> be a pointer to an {@code XrTime} value</li>
      * </ul>
      * 
@@ -88,15 +88,16 @@ public class KHRConvertTimespecTime {
      * </ul></dd>
      * </dl>
      *
-     * @param instance an {@code XrInstance} handle previously created with {@link XR10#xrCreateInstance CreateInstance}.
-     * @param time     the resulting {@code XrTime} that is equivalent to the {@code timespecTime}.
+     * @param instance     an {@code XrInstance} handle previously created with {@link XR10#xrCreateInstance CreateInstance}.
+     * @param timespecTime a {@code timespec} obtained from {@code clock_gettime} with {@code CLOCK_MONOTONIC}.
+     * @param time         the resulting {@code XrTime} that is equivalent to the {@code timespecTime}.
      */
     @NativeType("XrResult")
-    public static int xrConvertTimespecTimeToTimeKHR(XrInstance instance, @NativeType("struct timespec const *") long unixTime, @NativeType("XrTime *") LongBuffer time) {
+    public static int xrConvertTimespecTimeToTimeKHR(XrInstance instance, @NativeType("struct timespec const *") long timespecTime, @NativeType("XrTime *") LongBuffer time) {
         if (CHECKS) {
             check(time, 1);
         }
-        return nxrConvertTimespecTimeToTimeKHR(instance, unixTime, memAddress(time));
+        return nxrConvertTimespecTimeToTimeKHR(instance, timespecTime, memAddress(time));
     }
 
     // --- [ xrConvertTimeToTimespecTimeKHR ] ---

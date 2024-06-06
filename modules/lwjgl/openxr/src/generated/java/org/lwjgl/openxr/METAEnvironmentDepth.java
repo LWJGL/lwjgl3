@@ -670,7 +670,6 @@ public class METAEnvironmentDepth {
      * <ul>
      * <li>For OpenGL, a runtime <b>may</b> use the OpenGL context specified in the call to {@link XR10#xrCreateSession CreateSession}, which needs external synchronization.</li>
      * <li>For Vulkan, a runtime <b>may</b> use the {@code VkQueue} specified in the {@link XrGraphicsBindingVulkan2KHR}, which needs external synchronization.</li>
-     * <li>For Direct3D12, a runtime <b>may</b> use the {@code ID3D12CommandQueue} specified in the {@link XrGraphicsBindingD3D12KHR}, which needs external synchronization.</li>
      * </ul>
      * </li>
      * </ul>

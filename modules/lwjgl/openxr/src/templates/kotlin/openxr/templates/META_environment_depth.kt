@@ -517,7 +517,6 @@ val META_environment_depth = "METAEnvironmentDepth".nativeClassXR("META_environm
                 <ul>
                     <li>For OpenGL, a runtime <b>may</b> use the OpenGL context specified in the call to #CreateSession(), which needs external synchronization.</li>
                     <li>For Vulkan, a runtime <b>may</b> use the {@code VkQueue} specified in the ##XrGraphicsBindingVulkan2KHR, which needs external synchronization.</li>
-                    <li>For Direct3D12, a runtime <b>may</b> use the {@code ID3D12CommandQueue} specified in the ##XrGraphicsBindingD3D12KHR, which needs external synchronization.</li>
                 </ul>
             </li>
         </ul>

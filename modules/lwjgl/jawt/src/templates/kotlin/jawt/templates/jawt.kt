@@ -64,10 +64,10 @@ jboolean success = JAWT_GetAWT(env, &awt);""")}
         {@code Component}'s rectangle. If the window the {@code Component} belongs to has a {@code CALayer} attached to it, this layer will be accessible via
         the {@code windowLayer} property.
         ${codeBlock("""
-@protocol JAWT_SurfaceLayers
-@property (readwrite, retain) CALayer *layer;
-@property (readonly) CALayer *windowLayer;
-@end""", javadocBlock = true)}
+&#64;protocol JAWT_SurfaceLayers
+    &#64;property (readwrite, retain) CALayer *layer;
+    &#64;property (readonly) CALayer *windowLayer;
+&#64;end""")}
         """,
 
         "MACOSX_USE_CALAYER"..0x80000000.i

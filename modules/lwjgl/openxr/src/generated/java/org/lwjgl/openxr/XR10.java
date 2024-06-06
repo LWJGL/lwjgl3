@@ -445,16 +445,16 @@ public class XR10 {
      * <h5>Enumerant Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link REFERENCESPACETYPEVIEW XR_REFERENCE_SPACE_TYPE_VIEW}. The {@code VIEW} reference space tracks the view origin used to generate view transforms for the primary viewer (or centroid of view origins if stereo), with +Y up, +X to the right, and -Z forward. This space points in the forward direction for the viewer without incorporating the user’s eye orientation, and is not gravity-aligned.
+     * <li>{@link #XR_REFERENCE_SPACE_TYPE_VIEW REFERENCE_SPACE_TYPE_VIEW}. The {@code VIEW} reference space tracks the view origin used to generate view transforms for the primary viewer (or centroid of view origins if stereo), with +Y up, +X to the right, and -Z forward. This space points in the forward direction for the viewer without incorporating the user’s eye orientation, and is not gravity-aligned.
      * Runtimes <b>must</b> support {@code VIEW} reference space.
      * </li>
-     * <li>{@link REFERENCESPACETYPELOCAL XR_REFERENCE_SPACE_TYPE_LOCAL}. The {@code LOCAL} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. This space locks in both its initial position and orientation, which the runtime <b>may</b> define to be either the initial position at application launch or some other calibrated zero position.
+     * <li>{@link #XR_REFERENCE_SPACE_TYPE_LOCAL REFERENCE_SPACE_TYPE_LOCAL}. The {@code LOCAL} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. This space locks in both its initial position and orientation, which the runtime <b>may</b> define to be either the initial position at application launch or some other calibrated zero position.
      * Runtimes <b>must</b> support {@code LOCAL} reference space.
      * </li>
-     * <li>{@link REFERENCESPACETYPESTAGE XR_REFERENCE_SPACE_TYPE_STAGE}. The {@code STAGE} reference space is a runtime-defined flat, rectangular space that is empty and can be walked around on. The origin is on the floor at the center of the rectangle, with +Y up, and the X and Z axes aligned with the rectangle edges. The runtime <b>may</b> not be able to locate spaces relative to the {@code STAGE} reference space if the user has not yet defined one within the runtime-specific UI. Applications <b>can</b> use {@link #xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect} to determine the extents of the {@code STAGE} reference space’s XZ bounds rectangle, if defined.
+     * <li>{@link #XR_REFERENCE_SPACE_TYPE_STAGE REFERENCE_SPACE_TYPE_STAGE}. The {@code STAGE} reference space is a runtime-defined flat, rectangular space that is empty and can be walked around on. The origin is on the floor at the center of the rectangle, with +Y up, and the X and Z axes aligned with the rectangle edges. The runtime <b>may</b> not be able to locate spaces relative to the {@code STAGE} reference space if the user has not yet defined one within the runtime-specific UI. Applications <b>can</b> use {@link #xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect} to determine the extents of the {@code STAGE} reference space’s XZ bounds rectangle, if defined.
      * Support for the {@code STAGE} reference space is <b>optional</b>.
      * </li>
-     * <li>{@link REFERENCESPACETYPELOCALFLOOR XR_REFERENCE_SPACE_TYPE_LOCAL_FLOOR}. (provided by {@code XR_VERSION_1_1}) Similar to {@link REFERENCESPACETYPELOCAL XR_REFERENCE_SPACE_TYPE_LOCAL}, the {@code LOCAL_FLOOR} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. However, the origin of this space is defined to be on an estimate of the floor level.
+     * <li>{@link XR11#XR_REFERENCE_SPACE_TYPE_LOCAL_FLOOR REFERENCE_SPACE_TYPE_LOCAL_FLOOR}. (provided by {@code XR_VERSION_1_1}) Similar to {@code LOCAL} space, the {@code LOCAL_FLOOR} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. However, the origin of this space is defined to be on an estimate of the floor level.
      * Runtimes <b>must</b> support {@code LOCAL_FLOOR} reference space.
      * </li>
      * </ul>
@@ -466,14 +466,6 @@ public class XR10 {
      * <h5>See Also</h5>
      * 
      * <p>{@link XrEventDataReferenceSpaceChangePending}, {@link XrReferenceSpaceCreateInfo}, {@link #xrEnumerateReferenceSpaces EnumerateReferenceSpaces}, {@link #xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect}</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #XR_REFERENCE_SPACE_TYPE_VIEW REFERENCE_SPACE_TYPE_VIEW}</li>
-     * <li>{@link #XR_REFERENCE_SPACE_TYPE_LOCAL REFERENCE_SPACE_TYPE_LOCAL}</li>
-     * <li>{@link #XR_REFERENCE_SPACE_TYPE_STAGE REFERENCE_SPACE_TYPE_STAGE}</li>
-     * </ul>
      */
     public static final int
         XR_REFERENCE_SPACE_TYPE_VIEW  = 1,
@@ -2448,10 +2440,14 @@ public class XR10 {
 
     // --- [ xrEnumerateViewConfigurations ] ---
 
-    /** Unsafe version of: {@link #xrEnumerateViewConfigurations EnumerateViewConfigurations} */
-    public static int nxrEnumerateViewConfigurations(XrInstance instance, long systemId, int viewConfigurationsTypeCapacityInput, long viewConfigurationsTypeCountOutput, long viewConfigurationsTypes) {
+    /**
+     * Unsafe version of: {@link #xrEnumerateViewConfigurations EnumerateViewConfigurations}
+     *
+     * @param viewConfigurationTypeCapacityInput the capacity of the {@code viewConfigurationTypes} array, or 0 to indicate a request to retrieve the required capacity.
+     */
+    public static int nxrEnumerateViewConfigurations(XrInstance instance, long systemId, int viewConfigurationTypeCapacityInput, long viewConfigurationTypeCountOutput, long viewConfigurationTypes) {
         long __functionAddress = instance.getCapabilities().xrEnumerateViewConfigurations;
-        return callPJPPI(instance.address(), systemId, viewConfigurationsTypeCapacityInput, viewConfigurationsTypeCountOutput, viewConfigurationsTypes, __functionAddress);
+        return callPJPPI(instance.address(), systemId, viewConfigurationTypeCapacityInput, viewConfigurationTypeCountOutput, viewConfigurationTypes, __functionAddress);
     }
 
     /**
@@ -2465,9 +2461,9 @@ public class XR10 {
      * XrResult xrEnumerateViewConfigurations(
      *     XrInstance                                  instance,
      *     XrSystemId                                  systemId,
-     *     uint32_t                                    viewConfigurationsTypeCapacityInput,
-     *     uint32_t*                                   viewConfigurationsTypeCountOutput,
-     *     XrViewConfigurationType*                    viewConfigurationsTypes);</code></pre>
+     *     uint32_t                                    viewConfigurationTypeCapacityInput,
+     *     uint32_t*                                   viewConfigurationTypeCountOutput,
+     *     XrViewConfigurationType*                    viewConfigurationTypes);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2479,8 +2475,8 @@ public class XR10 {
      * 
      * <ul>
      * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-     * <li>{@code viewConfigurationsTypeCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-     * <li>If {@code viewConfigurationsTypeCapacityInput} is not 0, {@code viewConfigurationsTypes} <b>must</b> be a pointer to an array of {@code viewConfigurationsTypeCapacityInput} {@code XrViewConfigurationType} values</li>
+     * <li>{@code viewConfigurationTypeCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+     * <li>If {@code viewConfigurationTypeCapacityInput} is not 0, {@code viewConfigurationTypes} <b>must</b> be a pointer to an array of {@code viewConfigurationTypeCapacityInput} {@code XrViewConfigurationType} values</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -2501,15 +2497,17 @@ public class XR10 {
      * </ul></dd>
      * </dl>
      *
-     * @param instance the instance from which {@code systemId} was retrieved.
-     * @param systemId the {@code XrSystemId} whose view configurations will be enumerated.
+     * @param instance                         the instance from which {@code systemId} was retrieved.
+     * @param systemId                         the {@code XrSystemId} whose view configurations will be enumerated.
+     * @param viewConfigurationTypeCountOutput a pointer to the count of {@code viewConfigurationTypes} written, or a pointer to the required capacity in the case that {@code viewConfigurationTypeCapacityInput} is insufficient.
+     * @param viewConfigurationTypes           a pointer to an array of {@code XrViewConfigurationType} values, but <b>can</b> be {@code NULL} if {@code viewConfigurationTypeCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateViewConfigurations(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer viewConfigurationsTypeCountOutput, @Nullable @NativeType("XrViewConfigurationType *") IntBuffer viewConfigurationsTypes) {
+    public static int xrEnumerateViewConfigurations(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer viewConfigurationTypeCountOutput, @Nullable @NativeType("XrViewConfigurationType *") IntBuffer viewConfigurationTypes) {
         if (CHECKS) {
-            check(viewConfigurationsTypeCountOutput, 1);
+            check(viewConfigurationTypeCountOutput, 1);
         }
-        return nxrEnumerateViewConfigurations(instance, systemId, remainingSafe(viewConfigurationsTypes), memAddress(viewConfigurationsTypeCountOutput), memAddressSafe(viewConfigurationsTypes));
+        return nxrEnumerateViewConfigurations(instance, systemId, remainingSafe(viewConfigurationTypes), memAddress(viewConfigurationTypeCountOutput), memAddressSafe(viewConfigurationTypes));
     }
 
     // --- [ xrGetViewConfigurationProperties ] ---

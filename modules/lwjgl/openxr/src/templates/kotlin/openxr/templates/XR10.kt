@@ -378,19 +378,19 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Enumerant Descriptions</h5>
         <ul>
             <li>
-                {@link REFERENCESPACETYPEVIEW XR_REFERENCE_SPACE_TYPE_VIEW}. The {@code VIEW} reference space tracks the view origin used to generate view transforms for the primary viewer (or centroid of view origins if stereo), with +Y up, +X to the right, and -Z forward. This space points in the forward direction for the viewer without incorporating the user’s eye orientation, and is not gravity-aligned.
+                #REFERENCE_SPACE_TYPE_VIEW. The {@code VIEW} reference space tracks the view origin used to generate view transforms for the primary viewer (or centroid of view origins if stereo), with +Y up, +X to the right, and -Z forward. This space points in the forward direction for the viewer without incorporating the user’s eye orientation, and is not gravity-aligned.
                 Runtimes <b>must</b> support {@code VIEW} reference space.
             </li>
             <li>
-                {@link REFERENCESPACETYPELOCAL XR_REFERENCE_SPACE_TYPE_LOCAL}. The {@code LOCAL} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. This space locks in both its initial position and orientation, which the runtime <b>may</b> define to be either the initial position at application launch or some other calibrated zero position.
+                #REFERENCE_SPACE_TYPE_LOCAL. The {@code LOCAL} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. This space locks in both its initial position and orientation, which the runtime <b>may</b> define to be either the initial position at application launch or some other calibrated zero position.
                 Runtimes <b>must</b> support {@code LOCAL} reference space.
             </li>
             <li>
-                {@link REFERENCESPACETYPESTAGE XR_REFERENCE_SPACE_TYPE_STAGE}. The {@code STAGE} reference space is a runtime-defined flat, rectangular space that is empty and can be walked around on. The origin is on the floor at the center of the rectangle, with +Y up, and the X and Z axes aligned with the rectangle edges. The runtime <b>may</b> not be able to locate spaces relative to the {@code STAGE} reference space if the user has not yet defined one within the runtime-specific UI. Applications <b>can</b> use #GetReferenceSpaceBoundsRect() to determine the extents of the {@code STAGE} reference space’s XZ bounds rectangle, if defined.
+                #REFERENCE_SPACE_TYPE_STAGE. The {@code STAGE} reference space is a runtime-defined flat, rectangular space that is empty and can be walked around on. The origin is on the floor at the center of the rectangle, with +Y up, and the X and Z axes aligned with the rectangle edges. The runtime <b>may</b> not be able to locate spaces relative to the {@code STAGE} reference space if the user has not yet defined one within the runtime-specific UI. Applications <b>can</b> use #GetReferenceSpaceBoundsRect() to determine the extents of the {@code STAGE} reference space’s XZ bounds rectangle, if defined.
                 Support for the {@code STAGE} reference space is <b>optional</b>.
             </li>
             <li>
-                {@link REFERENCESPACETYPELOCALFLOOR XR_REFERENCE_SPACE_TYPE_LOCAL_FLOOR}. (provided by {@code XR_VERSION_1_1}) Similar to {@link REFERENCESPACETYPELOCAL XR_REFERENCE_SPACE_TYPE_LOCAL}, the {@code LOCAL_FLOOR} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. However, the origin of this space is defined to be on an estimate of the floor level.
+                #REFERENCE_SPACE_TYPE_LOCAL_FLOOR. (provided by {@code XR_VERSION_1_1}) Similar to {@code LOCAL} space, the {@code LOCAL_FLOOR} reference space establishes a world-locked origin, gravity-aligned to exclude pitch and roll, with +Y up, +X to the right, and -Z forward. However, the origin of this space is defined to be on an estimate of the floor level.
                 Runtimes <b>must</b> support {@code LOCAL_FLOOR} reference space.
             </li>
         </ul>
@@ -1854,9 +1854,9 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿XrResult xrEnumerateViewConfigurations(
 ￿    XrInstance                                  instance,
 ￿    XrSystemId                                  systemId,
-￿    uint32_t                                    viewConfigurationsTypeCapacityInput,
-￿    uint32_t*                                   viewConfigurationsTypeCountOutput,
-￿    XrViewConfigurationType*                    viewConfigurationsTypes);</code></pre>
+￿    uint32_t                                    viewConfigurationTypeCapacityInput,
+￿    uint32_t*                                   viewConfigurationTypeCountOutput,
+￿    XrViewConfigurationType*                    viewConfigurationTypes);</code></pre>
 
         <h5>Description</h5>
         #EnumerateViewConfigurations() enumerates the view configuration types supported by the {@code XrSystemId}. The supported set for that system <b>must</b> not change during the lifetime of its {@code XrInstance}. The returned list of primary view configurations <b>should</b> be in order from what the runtime considered highest to lowest user preference. Thus the first enumerated view configuration type <b>should</b> be the one the runtime prefers the application to use if possible.
@@ -1866,8 +1866,8 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-            <li>{@code viewConfigurationsTypeCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If {@code viewConfigurationsTypeCapacityInput} is not 0, {@code viewConfigurationsTypes} <b>must</b> be a pointer to an array of {@code viewConfigurationsTypeCapacityInput} {@code XrViewConfigurationType} values</li>
+            <li>{@code viewConfigurationTypeCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+            <li>If {@code viewConfigurationTypeCapacityInput} is not 0, {@code viewConfigurationTypes} <b>must</b> be a pointer to an array of {@code viewConfigurationTypeCapacityInput} {@code XrViewConfigurationType} values</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -1891,9 +1891,9 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         XrInstance("instance", "the instance from which {@code systemId} was retrieved."),
         XrSystemId("systemId", "the {@code XrSystemId} whose view configurations will be enumerated."),
-        AutoSize("viewConfigurationsTypes")..uint32_t("viewConfigurationsTypeCapacityInput", ""),
-        Check(1)..uint32_t.p("viewConfigurationsTypeCountOutput", ""),
-        nullable..XrViewConfigurationType.p("viewConfigurationsTypes", "")
+        AutoSize("viewConfigurationTypes")..uint32_t("viewConfigurationTypeCapacityInput", "the capacity of the {@code viewConfigurationTypes} array, or 0 to indicate a request to retrieve the required capacity."),
+        Check(1)..uint32_t.p("viewConfigurationTypeCountOutput", "a pointer to the count of {@code viewConfigurationTypes} written, or a pointer to the required capacity in the case that {@code viewConfigurationTypeCapacityInput} is insufficient."),
+        nullable..XrViewConfigurationType.p("viewConfigurationTypes", "a pointer to an array of {@code XrViewConfigurationType} values, but <b>can</b> be {@code NULL} if {@code viewConfigurationTypeCapacityInput} is 0.")
     )
 
     XrResult(

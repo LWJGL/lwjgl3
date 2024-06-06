@@ -63,7 +63,7 @@ val EXT_hp_mixed_reality_controller = "EXTHPMixedRealityController".nativeClassX
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        When the runtime supports {@link VERSION11 XR_VERSION_1_1} and use of OpenXR 1.1 is requested by the application, this interaction profile <b>must</b> also support
+        When the runtime supports {@link XR11 XR_VERSION_1_1} and use of OpenXR 1.1 is requested by the application, this interaction profile <b>must</b> also support
 
         <ul>
             <li>subpathname:/input/grip_surface/pose</li>

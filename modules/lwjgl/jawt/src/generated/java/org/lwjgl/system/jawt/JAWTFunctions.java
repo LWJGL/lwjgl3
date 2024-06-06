@@ -71,11 +71,11 @@ public class JAWTFunctions {
      * {@code Component}'s rectangle. If the window the {@code Component} belongs to has a {@code CALayer} attached to it, this layer will be accessible via
      * the {@code windowLayer} property.</p>
      * 
-     * <pre>{@code
-     * @protocol JAWT_SurfaceLayers
-     * @property (readwrite, retain) CALayer *layer;
-     * @property (readonly) CALayer *windowLayer;
-     * @end}</pre>
+     * <pre><code>
+     * &#64;protocol JAWT_SurfaceLayers
+     *     &#64;property (readwrite, retain) CALayer *layer;
+     *     &#64;property (readonly) CALayer *windowLayer;
+     * &#64;end</code></pre>
      */
     public static final int JAWT_MACOSX_USE_CALAYER = 0x80000000;
 

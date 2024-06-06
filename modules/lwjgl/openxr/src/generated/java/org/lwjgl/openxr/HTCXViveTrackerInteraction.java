@@ -94,13 +94,17 @@ public class HTCXViveTrackerInteraction {
 
     // --- [ xrEnumerateViveTrackerPathsHTCX ] ---
 
-    /** Unsafe version of: {@link #xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX} */
-    public static int nxrEnumerateViveTrackerPathsHTCX(XrInstance instance, int pathsCapacityInput, long pathsCountOutput, long viveTrackerPaths) {
+    /**
+     * Unsafe version of: {@link #xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX}
+     *
+     * @param pathCapacityInput the capacity of the {@code paths}, or 0 to retrieve the required capacity.
+     */
+    public static int nxrEnumerateViveTrackerPathsHTCX(XrInstance instance, int pathCapacityInput, long pathCountOutput, long paths) {
         long __functionAddress = instance.getCapabilities().xrEnumerateViveTrackerPathsHTCX;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(instance.address(), pathsCapacityInput, pathsCountOutput, viveTrackerPaths, __functionAddress);
+        return callPPPI(instance.address(), pathCapacityInput, pathCountOutput, paths, __functionAddress);
     }
 
     /**
@@ -113,9 +117,9 @@ public class HTCXViveTrackerInteraction {
      * <pre><code>
      * XrResult xrEnumerateViveTrackerPathsHTCX(
      *     XrInstance                                  instance,
-     *     uint32_t                                    pathsCapacityInput,
-     *     uint32_t*                                   pathsCountOutput,
-     *     XrViveTrackerPathsHTCX*                     viveTrackerPaths);</code></pre>
+     *     uint32_t                                    pathCapacityInput,
+     *     uint32_t*                                   pathCountOutput,
+     *     XrViveTrackerPathsHTCX*                     paths);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -126,8 +130,8 @@ public class HTCXViveTrackerInteraction {
      * <ul>
      * <li>The {@link HTCXViveTrackerInteraction XR_HTCX_vive_tracker_interaction} extension <b>must</b> be enabled prior to calling {@link #xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX}</li>
      * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-     * <li>{@code pathsCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-     * <li>If {@code pathsCapacityInput} is not 0, {@code viveTrackerPaths} <b>must</b> be a pointer to an array of {@code pathsCapacityInput} {@link XrViveTrackerPathsHTCX} structures</li>
+     * <li>{@code pathCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+     * <li>If {@code pathCapacityInput} is not 0, {@code paths} <b>must</b> be a pointer to an array of {@code pathCapacityInput} {@link XrViveTrackerPathsHTCX} structures</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -152,14 +156,16 @@ public class HTCXViveTrackerInteraction {
      * 
      * <p>{@link XrViveTrackerPathsHTCX}</p>
      *
-     * @param instance an instance previously created.
+     * @param instance        an instance previously created.
+     * @param pathCountOutput a pointer to the count of {@link XrViveTrackerPathsHTCX} {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is insufficient.
+     * @param paths           a pointer to an array of {@link XrViveTrackerPathsHTCX} VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateViveTrackerPathsHTCX(XrInstance instance, @NativeType("uint32_t *") IntBuffer pathsCountOutput, @Nullable @NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX.Buffer viveTrackerPaths) {
+    public static int xrEnumerateViveTrackerPathsHTCX(XrInstance instance, @NativeType("uint32_t *") IntBuffer pathCountOutput, @Nullable @NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX.Buffer paths) {
         if (CHECKS) {
-            check(pathsCountOutput, 1);
+            check(pathCountOutput, 1);
         }
-        return nxrEnumerateViveTrackerPathsHTCX(instance, remainingSafe(viveTrackerPaths), memAddress(pathsCountOutput), memAddressSafe(viveTrackerPaths));
+        return nxrEnumerateViveTrackerPathsHTCX(instance, remainingSafe(paths), memAddress(pathCountOutput), memAddressSafe(paths));
     }
 
 }

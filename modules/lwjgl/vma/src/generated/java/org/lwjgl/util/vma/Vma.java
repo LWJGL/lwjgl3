@@ -732,7 +732,7 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>Each pool has its own collection of {@code VkDeviceMemory} blocks. Some of them may be partially or even completely empty. Spreading allocations
  * across multiple pools increases the amount of wasted (allocated but unbound) memory.</li>
- * <li>You must manually choose specific memory type to be used by a custom pool (set as {@codeVmaPoolCreateInfo::memoryTypeIndex}). When using default
+ * <li>You must manually choose specific memory type to be used by a custom pool (set as {@code VmaPoolCreateInfo::memoryTypeIndex}). When using default
  * pools, best memory type for each of your allocations can be selected automatically using a carefully design algorithm that works across all kinds
  * of GPUs.</li>
  * <li>If an allocation from a custom pool at specific memory type fails, entire allocation operation returns failure. When using default pools, VMA tries
@@ -752,7 +752,7 @@ import org.lwjgl.vulkan.*;
  * automatically. It also maps only those {@code VkDeviceMemory} blocks that need to map any allocation. It even tries to keep mappable and
  * non-mappable allocations in separate blocks to minimize the amount of mapped memory.</li>
  * <li>If you want to choose a custom size for the default memory block, you can set it globally instead using 
- * {@codeVmaAllocatorCreateInfo::preferredLargeHeapBlockSize}.</li>
+ * {@code VmaAllocatorCreateInfo::preferredLargeHeapBlockSize}.</li>
  * <li>If you want to select specific memory type for your allocation, you can set {@code VmaAllocationCreateInfo::memoryTypeBits} to
  * {@code (1u << myMemoryTypeIndex)} instead.</li>
  * <li>If you need to create a buffer with certain minimum alignment, you can still do it using default pools with dedicated function
