@@ -1487,7 +1487,7 @@ public class ClangIndex {
         CXCursor_OMPParallelMaskedTaskLoopSimdDirective           = 304,
         CXCursor_OMPErrorDirective                                = 305,
         CXCursor_OMPScopeDirective                                = 306,
-        CXCursor_LastStmt                                         = CXCursor_OMPErrDirective,
+        CXCursor_LastStmt                                         = CXCursor_OMPScopeDirective,
         CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,

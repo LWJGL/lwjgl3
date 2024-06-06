@@ -5583,7 +5583,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         Check if a given value can potentially have fast math flags.
 
         Will return true for floating point arithmetic instructions, and for select, phi, and call instructions whose type is a floating point type, or a
-        vector or array thereof. See ${url("https://llvm.org/docs/LangRef.html#fast-math-flags", "fast-math-flags")}.
+        vector or array thereof. See ${url("https://llvm.org/docs/LangRef.html\\#fast-math-flags", "fast-math-flags")}.
         """,
 
         LLVMValueRef("Inst", ""),

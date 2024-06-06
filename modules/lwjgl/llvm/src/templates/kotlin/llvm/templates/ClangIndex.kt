@@ -837,7 +837,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPParallelMaskedTaskLoopSimdDirective".enum("OpenMP parallel masked taskloop simd directive."),
         "Cursor_OMPErrorDirective".enum("OpenMP error directive."),
         "Cursor_OMPScopeDirective".enum("OpenMP scope directive."),
-        "Cursor_LastStmt".enum("", "CXCursor_OMPErrDirective"),
+        "Cursor_LastStmt".enum("", "CXCursor_OMPScopeDirective"),
         "Cursor_TranslationUnit".enum(
             """
             Cursor that represents the translation unit itself.

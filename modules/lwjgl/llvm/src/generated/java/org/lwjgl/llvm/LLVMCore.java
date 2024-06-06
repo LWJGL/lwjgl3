@@ -12736,7 +12736,7 @@ public class LLVMCore {
      * Check if a given value can potentially have fast math flags.
      * 
      * <p>Will return true for floating point arithmetic instructions, and for select, phi, and call instructions whose type is a floating point type, or a
-     * vector or array thereof. See <a href="https://llvm.org/docs/{@link LangRef.html#fast}-math-flags">fast-math-flags</a>.</p>
+     * vector or array thereof. See <a href="https://llvm.org/docs/LangRef.html#fast-math-flags">fast-math-flags</a>.</p>
      *
      * @since 18
      */
