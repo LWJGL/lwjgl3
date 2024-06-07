@@ -11,6 +11,7 @@ val stb_dxt = "STBDXT".nativeClass(Module.STB, prefix = "STB", prefixMethod = "s
     includeSTBAPI(
         """#define STB_DXT_IMPLEMENTATION
 #define STB_DXT_STATIC
+#include <string.h>
 #include "stb_dxt.h"""")
 
     documentation =

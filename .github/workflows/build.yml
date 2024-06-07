@@ -161,10 +161,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 3
-      - name: Install dependencies
+      - name: Install dependencies # make is necessary for -flto=auto
         run: |
           git config --global --add safe.directory $(pwd)
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross make
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.78.0.19-ca-jdk8.0.412-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}

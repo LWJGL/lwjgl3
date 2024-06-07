@@ -25,7 +25,7 @@
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++20" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
-                <arg line="-O3 -flto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_FREEBSD -DLWJGL_${build.arch}"/>
+                <arg line="-O3 -flto=auto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_FREEBSD -DLWJGL_${build.arch}"/>
                 <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_BSD_SOURCE"/>
                 <arg line="-D_FILE_OFFSET_BITS=64"/>
 
@@ -109,7 +109,7 @@
                 <arg value="-m64" if:set="build.arch.x64"/>
 
                 <arg line="-z noexecstack"/>
-                <arg line="-O3 -flto -fPIC -pthread -o ${lib.arch}/lib${name}.so"/>
+                <arg line="-O3 -flto=auto -fPIC -pthread -o ${lib.arch}/lib${name}.so"/>
 
                 <arg line="-Wl,--no-undefined"/>
                 <arg line="-Wl,--version-script,${version.script}"/>
