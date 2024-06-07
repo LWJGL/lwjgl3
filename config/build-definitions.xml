@@ -167,7 +167,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <local name="java.version.regex"/>
     <property name="java.version.regex" value="((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/> <!-- without the major number -->
 
-    <condition property="jdk21">                             <matches string="${java.version}" pattern="^21${java.version.regex}$"/>     </condition>
+    <condition property="jdk24">                             <matches string="${java.version}" pattern="^24${java.version.regex}$"/>     </condition>
+    <condition property="jdk23"><or><isset property="jdk24"/><matches string="${java.version}" pattern="^23${java.version.regex}$"/></or></condition>
+    <condition property="jdk22"><or><isset property="jdk23"/><matches string="${java.version}" pattern="^22${java.version.regex}$"/></or></condition>
+    <condition property="jdk21"><or><isset property="jdk22"/><matches string="${java.version}" pattern="^21${java.version.regex}$"/></or></condition>
     <condition property="jdk20"><or><isset property="jdk21"/><matches string="${java.version}" pattern="^20${java.version.regex}$"/></or></condition>
     <condition property="jdk19"><or><isset property="jdk20"/><matches string="${java.version}" pattern="^19${java.version.regex}$"/></or></condition>
     <condition property="jdk18"><or><isset property="jdk19"/><matches string="${java.version}" pattern="^18${java.version.regex}$"/></or></condition>
@@ -182,6 +185,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property= "jdk9"><or><isset property="jdk10"/><matches string="${java.version}" pattern= "^9${java.version.regex}$"/></or></condition>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
+    <condition property="core.java23"><isset property="core.java24"/></condition>
+    <condition property="core.java22"><isset property="core.java23"/></condition>
+    <condition property="core.java21"><isset property="core.java22"/></condition>
     <condition property="core.java20"><isset property="core.java21"/></condition>
     <condition property="core.java19"><isset property="core.java20"/></condition>
     <condition property="core.java18"><isset property="core.java19"/></condition>
