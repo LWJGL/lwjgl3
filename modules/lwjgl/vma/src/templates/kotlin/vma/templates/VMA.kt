@@ -12,7 +12,7 @@ val VMA = "Vma".nativeClass(Module.VMA, "Vma", prefix = "VMA") {
     nativeDirective(
         """#include "lwjgl_malloc.h"
 DISABLE_WARNINGS()
-#if LWJGL_MACOS
+#ifdef __clang__
     _Pragma("GCC diagnostic ignored \"-Wnullability-completeness\"")
 #endif
 #define VMA_IMPLEMENTATION

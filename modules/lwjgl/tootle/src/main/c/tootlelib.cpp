@@ -22,7 +22,7 @@
 #include "Stripifier.h"
 
 #ifdef _DX11_1_
-#include "directxmesh.h"
+#include "DirectXMesh.h"
 #endif
 
 #define AMD_TOOTLE_API_FUNCTION_BEGIN try {

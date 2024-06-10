@@ -359,9 +359,10 @@ jobs:
           Rename-Item zulu8.78.0.19-ca-jdk8.0.412-win_i686 jdk8
         shell: pwsh
         if: matrix.ARCH == 'x86'
-      - name: Build native
+      - name: Build native # TODO: remove old LLVM workaround, see https://github.com/actions/runner-images/issues/10001
         run: |
           set LWJGL_BUILD_ARCH=${{matrix.ARCH}}
+          set PATH=%PATH:C:\Program Files\LLVM\bin;=%
           ant -emacs compile-native
       - name: Run tests
         run: ant -emacs tests

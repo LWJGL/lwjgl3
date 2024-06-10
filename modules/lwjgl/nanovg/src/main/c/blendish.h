@@ -1750,21 +1750,21 @@ void bndNodeBackground(NVGcontext *ctx, float x, float y, float w, float h,
         iconid, bnd_theme.regularTheme.textColor, 
         bndOffsetColor(titleColor, BND_BEVEL_SHADE), 
         BND_LEFT, BND_LABEL_FONT_SIZE, label);
-    NVGcolor arrowColor;
+    //NVGcolor arrowColor;
     NVGcolor borderColor;
     switch(state) {
     default:
     case BND_DEFAULT: {
         borderColor = nvgRGBf(0,0,0);
-        arrowColor = bndOffsetColor(titleColor, -BND_BEVEL_SHADE);
+        //arrowColor = bndOffsetColor(titleColor, -BND_BEVEL_SHADE);
     } break;
     case BND_HOVER: {
         borderColor = bnd_theme.nodeTheme.nodeSelectedColor;
-        arrowColor = bnd_theme.nodeTheme.nodeSelectedColor;
+        //arrowColor = bnd_theme.nodeTheme.nodeSelectedColor;
     } break;
     case BND_ACTIVE: {
         borderColor = bnd_theme.nodeTheme.activeNodeColor;
-        arrowColor = bnd_theme.nodeTheme.nodeSelectedColor;
+        //arrowColor = bnd_theme.nodeTheme.nodeSelectedColor;
     } break;
     }
     bndOutlineBox(ctx,x,y,w,h+1,

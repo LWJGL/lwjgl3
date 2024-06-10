@@ -75,7 +75,9 @@ extern JNIEnv* getEnv(jboolean* async);
             envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
         } \
         envData->LastError = LastError;
+#endif
 
+#if defined(LWJGL_WINDOWS) && !defined(__clang__)
     #define VA_LIST_CAST &(va_list)
 #else
     #define VA_LIST_CAST (va_list *)
