@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Ant">
     <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/gradle/lib/ant/ant.jar!/" />
       <root url="jar://$APPLICATION_HOME_DIR$/plugins/gradle/lib/ant/ant-launcher.jar!/" />
     </CLASSES>
     <JAVADOC />
