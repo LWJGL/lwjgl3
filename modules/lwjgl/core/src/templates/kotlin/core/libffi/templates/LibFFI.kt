@@ -16,40 +16,40 @@ ENABLE_WARNINGS()
 typedef void (*FFI_FN_TYPE)(void);
 typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
 
-#ifndef FFI_WIN64
+#ifndef HAS_FFI_WIN64
 #define FFI_WIN64 -1
 #endif
-#ifndef FFI_GNUW64
+#ifndef HAS_FFI_GNUW64
 #define FFI_GNUW64 -1
 #endif
-#ifndef FFI_UNIX64
+#ifndef HAS_FFI_UNIX64
 #define FFI_UNIX64 -1
 #endif
-#ifndef FFI_EFI64
+#ifndef HAS_FFI_EFI64
 #define FFI_EFI64 -1
 #endif
-#ifndef FFI_SYSV
+#ifndef HAS_FFI_SYSV
 #define FFI_SYSV -1
 #endif
-#ifndef FFI_STDCALL
+#ifndef HAS_FFI_STDCALL
 #define FFI_STDCALL -1
 #endif
-#ifndef FFI_THISCALL
+#ifndef HAS_FFI_THISCALL
 #define FFI_THISCALL -1
 #endif
-#ifndef FFI_FASTCALL
+#ifndef HAS_FFI_FASTCALL
 #define FFI_FASTCALL -1
 #endif
-#ifndef FFI_MS_CDECL
+#ifndef HAS_FFI_MS_CDECL
 #define FFI_MS_CDECL -1
 #endif
-#ifndef FFI_PASCAL
+#ifndef HAS_FFI_PASCAL
 #define FFI_PASCAL -1
 #endif
-#ifndef FFI_REGISTER
+#ifndef HAS_FFI_REGISTER
 #define FFI_REGISTER -1
 #endif
-#ifndef FFI_VFP
+#ifndef HAS_FFI_VFP
 #define FFI_VFP -1
 #endif""")
 

@@ -90,6 +90,10 @@ typedef enum ffi_abi {
   FFI_DEFAULT_ABI = FFI_GNUW64,
 #else
   FFI_DEFAULT_ABI = FFI_WIN64,
+
+  // LWJGL
+  #define HAS_FFI_WIN64 1
+  #define HAS_FFI_GNUW64 1
 #endif
 
 #elif defined(X86_64) || (defined (__x86_64__) && defined (X86_DARWIN))
@@ -100,6 +104,12 @@ typedef enum ffi_abi {
   FFI_GNUW64,
   FFI_LAST_ABI,
   FFI_DEFAULT_ABI = FFI_UNIX64,
+
+  // LWJGL
+  #define HAS_FFI_UNIX64 1
+  #define HAS_FFI_WIN64 1
+  #define HAS_FFI_EFI64 1
+  #define HAS_FFI_GNUW64 1
 
 #elif defined(X86_WIN32)
   FFI_FIRST_ABI = 0,
@@ -112,6 +122,15 @@ typedef enum ffi_abi {
   FFI_REGISTER  = 7,
   FFI_LAST_ABI,
   FFI_DEFAULT_ABI = FFI_MS_CDECL,
+
+  // LWJGL
+  #define HAS_FFI_SYSV 1
+  #define HAS_FFI_STDCALL 1
+  #define HAS_FFI_THISCALL 1
+  #define HAS_FFI_FASTCALL 1
+  #define HAS_FFI_MS_CDECL 1
+  #define HAS_FFI_PASCAL 1
+  #define HAS_FFI_REGISTER 1
 #else
   FFI_FIRST_ABI = 0,
   FFI_SYSV      = 1,
@@ -123,6 +142,15 @@ typedef enum ffi_abi {
   FFI_MS_CDECL  = 8,
   FFI_LAST_ABI,
   FFI_DEFAULT_ABI = FFI_SYSV,
+
+  // LWJGL
+  #define HAS_FFI_SYSV 1
+  #define HAS_FFI_THISCALL 1
+  #define HAS_FFI_FASTCALL 1
+  #define HAS_FFI_STDCALL 1
+  #define HAS_FFI_PASCAL 1
+  #define HAS_FFI_REGISTER 1
+  #define HAS_FFI_MS_CDECL 1
 #endif
 } ffi_abi;
 #endif
