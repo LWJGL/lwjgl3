@@ -25,7 +25,7 @@
 
 /** \mainpage Vulkan Memory Allocator
 
-<b>Version 3.1.0-development</b>
+<b>Version 3.1.0</b>
 
 Copyright (c) 2017-2024 Advanced Micro Devices, Inc. All rights reserved. \n
 License: MIT \n
@@ -127,7 +127,9 @@ See documentation chapter: \ref statistics.
 extern "C" {
 #endif
 
+#if !defined(VULKAN_H_)
 #include <vulkan/vulkan.h>
+#endif
 
 #if !defined(VMA_VULKAN_VERSION)
     #if defined(VK_VERSION_1_3)
