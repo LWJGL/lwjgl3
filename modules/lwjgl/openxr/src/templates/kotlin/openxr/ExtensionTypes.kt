@@ -1775,7 +1775,7 @@ val XrSecondaryViewConfigurationLayerInfoMSFT = struct(Module.OPENXR, "XrSeconda
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
             <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
             <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
-            <li>{@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid ##XrCompositionLayerBaseHeader-based structures. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
+            <li>{@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid ##XrCompositionLayerBaseHeader-based structures. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
             <li>The {@code layerCount} parameter <b>must</b> be greater than 0</li>
         </ul>
 
@@ -4223,19 +4223,15 @@ val XrPassthroughLayerCreateInfoFB = struct(Module.OPENXR, "XrPassthroughLayerCr
     XrPassthroughLayerPurposeFB("purpose", "")
 }
 
-val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerPassthroughFB") {
+val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerPassthroughFB", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         A composition layer for passthrough.
 
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code flags} is a bitmask of {@code XrCompositionLayerFlagBits} that specify additional behavior.</li>
-            <li>{@code space} is the {@code XrSpace} that specifies the layer’s space - <b>must</b> be #NULL_HANDLE.</li>
-            <li>{@code layerHandle} is the {@code XrPassthroughLayerFB} that defines this layer’s behavior.</li>
-        </ul>
+        <h5>Description</h5>
+        It is a composition layer type that may be submitted in #EndFrame() where an ##XrCompositionLayerBaseHeader is specified, as a stand-in for the actual passthrough contents.
+
+        Errata: the third field of this structure is named {@code flags} rather than {@code layerFlags} as expected and as documented for for the parent type ##XrCompositionLayerBaseHeader.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4253,11 +4249,11 @@ val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerP
         ##XrCompositionLayerBaseHeader
         """
 
-    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrCompositionLayerFlags("flags", "")
-    XrSpace("space", "")
-    XrPassthroughLayerFB("layerHandle", "")
+    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrCompositionLayerFlags("flags", "a bitmask of {@code XrCompositionLayerFlagBits} that specify additional behavior.")
+    XrSpace("space", "the {@code XrSpace} that specifies the layer’s space - <b>must</b> be #NULL_HANDLE.")
+    XrPassthroughLayerFB("layerHandle", "the {@code XrPassthroughLayerFB} that defines this layer’s behavior.")
 }
 
 val XrGeometryInstanceCreateInfoFB = struct(Module.OPENXR, "XrGeometryInstanceCreateInfoFB") {
@@ -7725,7 +7721,7 @@ val XrRecommendedLayerResolutionGetInfoMETA = struct(Module.OPENXR, "XrRecommend
             <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using ##XrRecommendedLayerResolutionGetInfoMETA</li>
             <li>{@code type} <b>must</b> be #TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layer} <b>must</b> be a pointer to a valid ##XrCompositionLayerBaseHeader-based structure. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
+            <li>{@code layer} <b>must</b> be a pointer to a valid ##XrCompositionLayerBaseHeader-based structure. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
         </ul>
 
         <h5>See Also</h5>
@@ -8932,7 +8928,7 @@ val XrPlaneDetectorLocationEXT = struct(Module.OPENXR, "XrPlaneDetectorLocationE
     uint64_t("planeId", "a {@code uint64_t} unique identifier of the plane. The planeId <b>should</b> remain the same for the duration of the {@code XrPlaneDetectorEXT} handle for a physical plane. A runtime on occasion <b>may</b> assign a different id to the same physical plane, for example when several planes merge into one plane. {@code planeId} <b>must</b> remain valid until the next call to #BeginPlaneDetectionEXT() or #DestroyPlaneDetectorEXT(). This id is used by #GetPlanePolygonBufferEXT().")
     XrSpaceLocationFlags("locationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful.")
     XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a plane within the reference frame of the corresponding ##XrPlaneDetectorGetInfoEXT{@code ::baseSpace}.")
-    XrExtent2Df("extents", "the extent of the plane along the x-axis (width) and z-axis (height) centered on the {@code pose}.")
+    XrExtent2Df("extents", "the extent of the plane along the x-axis ({@code extents.width}) and y-axis ({@code extents.height}) centered on the {@code pose}.")
     XrPlaneDetectorOrientationEXT("orientation", "the detected orientation of the plane.")
     XrPlaneDetectorSemanticTypeEXT("semanticType", "{@code semanticType} {@code XrPlaneDetectorSemanticTypeEXT} type of the plane.")
     uint32_t("polygonBufferCount", "the number of polygon buffers associated with this plane. If this is zero no polygon buffer was generated. The first polygon buffer is always the outside contour. If contours are requested with #PLANE_DETECTOR_ENABLE_CONTOUR_BIT_EXT this value <b>must</b> always be at least 1.")

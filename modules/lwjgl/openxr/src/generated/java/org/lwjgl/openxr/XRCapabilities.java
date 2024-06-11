@@ -527,6 +527,8 @@ public class XRCapabilities {
     public final boolean XR_EPIC_view_configuration_fov;
     /** When true, {@link EXTActiveActionSetPriority} is supported. */
     public final boolean XR_EXT_active_action_set_priority;
+    /** When true, {@link EXTCompositionLayerInvertedAlpha} is supported. */
+    public final boolean XR_EXT_composition_layer_inverted_alpha;
     /** When true, {@link EXTConformanceAutomation} is supported. */
     public final boolean XR_EXT_conformance_automation;
     /** When true, {@link EXTDebugUtils} is supported. */
@@ -821,6 +823,7 @@ public class XRCapabilities {
         XR_BD_controller_interaction = ext.contains("XR_BD_controller_interaction");
         XR_EPIC_view_configuration_fov = ext.contains("XR_EPIC_view_configuration_fov");
         XR_EXT_active_action_set_priority = ext.contains("XR_EXT_active_action_set_priority");
+        XR_EXT_composition_layer_inverted_alpha = ext.contains("XR_EXT_composition_layer_inverted_alpha");
         XR_EXT_conformance_automation = check_EXT_conformance_automation(provider, caps, ext);
         XR_EXT_debug_utils = check_EXT_debug_utils(provider, caps, ext);
         XR_EXT_dpad_binding = ext.contains("XR_EXT_dpad_binding");

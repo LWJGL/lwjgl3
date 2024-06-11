@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTPlaneDetection {
 
     /** The extension specification version. */
-    public static final int XR_EXT_plane_detection_SPEC_VERSION = 1;
+    public static final int XR_EXT_plane_detection_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_EXT_PLANE_DETECTION_EXTENSION_NAME = "XR_EXT_plane_detection";

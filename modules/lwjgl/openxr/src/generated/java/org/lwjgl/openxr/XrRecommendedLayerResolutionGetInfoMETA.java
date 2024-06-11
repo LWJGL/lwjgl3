@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using {@link XrRecommendedLayerResolutionGetInfoMETA}</li>
  * <li>{@code type} <b>must</b> be {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layer} <b>must</b> be a pointer to a valid {@link XrCompositionLayerBaseHeader}-based structure. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
+ * <li>{@code layer} <b>must</b> be a pointer to a valid {@link XrCompositionLayerBaseHeader}-based structure. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
  * </ul>
  * 
  * <h5>See Also</h5>

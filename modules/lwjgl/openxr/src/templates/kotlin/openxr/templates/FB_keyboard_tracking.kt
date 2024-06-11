@@ -49,8 +49,8 @@ val FB_keyboard_tracking = "FBKeyboardTracking".nativeClassXR("FB_keyboard_track
         <h5>Flag Descriptions</h5>
         <ul>
             <li>#KEYBOARD_TRACKING_EXISTS_BIT_FB — indicates that the system has a physically tracked keyboard to report.  If not set then no other bits should be considered to be valid or meaningful.  If set either XR_KEYBOARD_TRACKING_LOCAL_BIT_FB or XR_KEYBOARD_TRACKING_REMOTE_BIT_FB must also be set.</li>
-            <li>#KEYBOARD_TRACKING_LOCAL_BIT_FB — indicates that the physically tracked keyboard is intended to be used in a local pairing with the system.  Mutally exclusive with XR_KEYBOARD_TRACKING_REMOTE_BIT_FB.</li>
-            <li>#KEYBOARD_TRACKING_REMOTE_BIT_FB — indicates that the physically tracked keyboard is intended to be used while paired to a separate remote computing device. Mutally exclusive with XR_KEYBOARD_TRACKING_LOCAL_BIT_FB.</li>
+            <li>#KEYBOARD_TRACKING_LOCAL_BIT_FB — indicates that the physically tracked keyboard is intended to be used in a local pairing with the system.  Mutually exclusive with XR_KEYBOARD_TRACKING_REMOTE_BIT_FB.</li>
+            <li>#KEYBOARD_TRACKING_REMOTE_BIT_FB — indicates that the physically tracked keyboard is intended to be used while paired to a separate remote computing device. Mutually exclusive with XR_KEYBOARD_TRACKING_LOCAL_BIT_FB.</li>
             <li>#KEYBOARD_TRACKING_CONNECTED_BIT_FB — indicates that the physically tracked keyboard is actively connected to the headset and capable of sending key data</li>
         </ul>
         """,
@@ -67,8 +67,8 @@ val FB_keyboard_tracking = "FBKeyboardTracking".nativeClassXR("FB_keyboard_track
 
         <h5>Flag Descriptions</h5>
         <ul>
-            <li>#KEYBOARD_TRACKING_QUERY_LOCAL_BIT_FB — indicates the query is for the physically tracked keyboard that is intended to be used in a local pairing with the System. Mutally exclusive with XR_KEYBOARD_TRACKING_QUERY_REMOTE_BIT_FB.</li>
-            <li>#KEYBOARD_TRACKING_QUERY_REMOTE_BIT_FB — indicates the query is for the physically tracked keyboard that may be connected to a separate remote computing device. Mutally exclusive with XR_KEYBOARD_TRACKING_QUERY_LOCAL_BIT_FB.</li>
+            <li>#KEYBOARD_TRACKING_QUERY_LOCAL_BIT_FB — indicates the query is for the physically tracked keyboard that is intended to be used in a local pairing with the System. Mutually exclusive with XR_KEYBOARD_TRACKING_QUERY_REMOTE_BIT_FB.</li>
+            <li>#KEYBOARD_TRACKING_QUERY_REMOTE_BIT_FB — indicates the query is for the physically tracked keyboard that may be connected to a separate remote computing device. Mutually exclusive with XR_KEYBOARD_TRACKING_QUERY_LOCAL_BIT_FB.</li>
         </ul>
         """,
 

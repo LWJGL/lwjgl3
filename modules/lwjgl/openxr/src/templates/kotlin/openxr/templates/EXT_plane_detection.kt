@@ -19,7 +19,7 @@ val EXT_plane_detection = "EXTPlaneDetection".nativeClassXR("EXT_plane_detection
     IntConstant(
         "The extension specification version.",
 
-        "EXT_plane_detection_SPEC_VERSION".."1"
+        "EXT_plane_detection_SPEC_VERSION".."2"
     )
 
     StringConstant(

@@ -131,7 +131,7 @@ public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEX
     public long locationFlags() { return nlocationFlags(address()); }
     /** an {@link XrPosef} defining the position and orientation of the origin of a plane within the reference frame of the corresponding {@link XrPlaneDetectorGetInfoEXT}{@code ::baseSpace}. */
     public XrPosef pose() { return npose(address()); }
-    /** the extent of the plane along the x-axis (width) and z-axis (height) centered on the {@code pose}. */
+    /** the extent of the plane along the x-axis ({@code extents.width}) and y-axis ({@code extents.height}) centered on the {@code pose}. */
     public XrExtent2Df extents() { return nextents(address()); }
     /** the detected orientation of the plane. */
     @NativeType("XrPlaneDetectorOrientationEXT")

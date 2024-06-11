@@ -501,6 +501,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
             <li>#COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT <em>(deprecated — ignored)</em>  — Enables chromatic aberration correction when not done by default. This flag has no effect on any known conformant runtime, and is officially deprecated in OpenXR 1.1.</li>
             <li>#COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT — Enables the layer texture alpha channel.</li>
             <li>#COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT — Indicates the texture color channels have not been premultiplied by the texture alpha channel.</li>
+            <li>#COMPOSITION_LAYER_INVERTED_ALPHA_BIT_EXT — Indicates that the texture alpha channel stores transparency instead of opacity, and is to be inverted before layer blending.  (Added by the {@link EXTCompositionLayerInvertedAlpha XR_EXT_composition_layer_inverted_alpha} extension)</li>
         </ul>
 
         <h5>See Also</h5>

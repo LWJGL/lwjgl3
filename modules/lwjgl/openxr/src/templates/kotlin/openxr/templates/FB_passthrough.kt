@@ -34,7 +34,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     IntConstant(
         "The extension specification version.",
 
-        "FB_passthrough_SPEC_VERSION".."3"
+        "FB_passthrough_SPEC_VERSION".."4"
     )
 
     StringConstant(
