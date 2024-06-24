@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../bin/classes/templates" />
+    <output-test url="file://$MODULE_DIR$/../../bin/classes/templates" />
+    <exclude-output />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="module" module-name="templates.assimp" />
+    <orderEntry type="module" module-name="templates.bgfx" />
+    <orderEntry type="module" module-name="templates.core" />
+    <orderEntry type="module" module-name="templates.cuda" />
+    <orderEntry type="module" module-name="templates.egl" />
+    <orderEntry type="module" module-name="templates.fmod" />
+    <orderEntry type="module" module-name="templates.freetype" />
+    <orderEntry type="module" module-name="templates.glfw" />
+    <orderEntry type="module" module-name="templates.harfbuzz" />
+    <orderEntry type="module" module-name="templates.hwloc" />
+    <orderEntry type="module" module-name="templates.jawt" />
+    <orderEntry type="module" module-name="templates.jemalloc" />
+    <orderEntry type="module" module-name="templates.ktx" />
+    <orderEntry type="module" module-name="templates.libdivide" />
+    <orderEntry type="module" module-name="templates.llvm" />
+    <orderEntry type="module" module-name="templates.lmdb" />
+    <orderEntry type="module" module-name="templates.lz4" />
+    <orderEntry type="module" module-name="templates.meow" />
+    <orderEntry type="module" module-name="templates.meshoptimizer" />
+    <orderEntry type="module" module-name="templates.nanovg" />
+    <orderEntry type="module" module-name="templates.nfd" />
+    <orderEntry type="module" module-name="templates.nuklear" />
+    <orderEntry type="module" module-name="templates.odbc" />
+    <orderEntry type="module" module-name="templates.openal" />
+    <orderEntry type="module" module-name="templates.opencl" />
+    <orderEntry type="module" module-name="templates.opengl" />
+    <orderEntry type="module" module-name="templates.opengles" />
+    <orderEntry type="module" module-name="templates.openvr" />
+    <orderEntry type="module" module-name="templates.openxr" />
+    <orderEntry type="module" module-name="templates.opus" />
+    <orderEntry type="module" module-name="templates.ovr" />
+    <orderEntry type="module" module-name="templates.par" />
+    <orderEntry type="module" module-name="templates.remotery" />
+    <orderEntry type="module" module-name="templates.rpmalloc" />
+    <orderEntry type="module" module-name="templates.shaderc" />
+    <orderEntry type="module" module-name="templates.spvc" />
+    <orderEntry type="module" module-name="templates.sse" />
+    <orderEntry type="module" module-name="templates.stb" />
+    <orderEntry type="module" module-name="templates.tinyexr" />
+    <orderEntry type="module" module-name="templates.tinyfd" />
+    <orderEntry type="module" module-name="templates.tootle" />
+    <orderEntry type="module" module-name="templates.vma" />
+    <orderEntry type="module" module-name="templates.vulkan" />
+    <orderEntry type="module" module-name="templates.xxhash" />
+    <orderEntry type="module" module-name="templates.yoga" />
+    <orderEntry type="module" module-name="templates.zstd" />
+  </component>
+</module>

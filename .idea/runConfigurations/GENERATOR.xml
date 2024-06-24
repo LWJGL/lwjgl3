@@ -1,8 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="GENERATOR" type="Application" factoryName="Application" singleton="true">
     <option name="MAIN_CLASS_NAME" value="org.apache.tools.ant.launch.Launcher" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <module name="templates" />
+    <module name="generator_templates" />
     <option name="PROGRAM_PARAMETERS" value="generate" />
     <method v="2">
       <option name="Make" enabled="true" />

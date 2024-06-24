@@ -59,8 +59,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.yoga.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.yoga.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.zstd.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.zstd.iml" />
 
-      <!-- Used for building the generator -->
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates.iml" />
+      <!-- Used to build the templates at the same time as the generator -->
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/generator_templates.iml" filepath="$PROJECT_DIR$/.idea/modules/generator_templates.iml" />
 
       <!-- The LWJGL library (includes generated code) -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.assimp.iml" />
