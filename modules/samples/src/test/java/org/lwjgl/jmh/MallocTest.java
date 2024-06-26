@@ -48,12 +48,12 @@ public class MallocTest {
         bh.consume(sum);
     }
 
-    @Benchmark
+    /*@Benchmark
     public void t00_nio(Blackhole bh) {
         ByteBuffer mem = BufferUtils.createByteBuffer(size);
         consume(bh, mem);
         ((sun.nio.ch.DirectBuffer)mem).cleaner().clean(); // must be recompiled without JDK 8 bootclasspath on JDK 9+
-    }
+    }*/
 
     @Benchmark
     public void t10_malloc(Blackhole bh) {

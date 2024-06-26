@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/core/META-INF/versions/25" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/core25">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/core25/src/generated/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/core25/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/core25/src/test/java" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="25" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lwjgl.core17" />
+    <orderEntry type="module" module-name="lwjgl.core11" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+    <orderEntry type="library" scope="PROVIDED" name="JSpecify" level="project" />
+    <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
+    <orderEntry type="module" module-name="lwjgl.sdl" scope="TEST" />
+  </component>
+</module>

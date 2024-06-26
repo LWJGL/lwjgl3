@@ -30,7 +30,7 @@ public final class ALUtil {
             return null;
         }
 
-        ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE);
+        ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE - 8);
 
         List<String> strings = new ArrayList<>();
 

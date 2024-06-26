@@ -34,7 +34,7 @@ public final class Bench {
             .warmupTime(TimeValue.seconds(1))
             .mode(Mode.AverageTime)
             .timeUnit(TimeUnit.NANOSECONDS)
-            .jvmArgsPrepend("-server")
+            .detectJvmArgs()
             .build();
 
         new Runner(opt).run();

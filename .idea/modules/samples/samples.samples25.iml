@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/samples" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/samples" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/samples/src/test/java25">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/java25" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="25" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
+    <orderEntry type="library" scope="TEST" name="JOML" level="project" />
+    <orderEntry type="library" scope="TEST" name="JSpecify" level="project" />
+    <orderEntry type="library" name="JMH" level="project" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../bin/libs/native" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="lwjgl.core25" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.core17" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.core11" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.core" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.assimp" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.bgfx" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.egl" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.fmod" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.freetype" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.glfw" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.harfbuzz" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.hwloc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.jawt" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.jemalloc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.ktx" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.llvm" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.lmdb" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.lz4" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.meshoptimizer" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.msdfgen" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.nanovg" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.nfd" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.nuklear" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.odbc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.openal" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.opencl" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.opengl" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.opengles" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.openxr" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.opus" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.par" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.remotery" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.renderdoc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.rpmalloc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.sdl" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.shaderc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.spng" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.spvc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.stb" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.tinyexr" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.tinyfd" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.vma" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.vulkan" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.xxhash" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.yoga" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.zstd" scope="TEST" />
+    <orderEntry type="module" module-name="samples.samples" scope="TEST" />
+  </component>
+</module>
