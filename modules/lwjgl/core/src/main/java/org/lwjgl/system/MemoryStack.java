@@ -194,7 +194,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
         @Override
         public MemoryStack pop() {
-            Object pushed = debugFrames[frameIndex - 1];
+            Object pushed = Objects.requireNonNull(debugFrames[frameIndex - 1]);
             Object popped = stackWalkCheckPop(MemoryStack.class, pushed);
             if (popped != null) {
                 reportAsymmetricPop(pushed, popped);

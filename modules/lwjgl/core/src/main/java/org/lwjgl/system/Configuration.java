@@ -278,6 +278,17 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DEBUG_LOADER = new Configuration<>("org.lwjgl.util.DebugLoader", StateInit.BOOLEAN);
 
     /**
+     * When enabled, enables debug output in the bindings generator.
+     *
+     * <p>Output will be printed to the {@link #DEBUG_STREAM}. This option requires {@link #DEBUG} to be enabled.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.util.DebugGenerator</b><br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> DEBUG_GENERATOR = new Configuration<>("org.lwjgl.util.DebugGenerator", StateInit.BOOLEAN);
+
+    /**
      * Can be set to override the default {@link APIUtil#DEBUG_STREAM}.
      *
      * <p>It must be the name of a class that implements the {@link Supplier Supplier&lt;PrintStream&gt;} interface. The class will be instantiated using

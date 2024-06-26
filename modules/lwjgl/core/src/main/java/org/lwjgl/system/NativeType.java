@@ -9,6 +9,7 @@ import java.lang.annotation.*;
 /** Annotates parameter and return types in LWJGL bindings with the C type as defined in the native function. */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER})
+@Documented
 public @interface NativeType {
     String value();
 }

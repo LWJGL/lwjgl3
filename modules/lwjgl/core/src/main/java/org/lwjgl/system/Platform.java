@@ -99,6 +99,14 @@ public enum Platform {
         Architecture(boolean is64Bit) {
             this.is64Bit = is64Bit;
         }
+
+        public boolean is32Bit() {
+            return !is64Bit;
+        }
+
+        public boolean is64Bit() {
+            return is64Bit;
+        }
     }
 
     private static final Platform current;

@@ -36,11 +36,11 @@ public class MemSetTest {
         buffers = memAllocPointer(ARRAY_COUNT);
         offsets = new int[ARRAY_COUNT];
         for (int i = 0; i < ARRAY_COUNT; i++) {
-            int len = 8 + rand.nextInt(MAX_SIZE - 8);
+            int len = 8 + rand.nextInt(MAX_SIZE - 7);
 
             arrays[i] = new byte[len];
             buffers.put(i, nmemAlloc(len));
-            offsets[i] = i % 4 != 0 ? 0 : (1 + rand.nextInt(7)); // 25% unaligned head
+            offsets[i] = (i & 15) != 0 ? 0 : rand.nextInt(8); // 6.25% unaligned head
         }
     }
 
