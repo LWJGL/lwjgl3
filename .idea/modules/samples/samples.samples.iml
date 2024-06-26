@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/../../bin/classes/samples" />
-    <output-test url="file://$MODULE_DIR$/../../bin/classes/samples" />
+    <output url="file://$MODULE_DIR$/../../../bin/classes/samples" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/samples" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../modules/samples">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/samples/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/samples/src/test/resources" type="java-test-resource" />
+    <content url="file://$MODULE_DIR$/../../../modules/samples">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/resources" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -17,7 +17,7 @@
     <orderEntry type="module-library" scope="RUNTIME">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../bin/libs/native" />
+          <root url="file://$MODULE_DIR$/../../../bin/libs/native" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

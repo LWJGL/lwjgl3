@@ -119,7 +119,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/extract.iml" filepath="$PROJECT_DIR$/.idea/modules/extract.iml" />
 
       <!-- The LWJGL demo & benchmarking suite -->
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples.iml" filepath="$PROJECT_DIR$/.idea/modules/samples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/samples.samples.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/samples.samples.iml" />
     </modules>
   </component>
 </project>
