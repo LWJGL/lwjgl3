@@ -179,7 +179,7 @@ public class WinBase {
     public static String GetModuleFileName(@NativeType("HMODULE") long hModule, @NativeType("DWORD") int nSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpFilename = stack.malloc(nSize);
+            ByteBuffer lpFilename = stack.malloc(nSize << 1);
             int __result = nGetModuleFileName(hModule, memAddress(lpFilename), nSize);
             return memUTF16(lpFilename, __result);
         } finally {

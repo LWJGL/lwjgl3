@@ -313,7 +313,7 @@ internal class StringAutoSizeStackTransform(private val autoSizeParam: Parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
         val len = "${if (4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}"
-        writer.println("$t$t${t}ByteBuffer ${qtype.name} = stack.malloc($len);")
+        writer.println("$t$t${t}ByteBuffer ${qtype.name} = stack.malloc($len${if ((qtype.nativeType as CharSequenceType).charMapping == CharMapping.UTF16) " << 1" else ""});")
     }
 }
 
