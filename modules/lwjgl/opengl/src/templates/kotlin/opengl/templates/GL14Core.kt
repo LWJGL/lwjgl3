@@ -39,6 +39,12 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "ONE_MINUS_CONSTANT_ALPHA"..0x8004
     )
 
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+
+        "BLEND_COLOR"..0x8005
+    )
+
     void(
         "BlendColor",
         "Specifies the constant color C<sub>c</sub> to be used in blending.",
@@ -57,6 +63,12 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "FUNC_ADD"..0x8006,
         "MIN"..0x8007,
         "MAX"..0x8008
+    )
+
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+
+        "BLEND_EQUATION"..0x8009
     )
 
     void(

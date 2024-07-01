@@ -44,11 +44,17 @@ public class GL14C extends GL13C {
         GL_CONSTANT_ALPHA           = 0x8003,
         GL_ONE_MINUS_CONSTANT_ALPHA = 0x8004;
 
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
+    public static final int GL_BLEND_COLOR = 0x8005;
+
     /** Accepted by the {@code mode} parameter of BlendEquation. */
     public static final int
         GL_FUNC_ADD = 0x8006,
         GL_MIN      = 0x8007,
         GL_MAX      = 0x8008;
+
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
+    public static final int GL_BLEND_EQUATION = 0x8009;
 
     /** Accepted by the {@code mode} parameter of BlendEquation. */
     public static final int
