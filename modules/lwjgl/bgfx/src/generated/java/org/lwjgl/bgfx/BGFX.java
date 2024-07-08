@@ -2985,7 +2985,11 @@ public class BGFX {
 
     // --- [ bgfx_is_frame_buffer_valid ] ---
 
-    /** Unsafe version of: {@link #bgfx_is_frame_buffer_valid is_frame_buffer_valid} */
+    /**
+     * Unsafe version of: {@link #bgfx_is_frame_buffer_valid is_frame_buffer_valid}
+     *
+     * @param _num number of attachments
+     */
     public static boolean nbgfx_is_frame_buffer_valid(byte _num, long _attachment) {
         long __functionAddress = Functions.is_frame_buffer_valid;
         return invokeUPZ(_num, _attachment, __functionAddress);
@@ -2994,14 +2998,13 @@ public class BGFX {
     /**
      * Validate frame buffer parameters.
      *
-     * @param _num        number of attachments
      * @param _attachment attachment texture info
      *
      * @return true if a frame buffer with the same parameters can be created
      */
     @NativeType("bool")
-    public static boolean bgfx_is_frame_buffer_valid(@NativeType("uint8_t") int _num, @NativeType("bgfx_attachment_t const *") BGFXAttachment _attachment) {
-        return nbgfx_is_frame_buffer_valid((byte)_num, _attachment.address());
+    public static boolean bgfx_is_frame_buffer_valid(@NativeType("bgfx_attachment_t const *") BGFXAttachment.Buffer _attachment) {
+        return nbgfx_is_frame_buffer_valid((byte)_attachment.remaining(), _attachment.address());
     }
 
     // --- [ bgfx_calc_texture_size ] ---

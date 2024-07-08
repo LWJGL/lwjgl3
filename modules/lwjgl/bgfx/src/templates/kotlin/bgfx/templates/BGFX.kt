@@ -1544,7 +1544,7 @@ RGBA16S
         "is_frame_buffer_valid",
         "Validate frame buffer parameters.",
 
-        MapToInt..uint8_t("_num", "number of attachments"),
+        AutoSize("_attachment")..uint8_t("_num", "number of attachments"),
         bgfx_attachment_t.const.p("_attachment", "attachment texture info"),
 
         returnDoc = "true if a frame buffer with the same parameters can be created"
