@@ -15,7 +15,7 @@
         <property name="jcommander" value="1.78"/>
         <property name="jquery" value="3.5.1"/>
         <property name="slf4j" value="1.7.36"/>
-    <property name="joml" value="1.10.5"/>
+    <property name="joml" value="1.10.6"/>
     <property name="kotlinc-version" value="2.0.0"/>
     <property name="kotlinc-build" value="2.0.0-release-341"/>
     <property name="jmh-core" value="1.37"/>
