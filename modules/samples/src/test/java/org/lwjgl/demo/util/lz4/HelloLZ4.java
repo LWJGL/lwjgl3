@@ -189,7 +189,7 @@ public class HelloLZ4 {
     }
 
     private static long benchLZ4CompressionAdvanced(ByteBuffer uncompressed, ByteBuffer compressed, int iterations) {
-        int size = 0;
+        long size = 0;
 
         long cctx = NULL;
         try (MemoryStack stack = stackPush()) {
@@ -198,14 +198,14 @@ public class HelloLZ4 {
 
             cctx = pp.get(0);
             for (int i = 0; i < iterations; i++) {
-                size = (int)checkLZ4F(LZ4F_compressBegin(cctx, compressed, LZ4FPreferences.calloc(stack)
+                size = checkLZ4F(LZ4F_compressBegin(cctx, compressed, LZ4FPreferences.calloc(stack)
                     .frameInfo(LZ4FFrameInfo.calloc(stack)
                         .blockChecksumFlag(LZ4F_blockChecksumEnabled)
                         .contentChecksumFlag(LZ4F_contentChecksumEnabled)
                         .contentSize(uncompressed.remaining())
                     )));
-                size += checkLZ4F(LZ4F_compressUpdate(cctx, slice(compressed, size), uncompressed, null));
-                size += checkLZ4F(LZ4F_compressEnd(cctx, slice(compressed, size), null));
+                size += checkLZ4F(LZ4F_compressUpdate(cctx, slice(compressed, (int)size), uncompressed, null));
+                size += checkLZ4F(LZ4F_compressEnd(cctx, slice(compressed, (int)size), null));
             }
         } finally {
             if (cctx != NULL) {
