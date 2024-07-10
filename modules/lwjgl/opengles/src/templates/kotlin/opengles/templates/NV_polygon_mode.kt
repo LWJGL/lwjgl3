@@ -26,7 +26,7 @@ val NV_polygon_mode = "NVPolygonMode".nativeClassGLES("NV_polygon_mode", postfix
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter to IsEnabled.",
+        "Accepted by the {@code cap} parameter to Enable, Disable, IsEnabled.",
 
         "POLYGON_OFFSET_POINT_NV"..0x2A01,
         "POLYGON_OFFSET_LINE_NV"..0x2A02

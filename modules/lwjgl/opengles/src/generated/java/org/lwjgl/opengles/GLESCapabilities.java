@@ -2850,6 +2850,8 @@ public final class GLESCapabilities {
     public final boolean GL_QCOM_tiled_rendering;
     /** When true, {@link QCOMWriteonlyRendering} is supported. */
     public final boolean GL_QCOM_writeonly_rendering;
+    /** When true, {@link QCOMYCBCRDegamma} is supported. */
+    public final boolean GL_QCOM_ycbcr_degamma;
     /**
      * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_YUV_texture_gather.txt">QCOM_YUV_texture_gather</a> extension is supported.
      * 
@@ -3195,6 +3197,7 @@ public final class GLESCapabilities {
         GL_QCOM_texture_lod_bias = ext.contains("GL_QCOM_texture_lod_bias");
         GL_QCOM_tiled_rendering = check_QCOM_tiled_rendering(provider, caps, ext);
         GL_QCOM_writeonly_rendering = ext.contains("GL_QCOM_writeonly_rendering");
+        GL_QCOM_ycbcr_degamma = ext.contains("GL_QCOM_ycbcr_degamma");
         GL_QCOM_YUV_texture_gather = ext.contains("GL_QCOM_YUV_texture_gather");
         GL_VIV_shader_binary = ext.contains("GL_VIV_shader_binary");
 

@@ -23,7 +23,7 @@ public class NVPolygonMode {
     /** Accepted by the {@code pname} parameter to GetIntegerv. */
     public static final int GL_POLYGON_MODE_NV = 0xB40;
 
-    /** Accepted by the {@code pname} parameter to IsEnabled. */
+    /** Accepted by the {@code cap} parameter to Enable, Disable, IsEnabled. */
     public static final int
         GL_POLYGON_OFFSET_POINT_NV = 0x2A01,
         GL_POLYGON_OFFSET_LINE_NV  = 0x2A02;
