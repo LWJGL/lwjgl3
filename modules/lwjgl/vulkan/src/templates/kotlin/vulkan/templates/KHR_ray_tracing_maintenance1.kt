@@ -16,7 +16,7 @@ val KHR_ray_tracing_maintenance1 = "KHRRayTracingMaintenance1".nativeClassVK("KH
         The new features are as follows:
 
         <ul>
-            <li>Adds support for the {@code SPV_KHR_ray_cull_mask} SPIR-V extension in Vulkan. This extension provides access to built-in {@code CullMaskKHR} shader variable which contains the value of the {@code OpTrace*} {@code Cull Mask} parameter. This new shader variable is accessible in the intersection, any-hit, closest-hit and miss shader stages.</li>
+            <li>Adds support for the {@code SPV_KHR_ray_cull_mask} SPIR-V extension in Vulkan. This extension provides access to built-in {@code CullMaskKHR} shader variable which contains the value of the {@code OpTrace*} {@code Cull Mask} parameter. This new shader variable is accessible in the intersection, any-hit, closest hit and miss shader stages.</li>
             <li>
                 Adds support for a new pipeline stage and access mask built on top of {@link KHRSynchronization2 VK_KHR_synchronization2}:
                 <ul>

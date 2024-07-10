@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension provides extensible versions of the Vulkan memory map and unmap entry points. The new entry points are functionally identical to the core entry points, except that their parameters are specified using extensible structures that can be used to pass extension-specific information.
+ * This extension provides extensible versions of the Vulkan memory map and unmap commands. The new commands are functionally identical to the core commands, except that their parameters are specified using extensible structures that can be used to pass extension-specific information.
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

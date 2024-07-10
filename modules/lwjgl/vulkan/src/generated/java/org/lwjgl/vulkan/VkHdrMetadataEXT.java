@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify Hdr metadata.
+ * Specify HDR metadata.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

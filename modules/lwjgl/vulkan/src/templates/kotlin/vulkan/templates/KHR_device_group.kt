@@ -332,7 +332,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 ￿    VkRect2D*                                   pRects);</code></pre>
 
         <h5>Description</h5>
-        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available rectangles were returned.
+        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available rectangles were returned.
 
         The values returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded.
 

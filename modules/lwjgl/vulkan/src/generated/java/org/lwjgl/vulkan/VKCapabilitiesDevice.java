@@ -1317,6 +1317,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_maintenance5;
     /** When true, {@link KHRMaintenance6} is supported. */
     public final boolean VK_KHR_maintenance6;
+    /** When true, {@link KHRMaintenance7} is supported. */
+    public final boolean VK_KHR_maintenance7;
     /** When true, {@link KHRMapMemory2} is supported. */
     public final boolean VK_KHR_map_memory2;
     /** When true, {@link KHRMultiview} is supported. */
@@ -1373,6 +1375,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_shader_non_semantic_info;
     /** When true, {@link KHRShaderQuadControl} is supported. */
     public final boolean VK_KHR_shader_quad_control;
+    /** When true, {@link KHRShaderRelaxedExtendedInstruction} is supported. */
+    public final boolean VK_KHR_shader_relaxed_extended_instruction;
     /** When true, {@link KHRShaderSubgroupExtendedTypes} is supported. */
     public final boolean VK_KHR_shader_subgroup_extended_types;
     /** When true, {@link KHRShaderSubgroupRotate} is supported. */
@@ -1790,6 +1794,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_maintenance4 = check_KHR_maintenance4(provider, caps, ext);
         VK_KHR_maintenance5 = check_KHR_maintenance5(provider, caps, ext);
         VK_KHR_maintenance6 = check_KHR_maintenance6(provider, caps, ext);
+        VK_KHR_maintenance7 = ext.contains("VK_KHR_maintenance7");
         VK_KHR_map_memory2 = check_KHR_map_memory2(provider, caps, ext);
         VK_KHR_multiview = ext.contains("VK_KHR_multiview");
         VK_KHR_performance_query = check_KHR_performance_query(provider, caps, ext);
@@ -1818,6 +1823,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_shader_maximal_reconvergence = ext.contains("VK_KHR_shader_maximal_reconvergence");
         VK_KHR_shader_non_semantic_info = ext.contains("VK_KHR_shader_non_semantic_info");
         VK_KHR_shader_quad_control = ext.contains("VK_KHR_shader_quad_control");
+        VK_KHR_shader_relaxed_extended_instruction = ext.contains("VK_KHR_shader_relaxed_extended_instruction");
         VK_KHR_shader_subgroup_extended_types = ext.contains("VK_KHR_shader_subgroup_extended_types");
         VK_KHR_shader_subgroup_rotate = ext.contains("VK_KHR_shader_subgroup_rotate");
         VK_KHR_shader_subgroup_uniform_control_flow = ext.contains("VK_KHR_shader_subgroup_uniform_control_flow");

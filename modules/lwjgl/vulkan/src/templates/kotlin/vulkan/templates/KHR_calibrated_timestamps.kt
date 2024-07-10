@@ -99,7 +99,7 @@ val KHR_calibrated_timestamps = "KHRCalibratedTimestamps".nativeClassVK("KHR_cal
 ￿    VkTimeDomainKHR*                            pTimeDomains);</code></pre>
 
         <h5>Description</h5>
-        If {@code pTimeDomains} is {@code NULL}, then the number of calibrateable time domains supported for the given {@code physicalDevice} is returned in {@code pTimeDomainCount}. Otherwise, {@code pTimeDomainCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pTimeDomains} array, and on return the variable is overwritten with the number of values actually written to {@code pTimeDomains}. If the value of {@code pTimeDomainCount} is less than the number of calibrateable time domains supported, at most {@code pTimeDomainCount} values will be written to {@code pTimeDomains}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available time domains were returned.
+        If {@code pTimeDomains} is {@code NULL}, then the number of calibrateable time domains supported for the given {@code physicalDevice} is returned in {@code pTimeDomainCount}. Otherwise, {@code pTimeDomainCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pTimeDomains} array, and on return the variable is overwritten with the number of values actually written to {@code pTimeDomains}. If the value of {@code pTimeDomainCount} is less than the number of calibrateable time domains supported, at most {@code pTimeDomainCount} values will be written to {@code pTimeDomains}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available time domains were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

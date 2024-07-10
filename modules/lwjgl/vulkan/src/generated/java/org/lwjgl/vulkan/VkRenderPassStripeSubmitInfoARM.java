@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The elements of {@code pStripeSemaphoreInfos} are mapped to render pass instances in {@link VkCommandBufferSubmitInfo}{@code ::commandBuffer} in submission order and in stripe order within each render pass instance. Each semaphore in {@code pStripeSemaphoreInfos} is signaled when the implementation has completed execution of the associated stripe. In a render pass instance that has multiview enabled, the stripe includes all views in the view mask. In a render pass instance with {@code layerCount} greater than 1, the stripe includes all layers.</p>
  * 
+ * <p>Render pass instances that specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} will not have any elements of {@code pStripeSemaphoreInfos} mapped to them. Instead, for suspending and resuming render pass instances, this mapping is done for the first suspending render pass instance, and the per-stripe semaphores are only signaled for the last resuming render pass instance.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

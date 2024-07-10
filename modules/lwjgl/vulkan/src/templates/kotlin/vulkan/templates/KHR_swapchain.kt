@@ -216,7 +216,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         In some cases, swapchain creation <b>may</b> fail if exclusive full-screen mode is requested for application control, but for some implementation-specific reason exclusive full-screen access is unavailable for the particular combination of parameters provided. If this occurs, #ERROR_INITIALIZATION_FAILED will be returned.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the app not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.
+        In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the application not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.
         </div>
 
         If the {@code pNext} chain of ##VkSwapchainCreateInfoKHR includes a ##VkSwapchainPresentBarrierCreateInfoNV structure, then that structure includes additional swapchain creation parameters specific to the present barrier. Swapchain creation <b>may</b> fail if the state of the current system restricts the usage of the present barrier feature ##VkSurfaceCapabilitiesPresentBarrierNV, or a swapchain itself does not satisfy all the required conditions. In this scenario #ERROR_INITIALIZATION_FAILED is returned.
@@ -332,7 +332,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿    VkImage*                                    pSwapchainImages);</code></pre>
 
         <h5>Description</h5>
-        If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available presentable images were returned.
+        If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available presentable images were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -674,7 +674,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿    VkRect2D*                                   pRects);</code></pre>
 
         <h5>Description</h5>
-        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available rectangles were returned.
+        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available rectangles were returned.
 
         The values returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded.
 

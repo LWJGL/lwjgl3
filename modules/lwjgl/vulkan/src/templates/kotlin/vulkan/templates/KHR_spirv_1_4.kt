@@ -15,7 +15,7 @@ val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device",
 
         SPIR-V 1.4 incorporates features that are also available separately as extensions. SPIR-V 1.4 shader modules do not need to enable those extensions with the {@code OpExtension} opcode, since they are integral parts of SPIR-V 1.4.
 
-        SPIR-V 1.4 introduces new floating point execution mode capabilities, also available via {@code SPV_KHR_float_controls}. Implementations are not required to support all of these new capabilities; support can be queried using ##VkPhysicalDeviceFloatControlsPropertiesKHR from the {@link KHRShaderFloatControls VK_KHR_shader_float_controls} extension.
+        SPIR-V 1.4 introduces new floating-point execution mode capabilities, also available via {@code SPV_KHR_float_controls}. Implementations are not required to support all of these new capabilities; support can be queried using ##VkPhysicalDeviceFloatControlsPropertiesKHR from the {@link KHRShaderFloatControls VK_KHR_shader_float_controls} extension.
 
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.

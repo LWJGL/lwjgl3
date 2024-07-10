@@ -90,7 +90,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct<VkTextureLODGa
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** tells if the image format can be used with texture gather bias/LOD functions, as introduced by the {@link AMDTextureGatherBiasLod VK_AMD_texture_gather_bias_lod} extension. This field is set by the implementation. User-specified value is ignored. */
+    /** tells if the image format can be used with texture gather bias/LOD functions, as introduced by the {@link AMDTextureGatherBiasLod VK_AMD_texture_gather_bias_lod} extension. This field is set by the implementation. An application-specified value is ignored. */
     @NativeType("VkBool32")
     public boolean supportsTextureGatherLODBiasAMD() { return nsupportsTextureGatherLODBiasAMD(address()) != 0; }
 

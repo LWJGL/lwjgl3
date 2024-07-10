@@ -14,7 +14,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
         This extension adds some more dynamic state to support applications that need to reduce the number of pipeline state objects they compile and bind.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        This extension has been partially promoted. The dynamic state enumerants #DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT, #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT, and #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT; and the corresponding entry points in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The enumerants and entry points for dynamic logic operation and patch control points are not promoted, nor is the feature structure. Extension interfaces that were promoted remain available as aliases of the core functionality.
+        This extension has been partially promoted. The dynamic state enumerants #DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT, #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT, and #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT; and the corresponding commands in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The enumerants and commands for dynamic logic operation and patch control points are not promoted, nor is the feature structure. Extension interfaces that were promoted remain available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

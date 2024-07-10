@@ -705,7 +705,7 @@ public class EXTShaderObject {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pData} is {@code NULL}, then the size of the binary shader code of the shader object, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}. If {@code pDataSize} is less than the size of the binary shader code, nothing is written to {@code pData}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}.</p>
+     * <p>If {@code pData} is {@code NULL}, then the size of the binary shader code of the shader object, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the application to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}. If {@code pDataSize} is less than the size of the binary shader code, nothing is written to {@code pData}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -1660,7 +1660,7 @@ public class EXTShaderObject {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-     * <li>{@code pSampleMask} <b>must</b> be a valid pointer to an array of \lceil{\mathit{samples} \over 32}\rceil {@code VkSampleMask} values</li>
+     * <li>{@code pSampleMask} <b>must</b> be a valid pointer to an array of {@code ceil(samples / 32)} {@code VkSampleMask} values</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>

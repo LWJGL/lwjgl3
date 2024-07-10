@@ -96,7 +96,7 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a user-allocated buffer containing opaque capture data retrieved using {@link EXTDescriptorBuffer#vkGetBufferOpaqueCaptureDescriptorDataEXT GetBufferOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageOpaqueCaptureDescriptorDataEXT GetImageOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageViewOpaqueCaptureDescriptorDataEXT GetImageViewOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetSamplerOpaqueCaptureDescriptorDataEXT GetSamplerOpaqueCaptureDescriptorDataEXT}, or {@link EXTDescriptorBuffer#vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT GetAccelerationStructureOpaqueCaptureDescriptorDataEXT}. */
+    /** a pointer to an application-allocated buffer containing opaque capture data retrieved using {@link EXTDescriptorBuffer#vkGetBufferOpaqueCaptureDescriptorDataEXT GetBufferOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageOpaqueCaptureDescriptorDataEXT GetImageOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageViewOpaqueCaptureDescriptorDataEXT GetImageViewOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetSamplerOpaqueCaptureDescriptorDataEXT GetSamplerOpaqueCaptureDescriptorDataEXT}, or {@link EXTDescriptorBuffer#vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT GetAccelerationStructureOpaqueCaptureDescriptorDataEXT}. */
     @NativeType("void const *")
     public long opaqueCaptureDescriptorData() { return nopaqueCaptureDescriptorData(address()); }
 

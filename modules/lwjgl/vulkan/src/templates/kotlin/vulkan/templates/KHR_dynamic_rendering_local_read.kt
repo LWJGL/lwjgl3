@@ -164,7 +164,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
         <pre><code>
 ￿void vkCmdSetRenderingInputAttachmentIndicesKHR(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkRenderingInputAttachmentIndexInfoKHR* pLocationInfo);</code></pre>
+￿    const VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo);</code></pre>
 
         <h5>Description</h5>
         This command sets the input attachment index mappings for subsequent drawing commands, and <b>must</b> match the mappings provided to the currently bound pipeline, if one is bound, which <b>can</b> be set by chaining ##VkRenderingInputAttachmentIndexInfoKHR to ##VkGraphicsPipelineCreateInfo.
@@ -181,7 +181,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pLocationInfo} <b>must</b> be a valid pointer to a valid ##VkRenderingInputAttachmentIndexInfoKHR structure</li>
+            <li>{@code pInputAttachmentIndexInfo} <b>must</b> be a valid pointer to a valid ##VkRenderingInputAttachmentIndexInfoKHR structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>This command <b>must</b> only be called inside of a render pass instance</li>
@@ -205,6 +205,6 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkRenderingInputAttachmentIndexInfoKHR.const.p("pLocationInfo", "")
+        VkRenderingInputAttachmentIndexInfoKHR.const.p("pInputAttachmentIndexInfo", "a ##VkRenderingInputAttachmentIndexInfoKHR structure indicating the new mappings.")
     )
 }

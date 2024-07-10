@@ -307,7 +307,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         VkDevice("device", "the logical device that gets the descriptor."),
         VkDescriptorGetInfoEXT.const.p("pDescriptorInfo", "a pointer to a ##VkDescriptorGetInfoEXT structure specifying the parameters of the descriptor to get."),
         AutoSize("pDescriptor")..size_t("dataSize", "the amount of the descriptor data to get in bytes."),
-        void.p("pDescriptor", "a pointer to a user-allocated buffer where the descriptor will be written.")
+        void.p("pDescriptor", "a pointer to an application-allocated buffer where the descriptor will be written.")
     )
 
     void(
@@ -566,7 +566,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         VkDevice("device", "the logical device that gets the data."),
         VkBufferCaptureDescriptorDataInfoEXT.const.p("pInfo", "a pointer to a ##VkBufferCaptureDescriptorDataInfoEXT structure specifying the buffer."),
-        Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
+        Check(1)..void.p("pData", "a pointer to an application-allocated buffer where the data will be written.")
     )
 
     VkResult(
@@ -617,7 +617,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         VkDevice("device", "the logical device that gets the data."),
         VkImageCaptureDescriptorDataInfoEXT.const.p("pInfo", "a pointer to a ##VkImageCaptureDescriptorDataInfoEXT structure specifying the image."),
-        Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
+        Check(1)..void.p("pData", "a pointer to an application-allocated buffer where the data will be written.")
     )
 
     VkResult(
@@ -668,7 +668,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         VkDevice("device", "the logical device that gets the data."),
         VkImageViewCaptureDescriptorDataInfoEXT.const.p("pInfo", "a pointer to a ##VkImageViewCaptureDescriptorDataInfoEXT structure specifying the image view."),
-        Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
+        Check(1)..void.p("pData", "a pointer to an application-allocated buffer where the data will be written.")
     )
 
     VkResult(
@@ -719,7 +719,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         VkDevice("device", "the logical device that gets the data."),
         VkSamplerCaptureDescriptorDataInfoEXT.const.p("pInfo", "a pointer to a ##VkSamplerCaptureDescriptorDataInfoEXT structure specifying the sampler."),
-        Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
+        Check(1)..void.p("pData", "a pointer to an application-allocated buffer where the data will be written.")
     )
 
     DependsOn("""ext.contains("VK_KHR_acceleration_structure") || ext.contains("VK_NV_ray_tracing")""")..VkResult(
@@ -770,6 +770,6 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         VkDevice("device", "the logical device that gets the data."),
         VkAccelerationStructureCaptureDescriptorDataInfoEXT.const.p("pInfo", "a pointer to a ##VkAccelerationStructureCaptureDescriptorDataInfoEXT structure specifying the acceleration structure."),
-        Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
+        Check(1)..void.p("pData", "a pointer to an application-allocated buffer where the data will be written.")
     )
 }

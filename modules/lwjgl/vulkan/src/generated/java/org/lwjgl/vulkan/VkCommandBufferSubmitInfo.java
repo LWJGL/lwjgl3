@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code commandBuffer} <b>must</b> not have been allocated with {@link VK10#VK_COMMAND_BUFFER_LEVEL_SECONDARY COMMAND_BUFFER_LEVEL_SECONDARY}</li>
  * <li>If {@code deviceMask} is not 0, it <b>must</b> be a valid device mask</li>
- * <li>If any render pass instance in {@code commandBuffer} was recorded with a {@link VkRenderPassStripeBeginInfoARM} structure in its pNext chain, a {@link VkRenderPassStripeSubmitInfoARM} <b>must</b> be included in the {@code pNext} chain</li>
- * <li>If a {@link VkRenderPassStripeSubmitInfoARM} is included in the {@code pNext} chain, the value of {@link VkRenderPassStripeSubmitInfoARM}{@code ::stripeSemaphoreInfoCount} <b>must</b> be equal to the sum of the {@link VkRenderPassStripeBeginInfoARM}{@code ::stripeInfoCount} parameters provided to render pass instances recorded in {@code commandBuffer}</li>
+ * <li>If any render pass instance in {@code commandBuffer} was recorded with a {@link VkRenderPassStripeBeginInfoARM} structure in its pNext chain and did not specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} flag, a {@link VkRenderPassStripeSubmitInfoARM} <b>must</b> be included in the {@code pNext} chain</li>
+ * <li>If a {@link VkRenderPassStripeSubmitInfoARM} is included in the {@code pNext} chain, the value of {@link VkRenderPassStripeSubmitInfoARM}{@code ::stripeSemaphoreInfoCount} <b>must</b> be equal to the sum of the {@link VkRenderPassStripeBeginInfoARM}{@code ::stripeInfoCount} parameters provided to render pass instances recorded in {@code commandBuffer} that did not specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} flag</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

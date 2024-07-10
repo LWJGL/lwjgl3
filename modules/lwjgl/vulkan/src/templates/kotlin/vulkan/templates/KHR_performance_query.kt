@@ -433,7 +433,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 ￿    VkPerformanceCounterDescriptionKHR*         pCounterDescriptions);</code></pre>
 
         <h5>Description</h5>
-        If {@code pCounters} is {@code NULL} and {@code pCounterDescriptions} is {@code NULL}, then the number of counters available is returned in {@code pCounterCount}. Otherwise, {@code pCounterCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCounters}, {@code pCounterDescriptions}, or both arrays and on return the variable is overwritten with the number of structures actually written out. If {@code pCounterCount} is less than the number of counters available, at most {@code pCounterCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available counters were returned.
+        If {@code pCounters} is {@code NULL} and {@code pCounterDescriptions} is {@code NULL}, then the number of counters available is returned in {@code pCounterCount}. Otherwise, {@code pCounterCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pCounters}, {@code pCounterDescriptions}, or both arrays and on return the variable is overwritten with the number of structures actually written out. If {@code pCounterCount} is less than the number of counters available, at most {@code pCounterCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available counters were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

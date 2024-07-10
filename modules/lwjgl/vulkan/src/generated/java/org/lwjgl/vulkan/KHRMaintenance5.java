@@ -20,7 +20,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>A new {@link #VK_FORMAT_A8_UNORM_KHR FORMAT_A8_UNORM_KHR} format</li>
  * <li>A property to indicate that multisample coverage operations are performed after sample counting in EarlyFragmentTests mode</li>
  * <li>Relax VkBufferView creation requirements by allowing subsets of the associated VkBuffer usage using {@link VkBufferUsageFlags2CreateInfoKHR}</li>
- * <li>A new entry point {@link #vkCmdBindIndexBuffer2KHR CmdBindIndexBuffer2KHR}, allowing a range of memory to be bound as an index buffer</li>
+ * <li>A new command {@link #vkCmdBindIndexBuffer2KHR CmdBindIndexBuffer2KHR}, allowing a range of memory to be bound as an index buffer</li>
  * <li>{@link VK10#vkGetDeviceProcAddr GetDeviceProcAddr} must return {@code NULL} for supported core functions beyond the version requested by the application.</li>
  * <li>A property to indicate that the sample mask test is performed after sample counting in EarlyFragmentTests mode</li>
  * <li>{@code vkCmdBindVertexBuffers2} now supports using {@code VK_WHOLE_SIZE} in the {@code pSizes} parameter.</li>
@@ -453,7 +453,7 @@ public class KHRMaintenance5 {
         VK_PIPELINE_CREATE_2_DISABLE_OPTIMIZATION_BIT_KHR    = 0x1L,
         VK_PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR       = 0x2L,
         VK_PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR              = 0x4L,
-        VK_PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x0L;
+        VK_PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x400000000L;
 
     /**
      * VkBufferUsageFlagBits2KHR - Bitmask controlling how a pipeline is created

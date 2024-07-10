@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code ioSurface} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it will be used to underlie the {@code VkImage}. If {@code ioSurface} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the implementation will create a new {@code IOSurface} to underlie the {@code VkImage}.</p>
  * 
- * <p>If provided, the app <b>must</b> ensure that the configuration of the {@code IOSurfaceRef} object is compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.</p>
+ * <p>If provided, the application <b>must</b> ensure that the configuration of the {@code IOSurfaceRef} object is compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

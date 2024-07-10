@@ -172,12 +172,12 @@ public class KHRDynamicRenderingLocalRead {
     // --- [ vkCmdSetRenderingInputAttachmentIndicesKHR ] ---
 
     /** Unsafe version of: {@link #vkCmdSetRenderingInputAttachmentIndicesKHR CmdSetRenderingInputAttachmentIndicesKHR} */
-    public static void nvkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, long pLocationInfo) {
+    public static void nvkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, long pInputAttachmentIndexInfo) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetRenderingInputAttachmentIndicesKHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(commandBuffer.address(), pLocationInfo, __functionAddress);
+        callPPV(commandBuffer.address(), pInputAttachmentIndexInfo, __functionAddress);
     }
 
     /**
@@ -190,7 +190,7 @@ public class KHRDynamicRenderingLocalRead {
      * <pre><code>
      * void vkCmdSetRenderingInputAttachmentIndicesKHR(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkRenderingInputAttachmentIndexInfoKHR* pLocationInfo);</code></pre>
+     *     const VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -210,7 +210,7 @@ public class KHRDynamicRenderingLocalRead {
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pLocationInfo} <b>must</b> be a valid pointer to a valid {@link VkRenderingInputAttachmentIndexInfoKHR} structure</li>
+     * <li>{@code pInputAttachmentIndexInfo} <b>must</b> be a valid pointer to a valid {@link VkRenderingInputAttachmentIndexInfoKHR} structure</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called inside of a render pass instance</li>
@@ -235,10 +235,11 @@ public class KHRDynamicRenderingLocalRead {
      * 
      * <p>{@link VkRenderingInputAttachmentIndexInfoKHR}</p>
      *
-     * @param commandBuffer the command buffer into which the command will be recorded.
+     * @param commandBuffer             the command buffer into which the command will be recorded.
+     * @param pInputAttachmentIndexInfo a {@link VkRenderingInputAttachmentIndexInfoKHR} structure indicating the new mappings.
      */
-    public static void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInputAttachmentIndexInfoKHR const *") VkRenderingInputAttachmentIndexInfoKHR pLocationInfo) {
-        nvkCmdSetRenderingInputAttachmentIndicesKHR(commandBuffer, pLocationInfo.address());
+    public static void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInputAttachmentIndexInfoKHR const *") VkRenderingInputAttachmentIndexInfoKHR pInputAttachmentIndexInfo) {
+        nvkCmdSetRenderingInputAttachmentIndicesKHR(commandBuffer, pInputAttachmentIndexInfo.address());
     }
 
 }

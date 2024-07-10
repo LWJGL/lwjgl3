@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pfnAllocation} <b>must</b> be a valid pointer to a valid user-defined {@link VkAllocationFunction}</li>
- * <li>{@code pfnReallocation} <b>must</b> be a valid pointer to a valid user-defined {@link VkReallocationFunction}</li>
- * <li>{@code pfnFree} <b>must</b> be a valid pointer to a valid user-defined {@link VkFreeFunction}</li>
+ * <li>{@code pfnAllocation} <b>must</b> be a valid pointer to a valid application-defined {@link VkAllocationFunction}</li>
+ * <li>{@code pfnReallocation} <b>must</b> be a valid pointer to a valid application-defined {@link VkReallocationFunction}</li>
+ * <li>{@code pfnFree} <b>must</b> be a valid pointer to a valid application-defined {@link VkFreeFunction}</li>
  * <li>If either of {@code pfnInternalAllocation} or {@code pfnInternalFree} is not {@code NULL}, both <b>must</b> be valid callbacks</li>
  * </ul>
  * 

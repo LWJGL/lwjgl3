@@ -591,7 +591,7 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
         uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkRayTracingPipelineCreateInfoKHR{@code ::pGroups} or ##VkRayTracingPipelineCreateInfoNV{@code ::pGroups} array."),
         uint32_t("groupCount", "the number of shader handles to retrieve."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written.")
     )
 
     VkResult(
@@ -658,7 +658,7 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
         uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkRayTracingPipelineCreateInfoKHR{@code ::pGroups} array."),
         uint32_t("groupCount", "the number of shader handles to retrieve."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written.")
     )
 
     void(

@@ -158,7 +158,7 @@ public class NVDeviceDiagnosticCheckpoints {
      * 
      * <p>If {@code pCheckpointData} is {@code NULL}, then the number of checkpoint markers available is returned in {@code pCheckpointDataCount}.</p>
      * 
-     * <p>Otherwise, {@code pCheckpointDataCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCheckpointData} array, and on return the variable is overwritten with the number of structures actually written to {@code pCheckpointData}.</p>
+     * <p>Otherwise, {@code pCheckpointDataCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pCheckpointData} array, and on return the variable is overwritten with the number of structures actually written to {@code pCheckpointData}.</p>
      * 
      * <p>If {@code pCheckpointDataCount} is less than the number of checkpoint markers available, at most {@code pCheckpointDataCount} structures will be written.</p>
      * 

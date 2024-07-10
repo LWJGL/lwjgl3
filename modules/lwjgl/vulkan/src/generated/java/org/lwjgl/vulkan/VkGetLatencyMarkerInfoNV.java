@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code pTimings} is {@code NULL} then the maximum number of queryable frame data is returned in {@code timingCount}. Otherwise, {@code timingCount} <b>must</b> be set by the user to the number of elements in the {@code pTimings} array, and on return the variable is overwritten with the number of values actually written to {@code pTimings}. The elements of {@code pTimings} are arranged in the order they were requested in, with the oldest data in the first entry.</p>
+ * <p>If {@code pTimings} is {@code NULL} then the maximum number of queryable frame data is returned in {@code timingCount}. Otherwise, {@code timingCount} <b>must</b> be set by the application to the number of elements in the {@code pTimings} array, and on return the variable is overwritten with the number of values actually written to {@code pTimings}. The elements of {@code pTimings} are arranged in the order they were requested in, with the oldest data in the first entry.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

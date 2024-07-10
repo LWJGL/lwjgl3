@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pEnabledValidationFeatures} array contains {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT}, then it <b>must</b> also contain {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT}</li>
+ * <li>If the {@code pEnabledValidationFeatures} array contains {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT}, then it <b>must</b> also contain {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT} or {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT}</li>
  * <li>If the {@code pEnabledValidationFeatures} array contains {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT}, then it <b>must</b> not contain {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT}</li>
  * </ul>
  * 

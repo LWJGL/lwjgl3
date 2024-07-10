@@ -79,11 +79,11 @@ public class EXTHdrMetadata {
     }
 
     /**
-     * Set Hdr metadata.
+     * Set HDR metadata.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To provide Hdr metadata to an implementation, call:</p>
+     * <p>To provide HDR metadata to an implementation, call:</p>
      * 
      * <pre><code>
      * void vkSetHdrMetadataEXT(

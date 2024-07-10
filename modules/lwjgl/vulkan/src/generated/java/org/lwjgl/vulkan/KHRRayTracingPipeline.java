@@ -665,7 +665,7 @@ public class KHRRayTracingPipeline {
      * @param pipeline   the ray tracing pipeline object containing the shaders.
      * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pGroups} or {@link VkRayTracingPipelineCreateInfoNV}{@code ::pGroups} array.
      * @param groupCount the number of shader handles to retrieve.
-     * @param pData      a pointer to a user-allocated buffer where the results will be written.
+     * @param pData      a pointer to an application-allocated buffer where the results will be written.
      */
     @NativeType("VkResult")
     public static int vkGetRayTracingShaderGroupHandlesKHR(VkDevice device, @NativeType("VkPipeline") long pipeline, @NativeType("uint32_t") int firstGroup, @NativeType("uint32_t") int groupCount, @NativeType("void *") ByteBuffer pData) {
@@ -751,7 +751,7 @@ public class KHRRayTracingPipeline {
      * @param pipeline   the ray tracing pipeline object containing the shaders.
      * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pGroups} array.
      * @param groupCount the number of shader handles to retrieve.
-     * @param pData      a pointer to a user-allocated buffer where the results will be written.
+     * @param pData      a pointer to an application-allocated buffer where the results will be written.
      */
     @NativeType("VkResult")
     public static int vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(VkDevice device, @NativeType("VkPipeline") long pipeline, @NativeType("uint32_t") int firstGroup, @NativeType("uint32_t") int groupCount, @NativeType("void *") ByteBuffer pData) {

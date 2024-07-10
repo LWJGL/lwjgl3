@@ -859,7 +859,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkRayTracingPipelineCreateInfoKHR{@code ::pGroups} or ##VkRayTracingPipelineCreateInfoNV{@code ::pGroups} array."),
         uint32_t("groupCount", "the number of shader handles to retrieve."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written.")
     )
 
     VkResult(
@@ -910,7 +910,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkDevice("device", "the logical device that owns the acceleration structures."),
         VkAccelerationStructureNV("accelerationStructure", "the acceleration structure."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written.")
     )
 
     void(

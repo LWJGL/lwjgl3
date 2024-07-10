@@ -119,7 +119,7 @@ public class VkAccelerationStructureInstanceKHR extends Struct<VkAccelerationStr
 
     /** a {@link VkTransformMatrixKHR} structure describing a transformation to be applied to the acceleration structure. */
     public VkTransformMatrixKHR transform() { return ntransform(address()); }
-    /** a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
+    /** a 24-bit application-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
     @NativeType("uint32_t")
     public int instanceCustomIndex() { return ninstanceCustomIndex(address()); }
     /** an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0} */

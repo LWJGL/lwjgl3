@@ -227,7 +227,7 @@ public class KHRPushDescriptor {
      * struct AppDataStructure
      * {
      *     VkDescriptorImageInfo  imageInfo;          // a single image info
-     *     // ... some more application related data
+     *     // ... some more application-related data
      * };
      * 
      * const VkDescriptorUpdateTemplateEntry descriptorUpdateTemplateEntries[] =

@@ -250,11 +250,11 @@ public class EXTDebugMarker {
     }
 
     /**
-     * Give a user-friendly name to an object.
+     * Give an application-defined name to an object.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>An object can be given a user-friendly name by calling:</p>
+     * <p>An object can be given an application-defined name by calling:</p>
      * 
      * <pre><code>
      * VkResult vkDebugMarkerSetObjectNameEXT(

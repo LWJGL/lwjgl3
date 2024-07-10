@@ -602,7 +602,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
             <li>#RENDERING_RESUMING_BIT specifies that the render pass instance is resuming an earlier suspended render pass instance.</li>
             <li>#RENDERING_SUSPENDING_BIT specifies that the render pass instance will be suspended.</li>
             <li>#RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT specifies that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-legacy-dithering">Legacy Dithering</a> is enabled for the render pass instance.</li>
-            <li>#RENDERING_CONTENTS_INLINE_BIT_EXT specifies that draw calls for the render pass instance <b>can</b> be recorded inline within the current command buffer. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> feature is enabled this <b>can</b> be combined with the #RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT bit to allow draw calls to be recorded both inline and in secondary command buffers.</li>
+            <li>#RENDERING_CONTENTS_INLINE_BIT_KHR specifies that draw calls for the render pass instance <b>can</b> be recorded inline within the current command buffer. This <b>can</b> be combined with the #RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT bit to allow draw calls to be recorded both inline and in secondary command buffers.</li>
         </ul>
 
         The contents of {@code pRenderingInfo} <b>must</b> match between suspended render pass instances and the render pass instances that resume them, other than the presence or absence of the #RENDERING_RESUMING_BIT, #RENDERING_SUSPENDING_BIT, and #RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT flags. No action or synchronization commands, or other render pass instances, are allowed between suspending and resuming render pass instances.
@@ -736,7 +736,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkPhysicalDeviceToolProperties*             pToolProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.
+        If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.
 
         The count and properties of active tools <b>may</b> change in response to events outside the scope of the specification. An application <b>should</b> assume these properties might change at any given time.
 
@@ -888,7 +888,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         Associate data with a Vulkan object.
 
         <h5>C Specification</h5>
-        To store user defined data in a slot associated with a Vulkan object, call:
+        To store application-defined data in a slot associated with a Vulkan object, call:
 
         <pre><code>
 ￿VkResult vkSetPrivateData(
@@ -940,7 +940,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         VkObjectType("objectType", "a {@code VkObjectType} specifying the type of object to associate data with."),
         uint64_t("objectHandle", "a handle to the object to associate data with."),
         VkPrivateDataSlot("privateDataSlot", "a handle to a {@code VkPrivateDataSlot} specifying location of private data storage."),
-        uint64_t("data", "user defined data to associate the object with. This data will be stored at {@code privateDataSlot}.")
+        uint64_t("data", "application-defined data to associate the object with. This data will be stored at {@code privateDataSlot}.")
     )
 
     void(
@@ -949,7 +949,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         Retrieve data associated with a Vulkan object.
 
         <h5>C Specification</h5>
-        To retrieve user defined data from a slot associated with a Vulkan object, call:
+        To retrieve application-defined data from a slot associated with a Vulkan object, call:
 
         <pre><code>
 ￿void vkGetPrivateData(
@@ -994,7 +994,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         VkObjectType("objectType", "a {@code VkObjectType} specifying the type of object data is associated with."),
         uint64_t("objectHandle", "a handle to the object data is associated with."),
         VkPrivateDataSlot("privateDataSlot", "a handle to a {@code VkPrivateDataSlot} specifying location of private data pointer storage."),
-        Check(1)..uint64_t.p("pData", "a pointer to specify where user data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.")
+        Check(1)..uint64_t.p("pData", "a pointer to specify where application-defined data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.")
     )
 
     // Promoted from VK_KHR_synchronization2 (extension 315)
@@ -2663,6 +2663,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
                     <li>the value of ##VkApplicationInfo{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
                 </ul>
             </li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-depthBounds">{@code depthBounds}</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be #FALSE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

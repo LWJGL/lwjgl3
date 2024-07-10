@@ -1288,7 +1288,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pPhysicalDeviceGroupProperties} is {@code NULL}, then the number of device groups available is returned in {@code pPhysicalDeviceGroupCount}. Otherwise, {@code pPhysicalDeviceGroupCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPhysicalDeviceGroupProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pPhysicalDeviceGroupProperties}. If {@code pPhysicalDeviceGroupCount} is less than the number of device groups available, at most {@code pPhysicalDeviceGroupCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available device groups were returned.
+        If {@code pPhysicalDeviceGroupProperties} is {@code NULL}, then the number of device groups available is returned in {@code pPhysicalDeviceGroupCount}. Otherwise, {@code pPhysicalDeviceGroupCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pPhysicalDeviceGroupProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pPhysicalDeviceGroupProperties}. If {@code pPhysicalDeviceGroupCount} is less than the number of device groups available, at most {@code pPhysicalDeviceGroupCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available device groups were returned.
 
         Every physical device <b>must</b> be in exactly one device group.
 
@@ -2116,8 +2116,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿{
 ￿    VkDescriptorImageInfo  imageInfo;          // a single image info
 ￿    VkDescriptorBufferInfo bufferInfoArray[3]; // 3 buffer infos in an array
-￿    AppBufferView          bufferView[2];      // An application defined structure containing a bufferView
-￿    // ... some more application related data
+￿    AppBufferView          bufferView[2];      // An application-defined structure containing a bufferView
+￿    // ... some more application-related data
 ￿};
 ￿
 ￿const VkDescriptorUpdateTemplateEntry descriptorUpdateTemplateEntries[] =

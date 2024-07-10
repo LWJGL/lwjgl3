@@ -103,7 +103,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct<VkPhysica
     /** indicates that the implementation supports the use of a shading rate image to derive an effective shading rate for fragment processing. It also indicates that the implementation supports the {@code ShadingRateNV} SPIR-V execution mode. */
     @NativeType("VkBool32")
     public boolean shadingRateImage() { return nshadingRateImage(address()) != 0; }
-    /** indicates that the implementation supports a user-configurable ordering of coverage samples in fragments larger than one pixel. */
+    /** indicates that the implementation supports an application-configurable ordering of coverage samples in fragments larger than one pixel. */
     @NativeType("VkBool32")
     public boolean shadingRateCoarseSampleOrder() { return nshadingRateCoarseSampleOrder(address()) != 0; }
 

@@ -14,7 +14,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application’s use of Vulkan. This extension defines a way for layers and the implementation to call back to the application for events of interest to the application.
 
         <h5>Examples</h5>
-        {@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
+        {@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application-defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
         To capture events that occur while creating or destroying an instance an application <b>can</b> link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance().
 
@@ -158,7 +158,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>Description</h5>
         <ul>
             <li>#DEBUG_REPORT_ERROR_BIT_EXT specifies that the application has violated a valid usage condition of the specification.</li>
-            <li>#DEBUG_REPORT_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+            <li>#DEBUG_REPORT_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an application bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
             <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT specifies a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
             <li>#DEBUG_REPORT_INFORMATION_BIT_EXT specifies an informational message such as resource details that may be handy when debugging an application.</li>
             <li>#DEBUG_REPORT_DEBUG_BIT_EXT specifies diagnostic information from the implementation and layers.</li>
@@ -393,8 +393,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         VkDebugReportFlagsEXT("flags", "specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
         VkDebugReportObjectTypeEXT("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
         uint64_t("object", "the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),
-        size_t("location", "an application defined value."),
-        int32_t("messageCode", "an application defined value."),
+        size_t("location", "an application-defined value."),
+        int32_t("messageCode", "an application-defined value."),
         charUTF8.const.p("pLayerPrefix", "the abbreviation of the component making this event/message."),
         charUTF8.const.p("pMessage", "a null-terminated UTF-8 string detailing the trigger conditions.")
     )

@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_map_memory_placed = "EXTMapMemoryPlaced".nativeClassVK("EXT_map_memory_placed", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension allows a client to request that #MapMemory2KHR() attempt to place the memory map at a particular virtual address.
+        This extension allows an application to request that #MapMemory2KHR() attempt to place the memory map at a particular virtual address.
 
         <dl>
             <dt><b>Name String</b></dt>

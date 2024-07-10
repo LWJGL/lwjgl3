@@ -122,7 +122,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayPropertiesKHR*                     pProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pProperties} is {@code NULL}, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+        If {@code pProperties} is {@code NULL}, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -161,7 +161,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         Query the plane properties.
 
         <h5>C Specification</h5>
-        Images are presented to individual planes on a display. Devices <b>must</b> support at least one plane on each display. Planes <b>can</b> be stacked and blended to composite multiple images on one display. Devices <b>may</b> support only a fixed stacking order and fixed mapping between planes and displays, or they <b>may</b> allow arbitrary application specified stacking orders and mappings between planes and displays. To query the properties of device display planes, call:
+        Images are presented to individual planes on a display. Devices <b>must</b> support at least one plane on each display. Planes <b>can</b> be stacked and blended to composite multiple images on one display. Devices <b>may</b> support only a fixed stacking order and fixed mapping between planes and displays, or they <b>may</b> allow arbitrary application-specified stacking orders and mappings between planes and displays. To query the properties of device display planes, call:
 
         <pre><code>
 ￿VkResult vkGetPhysicalDeviceDisplayPlanePropertiesKHR(
@@ -170,7 +170,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayPlanePropertiesKHR*                pProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pProperties} is {@code NULL}, then the number of display planes available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written.
+        If {@code pProperties} is {@code NULL}, then the number of display planes available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -219,7 +219,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayKHR*                               pDisplays);</code></pre>
 
         <h5>Description</h5>
-        If {@code pDisplays} is {@code NULL}, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in {@code pDisplayCount}. Otherwise, {@code pDisplayCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pDisplays} array, and on return the variable is overwritten with the number of handles actually written to {@code pDisplays}. If the value of {@code pDisplayCount} is less than the number of usable display-plane pairs for {@code physicalDevice}, at most {@code pDisplayCount} handles will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available pairs were returned.
+        If {@code pDisplays} is {@code NULL}, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in {@code pDisplayCount}. Otherwise, {@code pDisplayCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pDisplays} array, and on return the variable is overwritten with the number of handles actually written to {@code pDisplays}. If the value of {@code pDisplayCount} is less than the number of usable display-plane pairs for {@code physicalDevice}, at most {@code pDisplayCount} handles will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available pairs were returned.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -271,7 +271,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayModePropertiesKHR*                 pProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pProperties} is {@code NULL}, then the number of display modes available on the specified {@code display} for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available display modes were returned.
+        If {@code pProperties} is {@code NULL}, then the number of display modes available on the specified {@code display} for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available display modes were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

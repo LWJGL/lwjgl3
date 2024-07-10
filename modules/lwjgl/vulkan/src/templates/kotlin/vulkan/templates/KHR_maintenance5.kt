@@ -20,7 +20,7 @@ val KHR_maintenance5 = "KHRMaintenance5".nativeClassVK("KHR_maintenance5", type 
             <li>A new #FORMAT_A8_UNORM_KHR format</li>
             <li>A property to indicate that multisample coverage operations are performed after sample counting in EarlyFragmentTests mode</li>
             <li>Relax VkBufferView creation requirements by allowing subsets of the associated VkBuffer usage using ##VkBufferUsageFlags2CreateInfoKHR</li>
-            <li>A new entry point #CmdBindIndexBuffer2KHR(), allowing a range of memory to be bound as an index buffer</li>
+            <li>A new command #CmdBindIndexBuffer2KHR(), allowing a range of memory to be bound as an index buffer</li>
             <li>#GetDeviceProcAddr() must return {@code NULL} for supported core functions beyond the version requested by the application.</li>
             <li>A property to indicate that the sample mask test is performed after sample counting in EarlyFragmentTests mode</li>
             <li>{@code vkCmdBindVertexBuffers2} now supports using {@code VK_WHOLE_SIZE} in the {@code pSizes} parameter.</li>
@@ -381,7 +381,7 @@ val KHR_maintenance5 = "KHRMaintenance5".nativeClassVK("KHR_maintenance5", type 
         "PIPELINE_CREATE_2_DISABLE_OPTIMIZATION_BIT_KHR".enum(0x00000001L),
         "PIPELINE_CREATE_2_ALLOW_DERIVATIVES_BIT_KHR".enum(0x00000002L),
         "PIPELINE_CREATE_2_DERIVATIVE_BIT_KHR".enum(0x00000004L),
-        "PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT".enum(0x0L) // TODO: bug in Vulkan-Docs?
+        "PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT".enum(0x400000000L) // TODO: bug in Vulkan-Docs?
     )
 
     EnumConstantLong(

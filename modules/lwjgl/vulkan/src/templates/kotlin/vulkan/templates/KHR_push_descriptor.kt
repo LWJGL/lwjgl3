@@ -218,7 +218,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 ￿struct AppDataStructure
 ￿{
 ￿    VkDescriptorImageInfo  imageInfo;          // a single image info
-￿    // ... some more application related data
+￿    // ... some more application-related data
 ￿};
 ￿
 ￿const VkDescriptorUpdateTemplateEntry descriptorUpdateTemplateEntries[] =

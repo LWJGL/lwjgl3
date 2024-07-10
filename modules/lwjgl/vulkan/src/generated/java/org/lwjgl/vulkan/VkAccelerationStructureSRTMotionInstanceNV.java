@@ -131,7 +131,7 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAcceler
     public VkSRTDataNV transformT0() { return ntransformT0(address()); }
     /** a {@link VkSRTDataNV} structure describing a transformation to be applied to the acceleration structure at time 1. */
     public VkSRTDataNV transformT1() { return ntransformT1(address()); }
-    /** a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
+    /** a 24-bit application-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
     @NativeType("uint32_t")
     public int instanceCustomIndex() { return ninstanceCustomIndex(address()); }
     /** an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0} */

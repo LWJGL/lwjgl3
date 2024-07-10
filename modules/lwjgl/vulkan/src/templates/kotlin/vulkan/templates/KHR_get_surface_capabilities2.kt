@@ -152,7 +152,7 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>Description</h5>
         #GetPhysicalDeviceSurfaceFormats2KHR() behaves similarly to #GetPhysicalDeviceSurfaceFormatsKHR(), with the ability to be extended via {@code pNext} chains.
 
-        If {@code pSurfaceFormats} is {@code NULL}, then the number of format tuples supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format tuples supported, at most {@code pSurfaceFormatCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
+        If {@code pSurfaceFormats} is {@code NULL}, then the number of format tuples supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format tuples supported, at most {@code pSurfaceFormatCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
 
         <h5>Valid Usage</h5>
         <ul>

@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds a new {@code VkFormatFeatureFlagBits2KHR} 64bits format feature flag type to extend the existing {@code VkFormatFeatureFlagBits} which is limited to 31 flags. At the time of this writing 29 bits of {@code VkFormatFeatureFlagBits} are already used.
  * 
- * <p>Because {@link VkFormatProperties2} is already defined to extend the Vulkan 1.0 {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} entry point, this extension defines a new {@link VkFormatProperties3KHR} to extend the {@link VkFormatProperties}.</p>
+ * <p>Because {@link VkFormatProperties2} is already defined to extend the Vulkan 1.0 {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} command, this extension defines a new {@link VkFormatProperties3KHR} to extend the {@link VkFormatProperties}.</p>
  * 
  * <p>On top of replicating all the bits from {@code VkFormatFeatureFlagBits}, {@code VkFormatFeatureFlagBits2KHR} adds the following bits :</p>
  * 

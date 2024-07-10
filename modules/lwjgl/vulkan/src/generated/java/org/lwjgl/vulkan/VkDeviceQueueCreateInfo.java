@@ -132,7 +132,7 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
     /** an unsigned integer specifying the number of queues to create in the queue family indicated by {@code queueFamilyIndex}, and with the behavior specified by {@code flags}. */
     @NativeType("uint32_t")
     public int queueCount() { return nqueueCount(address()); }
-    /** a pointer to an array of {@code queueCount} normalized floating point values, specifying priorities of work that will be submitted to each created queue. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#devsandqueues-priority">Queue Priority</a> for more information. */
+    /** a pointer to an array of {@code queueCount} normalized floating-point values, specifying priorities of work that will be submitted to each created queue. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#devsandqueues-priority">Queue Priority</a> for more information. */
     @NativeType("float const *")
     public FloatBuffer pQueuePriorities() { return npQueuePriorities(address()); }
 

@@ -102,10 +102,10 @@ public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysica
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports placing memory maps at client-specified virtual addresses. */
+    /** indicates that the implementation supports placing memory maps at application-specified virtual addresses. */
     @NativeType("VkBool32")
     public boolean memoryMapPlaced() { return nmemoryMapPlaced(address()) != 0; }
-    /** indicates that the implementation supports placing memory maps of a subrange of a memory object at client-specified virtual addresses. */
+    /** indicates that the implementation supports placing memory maps of a subrange of a memory object at application-specified virtual addresses. */
     @NativeType("VkBool32")
     public boolean memoryMapRangePlaced() { return nmemoryMapRangePlaced(address()) != 0; }
     /** indicates that the implementation supports leaving the memory range reserved when unmapping a memory object. */

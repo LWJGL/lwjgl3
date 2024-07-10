@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #gopFrameCount};
  *     uint32_t {@link #idrPeriod};
  *     uint32_t {@link #consecutiveBFrameCount};
- *     uint32_t subLayerCount;
+ *     uint32_t {@link #subLayerCount};
  * }</code></pre>
  */
 public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH265RateControlInfoKHR> implements NativeResource {
@@ -141,7 +141,7 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
     /** the number of consecutive B frames between I and/or P frames within the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-gop">GOP</a>. */
     @NativeType("uint32_t")
     public int consecutiveBFrameCount() { return nconsecutiveBFrameCount(address()); }
-    /** @return the value of the {@code subLayerCount} field. */
+    /** specifies the number of H.265 sub-layers that the application intends to use. */
     @NativeType("uint32_t")
     public int subLayerCount() { return nsubLayerCount(address()); }
 
@@ -159,7 +159,7 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
     public VkVideoEncodeH265RateControlInfoKHR idrPeriod(@NativeType("uint32_t") int value) { nidrPeriod(address(), value); return this; }
     /** Sets the specified value to the {@link #consecutiveBFrameCount} field. */
     public VkVideoEncodeH265RateControlInfoKHR consecutiveBFrameCount(@NativeType("uint32_t") int value) { nconsecutiveBFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@code subLayerCount} field. */
+    /** Sets the specified value to the {@link #subLayerCount} field. */
     public VkVideoEncodeH265RateControlInfoKHR subLayerCount(@NativeType("uint32_t") int value) { nsubLayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -394,7 +394,7 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
         /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#consecutiveBFrameCount} field. */
         @NativeType("uint32_t")
         public int consecutiveBFrameCount() { return VkVideoEncodeH265RateControlInfoKHR.nconsecutiveBFrameCount(address()); }
-        /** @return the value of the {@code subLayerCount} field. */
+        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#subLayerCount} field. */
         @NativeType("uint32_t")
         public int subLayerCount() { return VkVideoEncodeH265RateControlInfoKHR.nsubLayerCount(address()); }
 
@@ -412,7 +412,7 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
         public VkVideoEncodeH265RateControlInfoKHR.Buffer idrPeriod(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nidrPeriod(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#consecutiveBFrameCount} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer consecutiveBFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nconsecutiveBFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@code subLayerCount} field. */
+        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#subLayerCount} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer subLayerCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nsubLayerCount(address(), value); return this; }
 
     }

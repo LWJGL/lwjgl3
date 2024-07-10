@@ -793,7 +793,7 @@ public class VK13 extends VK12 {
      * <li>{@link #VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} specifies that the render pass instance is resuming an earlier suspended render pass instance.</li>
      * <li>{@link #VK_RENDERING_SUSPENDING_BIT RENDERING_SUSPENDING_BIT} specifies that the render pass instance will be suspended.</li>
      * <li>{@link EXTLegacyDithering#VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT} specifies that <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-legacy-dithering">Legacy Dithering</a> is enabled for the render pass instance.</li>
-     * <li>{@link EXTNestedCommandBuffer#VK_RENDERING_CONTENTS_INLINE_BIT_EXT RENDERING_CONTENTS_INLINE_BIT_EXT} specifies that draw calls for the render pass instance <b>can</b> be recorded inline within the current command buffer. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a> feature is enabled this <b>can</b> be combined with the {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} bit to allow draw calls to be recorded both inline and in secondary command buffers.</li>
+     * <li>{@link KHRMaintenance7#VK_RENDERING_CONTENTS_INLINE_BIT_KHR RENDERING_CONTENTS_INLINE_BIT_KHR} specifies that draw calls for the render pass instance <b>can</b> be recorded inline within the current command buffer. This <b>can</b> be combined with the {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} bit to allow draw calls to be recorded both inline and in secondary command buffers.</li>
      * </ul>
      * 
      * <p>The contents of {@code pRenderingInfo} <b>must</b> match between suspended render pass instances and the render pass instances that resume them, other than the presence or absence of the {@link #VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT}, {@link #VK_RENDERING_SUSPENDING_BIT RENDERING_SUSPENDING_BIT}, and {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT} flags. No action or synchronization commands, or other render pass instances, are allowed between suspending and resuming render pass instances.</p>
@@ -945,7 +945,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.</p>
+     * <p>If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.</p>
      * 
      * <p>The count and properties of active tools <b>may</b> change in response to events outside the scope of the specification. An application <b>should</b> assume these properties might change at any given time.</p>
      * 
@@ -1140,7 +1140,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To store user defined data in a slot associated with a Vulkan object, call:</p>
+     * <p>To store application-defined data in a slot associated with a Vulkan object, call:</p>
      * 
      * <pre><code>
      * VkResult vkSetPrivateData(
@@ -1193,7 +1193,7 @@ public class VK13 extends VK12 {
      * @param objectType      a {@code VkObjectType} specifying the type of object to associate data with.
      * @param objectHandle    a handle to the object to associate data with.
      * @param privateDataSlot a handle to a {@code VkPrivateDataSlot} specifying location of private data storage.
-     * @param data            user defined data to associate the object with. This data will be stored at {@code privateDataSlot}.
+     * @param data            application-defined data to associate the object with. This data will be stored at {@code privateDataSlot}.
      */
     @NativeType("VkResult")
     public static int vkSetPrivateData(VkDevice device, @NativeType("VkObjectType") int objectType, @NativeType("uint64_t") long objectHandle, @NativeType("VkPrivateDataSlot") long privateDataSlot, @NativeType("uint64_t") long data) {
@@ -1220,7 +1220,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To retrieve user defined data from a slot associated with a Vulkan object, call:</p>
+     * <p>To retrieve application-defined data from a slot associated with a Vulkan object, call:</p>
      * 
      * <pre><code>
      * void vkGetPrivateData(
@@ -1268,7 +1268,7 @@ public class VK13 extends VK12 {
      * @param objectType      a {@code VkObjectType} specifying the type of object data is associated with.
      * @param objectHandle    a handle to the object data is associated with.
      * @param privateDataSlot a handle to a {@code VkPrivateDataSlot} specifying location of private data pointer storage.
-     * @param pData           a pointer to specify where user data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.
+     * @param pData           a pointer to specify where application-defined data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.
      */
     public static void vkGetPrivateData(VkDevice device, @NativeType("VkObjectType") int objectType, @NativeType("uint64_t") long objectHandle, @NativeType("VkPrivateDataSlot") long privateDataSlot, @NativeType("uint64_t *") LongBuffer pData) {
         if (CHECKS) {
@@ -3338,6 +3338,7 @@ public class VK13 extends VK12 {
      * <li>the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} parent of {@code commandBuffer} is greater than or equal to Version 1.3</li>
      * </ul>
      * </li>
+     * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthBounds">{@code depthBounds}</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

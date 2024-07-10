@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension is a device extension which enables attaching arbitrary payloads to Vulkan objects. It introduces the idea of private data slots as a means of storing a 64-bit unsigned integer of application defined data. Private data slots can be created or destroyed any time an associated device is available. Private data slots can be reserved at device creation time, and limiting use to the amount reserved will allow the extension to exhibit better performance characteristics.
+        This extension is a device extension which enables attaching arbitrary payloads to Vulkan objects. It introduces the idea of private data slots as a means of storing a 64-bit unsigned integer of application-defined data. Private data slots can be created or destroyed any time an associated device is available. Private data slots can be reserved at device creation time, and limiting use to the amount reserved will allow the extension to exhibit better performance characteristics.
 
         <h5>Promotion to Vulkan 1.3</h5>
         Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
@@ -119,7 +119,7 @@ val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type =
         VkObjectType("objectType", "a {@code VkObjectType} specifying the type of object to associate data with."),
         uint64_t("objectHandle", "a handle to the object to associate data with."),
         VkPrivateDataSlot("privateDataSlot", "a handle to a {@code VkPrivateDataSlot} specifying location of private data storage."),
-        uint64_t("data", "user defined data to associate the object with. This data will be stored at {@code privateDataSlot}.")
+        uint64_t("data", "application-defined data to associate the object with. This data will be stored at {@code privateDataSlot}.")
     )
 
     void(
@@ -130,6 +130,6 @@ val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type =
         VkObjectType("objectType", "a {@code VkObjectType} specifying the type of object data is associated with."),
         uint64_t("objectHandle", "a handle to the object data is associated with."),
         VkPrivateDataSlot("privateDataSlot", "a handle to a {@code VkPrivateDataSlot} specifying location of private data pointer storage."),
-        Check(1)..uint64_t.p("pData", "a pointer to specify where user data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.")
+        Check(1)..uint64_t.p("pData", "a pointer to specify where application-defined data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.")
     )
 }

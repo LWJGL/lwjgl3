@@ -848,7 +848,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         VkMicromapEXT.const.p("pMicromaps", "a pointer to an array of existing previously built micromaps."),
         VkQueryType("queryType", "a {@code VkQueryType} value specifying the property to be queried."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written."),
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written."),
         size_t("stride", "the stride in bytes between results for individual queries within {@code pData}.")
     )
 

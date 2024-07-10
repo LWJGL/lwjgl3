@@ -1033,7 +1033,7 @@ public class EXTOpacityMicromap {
      * @param device     the device which owns the micromaps in {@code pMicromaps}.
      * @param pMicromaps a pointer to an array of existing previously built micromaps.
      * @param queryType  a {@code VkQueryType} value specifying the property to be queried.
-     * @param pData      a pointer to a user-allocated buffer where the results will be written.
+     * @param pData      a pointer to an application-allocated buffer where the results will be written.
      * @param stride     the stride in bytes between results for individual queries within {@code pData}.
      */
     @NativeType("VkResult")

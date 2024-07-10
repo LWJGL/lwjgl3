@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@code pNext} chain <b>must</b> include one {@link VkImportMetalTextureInfoEXT} structure for each plane in the {@code VkImage}. The app <b>must</b> ensure that the configuration of the Metal {@code id&lt;MTLTexture&gt;} objects are compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.</p>
+ * <p>The {@code pNext} chain <b>must</b> include one {@link VkImportMetalTextureInfoEXT} structure for each plane in the {@code VkImage}. The application <b>must</b> ensure that the configuration of the Metal {@code id&lt;MTLTexture&gt;} objects are compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

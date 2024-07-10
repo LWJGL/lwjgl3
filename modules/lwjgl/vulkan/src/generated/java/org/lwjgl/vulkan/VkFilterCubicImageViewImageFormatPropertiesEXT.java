@@ -100,10 +100,10 @@ public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct<VkFil
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering. This field is set by the implementation. User-specified value is ignored. */
+    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering. This field is set by the implementation. An application-specified value is ignored. */
     @NativeType("VkBool32")
     public boolean filterCubic() { return nfilterCubic(address()) != 0; }
-    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering and minmax filtering. This field is set by the implementation. User-specified value is ignored. */
+    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering and minmax filtering. This field is set by the implementation. An application-specified value is ignored. */
     @NativeType("VkBool32")
     public boolean filterCubicMinmax() { return nfilterCubicMinmax(address()) != 0; }
 

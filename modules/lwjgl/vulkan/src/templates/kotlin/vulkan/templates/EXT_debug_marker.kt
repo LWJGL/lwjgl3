@@ -223,10 +223,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
     VkResult(
         "DebugMarkerSetObjectNameEXT",
         """
-        Give a user-friendly name to an object.
+        Give an application-defined name to an object.
 
         <h5>C Specification</h5>
-        An object can be given a user-friendly name by calling:
+        An object can be given an application-defined name by calling:
 
         <pre><code>
 ￿VkResult vkDebugMarkerSetObjectNameEXT(

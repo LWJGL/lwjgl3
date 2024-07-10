@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension is a device extension which enables attaching arbitrary payloads to Vulkan objects. It introduces the idea of private data slots as a means of storing a 64-bit unsigned integer of application defined data. Private data slots can be created or destroyed any time an associated device is available. Private data slots can be reserved at device creation time, and limiting use to the amount reserved will allow the extension to exhibit better performance characteristics.
+ * This extension is a device extension which enables attaching arbitrary payloads to Vulkan objects. It introduces the idea of private data slots as a means of storing a 64-bit unsigned integer of application-defined data. Private data slots can be created or destroyed any time an associated device is available. Private data slots can be reserved at device creation time, and limiting use to the amount reserved will allow the extension to exhibit better performance characteristics.
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
@@ -154,7 +154,7 @@ public class EXTPrivateData {
      * @param objectType      a {@code VkObjectType} specifying the type of object to associate data with.
      * @param objectHandle    a handle to the object to associate data with.
      * @param privateDataSlot a handle to a {@code VkPrivateDataSlot} specifying location of private data storage.
-     * @param data            user defined data to associate the object with. This data will be stored at {@code privateDataSlot}.
+     * @param data            application-defined data to associate the object with. This data will be stored at {@code privateDataSlot}.
      */
     @NativeType("VkResult")
     public static int vkSetPrivateDataEXT(VkDevice device, @NativeType("VkObjectType") int objectType, @NativeType("uint64_t") long objectHandle, @NativeType("VkPrivateDataSlot") long privateDataSlot, @NativeType("uint64_t") long data) {
@@ -183,7 +183,7 @@ public class EXTPrivateData {
      * @param objectType      a {@code VkObjectType} specifying the type of object data is associated with.
      * @param objectHandle    a handle to the object data is associated with.
      * @param privateDataSlot a handle to a {@code VkPrivateDataSlot} specifying location of private data pointer storage.
-     * @param pData           a pointer to specify where user data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.
+     * @param pData           a pointer to specify where application-defined data is returned. 0 will be written in the absence of a previous call to {@code vkSetPrivateData} using the object specified by {@code objectHandle}.
      */
     public static void vkGetPrivateDataEXT(VkDevice device, @NativeType("VkObjectType") int objectType, @NativeType("uint64_t") long objectHandle, @NativeType("VkPrivateDataSlot") long privateDataSlot, @NativeType("uint64_t *") LongBuffer pData) {
         if (CHECKS) {

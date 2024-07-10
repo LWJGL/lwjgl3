@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_renderpass2", type = "device", postfix = "KHR") {
     documentation =
         """
-        This extension provides a new entry point to create render passes in a way that can be easily extended by other extensions through the substructures of render pass creation. The Vulkan 1.0 render pass creation sub-structures do not include {@code sType}/{@code pNext} members. Additionally, the render pass begin/next/end commands have been augmented with new extensible structures for passing additional subpass information.
+        This extension provides a new command to create render passes in a way that can be easily extended by other extensions through the substructures of render pass creation. The Vulkan 1.0 render pass creation sub-structures do not include {@code sType}/{@code pNext} members. Additionally, the render pass begin/next/end commands have been augmented with new extensible structures for passing additional subpass information.
 
         The ##VkRenderPassMultiviewCreateInfo and ##VkInputAttachmentAspectReference structures that extended the original ##VkRenderPassCreateInfo are not accepted into the new creation functions, and instead their parameters are folded into this extension as follows:
 

@@ -24,7 +24,7 @@ val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClas
             <dd>426</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTFragmentDensityMap VK_EXT_fragment_density_map}</dd>
@@ -38,7 +38,7 @@ val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClas
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-09-03</dd>
+            <dd>2024-06-17</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -46,6 +46,7 @@ val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClas
                 <li>Jonathan Wicks, Qualcomm Technologies, Inc.</li>
                 <li>Jonathan Tinkham, Qualcomm Technologies, Inc.</li>
                 <li>Jeff Leger, Qualcomm Technologies, Inc.</li>
+                <li>Manan Katwala, Qualcomm Technologies, Inc.</li>
             </ul></dd>
         </dl>
         """
@@ -53,7 +54,7 @@ val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClas
     IntConstant(
         "The extension specification version.",
 
-        "QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION".."1"
+        "QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION".."2"
     )
 
     StringConstant(

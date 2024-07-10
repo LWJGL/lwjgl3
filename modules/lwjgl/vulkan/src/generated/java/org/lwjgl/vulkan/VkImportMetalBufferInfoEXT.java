@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The app <b>must</b> ensure that the configuration of the {@code id&lt;MTLBuffer&gt;} object is compatible with the configuration of the {@code VkDeviceMemory}. Failure to do so results in undefined behavior.</p>
+ * <p>The application <b>must</b> ensure that the configuration of the {@code id&lt;MTLBuffer&gt;} object is compatible with the configuration of the {@code VkDeviceMemory}. Failure to do so results in undefined behavior.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

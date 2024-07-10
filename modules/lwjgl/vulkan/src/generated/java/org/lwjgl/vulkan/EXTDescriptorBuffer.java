@@ -361,7 +361,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device          the logical device that gets the descriptor.
      * @param pDescriptorInfo a pointer to a {@link VkDescriptorGetInfoEXT} structure specifying the parameters of the descriptor to get.
-     * @param pDescriptor     a pointer to a user-allocated buffer where the descriptor will be written.
+     * @param pDescriptor     a pointer to an application-allocated buffer where the descriptor will be written.
      */
     public static void vkGetDescriptorEXT(VkDevice device, @NativeType("VkDescriptorGetInfoEXT const *") VkDescriptorGetInfoEXT pDescriptorInfo, @NativeType("void *") ByteBuffer pDescriptor) {
         nvkGetDescriptorEXT(device, pDescriptorInfo.address(), pDescriptor.remaining(), memAddress(pDescriptor));
@@ -694,7 +694,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device the logical device that gets the data.
      * @param pInfo  a pointer to a {@link VkBufferCaptureDescriptorDataInfoEXT} structure specifying the buffer.
-     * @param pData  a pointer to a user-allocated buffer where the data will be written.
+     * @param pData  a pointer to an application-allocated buffer where the data will be written.
      */
     @NativeType("VkResult")
     public static int vkGetBufferOpaqueCaptureDescriptorDataEXT(VkDevice device, @NativeType("VkBufferCaptureDescriptorDataInfoEXT const *") VkBufferCaptureDescriptorDataInfoEXT pInfo, @NativeType("void *") ByteBuffer pData) {
@@ -764,7 +764,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device the logical device that gets the data.
      * @param pInfo  a pointer to a {@link VkImageCaptureDescriptorDataInfoEXT} structure specifying the image.
-     * @param pData  a pointer to a user-allocated buffer where the data will be written.
+     * @param pData  a pointer to an application-allocated buffer where the data will be written.
      */
     @NativeType("VkResult")
     public static int vkGetImageOpaqueCaptureDescriptorDataEXT(VkDevice device, @NativeType("VkImageCaptureDescriptorDataInfoEXT const *") VkImageCaptureDescriptorDataInfoEXT pInfo, @NativeType("void *") ByteBuffer pData) {
@@ -834,7 +834,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device the logical device that gets the data.
      * @param pInfo  a pointer to a {@link VkImageViewCaptureDescriptorDataInfoEXT} structure specifying the image view.
-     * @param pData  a pointer to a user-allocated buffer where the data will be written.
+     * @param pData  a pointer to an application-allocated buffer where the data will be written.
      */
     @NativeType("VkResult")
     public static int vkGetImageViewOpaqueCaptureDescriptorDataEXT(VkDevice device, @NativeType("VkImageViewCaptureDescriptorDataInfoEXT const *") VkImageViewCaptureDescriptorDataInfoEXT pInfo, @NativeType("void *") ByteBuffer pData) {
@@ -904,7 +904,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device the logical device that gets the data.
      * @param pInfo  a pointer to a {@link VkSamplerCaptureDescriptorDataInfoEXT} structure specifying the sampler.
-     * @param pData  a pointer to a user-allocated buffer where the data will be written.
+     * @param pData  a pointer to an application-allocated buffer where the data will be written.
      */
     @NativeType("VkResult")
     public static int vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, @NativeType("VkSamplerCaptureDescriptorDataInfoEXT const *") VkSamplerCaptureDescriptorDataInfoEXT pInfo, @NativeType("void *") ByteBuffer pData) {
@@ -974,7 +974,7 @@ public class EXTDescriptorBuffer {
      *
      * @param device the logical device that gets the data.
      * @param pInfo  a pointer to a {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT} structure specifying the acceleration structure.
-     * @param pData  a pointer to a user-allocated buffer where the data will be written.
+     * @param pData  a pointer to an application-allocated buffer where the data will be written.
      */
     @NativeType("VkResult")
     public static int vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(VkDevice device, @NativeType("VkAccelerationStructureCaptureDescriptorDataInfoEXT const *") VkAccelerationStructureCaptureDescriptorDataInfoEXT pInfo, @NativeType("void *") ByteBuffer pData) {

@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension allows a client to request that {@link KHRMapMemory2#vkMapMemory2KHR MapMemory2KHR} attempt to place the memory map at a particular virtual address.
+ * This extension allows an application to request that {@link KHRMapMemory2#vkMapMemory2KHR MapMemory2KHR} attempt to place the memory map at a particular virtual address.
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

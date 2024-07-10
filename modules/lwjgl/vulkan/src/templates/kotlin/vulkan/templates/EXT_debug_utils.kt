@@ -28,7 +28,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>Examples</h5>
         <b>Example 1</b>
 
-        {@code VK_EXT_debug_utils} allows an application to register multiple callbacks with any Vulkan component wishing to report debug information. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
+        {@code VK_EXT_debug_utils} allows an application to register multiple callbacks with any Vulkan component wishing to report debug information. Some callbacks may log the information to a file, others may cause a debug break point or other application-defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
         To capture events that occur while creating or destroying an instance an application <b>can</b> link a ##VkDebugUtilsMessengerCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance().
 
@@ -314,7 +314,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <ul>
             <li>#DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT specifies the most verbose output indicating all diagnostic messages from the Vulkan loader, layers, and drivers should be captured.</li>
             <li>#DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT specifies an informational message such as resource details that may be handy when debugging an application.</li>
-            <li>#DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+            <li>#DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an application bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
             <li>#DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT specifies that the application has violated a valid usage condition of the specification.</li>
         </ul>
 
@@ -362,9 +362,11 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
     VkResult(
         "SetDebugUtilsObjectNameEXT",
         """
-        Give a user-friendly name to an object.
+        Give an application-defined name to an object.
 
         <h5>C Specification</h5>
+        An object can be given an application-defined name by calling:
+
         <pre><code>
 ￿VkResult vkSetDebugUtilsObjectNameEXT(
 ￿    VkDevice                                    device,
@@ -793,7 +795,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         Inject a message into a debug stream.
 
         <h5>C Specification</h5>
-        There may be times that a user wishes to intentionally submit a debug message. To do this, call:
+        To intentionally submit a debug message, call:
 
         <pre><code>
 ￿void vkSubmitDebugUtilsMessageEXT(

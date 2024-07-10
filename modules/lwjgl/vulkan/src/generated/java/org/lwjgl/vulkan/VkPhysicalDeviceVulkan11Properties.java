@@ -29,6 +29,11 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>The members of {@link VkPhysicalDeviceVulkan11Properties} have the same values as the corresponding members of {@link VkPhysicalDeviceIDProperties}, {@link VkPhysicalDeviceSubgroupProperties}, {@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDeviceMultiviewProperties}, {@link VkPhysicalDeviceProtectedMemoryProperties}, and {@link VkPhysicalDeviceMaintenance3Properties}.</p>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>The {@code subgroupSupportedStages}, {@code subgroupSupportedOperations}, and {@code subgroupQuadOperationsInAllStages} members of this structure correspond respectively to the {@link VkPhysicalDeviceSubgroupProperties}{@code ::supportedStages}, {@link VkPhysicalDeviceSubgroupProperties}{@code ::supportedOperations}, and {@link VkPhysicalDeviceSubgroupProperties}{@code ::quadOperationsInAllStages} members, but add the {@code subgroup} prefix to the member name.</p>
+ * </div>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

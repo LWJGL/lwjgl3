@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code stage} is not {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_DISPATCH_BASE_BIT_EXT SHADER_CREATE_DISPATCH_BASE_BIT_EXT}</li>
  * <li>If {@code stage} is not {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_NO_TASK_SHADER_BIT_EXT SHADER_CREATE_NO_TASK_SHADER_BIT_EXT}</li>
  * <li>If {@code flags} includes both {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} and {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT}, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
- * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} but not {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} and no {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">{@code subgroupSize}</a></li>
+ * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} but not {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} and no {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a></li>
  * <li>{@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_ALL_GRAPHICS SHADER_STAGE_ALL_GRAPHICS} or {@link VK10#VK_SHADER_STAGE_ALL SHADER_STAGE_ALL}</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}</li>
@@ -84,7 +84,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} or {@link VkValidationFeaturesEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkShaderCreateFlagBitsEXT} values</li>
  * <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
@@ -269,6 +269,8 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     public VkShaderCreateInfoEXT pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
     public VkShaderCreateInfoEXT pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+    public VkShaderCreateInfoEXT pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkShaderCreateInfoEXT flags(@NativeType("VkShaderCreateFlagsEXT") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #stage} field. */
@@ -627,6 +629,8 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
         public VkShaderCreateInfoEXT.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
         public VkShaderCreateInfoEXT.Buffer pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+        public VkShaderCreateInfoEXT.Buffer pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkShaderCreateInfoEXT#flags} field. */
         public VkShaderCreateInfoEXT.Buffer flags(@NativeType("VkShaderCreateFlagsEXT") int value) { VkShaderCreateInfoEXT.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkShaderCreateInfoEXT#stage} field. */

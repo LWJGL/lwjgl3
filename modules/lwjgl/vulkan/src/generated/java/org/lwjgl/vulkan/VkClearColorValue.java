@@ -25,6 +25,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the image has more than one sample, the same value is written to all samples for any pixels being cleared.</p>
  * 
+ * <p>If the image or attachment format has a 64-bit component width, the first 2 array elements of each of the arrays above are reinterpreted as a single 64-bit element for the R component. The next 2 array elements are used in the same way for the G component. In other words, the union behaves as if it had the following additional members:</p>
+ * 
+ * <pre><code>
+ * double float64[2];
+ * int64_t int64[2];
+ * uint64_t uint64[2];</code></pre>
+ * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkClearValue}, {@link VkSamplerCustomBorderColorCreateInfoEXT}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}</p>
@@ -89,10 +96,10 @@ public class VkClearColorValue extends Struct<VkClearColorValue> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** are the color clear values when the format of the image or attachment is one of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
+    /** are the color clear values when the format of the image or attachment is one of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating-point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
     @NativeType("float[4]")
     public FloatBuffer float32() { return nfloat32(address()); }
-    /** are the color clear values when the format of the image or attachment is one of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
+    /** are the color clear values when the format of the image or attachment is one of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating-point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
     public float float32(int index) { return nfloat32(address(), index); }
     /** are the color clear values when the format of the image or attachment has a numeric type that is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined. */
     @NativeType("int32_t[4]")

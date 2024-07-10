@@ -19,7 +19,7 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 
         When done, the application will then destroy the function handle, as well as the CUDA module handle with #DestroyCudaFunctionNV() and #DestroyCudaModuleNV().
 
-        To reduce the impact of compilation time, this extension offers the capability to return a binary cache from the PTX that was provided. For this, a first query for the required cache size is made with #GetCudaModuleCacheNV() with a {@code NULL} pointer to a buffer and with a valid pointer receiving the size; then another call of the same function with a valid pointer to a buffer to retrieve the data. The resulting cache could then be user later for further runs of this application by sending this cache instead of the PTX code (using the same #CreateCudaModuleNV()), thus significantly speeding up the initialization of the CUDA module.
+        To reduce the impact of compilation time, this extension offers the capability to return a binary cache from the PTX that was provided. For this, a first query for the required cache size is made with #GetCudaModuleCacheNV() with a {@code NULL} pointer to a buffer and with a valid pointer receiving the size; then another call of the same function with a valid pointer to a buffer to retrieve the data. The resulting cache could then be used later for further runs of this application by sending this cache instead of the PTX code (using the same #CreateCudaModuleNV()), thus significantly speeding up the initialization of the CUDA module.
 
         As with {@code VkPipelineCache}, the binary cache depends on the hardware architecture. The application must assume the cache might fail, and need to handle falling back to the original PTX code as necessary. Most often, the cache will succeed if the same GPU driver and architecture is used between the cache generation from PTX and the use of this cache. In the event of a new driver version, or if using a different GPU architecture, the cache is likely to become invalid.
 
@@ -163,7 +163,7 @@ val NV_cuda_kernel_launch = "NVCudaKernelLaunch".nativeClassVK("NV_cuda_kernel_l
 ￿    void*                                       pCacheData);</code></pre>
 
         <h5>Description</h5>
-        If {@code pCacheData} is {@code NULL}, then the size of the binary cache, in bytes, is returned in {@code pCacheSize}. Otherwise, {@code pCacheSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pCacheData}, and on return the variable is overwritten with the amount of data actually written to {@code pCacheData}. If {@code pCacheSize} is less than the size of the binary shader code, nothing is written to {@code pCacheData}, and #INCOMPLETE will be returned instead of #SUCCESS.
+        If {@code pCacheData} is {@code NULL}, then the size of the binary cache, in bytes, is returned in {@code pCacheSize}. Otherwise, {@code pCacheSize} <b>must</b> point to a variable set by the application to the size of the buffer, in bytes, pointed to by {@code pCacheData}, and on return the variable is overwritten with the amount of data actually written to {@code pCacheData}. If {@code pCacheSize} is less than the size of the binary shader code, nothing is written to {@code pCacheData}, and #INCOMPLETE will be returned instead of #SUCCESS.
 
         The returned cache <b>may</b> then be used later for further initialization of the CUDA module, by sending this cache <em>instead</em> of the PTX code when using #CreateCudaModuleNV().
 

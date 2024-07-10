@@ -38,6 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code dstBinding} <b>must</b> be less than or equal to the maximum value of {@code binding} of all {@link VkDescriptorSetLayoutBinding} structures specified when {@code dstSet}’s descriptor set layout was created</li>
  * <li>{@code dstBinding} <b>must</b> be a binding with a non-zero {@code descriptorCount}</li>
+ * <li>{@code dstBinding} <b>must</b> be a binding with a non-zero {@link VkDescriptorSetLayoutCreateInfo}{@code ::bindingCount}</li>
  * <li>All consecutive bindings updated via a single {@link VkWriteDescriptorSet} structure, except those with a {@code descriptorCount} of zero, <b>must</b> have identical {@code descriptorType} and {@code stageFlags}</li>
  * <li>All consecutive bindings updated via a single {@link VkWriteDescriptorSet} structure, except those with a {@code descriptorCount} of zero, <b>must</b> all either use immutable samplers or <b>must</b> all not use immutable samplers</li>
  * <li>{@code descriptorType} <b>must</b> match the type of {@code dstBinding} within {@code dstSet}</li>
