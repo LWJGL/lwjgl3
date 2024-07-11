@@ -1504,7 +1504,8 @@ allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
 VkBuffer buf;
 VmaAllocation alloc;
 VmaAllocationInfo allocInfo;
-vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
+VkResult result = vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
+// Check result...
 
 VkMemoryPropertyFlags memPropFlags;
 vmaGetAllocationMemoryProperties(allocator, alloc, &memPropFlags);
@@ -1515,10 +1516,24 @@ if(memPropFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)
 
     // [Executed in runtime]:
     memcpy(allocInfo.pMappedData, myData, myDataSize);
+    result = vmaFlushAllocation(allocator, alloc, 0, VK_WHOLE_SIZE);
+    // Check result...
+
+    VkBufferMemoryBarrier bufMemBarrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
+    bufMemBarrier.srcAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+    bufMemBarrier.dstAccessMask = VK_ACCESS_UNIFORM_READ_BIT;
+    bufMemBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier.buffer = buf;
+    bufMemBarrier.offset = 0;
+    bufMemBarrier.size = VK_WHOLE_SIZE;
+
+    vkCmdPipelineBarrier(cmdBuf, VK_PIPELINE_STAGE_HOST_BIT, VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
+        0, 0, nullptr, 1, &bufMemBarrier, 0, nullptr);
 }
 else
 {
-    // Allocation ended up in a non-mappable memory - need to transfer.
+    // Allocation ended up in a non-mappable memory - a transfer using a staging buffer is required.
     VkBufferCreateInfo stagingBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
     stagingBufCreateInfo.size = 65536;
     stagingBufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
@@ -1531,18 +1546,46 @@ else
     VkBuffer stagingBuf;
     VmaAllocation stagingAlloc;
     VmaAllocationInfo stagingAllocInfo;
-    vmaCreateBuffer(allocator, &stagingBufCreateInfo, &stagingAllocCreateInfo,
-        &stagingBuf, &stagingAlloc, stagingAllocInfo);
+    result = vmaCreateBuffer(allocator, &stagingBufCreateInfo, &stagingAllocCreateInfo,
+        &stagingBuf, &stagingAlloc, &stagingAllocInfo);
+    // Check result...
 
     // [Executed in runtime]:
     memcpy(stagingAllocInfo.pMappedData, myData, myDataSize);
-    vmaFlushAllocation(allocator, stagingAlloc, 0, VK_WHOLE_SIZE);
-    //vkCmdPipelineBarrier: VK_ACCESS_HOST_WRITE_BIT --> VK_ACCESS_TRANSFER_READ_BIT
+    result = vmaFlushAllocation(allocator, stagingAlloc, 0, VK_WHOLE_SIZE);
+    // Check result...
+
+    VkBufferMemoryBarrier bufMemBarrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
+    bufMemBarrier.srcAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+    bufMemBarrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+    bufMemBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier.buffer = stagingBuf;
+    bufMemBarrier.offset = 0;
+    bufMemBarrier.size = VK_WHOLE_SIZE;
+
+    vkCmdPipelineBarrier(cmdBuf, VK_PIPELINE_STAGE_HOST_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+        0, 0, nullptr, 1, &bufMemBarrier, 0, nullptr);
+
     VkBufferCopy bufCopy = {
         0, // srcOffset
         0, // dstOffset,
-        myDataSize); // size
+        myDataSize, // size
+    };
+
     vkCmdCopyBuffer(cmdBuf, stagingBuf, buf, 1, &bufCopy);
+
+    VkBufferMemoryBarrier bufMemBarrier2 = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
+    bufMemBarrier2.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    bufMemBarrier2.dstAccessMask = VK_ACCESS_UNIFORM_READ_BIT; // We created a uniform buffer
+    bufMemBarrier2.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier2.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufMemBarrier2.buffer = buf;
+    bufMemBarrier2.offset = 0;
+    bufMemBarrier2.size = VK_WHOLE_SIZE;
+
+    vkCmdPipelineBarrier(cmdBuf, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
+        0, 0, nullptr, 1, &bufMemBarrier2, 0, nullptr);
 }""")}
 
         <h4>Other use cases</h4>
