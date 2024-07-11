@@ -229,7 +229,7 @@ public class BGFX {
     }
 
     /** API version */
-    public static final int BGFX_API_VERSION = 127;
+    public static final int BGFX_API_VERSION = 128;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -596,33 +596,33 @@ public class BGFX {
         BGFX_CAPS_COMPUTE                  = 0x4L,
         BGFX_CAPS_CONSERVATIVE_RASTER      = 0x8L,
         BGFX_CAPS_DRAW_INDIRECT            = 0x10L,
-        BGFX_CAPS_FRAGMENT_DEPTH           = 0x20L,
-        BGFX_CAPS_FRAGMENT_ORDERING        = 0x40L,
-        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x80L,
-        BGFX_CAPS_HDR10                    = 0x100L,
-        BGFX_CAPS_HIDPI                    = 0x200L,
-        BGFX_CAPS_IMAGE_RW                 = 0x400L,
-        BGFX_CAPS_INDEX32                  = 0x800L,
-        BGFX_CAPS_INSTANCING               = 0x1000L,
-        BGFX_CAPS_OCCLUSION_QUERY          = 0x2000L,
-        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x4000L,
-        BGFX_CAPS_SWAP_CHAIN               = 0x8000L,
-        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x10000L,
-        BGFX_CAPS_TEXTURE_3D               = 0x20000L,
+        BGFX_CAPS_DRAW_INDIRECT_COUNT      = 0x20L,
+        BGFX_CAPS_FRAGMENT_DEPTH           = 0x40L,
+        BGFX_CAPS_FRAGMENT_ORDERING        = 0x80L,
+        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x100L,
+        BGFX_CAPS_HDR10                    = 0x200L,
+        BGFX_CAPS_HIDPI                    = 0x400L,
+        BGFX_CAPS_IMAGE_RW                 = 0x800L,
+        BGFX_CAPS_INDEX32                  = 0x1000L,
+        BGFX_CAPS_INSTANCING               = 0x2000L,
+        BGFX_CAPS_OCCLUSION_QUERY          = 0x4000L,
+        BGFX_CAPS_PRIMITIVE_ID             = 0x8000L,
+        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x10000L,
+        BGFX_CAPS_SWAP_CHAIN               = 0x20000L,
         BGFX_CAPS_TEXTURE_BLIT             = 0x40000L,
-        BGFX_CAPS_TRANSPARENT_BACKBUFFER   = 0x80000L,
+        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x80000L,
         BGFX_CAPS_TEXTURE_COMPARE_RESERVED = 0x100000L,
-        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x200000L,
-        BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL,
-        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x400000L,
-        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x800000L,
-        BGFX_CAPS_TEXTURE_READ_BACK        = 0x1000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x2000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x4000000L,
-        BGFX_CAPS_VERTEX_ID                = 0x8000000L,
-        BGFX_CAPS_PRIMITIVE_ID             = 0x10000000L,
-        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x20000000L,
-        BGFX_CAPS_DRAW_INDIRECT_COUNT      = 0x40000000L;
+        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x200000L,
+        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x400000L,
+        BGFX_CAPS_TEXTURE_READ_BACK        = 0x800000L,
+        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x1000000L,
+        BGFX_CAPS_TEXTURE_3D               = 0x2000000L,
+        BGFX_CAPS_TRANSPARENT_BACKBUFFER   = 0x4000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x8000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x10000000L,
+        BGFX_CAPS_VERTEX_ID                = 0x20000000L,
+        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x40000000L,
+        BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL;
 
     /** Format caps */
     public static final int
