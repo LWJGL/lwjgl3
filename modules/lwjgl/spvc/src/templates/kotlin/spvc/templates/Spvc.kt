@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."59")
+    IntConstant("", "C_API_VERSION_MINOR".."61")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -523,6 +523,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_READWRITE_TEXTURE_FENCES".enum("", "86 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_REPLACE_RECURSIVE_INPUTS".enum("", "87 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_AGX_MANUAL_CUBE_GRAD_FIXUP".enum("", "88 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_FORCE_FRAGMENT_WITH_SIDE_EFFECTS_EXECUTION".enum("", "89 | SPVC_COMPILER_OPTION_MSL_BIT"),
     )
 
     void(
@@ -575,9 +576,20 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
     void(
         "msl_resource_binding_init",
-        "Initializes the resource binding struct. The defaults are non-zero.",
+        """
+        Deprecated: Use #msl_resource_binding_init_2().
+
+        Initializes the resource binding struct. The defaults are non-zero.
+        """,
 
         spvc_msl_resource_binding.p("binding", "")
+    )
+
+    void(
+        "msl_resource_binding_init_2",
+        "Initializes the resource binding struct. The defaults are non-zero.",
+
+        spvc_msl_resource_binding_2.p("binding", "")
     )
 
     unsigned_int(
@@ -897,10 +909,18 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
     spvc_result(
         "compiler_msl_add_resource_binding",
-        "",
+        "Deprecated, use #compiler_msl_add_resource_binding_2().",
 
         spvc_compiler("compiler", ""),
         spvc_msl_resource_binding.const.p("binding", "")
+    )
+
+    spvc_result(
+        "compiler_msl_add_resource_binding_2",
+        "",
+
+        spvc_compiler("compiler", ""),
+        spvc_msl_resource_binding_2.const.p("binding", "")
     )
 
     spvc_result(

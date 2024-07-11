@@ -212,6 +212,8 @@ val spvc_msl_shader_interface_var_2 = struct(Module.SPVC, "SpvcMslShaderInterfac
 val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding", nativeName = "spvc_msl_resource_binding") {
     documentation =
         """
+        Deprecated, use ##SpvcMslResourceBinding2.
+
         Matches the binding index of a MSL resource for a binding within a descriptor set.
 
         Taken together, the {@code stage}, {@code desc_set} and {@code binding} combine to form a reference to a resource descriptor used in a particular
@@ -224,6 +226,27 @@ val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding", na
     SpvExecutionModel("stage", "")
     unsigned_int("desc_set", "")
     unsigned_int("binding", "")
+    unsigned_int("msl_buffer", "")
+    unsigned_int("msl_texture", "")
+    unsigned_int("msl_sampler", "")
+}
+
+val spvc_msl_resource_binding_2 = struct(Module.SPVC, "SpvcMslResourceBinding2", nativeName = "spvc_msl_resource_binding_2") {
+    documentation =
+        """
+        Matches the binding index of a MSL resource for a binding within a descriptor set.
+
+        Taken together, the {@code stage}, {@code desc_set} and {@code binding} combine to form a reference to a resource descriptor used in a particular
+        shading stage. If using MSL 2.0 argument buffers, the descriptor set is not marked as a discrete descriptor set, and (for iOS only) the resource is not
+        a storage image ({@code sampled != 2}), the binding reference we remap to will become an {@code [[id(N)]]} attribute within the "descriptor set"
+        argument buffer structure. For resources which are bound in the "classic" MSL 1.0 way or discrete descriptors, the remap will become a
+        {@code [[buffer(N)]]}, {@code [[texture(N)]]} or {@code [[sampler(N)]]} depending on the resource types used.
+        """
+
+    SpvExecutionModel("stage", "")
+    unsigned_int("desc_set", "")
+    unsigned_int("binding", "")
+    unsigned_int("count", "")
     unsigned_int("msl_buffer", "")
     unsigned_int("msl_texture", "")
     unsigned_int("msl_sampler", "")
