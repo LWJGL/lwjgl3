@@ -325,7 +325,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 200;
+    public static final int MESHOPTIMIZER_VERSION = 210;
 
     /**
      * {@code meshopt_EncodeExpMode}
@@ -354,9 +354,18 @@ public class MeshOptimizer {
      * 
      * <p>Useful for simplifying portions of the larger mesh.</p>
      * </li>
+     * <li>{@link #meshopt_SimplifySparse SimplifySparse} - 
+     * Improve simplification performance assuming input indices are a sparse subset of the mesh.
+     * 
+     * <p>Note that error becomes relative to subset extents.</p>
+     * </li>
+     * <li>{@link #meshopt_SimplifyErrorAbsolute SimplifyErrorAbsolute} - Treat error limit and resulting error as absolute instead of relative to mesh extents.</li>
      * </ul>
      */
-    public static final int meshopt_SimplifyLockBorder = 1 << 0;
+    public static final int
+        meshopt_SimplifyLockBorder    = 1 << 0,
+        meshopt_SimplifySparse        = 1 << 1,
+        meshopt_SimplifyErrorAbsolute = 1 << 2;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();

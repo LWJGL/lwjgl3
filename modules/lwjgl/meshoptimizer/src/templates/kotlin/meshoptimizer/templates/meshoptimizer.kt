@@ -302,7 +302,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "MESHOPTIMIZER_VERSION".."200").noPrefix()
+    IntConstant("", "MESHOPTIMIZER_VERSION".."210").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -808,6 +808,18 @@ nmeshopt_setAllocator(
             Useful for simplifying portions of the larger mesh.
             """,
             "1 << 0"
+        ),
+        "SimplifySparse".enum(
+            """
+            Improve simplification performance assuming input indices are a sparse subset of the mesh.
+
+            Note that error becomes relative to subset extents.
+            """,
+            "1 << 1"
+        ),
+        "SimplifyErrorAbsolute".enum(
+            "Treat error limit and resulting error as absolute instead of relative to mesh extents.",
+            "1 << 2"
         )
     )
 
