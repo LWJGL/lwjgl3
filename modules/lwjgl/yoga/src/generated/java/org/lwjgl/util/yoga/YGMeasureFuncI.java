@@ -50,7 +50,7 @@ public interface YGMeasureFuncI extends CallbackI {
     }
 
     /**
-     * Returns the computed dimensions of the node, following the contraints of {@code widthMode} and {@code heightMode}:
+     * Returns the computed dimensions of the node, following the constraints of {@code widthMode} and {@code heightMode}:
      * 
      * <p>{@link Yoga#YGMeasureModeUndefined MeasureModeUndefined}: The parent has not imposed any constraint on the child. It can be whatever size it wants.</p>
      * 

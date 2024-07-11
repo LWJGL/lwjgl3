@@ -45,7 +45,7 @@ public interface YGBaselineFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Returns a defined offet to baseline (ascent). */
+    /** Returns a defined offset to baseline (ascent). */
     float invoke(@NativeType("YGNodeConstRef") long node, float width, float height);
 
 }

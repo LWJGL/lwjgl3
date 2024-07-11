@@ -629,7 +629,7 @@ public class Yoga {
     /**
      * Frees the Yoga node without disconnecting it from its owner or children.
      * 
-     * <p>Allows garbage collecting Yoga nodes in parallel when the entire tree is unrechable.</p>
+     * <p>Allows garbage collecting Yoga nodes in parallel when the entire tree is unreachable.</p>
      */
     public static void YGNodeFinalize(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -1779,6 +1779,19 @@ public class Yoga {
             check(node);
         }
         nYGNodeStyleSetGap(node, gutter, gapLength);
+    }
+
+    // --- [ YGNodeStyleSetGapPercent ] ---
+
+    /** Unsafe version of: {@link #YGNodeStyleSetGapPercent NodeStyleSetGapPercent} */
+    public static native void nYGNodeStyleSetGapPercent(long node, int gutter, float gapLength);
+
+    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    public static void YGNodeStyleSetGapPercent(@NativeType("YGNodeRef") long node, @NativeType("YGGutter") int gutter, float gapLength) {
+        if (CHECKS) {
+            check(node);
+        }
+        nYGNodeStyleSetGapPercent(node, gutter, gapLength);
     }
 
     // --- [ YGNodeStyleGetGap ] ---

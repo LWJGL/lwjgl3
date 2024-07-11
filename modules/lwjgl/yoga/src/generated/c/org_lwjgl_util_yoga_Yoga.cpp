@@ -663,6 +663,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleSetGap(JNIEnv *
     YGNodeStyleSetGap(node, (YGGutter)gutter, gapLength);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleSetGapPercent(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint gutter, jfloat gapLength) {
+    YGNodeRef node = (YGNodeRef)(uintptr_t)nodeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGNodeStyleSetGapPercent(node, (YGGutter)gutter, gapLength);
+}
+
 JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleGetGap(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint gutter) {
     YGNodeConstRef node = (YGNodeConstRef)(uintptr_t)nodeAddress;
     UNUSED_PARAMS(__env, clazz)

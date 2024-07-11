@@ -44,7 +44,7 @@ val YGMeasureFunc = Module.YOGA.callback {
     YGSize(
         "YGMeasureFunc",
         """
-        Returns the computed dimensions of the node, following the contraints of {@code widthMode} and {@code heightMode}:
+        Returns the computed dimensions of the node, following the constraints of {@code widthMode} and {@code heightMode}:
 
         #MeasureModeUndefined: The parent has not imposed any constraint on the child. It can be whatever size it wants.
  
@@ -67,7 +67,7 @@ val YGMeasureFunc = Module.YOGA.callback {
 val YGBaselineFunc = Module.YOGA.callback {
     float(
         "YGBaselineFunc",
-        "Returns a defined offet to baseline (ascent).",
+        "Returns a defined offset to baseline (ascent).",
 
         YGNodeConstRef("node", ""),
         float("width", ""),

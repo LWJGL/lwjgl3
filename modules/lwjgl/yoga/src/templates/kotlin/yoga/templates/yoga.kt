@@ -369,7 +369,7 @@ ENABLE_WARNINGS()""")
         """
         Frees the Yoga node without disconnecting it from its owner or children.
 
-        Allows garbage collecting Yoga nodes in parallel when the entire tree is unrechable.
+        Allows garbage collecting Yoga nodes in parallel when the entire tree is unreachable.
         """,
 
         YGNodeRef("node", "")
@@ -925,6 +925,14 @@ ENABLE_WARNINGS()""")
 
     void(
         "NodeStyleSetGap",
+        "",
+
+        YGNodeRef("node", ""),
+        YGGutter("gutter", "", Gutters),
+        float("gapLength", "")
+    )
+    void(
+        "NodeStyleSetGapPercent",
         "",
 
         YGNodeRef("node", ""),
