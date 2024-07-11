@@ -174,6 +174,13 @@ static nfdresult_t CopyUtf8String(const char* utf8Str, nfdnchar_t** out) {
     return NFD_ERROR;
 }
 
+static NSWindow* GetNativeWindowHandle(const nfdwindowhandle_t* parentWindow) {
+    if (parentWindow->type != NFD_WINDOW_HANDLE_TYPE_COCOA) {
+        return NULL;
+    }
+    return (NSWindow*)parentWindow->handle;
+}
+
 /* public */
 
 const char* NFD_GetError(void) {
@@ -215,18 +222,36 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
                             const nfdnchar_t* defaultPath) {
+    nfdopendialognargs_t args = {0};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    return NFD_OpenDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_OpenDialogN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdopendialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     nfdresult_t result = NFD_CANCEL;
     @autoreleasepool {
-        NSWindow* keyWindow = [[NSApplication sharedApplication] keyWindow];
+        NSWindow* keyWindow = GetNativeWindowHandle(&args->parentWindow);
+        if (keyWindow) {
+            [keyWindow makeKeyAndOrderFront:nil];
+        } else {
+            keyWindow = [[NSApplication sharedApplication] keyWindow];
+        }
 
         NSOpenPanel* dialog = [NSOpenPanel openPanel];
         [dialog setAllowsMultipleSelection:NO];
 
         // Build the filter list
-        AddFilterListToDialog(dialog, filterList, filterCount);
+        AddFilterListToDialog(dialog, args->filterList, args->filterCount);
 
         // Set the starting directory
-        SetDefaultPath(dialog, defaultPath);
+        SetDefaultPath(dialog, args->defaultPath);
 
         if ([dialog runModal] == NSModalResponseOK) {
             const NSURL* url = [dialog URL];
@@ -247,22 +272,46 @@ nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
     return NFD_OpenDialogN(outPath, filterList, filterCount, defaultPath);
 }
 
+nfdresult_t NFD_OpenDialogU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdopendialogu8args_t* args) {
+    return NFD_OpenDialogN_With_Impl(version, outPath, args);
+}
+
 nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
                                     nfdfiltersize_t filterCount,
                                     const nfdnchar_t* defaultPath) {
+    nfdopendialognargs_t args = {0};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    return NFD_OpenDialogMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, &args);
+}
+
+nfdresult_t NFD_OpenDialogMultipleN_With_Impl(nfdversion_t version,
+                                              const nfdpathset_t** outPaths,
+                                              const nfdopendialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     nfdresult_t result = NFD_CANCEL;
     @autoreleasepool {
-        NSWindow* keyWindow = [[NSApplication sharedApplication] keyWindow];
+        NSWindow* keyWindow = GetNativeWindowHandle(&args->parentWindow);
+        if (keyWindow) {
+            [keyWindow makeKeyAndOrderFront:nil];
+        } else {
+            keyWindow = [[NSApplication sharedApplication] keyWindow];
+        }
 
         NSOpenPanel* dialog = [NSOpenPanel openPanel];
         [dialog setAllowsMultipleSelection:YES];
 
         // Build the filter list
-        AddFilterListToDialog(dialog, filterList, filterCount);
+        AddFilterListToDialog(dialog, args->filterList, args->filterCount);
 
         // Set the starting directory
-        SetDefaultPath(dialog, defaultPath);
+        SetDefaultPath(dialog, args->defaultPath);
 
         if ([dialog runModal] == NSModalResponseOK) {
             const NSArray* urls = [dialog URLs];
@@ -288,14 +337,39 @@ nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
     return NFD_OpenDialogMultipleN(outPaths, filterList, filterCount, defaultPath);
 }
 
+nfdresult_t NFD_OpenDialogMultipleU8_With_Impl(nfdversion_t version,
+                                               const nfdpathset_t** outPaths,
+                                               const nfdopendialogu8args_t* args) {
+    return NFD_OpenDialogMultipleN_With_Impl(version, outPaths, args);
+}
+
 nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
                             const nfdnchar_t* defaultPath,
                             const nfdnchar_t* defaultName) {
+    nfdsavedialognargs_t args = {0};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    args.defaultName = defaultName;
+    return NFD_SaveDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_SaveDialogN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdsavedialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     nfdresult_t result = NFD_CANCEL;
     @autoreleasepool {
-        NSWindow* keyWindow = [[NSApplication sharedApplication] keyWindow];
+        NSWindow* keyWindow = GetNativeWindowHandle(&args->parentWindow);
+        if (keyWindow) {
+            [keyWindow makeKeyAndOrderFront:nil];
+        } else {
+            keyWindow = [[NSApplication sharedApplication] keyWindow];
+        }
 
         NSSavePanel* dialog = [NSSavePanel savePanel];
         [dialog setExtensionHidden:NO];
@@ -304,13 +378,13 @@ nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
         [dialog setAllowsOtherFileTypes:TRUE];
 
         // Build the filter list
-        AddFilterListToDialog(dialog, filterList, filterCount);
+        AddFilterListToDialog(dialog, args->filterList, args->filterCount);
 
         // Set the starting directory
-        SetDefaultPath(dialog, defaultPath);
+        SetDefaultPath(dialog, args->defaultPath);
 
         // Set the default file name
-        SetDefaultName(dialog, defaultName);
+        SetDefaultName(dialog, args->defaultName);
 
         if ([dialog runModal] == NSModalResponseOK) {
             const NSURL* url = [dialog URL];
@@ -332,10 +406,32 @@ nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
     return NFD_SaveDialogN(outPath, filterList, filterCount, defaultPath, defaultName);
 }
 
+nfdresult_t NFD_SaveDialogU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdsavedialogu8args_t* args) {
+    return NFD_SaveDialogN_With_Impl(version, outPath, args);
+}
+
 nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath) {
+    nfdpickfoldernargs_t args = {0};
+    args.defaultPath = defaultPath;
+    return NFD_PickFolderN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_PickFolderN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdpickfoldernargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     nfdresult_t result = NFD_CANCEL;
     @autoreleasepool {
-        NSWindow* keyWindow = [[NSApplication sharedApplication] keyWindow];
+        NSWindow* keyWindow = GetNativeWindowHandle(&args->parentWindow);
+        if (keyWindow) {
+            [keyWindow makeKeyAndOrderFront:nil];
+        } else {
+            keyWindow = [[NSApplication sharedApplication] keyWindow];
+        }
 
         NSOpenPanel* dialog = [NSOpenPanel openPanel];
         [dialog setAllowsMultipleSelection:NO];
@@ -344,7 +440,7 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
         [dialog setCanChooseFiles:NO];
 
         // Set the starting directory
-        SetDefaultPath(dialog, defaultPath);
+        SetDefaultPath(dialog, args->defaultPath);
 
         if ([dialog runModal] == NSModalResponseOK) {
             const NSURL* url = [dialog URL];
@@ -360,6 +456,70 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
 
 nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath) {
     return NFD_PickFolderN(outPath, defaultPath);
+}
+
+nfdresult_t NFD_PickFolderU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdpickfolderu8args_t* args) {
+    return NFD_PickFolderN_With_Impl(version, outPath, args);
+}
+
+nfdresult_t NFD_PickFolderMultipleN(const nfdpathset_t** outPaths, const nfdnchar_t* defaultPath) {
+    nfdpickfoldernargs_t args = {0};
+    args.defaultPath = defaultPath;
+    return NFD_PickFolderMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, &args);
+}
+
+nfdresult_t NFD_PickFolderMultipleN_With_Impl(nfdversion_t version,
+                                              const nfdpathset_t** outPaths,
+                                              const nfdpickfoldernargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
+    nfdresult_t result = NFD_CANCEL;
+    @autoreleasepool {
+        NSWindow* keyWindow = GetNativeWindowHandle(&args->parentWindow);
+        if (keyWindow) {
+            [keyWindow makeKeyAndOrderFront:nil];
+        } else {
+            keyWindow = [[NSApplication sharedApplication] keyWindow];
+        }
+
+        NSOpenPanel* dialog = [NSOpenPanel openPanel];
+        [dialog setAllowsMultipleSelection:YES];
+        [dialog setCanChooseDirectories:YES];
+        [dialog setCanCreateDirectories:YES];
+        [dialog setCanChooseFiles:NO];
+
+        // Set the starting directory
+        SetDefaultPath(dialog, args->defaultPath);
+
+        if ([dialog runModal] == NSModalResponseOK) {
+            const NSArray* urls = [dialog URLs];
+
+            if ([urls count] > 0) {
+                // have at least one URL, we return this NSArray
+                [urls retain];
+                *outPaths = (const nfdpathset_t*)urls;
+                result = NFD_OKAY;
+            }
+        }
+
+        // return focus to the key window (i.e. main window)
+        [keyWindow makeKeyAndOrderFront:nil];
+    }
+    return result;
+}
+
+nfdresult_t NFD_PickFolderMultipleU8(const nfdpathset_t** outPaths,
+                                     const nfdu8char_t* defaultPath) {
+    return NFD_PickFolderMultipleN(outPaths, defaultPath);
+}
+
+nfdresult_t NFD_PickFolderMultipleU8_With_Impl(nfdversion_t version,
+                                               const nfdpathset_t** outPaths,
+                                               const nfdpickfolderu8args_t* args) {
+    return NFD_PickFolderMultipleN_With_Impl(version, outPaths, args);
 }
 
 nfdresult_t NFD_PathSet_GetCount(const nfdpathset_t* pathSet, nfdpathsetsize_t* count) {

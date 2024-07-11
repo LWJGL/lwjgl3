@@ -29,6 +29,9 @@
 
 #ifdef __cplusplus
 extern "C" {
+#define NFD_INLINE inline
+#else
+#define NFD_INLINE static inline
 #endif  // __cplusplus
 
 #include <stddef.h>
@@ -93,6 +96,83 @@ typedef struct {
 typedef nfdu8filteritem_t nfdnfilteritem_t;
 #endif  // _WIN32
 
+// The native window handle type.
+enum {
+    NFD_WINDOW_HANDLE_TYPE_UNSET = 0,
+    // Windows: handle is HWND (the Windows API typedefs this to void*)
+    NFD_WINDOW_HANDLE_TYPE_WINDOWS = 1,
+    // Cocoa: handle is NSWindow*
+    NFD_WINDOW_HANDLE_TYPE_COCOA = 2,
+    // X11: handle is Window
+    NFD_WINDOW_HANDLE_TYPE_X11 = 3,
+    // Wayland support will be implemented separately in the future
+};
+// The native window handle.  If using a platform abstraction framework (e.g. SDL2), this should be
+// obtained using the corresponding NFD glue header (e.g. nfd_sdl2.h).
+typedef struct {
+    size_t type;  // this is one of the values of the enum above
+    void* handle;
+} nfdwindowhandle_t;
+
+typedef size_t nfdversion_t;
+
+typedef struct {
+    const nfdu8filteritem_t* filterList;
+    nfdfiltersize_t filterCount;
+    const nfdu8char_t* defaultPath;
+    nfdwindowhandle_t parentWindow;
+} nfdopendialogu8args_t;
+
+#ifdef _WIN32
+typedef struct {
+    const nfdnfilteritem_t* filterList;
+    nfdfiltersize_t filterCount;
+    const nfdnchar_t* defaultPath;
+    nfdwindowhandle_t parentWindow;
+} nfdopendialognargs_t;
+#else
+typedef nfdopendialogu8args_t nfdopendialognargs_t;
+#endif  // _WIN32
+
+typedef struct {
+    const nfdu8filteritem_t* filterList;
+    nfdfiltersize_t filterCount;
+    const nfdu8char_t* defaultPath;
+    const nfdu8char_t* defaultName;
+    nfdwindowhandle_t parentWindow;
+} nfdsavedialogu8args_t;
+
+#ifdef _WIN32
+typedef struct {
+    const nfdnfilteritem_t* filterList;
+    nfdfiltersize_t filterCount;
+    const nfdnchar_t* defaultPath;
+    const nfdnchar_t* defaultName;
+    nfdwindowhandle_t parentWindow;
+} nfdsavedialognargs_t;
+#else
+typedef nfdsavedialogu8args_t nfdsavedialognargs_t;
+#endif  // _WIN32
+
+typedef struct {
+    const nfdu8char_t* defaultPath;
+    nfdwindowhandle_t parentWindow;
+} nfdpickfolderu8args_t;
+
+#ifdef _WIN32
+typedef struct {
+    const nfdnchar_t* defaultPath;
+    nfdwindowhandle_t parentWindow;
+} nfdpickfoldernargs_t;
+#else
+typedef nfdpickfolderu8args_t nfdpickfoldernargs_t;
+#endif  // _WIN32
+
+// This is a unique identifier tagged to all the NFD_*With() function calls, for backward
+// compatibility purposes.  There is usually no need to use this directly, unless you want to use
+// NFD differently depending on the version you're building with.
+#define NFD_INTERFACE_VERSION 1
+
 /** Free a file path that was returned by the dialogs.
  *
  *  Note: use NFD_PathSet_FreePathN() to free path from pathset instead of this function. */
@@ -134,6 +214,35 @@ NFD_API nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
                                      nfdfiltersize_t filterCount,
                                      const nfdu8char_t* defaultPath);
 
+/** This function is a library implementation detail.  Please use NFD_OpenDialogN_With() instead. */
+NFD_API nfdresult_t NFD_OpenDialogN_With_Impl(nfdversion_t version,
+                                              nfdnchar_t** outPath,
+                                              const nfdopendialognargs_t* args);
+
+/** Single file open dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathN() if this function
+ *  returns NFD_OKAY.  See documentation of nfdopendialognargs_t for details. */
+NFD_INLINE nfdresult_t NFD_OpenDialogN_With(nfdnchar_t** outPath,
+                                            const nfdopendialognargs_t* args) {
+    return NFD_OpenDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
+/** This function is a library implementation detail.  Please use NFD_OpenDialogU8_With() instead.
+ */
+NFD_API nfdresult_t NFD_OpenDialogU8_With_Impl(nfdversion_t version,
+                                               nfdu8char_t** outPath,
+                                               const nfdopendialogu8args_t* args);
+
+/** Single file open dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathU8() if this function
+ *  returns NFD_OKAY.  See documentation of nfdopendialogu8args_t for details. */
+NFD_INLINE nfdresult_t NFD_OpenDialogU8_With(nfdu8char_t** outPath,
+                                             const nfdopendialogu8args_t* args) {
+    return NFD_OpenDialogU8_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
 /** Multiple file open dialog
  *
  *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeN() if this function
@@ -157,6 +266,36 @@ NFD_API nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
                                              const nfdu8filteritem_t* filterList,
                                              nfdfiltersize_t filterCount,
                                              const nfdu8char_t* defaultPath);
+
+/** This function is a library implementation detail.  Please use NFD_OpenDialogMultipleN_With()
+ * instead. */
+NFD_API nfdresult_t NFD_OpenDialogMultipleN_With_Impl(nfdversion_t version,
+                                                      const nfdpathset_t** outPaths,
+                                                      const nfdopendialognargs_t* args);
+
+/** Multiple file open dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeN() if this function
+ *  returns NFD_OKAY.  See documentation of nfdopendialognargs_t for details. */
+NFD_INLINE nfdresult_t NFD_OpenDialogMultipleN_With(const nfdpathset_t** outPaths,
+                                                    const nfdopendialognargs_t* args) {
+    return NFD_OpenDialogMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, args);
+}
+
+/** This function is a library implementation detail.  Please use NFD_OpenDialogU8_With() instead.
+ */
+NFD_API nfdresult_t NFD_OpenDialogMultipleU8_With_Impl(nfdversion_t version,
+                                                       const nfdpathset_t** outPaths,
+                                                       const nfdopendialogu8args_t* args);
+
+/** Multiple file open dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeU8() if this function
+ *  returns NFD_OKAY.  See documentation of nfdopendialogu8args_t for details. */
+NFD_INLINE nfdresult_t NFD_OpenDialogMultipleU8_With(const nfdpathset_t** outPaths,
+                                                     const nfdopendialogu8args_t* args) {
+    return NFD_OpenDialogMultipleU8_With_Impl(NFD_INTERFACE_VERSION, outPaths, args);
+}
 
 /** Save dialog
  *
@@ -184,7 +323,36 @@ NFD_API nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
                                      const nfdu8char_t* defaultPath,
                                      const nfdu8char_t* defaultName);
 
-/** Select folder dialog
+/** This function is a library implementation detail.  Please use NFD_SaveDialogN_With() instead. */
+NFD_API nfdresult_t NFD_SaveDialogN_With_Impl(nfdversion_t version,
+                                              nfdnchar_t** outPath,
+                                              const nfdsavedialognargs_t* args);
+
+/** Single file save dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathN() if this function
+ *  returns NFD_OKAY.  See documentation of nfdsavedialognargs_t for details. */
+NFD_INLINE nfdresult_t NFD_SaveDialogN_With(nfdnchar_t** outPath,
+                                            const nfdsavedialognargs_t* args) {
+    return NFD_SaveDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
+/** This function is a library implementation detail.  Please use NFD_SaveDialogU8_With() instead.
+ */
+NFD_API nfdresult_t NFD_SaveDialogU8_With_Impl(nfdversion_t version,
+                                               nfdu8char_t** outPath,
+                                               const nfdsavedialogu8args_t* args);
+
+/** Single file save dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathU8() if this function
+ *  returns NFD_OKAY.  See documentation of nfdsavedialogu8args_t for details. */
+NFD_INLINE nfdresult_t NFD_SaveDialogU8_With(nfdu8char_t** outPath,
+                                             const nfdsavedialogu8args_t* args) {
+    return NFD_SaveDialogU8_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
+/** Select single folder dialog
  *
  *  It is the caller's responsibility to free `outPath` via NFD_FreePathN() if this function returns
  *  NFD_OKAY.
@@ -192,13 +360,91 @@ NFD_API nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
  *  @param defaultPath If null, the operating system will decide. */
 NFD_API nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath);
 
-/** Select folder dialog
+/** Select single folder dialog
  *
  *  It is the caller's responsibility to free `outPath` via NFD_FreePathU8() if this function
  *  returns NFD_OKAY.
  *  @param[out] outPath
  *  @param defaultPath If null, the operating system will decide. */
 NFD_API nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath);
+
+/** This function is a library implementation detail.  Please use NFD_PickFolderN_With() instead. */
+NFD_API nfdresult_t NFD_PickFolderN_With_Impl(nfdversion_t version,
+                                              nfdnchar_t** outPath,
+                                              const nfdpickfoldernargs_t* args);
+
+/** Select single folder dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathN() if this function
+ *  returns NFD_OKAY.  See documentation of nfdpickfoldernargs_t for details. */
+NFD_INLINE nfdresult_t NFD_PickFolderN_With(nfdnchar_t** outPath,
+                                            const nfdpickfoldernargs_t* args) {
+    return NFD_PickFolderN_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
+/** This function is a library implementation detail.  Please use NFD_PickFolderU8_With() instead.
+ */
+NFD_API nfdresult_t NFD_PickFolderU8_With_Impl(nfdversion_t version,
+                                               nfdu8char_t** outPath,
+                                               const nfdpickfolderu8args_t* args);
+
+/** Select single folder dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPath` via NFD_FreePathU8() if this function
+ *  returns NFD_OKAY.  See documentation of nfdpickfolderu8args_t for details. */
+NFD_INLINE nfdresult_t NFD_PickFolderU8_With(nfdu8char_t** outPath,
+                                             const nfdpickfolderu8args_t* args) {
+    return NFD_PickFolderU8_With_Impl(NFD_INTERFACE_VERSION, outPath, args);
+}
+
+/** Select multiple folder dialog
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeN() if this function
+ *  returns NFD_OKAY.
+ *  @param[out] outPaths
+ *  @param defaultPath If null, the operating system will decide. */
+NFD_API nfdresult_t NFD_PickFolderMultipleN(const nfdpathset_t** outPaths,
+                                            const nfdnchar_t* defaultPath);
+
+/** Select multiple folder dialog
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeU8() if this function
+ *  returns NFD_OKAY.
+ *  @param[out] outPaths
+ *  @param defaultPath If null, the operating system will decide. */
+NFD_API nfdresult_t NFD_PickFolderMultipleU8(const nfdpathset_t** outPaths,
+                                             const nfdu8char_t* defaultPath);
+
+/** This function is a library implementation detail.  Please use NFD_PickFolderMultipleN_With()
+ * instead. */
+NFD_API nfdresult_t NFD_PickFolderMultipleN_With_Impl(nfdversion_t version,
+                                                      const nfdpathset_t** outPaths,
+                                                      const nfdpickfoldernargs_t* args);
+
+/** Select multiple folder dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeN() if this function
+ *  returns NFD_OKAY.  See documentation of nfdopendialogargs_t for details. */
+NFD_INLINE nfdresult_t NFD_PickFolderMultipleN_With(const nfdpathset_t** outPaths,
+                                                    const nfdpickfoldernargs_t* args) {
+    return NFD_PickFolderMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, args);
+}
+
+/** This function is a library implementation detail.  Please use NFD_PickFolderMultipleU8_With()
+ * instead.
+ */
+NFD_API nfdresult_t NFD_PickFolderMultipleU8_With_Impl(nfdversion_t version,
+                                                       const nfdpathset_t** outPaths,
+                                                       const nfdpickfolderu8args_t* args);
+
+/** Select multiple folder dialog, with additional parameters.
+ *
+ *  It is the caller's responsibility to free `outPaths` via NFD_PathSet_FreeU8() if this function
+ *  returns NFD_OKAY.  See documentation of nfdpickfolderargs_t for details. */
+NFD_INLINE nfdresult_t NFD_PickFolderMultipleU8_With(const nfdpathset_t** outPaths,
+                                                     const nfdpickfolderu8args_t* args) {
+    return NFD_PickFolderMultipleU8_With_Impl(NFD_INTERFACE_VERSION, outPaths, args);
+}
 
 /** Get the last error
  *
@@ -289,9 +535,15 @@ typedef nfdnchar_t nfdchar_t;
 typedef nfdnfilteritem_t nfdfilteritem_t;
 #define NFD_FreePath NFD_FreePathN
 #define NFD_OpenDialog NFD_OpenDialogN
+#define NFD_OpenDialog_With NFD_OpenDialogN_With
 #define NFD_OpenDialogMultiple NFD_OpenDialogMultipleN
+#define NFD_OpenDialogMultiple_With NFD_OpenDialogMultipleN_With
 #define NFD_SaveDialog NFD_SaveDialogN
+#define NFD_SaveDialog_With NFD_SaveDialogN_With
 #define NFD_PickFolder NFD_PickFolderN
+#define NFD_PickFolder_With NFD_PickFolderN_With
+#define NFD_PickFolderMultiple NFD_PickFolderMultipleN
+#define NFD_PickFolderMultiple_With NFD_PickFolderMultipleN_With
 #define NFD_PathSet_GetPath NFD_PathSet_GetPathN
 #define NFD_PathSet_FreePath NFD_PathSet_FreePathN
 #define NFD_PathSet_EnumNext NFD_PathSet_EnumNextN
@@ -300,14 +552,21 @@ typedef nfdu8char_t nfdchar_t;
 typedef nfdu8filteritem_t nfdfilteritem_t;
 #define NFD_FreePath NFD_FreePathU8
 #define NFD_OpenDialog NFD_OpenDialogU8
+#define NFD_OpenDialog_With NFD_OpenDialogU8_With
 #define NFD_OpenDialogMultiple NFD_OpenDialogMultipleU8
+#define NFD_OpenDialogMultiple_With NFD_OpenDialogMultipleU8_With
 #define NFD_SaveDialog NFD_SaveDialogU8
+#define NFD_SaveDialog_With NFD_SaveDialogU8_With
 #define NFD_PickFolder NFD_PickFolderU8
+#define NFD_PickFolder_With NFD_PickFolderU8_With
+#define NFD_PickFolderMultiple NFD_PickFolderMultipleU8
+#define NFD_PickFolderMultiple_With NFD_PickFolderMultipleU8_With
 #define NFD_PathSet_GetPath NFD_PathSet_GetPathU8
 #define NFD_PathSet_FreePath NFD_PathSet_FreePathU8
 #define NFD_PathSet_EnumNext NFD_PathSet_EnumNextU8
 #endif  // NFD_NATIVE
 
+#undef NFD_INLINE
 #ifdef __cplusplus
 }
 #endif  // __cplusplus

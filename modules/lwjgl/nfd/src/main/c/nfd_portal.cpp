@@ -11,6 +11,7 @@
 #include <dbus/dbus.h>
 #include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -115,11 +116,47 @@ T* transform(const T* begin, const T* end, T* out, Callback callback) {
     return out;
 }
 
+template <typename T>
+T* reverse_copy(const T* begin, const T* end, T* out) {
+    while (begin != end) {
+        *out++ = *--end;
+    }
+    return out;
+}
+
+// Returns true if ch is in [0-9A-Za-z], false otherwise.
+bool IsHex(char ch) {
+    return ('0' <= ch && ch <= '9') || ('A' <= ch && ch <= 'F') || ('a' <= ch && ch <= 'f');
+}
+
+// Returns the hexadecimal value contained in the char.  Precondition: IsHex(ch)
+char ParseHexUnchecked(char ch) {
+    if ('0' <= ch && ch <= '9') return ch - '0';
+    if ('A' <= ch && ch <= 'F') return ch - ('A' - 10);
+    if ('a' <= ch && ch <= 'f') return ch - ('a' - 10);
+#if defined(__GNUC__)
+    __builtin_unreachable();
+#endif
+}
+
+// Writes val as a hex string to out
+char* FormatUIntToHexString(char* out, uintptr_t val) {
+    char tmp[sizeof(uintptr_t) * 2];
+    char* tmp_end = tmp;
+    do {
+        const uintptr_t digit = val & 15u;
+        *tmp_end++ = digit < 10 ? '0' + digit : 'A' - 10 + digit;
+        val >>= 4;
+    } while (val != 0);
+    return reverse_copy(tmp, tmp_end, out);
+}
+
 constexpr const char* STR_EMPTY = "";
 constexpr const char* STR_OPEN_FILE = "Open File";
 constexpr const char* STR_OPEN_FILES = "Open Files";
 constexpr const char* STR_SAVE_FILE = "Save File";
 constexpr const char* STR_SELECT_FOLDER = "Select Folder";
+constexpr const char* STR_SELECT_FOLDERS = "Select Folders";
 constexpr const char* STR_HANDLE_TOKEN = "handle_token";
 constexpr const char* STR_MULTIPLE = "multiple";
 constexpr const char* STR_DIRECTORY = "directory";
@@ -135,6 +172,31 @@ constexpr const char* DBUS_PATH = "/org/freedesktop/portal/desktop";
 constexpr const char* DBUS_FILECHOOSER_IFACE = "org.freedesktop.portal.FileChooser";
 constexpr const char* DBUS_REQUEST_IFACE = "org.freedesktop.portal.Request";
 
+void AppendOpenFileQueryParentWindow(DBusMessageIter& iter, const nfdwindowhandle_t& parentWindow) {
+    switch (parentWindow.type) {
+        case NFD_WINDOW_HANDLE_TYPE_X11: {
+            constexpr size_t maxX11WindowStrLen =
+                4 + sizeof(uintptr_t) * 2 + 1;  // "x11:" + "<hex>" + "\0"
+            char serializedWindowBuf[maxX11WindowStrLen];
+            char* serializedWindow = serializedWindowBuf;
+            const uintptr_t handle = reinterpret_cast<uintptr_t>(parentWindow.handle);
+            char* out = serializedWindowBuf;
+            *out++ = 'x';
+            *out++ = '1';
+            *out++ = '1';
+            *out++ = ':';
+            out = FormatUIntToHexString(out, handle);
+            *out = '\0';
+            dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &serializedWindow);
+            return;
+        }
+        default: {
+            dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &STR_EMPTY);
+            return;
+        }
+    }
+}
+
 template <bool Multiple, bool Directory>
 void AppendOpenFileQueryTitle(DBusMessageIter&);
 template <>
@@ -148,6 +210,10 @@ void AppendOpenFileQueryTitle<true, false>(DBusMessageIter& iter) {
 template <>
 void AppendOpenFileQueryTitle<false, true>(DBusMessageIter& iter) {
     dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &STR_SELECT_FOLDER);
+}
+template <>
+void AppendOpenFileQueryTitle<true, true>(DBusMessageIter& iter) {
+    dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &STR_SELECT_FOLDERS);
 }
 
 void AppendSaveFileQueryTitle(DBusMessageIter& iter) {
@@ -552,12 +618,12 @@ void AppendOpenFileQueryParams(DBusMessage* query,
                                const char* handle_token,
                                const nfdnfilteritem_t* filterList,
                                nfdfiltersize_t filterCount,
-                               const nfdnchar_t* defaultPath) {
+                               const nfdnchar_t* defaultPath,
+                               const nfdwindowhandle_t& parentWindow) {
     DBusMessageIter iter;
     dbus_message_iter_init_append(query, &iter);
 
-    dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &STR_EMPTY);
-
+    AppendOpenFileQueryParentWindow(iter, parentWindow);
     AppendOpenFileQueryTitle<Multiple, Directory>(iter);
 
     DBusMessageIter sub_iter;
@@ -576,12 +642,12 @@ void AppendSaveFileQueryParams(DBusMessage* query,
                                const nfdnfilteritem_t* filterList,
                                nfdfiltersize_t filterCount,
                                const nfdnchar_t* defaultPath,
-                               const nfdnchar_t* defaultName) {
+                               const nfdnchar_t* defaultName,
+                               const nfdwindowhandle_t& parentWindow) {
     DBusMessageIter iter;
     dbus_message_iter_init_append(query, &iter);
 
-    dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &STR_EMPTY);
-
+    AppendOpenFileQueryParentWindow(iter, parentWindow);
     AppendSaveFileQueryTitle(iter);
 
     DBusMessageIter sub_iter;
@@ -958,21 +1024,6 @@ class DBusSignalSubscriptionHandler {
     }
 };
 
-// Returns true if ch is in [0-9A-Za-z], false otherwise.
-bool IsHex(char ch) {
-    return ('0' <= ch && ch <= '9') || ('A' <= ch && ch <= 'F') || ('a' <= ch && ch <= 'f');
-}
-
-// Returns the hexadecimal value contained in the char.  Precondition: IsHex(ch)
-char ParseHexUnchecked(char ch) {
-    if ('0' <= ch && ch <= '9') return ch - '0';
-    if ('A' <= ch && ch <= 'F') return ch - ('A' - 10);
-    if ('a' <= ch && ch <= 'f') return ch - ('a' - 10);
-#if defined(__GNUC__)
-    __builtin_unreachable();
-#endif
-}
-
 // Returns true if the given file URI is decodable (i.e. not malformed), and false otherwise.
 // If this function returns true, then `out` will be populated with the length of the decoded URI
 // and `fileUriEnd` will point to the trailing null byte of `fileUri`. Otherwise, `out` and
@@ -1123,7 +1174,8 @@ template <bool Multiple, bool Directory>
 nfdresult_t NFD_DBus_OpenFile(DBusMessage*& outMsg,
                               const nfdnfilteritem_t* filterList,
                               nfdfiltersize_t filterCount,
-                              const nfdnchar_t* defaultPath) {
+                              const nfdnchar_t* defaultPath,
+                              const nfdwindowhandle_t& parentWindow) {
     const char* handle_token_ptr;
     char* handle_obj_path = MakeUniqueObjectPath(&handle_token_ptr);
     Free_Guard<char> handle_obj_path_guard(handle_obj_path);
@@ -1144,7 +1196,7 @@ nfdresult_t NFD_DBus_OpenFile(DBusMessage*& outMsg,
         DBUS_DESTINATION, DBUS_PATH, DBUS_FILECHOOSER_IFACE, "OpenFile");
     DBusMessage_Guard query_guard(query);
     AppendOpenFileQueryParams<Multiple, Directory>(
-        query, handle_token_ptr, filterList, filterCount, defaultPath);
+        query, handle_token_ptr, filterList, filterCount, defaultPath, parentWindow);
 
     DBusMessage* reply =
         dbus_connection_send_with_reply_and_block(dbus_conn, query, DBUS_TIMEOUT_INFINITE, &err);
@@ -1205,7 +1257,8 @@ nfdresult_t NFD_DBus_SaveFile(DBusMessage*& outMsg,
                               const nfdnfilteritem_t* filterList,
                               nfdfiltersize_t filterCount,
                               const nfdnchar_t* defaultPath,
-                              const nfdnchar_t* defaultName) {
+                              const nfdnchar_t* defaultName,
+                              const nfdwindowhandle_t& parentWindow) {
     const char* handle_token_ptr;
     char* handle_obj_path = MakeUniqueObjectPath(&handle_token_ptr);
     Free_Guard<char> handle_obj_path_guard(handle_obj_path);
@@ -1226,7 +1279,7 @@ nfdresult_t NFD_DBus_SaveFile(DBusMessage*& outMsg,
         DBUS_DESTINATION, DBUS_PATH, DBUS_FILECHOOSER_IFACE, "SaveFile");
     DBusMessage_Guard query_guard(query);
     AppendSaveFileQueryParams(
-        query, handle_token_ptr, filterList, filterCount, defaultPath, defaultName);
+        query, handle_token_ptr, filterList, filterCount, defaultPath, defaultName, parentWindow);
 
     DBusMessage* reply =
         dbus_connection_send_with_reply_and_block(dbus_conn, query, DBUS_TIMEOUT_INFINITE, &err);
@@ -1377,10 +1430,23 @@ nfdresult_t NFD_OpenDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
                             const nfdnchar_t* defaultPath) {
+    nfdopendialognargs_t args{};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    return NFD_OpenDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_OpenDialogN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdopendialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     DBusMessage* msg;
     {
-        const nfdresult_t res =
-            NFD_DBus_OpenFile<false, false>(msg, filterList, filterCount, defaultPath);
+        const nfdresult_t res = NFD_DBus_OpenFile<false, false>(
+            msg, args->filterList, args->filterCount, args->defaultPath, args->parentWindow);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1404,14 +1470,32 @@ nfdresult_t NFD_OpenDialogU8(nfdu8char_t** outPath,
                              const nfdu8char_t* defaultPath)
     __attribute__((alias("NFD_OpenDialogN")));
 
+nfdresult_t NFD_OpenDialogU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdopendialogu8args_t* args)
+    __attribute__((alias("NFD_OpenDialogN_With_Impl")));
+
 nfdresult_t NFD_OpenDialogMultipleN(const nfdpathset_t** outPaths,
                                     const nfdnfilteritem_t* filterList,
                                     nfdfiltersize_t filterCount,
                                     const nfdnchar_t* defaultPath) {
+    nfdopendialognargs_t args{};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    return NFD_OpenDialogMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, &args);
+}
+
+nfdresult_t NFD_OpenDialogMultipleN_With_Impl(nfdversion_t version,
+                                              const nfdpathset_t** outPaths,
+                                              const nfdopendialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     DBusMessage* msg;
     {
-        const nfdresult_t res =
-            NFD_DBus_OpenFile<true, false>(msg, filterList, filterCount, defaultPath);
+        const nfdresult_t res = NFD_DBus_OpenFile<true, false>(
+            msg, args->filterList, args->filterCount, args->defaultPath, args->parentWindow);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1434,15 +1518,38 @@ nfdresult_t NFD_OpenDialogMultipleU8(const nfdpathset_t** outPaths,
                                      const nfdu8char_t* defaultPath)
     __attribute__((alias("NFD_OpenDialogMultipleN")));
 
+nfdresult_t NFD_OpenDialogMultipleU8_With_Impl(nfdversion_t version,
+                                               const nfdpathset_t** outPaths,
+                                               const nfdopendialogu8args_t* args)
+    __attribute__((alias("NFD_OpenDialogMultipleN_With_Impl")));
+
 nfdresult_t NFD_SaveDialogN(nfdnchar_t** outPath,
                             const nfdnfilteritem_t* filterList,
                             nfdfiltersize_t filterCount,
                             const nfdnchar_t* defaultPath,
                             const nfdnchar_t* defaultName) {
+    nfdsavedialognargs_t args{};
+    args.filterList = filterList;
+    args.filterCount = filterCount;
+    args.defaultPath = defaultPath;
+    args.defaultName = defaultName;
+    return NFD_SaveDialogN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_SaveDialogN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdsavedialognargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
     DBusMessage* msg;
     {
-        const nfdresult_t res =
-            NFD_DBus_SaveFile(msg, filterList, filterCount, defaultPath, defaultName);
+        const nfdresult_t res = NFD_DBus_SaveFile(msg,
+                                                  args->filterList,
+                                                  args->filterCount,
+                                                  args->defaultPath,
+                                                  args->defaultName,
+                                                  args->parentWindow);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1480,8 +1587,22 @@ nfdresult_t NFD_SaveDialogU8(nfdu8char_t** outPath,
                              const nfdu8char_t* defaultName)
     __attribute__((alias("NFD_SaveDialogN")));
 
+nfdresult_t NFD_SaveDialogU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdsavedialogu8args_t* args)
+    __attribute__((alias("NFD_SaveDialogN_With_Impl")));
+
 nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath) {
-    (void)defaultPath;  // Default path not supported for portal backend
+    nfdpickfoldernargs_t args{};
+    args.defaultPath = defaultPath;
+    return NFD_PickFolderN_With_Impl(NFD_INTERFACE_VERSION, outPath, &args);
+}
+
+nfdresult_t NFD_PickFolderN_With_Impl(nfdversion_t version,
+                                      nfdnchar_t** outPath,
+                                      const nfdpickfoldernargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
 
     {
         dbus_uint32_t version;
@@ -1501,7 +1622,8 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
 
     DBusMessage* msg;
     {
-        const nfdresult_t res = NFD_DBus_OpenFile<false, true>(msg, nullptr, 0, defaultPath);
+        const nfdresult_t res =
+            NFD_DBus_OpenFile<false, true>(msg, nullptr, 0, args->defaultPath, args->parentWindow);
         if (res != NFD_OKAY) {
             return res;
         }
@@ -1521,6 +1643,67 @@ nfdresult_t NFD_PickFolderN(nfdnchar_t** outPath, const nfdnchar_t* defaultPath)
 
 nfdresult_t NFD_PickFolderU8(nfdu8char_t** outPath, const nfdu8char_t* defaultPath)
     __attribute__((alias("NFD_PickFolderN")));
+
+nfdresult_t NFD_PickFolderU8_With_Impl(nfdversion_t version,
+                                       nfdu8char_t** outPath,
+                                       const nfdpickfolderu8args_t* args)
+    __attribute__((alias("NFD_PickFolderN_With_Impl")));
+
+nfdresult_t NFD_PickFolderMultipleN(const nfdpathset_t** outPaths, const nfdnchar_t* defaultPath) {
+    nfdpickfoldernargs_t args{};
+    args.defaultPath = defaultPath;
+    return NFD_PickFolderMultipleN_With_Impl(NFD_INTERFACE_VERSION, outPaths, &args);
+}
+
+nfdresult_t NFD_PickFolderMultipleN_With_Impl(nfdversion_t version,
+                                              const nfdpathset_t** outPaths,
+                                              const nfdpickfoldernargs_t* args) {
+    // We haven't needed to bump the interface version yet.
+    (void)version;
+
+    {
+        dbus_uint32_t version;
+        const nfdresult_t res = NFD_DBus_GetVersion(version);
+        if (res != NFD_OKAY) {
+            return res;
+        }
+        if (version < 3) {
+            NFDi_SetFormattedError(
+                "The xdg-desktop-portal installed on this system does not support a folder picker; "
+                "at least version 3 of the org.freedesktop.portal.FileChooser interface is "
+                "required but the installed interface version is %u.",
+                version);
+            return NFD_ERROR;
+        }
+    }
+
+    DBusMessage* msg;
+    {
+        const nfdresult_t res =
+            NFD_DBus_OpenFile<true, true>(msg, nullptr, 0, args->defaultPath, args->parentWindow);
+        if (res != NFD_OKAY) {
+            return res;
+        }
+    }
+
+    DBusMessageIter uri_iter;
+    const nfdresult_t res = ReadResponseUris(msg, uri_iter);
+    if (res != NFD_OKAY) {
+        dbus_message_unref(msg);
+        return res;
+    }
+
+    *outPaths = msg;
+    return NFD_OKAY;
+}
+
+nfdresult_t NFD_PickFolderMultipleU8(const nfdpathset_t** outPaths, const nfdu8char_t* defaultPath)
+    __attribute__((alias("NFD_PickFolderMultipleN")));
+
+nfdresult_t NFD_PickFolderMultipleU8_With_Impl(nfdversion_t version,
+                                               const nfdpathset_t** outPaths,
+                                               const nfdpickfolderu8args_t* args)
+    __attribute__((alias("NFD_PickFolderMultipleN_With_Impl")));
 
 nfdresult_t NFD_PathSet_GetCount(const nfdpathset_t* pathSet, nfdpathsetsize_t* count) {
     assert(pathSet);

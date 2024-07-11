@@ -93,6 +93,15 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
         "CANCEL" enum "User pressed cancel."
     )
 
+    EnumConstant(
+        "The native window handle type.",
+
+        "WINDOW_HANDLE_TYPE_UNSET".enum("", "0"),
+        "WINDOW_HANDLE_TYPE_WINDOWS".enum("Windows: handle is {@code HWND} (the Windows API typedefs this to {@code void*})"),
+        "WINDOW_HANDLE_TYPE_COCOA".enum("Cocoa: handle is {@code NSWindow*}"),
+        "WINDOW_HANDLE_TYPE_X11".enum("X11: handle is {@code Window}"),
+    )
+
     void(
         "FreePath",
         "Free a file path that was returned by the dialogs.",
@@ -129,6 +138,18 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
     )
 
     nfdresult_t(
+        "OpenDialog_With",
+        """
+        Single file open dialog, with additional parameters.
+
+        It is the caller's responsibility to free {@code outPath} via #FreePath() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdchar_t.p.p("outPath", ""),
+        nfdopendialogu8args_t.const.p("args", "")
+    )
+
+    nfdresult_t(
         "OpenDialogMultiple",
         """
         Multiple file open dialog.
@@ -140,6 +161,18 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
         nullable..nfdfilteritem_t.const.p("filterList", ""),
         AutoSize("filterList")..nfdfiltersize_t("filterCount", "if zero, {@code filterList} is ignored (you can use #NULL)"),
         nullable..nfdchar_t.const.p("defaultPath", "if #NULL, the operating system will decide")
+    )
+
+    nfdresult_t(
+        "OpenDialogMultiple_With",
+        """
+        Multiple file open dialog, with additional parameters.
+
+        It is the caller's responsibility to free {@code outPaths} via #PathSet_Free() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdpathset_t.const.p.p("outPath", ""),
+        nfdopendialogu8args_t.const.p("args", "")
     )
 
     nfdresult_t(
@@ -158,6 +191,18 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
     )
 
     nfdresult_t(
+        "SaveDialog_With",
+        """
+        Save dialog, with additional parameters.
+
+        It is the caller's responsibility to free {@code outPath} via #FreePath() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdchar_t.p.p("outPath", ""),
+        nfdsavedialogu8args_t.const.p("args", "")
+    )
+
+    nfdresult_t(
         "PickFolder",
         """
         Select folder dialog.
@@ -167,6 +212,42 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
 
         Check(1)..nfdchar_t.p.p("outPath", ""),
         nullable..nfdchar_t.const.p("defaultPath", "if #NULL, the operating system will decide")
+    )
+
+    nfdresult_t(
+        "PickFolder_With",
+        """
+        Select folder dialog, with additional parameters.
+
+        It is the caller's responsibility to free {@code outPath} via #FreePath() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdchar_t.p.p("outPath", ""),
+        nfdpickfolderu8args_t.const.p("args", "")
+    )
+
+    nfdresult_t(
+        "PickFolderMultiple",
+        """
+        Select multiple folder dialog.
+
+        It is the caller's responsibility to free {@code outPaths} via #PathSet_Free() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdpathset_t.const.p.p("outPaths", ""),
+        nullable..nfdchar_t.const.p("defaultPath", "if #NULL, the operating system will decide")
+    )
+
+    nfdresult_t(
+        "PickFolderMultiple_With",
+        """
+        Select multiple folder dialog, with additional parameters.
+
+        It is the caller's responsibility to free {@code outPaths} via #PathSet_Free() if this function returns #OKAY.
+        """,
+
+        Check(1)..nfdpathset_t.const.p.p("outPaths", ""),
+        nfdpickfolderu8args_t.const.p("args", "")
     )
 
     charUTF8.const.p(

@@ -33,12 +33,26 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialog
     return (jint)NFD_OpenDialog(outPath, filterList, (nfdfiltersize_t)filterCount, defaultPath);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialog_1With(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong argsAddress) {
+    nfdchar_t **outPath = (nfdchar_t **)(uintptr_t)outPathAddress;
+    nfdopendialogu8args_t const *args = (nfdopendialogu8args_t const *)(uintptr_t)argsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_OpenDialog_With(outPath, args);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialogMultiple(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong filterListAddress, jint filterCount, jlong defaultPathAddress) {
     nfdpathset_t const **outPath = (nfdpathset_t const **)(uintptr_t)outPathAddress;
     nfdfilteritem_t const *filterList = (nfdfilteritem_t const *)(uintptr_t)filterListAddress;
     nfdchar_t const *defaultPath = (nfdchar_t const *)(uintptr_t)defaultPathAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)NFD_OpenDialogMultiple(outPath, filterList, (nfdfiltersize_t)filterCount, defaultPath);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialogMultiple_1With(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong argsAddress) {
+    nfdpathset_t const **outPath = (nfdpathset_t const **)(uintptr_t)outPathAddress;
+    nfdopendialogu8args_t const *args = (nfdopendialogu8args_t const *)(uintptr_t)argsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_OpenDialogMultiple_With(outPath, args);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1SaveDialog(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong filterListAddress, jint filterCount, jlong defaultPathAddress, jlong defaultNameAddress) {
@@ -50,11 +64,39 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1SaveDialog
     return (jint)NFD_SaveDialog(outPath, filterList, (nfdfiltersize_t)filterCount, defaultPath, defaultName);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1SaveDialog_1With(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong argsAddress) {
+    nfdchar_t **outPath = (nfdchar_t **)(uintptr_t)outPathAddress;
+    nfdsavedialogu8args_t const *args = (nfdsavedialogu8args_t const *)(uintptr_t)argsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_SaveDialog_With(outPath, args);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PickFolder(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong defaultPathAddress) {
     nfdchar_t **outPath = (nfdchar_t **)(uintptr_t)outPathAddress;
     nfdchar_t const *defaultPath = (nfdchar_t const *)(uintptr_t)defaultPathAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)NFD_PickFolder(outPath, defaultPath);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PickFolder_1With(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong argsAddress) {
+    nfdchar_t **outPath = (nfdchar_t **)(uintptr_t)outPathAddress;
+    nfdpickfolderu8args_t const *args = (nfdpickfolderu8args_t const *)(uintptr_t)argsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_PickFolder_With(outPath, args);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PickFolderMultiple(JNIEnv *__env, jclass clazz, jlong outPathsAddress, jlong defaultPathAddress) {
+    nfdpathset_t const **outPaths = (nfdpathset_t const **)(uintptr_t)outPathsAddress;
+    nfdchar_t const *defaultPath = (nfdchar_t const *)(uintptr_t)defaultPathAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_PickFolderMultiple(outPaths, defaultPath);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PickFolderMultiple_1With(JNIEnv *__env, jclass clazz, jlong outPathsAddress, jlong argsAddress) {
+    nfdpathset_t const **outPaths = (nfdpathset_t const **)(uintptr_t)outPathsAddress;
+    nfdpickfolderu8args_t const *args = (nfdpickfolderu8args_t const *)(uintptr_t)argsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)NFD_PickFolderMultiple_With(outPaths, args);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1GetError(JNIEnv *__env, jclass clazz) {

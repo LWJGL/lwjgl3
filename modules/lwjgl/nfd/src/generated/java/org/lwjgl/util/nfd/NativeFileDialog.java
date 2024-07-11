@@ -108,6 +108,24 @@ public class NativeFileDialog {
         NFD_OKAY   = 1,
         NFD_CANCEL = 2;
 
+    /**
+     * The native window handle type.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #NFD_WINDOW_HANDLE_TYPE_UNSET WINDOW_HANDLE_TYPE_UNSET}</li>
+     * <li>{@link #NFD_WINDOW_HANDLE_TYPE_WINDOWS WINDOW_HANDLE_TYPE_WINDOWS} - Windows: handle is {@code HWND} (the Windows API typedefs this to {@code void*})</li>
+     * <li>{@link #NFD_WINDOW_HANDLE_TYPE_COCOA WINDOW_HANDLE_TYPE_COCOA} - Cocoa: handle is {@code NSWindow*}</li>
+     * <li>{@link #NFD_WINDOW_HANDLE_TYPE_X11 WINDOW_HANDLE_TYPE_X11} - X11: handle is {@code Window}</li>
+     * </ul>
+     */
+    public static final int
+        NFD_WINDOW_HANDLE_TYPE_UNSET   = 0,
+        NFD_WINDOW_HANDLE_TYPE_WINDOWS = 1,
+        NFD_WINDOW_HANDLE_TYPE_COCOA   = 2,
+        NFD_WINDOW_HANDLE_TYPE_X11     = 3;
+
     protected NativeFileDialog() {
         throw new UnsupportedOperationException();
     }
@@ -190,6 +208,25 @@ public class NativeFileDialog {
         }
     }
 
+    // --- [ NFD_OpenDialog_With ] ---
+
+    /** Unsafe version of: {@link #NFD_OpenDialog_With OpenDialog_With} */
+    public static native int nNFD_OpenDialog_With(long outPath, long args);
+
+    /**
+     * Single file open dialog, with additional parameters.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPath} via {@link #NFD_FreePath FreePath} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_OpenDialog_With(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdopendialogu8args_t const *") NFDOpenDialogArgs args) {
+        if (CHECKS) {
+            check(outPath, 1);
+            NFDOpenDialogArgs.validate(args.address());
+        }
+        return nNFD_OpenDialog_With(memAddress(outPath), args.address());
+    }
+
     // --- [ NFD_OpenDialogMultiple ] ---
 
     /**
@@ -237,6 +274,25 @@ public class NativeFileDialog {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ NFD_OpenDialogMultiple_With ] ---
+
+    /** Unsafe version of: {@link #NFD_OpenDialogMultiple_With OpenDialogMultiple_With} */
+    public static native int nNFD_OpenDialogMultiple_With(long outPath, long args);
+
+    /**
+     * Multiple file open dialog, with additional parameters.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPaths} via {@link #NFD_PathSet_Free PathSet_Free} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_OpenDialogMultiple_With(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @NativeType("nfdopendialogu8args_t const *") NFDOpenDialogArgs args) {
+        if (CHECKS) {
+            check(outPath, 1);
+            NFDOpenDialogArgs.validate(args.address());
+        }
+        return nNFD_OpenDialogMultiple_With(memAddress(outPath), args.address());
     }
 
     // --- [ NFD_SaveDialog ] ---
@@ -291,6 +347,25 @@ public class NativeFileDialog {
         }
     }
 
+    // --- [ NFD_SaveDialog_With ] ---
+
+    /** Unsafe version of: {@link #NFD_SaveDialog_With SaveDialog_With} */
+    public static native int nNFD_SaveDialog_With(long outPath, long args);
+
+    /**
+     * Save dialog, with additional parameters.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPath} via {@link #NFD_FreePath FreePath} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_SaveDialog_With(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdsavedialogu8args_t const *") NFDSaveDialogArgs args) {
+        if (CHECKS) {
+            check(outPath, 1);
+            NFDSaveDialogArgs.validate(args.address());
+        }
+        return nNFD_SaveDialog_With(memAddress(outPath), args.address());
+    }
+
     // --- [ NFD_PickFolder ] ---
 
     /** Unsafe version of: {@link #NFD_PickFolder PickFolder} */
@@ -332,6 +407,85 @@ public class NativeFileDialog {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ NFD_PickFolder_With ] ---
+
+    /** Unsafe version of: {@link #NFD_PickFolder_With PickFolder_With} */
+    public static native int nNFD_PickFolder_With(long outPath, long args);
+
+    /**
+     * Select folder dialog, with additional parameters.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPath} via {@link #NFD_FreePath FreePath} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_PickFolder_With(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdpickfolderu8args_t const *") NFDPickFolderArgs args) {
+        if (CHECKS) {
+            check(outPath, 1);
+        }
+        return nNFD_PickFolder_With(memAddress(outPath), args.address());
+    }
+
+    // --- [ NFD_PickFolderMultiple ] ---
+
+    /** Unsafe version of: {@link #NFD_PickFolderMultiple PickFolderMultiple} */
+    public static native int nNFD_PickFolderMultiple(long outPaths, long defaultPath);
+
+    /**
+     * Select multiple folder dialog.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPaths} via {@link #NFD_PathSet_Free PathSet_Free} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     *
+     * @param defaultPath if {@code NULL}, the operating system will decide
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+        if (CHECKS) {
+            check(outPaths, 1);
+            checkNT1Safe(defaultPath);
+        }
+        return nNFD_PickFolderMultiple(memAddress(outPaths), memAddressSafe(defaultPath));
+    }
+
+    /**
+     * Select multiple folder dialog.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPaths} via {@link #NFD_PathSet_Free PathSet_Free} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     *
+     * @param defaultPath if {@code NULL}, the operating system will decide
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+        if (CHECKS) {
+            check(outPaths, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8Safe(defaultPath, true);
+            long defaultPathEncoded = defaultPath == null ? NULL : stack.getPointerAddress();
+            return nNFD_PickFolderMultiple(memAddress(outPaths), defaultPathEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ NFD_PickFolderMultiple_With ] ---
+
+    /** Unsafe version of: {@link #NFD_PickFolderMultiple_With PickFolderMultiple_With} */
+    public static native int nNFD_PickFolderMultiple_With(long outPaths, long args);
+
+    /**
+     * Select multiple folder dialog, with additional parameters.
+     * 
+     * <p>It is the caller's responsibility to free {@code outPaths} via {@link #NFD_PathSet_Free PathSet_Free} if this function returns {@link #NFD_OKAY OKAY}.</p>
+     */
+    @NativeType("nfdresult_t")
+    public static int NFD_PickFolderMultiple_With(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @NativeType("nfdpickfolderu8args_t const *") NFDPickFolderArgs args) {
+        if (CHECKS) {
+            check(outPaths, 1);
+        }
+        return nNFD_PickFolderMultiple_With(memAddress(outPaths), args.address());
     }
 
     // --- [ NFD_GetError ] ---
