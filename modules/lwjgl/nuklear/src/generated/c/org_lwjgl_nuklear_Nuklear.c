@@ -41,7 +41,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1init_1fixed(JNIEn
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1init(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong allocatorAddress, jlong fontAddress) {
     struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
-    struct nk_allocator *allocator = (struct nk_allocator *)(uintptr_t)allocatorAddress;
+    struct nk_allocator const *allocator = (struct nk_allocator const *)(uintptr_t)allocatorAddress;
     struct nk_user_font const *font = (struct nk_user_font const *)(uintptr_t)fontAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jboolean)nk_init(ctx, allocator, font);
@@ -2919,7 +2919,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1filter_1binary(JN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1textedit_1init(JNIEnv *__env, jclass clazz, jlong boxAddress, jlong allocatorAddress, jlong size) {
     struct nk_text_edit *box = (struct nk_text_edit *)(uintptr_t)boxAddress;
-    struct nk_allocator *allocator = (struct nk_allocator *)(uintptr_t)allocatorAddress;
+    struct nk_allocator const *allocator = (struct nk_allocator const *)(uintptr_t)allocatorAddress;
     UNUSED_PARAMS(__env, clazz)
     nk_textedit_init(box, allocator, (nk_size)size);
 }
@@ -3540,15 +3540,15 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1korean_1glyph_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1init(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong allocAddress) {
     struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
-    struct nk_allocator *alloc = (struct nk_allocator *)(uintptr_t)allocAddress;
+    struct nk_allocator const *alloc = (struct nk_allocator const *)(uintptr_t)allocAddress;
     UNUSED_PARAMS(__env, clazz)
     nk_font_atlas_init(atlas, alloc);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1init_1custom(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong persistentAddress, jlong transient_Address) {
     struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
-    struct nk_allocator *persistent = (struct nk_allocator *)(uintptr_t)persistentAddress;
-    struct nk_allocator *transient_ = (struct nk_allocator *)(uintptr_t)transient_Address;
+    struct nk_allocator const *persistent = (struct nk_allocator const *)(uintptr_t)persistentAddress;
+    struct nk_allocator const *transient_ = (struct nk_allocator const *)(uintptr_t)transient_Address;
     UNUSED_PARAMS(__env, clazz)
     nk_font_atlas_init_custom(atlas, persistent, transient_);
 }

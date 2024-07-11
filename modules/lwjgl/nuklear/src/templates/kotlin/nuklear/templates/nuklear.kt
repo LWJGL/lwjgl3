@@ -399,6 +399,10 @@ nk_style_pop_vec2(ctx);""")}
         "SYMBOL_TRIANGLE_RIGHT".enum,
         "SYMBOL_PLUS".enum,
         "SYMBOL_MINUS".enum,
+        "SYMBOL_TRIANGLE_UP_OUTLINE".enum,
+        "SYMBOL_TRIANGLE_DOWN_OUTLINE".enum,
+        "SYMBOL_TRIANGLE_LEFT_OUTLINE".enum,
+        "SYMBOL_TRIANGLE_RIGHT_OUTLINE".enum,
         "SYMBOL_MAX".enum
     ).javaDocLinks
 
@@ -822,7 +826,7 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            nk_allocator.p("allocator", "must point to a previously allocated memory allocator"),
+            nk_allocator.const.p("allocator", "must point to a previously allocated memory allocator"),
             nullable..nk_user_font.const.p("font", "must point to a previously initialized font handle")
         )
 
@@ -4363,7 +4367,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_text_edit.p("box", ""),
-            nk_allocator.p("allocator", ""),
+            nk_allocator.const.p("allocator", ""),
             nk_size("size", "")
         )
 
@@ -5189,7 +5193,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_font_atlas.p("atlas", ""),
-            nk_allocator.p("alloc", "")
+            nk_allocator.const.p("alloc", "")
         )
 
         void(
@@ -5197,8 +5201,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_font_atlas.p("atlas", ""),
-            nk_allocator.p("persistent", ""),
-            nk_allocator.p("transient_", "")
+            nk_allocator.const.p("persistent", ""),
+            nk_allocator.const.p("transient_", "")
         )
 
         void(
