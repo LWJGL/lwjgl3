@@ -232,31 +232,37 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
     @NativeType("struct aiColor4D *")
     public AIColor4D.Buffer mColors(int index) { return nmColors(address(), index); }
     /**
-     * Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The
-     * array is {@code mNumVertices} in size.
+     * Vertex texture coordinates, also known as UV channels.
+     * 
+     * <p>A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} channels per vertex. Used and unused ({@code nullptr}) channels may go in any order. The array is
+     * {@code mNumVertices} in size.</p>
      */
     @NativeType("struct aiVector3D *[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public PointerBuffer mTextureCoords() { return nmTextureCoords(address()); }
     /**
-     * Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The
-     * array is {@code mNumVertices} in size.
+     * Vertex texture coordinates, also known as UV channels.
+     * 
+     * <p>A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} channels per vertex. Used and unused ({@code nullptr}) channels may go in any order. The array is
+     * {@code mNumVertices} in size.</p>
      */
     @Nullable
     @NativeType("struct aiVector3D *")
     public AIVector3D.Buffer mTextureCoords(int index) { return nmTextureCoords(address(), index); }
     /**
-     * Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
-     * 2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
-     * is set to 0.0f, too.
+     * Specifies the number of components for a given UV channel.
+     * 
+     * <p>Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is 2 for a given channel n, the component {@code p.z} of
+     * {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y} is set to 0.0f, too.</p>
      * 
      * <p>Note: 4D coordinates are not supported.</p>
      */
     @NativeType("unsigned int[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public IntBuffer mNumUVComponents() { return nmNumUVComponents(address()); }
     /**
-     * Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
-     * 2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
-     * is set to 0.0f, too.
+     * Specifies the number of components for a given UV channel.
+     * 
+     * <p>Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is 2 for a given channel n, the component {@code p.z} of
+     * {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y} is set to 0.0f, too.</p>
      * 
      * <p>Note: 4D coordinates are not supported.</p>
      */

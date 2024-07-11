@@ -480,17 +480,20 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     nullable..aiVector3D.p(
         "mTextureCoords",
         """
-        Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The
-        array is {@code mNumVertices} in size.
+        Vertex texture coordinates, also known as UV channels.
+
+        A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS channels per vertex. Used and unused ({@code nullptr}) channels may go in any order. The array is
+        {@code mNumVertices} in size.
         """
     )["AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     unsigned_int(
         "mNumUVComponents",
         """
-        Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
-        2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
-        is set to 0.0f, too.
-        
+        Specifies the number of components for a given UV channel.
+
+        Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is 2 for a given channel n, the component {@code p.z} of
+        {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y} is set to 0.0f, too.
+
         Note: 4D coordinates are not supported.
         """
     )["AI_MAX_NUMBER_OF_TEXTURECOORDS"]
