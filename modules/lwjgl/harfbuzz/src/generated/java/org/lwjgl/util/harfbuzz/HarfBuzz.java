@@ -1486,13 +1486,13 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT       = 240,
         HB_UNICODE_COMBINING_CLASS_INVALID              = 255;
 
-    public static final int HB_VERSION_MAJOR = 8;
+    public static final int HB_VERSION_MAJOR = 9;
 
-    public static final int HB_VERSION_MINOR = 5;
+    public static final int HB_VERSION_MINOR = 0;
 
     public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "8.5.0";
+    public static final String HB_VERSION_STRING = "9.0.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
