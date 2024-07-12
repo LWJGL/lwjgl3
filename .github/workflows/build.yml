@@ -54,9 +54,16 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Upgrade git
         run: |
+          sed -i \
+            -e 's/^mirrorlist/#mirrorlist/' \
+            -e 's/^#baseurl/baseurl/' \
+            -e 's/mirror\.centos\.org/vault.centos.org/' \
+            /etc/yum.repos.d/*.repo
           yum -y install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm
           yum -y install git
       - name: Checkout repository
@@ -70,6 +77,12 @@ jobs:
       - name: Install build dependencies
         run: |
           yum -y install centos-release-scl
+          sed -i \
+            -e 's/^mirrorlist/#mirrorlist/' \
+            -e 's/^#baseurl/baseurl/' \
+            -e 's/^# baseurl/baseurl/' \
+            -e 's/mirror\.centos\.org/vault.centos.org/' \
+            /etc/yum.repos.d/CentOS-SCLo-scl*.repo
           yum -y install devtoolset-11-gcc-c++
           yum -y install ant awscli zstd
       - name: Install LWJGL dependencies
