@@ -24,15 +24,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned char get_proc_membind;
  *     unsigned char set_thisthread_membind;
  *     unsigned char get_thisthread_membind;
+ *     unsigned char alloc_membind;
  *     unsigned char set_area_membind;
  *     unsigned char get_area_membind;
- *     unsigned char alloc_membind;
+ *     unsigned char get_area_memlocation;
  *     unsigned char firsttouch_membind;
  *     unsigned char bind_membind;
  *     unsigned char interleave_membind;
+ *     unsigned char weighted_interleave_membind;
  *     unsigned char nexttouch_membind;
  *     unsigned char migrate_membind;
- *     unsigned char get_area_memlocation;
  * }</code></pre>
  */
 @NativeType("struct hwloc_topology_membind_support")
@@ -52,18 +53,20 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
         GET_PROC_MEMBIND,
         SET_THISTHREAD_MEMBIND,
         GET_THISTHREAD_MEMBIND,
+        ALLOC_MEMBIND,
         SET_AREA_MEMBIND,
         GET_AREA_MEMBIND,
-        ALLOC_MEMBIND,
+        GET_AREA_MEMLOCATION,
         FIRSTTOUCH_MEMBIND,
         BIND_MEMBIND,
         INTERLEAVE_MEMBIND,
+        WEIGHTED_INTERLEAVE_MEMBIND,
         NEXTTOUCH_MEMBIND,
-        MIGRATE_MEMBIND,
-        GET_AREA_MEMLOCATION;
+        MIGRATE_MEMBIND;
 
     static {
         Layout layout = __struct(
+            __member(1),
             __member(1),
             __member(1),
             __member(1),
@@ -90,15 +93,16 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
         GET_PROC_MEMBIND = layout.offsetof(3);
         SET_THISTHREAD_MEMBIND = layout.offsetof(4);
         GET_THISTHREAD_MEMBIND = layout.offsetof(5);
-        SET_AREA_MEMBIND = layout.offsetof(6);
-        GET_AREA_MEMBIND = layout.offsetof(7);
-        ALLOC_MEMBIND = layout.offsetof(8);
-        FIRSTTOUCH_MEMBIND = layout.offsetof(9);
-        BIND_MEMBIND = layout.offsetof(10);
-        INTERLEAVE_MEMBIND = layout.offsetof(11);
-        NEXTTOUCH_MEMBIND = layout.offsetof(12);
-        MIGRATE_MEMBIND = layout.offsetof(13);
-        GET_AREA_MEMLOCATION = layout.offsetof(14);
+        ALLOC_MEMBIND = layout.offsetof(6);
+        SET_AREA_MEMBIND = layout.offsetof(7);
+        GET_AREA_MEMBIND = layout.offsetof(8);
+        GET_AREA_MEMLOCATION = layout.offsetof(9);
+        FIRSTTOUCH_MEMBIND = layout.offsetof(10);
+        BIND_MEMBIND = layout.offsetof(11);
+        INTERLEAVE_MEMBIND = layout.offsetof(12);
+        WEIGHTED_INTERLEAVE_MEMBIND = layout.offsetof(13);
+        NEXTTOUCH_MEMBIND = layout.offsetof(14);
+        MIGRATE_MEMBIND = layout.offsetof(15);
     }
 
     protected hwloc_topology_membind_support(long address, @Nullable ByteBuffer container) {
@@ -141,15 +145,18 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
     /** @return the value of the {@code get_thisthread_membind} field. */
     @NativeType("unsigned char")
     public boolean get_thisthread_membind() { return nget_thisthread_membind(address()); }
+    /** @return the value of the {@code alloc_membind} field. */
+    @NativeType("unsigned char")
+    public boolean alloc_membind() { return nalloc_membind(address()); }
     /** @return the value of the {@code set_area_membind} field. */
     @NativeType("unsigned char")
     public boolean set_area_membind() { return nset_area_membind(address()); }
     /** @return the value of the {@code get_area_membind} field. */
     @NativeType("unsigned char")
     public boolean get_area_membind() { return nget_area_membind(address()); }
-    /** @return the value of the {@code alloc_membind} field. */
+    /** @return the value of the {@code get_area_memlocation} field. */
     @NativeType("unsigned char")
-    public boolean alloc_membind() { return nalloc_membind(address()); }
+    public boolean get_area_memlocation() { return nget_area_memlocation(address()); }
     /** @return the value of the {@code firsttouch_membind} field. */
     @NativeType("unsigned char")
     public boolean firsttouch_membind() { return nfirsttouch_membind(address()); }
@@ -159,15 +166,15 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
     /** @return the value of the {@code interleave_membind} field. */
     @NativeType("unsigned char")
     public boolean interleave_membind() { return ninterleave_membind(address()); }
+    /** @return the value of the {@code weighted_interleave_membind} field. */
+    @NativeType("unsigned char")
+    public boolean weighted_interleave_membind() { return nweighted_interleave_membind(address()); }
     /** @return the value of the {@code nexttouch_membind} field. */
     @NativeType("unsigned char")
     public boolean nexttouch_membind() { return nnexttouch_membind(address()); }
     /** @return the value of the {@code migrate_membind} field. */
     @NativeType("unsigned char")
     public boolean migrate_membind() { return nmigrate_membind(address()); }
-    /** @return the value of the {@code get_area_memlocation} field. */
-    @NativeType("unsigned char")
-    public boolean get_area_memlocation() { return nget_area_memlocation(address()); }
 
     // -----------------------------------
 
@@ -212,24 +219,26 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
     public static boolean nset_thisthread_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_THISTHREAD_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_thisthread_membind}. */
     public static boolean nget_thisthread_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_THISTHREAD_MEMBIND) != 0; }
+    /** Unsafe version of {@link #alloc_membind}. */
+    public static boolean nalloc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.ALLOC_MEMBIND) != 0; }
     /** Unsafe version of {@link #set_area_membind}. */
     public static boolean nset_area_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_AREA_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_area_membind}. */
     public static boolean nget_area_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_AREA_MEMBIND) != 0; }
-    /** Unsafe version of {@link #alloc_membind}. */
-    public static boolean nalloc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.ALLOC_MEMBIND) != 0; }
+    /** Unsafe version of {@link #get_area_memlocation}. */
+    public static boolean nget_area_memlocation(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_AREA_MEMLOCATION) != 0; }
     /** Unsafe version of {@link #firsttouch_membind}. */
     public static boolean nfirsttouch_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.FIRSTTOUCH_MEMBIND) != 0; }
     /** Unsafe version of {@link #bind_membind}. */
     public static boolean nbind_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.BIND_MEMBIND) != 0; }
     /** Unsafe version of {@link #interleave_membind}. */
     public static boolean ninterleave_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.INTERLEAVE_MEMBIND) != 0; }
+    /** Unsafe version of {@link #weighted_interleave_membind}. */
+    public static boolean nweighted_interleave_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.WEIGHTED_INTERLEAVE_MEMBIND) != 0; }
     /** Unsafe version of {@link #nexttouch_membind}. */
     public static boolean nnexttouch_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.NEXTTOUCH_MEMBIND) != 0; }
     /** Unsafe version of {@link #migrate_membind}. */
     public static boolean nmigrate_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.MIGRATE_MEMBIND) != 0; }
-    /** Unsafe version of {@link #get_area_memlocation}. */
-    public static boolean nget_area_memlocation(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_AREA_MEMLOCATION) != 0; }
 
     // -----------------------------------
 
@@ -287,15 +296,18 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
         /** @return the value of the {@code get_thisthread_membind} field. */
         @NativeType("unsigned char")
         public boolean get_thisthread_membind() { return hwloc_topology_membind_support.nget_thisthread_membind(address()); }
+        /** @return the value of the {@code alloc_membind} field. */
+        @NativeType("unsigned char")
+        public boolean alloc_membind() { return hwloc_topology_membind_support.nalloc_membind(address()); }
         /** @return the value of the {@code set_area_membind} field. */
         @NativeType("unsigned char")
         public boolean set_area_membind() { return hwloc_topology_membind_support.nset_area_membind(address()); }
         /** @return the value of the {@code get_area_membind} field. */
         @NativeType("unsigned char")
         public boolean get_area_membind() { return hwloc_topology_membind_support.nget_area_membind(address()); }
-        /** @return the value of the {@code alloc_membind} field. */
+        /** @return the value of the {@code get_area_memlocation} field. */
         @NativeType("unsigned char")
-        public boolean alloc_membind() { return hwloc_topology_membind_support.nalloc_membind(address()); }
+        public boolean get_area_memlocation() { return hwloc_topology_membind_support.nget_area_memlocation(address()); }
         /** @return the value of the {@code firsttouch_membind} field. */
         @NativeType("unsigned char")
         public boolean firsttouch_membind() { return hwloc_topology_membind_support.nfirsttouch_membind(address()); }
@@ -305,15 +317,15 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
         /** @return the value of the {@code interleave_membind} field. */
         @NativeType("unsigned char")
         public boolean interleave_membind() { return hwloc_topology_membind_support.ninterleave_membind(address()); }
+        /** @return the value of the {@code weighted_interleave_membind} field. */
+        @NativeType("unsigned char")
+        public boolean weighted_interleave_membind() { return hwloc_topology_membind_support.nweighted_interleave_membind(address()); }
         /** @return the value of the {@code nexttouch_membind} field. */
         @NativeType("unsigned char")
         public boolean nexttouch_membind() { return hwloc_topology_membind_support.nnexttouch_membind(address()); }
         /** @return the value of the {@code migrate_membind} field. */
         @NativeType("unsigned char")
         public boolean migrate_membind() { return hwloc_topology_membind_support.nmigrate_membind(address()); }
-        /** @return the value of the {@code get_area_memlocation} field. */
-        @NativeType("unsigned char")
-        public boolean get_area_memlocation() { return hwloc_topology_membind_support.nget_area_memlocation(address()); }
 
     }
 

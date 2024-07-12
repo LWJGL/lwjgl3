@@ -178,15 +178,16 @@ val hwloc_topology_membind_support = struct(Module.HWLOC, "hwloc_topology_membin
     unsigned_charb("get_proc_membind", "")
     unsigned_charb("set_thisthread_membind", "")
     unsigned_charb("get_thisthread_membind", "")
+    unsigned_charb("alloc_membind", "")
     unsigned_charb("set_area_membind", "")
     unsigned_charb("get_area_membind", "")
-    unsigned_charb("alloc_membind", "")
+    unsigned_charb("get_area_memlocation", "")
     unsigned_charb("firsttouch_membind", "")
     unsigned_charb("bind_membind", "")
     unsigned_charb("interleave_membind", "")
+    unsigned_charb("weighted_interleave_membind", "")
     unsigned_charb("nexttouch_membind", "")
     unsigned_charb("migrate_membind", "")
-    unsigned_charb("get_area_memlocation", "")
 }
 
 val hwloc_topology_misc_support = struct(Module.HWLOC, "hwloc_topology_misc_support", nativeName = "struct hwloc_topology_misc_support", mutable = false) {
