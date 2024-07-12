@@ -243,11 +243,11 @@ val FT_Bitmap = struct(Module.FREETYPE, "FT_Bitmap", mutable = false) {
 val FT_Outline = struct(Module.FREETYPE, "FT_Outline", mutable = false) {
     documentation = "This structure is used to describe an outline to the scan-line converter."
 
-    AutoSize("contours")..short("n_contours", "number of contours in glyph")
-    AutoSize("points", "tags")..short("n_points", "number of points in the glyph")
+    AutoSize("contours")..unsigned_short("n_contours", "number of contours in glyph")
+    AutoSize("points", "tags")..unsigned_short("n_points", "number of points in the glyph")
     FT_Vector.p("points", "the outline's points")
-    char.p("tags", "the points flags")
-    short.p("contours", "the contour end points")
+    unsigned_char.p("tags", "the points flags")
+    unsigned_short.p("contours", "the contour end points")
     int("flags", "outline masks")
 }
 

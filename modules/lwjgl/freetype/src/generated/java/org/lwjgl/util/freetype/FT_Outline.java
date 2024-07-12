@@ -22,11 +22,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct FT_Outline {
- *     short {@link #n_contours};
- *     short {@link #n_points};
+ *     unsigned short {@link #n_contours};
+ *     unsigned short {@link #n_points};
  *     {@link FT_Vector FT_Vector} * {@link #points};
- *     char * {@link #tags};
- *     short * {@link #contours};
+ *     unsigned char * {@link #tags};
+ *     unsigned short * {@link #contours};
  *     int {@link #flags};
  * }</code></pre>
  */
@@ -91,17 +91,19 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** number of contours in glyph */
+    @NativeType("unsigned short")
     public short n_contours() { return nn_contours(address()); }
     /** number of points in the glyph */
+    @NativeType("unsigned short")
     public short n_points() { return nn_points(address()); }
     /** the outline's points */
     @NativeType("FT_Vector *")
     public FT_Vector.Buffer points() { return npoints(address()); }
     /** the points flags */
-    @NativeType("char *")
+    @NativeType("unsigned char *")
     public ByteBuffer tags() { return ntags(address()); }
     /** the contour end points */
-    @NativeType("short *")
+    @NativeType("unsigned short *")
     public ShortBuffer contours() { return ncontours(address()); }
     /** outline masks */
     public int flags() { return nflags(address()); }
@@ -224,11 +226,11 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
     /** Unsafe version of {@link #n_points}. */
     public static short nn_points(long struct) { return UNSAFE.getShort(null, struct + FT_Outline.N_POINTS); }
     /** Unsafe version of {@link #points}. */
-    public static FT_Vector.Buffer npoints(long struct) { return FT_Vector.create(memGetAddress(struct + FT_Outline.POINTS), nn_points(struct)); }
+    public static FT_Vector.Buffer npoints(long struct) { return FT_Vector.create(memGetAddress(struct + FT_Outline.POINTS), Short.toUnsignedInt(nn_points(struct))); }
     /** Unsafe version of {@link #tags() tags}. */
-    public static ByteBuffer ntags(long struct) { return memByteBuffer(memGetAddress(struct + FT_Outline.TAGS), nn_points(struct)); }
+    public static ByteBuffer ntags(long struct) { return memByteBuffer(memGetAddress(struct + FT_Outline.TAGS), Short.toUnsignedInt(nn_points(struct))); }
     /** Unsafe version of {@link #contours() contours}. */
-    public static ShortBuffer ncontours(long struct) { return memShortBuffer(memGetAddress(struct + FT_Outline.CONTOURS), nn_contours(struct)); }
+    public static ShortBuffer ncontours(long struct) { return memShortBuffer(memGetAddress(struct + FT_Outline.CONTOURS), Short.toUnsignedInt(nn_contours(struct))); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FT_Outline.FLAGS); }
 
@@ -271,17 +273,19 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
         }
 
         /** @return the value of the {@link FT_Outline#n_contours} field. */
+        @NativeType("unsigned short")
         public short n_contours() { return FT_Outline.nn_contours(address()); }
         /** @return the value of the {@link FT_Outline#n_points} field. */
+        @NativeType("unsigned short")
         public short n_points() { return FT_Outline.nn_points(address()); }
         /** @return a {@link FT_Vector.Buffer} view of the struct array pointed to by the {@link FT_Outline#points} field. */
         @NativeType("FT_Vector *")
         public FT_Vector.Buffer points() { return FT_Outline.npoints(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link FT_Outline#tags} field. */
-        @NativeType("char *")
+        @NativeType("unsigned char *")
         public ByteBuffer tags() { return FT_Outline.ntags(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@link FT_Outline#contours} field. */
-        @NativeType("short *")
+        @NativeType("unsigned short *")
         public ShortBuffer contours() { return FT_Outline.ncontours(address()); }
         /** @return the value of the {@link FT_Outline#flags} field. */
         public int flags() { return FT_Outline.nflags(address()); }
