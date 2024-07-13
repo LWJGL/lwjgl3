@@ -263,6 +263,9 @@
                     <fileset dir="." includes="${src.main}/*.cpp"/>
                 </compile>
             </beforeCompile>
+            <link>
+                <arg value="-ldl"/>
+            </link>
         </build>
 
         <!-- NanoVG -->
