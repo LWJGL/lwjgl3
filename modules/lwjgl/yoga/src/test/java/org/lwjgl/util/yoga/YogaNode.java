@@ -39,6 +39,9 @@ class YogaNode {
     @Nullable
     private YogaNode owner;
 
+    @Nullable
+    private Object data;
+
     YogaNode() {
         this(YGNodeNew());
     }
@@ -277,6 +280,14 @@ class YogaNode {
 
     void setWrap(YogaWrap flexWrap) {
         YGNodeStyleSetFlexWrap(node, flexWrap.value);
+    }
+
+    void setData(Object data) {
+        this.data = data;
+    }
+
+    Object getData() {
+        return data;
     }
 
     void setMeasureFunction(YGMeasureFuncI measureFunction) {
