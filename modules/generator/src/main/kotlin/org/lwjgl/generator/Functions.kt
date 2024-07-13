@@ -835,8 +835,9 @@ class Func(
             println("""$t${t}MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ${if (hasReturnStatement) { """long __result = stack.n${when {
-                    returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
                     returns.nativeType is PointerType<*>                   -> "pointer"
+                    returns.nativeType.mapping == PrimitiveMapping.POINTER -> "pointer"
+                    returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
                     else                                                   -> returns.nativeType.nativeMethodType
                 }}(${when (returns.nativeType.mapping) {
                     PrimitiveMapping.BOOLEAN,
@@ -858,8 +859,9 @@ class Func(
                             it.name
                         } else {
                             "stack.n${when {
-                                it.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
                                 it.nativeType is PointerType<*>                   -> "pointer"
+                                it.nativeType.mapping == PrimitiveMapping.POINTER -> "pointer"
+                                it.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
                                 else                                              -> it.nativeType.nativeMethodType
                             }}(${it.name})"
                         }

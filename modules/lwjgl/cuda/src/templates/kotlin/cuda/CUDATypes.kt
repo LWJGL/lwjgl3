@@ -30,9 +30,13 @@ val CUdevice = typedef(int, "CUdevice")
 val cuuint32_t = typedef(uint32_t, "cuuint32_t")
 val cuuint64_t = typedef(uint64_t, "cuuint64_t")
 
+val CUgraphConditionalHandle = typedef(cuuint64_t, "CUgraphConditionalHandle")
+
 val CUarray = "CUarray".handle
+val CUasyncCallbackHandle = "CUasyncCallbackHandle".handle
 val CUcontext = "CUcontext".handle
 val CUdeviceptr = "CUdeviceptr".handle
+val CUdevResourceDesc = "CUdevResourceDesc".handle
 val CUevent = "CUevent".handle
 val CUexternalMemory = "CUexternalMemory".handle
 val CUexternalSemaphore = "CUexternalSemaphore".handle
@@ -41,6 +45,7 @@ val CUgraph = "CUgraph".handle
 val CUgraphExec = "CUgraphExec".handle
 val CUgraphNode = "CUgraphNode".handle
 val CUgraphicsResource = "CUgraphicsResource".handle
+val CUgreenCtx = "CUgreenCtx".handle
 val CUkernel = "CUkernel".handle
 val CUlibrary = "CUlibrary".handle
 val CUlinkState = "CUlinkState".handle
@@ -60,10 +65,12 @@ val CUaccessProperty = "CUaccessProperty".enumType
 val CUaddress_mode = "CUaddress_mode".enumType
 val CUarraySparseSubresourceType = "CUarraySparseSubresourceType".enumType
 val CUarray_format = "CUarray_format".enumType
+val CUasyncNotificationType = "CUasyncNotificationType".enumType
 val CUclusterSchedulingPolicy = "CUclusterSchedulingPolicy".enumType
 val CUcoredumpSettings = "CUcoredumpSettings".enumType
 val CUdevice_attribute = "CUdevice_attribute".enumType
 val CUdevice_P2PAttribute = "CUdevice_P2PAttribute".enumType
+val CUdevResourceType = "CUdevResourceType".enumType
 val CUdriverProcAddressQueryResult = "CUdriverProcAddressQueryResult".enumType
 val CUexecAffinityType = "CUexecAffinityType".enumType
 val CUexternalMemoryHandleType = "CUexternalMemoryHandleType".enumType
@@ -73,6 +80,8 @@ val CUflushGPUDirectRDMAWritesScope = "CUflushGPUDirectRDMAWritesScope".enumType
 val CUflushGPUDirectRDMAWritesTarget = "CUflushGPUDirectRDMAWritesTarget".enumType
 val CUfunc_cache = "CUfunc_cache".enumType
 val CUfunction_attribute = "CUfunction_attribute".enumType
+val CUfunctionLoadingState = "CUfunctionLoadingState".enumType
+val CUgraphConditionalNodeType = "CUgraphConditionalNodeType".enumType
 val CUgraphInstantiateResult = "CUgraphInstantiateResult".enumType
 val CUgraphMem_attribute = "CUgraphMem_attribute".enumType
 val CUgraphNodeType = "CUgraphNodeType".enumType
@@ -143,6 +152,26 @@ val CUoccupancyB2DSize = Module.CUDA.callback {
         int("blockSize", ""),
 
         returnDoc = "the dynamic shared memory needed by a block"
+    ) {}
+}
+
+val CUasyncNotificationInfo = struct(Module.CUDA, "CUasyncNotificationInfo") {
+    CUasyncNotificationType("type", "")
+    union {
+        struct {
+            unsigned_long_long("bytesOverBudget", "")
+        }("overBudget", "")
+    }("info", "")
+}
+
+val CUasyncCallback = Module.CUDA.callback {
+    void(
+        "CUasyncCallback",
+        "",
+
+        CUasyncNotificationInfo.p("info", ""),
+        nullable..opaque_p("userData", ""),
+        CUasyncCallbackHandle("callback", "")
     ) {}
 }
 
@@ -237,6 +266,13 @@ val CUDA_MEMCPY3D_PEER = struct(Module.CUDA, "CUDA_MEMCPY3D_PEER") {
     size_t("Depth", "")
 }
 
+val CUDA_MEMCPY_NODE_PARAMS = struct(Module.CUDA, "CUDA_MEMCPY_NODE_PARAMS") {
+    int("flags", "")
+    int("reserved", "")
+    CUcontext("copyCtx", "")
+    CUDA_MEMCPY3D("copyParams", "")
+}
+
 val CUDA_ARRAY_DESCRIPTOR = struct(Module.CUDA, "CUDA_ARRAY_DESCRIPTOR") {
     size_t("Width", "")
     size_t("Height", "")
@@ -279,7 +315,7 @@ val CUDA_EXTERNAL_MEMORY_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY
             nullable..opaque_p("handle", "")
             nullable..opaque_const_p("name", "")
         }("win32", "")
-        nullable..opaque_const_p("nvSciBufObject", "");
+        nullable..opaque_const_p("nvSciBufObject", "")
     }("handle", "")
     unsigned_long_long("size", "")
     unsigned_int("flags", "")
@@ -308,7 +344,7 @@ val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEM
             nullable..opaque_p("handle", "")
             nullable..opaque_const_p("name", "")
         }("win32", "")
-        nullable..opaque_const_p("nvSciSyncObj", "");
+        nullable..opaque_const_p("nvSciSyncObj", "")
     }("handle", "")
     unsigned_int("flags", "")
     unsigned_int("reserved", "")[16]
@@ -357,7 +393,19 @@ val CUDA_EXT_SEM_SIGNAL_NODE_PARAMS = struct(Module.CUDA, "CUDA_EXT_SEM_SIGNAL_N
     AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", "")
 }
 
+val CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2 = struct(Module.CUDA, "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2") {
+    CUexternalSemaphore.p("extSemArray", "")
+    CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.const.p("paramsArray", "")
+    AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", "")
+}
+
 val CUDA_EXT_SEM_WAIT_NODE_PARAMS = struct(Module.CUDA, "CUDA_EXT_SEM_WAIT_NODE_PARAMS") {
+    CUexternalSemaphore.p("extSemArray", "")
+    CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.const.p("paramsArray", "")
+    AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", "")
+}
+
+val CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2 = struct(Module.CUDA, "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2") {
     CUexternalSemaphore.p("extSemArray", "")
     CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.const.p("paramsArray", "")
     AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", "")
@@ -454,6 +502,22 @@ val CUDA_MEM_ALLOC_NODE_PARAMS = struct(Module.CUDA, "CUDA_MEM_ALLOC_NODE_PARAMS
     nullable..CUdeviceptr("dptr", "")
 }
 
+val CUDA_MEM_FREE_NODE_PARAMS = struct(Module.CUDA, "CUDA_MEM_FREE_NODE_PARAMS") {
+    CUdeviceptr("dptr", "")
+}
+
+val CUDA_CHILD_GRAPH_NODE_PARAMS = struct(Module.CUDA, "CUDA_CHILD_GRAPH_NODE_PARAMS") {
+    CUgraph("graph", "")
+}
+
+val CUDA_EVENT_RECORD_NODE_PARAMS = struct(Module.CUDA, "CUDA_EVENT_RECORD_NODE_PARAMS") {
+    CUevent("event", "")
+}
+
+val CUDA_EVENT_WAIT_NODE_PARAMS = struct(Module.CUDA, "CUDA_EVENT_WAIT_NODE_PARAMS") {
+    CUevent("event", "")
+}
+
 val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
     CUstreamBatchMemOpType("operation", "")
     struct {
@@ -543,6 +607,21 @@ val CUDA_KERNEL_NODE_PARAMS_v2 = struct(Module.CUDA, "CUDA_KERNEL_NODE_PARAMS_v2
     nullable..CUcontext("ctx", "")
 }
 
+val CUDA_KERNEL_NODE_PARAMS_v3 = struct(Module.CUDA, "CUDA_KERNEL_NODE_PARAMS_v3") {
+    nullable..CUfunction("func", "")
+    unsigned_int("gridDimX", "")
+    unsigned_int("gridDimY", "")
+    unsigned_int("gridDimZ", "")
+    unsigned_int("blockDimX", "")
+    unsigned_int("blockDimY", "")
+    unsigned_int("blockDimZ", "")
+    unsigned_int("sharedMemBytes", "")
+    nullable..void.p.p("kernelParams", "")
+    nullable..void.p.p("extra", "")
+    nullable..CUkernel("kern", "")
+    nullable..CUcontext("ctx", "")
+}
+
 val CUDA_MEMSET_NODE_PARAMS = struct(Module.CUDA, "CUDA_MEMSET_NODE_PARAMS") {
     CUdeviceptr("dst", "")
     size_t("pitch", "")
@@ -552,9 +631,61 @@ val CUDA_MEMSET_NODE_PARAMS = struct(Module.CUDA, "CUDA_MEMSET_NODE_PARAMS") {
     size_t("height", "")
 }
 
+val CUDA_MEMSET_NODE_PARAMS_v2 = struct(Module.CUDA, "CUDA_MEMSET_NODE_PARAMS_v2") {
+    CUdeviceptr("dst", "")
+    size_t("pitch", "")
+    unsigned_int("value", "")
+    unsigned_int("elementSize", "")
+    size_t("width", "")
+    size_t("height", "")
+    nullable..CUcontext("ctx", "")
+}
+
 val CUDA_HOST_NODE_PARAMS = struct(Module.CUDA, "CUDA_HOST_NODE_PARAMS") {
     CUhostFn("fn", "")
     nullable..opaque_p("userData", "")
+}
+
+val CUDA_HOST_NODE_PARAMS_v2 = struct(Module.CUDA, "CUDA_HOST_NODE_PARAMS_v2") {
+    CUhostFn("fn", "")
+    nullable..opaque_p("userData", "")
+}
+
+val CUDA_CONDITIONAL_NODE_PARAMS = struct(Module.CUDA, "CUDA_CONDITIONAL_NODE_PARAMS") {
+    CUgraphConditionalHandle("handle", "")
+    CUgraphConditionalNodeType("type", "")
+    unsigned_int("size", "")
+    Check(1)..CUgraph.p("phGraph_out", "")
+    CUcontext("ctx", "")
+}
+
+val CUgraphNodeParams = struct(Module.CUDA, "CUgraphNodeParams") {
+    CUgraphNodeType("type", "")
+    int("reserved0", "")[3].private()
+    union {
+        long_long("reserved1", "")[29].private()
+        CUDA_KERNEL_NODE_PARAMS_v3("kernel", "")
+        CUDA_MEMCPY_NODE_PARAMS("memcpy", "")
+        CUDA_MEMSET_NODE_PARAMS_v2("memset", "")
+        CUDA_HOST_NODE_PARAMS_v2("host", "")
+        CUDA_CHILD_GRAPH_NODE_PARAMS("graph", "")
+        CUDA_EVENT_WAIT_NODE_PARAMS("eventWait", "")
+        CUDA_EVENT_RECORD_NODE_PARAMS("eventRecord", "")
+        CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2("extSemSignal", "")
+        CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2("extSemWait", "")
+        CUDA_MEM_ALLOC_NODE_PARAMS("alloc", "")
+        CUDA_MEM_FREE_NODE_PARAMS("free", "")
+        CUDA_BATCH_MEM_OP_NODE_PARAMS("memOp", "")
+        CUDA_CONDITIONAL_NODE_PARAMS("conditional", "")
+    }("params", "")
+    long_long("reserved2", "").private()
+}
+
+val CUgraphEdgeData = struct(Module.CUDA, "CUgraphEdgeData") {
+    unsigned_char("from_port", "")
+    unsigned_char("to_port", "")
+    unsigned_char("type", "")
+    unsigned_char("reserved", "")[5].private()
 }
 
 val CUDA_GRAPH_INSTANTIATE_PARAMS = struct(Module.CUDA, "CUDA_GRAPH_INSTANTIATE_PARAMS", mutable = false) {
@@ -629,6 +760,17 @@ val CUexecAffinityParam = struct(Module.CUDA, "CUexecAffinityParam") {
     union {
         CUexecAffinitySmCount("smCount", "")
     }("param", "")
+}
+
+val CUctxCigParam = struct(Module.CUDA, "CUctxCigParam") {
+    CUtensorMapDataType("sharedDataType", "")
+    nullable..opaque_p("sharedData", "")
+}
+
+val CUctxCreateParams = struct(Module.CUDA, "CUctxCreateParams") {
+    nullable..CUexecAffinityParam.p("execAffinityParams", "")
+    AutoSize("execAffinityParams")..unsigned_int("numExecAffinityParams", "")
+    nullable..CUctxCigParam.p("cigParams", "")
 }
 
 val CUDA_RESOURCE_DESC = struct(Module.CUDA, "CUDA_RESOURCE_DESC") {
@@ -710,6 +852,20 @@ val CUdevprop = struct(Module.CUDA, "CUdevprop") {
     int("regsPerBlock", "")
     int("clockRate", "")
     int("textureAlign", "")
+}
+
+val CUdevSmResource = struct(Module.CUDA, "CUdevSmResource", mutable = false) {
+    unsigned_int("smCount", "")
+}
+
+private const val RESOURCE_ABI_EXTERNAL_BYTES = 48
+val CUdevResource = struct(Module.CUDA, "CUdevResource", mutable = false) {
+    CUdevResourceType("type", "")
+    unsigned_char("_internal_padding", "")[92].private()
+    union {
+        CUdevSmResource("sm", "")
+        unsigned_char("_oversize", "")[RESOURCE_ABI_EXTERNAL_BYTES].private()
+    }("resource", "")
 }
 
 // GL Interop Types

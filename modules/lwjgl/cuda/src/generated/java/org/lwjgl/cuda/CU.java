@@ -68,6 +68,7 @@ public class CU {
             DevicePrimaryCtxReset                              = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuDevicePrimaryCtxReset", 2)),
             CtxCreate                                          = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuCtxCreate", 2)),
             CtxCreate_v3                                       = apiGetFunctionAddressOptional(NVCUDA, "cuCtxCreate_v3"),
+            CtxCreate_v4                                       = apiGetFunctionAddressOptional(NVCUDA, "cuCtxCreate_v4"),
             CtxDestroy                                         = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuCtxDestroy", 2)),
             CtxPushCurrent                                     = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuCtxPushCurrent", 2)),
             CtxPopCurrent                                      = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuCtxPopCurrent", 2)),
@@ -88,6 +89,8 @@ public class CU {
             CtxGetStreamPriorityRange                          = apiGetFunctionAddress(NVCUDA, "cuCtxGetStreamPriorityRange"),
             CtxResetPersistingL2Cache                          = apiGetFunctionAddressOptional(NVCUDA, "cuCtxResetPersistingL2Cache"),
             CtxGetExecAffinity                                 = apiGetFunctionAddressOptional(NVCUDA, "cuCtxGetExecAffinity"),
+            CtxRecordEvent                                     = apiGetFunctionAddressOptional(NVCUDA, "cuCtxRecordEvent"),
+            CtxWaitEvent                                       = apiGetFunctionAddressOptional(NVCUDA, "cuCtxWaitEvent"),
             CtxAttach                                          = apiGetFunctionAddress(NVCUDA, "cuCtxAttach"),
             CtxDetach                                          = apiGetFunctionAddress(NVCUDA, "cuCtxDetach"),
             ModuleLoad                                         = apiGetFunctionAddress(NVCUDA, "cuModuleLoad"),
@@ -97,6 +100,8 @@ public class CU {
             ModuleUnload                                       = apiGetFunctionAddress(NVCUDA, "cuModuleUnload"),
             ModuleGetLoadingMode                               = apiGetFunctionAddressOptional(NVCUDA, "cuModuleGetLoadingMode"),
             ModuleGetFunction                                  = apiGetFunctionAddress(NVCUDA, "cuModuleGetFunction"),
+            ModuleGetFunctionCount                             = apiGetFunctionAddressOptional(NVCUDA, "cuModuleGetFunctionCount"),
+            ModuleEnumerateFunctions                           = apiGetFunctionAddressOptional(NVCUDA, "cuModuleEnumerateFunctions"),
             ModuleGetGlobal                                    = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuModuleGetGlobal", 2)),
             LinkCreate                                         = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuLinkCreate", 2)),
             LinkAddData                                        = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuLinkAddData", 2)),
@@ -109,14 +114,19 @@ public class CU {
             LibraryLoadFromFile                                = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryLoadFromFile"),
             LibraryUnload                                      = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryUnload"),
             LibraryGetKernel                                   = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetKernel"),
+            LibraryGetKernelCount                              = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetKernelCount"),
+            LibraryEnumerateKernels                            = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryEnumerateKernels"),
             LibraryGetModule                                   = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetModule"),
             KernelGetFunction                                  = apiGetFunctionAddressOptional(NVCUDA, "cuKernelGetFunction"),
+            KernelGetLibrary                                   = apiGetFunctionAddressOptional(NVCUDA, "cuKernelGetLibrary"),
             LibraryGetGlobal                                   = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetGlobal"),
             LibraryGetManaged                                  = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetManaged"),
             LibraryGetUnifiedFunction                          = apiGetFunctionAddressOptional(NVCUDA, "cuLibraryGetUnifiedFunction"),
             KernelGetAttribute                                 = apiGetFunctionAddressOptional(NVCUDA, "cuKernelGetAttribute"),
             KernelSetAttribute                                 = apiGetFunctionAddressOptional(NVCUDA, "cuKernelSetAttribute"),
             KernelSetCacheConfig                               = apiGetFunctionAddressOptional(NVCUDA, "cuKernelSetCacheConfig"),
+            KernelGetName                                      = apiGetFunctionAddressOptional(NVCUDA, "cuKernelGetName"),
+            KernelGetParamInfo                                 = apiGetFunctionAddressOptional(NVCUDA, "cuKernelGetParamInfo"),
             MemGetInfo                                         = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuMemGetInfo", 2)),
             MemAlloc                                           = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuMemAlloc", 2)),
             MemAllocPitch                                      = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuMemAllocPitch", 2)),
@@ -128,6 +138,8 @@ public class CU {
             MemHostGetDevicePointer                            = apiGetFunctionAddress(NVCUDA, __CUDA_API_VERSION("cuMemHostGetDevicePointer", 2)),
             MemHostGetFlags                                    = apiGetFunctionAddress(NVCUDA, "cuMemHostGetFlags"),
             MemAllocManaged                                    = apiGetFunctionAddressOptional(NVCUDA, "cuMemAllocManaged"),
+            DeviceRegisterAsyncNotification                    = apiGetFunctionAddressOptional(NVCUDA, "cuDeviceRegisterAsyncNotification"),
+            DeviceUnregisterAsyncNotification                  = apiGetFunctionAddressOptional(NVCUDA, "cuDeviceUnregisterAsyncNotification"),
             DeviceGetByPCIBusId                                = apiGetFunctionAddressOptional(NVCUDA, "cuDeviceGetByPCIBusId"),
             DeviceGetPCIBusId                                  = apiGetFunctionAddressOptional(NVCUDA, "cuDeviceGetPCIBusId"),
             IpcGetEventHandle                                  = apiGetFunctionAddressOptional(NVCUDA, "cuIpcGetEventHandle"),
@@ -223,7 +235,9 @@ public class CU {
             MulticastGetGranularity                            = apiGetFunctionAddressOptional(NVCUDA, "cuMulticastGetGranularity"),
             PointerGetAttribute                                = apiGetFunctionAddressOptional(NVCUDA, "cuPointerGetAttribute"),
             MemPrefetchAsync                                   = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuMemPrefetchAsync")),
+            MemPrefetchAsync_v2                                = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuMemPrefetchAsync_v2")),
             MemAdvise                                          = apiGetFunctionAddressOptional(NVCUDA, "cuMemAdvise"),
+            MemAdvise_v2                                       = apiGetFunctionAddressOptional(NVCUDA, "cuMemAdvise_v2"),
             MemRangeGetAttribute                               = apiGetFunctionAddressOptional(NVCUDA, "cuMemRangeGetAttribute"),
             MemRangeGetAttributes                              = apiGetFunctionAddressOptional(NVCUDA, "cuMemRangeGetAttributes"),
             PointerSetAttribute                                = apiGetFunctionAddressOptional(NVCUDA, "cuPointerSetAttribute"),
@@ -234,16 +248,20 @@ public class CU {
             StreamGetFlags                                     = apiGetFunctionAddress(NVCUDA, __CUDA_API_PTSZ("cuStreamGetFlags")),
             StreamGetId                                        = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetId")),
             StreamGetCtx                                       = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetCtx")),
+            StreamGetCtx_v2                                    = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetCtx_v2")),
             StreamWaitEvent                                    = apiGetFunctionAddress(NVCUDA, __CUDA_API_PTSZ("cuStreamWaitEvent")),
             StreamAddCallback                                  = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamAddCallback")),
             StreamBeginCapture                                 = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamBeginCapture")),
             StreamBeginCapture_v2                              = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamBeginCapture_v2")),
+            StreamBeginCaptureToGraph                          = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamBeginCaptureToGraph")),
             ThreadExchangeStreamCaptureMode                    = apiGetFunctionAddressOptional(NVCUDA, "cuThreadExchangeStreamCaptureMode"),
             StreamEndCapture                                   = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamEndCapture")),
             StreamIsCapturing                                  = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamIsCapturing")),
+            StreamGetCaptureInfo_v3                            = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetCaptureInfo_v3")),
             StreamGetCaptureInfo                               = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetCaptureInfo")),
             StreamGetCaptureInfo_v2                            = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamGetCaptureInfo_v2")),
             StreamUpdateCaptureDependencies                    = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamUpdateCaptureDependencies")),
+            StreamUpdateCaptureDependencies_v2                 = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamUpdateCaptureDependencies_v2")),
             StreamAttachMemAsync                               = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuStreamAttachMemAsync")),
             StreamQuery                                        = apiGetFunctionAddress(NVCUDA, __CUDA_API_PTSZ("cuStreamQuery")),
             StreamSynchronize                                  = apiGetFunctionAddress(NVCUDA, __CUDA_API_PTSZ("cuStreamSynchronize")),
@@ -276,6 +294,10 @@ public class CU {
             FuncSetCacheConfig                                 = apiGetFunctionAddress(NVCUDA, "cuFuncSetCacheConfig"),
             FuncSetSharedMemConfig                             = apiGetFunctionAddressOptional(NVCUDA, "cuFuncSetSharedMemConfig"),
             FuncGetModule                                      = apiGetFunctionAddressOptional(NVCUDA, "cuFuncGetModule"),
+            FuncGetName                                        = apiGetFunctionAddressOptional(NVCUDA, "cuFuncGetName"),
+            FuncGetParamInfo                                   = apiGetFunctionAddressOptional(NVCUDA, "cuFuncGetParamInfo"),
+            FuncIsLoaded                                       = apiGetFunctionAddressOptional(NVCUDA, "cuFuncIsLoaded"),
+            FuncLoad                                           = apiGetFunctionAddressOptional(NVCUDA, "cuFuncLoad"),
             LaunchKernel                                       = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuLaunchKernel")),
             LaunchKernelEx                                     = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuLaunchKernelEx")),
             LaunchCooperativeKernel                            = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_PTSZ("cuLaunchCooperativeKernel")),
@@ -339,10 +361,15 @@ public class CU {
             GraphGetNodes                                      = apiGetFunctionAddressOptional(NVCUDA, "cuGraphGetNodes"),
             GraphGetRootNodes                                  = apiGetFunctionAddressOptional(NVCUDA, "cuGraphGetRootNodes"),
             GraphGetEdges                                      = apiGetFunctionAddressOptional(NVCUDA, "cuGraphGetEdges"),
+            GraphGetEdges_v2                                   = apiGetFunctionAddressOptional(NVCUDA, "cuGraphGetEdges_v2"),
             GraphNodeGetDependencies                           = apiGetFunctionAddressOptional(NVCUDA, "cuGraphNodeGetDependencies"),
+            GraphNodeGetDependencies_v2                        = apiGetFunctionAddressOptional(NVCUDA, "cuGraphNodeGetDependencies_v2"),
             GraphNodeGetDependentNodes                         = apiGetFunctionAddressOptional(NVCUDA, "cuGraphNodeGetDependentNodes"),
+            GraphNodeGetDependentNodes_v2                      = apiGetFunctionAddressOptional(NVCUDA, "cuGraphNodeGetDependentNodes_v2"),
             GraphAddDependencies                               = apiGetFunctionAddressOptional(NVCUDA, "cuGraphAddDependencies"),
+            GraphAddDependencies_v2                            = apiGetFunctionAddressOptional(NVCUDA, "cuGraphAddDependencies_v2"),
             GraphRemoveDependencies                            = apiGetFunctionAddressOptional(NVCUDA, "cuGraphRemoveDependencies"),
+            GraphRemoveDependencies_v2                         = apiGetFunctionAddressOptional(NVCUDA, "cuGraphRemoveDependencies_v2"),
             GraphDestroyNode                                   = apiGetFunctionAddressOptional(NVCUDA, "cuGraphDestroyNode"),
             GraphInstantiate                                   = apiGetFunctionAddressOptional(NVCUDA, __CUDA_API_VERSION("cuGraphInstantiate", 2)),
             GraphInstantiateWithFlags                          = apiGetFunctionAddressOptional(NVCUDA, "cuGraphInstantiateWithFlags"),
@@ -375,6 +402,11 @@ public class CU {
             UserObjectRelease                                  = apiGetFunctionAddressOptional(NVCUDA, "cuUserObjectRelease"),
             GraphRetainUserObject                              = apiGetFunctionAddressOptional(NVCUDA, "cuGraphRetainUserObject"),
             GraphReleaseUserObject                             = apiGetFunctionAddressOptional(NVCUDA, "cuGraphReleaseUserObject"),
+            GraphAddNode                                       = apiGetFunctionAddressOptional(NVCUDA, "cuGraphAddNode"),
+            GraphAddNode_v2                                    = apiGetFunctionAddressOptional(NVCUDA, "cuGraphAddNode_v2"),
+            GraphNodeSetParams                                 = apiGetFunctionAddressOptional(NVCUDA, "cuGraphNodeSetParams"),
+            GraphExecNodeSetParams                             = apiGetFunctionAddressOptional(NVCUDA, "cuGraphExecNodeSetParams"),
+            GraphConditionalHandleCreate                       = apiGetFunctionAddressOptional(NVCUDA, "cuGraphConditionalHandleCreate"),
             OccupancyMaxActiveBlocksPerMultiprocessor          = apiGetFunctionAddressOptional(NVCUDA, "cuOccupancyMaxActiveBlocksPerMultiprocessor"),
             OccupancyMaxActiveBlocksPerMultiprocessorWithFlags = apiGetFunctionAddressOptional(NVCUDA, "cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags"),
             OccupancyMaxPotentialBlockSize                     = apiGetFunctionAddressOptional(NVCUDA, "cuOccupancyMaxPotentialBlockSize"),
@@ -439,7 +471,19 @@ public class CU {
             CoredumpGetAttributeGlobal                         = apiGetFunctionAddressOptional(NVCUDA, "cuCoredumpGetAttributeGlobal"),
             CoredumpSetAttribute                               = apiGetFunctionAddressOptional(NVCUDA, "cuCoredumpSetAttribute"),
             CoredumpSetAttributeGlobal                         = apiGetFunctionAddressOptional(NVCUDA, "cuCoredumpSetAttributeGlobal"),
-            GetExportTable                                     = apiGetFunctionAddress(NVCUDA, "cuGetExportTable");
+            GetExportTable                                     = apiGetFunctionAddress(NVCUDA, "cuGetExportTable"),
+            GreenCtxCreate                                     = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxCreate"),
+            GreenCtxDestroy                                    = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxDestroy"),
+            CtxFromGreenCtx                                    = apiGetFunctionAddressOptional(NVCUDA, "cuCtxFromGreenCtx"),
+            DeviceGetDevResource                               = apiGetFunctionAddressOptional(NVCUDA, "cuDeviceGetDevResource"),
+            CtxGetDevResource                                  = apiGetFunctionAddressOptional(NVCUDA, "cuCtxGetDevResource"),
+            GreenCtxGetDevResource                             = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxGetDevResource"),
+            DevSmResourceSplitByCount                          = apiGetFunctionAddressOptional(NVCUDA, "cuDevSmResourceSplitByCount"),
+            DevResourceGenerateDesc                            = apiGetFunctionAddressOptional(NVCUDA, "cuDevResourceGenerateDesc"),
+            GreenCtxRecordEvent                                = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxRecordEvent"),
+            GreenCtxWaitEvent                                  = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxWaitEvent"),
+            StreamGetGreenCtx                                  = apiGetFunctionAddressOptional(NVCUDA, "cuStreamGetGreenCtx"),
+            GreenCtxStreamCreate                               = apiGetFunctionAddressOptional(NVCUDA, "cuGreenCtxStreamCreate");
 
     }
 
@@ -448,7 +492,7 @@ public class CU {
         return NVCUDA;
     }
 
-    public static final int CU_CUDA_VERSION = 12010;
+    public static final int CU_CUDA_VERSION = 12050;
 
     public static final int CU_IPC_HANDLE_SIZE = 64;
 
@@ -721,6 +765,9 @@ public class CU {
         CU_STREAM_ADD_CAPTURE_DEPENDENCIES = 0x0,
         CU_STREAM_SET_CAPTURE_DEPENDENCIES = 0x1;
 
+    /** {@code CUasyncNotificationType} */
+    public static final int CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET = 0x1;
+
     /**
      * {@code CUarray_format}
      * 
@@ -762,6 +809,19 @@ public class CU {
      * <li>{@link #CU_AD_FORMAT_BC6H_SF16 AD_FORMAT_BC6H_SF16}</li>
      * <li>{@link #CU_AD_FORMAT_BC7_UNORM AD_FORMAT_BC7_UNORM}</li>
      * <li>{@link #CU_AD_FORMAT_BC7_UNORM_SRGB AD_FORMAT_BC7_UNORM_SRGB}</li>
+     * <li>{@link #CU_AD_FORMAT_P010 AD_FORMAT_P010}</li>
+     * <li>{@link #CU_AD_FORMAT_P016 AD_FORMAT_P016}</li>
+     * <li>{@link #CU_AD_FORMAT_NV16 AD_FORMAT_NV16}</li>
+     * <li>{@link #CU_AD_FORMAT_P210 AD_FORMAT_P210}</li>
+     * <li>{@link #CU_AD_FORMAT_P216 AD_FORMAT_P216}</li>
+     * <li>{@link #CU_AD_FORMAT_YUY2 AD_FORMAT_YUY2}</li>
+     * <li>{@link #CU_AD_FORMAT_Y210 AD_FORMAT_Y210}</li>
+     * <li>{@link #CU_AD_FORMAT_Y216 AD_FORMAT_Y216}</li>
+     * <li>{@link #CU_AD_FORMAT_AYUV AD_FORMAT_AYUV}</li>
+     * <li>{@link #CU_AD_FORMAT_Y410 AD_FORMAT_Y410}</li>
+     * <li>{@link #CU_AD_FORMAT_Y416 AD_FORMAT_Y416}</li>
+     * <li>{@link #CU_AD_FORMAT_Y444_PLANAR8 AD_FORMAT_Y444_PLANAR8}</li>
+     * <li>{@link #CU_AD_FORMAT_Y444_PLANAR10 AD_FORMAT_Y444_PLANAR10}</li>
      * </ul>
      */
     public static final int
@@ -799,7 +859,20 @@ public class CU {
         CU_AD_FORMAT_BC6H_UF16      = 0x9b,
         CU_AD_FORMAT_BC6H_SF16      = 0x9c,
         CU_AD_FORMAT_BC7_UNORM      = 0x9d,
-        CU_AD_FORMAT_BC7_UNORM_SRGB = 0x9e;
+        CU_AD_FORMAT_BC7_UNORM_SRGB = 0x9e,
+        CU_AD_FORMAT_P010           = 0x9f,
+        CU_AD_FORMAT_P016           = 0xa1,
+        CU_AD_FORMAT_NV16           = 0xa2,
+        CU_AD_FORMAT_P210           = 0xa3,
+        CU_AD_FORMAT_P216           = 0xa4,
+        CU_AD_FORMAT_YUY2           = 0xa5,
+        CU_AD_FORMAT_Y210           = 0xa6,
+        CU_AD_FORMAT_Y216           = 0xa7,
+        CU_AD_FORMAT_AYUV           = 0xa8,
+        CU_AD_FORMAT_Y410           = 0xa9,
+        CU_AD_FORMAT_Y416           = 0xb1,
+        CU_AD_FORMAT_Y444_PLANAR8   = 0xb2,
+        CU_AD_FORMAT_Y444_PLANAR10  = 0xb3;
 
     /**
      * {@code CUaddress_mode}
@@ -972,8 +1045,14 @@ public class CU {
      * <li>{@link #CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED}</li>
      * <li>{@link #CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT}</li>
      * <li>{@link #CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED}</li>
      * <li>{@link #CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_NUMA_CONFIG DEVICE_ATTRIBUTE_NUMA_CONFIG}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_NUMA_ID DEVICE_ATTRIBUTE_NUMA_ID}</li>
      * <li>{@link #CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_MPS_ENABLED DEVICE_ATTRIBUTE_MPS_ENABLED}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID DEVICE_ATTRIBUTE_HOST_NUMA_ID}</li>
+     * <li>{@link #CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED}</li>
      * </ul>
      */
     public static final int
@@ -1110,8 +1189,14 @@ public class CU {
         CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED                          = 125,
         CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT                        = 126,
         CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED                  = 127,
+        CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED                 = 128,
         CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS                    = 129,
-        CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED                          = 132;
+        CU_DEVICE_ATTRIBUTE_NUMA_CONFIG                                  = 130,
+        CU_DEVICE_ATTRIBUTE_NUMA_ID                                      = 131,
+        CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED                          = 132,
+        CU_DEVICE_ATTRIBUTE_MPS_ENABLED                                  = 133,
+        CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID                                 = 134,
+        CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED                          = 135;
 
     /**
      * {@code CUpointer_attribute}
@@ -1321,13 +1406,21 @@ public class CU {
      * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION}</li>
      * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY MEM_RANGE_ATTRIBUTE_ACCESSED_BY}</li>
      * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION}</li>
+     * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_TYPE MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_TYPE}</li>
+     * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_ID MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_ID}</li>
+     * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_TYPE MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_TYPE}</li>
+     * <li>{@link #CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_ID MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_ID}</li>
      * </ul>
      */
     public static final int
-        CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY            = 0x1,
-        CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION     = 0x2,
-        CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY            = 0x3,
-        CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION = 0x4;
+        CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY                 = 1,
+        CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION          = 2,
+        CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY                 = 3,
+        CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION      = 4,
+        CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_TYPE     = 5,
+        CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_ID       = 6,
+        CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_TYPE = 7,
+        CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_ID   = 8;
 
     /**
      * {@code CUjit_option}
@@ -1366,6 +1459,9 @@ public class CU {
      * <li>{@link #CU_JIT_REFERENCED_VARIABLE_COUNT JIT_REFERENCED_VARIABLE_COUNT}</li>
      * <li>{@link #CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES}</li>
      * <li>{@link #CU_JIT_POSITION_INDEPENDENT_CODE JIT_POSITION_INDEPENDENT_CODE}</li>
+     * <li>{@link #CU_JIT_MIN_CTA_PER_SM JIT_MIN_CTA_PER_SM}</li>
+     * <li>{@link #CU_JIT_MAX_THREADS_PER_BLOCK JIT_MAX_THREADS_PER_BLOCK}</li>
+     * <li>{@link #CU_JIT_OVERRIDE_DIRECTIVE_VALUES JIT_OVERRIDE_DIRECTIVE_VALUES}</li>
      * <li>{@link #CU_JIT_NUM_OPTIONS JIT_NUM_OPTIONS}</li>
      * </ul>
      */
@@ -1401,7 +1497,10 @@ public class CU {
         CU_JIT_REFERENCED_VARIABLE_COUNT        = 28,
         CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES = 29,
         CU_JIT_POSITION_INDEPENDENT_CODE        = 30,
-        CU_JIT_NUM_OPTIONS                      = 31;
+        CU_JIT_MIN_CTA_PER_SM                   = 31,
+        CU_JIT_MAX_THREADS_PER_BLOCK            = 32,
+        CU_JIT_OVERRIDE_DIRECTIVE_VALUES        = 33,
+        CU_JIT_NUM_OPTIONS                      = 34;
 
     public static final int CU_COMPUTE_ACCELERATED_TARGET_BASE = 0x10000;
 
@@ -1582,6 +1681,9 @@ public class CU {
      * <li>{@link #CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT}</li>
      * <li>{@link #CU_LIMIT_MAX_L2_FETCH_GRANULARITY LIMIT_MAX_L2_FETCH_GRANULARITY}</li>
      * <li>{@link #CU_LIMIT_PERSISTING_L2_CACHE_SIZE LIMIT_PERSISTING_L2_CACHE_SIZE}</li>
+     * <li>{@link #CU_LIMIT_SHMEM_SIZE LIMIT_SHMEM_SIZE}</li>
+     * <li>{@link #CU_LIMIT_CIG_ENABLED LIMIT_CIG_ENABLED}</li>
+     * <li>{@link #CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED LIMIT_CIG_SHMEM_FALLBACK_ENABLED}</li>
      * </ul>
      */
     public static final int
@@ -1591,7 +1693,10 @@ public class CU {
         CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH           = 0x03,
         CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT = 0x04,
         CU_LIMIT_MAX_L2_FETCH_GRANULARITY         = 0x05,
-        CU_LIMIT_PERSISTING_L2_CACHE_SIZE         = 0x06;
+        CU_LIMIT_PERSISTING_L2_CACHE_SIZE         = 0x06,
+        CU_LIMIT_SHMEM_SIZE                       = 0x07,
+        CU_LIMIT_CIG_ENABLED                      = 0x08,
+        CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED       = 0x09;
 
     /**
      * {@code CUresourcetype}
@@ -1627,6 +1732,22 @@ public class CU {
         CU_ACCESS_PROPERTY_STREAMING  = 1,
         CU_ACCESS_PROPERTY_PERSISTING = 2;
 
+    public static final int CU_GRAPH_COND_ASSIGN_DEFAULT = 0x1;
+
+    /**
+     * {@code CUgraphConditionalNodeType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_GRAPH_COND_TYPE_IF GRAPH_COND_TYPE_IF}</li>
+     * <li>{@link #CU_GRAPH_COND_TYPE_WHILE GRAPH_COND_TYPE_WHILE}</li>
+     * </ul>
+     */
+    public static final int
+        CU_GRAPH_COND_TYPE_IF    = 0,
+        CU_GRAPH_COND_TYPE_WHILE = 1;
+
     /**
      * {@code CUgraphNodeType}
      * 
@@ -1646,6 +1767,7 @@ public class CU {
      * <li>{@link #CU_GRAPH_NODE_TYPE_MEM_ALLOC GRAPH_NODE_TYPE_MEM_ALLOC}</li>
      * <li>{@link #CU_GRAPH_NODE_TYPE_MEM_FREE GRAPH_NODE_TYPE_MEM_FREE}</li>
      * <li>{@link #CU_GRAPH_NODE_TYPE_BATCH_MEM_OP GRAPH_NODE_TYPE_BATCH_MEM_OP}</li>
+     * <li>{@link #CU_GRAPH_NODE_TYPE_CONDITIONAL GRAPH_NODE_TYPE_CONDITIONAL}</li>
      * </ul>
      */
     public static final int
@@ -1661,7 +1783,27 @@ public class CU {
         CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT   = 9,
         CU_GRAPH_NODE_TYPE_MEM_ALLOC        = 10,
         CU_GRAPH_NODE_TYPE_MEM_FREE         = 11,
-        CU_GRAPH_NODE_TYPE_BATCH_MEM_OP     = 12;
+        CU_GRAPH_NODE_TYPE_BATCH_MEM_OP     = 12,
+        CU_GRAPH_NODE_TYPE_CONDITIONAL      = 13;
+
+    /**
+     * {@code CUgraphDependencyType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_GRAPH_DEPENDENCY_TYPE_DEFAULT GRAPH_DEPENDENCY_TYPE_DEFAULT}</li>
+     * <li>{@link #CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC}</li>
+     * </ul>
+     */
+    public static final int
+        CU_GRAPH_DEPENDENCY_TYPE_DEFAULT      = 0,
+        CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = 1;
+
+    public static final int
+        CU_GRAPH_KERNEL_NODE_PORT_DEFAULT      = 0,
+        CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC = 1,
+        CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER = 2;
 
     /**
      * {@code CUgraphInstantiateResult}
@@ -1748,6 +1890,9 @@ public class CU {
      * <li>{@link #CU_LAUNCH_ATTRIBUTE_PRIORITY LAUNCH_ATTRIBUTE_PRIORITY}</li>
      * <li>{@link #CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP}</li>
      * <li>{@link #CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN}</li>
+     * <li>{@link #CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT}</li>
+     * <li>{@link #CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE}</li>
+     * <li>{@link #CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT}</li>
      * </ul>
      */
     public static final int
@@ -1761,7 +1906,10 @@ public class CU {
         CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT                   = 7,
         CU_LAUNCH_ATTRIBUTE_PRIORITY                             = 8,
         CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP                  = 9,
-        CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN                      = 10;
+        CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN                      = 10,
+        CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT              = 12,
+        CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE         = 13,
+        CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT     = 14;
 
     /**
      * {@code CUkernelNodeAttrID}
@@ -1776,6 +1924,8 @@ public class CU {
      * <li>{@link #CU_KERNEL_NODE_ATTRIBUTE_PRIORITY KERNEL_NODE_ATTRIBUTE_PRIORITY}</li>
      * <li>{@link #CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP}</li>
      * <li>{@link #CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN}</li>
+     * <li>{@link #CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE}</li>
+     * <li>{@link #CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT}</li>
      * </ul>
      */
     public static final int
@@ -1785,7 +1935,9 @@ public class CU {
         CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE,
         CU_KERNEL_NODE_ATTRIBUTE_PRIORITY                             = CU_LAUNCH_ATTRIBUTE_PRIORITY,
         CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP                  = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP,
-        CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN                      = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN;
+        CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN                      = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN,
+        CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE         = CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE,
+        CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT     = CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT;
 
     /**
      * {@code CUstreamCaptureStatus}
@@ -1885,6 +2037,9 @@ public class CU {
         CU_EXEC_AFFINITY_TYPE_SM_COUNT = 0,
         CU_EXEC_AFFINITY_TYPE_MAX      = 1;
 
+    /** {@code CUcigDataType} */
+    public static final int CU_DATA_TYPE_D3D12_COMMAND_QUEUE = 0x1;
+
     /**
      * {@code CUlibraryOption}
      * 
@@ -1952,6 +2107,7 @@ public class CU {
      * <li>{@link #CUDA_ERROR_OPERATING_SYSTEM CUDA_ERROR_OPERATING_SYSTEM}</li>
      * <li>{@link #CUDA_ERROR_INVALID_HANDLE CUDA_ERROR_INVALID_HANDLE}</li>
      * <li>{@link #CUDA_ERROR_ILLEGAL_STATE CUDA_ERROR_ILLEGAL_STATE}</li>
+     * <li>{@link #CUDA_ERROR_LOSSY_QUERY CUDA_ERROR_LOSSY_QUERY}</li>
      * <li>{@link #CUDA_ERROR_NOT_FOUND CUDA_ERROR_NOT_FOUND}</li>
      * <li>{@link #CUDA_ERROR_NOT_READY CUDA_ERROR_NOT_READY}</li>
      * <li>{@link #CUDA_ERROR_ILLEGAL_ADDRESS CUDA_ERROR_ILLEGAL_ADDRESS}</li>
@@ -1999,6 +2155,9 @@ public class CU {
      * <li>{@link #CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE}</li>
      * <li>{@link #CUDA_ERROR_EXTERNAL_DEVICE CUDA_ERROR_EXTERNAL_DEVICE}</li>
      * <li>{@link #CUDA_ERROR_INVALID_CLUSTER_SIZE CUDA_ERROR_INVALID_CLUSTER_SIZE}</li>
+     * <li>{@link #CUDA_ERROR_FUNCTION_NOT_LOADED CUDA_ERROR_FUNCTION_NOT_LOADED}</li>
+     * <li>{@link #CUDA_ERROR_INVALID_RESOURCE_TYPE CUDA_ERROR_INVALID_RESOURCE_TYPE}</li>
+     * <li>{@link #CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION}</li>
      * <li>{@link #CUDA_ERROR_UNKNOWN CUDA_ERROR_UNKNOWN}</li>
      * </ul>
      */
@@ -2048,6 +2207,7 @@ public class CU {
         CUDA_ERROR_OPERATING_SYSTEM               = 304,
         CUDA_ERROR_INVALID_HANDLE                 = 400,
         CUDA_ERROR_ILLEGAL_STATE                  = 401,
+        CUDA_ERROR_LOSSY_QUERY                    = 402,
         CUDA_ERROR_NOT_FOUND                      = 500,
         CUDA_ERROR_NOT_READY                      = 600,
         CUDA_ERROR_ILLEGAL_ADDRESS                = 700,
@@ -2095,6 +2255,9 @@ public class CU {
         CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE      = 910,
         CUDA_ERROR_EXTERNAL_DEVICE                = 911,
         CUDA_ERROR_INVALID_CLUSTER_SIZE           = 912,
+        CUDA_ERROR_FUNCTION_NOT_LOADED            = 913,
+        CUDA_ERROR_INVALID_RESOURCE_TYPE          = 914,
+        CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION = 915,
         CUDA_ERROR_UNKNOWN                        = 999;
 
     /**
@@ -2429,13 +2592,15 @@ public class CU {
      * <li>{@link #CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR}</li>
      * <li>{@link #CU_MEM_HANDLE_TYPE_WIN32 MEM_HANDLE_TYPE_WIN32}</li>
      * <li>{@link #CU_MEM_HANDLE_TYPE_WIN32_KMT MEM_HANDLE_TYPE_WIN32_KMT}</li>
+     * <li>{@link #CU_MEM_HANDLE_TYPE_FABRIC MEM_HANDLE_TYPE_FABRIC}</li>
      * </ul>
      */
     public static final int
         CU_MEM_HANDLE_TYPE_NONE                  = 0x0,
         CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = 0x1,
         CU_MEM_HANDLE_TYPE_WIN32                 = 0x2,
-        CU_MEM_HANDLE_TYPE_WIN32_KMT             = 0x4;
+        CU_MEM_HANDLE_TYPE_WIN32_KMT             = 0x4,
+        CU_MEM_HANDLE_TYPE_FABRIC                = 0x8;
 
     /**
      * {@code CUmemAccess_flags}
@@ -2461,11 +2626,17 @@ public class CU {
      * <ul>
      * <li>{@link #CU_MEM_LOCATION_TYPE_INVALID MEM_LOCATION_TYPE_INVALID}</li>
      * <li>{@link #CU_MEM_LOCATION_TYPE_DEVICE MEM_LOCATION_TYPE_DEVICE}</li>
+     * <li>{@link #CU_MEM_LOCATION_TYPE_HOST MEM_LOCATION_TYPE_HOST}</li>
+     * <li>{@link #CU_MEM_LOCATION_TYPE_HOST_NUMA MEM_LOCATION_TYPE_HOST_NUMA}</li>
+     * <li>{@link #CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT MEM_LOCATION_TYPE_HOST_NUMA_CURRENT}</li>
      * </ul>
      */
     public static final int
-        CU_MEM_LOCATION_TYPE_INVALID = 0x0,
-        CU_MEM_LOCATION_TYPE_DEVICE  = 0x1;
+        CU_MEM_LOCATION_TYPE_INVALID           = 0x0,
+        CU_MEM_LOCATION_TYPE_DEVICE            = 0x1,
+        CU_MEM_LOCATION_TYPE_HOST              = 0x2,
+        CU_MEM_LOCATION_TYPE_HOST_NUMA         = 0x3,
+        CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT = 0x4;
 
     /**
      * {@code CUmemAllocationType}
@@ -2668,18 +2839,20 @@ public class CU {
      * <li>{@link #CUDA_ARRAY3D_COLOR_ATTACHMENT CUDA_ARRAY3D_COLOR_ATTACHMENT}</li>
      * <li>{@link #CUDA_ARRAY3D_SPARSE CUDA_ARRAY3D_SPARSE}</li>
      * <li>{@link #CUDA_ARRAY3D_DEFERRED_MAPPING CUDA_ARRAY3D_DEFERRED_MAPPING}</li>
+     * <li>{@link #CUDA_ARRAY3D_VIDEO_ENCODE_DECODE CUDA_ARRAY3D_VIDEO_ENCODE_DECODE}</li>
      * </ul>
      */
     public static final int
-        CUDA_ARRAY3D_LAYERED          = 0x01,
-        CUDA_ARRAY3D_2DARRAY          = 0x01,
-        CUDA_ARRAY3D_SURFACE_LDST     = 0x02,
-        CUDA_ARRAY3D_CUBEMAP          = 0x04,
-        CUDA_ARRAY3D_TEXTURE_GATHER   = 0x08,
-        CUDA_ARRAY3D_DEPTH_TEXTURE    = 0x10,
-        CUDA_ARRAY3D_COLOR_ATTACHMENT = 0x20,
-        CUDA_ARRAY3D_SPARSE           = 0x40,
-        CUDA_ARRAY3D_DEFERRED_MAPPING = 0x80;
+        CUDA_ARRAY3D_LAYERED             = 0x01,
+        CUDA_ARRAY3D_2DARRAY             = 0x01,
+        CUDA_ARRAY3D_SURFACE_LDST        = 0x02,
+        CUDA_ARRAY3D_CUBEMAP             = 0x04,
+        CUDA_ARRAY3D_TEXTURE_GATHER      = 0x08,
+        CUDA_ARRAY3D_DEPTH_TEXTURE       = 0x10,
+        CUDA_ARRAY3D_COLOR_ATTACHMENT    = 0x20,
+        CUDA_ARRAY3D_SPARSE              = 0x40,
+        CUDA_ARRAY3D_DEFERRED_MAPPING    = 0x80,
+        CUDA_ARRAY3D_VIDEO_ENCODE_DECODE = 0x100;
 
     /** Flag for {@link #cuTexRefSetArray TexRefSetArray}. */
     public static final int CU_TRSA_OVERRIDE_FORMAT = 0x1;
@@ -2783,6 +2956,7 @@ public class CU {
      * <li>{@link #CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS}</li>
      * <li>{@link #CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS}</li>
      * <li>{@link #CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO}</li>
+     * <li>{@link #CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS}</li>
      * </ul>
      */
     public static final int
@@ -2800,7 +2974,8 @@ public class CU {
         CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS        = 1<<11,
         CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS         = 1<<12,
         CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS     = 1<<13,
-        CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO              = 1<<14;
+        CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO              = 1<<14,
+        CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS      = 1<<15;
 
     /** {@code CUuserObject_flags} */
     public static final int CU_USER_OBJECT_NO_DESTRUCTOR_SYNC = 1;
@@ -2827,6 +3002,20 @@ public class CU {
         CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY   = 8;
 
     /**
+     * {@code CUdeviceNumaConfig}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_DEVICE_NUMA_CONFIG_NONE DEVICE_NUMA_CONFIG_NONE}</li>
+     * <li>{@link #CU_DEVICE_NUMA_CONFIG_NUMA_NODE DEVICE_NUMA_CONFIG_NUMA_NODE}</li>
+     * </ul>
+     */
+    public static final int
+        CU_DEVICE_NUMA_CONFIG_NONE      = 0,
+        CU_DEVICE_NUMA_CONFIG_NUMA_NODE = 1;
+
+    /**
      * {@code CUmoduleLoadingMode}
      * 
      * <h5>Enum values:</h5>
@@ -2841,6 +3030,22 @@ public class CU {
         CU_MODULE_LAZY_LOADING  = 0x2;
 
     /**
+     * {@code CUfunctionLoadingState}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_FUNCTION_LOADING_STATE_UNLOADED FUNCTION_LOADING_STATE_UNLOADED}</li>
+     * <li>{@link #CU_FUNCTION_LOADING_STATE_LOADED FUNCTION_LOADING_STATE_LOADED}</li>
+     * <li>{@link #CU_FUNCTION_LOADING_STATE_MAX FUNCTION_LOADING_STATE_MAX}</li>
+     * </ul>
+     */
+    public static final int
+        CU_FUNCTION_LOADING_STATE_UNLOADED = 0,
+        CU_FUNCTION_LOADING_STATE_LOADED   = 1,
+        CU_FUNCTION_LOADING_STATE_MAX      = 2;
+
+    /**
      * {@code CUcoredumpSettings}
      * 
      * <h5>Enum values:</h5>
@@ -2852,6 +3057,7 @@ public class CU {
      * <li>{@link #CU_COREDUMP_ENABLE_USER_TRIGGER COREDUMP_ENABLE_USER_TRIGGER}</li>
      * <li>{@link #CU_COREDUMP_FILE COREDUMP_FILE}</li>
      * <li>{@link #CU_COREDUMP_PIPE COREDUMP_PIPE}</li>
+     * <li>{@link #CU_COREDUMP_GENERATION_FLAGS COREDUMP_GENERATION_FLAGS}</li>
      * <li>{@link #CU_COREDUMP_MAX COREDUMP_MAX}</li>
      * </ul>
      */
@@ -2862,7 +3068,63 @@ public class CU {
         CU_COREDUMP_ENABLE_USER_TRIGGER = 4,
         CU_COREDUMP_FILE                = 5,
         CU_COREDUMP_PIPE                = 6,
-        CU_COREDUMP_MAX                 = 7;
+        CU_COREDUMP_GENERATION_FLAGS    = 7,
+        CU_COREDUMP_MAX                 = 8;
+
+    /**
+     * {@code CUCoredumpGenerationFlags}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_COREDUMP_DEFAULT_FLAGS COREDUMP_DEFAULT_FLAGS}</li>
+     * <li>{@link #CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES}</li>
+     * <li>{@link #CU_COREDUMP_SKIP_GLOBAL_MEMORY COREDUMP_SKIP_GLOBAL_MEMORY}</li>
+     * <li>{@link #CU_COREDUMP_SKIP_SHARED_MEMORY COREDUMP_SKIP_SHARED_MEMORY}</li>
+     * <li>{@link #CU_COREDUMP_SKIP_LOCAL_MEMORY COREDUMP_SKIP_LOCAL_MEMORY}</li>
+     * <li>{@link #CU_COREDUMP_SKIP_ABORT COREDUMP_SKIP_ABORT}</li>
+     * <li>{@link #CU_COREDUMP_LIGHTWEIGHT_FLAGS COREDUMP_LIGHTWEIGHT_FLAGS}</li>
+     * </ul>
+     */
+    public static final int
+        CU_COREDUMP_DEFAULT_FLAGS                = 0,
+        CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES = 1 << 0,
+        CU_COREDUMP_SKIP_GLOBAL_MEMORY           = 1 << 1,
+        CU_COREDUMP_SKIP_SHARED_MEMORY           = 1 << 2,
+        CU_COREDUMP_SKIP_LOCAL_MEMORY            = 1 << 3,
+        CU_COREDUMP_SKIP_ABORT                   = 1 << 4,
+        CU_COREDUMP_LIGHTWEIGHT_FLAGS            = CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES | CU_COREDUMP_SKIP_GLOBAL_MEMORY | CU_COREDUMP_SKIP_SHARED_MEMORY | CU_COREDUMP_SKIP_LOCAL_MEMORY;
+
+    /** {@code CUgreenCtxCreate_flags} */
+    public static final int CU_GREEN_CTX_DEFAULT_STREAM = 0x1;
+
+    /**
+     * {@code CUdevSmResourceSplit_flags}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING}</li>
+     * <li>{@link #CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE}</li>
+     * </ul>
+     */
+    public static final int
+        CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING     = 0x1,
+        CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE = 0x2;
+
+    /**
+     * {@code CUdevResourceType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_DEV_RESOURCE_TYPE_INVALID DEV_RESOURCE_TYPE_INVALID}</li>
+     * <li>{@link #CU_DEV_RESOURCE_TYPE_SM DEV_RESOURCE_TYPE_SM}</li>
+     * </ul>
+     */
+    public static final int
+        CU_DEV_RESOURCE_TYPE_INVALID = 0,
+        CU_DEV_RESOURCE_TYPE_SM      = 1;
 
     protected CU() {
         throw new UnsupportedOperationException();
@@ -3282,6 +3544,24 @@ public class CU {
         return ncuCtxCreate_v3(memAddress(pctx), paramsArray.address(), paramsArray.remaining(), flags, dev);
     }
 
+    // --- [ cuCtxCreate_v4 ] ---
+
+    public static int ncuCtxCreate_v4(long pctx, long ctxCreateParams, int flags, int dev) {
+        long __functionAddress = Functions.CtxCreate_v4;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(pctx, ctxCreateParams, flags, dev, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuCtxCreate_v4(@NativeType("CUcontext *") PointerBuffer pctx, @NativeType("CUctxCreateParams *") CUctxCreateParams ctxCreateParams, @NativeType("unsigned int") int flags, @NativeType("CUdevice") int dev) {
+        if (CHECKS) {
+            check(pctx, 1);
+        }
+        return ncuCtxCreate_v4(memAddress(pctx), ctxCreateParams.address(), flags, dev);
+    }
+
     // --- [ cuCtxDestroy ] ---
 
     @NativeType("CUresult")
@@ -3559,6 +3839,32 @@ public class CU {
         return ncuCtxGetExecAffinity(pExecAffinity.address(), type);
     }
 
+    // --- [ cuCtxRecordEvent ] ---
+
+    @NativeType("CUresult")
+    public static int cuCtxRecordEvent(@NativeType("CUcontext") long hCtx, @NativeType("CUevent") long hEvent) {
+        long __functionAddress = Functions.CtxRecordEvent;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+            check(hEvent);
+        }
+        return callPPI(hCtx, hEvent, __functionAddress);
+    }
+
+    // --- [ cuCtxWaitEvent ] ---
+
+    @NativeType("CUresult")
+    public static int cuCtxWaitEvent(@NativeType("CUcontext") long hCtx, @NativeType("CUevent") long hEvent) {
+        long __functionAddress = Functions.CtxWaitEvent;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+            check(hEvent);
+        }
+        return callPPI(hCtx, hEvent, __functionAddress);
+    }
+
     // --- [ cuCtxAttach ] ---
 
     public static int ncuCtxAttach(long pctx, int flags) {
@@ -3723,6 +4029,41 @@ public class CU {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ cuModuleGetFunctionCount ] ---
+
+    public static int ncuModuleGetFunctionCount(long count, long mod) {
+        long __functionAddress = Functions.ModuleGetFunctionCount;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return callPPI(count, mod, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuModuleGetFunctionCount(@NativeType("unsigned int *") IntBuffer count, @NativeType("CUmodule") long mod) {
+        if (CHECKS) {
+            check(count, 1);
+        }
+        return ncuModuleGetFunctionCount(memAddress(count), mod);
+    }
+
+    // --- [ cuModuleEnumerateFunctions ] ---
+
+    public static int ncuModuleEnumerateFunctions(long functions, int numFunctions, long mod) {
+        long __functionAddress = Functions.ModuleEnumerateFunctions;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return callPPI(functions, numFunctions, mod, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuModuleEnumerateFunctions(@NativeType("CUfunction *") PointerBuffer functions, @NativeType("CUmodule") long mod) {
+        return ncuModuleEnumerateFunctions(memAddress(functions), functions.remaining(), mod);
     }
 
     // --- [ cuModuleGetGlobal ] ---
@@ -4055,6 +4396,41 @@ public class CU {
         }
     }
 
+    // --- [ cuLibraryGetKernelCount ] ---
+
+    public static int ncuLibraryGetKernelCount(long count, long lib) {
+        long __functionAddress = Functions.LibraryGetKernelCount;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(lib);
+        }
+        return callPPI(count, lib, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuLibraryGetKernelCount(@NativeType("unsigned int *") IntBuffer count, @NativeType("CUlibrary") long lib) {
+        if (CHECKS) {
+            check(count, 1);
+        }
+        return ncuLibraryGetKernelCount(memAddress(count), lib);
+    }
+
+    // --- [ cuLibraryEnumerateKernels ] ---
+
+    public static int ncuLibraryEnumerateKernels(long kernels, int numKernels, long lib) {
+        long __functionAddress = Functions.LibraryEnumerateKernels;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(lib);
+        }
+        return callPPI(kernels, numKernels, lib, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuLibraryEnumerateKernels(@NativeType("CUkernel *") PointerBuffer kernels, @NativeType("CUlibrary") long lib) {
+        return ncuLibraryEnumerateKernels(memAddress(kernels), kernels.remaining(), lib);
+    }
+
     // --- [ cuLibraryGetModule ] ---
 
     public static int ncuLibraryGetModule(long pMod, long library) {
@@ -4091,6 +4467,25 @@ public class CU {
             check(pFunc, 1);
         }
         return ncuKernelGetFunction(memAddress(pFunc), kernel);
+    }
+
+    // --- [ cuKernelGetLibrary ] ---
+
+    public static int ncuKernelGetLibrary(long pLib, long kernel) {
+        long __functionAddress = Functions.KernelGetLibrary;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(kernel);
+        }
+        return callPPI(pLib, kernel, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuKernelGetLibrary(@NativeType("CUlibrary *") PointerBuffer pLib, @NativeType("CUkernel") long kernel) {
+        if (CHECKS) {
+            check(pLib, 1);
+        }
+        return ncuKernelGetLibrary(memAddress(pLib), kernel);
     }
 
     // --- [ cuLibraryGetGlobal ] ---
@@ -4243,6 +4638,45 @@ public class CU {
             check(kernel);
         }
         return callPI(kernel, config, dev, __functionAddress);
+    }
+
+    // --- [ cuKernelGetName ] ---
+
+    public static int ncuKernelGetName(long name, long hfunc) {
+        long __functionAddress = Functions.KernelGetName;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hfunc);
+        }
+        return callPPI(name, hfunc, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuKernelGetName(@NativeType("char const **") PointerBuffer name, @NativeType("CUkernel") long hfunc) {
+        if (CHECKS) {
+            check(name, 1);
+        }
+        return ncuKernelGetName(memAddress(name), hfunc);
+    }
+
+    // --- [ cuKernelGetParamInfo ] ---
+
+    public static int ncuKernelGetParamInfo(long kernel, long paramIndex, long paramOffset, long paramSize) {
+        long __functionAddress = Functions.KernelGetParamInfo;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(kernel);
+        }
+        return callPPPPI(kernel, paramIndex, paramOffset, paramSize, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuKernelGetParamInfo(@NativeType("CUkernel") long kernel, @NativeType("size_t") long paramIndex, @Nullable @NativeType("size_t *") PointerBuffer paramOffset, @Nullable @NativeType("size_t *") PointerBuffer paramSize) {
+        if (CHECKS) {
+            checkSafe(paramOffset, 1);
+            checkSafe(paramSize, 1);
+        }
+        return ncuKernelGetParamInfo(kernel, paramIndex, memAddressSafe(paramOffset), memAddressSafe(paramSize));
     }
 
     // --- [ cuMemGetInfo ] ---
@@ -4410,6 +4844,36 @@ public class CU {
             check(dptr, 1);
         }
         return ncuMemAllocManaged(memAddress(dptr), bytesize, flags);
+    }
+
+    // --- [ cuDeviceRegisterAsyncNotification ] ---
+
+    public static int ncuDeviceRegisterAsyncNotification(int device, long callbackFunc, long userData, long callback) {
+        long __functionAddress = Functions.DeviceRegisterAsyncNotification;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPI(device, callbackFunc, userData, callback, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuDeviceRegisterAsyncNotification(@NativeType("CUdevice") int device, @NativeType("void (*) (CUasyncNotificationInfo *, void *, CUasyncCallbackHandle)") CUasyncCallbackI callbackFunc, @NativeType("void *") long userData, @NativeType("CUasyncCallbackHandle *") PointerBuffer callback) {
+        if (CHECKS) {
+            check(callback, 1);
+        }
+        return ncuDeviceRegisterAsyncNotification(device, callbackFunc.address(), userData, memAddress(callback));
+    }
+
+    // --- [ cuDeviceUnregisterAsyncNotification ] ---
+
+    @NativeType("CUresult")
+    public static int cuDeviceUnregisterAsyncNotification(@NativeType("CUdevice") int device, @NativeType("CUasyncCallbackHandle") long callback) {
+        long __functionAddress = Functions.DeviceUnregisterAsyncNotification;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(callback);
+        }
+        return callPI(device, callback, __functionAddress);
     }
 
     // --- [ cuDeviceGetByPCIBusId ] ---
@@ -6131,6 +6595,42 @@ public class CU {
         return callPPPI(devPtr, count, dstDevice, hStream, __functionAddress);
     }
 
+    // --- [ cuMemPrefetchAsync_v2 ] ---
+
+    private static final FFICIF cuMemPrefetchAsync_v2CIF = apiCreateCIF(
+        apiStdcall(), ffi_type_uint32,
+        ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_sint32), ffi_type_uint32, ffi_type_pointer
+    );
+
+    public static int ncuMemPrefetchAsync_v2(long devPtr, long count, long location, int flags, long hStream) {
+        long __functionAddress = Functions.MemPrefetchAsync_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(devPtr);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long __result = stack.nint(0);
+            long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 5);
+            memPutAddress(arguments, stack.npointer(devPtr));
+            memPutAddress(arguments + POINTER_SIZE, stack.npointer(count));
+            memPutAddress(arguments + 2 * POINTER_SIZE, location);
+            memPutAddress(arguments + 3 * POINTER_SIZE, stack.nint(flags));
+            memPutAddress(arguments + 4 * POINTER_SIZE, stack.npointer(hStream));
+
+            nffi_call(cuMemPrefetchAsync_v2CIF.address(), __functionAddress, __result, arguments);
+
+            return memGetInt(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    @NativeType("CUresult")
+    public static int cuMemPrefetchAsync_v2(@NativeType("CUdeviceptr") long devPtr, @NativeType("size_t") long count, CUmemLocation location, @NativeType("unsigned int") int flags, @NativeType("CUstream") long hStream) {
+        return ncuMemPrefetchAsync_v2(devPtr, count, location.address(), flags, hStream);
+    }
+
     // --- [ cuMemAdvise ] ---
 
     @NativeType("CUresult")
@@ -6141,6 +6641,41 @@ public class CU {
             check(devPtr);
         }
         return callPPI(devPtr, count, advice, device, __functionAddress);
+    }
+
+    // --- [ cuMemAdvise_v2 ] ---
+
+    private static final FFICIF cuMemAdvise_v2CIF = apiCreateCIF(
+        apiStdcall(), ffi_type_uint32,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_uint32, apiCreateStruct(ffi_type_uint32, ffi_type_sint32)
+    );
+
+    public static int ncuMemAdvise_v2(long devPtr, long count, int advice, long location) {
+        long __functionAddress = Functions.MemAdvise_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(devPtr);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long __result = stack.nint(0);
+            long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 4);
+            memPutAddress(arguments, stack.npointer(devPtr));
+            memPutAddress(arguments + POINTER_SIZE, stack.npointer(count));
+            memPutAddress(arguments + 2 * POINTER_SIZE, stack.nint(advice));
+            memPutAddress(arguments + 3 * POINTER_SIZE, location);
+
+            nffi_call(cuMemAdvise_v2CIF.address(), __functionAddress, __result, arguments);
+
+            return memGetInt(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    @NativeType("CUresult")
+    public static int cuMemAdvise_v2(@NativeType("CUdeviceptr") long devPtr, @NativeType("size_t") long count, @NativeType("CUmem_advise") int advice, CUmemLocation location) {
+        return ncuMemAdvise_v2(devPtr, count, advice, location.address());
     }
 
     // --- [ cuMemRangeGetAttribute ] ---
@@ -6310,6 +6845,25 @@ public class CU {
         return ncuStreamGetCtx(hStream, memAddress(pctx));
     }
 
+    // --- [ cuStreamGetCtx_v2 ] ---
+
+    public static int ncuStreamGetCtx_v2(long hStream, long pctx, long pGreenCtx) {
+        long __functionAddress = Functions.StreamGetCtx_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPI(hStream, pctx, pGreenCtx, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuStreamGetCtx_v2(@NativeType("CUstream") long hStream, @NativeType("CUcontext *") PointerBuffer pctx, @NativeType("CUgreenCtx *") PointerBuffer pGreenCtx) {
+        if (CHECKS) {
+            check(pctx, 1);
+            check(pGreenCtx, 1);
+        }
+        return ncuStreamGetCtx_v2(hStream, memAddress(pctx), memAddress(pGreenCtx));
+    }
+
     // --- [ cuStreamWaitEvent ] ---
 
     @NativeType("CUresult")
@@ -6357,6 +6911,25 @@ public class CU {
             check(__functionAddress);
         }
         return callPI(hStream, mode, __functionAddress);
+    }
+
+    // --- [ cuStreamBeginCaptureToGraph ] ---
+
+    public static int ncuStreamBeginCaptureToGraph(long hStream, long hGraph, long dependencies, long dependencyData, long numDependencies, int mode) {
+        long __functionAddress = Functions.StreamBeginCaptureToGraph;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPI(hStream, hGraph, dependencies, dependencyData, numDependencies, mode, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuStreamBeginCaptureToGraph(@NativeType("CUstream") long hStream, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("CUstreamCaptureMode") int mode) {
+        if (CHECKS) {
+            checkSafe(dependencyData, remainingSafe(dependencies));
+        }
+        return ncuStreamBeginCaptureToGraph(hStream, hGraph, memAddressSafe(dependencies), memAddressSafe(dependencyData), remainingSafe(dependencies), mode);
     }
 
     // --- [ cuThreadExchangeStreamCaptureMode ] ---
@@ -6413,6 +6986,29 @@ public class CU {
         return ncuStreamIsCapturing(hStream, memAddress(captureStatus));
     }
 
+    // --- [ cuStreamGetCaptureInfo_v3 ] ---
+
+    public static int ncuStreamGetCaptureInfo_v3(long hStream, long captureStatus_out, long id_out, long graph_out, long dependencies_out, long edgeData_out, long numDependencies_out) {
+        long __functionAddress = Functions.StreamGetCaptureInfo_v3;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPPPPPI(hStream, captureStatus_out, id_out, graph_out, dependencies_out, edgeData_out, numDependencies_out, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuStreamGetCaptureInfo_v3(@NativeType("CUstream") long hStream, @NativeType("CUstreamCaptureStatus *") IntBuffer captureStatus_out, @Nullable @NativeType("cuuint64_t *") LongBuffer id_out, @Nullable @NativeType("CUgraph *") PointerBuffer graph_out, @Nullable @NativeType("CUgraphNode const **") PointerBuffer dependencies_out, @Nullable @NativeType("CUgraphEdgeData const **") PointerBuffer edgeData_out, @Nullable @NativeType("size_t *") PointerBuffer numDependencies_out) {
+        if (CHECKS) {
+            check(captureStatus_out, 1);
+            checkSafe(id_out, 1);
+            checkSafe(graph_out, 1);
+            checkSafe(dependencies_out, 1);
+            checkSafe(edgeData_out, 1);
+            checkSafe(numDependencies_out, 1);
+        }
+        return ncuStreamGetCaptureInfo_v3(hStream, memAddress(captureStatus_out), memAddressSafe(id_out), memAddressSafe(graph_out), memAddressSafe(dependencies_out), memAddressSafe(edgeData_out), memAddressSafe(numDependencies_out));
+    }
+
     // --- [ cuStreamGetCaptureInfo ] ---
 
     public static int ncuStreamGetCaptureInfo(long hStream, long captureStatus, long id) {
@@ -6467,6 +7063,24 @@ public class CU {
     @NativeType("CUresult")
     public static int cuStreamUpdateCaptureDependencies(@NativeType("CUstream") long hStream, @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("unsigned int") int flags) {
         return ncuStreamUpdateCaptureDependencies(hStream, memAddress(dependencies), dependencies.remaining(), flags);
+    }
+
+    // --- [ cuStreamUpdateCaptureDependencies_v2 ] ---
+
+    public static int ncuStreamUpdateCaptureDependencies_v2(long hStream, long dependencies, long dependencyData, long numDependencies, int flags) {
+        long __functionAddress = Functions.StreamUpdateCaptureDependencies_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPPI(hStream, dependencies, dependencyData, numDependencies, flags, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuStreamUpdateCaptureDependencies_v2(@NativeType("CUstream") long hStream, @NativeType("CUgraphNode *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            checkSafe(dependencyData, dependencies.remaining());
+        }
+        return ncuStreamUpdateCaptureDependencies_v2(hStream, memAddress(dependencies), memAddressSafe(dependencyData), dependencies.remaining(), flags);
     }
 
     // --- [ cuStreamAttachMemAsync ] ---
@@ -6907,6 +7521,76 @@ public class CU {
             check(hmod, 1);
         }
         return ncuFuncGetModule(memAddress(hmod), hfunc);
+    }
+
+    // --- [ cuFuncGetName ] ---
+
+    public static int ncuFuncGetName(long name, long hfunc) {
+        long __functionAddress = Functions.FuncGetName;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hfunc);
+        }
+        return callPPI(name, hfunc, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuFuncGetName(@NativeType("char **") PointerBuffer name, @NativeType("CUfunction") long hfunc) {
+        if (CHECKS) {
+            check(name, 1);
+        }
+        return ncuFuncGetName(memAddress(name), hfunc);
+    }
+
+    // --- [ cuFuncGetParamInfo ] ---
+
+    public static int ncuFuncGetParamInfo(long hfunc, long paramIndex, long paramOffset, long paramSize) {
+        long __functionAddress = Functions.FuncGetParamInfo;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hfunc);
+        }
+        return callPPPPI(hfunc, paramIndex, paramOffset, paramSize, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuFuncGetParamInfo(@NativeType("CUfunction") long hfunc, @NativeType("size_t") long paramIndex, @NativeType("size_t *") PointerBuffer paramOffset, @Nullable @NativeType("size_t *") PointerBuffer paramSize) {
+        if (CHECKS) {
+            check(paramOffset, 1);
+            checkSafe(paramSize, 1);
+        }
+        return ncuFuncGetParamInfo(hfunc, paramIndex, memAddress(paramOffset), memAddressSafe(paramSize));
+    }
+
+    // --- [ cuFuncIsLoaded ] ---
+
+    public static int ncuFuncIsLoaded(long state, long function) {
+        long __functionAddress = Functions.FuncIsLoaded;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(function);
+        }
+        return callPPI(state, function, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuFuncIsLoaded(@NativeType("CUfunctionLoadingState *") IntBuffer state, @NativeType("CUfunction") long function) {
+        if (CHECKS) {
+            check(state, 1);
+        }
+        return ncuFuncIsLoaded(memAddress(state), function);
+    }
+
+    // --- [ cuFuncLoad ] ---
+
+    @NativeType("CUresult")
+    public static int cuFuncLoad(@NativeType("CUfunction") long function) {
+        long __functionAddress = Functions.FuncLoad;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(function);
+        }
+        return callPI(function, __functionAddress);
     }
 
     // --- [ cuLaunchKernel ] ---
@@ -7965,6 +8649,28 @@ public class CU {
         return ncuGraphGetEdges(hGraph, memAddressSafe(from), memAddressSafe(to), memAddress(numEdges));
     }
 
+    // --- [ cuGraphGetEdges_v2 ] ---
+
+    public static int ncuGraphGetEdges_v2(long hGraph, long from, long to, long edgeData, long numEdges) {
+        long __functionAddress = Functions.GraphGetEdges_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPI(hGraph, from, to, edgeData, numEdges, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphGetEdges_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer from, @Nullable @NativeType("CUgraphNode *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numEdges) {
+        if (CHECKS) {
+            check(numEdges, 1);
+            checkSafe(from, numEdges.get(numEdges.position()));
+            checkSafe(to, numEdges.get(numEdges.position()));
+            checkSafe(edgeData, numEdges.get(numEdges.position()));
+        }
+        return ncuGraphGetEdges_v2(hGraph, memAddressSafe(from), memAddressSafe(to), memAddressSafe(edgeData), memAddress(numEdges));
+    }
+
     // --- [ cuGraphNodeGetDependencies ] ---
 
     public static int ncuGraphNodeGetDependencies(long hNode, long dependencies, long numDependencies) {
@@ -7983,6 +8689,27 @@ public class CU {
             checkSafe(dependencies, numDependencies.get(numDependencies.position()));
         }
         return ncuGraphNodeGetDependencies(hNode, memAddressSafe(dependencies), memAddress(numDependencies));
+    }
+
+    // --- [ cuGraphNodeGetDependencies_v2 ] ---
+
+    public static int ncuGraphNodeGetDependencies_v2(long hNode, long dependencies, long edgeData, long numDependencies) {
+        long __functionAddress = Functions.GraphNodeGetDependencies_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hNode);
+        }
+        return callPPPPI(hNode, dependencies, edgeData, numDependencies, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphNodeGetDependencies_v2(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependencies) {
+        if (CHECKS) {
+            check(numDependencies, 1);
+            checkSafe(dependencies, numDependencies.get(numDependencies.position()));
+            checkSafe(edgeData, numDependencies.get(numDependencies.position()));
+        }
+        return ncuGraphNodeGetDependencies_v2(hNode, memAddressSafe(dependencies), memAddressSafe(edgeData), memAddress(numDependencies));
     }
 
     // --- [ cuGraphNodeGetDependentNodes ] ---
@@ -8005,6 +8732,27 @@ public class CU {
         return ncuGraphNodeGetDependentNodes(hNode, memAddressSafe(dependentNodes), memAddress(numDependentNodes));
     }
 
+    // --- [ cuGraphNodeGetDependentNodes_v2 ] ---
+
+    public static int ncuGraphNodeGetDependentNodes_v2(long hNode, long dependentNodes, long edgeData, long numDependentNodes) {
+        long __functionAddress = Functions.GraphNodeGetDependentNodes_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hNode);
+        }
+        return callPPPPI(hNode, dependentNodes, edgeData, numDependentNodes, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphNodeGetDependentNodes_v2(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependentNodes, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependentNodes) {
+        if (CHECKS) {
+            check(numDependentNodes, 1);
+            checkSafe(dependentNodes, numDependentNodes.get(numDependentNodes.position()));
+            checkSafe(edgeData, numDependentNodes.get(numDependentNodes.position()));
+        }
+        return ncuGraphNodeGetDependentNodes_v2(hNode, memAddressSafe(dependentNodes), memAddressSafe(edgeData), memAddress(numDependentNodes));
+    }
+
     // --- [ cuGraphAddDependencies ] ---
 
     public static int ncuGraphAddDependencies(long hGraph, long from, long to, long numDependencies) {
@@ -8024,6 +8772,26 @@ public class CU {
         return ncuGraphAddDependencies(hGraph, memAddressSafe(from), memAddressSafe(to), remainingSafe(from));
     }
 
+    // --- [ cuGraphAddDependencies_v2 ] ---
+
+    public static int ncuGraphAddDependencies_v2(long hGraph, long from, long to, long edgeData, long numDependencies) {
+        long __functionAddress = Functions.GraphAddDependencies_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPI(hGraph, from, to, edgeData, numDependencies, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphAddDependencies_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer edgeData) {
+        if (CHECKS) {
+            checkSafe(to, remainingSafe(from));
+            checkSafe(edgeData, remainingSafe(from));
+        }
+        return ncuGraphAddDependencies_v2(hGraph, memAddressSafe(from), memAddressSafe(to), memAddressSafe(edgeData), remainingSafe(from));
+    }
+
     // --- [ cuGraphRemoveDependencies ] ---
 
     public static int ncuGraphRemoveDependencies(long hGraph, long from, long to, long numDependencies) {
@@ -8041,6 +8809,26 @@ public class CU {
             checkSafe(to, remainingSafe(from));
         }
         return ncuGraphRemoveDependencies(hGraph, memAddressSafe(from), memAddressSafe(to), remainingSafe(from));
+    }
+
+    // --- [ cuGraphRemoveDependencies_v2 ] ---
+
+    public static int ncuGraphRemoveDependencies_v2(long hGraph, long from, long to, long edgeData, long numDependencies) {
+        long __functionAddress = Functions.GraphRemoveDependencies_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPI(hGraph, from, to, edgeData, numDependencies, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphRemoveDependencies_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer edgeData) {
+        if (CHECKS) {
+            checkSafe(to, remainingSafe(from));
+            checkSafe(edgeData, remainingSafe(from));
+        }
+        return ncuGraphRemoveDependencies_v2(hGraph, memAddressSafe(from), memAddressSafe(to), memAddressSafe(edgeData), remainingSafe(from));
     }
 
     // --- [ cuGraphDestroyNode ] ---
@@ -8561,6 +9349,98 @@ public class CU {
             check(object);
         }
         return callPPI(graph, object, count, __functionAddress);
+    }
+
+    // --- [ cuGraphAddNode ] ---
+
+    public static int ncuGraphAddNode(long phGraphNode, long hGraph, long dependencies, long numDependencies, long nodeParams) {
+        long __functionAddress = Functions.GraphAddNode;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, nodeParams, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphAddNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+        if (CHECKS) {
+            check(phGraphNode, 1);
+        }
+        return ncuGraphAddNode(memAddress(phGraphNode), hGraph, memAddressSafe(dependencies), remainingSafe(dependencies), nodeParams.address());
+    }
+
+    // --- [ cuGraphAddNode_v2 ] ---
+
+    public static int ncuGraphAddNode_v2(long phGraphNode, long hGraph, long dependencies, long dependencyData, long numDependencies, long nodeParams) {
+        long __functionAddress = Functions.GraphAddNode_v2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+        }
+        return callPPPPPPI(phGraphNode, hGraph, dependencies, dependencyData, numDependencies, nodeParams, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphAddNode_v2(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+        if (CHECKS) {
+            check(phGraphNode, 1);
+            checkSafe(dependencyData, remainingSafe(dependencies));
+        }
+        return ncuGraphAddNode_v2(memAddress(phGraphNode), hGraph, memAddressSafe(dependencies), memAddressSafe(dependencyData), remainingSafe(dependencies), nodeParams.address());
+    }
+
+    // --- [ cuGraphNodeSetParams ] ---
+
+    public static int ncuGraphNodeSetParams(long hNode, long nodeParams) {
+        long __functionAddress = Functions.GraphNodeSetParams;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hNode);
+        }
+        return callPPI(hNode, nodeParams, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphNodeSetParams(@NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+        return ncuGraphNodeSetParams(hNode, nodeParams.address());
+    }
+
+    // --- [ cuGraphExecNodeSetParams ] ---
+
+    public static int ncuGraphExecNodeSetParams(long hGraphExec, long hNode, long nodeParams) {
+        long __functionAddress = Functions.GraphExecNodeSetParams;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraphExec);
+            check(hNode);
+        }
+        return callPPPI(hGraphExec, hNode, nodeParams, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphExecNodeSetParams(@NativeType("CUgraphExec") long hGraphExec, @NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+        return ncuGraphExecNodeSetParams(hGraphExec, hNode, nodeParams.address());
+    }
+
+    // --- [ cuGraphConditionalHandleCreate ] ---
+
+    public static int ncuGraphConditionalHandleCreate(long pHandle_out, long hGraph, long ctx, int defaultLaunchValue, int flags) {
+        long __functionAddress = Functions.GraphConditionalHandleCreate;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hGraph);
+            check(ctx);
+        }
+        return callPPPI(pHandle_out, hGraph, ctx, defaultLaunchValue, flags, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGraphConditionalHandleCreate(@NativeType("CUgraphConditionalHandle *") LongBuffer pHandle_out, @NativeType("CUgraph") long hGraph, @NativeType("CUcontext") long ctx, @NativeType("unsigned int") int defaultLaunchValue, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            check(pHandle_out, 1);
+        }
+        return ncuGraphConditionalHandleCreate(memAddress(pHandle_out), hGraph, ctx, defaultLaunchValue, flags);
     }
 
     // --- [ cuOccupancyMaxActiveBlocksPerMultiprocessor ] ---
@@ -9630,6 +10510,216 @@ public class CU {
     @NativeType("CUresult")
     public static int cuGetExportTable(@NativeType("void const **") PointerBuffer ppExportTable, @NativeType("CUuuid const *") CUuuid pExportTableId) {
         return ncuGetExportTable(memAddress(ppExportTable), pExportTableId.address());
+    }
+
+    // --- [ cuGreenCtxCreate ] ---
+
+    public static int ncuGreenCtxCreate(long phCtx, long desc, int dev, int flags) {
+        long __functionAddress = Functions.GreenCtxCreate;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(desc);
+        }
+        return callPPI(phCtx, desc, dev, flags, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxCreate(@NativeType("CUgreenCtx *") PointerBuffer phCtx, @NativeType("CUdevResourceDesc") long desc, @NativeType("CUdevice") int dev, @NativeType("unsigned int") int flags) {
+        if (CHECKS) {
+            check(phCtx, 1);
+        }
+        return ncuGreenCtxCreate(memAddress(phCtx), desc, dev, flags);
+    }
+
+    // --- [ cuGreenCtxDestroy ] ---
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxDestroy(@NativeType("CUgreenCtx") long hCtx) {
+        long __functionAddress = Functions.GreenCtxDestroy;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+        }
+        return callPI(hCtx, __functionAddress);
+    }
+
+    // --- [ cuCtxFromGreenCtx ] ---
+
+    public static int ncuCtxFromGreenCtx(long pContext, long hCtx) {
+        long __functionAddress = Functions.CtxFromGreenCtx;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+        }
+        return callPPI(pContext, hCtx, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuCtxFromGreenCtx(@NativeType("CUcontext *") PointerBuffer pContext, @NativeType("CUgreenCtx") long hCtx) {
+        if (CHECKS) {
+            check(pContext, 1);
+        }
+        return ncuCtxFromGreenCtx(memAddress(pContext), hCtx);
+    }
+
+    // --- [ cuDeviceGetDevResource ] ---
+
+    public static int ncuDeviceGetDevResource(int device, long resource, int type) {
+        long __functionAddress = Functions.DeviceGetDevResource;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPI(device, resource, type, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuDeviceGetDevResource(@NativeType("CUdevice") int device, @NativeType("CUdevResource *") CUdevResource.Buffer resource, @NativeType("CUdevResourceType") int type) {
+        if (CHECKS) {
+            check(resource, 1);
+        }
+        return ncuDeviceGetDevResource(device, resource.address(), type);
+    }
+
+    // --- [ cuCtxGetDevResource ] ---
+
+    public static int ncuCtxGetDevResource(long hCtx, long resource, int type) {
+        long __functionAddress = Functions.CtxGetDevResource;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+        }
+        return callPPI(hCtx, resource, type, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuCtxGetDevResource(@NativeType("CUcontext") long hCtx, @NativeType("CUdevResource *") CUdevResource.Buffer resource, @NativeType("CUdevResourceType") int type) {
+        if (CHECKS) {
+            check(resource, 1);
+        }
+        return ncuCtxGetDevResource(hCtx, resource.address(), type);
+    }
+
+    // --- [ cuGreenCtxGetDevResource ] ---
+
+    public static int ncuGreenCtxGetDevResource(long hCtx, long resource, int type) {
+        long __functionAddress = Functions.GreenCtxGetDevResource;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+        }
+        return callPPI(hCtx, resource, type, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxGetDevResource(@NativeType("CUgreenCtx") long hCtx, @NativeType("CUdevResource *") CUdevResource.Buffer resource, @NativeType("CUdevResourceType") int type) {
+        if (CHECKS) {
+            check(resource, 1);
+        }
+        return ncuGreenCtxGetDevResource(hCtx, resource.address(), type);
+    }
+
+    // --- [ cuDevSmResourceSplitByCount ] ---
+
+    public static int ncuDevSmResourceSplitByCount(long result, long nbGroups, long input, long remaining, int useFlags, int minCount) {
+        long __functionAddress = Functions.DevSmResourceSplitByCount;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPPI(result, nbGroups, input, remaining, useFlags, minCount, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuDevSmResourceSplitByCount(@NativeType("CUdevResource *") CUdevResource.Buffer result, @NativeType("unsigned int *") IntBuffer nbGroups, @NativeType("CUdevResource *") CUdevResource.Buffer input, @NativeType("CUdevResource *") CUdevResource.Buffer remaining, @NativeType("unsigned int") int useFlags, @NativeType("unsigned int") int minCount) {
+        if (CHECKS) {
+            check(result, 1);
+            check(nbGroups, 1);
+            check(input, 1);
+            check(remaining, 1);
+        }
+        return ncuDevSmResourceSplitByCount(result.address(), memAddress(nbGroups), input.address(), remaining.address(), useFlags, minCount);
+    }
+
+    // --- [ cuDevResourceGenerateDesc ] ---
+
+    public static int ncuDevResourceGenerateDesc(long phDesc, long resources, int nbResources) {
+        long __functionAddress = Functions.DevResourceGenerateDesc;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(phDesc, resources, nbResources, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuDevResourceGenerateDesc(@NativeType("CUdevResourceDesc *") PointerBuffer phDesc, @NativeType("CUdevResource *") CUdevResource.Buffer resources, @NativeType("unsigned int") int nbResources) {
+        if (CHECKS) {
+            check(phDesc, 1);
+            check(resources, 1);
+        }
+        return ncuDevResourceGenerateDesc(memAddress(phDesc), resources.address(), nbResources);
+    }
+
+    // --- [ cuGreenCtxRecordEvent ] ---
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxRecordEvent(@NativeType("CUgreenCtx") long hCtx, @NativeType("CUevent") long hEvent) {
+        long __functionAddress = Functions.GreenCtxRecordEvent;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+            check(hEvent);
+        }
+        return callPPI(hCtx, hEvent, __functionAddress);
+    }
+
+    // --- [ cuGreenCtxWaitEvent ] ---
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxWaitEvent(@NativeType("CUgreenCtx") long hCtx, @NativeType("CUevent") long hEvent) {
+        long __functionAddress = Functions.GreenCtxWaitEvent;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hCtx);
+            check(hEvent);
+        }
+        return callPPI(hCtx, hEvent, __functionAddress);
+    }
+
+    // --- [ cuStreamGetGreenCtx ] ---
+
+    public static int ncuStreamGetGreenCtx(long hStream, long phCtx) {
+        long __functionAddress = Functions.StreamGetGreenCtx;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hStream);
+        }
+        return callPPI(hStream, phCtx, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuStreamGetGreenCtx(@NativeType("CUstream") long hStream, @NativeType("CUgreenCtx *") PointerBuffer phCtx) {
+        if (CHECKS) {
+            check(phCtx, 1);
+        }
+        return ncuStreamGetGreenCtx(hStream, memAddress(phCtx));
+    }
+
+    // --- [ cuGreenCtxStreamCreate ] ---
+
+    public static int ncuGreenCtxStreamCreate(long phStream, long greenCtx, int flags, int priority) {
+        long __functionAddress = Functions.GreenCtxStreamCreate;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(greenCtx);
+        }
+        return callPPI(phStream, greenCtx, flags, priority, __functionAddress);
+    }
+
+    @NativeType("CUresult")
+    public static int cuGreenCtxStreamCreate(@NativeType("CUstream *") PointerBuffer phStream, @NativeType("CUgreenCtx") long greenCtx, @NativeType("unsigned int") int flags, int priority) {
+        if (CHECKS) {
+            check(phStream, 1);
+        }
+        return ncuGreenCtxStreamCreate(memAddress(phStream), greenCtx, flags, priority);
     }
 
 }

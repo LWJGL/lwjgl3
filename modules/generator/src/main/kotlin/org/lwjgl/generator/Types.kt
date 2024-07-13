@@ -146,12 +146,13 @@ open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Bo
     override val const by lazy { IntegerType(this.name.const, this.mapping, unsigned) }
     override val libffiType: String
         get() = when (mapping) {
-            PrimitiveMapping.BYTE  -> if (unsigned) "ffi_type_uint8" else "ffi_type_sint8"
-            PrimitiveMapping.SHORT -> if (unsigned) "ffi_type_uint16" else "ffi_type_sint16"
-            PrimitiveMapping.INT   -> if (unsigned) "ffi_type_uint32" else "ffi_type_sint32"
-            PrimitiveMapping.LONG  -> if (unsigned) "ffi_type_uint64" else "ffi_type_sint64"
-            PrimitiveMapping.CLONG -> if (unsigned) "ffi_type_ulong" else "ffi_type_slong"
-            else                   -> throw IllegalStateException(this.toString())
+            PrimitiveMapping.BYTE    -> if (unsigned) "ffi_type_uint8" else "ffi_type_sint8"
+            PrimitiveMapping.SHORT   -> if (unsigned) "ffi_type_uint16" else "ffi_type_sint16"
+            PrimitiveMapping.INT     -> if (unsigned) "ffi_type_uint32" else "ffi_type_sint32"
+            PrimitiveMapping.LONG    -> if (unsigned) "ffi_type_uint64" else "ffi_type_sint64"
+            PrimitiveMapping.CLONG   -> if (unsigned) "ffi_type_ulong" else "ffi_type_slong"
+            PrimitiveMapping.POINTER -> "ffi_type_pointer"
+            else                     -> throw IllegalStateException(this.toString())
         }
     override val abiType: String
         get() = when (mapping) {
