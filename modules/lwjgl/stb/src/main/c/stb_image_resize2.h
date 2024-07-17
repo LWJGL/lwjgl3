@@ -2420,7 +2420,7 @@ static stbir__inline stbir_uint8 stbir__linear_to_srgb_uchar(float in)
     stbir__simdi_store( output,final );
   }
 
-#elif defined(STBIR_WASM) || (defined(STBIR_NEON) && (defined(_MSC_VER) || defined(_M_ARM) || defined(__arm__))) // WASM or 32-bit ARM on MSVC/clang
+#elif defined(STBIR_WASM) || (defined(STBIR_NEON) && defined(_MSC_VER) && (defined(_M_ARM) || defined(__arm__))) // WASM or 32-bit ARM on MSVC/clang
 
   static stbir__inline void stbir__half_to_float_SIMD(float * output, stbir__FP16 const * input)
   {
