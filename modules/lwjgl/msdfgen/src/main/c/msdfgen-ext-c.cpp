@@ -71,13 +71,49 @@ MSDF_API int msdf_ft_load_font_data(msdf_ft_handle handle, const void* data, con
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, const unsigned cp, int coordinateScaling, msdf_shape_handle* shape) {
+MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, const unsigned cp, const int coordinateScaling, msdf_shape_handle* shape) {
     if(font == nullptr || shape == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
     auto* actual_shape = new msdfgen::Shape();
     msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), cp, (msdfgen::FontCoordinateScaling)coordinateScaling);
     *shape = reinterpret_cast<msdf_shape_handle>(actual_shape);
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, const unsigned index, const int coordinateScaling, msdf_shape_handle* shape) {
+    if(font == nullptr || shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    auto* actual_shape = new msdfgen::Shape();
+    msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), msdfgen::GlyphIndex(index), (msdfgen::FontCoordinateScaling)coordinateScaling);
+    *shape = reinterpret_cast<msdf_shape_handle>(actual_shape);
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_ft_font_get_glyph_index(msdf_ft_font_handle font, unsigned cp, unsigned* index) {
+    if(font == nullptr || index == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::GlyphIndex glyph_index{};
+    msdfgen::getGlyphIndex(glyph_index, reinterpret_cast<msdfgen::FontHandle*>(font), cp);
+    *index = glyph_index.getIndex();
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_ft_font_get_kerning_by_index(msdf_ft_font_handle font, unsigned index1, unsigned index2, double* kerning) {
+    if(font == nullptr || kerning == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::getKerning(*kerning, reinterpret_cast<msdfgen::FontHandle*>(font), msdfgen::GlyphIndex(index1), msdfgen::GlyphIndex(index2));
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_ft_font_get_kerning(msdf_ft_font_handle font, unsigned cp1, unsigned cp2, double* kerning) {
+    if(font == nullptr || kerning == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    msdfgen::getKerning(*kerning, reinterpret_cast<msdfgen::FontHandle*>(font), cp1, cp2);
     return MSDF_SUCCESS;
 }
 
