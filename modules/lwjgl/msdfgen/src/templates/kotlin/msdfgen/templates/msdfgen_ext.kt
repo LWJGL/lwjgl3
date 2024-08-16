@@ -105,6 +105,60 @@ val msdfGenExt = "MSDFGenExt".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefi
         returnDoc = returnDoc
     )
 
+    int(
+        "ft_font_load_glyph_by_index",
+        "Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.",
+
+        msdf_ft_font_handle("font", "a handle to the font to use for generating the glyph shape"),
+        unsigned("index", "the glyph index to generate a shape for"),
+        int("coordinateScaling", "the coordinate scaling to use", "FONT_SCALING_\\w+"),
+        Check(1)..msdf_shape_handle.p(
+            "shape",
+            """
+            a pointer to a handle to be populated with the address of the newly created shape.
+            
+            This shape must later be freed using #shape_free()!
+            """
+        ),
+
+        returnDoc = returnDoc
+    )
+
+    int(
+        "ft_font_get_glyph_index",
+        "Retrieves the glyph index of the given unicode codepoint.",
+
+        msdf_ft_font_handle("font", "a handle to the font to retrieve the glyph index from"),
+        unsigned("cp", "the codepoint to retrieve the glyph index for"),
+        Check(1)..unsigned.p("index", "a pointer to the glyph index to be retrieved"),
+
+        returnDoc = returnDoc
+    )
+
+    int(
+        "ft_font_get_kerning",
+        "Retrieves the kerning between the two given codepoints.",
+
+        msdf_ft_font_handle("font", "a handle to the font to retrieve the kerning from"),
+        unsigned("cp1", "the left codepoint"),
+        unsigned("cp2", "the right codepoint"),
+        Check(1)..double.p("kerning", "a pointer to the kerning value to be retrieved"),
+
+        returnDoc = returnDoc
+    )
+
+    int(
+        "ft_font_get_kerning_by_index",
+        "etrieves the kerning between the two given glyphs.",
+
+        msdf_ft_font_handle("font", "a handle to the font to retrieve the kerning from"),
+        unsigned("index1", "the glyph index of the left glyph"),
+        unsigned("index2", "the glyph index of the right glyph"),
+        Check(1)..double.p("kerning", "a pointer to the kerning value to be retrieved"),
+
+        returnDoc = returnDoc
+    )
+
     void(
         "ft_font_destroy",
         "Frees the underlying instance of the given FreeType font.",

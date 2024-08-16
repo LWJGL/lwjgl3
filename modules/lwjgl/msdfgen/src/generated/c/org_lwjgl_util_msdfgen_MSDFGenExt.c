@@ -55,6 +55,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1l
     return (jint)msdf_ft_font_load_glyph(font, (unsigned)cp, coordinateScaling, shape);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1load_1glyph_1by_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint index, jint coordinateScaling, jlong shapeAddress) {
+    msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    msdf_shape_handle *shape = (msdf_shape_handle *)(uintptr_t)shapeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_ft_font_load_glyph_by_index(font, (unsigned)index, coordinateScaling, shape);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1get_1glyph_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint cp, jlong indexAddress) {
+    msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    unsigned *index = (unsigned *)(uintptr_t)indexAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_ft_font_get_glyph_index(font, (unsigned)cp, index);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1get_1kerning(JNIEnv *__env, jclass clazz, jlong fontAddress, jint cp1, jint cp2, jlong kerningAddress) {
+    msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    double *kerning = (double *)(uintptr_t)kerningAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_ft_font_get_kerning(font, (unsigned)cp1, (unsigned)cp2, kerning);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1get_1kerning_1by_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint index1, jint index2, jlong kerningAddress) {
+    msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    double *kerning = (double *)(uintptr_t)kerningAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_ft_font_get_kerning_by_index(font, (unsigned)index1, (unsigned)index2, kerning);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1destroy(JNIEnv *__env, jclass clazz, jlong fontAddress) {
     msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
     UNUSED_PARAMS(__env, clazz)

@@ -85,13 +85,54 @@ MSDF_API int msdf_ft_load_font_data(msdf_ft_handle handle, const void* data, siz
 /**
  * Loads a single glyph from the given font and converts it into a vector shape
  * for rendering glyph sprites.
- * @param font A handle to the font to use for generating the glyph shape.
+ * @param font A handle to the font to load the glyph shape from.
  * @param cp The codepoint to generate a shape for.
+ * @param coordinateScaling The type of coordinate transform applied to the shape.
  * @param shape A pointer to a handle to be populated with the address of the newly created shape.
  *  This shape must later be freed using msdf_shape_free!
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
 MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, msdf_shape_handle* shape);
+
+/**
+ * Loads a single glyph from the given font and converts it into a vector shape
+ * for rendering glyph sprites.
+ * @param font A handle to the font to load the glyph shape from.
+ * @param index The glyph index to generate a shape for.
+ * @param coordinateScaling The type of coordinate transform applied to the shape.
+ * @param shape A pointer to a handle to be populated with the address of the newly created shape.
+ *  This shape must later be freed using msdf_shape_free!
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, msdf_shape_handle* shape);
+
+/**
+ * Retrieves the glyph index of the given unicode codepoint.
+ * @param font A handle to the font to retrieve the glyph index from.
+ * @param cp The codepoint to retrieve the glyph index for.
+ * @param index A pointer to the glyph index to be retrieved.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_ft_font_get_glyph_index(msdf_ft_font_handle font, unsigned cp, unsigned* index);
+
+/**
+ * Retrieves the kerning between the two given glyphs.
+ * @param font A handle to the font to retrieve the kerning from.
+ * @param index1 The glyph index of the left glyph.
+ * @param index2 The glyph index of the right glyph.
+ * @param kerning A pointer to the kerning value to be retrieved.
+ * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
+ */
+MSDF_API int msdf_ft_font_get_kerning_by_index(msdf_ft_font_handle font, unsigned index1, unsigned index2, double* kerning);
+
+/**
+ * Retrieves the kerning between the two given codepoints.
+ * @param font A handle to the font to retrieve the kerning from.
+ * @param cp1 The left codepoint.
+ * @param cp2 The right codepoint.
+ * @param kerning A pointer to the kerning value to be retrieved.
+ */
+MSDF_API int msdf_ft_font_get_kerning(msdf_ft_font_handle font, unsigned cp1, unsigned cp2, double* kerning);
 
 /**
  * Frees the underlying instance of the given FreeType font.

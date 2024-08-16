@@ -212,6 +212,99 @@ public class MSDFGenExt {
         return nmsdf_ft_font_load_glyph(font, cp, coordinateScaling, memAddress(shape));
     }
 
+    // --- [ msdf_ft_font_load_glyph_by_index ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_load_glyph_by_index ft_font_load_glyph_by_index} */
+    public static native int nmsdf_ft_font_load_glyph_by_index(long font, int index, int coordinateScaling, long shape);
+
+    /**
+     * Loads a single glyph from the given font and converts it into a vector shape for rendering glyph sprites.
+     *
+     * @param font              a handle to the font to use for generating the glyph shape
+     * @param index             the glyph index to generate a shape for
+     * @param coordinateScaling the coordinate scaling to use. One of:<br><table><tr><td>{@link #MSDF_FONT_SCALING_NONE FONT_SCALING_NONE}</td><td>{@link #MSDF_FONT_SCALING_EM_NORMALIZED FONT_SCALING_EM_NORMALIZED}</td><td>{@link #MSDF_FONT_SCALING_LEGACY FONT_SCALING_LEGACY}</td></tr></table>
+     * @param shape             a pointer to a handle to be populated with the address of the newly created shape.
+     *                          
+     *                          <p>This shape must later be freed using {@link MSDFGen#msdf_shape_free shape_free}!</p>
+     *
+     * @return {@link MSDFGen#MSDF_SUCCESS SUCCESS} on success, otherwise one of the constants prefixed with {@code MSDF_ERR_}.
+     */
+    public static int msdf_ft_font_load_glyph_by_index(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int index, int coordinateScaling, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
+        if (CHECKS) {
+            check(font);
+            check(shape, 1);
+        }
+        return nmsdf_ft_font_load_glyph_by_index(font, index, coordinateScaling, memAddress(shape));
+    }
+
+    // --- [ msdf_ft_font_get_glyph_index ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_get_glyph_index ft_font_get_glyph_index} */
+    public static native int nmsdf_ft_font_get_glyph_index(long font, int cp, long index);
+
+    /**
+     * Retrieves the glyph index of the given unicode codepoint.
+     *
+     * @param font  a handle to the font to retrieve the glyph index from
+     * @param cp    the codepoint to retrieve the glyph index for
+     * @param index a pointer to the glyph index to be retrieved
+     *
+     * @return {@link MSDFGen#MSDF_SUCCESS SUCCESS} on success, otherwise one of the constants prefixed with {@code MSDF_ERR_}.
+     */
+    public static int msdf_ft_font_get_glyph_index(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp, @NativeType("unsigned *") IntBuffer index) {
+        if (CHECKS) {
+            check(font);
+            check(index, 1);
+        }
+        return nmsdf_ft_font_get_glyph_index(font, cp, memAddress(index));
+    }
+
+    // --- [ msdf_ft_font_get_kerning ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_get_kerning ft_font_get_kerning} */
+    public static native int nmsdf_ft_font_get_kerning(long font, int cp1, int cp2, long kerning);
+
+    /**
+     * Retrieves the kerning between the two given codepoints.
+     *
+     * @param font    a handle to the font to retrieve the kerning from
+     * @param cp1     the left codepoint
+     * @param cp2     the right codepoint
+     * @param kerning a pointer to the kerning value to be retrieved
+     *
+     * @return {@link MSDFGen#MSDF_SUCCESS SUCCESS} on success, otherwise one of the constants prefixed with {@code MSDF_ERR_}.
+     */
+    public static int msdf_ft_font_get_kerning(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp1, @NativeType("unsigned") int cp2, @NativeType("double *") DoubleBuffer kerning) {
+        if (CHECKS) {
+            check(font);
+            check(kerning, 1);
+        }
+        return nmsdf_ft_font_get_kerning(font, cp1, cp2, memAddress(kerning));
+    }
+
+    // --- [ msdf_ft_font_get_kerning_by_index ] ---
+
+    /** Unsafe version of: {@link #msdf_ft_font_get_kerning_by_index ft_font_get_kerning_by_index} */
+    public static native int nmsdf_ft_font_get_kerning_by_index(long font, int index1, int index2, long kerning);
+
+    /**
+     * etrieves the kerning between the two given glyphs.
+     *
+     * @param font    a handle to the font to retrieve the kerning from
+     * @param index1  the glyph index of the left glyph
+     * @param index2  the glyph index of the right glyph
+     * @param kerning a pointer to the kerning value to be retrieved
+     *
+     * @return {@link MSDFGen#MSDF_SUCCESS SUCCESS} on success, otherwise one of the constants prefixed with {@code MSDF_ERR_}.
+     */
+    public static int msdf_ft_font_get_kerning_by_index(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int index1, @NativeType("unsigned") int index2, @NativeType("double *") DoubleBuffer kerning) {
+        if (CHECKS) {
+            check(font);
+            check(kerning, 1);
+        }
+        return nmsdf_ft_font_get_kerning_by_index(font, index1, index2, memAddress(kerning));
+    }
+
     // --- [ msdf_ft_font_destroy ] ---
 
     /** Unsafe version of: {@link #msdf_ft_font_destroy ft_font_destroy} */
