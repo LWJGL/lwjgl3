@@ -90,9 +90,6 @@ public final class ThreadLocalUtil {
     /** The global JNIEnv. */
     private static final long JNI_NATIVE_INTERFACE = memGetAddress(getThreadJNIEnv());
 
-    /** The offset in JNIEnv at which to store the pointer to the capabilities array. */
-    private static final int CAPABILITIES_OFFSET = 3 * POINTER_SIZE;
-
     /** The number of pointers in the JNIEnv struct. */
     private static final int JNI_NATIVE_INTERFACE_FUNCTION_COUNT;
 
@@ -105,6 +102,9 @@ public final class ThreadLocalUtil {
      * <p>The array size depends on whether OpenGL or OpenGL ES is used.</p>
      */
     private static long FUNCTION_MISSING_ABORT_TABLE = NULL;
+
+    /** The offset in JNIEnv at which to store the pointer to the capabilities array. */
+    private static final int CAPABILITIES_OFFSET = 3 * POINTER_SIZE;
 
     static {
         int JNI_VERSION = GetVersion();
