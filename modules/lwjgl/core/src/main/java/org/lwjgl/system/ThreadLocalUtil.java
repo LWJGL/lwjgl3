@@ -199,7 +199,7 @@ public final class ThreadLocalUtil {
         long currentTable = memGetAddress(ptr);
 
         if (functionCount == 0) {
-            if (currentTable != FUNCTION_MISSING_ABORT) {
+            if (currentTable == FUNCTION_MISSING_ABORT) {
                 FUNCTION_MISSING_ABORT_TABLE = NULL;
                 getAllocator().free(currentTable);
                 memPutAddress(ptr, RESERVED3_NULL);
