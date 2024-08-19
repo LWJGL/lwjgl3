@@ -186,7 +186,13 @@ public final class ThreadLocalUtil {
     public static void setFunctionMissingAddresses(int functionCount) {
         long ptr = JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET;
 
+        // aka. reserved3
+        //
+        // OpenJDK: NULL
+        // EspressoVM: NULL
+        // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
         long currentTable = memGetAddress(ptr);
+
         if (functionCount == 0) {
             if (currentTable != FUNCTION_MISSING_ABORT) {
                 FUNCTION_MISSING_ABORT_TABLE = NULL;
@@ -195,7 +201,7 @@ public final class ThreadLocalUtil {
             }
         } else {
             // OpenJDK: NULL
-            // EspressoVM: NULL
+            // EspressoVM: pointer to VM internal
             // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
             long RESERVED0_NULL = memGetAddress(JNI_NATIVE_INTERFACE);
 
