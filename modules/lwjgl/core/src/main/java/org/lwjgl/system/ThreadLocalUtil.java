@@ -93,11 +93,6 @@ public final class ThreadLocalUtil {
     /** The offset in JNIEnv at which to store the pointer to the capabilities array. */
     private static final int CAPABILITIES_OFFSET = 3 * POINTER_SIZE;
 
-    // OpenJDK: NULL
-    // EspressoVM: NULL
-    // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
-    private static long RESERVED3_NULL = memGetAddress(JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET);
-
     /** The number of pointers in the JNIEnv struct. */
     private static final int JNI_NATIVE_INTERFACE_FUNCTION_COUNT;
 
@@ -199,7 +194,15 @@ public final class ThreadLocalUtil {
                 memPutAddress(ptr, NULL);
             }
         } else {
-            if (currentTable != RESERVED3_NULL) {
+            // OpenJDK: NULL
+            // EspressoVM: NULL
+            // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
+            long RESERVED0_NULL = memGetAddress(JNI_NATIVE_INTERFACE);
+
+            boolean slotAvailable = currentTable == NULL; // on HotSpot or Espresso
+            slotAvailable |= currentTable == RESERVED0_NULL; // on Native Image
+
+            if (!slotAvailable) {
                 throw new IllegalStateException("setFunctionMissingAddresses has been called already");
             }
             if (currentTable != NULL) {
