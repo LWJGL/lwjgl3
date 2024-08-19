@@ -210,7 +210,7 @@ public final class ThreadLocalUtil {
             // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
             long RESERVED0_NULL = memGetAddress(JNI_NATIVE_INTERFACE);
 
-            boolean slotAvailable = currentTable == RESERVED3_NULL; // on HotSpot or Espresso
+            boolean slotAvailable = currentTable == NULL; // on HotSpot or Espresso
             slotAvailable |= currentTable == RESERVED0_NULL; // on Native Image
 
             if (!slotAvailable) {
