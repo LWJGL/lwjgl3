@@ -384,9 +384,7 @@ gint RunDialogWithFocus(GtkDialog* dialog) {
 // Gets the GdkWindow from the given window handle.  This function might fail even if parentWindow
 // is set correctly, since it calls some failable GDK functions.  If it fails, it will return
 // nullptr.  The caller is responsible for freeing ths returned GdkWindow, if not nullptr.
-GdkWindow* GetAllocNativeWindowHandle(const nfdwindowhandle_t& parentWindow,
-                                      GdkDisplayManager*& outDisplayManager,
-                                      GdkDisplay*& outDisplay) {
+GdkWindow* GetAllocNativeWindowHandle(const nfdwindowhandle_t& parentWindow) {
     switch (parentWindow.type) {
 #if defined(GDK_WINDOWING_X11)
         case NFD_WINDOW_HANDLE_TYPE_X11: {
@@ -434,8 +432,6 @@ GdkWindow* GetAllocNativeWindowHandle(const nfdwindowhandle_t& parentWindow,
                 gdk_set_allowed_backends(NULL);
             }
             if (!x11_display) return nullptr;
-            outDisplayManager = display_manager;
-            outDisplay = x11_display;
             GdkWindow* gdk_window = gdk_x11_window_foreign_new_for_display(x11_display, x11_handle);
             return gdk_window;
         }
@@ -452,39 +448,29 @@ void RealizedSignalHandler(GtkWidget* window, void* userdata) {
 
 struct NativeWindowParenter {
     NativeWindowParenter(GtkWidget* widget, const nfdwindowhandle_t& parentWindow) noexcept
-        : widget(widget), displayManager(nullptr) {
-        GdkDisplay* new_display = nullptr;
-        parent = GetAllocNativeWindowHandle(parentWindow, displayManager, new_display);
+        : widget(widget) {
+        parent = GetAllocNativeWindowHandle(parentWindow);
 
         if (parent) {
-            /* set the handler to the realize signal to set the transient GDK parent */
+            // set the handler to the realize signal to set the transient GDK parent
             handlerID = g_signal_connect(G_OBJECT(widget),
                                          "realize",
                                          G_CALLBACK(RealizedSignalHandler),
                                          static_cast<void*>(parent));
 
-            /* Set the default display to a display that we know is X11 (so that realizing the file
-             * dialog will use it) */
-            /* Note: displayManager here must be non-null since parent is non-null */
-            originalDisplay = gdk_display_manager_get_default_display(displayManager);
-            gdk_display_manager_set_default_display(displayManager, new_display);
+            // make the dialog window use the same GtkScreen as the parent (so that parenting works)
+            gtk_window_set_screen(GTK_WINDOW(widget), gdk_window_get_screen(parent));
         }
     }
     ~NativeWindowParenter() {
         if (parent) {
-            /* Set the default display back to whatever it was, to be nice */
-            /* Note: displayManager here must be non-null since parent is non-null */
-            gdk_display_manager_set_default_display(displayManager, originalDisplay);
-
-            /* unset the handler and delete the parent GdkWindow */
+            // unset the handler and delete the parent GdkWindow
             g_signal_handler_disconnect(G_OBJECT(widget), handlerID);
             g_object_unref(parent);
         }
     }
     GtkWidget* const widget;
     GdkWindow* parent;
-    GdkDisplayManager* displayManager;
-    GdkDisplay* originalDisplay;
     gulong handlerID;
 };
 
