@@ -1,8 +1,8 @@
 // libdivide.h - Optimized integer division
 // https://libdivide.com
 //
-// Copyright (C) 2010 - 2021 ridiculous_fish, <libdivide@ridiculousfish.com>
-// Copyright (C) 2016 - 2021 Kim Walisch, <kim.walisch@gmail.com>
+// Copyright (C) 2010 - 2022 ridiculous_fish, <libdivide@ridiculousfish.com>
+// Copyright (C) 2016 - 2022 Kim Walisch, <kim.walisch@gmail.com>
 //
 // libdivide is dual-licensed under the Boost or zlib licenses.
 // You may use libdivide under the terms of either of these.
@@ -11,11 +11,12 @@
 #ifndef LIBDIVIDE_H
 #define LIBDIVIDE_H
 
-#define LIBDIVIDE_VERSION "5.0"
+#define LIBDIVIDE_VERSION "5.1"
 #define LIBDIVIDE_VERSION_MAJOR 5
-#define LIBDIVIDE_VERSION_MINOR 0
+#define LIBDIVIDE_VERSION_MINOR 1
 
 #include <stdint.h>
+
 #if !defined(__AVR__)
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,9 +25,11 @@
 #if defined(LIBDIVIDE_SSE2)
 #include <emmintrin.h>
 #endif
+
 #if defined(LIBDIVIDE_AVX2) || defined(LIBDIVIDE_AVX512)
 #include <immintrin.h>
 #endif
+
 #if defined(LIBDIVIDE_NEON)
 #include <arm_neon.h>
 #endif
@@ -510,7 +513,7 @@ static LIBDIVIDE_INLINE uint64_t libdivide_128_div_64_to_64(
 
     // Check for overflow and divide by 0.
     if (numhi >= den) {
-        if (r != NULL) *r = ~0ull;
+        if (r) *r = ~0ull;
         return ~0ull;
     }
 
@@ -556,10 +559,13 @@ static LIBDIVIDE_INLINE uint64_t libdivide_128_div_64_to_64(
     q0 = (uint32_t)qhat;
 
     // Return remainder if requested.
-    if (r != NULL) *r = (rem * b + num0 - q0 * den) >> shift;
+    if (r) *r = (rem * b + num0 - q0 * den) >> shift;
     return ((uint64_t)q1 << 32) | q0;
 #endif
 }
+
+#if !(defined(HAS_INT128_T) && \
+      defined(HAS_INT128_DIV))
 
 // Bitshift a u128 in place, left (signed_shift > 0) or right (signed_shift < 0)
 static LIBDIVIDE_INLINE void libdivide_u128_shift(
@@ -576,6 +582,8 @@ static LIBDIVIDE_INLINE void libdivide_u128_shift(
         *u1 >>= shift;
     }
 }
+
+#endif
 
 // Computes a 128 / 128 -> 64 bit division, with a 128 bit remainder.
 static LIBDIVIDE_INLINE uint64_t libdivide_128_div_128_to_64(
@@ -2958,6 +2966,28 @@ __m128i libdivide_s64_branchfree_do_vec128(
 
 #ifdef __cplusplus
 
+//for constexpr zero initialization,
+//c++11 might handle things ok,
+//but just limit to at least c++14 to ensure
+//we don't break anyone's code:
+
+// for gcc and clang, use https://en.cppreference.com/w/cpp/feature_test#cpp_constexpr
+#if (defined(__GNUC__) || defined(__clang__)) && (__cpp_constexpr >= 201304L)
+#define LIBDIVIDE_CONSTEXPR constexpr
+
+// supposedly, MSVC might not implement feature test macros right (https://stackoverflow.com/questions/49316752/feature-test-macros-not-working-properly-in-visual-c)
+// so check that _MSVC_LANG corresponds to at least c++14, and _MSC_VER corresponds to at least VS 2017 15.0 (for extended constexpr support https://learn.microsoft.com/en-us/cpp/overview/visual-cpp-language-conformance?view=msvc-170)
+#elif defined(_MSC_VER) && _MSC_VER >= 1910 && defined(_MSVC_LANG) && _MSVC_LANG >=201402L
+#define LIBDIVIDE_CONSTEXPR constexpr
+
+// in case some other obscure compiler has the right __cpp_constexpr :
+#elif defined(__cpp_constexpr) && __cpp_constexpr >= 201304L
+#define LIBDIVIDE_CONSTEXPR constexpr
+
+#else
+#define LIBDIVIDE_CONSTEXPR LIBDIVIDE_INLINE
+#endif
+
 enum Branching {
     BRANCHFULL,  // use branching algorithms
     BRANCHFREE   // use branchfree algorithms
@@ -3051,6 +3081,7 @@ struct NeonVecFor {
 #define DISPATCHER_GEN(T, ALGO)                                                       \
     libdivide_##ALGO##_t denom;                                                       \
     LIBDIVIDE_INLINE dispatcher() {}                                                  \
+    explicit LIBDIVIDE_CONSTEXPR dispatcher(decltype(nullptr)) : denom{} {}              \
     LIBDIVIDE_INLINE dispatcher(T d) : denom(libdivide_##ALGO##_gen(d)) {}            \
     LIBDIVIDE_INLINE T divide(T n) const { return libdivide_##ALGO##_do(n, &denom); } \
     LIBDIVIDE_INLINE T recover() const { return libdivide_##ALGO##_recover(&denom); } \
@@ -3142,6 +3173,9 @@ class divider {
     // later doesn't slow us down.
     divider() {}
 
+    // constexpr zero-initialization to allow for use w/ static constinit
+    explicit LIBDIVIDE_CONSTEXPR divider(decltype(nullptr)) : div(nullptr) {}
+
     // Constructor that takes the divisor as a parameter
     LIBDIVIDE_INLINE divider(T d) : div(d) {}
 
@@ -3153,7 +3187,7 @@ class divider {
     T recover() const { return div.recover(); }
 
     bool operator==(const divider<T, ALGO> &other) const {
-        return div.denom.magic == other.denom.magic && div.denom.more == other.denom.more;
+        return div.denom.magic == other.div.denom.magic && div.denom.more == other.div.denom.more;
     }
 
     bool operator!=(const divider<T, ALGO> &other) const { return !(*this == other); }

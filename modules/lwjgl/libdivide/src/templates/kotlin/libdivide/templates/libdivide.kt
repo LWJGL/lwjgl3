@@ -28,7 +28,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         "Library version.",
 
         "VERSION_MAJOR".."5",
-        "VERSION_MINOR".."0"
+        "VERSION_MINOR".."1"
     )
 
     EnumConstant(
