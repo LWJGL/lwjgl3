@@ -77,10 +77,10 @@ extern JNIEnv* getEnv(jboolean* async);
         envData->LastError = LastError;
 #endif
 
-#if defined(LWJGL_WINDOWS) && !defined(__clang__)
-    #define VA_LIST_CAST &(va_list)
+#if defined(LWJGL_WINDOWS) || (defined(LWJGL_MACOS) && defined(LWJGL_arm64))
+    #define VA_LIST_CAST(param) (va_list)(uintptr_t)param##Address
 #else
-    #define VA_LIST_CAST (va_list *)
+    #define VA_LIST_CAST(param) *(va_list *)(uintptr_t)param##Address
 #endif
 
 // -----------------------------------------------------
