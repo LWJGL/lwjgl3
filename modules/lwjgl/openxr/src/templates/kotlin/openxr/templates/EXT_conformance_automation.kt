@@ -80,6 +80,7 @@ val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_c
             <dd><ul>
                 <li>#ERROR_FUNCTION_UNSUPPORTED</li>
                 <li>#ERROR_VALIDATION_FAILURE</li>
+                <li>#ERROR_RUNTIME_FAILURE</li>
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
@@ -133,6 +134,7 @@ val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_c
             <dd><ul>
                 <li>#ERROR_FUNCTION_UNSUPPORTED</li>
                 <li>#ERROR_VALIDATION_FAILURE</li>
+                <li>#ERROR_RUNTIME_FAILURE</li>
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
@@ -186,6 +188,7 @@ val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_c
             <dd><ul>
                 <li>#ERROR_FUNCTION_UNSUPPORTED</li>
                 <li>#ERROR_VALIDATION_FAILURE</li>
+                <li>#ERROR_RUNTIME_FAILURE</li>
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
@@ -239,6 +242,7 @@ val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_c
             <dd><ul>
                 <li>#ERROR_FUNCTION_UNSUPPORTED</li>
                 <li>#ERROR_VALIDATION_FAILURE</li>
+                <li>#ERROR_RUNTIME_FAILURE</li>
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
@@ -300,6 +304,7 @@ val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_c
             <dd><ul>
                 <li>#ERROR_FUNCTION_UNSUPPORTED</li>
                 <li>#ERROR_VALIDATION_FAILURE</li>
+                <li>#ERROR_RUNTIME_FAILURE</li>
                 <li>#ERROR_HANDLE_INVALID</li>
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
