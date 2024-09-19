@@ -1286,6 +1286,22 @@ public class LibURing {
         nio_uring_prep_connect(sqe.address(), fd, addr.address(), addrlen);
     }
 
+    // --- [ io_uring_prep_bind ] ---
+
+    public static native void nio_uring_prep_bind(long sqe, int fd, long addr, int addrlen);
+
+    public static void io_uring_prep_bind(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct sockaddr *") Sockaddr addr, @NativeType("socklen_t") int addrlen) {
+        nio_uring_prep_bind(sqe.address(), fd, addr.address(), addrlen);
+    }
+
+    // --- [ io_uring_prep_listen ] ---
+
+    public static native void nio_uring_prep_listen(long sqe, int fd, int backlog);
+
+    public static void io_uring_prep_listen(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, int backlog) {
+        nio_uring_prep_listen(sqe.address(), fd, backlog);
+    }
+
     // --- [ io_uring_prep_files_update ] ---
 
     public static native void nio_uring_prep_files_update(long sqe, long fds, int nr_fds, int offset);
@@ -1440,18 +1456,34 @@ public class LibURing {
 
     // --- [ io_uring_prep_fadvise ] ---
 
-    public static native void nio_uring_prep_fadvise(long sqe, int fd, int offset, long len, int advice);
+    public static native void nio_uring_prep_fadvise(long sqe, int fd, long offset, int len, int advice);
 
-    public static void io_uring_prep_fadvise(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, int offset, @NativeType("off_t") long len, int advice) {
+    public static void io_uring_prep_fadvise(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("__u64") long offset, @NativeType("__u32") int len, int advice) {
         nio_uring_prep_fadvise(sqe.address(), fd, offset, len, advice);
     }
 
     // --- [ io_uring_prep_madvise ] ---
 
-    public static native void nio_uring_prep_madvise(long sqe, long addr, long length, int advice);
+    public static native void nio_uring_prep_madvise(long sqe, long addr, int length, int advice);
 
     public static void io_uring_prep_madvise(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("void *") ByteBuffer addr, int advice) {
         nio_uring_prep_madvise(sqe.address(), memAddress(addr), addr.remaining(), advice);
+    }
+
+    // --- [ io_uring_prep_fadvise64 ] ---
+
+    public static native void nio_uring_prep_fadvise64(long sqe, int fd, long offset, int len, int advice);
+
+    public static void io_uring_prep_fadvise64(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("__u64") long offset, @NativeType("__u32") int len, int advice) {
+        nio_uring_prep_fadvise64(sqe.address(), fd, offset, len, advice);
+    }
+
+    // --- [ io_uring_prep_madvise64 ] ---
+
+    public static native void nio_uring_prep_madvise64(long sqe, long addr, long length, int advice);
+
+    public static void io_uring_prep_madvise64(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("void *") ByteBuffer addr, int advice) {
+        nio_uring_prep_madvise64(sqe.address(), memAddress(addr), addr.remaining(), advice);
     }
 
     // --- [ io_uring_prep_send ] ---
@@ -1460,6 +1492,14 @@ public class LibURing {
 
     public static void io_uring_prep_send(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int sockfd, @NativeType("void const *") ByteBuffer buf, int flags) {
         nio_uring_prep_send(sqe.address(), sockfd, memAddress(buf), buf.remaining(), flags);
+    }
+
+    // --- [ io_uring_prep_send_bundle ] ---
+
+    public static native void nio_uring_prep_send_bundle(long sqe, int sockfd, long len, int flags);
+
+    public static void io_uring_prep_send_bundle(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int sockfd, @NativeType("size_t") long len, int flags) {
+        nio_uring_prep_send_bundle(sqe.address(), sockfd, len, flags);
     }
 
     // --- [ io_uring_prep_send_set_addr ] ---

@@ -28,7 +28,7 @@ public class LibDivide {
     /** Library version. */
     public static final int
         LIBDIVIDE_VERSION_MAJOR = 5,
-        LIBDIVIDE_VERSION_MINOR = 0;
+        LIBDIVIDE_VERSION_MINOR = 1;
 
     /**
      * <h5>Enum values:</h5>

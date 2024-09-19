@@ -199,6 +199,8 @@ __cold int io_uring_ring_dontfork(struct io_uring *ring)
 /* FIXME */
 static size_t huge_page_size = 2 * 1024 * 1024;
 
+#define KRING_SIZE	64
+
 /*
  * Returns negative for error, or number of bytes used in the buffer on success
  */
@@ -208,7 +210,7 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 {
 	unsigned long page_size = get_page_size();
 	unsigned sq_entries, cq_entries;
-	size_t ring_mem, sqes_mem;
+	size_t ring_mem, sqes_mem, cqes_mem;
 	unsigned long mem_used = 0;
 	void *ptr;
 	int ret;
@@ -217,14 +219,18 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 	if (ret)
 		return ret;
 
+	ring_mem = KRING_SIZE;
+
 	sqes_mem = sq_entries * sizeof(struct io_uring_sqe);
 	sqes_mem = (sqes_mem + page_size - 1) & ~(page_size - 1);
-	ring_mem = cq_entries * sizeof(struct io_uring_cqe);
-	if (p->flags & IORING_SETUP_CQE32)
-		ring_mem *= 2;
 	if (!(p->flags & IORING_SETUP_NO_SQARRAY))
-		ring_mem += sq_entries * sizeof(unsigned);
-	mem_used = sqes_mem + ring_mem;
+		sqes_mem += sq_entries * sizeof(unsigned);
+
+	cqes_mem = cq_entries * sizeof(struct io_uring_cqe);
+	if (p->flags & IORING_SETUP_CQE32)
+		cqes_mem *= 2;
+	ring_mem += sqes_mem + cqes_mem;
+	mem_used = ring_mem;
 	mem_used = (mem_used + page_size - 1) & ~(page_size - 1);
 
 	/*
@@ -497,8 +503,6 @@ static size_t npages(size_t size, long page_size)
 	size /= page_size;
 	return __fls((int) size);
 }
-
-#define KRING_SIZE	320
 
 static size_t rings_size(struct io_uring_params *p, unsigned entries,
 			 unsigned cq_entries, long page_size)

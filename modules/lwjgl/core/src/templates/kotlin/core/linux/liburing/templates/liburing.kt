@@ -1208,6 +1208,25 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_bind",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        sockaddr.p("addr", ""),
+        socklen_t("addrlen", "")
+    )
+
+    void(
+        "prep_listen",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        int("backlog", "")
+    )
+
+    void(
         "prep_files_update",
         "",
 
@@ -1344,13 +1363,34 @@ struct io_uring_buf {
 
         io_uring_sqe.p("sqe", ""),
         int("fd", ""),
-        int("offset", ""),
-        off_t("len", ""),
+        __u64("offset", ""),
+        __u32("len", ""),
         int("advice", "") // TODO:
     )
 
     void(
         "prep_madvise",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        void.p("addr", ""),
+        AutoSize("addr")..__u32("length", ""),
+        int("advice", "") // TODO:
+    )
+
+    void(
+        "prep_fadvise64",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        __u64("offset", ""),
+        __u32("len", ""),
+        int("advice", "") // TODO:
+    )
+
+    void(
+        "prep_madvise64",
         "",
 
         io_uring_sqe.p("sqe", ""),
@@ -1367,6 +1407,16 @@ struct io_uring_buf {
         int("sockfd", ""),
         void.const.p("buf", ""),
         AutoSize("buf")..size_t("len", ""),
+        int("flags", "")
+    )
+
+    void(
+        "prep_send_bundle",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("sockfd", ""),
+        size_t("len", ""),
         int("flags", "")
     )
 

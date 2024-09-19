@@ -375,7 +375,7 @@ IOURINGINLINE void __io_uring_set_target_fixed_file(struct io_uring_sqe *sqe,
 	sqe->file_index = file_index + 1;
 }
 
-IOURINGINLINE void io_uring_initialize_sqe(struct io_uring_sqe *sqe) 
+IOURINGINLINE void io_uring_initialize_sqe(struct io_uring_sqe *sqe)
 {
 	sqe->flags = 0;
 	sqe->ioprio = 0;
@@ -669,6 +669,19 @@ IOURINGINLINE void io_uring_prep_connect(struct io_uring_sqe *sqe, int fd,
 	io_uring_prep_rw(IORING_OP_CONNECT, sqe, fd, addr, 0, addrlen);
 }
 
+IOURINGINLINE void io_uring_prep_bind(struct io_uring_sqe *sqe, int fd,
+				      struct sockaddr *addr,
+				      socklen_t addrlen)
+{
+	io_uring_prep_rw(IORING_OP_BIND, sqe, fd, addr, 0, addrlen);
+}
+
+IOURINGINLINE void io_uring_prep_listen(struct io_uring_sqe *sqe, int fd,
+				      int backlog)
+{
+	io_uring_prep_rw(IORING_OP_LISTEN, sqe, fd, 0, backlog, 0);
+}
+
 IOURINGINLINE void io_uring_prep_files_update(struct io_uring_sqe *sqe,
 					      int *fds, unsigned nr_fds,
 					      int offset)
@@ -731,6 +744,7 @@ IOURINGINLINE void io_uring_prep_read_multishot(struct io_uring_sqe *sqe,
 	io_uring_prep_rw(IORING_OP_READ_MULTISHOT, sqe, fd, NULL, nbytes,
 			 offset);
 	sqe->buf_group = buf_group;
+	sqe->flags = IOSQE_BUFFER_SELECT;
 }
 
 IOURINGINLINE void io_uring_prep_write(struct io_uring_sqe *sqe, int fd,
@@ -751,16 +765,31 @@ IOURINGINLINE void io_uring_prep_statx(struct io_uring_sqe *sqe, int dfd,
 }
 
 IOURINGINLINE void io_uring_prep_fadvise(struct io_uring_sqe *sqe, int fd,
-					 __u64 offset, off_t len, int advice)
+					 __u64 offset, __u32 len, int advice)
 {
 	io_uring_prep_rw(IORING_OP_FADVISE, sqe, fd, NULL, (__u32) len, offset);
 	sqe->fadvise_advice = (__u32) advice;
 }
 
 IOURINGINLINE void io_uring_prep_madvise(struct io_uring_sqe *sqe, void *addr,
-					 off_t length, int advice)
+					 __u32 length, int advice)
 {
 	io_uring_prep_rw(IORING_OP_MADVISE, sqe, -1, addr, (__u32) length, 0);
+	sqe->fadvise_advice = (__u32) advice;
+}
+
+IOURINGINLINE void io_uring_prep_fadvise64(struct io_uring_sqe *sqe, int fd,
+					 __u64 offset, off_t len, int advice)
+{
+	io_uring_prep_rw(IORING_OP_FADVISE, sqe, fd, NULL, 0, offset);
+	sqe->addr = len;
+	sqe->fadvise_advice = (__u32) advice;
+}
+
+IOURINGINLINE void io_uring_prep_madvise64(struct io_uring_sqe *sqe, void *addr,
+					 off_t length, int advice)
+{
+	io_uring_prep_rw(IORING_OP_MADVISE, sqe, -1, addr, 0, length);
 	sqe->fadvise_advice = (__u32) advice;
 }
 
@@ -769,6 +798,13 @@ IOURINGINLINE void io_uring_prep_send(struct io_uring_sqe *sqe, int sockfd,
 {
 	io_uring_prep_rw(IORING_OP_SEND, sqe, sockfd, buf, (__u32) len, 0);
 	sqe->msg_flags = (__u32) flags;
+}
+
+IOURINGINLINE void io_uring_prep_send_bundle(struct io_uring_sqe *sqe,
+					     int sockfd, size_t len, int flags)
+{
+	io_uring_prep_send(sqe, sockfd, NULL, len, flags);
+	sqe->ioprio |= IORING_RECVSEND_BUNDLE;
 }
 
 IOURINGINLINE void io_uring_prep_send_set_addr(struct io_uring_sqe *sqe,

@@ -992,6 +992,8 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "OP_FUTEX_WAITV".enumByte,
         "OP_FIXED_FD_INSTALL".enumByte,
         "OP_FTRUNCATE".enumByte,
+        "OP_BIND".enumByte,
+        "OP_LISTEN".enumByte,
         "OP_LAST".enumByte
     )
 
@@ -1107,7 +1109,24 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             "1 << 1"
         ),
         "RECVSEND_FIXED_BUF".enum("Use registered buffers, the index is stored in the {@code buf_index} field.", "1 << 2"),
-        "SEND_ZC_REPORT_USAGE".enum("", "1 << 3")
+        "SEND_ZC_REPORT_USAGE".enum(
+            """
+            If set, {@code SEND[MSG]_ZC} should report the zerocopy usage in {@code cqe.res} for the #CQE_F_NOTIF cqe.
+
+            0 is reported if zerocopy was actually possible. #NOTIF_USAGE_ZC_COPIED if data was copied (at least partially).
+            """,
+            "1 << 3"
+        ),
+        "RECVSEND_BUNDLE".enum(
+            """
+            Used with #IOSQE_BUFFER_SELECT.
+
+            If set, send wil grab as many buffers from the buffer group ID given and send them all. The completion result will be the number of buffers send,
+            with the starting buffer ID in {@code cqe->flags} as per usual for provided buffer usage. The buffers will be contigious from the starting buffer
+            ID.
+            """,
+            "1 << 4"
+        )
     )
 
     IntConstant("", "NOTIF_USAGE_ZC_COPIED".."1 << 31")
@@ -1115,7 +1134,9 @@ if (flags & IORING_SQ_NEED_WAKEUP)
     EnumConstant(
         "Accept flags stored in {@code sqe->ioprio}",
 
-        "ACCEPT_MULTISHOT".enum("", "1 << 0")
+        "ACCEPT_MULTISHOT".enum("", "1 << 0"),
+        "ACCEPT_DONTWAIT".enum("", "1 << 1"),
+        "ACCEPT_POLL_FIRST".enum("", "1 << 2")
     )
 
     EnumConstant(
@@ -1136,6 +1157,12 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "#OP_FIXED_FD_INSTALL flags ({@code sqe->install_fd_flags})",
 
         "FIXED_FD_NO_CLOEXEC".enum("Don't mark the fd as {@code O_CLOEXEC}.", "1 << 0")
+    )
+
+    EnumConstant(
+        "#OP_NOP flags ({@code sqe->nop_flags})",
+
+        "NOP_INJECT_RESULT".enum("Inject result from {@code sqe->result}.", "1 << 0")
     )
 
     EnumConstant(
@@ -1375,7 +1402,8 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             """,
             "1 << 12"
         ),
-        "FEAT_REG_REG_RING".enum("", "1 << 13")
+        "FEAT_REG_REG_RING".enum("", "1 << 13"),
+        "FEAT_RECVSEND_BUNDLE".enum("", "1 << 14")
     )
 
     EnumConstant(

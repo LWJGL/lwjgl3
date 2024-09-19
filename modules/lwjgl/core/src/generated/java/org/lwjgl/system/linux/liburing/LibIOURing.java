@@ -886,6 +886,8 @@ public class LibIOURing {
      * <li>{@link #IORING_OP_FUTEX_WAITV OP_FUTEX_WAITV}</li>
      * <li>{@link #IORING_OP_FIXED_FD_INSTALL OP_FIXED_FD_INSTALL}</li>
      * <li>{@link #IORING_OP_FTRUNCATE OP_FTRUNCATE}</li>
+     * <li>{@link #IORING_OP_BIND OP_BIND}</li>
+     * <li>{@link #IORING_OP_LISTEN OP_LISTEN}</li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
@@ -946,7 +948,9 @@ public class LibIOURing {
         IORING_OP_FUTEX_WAITV      = 53,
         IORING_OP_FIXED_FD_INSTALL = 54,
         IORING_OP_FTRUNCATE        = 55,
-        IORING_OP_LAST             = 56;
+        IORING_OP_BIND             = 56,
+        IORING_OP_LISTEN           = 57,
+        IORING_OP_LAST             = 58;
 
     public static final int IORING_URING_CMD_FIXED = 1 << 0;
 
@@ -1065,19 +1069,44 @@ public class LibIOURing {
      * <p>Sets {@link #IORING_CQE_F_MORE CQE_F_MORE} if the handler will continue to report CQEs on behalf of the same SQE.</p>
      * </li>
      * <li>{@link #IORING_RECVSEND_FIXED_BUF RECVSEND_FIXED_BUF} - Use registered buffers, the index is stored in the {@code buf_index} field.</li>
-     * <li>{@link #IORING_SEND_ZC_REPORT_USAGE SEND_ZC_REPORT_USAGE}</li>
+     * <li>{@link #IORING_SEND_ZC_REPORT_USAGE SEND_ZC_REPORT_USAGE} - 
+     * If set, {@code SEND[MSG]_ZC} should report the zerocopy usage in {@code cqe.res} for the {@link #IORING_CQE_F_NOTIF CQE_F_NOTIF} cqe.
+     * 
+     * <p>0 is reported if zerocopy was actually possible. {@link #IORING_NOTIF_USAGE_ZC_COPIED NOTIF_USAGE_ZC_COPIED} if data was copied (at least partially).</p>
+     * </li>
+     * <li>{@link #IORING_RECVSEND_BUNDLE RECVSEND_BUNDLE} - 
+     * Used with {@link #IOSQE_BUFFER_SELECT}.
+     * 
+     * <p>If set, send wil grab as many buffers from the buffer group ID given and send them all. The completion result will be the number of buffers send,
+     * with the starting buffer ID in {@code cqe->flags} as per usual for provided buffer usage. The buffers will be contigious from the starting buffer
+     * ID.</p>
+     * </li>
      * </ul>
      */
     public static final int
         IORING_RECVSEND_POLL_FIRST  = 1 << 0,
         IORING_RECV_MULTISHOT       = 1 << 1,
         IORING_RECVSEND_FIXED_BUF   = 1 << 2,
-        IORING_SEND_ZC_REPORT_USAGE = 1 << 3;
+        IORING_SEND_ZC_REPORT_USAGE = 1 << 3,
+        IORING_RECVSEND_BUNDLE      = 1 << 4;
 
     public static final int IORING_NOTIF_USAGE_ZC_COPIED = 1 << 31;
 
-    /** Accept flags stored in {@code sqe->ioprio} */
-    public static final int IORING_ACCEPT_MULTISHOT = 1 << 0;
+    /**
+     * Accept flags stored in {@code sqe->ioprio}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_ACCEPT_MULTISHOT ACCEPT_MULTISHOT}</li>
+     * <li>{@link #IORING_ACCEPT_DONTWAIT ACCEPT_DONTWAIT}</li>
+     * <li>{@link #IORING_ACCEPT_POLL_FIRST ACCEPT_POLL_FIRST}</li>
+     * </ul>
+     */
+    public static final int
+        IORING_ACCEPT_MULTISHOT  = 1 << 0,
+        IORING_ACCEPT_DONTWAIT   = 1 << 1,
+        IORING_ACCEPT_POLL_FIRST = 1 << 2;
 
     /**
      * {@link #IORING_OP_MSG_RING OP_MSG_RING} command types, stored in {@code sqe->addr}
@@ -1117,6 +1146,17 @@ public class LibIOURing {
      * </ul>
      */
     public static final int IORING_FIXED_FD_NO_CLOEXEC = 1 << 0;
+
+    /**
+     * {@link #IORING_OP_NOP OP_NOP} flags ({@code sqe->nop_flags})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_NOP_INJECT_RESULT NOP_INJECT_RESULT} - Inject result from {@code sqe->result}.</li>
+     * </ul>
+     */
+    public static final int IORING_NOP_INJECT_RESULT = 1 << 0;
 
     /**
      * {@code cqe->flags}
@@ -1331,6 +1371,7 @@ public class LibIOURing {
      * <p>Available since kernel 5.17.</p>
      * </li>
      * <li>{@link #IORING_FEAT_REG_REG_RING FEAT_REG_REG_RING}</li>
+     * <li>{@link #IORING_FEAT_RECVSEND_BUNDLE FEAT_RECVSEND_BUNDLE}</li>
      * </ul>
      */
     public static final int
@@ -1347,7 +1388,8 @@ public class LibIOURing {
         IORING_FEAT_RSRC_TAGS       = 1 << 10,
         IORING_FEAT_CQE_SKIP        = 1 << 11,
         IORING_FEAT_LINKED_FILE     = 1 << 12,
-        IORING_FEAT_REG_REG_RING    = 1 << 13;
+        IORING_FEAT_REG_REG_RING    = 1 << 13,
+        IORING_FEAT_RECVSEND_BUNDLE = 1 << 14;
 
     /**
      * {@link #io_uring_register register} {@code opcodes} and arguments

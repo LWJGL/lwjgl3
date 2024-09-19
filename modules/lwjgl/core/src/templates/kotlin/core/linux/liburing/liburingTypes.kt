@@ -72,6 +72,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
         __u32("waitid_flags", "")
 		__u32("futex_flags", "")
 		__u32("install_fd_flags", "")
+        __u32("nop_flags", "")
     }
     __u64("user_data", "an application-supplied value that will be copied into the completion queue entry")
     union {
