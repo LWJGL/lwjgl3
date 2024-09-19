@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>At least one of {@code writeStdVPS}, {@code writeStdSPS}, and {@code writeStdPPS} <b>must</b> be set to {@link VK10#VK_TRUE TRUE}</li>
+ * <li>At least one of {@code writeStdVPS}, {@code writeStdSPS}, and {@code writeStdPPS} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

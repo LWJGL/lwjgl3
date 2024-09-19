@@ -103,7 +103,7 @@ public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateIn
     /** the number of settings to configure. */
     @NativeType("uint32_t")
     public int settingCount() { return nsettingCount(address()); }
-    /** a pointer to an array of {@code settingCount} {@link VkLayerSettingEXT} values specifying the setting to be configured. */
+    /** a pointer to an array of {@code settingCount} {@link VkLayerSettingEXT} values specifying the settings to be configured. */
     @Nullable
     @NativeType("VkLayerSettingEXT const *")
     public VkLayerSettingEXT.Buffer pSettings() { return npSettings(address()); }

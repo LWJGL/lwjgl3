@@ -77,7 +77,7 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
 ￿    VkDisplayKHR                                display);</code></pre>
 
         <h5>Description</h5>
-        All permissions necessary to control the display are granted to the Vulkan instance associated with the provided {@code physicalDevice} until the display is either released or the connector is unplugged. The provided {@code drmFd} must correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN must be returned. The DRM FD must have DRM master permissions. If any error is encountered during the acquisition of the display, the call must return the error code #ERROR_INITIALIZATION_FAILED.
+        All permissions necessary to control the display are granted to the Vulkan instance associated with the provided {@code physicalDevice} until the display is either released or the connector is unplugged. The provided {@code drmFd} <b>must</b> correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. The DRM FD must have DRM master permissions. If any error is encountered during the acquisition of the display, the call <b>must</b> return the error code #ERROR_INITIALIZATION_FAILED.
 
         The provided DRM fd should not be closed before the display is released, attempting to do it may result in undefined behavior.
 
@@ -123,7 +123,7 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
 ￿    VkDisplayKHR*                               display);</code></pre>
 
         <h5>Description</h5>
-        If there is no {@code VkDisplayKHR} corresponding to the {@code connectorId} on the {@code physicalDevice}, the returning {@code display} must be set to #NULL_HANDLE. The provided {@code drmFd} must correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN must be returned. Master permissions are not required, because the file descriptor is just used for information gathering purposes. The given {@code connectorId} must be a resource owned by the provided {@code drmFd}. If not, the error code #ERROR_UNKNOWN must be returned. If any error is encountered during the identification of the display, the call must return the error code #ERROR_INITIALIZATION_FAILED.
+        If there is no {@code VkDisplayKHR} corresponding to the {@code connectorId} on the {@code physicalDevice}, the returning {@code display} <b>must</b> be set to #NULL_HANDLE. The provided {@code drmFd} <b>must</b> correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. Master permissions are not required, because the file descriptor is just used for information gathering purposes. The given {@code connectorId} <b>must</b> be a resource owned by the provided {@code drmFd}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. If any error is encountered during the identification of the display, the call <b>must</b> return the error code #ERROR_INITIALIZATION_FAILED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

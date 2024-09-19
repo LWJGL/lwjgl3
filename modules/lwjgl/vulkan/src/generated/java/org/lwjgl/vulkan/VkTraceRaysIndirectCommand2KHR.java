@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The members of {@link VkTraceRaysIndirectCommand2KHR} have the same meaning as the similarly named parameters of {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}.</p>
  * 
- * <p>Indirect shader binding table buffer parameters must satisfy the same memory alignment and binding requirements as their counterparts in {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR} and {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}.</p>
+ * <p>Indirect shader binding table buffer parameters <b>must</b> satisfy the same memory alignment and binding requirements as their counterparts in {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR} and {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

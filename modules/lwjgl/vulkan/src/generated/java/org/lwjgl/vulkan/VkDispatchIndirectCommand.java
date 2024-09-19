@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a indirect dispatching command.
+ * Structure specifying an indirect dispatching command.
  * 
  * <h5>Description</h5>
  * 

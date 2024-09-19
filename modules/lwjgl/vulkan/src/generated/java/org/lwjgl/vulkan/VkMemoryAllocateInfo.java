@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Importing memory <b>must</b> not increase overall heap usage within a system. However, it <b>must</b> affect the following per-process values:</p>
  * 
  * <ul>
- * <li>{@link VkPhysicalDeviceMaintenance3Properties}{@code ::maxMemoryAllocationCount}</li>
+ * <li>{@link VkPhysicalDeviceLimits}{@code ::maxMemoryAllocationCount}</li>
  * <li>{@link VkPhysicalDeviceMemoryBudgetPropertiesEXT}{@code ::heapUsage}</li>
  * </ul>
  * 

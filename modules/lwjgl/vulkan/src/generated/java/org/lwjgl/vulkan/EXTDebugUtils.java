@@ -334,7 +334,7 @@ public class EXTDebugUtils {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link #vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
+     * <p>{@link VkDebugUtilsMessengerCallbackEXT}, {@link #vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
      */
     public static final int
         VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT = 0x1,

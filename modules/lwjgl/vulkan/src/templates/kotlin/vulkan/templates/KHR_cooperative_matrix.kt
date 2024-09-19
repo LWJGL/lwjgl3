@@ -97,14 +97,14 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
             <li>#COMPONENT_TYPE_FLOAT16_KHR corresponds to SPIR-V {@code OpTypeFloat} 16.</li>
             <li>#COMPONENT_TYPE_FLOAT32_KHR corresponds to SPIR-V {@code OpTypeFloat} 32.</li>
             <li>#COMPONENT_TYPE_FLOAT64_KHR corresponds to SPIR-V {@code OpTypeFloat} 64.</li>
-            <li>#COMPONENT_TYPE_SINT8_KHR corresponds to SPIR-V {@code OpTypeInt} 8 1.</li>
-            <li>#COMPONENT_TYPE_SINT16_KHR corresponds to SPIR-V {@code OpTypeInt} 16 1.</li>
-            <li>#COMPONENT_TYPE_SINT32_KHR corresponds to SPIR-V {@code OpTypeInt} 32 1.</li>
-            <li>#COMPONENT_TYPE_SINT64_KHR corresponds to SPIR-V {@code OpTypeInt} 64 1.</li>
-            <li>#COMPONENT_TYPE_UINT8_KHR corresponds to SPIR-V {@code OpTypeInt} 8 0.</li>
-            <li>#COMPONENT_TYPE_UINT16_KHR corresponds to SPIR-V {@code OpTypeInt} 16 0.</li>
-            <li>#COMPONENT_TYPE_UINT32_KHR corresponds to SPIR-V {@code OpTypeInt} 32 0.</li>
-            <li>#COMPONENT_TYPE_UINT64_KHR corresponds to SPIR-V {@code OpTypeInt} 64 0.</li>
+            <li>#COMPONENT_TYPE_SINT8_KHR corresponds to SPIR-V {@code OpTypeInt} 8 0/1.</li>
+            <li>#COMPONENT_TYPE_SINT16_KHR corresponds to SPIR-V {@code OpTypeInt} 16 0/1.</li>
+            <li>#COMPONENT_TYPE_SINT32_KHR corresponds to SPIR-V {@code OpTypeInt} 32 0/1.</li>
+            <li>#COMPONENT_TYPE_SINT64_KHR corresponds to SPIR-V {@code OpTypeInt} 64 0/1.</li>
+            <li>#COMPONENT_TYPE_UINT8_KHR corresponds to SPIR-V {@code OpTypeInt} 8 0/1.</li>
+            <li>#COMPONENT_TYPE_UINT16_KHR corresponds to SPIR-V {@code OpTypeInt} 16 0/1.</li>
+            <li>#COMPONENT_TYPE_UINT32_KHR corresponds to SPIR-V {@code OpTypeInt} 32 0/1.</li>
+            <li>#COMPONENT_TYPE_UINT64_KHR corresponds to SPIR-V {@code OpTypeInt} 64 0/1.</li>
         </ul>
 
         <h5>See Also</h5>

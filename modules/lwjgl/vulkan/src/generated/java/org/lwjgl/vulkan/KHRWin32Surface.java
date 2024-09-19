@@ -94,7 +94,7 @@ public class KHRWin32Surface {
     }
 
     /**
-     * Create a VkSurfaceKHR object for an Win32 native window.
+     * Create a VkSurfaceKHR object for a Win32 native window.
      * 
      * <h5>C Specification</h5>
      * 
@@ -130,7 +130,7 @@ public class KHRWin32Surface {
      * </ul></dd>
      * </dl>
      * 
-     * <p>Some Vulkan functions <b>may</b> call the {@code SendMessage} system API when interacting with a {@code VkSurfaceKHR} through a {@code VkSwapchainKHR}. In a multithreaded environment, calling {@code SendMessage} from a thread that is not the thread associated with {@code pCreateInfo}{@code ::hwnd} will block until the application has processed the window message. Thus, applications <b>should</b> either call these Vulkan functions on the message pump thread, or make sure their message pump is actively running. Failing to do so <b>may</b> result in deadlocks.</p>
+     * <p>Some Vulkan functions <b>may</b> call the {@code SendMessage} system API when interacting with a {@code VkSurfaceKHR} through a {@code VkSwapchainKHR}. In a multithreaded environment, calling {@code SendMessage} from a thread that is not the thread associated with {@code pCreateInfo→hwnd} will block until the application has processed the window message. Thus, applications <b>should</b> either call these Vulkan functions on the message pump thread, or make sure their message pump is actively running. Failing to do so <b>may</b> result in deadlocks.</p>
      * 
      * <p>The functions subject to this requirement are:</p>
      * 

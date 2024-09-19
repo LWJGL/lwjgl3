@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If a {@link VkBufferUsageFlags2CreateInfoKHR} structure is present in the {@code pNext} chain, {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage} from that structure is used instead of {@code usage} from this structure.</p>
+ * <p>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage} from that structure is used instead of {@code usage} from this structure.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} must be a valid combination of {@code VkBufferUsageFlagBits} values</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} must not be 0</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> not be 0</li>
  * <li>{@code size} <b>must</b> be greater than 0</li>
  * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
  * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>

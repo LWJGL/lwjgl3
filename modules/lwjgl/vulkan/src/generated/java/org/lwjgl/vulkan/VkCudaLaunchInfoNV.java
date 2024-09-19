@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code gridDimZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2]</li>
  * <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table</li>
  * <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}</li>
- * <li>{@code extraCount} must be 0</li>
- * <li>{@code pExtras} must be NULL</li>
+ * <li>{@code extraCount} <b>must</b> be 0</li>
+ * <li>{@code pExtras} <b>must</b> be NULL</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -163,13 +163,13 @@ public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements Na
     /** the CUDA-Driver handle to the function being launched. */
     @NativeType("VkCudaFunctionNV")
     public long function() { return nfunction(address()); }
-    /** the number of local workgroups to dispatch in the X dimension. It must be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0] */
+    /** the number of local workgroups to dispatch in the X dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0] */
     @NativeType("uint32_t")
     public int gridDimX() { return ngridDimX(address()); }
-    /** the number of local workgroups to dispatch in the Y dimension. It must be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1] */
+    /** the number of local workgroups to dispatch in the Y dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1] */
     @NativeType("uint32_t")
     public int gridDimY() { return ngridDimY(address()); }
-    /** the number of local workgroups to dispatch in the Z dimension. It must be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2] */
+    /** the number of local workgroups to dispatch in the Z dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2] */
     @NativeType("uint32_t")
     public int gridDimZ() { return ngridDimZ(address()); }
     /** block size in the X dimension. */

@@ -225,7 +225,7 @@ public class EXTDebugReport {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkDebugMarkerObjectNameInfoEXT}, {@link VkDebugMarkerObjectTagInfoEXT}, {@link #vkDebugReportMessageEXT DebugReportMessageEXT}</p>
+     * <p>{@link VkDebugReportCallbackEXT}, {@link VkDebugMarkerObjectNameInfoEXT}, {@link VkDebugMarkerObjectTagInfoEXT}, {@link #vkDebugReportMessageEXT DebugReportMessageEXT}</p>
      * 
      * <h5>Enum values:</h5>
      * 

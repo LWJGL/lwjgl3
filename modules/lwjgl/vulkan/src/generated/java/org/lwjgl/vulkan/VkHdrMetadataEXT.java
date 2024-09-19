@@ -18,17 +18,21 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Specify HDR metadata.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If any of the above values are unknown, they <b>can</b> be set to 0.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>The meta-data provided here is intended to be used as defined in the SMPTE 2086, CTA 861.3 and CIE 15:2004 specifications. The validity and use of this data is outside the scope of Vulkan.</p>
+ * </div>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTHdrMetadata#VK_STRUCTURE_TYPE_HDR_METADATA_EXT STRUCTURE_TYPE_HDR_METADATA_EXT}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The validity and use of this data is outside the scope of Vulkan.</p>
- * </div>
  * 
  * <h5>See Also</h5>
  * 
@@ -128,21 +132,21 @@ public class VkHdrMetadataEXT extends Struct<VkHdrMetadataEXT> implements Native
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s red primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the red primary of the display used to optimize the content */
     public VkXYColorEXT displayPrimaryRed() { return ndisplayPrimaryRed(address()); }
-    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s green primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the green primary of the display used to optimize the content */
     public VkXYColorEXT displayPrimaryGreen() { return ndisplayPrimaryGreen(address()); }
-    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s blue primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the blue primary of the display used to optimize the content */
     public VkXYColorEXT displayPrimaryBlue() { return ndisplayPrimaryBlue(address()); }
-    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s white-point in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the white-point of the display used to optimize the content */
     public VkXYColorEXT whitePoint() { return nwhitePoint(address()); }
-    /** the maximum luminance of the reference monitor in nits */
+    /** the maximum luminance of the display used to optimize the content in nits */
     public float maxLuminance() { return nmaxLuminance(address()); }
-    /** the minimum luminance of the reference monitor in nits */
+    /** the minimum luminance of the display used to optimize the content in nits */
     public float minLuminance() { return nminLuminance(address()); }
-    /** content’s maximum luminance in nits */
+    /** the value in nits of the desired luminance for the brightest pixels in the displayed image. */
     public float maxContentLightLevel() { return nmaxContentLightLevel(address()); }
-    /** the maximum frame average light level in nits */
+    /** the value in nits of the average luminance of the frame which has the brightest average luminance anywhere in the content. */
     public float maxFrameAverageLightLevel() { return nmaxFrameAverageLightLevel(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

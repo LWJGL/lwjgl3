@@ -98,7 +98,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBuffer
     /** the byte size range which is available for this operation from the provided address. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** a {@code VkIndexType} value specifying how indices are treated. Instead of the Vulkan enum values, a custom {@code uint32_t} value <b>can</b> be mapped to an {@code VkIndexType} by specifying the {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypes} and {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypeValues} arrays. */
+    /** a {@code VkIndexType} value specifying how indices are treated. Instead of the Vulkan enum values, a custom {@code uint32_t} value <b>can</b> be mapped to {@code VkIndexType} by specifying the {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypes} and {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypeValues} arrays. */
     @NativeType("VkIndexType")
     public int indexType() { return nindexType(address()); }
 

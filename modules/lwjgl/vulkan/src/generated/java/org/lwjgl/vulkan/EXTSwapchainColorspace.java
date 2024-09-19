@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>105</dd>
  * <dt><b>Revision</b></dt>
- * <dd>4</dd>
+ * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRSurface VK_KHR_surface}</dd>
  * <dt><b>Contact</b></dt>
@@ -41,7 +41,7 @@ package org.lwjgl.vulkan;
 public final class EXTSwapchainColorspace {
 
     /** The extension specification version. */
-    public static final int VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION = 4;
+    public static final int VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION = 5;
 
     /** The extension name. */
     public static final String VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME = "VK_EXT_swapchain_colorspace";

@@ -19,6 +19,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying sparse image opaque memory bind information.
  * 
+ * <h5>Description</h5>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>This structure is normally used to bind memory to fully-resident sparse images or for mip tail regions of partially resident images. However, it <b>can</b> also be used to bind memory for the entire binding range of partially resident images.</p>
+ * 
+ * <p>If the {@code pBinds}[i].flags of an element <em>i</em> of {@code pBinds} does not contain {@link VK10#VK_SPARSE_MEMORY_BIND_METADATA_BIT SPARSE_MEMORY_BIND_METADATA_BIT}, the {@code resourceOffset} is in the range <code>[0, {@link VkMemoryRequirements}::size)</code>, This range includes data from all aspects of the image, including metadata. For most implementations this will probably mean that the {@code resourceOffset} is a simple device address offset within the resource. It is possible for an application to bind a range of memory that includes both resource data and metadata. However, the application would not know what part of the image the memory is used for, or if any range is being used for metadata.</p>
+ * 
+ * <p>If the {@code pBinds}[i].flags of an element <em>i</em> of {@code pBinds} contains {@link VK10#VK_SPARSE_MEMORY_BIND_METADATA_BIT SPARSE_MEMORY_BIND_METADATA_BIT}, the binding range specified <b>must</b> be within the mip tail region of the metadata aspect. In this case the {@code resourceOffset} is not <b>required</b> to be a simple device address offset within the resource. However, it <em>is</em> defined to be within <code>[imageMipTailOffset, imageMipTailOffset + imageMipTailSize)</code> for the metadata aspect. See {@link VkSparseMemoryBind} for the full constraints on binding region with this flag present.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

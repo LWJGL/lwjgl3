@@ -366,6 +366,7 @@ val KHR_maintenance5 = "KHRMaintenance5".nativeClassVK("KHR_maintenance5", type 
             <li>#PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV specifies that the ray tracing pipeline <b>can</b> be used with acceleration structures which reference a displacement micromap array.</li>
             <li>#PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT specifies that the pipeline <b>must</b> not be bound to a protected command buffer.</li>
             <li>#PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT specifies that the pipeline <b>must</b> not be bound to an unprotected command buffer.</li>
+            <li>#PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR specifies that {@code VkPipelineBinaryKHR} objects <b>can</b> be created from the pipeline. If #PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR is used, implementations <b>should</b> not store pipeline data to an internal cache, if such a cache exists as stated by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-pipelineBinaryInternalCache">{@code pipelineBinaryInternalCache}</a>. If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-pipelineBinaryPrefersInternalCache">{@code pipelineBinaryPrefersInternalCache}</a> is #TRUE, applications <b>should</b> not use #PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR.</li>
             <li>#PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT specifies that the pipeline will be used in a render pass that is begun with #RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT.</li>
         </ul>
 

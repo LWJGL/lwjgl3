@@ -29,6 +29,10 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_compute_shader_derivatives.html">SPV_NV_compute_shader_derivatives</a></li>
  * </ul></dd>
+ * <dt><b>Deprecation State</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to {@link KHRComputeShaderDerivatives VK_KHR_compute_shader_derivatives} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Pat Brown <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_compute_shader_derivatives]%20@nvpbrown%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_compute_shader_derivatives%20extension*">nvpbrown</a></li>

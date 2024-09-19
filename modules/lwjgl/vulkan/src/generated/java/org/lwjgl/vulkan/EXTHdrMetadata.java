@@ -14,9 +14,15 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension defines two new structures and a function to assign SMPTE (the Society of Motion Picture and Television Engineers) 2086 metadata and CTA (Consumer Technology Association) 861.3 metadata to a swapchain. The metadata includes the color primaries, white point, and luminance range of the reference monitor, which all together define the color volume containing all the possible colors the reference monitor can produce. The reference monitor is the display where creative work is done and creative intent is established. To preserve such creative intent as much as possible and achieve consistent color reproduction on different viewing displays, it is useful for the display pipeline to know the color volume of the original reference monitor where content was created or tuned. This avoids performing unnecessary mapping of colors that are not displayable on the original reference monitor. The metadata also includes the {@code maxContentLightLevel} and {@code maxFrameAverageLightLevel} as defined by CTA 861.3.
+ * This extension defines two new structures and a function to assign SMPTE (the Society of Motion Picture and Television Engineers) 2086 metadata and CTA (Consumer Technology Association) 861.3 metadata to a swapchain.
  * 
- * <p>While the intended purpose of the metadata is to assist in the transformation between different color volumes of different displays and help achieve better color reproduction, it is not in the scope of this extension to define how exactly the metadata should be used in such a process. It is up to the implementation to determine how to make use of the metadata.</p>
+ * <p>SMPTE 2086 metadata defines the color volume of the display on which the content was optimized for viewing and includes the color primaries, white point, and luminance range. When such content is reproduced on another display, this metadata can be used by the presentation engine to improve processing of images. For instance, values in the image can first be clamped to the color volume described in the metadata, and then what remains can be remapped to the color volume of the presentation engine.</p>
+ * 
+ * <p>CTA 861.3 metadata additionally includes the maximum intended luminance for the content and the maximum average light level across frames.</p>
+ * 
+ * <p>This extension does not define exactly how this metadata is used, however, it simply provides a mechanism to provide it to the presentation engine. Presentation engines may process the image based on the metadata before displaying it, resulting in the image being modified outside of Vulkan. For example, the clamping of colors in the image to the color volume may change those values in the image itself.</p>
+ * 
+ * <p>The metadata does not override or otherwise influence the color space and color encoding.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -26,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>106</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRSwapchain VK_KHR_swapchain}</dd>
  * <dt><b>Contact</b></dt>
@@ -39,19 +45,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-12-19</dd>
+ * <dd>2024-03-26</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Courtney Goeltzenleuchter, Google</li>
+ * <li>Sebastian Wick, Red Hat Inc.</li>
+ * <li>Tobias Hector, AMD</li>
  * </ul></dd>
  * </dl>
  */
 public class EXTHdrMetadata {
 
     /** The extension specification version. */
-    public static final int VK_EXT_HDR_METADATA_SPEC_VERSION = 2;
+    public static final int VK_EXT_HDR_METADATA_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_EXT_HDR_METADATA_EXTENSION_NAME = "VK_EXT_hdr_metadata";
@@ -94,7 +102,7 @@ public class EXTHdrMetadata {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The metadata will be applied to the specified {@code VkSwapchainKHR} objects at the next {@code vkQueuePresentKHR} call using that {@code VkSwapchainKHR} object. The metadata will persist until a subsequent {@code vkSetHdrMetadataEXT} changes it.</p>
+     * <p>The metadata will be applied to the specified {@code VkSwapchainKHR} objects at the next {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} call using that {@code VkSwapchainKHR} object. The metadata will persist until a subsequent {@code vkSetHdrMetadataEXT} changes it.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

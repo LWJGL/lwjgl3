@@ -31,16 +31,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The default stack size for a pipeline if {@link KHRRayTracingPipeline#VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR} is not provided is computed as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-tracing-pipeline-stack">Ray Tracing Pipeline Stack</a>.</p>
  * 
- * <p>If a {@link VkPipelineCreateFlags2CreateInfoKHR} structure is present in the {@code pNext} chain, {@link VkPipelineCreateFlags2CreateInfoKHR}{@code ::flags} from that structure is used instead of {@code flags} from this structure.</p>
+ * <p>If the {@code pNext} chain includes a {@link VkPipelineCreateFlags2CreateInfoKHR} structure, {@link VkPipelineCreateFlags2CreateInfoKHR}{@code ::flags} from that structure is used instead of {@code flags} from this structure.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkPipelineCreateFlags2CreateInfoKHR} structure, {@code flags} must be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkPipelineCreateFlags2CreateInfoKHR} structure, {@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
  * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid ray tracing {@code VkPipeline} handle</li>
  * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, and {@code basePipelineHandle} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command’s {@code pCreateInfos} parameter</li>
  * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match both the shader stage and range</li>
+ * <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match the shader stage</li>
+ * <li>If a push constant block is declared in a shader, the block must be contained inside the push constant range in {@code layout} that matches the stage</li>
  * <li>If a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources">resource variables</a> is declared in a shader, a descriptor slot in {@code layout} <b>must</b> match the shader stage</li>
  * <li>If a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources">resource variables</a> is declared in a shader, and the descriptor type is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, a descriptor slot in {@code layout} <b>must</b> match the descriptor type</li>
  * <li>If a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources">resource variables</a> is declared in a shader as an array, a descriptor slot in {@code layout} <b>must</b> match the descriptor count</li>
@@ -86,7 +87,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineCreateFlags2CreateInfoKHR}, {@link VkPipelineCreationFeedbackCreateInfo}, or {@link VkPipelineRobustnessCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineBinaryInfoKHR}, {@link VkPipelineCreateFlags2CreateInfoKHR}, {@link VkPipelineCreationFeedbackCreateInfo}, or {@link VkPipelineRobustnessCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code stageCount} is not 0, {@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid {@link VkPipelineShaderStageCreateInfo} structures</li>
  * <li>If {@code groupCount} is not 0, {@code pGroups} <b>must</b> be a valid pointer to an array of {@code groupCount} valid {@link VkRayTracingShaderGroupCreateInfoKHR} structures</li>
@@ -259,6 +260,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     public VkRayTracingPipelineCreateInfoKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingPipelineCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPipelineBinaryInfoKHR} value to the {@code pNext} chain. */
+    public VkRayTracingPipelineCreateInfoKHR pNext(VkPipelineBinaryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
     public VkRayTracingPipelineCreateInfoKHR pNext(VkPipelineCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfo} value to the {@code pNext} chain. */
@@ -619,6 +622,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
         public VkRayTracingPipelineCreateInfoKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#pNext} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingPipelineCreateInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPipelineBinaryInfoKHR} value to the {@code pNext} chain. */
+        public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkPipelineBinaryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkPipelineCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfo} value to the {@code pNext} chain. */

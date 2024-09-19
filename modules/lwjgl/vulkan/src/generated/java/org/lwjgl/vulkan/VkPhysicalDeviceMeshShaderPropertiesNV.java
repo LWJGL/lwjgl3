@@ -182,10 +182,10 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct<VkPhysicalDev
     /** the maximum number of multiview views a mesh shader can use. */
     @NativeType("uint32_t")
     public int maxMeshMultiviewViewCount() { return nmaxMeshMultiviewViewCount(address()); }
-    /** the granularity with which mesh vertex outputs are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}. */
+    /** the granularity with which mesh vertex outputs are allocated. The value can be used to compute the memory size used by the mesh shader, which <b>must</b> be less than or equal to {@code maxMeshTotalMemorySize}. */
     @NativeType("uint32_t")
     public int meshOutputPerVertexGranularity() { return nmeshOutputPerVertexGranularity(address()); }
-    /** the granularity with which mesh outputs qualified as per-primitive are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}. */
+    /** the granularity with which mesh outputs qualified as per-primitive are allocated. The value can be used to compute the memory size used by the mesh shader, which <b>must</b> be less than or equal to {@code maxMeshTotalMemorySize}. */
     @NativeType("uint32_t")
     public int meshOutputPerPrimitiveGranularity() { return nmeshOutputPerPrimitiveGranularity(address()); }
 

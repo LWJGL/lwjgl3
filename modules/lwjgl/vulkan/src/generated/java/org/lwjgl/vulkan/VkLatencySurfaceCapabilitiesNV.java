@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code pPresentModes} is {@code NULL}, then the number of present modes that are optimized for use with low latency mode returned in {@code presentModeCount}. Otherwise, {@code presentModeCount} must be set by the application to the number of elements in the {@code pPresentModes} array, and on return the variable is overwritten with the number of values actually written to {@code pPresentModes}. If the value of {@code presentModeCount} is less than the number of optimized present modes, at most {@code presentModeCount} values will be written to {@code pPresentModes}.</p>
+ * <p>If {@code pPresentModes} is {@code NULL}, then the number of present modes that are optimized for use with low latency mode returned in {@code presentModeCount}. Otherwise, {@code presentModeCount} <b>must</b> be set by the application to the number of elements in the {@code pPresentModes} array, and on return the variable is overwritten with the number of values actually written to {@code pPresentModes}. If the value of {@code presentModeCount} is less than the number of optimized present modes, at most {@code presentModeCount} values will be written to {@code pPresentModes}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

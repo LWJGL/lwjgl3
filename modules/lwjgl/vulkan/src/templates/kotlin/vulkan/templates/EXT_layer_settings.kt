@@ -17,8 +17,12 @@ val EXT_layer_settings = "EXTLayerSettings".nativeClassVK("EXT_layer_settings", 
 
         The structure contains an array of ##VkLayerSettingEXT structure values that configure specific features of layers.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The {@link EXTLayerSettings VK_EXT_layer_settings} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension and the {@link EXTValidationFeatures VK_EXT_validation_features} extension.
+        </div>
+
         <h5>Example</h5>
-        {@code VK_EXT_layer_settings} is implemented by the Vulkan Profiles layer.
+        One example usage of {@code VK_EXT_layer_settings} is as implemented by the Vulkan Profiles layer.
 
         It allows the profiles layer tests used by the profiles layer C.I. to programmatically configure the layer for each test without affecting the C.I. environment, allowing to run multiple tests concurrently.
 
@@ -59,10 +63,6 @@ val EXT_layer_settings = "EXTLayerSettings".nativeClassVK("EXT_layer_settings", 
 ￿...
 ￿inst_create_info.pNext = &amp;layer_settings_create_info;
 ￿vkCreateInstance(&amp;inst_create_info, nullptr, &amp;_instances);</code></pre>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The {@link EXTLayerSettings VK_EXT_layer_settings} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension and the {@link EXTValidationFeatures VK_EXT_validation_features} extension.
-        </div>
 
         <dl>
             <dt><b>Name String</b></dt>

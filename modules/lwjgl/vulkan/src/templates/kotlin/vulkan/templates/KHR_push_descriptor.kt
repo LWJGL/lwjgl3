@@ -81,12 +81,6 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         "DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR".enum(0x00000001)
     )
 
-    EnumConstant(
-        "Extends {@code VkDescriptorUpdateTemplateType}.",
-
-        "DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR".."1"
-    )
-
     void(
         "CmdPushDescriptorSetKHR",
         """

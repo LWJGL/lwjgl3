@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkDeviceDeviceMemoryReportCreateInfoEXT}</p>
+ * <p>{@link VkDeviceDeviceMemoryReportCreateInfoEXT}, {@link VkDeviceMemoryReportCallbackDataEXT}</p>
  */
 public abstract class VkDeviceMemoryReportCallbackEXT extends Callback implements VkDeviceMemoryReportCallbackEXTI {
 

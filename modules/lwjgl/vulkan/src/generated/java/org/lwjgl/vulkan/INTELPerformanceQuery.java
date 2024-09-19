@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Such a library is available at : <a href="https://github.com/intel/metrics-discovery">https://github.com/intel/metrics-discovery</a></p>
  * 
- * <p>Performance analysis tools such as <a href="https://software.intel.com/content/www/us/en/develop/tools/graphics-performance-analyzers.html">Graphics Performance Analyzers</a> make use of this extension and the metrics-discovery library to present the data in a human readable way.</p>
+ * <p>Performance analysis tools such as <a href="https://www.intel.com/content/www/us/en/developer/tools/graphics-performance-analyzers/overview.html">Graphics Performance Analyzers</a> make use of this extension and the metrics-discovery library to present the data in a human readable way.</p>
  * 
  * <h5>Example Code</h5>
  * 

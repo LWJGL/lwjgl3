@@ -156,7 +156,7 @@ public class VkCooperativeMatrixPropertiesKHR extends Struct<VkCooperativeMatrix
     /** the component type of matrix {@code Result}, of type {@code VkComponentTypeKHR}. */
     @NativeType("VkComponentTypeKHR")
     public int ResultType() { return nResultType(address()); }
-    /** indicates whether the {@code SaturatingAccumulation} operand to {@code OpCooperativeMatrixMulAddKHR} <b>must</b> be present. */
+    /** indicates whether the {@code SaturatingAccumulation} operand to {@code OpCooperativeMatrixMulAddKHR} <b>must</b> be present or not. If it is {@link VK10#VK_TRUE TRUE}, the {@code SaturatingAccumulation} operand <b>must</b> be present. If it is {@link VK10#VK_FALSE FALSE}, the {@code SaturatingAccumulation} operand <b>must</b> not be present. */
     @NativeType("VkBool32")
     public boolean saturatingAccumulation() { return nsaturatingAccumulation(address()) != 0; }
     /** the scope of all the matrix types, of type {@code VkScopeKHR}. */

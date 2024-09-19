@@ -808,9 +808,8 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
             <li>All micromaps in {@code pMicromaps} <b>must</b> have been constructed prior to the execution of this command</li>
             <li>All micromaps in {@code pMicromaps} <b>must</b> have been constructed with #BUILD_MICROMAP_ALLOW_COMPACTION_BIT_EXT if {@code queryType} is #QUERY_TYPE_MICROMAP_COMPACTED_SIZE_EXT</li>
             <li>{@code queryType} <b>must</b> be #QUERY_TYPE_MICROMAP_COMPACTED_SIZE_EXT or #QUERY_TYPE_MICROMAP_SERIALIZATION_SIZE_EXT</li>
-            <li>If {@code queryType} is #QUERY_TYPE_MICROMAP_SERIALIZATION_SIZE_EXT, then {@code stride} <b>must</b> be a multiple of the size of {@code VkDeviceSize}</li>
-            <li>If {@code queryType} is #QUERY_TYPE_MICROMAP_SERIALIZATION_SIZE_EXT, then {@code pData} <b>must</b> point to a {@code VkDeviceSize}</li>
-            <li>If {@code queryType} is</li>
+            <li>If {@code queryType} is #QUERY_TYPE_MICROMAP_SERIALIZATION_SIZE_EXT or #QUERY_TYPE_MICROMAP_COMPACTED_SIZE_EXT then {@code stride} <b>must</b> be a multiple of the size of {@code VkDeviceSize}</li>
+            <li>If {@code queryType} is #QUERY_TYPE_MICROMAP_SERIALIZATION_SIZE_EXT or #QUERY_TYPE_MICROMAP_COMPACTED_SIZE_EXT then {@code pData} <b>must</b> point to a {@code VkDeviceSize}</li>
             <li>{@code dataSize} <b>must</b> be greater than or equal to <code>micromapCount*stride</code></li>
             <li>The {@code buffer} used to create each micromap in {@code pMicromaps} <b>must</b> be bound to host-visible device memory</li>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-micromapHostCommands">##VkPhysicalDeviceOpacityMicromapFeaturesEXT{@code ::micromapHostCommands}</a> feature <b>must</b> be enabled</li>

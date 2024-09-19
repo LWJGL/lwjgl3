@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkLatencyTimingsFrameReportNV {
  *     VkStructureType sType;
  *     void const * pNext;
- *     uint64_t presentID;
+ *     uint64_t {@link #presentID};
  *     uint64_t inputSampleTimeUs;
  *     uint64_t {@link #simStartTimeUs};
  *     uint64_t {@link #simEndTimeUs};
@@ -146,7 +146,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code presentID} field. */
+    /** the application provided value that is used to associate the timestamp with a {@code vkQueuePresentKHR} command using {@link VkPresentIdKHR}{@code ::pPresentIds} for a given present. */
     @NativeType("uint64_t")
     public long presentID() { return npresentID(address()); }
     /** @return the value of the {@code inputSampleTimeUs} field. */
@@ -414,7 +414,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencyTimingsFrameReportNV.npNext(address()); }
-        /** @return the value of the {@code presentID} field. */
+        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#presentID} field. */
         @NativeType("uint64_t")
         public long presentID() { return VkLatencyTimingsFrameReportNV.npresentID(address()); }
         /** @return the value of the {@code inputSampleTimeUs} field. */

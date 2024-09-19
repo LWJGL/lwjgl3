@@ -39,6 +39,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_2</li>
                 <li>Interacts with VK_VERSION_1_3</li>
                 <li>Interacts with VK_EXT_debug_report</li>
                 <li>Interacts with VK_KHR_format_feature_flags2</li>
@@ -238,6 +239,10 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR and #BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are needed.
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR and #BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR are allowed to be used together. In that case, the result of the compaction copy is used as the source of a build with {@code mode} of #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR to perform the compacted update.
         </div>
         """,
 
@@ -609,7 +614,13 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <ul>
-            <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code></li>
+            <li>
+                For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to either:
+                <ul>
+                    <li>the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code> or,</li>
+                    <li>the result of querying the corresponding #QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR, if updating a compacted acceleration structure</li>
+                </ul>
+            </li>
             <li>Each element of {@code ppBuildRangeInfos}[i] <b>must</b> be a valid pointer to an array of {@code pInfos}[i].{@code geometryCount} ##VkAccelerationStructureBuildRangeInfoKHR structures</li>
         </ul>
 
@@ -665,7 +676,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    const uint32_t* const*                      ppMaxPrimitiveCounts);</code></pre>
 
         <h5>Description</h5>
-        Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers must be synchronized as with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.
+        Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers <b>must</b> be synchronized as with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.
 
         Accesses to any element of {@code pIndirectDeviceAddresses} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_INDIRECT_COMMAND_READ_BIT.
 
@@ -853,7 +864,13 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <ul>
-            <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code></li>
+            <li>
+                For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to either:
+                <ul>
+                    <li>the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code> or,</li>
+                    <li>the result of querying the corresponding #QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR, if updating a compacted acceleration structure</li>
+                </ul>
+            </li>
             <li>Each element of {@code ppBuildRangeInfos}[i] <b>must</b> be a valid pointer to an array of {@code pInfos}[i].{@code geometryCount} ##VkAccelerationStructureBuildRangeInfoKHR structures</li>
         </ul>
 
@@ -1180,7 +1197,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         VkAccelerationStructureKHR.const.p("pAccelerationStructures", "a pointer to an array of existing previously built acceleration structures."),
         VkQueryType("queryType", "a {@code VkQueryType} value specifying the property to be queried."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a application-allocated buffer where the results will be written."),
+        void.p("pData", "a pointer to an application-allocated buffer where the results will be written."),
         size_t("stride", "the stride in bytes between results for individual queries within {@code pData}.")
     )
 
@@ -1370,7 +1387,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
     VkDeviceAddress(
         "GetAccelerationStructureDeviceAddressKHR",
         """
-        Query an address of a acceleration structure.
+        Query an address of an acceleration structure.
 
         <h5>C Specification</h5>
         To query the 64-bit device address for an acceleration structure, call:

@@ -355,7 +355,7 @@ public class NVOpticalFlow {
         VK_OPTICAL_FLOW_SESSION_CREATE_BOTH_DIRECTIONS_BIT_NV    = 0x10;
 
     /**
-     * VkOpticalFlowExecuteFlagBitsNV - Bits specifying flags for a optical flow vector calculation
+     * VkOpticalFlowExecuteFlagBitsNV - Bits specifying flags for an optical flow vector calculation
      * 
      * <h5>Description</h5>
      * 
@@ -400,9 +400,9 @@ public class NVOpticalFlow {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pImageFormatProperties} is {@code NULL}, then the number of optical flow properties supported for the given {@code physicalDevice} is returned in {@code pFormatCount}. Otherwise, {@code pFormatCount} must point to a variable set by the application to the number of elements in the {@code pImageFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pImageFormatProperties}. If the value of {@code pFormatCount} is less than the number of optical flow properties supported, at most {@code pFormatCount} values will be written to {@code pImageFormatProperties}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available values were returned.</p>
+     * <p>If {@code pImageFormatProperties} is {@code NULL}, then the number of optical flow properties supported for the given {@code physicalDevice} is returned in {@code pFormatCount}. Otherwise, {@code pFormatCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pImageFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pImageFormatProperties}. If the value of {@code pFormatCount} is less than the number of optical flow properties supported, at most {@code pFormatCount} values will be written to {@code pImageFormatProperties}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available values were returned.</p>
      * 
-     * <p>Before creating an image to be used as a optical flow frame, obtain the supported image creation parameters by querying with {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} and {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} using one of the reported formats and adding {@link VkOpticalFlowImageFormatInfoNV} to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2}.</p>
+     * <p>Before creating an image to be used as an optical flow frame, obtain the supported image creation parameters by querying with {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} and {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} using one of the reported formats and adding {@link VkOpticalFlowImageFormatInfoNV} to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2}.</p>
      * 
      * <p>When querying the parameters with {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} for images used for optical flow operations, the {@link VkOpticalFlowImageFormatInfoNV}{@code ::usage} field <b>must</b> contain one or more of the bits defined in {@code VkOpticalFlowUsageFlagBitsNV}.</p>
      * 
@@ -539,7 +539,7 @@ public class NVOpticalFlow {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To destroy a optical flow session object, call:</p>
+     * <p>To destroy an optical flow session object, call:</p>
      * 
      * <pre><code>
      * void vkDestroyOpticalFlowSessionNV(

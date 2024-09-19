@@ -21,7 +21,7 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRExternalMemory VK_KHR_external_memory} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Lina Versace <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_external_memory_acquire_unmodified]%20@versalinyaa%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_external_memory_acquire_unmodified%20extension*">versalinyaa</a></li>
+ * <li>Lina Versace <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_external_memory_acquire_unmodified]%20@linyaa-kiwi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_external_memory_acquire_unmodified%20extension*">linyaa-kiwi</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
  * <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_external_memory_acquire_unmodified.adoc">VK_EXT_external_memory_acquire_unmodified</a></dd>

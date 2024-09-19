@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkDescriptorBufferBindingPushDescriptorBufferHandleEXT {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkBuffer {@link #buffer};
  * }</code></pre>
  */
@@ -95,7 +95,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** the {@code VkBuffer} handle of the buffer for push descriptors. */
     @NativeType("VkBuffer")
@@ -106,7 +106,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
     /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@link #sType} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
     public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
 
@@ -304,7 +304,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nsType(address()); }
         /** @return the value of the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.npNext(address()); }
         /** @return the value of the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#buffer} field. */
         @NativeType("VkBuffer")
@@ -315,7 +315,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
         /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT} value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#sType} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT); }
         /** Sets the specified value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#pNext} field. */
-        public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer pNext(@NativeType("void *") long value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.npNext(address(), value); return this; }
+        public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#buffer} field. */
         public VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer buffer(@NativeType("VkBuffer") long value) { VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.nbuffer(address(), value); return this; }
 

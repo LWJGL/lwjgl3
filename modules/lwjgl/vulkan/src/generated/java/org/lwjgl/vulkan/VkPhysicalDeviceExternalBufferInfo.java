@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Only usage flags representable in {@code VkBufferUsageFlagBits} are returned in this structure’s {@code usage}. If a {@link VkBufferUsageFlags2CreateInfoKHR} structure is present in the {@code pNext} chain, all usage flags of the buffer are returned in {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage}.</p>
+ * <p>Only usage flags representable in {@code VkBufferUsageFlagBits} are returned in this structure’s {@code usage}. If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR} structure, all usage flags of the buffer are returned in {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} must be a valid combination of {@code VkBufferUsageFlagBits} values</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} must not be 0</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

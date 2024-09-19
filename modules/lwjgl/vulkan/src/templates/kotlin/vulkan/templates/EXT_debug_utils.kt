@@ -332,7 +332,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         </div>
 
         <h5>See Also</h5>
-        #SubmitDebugUtilsMessageEXT()
+        ##VkDebugUtilsMessengerCallbackEXT, #SubmitDebugUtilsMessageEXT()
         """,
 
         "DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT".enum(0x00000001),

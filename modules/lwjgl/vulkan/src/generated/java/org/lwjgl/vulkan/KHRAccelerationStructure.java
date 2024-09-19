@@ -41,6 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a> and {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}</dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_2</li>
  * <li>Interacts with VK_VERSION_1_3</li>
  * <li>Interacts with VK_EXT_debug_report</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
@@ -255,6 +256,11 @@ public class KHRAccelerationStructure {
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <p>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR} and {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are needed.</p>
+     * </div>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR} and {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} are allowed to be used together. In that case, the result of the compaction copy is used as the source of a build with {@code mode} of {@link #VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR} to perform the compacted update.</p>
      * </div>
      */
     public static final int
@@ -686,7 +692,13 @@ public class KHRAccelerationStructure {
      * </ul>
      * 
      * <ul>
-     * <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of {@link VkAccelerationStructureCreateInfoKHR}{@code ::size} greater than or equal to the memory size required by the build operation, as returned by {@link #vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR} with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code></li>
+     * <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of {@link VkAccelerationStructureCreateInfoKHR}{@code ::size} greater than or equal to either:
+     * 
+     * <ul>
+     * <li>the memory size required by the build operation, as returned by {@link #vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR} with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code> or,</li>
+     * <li>the result of querying the corresponding {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, if updating a compacted acceleration structure</li>
+     * </ul>
+     * </li>
      * <li>Each element of {@code ppBuildRangeInfos}[i] <b>must</b> be a valid pointer to an array of {@code pInfos}[i].{@code geometryCount} {@link VkAccelerationStructureBuildRangeInfoKHR} structures</li>
      * </ul>
      * 
@@ -765,7 +777,7 @@ public class KHRAccelerationStructure {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers must be synchronized as with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.</p>
+     * <p>Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers <b>must</b> be synchronized as with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.</p>
      * 
      * <p>Accesses to any element of {@code pIndirectDeviceAddresses} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link #VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link VK10#VK_ACCESS_INDIRECT_COMMAND_READ_BIT ACCESS_INDIRECT_COMMAND_READ_BIT}.</p>
      * 
@@ -981,7 +993,13 @@ public class KHRAccelerationStructure {
      * </ul>
      * 
      * <ul>
-     * <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of {@link VkAccelerationStructureCreateInfoKHR}{@code ::size} greater than or equal to the memory size required by the build operation, as returned by {@link #vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR} with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code></li>
+     * <li>For each {@code pInfos}[i], {@code dstAccelerationStructure} <b>must</b> have been created with a value of {@link VkAccelerationStructureCreateInfoKHR}{@code ::size} greater than or equal to either:
+     * 
+     * <ul>
+     * <li>the memory size required by the build operation, as returned by {@link #vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR} with <code>pBuildInfo = pInfos[i]</code> and with each element of the {@code pMaxPrimitiveCounts} array greater than or equal to the equivalent {@code ppBuildRangeInfos}[i][j].{@code primitiveCount} values for {@code j} in <code>[0,pInfos[i].geometryCount)</code> or,</li>
+     * <li>the result of querying the corresponding {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR}, if updating a compacted acceleration structure</li>
+     * </ul>
+     * </li>
      * <li>Each element of {@code ppBuildRangeInfos}[i] <b>must</b> be a valid pointer to an array of {@code pInfos}[i].{@code geometryCount} {@link VkAccelerationStructureBuildRangeInfoKHR} structures</li>
      * </ul>
      * 
@@ -1381,7 +1399,7 @@ public class KHRAccelerationStructure {
      * @param device                  the device which owns the acceleration structures in {@code pAccelerationStructures}.
      * @param pAccelerationStructures a pointer to an array of existing previously built acceleration structures.
      * @param queryType               a {@code VkQueryType} value specifying the property to be queried.
-     * @param pData                   a pointer to a application-allocated buffer where the results will be written.
+     * @param pData                   a pointer to an application-allocated buffer where the results will be written.
      * @param stride                  the stride in bytes between results for individual queries within {@code pData}.
      */
     @NativeType("VkResult")
@@ -1638,7 +1656,7 @@ public class KHRAccelerationStructure {
     }
 
     /**
-     * Query an address of a acceleration structure.
+     * Query an address of an acceleration structure.
      * 
      * <h5>C Specification</h5>
      * 

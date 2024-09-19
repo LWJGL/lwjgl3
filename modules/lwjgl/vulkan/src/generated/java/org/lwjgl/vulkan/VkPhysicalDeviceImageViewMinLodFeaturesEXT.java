@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether clamping the min LOD of a image view is supported by the implementation.
+ * Structure describing whether clamping the min LOD of an image view is supported by the implementation.
  * 
  * <h5>Description</h5>
  * 

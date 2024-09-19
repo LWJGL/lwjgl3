@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkDebugUtilsLabelEXT}, {@link VkDebugUtilsObjectNameInfoEXT}, {@link EXTDebugUtils#vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
+ * <p>{@link VkDebugUtilsMessengerCallbackEXT}, {@link VkDebugUtilsLabelEXT}, {@link VkDebugUtilsObjectNameInfoEXT}, {@link EXTDebugUtils#vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

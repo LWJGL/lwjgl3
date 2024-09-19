@@ -221,7 +221,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         </div>
 
         <h5>See Also</h5>
-        ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, #DebugReportMessageEXT()
+        ##VkDebugReportCallbackEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, #DebugReportMessageEXT()
         """,
 
         "DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT".."0",

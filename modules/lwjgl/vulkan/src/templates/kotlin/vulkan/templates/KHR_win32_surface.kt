@@ -89,7 +89,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
     VkResult(
         "CreateWin32SurfaceKHR",
         """
-        Create a VkSurfaceKHR object for an Win32 native window.
+        Create a VkSurfaceKHR object for a Win32 native window.
 
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for a Win32 window, call:
@@ -123,7 +123,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
             </ul></dd>
         </dl>
 
-        Some Vulkan functions <b>may</b> call the {@code SendMessage} system API when interacting with a {@code VkSurfaceKHR} through a {@code VkSwapchainKHR}. In a multithreaded environment, calling {@code SendMessage} from a thread that is not the thread associated with {@code pCreateInfo}{@code ::hwnd} will block until the application has processed the window message. Thus, applications <b>should</b> either call these Vulkan functions on the message pump thread, or make sure their message pump is actively running. Failing to do so <b>may</b> result in deadlocks.
+        Some Vulkan functions <b>may</b> call the {@code SendMessage} system API when interacting with a {@code VkSurfaceKHR} through a {@code VkSwapchainKHR}. In a multithreaded environment, calling {@code SendMessage} from a thread that is not the thread associated with {@code pCreateInfo→hwnd} will block until the application has processed the window message. Thus, applications <b>should</b> either call these Vulkan functions on the message pump thread, or make sure their message pump is actively running. Failing to do so <b>may</b> result in deadlocks.
 
         The functions subject to this requirement are:
 

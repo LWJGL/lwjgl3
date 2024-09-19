@@ -24,7 +24,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
             <dd>105</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>4</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRSurface VK_KHR_surface}</dd>
@@ -53,7 +53,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."4"
+        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."5"
     )
 
     StringConstant(

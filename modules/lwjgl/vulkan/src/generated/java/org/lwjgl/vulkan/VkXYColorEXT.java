@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Chromaticity coordinates are as specified in CIE 15:2004 “{@code Calculation of chromaticity coordinates}” (Section 7.3) and are limited to between 0 and 1 for real colors for the reference monitor.</p>
+ * <p>Chromaticity coordinates are as specified in CIE 15:2004 “{@code Calculation of chromaticity coordinates}” (Section 7.3) and are limited to between 0 and 1 for real colors.</p>
  * 
  * <h5>See Also</h5>
  * 

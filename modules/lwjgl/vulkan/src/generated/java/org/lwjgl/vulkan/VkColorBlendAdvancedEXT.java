@@ -117,7 +117,7 @@ public class VkColorBlendAdvancedEXT extends Struct<VkColorBlendAdvancedEXT> imp
     /** a {@code VkBlendOverlapEXT} value specifying how the source and destination sample’s coverage is correlated. */
     @NativeType("VkBlendOverlapEXT")
     public int blendOverlap() { return nblendOverlap(address()); }
-    /** specifies the results must be clamped to the [0,1] range before writing to the attachment, which is useful when the attachment format is not normalized fixed-point. */
+    /** specifies that results <b>must</b> be clamped to the [0,1] range before writing to the attachment, which is useful when the attachment format is not normalized fixed-point. */
     @NativeType("VkBool32")
     public boolean clampResults() { return nclampResults(address()) != 0; }
 

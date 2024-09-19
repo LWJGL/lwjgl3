@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a optical flow vector calculation.
+ * Structure specifying parameters of an optical flow vector calculation.
  * 
  * <h5>Valid Usage</h5>
  * 

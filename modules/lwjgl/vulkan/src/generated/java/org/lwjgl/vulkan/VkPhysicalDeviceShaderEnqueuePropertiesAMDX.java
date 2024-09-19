@@ -113,7 +113,7 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     /** defines the maximum node chain depth in the graph. The dispatched node is at depth 1 and the node enqueued by it is at depth 2, and so on. If a node enqueues itself, each recursive enqueue increases the depth by 1 as well. */
     @NativeType("uint32_t")
     public int maxExecutionGraphDepth() { return nmaxExecutionGraphDepth(address()); }
-    /** specifies the maximum number of unique nodes that can be dispatched from a single shader, and must be at least 256. */
+    /** specifies the maximum number of unique nodes that can be dispatched from a single shader, and <b>must</b> be at least 256. */
     @NativeType("uint32_t")
     public int maxExecutionGraphShaderOutputNodes() { return nmaxExecutionGraphShaderOutputNodes(address()); }
     /** specifies the maximum total size of payload declarations in a shader. For any payload declarations that share resources, indicated by {@code NodeSharesPayloadLimitsWithAMDX} decorations, the maximum size of each set of shared payload declarations is taken. The sum of each shared set’s maximum size and the size of each unshared payload is counted against this limit. */

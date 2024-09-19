@@ -313,7 +313,7 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
 
     EnumConstant(
         """
-        VkOpticalFlowExecuteFlagBitsNV - Bits specifying flags for a optical flow vector calculation
+        VkOpticalFlowExecuteFlagBitsNV - Bits specifying flags for an optical flow vector calculation
 
         <h5>Description</h5>
         <ul>
@@ -340,9 +340,9 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
 ￿    VkOpticalFlowImageFormatPropertiesNV*       pImageFormatProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pImageFormatProperties} is {@code NULL}, then the number of optical flow properties supported for the given {@code physicalDevice} is returned in {@code pFormatCount}. Otherwise, {@code pFormatCount} must point to a variable set by the application to the number of elements in the {@code pImageFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pImageFormatProperties}. If the value of {@code pFormatCount} is less than the number of optical flow properties supported, at most {@code pFormatCount} values will be written to {@code pImageFormatProperties}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
+        If {@code pImageFormatProperties} is {@code NULL}, then the number of optical flow properties supported for the given {@code physicalDevice} is returned in {@code pFormatCount}. Otherwise, {@code pFormatCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pImageFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pImageFormatProperties}. If the value of {@code pFormatCount} is less than the number of optical flow properties supported, at most {@code pFormatCount} values will be written to {@code pImageFormatProperties}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
 
-        Before creating an image to be used as a optical flow frame, obtain the supported image creation parameters by querying with #GetPhysicalDeviceFormatProperties2() and #GetPhysicalDeviceImageFormatProperties2() using one of the reported formats and adding ##VkOpticalFlowImageFormatInfoNV to the {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2.
+        Before creating an image to be used as an optical flow frame, obtain the supported image creation parameters by querying with #GetPhysicalDeviceFormatProperties2() and #GetPhysicalDeviceImageFormatProperties2() using one of the reported formats and adding ##VkOpticalFlowImageFormatInfoNV to the {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2.
 
         When querying the parameters with #GetPhysicalDeviceImageFormatProperties2() for images used for optical flow operations, the ##VkOpticalFlowImageFormatInfoNV{@code ::usage} field <b>must</b> contain one or more of the bits defined in {@code VkOpticalFlowUsageFlagBitsNV}.
 
@@ -441,7 +441,7 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
         Destroy optical flow session object.
 
         <h5>C Specification</h5>
-        To destroy a optical flow session object, call:
+        To destroy an optical flow session object, call:
 
         <pre><code>
 ￿void vkDestroyOpticalFlowSessionNV(

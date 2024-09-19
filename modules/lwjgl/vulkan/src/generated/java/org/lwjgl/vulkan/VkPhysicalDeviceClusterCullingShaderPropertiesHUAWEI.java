@@ -107,22 +107,22 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of local workgroups that can be launched by a single command. These three value represent the maximum local workgroup count in the X, Y and Z dimensions, respectively. In the current implementation, the values of Y and Z are both implicitly set as one. groupCountX of DrawCluster command must be less than or equal to maxWorkGroupCount[0]. */
+    /** the maximum number of local workgroups that can be launched by a single command. These three value represent the maximum local workgroup count in the X, Y and Z dimensions, respectively. In the current implementation, the values of Y and Z are both implicitly set as one. groupCountX of DrawCluster command <b>must</b> be less than or equal to maxWorkGroupCount[0]. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxWorkGroupCount() { return nmaxWorkGroupCount(address()); }
-    /** the maximum number of local workgroups that can be launched by a single command. These three value represent the maximum local workgroup count in the X, Y and Z dimensions, respectively. In the current implementation, the values of Y and Z are both implicitly set as one. groupCountX of DrawCluster command must be less than or equal to maxWorkGroupCount[0]. */
+    /** the maximum number of local workgroups that can be launched by a single command. These three value represent the maximum local workgroup count in the X, Y and Z dimensions, respectively. In the current implementation, the values of Y and Z are both implicitly set as one. groupCountX of DrawCluster command <b>must</b> be less than or equal to maxWorkGroupCount[0]. */
     @NativeType("uint32_t")
     public int maxWorkGroupCount(int index) { return nmaxWorkGroupCount(address(), index); }
-    /** the maximum size of a local workgroup. These three value represent the maximum local workgroup size in the X, Y and Z dimensions, respectively. The x, y and z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the WorkgroupSize decoration in shader modules, must be less than or equal to the corresponding limit. In the current implementation, the maximum workgroup size of the X dimension is 32, the others are 1. */
+    /** the maximum size of a local workgroup. These three value represent the maximum local workgroup size in the X, Y and Z dimensions, respectively. The x, y and z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the WorkgroupSize decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. In the current implementation, the maximum workgroup size of the X dimension is 32, the others are 1. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxWorkGroupSize() { return nmaxWorkGroupSize(address()); }
-    /** the maximum size of a local workgroup. These three value represent the maximum local workgroup size in the X, Y and Z dimensions, respectively. The x, y and z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the WorkgroupSize decoration in shader modules, must be less than or equal to the corresponding limit. In the current implementation, the maximum workgroup size of the X dimension is 32, the others are 1. */
+    /** the maximum size of a local workgroup. These three value represent the maximum local workgroup size in the X, Y and Z dimensions, respectively. The x, y and z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the WorkgroupSize decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. In the current implementation, the maximum workgroup size of the X dimension is 32, the others are 1. */
     @NativeType("uint32_t")
     public int maxWorkGroupSize(int index) { return nmaxWorkGroupSize(address(), index); }
     /** the maximum number of output cluster a single cluster culling shader workgroup can emit. */
     @NativeType("uint32_t")
     public int maxOutputClusterCount() { return nmaxOutputClusterCount(address()); }
-    /** indicates the alignment for cluster drawing command buffer stride. {@link HUAWEIClusterCullingShader#vkCmdDrawClusterIndirectHUAWEI CmdDrawClusterIndirectHUAWEI}{@code ::offset} must be a multiple of this value. */
+    /** indicates the alignment for cluster drawing command buffer stride. {@link HUAWEIClusterCullingShader#vkCmdDrawClusterIndirectHUAWEI CmdDrawClusterIndirectHUAWEI}{@code ::offset} <b>must</b> be a multiple of this value. */
     @NativeType("VkDeviceSize")
     public long indirectBufferOffsetAlignment() { return nindirectBufferOffsetAlignment(address()); }
 

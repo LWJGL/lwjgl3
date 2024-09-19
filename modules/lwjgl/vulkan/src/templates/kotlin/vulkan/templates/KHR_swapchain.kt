@@ -388,9 +388,10 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> be unsignaled</li>
-            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> not have any uncompleted signal or wait operations pending</li>
-            <li>If {@code fence} is not #NULL_HANDLE it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE, it <b>must</b> be unsignaled</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE, it <b>must</b> not have any uncompleted signal or wait operations pending</li>
+            <li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be unsignaled</li>
+            <li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
             <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
             <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create the {@code swapchain} member of {@code pAcquireInfo}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
             <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of #SEMAPHORE_TYPE_BINARY</li>
