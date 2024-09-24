@@ -130,6 +130,7 @@ public class FMODStudio {
             EventDescription_SetUserData                    = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventDescription_SetUserData"),
             EventInstance_IsValid                           = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_IsValid"),
             EventInstance_GetDescription                    = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_GetDescription"),
+            EventInstance_GetSystem                         = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_GetSystem"),
             EventInstance_GetVolume                         = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_GetVolume"),
             EventInstance_SetVolume                         = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_SetVolume"),
             EventInstance_GetPitch                          = apiGetFunctionAddress(FMODSTUDIO, "FMOD_Studio_EventInstance_GetPitch"),
@@ -2425,6 +2426,26 @@ public class FMODStudio {
             check(description, 1);
         }
         return nFMOD_Studio_EventInstance_GetDescription(eventinstance, memAddress(description));
+    }
+
+    // --- [ FMOD_Studio_EventInstance_GetSystem ] ---
+
+    /** Unsafe version of: {@link #FMOD_Studio_EventInstance_GetSystem EventInstance_GetSystem} */
+    public static int nFMOD_Studio_EventInstance_GetSystem(long eventinstance, long system) {
+        long __functionAddress = Functions.EventInstance_GetSystem;
+        if (CHECKS) {
+            check(eventinstance);
+        }
+        return callPPI(eventinstance, system, __functionAddress);
+    }
+
+    /** @since 2.03 */
+    @NativeType("FMOD_RESULT")
+    public static int FMOD_Studio_EventInstance_GetSystem(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("FMOD_STUDIO_SYSTEM **") PointerBuffer system) {
+        if (CHECKS) {
+            check(system, 1);
+        }
+        return nFMOD_Studio_EventInstance_GetSystem(eventinstance, memAddress(system));
     }
 
     // --- [ FMOD_Studio_EventInstance_GetVolume ] ---

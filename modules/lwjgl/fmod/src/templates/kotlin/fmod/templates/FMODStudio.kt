@@ -984,6 +984,16 @@ val FMODStudio = "FMODStudio".nativeClass(
     )
 
     FMOD_RESULT(
+        "EventInstance_GetSystem",
+        "",
+
+        FMOD_STUDIO_EVENTINSTANCE.p("eventinstance", ""),
+        Check(1)..FMOD_STUDIO_SYSTEM.p.p("system", ""),
+
+        since = "2.03"
+    )
+
+    FMOD_RESULT(
         "EventInstance_GetVolume",
         "",
 

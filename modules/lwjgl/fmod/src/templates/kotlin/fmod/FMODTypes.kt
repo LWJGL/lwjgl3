@@ -400,7 +400,7 @@ val FMOD_ADVANCEDSETTINGS = struct(Module.FMOD, "FMOD_ADVANCEDSETTINGS") {
     int("maxVorbisCodecs", "")
     int("maxAT9Codecs", "")
     int("maxFADPCMCodecs", "")
-    int("maxPCMCodecs", "")
+    int("maxOpusCodecs", "")
     AutoSize("ASIOChannelList", "ASIOSpeakerList")..int("ASIONumChannels", "")
     charUTF8.p.p("ASIOChannelList", "")
     FMOD_SPEAKER.p("ASIOSpeakerList", "")
@@ -414,7 +414,6 @@ val FMOD_ADVANCEDSETTINGS = struct(Module.FMOD, "FMOD_ADVANCEDSETTINGS") {
     FMOD_DSP_RESAMPLER("resamplerMethod", "")
     unsigned_int("randomSeed", "")
     int("maxConvolutionThreads", "")
-    int("maxOpusCodecs", "")
     int("maxSpatialObjects", "")
 }
 
@@ -1378,6 +1377,11 @@ val FMOD_DSP_PARAMETER_FFT = struct(Module.FMOD, "FMOD_DSP_PARAMETER_FFT") {
     int("length", "")
     int("numchannels", "")
     float.p("spectrum", "")[32]
+}
+
+val FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE = struct(Module.FMOD, "FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE") {
+    int("numchannels", "")
+    float("rms", "")[32]
 }
 
 val FMOD_DSP_DESCRIPTION = struct(Module.FMOD, "FMOD_DSP_DESCRIPTION") {

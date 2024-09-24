@@ -14,7 +14,8 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("", "VERSION"..0x00020221)
+    IntConstant("", "VERSION"..0x00020302)
+    IntConstant("", "BUILDNUMBER"..144646)
 
     IntConstant("", "DEBUG_LEVEL_NONE"..0x00000000)
     IntConstant("", "DEBUG_LEVEL_ERROR"..0x00000001)
@@ -72,15 +73,14 @@ val FMOD = "FMOD".nativeClass(
     IntConstant("", "SYSTEM_CALLBACK_PREMIX"..0x00000020)
     IntConstant("", "SYSTEM_CALLBACK_POSTMIX"..0x00000040)
     IntConstant("", "SYSTEM_CALLBACK_ERROR"..0x00000080)
-    IntConstant("", "SYSTEM_CALLBACK_MIDMIX"..0x00000100)
-    IntConstant("", "SYSTEM_CALLBACK_THREADDESTROYED"..0x00000200)
-    IntConstant("", "SYSTEM_CALLBACK_PREUPDATE"..0x00000400)
-    IntConstant("", "SYSTEM_CALLBACK_POSTUPDATE"..0x00000800)
-    IntConstant("", "SYSTEM_CALLBACK_RECORDLISTCHANGED"..0x00001000)
-    IntConstant("", "SYSTEM_CALLBACK_BUFFEREDNOMIX"..0x00002000)
-    IntConstant("", "SYSTEM_CALLBACK_DEVICEREINITIALIZE"..0x00004000)
-    IntConstant("", "SYSTEM_CALLBACK_OUTPUTUNDERRUN"..0x00008000)
-    IntConstant("", "SYSTEM_CALLBACK_RECORDPOSITIONCHANGED"..0x00010000)
+    IntConstant("", "SYSTEM_CALLBACK_THREADDESTROYED"..0x00000100)
+    IntConstant("", "SYSTEM_CALLBACK_PREUPDATE"..0x00000200)
+    IntConstant("", "SYSTEM_CALLBACK_POSTUPDATE"..0x00000400)
+    IntConstant("", "SYSTEM_CALLBACK_RECORDLISTCHANGED"..0x00000800)
+    IntConstant("", "SYSTEM_CALLBACK_BUFFEREDNOMIX"..0x00001000)
+    IntConstant("", "SYSTEM_CALLBACK_DEVICEREINITIALIZE"..0x00002000)
+    IntConstant("", "SYSTEM_CALLBACK_OUTPUTUNDERRUN"..0x00004000)
+    IntConstant("", "SYSTEM_CALLBACK_RECORDPOSITIONCHANGED"..0x00008000)
     IntConstant("", "SYSTEM_CALLBACK_ALL"..0xFFFFFFFF.i)
 
     IntConstant("", "DEFAULT"..0x00000000)
@@ -133,7 +133,6 @@ val FMOD = "FMOD".nativeClass(
     IntConstant("", "CHANNELMASK_7POINT1".."FMOD_CHANNELMASK_FRONT_LEFT | FMOD_CHANNELMASK_FRONT_RIGHT | FMOD_CHANNELMASK_FRONT_CENTER  | FMOD_CHANNELMASK_LOW_FREQUENCY | FMOD_CHANNELMASK_SURROUND_LEFT  | FMOD_CHANNELMASK_SURROUND_RIGHT | FMOD_CHANNELMASK_BACK_LEFT | FMOD_CHANNELMASK_BACK_RIGHT")
 
     LongConstant("", "PORT_INDEX_NONE".."0xFFFFFFFFFFFFFFFFL")
-    LongConstant("", "PORT_INDEX_FLAG_VR_CONTROLLER"..0x1000000000000000)
 
     IntConstant("", "THREAD_PRIORITY_PLATFORM_MIN".."-32 * 1024") // TODO
     IntConstant("", "THREAD_PRIORITY_PLATFORM_MAX".."32 * 1024")
@@ -641,6 +640,8 @@ val FMOD = "FMOD".nativeClass(
         "PORT_TYPE_PERSONAL".enum,
         "PORT_TYPE_VIBRATION".enum,
         "PORT_TYPE_AUX".enum,
+        "PORT_TYPE_PASSTHROUGH".enum,
+        "PORT_TYPE_VR_VIBRATION".enum,
         "PORT_TYPE_MAX".enum
     )
 
@@ -662,15 +663,12 @@ val FMOD = "FMOD".nativeClass(
         "DSP_TYPE_PARAMEQ".enum,
         "DSP_TYPE_PITCHSHIFT".enum,
         "DSP_TYPE_CHORUS".enum,
-        "DSP_TYPE_VSTPLUGIN".enum,
-        "DSP_TYPE_WINAMPPLUGIN".enum,
         "DSP_TYPE_ITECHO".enum,
         "DSP_TYPE_COMPRESSOR".enum,
         "DSP_TYPE_SFXREVERB".enum,
         "DSP_TYPE_LOWPASS_SIMPLE".enum,
         "DSP_TYPE_DELAY".enum,
         "DSP_TYPE_TREMOLO".enum,
-        "DSP_TYPE_LADSPAPLUGIN".enum,
         "DSP_TYPE_SEND".enum,
         "DSP_TYPE_RETURN".enum,
         "DSP_TYPE_HIGHPASS_SIMPLE".enum,
@@ -678,12 +676,12 @@ val FMOD = "FMOD".nativeClass(
         "DSP_TYPE_THREE_EQ".enum,
         "DSP_TYPE_FFT".enum,
         "DSP_TYPE_LOUDNESS_METER".enum,
-        "DSP_TYPE_ENVELOPEFOLLOWER".enum,
         "DSP_TYPE_CONVOLUTIONREVERB".enum,
         "DSP_TYPE_CHANNELMIX".enum,
         "DSP_TYPE_TRANSCEIVER".enum,
         "DSP_TYPE_OBJECTPAN".enum,
         "DSP_TYPE_MULTIBAND_EQ".enum,
+        "DSP_TYPE_MULTIBAND_DYNAMICS".enum,
         "DSP_TYPE_MAX".enum
     )
 
@@ -721,7 +719,16 @@ val FMOD = "FMOD".nativeClass(
         "DSP_ECHO_DELAY".enum("", "0"),
         "DSP_ECHO_FEEDBACK".enum,
         "DSP_ECHO_DRYLEVEL".enum,
-        "DSP_ECHO_WETLEVEL".enum
+        "DSP_ECHO_WETLEVEL".enum,
+        "DSP_ECHO_DELAYCHANGEMODE".enum
+    )
+
+    EnumConstant(
+        "{@code FMOD_DSP_ECHO_DELAYCHANGEMODE_TYPE}",
+
+        "DSP_ECHO_DELAYCHANGEMODE_FADE".enum("", "0"),
+        "DSP_ECHO_DELAYCHANGEMODE_LERP".enum,
+        "DSP_ECHO_DELAYCHANGEMODE_NONE".enum
     )
 
     EnumConstant(
@@ -810,7 +817,52 @@ val FMOD = "FMOD".nativeClass(
         "DSP_MULTIBAND_EQ_FILTER_PEAKING".enum,
         "DSP_MULTIBAND_EQ_FILTER_BANDPASS".enum,
         "DSP_MULTIBAND_EQ_FILTER_NOTCH".enum,
-        "DSP_MULTIBAND_EQ_FILTER_ALLPASS".enum
+        "DSP_MULTIBAND_EQ_FILTER_ALLPASS".enum,
+        "DSP_MULTIBAND_EQ_FILTER_LOWPASS_6DB".enum,
+        "DSP_MULTIBAND_EQ_FILTER_HIGHPASS_6DB".enum,
+    )
+
+    EnumConstant(
+        "{@code FMOD_DSP_MULTIBAND_DYNAMICS}",
+
+        "DSP_MULTIBAND_DYNAMICS_LOWER_FREQUENCY".enum("", "0"),
+        "DSP_MULTIBAND_DYNAMICS_UPPER_FREQUENCY".enum,
+        "DSP_MULTIBAND_DYNAMICS_LINKED".enum,
+        "DSP_MULTIBAND_DYNAMICS_USE_SIDECHAIN".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_MODE".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_GAIN".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_THRESHOLD".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_RATIO".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_ATTACK".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_RELEASE".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_GAIN_MAKEUP".enum,
+        "DSP_MULTIBAND_DYNAMICS_A_RESPONSE_DATA".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_MODE".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_GAIN".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_THRESHOLD".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_RATIO".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_ATTACK".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_RELEASE".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_GAIN_MAKEUP".enum,
+        "DSP_MULTIBAND_DYNAMICS_B_RESPONSE_DATA".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_MODE".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_GAIN".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_THRESHOLD".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_RATIO".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_ATTACK".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_RELEASE".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_GAIN_MAKEUP".enum,
+        "DSP_MULTIBAND_DYNAMICS_C_RESPONSE_DATA".enum
+    )
+
+    EnumConstant(
+        "{@code FMOD_DSP_MULTIBAND_DYNAMICS_MODE_TYPE}",
+
+        "DSP_MULTIBAND_DYNAMICS_MODE_DISABLED".enum("", "0"),
+        "DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_UP".enum,
+        "DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_DOWN".enum,
+        "DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_UP".enum,
+        "DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_DOWN".enum
     )
 
     EnumConstant(
@@ -1013,7 +1065,7 @@ val FMOD = "FMOD".nativeClass(
     )
 
     EnumConstant(
-        "{@code FMOD_DSP_FFT_WINDOW}",
+        "{@code FMOD_DSP_FFT_WINDOW_TYPE}",
 
         "DSP_FFT_WINDOW_RECT".enum("", "0"),
         "DSP_FFT_WINDOW_TRIANGLE".enum,
@@ -1024,12 +1076,25 @@ val FMOD = "FMOD".nativeClass(
     )
 
     EnumConstant(
+        "{@code FMOD_DSP_FFT_DOWNMIX_TYPE}",
+
+        "DSP_FFT_DOWNMIX_NONE".enum,
+        "DSP_FFT_DOWNMIX_MONO".enum
+    )
+
+    EnumConstant(
         "{@code FMOD_DSP_FFT}",
 
         "DSP_FFT_WINDOWSIZE".enum("", "0"),
-        "DSP_FFT_WINDOWTYPE".enum,
+        "DSP_FFT_WINDOW".enum,
+        "DSP_FFT_BAND_START_FREQ".enum,
+        "DSP_FFT_BAND_STOP_FREQ".enum,
         "DSP_FFT_SPECTRUMDATA".enum,
-        "DSP_FFT_DOMINANT_FREQ".enum
+        "DSP_FFT_RMS".enum,
+        "DSP_FFT_SPECTRAL_CENTROID".enum,
+        "DSP_FFT_IMMEDIATE_MODE".enum,
+        "DSP_FFT_DOWNMIX".enum,
+        "DSP_FFT_CHANNEL".enum
     )
 
     EnumConstant(
@@ -1048,15 +1113,6 @@ val FMOD = "FMOD".nativeClass(
         "DSP_LOUDNESS_METER_STATE_RESET_ALL".enum,
         "DSP_LOUDNESS_METER_STATE_PAUSED".enum,
         "DSP_LOUDNESS_METER_STATE_ANALYZING".enum
-    )
-
-    EnumConstant(
-        "{@code FMOD_DSP_ENVELOPEFOLLOWER}",
-
-        "DSP_ENVELOPEFOLLOWER_ATTACK".enum("", "0"),
-        "DSP_ENVELOPEFOLLOWER_RELEASE".enum,
-        "DSP_ENVELOPEFOLLOWER_ENVELOPE".enum,
-        "DSP_ENVELOPEFOLLOWER_USESIDECHAIN".enum
     )
 
     EnumConstant(
@@ -1226,7 +1282,8 @@ val FMOD = "FMOD".nativeClass(
         "DSP_PARAMETER_DATA_TYPE_SIDECHAIN".enum("", "-3"),
         "DSP_PARAMETER_DATA_TYPE_FFT".enum("", "-4"),
         "DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI".enum("", "-5"),
-        "DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE".enum("", "-6")
+        "DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE".enum("", "-6"),
+        "DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE".enum("", "-7")
     )
 
     customMethod("""
@@ -1855,7 +1912,8 @@ val FMOD = "FMOD".nativeClass(
         "System information functions.",
 
         FMOD_SYSTEM.p("system", ""),
-        Check(1)..unsigned_int.p("version", "")
+        Check(1)..unsigned_int.p("version", ""),
+        Check(1)..unsigned_int.p("buildnumber", "")
     )
 
     FMOD_RESULT(

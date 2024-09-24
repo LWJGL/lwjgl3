@@ -421,7 +421,9 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20221;
+    public static final int FMOD_VERSION = 0x20302;
+
+    public static final int FMOD_BUILDNUMBER = 0x23506;
 
     public static final int FMOD_DEBUG_LEVEL_NONE = 0x0;
 
@@ -525,23 +527,21 @@ public class FMOD {
 
     public static final int FMOD_SYSTEM_CALLBACK_ERROR = 0x80;
 
-    public static final int FMOD_SYSTEM_CALLBACK_MIDMIX = 0x100;
+    public static final int FMOD_SYSTEM_CALLBACK_THREADDESTROYED = 0x100;
 
-    public static final int FMOD_SYSTEM_CALLBACK_THREADDESTROYED = 0x200;
+    public static final int FMOD_SYSTEM_CALLBACK_PREUPDATE = 0x200;
 
-    public static final int FMOD_SYSTEM_CALLBACK_PREUPDATE = 0x400;
+    public static final int FMOD_SYSTEM_CALLBACK_POSTUPDATE = 0x400;
 
-    public static final int FMOD_SYSTEM_CALLBACK_POSTUPDATE = 0x800;
+    public static final int FMOD_SYSTEM_CALLBACK_RECORDLISTCHANGED = 0x800;
 
-    public static final int FMOD_SYSTEM_CALLBACK_RECORDLISTCHANGED = 0x1000;
+    public static final int FMOD_SYSTEM_CALLBACK_BUFFEREDNOMIX = 0x1000;
 
-    public static final int FMOD_SYSTEM_CALLBACK_BUFFEREDNOMIX = 0x2000;
+    public static final int FMOD_SYSTEM_CALLBACK_DEVICEREINITIALIZE = 0x2000;
 
-    public static final int FMOD_SYSTEM_CALLBACK_DEVICEREINITIALIZE = 0x4000;
+    public static final int FMOD_SYSTEM_CALLBACK_OUTPUTUNDERRUN = 0x4000;
 
-    public static final int FMOD_SYSTEM_CALLBACK_OUTPUTUNDERRUN = 0x8000;
-
-    public static final int FMOD_SYSTEM_CALLBACK_RECORDPOSITIONCHANGED = 0x10000;
+    public static final int FMOD_SYSTEM_CALLBACK_RECORDPOSITIONCHANGED = 0x8000;
 
     public static final int FMOD_SYSTEM_CALLBACK_ALL = 0xFFFFFFFF;
 
@@ -640,8 +640,6 @@ public class FMOD {
     public static final int FMOD_CHANNELMASK_7POINT1 = FMOD_CHANNELMASK_FRONT_LEFT | FMOD_CHANNELMASK_FRONT_RIGHT | FMOD_CHANNELMASK_FRONT_CENTER  | FMOD_CHANNELMASK_LOW_FREQUENCY | FMOD_CHANNELMASK_SURROUND_LEFT  | FMOD_CHANNELMASK_SURROUND_RIGHT | FMOD_CHANNELMASK_BACK_LEFT | FMOD_CHANNELMASK_BACK_RIGHT;
 
     public static final long FMOD_PORT_INDEX_NONE = 0xFFFFFFFFFFFFFFFFL;
-
-    public static final long FMOD_PORT_INDEX_FLAG_VR_CONTROLLER = 0x1000000000000000L;
 
     public static final int FMOD_THREAD_PRIORITY_PLATFORM_MIN = -32 * 1024;
 
@@ -1568,6 +1566,8 @@ public class FMOD {
      * <li>{@link #FMOD_PORT_TYPE_PERSONAL PORT_TYPE_PERSONAL}</li>
      * <li>{@link #FMOD_PORT_TYPE_VIBRATION PORT_TYPE_VIBRATION}</li>
      * <li>{@link #FMOD_PORT_TYPE_AUX PORT_TYPE_AUX}</li>
+     * <li>{@link #FMOD_PORT_TYPE_PASSTHROUGH PORT_TYPE_PASSTHROUGH}</li>
+     * <li>{@link #FMOD_PORT_TYPE_VR_VIBRATION PORT_TYPE_VR_VIBRATION}</li>
      * <li>{@link #FMOD_PORT_TYPE_MAX PORT_TYPE_MAX}</li>
      * </ul>
      */
@@ -1579,7 +1579,9 @@ public class FMOD {
         FMOD_PORT_TYPE_PERSONAL        = 4,
         FMOD_PORT_TYPE_VIBRATION       = 5,
         FMOD_PORT_TYPE_AUX             = 6,
-        FMOD_PORT_TYPE_MAX             = 7;
+        FMOD_PORT_TYPE_PASSTHROUGH     = 7,
+        FMOD_PORT_TYPE_VR_VIBRATION    = 8,
+        FMOD_PORT_TYPE_MAX             = 9;
 
     /**
      * {@code FMOD_DSP_TYPE}
@@ -1602,15 +1604,12 @@ public class FMOD {
      * <li>{@link #FMOD_DSP_TYPE_PARAMEQ DSP_TYPE_PARAMEQ}</li>
      * <li>{@link #FMOD_DSP_TYPE_PITCHSHIFT DSP_TYPE_PITCHSHIFT}</li>
      * <li>{@link #FMOD_DSP_TYPE_CHORUS DSP_TYPE_CHORUS}</li>
-     * <li>{@link #FMOD_DSP_TYPE_VSTPLUGIN DSP_TYPE_VSTPLUGIN}</li>
-     * <li>{@link #FMOD_DSP_TYPE_WINAMPPLUGIN DSP_TYPE_WINAMPPLUGIN}</li>
      * <li>{@link #FMOD_DSP_TYPE_ITECHO DSP_TYPE_ITECHO}</li>
      * <li>{@link #FMOD_DSP_TYPE_COMPRESSOR DSP_TYPE_COMPRESSOR}</li>
      * <li>{@link #FMOD_DSP_TYPE_SFXREVERB DSP_TYPE_SFXREVERB}</li>
      * <li>{@link #FMOD_DSP_TYPE_LOWPASS_SIMPLE DSP_TYPE_LOWPASS_SIMPLE}</li>
      * <li>{@link #FMOD_DSP_TYPE_DELAY DSP_TYPE_DELAY}</li>
      * <li>{@link #FMOD_DSP_TYPE_TREMOLO DSP_TYPE_TREMOLO}</li>
-     * <li>{@link #FMOD_DSP_TYPE_LADSPAPLUGIN DSP_TYPE_LADSPAPLUGIN}</li>
      * <li>{@link #FMOD_DSP_TYPE_SEND DSP_TYPE_SEND}</li>
      * <li>{@link #FMOD_DSP_TYPE_RETURN DSP_TYPE_RETURN}</li>
      * <li>{@link #FMOD_DSP_TYPE_HIGHPASS_SIMPLE DSP_TYPE_HIGHPASS_SIMPLE}</li>
@@ -1618,54 +1617,51 @@ public class FMOD {
      * <li>{@link #FMOD_DSP_TYPE_THREE_EQ DSP_TYPE_THREE_EQ}</li>
      * <li>{@link #FMOD_DSP_TYPE_FFT DSP_TYPE_FFT}</li>
      * <li>{@link #FMOD_DSP_TYPE_LOUDNESS_METER DSP_TYPE_LOUDNESS_METER}</li>
-     * <li>{@link #FMOD_DSP_TYPE_ENVELOPEFOLLOWER DSP_TYPE_ENVELOPEFOLLOWER}</li>
      * <li>{@link #FMOD_DSP_TYPE_CONVOLUTIONREVERB DSP_TYPE_CONVOLUTIONREVERB}</li>
      * <li>{@link #FMOD_DSP_TYPE_CHANNELMIX DSP_TYPE_CHANNELMIX}</li>
      * <li>{@link #FMOD_DSP_TYPE_TRANSCEIVER DSP_TYPE_TRANSCEIVER}</li>
      * <li>{@link #FMOD_DSP_TYPE_OBJECTPAN DSP_TYPE_OBJECTPAN}</li>
      * <li>{@link #FMOD_DSP_TYPE_MULTIBAND_EQ DSP_TYPE_MULTIBAND_EQ}</li>
+     * <li>{@link #FMOD_DSP_TYPE_MULTIBAND_DYNAMICS DSP_TYPE_MULTIBAND_DYNAMICS}</li>
      * <li>{@link #FMOD_DSP_TYPE_MAX DSP_TYPE_MAX}</li>
      * </ul>
      */
     public static final int
-        FMOD_DSP_TYPE_UNKNOWN           = 0,
-        FMOD_DSP_TYPE_MIXER             = 1,
-        FMOD_DSP_TYPE_OSCILLATOR        = 2,
-        FMOD_DSP_TYPE_LOWPASS           = 3,
-        FMOD_DSP_TYPE_ITLOWPASS         = 4,
-        FMOD_DSP_TYPE_HIGHPASS          = 5,
-        FMOD_DSP_TYPE_ECHO              = 6,
-        FMOD_DSP_TYPE_FADER             = 7,
-        FMOD_DSP_TYPE_FLANGE            = 8,
-        FMOD_DSP_TYPE_DISTORTION        = 9,
-        FMOD_DSP_TYPE_NORMALIZE         = 10,
-        FMOD_DSP_TYPE_LIMITER           = 11,
-        FMOD_DSP_TYPE_PARAMEQ           = 12,
-        FMOD_DSP_TYPE_PITCHSHIFT        = 13,
-        FMOD_DSP_TYPE_CHORUS            = 14,
-        FMOD_DSP_TYPE_VSTPLUGIN         = 15,
-        FMOD_DSP_TYPE_WINAMPPLUGIN      = 16,
-        FMOD_DSP_TYPE_ITECHO            = 17,
-        FMOD_DSP_TYPE_COMPRESSOR        = 18,
-        FMOD_DSP_TYPE_SFXREVERB         = 19,
-        FMOD_DSP_TYPE_LOWPASS_SIMPLE    = 20,
-        FMOD_DSP_TYPE_DELAY             = 21,
-        FMOD_DSP_TYPE_TREMOLO           = 22,
-        FMOD_DSP_TYPE_LADSPAPLUGIN      = 23,
-        FMOD_DSP_TYPE_SEND              = 24,
-        FMOD_DSP_TYPE_RETURN            = 25,
-        FMOD_DSP_TYPE_HIGHPASS_SIMPLE   = 26,
-        FMOD_DSP_TYPE_PAN               = 27,
-        FMOD_DSP_TYPE_THREE_EQ          = 28,
-        FMOD_DSP_TYPE_FFT               = 29,
-        FMOD_DSP_TYPE_LOUDNESS_METER    = 30,
-        FMOD_DSP_TYPE_ENVELOPEFOLLOWER  = 31,
-        FMOD_DSP_TYPE_CONVOLUTIONREVERB = 32,
-        FMOD_DSP_TYPE_CHANNELMIX        = 33,
-        FMOD_DSP_TYPE_TRANSCEIVER       = 34,
-        FMOD_DSP_TYPE_OBJECTPAN         = 35,
-        FMOD_DSP_TYPE_MULTIBAND_EQ      = 36,
-        FMOD_DSP_TYPE_MAX               = 37;
+        FMOD_DSP_TYPE_UNKNOWN            = 0,
+        FMOD_DSP_TYPE_MIXER              = 1,
+        FMOD_DSP_TYPE_OSCILLATOR         = 2,
+        FMOD_DSP_TYPE_LOWPASS            = 3,
+        FMOD_DSP_TYPE_ITLOWPASS          = 4,
+        FMOD_DSP_TYPE_HIGHPASS           = 5,
+        FMOD_DSP_TYPE_ECHO               = 6,
+        FMOD_DSP_TYPE_FADER              = 7,
+        FMOD_DSP_TYPE_FLANGE             = 8,
+        FMOD_DSP_TYPE_DISTORTION         = 9,
+        FMOD_DSP_TYPE_NORMALIZE          = 10,
+        FMOD_DSP_TYPE_LIMITER            = 11,
+        FMOD_DSP_TYPE_PARAMEQ            = 12,
+        FMOD_DSP_TYPE_PITCHSHIFT         = 13,
+        FMOD_DSP_TYPE_CHORUS             = 14,
+        FMOD_DSP_TYPE_ITECHO             = 15,
+        FMOD_DSP_TYPE_COMPRESSOR         = 16,
+        FMOD_DSP_TYPE_SFXREVERB          = 17,
+        FMOD_DSP_TYPE_LOWPASS_SIMPLE     = 18,
+        FMOD_DSP_TYPE_DELAY              = 19,
+        FMOD_DSP_TYPE_TREMOLO            = 20,
+        FMOD_DSP_TYPE_SEND               = 21,
+        FMOD_DSP_TYPE_RETURN             = 22,
+        FMOD_DSP_TYPE_HIGHPASS_SIMPLE    = 23,
+        FMOD_DSP_TYPE_PAN                = 24,
+        FMOD_DSP_TYPE_THREE_EQ           = 25,
+        FMOD_DSP_TYPE_FFT                = 26,
+        FMOD_DSP_TYPE_LOUDNESS_METER     = 27,
+        FMOD_DSP_TYPE_CONVOLUTIONREVERB  = 28,
+        FMOD_DSP_TYPE_CHANNELMIX         = 29,
+        FMOD_DSP_TYPE_TRANSCEIVER        = 30,
+        FMOD_DSP_TYPE_OBJECTPAN          = 31,
+        FMOD_DSP_TYPE_MULTIBAND_EQ       = 32,
+        FMOD_DSP_TYPE_MULTIBAND_DYNAMICS = 33,
+        FMOD_DSP_TYPE_MAX                = 34;
 
     /**
      * {@code FMOD_DSP_OSCILLATOR}
@@ -1733,13 +1729,31 @@ public class FMOD {
      * <li>{@link #FMOD_DSP_ECHO_FEEDBACK DSP_ECHO_FEEDBACK}</li>
      * <li>{@link #FMOD_DSP_ECHO_DRYLEVEL DSP_ECHO_DRYLEVEL}</li>
      * <li>{@link #FMOD_DSP_ECHO_WETLEVEL DSP_ECHO_WETLEVEL}</li>
+     * <li>{@link #FMOD_DSP_ECHO_DELAYCHANGEMODE DSP_ECHO_DELAYCHANGEMODE}</li>
      * </ul>
      */
     public static final int
-        FMOD_DSP_ECHO_DELAY    = 0,
-        FMOD_DSP_ECHO_FEEDBACK = 1,
-        FMOD_DSP_ECHO_DRYLEVEL = 2,
-        FMOD_DSP_ECHO_WETLEVEL = 3;
+        FMOD_DSP_ECHO_DELAY           = 0,
+        FMOD_DSP_ECHO_FEEDBACK        = 1,
+        FMOD_DSP_ECHO_DRYLEVEL        = 2,
+        FMOD_DSP_ECHO_WETLEVEL        = 3,
+        FMOD_DSP_ECHO_DELAYCHANGEMODE = 4;
+
+    /**
+     * {@code FMOD_DSP_ECHO_DELAYCHANGEMODE_TYPE}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #FMOD_DSP_ECHO_DELAYCHANGEMODE_FADE DSP_ECHO_DELAYCHANGEMODE_FADE}</li>
+     * <li>{@link #FMOD_DSP_ECHO_DELAYCHANGEMODE_LERP DSP_ECHO_DELAYCHANGEMODE_LERP}</li>
+     * <li>{@link #FMOD_DSP_ECHO_DELAYCHANGEMODE_NONE DSP_ECHO_DELAYCHANGEMODE_NONE}</li>
+     * </ul>
+     */
+    public static final int
+        FMOD_DSP_ECHO_DELAYCHANGEMODE_FADE = 0,
+        FMOD_DSP_ECHO_DELAYCHANGEMODE_LERP = 1,
+        FMOD_DSP_ECHO_DELAYCHANGEMODE_NONE = 2;
 
     /**
      * {@code FMOD_DSP_FADER}
@@ -1893,6 +1907,8 @@ public class FMOD {
      * <li>{@link #FMOD_DSP_MULTIBAND_EQ_FILTER_BANDPASS DSP_MULTIBAND_EQ_FILTER_BANDPASS}</li>
      * <li>{@link #FMOD_DSP_MULTIBAND_EQ_FILTER_NOTCH DSP_MULTIBAND_EQ_FILTER_NOTCH}</li>
      * <li>{@link #FMOD_DSP_MULTIBAND_EQ_FILTER_ALLPASS DSP_MULTIBAND_EQ_FILTER_ALLPASS}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_EQ_FILTER_LOWPASS_6DB DSP_MULTIBAND_EQ_FILTER_LOWPASS_6DB}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_EQ_FILTER_HIGHPASS_6DB DSP_MULTIBAND_EQ_FILTER_HIGHPASS_6DB}</li>
      * </ul>
      */
     public static final int
@@ -1908,7 +1924,95 @@ public class FMOD {
         FMOD_DSP_MULTIBAND_EQ_FILTER_PEAKING       = 9,
         FMOD_DSP_MULTIBAND_EQ_FILTER_BANDPASS      = 10,
         FMOD_DSP_MULTIBAND_EQ_FILTER_NOTCH         = 11,
-        FMOD_DSP_MULTIBAND_EQ_FILTER_ALLPASS       = 12;
+        FMOD_DSP_MULTIBAND_EQ_FILTER_ALLPASS       = 12,
+        FMOD_DSP_MULTIBAND_EQ_FILTER_LOWPASS_6DB   = 13,
+        FMOD_DSP_MULTIBAND_EQ_FILTER_HIGHPASS_6DB  = 14;
+
+    /**
+     * {@code FMOD_DSP_MULTIBAND_DYNAMICS}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_LOWER_FREQUENCY DSP_MULTIBAND_DYNAMICS_LOWER_FREQUENCY}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_UPPER_FREQUENCY DSP_MULTIBAND_DYNAMICS_UPPER_FREQUENCY}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_LINKED DSP_MULTIBAND_DYNAMICS_LINKED}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_USE_SIDECHAIN DSP_MULTIBAND_DYNAMICS_USE_SIDECHAIN}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_MODE DSP_MULTIBAND_DYNAMICS_A_MODE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_GAIN DSP_MULTIBAND_DYNAMICS_A_GAIN}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_THRESHOLD DSP_MULTIBAND_DYNAMICS_A_THRESHOLD}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_RATIO DSP_MULTIBAND_DYNAMICS_A_RATIO}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_ATTACK DSP_MULTIBAND_DYNAMICS_A_ATTACK}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_RELEASE DSP_MULTIBAND_DYNAMICS_A_RELEASE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_GAIN_MAKEUP DSP_MULTIBAND_DYNAMICS_A_GAIN_MAKEUP}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_A_RESPONSE_DATA DSP_MULTIBAND_DYNAMICS_A_RESPONSE_DATA}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_MODE DSP_MULTIBAND_DYNAMICS_B_MODE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_GAIN DSP_MULTIBAND_DYNAMICS_B_GAIN}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_THRESHOLD DSP_MULTIBAND_DYNAMICS_B_THRESHOLD}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_RATIO DSP_MULTIBAND_DYNAMICS_B_RATIO}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_ATTACK DSP_MULTIBAND_DYNAMICS_B_ATTACK}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_RELEASE DSP_MULTIBAND_DYNAMICS_B_RELEASE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_GAIN_MAKEUP DSP_MULTIBAND_DYNAMICS_B_GAIN_MAKEUP}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_B_RESPONSE_DATA DSP_MULTIBAND_DYNAMICS_B_RESPONSE_DATA}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_MODE DSP_MULTIBAND_DYNAMICS_C_MODE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_GAIN DSP_MULTIBAND_DYNAMICS_C_GAIN}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_THRESHOLD DSP_MULTIBAND_DYNAMICS_C_THRESHOLD}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_RATIO DSP_MULTIBAND_DYNAMICS_C_RATIO}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_ATTACK DSP_MULTIBAND_DYNAMICS_C_ATTACK}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_RELEASE DSP_MULTIBAND_DYNAMICS_C_RELEASE}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_GAIN_MAKEUP DSP_MULTIBAND_DYNAMICS_C_GAIN_MAKEUP}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_C_RESPONSE_DATA DSP_MULTIBAND_DYNAMICS_C_RESPONSE_DATA}</li>
+     * </ul>
+     */
+    public static final int
+        FMOD_DSP_MULTIBAND_DYNAMICS_LOWER_FREQUENCY = 0,
+        FMOD_DSP_MULTIBAND_DYNAMICS_UPPER_FREQUENCY = 1,
+        FMOD_DSP_MULTIBAND_DYNAMICS_LINKED          = 2,
+        FMOD_DSP_MULTIBAND_DYNAMICS_USE_SIDECHAIN   = 3,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_MODE          = 4,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_GAIN          = 5,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_THRESHOLD     = 6,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_RATIO         = 7,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_ATTACK        = 8,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_RELEASE       = 9,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_GAIN_MAKEUP   = 10,
+        FMOD_DSP_MULTIBAND_DYNAMICS_A_RESPONSE_DATA = 11,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_MODE          = 12,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_GAIN          = 13,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_THRESHOLD     = 14,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_RATIO         = 15,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_ATTACK        = 16,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_RELEASE       = 17,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_GAIN_MAKEUP   = 18,
+        FMOD_DSP_MULTIBAND_DYNAMICS_B_RESPONSE_DATA = 19,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_MODE          = 20,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_GAIN          = 21,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_THRESHOLD     = 22,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_RATIO         = 23,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_ATTACK        = 24,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_RELEASE       = 25,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_GAIN_MAKEUP   = 26,
+        FMOD_DSP_MULTIBAND_DYNAMICS_C_RESPONSE_DATA = 27;
+
+    /**
+     * {@code FMOD_DSP_MULTIBAND_DYNAMICS_MODE_TYPE}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_MODE_DISABLED DSP_MULTIBAND_DYNAMICS_MODE_DISABLED}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_UP DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_UP}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_DOWN DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_DOWN}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_UP DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_UP}</li>
+     * <li>{@link #FMOD_DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_DOWN DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_DOWN}</li>
+     * </ul>
+     */
+    public static final int
+        FMOD_DSP_MULTIBAND_DYNAMICS_MODE_DISABLED      = 0,
+        FMOD_DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_UP   = 1,
+        FMOD_DSP_MULTIBAND_DYNAMICS_MODE_COMPRESS_DOWN = 2,
+        FMOD_DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_UP     = 3,
+        FMOD_DSP_MULTIBAND_DYNAMICS_MODE_EXPAND_DOWN   = 4;
 
     /**
      * {@code FMOD_DSP_PITCHSHIFT}
@@ -2291,7 +2395,7 @@ public class FMOD {
         FMOD_DSP_THREE_EQ_CROSSOVERSLOPE = 5;
 
     /**
-     * {@code FMOD_DSP_FFT_WINDOW}
+     * {@code FMOD_DSP_FFT_WINDOW_TYPE}
      * 
      * <h5>Enum values:</h5>
      * 
@@ -2313,22 +2417,48 @@ public class FMOD {
         FMOD_DSP_FFT_WINDOW_BLACKMANHARRIS = 5;
 
     /**
+     * {@code FMOD_DSP_FFT_DOWNMIX_TYPE}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #FMOD_DSP_FFT_DOWNMIX_NONE DSP_FFT_DOWNMIX_NONE}</li>
+     * <li>{@link #FMOD_DSP_FFT_DOWNMIX_MONO DSP_FFT_DOWNMIX_MONO}</li>
+     * </ul>
+     */
+    public static final int
+        FMOD_DSP_FFT_DOWNMIX_NONE = 0,
+        FMOD_DSP_FFT_DOWNMIX_MONO = 1;
+
+    /**
      * {@code FMOD_DSP_FFT}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
      * <li>{@link #FMOD_DSP_FFT_WINDOWSIZE DSP_FFT_WINDOWSIZE}</li>
-     * <li>{@link #FMOD_DSP_FFT_WINDOWTYPE DSP_FFT_WINDOWTYPE}</li>
+     * <li>{@link #FMOD_DSP_FFT_WINDOW DSP_FFT_WINDOW}</li>
+     * <li>{@link #FMOD_DSP_FFT_BAND_START_FREQ DSP_FFT_BAND_START_FREQ}</li>
+     * <li>{@link #FMOD_DSP_FFT_BAND_STOP_FREQ DSP_FFT_BAND_STOP_FREQ}</li>
      * <li>{@link #FMOD_DSP_FFT_SPECTRUMDATA DSP_FFT_SPECTRUMDATA}</li>
-     * <li>{@link #FMOD_DSP_FFT_DOMINANT_FREQ DSP_FFT_DOMINANT_FREQ}</li>
+     * <li>{@link #FMOD_DSP_FFT_RMS DSP_FFT_RMS}</li>
+     * <li>{@link #FMOD_DSP_FFT_SPECTRAL_CENTROID DSP_FFT_SPECTRAL_CENTROID}</li>
+     * <li>{@link #FMOD_DSP_FFT_IMMEDIATE_MODE DSP_FFT_IMMEDIATE_MODE}</li>
+     * <li>{@link #FMOD_DSP_FFT_DOWNMIX DSP_FFT_DOWNMIX}</li>
+     * <li>{@link #FMOD_DSP_FFT_CHANNEL DSP_FFT_CHANNEL}</li>
      * </ul>
      */
     public static final int
-        FMOD_DSP_FFT_WINDOWSIZE    = 0,
-        FMOD_DSP_FFT_WINDOWTYPE    = 1,
-        FMOD_DSP_FFT_SPECTRUMDATA  = 2,
-        FMOD_DSP_FFT_DOMINANT_FREQ = 3;
+        FMOD_DSP_FFT_WINDOWSIZE        = 0,
+        FMOD_DSP_FFT_WINDOW            = 1,
+        FMOD_DSP_FFT_BAND_START_FREQ   = 2,
+        FMOD_DSP_FFT_BAND_STOP_FREQ    = 3,
+        FMOD_DSP_FFT_SPECTRUMDATA      = 4,
+        FMOD_DSP_FFT_RMS               = 5,
+        FMOD_DSP_FFT_SPECTRAL_CENTROID = 6,
+        FMOD_DSP_FFT_IMMEDIATE_MODE    = 7,
+        FMOD_DSP_FFT_DOWNMIX           = 8,
+        FMOD_DSP_FFT_CHANNEL           = 9;
 
     /**
      * {@code FMOD_DSP_LOUDNESS_METER}
@@ -2365,24 +2495,6 @@ public class FMOD {
         FMOD_DSP_LOUDNESS_METER_STATE_RESET_ALL        = -1,
         FMOD_DSP_LOUDNESS_METER_STATE_PAUSED           = 0,
         FMOD_DSP_LOUDNESS_METER_STATE_ANALYZING        = 1;
-
-    /**
-     * {@code FMOD_DSP_ENVELOPEFOLLOWER}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #FMOD_DSP_ENVELOPEFOLLOWER_ATTACK DSP_ENVELOPEFOLLOWER_ATTACK}</li>
-     * <li>{@link #FMOD_DSP_ENVELOPEFOLLOWER_RELEASE DSP_ENVELOPEFOLLOWER_RELEASE}</li>
-     * <li>{@link #FMOD_DSP_ENVELOPEFOLLOWER_ENVELOPE DSP_ENVELOPEFOLLOWER_ENVELOPE}</li>
-     * <li>{@link #FMOD_DSP_ENVELOPEFOLLOWER_USESIDECHAIN DSP_ENVELOPEFOLLOWER_USESIDECHAIN}</li>
-     * </ul>
-     */
-    public static final int
-        FMOD_DSP_ENVELOPEFOLLOWER_ATTACK       = 0,
-        FMOD_DSP_ENVELOPEFOLLOWER_RELEASE      = 1,
-        FMOD_DSP_ENVELOPEFOLLOWER_ENVELOPE     = 2,
-        FMOD_DSP_ENVELOPEFOLLOWER_USESIDECHAIN = 3;
 
     /**
      * {@code FMOD_DSP_CONVOLUTION_REVERB}
@@ -2713,6 +2825,7 @@ public class FMOD {
      * <li>{@link #FMOD_DSP_PARAMETER_DATA_TYPE_FFT DSP_PARAMETER_DATA_TYPE_FFT}</li>
      * <li>{@link #FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI}</li>
      * <li>{@link #FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE}</li>
+     * <li>{@link #FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE}</li>
      * </ul>
      */
     public static final int
@@ -2722,7 +2835,8 @@ public class FMOD {
         FMOD_DSP_PARAMETER_DATA_TYPE_SIDECHAIN          = -3,
         FMOD_DSP_PARAMETER_DATA_TYPE_FFT                = -4,
         FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI = -5,
-        FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE  = -6;
+        FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE  = -6,
+        FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE   = -7;
 
     protected FMOD() {
         throw new UnsupportedOperationException();
@@ -3651,21 +3765,22 @@ public class FMOD {
     // --- [ FMOD_System_GetVersion ] ---
 
     /** Unsafe version of: {@link #FMOD_System_GetVersion System_GetVersion} */
-    public static int nFMOD_System_GetVersion(long system, long version) {
+    public static int nFMOD_System_GetVersion(long system, long version, long buildnumber) {
         long __functionAddress = Functions.System_GetVersion;
         if (CHECKS) {
             check(system);
         }
-        return callPPI(system, version, __functionAddress);
+        return callPPPI(system, version, buildnumber, __functionAddress);
     }
 
     /** System information functions. */
     @NativeType("FMOD_RESULT")
-    public static int FMOD_System_GetVersion(@NativeType("FMOD_SYSTEM *") long system, @NativeType("unsigned int *") IntBuffer version) {
+    public static int FMOD_System_GetVersion(@NativeType("FMOD_SYSTEM *") long system, @NativeType("unsigned int *") IntBuffer version, @NativeType("unsigned int *") IntBuffer buildnumber) {
         if (CHECKS) {
             check(version, 1);
+            check(buildnumber, 1);
         }
-        return nFMOD_System_GetVersion(system, memAddress(version));
+        return nFMOD_System_GetVersion(system, memAddress(version), memAddress(buildnumber));
     }
 
     // --- [ FMOD_System_GetOutputHandle ] ---
