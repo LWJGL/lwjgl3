@@ -485,6 +485,10 @@ nk_style_pop_vec2(ctx);""")}
         "COLOR_SCROLLBAR_CURSOR_HOVER".enum,
         "COLOR_SCROLLBAR_CURSOR_ACTIVE".enum,
         "COLOR_TAB_HEADER".enum,
+        "COLOR_KNOB".enum,
+        "COLOR_KNOB_CURSOR".enum,
+        "COLOR_KNOB_CURSOR_HOVER".enum,
+        "COLOR_KNOB_CURSOR_ACTIVE".enum,
 
         "COLOR_COUNT".enum
     ).javaDocLinksSkipCount
@@ -2096,6 +2100,32 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..int.p("val", ""),
             int("max", ""),
             int("step", "")
+        )
+
+        nk_bool(
+            "knob_float",
+            "",
+
+            ctx,
+            float("min", ""),
+            Check(1)..float.p("val", ""),
+            float("max", ""),
+            float("step", ""),
+            nk_heading("zero_direction", "", Headings),
+            float("dead_zone_degrees", "")
+        )
+
+        nk_bool(
+            "knob_int",
+            "",
+
+            ctx,
+            int("min", ""),
+            Check(1)..int.p("val", ""),
+            int("max", ""),
+            int("step", ""),
+            nk_heading("zero_direction", "", Headings),
+            float("dead_zone_degrees", "")
         )
 
         nk_bool(

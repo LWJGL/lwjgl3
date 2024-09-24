@@ -652,6 +652,10 @@ public class Nuklear {
      * <li>{@link #NK_COLOR_SCROLLBAR_CURSOR_HOVER COLOR_SCROLLBAR_CURSOR_HOVER}</li>
      * <li>{@link #NK_COLOR_SCROLLBAR_CURSOR_ACTIVE COLOR_SCROLLBAR_CURSOR_ACTIVE}</li>
      * <li>{@link #NK_COLOR_TAB_HEADER COLOR_TAB_HEADER}</li>
+     * <li>{@link #NK_COLOR_KNOB COLOR_KNOB}</li>
+     * <li>{@link #NK_COLOR_KNOB_CURSOR COLOR_KNOB_CURSOR}</li>
+     * <li>{@link #NK_COLOR_KNOB_CURSOR_HOVER COLOR_KNOB_CURSOR_HOVER}</li>
+     * <li>{@link #NK_COLOR_KNOB_CURSOR_ACTIVE COLOR_KNOB_CURSOR_ACTIVE}</li>
      * <li>{@link #NK_COLOR_COUNT COLOR_COUNT}</li>
      * </ul>
      */
@@ -684,7 +688,11 @@ public class Nuklear {
         NK_COLOR_SCROLLBAR_CURSOR_HOVER  = 25,
         NK_COLOR_SCROLLBAR_CURSOR_ACTIVE = 26,
         NK_COLOR_TAB_HEADER              = 27,
-        NK_COLOR_COUNT                   = 28;
+        NK_COLOR_KNOB                    = 28,
+        NK_COLOR_KNOB_CURSOR             = 29,
+        NK_COLOR_KNOB_CURSOR_HOVER       = 30,
+        NK_COLOR_KNOB_CURSOR_ACTIVE      = 31,
+        NK_COLOR_COUNT                   = 32;
 
     /**
      * nk_style_cursor
@@ -4957,6 +4965,40 @@ public class Nuklear {
         return nnk_slider_int(ctx.address(), min, memAddress(val), max, step);
     }
 
+    // --- [ nk_knob_float ] ---
+
+    /** Unsafe version of: {@link #nk_knob_float knob_float} */
+    public static native boolean nnk_knob_float(long ctx, float min, long val, float max, float step, int zero_direction, float dead_zone_degrees);
+
+    /**
+     * @param ctx            the nuklear context
+     * @param zero_direction one of:<br><table><tr><td>{@link #NK_UP UP}</td><td>{@link #NK_RIGHT RIGHT}</td><td>{@link #NK_DOWN DOWN}</td><td>{@link #NK_LEFT LEFT}</td></tr></table>
+     */
+    @NativeType("nk_bool")
+    public static boolean nk_knob_float(@NativeType("struct nk_context *") NkContext ctx, float min, @NativeType("float *") FloatBuffer val, float max, float step, @NativeType("enum nk_heading") int zero_direction, float dead_zone_degrees) {
+        if (CHECKS) {
+            check(val, 1);
+        }
+        return nnk_knob_float(ctx.address(), min, memAddress(val), max, step, zero_direction, dead_zone_degrees);
+    }
+
+    // --- [ nk_knob_int ] ---
+
+    /** Unsafe version of: {@link #nk_knob_int knob_int} */
+    public static native boolean nnk_knob_int(long ctx, int min, long val, int max, int step, int zero_direction, float dead_zone_degrees);
+
+    /**
+     * @param ctx            the nuklear context
+     * @param zero_direction one of:<br><table><tr><td>{@link #NK_UP UP}</td><td>{@link #NK_RIGHT RIGHT}</td><td>{@link #NK_DOWN DOWN}</td><td>{@link #NK_LEFT LEFT}</td></tr></table>
+     */
+    @NativeType("nk_bool")
+    public static boolean nk_knob_int(@NativeType("struct nk_context *") NkContext ctx, int min, @NativeType("int *") IntBuffer val, int max, int step, @NativeType("enum nk_heading") int zero_direction, float dead_zone_degrees) {
+        if (CHECKS) {
+            check(val, 1);
+        }
+        return nnk_knob_int(ctx.address(), min, memAddress(val), max, step, zero_direction, dead_zone_degrees);
+    }
+
     // --- [ nk_progress ] ---
 
     /** Unsafe version of: {@link #nk_progress progress} */
@@ -7061,7 +7103,7 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_style_get_color_by_name style_get_color_by_name} */
     public static native long nnk_style_get_color_by_name(int c);
 
-    /** @param c one of:<br><table><tr><td>{@link #NK_COLOR_TEXT COLOR_TEXT}</td><td>{@link #NK_COLOR_WINDOW COLOR_WINDOW}</td><td>{@link #NK_COLOR_HEADER COLOR_HEADER}</td><td>{@link #NK_COLOR_BORDER COLOR_BORDER}</td></tr><tr><td>{@link #NK_COLOR_BUTTON COLOR_BUTTON}</td><td>{@link #NK_COLOR_BUTTON_HOVER COLOR_BUTTON_HOVER}</td><td>{@link #NK_COLOR_BUTTON_ACTIVE COLOR_BUTTON_ACTIVE}</td><td>{@link #NK_COLOR_TOGGLE COLOR_TOGGLE}</td></tr><tr><td>{@link #NK_COLOR_TOGGLE_HOVER COLOR_TOGGLE_HOVER}</td><td>{@link #NK_COLOR_TOGGLE_CURSOR COLOR_TOGGLE_CURSOR}</td><td>{@link #NK_COLOR_SELECT COLOR_SELECT}</td><td>{@link #NK_COLOR_SELECT_ACTIVE COLOR_SELECT_ACTIVE}</td></tr><tr><td>{@link #NK_COLOR_SLIDER COLOR_SLIDER}</td><td>{@link #NK_COLOR_SLIDER_CURSOR COLOR_SLIDER_CURSOR}</td><td>{@link #NK_COLOR_SLIDER_CURSOR_HOVER COLOR_SLIDER_CURSOR_HOVER}</td><td>{@link #NK_COLOR_SLIDER_CURSOR_ACTIVE COLOR_SLIDER_CURSOR_ACTIVE}</td></tr><tr><td>{@link #NK_COLOR_PROPERTY COLOR_PROPERTY}</td><td>{@link #NK_COLOR_EDIT COLOR_EDIT}</td><td>{@link #NK_COLOR_EDIT_CURSOR COLOR_EDIT_CURSOR}</td><td>{@link #NK_COLOR_COMBO COLOR_COMBO}</td></tr><tr><td>{@link #NK_COLOR_CHART COLOR_CHART}</td><td>{@link #NK_COLOR_CHART_COLOR COLOR_CHART_COLOR}</td><td>{@link #NK_COLOR_CHART_COLOR_HIGHLIGHT COLOR_CHART_COLOR_HIGHLIGHT}</td><td>{@link #NK_COLOR_SCROLLBAR COLOR_SCROLLBAR}</td></tr><tr><td>{@link #NK_COLOR_SCROLLBAR_CURSOR COLOR_SCROLLBAR_CURSOR}</td><td>{@link #NK_COLOR_SCROLLBAR_CURSOR_HOVER COLOR_SCROLLBAR_CURSOR_HOVER}</td><td>{@link #NK_COLOR_SCROLLBAR_CURSOR_ACTIVE COLOR_SCROLLBAR_CURSOR_ACTIVE}</td><td>{@link #NK_COLOR_TAB_HEADER COLOR_TAB_HEADER}</td></tr></table> */
+    /** @param c one of:<br><table><tr><td>{@link #NK_COLOR_TEXT COLOR_TEXT}</td><td>{@link #NK_COLOR_WINDOW COLOR_WINDOW}</td><td>{@link #NK_COLOR_HEADER COLOR_HEADER}</td><td>{@link #NK_COLOR_BORDER COLOR_BORDER}</td></tr><tr><td>{@link #NK_COLOR_BUTTON COLOR_BUTTON}</td><td>{@link #NK_COLOR_BUTTON_HOVER COLOR_BUTTON_HOVER}</td><td>{@link #NK_COLOR_BUTTON_ACTIVE COLOR_BUTTON_ACTIVE}</td><td>{@link #NK_COLOR_TOGGLE COLOR_TOGGLE}</td></tr><tr><td>{@link #NK_COLOR_TOGGLE_HOVER COLOR_TOGGLE_HOVER}</td><td>{@link #NK_COLOR_TOGGLE_CURSOR COLOR_TOGGLE_CURSOR}</td><td>{@link #NK_COLOR_SELECT COLOR_SELECT}</td><td>{@link #NK_COLOR_SELECT_ACTIVE COLOR_SELECT_ACTIVE}</td></tr><tr><td>{@link #NK_COLOR_SLIDER COLOR_SLIDER}</td><td>{@link #NK_COLOR_SLIDER_CURSOR COLOR_SLIDER_CURSOR}</td><td>{@link #NK_COLOR_SLIDER_CURSOR_HOVER COLOR_SLIDER_CURSOR_HOVER}</td><td>{@link #NK_COLOR_SLIDER_CURSOR_ACTIVE COLOR_SLIDER_CURSOR_ACTIVE}</td></tr><tr><td>{@link #NK_COLOR_PROPERTY COLOR_PROPERTY}</td><td>{@link #NK_COLOR_EDIT COLOR_EDIT}</td><td>{@link #NK_COLOR_EDIT_CURSOR COLOR_EDIT_CURSOR}</td><td>{@link #NK_COLOR_COMBO COLOR_COMBO}</td></tr><tr><td>{@link #NK_COLOR_CHART COLOR_CHART}</td><td>{@link #NK_COLOR_CHART_COLOR COLOR_CHART_COLOR}</td><td>{@link #NK_COLOR_CHART_COLOR_HIGHLIGHT COLOR_CHART_COLOR_HIGHLIGHT}</td><td>{@link #NK_COLOR_SCROLLBAR COLOR_SCROLLBAR}</td></tr><tr><td>{@link #NK_COLOR_SCROLLBAR_CURSOR COLOR_SCROLLBAR_CURSOR}</td><td>{@link #NK_COLOR_SCROLLBAR_CURSOR_HOVER COLOR_SCROLLBAR_CURSOR_HOVER}</td><td>{@link #NK_COLOR_SCROLLBAR_CURSOR_ACTIVE COLOR_SCROLLBAR_CURSOR_ACTIVE}</td><td>{@link #NK_COLOR_TAB_HEADER COLOR_TAB_HEADER}</td></tr><tr><td>{@link #NK_COLOR_KNOB COLOR_KNOB}</td><td>{@link #NK_COLOR_KNOB_CURSOR COLOR_KNOB_CURSOR}</td><td>{@link #NK_COLOR_KNOB_CURSOR_HOVER COLOR_KNOB_CURSOR_HOVER}</td><td>{@link #NK_COLOR_KNOB_CURSOR_ACTIVE COLOR_KNOB_CURSOR_ACTIVE}</td></tr></table> */
     @Nullable
     @NativeType("char const *")
     public static String nk_style_get_color_by_name(@NativeType("enum nk_style_colors") int c) {
@@ -10394,6 +10436,30 @@ public class Nuklear {
             check(val, 1);
         }
         return nnk_slider_int(ctx.address(), min, val, max, step);
+    }
+
+    /** Array version of: {@link #nnk_knob_float} */
+    public static native boolean nnk_knob_float(long ctx, float min, float[] val, float max, float step, int zero_direction, float dead_zone_degrees);
+
+    /** Array version of: {@link #nk_knob_float knob_float} */
+    @NativeType("nk_bool")
+    public static boolean nk_knob_float(@NativeType("struct nk_context *") NkContext ctx, float min, @NativeType("float *") float[] val, float max, float step, @NativeType("enum nk_heading") int zero_direction, float dead_zone_degrees) {
+        if (CHECKS) {
+            check(val, 1);
+        }
+        return nnk_knob_float(ctx.address(), min, val, max, step, zero_direction, dead_zone_degrees);
+    }
+
+    /** Array version of: {@link #nnk_knob_int} */
+    public static native boolean nnk_knob_int(long ctx, int min, int[] val, int max, int step, int zero_direction, float dead_zone_degrees);
+
+    /** Array version of: {@link #nk_knob_int knob_int} */
+    @NativeType("nk_bool")
+    public static boolean nk_knob_int(@NativeType("struct nk_context *") NkContext ctx, int min, @NativeType("int *") int[] val, int max, int step, @NativeType("enum nk_heading") int zero_direction, float dead_zone_degrees) {
+        if (CHECKS) {
+            check(val, 1);
+        }
+        return nnk_knob_int(ctx.address(), min, val, max, step, zero_direction, dead_zone_degrees);
     }
 
     /** Array version of: {@link #nnk_property_int} */

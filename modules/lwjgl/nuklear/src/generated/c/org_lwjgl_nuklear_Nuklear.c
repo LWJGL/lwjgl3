@@ -1090,6 +1090,20 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1slider_1int__JIJI
     return (jboolean)nk_slider_int(ctx, min, val, max, step);
 }
 
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1knob_1float__JFJFFIF(JNIEnv *__env, jclass clazz, jlong ctxAddress, jfloat min, jlong valAddress, jfloat max, jfloat step, jint zero_direction, jfloat dead_zone_degrees) {
+    struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
+    float *val = (float *)(uintptr_t)valAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jboolean)nk_knob_float(ctx, min, val, max, step, (enum nk_heading)zero_direction, dead_zone_degrees);
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1knob_1int__JIJIIIF(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint min, jlong valAddress, jint max, jint step, jint zero_direction, jfloat dead_zone_degrees) {
+    struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
+    int *val = (int *)(uintptr_t)valAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jboolean)nk_knob_int(ctx, min, val, max, step, (enum nk_heading)zero_direction, dead_zone_degrees);
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1progress(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong curAddress, jlong max, jboolean modifyable) {
     struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
     nk_size *cur = (nk_size *)(uintptr_t)curAddress;
@@ -3747,6 +3761,26 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1slider_1int__JI_3
     jint *val = (*__env)->GetIntArrayElements(__env, valAddress, NULL);
     UNUSED_PARAMS(__env, clazz)
     __result = (jboolean)nk_slider_int(ctx, min, (int *)val, max, step);
+    (*__env)->ReleaseIntArrayElements(__env, valAddress, val, 0);
+    return __result;
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1knob_1float__JF_3FFFIF(JNIEnv *__env, jclass clazz, jlong ctxAddress, jfloat min, jfloatArray valAddress, jfloat max, jfloat step, jint zero_direction, jfloat dead_zone_degrees) {
+    struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
+    jboolean __result;
+    jfloat *val = (*__env)->GetFloatArrayElements(__env, valAddress, NULL);
+    UNUSED_PARAMS(__env, clazz)
+    __result = (jboolean)nk_knob_float(ctx, min, (float *)val, max, step, (enum nk_heading)zero_direction, dead_zone_degrees);
+    (*__env)->ReleaseFloatArrayElements(__env, valAddress, val, 0);
+    return __result;
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1knob_1int__JI_3IIIIF(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint min, jintArray valAddress, jint max, jint step, jint zero_direction, jfloat dead_zone_degrees) {
+    struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
+    jboolean __result;
+    jint *val = (*__env)->GetIntArrayElements(__env, valAddress, NULL);
+    UNUSED_PARAMS(__env, clazz)
+    __result = (jboolean)nk_knob_int(ctx, min, (int *)val, max, step, (enum nk_heading)zero_direction, dead_zone_degrees);
     (*__env)->ReleaseIntArrayElements(__env, valAddress, val, 0);
     return __result;
 }

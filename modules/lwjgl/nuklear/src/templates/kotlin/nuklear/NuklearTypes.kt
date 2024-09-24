@@ -843,6 +843,39 @@ val nk_style_slider = struct(Module.NUKLEAR, "NkStyleSlider", nativeName = "stru
     nullable..nk_draw_end("draw_end", "")
 }
 
+val nk_style_knob = struct(Module.NUKLEAR, "NkStyleKnob", nativeName = "struct nk_style_knob") {
+    /* background */
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
+
+    /* knob */
+    nk_color("knob_normal", "")
+    nk_color("knob_hover", "")
+    nk_color("knob_active", "")
+    nk_color("knob_border_color", "")
+
+    /* cursor */
+    nk_color("cursor_normal", "")
+    nk_color("cursor_hover", "")
+    nk_color("cursor_active", "")
+
+    /* properties */
+    float("border", "")
+    float("knob_border", "")
+    nk_vec2("padding", "")
+    nk_vec2("spacing", "")
+    float("cursor_width", "")
+    float("color_factor", "")
+    float("disabled_factor", "")
+
+    /* optional user callbacks */
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
+}
+
 val nk_style_progress = struct(Module.NUKLEAR, "NkStyleProgress", nativeName = "struct nk_style_progress") {
     /* background */
     nk_style_item("normal", "")
@@ -1127,6 +1160,7 @@ val nk_style = struct(Module.NUKLEAR, "NkStyle", nativeName = "struct nk_style")
     nk_style_toggle("checkbox", "")
     nk_style_selectable("selectable", "")
     nk_style_slider("slider", "")
+    nk_style_knob("knob", "")
     nk_style_progress("progress", "")
     nk_style_property("property", "")
     nk_style_edit("edit", "")
