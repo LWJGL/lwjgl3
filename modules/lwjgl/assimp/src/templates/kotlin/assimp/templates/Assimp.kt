@@ -685,6 +685,20 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Set whether the FBX importer shall ignore the provided axis configuration.
+
+        If this property is set to true, the axis directions provided in the FBX file will be ignored and the file will be loaded as is.
+
+        Set to true for Assimp 5.3.x and earlier behavior. Equivalent to #AI_CONFIG_IMPORT_COLLADA_IGNORE_UP_DIRECTION
+
+        Property type: {@code Bool}. Default value: {@code false}.
+        """,
+
+        "AI_CONFIG_IMPORT_FBX_IGNORE_UP_DIRECTION".."AI_CONFIG_IMPORT_FBX_IGNORE_UP_DIRECTION"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Will enable the skeleton struct to store bone data.
 
         This will decouple the bone coupling to the mesh. This feature is experimental.
@@ -782,6 +796,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """,
 
         "AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATION_EVENTS".."IMPORT_MDL_HL1_READ_ANIMATION_EVENTS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether you want to convert the HS1 coordinate system in a special way.
+
+        Property type: bool. The default value is {@code true} (S1).
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_TRANSFORM_COORD_SYSTEM".."TRANSFORM COORDSYSTEM FOR HS! MODELS"
     ).noPrefix()
 
     StringConstant(
@@ -1442,6 +1466,15 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     // anim.h
 
     EnumConstant(
+        "{@code enum aiAnimInterpolation}",
+
+        "AnimInterpolation_Step".enum("", "0"),
+        "AnimInterpolation_Linear".enum,
+        "AnimInterpolation_Spherical_Linear".enum,
+        "AnimInterpolation_Cubic_Spline".enum
+    )
+
+    EnumConstant(
         """
         Defines how an animation channel behaves outside the defined time range. This corresponds to ##AINodeAnim{@code ::mPreState} and
         ##AINodeAnim{@code ::mPostState}.
@@ -1850,6 +1883,14 @@ aiAttachLogStream(&c);""")}
 
         aiScene.const.p("pIn", "Input asset."),
         aiMemoryInfo.p("in", "Data structure to be filled.")
+    )
+
+    aiTexture.p(
+        "GetEmbeddedTexture",
+        "Returns an embedded texture, or {@code nullptr}.",
+
+        aiScene.const.p("pIn", "Input asset."),
+        charUTF8.const.p("filename", "Texture path extracted from #GetMaterialString().")
     )
 
     aiPropertyStore.p(
@@ -2768,13 +2809,20 @@ aiAttachLogStream(&c);""")}
         "TextureType_METALNESS".enum("PBR material."),
         "TextureType_DIFFUSE_ROUGHNESS".enum("PBR material."),
         "TextureType_AMBIENT_OCCLUSION".enum("PBR material."),
+        "TextureType_UNKNOWN".enum(
+            """
+            Unknown texture.
+
+            A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is excluded from any
+            further post-processing.
+            """
+        ),
         "TextureType_SHEEN".enum(
             """
             Generally used to simulate textiles that are covered in a layer of microfibers eg velvet.
 
             ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen", "KHR_materials_sheen")})
-            """,
-            "19"
+            """
         ),
         "TextureType_CLEARCOAT".enum(
             """
@@ -2782,24 +2830,19 @@ aiAttachLogStream(&c);""")}
 
             ${url("https://autodesk.github.io/standard-surface/\\#closures/coating", "coating")},
             ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat", "KHR_materials_clearcoat")}
-            """,
-            "20"
+            """
         ),
         "TextureType_TRANSMISSION".enum(
             """
             Simulates transmission through the surface.
 
             May include further information such as wall thickness.
-            """,
-            "21"
-        ),
-        "TextureType_UNKNOWN".enum(
             """
-            Unknown texture. A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is
-            excluded from any further post-processing.
-            """,
-            "18"
-        )
+        ),
+        "TextureType_MAYA_BASE".enum,
+        "TextureType_MAYA_SPECULAR".enum,
+        "TextureType_MAYA_SPECULAR_COLOR".enum,
+        "TextureType_MAYA_SPECULAR_ROUGHNESS".enum
     ).javaDocLinks
 
     EnumConstant(

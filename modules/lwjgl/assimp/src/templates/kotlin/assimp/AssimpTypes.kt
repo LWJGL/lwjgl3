@@ -31,6 +31,8 @@ val ai_int32 = typedef(int32_t, "ai_int32")
 val ai_uint32 = typedef(uint32_t, "ai_uint32")
 val ai_real = typedef(float, "ai_real")
 
+val aiAnimInterpolation = "aiAnimInterpolation".enumType
+
 /*val aiPlane = struct(Binding.ASSIMP, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."
 
@@ -732,6 +734,7 @@ val aiVectorKey = struct(Module.ASSIMP, "AIVectorKey", nativeName = "struct aiVe
 
     double("mTime", "The time of this key")
     aiVector3D("mValue", "The value of this key")
+    aiAnimInterpolation("mInterpolation", "The interpolation setting of this key")
 }
 
 val aiQuatKey = struct(Module.ASSIMP, "AIQuatKey", nativeName = "struct aiQuatKey") {
@@ -739,6 +742,7 @@ val aiQuatKey = struct(Module.ASSIMP, "AIQuatKey", nativeName = "struct aiQuatKe
 
     double("mTime", "The time of this key")
     aiQuaternion("mValue", "The value of this key")
+    aiAnimInterpolation("mInterpolation", "The interpolation setting of this key")
 }
 
 val aiMeshKey = struct(Module.ASSIMP, "AIMeshKey", nativeName = "struct aiMeshKey") {
