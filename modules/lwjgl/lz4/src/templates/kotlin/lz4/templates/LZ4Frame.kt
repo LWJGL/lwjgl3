@@ -100,7 +100,26 @@ ENABLE_WARNINGS()""")
         LZ4F_errorCode_t("code", "")
     )
 
-    int("compressionLevel_max", "", void())
+    size_t(
+        "compressFrame",
+        """
+        Compress {@code srcBuffer} content into an LZ4-compressed frame.  It's a one shot operation, all input content is consumed, and all output is\
+        generated.
+
+        Note : it's a stateless operation (no {@code LZ4F_cctx} state needed). In order to reduce load on the allocator, {@code LZ4F_compressFrame()}, by
+        default, uses the stack to allocate space for the compression state and some table. If this usage of the stack is too much for your application,
+        consider compiling {@code lz4frame.c} with compile-time macro {@code LZ4F_HEAPMODE} set to 1 instead. All state allocations will use the Heap. It also
+        means each invocation of {@code LZ4F_compressFrame()} will trigger several internal alloc/free invocations.
+        """,
+
+        void.p("dstBuffer", ""),
+        AutoSize("dstBuffer")..size_t("dstCapacity", "MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}"),
+        void.const.p("srcBuffer", ""),
+        AutoSize("srcBuffer")..size_t("srcSize", ""),
+        nullable..LZ4F_preferences_t.const.p("preferencesPtr", "optional: one can provide #NULL, in which case all preferences are set to default"),
+
+        returnDoc = "number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using #isError())"
+    )
 
     size_t(
         "compressFrameBound",
@@ -122,21 +141,13 @@ ENABLE_WARNINGS()""")
         nullable..LZ4F_preferences_t.const.p("preferencesPtr", "")
     )
 
-    size_t(
-        "compressFrame",
-        """
-        Compress an entire {@code srcBuffer} into a valid LZ4 frame.
+    int(
+        "compressionLevel_max",
+        "",
 
-        The {@code LZ4F_preferences_t} structure is optional: you can provide #NULL as argument. All preferences will be set to default.
-        """,
+        void(),
 
-        void.p("dstBuffer", ""),
-        AutoSize("dstBuffer")..size_t("dstCapacity", "MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}"),
-        void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..size_t("srcSize", ""),
-        nullable..LZ4F_preferences_t.const.p("preferencesPtr", ""),
-
-        returnDoc = "number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using #isError())"
+        returnDoc = "maximum allowed compression level (currently: 12)"
     )
 
     unsigned("getVersion", "", void())
@@ -181,7 +192,7 @@ ENABLE_WARNINGS()""")
         LZ4F_cctx.p("cctx", ""),
         void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", "must be &ge; #HEADER_SIZE_MAX bytes"),
-        nullable..LZ4F_preferences_t.const.p("prefsPtr", "optional: you can provide #NULL as argument, all preferences will then be set to default"),
+        nullable..LZ4F_preferences_t.const.p("prefsPtr", "optional: NULL can be provided to set all preferences to default"),
 
         returnDoc = "number of bytes written into {@code dstBuffer} for the header or an error code (which can be tested using #isError())"
     )
@@ -363,7 +374,7 @@ ENABLE_WARNINGS()""")
         "decompress",
         """
         Call this function repetitively to regenerate data compressed in {@code srcBuffer}.
-        
+
         The function requires a valid {@code dctx} state. It will read up to {@code *srcSizePtr} bytes from {@code srcBuffer}, and decompress data into
         {@code dstBuffer}, of capacity {@code *dstSizePtr}.
 
@@ -376,6 +387,10 @@ ENABLE_WARNINGS()""")
         subsequent invocations.
 
         {@code dstBuffer} can freely change between each consecutive function invocation. {@code dstBuffer} content will be overwritten.
+
+        Note: if #getFrameInfo() is called before {@code LZ4F_decompress()}, {@code srcBuffer} must be updated to reflect the number of bytes consumed after
+        reading the frame header. Failure to update {@code srcBuffer} before calling {@code LZ4F_decompress()} will cause decompression failure or, even worse,
+        successful but incorrect decompression. See the {@code LZ4F_getFrameInfo()} docs for details.
 
         After a frame is fully decoded, {@code dctx} can be used again to decompress another frame.
 
@@ -426,7 +441,7 @@ ENABLE_WARNINGS()""")
         "ERROR_GENERIC".enum,
         "ERROR_maxBlockSize_invalid".enum,
         "ERROR_blockMode_invalid".enum,
-        "ERROR_contentChecksumFlag_invalid".enum,
+        "ERROR_parameter_invalid".enum,
         "ERROR_compressionLevel_invalid".enum,
         "ERROR_headerVersion_wrong".enum,
         "ERROR_blockChecksum_invalid".enum,
@@ -444,6 +459,8 @@ ENABLE_WARNINGS()""")
         "ERROR_frameDecoding_alreadyStarted".enum,
         "ERROR_compressionState_uninitialized".enum,
         "ERROR_parameter_null".enum,
+        "ERROR_io_write".enum,
+        "ERROR_io_read".enum,
         "ERROR_maxCode".enum
     )
 
@@ -455,35 +472,44 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
-        "getBlockSize",
-        "Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}.",
-
-        LZ4F_blockSizeID_t("blockSizeID", "")
-    )
-
-    size_t(
-        "uncompressedUpdate",
+        "compressBegin_usingDict",
         """
-        Can be called repetitively to add as much data uncompressed data as necessary.
-        
-        Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
-        condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
-        state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed before appending uncompressed data
-        is continued. This is only supported when #blockIndependent is used.
+        Inits dictionary compression streaming, and writes the frame header into {@code dstBuffer}.
+
+        NOTE: The {@code LZ4Frame} spec allows each independent block to be compressed with the dictionary, but this entry supports a more limited scenario,
+        where only the first block uses the dictionary. This is still useful for small data, which only need one block anyway. For larger inputs, one may be
+        more interested in #compressFrame_usingCDict().
         """,
 
         LZ4F_cctx.p("cctx", ""),
         void.p("dstBuffer", ""),
-        AutoSize("dstBuffer")..size_t("dstCapacity", ""),
-        void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..size_t("srcSize", ""),
-        nullable..LZ4F_compressOptions_t.const.p("cOptPtr", "optional : #NULL can be provided, in which case all options are set to default"),
+        AutoSize("dstBuffer")..size_t("dstCapacity", "must be &ge; #HEADER_SIZE_MAX bytes"),
+        void.const.p("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t("dictSize", "must outlive the compression session"),
+        nullable..LZ4F_preferences_t.const.p(
+            "prefsPtr",
+            "optional: one may provide #NULL as argument, however, it's the only way to provide {@code dictID} in the frame header."
+        ),
 
-        returnDoc =
+        returnDoc = "number of bytes written into {@code dstBuffer} for the header, or an error code (which can be tested using #isError())"
+    )
+
+    size_t(
+        "decompress_usingDict",
         """
-        number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
-        tested using #isError())"
-        """
+        Same as #decompress(), using a predefined dictionary.
+
+        Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.
+        """,
+
+        LZ4F_dctx.p("dctxPtr", ""),
+        void.p("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p("dstSizePtr", ""),
+        void.const.p("srcBuffer", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p("srcSizePtr", ""),
+        void.const.p("dict", ""),
+        AutoSize("dict")..size_t("dictSize", ""),
+        LZ4F_decompressOptions_t.const.p("decompressOptionsPtr", "")
     )
 
     LZ4F_CDict.p(
@@ -533,16 +559,12 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "compressBegin_usingCDict",
-        """
-        Inits streaming dictionary compression, and writes the frame header into {@code dstBuffer}.
-
-        {@code dstCapacity} must be &ge; #HEADER_SIZE_MAX bytes.
-        """,
+        "Inits streaming dictionary compression, and writes the frame header into {@code dstBuffer}.",
 
         LZ4F_cctx.p("cctx", ""),
         void.p("dstBuffer", ""),
-        AutoSize("dstBuffer")..size_t("dstCapacity", ""),
-        LZ4F_CDict.const.p("cdict", ""),
+        AutoSize("dstBuffer")..size_t("dstCapacity", "must be &ge; #HEADER_SIZE_MAX bytes"),
+        LZ4F_CDict.const.p("cdict", "must outlive the compression session"),
         LZ4F_preferences_t.const.p(
             "prefsPtr",
             "optional: you may provide #NULL as argument, however, it's the only way to provide {@code dictID} in the frame header"
@@ -552,21 +574,38 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
-        "decompress_usingDict",
+        "getBlockSize",
         """
-        Same as #decompress(), using a predefined dictionary.
-
-        Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.
+        Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}, or an error code (can be tested using
+        #isError()) if {@code blockSizeID} is invalid.
         """,
 
-        LZ4F_dctx.p("dctxPtr", ""),
+        LZ4F_blockSizeID_t("blockSizeID", "")
+    )
+
+    size_t(
+        "uncompressedUpdate",
+        """
+        Can be called repetitively to add data stored as uncompressed blocks.
+
+        Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
+        condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
+        state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed first before appending uncompressed
+        data is continued. This operation is only supported when #blockIndependent is used.
+        """,
+
+        LZ4F_cctx.p("cctx", ""),
         void.p("dstBuffer", ""),
-        AutoSize("dstBuffer")..Check(1)..size_t.p("dstSizePtr", ""),
+        AutoSize("dstBuffer")..size_t("dstCapacity", ""),
         void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t.p("srcSizePtr", ""),
-        void.const.p("dict", ""),
-        AutoSize("dict")..size_t("dictSize", ""),
-        LZ4F_decompressOptions_t.const.p("decompressOptionsPtr", "")
+        AutoSize("srcBuffer")..size_t("srcSize", ""),
+        nullable..LZ4F_compressOptions_t.const.p("cOptPtr", "optional : #NULL can be provided, in which case all options are set to default"),
+
+        returnDoc =
+        """
+        number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
+        tested using #isError())"
+        """
     )
 
     macro..LZ4F_CustomMem("defaultCMem", "This constant defers to stdlib's functions", void())

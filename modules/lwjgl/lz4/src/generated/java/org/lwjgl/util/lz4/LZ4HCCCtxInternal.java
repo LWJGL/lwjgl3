@@ -150,7 +150,7 @@ public class LZ4HCCCtxInternal extends Struct<LZ4HCCCtxInternal> {
     /** below that point, need {@code extDict} */
     @NativeType("LZ4_u32")
     public int dictLimit() { return ndictLimit(address()); }
-    /** below that point, no more {@code dict} */
+    /** below that point, no more history */
     @NativeType("LZ4_u32")
     public int lowLimit() { return nlowLimit(address()); }
     /** index from which to continue dictionary update */

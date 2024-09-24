@@ -31,7 +31,8 @@ ENABLE_WARNINGS()""")
         same stream) (experimental). {@code LZ4_resetStreamHC_fast()} only works on states which have been properly initialized at least once, which is
         automatically the case when state is created using {@code LZ4_createStreamHC()}.
 
-        After reset, a first "fictional block" can be designated as initial dictionary, using #loadDictHC() (Optional).
+        After reset, a first "fictional block" can be designated as initial dictionary, using #loadDictHC() (Optional). Note: In order for #loadDictHC() to
+        create the correct data structure, it is essential to set the compression level <b>before</b> loading the dictionary.
 
         Invoke #compress_HC_continue() to compress each successive block. The number of blocks is unlimited. Previous input blocks, including initial
         dictionary when present, must remain accessible and unmodified during compression.
@@ -53,7 +54,7 @@ ENABLE_WARNINGS()""")
     IntConstant(
         "Compression level.",
 
-        "CLEVEL_MIN".."3",
+        "CLEVEL_MIN".."2",
         "CLEVEL_DEFAULT".."9",
         "CLEVEL_OPT_MIN".."10",
         "CLEVEL_MAX".."12"
@@ -215,6 +216,33 @@ ENABLE_WARNINGS()""")
         AutoSize("safeBuffer")..int("maxDictSize", "")
     )
 
+    void(
+        "attach_HC_dictionary",
+        """
+        This API allows for the efficient re-use of a static dictionary many times.
+
+        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
+        {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
+        references the dictionary stream in-place.
+
+        Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDictHC() should be
+        expected to work.
+
+        Alternatively, the provided dictionary stream pointer may be #NULL, in which case any existing dictionary stream is unset.
+
+        A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).
+
+        The dictionary will remain attached to the working stream only for the current stream session. Calls to #resetStreamHC_fast() will remove the
+        dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged through
+        the lifetime of the stream session.
+        """,
+
+        LZ4_streamHC_t.p("working_stream", ""),
+        nullable..LZ4_streamHC_t.p.const("dictionary_stream", ""),
+
+        since = "1.10.0"
+    )
+
     LZ4_streamHC_t.p(
         "initStreamHC",
         "Required before first use of a statically allocated {@code LZ4_streamHC_t}.",
@@ -263,30 +291,5 @@ ENABLE_WARNINGS()""")
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         int("compressionLevel", "")
-    )
-
-    void(
-        "attach_HC_dictionary",
-        """
-        This is an experimental API that allows for the efficient use of a static dictionary many times.
-
-        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
-        {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
-        references the dictionary stream in-place.
-
-        Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDictHC() should be
-        expected to work.
-
-        Alternatively, the provided dictionary stream pointer may be #NULL, in which case any existing dictionary stream is unset.
-
-        A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).
-
-        The dictionary will remain attached to the working stream only for the current stream session. Calls to #resetStreamHC_fast() will remove the
-        dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged through
-        the lifetime of the stream session.
-        """,
-
-        LZ4_streamHC_t.p("working_stream", ""),
-        nullable..LZ4_streamHC_t.p.const("dictionary_stream", "")
     )
 }

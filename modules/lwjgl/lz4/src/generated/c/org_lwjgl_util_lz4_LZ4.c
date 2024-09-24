@@ -99,6 +99,20 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1loadDict(JNIEnv *__env,
     return (jint)LZ4_loadDict(streamPtr, dictionary, dictSize);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1loadDictSlow(JNIEnv *__env, jclass clazz, jlong streamPtrAddress, jlong dictionaryAddress, jint dictSize) {
+    LZ4_stream_t *streamPtr = (LZ4_stream_t *)(uintptr_t)streamPtrAddress;
+    char const *dictionary = (char const *)(uintptr_t)dictionaryAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)LZ4_loadDictSlow(streamPtr, dictionary, dictSize);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1attach_1dictionary(JNIEnv *__env, jclass clazz, jlong workingStreamAddress, jlong dictionaryStreamAddress) {
+    LZ4_stream_t *workingStream = (LZ4_stream_t *)(uintptr_t)workingStreamAddress;
+    LZ4_stream_t const *dictionaryStream = (LZ4_stream_t const *)(uintptr_t)dictionaryStreamAddress;
+    UNUSED_PARAMS(__env, clazz)
+    LZ4_attach_dictionary(workingStream, dictionaryStream);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1fast_1continue(JNIEnv *__env, jclass clazz, jlong streamPtrAddress, jlong srcAddress, jlong dstAddress, jint srcSize, jint dstCapacity, jint acceleration) {
     LZ4_stream_t *streamPtr = (LZ4_stream_t *)(uintptr_t)streamPtrAddress;
     char const *src = (char const *)(uintptr_t)srcAddress;
@@ -169,17 +183,19 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1fast_1extStat
     return (jint)LZ4_compress_fast_extState_fastReset(state, src, dst, srcSize, dstCapacity, acceleration);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1attach_1dictionary(JNIEnv *__env, jclass clazz, jlong workingStreamAddress, jlong dictionaryStreamAddress) {
-    LZ4_stream_t *workingStream = (LZ4_stream_t *)(uintptr_t)workingStreamAddress;
-    LZ4_stream_t const *dictionaryStream = (LZ4_stream_t const *)(uintptr_t)dictionaryStreamAddress;
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize_1extState(JNIEnv *__env, jclass clazz, jlong stateAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize, jint acceleration) {
+    void *state = (void *)(uintptr_t)stateAddress;
+    char const *src = (char const *)(uintptr_t)srcAddress;
+    char *dst = (char *)(uintptr_t)dstAddress;
+    int *srcSizePtr = (int *)(uintptr_t)srcSizePtrAddress;
     UNUSED_PARAMS(__env, clazz)
-    LZ4_attach_dictionary(workingStream, dictionaryStream);
+    return (jint)LZ4_compress_destSize_extState(state, src, dst, srcSizePtr, targetDstSize, acceleration);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1initStream(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong size) {
-    void *buffer = (void *)(uintptr_t)bufferAddress;
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1initStream(JNIEnv *__env, jclass clazz, jlong stateBufferAddress, jlong size) {
+    void *stateBuffer = (void *)(uintptr_t)stateBufferAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(uintptr_t)LZ4_initStream(buffer, (size_t)size);
+    return (jlong)(uintptr_t)LZ4_initStream(stateBuffer, (size_t)size);
 }
 
 EXTERN_C_EXIT

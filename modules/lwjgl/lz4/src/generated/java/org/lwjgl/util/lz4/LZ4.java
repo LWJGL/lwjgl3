@@ -77,8 +77,8 @@ public class LZ4 {
     /** Version number part. */
     public static final int
         LZ4_VERSION_MAJOR   = 1,
-        LZ4_VERSION_MINOR   = 9,
-        LZ4_VERSION_RELEASE = 4;
+        LZ4_VERSION_MINOR   = 10,
+        LZ4_VERSION_RELEASE = 0;
 
     /** Version number. */
     public static final int LZ4_VERSION_NUMBER = (LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE);
@@ -86,7 +86,7 @@ public class LZ4 {
     /** Version string. */
     public static final String LZ4_VERSION_STRING = LZ4_VERSION_MAJOR + "." + LZ4_VERSION_MINOR + "." + LZ4_VERSION_RELEASE;
 
-    /** Tuning parameters. */
+    /** Tuning memory usage. */
     public static final int
         LZ4_MEMORY_USAGE_MIN     = 10,
         LZ4_MEMORY_USAGE_DEFAULT = 14,
@@ -95,10 +95,10 @@ public class LZ4 {
     /**
      * Memory usage formula : {@code N->2^N} Bytes (examples : {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} )
      * 
-     * <p>Increasing memory usage improves compression ratio, at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks to better
-     * cache locality.</p>
+     * <p>Increasing memory usage improves compression ratio, generally at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks
+     * to better cache locality.</p>
      * 
-     * <p>Default value is 14, for 16KB, which nicely fits into Intel x86 L1 cache.</p>
+     * <p>Default value is 14, for 16KB, which nicely fits into most L1 caches.</p>
      */
     public static final int LZ4_MEMORY_USAGE = LZ4_MEMORY_USAGE_DEFAULT;
 
@@ -258,20 +258,22 @@ public class LZ4 {
     /**
      * Unsafe version of: {@link #LZ4_compress_destSize compress_destSize}
      *
-     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value.
+     * @param srcSizePtr in+out parameter. Initially contains size of input. Will be modified to indicate how many bytes where read from {@code source} to fill
+     *                   {@code dest}. New value is necessarily &le; input value.
      */
     public static native int nLZ4_compress_destSize(long src, long dst, long srcSizePtr, int targetDstSize);
 
     /**
      * Reverse the logic: compresses as much data as possible from {@code src} buffer into already allocated buffer {@code dst} of size
-     * {@code targetDstSize}.
+     * {@code dstCapacity}.
      * 
      * <p>This function either compresses the entire {@code src} content into {@code dst} if it's large enough, or fill {@code dst} buffer completely with as
      * much data as possible from {@code src}. Note: acceleration parameter is fixed to {@code "default"}.</p>
      *
-     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value.
+     * @param srcSizePtr in+out parameter. Initially contains size of input. Will be modified to indicate how many bytes where read from {@code source} to fill
+     *                   {@code dest}. New value is necessarily &le; input value.
      *
-     * @return nb bytes written into {@code dest} (necessarily &le; {@code targetDestSize}) or 0 if compression fails
+     * @return nb bytes written into {@code dest} (necessarily &le; {@code dstCapacity}) or 0 if compression fails
      */
     public static int LZ4_compress_destSize(@NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr) {
         if (CHECKS) {
@@ -372,16 +374,67 @@ public class LZ4 {
      * 
      * <p>The dictionary must remain available during compression. {@code LZ4_loadDict()} triggers a reset, so any previous data will be forgotten. The same
      * dictionary will have to be loaded on decompression side for successful decoding. Dictionarys are useful for better compression of small data (KB
-     * range). While LZ4 accepts any input as dictionary, results are generally better when using Zstandard's Dictionary Builder. Loading a size of 0 is
-     * allowed, and is the same as reset.</p>
+     * range). While LZ4 itself accepts any input as dictionary, dictionary efficiency is also a topic. When in doubt, employ the Zstandard's Dictionary
+     * Builder. Loading a size of 0 is allowed, and is the same as reset.</p>
      *
-     * @return loaded dictionary size, in bytes (necessarily &le; 64 KB)
+     * @return loaded dictionary size, in bytes (note: only the last 64 KB are loaded)
      */
     public static int LZ4_loadDict(@NativeType("LZ4_stream_t *") long streamPtr, @Nullable @NativeType("char const *") ByteBuffer dictionary) {
         if (CHECKS) {
             check(streamPtr);
         }
         return nLZ4_loadDict(streamPtr, memAddressSafe(dictionary), remainingSafe(dictionary));
+    }
+
+    // --- [ LZ4_loadDictSlow ] ---
+
+    /** Unsafe version of: {@link #LZ4_loadDictSlow loadDictSlow} */
+    public static native int nLZ4_loadDictSlow(long streamPtr, long dictionary, int dictSize);
+
+    /**
+     * Same as {@link #LZ4_loadDict loadDict}, but uses a bit more cpu to reference the dictionary content more thoroughly.
+     * 
+     * <p>This is expected to slightly improve compression ratio. The extra-cpu cost is likely worth it if the dictionary is re-used across multiple sessions.</p>
+     */
+    public static int LZ4_loadDictSlow(@NativeType("LZ4_stream_t *") long streamPtr, @Nullable @NativeType("char const *") ByteBuffer dictionary) {
+        if (CHECKS) {
+            check(streamPtr);
+        }
+        return nLZ4_loadDictSlow(streamPtr, memAddressSafe(dictionary), remainingSafe(dictionary));
+    }
+
+    // --- [ LZ4_attach_dictionary ] ---
+
+    /** Unsafe version of: {@link #LZ4_attach_dictionary attach_dictionary} */
+    public static native void nLZ4_attach_dictionary(long workingStream, long dictionaryStream);
+
+    /**
+     * This allows efficient re-use of a static dictionary multiple times.
+     * 
+     * <p>Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
+     * into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references
+     * {@code dictionaryStream} in-place.</p>
+     * 
+     * <p>Several assumptions are made about the state of {@code dictionaryStream}. Currently, only states which have been prepared by {@link #LZ4_loadDict loadDict} or
+     * {@link #LZ4_loadDictSlow loadDictSlow} should be expected to work.</p>
+     * 
+     * <p>Alternatively, the provided {@code dictionaryStream} may be {@code NULL}, in which case any existing dictionary stream is unset.</p>
+     * 
+     * <p>If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
+     * logically immediately precede the data compressed in the first subsequent compression call.</p>
+     * 
+     * <p>The dictionary will only remain attached to the working stream through the first compression call, at the end of which it is cleared.
+     * {@code dictionaryStream} stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the compression session.</p>
+     * 
+     * <p>Note: there is no equivalent {@code LZ4_attach_*()} method on the decompression side because there is no initialization cost, hence no need to share
+     * the cost across multiple sessions. To decompress LZ4 blocks using dictionary, attached or not, just employ the regular {@link #LZ4_setStreamDecode setStreamDecode} for
+     * streaming, or the stateless {@link #LZ4_decompress_safe_usingDict decompress_safe_usingDict} for one-shot decompression.</p>
+     */
+    public static void LZ4_attach_dictionary(@NativeType("LZ4_stream_t *") long workingStream, @NativeType("LZ4_stream_t const *") long dictionaryStream) {
+        if (CHECKS) {
+            check(workingStream);
+        }
+        nLZ4_attach_dictionary(workingStream, dictionaryStream);
     }
 
     // --- [ LZ4_compress_fast_continue ] ---
@@ -500,11 +553,11 @@ public class LZ4 {
     public static native int nLZ4_decompress_safe_continue(long LZ4_streamDecode, long src, long dst, int srcSize, int dstCapacity);
 
     /**
-     * These decoding functions allow decompression of consecutive blocks in "streaming" mode.
+     * This decoding function allows decompression of consecutive blocks in "streaming" mode.
      * 
-     * <p>A block is an unsplittable entity, it must be presented entirely to a decompression function. Decompression functions only accept one block at a time.
-     * The last 64KB of previously decoded data <i>must</i> remain available and unmodified at the memory position where they were decoded. If less than 64KB
-     * of data has been decoded, all the data must be present.</p>
+     * <p>The difference with the usual independent blocks is that new blocks are allowed to find references into former blocks. A block is an unsplittable
+     * entity, and must be presented entirely to the decompression function. {@code LZ4_decompress_safe_continue()} only accepts one block at a time. It's
+     * modeled after {@link #LZ4_decompress_safe decompress_safe} and behaves similarly.</p>
      * 
      * <p>Special: if decompression side sets a ring buffer, it must respect one of the following conditions:</p>
      * 
@@ -535,8 +588,8 @@ public class LZ4 {
     public static native int nLZ4_decompress_safe_usingDict(long src, long dst, int srcSize, int dstCapacity, long dictStart, int dictSize);
 
     /**
-     * These decoding functions work the same as a combination of {@link #LZ4_setStreamDecode setStreamDecode} followed by {@code LZ4_decompress_*_continue()}. They are stand-alone,
-     * and don't need an {@code LZ4_streamDecode_t} structure.
+     * Works the same as a combination of {@link #LZ4_setStreamDecode setStreamDecode} followed by {@link #LZ4_decompress_safe_continue decompress_safe_continue}. However, it's stateless: it doesn't need any
+     * {@code LZ4_streamDecode_t} state.
      * 
      * <p>Dictionary is presumed stable: it must remain accessible and unmodified during decompression.</p>
      * 
@@ -551,7 +604,11 @@ public class LZ4 {
     /** Unsafe version of: {@link #LZ4_decompress_safe_partial_usingDict decompress_safe_partial_usingDict} */
     public static native int nLZ4_decompress_safe_partial_usingDict(long src, long dst, int compressedSize, int targetOutputSize, int maxOutputSize, long dictStart, int dictSize);
 
-    /** See {@link #LZ4_decompress_safe_usingDict decompress_safe_usingDict}. */
+    /**
+     * Behaves the same as {@link #LZ4_decompress_safe_partial decompress_safe_partial} with the added ability to specify a memory segment for past data.
+     * 
+     * <p>Performance tip: Decompression speed can be substantially increased when {@code dst == dictStart + dictSize}.</p>
+     */
     public static int LZ4_decompress_safe_partial_usingDict(@NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int targetOutputSize, @NativeType("char const *") ByteBuffer dictStart) {
         return nLZ4_decompress_safe_partial_usingDict(memAddress(src), memAddress(dst), src.remaining(), targetOutputSize, dst.remaining(), memAddress(dictStart), dictStart.remaining());
     }
@@ -572,40 +629,28 @@ public class LZ4 {
         return nLZ4_compress_fast_extState_fastReset(memAddress(state), memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), acceleration);
     }
 
-    // --- [ LZ4_attach_dictionary ] ---
+    // --- [ LZ4_compress_destSize_extState ] ---
 
-    /** Unsafe version of: {@link #LZ4_attach_dictionary attach_dictionary} */
-    public static native void nLZ4_attach_dictionary(long workingStream, long dictionaryStream);
+    /** Unsafe version of: {@link #LZ4_compress_destSize_extState compress_destSize_extState} */
+    public static native int nLZ4_compress_destSize_extState(long state, long src, long dst, long srcSizePtr, int targetDstSize, int acceleration);
 
     /**
-     * This is an experimental API that allows efficient use of a static dictionary many times.
-     * 
-     * <p>Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
-     * into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references the dictionary stream
-     * in-place.</p>
-     * 
-     * <p>Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by {@link #LZ4_loadDict loadDict} should be
-     * expected to work.</p>
-     * 
-     * <p>Alternatively, the provided {@code dictionaryStream} may be {@code NULL}, in which case any existing dictionary stream is unset.</p>
-     * 
-     * <p>If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
-     * logically immediately precede the data compressed in the first subsequent compression call.</p>
-     * 
-     * <p>The dictionary will only remain attached to the working stream through the first compression call, at the end of which it is cleared. The dictionary
-     * stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the first compression call on the stream.</p>
+     * Same as {@link #LZ4_compress_destSize compress_destSize}, but using an externally allocated state.
+     *
+     * @since 1.10.0
      */
-    public static void LZ4_attach_dictionary(@NativeType("LZ4_stream_t *") long workingStream, @NativeType("LZ4_stream_t const *") long dictionaryStream) {
+    public static int LZ4_compress_destSize_extState(@NativeType("void *") ByteBuffer state, @NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr, int acceleration) {
         if (CHECKS) {
-            check(workingStream);
+            check(srcSizePtr, 1);
+            check(src, srcSizePtr.get(srcSizePtr.position()));
         }
-        nLZ4_attach_dictionary(workingStream, dictionaryStream);
+        return nLZ4_compress_destSize_extState(memAddress(state), memAddress(src), memAddress(dst), memAddress(srcSizePtr), dst.remaining(), acceleration);
     }
 
     // --- [ LZ4_initStream ] ---
 
     /** Unsafe version of: {@link #LZ4_initStream initStream} */
-    public static native long nLZ4_initStream(long buffer, long size);
+    public static native long nLZ4_initStream(long stateBuffer, long size);
 
     /**
      * An {@code LZ4_stream_t} structure must be initialized at least once. This is automatically done when invoking createStream(), but it's not when the
@@ -621,8 +666,8 @@ public class LZ4 {
      * @since 1.9.0
      */
     @NativeType("LZ4_stream_t *")
-    public static long LZ4_initStream(@NativeType("void *") ByteBuffer buffer) {
-        return nLZ4_initStream(memAddress(buffer), buffer.remaining());
+    public static long LZ4_initStream(@NativeType("void *") ByteBuffer stateBuffer) {
+        return nLZ4_initStream(memAddress(stateBuffer), stateBuffer.remaining());
     }
 
     // --- [ LZ4_DECOMPRESS_INPLACE_MARGIN ] ---

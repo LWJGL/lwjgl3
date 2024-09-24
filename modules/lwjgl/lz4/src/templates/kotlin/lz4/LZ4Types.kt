@@ -34,13 +34,13 @@ val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_fr
 
         Structure must be first init to 0, using {@code memset()}, setting all parameters to default. It's then possible to update selectively some parameter.
         """
-    LZ4F_blockSizeID_t("blockSizeID", "{@code 0 == default}").links("max\\d+\\w+")
-    LZ4F_blockMode_t("blockMode", "{@code 0 == default}").links("block\\w+")
-    LZ4F_contentChecksum_t("contentChecksumFlag", "1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default) ")
+    LZ4F_blockSizeID_t("blockSizeID", "{@code 0 == default (#max64KB)}").links("max\\d+\\w+")
+    LZ4F_blockMode_t("blockMode", "{@code 0 == default (#blockLinked)}").links("block\\w+")
+    LZ4F_contentChecksum_t("contentChecksumFlag", "1: add a 32-bit checksum of frame's decompressed data; 0: disabled (default) ")
     LZ4F_frameType_t("frameType", "read-only field").links("#frame #skippableFrame")
     unsigned_long_long("contentSize", "size of uncompressed content ; {@code 0 == unknown}")
     unsigned("dictID", "dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided")
-    LZ4F_blockChecksum_t("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: disabled (default)")
+    LZ4F_blockChecksum_t("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: default (disabled)")
 }
 
 val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
@@ -71,16 +71,16 @@ val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativ
     unsigned(
         "stableDst",
         """
-        pledges that last 64KB decompressed data will remain available unmodified between invocations.
+        pledges that last 64KB decompressed data is present right before {@code dstBuffer} pointer.
 
-        This optimization skips storage operations in tmp buffers.
+        This optimization skips internal storage operations. Once set, this pledge must remain valid up to the end of current frame.
         """
     )
   unsigned(
       "skipChecksums",
       """
       disable checksum calculation and verification, even when one is present in frame, to save CPU time.
-      
+
       Setting this option to 1 once disables all checksums for the rest of the frame.
       """
   )

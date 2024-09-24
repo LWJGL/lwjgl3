@@ -28,7 +28,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * same stream) (experimental). {@code LZ4_resetStreamHC_fast()} only works on states which have been properly initialized at least once, which is
  * automatically the case when state is created using {@code LZ4_createStreamHC()}.</p>
  * 
- * <p>After reset, a first "fictional block" can be designated as initial dictionary, using {@link #LZ4_loadDictHC loadDictHC} (Optional).</p>
+ * <p>After reset, a first "fictional block" can be designated as initial dictionary, using {@link #LZ4_loadDictHC loadDictHC} (Optional). Note: In order for {@link #LZ4_loadDictHC loadDictHC} to
+ * create the correct data structure, it is essential to set the compression level <b>before</b> loading the dictionary.</p>
  * 
  * <p>Invoke {@link #LZ4_compress_HC_continue compress_HC_continue} to compress each successive block. The number of blocks is unlimited. Previous input blocks, including initial
  * dictionary when present, must remain accessible and unmodified during compression.</p>
@@ -52,7 +53,7 @@ public class LZ4HC {
 
     /** Compression level. */
     public static final int
-        LZ4HC_CLEVEL_MIN     = 3,
+        LZ4HC_CLEVEL_MIN     = 2,
         LZ4HC_CLEVEL_DEFAULT = 9,
         LZ4HC_CLEVEL_OPT_MIN = 10,
         LZ4HC_CLEVEL_MAX     = 12;
@@ -261,6 +262,38 @@ public class LZ4HC {
         return nLZ4_saveDictHC(streamHCPtr, memAddress(safeBuffer), safeBuffer.remaining());
     }
 
+    // --- [ LZ4_attach_HC_dictionary ] ---
+
+    /** Unsafe version of: {@link #LZ4_attach_HC_dictionary attach_HC_dictionary} */
+    public static native void nLZ4_attach_HC_dictionary(long working_stream, long dictionary_stream);
+
+    /**
+     * This API allows for the efficient re-use of a static dictionary many times.
+     * 
+     * <p>Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
+     * {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
+     * references the dictionary stream in-place.</p>
+     * 
+     * <p>Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by {@link #LZ4_loadDictHC loadDictHC} should be
+     * expected to work.</p>
+     * 
+     * <p>Alternatively, the provided dictionary stream pointer may be {@code NULL}, in which case any existing dictionary stream is unset.</p>
+     * 
+     * <p>A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).</p>
+     * 
+     * <p>The dictionary will remain attached to the working stream only for the current stream session. Calls to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} will remove the
+     * dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged through
+     * the lifetime of the stream session.</p>
+     *
+     * @since 1.10.0
+     */
+    public static void LZ4_attach_HC_dictionary(@NativeType("LZ4_streamHC_t *") long working_stream, @NativeType("LZ4_streamHC_t * const") long dictionary_stream) {
+        if (CHECKS) {
+            check(working_stream);
+        }
+        nLZ4_attach_HC_dictionary(working_stream, dictionary_stream);
+    }
+
     // --- [ LZ4_initStreamHC ] ---
 
     /** Unsafe version of: {@link #LZ4_initStreamHC initStreamHC} */
@@ -322,36 +355,6 @@ public class LZ4HC {
      */
     public static int LZ4_compress_HC_extStateHC_fastReset(@NativeType("void *") ByteBuffer state, @NativeType("char * const") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int compressionLevel) {
         return nLZ4_compress_HC_extStateHC_fastReset(memAddress(state), memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), compressionLevel);
-    }
-
-    // --- [ LZ4_attach_HC_dictionary ] ---
-
-    /** Unsafe version of: {@link #LZ4_attach_HC_dictionary attach_HC_dictionary} */
-    public static native void nLZ4_attach_HC_dictionary(long working_stream, long dictionary_stream);
-
-    /**
-     * This is an experimental API that allows for the efficient use of a static dictionary many times.
-     * 
-     * <p>Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
-     * {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
-     * references the dictionary stream in-place.</p>
-     * 
-     * <p>Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by {@link #LZ4_loadDictHC loadDictHC} should be
-     * expected to work.</p>
-     * 
-     * <p>Alternatively, the provided dictionary stream pointer may be {@code NULL}, in which case any existing dictionary stream is unset.</p>
-     * 
-     * <p>A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).</p>
-     * 
-     * <p>The dictionary will remain attached to the working stream only for the current stream session. Calls to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} will remove the
-     * dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged through
-     * the lifetime of the stream session.</p>
-     */
-    public static void LZ4_attach_HC_dictionary(@NativeType("LZ4_streamHC_t *") long working_stream, @NativeType("LZ4_streamHC_t * const") long dictionary_stream) {
-        if (CHECKS) {
-            check(working_stream);
-        }
-        nLZ4_attach_HC_dictionary(working_stream, dictionary_stream);
     }
 
 }

@@ -79,8 +79,8 @@ ENABLE_WARNINGS()""")
         "Version number part.",
 
         "VERSION_MAJOR".."1",
-        "VERSION_MINOR".."9",
-        "VERSION_RELEASE".."4"
+        "VERSION_MINOR".."10",
+        "VERSION_RELEASE".."0"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -90,7 +90,7 @@ ENABLE_WARNINGS()""")
     Nonnull..charASCII.const.p("versionString", "Returns the version string.", void())
 
    IntConstant(
-       "Tuning parameters.",
+       "Tuning memory usage.",
 
        "MEMORY_USAGE_MIN".."10",
        "MEMORY_USAGE_DEFAULT".."14",
@@ -101,10 +101,10 @@ ENABLE_WARNINGS()""")
         """
         Memory usage formula : {@code N->2^N} Bytes (examples : {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} )
 
-        Increasing memory usage improves compression ratio, at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks to better
-        cache locality.
-        
-        Default value is 14, for 16KB, which nicely fits into Intel x86 L1 cache.
+        Increasing memory usage improves compression ratio, generally at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks
+        to better cache locality.
+
+        Default value is 14, for 16KB, which nicely fits into most L1 caches.
         """,
 
         "MEMORY_USAGE".."LZ4_MEMORY_USAGE_DEFAULT"
@@ -237,7 +237,7 @@ ENABLE_WARNINGS()""")
         "compress_destSize",
         """
         Reverse the logic: compresses as much data as possible from {@code src} buffer into already allocated buffer {@code dst} of size
-        {@code targetDstSize}.
+        {@code dstCapacity}.
 
         This function either compresses the entire {@code src} content into {@code dst} if it's large enough, or fill {@code dst} buffer completely with as
         much data as possible from {@code src}. Note: acceleration parameter is fixed to {@code "default"}.
@@ -247,11 +247,14 @@ ENABLE_WARNINGS()""")
         char.p("dst", ""),
         AutoSize("src")..Check(1)..int.p(
             "srcSizePtr",
-            "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value."
+            """
+            in+out parameter. Initially contains size of input. Will be modified to indicate how many bytes where read from {@code source} to fill
+            {@code dest}. New value is necessarily &le; input value.
+            """
         ),
         AutoSize("dst")..int("targetDstSize", ""),
 
-        returnDoc = "nb bytes written into {@code dest} (necessarily &le; {@code targetDestSize}) or 0 if compression fails"
+        returnDoc = "nb bytes written into {@code dest} (necessarily &le; {@code dstCapacity}) or 0 if compression fails"
     )
 
     int(
@@ -339,15 +342,57 @@ ENABLE_WARNINGS()""")
 
         The dictionary must remain available during compression. {@code LZ4_loadDict()} triggers a reset, so any previous data will be forgotten. The same
         dictionary will have to be loaded on decompression side for successful decoding. Dictionarys are useful for better compression of small data (KB
-        range). While LZ4 accepts any input as dictionary, results are generally better when using Zstandard's Dictionary Builder. Loading a size of 0 is
-        allowed, and is the same as reset.
+        range). While LZ4 itself accepts any input as dictionary, dictionary efficiency is also a topic. When in doubt, employ the Zstandard's Dictionary
+        Builder. Loading a size of 0 is allowed, and is the same as reset.
         """,
 
         LZ4_stream_t.p("streamPtr", ""),
         nullable..char.const.p("dictionary", ""),
         AutoSize("dictionary")..int("dictSize", ""),
 
-        returnDoc = "loaded dictionary size, in bytes (necessarily &le; 64 KB)"
+        returnDoc = "loaded dictionary size, in bytes (note: only the last 64 KB are loaded)"
+    )
+
+    int(
+        "loadDictSlow",
+        """
+        Same as #loadDict(), but uses a bit more cpu to reference the dictionary content more thoroughly.
+
+        This is expected to slightly improve compression ratio. The extra-cpu cost is likely worth it if the dictionary is re-used across multiple sessions.
+        """,
+
+        LZ4_stream_t.p("streamPtr", ""),
+        nullable..char.const.p("dictionary", ""),
+        AutoSize("dictionary")..int("dictSize", "")
+    )
+
+    void(
+        "attach_dictionary",
+        """
+        This allows efficient re-use of a static dictionary multiple times.
+
+        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
+        into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references
+        {@code dictionaryStream} in-place.
+
+        Several assumptions are made about the state of {@code dictionaryStream}. Currently, only states which have been prepared by #loadDict() or
+        #loadDictSlow() should be expected to work.
+
+        Alternatively, the provided {@code dictionaryStream} may be #NULL, in which case any existing dictionary stream is unset.
+
+        If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
+        logically immediately precede the data compressed in the first subsequent compression call.
+
+        The dictionary will only remain attached to the working stream through the first compression call, at the end of which it is cleared.
+        {@code dictionaryStream} stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the compression session.
+
+        Note: there is no equivalent {@code LZ4_attach_*()} method on the decompression side because there is no initialization cost, hence no need to share
+        the cost across multiple sessions. To decompress LZ4 blocks using dictionary, attached or not, just employ the regular #setStreamDecode() for
+        streaming, or the stateless #decompress_safe_usingDict() for one-shot decompression.
+        """,
+
+        LZ4_stream_t.p("workingStream", ""),
+        nullable..LZ4_stream_t.const.p("dictionaryStream", "")
     )
 
     int(
@@ -458,11 +503,11 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_safe_continue",
         """
-        These decoding functions allow decompression of consecutive blocks in "streaming" mode.
+        This decoding function allows decompression of consecutive blocks in "streaming" mode.
 
-        A block is an unsplittable entity, it must be presented entirely to a decompression function. Decompression functions only accept one block at a time.
-        The last 64KB of previously decoded data <i>must</i> remain available and unmodified at the memory position where they were decoded. If less than 64KB
-        of data has been decoded, all the data must be present.
+        The difference with the usual independent blocks is that new blocks are allowed to find references into former blocks. A block is an unsplittable
+        entity, and must be presented entirely to the decompression function. {@code LZ4_decompress_safe_continue()} only accepts one block at a time. It's
+        modeled after #decompress_safe() and behaves similarly.
 
         Special: if decompression side sets a ring buffer, it must respect one of the following conditions:
         ${ul(
@@ -495,8 +540,8 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_safe_usingDict",
         """
-        These decoding functions work the same as a combination of #setStreamDecode() followed by {@code LZ4_decompress_*_continue()}. They are stand-alone,
-        and don't need an {@code LZ4_streamDecode_t} structure.
+        Works the same as a combination of #setStreamDecode() followed by #decompress_safe_continue(). However, it's stateless: it doesn't need any
+        {@code LZ4_streamDecode_t} state.
 
         Dictionary is presumed stable: it must remain accessible and unmodified during decompression.
 
@@ -513,7 +558,11 @@ ENABLE_WARNINGS()""")
 
     int(
         "decompress_safe_partial_usingDict",
-        "See #decompress_safe_usingDict().",
+        """
+        Behaves the same as #decompress_safe_partial() with the added ability to specify a memory segment for past data.
+
+        Performance tip: Decompression speed can be substantially increased when {@code dst == dictStart + dictSize}.
+        """,
 
         char.const.p("src", ""),
         char.p("dst", ""),
@@ -542,29 +591,20 @@ ENABLE_WARNINGS()""")
         int("acceleration", "")
     )
 
-    void(
-        "attach_dictionary",
+    int(
+        "compress_destSize_extState",
         """
-        This is an experimental API that allows efficient use of a static dictionary many times.
-
-        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
-        into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references the dictionary stream
-        in-place.
-
-        Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDict() should be
-        expected to work.
-
-        Alternatively, the provided {@code dictionaryStream} may be #NULL, in which case any existing dictionary stream is unset.
-
-        If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
-        logically immediately precede the data compressed in the first subsequent compression call.
-
-        The dictionary will only remain attached to the working stream through the first compression call, at the end of which it is cleared. The dictionary
-        stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the first compression call on the stream.
+        Same as #compress_destSize(), but using an externally allocated state.
         """,
 
-        LZ4_stream_t.p("workingStream", ""),
-        nullable..LZ4_stream_t.const.p("dictionaryStream", "")
+        Unsafe..void.p("state", ""),
+        char.const.p("src", ""),
+        char.p("dst", ""),
+        AutoSize("src")..Check(1)..int.p("srcSizePtr", ""),
+        AutoSize("dst")..int("targetDstSize", ""),
+        int("acceleration", ""),
+
+        since = "1.10.0"
     )
 
     LZ4_stream_t.p(
@@ -581,8 +621,8 @@ ENABLE_WARNINGS()""")
         Note 2: An {@code LZ4_stream_t} structure guarantees correct alignment and size.
         """,
 
-        void.p("buffer", ""),
-        AutoSize("buffer")..size_t("size", ""),
+        void.p("stateBuffer", ""),
+        AutoSize("stateBuffer")..size_t("size", ""),
 
         since = "1.9.0"
     )

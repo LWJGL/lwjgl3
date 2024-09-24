@@ -146,7 +146,7 @@ public class LZ4Frame {
      * <li>{@link #LZ4F_ERROR_GENERIC ERROR_GENERIC}</li>
      * <li>{@link #LZ4F_ERROR_maxBlockSize_invalid ERROR_maxBlockSize_invalid}</li>
      * <li>{@link #LZ4F_ERROR_blockMode_invalid ERROR_blockMode_invalid}</li>
-     * <li>{@link #LZ4F_ERROR_contentChecksumFlag_invalid ERROR_contentChecksumFlag_invalid}</li>
+     * <li>{@link #LZ4F_ERROR_parameter_invalid ERROR_parameter_invalid}</li>
      * <li>{@link #LZ4F_ERROR_compressionLevel_invalid ERROR_compressionLevel_invalid}</li>
      * <li>{@link #LZ4F_ERROR_headerVersion_wrong ERROR_headerVersion_wrong}</li>
      * <li>{@link #LZ4F_ERROR_blockChecksum_invalid ERROR_blockChecksum_invalid}</li>
@@ -164,6 +164,8 @@ public class LZ4Frame {
      * <li>{@link #LZ4F_ERROR_frameDecoding_alreadyStarted ERROR_frameDecoding_alreadyStarted}</li>
      * <li>{@link #LZ4F_ERROR_compressionState_uninitialized ERROR_compressionState_uninitialized}</li>
      * <li>{@link #LZ4F_ERROR_parameter_null ERROR_parameter_null}</li>
+     * <li>{@link #LZ4F_ERROR_io_write ERROR_io_write}</li>
+     * <li>{@link #LZ4F_ERROR_io_read ERROR_io_read}</li>
      * <li>{@link #LZ4F_ERROR_maxCode ERROR_maxCode}</li>
      * </ul>
      */
@@ -172,7 +174,7 @@ public class LZ4Frame {
         LZ4F_ERROR_GENERIC                        = 1,
         LZ4F_ERROR_maxBlockSize_invalid           = 2,
         LZ4F_ERROR_blockMode_invalid              = 3,
-        LZ4F_ERROR_contentChecksumFlag_invalid    = 4,
+        LZ4F_ERROR_parameter_invalid              = 4,
         LZ4F_ERROR_compressionLevel_invalid       = 5,
         LZ4F_ERROR_headerVersion_wrong            = 6,
         LZ4F_ERROR_blockChecksum_invalid          = 7,
@@ -190,7 +192,9 @@ public class LZ4Frame {
         LZ4F_ERROR_frameDecoding_alreadyStarted   = 19,
         LZ4F_ERROR_compressionState_uninitialized = 20,
         LZ4F_ERROR_parameter_null                 = 21,
-        LZ4F_ERROR_maxCode                        = 22;
+        LZ4F_ERROR_io_write                       = 22,
+        LZ4F_ERROR_io_read                        = 23,
+        LZ4F_ERROR_maxCode                        = 24;
 
     protected LZ4Frame() {
         throw new UnsupportedOperationException();
@@ -220,9 +224,32 @@ public class LZ4Frame {
         return memASCIISafe(__result);
     }
 
-    // --- [ LZ4F_compressionLevel_max ] ---
+    // --- [ LZ4F_compressFrame ] ---
 
-    public static native int LZ4F_compressionLevel_max();
+    /**
+     * Unsafe version of: {@link #LZ4F_compressFrame compressFrame}
+     *
+     * @param dstCapacity MUST be &ge; {@link #LZ4F_compressFrameBound compressFrameBound}{@code (srcSize, preferencesPtr)}
+     */
+    public static native long nLZ4F_compressFrame(long dstBuffer, long dstCapacity, long srcBuffer, long srcSize, long preferencesPtr);
+
+    /**
+     * Compress {@code srcBuffer} content into an LZ4-compressed frame.  It's a one shot operation, all input content is consumed, and all output is\
+     * generated.
+     * 
+     * <p>Note : it's a stateless operation (no {@code LZ4F_cctx} state needed). In order to reduce load on the allocator, {@code LZ4F_compressFrame()}, by
+     * default, uses the stack to allocate space for the compression state and some table. If this usage of the stack is too much for your application,
+     * consider compiling {@code lz4frame.c} with compile-time macro {@code LZ4F_HEAPMODE} set to 1 instead. All state allocations will use the Heap. It also
+     * means each invocation of {@code LZ4F_compressFrame()} will trigger several internal alloc/free invocations.</p>
+     *
+     * @param preferencesPtr optional: one can provide {@code NULL}, in which case all preferences are set to default
+     *
+     * @return number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using {@link #LZ4F_isError isError})
+     */
+    @NativeType("size_t")
+    public static long LZ4F_compressFrame(@NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer srcBuffer, @Nullable @NativeType("LZ4F_preferences_t const *") LZ4FPreferences preferencesPtr) {
+        return nLZ4F_compressFrame(memAddress(dstBuffer), dstBuffer.remaining(), memAddress(srcBuffer), srcBuffer.remaining(), memAddressSafe(preferencesPtr));
+    }
 
     // --- [ LZ4F_compressFrameBound ] ---
 
@@ -246,26 +273,10 @@ public class LZ4Frame {
         return nLZ4F_compressFrameBound(srcSize, memAddressSafe(preferencesPtr));
     }
 
-    // --- [ LZ4F_compressFrame ] ---
+    // --- [ LZ4F_compressionLevel_max ] ---
 
-    /**
-     * Unsafe version of: {@link #LZ4F_compressFrame compressFrame}
-     *
-     * @param dstCapacity MUST be &ge; {@link #LZ4F_compressFrameBound compressFrameBound}{@code (srcSize, preferencesPtr)}
-     */
-    public static native long nLZ4F_compressFrame(long dstBuffer, long dstCapacity, long srcBuffer, long srcSize, long preferencesPtr);
-
-    /**
-     * Compress an entire {@code srcBuffer} into a valid LZ4 frame.
-     * 
-     * <p>The {@code LZ4F_preferences_t} structure is optional: you can provide {@code NULL} as argument. All preferences will be set to default.</p>
-     *
-     * @return number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using {@link #LZ4F_isError isError})
-     */
-    @NativeType("size_t")
-    public static long LZ4F_compressFrame(@NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer srcBuffer, @Nullable @NativeType("LZ4F_preferences_t const *") LZ4FPreferences preferencesPtr) {
-        return nLZ4F_compressFrame(memAddress(dstBuffer), dstBuffer.remaining(), memAddress(srcBuffer), srcBuffer.remaining(), memAddressSafe(preferencesPtr));
-    }
+    /** @return maximum allowed compression level (currently: 12) */
+    public static native int LZ4F_compressionLevel_max();
 
     // --- [ LZ4F_getVersion ] ---
 
@@ -326,7 +337,7 @@ public class LZ4Frame {
     /**
      * Will write the frame header into {@code dstBuffer}.
      *
-     * @param prefsPtr optional: you can provide {@code NULL} as argument, all preferences will then be set to default
+     * @param prefsPtr optional: NULL can be provided to set all preferences to default
      *
      * @return number of bytes written into {@code dstBuffer} for the header or an error code (which can be tested using {@link #LZ4F_isError isError})
      */
@@ -568,6 +579,10 @@ public class LZ4Frame {
      * 
      * <p>{@code dstBuffer} can freely change between each consecutive function invocation. {@code dstBuffer} content will be overwritten.</p>
      * 
+     * <p>Note: if {@link #LZ4F_getFrameInfo getFrameInfo} is called before {@code LZ4F_decompress()}, {@code srcBuffer} must be updated to reflect the number of bytes consumed after
+     * reading the frame header. Failure to update {@code srcBuffer} before calling {@code LZ4F_decompress()} will cause decompression failure or, even worse,
+     * successful but incorrect decompression. See the {@code LZ4F_getFrameInfo()} docs for details.</p>
+     * 
      * <p>After a frame is fully decoded, {@code dctx} can be used again to decompress another frame.</p>
      * 
      * <p>After a decompression error, use {@link #LZ4F_resetDecompressionContext resetDecompressionContext} before re-using {@code dctx}, to return to clean state.</p>
@@ -619,36 +634,55 @@ public class LZ4Frame {
     @NativeType("LZ4F_errorCodes")
     public static native int LZ4F_getErrorCode(@NativeType("size_t") long functionResult);
 
-    // --- [ LZ4F_getBlockSize ] ---
-
-    /** Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}. */
-    @NativeType("size_t")
-    public static native long LZ4F_getBlockSize(@NativeType("LZ4F_blockSizeID_t") int blockSizeID);
-
-    // --- [ LZ4F_uncompressedUpdate ] ---
-
-    /** Unsafe version of: {@link #LZ4F_uncompressedUpdate uncompressedUpdate} */
-    public static native long nLZ4F_uncompressedUpdate(long cctx, long dstBuffer, long dstCapacity, long srcBuffer, long srcSize, long cOptPtr);
+    // --- [ LZ4F_compressBegin_usingDict ] ---
 
     /**
-     * Can be called repetitively to add as much data uncompressed data as necessary.
+     * Unsafe version of: {@link #LZ4F_compressBegin_usingDict compressBegin_usingDict}
+     *
+     * @param dstCapacity must be &ge; {@link #LZ4F_HEADER_SIZE_MAX HEADER_SIZE_MAX} bytes
+     * @param dictSize    must outlive the compression session
+     */
+    public static native long nLZ4F_compressBegin_usingDict(long cctx, long dstBuffer, long dstCapacity, long dictBuffer, long dictSize, long prefsPtr);
+
+    /**
+     * Inits dictionary compression streaming, and writes the frame header into {@code dstBuffer}.
      * 
-     * <p>Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
-     * condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
-     * state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed before appending uncompressed data
-     * is continued. This is only supported when {@link #LZ4F_blockIndependent blockIndependent} is used.</p>
+     * <p>NOTE: The {@code LZ4Frame} spec allows each independent block to be compressed with the dictionary, but this entry supports a more limited scenario,
+     * where only the first block uses the dictionary. This is still useful for small data, which only need one block anyway. For larger inputs, one may be
+     * more interested in {@link #LZ4F_compressFrame_usingCDict compressFrame_usingCDict}.</p>
      *
-     * @param cOptPtr optional : {@code NULL} can be provided, in which case all options are set to default
+     * @param prefsPtr optional: one may provide {@code NULL} as argument, however, it's the only way to provide {@code dictID} in the frame header.
      *
-     * @return number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
-     *         tested using {@link #LZ4F_isError isError})"
+     * @return number of bytes written into {@code dstBuffer} for the header, or an error code (which can be tested using {@link #LZ4F_isError isError})
      */
     @NativeType("size_t")
-    public static long LZ4F_uncompressedUpdate(@NativeType("LZ4F_cctx *") long cctx, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer srcBuffer, @Nullable @NativeType("LZ4F_compressOptions_t const *") LZ4FCompressOptions cOptPtr) {
+    public static long LZ4F_compressBegin_usingDict(@NativeType("LZ4F_cctx *") long cctx, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer dictBuffer, @Nullable @NativeType("LZ4F_preferences_t const *") LZ4FPreferences prefsPtr) {
         if (CHECKS) {
             check(cctx);
         }
-        return nLZ4F_uncompressedUpdate(cctx, memAddress(dstBuffer), dstBuffer.remaining(), memAddress(srcBuffer), srcBuffer.remaining(), memAddressSafe(cOptPtr));
+        return nLZ4F_compressBegin_usingDict(cctx, memAddress(dstBuffer), dstBuffer.remaining(), memAddress(dictBuffer), dictBuffer.remaining(), memAddressSafe(prefsPtr));
+    }
+
+    // --- [ LZ4F_decompress_usingDict ] ---
+
+    /** Unsafe version of: {@link #LZ4F_decompress_usingDict decompress_usingDict} */
+    public static native long nLZ4F_decompress_usingDict(long dctxPtr, long dstBuffer, long dstSizePtr, long srcBuffer, long srcSizePtr, long dict, long dictSize, long decompressOptionsPtr);
+
+    /**
+     * Same as {@link #LZ4F_decompress decompress}, using a predefined dictionary.
+     * 
+     * <p>Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.</p>
+     */
+    @NativeType("size_t")
+    public static long LZ4F_decompress_usingDict(@NativeType("LZ4F_dctx *") long dctxPtr, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("size_t *") PointerBuffer dstSizePtr, @NativeType("void const *") ByteBuffer srcBuffer, @NativeType("size_t *") PointerBuffer srcSizePtr, @NativeType("void const *") ByteBuffer dict, @NativeType("LZ4F_decompressOptions_t const *") LZ4FDecompressOptions decompressOptionsPtr) {
+        if (CHECKS) {
+            check(dctxPtr);
+            check(dstSizePtr, 1);
+            check(dstBuffer, dstSizePtr.get(dstSizePtr.position()));
+            check(srcSizePtr, 1);
+            check(srcBuffer, srcSizePtr.get(srcSizePtr.position()));
+        }
+        return nLZ4F_decompress_usingDict(dctxPtr, memAddress(dstBuffer), memAddress(dstSizePtr), memAddress(srcBuffer), memAddress(srcSizePtr), memAddress(dict), dict.remaining(), decompressOptionsPtr.address());
     }
 
     // --- [ LZ4F_createCDict ] ---
@@ -707,14 +741,17 @@ public class LZ4Frame {
 
     // --- [ LZ4F_compressBegin_usingCDict ] ---
 
-    /** Unsafe version of: {@link #LZ4F_compressBegin_usingCDict compressBegin_usingCDict} */
+    /**
+     * Unsafe version of: {@link #LZ4F_compressBegin_usingCDict compressBegin_usingCDict}
+     *
+     * @param dstCapacity must be &ge; {@link #LZ4F_HEADER_SIZE_MAX HEADER_SIZE_MAX} bytes
+     */
     public static native long nLZ4F_compressBegin_usingCDict(long cctx, long dstBuffer, long dstCapacity, long cdict, long prefsPtr);
 
     /**
      * Inits streaming dictionary compression, and writes the frame header into {@code dstBuffer}.
-     * 
-     * <p>{@code dstCapacity} must be &ge; {@link #LZ4F_HEADER_SIZE_MAX HEADER_SIZE_MAX} bytes.</p>
      *
+     * @param cdict    must outlive the compression session
      * @param prefsPtr optional: you may provide {@code NULL} as argument, however, it's the only way to provide {@code dictID} in the frame header
      *
      * @return number of bytes written into {@code dstBuffer} for the header, or an error code (which can be tested using {@link #LZ4F_isError isError})
@@ -728,26 +765,39 @@ public class LZ4Frame {
         return nLZ4F_compressBegin_usingCDict(cctx, memAddress(dstBuffer), dstBuffer.remaining(), cdict, prefsPtr.address());
     }
 
-    // --- [ LZ4F_decompress_usingDict ] ---
-
-    /** Unsafe version of: {@link #LZ4F_decompress_usingDict decompress_usingDict} */
-    public static native long nLZ4F_decompress_usingDict(long dctxPtr, long dstBuffer, long dstSizePtr, long srcBuffer, long srcSizePtr, long dict, long dictSize, long decompressOptionsPtr);
+    // --- [ LZ4F_getBlockSize ] ---
 
     /**
-     * Same as {@link #LZ4F_decompress decompress}, using a predefined dictionary.
-     * 
-     * <p>Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.</p>
+     * Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}, or an error code (can be tested using
+     * {@link #LZ4F_isError isError}) if {@code blockSizeID} is invalid.
      */
     @NativeType("size_t")
-    public static long LZ4F_decompress_usingDict(@NativeType("LZ4F_dctx *") long dctxPtr, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("size_t *") PointerBuffer dstSizePtr, @NativeType("void const *") ByteBuffer srcBuffer, @NativeType("size_t *") PointerBuffer srcSizePtr, @NativeType("void const *") ByteBuffer dict, @NativeType("LZ4F_decompressOptions_t const *") LZ4FDecompressOptions decompressOptionsPtr) {
+    public static native long LZ4F_getBlockSize(@NativeType("LZ4F_blockSizeID_t") int blockSizeID);
+
+    // --- [ LZ4F_uncompressedUpdate ] ---
+
+    /** Unsafe version of: {@link #LZ4F_uncompressedUpdate uncompressedUpdate} */
+    public static native long nLZ4F_uncompressedUpdate(long cctx, long dstBuffer, long dstCapacity, long srcBuffer, long srcSize, long cOptPtr);
+
+    /**
+     * Can be called repetitively to add data stored as uncompressed blocks.
+     * 
+     * <p>Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
+     * condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
+     * state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed first before appending uncompressed
+     * data is continued. This operation is only supported when {@link #LZ4F_blockIndependent blockIndependent} is used.</p>
+     *
+     * @param cOptPtr optional : {@code NULL} can be provided, in which case all options are set to default
+     *
+     * @return number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
+     *         tested using {@link #LZ4F_isError isError})"
+     */
+    @NativeType("size_t")
+    public static long LZ4F_uncompressedUpdate(@NativeType("LZ4F_cctx *") long cctx, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer srcBuffer, @Nullable @NativeType("LZ4F_compressOptions_t const *") LZ4FCompressOptions cOptPtr) {
         if (CHECKS) {
-            check(dctxPtr);
-            check(dstSizePtr, 1);
-            check(dstBuffer, dstSizePtr.get(dstSizePtr.position()));
-            check(srcSizePtr, 1);
-            check(srcBuffer, srcSizePtr.get(srcSizePtr.position()));
+            check(cctx);
         }
-        return nLZ4F_decompress_usingDict(dctxPtr, memAddress(dstBuffer), memAddress(dstSizePtr), memAddress(srcBuffer), memAddress(srcSizePtr), memAddress(dict), dict.remaining(), decompressOptionsPtr.address());
+        return nLZ4F_uncompressedUpdate(cctx, memAddress(dstBuffer), dstBuffer.remaining(), memAddress(srcBuffer), srcBuffer.remaining(), memAddressSafe(cOptPtr));
     }
 
     // --- [ LZ4F_defaultCMem ] ---

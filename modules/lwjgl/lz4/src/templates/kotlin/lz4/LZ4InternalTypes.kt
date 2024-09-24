@@ -49,7 +49,7 @@ val LZ4HC_CCtx_internal = struct(Module.LZ4, "LZ4HCCCtxInternal", nativeName = "
     LZ4_byte.const.p("prefixStart", "Indexes relative to this position")
     LZ4_byte.const.p("dictStart", "alternate reference for {@code extDict}")
     LZ4_u32("dictLimit", "below that point, need {@code extDict}")
-    LZ4_u32("lowLimit", "below that point, no more {@code dict}")
+    LZ4_u32("lowLimit", "below that point, no more history")
     LZ4_u32("nextToUpdate", "index from which to continue dictionary update")
     short("compressionLevel", "")
     LZ4_i8("favorDecSpeed", "favor decompression speed if this flag set, otherwise, favor compression ratio")

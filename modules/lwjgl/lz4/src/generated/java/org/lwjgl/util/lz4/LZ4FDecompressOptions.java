@@ -82,9 +82,9 @@ public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> impleme
     public int sizeof() { return SIZEOF; }
 
     /**
-     * pledges that last 64KB decompressed data will remain available unmodified between invocations.
+     * pledges that last 64KB decompressed data is present right before {@code dstBuffer} pointer.
      * 
-     * <p>This optimization skips storage operations in tmp buffers.</p>
+     * <p>This optimization skips internal storage operations. Once set, this pledge must remain valid up to the end of current frame.</p>
      */
     @NativeType("unsigned")
     public int stableDst() { return nstableDst(address()); }

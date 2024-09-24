@@ -97,13 +97,13 @@ public class LZ4FFrameInfo extends Struct<LZ4FFrameInfo> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** {@code 0 == default}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_max64KB max64KB}</td><td>{@link LZ4Frame#LZ4F_max256KB max256KB}</td><td>{@link LZ4Frame#LZ4F_max1MB max1MB}</td><td>{@link LZ4Frame#LZ4F_max4MB max4MB}</td></tr></table> */
+    /** {@code 0 == default ({@link LZ4Frame#LZ4F_max64KB max64KB})}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_max64KB max64KB}</td><td>{@link LZ4Frame#LZ4F_max256KB max256KB}</td><td>{@link LZ4Frame#LZ4F_max1MB max1MB}</td><td>{@link LZ4Frame#LZ4F_max4MB max4MB}</td></tr></table> */
     @NativeType("LZ4F_blockSizeID_t")
     public int blockSizeID() { return nblockSizeID(address()); }
-    /** {@code 0 == default}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_blockLinked blockLinked}</td><td>{@link LZ4Frame#LZ4F_blockIndependent blockIndependent}</td><td>{@link LZ4Frame#LZ4F_blockChecksumEnabled blockChecksumEnabled}</td></tr></table> */
+    /** {@code 0 == default ({@link LZ4Frame#LZ4F_blockLinked blockLinked})}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_blockLinked blockLinked}</td><td>{@link LZ4Frame#LZ4F_blockIndependent blockIndependent}</td><td>{@link LZ4Frame#LZ4F_blockChecksumEnabled blockChecksumEnabled}</td></tr></table> */
     @NativeType("LZ4F_blockMode_t")
     public int blockMode() { return nblockMode(address()); }
-    /** 1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default) */
+    /** 1: add a 32-bit checksum of frame's decompressed data; 0: disabled (default) */
     @NativeType("LZ4F_contentChecksum_t")
     public int contentChecksumFlag() { return ncontentChecksumFlag(address()); }
     /** read-only field. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_frame frame}</td><td>{@link LZ4Frame#LZ4F_skippableFrame skippableFrame}</td></tr></table> */
@@ -115,7 +115,7 @@ public class LZ4FFrameInfo extends Struct<LZ4FFrameInfo> implements NativeResour
     /** dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided */
     @NativeType("unsigned")
     public int dictID() { return ndictID(address()); }
-    /** 1: each block followed by a checksum of block's compressed data; 0: disabled (default) */
+    /** 1: each block followed by a checksum of block's compressed data; 0: default (disabled) */
     @NativeType("LZ4F_blockChecksum_t")
     public int blockChecksumFlag() { return nblockChecksumFlag(address()); }
 
