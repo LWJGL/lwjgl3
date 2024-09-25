@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."61")
+    IntConstant("", "C_API_VERSION_MINOR".."64")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -136,7 +136,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "RESOURCE_TYPE_SEPARATE_SAMPLERS".enum,
         "RESOURCE_TYPE_ACCELERATION_STRUCTURE".enum,
         "RESOURCE_TYPE_RAY_QUERY".enum,
-        "RESOURCE_TYPE_SHADER_RECORD_BUFFER".enum
+        "RESOURCE_TYPE_SHADER_RECORD_BUFFER".enum,
+        "RESOURCE_TYPE_GL_PLAIN_UNIFORM".enum
     )
 
     EnumConstant(
@@ -524,6 +525,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_REPLACE_RECURSIVE_INPUTS".enum("", "87 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_AGX_MANUAL_CUBE_GRAD_FIXUP".enum("", "88 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_FORCE_FRAGMENT_WITH_SIDE_EFFECTS_EXECUTION".enum("", "89 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_HLSL_USE_ENTRY_POINT_NAME".enum("", "90 | SPVC_COMPILER_OPTION_HLSL_BIT"),
+        "COMPILER_OPTION_HLSL_PRESERVE_STRUCTURED_BUFFERS".enum("", "91 | SPVC_COMPILER_OPTION_HLSL_BIT")
     )
 
     void(
