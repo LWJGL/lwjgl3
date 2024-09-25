@@ -267,6 +267,14 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "SCRIPT_KAWI".enum("", "HB_TAG ('K','a','w','i')"),
         "SCRIPT_NAG_MUNDARI".enum("", "HB_TAG ('N','a','g','m')"),
 
+        "SCRIPT_GARAY".enum("", "HB_TAG ('G','a','r','a')"),
+        "SCRIPT_GURUNG_KHEMA".enum("", "HB_TAG ('G','u','k','h')"),
+        "SCRIPT_KIRAT_RAI".enum("", "HB_TAG ('K','r','a','i')"),
+        "SCRIPT_OL_ONAL".enum("", "HB_TAG ('O','n','a','o')"),
+        "SCRIPT_SUNUWAR".enum("", "HB_TAG ('S','u','n','u')"),
+        "SCRIPT_TODHRI".enum("", "HB_TAG ('T','o','d','r')"),
+        "SCRIPT_TULU_TIGALARI".enum("", "HB_TAG ('T','u','t','g')"),
+
         "SCRIPT_INVALID".enum("No script set.", "HB_TAG_NONE")
     )
 
@@ -1112,6 +1120,21 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "buffer_set_not_found_variation_selector_glyph",
+        "",
+
+        hb_buffer_t.p("buffer", ""),
+        hb_codepoint_t("not_found_variation_selector", "")
+    )
+
+    hb_codepoint_t(
+        "buffer_get_not_found_variation_selector_glyph",
+        "",
+
+        hb_buffer_t.const.p("buffer", "")
+    )
+
+    void(
         "buffer_set_random_state",
         "",
 
@@ -1725,6 +1748,16 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         hb_face_t.const.p("face", "")
+    )
+
+    void(
+        "face_set_get_table_tags_func",
+        "",
+
+        hb_face_t.p("face", ""),
+        hb_get_table_tags_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
     )
 
     unsigned_int(
@@ -4170,11 +4203,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("", "VERSION_MAJOR".."9")
+    IntConstant("", "VERSION_MAJOR".."10")
     IntConstant("", "VERSION_MINOR".."0")
-    IntConstant("", "VERSION_MICRO".."0")
+    IntConstant("", "VERSION_MICRO".."1")
 
-    StringConstant("", "VERSION_STRING".."9.0.0")
+    StringConstant("", "VERSION_STRING".."10.0.1")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {
