@@ -111,6 +111,14 @@ val LLVMOrcCDependenceMapPair = struct(Module.LLVM, "LLVMOrcCDependenceMapPair")
 }
 val LLVMOrcCDependenceMapPairs = typedef(LLVMOrcCDependenceMapPair.p, "LLVMOrcCDependenceMapPairs")
 
+val LLVMOrcCSymbolDependenceGroup = struct(Module.LLVM, "LLVMOrcCSymbolDependenceGroup") {
+    documentation = "A set of symbols that share dependencies."
+
+    LLVMOrcCSymbolsList("Symbols", "")
+    LLVMOrcCDependenceMapPairs("Dependencies", "")
+    AutoSize("Dependencies")..size_t("NumDependencies", "")
+}
+
 val LLVMOrcCJITDylibSearchOrderElement = struct(Module.LLVM, "LLVMOrcCJITDylibSearchOrderElement") {
     documentation = "An element type for a JITDylib search order."
 

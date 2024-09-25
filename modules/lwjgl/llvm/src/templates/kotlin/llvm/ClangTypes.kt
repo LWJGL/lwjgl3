@@ -67,6 +67,7 @@ val CXSymbolRole = "CXSymbolRole".enumType
 val CXIndexOptFlags = "CXIndexOptFlags".enumType
 val CXBinaryOperatorKind = "enum CXBinaryOperatorKind".enumType
 val CXUnaryOperatorKind = "enum CXUnaryOperatorKind".enumType
+val CX_BinaryOperatorKind = "enum CX_BinaryOperatorKind".enumType
 
 val CXString = struct(Module.LLVM, "CXString", mutable = false) {
     documentation =

@@ -442,12 +442,24 @@ LLVMOrcMaterializationUnitRef MU =
         Notifies the target {@code JITDylib} (and any pending queries on that {@code JITDylib}) that all symbols covered by this
         {@code MaterializationResponsibility} instance have been emitted.
 
+        This function takes ownership of the symbols in the {@code Dependencies} struct. This allows the following pattern...
+        ${codeBlock("""
+LLVMOrcSymbolStringPoolEntryRef Names[] = {...};
+LLVMOrcCDependenceMapPair Dependence = {JD, {Names, sizeof(Names)}}
+LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &Dependence, 1);""")}
+
+        ... without requiring cleanup of the elements of the Names array afterwards.
+
+        The client is still responsible for deleting the {@code Dependencies.Names} arrays, and the {@code Dependencies} array itself.
+
         This method will return an error if any symbols being resolved have been moved to the error state due to the failure of a dependency. If this method
         returns an error then clients should log it and call #OrcMaterializationResponsibilityFailMaterialization(). If no dependencies have been registered
         for the symbols covered by this {@code MaterializationResponsibility} then this method is guaranteed to return #ErrorSuccess.
         """,
 
         LLVMOrcMaterializationResponsibilityRef("MR", ""),
+        LLVMOrcCSymbolDependenceGroup.p("SymbolDepGroups", ""),
+        AutoSize("SymbolDepGroups")..size_t("NumSymbolDepGroups", ""),
 
         since = "13"
     )
@@ -515,20 +527,7 @@ LLVMOrcMaterializationUnitRef MU =
 
     IgnoreMissing..void(
         "OrcMaterializationResponsibilityAddDependencies",
-        """
-        Adds dependencies to a symbol that the {@code MaterializationResponsibility} is responsible for.
-
-        This function takes ownership of {@code Dependencies} struct. The {@code Names} array have been retained for this function. This allows the following
-        pattern...
-        ${codeBlock("""
-LLVMOrcSymbolStringPoolEntryRef Names[] = {...};
-LLVMOrcCDependenceMapPair Dependence = {JD, {Names, sizeof(Names)}}
-LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &Dependence, 1);""")}
-
-        ... without requiring cleanup of the elements of the {@code Names} array afterwards.
-
-        The client is still responsible for deleting the {@code Dependencies.Names} array itself.
-        """,
+        "Removed in LLVM 19.",
 
         LLVMOrcMaterializationResponsibilityRef("MR", ""),
         LLVMOrcSymbolStringPoolEntryRef("Name", ""),
@@ -540,10 +539,7 @@ LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &Dependence, 1);""
 
     IgnoreMissing..void(
         "OrcMaterializationResponsibilityAddDependenciesForAll",
-        """
-        Adds dependencies to all symbols that the {@code MaterializationResponsibility} is responsible for. See
-        #OrcMaterializationResponsibilityAddDependencies() for notes about memory responsibility.
-        """,
+        "Removed in LLVM 19.",
 
         LLVMOrcMaterializationResponsibilityRef("MR", ""),
         LLVMOrcCDependenceMapPairs("Dependencies", ""),

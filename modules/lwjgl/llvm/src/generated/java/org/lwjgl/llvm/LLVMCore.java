@@ -56,6 +56,7 @@ public class LLVMCore {
             GetEnumAttributeValue                      = apiGetFunctionAddress(LLVM, "LLVMGetEnumAttributeValue"),
             CreateTypeAttribute                        = apiGetFunctionAddressOptional(LLVM, "LLVMCreateTypeAttribute"),
             GetTypeAttributeValue                      = apiGetFunctionAddressOptional(LLVM, "LLVMGetTypeAttributeValue"),
+            CreateConstantRangeAttribute               = apiGetFunctionAddressOptional(LLVM, "LLVMCreateConstantRangeAttribute"),
             CreateStringAttribute                      = apiGetFunctionAddress(LLVM, "LLVMCreateStringAttribute"),
             GetStringAttributeKind                     = apiGetFunctionAddress(LLVM, "LLVMGetStringAttributeKind"),
             GetStringAttributeValue                    = apiGetFunctionAddress(LLVM, "LLVMGetStringAttributeValue"),
@@ -184,6 +185,10 @@ public class LLVMCore {
             VectorType                                 = apiGetFunctionAddress(LLVM, "LLVMVectorType"),
             ScalableVectorType                         = apiGetFunctionAddressOptional(LLVM, "LLVMScalableVectorType"),
             GetVectorSize                              = apiGetFunctionAddress(LLVM, "LLVMGetVectorSize"),
+            GetConstantPtrAuthPointer                  = apiGetFunctionAddressOptional(LLVM, "LLVMGetConstantPtrAuthPointer"),
+            GetConstantPtrAuthKey                      = apiGetFunctionAddressOptional(LLVM, "LLVMGetConstantPtrAuthKey"),
+            GetConstantPtrAuthDiscriminator            = apiGetFunctionAddressOptional(LLVM, "LLVMGetConstantPtrAuthDiscriminator"),
+            GetConstantPtrAuthAddrDiscriminator        = apiGetFunctionAddressOptional(LLVM, "LLVMGetConstantPtrAuthAddrDiscriminator"),
             VoidTypeInContext                          = apiGetFunctionAddress(LLVM, "LLVMVoidTypeInContext"),
             LabelTypeInContext                         = apiGetFunctionAddress(LLVM, "LLVMLabelTypeInContext"),
             X86MMXTypeInContext                        = apiGetFunctionAddress(LLVM, "LLVMX86MMXTypeInContext"),
@@ -195,12 +200,18 @@ public class LLVMCore {
             X86MMXType                                 = apiGetFunctionAddress(LLVM, "LLVMX86MMXType"),
             X86AMXType                                 = apiGetFunctionAddressOptional(LLVM, "LLVMX86AMXType"),
             TargetExtTypeInContext                     = apiGetFunctionAddressOptional(LLVM, "LLVMTargetExtTypeInContext"),
+            GetTargetExtTypeName                       = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeName"),
+            GetTargetExtTypeNumTypeParams              = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeNumTypeParams"),
+            GetTargetExtTypeTypeParam                  = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeTypeParam"),
+            GetTargetExtTypeNumIntParams               = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeNumIntParams"),
+            GetTargetExtTypeIntParam                   = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeIntParam"),
             TypeOf                                     = apiGetFunctionAddress(LLVM, "LLVMTypeOf"),
             GetValueKind                               = apiGetFunctionAddress(LLVM, "LLVMGetValueKind"),
             GetValueName2                              = apiGetFunctionAddressOptional(LLVM, "LLVMGetValueName2"),
             SetValueName2                              = apiGetFunctionAddressOptional(LLVM, "LLVMSetValueName2"),
             DumpValue                                  = apiGetFunctionAddress(LLVM, "LLVMDumpValue"),
             PrintValueToString                         = apiGetFunctionAddress(LLVM, "LLVMPrintValueToString"),
+            PrintDbgRecordToString                     = apiGetFunctionAddressOptional(LLVM, "LLVMPrintDbgRecordToString"),
             ReplaceAllUsesWith                         = apiGetFunctionAddress(LLVM, "LLVMReplaceAllUsesWith"),
             IsConstant                                 = apiGetFunctionAddress(LLVM, "LLVMIsConstant"),
             IsUndef                                    = apiGetFunctionAddress(LLVM, "LLVMIsUndef"),
@@ -323,6 +334,7 @@ public class LLVMCore {
             ConstIntGetSExtValue                       = apiGetFunctionAddress(LLVM, "LLVMConstIntGetSExtValue"),
             ConstRealGetDouble                         = apiGetFunctionAddress(LLVM, "LLVMConstRealGetDouble"),
             ConstStringInContext                       = apiGetFunctionAddress(LLVM, "LLVMConstStringInContext"),
+            ConstStringInContext2                      = apiGetFunctionAddressOptional(LLVM, "LLVMConstStringInContext2"),
             ConstString                                = apiGetFunctionAddress(LLVM, "LLVMConstString"),
             IsConstantString                           = apiGetFunctionAddress(LLVM, "LLVMIsConstantString"),
             GetAsString                                = apiGetFunctionAddress(LLVM, "LLVMGetAsString"),
@@ -334,6 +346,7 @@ public class LLVMCore {
             GetAggregateElement                        = apiGetFunctionAddressOptional(LLVM, "LLVMGetAggregateElement"),
             GetElementAsConstant                       = apiGetFunctionAddress(LLVM, "LLVMGetElementAsConstant"),
             ConstVector                                = apiGetFunctionAddress(LLVM, "LLVMConstVector"),
+            ConstantPtrAuth                            = apiGetFunctionAddressOptional(LLVM, "LLVMConstantPtrAuth"),
             GetConstOpcode                             = apiGetFunctionAddress(LLVM, "LLVMGetConstOpcode"),
             AlignOf                                    = apiGetFunctionAddress(LLVM, "LLVMAlignOf"),
             SizeOf                                     = apiGetFunctionAddress(LLVM, "LLVMSizeOf"),
@@ -365,15 +378,16 @@ public class LLVMCore {
             ConstAnd                                   = apiGetFunctionAddressOptional(LLVM, "LLVMConstAnd"),
             ConstOr                                    = apiGetFunctionAddressOptional(LLVM, "LLVMConstOr"),
             ConstXor                                   = apiGetFunctionAddress(LLVM, "LLVMConstXor"),
-            ConstICmp                                  = apiGetFunctionAddress(LLVM, "LLVMConstICmp"),
-            ConstFCmp                                  = apiGetFunctionAddress(LLVM, "LLVMConstFCmp"),
-            ConstShl                                   = apiGetFunctionAddress(LLVM, "LLVMConstShl"),
+            ConstICmp                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstICmp"),
+            ConstFCmp                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstFCmp"),
+            ConstShl                                   = apiGetFunctionAddressOptional(LLVM, "LLVMConstShl"),
             ConstLShr                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstLShr"),
             ConstAShr                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstAShr"),
             ConstGEP                                   = apiGetFunctionAddressOptional(LLVM, "LLVMConstGEP"),
             ConstGEP2                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstGEP2"),
             ConstInBoundsGEP                           = apiGetFunctionAddressOptional(LLVM, "LLVMConstInBoundsGEP"),
             ConstInBoundsGEP2                          = apiGetFunctionAddressOptional(LLVM, "LLVMConstInBoundsGEP2"),
+            ConstInBoundsGEPWithNoWrapFlags            = apiGetFunctionAddressOptional(LLVM, "LLVMConstInBoundsGEPWithNoWrapFlags"),
             ConstTrunc                                 = apiGetFunctionAddress(LLVM, "LLVMConstTrunc"),
             ConstSExt                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstSExt"),
             ConstZExt                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstZExt"),
@@ -400,6 +414,8 @@ public class LLVMCore {
             ConstExtractValue                          = apiGetFunctionAddressOptional(LLVM, "LLVMConstExtractValue"),
             ConstInsertValue                           = apiGetFunctionAddressOptional(LLVM, "LLVMConstInsertValue"),
             BlockAddress                               = apiGetFunctionAddressOptional(LLVM, "LLVMBlockAddress"),
+            GetBlockAddressFunction                    = apiGetFunctionAddressOptional(LLVM, "LLVMGetBlockAddressFunction"),
+            GetBlockAddressBasicBlock                  = apiGetFunctionAddressOptional(LLVM, "LLVMGetBlockAddressBasicBlock"),
             ConstInlineAsm                             = apiGetFunctionAddress(LLVM, "LLVMConstInlineAsm"),
             GetGlobalParent                            = apiGetFunctionAddress(LLVM, "LLVMGetGlobalParent"),
             IsDeclaration                              = apiGetFunctionAddress(LLVM, "LLVMIsDeclaration"),
@@ -468,6 +484,12 @@ public class LLVMCore {
             SetFunctionCallConv                        = apiGetFunctionAddress(LLVM, "LLVMSetFunctionCallConv"),
             GetGC                                      = apiGetFunctionAddress(LLVM, "LLVMGetGC"),
             SetGC                                      = apiGetFunctionAddress(LLVM, "LLVMSetGC"),
+            GetPrefixData                              = apiGetFunctionAddressOptional(LLVM, "LLVMGetPrefixData"),
+            HasPrefixData                              = apiGetFunctionAddressOptional(LLVM, "LLVMHasPrefixData"),
+            SetPrefixData                              = apiGetFunctionAddressOptional(LLVM, "LLVMSetPrefixData"),
+            GetPrologueData                            = apiGetFunctionAddressOptional(LLVM, "LLVMGetPrologueData"),
+            HasPrologueData                            = apiGetFunctionAddressOptional(LLVM, "LLVMHasPrologueData"),
+            SetPrologueData                            = apiGetFunctionAddressOptional(LLVM, "LLVMSetPrologueData"),
             AddAttributeAtIndex                        = apiGetFunctionAddress(LLVM, "LLVMAddAttributeAtIndex"),
             GetAttributeCountAtIndex                   = apiGetFunctionAddress(LLVM, "LLVMGetAttributeCountAtIndex"),
             GetAttributesAtIndex                       = apiGetFunctionAddress(LLVM, "LLVMGetAttributesAtIndex"),
@@ -576,6 +598,9 @@ public class LLVMCore {
             GetUnwindDest                              = apiGetFunctionAddress(LLVM, "LLVMGetUnwindDest"),
             SetNormalDest                              = apiGetFunctionAddress(LLVM, "LLVMSetNormalDest"),
             SetUnwindDest                              = apiGetFunctionAddress(LLVM, "LLVMSetUnwindDest"),
+            GetCallBrDefaultDest                       = apiGetFunctionAddressOptional(LLVM, "LLVMGetCallBrDefaultDest"),
+            GetCallBrNumIndirectDests                  = apiGetFunctionAddressOptional(LLVM, "LLVMGetCallBrNumIndirectDests"),
+            GetCallBrIndirectDest                      = apiGetFunctionAddressOptional(LLVM, "LLVMGetCallBrIndirectDest"),
             GetNumSuccessors                           = apiGetFunctionAddress(LLVM, "LLVMGetNumSuccessors"),
             GetSuccessor                               = apiGetFunctionAddress(LLVM, "LLVMGetSuccessor"),
             SetSuccessor                               = apiGetFunctionAddress(LLVM, "LLVMSetSuccessor"),
@@ -587,6 +612,8 @@ public class LLVMCore {
             IsInBounds                                 = apiGetFunctionAddress(LLVM, "LLVMIsInBounds"),
             SetIsInBounds                              = apiGetFunctionAddress(LLVM, "LLVMSetIsInBounds"),
             GetGEPSourceElementType                    = apiGetFunctionAddressOptional(LLVM, "LLVMGetGEPSourceElementType"),
+            GEPGetNoWrapFlags                          = apiGetFunctionAddressOptional(LLVM, "LLVMGEPGetNoWrapFlags"),
+            GEPSetNoWrapFlags                          = apiGetFunctionAddressOptional(LLVM, "LLVMGEPSetNoWrapFlags"),
             AddIncoming                                = apiGetFunctionAddress(LLVM, "LLVMAddIncoming"),
             CountIncoming                              = apiGetFunctionAddress(LLVM, "LLVMCountIncoming"),
             GetIncomingValue                           = apiGetFunctionAddress(LLVM, "LLVMGetIncomingValue"),
@@ -596,7 +623,9 @@ public class LLVMCore {
             CreateBuilderInContext                     = apiGetFunctionAddress(LLVM, "LLVMCreateBuilderInContext"),
             CreateBuilder                              = apiGetFunctionAddress(LLVM, "LLVMCreateBuilder"),
             PositionBuilder                            = apiGetFunctionAddress(LLVM, "LLVMPositionBuilder"),
+            PositionBuilderBeforeDbgRecords            = apiGetFunctionAddressOptional(LLVM, "LLVMPositionBuilderBeforeDbgRecords"),
             PositionBuilderBefore                      = apiGetFunctionAddress(LLVM, "LLVMPositionBuilderBefore"),
+            PositionBuilderBeforeInstrAndDbgRecords    = apiGetFunctionAddressOptional(LLVM, "LLVMPositionBuilderBeforeInstrAndDbgRecords"),
             PositionBuilderAtEnd                       = apiGetFunctionAddress(LLVM, "LLVMPositionBuilderAtEnd"),
             GetInsertBlock                             = apiGetFunctionAddress(LLVM, "LLVMGetInsertBlock"),
             ClearInsertionPosition                     = apiGetFunctionAddress(LLVM, "LLVMClearInsertionPosition"),
@@ -618,6 +647,7 @@ public class LLVMCore {
             BuildCondBr                                = apiGetFunctionAddress(LLVM, "LLVMBuildCondBr"),
             BuildSwitch                                = apiGetFunctionAddress(LLVM, "LLVMBuildSwitch"),
             BuildIndirectBr                            = apiGetFunctionAddress(LLVM, "LLVMBuildIndirectBr"),
+            BuildCallBr                                = apiGetFunctionAddressOptional(LLVM, "LLVMBuildCallBr"),
             BuildInvoke                                = apiGetFunctionAddressOptional(LLVM, "LLVMBuildInvoke"),
             BuildInvoke2                               = apiGetFunctionAddressOptional(LLVM, "LLVMBuildInvoke2"),
             BuildInvokeWithOperandBundles              = apiGetFunctionAddressOptional(LLVM, "LLVMBuildInvokeWithOperandBundles"),
@@ -704,6 +734,7 @@ public class LLVMCore {
             BuildStructGEP                             = apiGetFunctionAddressOptional(LLVM, "LLVMBuildStructGEP"),
             BuildGEP2                                  = apiGetFunctionAddressOptional(LLVM, "LLVMBuildGEP2"),
             BuildInBoundsGEP2                          = apiGetFunctionAddressOptional(LLVM, "LLVMBuildInBoundsGEP2"),
+            BuildGEPWithNoWrapFlags                    = apiGetFunctionAddressOptional(LLVM, "LLVMBuildGEPWithNoWrapFlags"),
             BuildStructGEP2                            = apiGetFunctionAddressOptional(LLVM, "LLVMBuildStructGEP2"),
             BuildGlobalString                          = apiGetFunctionAddress(LLVM, "LLVMBuildGlobalString"),
             BuildGlobalStringPtr                       = apiGetFunctionAddress(LLVM, "LLVMBuildGlobalStringPtr"),
@@ -1209,6 +1240,7 @@ public class LLVMCore {
      * <li>{@link #LLVMInstructionValueKind InstructionValueKind}</li>
      * <li>{@link #LLVMPoisonValueValueKind PoisonValueValueKind}</li>
      * <li>{@link #LLVMConstantTargetNoneValueKind ConstantTargetNoneValueKind}</li>
+     * <li>{@link #LLVMConstantPtrAuthValueKind ConstantPtrAuthValueKind}</li>
      * </ul>
      */
     public static final int
@@ -1238,7 +1270,8 @@ public class LLVMCore {
         LLVMInlineAsmValueKind             = 23,
         LLVMInstructionValueKind           = 24,
         LLVMPoisonValueValueKind           = 25,
-        LLVMConstantTargetNoneValueKind    = 26;
+        LLVMConstantTargetNoneValueKind    = 26,
+        LLVMConstantPtrAuthValueKind       = 27;
 
     /**
      * {@code LLVMIntPredicate}
@@ -1394,24 +1427,28 @@ public class LLVMCore {
      * <li>{@link #LLVMAtomicRMWBinOpFSub AtomicRMWBinOpFSub} - Subtract a floating point value and return the old one</li>
      * <li>{@link #LLVMAtomicRMWBinOpFMax AtomicRMWBinOpFMax} - Sets the value if it's greater than the original using a floating point comparison and return the old one</li>
      * <li>{@link #LLVMAtomicRMWBinOpFMin AtomicRMWBinOpFMin} - Sets the value if it's smaller than the original using a floating point comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpUIncWrap AtomicRMWBinOpUIncWrap} - Increments the value, wrapping back to zero when incremented above input value</li>
+     * <li>{@link #LLVMAtomicRMWBinOpUDecWrap AtomicRMWBinOpUDecWrap} - Decrements the value, wrapping back to the input value when decremented below zero</li>
      * </ul>
      */
     public static final int
-        LLVMAtomicRMWBinOpXchg = 0,
-        LLVMAtomicRMWBinOpAdd  = 1,
-        LLVMAtomicRMWBinOpSub  = 2,
-        LLVMAtomicRMWBinOpAnd  = 3,
-        LLVMAtomicRMWBinOpNand = 4,
-        LLVMAtomicRMWBinOpOr   = 5,
-        LLVMAtomicRMWBinOpXor  = 6,
-        LLVMAtomicRMWBinOpMax  = 7,
-        LLVMAtomicRMWBinOpMin  = 8,
-        LLVMAtomicRMWBinOpUMax = 9,
-        LLVMAtomicRMWBinOpUMin = 10,
-        LLVMAtomicRMWBinOpFAdd = 11,
-        LLVMAtomicRMWBinOpFSub = 12,
-        LLVMAtomicRMWBinOpFMax = 13,
-        LLVMAtomicRMWBinOpFMin = 14;
+        LLVMAtomicRMWBinOpXchg     = 0,
+        LLVMAtomicRMWBinOpAdd      = 1,
+        LLVMAtomicRMWBinOpSub      = 2,
+        LLVMAtomicRMWBinOpAnd      = 3,
+        LLVMAtomicRMWBinOpNand     = 4,
+        LLVMAtomicRMWBinOpOr       = 5,
+        LLVMAtomicRMWBinOpXor      = 6,
+        LLVMAtomicRMWBinOpMax      = 7,
+        LLVMAtomicRMWBinOpMin      = 8,
+        LLVMAtomicRMWBinOpUMax     = 9,
+        LLVMAtomicRMWBinOpUMin     = 10,
+        LLVMAtomicRMWBinOpFAdd     = 11,
+        LLVMAtomicRMWBinOpFSub     = 12,
+        LLVMAtomicRMWBinOpFMax     = 13,
+        LLVMAtomicRMWBinOpFMin     = 14,
+        LLVMAtomicRMWBinOpUIncWrap = 15,
+        LLVMAtomicRMWBinOpUDecWrap = 16;
 
     /**
      * {@code LLVMDiagnosticSeverity}
@@ -1541,6 +1578,22 @@ public class LLVMCore {
             LLVMFastMathNoInfs | LLVMFastMathNoSignedZeros |
             LLVMFastMathAllowReciprocal | LLVMFastMathAllowContract |
             LLVMFastMathApproxFunc;
+
+    /**
+     * {@code LLVMGEPNoWrapFlags}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMGEPFlagInBounds GEPFlagInBounds}</li>
+     * <li>{@link #LLVMGEPFlagNUSW GEPFlagNUSW}</li>
+     * <li>{@link #LLVMGEPFlagNUW GEPFlagNUW}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMGEPFlagInBounds = 1 << 0,
+        LLVMGEPFlagNUSW     = 1 << 1,
+        LLVMGEPFlagNUW      = 1 << 2;
 
     protected LLVMCore() {
         throw new UnsupportedOperationException();
@@ -1980,6 +2033,30 @@ public class LLVMCore {
             check(A);
         }
         return invokePP(A, __functionAddress);
+    }
+
+    // --- [ LLVMCreateConstantRangeAttribute ] ---
+
+    /** Unsafe version of: {@link #LLVMCreateConstantRangeAttribute CreateConstantRangeAttribute} */
+    public static long nLLVMCreateConstantRangeAttribute(long C, int KindID, int NumBits, long LowerWords, long UpperWords) {
+        long __functionAddress = Functions.CreateConstantRangeAttribute;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePPPP(C, KindID, NumBits, LowerWords, UpperWords, __functionAddress);
+    }
+
+    /**
+     * Create a {@code ConstantRange} attribute.
+     * 
+     * <p>{@code LowerWords} and {@code UpperWords} need to be {@code NumBits} divided by 64 rounded up elements long.</p>
+     *
+     * @since 19
+     */
+    @NativeType("LLVMAttributeRef")
+    public static long LLVMCreateConstantRangeAttribute(@NativeType("LLVMContextRef") long C, @NativeType("unsigned") int KindID, @NativeType("unsigned") int NumBits, @NativeType("uint64_t const *") LongBuffer LowerWords, @NativeType("uint64_t const *") LongBuffer UpperWords) {
+        return nLLVMCreateConstantRangeAttribute(C, KindID, NumBits, memAddress(LowerWords), memAddress(UpperWords));
     }
 
     // --- [ LLVMCreateStringAttribute ] ---
@@ -4428,6 +4505,62 @@ public class LLVMCore {
         return invokePI(VectorTy, __functionAddress);
     }
 
+    // --- [ LLVMGetConstantPtrAuthPointer ] ---
+
+    /** Get the pointer value for the associated {@code ConstantPtrAuth} constant. */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetConstantPtrAuthPointer(@NativeType("LLVMValueRef") long PtrAuth) {
+        long __functionAddress = Functions.GetConstantPtrAuthPointer;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(PtrAuth);
+        }
+        return invokePP(PtrAuth, __functionAddress);
+    }
+
+    // --- [ LLVMGetConstantPtrAuthKey ] ---
+
+    /** Get the key value for the associated {@code ConstantPtrAuth} constant. */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetConstantPtrAuthKey(@NativeType("LLVMValueRef") long PtrAuth) {
+        long __functionAddress = Functions.GetConstantPtrAuthKey;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(PtrAuth);
+        }
+        return invokePP(PtrAuth, __functionAddress);
+    }
+
+    // --- [ LLVMGetConstantPtrAuthDiscriminator ] ---
+
+    /** Get the discriminator value for the associated {@code ConstantPtrAuth} constant. */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetConstantPtrAuthDiscriminator(@NativeType("LLVMValueRef") long PtrAuth) {
+        long __functionAddress = Functions.GetConstantPtrAuthDiscriminator;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(PtrAuth);
+        }
+        return invokePP(PtrAuth, __functionAddress);
+    }
+
+    // --- [ LLVMGetConstantPtrAuthAddrDiscriminator ] ---
+
+    /**
+     * Get the address discriminator value for the associated {@code ConstantPtrAuth} constant.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetConstantPtrAuthAddrDiscriminator(@NativeType("LLVMValueRef") long PtrAuth) {
+        long __functionAddress = Functions.GetConstantPtrAuthAddrDiscriminator;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(PtrAuth);
+        }
+        return invokePP(PtrAuth, __functionAddress);
+    }
+
     // --- [ LLVMVoidTypeInContext ] ---
 
     /** Create a void type in a context. */
@@ -4578,6 +4711,82 @@ public class LLVMCore {
         }
     }
 
+    // --- [ LLVMGetTargetExtTypeName ] ---
+
+    /** Unsafe version of: {@link #LLVMGetTargetExtTypeName GetTargetExtTypeName} */
+    public static long nLLVMGetTargetExtTypeName(long TargetExtTy) {
+        long __functionAddress = Functions.GetTargetExtTypeName;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(TargetExtTy);
+        }
+        return invokePP(TargetExtTy, __functionAddress);
+    }
+
+    /** Obtain the name for this target extension type. */
+    @Nullable
+    @NativeType("char const *")
+    public static String LLVMGetTargetExtTypeName(@NativeType("LLVMTypeRef") long TargetExtTy) {
+        long __result = nLLVMGetTargetExtTypeName(TargetExtTy);
+        return memUTF8Safe(__result);
+    }
+
+    // --- [ LLVMGetTargetExtTypeNumTypeParams ] ---
+
+    /** Obtain the number of type parameters for this target extension type. */
+    @NativeType("unsigned")
+    public static int LLVMGetTargetExtTypeNumTypeParams(@NativeType("LLVMTypeRef") long TargetExtTy) {
+        long __functionAddress = Functions.GetTargetExtTypeNumTypeParams;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(TargetExtTy);
+        }
+        return invokePI(TargetExtTy, __functionAddress);
+    }
+
+    // --- [ LLVMGetTargetExtTypeTypeParam ] ---
+
+    /** Get the type parameter at the given index for the target extension type. */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMGetTargetExtTypeTypeParam(@NativeType("LLVMTypeRef") long TargetExtTy, @NativeType("unsigned") int Idx) {
+        long __functionAddress = Functions.GetTargetExtTypeTypeParam;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(TargetExtTy);
+        }
+        return invokePP(TargetExtTy, Idx, __functionAddress);
+    }
+
+    // --- [ LLVMGetTargetExtTypeNumIntParams ] ---
+
+    /** Obtain the number of int parameters for this target extension type. */
+    @NativeType("unsigned")
+    public static int LLVMGetTargetExtTypeNumIntParams(@NativeType("LLVMTypeRef") long TargetExtTy) {
+        long __functionAddress = Functions.GetTargetExtTypeNumIntParams;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(TargetExtTy);
+        }
+        return invokePI(TargetExtTy, __functionAddress);
+    }
+
+    // --- [ LLVMGetTargetExtTypeIntParam ] ---
+
+    /**
+     * Get the int parameter at the given index for the target extension type.
+     *
+     * @since 19
+     */
+    @NativeType("unsigned")
+    public static int LLVMGetTargetExtTypeIntParam(@NativeType("LLVMTypeRef") long TargetExtTy, @NativeType("unsigned") int Idx) {
+        long __functionAddress = Functions.GetTargetExtTypeIntParam;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(TargetExtTy);
+        }
+        return invokePI(TargetExtTy, Idx, __functionAddress);
+    }
+
     // --- [ LLVMTypeOf ] ---
 
     /** Obtain the type of a value. */
@@ -4683,6 +4892,30 @@ public class LLVMCore {
     public static String LLVMPrintValueToString(@NativeType("LLVMValueRef") long Val) {
         long __result = nLLVMPrintValueToString(Val);
         return memUTF8(__result);
+    }
+
+    // --- [ LLVMPrintDbgRecordToString ] ---
+
+    /** Unsafe version of: {@link #LLVMPrintDbgRecordToString PrintDbgRecordToString} */
+    public static long nLLVMPrintDbgRecordToString(long Record) {
+        long __functionAddress = Functions.PrintDbgRecordToString;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Record);
+        }
+        return invokePP(Record, __functionAddress);
+    }
+
+    /**
+     * Return a string representation of the {@code DbgRecord}. Use {@link #LLVMDisposeMessage DisposeMessage} to free the string.
+     *
+     * @since 19
+     */
+    @Nullable
+    @NativeType("char *")
+    public static String LLVMPrintDbgRecordToString(@NativeType("LLVMDbgRecordRef") long Record) {
+        long __result = nLLVMPrintDbgRecordToString(Record);
+        return memUTF8Safe(__result);
     }
 
     // --- [ LLVMReplaceAllUsesWith ] ---
@@ -6234,13 +6467,13 @@ public class LLVMCore {
         return invokePPP(C, Str, Length, DontNullTerminate, __functionAddress);
     }
 
-    /** Create a {@code ConstantDataSequential} and initialize it with a string. */
+    /** Deprecated. Create a {@code ConstantDataSequential} and initialize it with a string. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
         return nLLVMConstStringInContext(C, memAddress(Str), Str.remaining(), DontNullTerminate ? 1 : 0);
     }
 
-    /** Create a {@code ConstantDataSequential} and initialize it with a string. */
+    /** Deprecated. Create a {@code ConstantDataSequential} and initialize it with a string. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -6248,6 +6481,45 @@ public class LLVMCore {
             int StrEncodedLength = stack.nUTF8(Str, false);
             long StrEncoded = stack.getPointerAddress();
             return nLLVMConstStringInContext(C, StrEncoded, StrEncodedLength, DontNullTerminate ? 1 : 0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMConstStringInContext2 ] ---
+
+    /** Unsafe version of: {@link #LLVMConstStringInContext2 ConstStringInContext2} */
+    public static long nLLVMConstStringInContext2(long C, long Str, int Length, int DontNullTerminate) {
+        long __functionAddress = Functions.ConstStringInContext2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePPP(C, Str, Length, DontNullTerminate, __functionAddress);
+    }
+
+    /**
+     * Create a {@code ConstantDataSequential} and initialize it with a string.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstStringInContext2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
+        return nLLVMConstStringInContext2(C, memAddress(Str), Str.remaining(), DontNullTerminate ? 1 : 0);
+    }
+
+    /**
+     * Create a {@code ConstantDataSequential} and initialize it with a string.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstStringInContext2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMConstStringInContext2(C, StrEncoded, StrEncodedLength, DontNullTerminate ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6465,6 +6737,26 @@ public class LLVMCore {
         return nLLVMConstVector(memAddress(ScalarConstantVals), ScalarConstantVals.remaining());
     }
 
+    // --- [ LLVMConstantPtrAuth ] ---
+
+    /**
+     * Create a {@code ConstantPtrAuth} constant with the given values.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstantPtrAuth(@NativeType("LLVMValueRef") long Ptr, @NativeType("LLVMValueRef") long Key, @NativeType("LLVMValueRef") long Disc, @NativeType("LLVMValueRef") long AddrDisc) {
+        long __functionAddress = Functions.ConstantPtrAuth;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Ptr);
+            check(Key);
+            check(Disc);
+            check(AddrDisc);
+        }
+        return invokePPPPP(Ptr, Key, Disc, AddrDisc, __functionAddress);
+    }
+
     // --- [ LLVMGetConstOpcode ] ---
 
     @NativeType("LLVMOpcode")
@@ -6522,6 +6814,7 @@ public class LLVMCore {
 
     // --- [ LLVMConstNUWNeg ] ---
 
+    /** Deprecated. Use {@link #LLVMConstNull ConstNull} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstNUWNeg(@NativeType("LLVMValueRef") long ConstantVal) {
         long __functionAddress = Functions.ConstNUWNeg;
@@ -6847,10 +7140,12 @@ public class LLVMCore {
 
     // --- [ LLVMConstICmp ] ---
 
+    /** Removed in LLVM 19. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstICmp(@NativeType("LLVMIntPredicate") int Predicate, @NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstICmp;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -6859,10 +7154,12 @@ public class LLVMCore {
 
     // --- [ LLVMConstFCmp ] ---
 
+    /** Removed in LLVM 19. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstFCmp(@NativeType("LLVMRealPredicate") int Predicate, @NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstFCmp;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -6871,10 +7168,12 @@ public class LLVMCore {
 
     // --- [ LLVMConstShl ] ---
 
+    /** Removed in LLVM 19. */
     @NativeType("LLVMValueRef")
     public static long LLVMConstShl(@NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstShl;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -6977,6 +7276,29 @@ public class LLVMCore {
     @NativeType("LLVMValueRef")
     public static long LLVMConstInBoundsGEP2(@NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long ConstantVal, @NativeType("LLVMValueRef *") PointerBuffer ConstantIndices) {
         return nLLVMConstInBoundsGEP2(Ty, ConstantVal, memAddress(ConstantIndices), ConstantIndices.remaining());
+    }
+
+    // --- [ LLVMConstInBoundsGEPWithNoWrapFlags ] ---
+
+    /** Unsafe version of: {@link #LLVMConstInBoundsGEPWithNoWrapFlags ConstInBoundsGEPWithNoWrapFlags} */
+    public static long nLLVMConstInBoundsGEPWithNoWrapFlags(long Ty, long ConstantVal, long ConstantIndices, int NumIndices, int NoWrapFlags) {
+        long __functionAddress = Functions.ConstInBoundsGEPWithNoWrapFlags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Ty);
+            check(ConstantVal);
+        }
+        return invokePPPP(Ty, ConstantVal, ConstantIndices, NumIndices, NoWrapFlags, __functionAddress);
+    }
+
+    /**
+     * Creates a constant {@code GetElementPtr} expression. Similar to {@link #LLVMConstGEP2 ConstGEP2}, but allows specifying the no-wrap flags.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstInBoundsGEPWithNoWrapFlags(@NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long ConstantVal, @NativeType("LLVMValueRef *") PointerBuffer ConstantIndices, @NativeType("LLVMGEPNoWrapFlags") int NoWrapFlags) {
+        return nLLVMConstInBoundsGEPWithNoWrapFlags(Ty, ConstantVal, memAddress(ConstantIndices), ConstantIndices.remaining(), NoWrapFlags);
     }
 
     // --- [ LLVMConstTrunc ] ---
@@ -7328,6 +7650,40 @@ public class LLVMCore {
             check(BB);
         }
         return invokePPP(F, BB, __functionAddress);
+    }
+
+    // --- [ LLVMGetBlockAddressFunction ] ---
+
+    /**
+     * Gets the function associated with a given {@code BlockAddress} constant value.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetBlockAddressFunction(@NativeType("LLVMValueRef") long BlockAddr) {
+        long __functionAddress = Functions.GetBlockAddressFunction;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(BlockAddr);
+        }
+        return invokePP(BlockAddr, __functionAddress);
+    }
+
+    // --- [ LLVMGetBlockAddressBasicBlock ] ---
+
+    /**
+     * Gets the basic block associated with a given {@code BlockAddress} constant value.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMBasicBlockRef")
+    public static long LLVMGetBlockAddressBasicBlock(@NativeType("LLVMValueRef") long BlockAddr) {
+        long __functionAddress = Functions.GetBlockAddressBasicBlock;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(BlockAddr);
+        }
+        return invokePP(BlockAddr, __functionAddress);
     }
 
     // --- [ LLVMConstInlineAsm ] ---
@@ -8455,6 +8811,108 @@ public class LLVMCore {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ LLVMGetPrefixData ] ---
+
+    /**
+     * Gets the prefix data associated with a function. Only valid on functions, and only if {@link #LLVMHasPrefixData HasPrefixData} returns true.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetPrefixData(@NativeType("LLVMValueRef") long Fn) {
+        long __functionAddress = Functions.GetPrefixData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+        }
+        return invokePP(Fn, __functionAddress);
+    }
+
+    // --- [ LLVMHasPrefixData ] ---
+
+    /**
+     * Check if a given function has prefix data. Only valid on functions.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMBool")
+    public static boolean LLVMHasPrefixData(@NativeType("LLVMValueRef") long Fn) {
+        long __functionAddress = Functions.HasPrefixData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+        }
+        return invokePI(Fn, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMSetPrefixData ] ---
+
+    /**
+     * Sets the prefix data for the function. Only valid on functions.
+     *
+     * @since 19
+     */
+    public static void LLVMSetPrefixData(@NativeType("LLVMValueRef") long Fn, @NativeType("LLVMValueRef") long prefixData) {
+        long __functionAddress = Functions.SetPrefixData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+            check(prefixData);
+        }
+        invokePPV(Fn, prefixData, __functionAddress);
+    }
+
+    // --- [ LLVMGetPrologueData ] ---
+
+    /**
+     * Gets the prologue data associated with a function. Only valid on functions, and only if {@link #LLVMHasPrologueData HasPrologueData} returns true.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetPrologueData(@NativeType("LLVMValueRef") long Fn) {
+        long __functionAddress = Functions.GetPrologueData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+        }
+        return invokePP(Fn, __functionAddress);
+    }
+
+    // --- [ LLVMHasPrologueData ] ---
+
+    /**
+     * Check if a given function has prologue data. Only valid on functions.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMBool")
+    public static boolean LLVMHasPrologueData(@NativeType("LLVMValueRef") long Fn) {
+        long __functionAddress = Functions.HasPrologueData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+        }
+        return invokePI(Fn, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMSetPrologueData ] ---
+
+    /**
+     * Sets the prologue data for the function. Only valid on functions.
+     *
+     * @since 19
+     */
+    public static void LLVMSetPrologueData(@NativeType("LLVMValueRef") long Fn, @NativeType("LLVMValueRef") long prologueData) {
+        long __functionAddress = Functions.SetPrologueData;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+            check(prologueData);
+        }
+        invokePPV(Fn, prologueData, __functionAddress);
     }
 
     // --- [ LLVMAddAttributeAtIndex ] ---
@@ -10090,8 +10548,7 @@ public class LLVMCore {
     /**
      * Obtain the predicate of an instruction.
      * 
-     * <p>This is only valid for instructions that correspond to {@code llvm::ICmpInst} or {@code llvm::ConstantExpr} whose opcode is
-     * {@code llvm::Instruction::ICmp}.</p>
+     * <p>This is only valid for instructions that correspond to {@code llvm::ICmpInst}.</p>
      */
     @NativeType("LLVMIntPredicate")
     public static int LLVMGetICmpPredicate(@NativeType("LLVMValueRef") long Inst) {
@@ -10107,8 +10564,7 @@ public class LLVMCore {
     /**
      * Obtain the float predicate of an instruction.
      * 
-     * <p>This is only valid for instructions that correspond to {@code llvm::FCmpInst} or {@code llvm::ConstantExpr} whose opcode is
-     * {@code llvm::Instruction::FCmp}.</p>
+     * <p>This is only valid for instructions that correspond to {@code llvm::FCmpInst}.</p>
      */
     @NativeType("LLVMRealPredicate")
     public static int LLVMGetFCmpPredicate(@NativeType("LLVMValueRef") long Inst) {
@@ -10525,6 +10981,57 @@ public class LLVMCore {
         invokePPV(InvokeInst, B, __functionAddress);
     }
 
+    // --- [ LLVMGetCallBrDefaultDest ] ---
+
+    /**
+     * Obtain the default destination basic block of a {@code CallBr} instruction.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMBasicBlockRef")
+    public static long LLVMGetCallBrDefaultDest(@NativeType("LLVMValueRef") long CallBr) {
+        long __functionAddress = Functions.GetCallBrDefaultDest;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(CallBr);
+        }
+        return invokePP(CallBr, __functionAddress);
+    }
+
+    // --- [ LLVMGetCallBrNumIndirectDests ] ---
+
+    /**
+     * Obtain the number of indirect destinations of a {@code CallBr} instruction.
+     *
+     * @since 19
+     */
+    @NativeType("unsigned")
+    public static int LLVMGetCallBrNumIndirectDests(@NativeType("LLVMValueRef") long CallBr) {
+        long __functionAddress = Functions.GetCallBrNumIndirectDests;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(CallBr);
+        }
+        return invokePI(CallBr, __functionAddress);
+    }
+
+    // --- [ LLVMGetCallBrIndirectDest ] ---
+
+    /**
+     * Obtain the indirect destination of a {@code CallBr} instruction at the given index.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMBasicBlockRef")
+    public static long LLVMGetCallBrIndirectDest(@NativeType("LLVMValueRef") long CallBr, @NativeType("unsigned") int Idx) {
+        long __functionAddress = Functions.GetCallBrIndirectDest;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(CallBr);
+        }
+        return invokePP(CallBr, Idx, __functionAddress);
+    }
+
     // --- [ LLVMGetNumSuccessors ] ---
 
     /** Return the number of successors that this terminator has. */
@@ -10673,6 +11180,39 @@ public class LLVMCore {
         return invokePP(GEP, __functionAddress);
     }
 
+    // --- [ LLVMGEPGetNoWrapFlags ] ---
+
+    /**
+     * Get the no-wrap related flags for the given {@code GEP} instruction.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMGEPNoWrapFlags")
+    public static int LLVMGEPGetNoWrapFlags(@NativeType("LLVMValueRef") long GEP) {
+        long __functionAddress = Functions.GEPGetNoWrapFlags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(GEP);
+        }
+        return invokePI(GEP, __functionAddress);
+    }
+
+    // --- [ LLVMGEPSetNoWrapFlags ] ---
+
+    /**
+     * Set the no-wrap related flags for the given {@code GEP} instruction.
+     *
+     * @since 19
+     */
+    public static void LLVMGEPSetNoWrapFlags(@NativeType("LLVMValueRef") long GEP, @NativeType("LLVMGEPNoWrapFlags") int NoWrapFlags) {
+        long __functionAddress = Functions.GEPSetNoWrapFlags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(GEP);
+        }
+        invokePV(GEP, NoWrapFlags, __functionAddress);
+    }
+
     // --- [ LLVMAddIncoming ] ---
 
     /** Unsafe version of: {@link #LLVMAddIncoming AddIncoming} */
@@ -10783,21 +11323,59 @@ public class LLVMCore {
 
     // --- [ LLVMPositionBuilder ] ---
 
+    /**
+     * Set the builder position before {@code Instr} but after any attached debug records, or if {@code Instr} is null set the position to the end of
+     * {@code Block}.
+     */
     public static void LLVMPositionBuilder(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMBasicBlockRef") long Block, @NativeType("LLVMValueRef") long Instr) {
         long __functionAddress = Functions.PositionBuilder;
         if (CHECKS) {
             check(Builder);
             check(Block);
-            check(Instr);
+        }
+        invokePPPV(Builder, Block, Instr, __functionAddress);
+    }
+
+    // --- [ LLVMPositionBuilderBeforeDbgRecords ] ---
+
+    /**
+     * Set the builder position before {@code Instr} and any attached debug records, or if {@code Instr} is null set the position to the end of {@code Block}.
+     *
+     * @since 19
+     */
+    public static void LLVMPositionBuilderBeforeDbgRecords(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMBasicBlockRef") long Block, @NativeType("LLVMValueRef") long Instr) {
+        long __functionAddress = Functions.PositionBuilderBeforeDbgRecords;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Block);
         }
         invokePPPV(Builder, Block, Instr, __functionAddress);
     }
 
     // --- [ LLVMPositionBuilderBefore ] ---
 
+    /** Set the builder position before {@code Instr} but after any attached debug records. */
     public static void LLVMPositionBuilderBefore(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Instr) {
         long __functionAddress = Functions.PositionBuilderBefore;
         if (CHECKS) {
+            check(Builder);
+            check(Instr);
+        }
+        invokePPV(Builder, Instr, __functionAddress);
+    }
+
+    // --- [ LLVMPositionBuilderBeforeInstrAndDbgRecords ] ---
+
+    /**
+     * Set the builder position before {@code Instr} and any attached debug records.
+     *
+     * @since 19
+     */
+    public static void LLVMPositionBuilderBeforeInstrAndDbgRecords(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Instr) {
+        long __functionAddress = Functions.PositionBuilderBeforeInstrAndDbgRecords;
+        if (CHECKS) {
+            check(__functionAddress);
             check(Builder);
             check(Instr);
         }
@@ -11111,6 +11689,43 @@ public class LLVMCore {
             check(Addr);
         }
         return invokePPP(B, Addr, NumDests, __functionAddress);
+    }
+
+    // --- [ LLVMBuildCallBr ] ---
+
+    /** Unsafe version of: {@link #LLVMBuildCallBr BuildCallBr} */
+    public static long nLLVMBuildCallBr(long B, long Ty, long Fn, long DefaultDest, long IndirectDests, int NumIndirectDests, long Args, int NumArgs, long Bundles, int NumBundles, long Name) {
+        long __functionAddress = Functions.BuildCallBr;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(B);
+            check(Ty);
+            check(Fn);
+            check(DefaultDest);
+        }
+        return invokePPPPPPPPP(B, Ty, Fn, DefaultDest, IndirectDests, NumIndirectDests, Args, NumArgs, Bundles, NumBundles, Name, __functionAddress);
+    }
+
+    /** @since 19 */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildCallBr(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Fn, @NativeType("LLVMBasicBlockRef") long DefaultDest, @NativeType("LLVMBasicBlockRef *") PointerBuffer IndirectDests, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("LLVMOperandBundleRef *") PointerBuffer Bundles, @NativeType("char const *") ByteBuffer Name) {
+        if (CHECKS) {
+            checkNT1(Name);
+        }
+        return nLLVMBuildCallBr(B, Ty, Fn, DefaultDest, memAddress(IndirectDests), IndirectDests.remaining(), memAddress(Args), Args.remaining(), memAddress(Bundles), Bundles.remaining(), memAddress(Name));
+    }
+
+    /** @since 19 */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildCallBr(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Fn, @NativeType("LLVMBasicBlockRef") long DefaultDest, @NativeType("LLVMBasicBlockRef *") PointerBuffer IndirectDests, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("LLVMOperandBundleRef *") PointerBuffer Bundles, @NativeType("char const *") CharSequence Name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCallBr(B, Ty, Fn, DefaultDest, memAddress(IndirectDests), IndirectDests.remaining(), memAddress(Args), Args.remaining(), memAddress(Bundles), Bundles.remaining(), NameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ LLVMBuildInvoke ] ---
@@ -12535,6 +13150,7 @@ public class LLVMCore {
 
     // --- [ LLVMBuildNUWNeg ] ---
 
+    /** Unsafe version of: {@link #LLVMBuildNUWNeg BuildNUWNeg} */
     public static long nLLVMBuildNUWNeg(long B, long V, long Name) {
         long __functionAddress = Functions.BuildNUWNeg;
         if (CHECKS) {
@@ -12544,6 +13160,7 @@ public class LLVMCore {
         return invokePPPP(B, V, Name, __functionAddress);
     }
 
+    /** Deprecated. Use {@link #LLVMBuildNeg BuildNeg} + {@link #LLVMSetNUW SetNUW} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMBuildNUWNeg(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long V, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -12552,6 +13169,7 @@ public class LLVMCore {
         return nLLVMBuildNUWNeg(B, V, memAddress(Name));
     }
 
+    /** Deprecated. Use {@link #LLVMBuildNeg BuildNeg} + {@link #LLVMSetNUW SetNUW} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMBuildNUWNeg(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -13259,6 +13877,50 @@ public class LLVMCore {
             stack.nUTF8(Name, true);
             long NameEncoded = stack.getPointerAddress();
             return nLLVMBuildInBoundsGEP2(B, Ty, Pointer, memAddress(Indices), Indices.remaining(), NameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMBuildGEPWithNoWrapFlags ] ---
+
+    /** Unsafe version of: {@link #LLVMBuildGEPWithNoWrapFlags BuildGEPWithNoWrapFlags} */
+    public static long nLLVMBuildGEPWithNoWrapFlags(long B, long Ty, long Pointer, long Indices, int NumIndices, long Name, int NoWrapFlags) {
+        long __functionAddress = Functions.BuildGEPWithNoWrapFlags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(B);
+            check(Ty);
+            check(Pointer);
+        }
+        return invokePPPPPP(B, Ty, Pointer, Indices, NumIndices, Name, NoWrapFlags, __functionAddress);
+    }
+
+    /**
+     * Creates a {@code GetElementPtr} instruction. Similar to {@link #LLVMBuildGEP2 BuildGEP2}, but allows specifying the no-wrap flags.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildGEPWithNoWrapFlags(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Pointer, @NativeType("LLVMValueRef *") PointerBuffer Indices, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMGEPNoWrapFlags") int NoWrapFlags) {
+        if (CHECKS) {
+            checkNT1(Name);
+        }
+        return nLLVMBuildGEPWithNoWrapFlags(B, Ty, Pointer, memAddress(Indices), Indices.remaining(), memAddress(Name), NoWrapFlags);
+    }
+
+    /**
+     * Creates a {@code GetElementPtr} instruction. Similar to {@link #LLVMBuildGEP2 BuildGEP2}, but allows specifying the no-wrap flags.
+     *
+     * @since 19
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildGEPWithNoWrapFlags(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Pointer, @NativeType("LLVMValueRef *") PointerBuffer Indices, @NativeType("char const *") CharSequence Name, @NativeType("LLVMGEPNoWrapFlags") int NoWrapFlags) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildGEPWithNoWrapFlags(B, Ty, Pointer, memAddress(Indices), Indices.remaining(), NameEncoded, NoWrapFlags);
         } finally {
             stack.setPointer(stackPointer);
         }

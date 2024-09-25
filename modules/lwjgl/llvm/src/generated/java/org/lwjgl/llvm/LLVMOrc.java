@@ -797,9 +797,30 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityNotifyEmitted ] ---
 
+    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityNotifyEmitted OrcMaterializationResponsibilityNotifyEmitted} */
+    public static long nLLVMOrcMaterializationResponsibilityNotifyEmitted(long MR, long SymbolDepGroups, long NumSymbolDepGroups) {
+        long __functionAddress = Functions.OrcMaterializationResponsibilityNotifyEmitted;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(MR);
+        }
+        return invokePPPP(MR, SymbolDepGroups, NumSymbolDepGroups, __functionAddress);
+    }
+
     /**
      * Notifies the target {@code JITDylib} (and any pending queries on that {@code JITDylib}) that all symbols covered by this
      * {@code MaterializationResponsibility} instance have been emitted.
+     * 
+     * <p>This function takes ownership of the symbols in the {@code Dependencies} struct. This allows the following pattern...</p>
+     * 
+     * <pre><code>
+     * LLVMOrcSymbolStringPoolEntryRef Names[] = {...};
+     * LLVMOrcCDependenceMapPair Dependence = {JD, {Names, sizeof(Names)}}
+     * LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &amp;Dependence, 1);</code></pre>
+     * 
+     * <p>... without requiring cleanup of the elements of the Names array afterwards.</p>
+     * 
+     * <p>The client is still responsible for deleting the {@code Dependencies.Names} arrays, and the {@code Dependencies} array itself.</p>
      * 
      * <p>This method will return an error if any symbols being resolved have been moved to the error state due to the failure of a dependency. If this method
      * returns an error then clients should log it and call {@link #LLVMOrcMaterializationResponsibilityFailMaterialization OrcMaterializationResponsibilityFailMaterialization}. If no dependencies have been registered
@@ -808,13 +829,8 @@ public class LLVMOrc {
      * @since 13
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcMaterializationResponsibilityNotifyEmitted(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
-        long __functionAddress = Functions.OrcMaterializationResponsibilityNotifyEmitted;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(MR);
-        }
-        return invokePP(MR, __functionAddress);
+    public static long LLVMOrcMaterializationResponsibilityNotifyEmitted(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcCSymbolDependenceGroup *") LLVMOrcCSymbolDependenceGroup.Buffer SymbolDepGroups) {
+        return nLLVMOrcMaterializationResponsibilityNotifyEmitted(MR, SymbolDepGroups.address(), SymbolDepGroups.remaining());
     }
 
     // --- [ LLVMOrcMaterializationResponsibilityDefineMaterializing ] ---
@@ -923,19 +939,7 @@ public class LLVMOrc {
     }
 
     /**
-     * Adds dependencies to a symbol that the {@code MaterializationResponsibility} is responsible for.
-     * 
-     * <p>This function takes ownership of {@code Dependencies} struct. The {@code Names} array have been retained for this function. This allows the following
-     * pattern...</p>
-     * 
-     * <pre><code>
-     * LLVMOrcSymbolStringPoolEntryRef Names[] = {...};
-     * LLVMOrcCDependenceMapPair Dependence = {JD, {Names, sizeof(Names)}}
-     * LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &amp;Dependence, 1);</code></pre>
-     * 
-     * <p>... without requiring cleanup of the elements of the {@code Names} array afterwards.</p>
-     * 
-     * <p>The client is still responsible for deleting the {@code Dependencies.Names} array itself.</p>
+     * Removed in LLVM 19.
      *
      * @since 13
      */
@@ -956,8 +960,7 @@ public class LLVMOrc {
     }
 
     /**
-     * Adds dependencies to all symbols that the {@code MaterializationResponsibility} is responsible for. See
-     * {@link #LLVMOrcMaterializationResponsibilityAddDependencies OrcMaterializationResponsibilityAddDependencies} for notes about memory responsibility.
+     * Removed in LLVM 19.
      *
      * @since 13
      */

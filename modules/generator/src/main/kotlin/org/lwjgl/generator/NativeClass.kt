@@ -644,6 +644,11 @@ class NativeClass internal constructor(
 
     // DSL extensions
 
+    /** May be used to split init methods that end up too large to be compilable to a single class. */
+    fun split(init: (NativeClass.() -> Unit)) {
+        this.init()
+    }
+
     operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, see: Array<String>? = null, access: Access = Access.PUBLIC): ConstantBlock<T> {
         val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation) }, see, *constants)
         constantBlocks.add(block)

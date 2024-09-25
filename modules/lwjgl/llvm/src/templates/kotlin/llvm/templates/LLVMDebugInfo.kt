@@ -112,7 +112,19 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DWARFSourceLanguageFortran18".enum,
         "DWARFSourceLanguageAda2005".enum,
         "DWARFSourceLanguageAda2012".enum,
+        "DWARFSourceLanguageHIP".enum,
+        "DWARFSourceLanguageAssembly".enum,
+        "DWARFSourceLanguageC_sharp".enum,
         "DWARFSourceLanguageMojo".enum,
+        "DWARFSourceLanguageGLSL".enum,
+        "DWARFSourceLanguageGLSL_ES".enum,
+        "DWARFSourceLanguageHLSL".enum,
+        "DWARFSourceLanguageOpenCL_CPP".enum,
+        "DWARFSourceLanguageCPP_for_OpenCL".enum,
+        "DWARFSourceLanguageSYCL".enum,
+        "DWARFSourceLanguageRuby".enum,
+        "DWARFSourceLanguageMove".enum,
+        "DWARFSourceLanguageHylo".enum,
         "DWARFSourceLanguageMips_Assembler".enum("Vendor extensions:"),
         "DWARFSourceLanguageGOOGLE_RenderScript".enum("Vendor extensions:"),
         "DWARFSourceLanguageBORLAND_Delphi".enum("Vendor extensions:")
@@ -1151,9 +1163,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         uint32_t("AlignInBits", "variable alignment(or 0 if no alignment attr was specified)")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "DIBuilderInsertDeclareBefore",
-        "Insert a new {@code llvm.dbg.declare} intrinsic call before the given instruction.",
+        "Removed in LLVM 19.",
 
         LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
         LLVMValueRef("Storage", "the storage of the variable to declare"),
@@ -1163,12 +1175,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMValueRef("Instr", "instruction acting as a location for the new intrinsic")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "DIBuilderInsertDeclareAtEnd",
-        """
-        Insert a new {@code llvm.dbg.declare} intrinsic call at the end of the given basic block. If the basic block has a terminator instruction, the
-        intrinsic is inserted before that terminator instruction.
-        """,
+        "Removed in LLVM 19.",
 
         LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
         LLVMValueRef("Storage", "the storage of the variable to declare"),
@@ -1178,9 +1187,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMBasicBlockRef("Block", "basic block acting as a location for the new intrinsic")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "DIBuilderInsertDbgValueBefore",
-        "Insert a new {@code llvm.dbg.value} intrinsic call before the given instruction.",
+        "Removed in LLVM 19.",
 
         LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
         LLVMValueRef("Val", "the value of the variable"),
@@ -1190,12 +1199,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMValueRef("Instr", "instruction acting as a location for the new intrinsic")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "DIBuilderInsertDbgValueAtEnd",
-        """
-        Insert a new {@code llvm.dbg.value} intrinsic call at the end of the given basic block. If the basic block has a terminator instruction, the intrinsic
-        is inserted before that terminator instruction.
-        """,
+        "Removed in LLVM 19.",
 
         LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
         LLVMValueRef("Val", "the value of the variable"),
@@ -1203,6 +1209,70 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef("Expr", "a complex location expression for the variable"),
         LLVMMetadataRef("DebugLoc", "debug info location"),
         LLVMBasicBlockRef("Block", "basic block acting as a location for the new intrinsic")
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertDeclareRecordBefore",
+        "Insert a Declare {@code DbgRecord} before the given instruction.",
+
+        LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
+        LLVMValueRef("Storage", "the storage of the variable to declare"),
+        LLVMMetadataRef("VarInfo", "the variable's debug info descriptor"),
+        LLVMMetadataRef("Expr", "a complex location expression for the variable"),
+        LLVMMetadataRef("DebugLoc", "debug info location"),
+        LLVMValueRef("Instr", "instruction acting as a location for the new record"),
+
+        since = "19"
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertDeclareRecordAtEnd",
+        """
+        Insert a Declare {@code DbgRecord} at the end of the given basic block.
+
+        If the basic block has a terminator instruction, the record is inserted before that terminator instruction.
+        """,
+
+        LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
+        LLVMValueRef("Storage", "the storage of the variable to declare"),
+        LLVMMetadataRef("VarInfo", "the variable's debug info descriptor"),
+        LLVMMetadataRef("Expr", "a complex location expression for the variable"),
+        LLVMMetadataRef("DebugLoc", "debug info location"),
+        LLVMBasicBlockRef("Block", "basic block acting as a location for the new record"),
+
+        since = "19"
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertDbgValueRecordBefore",
+        "Insert a new debug record before the given instruction.",
+
+        LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
+        LLVMValueRef("Val", "the value of the variable"),
+        LLVMMetadataRef("VarInfo", "the variable's debug info descriptor"),
+        LLVMMetadataRef("Expr", "a complex location expression for the variable"),
+        LLVMMetadataRef("DebugLoc", "debug info location"),
+        LLVMValueRef("Instr", "instruction acting as a location for the new record"),
+
+        since = "19"
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertDbgValueRecordAtEnd",
+        """
+        Insert a new debug record at the end of the given basic block.
+
+        If the basic block has a terminator instruction, the record is inserted before that terminator instruction.
+        """,
+
+        LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
+        LLVMValueRef("Val", "the value of the variable"),
+        LLVMMetadataRef("VarInfo", "the variable's debug info descriptor"),
+        LLVMMetadataRef("Expr", "a complex location expression for the variable"),
+        LLVMMetadataRef("DebugLoc", "debug info location"),
+        LLVMBasicBlockRef("Block", "basic block acting as a location for the new record"),
+
+        since = "19"
     )
 
     LLVMMetadataRef(

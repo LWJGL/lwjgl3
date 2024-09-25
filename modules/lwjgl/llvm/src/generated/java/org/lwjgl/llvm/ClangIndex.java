@@ -218,6 +218,8 @@ public class ClangIndex {
             Type_getCXXRefQualifier                 = apiGetFunctionAddress(CLANG, "clang_Type_getCXXRefQualifier"),
             isVirtualBase                           = apiGetFunctionAddress(CLANG, "clang_isVirtualBase"),
             getCXXAccessSpecifier                   = apiGetFunctionAddress(CLANG, "clang_getCXXAccessSpecifier"),
+            Cursor_getBinaryOpcode                  = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getBinaryOpcode"),
+            Cursor_getBinaryOpcodeStr               = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getBinaryOpcodeStr"),
             Cursor_getStorageClass                  = apiGetFunctionAddress(CLANG, "clang_Cursor_getStorageClass"),
             getNumOverloadedDecls                   = apiGetFunctionAddress(CLANG, "clang_getNumOverloadedDecls"),
             getOverloadedDecl                       = apiGetFunctionAddress(CLANG, "clang_getOverloadedDecl"),
@@ -1052,15 +1054,16 @@ public class ClangIndex {
      * </li>
      * <li>{@link #CXCursor_ObjCBoolLiteralExpr Cursor_ObjCBoolLiteralExpr} - Objective-c Boolean Literal.</li>
      * <li>{@link #CXCursor_ObjCSelfExpr Cursor_ObjCSelfExpr} - Represents the "self" expression in an Objective-C method.</li>
-     * <li>{@link #CXCursor_OMPArraySectionExpr Cursor_OMPArraySectionExpr} - OpenMP 5.0 [2.1.5, Array Section].</li>
+     * <li>{@link #CXCursor_ArraySectionExpr Cursor_ArraySectionExpr} - OpenMP 5.0 [2.1.5, Array Section].</li>
      * <li>{@link #CXCursor_ObjCAvailabilityCheckExpr Cursor_ObjCAvailabilityCheckExpr} - Represents an {@code @available (...)} check.</li>
      * <li>{@link #CXCursor_FixedPointLiteral Cursor_FixedPointLiteral} - Fixed point literal</li>
      * <li>{@link #CXCursor_OMPArrayShapingExpr Cursor_OMPArrayShapingExpr} - OpenMP 5.0 [2.1.4, Array Shaping].</li>
      * <li>{@link #CXCursor_OMPIteratorExpr Cursor_OMPIteratorExpr} - OpenMP 5.0 [2.1.6 Iterators]</li>
      * <li>{@link #CXCursor_CXXAddrspaceCastExpr Cursor_CXXAddrspaceCastExpr} - OpenCL's {@code addrspace_cast<>} expression.</li>
      * <li>{@link #CXCursor_ConceptSpecializationExpr Cursor_ConceptSpecializationExpr} - Expression that references a C++20 concept.</li>
-     * <li>{@link #CXCursor_RequiresExpr Cursor_RequiresExpr} - Expression that references a C++20 concept.</li>
+     * <li>{@link #CXCursor_RequiresExpr Cursor_RequiresExpr} - Expression that references a C++20 concept requires expression.</li>
      * <li>{@link #CXCursor_CXXParenListInitExpr Cursor_CXXParenListInitExpr} - Expression that references a C++20 parenthesized list aggregate initializer.</li>
+     * <li>{@link #CXCursor_PackIndexingExpr Cursor_PackIndexingExpr} - Represents a C++26 pack indexing expression.</li>
      * <li>{@link #CXCursor_LastExpr Cursor_LastExpr}</li>
      * <li>{@link #CXCursor_FirstStmt Cursor_FirstStmt} - Statements</li>
      * <li>{@link #CXCursor_UnexposedStmt Cursor_UnexposedStmt} - 
@@ -1192,6 +1195,10 @@ public class ClangIndex {
      * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopSimdDirective Cursor_OMPParallelMaskedTaskLoopSimdDirective} - OpenMP parallel masked taskloop simd directive.</li>
      * <li>{@link #CXCursor_OMPErrorDirective Cursor_OMPErrorDirective} - OpenMP error directive.</li>
      * <li>{@link #CXCursor_OMPScopeDirective Cursor_OMPScopeDirective} - OpenMP scope directive.</li>
+     * <li>{@link #CXCursor_OMPReverseDirective Cursor_OMPReverseDirective} - OpenMP reverse directive.</li>
+     * <li>{@link #CXCursor_OMPInterchangeDirective Cursor_OMPInterchangeDirective} - OpenMP interchange directive.</li>
+     * <li>{@link #CXCursor_OpenACCComputeConstruct Cursor_OpenACCComputeConstruct} - OpenACC Compute Construct.</li>
+     * <li>{@link #CXCursor_OpenACCLoopConstruct Cursor_OpenACCLoopConstruct} - OpenACC Loop Construct.</li>
      * <li>{@link #CXCursor_LastStmt Cursor_LastStmt}</li>
      * <li>{@link #CXCursor_TranslationUnit Cursor_TranslationUnit} - 
      * Cursor that represents the translation unit itself.
@@ -1368,7 +1375,7 @@ public class ClangIndex {
         CXCursor_LambdaExpr                                       = 144,
         CXCursor_ObjCBoolLiteralExpr                              = 145,
         CXCursor_ObjCSelfExpr                                     = 146,
-        CXCursor_OMPArraySectionExpr                              = 147,
+        CXCursor_ArraySectionExpr                                 = 147,
         CXCursor_ObjCAvailabilityCheckExpr                        = 148,
         CXCursor_FixedPointLiteral                                = 149,
         CXCursor_OMPArrayShapingExpr                              = 150,
@@ -1377,7 +1384,8 @@ public class ClangIndex {
         CXCursor_ConceptSpecializationExpr                        = 153,
         CXCursor_RequiresExpr                                     = 154,
         CXCursor_CXXParenListInitExpr                             = 155,
-        CXCursor_LastExpr                                         = CXCursor_CXXParenListInitExpr,
+        CXCursor_PackIndexingExpr                                 = 156,
+        CXCursor_LastExpr                                         = CXCursor_PackIndexingExpr,
         CXCursor_FirstStmt                                        = 200,
         CXCursor_UnexposedStmt                                    = 200,
         CXCursor_LabelStmt                                        = 201,
@@ -1487,7 +1495,11 @@ public class ClangIndex {
         CXCursor_OMPParallelMaskedTaskLoopSimdDirective           = 304,
         CXCursor_OMPErrorDirective                                = 305,
         CXCursor_OMPScopeDirective                                = 306,
-        CXCursor_LastStmt                                         = CXCursor_OMPScopeDirective,
+        CXCursor_OMPReverseDirective                              = 307,
+        CXCursor_OMPInterchangeDirective                          = 308,
+        CXCursor_OpenACCComputeConstruct                          = 320,
+        CXCursor_OpenACCLoopConstruct                             = 321,
+        CXCursor_LastStmt                                         = CXCursor_OpenACCLoopConstruct,
         CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,
@@ -1924,6 +1936,8 @@ public class ClangIndex {
      * <li>{@link #CXCallingConv_SwiftAsync CallingConv_SwiftAsync}</li>
      * <li>{@link #CXCallingConv_AArch64SVEPCS CallingConv_AArch64SVEPCS}</li>
      * <li>{@link #CXCallingConv_M68kRTD CallingConv_M68kRTD}</li>
+     * <li>{@link #CXCallingConv_PreserveNone CallingConv_PreserveNone}</li>
+     * <li>{@link #CXCallingConv_RISCVVectorCall CallingConv_RISCVVectorCall}</li>
      * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid}</li>
      * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed}</li>
      * </ul>
@@ -1950,6 +1964,8 @@ public class ClangIndex {
         CXCallingConv_SwiftAsync        = 17,
         CXCallingConv_AArch64SVEPCS     = 18,
         CXCallingConv_M68kRTD           = 19,
+        CXCallingConv_PreserveNone      = 20,
+        CXCallingConv_RISCVVectorCall   = 21,
         CXCallingConv_Invalid           = 100,
         CXCallingConv_Unexposed         = 200;
 
@@ -2099,6 +2115,86 @@ public class ClangIndex {
         CX_SC_OpenCLWorkGroupLocal = 5,
         CX_SC_Auto                 = 6,
         CX_SC_Register             = 7;
+
+    /**
+     * Represents a specific kind of binary operator which can appear at a cursor. ({@code enum CX_BinaryOperatorKind})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CX_BO_Invalid _BO_Invalid}</li>
+     * <li>{@link #CX_BO_PtrMemD _BO_PtrMemD}</li>
+     * <li>{@link #CX_BO_PtrMemI _BO_PtrMemI}</li>
+     * <li>{@link #CX_BO_Mul _BO_Mul}</li>
+     * <li>{@link #CX_BO_Div _BO_Div}</li>
+     * <li>{@link #CX_BO_Rem _BO_Rem}</li>
+     * <li>{@link #CX_BO_Add _BO_Add}</li>
+     * <li>{@link #CX_BO_Sub _BO_Sub}</li>
+     * <li>{@link #CX_BO_Shl _BO_Shl}</li>
+     * <li>{@link #CX_BO_Shr _BO_Shr}</li>
+     * <li>{@link #CX_BO_Cmp _BO_Cmp}</li>
+     * <li>{@link #CX_BO_LT _BO_LT}</li>
+     * <li>{@link #CX_BO_GT _BO_GT}</li>
+     * <li>{@link #CX_BO_LE _BO_LE}</li>
+     * <li>{@link #CX_BO_GE _BO_GE}</li>
+     * <li>{@link #CX_BO_EQ _BO_EQ}</li>
+     * <li>{@link #CX_BO_NE _BO_NE}</li>
+     * <li>{@link #CX_BO_And _BO_And}</li>
+     * <li>{@link #CX_BO_Xor _BO_Xor}</li>
+     * <li>{@link #CX_BO_Or _BO_Or}</li>
+     * <li>{@link #CX_BO_LAnd _BO_LAnd}</li>
+     * <li>{@link #CX_BO_LOr _BO_LOr}</li>
+     * <li>{@link #CX_BO_Assign _BO_Assign}</li>
+     * <li>{@link #CX_BO_MulAssign _BO_MulAssign}</li>
+     * <li>{@link #CX_BO_DivAssign _BO_DivAssign}</li>
+     * <li>{@link #CX_BO_RemAssign _BO_RemAssign}</li>
+     * <li>{@link #CX_BO_AddAssign _BO_AddAssign}</li>
+     * <li>{@link #CX_BO_SubAssign _BO_SubAssign}</li>
+     * <li>{@link #CX_BO_ShlAssign _BO_ShlAssign}</li>
+     * <li>{@link #CX_BO_ShrAssign _BO_ShrAssign}</li>
+     * <li>{@link #CX_BO_AndAssign _BO_AndAssign}</li>
+     * <li>{@link #CX_BO_XorAssign _BO_XorAssign}</li>
+     * <li>{@link #CX_BO_OrAssign _BO_OrAssign}</li>
+     * <li>{@link #CX_BO_Comma _BO_Comma}</li>
+     * <li>{@link #CX_BO_LAST _BO_LAST}</li>
+     * </ul>
+     */
+    public static final int
+        CX_BO_Invalid   = 0,
+        CX_BO_PtrMemD   = 1,
+        CX_BO_PtrMemI   = 2,
+        CX_BO_Mul       = 3,
+        CX_BO_Div       = 4,
+        CX_BO_Rem       = 5,
+        CX_BO_Add       = 6,
+        CX_BO_Sub       = 7,
+        CX_BO_Shl       = 8,
+        CX_BO_Shr       = 9,
+        CX_BO_Cmp       = 10,
+        CX_BO_LT        = 11,
+        CX_BO_GT        = 12,
+        CX_BO_LE        = 13,
+        CX_BO_GE        = 14,
+        CX_BO_EQ        = 15,
+        CX_BO_NE        = 16,
+        CX_BO_And       = 17,
+        CX_BO_Xor       = 18,
+        CX_BO_Or        = 19,
+        CX_BO_LAnd      = 20,
+        CX_BO_LOr       = 21,
+        CX_BO_Assign    = 22,
+        CX_BO_MulAssign = 23,
+        CX_BO_DivAssign = 24,
+        CX_BO_RemAssign = 25,
+        CX_BO_AddAssign = 26,
+        CX_BO_SubAssign = 27,
+        CX_BO_ShlAssign = 28,
+        CX_BO_ShrAssign = 29,
+        CX_BO_AndAssign = 30,
+        CX_BO_XorAssign = 31,
+        CX_BO_OrAssign  = 32,
+        CX_BO_Comma     = 33,
+        CX_BO_LAST      = CX_BO_Comma;
 
     /**
      * Describes how the traversal of the children of a particular cursor should proceed after visiting a particular child cursor. ({@code enum
@@ -7121,6 +7217,46 @@ if (clang_Cursor_isBitField(Cursor)) {
     @NativeType("enum CX_CXXAccessSpecifier")
     public static int clang_getCXXAccessSpecifier(CXCursor cursor) {
         return nclang_getCXXAccessSpecifier(cursor.address());
+    }
+
+    // --- [ clang_Cursor_getBinaryOpcode ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcode Cursor_getBinaryOpcode} */
+    public static native int nclang_Cursor_getBinaryOpcode(long cursor, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcode Cursor_getBinaryOpcode} */
+    public static int nclang_Cursor_getBinaryOpcode(long cursor) {
+        long __functionAddress = Functions.Cursor_getBinaryOpcode;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getBinaryOpcode(cursor, __functionAddress);
+    }
+
+    /** Returns the operator code for the binary operator. */
+    @NativeType("enum CX_BinaryOperatorKind")
+    public static int clang_Cursor_getBinaryOpcode(CXCursor cursor) {
+        return nclang_Cursor_getBinaryOpcode(cursor.address());
+    }
+
+    // --- [ clang_Cursor_getBinaryOpcodeStr ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcodeStr Cursor_getBinaryOpcodeStr} */
+    public static native void nclang_Cursor_getBinaryOpcodeStr(int Op, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcodeStr Cursor_getBinaryOpcodeStr} */
+    public static void nclang_Cursor_getBinaryOpcodeStr(int Op, long __result) {
+        long __functionAddress = Functions.Cursor_getBinaryOpcodeStr;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_Cursor_getBinaryOpcodeStr(Op, __functionAddress, __result);
+    }
+
+    /** Returns a string containing the spelling of the binary operator. */
+    public static CXString clang_Cursor_getBinaryOpcodeStr(@NativeType("enum CX_BinaryOperatorKind") int Op, CXString __result) {
+        nclang_Cursor_getBinaryOpcodeStr(Op, __result.address());
+        return __result;
     }
 
     // --- [ clang_Cursor_getStorageClass ] ---

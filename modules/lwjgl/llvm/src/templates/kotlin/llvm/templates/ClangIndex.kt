@@ -688,16 +688,17 @@ val ClangIndex = "ClangIndex".nativeClass(
         ),
         "Cursor_ObjCBoolLiteralExpr".enum("Objective-c Boolean Literal."),
         "Cursor_ObjCSelfExpr".enum("Represents the \"self\" expression in an Objective-C method."),
-        "Cursor_OMPArraySectionExpr".enum("OpenMP 5.0 [2.1.5, Array Section]."),
+        "Cursor_ArraySectionExpr".enum("OpenMP 5.0 [2.1.5, Array Section]."),
         "Cursor_ObjCAvailabilityCheckExpr".enum("Represents an {@code @available (...)} check."),
         "Cursor_FixedPointLiteral".enum("Fixed point literal"),
         "Cursor_OMPArrayShapingExpr".enum("OpenMP 5.0 [2.1.4, Array Shaping]."),
         "Cursor_OMPIteratorExpr".enum("OpenMP 5.0 [2.1.6 Iterators]"),
         "Cursor_CXXAddrspaceCastExpr".enum("OpenCL's {@code addrspace_cast<>} expression."),
         "Cursor_ConceptSpecializationExpr".enum("Expression that references a C++20 concept."),
-        "Cursor_RequiresExpr".enum("Expression that references a C++20 concept."),
+        "Cursor_RequiresExpr".enum("Expression that references a C++20 concept requires expression."),
         "Cursor_CXXParenListInitExpr".enum("Expression that references a C++20 parenthesized list aggregate initializer."),
-        "Cursor_LastExpr".enum("", "CXCursor_CXXParenListInitExpr"),
+        "Cursor_PackIndexingExpr".enum("Represents a C++26 pack indexing expression."),
+        "Cursor_LastExpr".enum("", "CXCursor_PackIndexingExpr"),
         "Cursor_FirstStmt".enum("Statements", "200"),
         "Cursor_UnexposedStmt".enum(
             """
@@ -837,7 +838,11 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPParallelMaskedTaskLoopSimdDirective".enum("OpenMP parallel masked taskloop simd directive."),
         "Cursor_OMPErrorDirective".enum("OpenMP error directive."),
         "Cursor_OMPScopeDirective".enum("OpenMP scope directive."),
-        "Cursor_LastStmt".enum("", "CXCursor_OMPScopeDirective"),
+        "Cursor_OMPReverseDirective".enum("OpenMP reverse directive."),
+        "Cursor_OMPInterchangeDirective".enum("OpenMP interchange directive."),
+        "Cursor_OpenACCComputeConstruct".enum("OpenACC Compute Construct.", "320"),
+        "Cursor_OpenACCLoopConstruct".enum("OpenACC Loop Construct."),
+        "Cursor_LastStmt".enum("", "CXCursor_OpenACCLoopConstruct"),
         "Cursor_TranslationUnit".enum(
             """
             Cursor that represents the translation unit itself.
@@ -1130,6 +1135,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CallingConv_SwiftAsync".enum(""),
         "CallingConv_AArch64SVEPCS".enum,
         "CallingConv_M68kRTD".enum,
+        "CallingConv_PreserveNone".enum,
+        "CallingConv_RISCVVectorCall".enum,
         "CallingConv_Invalid".enum("", "100"),
         "CallingConv_Unexposed".enum("", "200")
     )
@@ -1225,6 +1232,46 @@ val ClangIndex = "ClangIndex".nativeClass(
         "_SC_OpenCLWorkGroupLocal".enum,
         "_SC_Auto".enum,
         "_SC_Register".enum
+    )
+
+    EnumConstant(
+        "Represents a specific kind of binary operator which can appear at a cursor. ({@code enum CX_BinaryOperatorKind})",
+
+        "_BO_Invalid".enum("", "0"),
+        "_BO_PtrMemD".enum,
+        "_BO_PtrMemI".enum,
+        "_BO_Mul".enum,
+        "_BO_Div".enum,
+        "_BO_Rem".enum,
+        "_BO_Add".enum,
+        "_BO_Sub".enum,
+        "_BO_Shl".enum,
+        "_BO_Shr".enum,
+        "_BO_Cmp".enum,
+        "_BO_LT".enum,
+        "_BO_GT".enum,
+        "_BO_LE".enum,
+        "_BO_GE".enum,
+        "_BO_EQ".enum,
+        "_BO_NE".enum,
+        "_BO_And".enum,
+        "_BO_Xor".enum,
+        "_BO_Or".enum,
+        "_BO_LAnd".enum,
+        "_BO_LOr".enum,
+        "_BO_Assign".enum,
+        "_BO_MulAssign".enum,
+        "_BO_DivAssign".enum,
+        "_BO_RemAssign".enum,
+        "_BO_AddAssign".enum,
+        "_BO_SubAssign".enum,
+        "_BO_ShlAssign".enum,
+        "_BO_ShrAssign".enum,
+        "_BO_AndAssign".enum,
+        "_BO_XorAssign".enum,
+        "_BO_OrAssign".enum,
+        "_BO_Comma".enum,
+        "_BO_LAST".enum("", "CX_BO_Comma")
     )
 
     EnumConstant(
@@ -4003,6 +4050,20 @@ void foo(const int);""")}
         """,
 
         CXCursor("cursor", "")
+    )
+
+    IgnoreMissing..CX_BinaryOperatorKind(
+        "Cursor_getBinaryOpcode",
+        "Returns the operator code for the binary operator.",
+
+        CXCursor("cursor", "")
+    )
+
+    IgnoreMissing..CXString(
+        "Cursor_getBinaryOpcodeStr",
+        "Returns a string containing the spelling of the binary operator.",
+
+        CX_BinaryOperatorKind("Op", "")
     )
 
     CX_StorageClass(
