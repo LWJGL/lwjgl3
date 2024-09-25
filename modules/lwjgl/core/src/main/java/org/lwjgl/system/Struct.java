@@ -147,6 +147,7 @@ public abstract class Struct<SELF extends Struct<SELF>> extends Pointer.Default 
             validation.validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
+    public static void validate(long array, long count, int SIZEOF, StructValidation validation) { validate(array, (int)count, SIZEOF, validation); }
 
     // ---------------- Struct Member Layout ----------------
 

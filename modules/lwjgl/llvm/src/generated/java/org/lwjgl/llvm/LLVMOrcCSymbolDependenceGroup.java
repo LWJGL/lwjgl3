@@ -252,10 +252,10 @@ public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependen
      */
     public static void validate(long struct) {
         LLVMOrcCSymbolsList.validate(struct + LLVMOrcCSymbolDependenceGroup.SYMBOLS);
+        long NumDependencies = nNumDependencies(struct);
         long Dependencies = memGetAddress(struct + LLVMOrcCSymbolDependenceGroup.DEPENDENCIES);
         check(Dependencies);
         validate(Dependencies, NumDependencies, LLVMOrcCDependenceMapPair.SIZEOF, LLVMOrcCDependenceMapPair::validate);
-        long NumDependencies = nNumDependencies(struct);
     }
 
     // -----------------------------------

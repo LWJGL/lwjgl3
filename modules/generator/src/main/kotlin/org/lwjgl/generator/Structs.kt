@@ -468,7 +468,18 @@ class Struct(
         val validations = ArrayList<String>()
 
         fun MutableList<String>.addPointer(m: StructMember) = this.add("$t${t}long ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});")
-        fun MutableList<String>.addCount(m: StructMember) = this.add("$t$t${m.nativeType.javaMethodType} ${m.name} = n${m.name}($STRUCT);")
+        fun MutableList<String>.addCount(m: StructMember) {
+            val validation = "$t$t${m.nativeType.javaMethodType} ${m.name} = n${m.name}($STRUCT);"
+            if (!this.isEmpty()) {
+                for (i in 0 until this.size) {
+                    if (this[i].contains(m.name)) {
+                        this.add(i, validation)
+                        return
+                    }
+                }
+            }
+            this.add(validation)
+        }
 
         fun validate(m: StructMember, indent: String, hasPointer: Boolean = false): String {
             return if (m.nativeType.hasStructValidation) {
