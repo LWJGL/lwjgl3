@@ -1,0 +1,7 @@
+# Usage: java @config/cli/debug.args <other arguments>
+-Dorg.lwjgl.util.Debug=true
+-Dorg.lwjgl.util.DebugLoader=false
+-Dorg.lwjgl.util.DebugAllocator=false
+-Dorg.lwjgl.util.DebugAllocator.fast=false
+-Dorg.lwjgl.util.DebugStack=false
+-Dorg.lwjgl.util.DebugFunctions=false
