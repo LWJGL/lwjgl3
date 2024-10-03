@@ -60,6 +60,10 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         if (fdwReason == DLL_THREAD_DETACH && lpvReserved == NULL/* see: https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain */) {
             EnvData* data = (EnvData*)TlsGetValue(envTLS);
             if (data != NULL) {
+                if (data->async && getThreadEnv() != NULL) {
+                    detachCurrentThread();
+                }
+
                 TlsSetValue(envTLS, NULL);
 
                 JNIEnv env = data->envCopy;
@@ -67,10 +71,6 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
                     free((void *)env);
                 }
                 free(data);
-            }
-
-            if (getThreadEnv() != NULL) {
-                detachCurrentThread();
             }
         }
 
@@ -128,16 +128,16 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
     static void autoDetach(void* value) {
         EnvData* data = (EnvData *)value;
 
+        if (data->async && getThreadEnv() != NULL) {
+            detachCurrentThread();
+        }
+
         JNIEnv env = data->envCopy;
         if (env != NULL) {
             free((void *)env);
         }
 
         free(data);
-
-        if (getThreadEnv() != NULL) {
-            detachCurrentThread();
-        }
     }
 
     static inline void tlsInit(void) {
