@@ -15,7 +15,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>This extension expands on the concept of spatial entities to include a way for a spatial entity to represent a triangle mesh that describes 3D geometry of the spatial entity in a scene. Spatial entities are defined in {@link FBSpatialEntity XR_FB_spatial_entity} extension using the Entity-Component System. The triangle mesh is a component type that <b>may</b> be associated to a spatial entity.</p>
  * 
- * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">fundamentals-extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">extension</a> section.</p>
  */
 public class METASpatialEntityMesh {
 

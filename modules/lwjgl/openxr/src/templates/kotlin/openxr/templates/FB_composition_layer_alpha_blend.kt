@@ -13,7 +13,7 @@ val FB_composition_layer_alpha_blend = "FBCompositionLayerAlphaBlend".nativeClas
         """
         The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_FB_composition_layer_alpha_blend">XR_FB_composition_layer_alpha_blend</a> extension.
 
-        This extension provides explicit control over source and destination blend factors, with separate controls for color and alpha. When specified, these blend controls supersede the behavior of #COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT, as well as the layer blending operation which defined in the section of <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#composition-layer-blending">Composition Layer Blending</a>.
+        This extension provides explicit control over source and destination blend factors, with separate controls for color and alpha. When specified, these blend controls supersede the behavior of #COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT, as well as the layer blending operation which defined in the section of <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#rendering-composition-layer-blending">Composition Layer Blending</a>.
 
         When #COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT is specified, the source color is unpremultiplied alpha.
 

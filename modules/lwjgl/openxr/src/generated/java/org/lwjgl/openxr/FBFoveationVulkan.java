@@ -16,7 +16,7 @@ package org.lwjgl.openxr;
  * <li>An application to obtain foveation textures or constructs needed for foveated rendering in Vulkan.</li>
  * </ul>
  * 
- * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">fundamentals-extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">extension</a> section.</p>
  */
 public final class FBFoveationVulkan {
 

@@ -23,7 +23,7 @@ val VARJO_quad_views = "VARJOQuadViews".nativeClassXR("VARJO_quad_views", type =
 
         The relative position of the inner views relative to the outer views can change at run-time.
 
-        The runtime must: set pname:pose for view 0 and 2 to be identical and must: set pname:pose for view 1 and 3 to be be identical when application calls flink:xrLocateViews.
+        The runtime <b>must</b> set {@code pose} for view 0 and 2 to be identical and <b>must</b> set {@code pose} for view 1 and 3 to be be identical when application calls #LocateViews().
 
         The runtime might blend between the views at the edges, so the application should not omit the inner field of view from being generated in the outer view.
         """

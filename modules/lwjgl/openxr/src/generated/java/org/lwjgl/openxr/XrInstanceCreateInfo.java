@@ -128,7 +128,7 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     /** the number of global API layers to enable. */
     @NativeType("uint32_t")
     public int enabledApiLayerCount() { return nenabledApiLayerCount(address()); }
-    /** a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#instance-api-layers-and-extensions">instance-api-layers-and-extensions</a> section for further details. */
+    /** a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#instance-api-layers-and-extensions">API Layers and Extensions</a> section for further details. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer enabledApiLayerNames() { return nenabledApiLayerNames(address()); }

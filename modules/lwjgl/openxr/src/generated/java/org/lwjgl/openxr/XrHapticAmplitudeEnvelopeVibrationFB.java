@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
  * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
- * <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-duration">fundamentals-duration</a> for more details.</li>
+ * <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-duration">duration</a> for more details.</li>
  * <li>{@code amplitudeCount} is the number of samples in the buffer.</li>
  * <li>{@code amplitudes} is the pointer to a float array that contains the samples.</li>
  * </ul>

@@ -74,10 +74,10 @@ public class EXTFuture {
      * 
      * <ul>
      * <li>When successfully returned from an async function the future starts out as {@code Pending}. In this state the future <b>may</b> be polled, but <b>must</b> not be passed to a completion function. Applications <b>should</b> wait for the future to become ready and keep polling the state of the future. If a pending future is passed to the associated completion function, it <b>must</b> return {@link #XR_ERROR_FUTURE_PENDING_EXT ERROR_FUTURE_PENDING_EXT}.</li>
-     * <li>Once the asynchronous operation succeeds or fails, the state of the future moves to {@code Ready}. In the ready state the future <b>may</b> be "Completed" with the {@code Complete} function. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_future-completing">ext_future-completing</a>.</li>
+     * <li>Once the asynchronous operation succeeds or fails, the state of the future moves to {@code Ready}. In the ready state the future <b>may</b> be "Completed" with the {@code Complete} function. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_future-completing">Completing a Future</a>.</li>
      * <li>After being successfully completed, the future becomes invalidated if the completion function returns a success code, and in the case of two-call idioms, the array was not {@code NULL}.</li>
      * <li>After a call to {@link #xrCancelFutureEXT CancelFutureEXT}, the future becomes invalidated immediately and any resources associated with it <b>may</b> be freed (including handles)</li>
-     * <li>When the associated handle is destroyed, the futures become invalidated. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_future-scope">ext_future-scope</a>.</li>
+     * <li>When the associated handle is destroyed, the futures become invalidated. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_future-scope">Future Scope</a>.</li>
      * </ul>
      * 
      * <p>A future returned from an async function <b>must</b> be in either the state {@link #XR_FUTURE_STATE_PENDING_EXT FUTURE_STATE_PENDING_EXT} or {@link #XR_FUTURE_STATE_READY_EXT FUTURE_STATE_READY_EXT}. A runtime <b>may</b> skip the {@code Pending} state and go directly to {@code Ready} if the result is immediately available.</p>

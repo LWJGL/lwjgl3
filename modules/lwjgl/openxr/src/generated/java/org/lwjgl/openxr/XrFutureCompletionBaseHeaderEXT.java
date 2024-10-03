@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using {@link XrFutureCompletionBaseHeaderEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT}</li>
+ * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML}, {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT}, {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML}, {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML}, {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML}, {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML}, {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML}, {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
  * </ul>
@@ -162,8 +162,43 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return address == NULL ? null : new XrFutureCompletionBaseHeaderEXT(address, null);
     }
 
+    /** Upcasts the specified {@code XrCreateSpatialAnchorsCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrCreateSpatialAnchorsCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsQueryCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSpatialAnchorsQueryCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsPublishCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSpatialAnchorsPublishCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsDeleteCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSpatialAnchorsDeleteCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsUpdateExpirationCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSpatialAnchorsUpdateExpirationCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
     /** Upcasts the specified {@code XrFutureCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
     public static XrFutureCompletionBaseHeaderEXT create(XrFutureCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrWorldMeshStateRequestCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrWorldMeshStateRequestCompletionML value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrWorldMeshRequestCompletionML} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrWorldMeshRequestCompletionML value) {
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
@@ -211,8 +246,43 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
+    /** Upcasts the specified {@code XrCreateSpatialAnchorsCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrCreateSpatialAnchorsCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsQueryCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSpatialAnchorsQueryCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsPublishCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSpatialAnchorsPublishCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsDeleteCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSpatialAnchorsDeleteCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorsUpdateExpirationCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSpatialAnchorsUpdateExpirationCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
     /** Upcasts the specified {@code XrFutureCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
     public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrFutureCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrWorldMeshStateRequestCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrWorldMeshStateRequestCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrWorldMeshRequestCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrWorldMeshRequestCompletionML.Buffer value) {
         return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

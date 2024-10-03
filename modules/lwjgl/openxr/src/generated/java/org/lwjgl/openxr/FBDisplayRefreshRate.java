@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>An application to receive notification of changes to the display refresh rate which are delivered via events.</li>
  * </ul>
  * 
- * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">fundamentals-extensions</a> section.</p>
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-extensions">extension</a> section.</p>
  */
 public class FBDisplayRefreshRate {
 
