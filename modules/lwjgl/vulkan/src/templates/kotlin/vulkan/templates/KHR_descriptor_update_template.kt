@@ -16,7 +16,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         <h5>Promotion to Vulkan 1.1</h5>
         #CmdPushDescriptorSetWithTemplateKHR() is included as an interaction with {@link KHRPushDescriptor VK_KHR_push_descriptor}. If Vulkan 1.1 and {@code VK_KHR_push_descriptor} are supported, this is included by {@link KHRPushDescriptor VK_KHR_push_descriptor}.
 
-        The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

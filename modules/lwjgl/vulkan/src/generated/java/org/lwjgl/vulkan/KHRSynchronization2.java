@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
- * <p>Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.</p>
  * 
  * <h5>Examples</h5>
  * 
@@ -67,6 +67,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Interacts with VK_AMD_buffer_marker</li>
  * <li>Interacts with VK_EXT_blend_operation_advanced</li>
  * <li>Interacts with VK_EXT_conditional_rendering</li>
+ * <li>Interacts with VK_EXT_device_generated_commands</li>
  * <li>Interacts with VK_EXT_fragment_density_map</li>
  * <li>Interacts with VK_EXT_mesh_shader</li>
  * <li>Interacts with VK_EXT_transform_feedback</li>
@@ -319,6 +320,23 @@ public class KHRSynchronization2 {
     public static final long
         VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV  = 0x20000L,
         VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV = 0x40000L;
+
+    /** Extends {@code VkPipelineStageFlagBits2}. */
+    public static final long VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_EXT = 0x20000L;
+
+    /**
+     * Extends {@code VkAccessFlagBits2}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT}</li>
+     * <li>{@link #VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT}</li>
+     * </ul>
+     */
+    public static final long
+        VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT  = 0x20000L,
+        VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT = 0x40000L;
 
     /** Extends {@code VkPipelineStageFlagBits2}. */
     public static final long VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x400000L;

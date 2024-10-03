@@ -30,7 +30,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * </ul>
  * 
  * <ul>
- * <li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fxvertex-input">Vertex Input Description</a></li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-drawIndirectFirstInstance">{@code drawIndirectFirstInstance}</a> feature is not enabled, {@code firstInstance} <b>must</b> be 0</li>
  * </ul>
  * 

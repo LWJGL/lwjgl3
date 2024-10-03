@@ -16,7 +16,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         This extension also allows applications to use the physical-device components of device extensions before #CreateDevice() is called.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         <pre><code>

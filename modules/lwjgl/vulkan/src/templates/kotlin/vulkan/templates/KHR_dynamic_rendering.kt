@@ -16,7 +16,7 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
         This extension also incorporates #ATTACHMENT_STORE_OP_NONE_KHR from {@link QCOMRenderPassStoreOps VK_QCOM_render_pass_store_ops}, enabling applications to avoid unnecessary synchronization when an attachment is not written during a render pass.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

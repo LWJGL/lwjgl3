@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.</p>
  * 
  * <h5>Input Attachment Specification Example</h5>
  * 

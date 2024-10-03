@@ -14,7 +14,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export non-Vulkan handles from Vulkan memory objects such that the underlying resources can be referenced outside the scope of the Vulkan logical device that created them.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

@@ -534,7 +534,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
             <li>{@code pData} <b>must</b> point to a buffer that is at least ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::bufferCaptureReplayDescriptorDataSize} bytes in size</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
@@ -585,7 +585,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
             <li>{@code pData} <b>must</b> point to a buffer that is at least ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::imageCaptureReplayDescriptorDataSize} bytes in size</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
@@ -636,7 +636,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
             <li>{@code pData} <b>must</b> point to a buffer that is at least ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::imageViewCaptureReplayDescriptorDataSize} bytes in size</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
@@ -687,7 +687,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
             <li>{@code pData} <b>must</b> point to a buffer that is at least ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::samplerCaptureReplayDescriptorDataSize} bytes in size</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
@@ -738,7 +738,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
             <li>{@code pData} <b>must</b> point to a buffer that is at least ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::accelerationStructureCaptureReplayDescriptorDataSize} bytes in size</li>
             <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>

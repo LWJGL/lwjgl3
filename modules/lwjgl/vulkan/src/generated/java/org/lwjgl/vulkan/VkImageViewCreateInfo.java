@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Any view of an image plane will have the same mapping between texel coordinates and memory locations as used by the components of the color aspect, subject to the formulae relating texel coordinates to lower-resolution planes as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-chroma-reconstruction">Chroma Reconstruction</a>. That is, if an R or B plane has a reduced resolution relative to the G plane of the multi-planar image, the image view operates using the (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) unnormalized coordinates of the reduced-resolution plane, and these coordinates access the same memory locations as the (<em>u<sub>color</sub></em>, <em>v<sub>color</sub></em>) unnormalized coordinates of the color aspect for which chroma reconstruction operations operate on the same (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) or (<em>i<sub>plane</sub></em>, <em>j<sub>plane</sub></em>) coordinates.</p>
  * 
- * <h6>Image type and image view type compatibility requirements</h6>
+ * <h6>Image Type and Image View Type Compatibility Requirements</h6>
  * 
  * <table class="lwjgl">
  * <thead><tr><th>Image View Type</th><th>Compatible Image Types</th></tr></thead>

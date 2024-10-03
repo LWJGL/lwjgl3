@@ -139,7 +139,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         The supported {@code VkImageUsageFlagBits} of the presentable images of a swapchain created for a surface <b>may</b> differ depending on the presentation mode, and can be determined as per the table below:
 
-        <h6>Presentable image usage queries</h6>
+        <h6>Presentable Image Usage Queries</h6>
         <table class="lwjgl">
             <thead><tr><th>Presentation mode</th><th>Image usage flags</th></tr></thead>
             <tbody>

@@ -18,7 +18,7 @@ val KHR_multiview = "KHRMultiview".nativeClassVK("KHR_multiview", type = "device
         This extension enables the use of the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_multiview.html">{@code SPV_KHR_multiview}</a> shader extension, which adds a new {@code ViewIndex} built-in type that allows shaders to control what to do for each view. If using GLSL there is also the <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_multiview.txt">{@code GL_EXT_multiview}</a> extension that introduces a {@code highp int gl_ViewIndex;} built-in variable for vertex, tessellation, geometry, and fragment shaders.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

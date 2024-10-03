@@ -18,7 +18,7 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
         Depth and stencil samples are resolved to a single value based on the resolve mode. The set of possible resolve modes is defined in the {@code VkResolveModeFlagBits} enum. The #RESOLVE_MODE_SAMPLE_ZERO_BIT mode is the only mode that is required of all implementations (that support the extension or support Vulkan 1.2 or higher). Some implementations may also support averaging (the same as color sample resolve) or taking the minimum or maximum sample, which may be more suitable for depth/stencil resolve.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

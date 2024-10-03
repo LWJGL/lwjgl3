@@ -491,7 +491,7 @@ public class KHRSwapchain {
      * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be unsignaled</li>
      * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
      * <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
-     * <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create the {@code swapchain} member of {@code pAcquireInfo}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
+     * <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create the {@code swapchain} member of {@code pAcquireInfo}, {@code timeout} <b>must</b> not be {@code UINT64_MAX}</li>
      * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
      * </ul>
      * 

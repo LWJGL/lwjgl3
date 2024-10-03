@@ -22,7 +22,7 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
         </ul>
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

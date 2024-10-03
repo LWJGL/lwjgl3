@@ -40,8 +40,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code swapchainCount} <b>must</b> be equal to {@link VkPresentInfoKHR}{@code ::swapchainCount}</li>
- * <li>Each element of {@code pFences} <b>must</b> be unsignaled</li>
- * <li>Each element of {@code pFences} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+ * <li>Each element of {@code pFences} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} <b>must</b> be unsignaled</li>
+ * <li>Each element of {@code pFences} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

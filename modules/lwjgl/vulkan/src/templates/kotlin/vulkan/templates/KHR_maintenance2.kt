@@ -30,7 +30,7 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
         On some implementations there <b>may</b> be a performance penalty if the implementation does not know (at #CreateRenderPass() time) which aspect(s) of multi-aspect images <b>can</b> be accessed as input attachments.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <h5>Input Attachment Specification Example</h5>
         Consider the case where a render pass has two subpasses and two attachments.

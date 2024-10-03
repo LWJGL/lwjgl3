@@ -141,6 +141,12 @@ public class EXTSwapchainMaintenance1 {
      * <p>This functionality is useful during swapchain recreation, where acquired images from the old swapchain can be released instead of presented.</p>
      * </div>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>Feature <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> <b>must</b> be enabled</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>

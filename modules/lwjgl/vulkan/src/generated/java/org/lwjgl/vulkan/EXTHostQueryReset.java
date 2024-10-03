@@ -15,7 +15,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

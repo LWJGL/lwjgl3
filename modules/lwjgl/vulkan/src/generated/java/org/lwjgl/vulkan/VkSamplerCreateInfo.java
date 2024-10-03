@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Mapping of OpenGL to Vulkan filter modes</h5>
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Mapping of OpenGL to Vulkan Filter Modes</h5>
  * 
  * <p>{@code magFilter} values of {@link VK10#VK_FILTER_NEAREST FILTER_NEAREST} and {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} directly correspond to {@code GL_NEAREST} and {@code GL_LINEAR} magnification filters. {@code minFilter} and {@code mipmapMode} combine to correspond to the similarly named OpenGL minification filter of {@code GL_minFilter_MIPMAP_mipmapMode} (e.g. {@code minFilter} of {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} and {@code mipmapMode} of {@link VK10#VK_SAMPLER_MIPMAP_MODE_NEAREST SAMPLER_MIPMAP_MODE_NEAREST} correspond to {@code GL_LINEAR_MIPMAP_NEAREST}).</p>
  * 

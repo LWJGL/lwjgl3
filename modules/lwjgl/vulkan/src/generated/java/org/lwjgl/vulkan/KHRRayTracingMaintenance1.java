@@ -48,6 +48,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_3</li>
+ * <li>Interacts with VK_EXT_device_generated_commands</li>
  * <li>Interacts with VK_KHR_ray_tracing_pipeline</li>
  * <li>Interacts with VK_KHR_synchronization2</li>
  * </ul></dd>
@@ -120,6 +121,9 @@ public class KHRRayTracingMaintenance1 {
 
     /** Extends {@code VkAccessFlagBits2}. */
     public static final long VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR = 0x10000000000L;
+
+    /** Extends {@code VkIndirectCommandsTokenTypeEXT}. */
+    public static final int VK_INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT = 1000386004;
 
     protected KHRRayTracingMaintenance1() {
         throw new UnsupportedOperationException();

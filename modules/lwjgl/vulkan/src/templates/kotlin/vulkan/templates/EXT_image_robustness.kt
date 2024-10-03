@@ -14,7 +14,7 @@ val EXT_image_robustness = "EXTImageRobustness".nativeClassVK("EXT_image_robustn
         This extension adds stricter requirements for how out of bounds reads from images are handled. Rather than returning undefined values, most out of bounds reads return R, G, and B values of zero and alpha values of either zero or one. Components not present in the image format may be set to zero or to values based on the format as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-conversion-to-rgba">Conversion to RGBA</a>.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         None.

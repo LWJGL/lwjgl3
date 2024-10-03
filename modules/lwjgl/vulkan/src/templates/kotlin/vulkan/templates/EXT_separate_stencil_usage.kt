@@ -14,7 +14,7 @@ val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_se
         This extension allows specifying separate usage flags for the stencil aspect of images with a depth-stencil format at image creation time.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

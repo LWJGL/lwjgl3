@@ -39,7 +39,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         </ul>
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         See <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples">https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples</a>
@@ -65,6 +65,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
                 <li>Interacts with VK_AMD_buffer_marker</li>
                 <li>Interacts with VK_EXT_blend_operation_advanced</li>
                 <li>Interacts with VK_EXT_conditional_rendering</li>
+                <li>Interacts with VK_EXT_device_generated_commands</li>
                 <li>Interacts with VK_EXT_fragment_density_map</li>
                 <li>Interacts with VK_EXT_mesh_shader</li>
                 <li>Interacts with VK_EXT_transform_feedback</li>
@@ -256,6 +257,19 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
         "ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV".enum(0x00020000L),
         "ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV".enum(0x00040000L)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkPipelineStageFlagBits2}.",
+
+        "PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_EXT".enum(0x00020000L)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkAccessFlagBits2}.",
+
+        "ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT".enum(0x00020000L),
+        "ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT".enum(0x00040000L)
     )
 
     EnumConstantLong(

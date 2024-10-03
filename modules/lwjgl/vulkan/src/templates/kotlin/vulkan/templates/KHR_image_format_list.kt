@@ -16,7 +16,7 @@ val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format
         This extension allows an application to provide the list of all formats that <b>can</b> be used with an image when it is created. The implementation may then be able to create a more efficient image that supports the subset of formats required by the application without having to support all formats in the format compatibility class of the image format.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

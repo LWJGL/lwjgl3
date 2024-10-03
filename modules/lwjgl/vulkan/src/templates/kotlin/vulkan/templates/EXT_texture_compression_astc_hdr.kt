@@ -16,7 +16,7 @@ val EXT_texture_compression_astc_hdr = "EXTTextureCompressionAstcHdr".nativeClas
         When this extension is enabled, the HDR profile is supported for all ASTC formats listed in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#appendix-compressedtex-astc">ASTC Compressed Image Formats</a>.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        This extension has been partially promoted. Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.3. The original type, enum and command names are still available as aliases of the core functionality.
+        This extension has been partially promoted. Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.3. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

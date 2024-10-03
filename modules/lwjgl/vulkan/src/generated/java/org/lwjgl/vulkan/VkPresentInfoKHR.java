@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Elements of {@code pSwapchain} <b>must</b> be unique</li>
  * <li>Each element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the {@link KHRSwapchain#VK_IMAGE_LAYOUT_PRESENT_SRC_KHR IMAGE_LAYOUT_PRESENT_SRC_KHR} or {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR} layout at the time the operation is executed on a {@code VkDevice}</li>
  * <li>If a {@link VkPresentIdKHR} structure is included in the {@code pNext} chain, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentId">{@code presentId}</a> feature is not enabled, each {@code presentIds} entry in that structure <b>must</b> be NULL</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then the {@code pNext} chain <b>must</b> not include a {@link VkSwapchainPresentFenceInfoEXT} structure</li>
  * <li>If any element of the {@code pSwapchains} array has been created with {@link VkSwapchainPresentModesCreateInfoEXT}, all of the elements of this array <b>must</b> be created with {@link VkSwapchainPresentModesCreateInfoEXT}</li>
  * </ul>
  * 

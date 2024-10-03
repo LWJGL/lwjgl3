@@ -16,7 +16,7 @@ val KHR_imageless_framebuffer = "KHRImagelessFramebuffer".nativeClassVK("KHR_ima
         Framebuffers are now created with a small amount of additional metadata about the image views that will be used in ##VkFramebufferAttachmentsCreateInfoKHR, and the actual image views are provided at render pass begin time via ##VkRenderPassAttachmentBeginInfoKHR.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

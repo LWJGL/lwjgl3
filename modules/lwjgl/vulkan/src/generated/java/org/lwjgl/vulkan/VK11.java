@@ -838,7 +838,7 @@ public class VK11 extends VK10 {
      * 
      * <p>Some external memory handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:</p>
      * 
-     * <h6>External memory handle types compatibility</h6>
+     * <h6>External Memory Handle Types Compatibility</h6>
      * 
      * <table class="lwjgl">
      * <tbody>
@@ -922,7 +922,7 @@ public class VK11 extends VK10 {
      * 
      * <p>Some external fence handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:</p>
      * 
-     * <h6>External fence handle types compatibility</h6>
+     * <h6>External Fence Handle Types Compatibility</h6>
      * 
      * <table class="lwjgl">
      * <tbody>
@@ -1003,7 +1003,7 @@ public class VK11 extends VK10 {
      * 
      * <p>Some external semaphore handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:</p>
      * 
-     * <h6>External semaphore handle types compatibility</h6>
+     * <h6>External Semaphore Handle Types Compatibility</h6>
      * 
      * <table class="lwjgl">
      * <tbody>

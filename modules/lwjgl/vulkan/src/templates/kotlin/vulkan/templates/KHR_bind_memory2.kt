@@ -16,7 +16,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
         This extension also introduces #IMAGE_CREATE_ALIAS_BIT_KHR, which allows “{@code identical}” images that alias the same memory to interpret the contents consistently, even across image layout changes.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

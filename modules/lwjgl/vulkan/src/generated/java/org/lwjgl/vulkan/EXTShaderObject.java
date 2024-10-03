@@ -324,6 +324,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Interacts with VK_VERSION_1_3</li>
  * <li>Interacts with VK_EXT_blend_operation_advanced</li>
  * <li>Interacts with VK_EXT_conservative_rasterization</li>
+ * <li>Interacts with VK_EXT_depth_clamp_control</li>
  * <li>Interacts with VK_EXT_depth_clip_control</li>
  * <li>Interacts with VK_EXT_depth_clip_enable</li>
  * <li>Interacts with VK_EXT_fragment_density_map</li>
@@ -482,6 +483,7 @@ public class EXTShaderObject {
      * <li>{@link #VK_SHADER_CREATE_DISPATCH_BASE_BIT_EXT SHADER_CREATE_DISPATCH_BASE_BIT_EXT} specifies that a compute shader <b>can</b> be used with {@link VK11#vkCmdDispatchBase CmdDispatchBase} with a non-zero base workgroup.</li>
      * <li>{@link #VK_SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT} specifies that a fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
      * <li>{@link #VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT} specifies that a fragment shader <b>can</b> be used with a fragment density map attachment.</li>
+     * <li>{@link EXTDeviceGeneratedCommands#VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT} specifies that the shader <b>can</b> be used in combination with <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>.</li>
      * </ul>
      */
     public static final int VK_SHADER_CREATE_LINK_STAGE_BIT_EXT = 0x1;
@@ -503,6 +505,24 @@ public class EXTShaderObject {
     public static final int
         VK_SHADER_CODE_TYPE_BINARY_EXT = 0,
         VK_SHADER_CODE_TYPE_SPIRV_EXT  = 1;
+
+    /**
+     * VkDepthClampModeEXT - Modes that determine the depth clamp range
+     * 
+     * <h5>Description</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT} specifies that the depth clamp range follows the viewport depth range. The depth clamp range of each viewport will implicitly be set to <code>z<sub>min</sub> = min(n,f)</code> and <code>z<sub>max</sub> = max(n,f)</code>, where <code>n</code> and <code>f</code> are the {@code minDepth} and {@code maxDepth} depth range values of the viewport.</li>
+     * <li>{@link #VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT} specifies that a single user-defined depth clamp range will be used for all viewports. The user-defined depth clamp range is defined by the {@code minDepthClamp} and {@code maxDepthClamp} members of {@link VkDepthClampRangeEXT}.</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkPipelineViewportDepthClampControlCreateInfoEXT}, {@link #vkCmdSetDepthClampRangeEXT CmdSetDepthClampRangeEXT}</p>
+     */
+    public static final int
+        VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT     = 0,
+        VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT = 1;
 
     protected EXTShaderObject() {
         throw new UnsupportedOperationException();
@@ -3466,6 +3486,77 @@ public class EXTShaderObject {
             check(__functionAddress);
         }
         callPV(commandBuffer.address(), coverageReductionMode, __functionAddress);
+    }
+
+    // --- [ vkCmdSetDepthClampRangeEXT ] ---
+
+    /** Unsafe version of: {@link #vkCmdSetDepthClampRangeEXT CmdSetDepthClampRangeEXT} */
+    public static void nvkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, int depthClampMode, long pDepthClampRange) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthClampRangeEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPV(commandBuffer.address(), depthClampMode, pDepthClampRange, __functionAddress);
+    }
+
+    /**
+     * Set the viewport depth clamp range dynamically for a command buffer.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the viewport depth clamp range parameters, call:</p>
+     * 
+     * <pre><code>
+     * void vkCmdSetDepthClampRangeEXT(
+     *     VkCommandBuffer                             commandBuffer,
+     *     VkDepthClampModeEXT                         depthClampMode,
+     *     const VkDepthClampRangeEXT*                 pDepthClampRange);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the viewport depth clamp range for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link EXTDepthClampControl#VK_DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineViewportDepthClampControlCreateInfoEXT}{@code ::depthClampMode} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>If {@code depthClampMode} is set to {@link #VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}, then {@code pDepthClampRange} must be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure.</li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+     * <li>{@code depthClampMode} <b>must</b> be a valid {@code VkDepthClampModeEXT} value</li>
+     * <li>If {@code pDepthClampRange} is not {@code NULL}, {@code pDepthClampRange} <b>must</b> be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure</li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
+     * <h5>Command Properties</h5>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+     * </table>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkDepthClampRangeEXT}</p>
+     *
+     * @param commandBuffer    the command buffer into which the command will be recorded.
+     * @param depthClampMode   determines how the clamp range is determined for each viewport.
+     * @param pDepthClampRange sets the depth clamp range for all viewports if {@code depthClampMode} is set to {@link #VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}.
+     */
+    public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @Nullable @NativeType("VkDepthClampRangeEXT const *") VkDepthClampRangeEXT pDepthClampRange) {
+        nvkCmdSetDepthClampRangeEXT(commandBuffer, depthClampMode, memAddressSafe(pDepthClampRange));
     }
 
     /** Array version of: {@link #vkCreateShadersEXT CreateShadersEXT} */

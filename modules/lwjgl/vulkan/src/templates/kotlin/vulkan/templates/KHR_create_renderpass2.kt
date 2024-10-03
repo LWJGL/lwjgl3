@@ -25,7 +25,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         The details of these mappings are explained fully in the new structures.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

@@ -353,7 +353,7 @@ public class EXTValidationCache {
      * 
      * <p>Applications <b>can</b> store the data retrieved from the validation cache, and use these data, possibly in a future run of the application, to populate new validation cache objects. The results of validation, however, <b>may</b> depend on the vendor ID, device ID, driver version, and other details of the device. To enable applications to detect when previously retrieved data is incompatible with the device, the initial bytes written to {@code pData} <b>must</b> be a header consisting of the following members:</p>
      * 
-     * <h6>Layout for validation cache header version {@link #VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT VALIDATION_CACHE_HEADER_VERSION_ONE_EXT}</h6>
+     * <h6>Layout for Validation Cache Header Version {@link #VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT VALIDATION_CACHE_HEADER_VERSION_ONE_EXT}</h6>
      * 
      * <table class="lwjgl">
      * <thead><tr><th>Offset</th><th>Size</th><th>Meaning</th></tr></thead>

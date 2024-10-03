@@ -16,7 +16,7 @@ val KHR_uniform_buffer_standard_layout = "KHRUniformBufferStandardLayout".native
         It modifies the alignment rules for uniform buffers, allowing for tighter packing of arrays and structures. This allows, for example, the std430 layout, as defined in <a href="https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">GLSL</a> to be supported in uniform buffers.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

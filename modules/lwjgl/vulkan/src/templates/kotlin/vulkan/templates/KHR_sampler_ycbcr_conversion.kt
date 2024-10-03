@@ -16,7 +16,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         This extension provides the ability to perform specified color space conversions during texture sampling operations for the Y′C<sub>B</sub>C<sub>R</sub> color space natively. It also adds a selection of multi-planar formats, image aspect plane, and the ability to bind memory to the planes of an image collectively or separately.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. However, if Vulkan 1.1 is supported and this extension is not, the {@code samplerYcbcrConversion} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. However, if Vulkan 1.1 is supported and this extension is not, the {@code samplerYcbcrConversion} capability is optional. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

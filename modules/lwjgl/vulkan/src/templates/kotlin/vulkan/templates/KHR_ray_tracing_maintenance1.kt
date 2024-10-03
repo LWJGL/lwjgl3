@@ -53,6 +53,7 @@ val KHR_ray_tracing_maintenance1 = "KHRRayTracingMaintenance1".nativeClassVK("KH
             <dt><b>API Interactions</b></dt>
             <dd><ul>
                 <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_EXT_device_generated_commands</li>
                 <li>Interacts with VK_KHR_ray_tracing_pipeline</li>
                 <li>Interacts with VK_KHR_synchronization2</li>
             </ul></dd>
@@ -134,6 +135,12 @@ val KHR_ray_tracing_maintenance1 = "KHRRayTracingMaintenance1".nativeClassVK("KH
         "Extends {@code VkAccessFlagBits2}.",
 
         "ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR".enum(0x10000000000L)
+    )
+
+    EnumConstant(
+        "Extends {@code VkIndirectCommandsTokenTypeEXT}.",
+
+        "INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT".."1000386004"
     )
 
     DependsOn("VK_KHR_ray_tracing_pipeline")..void(

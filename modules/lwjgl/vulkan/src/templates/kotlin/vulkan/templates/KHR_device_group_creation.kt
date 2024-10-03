@@ -14,7 +14,7 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
         This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the {@link KHRDeviceGroup VK_KHR_device_group} extension.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         <pre><code>

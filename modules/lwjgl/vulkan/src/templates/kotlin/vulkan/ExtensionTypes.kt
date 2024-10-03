@@ -36,6 +36,8 @@ val VkMicromapEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkMicromapEXT")
 val VkOpticalFlowSessionNV = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkOpticalFlowSessionNV")
 val VkShaderEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkShaderEXT")
 val VkPipelineBinaryKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPipelineBinaryKHR")
+val VkIndirectExecutionSetEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectExecutionSetEXT")
+val VkIndirectCommandsLayoutEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectCommandsLayoutEXT")
 
 // Enum types
 val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
@@ -221,6 +223,7 @@ val VkAntiLagModeAMD = "VkAntiLagModeAMD".enumType
 val VkAntiLagStageAMD = "VkAntiLagStageAMD".enumType
 val VkShaderCreateFlagBitsEXT = "VkShaderCreateFlagBitsEXT".enumType
 val VkShaderCodeTypeEXT = "VkShaderCodeTypeEXT".enumType
+val VkDepthClampModeEXT = "VkDepthClampModeEXT".enumType
 val VkRayTracingInvocationReorderModeNV = "VkRayTracingInvocationReorderModeNV".enumType
 val VkLayerSettingTypeEXT = "VkLayerSettingTypeEXT".enumType
 val VkLatencyMarkerNV = "VkLatencyMarkerNV".enumType
@@ -231,6 +234,10 @@ val VkBlockMatchWindowCompareModeQCOM = "VkBlockMatchWindowCompareModeQCOM".enum
 val VkCubicFilterWeightsQCOM = "VkCubicFilterWeightsQCOM".enumType
 val VkLayeredDriverUnderlyingApiMSFT = "VkLayeredDriverUnderlyingApiMSFT".enumType
 val VkPhysicalDeviceLayeredApiKHR = "VkPhysicalDeviceLayeredApiKHR".enumType
+val VkIndirectExecutionSetInfoTypeEXT = "VkIndirectExecutionSetInfoTypeEXT".enumType
+val VkIndirectCommandsTokenTypeEXT = "VkIndirectCommandsTokenTypeEXT".enumType
+val VkIndirectCommandsInputModeFlagBitsEXT = "VkIndirectCommandsInputModeFlagBitsEXT".enumType
+val VkIndirectCommandsLayoutUsageFlagBitsEXT = "VkIndirectCommandsLayoutUsageFlagBitsEXT".enumType
 
 // Bitmask types
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
@@ -357,6 +364,8 @@ val VkOpticalFlowExecuteFlagsNV = typedef(VkFlags, "VkOpticalFlowExecuteFlagsNV"
 val VkPipelineCreateFlags2KHR = typedef(VkFlags64, "VkPipelineCreateFlags2KHR")
 val VkBufferUsageFlags2KHR = typedef(VkFlags64, "VkBufferUsageFlags2KHR")
 val VkShaderCreateFlagsEXT = typedef(VkFlags, "VkShaderCreateFlagsEXT")
+val VkIndirectCommandsInputModeFlagsEXT = typedef(VkFlags, "VkIndirectCommandsInputModeFlagsEXT")
+val VkIndirectCommandsLayoutUsageFlagsEXT = typedef(VkFlags, "VkIndirectCommandsLayoutUsageFlagsEXT")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -532,11 +541,14 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
         <ul>
             <li>{@code surface} <b>must</b> be a surface that is supported by the device as determined using #GetPhysicalDeviceSurfaceSupportKHR()</li>
             <li>{@code minImageCount} <b>must</b> be less than or equal to the value returned in the {@code maxImageCount} member of the ##VkSurfaceCapabilitiesKHR structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface if the returned {@code maxImageCount} is not zero</li>
-            <li>If {@code presentMode} is not #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR nor #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR, then {@code minImageCount} <b>must</b> be greater than or equal to the value returned in the {@code minImageCount} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li></li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then the {@code pNext} chain <b>must</b> not include a ##VkSwapchainPresentModesCreateInfoEXT structure</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then the {@code pNext} chain <b>must</b> not include a ##VkSwapchainPresentScalingCreateInfoEXT structure If {@code presentMode} is not #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR nor #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR, then {@code minImageCount} <b>must</b> be greater than or equal to the value returned in the {@code minImageCount} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
             <li>{@code minImageCount} <b>must</b> be 1 if {@code presentMode} is either #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</li>
             <li>{@code imageFormat} and {@code imageColorSpace} <b>must</b> match the {@code format} and {@code colorSpace} members, respectively, of one of the ##VkSurfaceFormatKHR structures returned by {@code vkGetPhysicalDeviceSurfaceFormatsKHR} for the surface</li>
             <li>If a ##VkSwapchainPresentScalingCreateInfoEXT structure was not included in the {@code pNext} chain, or it is included and ##VkSwapchainPresentScalingCreateInfoEXT{@code ::scalingBehavior} is zero then {@code imageExtent} <b>must</b> be between {@code minImageExtent} and {@code maxImageExtent}, inclusive, where {@code minImageExtent} and {@code maxImageExtent} are members of the ##VkSurfaceCapabilitiesKHR structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
             <li>If a ##VkSwapchainPresentScalingCreateInfoEXT structure was included in the {@code pNext} chain and ##VkSwapchainPresentScalingCreateInfoEXT{@code ::scalingBehavior} is not zero then {@code imageExtent} <b>must</b> be between {@code minScaledImageExtent} and {@code maxScaledImageExtent}, inclusive, where {@code minScaledImageExtent} and {@code maxScaledImageExtent} are members of the ##VkSurfacePresentScalingCapabilitiesEXT structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} for the surface and {@code presentMode}</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then {@code flags} <b>must</b> not include #SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT</li>
             <li>{@code imageExtent} members {@code width} and {@code height} <b>must</b> both be non-zero</li>
             <li>{@code imageArrayLayers} <b>must</b> be greater than 0 and less than or equal to the {@code maxImageArrayLayers} member of the ##VkSurfaceCapabilitiesKHR structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
             <li>If {@code presentMode} is #PRESENT_MODE_IMMEDIATE_KHR, #PRESENT_MODE_MAILBOX_KHR, #PRESENT_MODE_FIFO_KHR or #PRESENT_MODE_FIFO_RELAXED_KHR, {@code imageUsage} <b>must</b> be a subset of the supported usage flags present in the {@code supportedUsageFlags} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for {@code surface}</li>
@@ -647,6 +659,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
             <li>Elements of {@code pSwapchain} <b>must</b> be unique</li>
             <li>Each element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR or #IMAGE_LAYOUT_SHARED_PRESENT_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
             <li>If a ##VkPresentIdKHR structure is included in the {@code pNext} chain, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-presentId">{@code presentId}</a> feature is not enabled, each {@code presentIds} entry in that structure <b>must</b> be NULL</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then the {@code pNext} chain <b>must</b> not include a ##VkSwapchainPresentFenceInfoEXT structure</li>
             <li>If any element of the {@code pSwapchains} array has been created with ##VkSwapchainPresentModesCreateInfoEXT, all of the elements of this array <b>must</b> be created with ##VkSwapchainPresentModesCreateInfoEXT</li>
         </ul>
 
@@ -7330,6 +7343,7 @@ val VkExecutionGraphPipelineCreateInfoAMDX = struct(Module.VULKAN, "VkExecutionG
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedComputePipelines">##VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV{@code ::deviceGeneratedComputePipelines}</a> is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV</li>
             <li>If {@code flags} includes #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV, then the {@code pNext} chain <b>must</b> include a pointer to a valid instance of ##VkComputePipelineIndirectBufferInfoNV specifying the address where the pipeline’s metadata will be saved</li>
+            <li>If {@code flags} includes #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCommandsEXT">{@code deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT or #PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT</li>
             <li>The {@code stage} member of any element of {@code pStages} <b>must</b> be #SHADER_STAGE_COMPUTE_BIT</li>
             <li>The shader code for the entry point identified by each element of {@code pStages} and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
@@ -8615,6 +8629,7 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
             <li>The shader code for the entry points identified by {@code pStages}, and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
             <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV</li>
+            <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT or #PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT</li>
             <li>If {@code flags} does not include #PIPELINE_CREATE_LIBRARY_BIT_KHR, the {@code stage} member of at least one element of {@code pStages}, including those implicitly added by {@code pLibraryInfo}, <b>must</b> be #SHADER_STAGE_RAYGEN_BIT_KHR</li>
             <li>{@code maxPipelineRayRecursionDepth} <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPipelinePropertiesKHR{@code ::maxRayRecursionDepth}</li>
@@ -9618,6 +9633,7 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
             <li>The shader code for the entry points identified by {@code pStages}, and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
             <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV</li>
+            <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT or #PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT</li>
             <li>The {@code stage} member of at least one element of {@code pStages} <b>must</b> be #SHADER_STAGE_RAYGEN_BIT_KHR</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
@@ -13720,8 +13736,8 @@ val VkSwapchainPresentFenceInfoEXT = struct(Module.VULKAN, "VkSwapchainPresentFe
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code swapchainCount} <b>must</b> be equal to ##VkPresentInfoKHR{@code ::swapchainCount}</li>
-            <li>Each element of {@code pFences} <b>must</b> be unsignaled</li>
-            <li>Each element of {@code pFences} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+            <li>Each element of {@code pFences} that is not #NULL_HANDLE <b>must</b> be unsignaled</li>
+            <li>Each element of {@code pFences} that is not #NULL_HANDLE <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -13819,12 +13835,13 @@ val VkSwapchainPresentScalingCreateInfoEXT = struct(Module.VULKAN, "VkSwapchainP
             <li>{@code scalingBehavior} <b>must</b> not have more than one bit set</li>
             <li>{@code presentGravityX} <b>must</b> not have more than one bit set</li>
             <li>{@code presentGravityY} <b>must</b> not have more than one bit set</li>
-            <li>{@code scalingBehavior} <b>must</b> be a valid scaling method for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentScaling}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
-            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code scalingBehavior} <b>must</b> be a valid scaling method for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentScaling}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
-            <li>{@code presentGravityX} <b>must</b> be a valid x-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityX}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
-            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code presentGravityX} <b>must</b> be a valid x-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityX}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
-            <li>{@code presentGravityY} <b>must</b> be a valid y-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityY}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
-            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code presentGravityY} <b>must</b> be a valid y-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityY}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
+            <li>{@code scalingBehavior} <b>must</b> be 0 or a valid scaling method for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentScaling}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
+            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code scalingBehavior} <b>must</b> be 0 or a valid scaling method for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentScaling}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
+            <li>{@code presentGravityX} <b>must</b> be 0 or a valid x-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityX}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
+            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code presentGravityX} <b>must</b> be 0 or a valid x-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityX}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
+            <li>{@code presentGravityY} <b>must</b> be 0 or a valid y-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityY}, given ##VkSwapchainCreateInfoKHR{@code ::presentMode} in ##VkSurfacePresentModeEXT</li>
+            <li>If the swapchain is created with ##VkSwapchainPresentModesCreateInfoEXT, {@code presentGravityY} <b>must</b> be 0 or a valid y-axis present gravity for the surface as returned in ##VkSurfacePresentScalingCapabilitiesEXT{@code ::supportedPresentGravityY}, given each present mode in ##VkSwapchainPresentModesCreateInfoEXT{@code ::pPresentModes} in ##VkSurfacePresentModeEXT</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> feature is not enabled, then {@code presentScaling}, {@code presentGravityX}, and {@code presentGravityY} <b>must</b> be 0</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -21361,6 +21378,8 @@ val VkShaderCreateInfoEXT = struct(Module.VULKAN, "VkShaderCreateInfoEXT") {
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code flags} <b>must</b> not include #SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT</li>
             <li>If {@code flags} includes #SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled</li>
             <li>If {@code flags} includes #SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-computeFullSubgroups">{@code computeFullSubgroups}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code flags} includes #SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCommandsEXT">{@code deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code flags} includes #SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT, then the identified entry point <b>must</b> not specify {@code Xfb} execution mode</li>
             <li>If {@code flags} includes #SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT, {@code stage} <b>must</b> be one of #SHADER_STAGE_MESH_BIT_EXT, #SHADER_STAGE_TASK_BIT_EXT, or #SHADER_STAGE_COMPUTE_BIT</li>
             <li>If {@code stage} is not #SHADER_STAGE_COMPUTE_BIT, {@code flags} <b>must</b> not include #SHADER_CREATE_DISPATCH_BASE_BIT_EXT</li>
             <li>If {@code stage} is not #SHADER_STAGE_MESH_BIT_EXT, {@code flags} <b>must</b> not include #SHADER_CREATE_NO_TASK_SHADER_BIT_EXT</li>
@@ -21453,6 +21472,26 @@ val VkShaderRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkShaderR
     Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType", "").mutable()
     nullable..opaque_p("pNext", "").mutable()
     uint32_t("requiredSubgroupSize", "")
+}
+
+val VkDepthClampRangeEXT = struct(Module.VULKAN, "VkDepthClampRangeEXT") {
+    documentation =
+        """
+        Structure specifying a depth clamp range.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code minDepthClamp} <b>must</b> be less than or equal to {@code maxDepthClamp}</li>
+            <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code minDepthClamp} <b>must</b> be greater than or equal to {@code 0.0}</li>
+            <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code maxDepthClamp} <b>must</b> be less than or equal to {@code 1.0}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPipelineViewportDepthClampControlCreateInfoEXT, #CmdSetDepthClampRangeEXT()
+        """
+
+    float("minDepthClamp", "sets <code>z<sub>min</sub></code> in the depth clamp range of the viewport.")
+    float("maxDepthClamp", "sets <code>z<sub>max</sub></code> in the depth clamp range of the viewport.")
 }
 
 val VkPhysicalDevicePipelineBinaryFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevicePipelineBinaryFeaturesKHR") {
@@ -23939,6 +23978,717 @@ val VkPhysicalDeviceRayTracingValidationFeaturesNV = struct(Module.VULKAN, "VkPh
     VkBool32("rayTracingValidation", "indicates whether the implementation supports the ray tracing validation feature.")
 }
 
+val VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT") {
+    documentation =
+        """
+        Structure describing the device-generated compute features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("deviceGeneratedCommands", "indicates whether the implementation supports functionality to generate commands on the device.")
+    VkBool32("dynamicGeneratedPipelineLayout", "indicates the implementation allows the {@code pipelineLayout} member of ##VkIndirectCommandsLayoutCreateInfoEXT to be #NULL_HANDLE and ##VkPipelineLayoutCreateInfo <b>can</b> be chained off those structures' {@code pNext} instead.")
+}
+
+val VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure describing push descriptor limits that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("maxIndirectPipelineCount", "the maximum number of pipelines passed to #CreateIndirectExecutionSetEXT().")
+    uint32_t("maxIndirectShaderObjectCount", "the maximum number of shader objects passed to #CreateIndirectExecutionSetEXT(). If this value is zero, binding shader objects indirectly is not supported.")
+    uint32_t("maxIndirectSequenceCount", "the maximum number of sequences in ##VkGeneratedCommandsInfoEXT and in ##VkGeneratedCommandsMemoryRequirementsInfoEXT.")
+    uint32_t("maxIndirectCommandsTokenCount", "the maximum number of tokens in ##VkIndirectCommandsLayoutCreateInfoEXT.")
+    uint32_t("maxIndirectCommandsTokenOffset", "the maximum offset in ##VkIndirectCommandsLayoutTokenEXT.")
+    uint32_t("maxIndirectCommandsIndirectStride", "the maximum stream stride in ##VkIndirectCommandsLayoutCreateInfoEXT.")
+    VkIndirectCommandsInputModeFlagsEXT("supportedIndirectCommandsInputModes", "indicates the supported input modes.")
+    VkShaderStageFlags("supportedIndirectCommandsShaderStages", "indicates the stages which <b>can</b> be used to generate indirect commands. Implementations are required to support, at minimum: #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_FRAGMENT_BIT, #SHADER_STAGE_COMPUTE_BIT.")
+    VkShaderStageFlags("supportedIndirectCommandsShaderStagesPipelineBinding", "indicates the stages which <b>can</b> be used within indirect execution sets for indirectly binding shader stages using pipelines.")
+    VkShaderStageFlags("supportedIndirectCommandsShaderStagesShaderBinding", "indicates the stages which <b>can</b> be used within indirect execution sets for indirectly binding shader stages using shader objects.")
+    VkBool32("deviceGeneratedCommandsTransformFeedback", "indicates whether the implementation supports interactions with {@link EXTTransformFeedback VK_EXT_transform_feedback} for pipelines not created with #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT.")
+    VkBool32("deviceGeneratedCommandsMultiDrawIndirectCount", "indicates whether the implementation supports COUNT variants of multi-draw indirect tokens.")
+}
+
+val VkGeneratedCommandsMemoryRequirementsInfoEXT = struct(Module.VULKAN, "VkGeneratedCommandsMemoryRequirementsInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters for the reservation of preprocess buffer space.
+
+        <h5>Description</h5>
+        If the action command token for the layout is not a COUNT-type multi-draw indirect token, {@code maxDrawCount} is ignored.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code maxSequencesCount} <b>must</b> be less or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectSequenceCount}</li>
+            <li>If {@code indirectCommandsLayout} was created with a token sequence that contained the #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, {@code indirectExecutionSet} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code indirectCommandsLayout} was created with a token sequence that contained the #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, the shader stages used to create the initial shader state of {@code indirectExecutionSet} <b>must</b> equal the ##VkIndirectCommandsExecutionSetTokenEXT{@code ::shaderStages} used to create {@code indirectCommandsLayout}</li>
+            <li>If {@code indirectCommandsLayout} was not created with a token sequence that contained the #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, {@code indirectExecutionSet} <b>must</b> be #NULL_HANDLE</li>
+            <li>When not ignored, <code>maxDrawCount × maxSequenceCount</code> <b>must</b> be less than <code>2^24</code></li>
+            <li>If {@code indirectExecutionSet} is #NULL_HANDLE, either a ##VkGeneratedCommandsPipelineInfoEXT or a ##VkGeneratedCommandsShaderInfoEXT <b>must</b> be included in the {@code pNext} chain</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkGeneratedCommandsPipelineInfoEXT or ##VkGeneratedCommandsShaderInfoEXT</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>If {@code indirectExecutionSet} is not #NULL_HANDLE, {@code indirectExecutionSet} <b>must</b> be a valid {@code VkIndirectExecutionSetEXT} handle</li>
+            <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutEXT} handle</li>
+            <li>Both of {@code indirectCommandsLayout}, and {@code indirectExecutionSet} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetGeneratedCommandsMemoryRequirementsEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkGeneratedCommandsPipelineInfoEXT", "VkGeneratedCommandsShaderInfoEXT",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkIndirectExecutionSetEXT("indirectExecutionSet", "the indirect execution set to be used for binding shaders.")
+    VkIndirectCommandsLayoutEXT("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutEXT} that this buffer memory is intended to be used with.")
+    uint32_t("maxSequenceCount", "the maximum number of sequences that this buffer memory can be used with.")
+    uint32_t("maxDrawCount", "the maximum number of indirect draws that can be executed by any COUNT-type multi-draw indirect tokens. The draw count in the indirect buffer is clamped to this value for these token types.")
+}
+
+val VkIndirectExecutionSetPipelineInfoEXT = struct(Module.VULKAN, "VkIndirectExecutionSetPipelineInfoEXT") {
+    documentation =
+        """
+        Struct specifying parameters of a newly created indirect execution set containing only pipelines.
+
+        <h5>Description</h5>
+        The characteristics of {@code initialPipeline} will be used to validate all pipelines added to the set even if they are removed from the set or destroyed.
+
+        When an Indirect Execution Set created with pipelines is used, {@code initialPipeline} constitutes the initial shader state.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesPipelineBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain #SHADER_STAGE_COMPUTE_BIT, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be #PIPELINE_BIND_POINT_COMPUTE</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesPipelineBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain #SHADER_STAGE_FRAGMENT_BIT, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be #PIPELINE_BIND_POINT_GRAPHICS</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesPipelineBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain ray tracing stages, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be #PIPELINE_BIND_POINT_RAY_TRACING_KHR</li>
+            <li>{@code maxPipelineCount} <b>must</b> be between 1 and ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectPipelineCount}</li>
+            <li>{@code initialPipeline} <b>must</b> not use descriptors of type #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</li>
+            <li>{@code initialPipeline} <b>must</b> have been created with #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT</li>
+            <li>{@code initialPipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectExecutionSetInfoEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkPipeline("initialPipeline", "the initial pipeline for the set. This pipeline will be automatically added to the set at index 0.")
+    uint32_t("maxPipelineCount", "the maximum number of pipelines stored in the set.")
+}
+
+val VkIndirectExecutionSetShaderLayoutInfoEXT = struct(Module.VULKAN, "VkIndirectExecutionSetShaderLayoutInfoEXT") {
+    documentation =
+        """
+        Struct specifying descriptor layout parameters of a newly created indirect execution set containing only shader objects.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All members of {@code pSetLayouts} <b>must</b> not contain descriptors of type #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT</li>
+            <li>If {@code setLayoutCount} is not 0, {@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code setLayoutCount} valid or #NULL_HANDLE {@code VkDescriptorSetLayout} handles</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectExecutionSetShaderInfoEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    AutoSize("pSetLayouts", optional = true)..uint32_t("setLayoutCount", "the number of members in the {@code pSetLayouts} array")
+    nullable..VkDescriptorSetLayout.const.p("pSetLayouts", "a pointer to an array containing {@code VkDescriptorSetLayout} objects used by the shader stage.")
+}
+
+val VkIndirectExecutionSetShaderInfoEXT = struct(Module.VULKAN, "VkIndirectExecutionSetShaderInfoEXT") {
+    documentation =
+        """
+        Struct specifying parameters of a newly created indirect execution set containing only shader objects.
+
+        <h5>Description</h5>
+        The characteristics of {@code pInitialShaders} will be used to validate all shaders added to the set even if they are removed from the set or destroyed.
+
+        When an Indirect Execution Set created with shader objects is used, {@code pInitialShaders} constitutes the initial shader state.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All members of {@code pInitialShaders} <b>must</b> have a {@code stage} supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesShaderBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
+            <li>{@code maxShaderCount} <b>must</b> not be zero</li>
+            <li>{@code maxShaderCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectShaderObjectCount}</li>
+            <li>{@code maxShaderCount} <b>must</b> be greater than or equal to {@code shaderCount}</li>
+            <li>The {@code stage} of each element in the {@code pInitialShaders} array <b>must</b> be unique</li>
+            <li>Each member of {@code pInitialShaders} <b>must</b> have been created with #SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT</li>
+            <li>{@code pInitialShaders} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid {@code VkShaderEXT} handles</li>
+            <li>If {@code pSetLayoutInfos} is not {@code NULL}, {@code pSetLayoutInfos} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid ##VkIndirectExecutionSetShaderLayoutInfoEXT structures</li>
+            <li>If {@code pushConstantRangeCount} is not 0, {@code pPushConstantRanges} <b>must</b> be a valid pointer to an array of {@code pushConstantRangeCount} valid ##VkPushConstantRange structures</li>
+            <li>{@code shaderCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectExecutionSetInfoEXT, ##VkIndirectExecutionSetShaderLayoutInfoEXT, ##VkPushConstantRange
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pInitialShaders", "pSetLayoutInfos")..uint32_t("shaderCount", "the number of members in the {@code pInitialShaders} and {@code pSetLayoutInfos} arrays.")
+    VkShaderEXT.const.p("pInitialShaders", "a pointer to an array containing a {@code VkShaderEXT} object for each shader stage that will be used in the set. These shaders will be automatically added to the set beginning at index 0.")
+    nullable..VkIndirectExecutionSetShaderLayoutInfoEXT.const.p("pSetLayoutInfos", "a pointer to an array containing a ##VkIndirectExecutionSetShaderLayoutInfoEXT used by each corresponding {@code pInitialShaders} shader stage in the set.")
+    uint32_t("maxShaderCount", "the maximum number of shader objects stored in the set.")
+    AutoSize("pPushConstantRanges", optional = true)..uint32_t("pushConstantRangeCount", "the number of members in the {@code pPushConstantRanges} array.")
+    VkPushConstantRange.const.p("pPushConstantRanges", "a pointer to the array of ##VkPushConstantRange ranges used by all shaders in the set.")
+}
+
+val VkIndirectExecutionSetInfoEXT = union(Module.VULKAN, "VkIndirectExecutionSetInfoEXT") {
+    documentation =
+        """
+        Union specifying parameters of a newly created indirect execution set.
+
+        <h5>See Also</h5>
+        ##VkIndirectExecutionSetCreateInfoEXT, ##VkIndirectExecutionSetPipelineInfoEXT, ##VkIndirectExecutionSetShaderInfoEXT
+        """
+
+    VkIndirectExecutionSetPipelineInfoEXT.const.p("pPipelineInfo", "a pointer to a ##VkIndirectExecutionSetPipelineInfoEXT struct containing pipeline layout information for the set.")
+    VkIndirectExecutionSetShaderInfoEXT.const.p("pShaderInfo", "a pointer to a ##VkIndirectExecutionSetShaderInfoEXT struct containing shader object layout information for the set.")
+}
+
+val VkIndirectExecutionSetCreateInfoEXT = struct(Module.VULKAN, "VkIndirectExecutionSetCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created indirect execution set.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectShaderObjectCount} is zero or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> is not enabled {@code type} <b>must</b> not be #INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkIndirectExecutionSetInfoTypeEXT} value</li>
+            <li>If {@code type} is #INDIRECT_EXECUTION_SET_INFO_TYPE_PIPELINES_EXT, the {@code pPipelineInfo} member of {@code info} <b>must</b> be a valid pointer to a valid ##VkIndirectExecutionSetPipelineInfoEXT structure</li>
+            <li>If {@code type} is #INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT, the {@code pShaderInfo} member of {@code info} <b>must</b> be a valid pointer to a valid ##VkIndirectExecutionSetShaderInfoEXT structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectExecutionSetInfoEXT, #CreateIndirectExecutionSetEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkIndirectExecutionSetInfoTypeEXT("type", "a {@code VkIndirectExecutionSetInfoTypeEXT} describing the type of set being created and determining which field of the {@code info} union will be used.")
+    VkIndirectExecutionSetInfoEXT("info", "a ##VkIndirectExecutionSetInfoEXT union containing layout information for the set.")
+}
+
+val VkGeneratedCommandsInfoEXT = struct(Module.VULKAN, "VkGeneratedCommandsInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters for the generation of commands.
+
+        <h5>Description</h5>
+        If {@code sequenceCountAddress} is not {@code NULL}, then {@code maxSequenceCount} is the maximum number of sequences that can be executed. The actual number is {@code min(maxSequenceCount, *sequenceCountAddress)}. If {@code sequenceCountAddress} is {@code NULL}, then {@code maxSequenceCount} is the exact number of sequences to execute.
+
+        If the action command token for the layout is not a COUNT-type multi-draw indirect token, {@code maxDrawCount} is ignored.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If #GetGeneratedCommandsMemoryRequirementsEXT() returns a non-zero size, {@code preprocessAddress} <b>must</b> not be {@code NULL}</li>
+            <li>{@code VkDeviceMemory} objects bound to the underlying buffer for {@code preprocessAddress} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned by #GetGeneratedCommandsMemoryRequirementsEXT()</li>
+            <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT, then the {@code indirectExecutionSet}’s push constant layout <b>must</b> contain the {@code updateRange} specified in ##VkIndirectCommandsPushConstantTokenEXT</li>
+            <li>If the {@code indirectCommandsLayout} uses a token of #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT, then the {@code indirectExecutionSet}’s push constant layout <b>must</b> contain the {@code updateRange} specified in ##VkIndirectCommandsPushConstantTokenEXT</li>
+            <li>{@code maxSequenceCount} <b>must</b> be less or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectSequenceCount} and ##VkGeneratedCommandsMemoryRequirementsInfoEXT{@code ::maxSequencesCount} that was used to determine the {@code preprocessSize}</li>
+            <li>If {@code sequenceCountAddress} is not {@code NULL}, the value contained in the address <b>must</b> be less or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectSequenceCount} and ##VkGeneratedCommandsMemoryRequirementsInfoEXT{@code ::maxSequencesCount} that was used to determine the {@code preprocessSize}</li>
+            <li>The underlying buffer for {@code preprocessAddress} <b>must</b> have the #BUFFER_USAGE_2_PREPROCESS_BUFFER_BIT_EXT bit set in its usage flag</li>
+            <li>If the underlying buffer for {@code preprocessAddress} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+            <li>If the {@code indirectCommandsLayout} contains a #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, then the descriptor and push constant layout info provided either by {@code pipelineLayout} or through a ##VkPipelineLayoutCreateInfo in {@code pNext} of the ##VkIndirectCommandsLayoutCreateInfoEXT used to create {@code indirectCommandsLayout} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-compatibility">compatible</a> with the descriptor and push constant layout info used by {@code indirectExecutionSet}</li>
+            <li>If {@code indirectCommandsLayout} was created with a token sequence that contained the #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, the shader stages used to create the initial shader state of {@code indirectExecutionSet} <b>must</b> equal the ##VkIndirectCommandsExecutionSetTokenEXT{@code ::shaderStages} used to create {@code indirectCommandsLayout}</li>
+            <li>{@code preprocessSize} <b>must</b> be greater than or equal to the memory requirement’s size returned by #GetGeneratedCommandsMemoryRequirementsEXT() using the matching inputs ({@code indirectCommandsLayout}, …​) as within this structure</li>
+            <li>The underlying buffer for {@code sequenceCountAddress} <b>must</b> have the #BUFFER_USAGE_2_PREPROCESS_BUFFER_BIT_EXT bit set in its usage flag</li>
+            <li>If {@code sequenceCountAddress} is not {@code NULL}, {@code sequenceCountAddress} <b>must</b> be aligned to 4</li>
+            <li>{@code indirectAddress} <b>must</b> be aligned to 4</li>
+            <li>If the underlying buffer for {@code sequenceCountAddress} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+            <li>{@code indirectAddress} <b>must</b> not be {@code NULL}</li>
+            <li>{@code indirectAddressSize} <b>must</b> be greater than zero</li>
+            <li>When not ignored, <code>maxDrawCount × maxSequenceCount</code> <b>must</b> be less than <code>2^24</code></li>
+            <li>If {@code indirectCommandsLayout} was created using a #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT token and shader objects are not bound then the currently bound graphics pipeline <b>must</b> have been created with #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE in {@code pDynamicStates}</li>
+            <li>If the token sequence of the passed {@code indirectCommandsLayout} contains a #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, the {@code indirectExecutionSet} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code indirectExecutionSet} is #NULL_HANDLE, a ##VkGeneratedCommandsPipelineInfoEXT or ##VkGeneratedCommandsShaderInfoEXT <b>must</b> be included in the {@code pNext} chain</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_EXT</li>
+            <li>{@code shaderStages} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code shaderStages} <b>must</b> not be 0</li>
+            <li>If {@code indirectExecutionSet} is not #NULL_HANDLE, {@code indirectExecutionSet} <b>must</b> be a valid {@code VkIndirectExecutionSetEXT} handle</li>
+            <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutEXT} handle</li>
+            <li>Both of {@code indirectCommandsLayout}, and {@code indirectExecutionSet} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdExecuteGeneratedCommandsEXT(), #CmdPreprocessGeneratedCommandsEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkGeneratedCommandsPipelineInfoEXT", "VkGeneratedCommandsShaderInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderStageFlags("shaderStages", "the mask of shader stages used by the commands.")
+    VkIndirectExecutionSetEXT("indirectExecutionSet", "the indirect execution set to be used for binding shaders.")
+    VkIndirectCommandsLayoutEXT("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutEXT} that specifies the command sequence data.")
+    VkDeviceAddress("indirectAddress", "an address that holds the indirect buffer data.")
+    VkDeviceSize("indirectAddressSize", "the size in bytes of indirect buffer data starting at {@code indirectAddress}.")
+    VkDeviceAddress("preprocessAddress", "specifies a physical address of the {@code VkBuffer} used for preprocessing the input data for execution. If this structure is used with #CmdExecuteGeneratedCommandsEXT() with its {@code isPreprocessed} set to #TRUE, then the preprocessing step is skipped but data in this address <b>may</b> still be modified. The contents and the layout of this address are opaque to applications and <b>must</b> not be modified outside functions related to device-generated commands or copied to another buffer for reuse.")
+    VkDeviceSize("preprocessSize", "the maximum byte size within {@code preprocessAddress} that is available for preprocessing.")
+    uint32_t("maxSequenceCount", "used to determine the number of sequences to execute.")
+    VkDeviceAddress("sequenceCountAddress", "specifies an optional physical address of a single {@code uint32_t} value containing the requested number of sequences to execute.")
+    uint32_t("maxDrawCount", "the maximum number of indirect draws that can be executed by any COUNT-type multi-draw indirect tokens. The draw count in the indirect buffer is clamped to this value for these token types.")
+}
+
+val VkWriteIndirectExecutionSetPipelineEXT = struct(Module.VULKAN, "VkWriteIndirectExecutionSetPipelineEXT") {
+    documentation =
+        """
+        Struct specifying pipeline update information for an indirect execution set.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code index} <b>must</b> be less than the value of ##VkIndirectExecutionSetPipelineInfoEXT{@code ::maxPipelineCount} used to create the set</li>
+            <li>{@code pipeline} <b>must</b> have been created with #PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT</li>
+            <li>The descriptor layout info used to create {@code pipeline} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-compatibility">compatible</a> with the descriptor layout info used to create the indirect execution set</li>
+            <li>{@code index} <b>must</b> not be referenced by submitted command buffers</li>
+            <li>The shader stages contained in {@code pipeline} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesPipelineBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT</li>
+            <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #UpdateIndirectExecutionSetPipelineEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    uint32_t("index", "the element of the set to update")
+    VkPipeline("pipeline", "the pipeline to store in the indirect execution set")
+}
+
+val VkIndirectCommandsPushConstantTokenEXT = struct(Module.VULKAN, "VkIndirectCommandsPushConstantTokenEXT") {
+    documentation =
+        """
+        Structure specifying layout token info for a single push constant command token.
+
+        <h5>Description</h5>
+        The {@code stageFlags} member of {@code updateRange} is ignored.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code updateRange} <b>must</b> be contained within the push constant info used by ##VkIndirectCommandsLayoutCreateInfoEXT</li>
+            <li>If the token type is #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT, the {@code size} member of {@code updateRange} <b>must</b> be 4</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code updateRange} <b>must</b> be a valid ##VkPushConstantRange structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsTokenDataEXT, ##VkPushConstantRange
+        """
+
+    VkPushConstantRange("updateRange", "the push constant range that will be updated by the token.")
+}
+
+val VkIndirectCommandsVertexBufferTokenEXT = struct(Module.VULKAN, "VkIndirectCommandsVertexBufferTokenEXT") {
+    documentation =
+        """
+        Structure specifying layout token info for a single index buffer command token.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code vertexBindingUnit} <b>must</b> be less than the total number of vertex input bindings in use by the current graphics state.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsTokenDataEXT
+        """
+
+    uint32_t("vertexBindingUnit", "the vertex input binding number to be bound.")
+}
+
+val VkIndirectCommandsIndexBufferTokenEXT = struct(Module.VULKAN, "VkIndirectCommandsIndexBufferTokenEXT") {
+    documentation =
+        """
+        Structure specifying layout token info for a single index buffer command token.
+
+        <h5>Description</h5>
+        This allows for easy layering of Vulkan atop other APIs. When #INDIRECT_COMMANDS_INPUT_MODE_DXGI_INDEX_BUFFER_EXT is specified, the indirect buffer can contain a {@code D3D12_INDEX_BUFFER_VIEW} instead of ##VkBindIndexBufferIndirectCommandEXT as D3D’s DXGI format value is mapped to the {@code VkIndexType}. It works as both structs are otherwise binary compatible.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code mode} <b>must</b> be non-zero</li>
+            <li>{@code mode} <b>must</b> be one of the bits supported in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsInputModes">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsInputModes}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code mode} <b>must</b> be a valid {@code VkIndirectCommandsInputModeFlagBitsEXT} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsTokenDataEXT
+        """
+
+    VkIndirectCommandsInputModeFlagBitsEXT("mode", "specifies the mode to use with this token.")
+}
+
+val VkIndirectCommandsExecutionSetTokenEXT = struct(Module.VULKAN, "VkIndirectCommandsExecutionSetTokenEXT") {
+    documentation =
+        """
+        Structure specifying input data for a single execution set command token.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Each bit in {@code shaderStages} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesPipelineBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStagesShaderBinding">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code type} <b>must</b> be a valid {@code VkIndirectExecutionSetInfoTypeEXT} value</li>
+            <li>{@code shaderStages} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code shaderStages} <b>must</b> not be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsTokenDataEXT
+        """
+
+    VkIndirectExecutionSetInfoTypeEXT("type", "describes the type of indirect execution set in use.")
+    VkShaderStageFlags("shaderStages", "specifies the shaders that will be changed by this token.")
+}
+
+val VkIndirectCommandsTokenDataEXT = union(Module.VULKAN, "VkIndirectCommandsTokenDataEXT") {
+    documentation =
+        """
+        Union specifying the token-specific details of an indirect command layout token.
+
+        <h5>Description</h5>
+        The appropriate member of the union <b>must</b> be set for each token.
+
+        The following code provides detailed information on how an individual sequence is processed. For valid usage, all restrictions from the regular commands apply.
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsExecutionSetTokenEXT, ##VkIndirectCommandsIndexBufferTokenEXT, ##VkIndirectCommandsLayoutTokenEXT, ##VkIndirectCommandsPushConstantTokenEXT, ##VkIndirectCommandsVertexBufferTokenEXT
+        """
+
+    VkIndirectCommandsPushConstantTokenEXT.const.p("pPushConstant", "a pointer to a ##VkIndirectCommandsPushConstantTokenEXT struct needed for #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT and #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT tokens")
+    VkIndirectCommandsVertexBufferTokenEXT.const.p("pVertexBuffer", "a pointer to a ##VkIndirectCommandsVertexBufferTokenEXT struct needed for #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT tokens")
+    VkIndirectCommandsIndexBufferTokenEXT.const.p("pIndexBuffer", "a pointer to a ##VkIndirectCommandsIndexBufferTokenEXT struct needed for #INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT tokens")
+    VkIndirectCommandsExecutionSetTokenEXT.const.p("pExecutionSet", "a pointer to a ##VkIndirectCommandsExecutionSetTokenEXT struct needed for #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT tokens")
+}
+
+val VkIndirectCommandsLayoutTokenEXT = struct(Module.VULKAN, "VkIndirectCommandsLayoutTokenEXT") {
+    documentation =
+        """
+        Struct specifying the details of an indirect command layout token.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code offset} <b>must</b> be less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectCommandsTokenOffset}</li>
+            <li>{@code offset} <b>must</b> be aligned to 4</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">{@code meshShader}</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">{@code taskShader}</a> are not enabled, {@code type} <b>must</b> not be #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTracingMaintenance1">{@code rayTracingMaintenance1}</a> is not enabled, {@code type} <b>must</b> not be #INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-deviceGeneratedCommandsMultiDrawIndirectCount">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_COUNT_EXT</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-deviceGeneratedCommandsMultiDrawIndirectCount">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT</li>
+            <li>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-deviceGeneratedCommandsMultiDrawIndirectCount">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkIndirectCommandsTokenTypeEXT} value</li>
+            <li>If {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT, the {@code pPushConstant} member of {@code data} <b>must</b> be a valid pointer to a valid ##VkIndirectCommandsPushConstantTokenEXT structure</li>
+            <li>If {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT, the {@code pVertexBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid ##VkIndirectCommandsVertexBufferTokenEXT structure</li>
+            <li>If {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT, the {@code pIndexBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid ##VkIndirectCommandsIndexBufferTokenEXT structure</li>
+            <li>If {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT, the {@code pExecutionSet} member of {@code data} <b>must</b> be a valid pointer to a valid ##VkIndirectCommandsExecutionSetTokenEXT structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsLayoutCreateInfoEXT, ##VkIndirectCommandsTokenDataEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkIndirectCommandsTokenTypeEXT("type", "specifies the {@code VkIndirectCommandsTokenTypeEXT} for {@code data}.")
+    VkIndirectCommandsTokenDataEXT("data", "specifies a ##VkIndirectCommandsTokenDataEXT containing token-specific details for command execution. It is ignored if {@code type} does not match any member of the ##VkIndirectCommandsTokenDataEXT union.")
+    uint32_t("offset", "the relative byte offset for the token within one sequence of the indirect buffer. The data stored at that offset is the command data for the token, e.g. ##VkDispatchIndirectCommand.")
+}
+
+val VkIndirectCommandsLayoutCreateInfoEXT = struct(Module.VULKAN, "VkIndirectCommandsLayoutCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying the parameters of a newly created indirect commands layout object.
+
+        <h5>Description</h5>
+        The following code illustrates some of the flags:
+
+        <pre><code>
+￿void cmdProcessAllSequences(cmd, indirectExecutionSet, indirectCommandsLayout, indirectAddress, sequencesCount)
+￿{
+￿  for (s = 0; s &lt; sequencesCount; s++)
+￿  {
+￿    sUsed = s;
+￿
+￿    if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_EXT) {
+￿      sUsed = incoherent_implementation_dependent_permutation[ sUsed ];
+￿    }
+￿
+￿    cmdProcessSequence( cmd, indirectExecutionSet, indirectCommandsLayout, indirectAddress, sUsed );
+￿  }
+￿}</code></pre>
+
+        When tokens are consumed, an offset is computed based on token offset and stream stride. The resulting offset is required to be aligned. The alignment for a specific token is equal to the scalar alignment of the data type as defined in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-alignment-requirements">Alignment Requirements</a>, or 4, whichever is lower.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code indirectStride} <b>must</b> be less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectCommandsIndirectStride}</li>
+            <li>{@code shaderStages} <b>must</b> only contain stages supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-supportedIndirectCommandsShaderStages">##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::supportedIndirectCommandsShaderStages}</a></li>
+            <li>{@code tokenCount} <b>must</b> less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT{@code ::maxIndirectCommandsTokenCount}</li>
+            <li>The number of tokens in the {@code pTokens} array with {@code type} equal to #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT <b>must</b> be less than or equal to 1</li>
+            <li>The number of tokens in the {@code pTokens} array with {@code type} equal to #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT <b>must</b> be less than or equal to 1</li>
+            <li>The number of tokens in the {@code pTokens} array with {@code type} equal to #INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT <b>must</b> be less than or equal to 1</li>
+            <li>If the action command token in the {@code pTokens} array is not an indexed draw token, then {@code pTokens} <b>must</b> not contain a member with {@code type} set to #INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT</li>
+            <li>If the action command token in the {@code pTokens} array is not a non-mesh draw token, then {@code pTokens} <b>must</b> not contain a member with {@code type} set to #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT</li>
+            <li>If the {@code pTokens} array contains multiple tokens with {@code type} equal to #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT, then there <b>must</b> be no duplicate ##VkIndirectCommandsVertexBufferTokenEXT{@code ::vertexBindingUnit} values</li>
+            <li>For all #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT and #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT type tokens in {@code pTokens}, there <b>must</b> be no overlapping ranges between any specified push constant ranges</li>
+            <li>The action command token <b>must</b> be the last token in the {@code pTokens} array</li>
+            <li>If the {@code pTokens} array contains a #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT token, then this token <b>must</b> be the first token in the array</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicGeneratedPipelineLayout">{@code dynamicGeneratedPipelineLayout}</a> is not enabled, then the {@code pipelineLayout} <b>must</b> not be #NULL_HANDLE</li>
+            <li>For any element of {@code pTokens}, if {@code type} is either #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT and {@code pipelineLayout} is #NULL_HANDLE, then the {@code pNext} chain <b>must</b> include a ##VkPipelineLayoutCreateInfo struct</li>
+            <li>For any element of {@code pTokens}, the {@code offset} <b>must</b> be greater than or equal to the {@code offset} member of the previous tokens</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_EXT, or #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_EXT, then {@code shaderStages} <b>must</b> contain graphics stages</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT, then {@code shaderStages} <b>must</b> be #SHADER_STAGE_COMPUTE_BIT</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT, then {@code shaderStages} <b>must</b> contain #SHADER_STAGE_MESH_BIT_EXT</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT or #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT, then the {@code shaderStages} <b>must</b> contain #SHADER_STAGE_MESH_BIT_NV</li>
+            <li>For any element of {@code pTokens}, if {@code type} is #INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT, then {@code shaderStages} <b>must</b> contain ray tracing stages</li>
+            <li>If {@code shaderStages} contains graphics stages then the state tokens in {@code pTokens} <b>must</b> not include #INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT</li>
+            <li>If {@code shaderStages} is #SHADER_STAGE_COMPUTE_BIT then the state tokens in {@code pTokens} <b>must</b> only include #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT, or #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT</li>
+            <li>If {@code shaderStages} contains ray tracing stages then the state tokens in {@code pTokens} <b>must</b> only include #INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT, #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT, or #INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT</li>
+            <li>
+                The {@code shaderStages} <b>must</b> only contain stages from one of the following:
+                <ul>
+                    <li>graphics stages</li>
+                    <li>#SHADER_STAGE_COMPUTE_BIT</li>
+                    <li>mesh stages and #SHADER_STAGE_FRAGMENT_BIT</li>
+                    <li>ray tracing stages</li>
+                </ul>
+            </li>
+            <li>If {@code shaderStages} contains #SHADER_STAGE_FRAGMENT_BIT, then {@code shaderStages} <b>must</b> also contain #SHADER_STAGE_VERTEX_BIT or #SHADER_STAGE_MESH_BIT_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineLayoutCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkIndirectCommandsLayoutUsageFlagBitsEXT} values</li>
+            <li>{@code shaderStages} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code shaderStages} <b>must</b> not be 0</li>
+            <li>If {@code pipelineLayout} is not #NULL_HANDLE, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+            <li>{@code pTokens} <b>must</b> be a valid pointer to an array of {@code tokenCount} valid ##VkIndirectCommandsLayoutTokenEXT structures</li>
+            <li>{@code tokenCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkIndirectCommandsLayoutTokenEXT, #CreateIndirectCommandsLayoutEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkIndirectCommandsLayoutUsageFlagsEXT("flags", "a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsEXT} specifying usage rules for this layout.")
+    VkShaderStageFlags("shaderStages", "the {@code VkShaderStageFlags} that this layout supports.")
+    uint32_t("indirectStride", "the distance in bytes between sequences in the indirect buffer")
+    VkPipelineLayout("pipelineLayout", "the optional {@code VkPipelineLayout} that tokens in this layout use. If the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-dynamicGeneratedPipelineLayout\">{@code dynamicGeneratedPipelineLayout}</a> feature is enabled, {@code pipelineLayout} <b>can</b> be #NULL_HANDLE and the layout <b>must</b> be specified by chaining the ##VkPipelineLayoutCreateInfo structure off the {@code pNext}")
+    AutoSize("pTokens")..uint32_t("tokenCount", "the length of the individual command sequence.")
+    VkIndirectCommandsLayoutTokenEXT.const.p("pTokens", "a pointer to an array of ##VkIndirectCommandsLayoutTokenEXT describing each command token in detail.")
+}
+
+val VkDrawIndirectCountIndirectCommandEXT = struct(Module.VULKAN, "VkDrawIndirectCountIndirectCommandEXT") {
+    documentation =
+        """
+        Structure specifying input data for a single draw-type command token.
+
+        <h5>Description</h5>
+        The corresponding indirect draw struct data will be read from the buffer address.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The buffer’s usage flag from which the address was acquired <b>must</b> have the #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set</li>
+            <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+        </ul>
+        """
+
+    VkDeviceAddress("bufferAddress", "specifies a physical address of the {@code VkBuffer} used for draw commands.")
+    uint32_t("stride", "the byte size stride for the command arguments")
+    uint32_t("commandCount", "the number of commands to execute")
+}
+
+val VkBindVertexBufferIndirectCommandEXT = struct(Module.VULKAN, "VkBindVertexBufferIndirectCommandEXT") {
+    documentation =
+        """
+        Structure specifying input data for a single vertex buffer command token.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The buffer’s usage flag from which the address was acquired <b>must</b> have the #BUFFER_USAGE_VERTEX_BUFFER_BIT bit set</li>
+            <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+        </ul>
+        """
+
+    VkDeviceAddress("bufferAddress", "specifies a physical address of the {@code VkBuffer} used as vertex input binding.")
+    uint32_t("size", "the byte size range which is available for this operation from the provided address.")
+    uint32_t("stride", "the byte size stride for this vertex input binding as in ##VkVertexInputBindingDescription{@code ::stride}.")
+}
+
+val VkBindIndexBufferIndirectCommandEXT = struct(Module.VULKAN, "VkBindIndexBufferIndirectCommandEXT") {
+    documentation =
+        """
+        Structure specifying input data for a single index buffer command token.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The buffer’s usage flags from which the address was acquired <b>must</b> have the #BUFFER_USAGE_INDEX_BUFFER_BIT bit set</li>
+            <li>The {@code bufferAddress} <b>must</b> be aligned to the {@code VkIndexType} of the {@code indexType} used</li>
+            <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
+        </ul>
+        """
+
+    VkDeviceAddress("bufferAddress", "specifies a physical address of the {@code VkBuffer} used as index buffer.")
+    uint32_t("size", "the byte size range which is available for this operation from the provided address.")
+    VkIndexType("indexType", "a {@code VkIndexType} value specifying how indices are treated.")
+}
+
+val VkGeneratedCommandsPipelineInfoEXT = struct(Module.VULKAN, "VkGeneratedCommandsPipelineInfoEXT") {
+    documentation =
+        """
+        Structure specifying a pipeline for use with indirect command preprocessing.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT</li>
+            <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkPipeline("pipeline", "a valid pipeline object.")
+}
+
+val VkGeneratedCommandsShaderInfoEXT = struct(Module.VULKAN, "VkGeneratedCommandsShaderInfoEXT") {
+    documentation =
+        """
+        Structure specifying shader objects for use with indirect command preprocessing.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pShaders} <b>must</b> not contain more than one shader object for a given {@code VkShaderStageFlagBits} stage</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT</li>
+            <li>{@code pShaders} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid {@code VkShaderEXT} handles</li>
+            <li>{@code shaderCount} <b>must</b> be greater than 0</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pShaders")..uint32_t("shaderCount", "the size of the {@code pShaders} array.")
+    VkShaderEXT.const.p("pShaders", "a pointer to an array of shader objects.")
+}
+
+val VkWriteIndirectExecutionSetShaderEXT = struct(Module.VULKAN, "VkWriteIndirectExecutionSetShaderEXT") {
+    documentation =
+        """
+        Struct specifying shader object update information for an indirect execution set.
+
+        <h5>Description</h5>
+        Shaders need not be stored in the Indirect Execution Set according to their stage. The only restriction for shader indices within a set is that the value of the index <b>must</b> be less than the maximum number of shaders in the set.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code index} <b>must</b> be less than ##VkIndirectExecutionSetShaderInfoEXT{@code ::maxShaderCount}</li>
+            <li>{@code shader} <b>must</b> have been created with #SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT</li>
+            <li>A shader created with the same {@code VkShaderStageFlagBits} <b>must</b> have been passed in the ##VkIndirectExecutionSetShaderInfoEXT{@code ::pInitialShaders} array</li>
+            <li>{@code index} <b>must</b> not be in use by submitted command buffers</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT</li>
+            <li>{@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #UpdateIndirectExecutionSetShaderEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    uint32_t("index", "the element of the set to update")
+    VkShaderEXT("shader", "the shader to store in the indirect execution set")
+}
+
 val VkPhysicalDeviceImageAlignmentControlFeaturesMESA = struct(Module.VULKAN, "VkPhysicalDeviceImageAlignmentControlFeaturesMESA") {
     documentation =
         """
@@ -24003,4 +24753,53 @@ val VkImageAlignmentControlCreateInfoMESA = struct(Module.VULKAN, "VkImageAlignm
     Expression("#STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("maximumRequestedAlignment", "specifies the maximum alignment for the image.")
+}
+
+val VkPhysicalDeviceDepthClampControlFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDepthClampControlFeaturesEXT") {
+    documentation =
+        """
+        Structure describing additional depth clamp control supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDepthClampControlFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceDepthClampControlFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("depthClampControl", "indicates that the implementation supports setting ##VkPipelineViewportDepthClampControlCreateInfoEXT{@code ::depthClampMode} to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
+}
+
+val VkPipelineViewportDepthClampControlCreateInfoEXT = struct(Module.VULKAN, "VkPipelineViewportDepthClampControlCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created pipeline depth clamp control state.
+
+        <h5>Description</h5>
+        This structure extends ##VkPipelineViewportStateCreateInfo and specifies the depth clamp range used in the pipeline. If this structure is not provided in the next chain then {@code depthClampMode} defaults to #DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT, and the pipeline is not created with #DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT, then {@code pDepthClampRange} must be a valid pointer to a valid ##VkDepthClampRangeEXT structure.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT</li>
+            <li>{@code depthClampMode} <b>must</b> be a valid {@code VkDepthClampModeEXT} value</li>
+            <li>If {@code pDepthClampRange} is not {@code NULL}, {@code pDepthClampRange} <b>must</b> be a valid pointer to a valid ##VkDepthClampRangeEXT structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDepthClampRangeEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT")..VkStructureType("sType", "a {@code VkStructureType} value identifying this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkDepthClampModeEXT("depthClampMode", "determines how the clamp range is determined for each viewport.")
+    nullable..VkDepthClampRangeEXT.const.p("pDepthClampRange", "sets the depth clamp range for all viewports if {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
 }

@@ -14,7 +14,7 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         This extension provides new queries for memory requirements of images and buffers that can be easily extended by other extensions, without introducing any additional commands. The Vulkan 1.0 ##VkMemoryRequirements and ##VkSparseImageMemoryRequirements structures do not include {@code sType} and {@code pNext} members. This extension wraps them in new structures with these members, so an application can query a chain of memory requirements structures by constructing the chain and letting the implementation fill them in. A new command is added for each {@code vkGet*MemoryRequrements} command in core Vulkan 1.0.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

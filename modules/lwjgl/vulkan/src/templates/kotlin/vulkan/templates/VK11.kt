@@ -622,7 +622,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         Some external memory handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:
 
-        <h6>External memory handle types compatibility</h6>
+        <h6>External Memory Handle Types Compatibility</h6>
         <table class="lwjgl">
             <tbody>
                 <tr><td>Handle type</td><td>##VkPhysicalDeviceIDProperties{@code ::driverUUID}</td><td>##VkPhysicalDeviceIDProperties{@code ::deviceUUID}</td></tr>
@@ -704,7 +704,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         Some external fence handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:
 
-        <h6>External fence handle types compatibility</h6>
+        <h6>External Fence Handle Types Compatibility</h6>
         <table class="lwjgl">
             <tbody>
                 <tr><td>Handle type</td><td>##VkPhysicalDeviceIDProperties{@code ::driverUUID}</td><td>##VkPhysicalDeviceIDProperties{@code ::deviceUUID}</td></tr>
@@ -788,7 +788,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         Some external semaphore handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:
 
-        <h6>External semaphore handle types compatibility</h6>
+        <h6>External Semaphore Handle Types Compatibility</h6>
         <table class="lwjgl">
             <tbody>
                 <tr><td>Handle type</td><td>##VkPhysicalDeviceIDProperties{@code ::driverUUID}</td><td>##VkPhysicalDeviceIDProperties{@code ::deviceUUID}</td></tr>

@@ -14,7 +14,7 @@ val EXT_shader_demote_to_helper_invocation = "EXTShaderDemoteToHelperInvocation"
         This extension adds Vulkan support for the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_demote_to_helper_invocation.html">{@code SPV_EXT_demote_to_helper_invocation}</a> SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpDemoteToHelperInvocationEXT} allowing shaders to “{@code demote}” a fragment shader invocation to behave like a helper invocation for its duration. The demoted invocation will have no further side effects and will not output to the framebuffer, but remains active and can participate in computing derivatives and in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-group-operations">group operations</a>. This is a better match for the “{@code discard}” instruction in HLSL.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

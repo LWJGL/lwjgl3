@@ -16,7 +16,7 @@ val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type =
         The {@code StorageBuffer8BitAccess} capability <b>must</b> be supported by all implementations of this extension. The other capabilities are optional.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        Functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code StorageBuffer8BitAccess} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code StorageBuffer8BitAccess} capability is optional. The original type, enum, and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>

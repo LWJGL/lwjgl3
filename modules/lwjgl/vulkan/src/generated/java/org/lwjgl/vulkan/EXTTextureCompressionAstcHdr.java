@@ -12,7 +12,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
- * <p>This extension has been partially promoted. Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.3. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>This extension has been partially promoted. Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.3. The original type, enum, and command names are still available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
