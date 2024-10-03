@@ -40,7 +40,7 @@ val hwloc_type_filter_e = "enum hwloc_type_filter_e".enumType
 
 val hwloc_uint64_t = typedef(uint64_t, "hwloc_uint64_t")
 
-val hwloc_obj_osdev_type_t = typedef(unsigned_long, "hwloc_obj_osdev_type_t")
+val hwloc_obj_osdev_types_t = typedef(unsigned_long, "hwloc_obj_osdev_types_t")
 
 val hwloc_info_s = struct(Module.HWLOC, "hwloc_info_s", nativeName = "struct hwloc_info_s", mutable = false) {
     charASCII.p("name", "")
@@ -107,7 +107,7 @@ val hwloc_obj_attr_u = union(Module.HWLOC, "hwloc_obj_attr_u", nativeName = "str
         unsigned("depth", "")
     }("bridge", "")
     struct(Module.HWLOC, "hwloc_osdev_attr_s", mutable = false) {
-        hwloc_obj_osdev_type_t("type", "")
+        hwloc_obj_osdev_types_t("types", "")
     }("osdev", "")
 }
 

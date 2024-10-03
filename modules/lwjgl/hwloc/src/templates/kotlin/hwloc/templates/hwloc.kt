@@ -448,6 +448,7 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         "OBJ_TYPE_MIN".enum("", "0"),
         "OBJ_MACHINE".enum("", "0"),
         "OBJ_PACKAGE".enum,
+        "OBJ_DIE".enum,
         "OBJ_CORE".enum,
         "OBJ_PU".enum,
         "OBJ_L1CACHE".enum,
@@ -460,12 +461,11 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         "OBJ_L3ICACHE".enum,
         "OBJ_GROUP".enum,
         "OBJ_NUMANODE".enum,
+        "OBJ_MEMCACHE".enum,
         "OBJ_BRIDGE".enum,
         "OBJ_PCI_DEVICE".enum,
         "OBJ_OS_DEVICE".enum,
         "OBJ_MISC".enum,
-        "OBJ_MEMCACHE".enum,
-        "OBJ_DIE".enum,
         "OBJ_TYPE_MAX".enum
     )
 
@@ -2195,10 +2195,36 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
         hwloc_topology_t("topology", ""),
         hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target", ""),
+        hwloc_obj_t("target_node", ""),
         unsigned_long("flags", ""),
         Check(1)..hwloc_location.p("best_initiator", ""),
         Check(1)..nullable..hwloc_uint64_t.p("value", "")
+    )
+
+    int(
+        "memattr_get_targets",
+        "",
+
+        hwloc_topology_t("topology", ""),
+        hwloc_memattr_id_t("attribute", ""),
+        nullable..hwloc_location.p("initiator", ""),
+        unsigned_long("flags", ""),
+        AutoSize("targets", "values")..Check(1)..unsigned_int.p("nr", ""),
+        hwloc_obj_t.p("targets", ""),
+        nullable..hwloc_uint64_t.p("values", "")
+    )
+
+    int(
+        "memattr_get_initiators",
+        "",
+
+        hwloc_topology_t("topology", ""),
+        hwloc_memattr_id_t("attribute", ""),
+        hwloc_obj_t("target_node", ""),
+        unsigned_long("flags", ""),
+        AutoSize("initiators", "values")..Check(1)..unsigned_int.p("nr", ""),
+        hwloc_location.p("initiators", ""),
+        nullable..hwloc_uint64_t.p("values", "")
     )
 
     int(
@@ -2239,32 +2265,6 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         nullable..hwloc_location.p("initiator", ""),
         unsigned_long("flags", ""),
         hwloc_uint64_t("value", "")
-    )
-
-    int(
-        "memattr_get_targets",
-        "",
-
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        nullable..hwloc_location.p("initiator", ""),
-        unsigned_long("flags", ""),
-        AutoSize("targets", "values")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_obj_t.p("targets", ""),
-        nullable..hwloc_uint64_t.p("values", "")
-    )
-
-    int(
-        "memattr_get_initiators",
-        "",
-
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target_node", ""),
-        unsigned_long("flags", ""),
-        AutoSize("initiators", "values")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_location.p("initiators", ""),
-        nullable..hwloc_uint64_t.p("values", "")
     )
 
     // cpukinds.h

@@ -192,12 +192,12 @@ public class HWLoc {
             memattr_get_value                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_value"),
             memattr_get_best_target               = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_best_target"),
             memattr_get_best_initiator            = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_best_initiator"),
+            memattr_get_targets                   = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_targets"),
+            memattr_get_initiators                = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_initiators"),
             memattr_get_name                      = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_name"),
             memattr_get_flags                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_flags"),
             memattr_register                      = apiGetFunctionAddress(HWLOC, "hwloc_memattr_register"),
             memattr_set_value                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_set_value"),
-            memattr_get_targets                   = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_targets"),
-            memattr_get_initiators                = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_initiators"),
             cpukinds_get_nr                       = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_nr"),
             cpukinds_get_by_cpuset                = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_by_cpuset"),
             cpukinds_get_info                     = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_info"),
@@ -255,6 +255,7 @@ public class HWLoc {
      * <li>{@link #HWLOC_OBJ_TYPE_MIN OBJ_TYPE_MIN}</li>
      * <li>{@link #HWLOC_OBJ_MACHINE OBJ_MACHINE}</li>
      * <li>{@link #HWLOC_OBJ_PACKAGE OBJ_PACKAGE}</li>
+     * <li>{@link #HWLOC_OBJ_DIE OBJ_DIE}</li>
      * <li>{@link #HWLOC_OBJ_CORE OBJ_CORE}</li>
      * <li>{@link #HWLOC_OBJ_PU OBJ_PU}</li>
      * <li>{@link #HWLOC_OBJ_L1CACHE OBJ_L1CACHE}</li>
@@ -267,12 +268,11 @@ public class HWLoc {
      * <li>{@link #HWLOC_OBJ_L3ICACHE OBJ_L3ICACHE}</li>
      * <li>{@link #HWLOC_OBJ_GROUP OBJ_GROUP}</li>
      * <li>{@link #HWLOC_OBJ_NUMANODE OBJ_NUMANODE}</li>
+     * <li>{@link #HWLOC_OBJ_MEMCACHE OBJ_MEMCACHE}</li>
      * <li>{@link #HWLOC_OBJ_BRIDGE OBJ_BRIDGE}</li>
      * <li>{@link #HWLOC_OBJ_PCI_DEVICE OBJ_PCI_DEVICE}</li>
      * <li>{@link #HWLOC_OBJ_OS_DEVICE OBJ_OS_DEVICE}</li>
      * <li>{@link #HWLOC_OBJ_MISC OBJ_MISC}</li>
-     * <li>{@link #HWLOC_OBJ_MEMCACHE OBJ_MEMCACHE}</li>
-     * <li>{@link #HWLOC_OBJ_DIE OBJ_DIE}</li>
      * <li>{@link #HWLOC_OBJ_TYPE_MAX OBJ_TYPE_MAX}</li>
      * </ul>
      */
@@ -280,24 +280,24 @@ public class HWLoc {
         HWLOC_OBJ_TYPE_MIN   = 0,
         HWLOC_OBJ_MACHINE    = 0,
         HWLOC_OBJ_PACKAGE    = 1,
-        HWLOC_OBJ_CORE       = 2,
-        HWLOC_OBJ_PU         = 3,
-        HWLOC_OBJ_L1CACHE    = 4,
-        HWLOC_OBJ_L2CACHE    = 5,
-        HWLOC_OBJ_L3CACHE    = 6,
-        HWLOC_OBJ_L4CACHE    = 7,
-        HWLOC_OBJ_L5CACHE    = 8,
-        HWLOC_OBJ_L1ICACHE   = 9,
-        HWLOC_OBJ_L2ICACHE   = 10,
-        HWLOC_OBJ_L3ICACHE   = 11,
-        HWLOC_OBJ_GROUP      = 12,
-        HWLOC_OBJ_NUMANODE   = 13,
-        HWLOC_OBJ_BRIDGE     = 14,
-        HWLOC_OBJ_PCI_DEVICE = 15,
-        HWLOC_OBJ_OS_DEVICE  = 16,
-        HWLOC_OBJ_MISC       = 17,
-        HWLOC_OBJ_MEMCACHE   = 18,
-        HWLOC_OBJ_DIE        = 19,
+        HWLOC_OBJ_DIE        = 2,
+        HWLOC_OBJ_CORE       = 3,
+        HWLOC_OBJ_PU         = 4,
+        HWLOC_OBJ_L1CACHE    = 5,
+        HWLOC_OBJ_L2CACHE    = 6,
+        HWLOC_OBJ_L3CACHE    = 7,
+        HWLOC_OBJ_L4CACHE    = 8,
+        HWLOC_OBJ_L5CACHE    = 9,
+        HWLOC_OBJ_L1ICACHE   = 10,
+        HWLOC_OBJ_L2ICACHE   = 11,
+        HWLOC_OBJ_L3ICACHE   = 12,
+        HWLOC_OBJ_GROUP      = 13,
+        HWLOC_OBJ_NUMANODE   = 14,
+        HWLOC_OBJ_MEMCACHE   = 15,
+        HWLOC_OBJ_BRIDGE     = 16,
+        HWLOC_OBJ_PCI_DEVICE = 17,
+        HWLOC_OBJ_OS_DEVICE  = 18,
+        HWLOC_OBJ_MISC       = 19,
         HWLOC_OBJ_TYPE_MAX   = 20;
 
     /**
@@ -2719,20 +2719,58 @@ public class HWLoc {
 
     // --- [ hwloc_memattr_get_best_initiator ] ---
 
-    public static int nhwloc_memattr_get_best_initiator(long topology, int attribute, long target, long flags, long best_initiator, long value) {
+    public static int nhwloc_memattr_get_best_initiator(long topology, int attribute, long target_node, long flags, long best_initiator, long value) {
         long __functionAddress = Functions.memattr_get_best_initiator;
         if (CHECKS) {
             check(topology);
         }
-        return invokePPNPPI(topology, attribute, target, flags, best_initiator, value, __functionAddress);
+        return invokePPNPPI(topology, attribute, target_node, flags, best_initiator, value, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_best_initiator(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target, @NativeType("unsigned long") long flags, @NativeType("struct hwloc_location *") hwloc_location.Buffer best_initiator, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer value) {
+    public static int hwloc_memattr_get_best_initiator(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("struct hwloc_location *") hwloc_location.Buffer best_initiator, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer value) {
         if (CHECKS) {
             check(best_initiator, 1);
             checkSafe(value, 1);
         }
-        return nhwloc_memattr_get_best_initiator(topology, attribute, target.address(), flags, best_initiator.address(), memAddressSafe(value));
+        return nhwloc_memattr_get_best_initiator(topology, attribute, target_node.address(), flags, best_initiator.address(), memAddressSafe(value));
+    }
+
+    // --- [ hwloc_memattr_get_targets ] ---
+
+    public static int nhwloc_memattr_get_targets(long topology, int attribute, long initiator, long flags, long nr, long targets, long values) {
+        long __functionAddress = Functions.memattr_get_targets;
+        if (CHECKS) {
+            check(topology);
+        }
+        return invokePPNPPPI(topology, attribute, initiator, flags, nr, targets, values, __functionAddress);
+    }
+
+    public static int hwloc_memattr_get_targets(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("hwloc_obj_t *") PointerBuffer targets, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
+        if (CHECKS) {
+            check(nr, 1);
+            check(targets, nr.get(nr.position()));
+            checkSafe(values, nr.get(nr.position()));
+        }
+        return nhwloc_memattr_get_targets(topology, attribute, memAddressSafe(initiator), flags, memAddress(nr), memAddress(targets), memAddressSafe(values));
+    }
+
+    // --- [ hwloc_memattr_get_initiators ] ---
+
+    public static int nhwloc_memattr_get_initiators(long topology, int attribute, long target_node, long flags, long nr, long initiators, long values) {
+        long __functionAddress = Functions.memattr_get_initiators;
+        if (CHECKS) {
+            check(topology);
+        }
+        return invokePPNPPPI(topology, attribute, target_node, flags, nr, initiators, values, __functionAddress);
+    }
+
+    public static int hwloc_memattr_get_initiators(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("struct hwloc_location *") hwloc_location.Buffer initiators, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
+        if (CHECKS) {
+            check(nr, 1);
+            check(initiators, nr.get(nr.position()));
+            checkSafe(values, nr.get(nr.position()));
+        }
+        return nhwloc_memattr_get_initiators(topology, attribute, target_node.address(), flags, memAddress(nr), initiators.address(), memAddressSafe(values));
     }
 
     // --- [ hwloc_memattr_get_name ] ---
@@ -2813,44 +2851,6 @@ public class HWLoc {
 
     public static int hwloc_memattr_set_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t") long value) {
         return nhwloc_memattr_set_value(topology, attribute, target_node.address(), memAddressSafe(initiator), flags, value);
-    }
-
-    // --- [ hwloc_memattr_get_targets ] ---
-
-    public static int nhwloc_memattr_get_targets(long topology, int attribute, long initiator, long flags, long nr, long targets, long values) {
-        long __functionAddress = Functions.memattr_get_targets;
-        if (CHECKS) {
-            check(topology);
-        }
-        return invokePPNPPPI(topology, attribute, initiator, flags, nr, targets, values, __functionAddress);
-    }
-
-    public static int hwloc_memattr_get_targets(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("hwloc_obj_t *") PointerBuffer targets, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
-        if (CHECKS) {
-            check(nr, 1);
-            check(targets, nr.get(nr.position()));
-            checkSafe(values, nr.get(nr.position()));
-        }
-        return nhwloc_memattr_get_targets(topology, attribute, memAddressSafe(initiator), flags, memAddress(nr), memAddress(targets), memAddressSafe(values));
-    }
-
-    // --- [ hwloc_memattr_get_initiators ] ---
-
-    public static int nhwloc_memattr_get_initiators(long topology, int attribute, long target_node, long flags, long nr, long initiators, long values) {
-        long __functionAddress = Functions.memattr_get_initiators;
-        if (CHECKS) {
-            check(topology);
-        }
-        return invokePPNPPPI(topology, attribute, target_node, flags, nr, initiators, values, __functionAddress);
-    }
-
-    public static int hwloc_memattr_get_initiators(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("struct hwloc_location *") hwloc_location.Buffer initiators, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
-        if (CHECKS) {
-            check(nr, 1);
-            check(initiators, nr.get(nr.position()));
-            checkSafe(values, nr.get(nr.position()));
-        }
-        return nhwloc_memattr_get_initiators(topology, attribute, target_node.address(), flags, memAddress(nr), initiators.address(), memAddressSafe(values));
     }
 
     // --- [ hwloc_cpukinds_get_nr ] ---
