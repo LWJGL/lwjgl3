@@ -10,6 +10,7 @@
 #include <errno.h>
 
 JavaVM *jvm;
+void *RESERVED_NULL;
 
 static inline JNIEnv* getThreadEnv(void) {
     JNIEnv *env;
@@ -201,6 +202,14 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
     jvm = vm;
 
     tlsInit();
+
+    JNIEnv* env = getThreadEnv();
+    RESERVED_NULL = (*env)->reserved3;
+    if ((*env)->reserved0 != RESERVED_NULL) {
+        fprintf(stderr, "[LWJGL] Unsupported JVM detected, this may result in a crash. Please inform LWJGL developers.");
+        fflush(stderr);
+    }
+
     return JNI_VERSION_1_6;
 }
 

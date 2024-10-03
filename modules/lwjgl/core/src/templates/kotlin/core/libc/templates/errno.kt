@@ -72,7 +72,7 @@ val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
 
     Code(
         nativeCall = """${t}EnvData *envData = (EnvData *)(*__env)->reserved2;
-${t}return envData == (*__env)->reserved0 ? 0 : envData->errnum;"""
+${t}return envData == RESERVED_NULL ? 0 : envData->errnum;"""
     )..int(
         "getErrno",
         """

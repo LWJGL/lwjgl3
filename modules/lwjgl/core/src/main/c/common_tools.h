@@ -51,6 +51,8 @@ typedef struct EnvData_ {
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
 extern JNIEnv* getEnv(jboolean* async);
 
+extern void* RESERVED_NULL;
+
 // Upcalls are used to create EnvData, because these macros will be used in non-core modules too.
 /*
  * method (any module)                                             -> ThreadLocalUtil::setupEnvData upcall (core module)
@@ -60,7 +62,7 @@ extern JNIEnv* getEnv(jboolean* async);
 #define saveErrno() \
     jint errnum = errno; \
     EnvData *envData = (EnvData *)(*__env)->reserved2; \
-    if (envData == (*__env)->reserved0) { \
+    if (envData == RESERVED_NULL) { \
         jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
         envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
     } \
@@ -70,7 +72,7 @@ extern JNIEnv* getEnv(jboolean* async);
     #define saveLastError() \
         jint LastError = (jint)GetLastError(); \
         EnvData *envData = (EnvData *)(*__env)->reserved2; \
-        if (envData == (*__env)->reserved0) { \
+        if (envData == RESERVED_NULL) { \
             jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
             envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
         } \
