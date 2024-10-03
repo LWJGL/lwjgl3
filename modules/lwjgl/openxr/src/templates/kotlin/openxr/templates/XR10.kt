@@ -220,7 +220,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         XrStructureType - Values for type members of structs
 
         <h5>Description</h5>
-        Most structures containing {@code type} members have a value of {@code type} matching the type of the structure, as described more fully in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-valid-usage-for-structure-types">fundamentals-valid-usage-for-structure-types</a>.
+        Most structures containing {@code type} members have a value of {@code type} matching the type of the structure, as described more fully in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-valid-usage-for-structure-types">Valid Usage for Structure Types</a>.
 
         Note that all extension enums begin at the extension enum base of <code>10^9</code> (base 10). Each extension is assigned a block of 1000 enums, starting at the enum base and arranged by the extension’s number.
 
@@ -1734,7 +1734,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         For a {@code time} in the future, the runtime <b>should</b> locate the spaces based on the runtime’s most up-to-date prediction of how the world will be at that future time.
 
-        The minimum valid range of values for {@code time} are described in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-prediction-time-limits">fundamentals-prediction-time-limits</a>. For values of {@code time} outside this range, #LocateSpace() <b>may</b> return a location with no position and #SPACE_LOCATION_POSITION_VALID_BIT unset.
+        The minimum valid range of values for {@code time} are described in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-prediction-time-limits">Prediction Time Limits</a>. For values of {@code time} outside this range, #LocateSpace() <b>may</b> return a location with no position and #SPACE_LOCATION_POSITION_VALID_BIT unset.
 
         Some devices improve their understanding of the world as the device is used. The location returned by #LocateSpace() for a given {@code space}, {@code baseSpace} and {@code time} <b>may</b> change over time, even for spaces that track static objects, as one or both spaces adjust their origins.
 
@@ -2869,7 +2869,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrPath*                                     path);</code></pre>
 
         <h5>Description</h5>
-        #StringToPath() retrieves the {@code XrPath} value for a well-formed path string. If such a value had not yet been assigned by the runtime to the provided path string in this {@code XrInstance}, one <b>must</b> be assigned at this point. All calls to this function with the same {@code XrInstance} and path string <b>must</b> retrieve the same {@code XrPath} value. Upon failure, #StringToPath() <b>must</b> return an appropriate {@code XrResult}, and <b>may</b> set the output parameter to #NULL_PATH. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-path-atom-type">semantic-paths-path-atom-type</a> for the conditions under which an error <b>may</b> be returned when this function is given a valid {@code XrInstance} and a well-formed path string.
+        #StringToPath() retrieves the {@code XrPath} value for a well-formed path string. If such a value had not yet been assigned by the runtime to the provided path string in this {@code XrInstance}, one <b>must</b> be assigned at this point. All calls to this function with the same {@code XrInstance} and path string <b>must</b> retrieve the same {@code XrPath} value. Upon failure, #StringToPath() <b>must</b> return an appropriate {@code XrResult}, and <b>may</b> set the output parameter to #NULL_PATH. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-path-atom-type">Path Atom Type</a> for the conditions under which an error <b>may</b> be returned when this function is given a valid {@code XrInstance} and a well-formed path string.
 
         If the runtime’s resources are exhausted and it cannot create the path, a return value of #ERROR_PATH_COUNT_EXCEEDED <b>must</b> be returned. If the application specifies a string that is not a well-formed path string, #ERROR_PATH_FORMAT_INVALID <b>must</b> be returned.
 
@@ -3199,7 +3199,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         If the application successfully calls #SuggestInteractionProfileBindings() more than once for an interaction profile, the runtime <b>must</b> discard the previous suggested bindings and replace them with the new suggested bindings for that profile.
 
-        If the interaction profile path does not follow the structure defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-interaction-profiles">Interaction Profiles</a> or suggested bindings contain paths that do not follow the format defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-input">semantic-paths-input</a> (further described in ##XrActionSuggestedBinding), the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. If the interaction profile or input source for any of the suggested bindings does not exist in the allowlist defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-interaction-profiles">Interaction Profile Paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. A runtime <b>must</b> accept every valid binding in the allowlist though it is free to ignore any of them.
+        If the interaction profile path does not follow the structure defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-interaction-profiles">Interaction Profiles</a> or suggested bindings contain paths that do not follow the format defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-input">Input subpaths</a> (further described in ##XrActionSuggestedBinding), the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. If the interaction profile or input source for any of the suggested bindings does not exist in the allowlist defined in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-interaction-profiles">Interaction Profile Paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED. A runtime <b>must</b> accept every valid binding in the allowlist though it is free to ignore any of them.
 
         If the action set for any action referenced in the {@code suggestedBindings} parameter has been included in a call to #AttachSessionActionSets(), the implementation <b>must</b> return #ERROR_ACTIONSETS_ALREADY_ATTACHED.
 
@@ -3310,7 +3310,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         The runtime <b>must</b> return only interaction profiles for which the application has provided suggested bindings with #SuggestInteractionProfileBindings() or #NULL_PATH. The runtime <b>may</b> return interaction profiles that do not represent physically present hardware, for example if the runtime is using a known interaction profile to bind to hardware that the application is not aware of. The runtime <b>may</b> return the last-known interaction profile in the event that no controllers are active.
 
-        If #AttachSessionActionSets() has not yet been called for the {@code session}, the runtime <b>must</b> return #ERROR_ACTIONSET_NOT_ATTACHED. If {@code topLevelUserPath} is not one of the top level user paths described in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-user">semantic-paths-user</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED.
+        If #AttachSessionActionSets() has not yet been called for the {@code session}, the runtime <b>must</b> return #ERROR_ACTIONSET_NOT_ATTACHED. If {@code topLevelUserPath} is not one of the top level user paths described in <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#semantic-paths-user">/user paths</a>, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

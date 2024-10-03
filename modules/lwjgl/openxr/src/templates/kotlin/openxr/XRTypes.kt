@@ -58,7 +58,7 @@ val XrApiLayerProperties = struct(Module.OPENXR, "XrApiLayerProperties", mutable
     Expression("#TYPE_API_LAYER_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
     nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     charUTF8("layerName", "a string specifying the name of the API layer. Use this name in the ##XrInstanceCreateInfo{@code ::enabledApiLayerNames} array to enable this API layer for an instance.")["XR_MAX_API_LAYER_NAME_SIZE"]
-    XrVersion("specVersion", "the API version the API layer was written to, encoded as described in the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#fundamentals-api-version-numbers-and-semantics\">fundamentals-api-version-numbers-and-semantics</a> section.")
+    XrVersion("specVersion", "the API version the API layer was written to, encoded as described in the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#fundamentals-api-version-numbers-and-semantics\">API Version Numbers and Semantics</a> section.")
     uint32_t("layerVersion", "the version of this API layer. It is an integer, increasing with backward compatible changes.")
     charUTF8("description", "a string providing additional details that <b>can</b> be used by the application to identify the API layer.")["XR_MAX_API_LAYER_DESCRIPTION_SIZE"]
 }
@@ -114,7 +114,7 @@ val XrApplicationInfo = struct(Module.OPENXR, "XrApplicationInfo") {
     uint32_t("applicationVersion", "an unsigned integer variable containing the developer-supplied version number of the application.")
     charUTF8("engineName", "a string containing the name of the engine (if any) used to create the application. It may be empty to indicate no specified engine.")["XR_MAX_ENGINE_NAME_SIZE"]
     uint32_t("engineVersion", "an unsigned integer variable containing the developer-supplied version number of the engine used to create the application. May be zero to indicate no specified engine.")
-    XrVersion("apiVersion", "the version of this API against which the application will run, encoded as described in the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#fundamentals-api-version-numbers-and-semantics\">fundamentals-api-version-numbers-and-semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return #ERROR_API_VERSION_UNSUPPORTED.")
+    XrVersion("apiVersion", "the version of this API against which the application will run, encoded as described in the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#fundamentals-api-version-numbers-and-semantics\">API Version Numbers and Semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return #ERROR_API_VERSION_UNSUPPORTED.")
 }
 
 val XrInstanceCreateInfo = struct(Module.OPENXR, "XrInstanceCreateInfo") {
@@ -144,7 +144,7 @@ val XrInstanceCreateInfo = struct(Module.OPENXR, "XrInstanceCreateInfo") {
     XrInstanceCreateFlags("createFlags", "a bitmask of {@code XrInstanceCreateFlags} that identifies options that apply to the creation.")
     XrApplicationInfo("applicationInfo", "an instance of ##XrApplicationInfo. This information helps runtimes recognize behavior inherent to classes of applications. ##XrApplicationInfo is defined in detail below.")
     AutoSize("enabledApiLayerNames", optional = true)..uint32_t("enabledApiLayerCount", "the number of global API layers to enable.")
-    charUTF8.const.p.const.p("enabledApiLayerNames", "a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#instance-api-layers-and-extensions\">instance-api-layers-and-extensions</a> section for further details.")
+    charUTF8.const.p.const.p("enabledApiLayerNames", "a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#instance-api-layers-and-extensions\">API Layers and Extensions</a> section for further details.")
     AutoSize("enabledExtensionNames", optional = true)..uint32_t("enabledExtensionCount", "the number of global extensions to enable.")
     charUTF8.const.p.const.p("enabledExtensionNames", "a pointer to an array of {@code enabledExtensionCount} strings containing the names of extensions to enable.")
 }

@@ -15,7 +15,7 @@ val META_spatial_entity_mesh = "METASpatialEntityMesh".nativeClassXR("META_spati
 
         This extension expands on the concept of spatial entities to include a way for a spatial entity to represent a triangle mesh that describes 3D geometry of the spatial entity in a scene. Spatial entities are defined in {@link FBSpatialEntity XR_FB_spatial_entity} extension using the Entity-Component System. The triangle mesh is a component type that <b>may</b> be associated to a spatial entity.
 
-        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-extensions">fundamentals-extensions</a> section.
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-extensions">extension</a> section.
         """
 
     IntConstant(

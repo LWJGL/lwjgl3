@@ -21,7 +21,7 @@ val FB_foveation_vulkan = "FBFoveationVulkan".nativeClassXR("FB_foveation_vulkan
             <li>An application to obtain foveation textures or constructs needed for foveated rendering in Vulkan.</li>
         </ul>
 
-        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-extensions">fundamentals-extensions</a> section.
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo {@code enabledExtensionNames} parameter as indicated in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-extensions">extension</a> section.
         """
 
     IntConstant(
