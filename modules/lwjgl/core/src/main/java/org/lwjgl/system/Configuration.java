@@ -239,6 +239,20 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DISABLE_FUNCTION_CHECKS = new Configuration<>("org.lwjgl.util.NoFunctionChecks", StateInit.BOOLEAN);
 
     /**
+     * Set to true to disable LWJGL's shared library hash checks.
+     *
+     * <p>LWJGL compares the shared library hash stored in the classpath, with the hash of the actual library loaded at runtime. These checks print a simple
+     * warning when there's a hash mismatch, to help diagnose installation/classpath issues. It is not a security feature.</p>
+     *
+     * <p>If this option is not set, it defaults to the value of {@link #DISABLE_CHECKS}.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.util.NoLibraryChecks</b><br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> DISABLE_HASH_CHECKS = new Configuration<>("org.lwjgl.util.NoHashChecks", StateInit.BOOLEAN);
+
+    /**
      * Set to true to enable LWJGL's debug mode.
      *
      * <p>Information messages will be printed to the {@link APIUtil#DEBUG_STREAM} and extra runtime checks will be performed (some potentially expensive,

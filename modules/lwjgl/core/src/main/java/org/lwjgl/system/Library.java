@@ -573,7 +573,7 @@ public final class Library {
      * @param libFile the library file loaded
      */
     private static void checkHash(Class<?> context, Path libFile, String module, String libName) {
-        if (!CHECKS) {
+        if (Configuration.DISABLE_HASH_CHECKS.get(!CHECKS)) {
             return;
         }
 
