@@ -17,7 +17,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.demo.system.linux.liburing.BenchBase.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.LibCErrno.*;
 import static org.lwjgl.system.libc.LibCString.*;
 import static org.lwjgl.system.linux.FCNTL.*;
 import static org.lwjgl.system.linux.MMAN.*;
@@ -162,16 +161,18 @@ public class HelloLibIOURing {
 
         private int registeredFiles;
 
-        IOURingContainer() {
-            try (MemoryStack stack = stackPush()) {
-                IOURingParams params = IOURingParams.calloc(stack);
+        IOURingContainer(MemoryStack stack) {
+            try (MemoryStack frame = stack.push()) {
+                IntBuffer errno = frame.mallocInt(1);
+
+                IOURingParams params = IOURingParams.calloc(frame);
                 params.flags(IORING_SETUP_CQSIZE | IORING_SETUP_SQPOLL);
                 params.sq_thread_idle(1000);
                 params.cq_entries(QUEUE_DEPTH);
 
-                ringFD = io_uring_setup(QUEUE_DEPTH, params);
+                ringFD = io_uring_setup(errno, QUEUE_DEPTH, params);
                 if (ringFD < 0) {
-                    throw new IllegalStateException("Failed io_uring_setup: " + strerror(getErrno()));
+                    throw new IllegalStateException("Failed io_uring_setup: " + strerror(errno.get(0)));
                 }
 
                 /*System.out.println("io_uring features: (supported by current kernel)");
@@ -205,34 +206,34 @@ public class HelloLibIOURing {
                 long completionRingAddress        = NULL;
 
                 try {
-                    submissionRingAddress = mmap(NULL, submissionRingSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_SQ_RING);
+                    submissionRingAddress = mmap(errno, NULL, submissionRingSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_SQ_RING);
                     if (submissionRingAddress == MAP_FAILED) {
-                        throw new IllegalStateException("Failed to memory map submission ring buffer.");
+                        throw new IllegalStateException("Failed to memory map submission ring buffer: " + strerror(errno.get(0)));
                     }
 
-                    submissionRingEntriesAddress = mmap(0, submissionRingEntriesSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_SQES);
+                    submissionRingEntriesAddress = mmap(errno, 0, submissionRingEntriesSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_SQES);
                     if (submissionRingEntriesAddress == MAP_FAILED) {
-                        throw new IllegalStateException("Failed to memory map submission ring entries.");
+                        throw new IllegalStateException("Failed to memory map submission ring entries: " + strerror(errno.get(0)));
                     }
 
                     if ((params.features() & IORING_FEAT_SINGLE_MMAP) != 0) {
                         completionRingAddress = submissionRingAddress;
                     } else {
-                        completionRingAddress = mmap(0, completionRingSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_CQ_RING);
+                        completionRingAddress = mmap(errno, 0, completionRingSize, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE, ringFD, IORING_OFF_CQ_RING);
                         if (completionRingAddress == MAP_FAILED) {
-                            nmunmap(submissionRingAddress, submissionRingSize);
-                            throw new IllegalStateException("Failed to memory map completion ring buffer.");
+                            nmunmap(NULL, submissionRingAddress, submissionRingSize);
+                            throw new IllegalStateException("Failed to memory map completion ring buffer: " + strerror(errno.get(0)));
                         }
                     }
                 } catch (Exception e) {
                     if (submissionRingEntriesAddress != NULL) {
-                        nmunmap(submissionRingEntriesAddress, submissionRingEntriesSize);
+                        nmunmap(NULL, submissionRingEntriesAddress, submissionRingEntriesSize);
                     }
                     if (completionRingAddress != NULL && completionRingAddress != submissionRingAddress) {
-                        nmunmap(completionRingAddress, completionRingSize);
+                        nmunmap(NULL, completionRingAddress, completionRingSize);
                     }
                     if (submissionRingAddress != NULL) {
-                        nmunmap(submissionRingAddress, submissionRingSize);
+                        nmunmap(NULL, submissionRingAddress, submissionRingSize);
                     }
                 }
 
@@ -263,24 +264,29 @@ public class HelloLibIOURing {
                         .address();
                 }
 
-                int ret = io_uring_register(ringFD, opcode, arg, 1);
+                IntBuffer errno = stack.mallocInt(1);
+
+                int ret = io_uring_register(errno, ringFD, opcode, arg, 1);
                 if (ret == -1) {
-                    throw new IllegalStateException("Failed to register file: " + strerror(getErrno()));
+                    throw new IllegalStateException("Failed to register file: " + strerror(errno.get(0)));
                 }
             }
         }
 
-        public void enter(int flags) {
-            int result = io_uring_enter(ringFD, 0, 0, flags, NULL);
+        public void enter(int flags, IntBuffer errno) {
+            int result = io_uring_enter(errno, ringFD, 0, 0, flags, NULL);
             if (result == -1) {
-                throw new IllegalStateException("Failed io_uring_enter: " + strerror(getErrno()));
+                throw new IllegalStateException("Failed io_uring_enter: " + strerror(errno.get(0)));
             }
         }
 
         @Override
         public void close() {
-            if (UNISTD.close(ringFD) != 0) {
-                System.err.println("Failed to close io_ring fd: " + strerror(getErrno()));
+            try (MemoryStack stack = stackPush()) {
+                IntBuffer errno = stack.mallocInt(1);
+                if (UNISTD.close(errno, ringFD) != 0) {
+                    System.err.println("Failed to close io_ring fd: " + strerror(errno.get(0)));
+                }
             }
         }
     }
@@ -288,46 +294,51 @@ public class HelloLibIOURing {
     private static void benchIOURing(String filePath, int fileLength) {
         ByteBuffer buffer = memAlignedAlloc(PAGE_SIZE, fileLength);
 
-        try (IOURingContainer container = new IOURingContainer()) {
-            try (MemoryStack stack = stackPush()) {
-                IOVec.Buffer IOVECS = IOVec.malloc(1, stack);
+        try (
+            MemoryStack stack = stackPush();
+            IOURingContainer container = new IOURingContainer(stack)
+        ) {
+            IntBuffer errno = stack.mallocInt(1);
+
+            try (MemoryStack frame = stackPush()) {
+                IOVec.Buffer IOVECS = IOVec.malloc(1, frame);
                 IOVECS.get(0)
                     .iov_base(buffer)
                     .iov_len(buffer.capacity());
 
-                if (io_uring_register(container.ringFD, IORING_REGISTER_BUFFERS, IOVECS.address(), 1) == -1) {
-                    throw new IllegalStateException("Failed to register buffers: " + strerror(getErrno()));
+                if (io_uring_register(errno, container.ringFD, IORING_REGISTER_BUFFERS, IOVECS.address(), 1) == -1) {
+                    throw new IllegalStateException("Failed to register buffers: " + strerror(errno.get(0)));
                 }
             }
 
-            benchIOURingInner(filePath, fileLength, container, buffer);
+            benchIOURingInner(filePath, fileLength, container, errno, buffer);
             if (benchHashCode(buffer) != REFERENCE_HASHCODE) {
                 throw new IllegalStateException();
             }
 
             for (int i = 0; i < WARMUP_ITERS; i++) {
-                benchIOURingInner(filePath, fileLength, container, buffer);
+                benchIOURingInner(filePath, fileLength, container, errno, buffer);
             }
 
             long t = System.nanoTime();
             for (int i = 0; i < BENCH_ITERS; i++) {
-                benchIOURingInner(filePath, fileLength, container, buffer);
+                benchIOURingInner(filePath, fileLength, container, errno, buffer);
             }
             t = System.nanoTime() - t;
             System.out.println("io_uring:\n\t" + (t / BENCH_ITERS));
 
-            if (io_uring_register(container.ringFD, IORING_UNREGISTER_BUFFERS, NULL, 0) == -1) {
-                System.err.println("Failed to unregister buffers: " + strerror(getErrno()));
+            if (io_uring_register(errno, container.ringFD, IORING_UNREGISTER_BUFFERS, NULL, 0) == -1) {
+                System.err.println("Failed to unregister buffers: " + strerror(errno.get(0)));
             }
         } finally {
             memAlignedFree(buffer);
         }
     }
 
-    private static void benchIOURingInner(String filePath, int fileLength, IOURingContainer container, ByteBuffer buffer) {
-        int fileFD = open(filePath, O_RDONLY, 0);
+    private static void benchIOURingInner(String filePath, int fileLength, IOURingContainer container, IntBuffer errno, ByteBuffer buffer) {
+        int fileFD = open(errno, filePath, O_RDONLY, 0);
         if (fileFD < 0) {
-            throw new IllegalStateException("Failed to open file: " + strerror(getErrno()));
+            throw new IllegalStateException("Failed to open file: " + strerror(errno.get(0)));
         }
         container.registerFile(fileFD);
 
@@ -341,7 +352,7 @@ public class HelloLibIOURing {
             // submit
             {
                 if (submitted == QUEUE_DEPTH) {
-                    container.enter(IORING_ENTER_SQ_WAIT);
+                    container.enter(IORING_ENTER_SQ_WAIT, errno);
                 }
 
                 int tail     = submissionRing.getTail();
@@ -372,7 +383,7 @@ public class HelloLibIOURing {
                 if (tailInit < tail) {
                     submissionRing.updateTail(tail);
                     if (submissionRing.needsWakeup()) {
-                        container.enter(IORING_ENTER_SQ_WAKEUP);
+                        container.enter(IORING_ENTER_SQ_WAKEUP, errno);
                     }
                 } else if (submitted == 0) {
                     break;
@@ -412,8 +423,8 @@ public class HelloLibIOURing {
         /*if (io_uring_register(container.ringFD, IORING_UNREGISTER_FILES, NULL, 0) == -1) {
             throw new IllegalStateException("Failed to unregister file: " + strerr(getErrno()));
         }*/
-        if (close(fileFD) != 0) {
-            System.err.println("Failed to close file fd: " + strerror(getErrno()));
+        if (close(errno, fileFD) != 0) {
+            System.err.println("Failed to close file fd: " + strerror(errno.get(0)));
         }
     }
 

@@ -5,10 +5,13 @@
  */
 package org.lwjgl.system.linux;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to &lt;sys/mman.h&gt;. */
@@ -206,6 +209,9 @@ public class MMAN {
 
     // --- [ mmap ] ---
 
+    /** Unsafe version of: {@link #mmap} */
+    public static native long nmmap(long _errno, long addr, long length, int prot, int flags, int fd, long offset);
+
     /**
      * Creates a new mapping in the virtual address space of the calling process.
      * 
@@ -224,18 +230,24 @@ public class MMAN {
      * 
      * <p>After the {@code mmap()} call has returned, the file descriptor, {@code fd}, can be closed immediately without invalidating the mapping.</p>
      *
-     * @param prot  describes the desired memory protection of the mapping (and must not conflict with the open mode of the file). One or more of:<br><table><tr><td>{@link #PROT_EXEC}</td><td>{@link #PROT_READ}</td><td>{@link #PROT_WRITE}</td><td>{@link #PROT_NONE}</td><td>{@link #PROT_GROWSDOWN}</td><td>{@link #PROT_GROWSUP}</td></tr></table>
-     * @param flags one or more of:<br><table><tr><td>{@link #MAP_FAILED}</td><td>{@link #MAP_SHARED}</td><td>{@link #MAP_SHARED_VALIDATE}</td><td>{@link #MAP_PRIVATE}</td><td>{@link #MAP_HUGE_SHIFT}</td><td>{@link #MAP_HUGE_MASK}</td></tr><tr><td>{@link #MAP_32BIT}</td><td>{@link #MAP_ANONYMOUS}</td><td>{@link #MAP_ANON}</td><td>{@link #MAP_DENYWRITE}</td><td>{@link #MAP_EXECUTABLE}</td><td>{@link #MAP_FILE}</td></tr><tr><td>{@link #MAP_FIXED}</td><td>{@link #MAP_FIXED_NOREPLACE}</td><td>{@link #MAP_GROWSDOWN}</td><td>{@link #MAP_HUGETLB}</td><td>{@link #MAP_HUGE_2MB}</td><td>{@link #MAP_HUGE_1GB}</td></tr><tr><td>{@link #MAP_LOCKED}</td><td>{@link #MAP_NONBLOCK}</td><td>{@link #MAP_NORESERVE}</td><td>{@link #MAP_POPULATE}</td><td>{@link #MAP_STACK}</td><td>{@link #MAP_SYNC}</td></tr><tr><td>{@link #MAP_UNINITIALIZED}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param prot   describes the desired memory protection of the mapping (and must not conflict with the open mode of the file). One or more of:<br><table><tr><td>{@link #PROT_EXEC}</td><td>{@link #PROT_READ}</td><td>{@link #PROT_WRITE}</td><td>{@link #PROT_NONE}</td><td>{@link #PROT_GROWSDOWN}</td><td>{@link #PROT_GROWSUP}</td></tr></table>
+     * @param flags  one or more of:<br><table><tr><td>{@link #MAP_FAILED}</td><td>{@link #MAP_SHARED}</td><td>{@link #MAP_SHARED_VALIDATE}</td><td>{@link #MAP_PRIVATE}</td><td>{@link #MAP_HUGE_SHIFT}</td><td>{@link #MAP_HUGE_MASK}</td></tr><tr><td>{@link #MAP_32BIT}</td><td>{@link #MAP_ANONYMOUS}</td><td>{@link #MAP_ANON}</td><td>{@link #MAP_DENYWRITE}</td><td>{@link #MAP_EXECUTABLE}</td><td>{@link #MAP_FILE}</td></tr><tr><td>{@link #MAP_FIXED}</td><td>{@link #MAP_FIXED_NOREPLACE}</td><td>{@link #MAP_GROWSDOWN}</td><td>{@link #MAP_HUGETLB}</td><td>{@link #MAP_HUGE_2MB}</td><td>{@link #MAP_HUGE_1GB}</td></tr><tr><td>{@link #MAP_LOCKED}</td><td>{@link #MAP_NONBLOCK}</td><td>{@link #MAP_NORESERVE}</td><td>{@link #MAP_POPULATE}</td><td>{@link #MAP_STACK}</td><td>{@link #MAP_SYNC}</td></tr><tr><td>{@link #MAP_UNINITIALIZED}</td></tr></table>
      *
      * @return on success, returns a pointer to the mapped area. On error, the value {@link #MAP_FAILED} is returned, and {@code errno} is set to indicate the error.
      */
     @NativeType("void *")
-    public static native long mmap(@NativeType("void *") long addr, @NativeType("size_t") long length, int prot, int flags, int fd, @NativeType("off_t") long offset);
+    public static long mmap(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("void *") long addr, @NativeType("size_t") long length, int prot, int flags, int fd, @NativeType("off_t") long offset) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nmmap(memAddressSafe(_errno), addr, length, prot, flags, fd, offset);
+    }
 
     // --- [ munmap ] ---
 
     /** Unsafe version of: {@link #munmap} */
-    public static native int nmunmap(long addr, long length);
+    public static native int nmunmap(long _errno, long addr, long length);
 
     /**
      * Deletes the mappings for the specified address range, and causes further references to addresses within the range to generate invalid memory
@@ -247,10 +259,15 @@ public class MMAN {
      * unmapped, and subsequent references to these pages will generate {@code SIGSEGV}. It is not an error if the indicated range does not contain any mapped
      * pages.</p>
      *
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     *
      * @return on success, returns 0. On failure, it returns -1, and {@code errno} is set to indicate the error (probably to {@code EINVAL}).
      */
-    public static int munmap(@NativeType("void *") ByteBuffer addr) {
-        return nmunmap(memAddress(addr), addr.remaining());
+    public static int munmap(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("void *") ByteBuffer addr) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nmunmap(memAddressSafe(_errno), memAddress(addr), addr.remaining());
     }
 
 }

@@ -49,6 +49,10 @@ bin/classes/test;\
 bin/classes/samples;\
 modules/samples/src/test/resources;\
 bin/libs/java/testng.jar;\
+bin/libs/java/jcommander.jar;\
+bin/libs/java/jquery.jar;\
+bin/libs/java/slf4j-api.jar;\
+bin/libs/java/slf4j-jdk14.jar;\
 bin/libs/java/joml.jar;\
 bin/libs/java/jmh-core.jar;\
 bin/libs/java/commons-math3.jar;\

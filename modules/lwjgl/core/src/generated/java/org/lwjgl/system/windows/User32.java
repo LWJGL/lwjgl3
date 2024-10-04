@@ -1108,71 +1108,81 @@ public class User32 {
     // --- [ RegisterClassEx ] ---
 
     /** Unsafe version of: {@link #RegisterClassEx} */
-    public static native short nRegisterClassEx(long lpwcx, long __functionAddress);
+    public static native short nRegisterClassEx(long _GetLastError, long lpwcx, long __functionAddress);
 
     /** Unsafe version of: {@link #RegisterClassEx} */
-    public static short nRegisterClassEx(long lpwcx) {
+    public static short nRegisterClassEx(long _GetLastError, long lpwcx) {
         long __functionAddress = Functions.RegisterClassEx;
         if (CHECKS) {
             WNDCLASSEX.validate(lpwcx);
         }
-        return nRegisterClassEx(lpwcx, __functionAddress);
+        return nRegisterClassEx(_GetLastError, lpwcx, __functionAddress);
     }
 
     /**
      * Registers a window class for subsequent use in calls to the {@link #CreateWindowEx} function.
      *
-     * @param lpwcx a {@link WNDCLASSEX} structure. You must fill the structure with the appropriate class attributes before passing it to the function.
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param lpwcx         a {@link WNDCLASSEX} structure. You must fill the structure with the appropriate class attributes before passing it to the function.
      */
     @NativeType("ATOM")
-    public static short RegisterClassEx(@NativeType("WNDCLASSEX const *") WNDCLASSEX lpwcx) {
-        return nRegisterClassEx(lpwcx.address());
+    public static short RegisterClassEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("WNDCLASSEX const *") WNDCLASSEX lpwcx) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nRegisterClassEx(memAddressSafe(_GetLastError), lpwcx.address());
     }
 
     // --- [ UnregisterClass ] ---
 
     /** Unsafe version of: {@link #UnregisterClass} */
-    public static native int nUnregisterClass(long lpClassName, long hInstance, long __functionAddress);
+    public static native int nUnregisterClass(long _GetLastError, long lpClassName, long hInstance, long __functionAddress);
 
     /** Unsafe version of: {@link #UnregisterClass} */
-    public static int nUnregisterClass(long lpClassName, long hInstance) {
+    public static int nUnregisterClass(long _GetLastError, long lpClassName, long hInstance) {
         long __functionAddress = Functions.UnregisterClass;
-        return nUnregisterClass(lpClassName, hInstance, __functionAddress);
+        return nUnregisterClass(_GetLastError, lpClassName, hInstance, __functionAddress);
     }
 
     /**
      * Unregisters a window class, freeing the memory required for the class.
      *
-     * @param lpClassName a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
-     *                    registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
-     *                    parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
-     *                    word of {@code lpClassName}; the high-order word must be zero.
-     * @param hInstance   a handle to the instance of the module that created the class
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param lpClassName   a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
+     *                      registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
+     *                      parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
+     *                      word of {@code lpClassName}; the high-order word must be zero.
+     * @param hInstance     a handle to the instance of the module that created the class
      */
     @NativeType("BOOL")
-    public static boolean UnregisterClass(@NativeType("LPCTSTR") ByteBuffer lpClassName, @NativeType("HINSTANCE") long hInstance) {
+    public static boolean UnregisterClass(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") ByteBuffer lpClassName, @NativeType("HINSTANCE") long hInstance) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2(lpClassName);
         }
-        return nUnregisterClass(memAddress(lpClassName), hInstance) != 0;
+        return nUnregisterClass(memAddressSafe(_GetLastError), memAddress(lpClassName), hInstance) != 0;
     }
 
     /**
      * Unregisters a window class, freeing the memory required for the class.
      *
-     * @param lpClassName a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
-     *                    registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
-     *                    parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
-     *                    word of {@code lpClassName}; the high-order word must be zero.
-     * @param hInstance   a handle to the instance of the module that created the class
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param lpClassName   a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
+     *                      registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
+     *                      parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
+     *                      word of {@code lpClassName}; the high-order word must be zero.
+     * @param hInstance     a handle to the instance of the module that created the class
      */
     @NativeType("BOOL")
-    public static boolean UnregisterClass(@NativeType("LPCTSTR") CharSequence lpClassName, @NativeType("HINSTANCE") long hInstance) {
+    public static boolean UnregisterClass(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") CharSequence lpClassName, @NativeType("HINSTANCE") long hInstance) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16(lpClassName, true);
             long lpClassNameEncoded = stack.getPointerAddress();
-            return nUnregisterClass(lpClassNameEncoded, hInstance) != 0;
+            return nUnregisterClass(memAddressSafe(_GetLastError), lpClassNameEncoded, hInstance) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1181,66 +1191,72 @@ public class User32 {
     // --- [ CreateWindowEx ] ---
 
     /** Unsafe version of: {@link #CreateWindowEx} */
-    public static native long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam, long __functionAddress);
+    public static native long nCreateWindowEx(long _GetLastError, int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam, long __functionAddress);
 
     /** Unsafe version of: {@link #CreateWindowEx} */
-    public static long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam) {
+    public static long nCreateWindowEx(long _GetLastError, int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam) {
         long __functionAddress = Functions.CreateWindowEx;
-        return nCreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam, __functionAddress);
+        return nCreateWindowEx(_GetLastError, dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam, __functionAddress);
     }
 
     /**
      * Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.
      *
-     * @param dwExStyle    the extended window style of the window being created
-     * @param lpClassName  a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
-     * @param lpWindowName the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
-     * @param dwStyle      the style of the window being created
-     * @param x            the initial horizontal position of the window
-     * @param y            the initial vertical position of the window
-     * @param nWidth       the width, in device units, of the window
-     * @param nHeight      the height, in device units, of the window
-     * @param hWndParent   a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle.
-     * @param hMenu        a handle to a menu, or specifies a child-window identifier, depending on the window style
-     * @param hInstance    a handle to the instance of the module to be associated with the window
-     * @param lpParam      a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
-     *                     of the {@link #WM_CREATE} message.
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param dwExStyle     the extended window style of the window being created
+     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
+     * @param lpWindowName  the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
+     * @param dwStyle       the style of the window being created
+     * @param x             the initial horizontal position of the window
+     * @param y             the initial vertical position of the window
+     * @param nWidth        the width, in device units, of the window
+     * @param nHeight       the height, in device units, of the window
+     * @param hWndParent    a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle.
+     * @param hMenu         a handle to a menu, or specifies a child-window identifier, depending on the window style
+     * @param hInstance     a handle to the instance of the module to be associated with the window
+     * @param lpParam       a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
+     *                      of the {@link #WM_CREATE} message.
      */
     @NativeType("HWND")
-    public static long CreateWindowEx(@NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") ByteBuffer lpClassName, @Nullable @NativeType("LPCTSTR") ByteBuffer lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
+    public static long CreateWindowEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") ByteBuffer lpClassName, @Nullable @NativeType("LPCTSTR") ByteBuffer lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2Safe(lpClassName);
             checkNT2Safe(lpWindowName);
         }
-        return nCreateWindowEx(dwExStyle, memAddressSafe(lpClassName), memAddressSafe(lpWindowName), dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+        return nCreateWindowEx(memAddressSafe(_GetLastError), dwExStyle, memAddressSafe(lpClassName), memAddressSafe(lpWindowName), dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
     }
 
     /**
      * Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.
      *
-     * @param dwExStyle    the extended window style of the window being created
-     * @param lpClassName  a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
-     * @param lpWindowName the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
-     * @param dwStyle      the style of the window being created
-     * @param x            the initial horizontal position of the window
-     * @param y            the initial vertical position of the window
-     * @param nWidth       the width, in device units, of the window
-     * @param nHeight      the height, in device units, of the window
-     * @param hWndParent   a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle.
-     * @param hMenu        a handle to a menu, or specifies a child-window identifier, depending on the window style
-     * @param hInstance    a handle to the instance of the module to be associated with the window
-     * @param lpParam      a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
-     *                     of the {@link #WM_CREATE} message.
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param dwExStyle     the extended window style of the window being created
+     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
+     * @param lpWindowName  the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
+     * @param dwStyle       the style of the window being created
+     * @param x             the initial horizontal position of the window
+     * @param y             the initial vertical position of the window
+     * @param nWidth        the width, in device units, of the window
+     * @param nHeight       the height, in device units, of the window
+     * @param hWndParent    a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle.
+     * @param hMenu         a handle to a menu, or specifies a child-window identifier, depending on the window style
+     * @param hInstance     a handle to the instance of the module to be associated with the window
+     * @param lpParam       a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
+     *                      of the {@link #WM_CREATE} message.
      */
     @NativeType("HWND")
-    public static long CreateWindowEx(@NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") CharSequence lpClassName, @Nullable @NativeType("LPCTSTR") CharSequence lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
+    public static long CreateWindowEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") CharSequence lpClassName, @Nullable @NativeType("LPCTSTR") CharSequence lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16Safe(lpClassName, true);
             long lpClassNameEncoded = lpClassName == null ? NULL : stack.getPointerAddress();
             stack.nUTF16Safe(lpWindowName, true);
             long lpWindowNameEncoded = lpWindowName == null ? NULL : stack.getPointerAddress();
-            return nCreateWindowEx(dwExStyle, lpClassNameEncoded, lpWindowNameEncoded, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+            return nCreateWindowEx(memAddressSafe(_GetLastError), dwExStyle, lpClassNameEncoded, lpWindowNameEncoded, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1249,7 +1265,16 @@ public class User32 {
     // --- [ DestroyWindow ] ---
 
     /** Unsafe version of: {@link #DestroyWindow} */
-    public static native int nDestroyWindow(long hWnd, long __functionAddress);
+    public static native int nDestroyWindow(long _GetLastError, long hWnd, long __functionAddress);
+
+    /** Unsafe version of: {@link #DestroyWindow} */
+    public static int nDestroyWindow(long _GetLastError, long hWnd) {
+        long __functionAddress = Functions.DestroyWindow;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return nDestroyWindow(_GetLastError, hWnd, __functionAddress);
+    }
 
     /**
      * Destroys the specified window. The function sends {@link #WM_DESTROY} and {@link #WM_NCDESTROY} messages to the window to deactivate it and remove the keyboard focus
@@ -1259,15 +1284,15 @@ public class User32 {
      * <p>If the specified window is a parent or owner window, DestroyWindow automatically destroys the associated child or owned windows when it destroys the
      * parent or owner window. The function first destroys child or owned windows, and then it destroys the parent or owner window.</p>
      *
-     * @param hWnd a handle to the window to be destroyed
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window to be destroyed
      */
     @NativeType("BOOL")
-    public static boolean DestroyWindow(@NativeType("HWND") long hWnd) {
-        long __functionAddress = Functions.DestroyWindow;
+    public static boolean DestroyWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
         if (CHECKS) {
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nDestroyWindow(hWnd, __functionAddress) != 0;
+        return nDestroyWindow(memAddressSafe(_GetLastError), hWnd) != 0;
     }
 
     // --- [ DefWindowProc ] ---
@@ -1358,12 +1383,22 @@ public class User32 {
     // --- [ SetWindowPos ] ---
 
     /** Unsafe version of: {@link #SetWindowPos} */
-    public static native int nSetWindowPos(long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags, long __functionAddress);
+    public static native int nSetWindowPos(long _GetLastError, long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags, long __functionAddress);
+
+    /** Unsafe version of: {@link #SetWindowPos} */
+    public static int nSetWindowPos(long _GetLastError, long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags) {
+        long __functionAddress = Functions.SetWindowPos;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return nSetWindowPos(_GetLastError, hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags, __functionAddress);
+    }
 
     /**
      * Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
      * The topmost window receives the highest rank and is the first window in the Z order.
      *
+     * @param _GetLastError   optionally returns the result of {@code GetLastError()} after this function is called
      * @param hWnd            a handle to the window
      * @param hWndInsertAfter a handle to the window to precede the positioned window in the Z order. This parameter must be a window handle or one of:<br><table><tr><td>{@link #HWND_TOP}</td><td>{@link #HWND_BOTTOM}</td><td>{@link #HWND_TOPMOST}</td><td>{@link #HWND_NOTOPMOST}</td></tr></table>
      * @param X               the new position of the left side of the window, in client coordinates
@@ -1373,57 +1408,62 @@ public class User32 {
      * @param uFlags          the window sizing and positioning flags. One or more of:<br><table><tr><td>{@link #SWP_NOSIZE}</td><td>{@link #SWP_NOMOVE}</td><td>{@link #SWP_NOZORDER}</td><td>{@link #SWP_NOREDRAW}</td><td>{@link #SWP_NOACTIVATE}</td></tr><tr><td>{@link #SWP_FRAMECHANGED}</td><td>{@link #SWP_SHOWWINDOW}</td><td>{@link #SWP_HIDEWINDOW}</td><td>{@link #SWP_NOCOPYBITS}</td><td>{@link #SWP_NOOWNERZORDER}</td></tr><tr><td>{@link #SWP_NOSENDCHANGING}</td><td>{@link #SWP_DRAWFRAME}</td><td>{@link #SWP_NOREPOSITION}</td><td>{@link #SWP_DEFERERASE}</td><td>{@link #SWP_ASYNCWINDOWPOS}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean SetWindowPos(@NativeType("HWND") long hWnd, @NativeType("HWND") long hWndInsertAfter, int X, int Y, int cx, int cy, @NativeType("UINT") int uFlags) {
-        long __functionAddress = Functions.SetWindowPos;
+    public static boolean SetWindowPos(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("HWND") long hWndInsertAfter, int X, int Y, int cx, int cy, @NativeType("UINT") int uFlags) {
         if (CHECKS) {
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nSetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags, __functionAddress) != 0;
+        return nSetWindowPos(memAddressSafe(_GetLastError), hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags) != 0;
     }
 
     // --- [ SetWindowText ] ---
 
     /** Unsafe version of: {@link #SetWindowText} */
-    public static native int nSetWindowText(long hWnd, long lpString, long __functionAddress);
+    public static native int nSetWindowText(long _GetLastError, long hWnd, long lpString, long __functionAddress);
 
     /** Unsafe version of: {@link #SetWindowText} */
-    public static int nSetWindowText(long hWnd, long lpString) {
+    public static int nSetWindowText(long _GetLastError, long hWnd, long lpString) {
         long __functionAddress = Functions.SetWindowText;
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowText(hWnd, lpString, __functionAddress);
+        return nSetWindowText(_GetLastError, hWnd, lpString, __functionAddress);
     }
 
     /**
      * Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
      * However, {@code SetWindowText} cannot change the text of a control in another application.
      *
-     * @param hWnd     a handle to the window or control whose text is to be changed
-     * @param lpString the new title or control text
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window or control whose text is to be changed
+     * @param lpString      the new title or control text
      */
     @NativeType("BOOL")
-    public static boolean SetWindowText(@NativeType("HWND") long hWnd, @NativeType("LPCTSTR") ByteBuffer lpString) {
+    public static boolean SetWindowText(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") ByteBuffer lpString) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2(lpString);
         }
-        return nSetWindowText(hWnd, memAddress(lpString)) != 0;
+        return nSetWindowText(memAddressSafe(_GetLastError), hWnd, memAddress(lpString)) != 0;
     }
 
     /**
      * Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
      * However, {@code SetWindowText} cannot change the text of a control in another application.
      *
-     * @param hWnd     a handle to the window or control whose text is to be changed
-     * @param lpString the new title or control text
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window or control whose text is to be changed
+     * @param lpString      the new title or control text
      */
     @NativeType("BOOL")
-    public static boolean SetWindowText(@NativeType("HWND") long hWnd, @NativeType("LPCTSTR") CharSequence lpString) {
+    public static boolean SetWindowText(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") CharSequence lpString) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16(lpString, true);
             long lpStringEncoded = stack.getPointerAddress();
-            return nSetWindowText(hWnd, lpStringEncoded) != 0;
+            return nSetWindowText(memAddressSafe(_GetLastError), hWnd, lpStringEncoded) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1432,18 +1472,19 @@ public class User32 {
     // --- [ GetMessage ] ---
 
     /** Unsafe version of: {@link #GetMessage} */
-    public static native int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, long __functionAddress);
+    public static native int nGetMessage(long _GetLastError, long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, long __functionAddress);
 
     /** Unsafe version of: {@link #GetMessage} */
-    public static int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax) {
+    public static int nGetMessage(long _GetLastError, long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax) {
         long __functionAddress = Functions.GetMessage;
-        return nGetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, __functionAddress);
+        return nGetMessage(_GetLastError, lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, __functionAddress);
     }
 
     /**
      * Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
      * retrieval. Unlike GetMessage, the {@link #PeekMessage} function does not wait for a message to be posted before returning.
      *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param lpMsg         a pointer to an {@link MSG} structure that receives message information from the thread's message queue
      * @param hWnd          a handle to the window whose messages are to be retrieved. The window must belong to the current thread.
      *                      
@@ -1457,8 +1498,11 @@ public class User32 {
      * @param wMsgFilterMax the integer value of the highest message value to be retrieved
      */
     @NativeType("BOOL")
-    public static boolean GetMessage(@NativeType("LPMSG") MSG lpMsg, @NativeType("HWND") long hWnd, @NativeType("UINT") int wMsgFilterMin, @NativeType("UINT") int wMsgFilterMax) {
-        return nGetMessage(lpMsg.address(), hWnd, wMsgFilterMin, wMsgFilterMax) != 0;
+    public static boolean GetMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPMSG") MSG lpMsg, @NativeType("HWND") long hWnd, @NativeType("UINT") int wMsgFilterMin, @NativeType("UINT") int wMsgFilterMax) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetMessage(memAddressSafe(_GetLastError), lpMsg.address(), hWnd, wMsgFilterMin, wMsgFilterMax) != 0;
     }
 
     // --- [ PeekMessage ] ---
@@ -1513,16 +1557,26 @@ public class User32 {
     // --- [ WaitMessage ] ---
 
     /** Unsafe version of: {@link #WaitMessage} */
-    public static native int nWaitMessage(long __functionAddress);
+    public static native int nWaitMessage(long _GetLastError, long __functionAddress);
+
+    /** Unsafe version of: {@link #WaitMessage} */
+    public static int nWaitMessage(long _GetLastError) {
+        long __functionAddress = Functions.WaitMessage;
+        return nWaitMessage(_GetLastError, __functionAddress);
+    }
 
     /**
      * Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
      * return until a new message is placed in the thread's message queue.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      */
     @NativeType("BOOL")
-    public static boolean WaitMessage() {
-        long __functionAddress = Functions.WaitMessage;
-        return nWaitMessage(__functionAddress) != 0;
+    public static boolean WaitMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nWaitMessage(memAddressSafe(_GetLastError)) != 0;
     }
 
     // --- [ DispatchMessage ] ---
@@ -1546,191 +1600,234 @@ public class User32 {
     // --- [ PostMessage ] ---
 
     /** Unsafe version of: {@link #PostMessage} */
-    public static native int nPostMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
+    public static native int nPostMessage(long _GetLastError, long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
+
+    /** Unsafe version of: {@link #PostMessage} */
+    public static int nPostMessage(long _GetLastError, long hWnd, int Msg, long wParam, long lParam) {
+        long __functionAddress = Functions.PostMessage;
+        return nPostMessage(_GetLastError, hWnd, Msg, wParam, lParam, __functionAddress);
+    }
 
     /**
      * Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
      * to process the message.
      *
-     * @param hWnd   a handle to the window whose window procedure is to receive the message. The following values have special meanings:
-     *               
-     *               <ul>
-     *               <li>{@link #HWND_BROADCAST} - The message is posted to all top-level windows in the system, including disabled or invisible unowned windows, overlapped
-     *               windows, and pop-up windows. The message is not posted to child windows.</li>
-     *               <li>{@code NULL} - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread.</li>
-     *               </ul>
-     * @param Msg    the message to be posted
-     * @param wParam additional message-specific information
-     * @param lParam additional message-specific information
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window whose window procedure is to receive the message. The following values have special meanings:
+     *                      
+     *                      <ul>
+     *                      <li>{@link #HWND_BROADCAST} - The message is posted to all top-level windows in the system, including disabled or invisible unowned windows, overlapped
+     *                      windows, and pop-up windows. The message is not posted to child windows.</li>
+     *                      <li>{@code NULL} - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread.</li>
+     *                      </ul>
+     * @param Msg           the message to be posted
+     * @param wParam        additional message-specific information
+     * @param lParam        additional message-specific information
      */
     @NativeType("BOOL")
-    public static boolean PostMessage(@NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
-        long __functionAddress = Functions.PostMessage;
-        return nPostMessage(hWnd, Msg, wParam, lParam, __functionAddress) != 0;
+    public static boolean PostMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nPostMessage(memAddressSafe(_GetLastError), hWnd, Msg, wParam, lParam) != 0;
     }
 
     // --- [ SendMessage ] ---
 
     /** Unsafe version of: {@link #SendMessage} */
-    public static native int nSendMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
+    public static native int nSendMessage(long _GetLastError, long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
+
+    /** Unsafe version of: {@link #SendMessage} */
+    public static int nSendMessage(long _GetLastError, long hWnd, int Msg, long wParam, long lParam) {
+        long __functionAddress = Functions.SendMessage;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return nSendMessage(_GetLastError, hWnd, Msg, wParam, lParam, __functionAddress);
+    }
 
     /**
      * Sends the specified message to a window or windows. The {@code SendMessage} function calls the window procedure for the specified window and does not
      * return until the window procedure has processed the message.
      *
-     * @param hWnd   a handle to the window whose window procedure will receive the message. If this parameter is {@link #HWND_BROADCAST}, the message is sent to all top-level
-     *               windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to
-     *               child windows.
-     *               
-     *               <p>Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal
-     *               integrity level.</p>
-     * @param Msg    the message to be sent
-     * @param wParam additional message-specific information
-     * @param lParam additional message-specific information
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window whose window procedure will receive the message. If this parameter is {@link #HWND_BROADCAST}, the message is sent to all top-level
+     *                      windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to
+     *                      child windows.
+     *                      
+     *                      <p>Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal
+     *                      integrity level.</p>
+     * @param Msg           the message to be sent
+     * @param wParam        additional message-specific information
+     * @param lParam        additional message-specific information
      */
     @NativeType("BOOL")
-    public static boolean SendMessage(@NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
-        long __functionAddress = Functions.SendMessage;
+    public static boolean SendMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
         if (CHECKS) {
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nSendMessage(hWnd, Msg, wParam, lParam, __functionAddress) != 0;
+        return nSendMessage(memAddressSafe(_GetLastError), hWnd, Msg, wParam, lParam) != 0;
     }
 
     // --- [ AdjustWindowRectEx ] ---
 
     /** Unsafe version of: {@link #AdjustWindowRectEx} */
-    public static native int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle, long __functionAddress);
+    public static native int nAdjustWindowRectEx(long _GetLastError, long lpRect, int dwStyle, int bMenu, int dwExStyle, long __functionAddress);
 
     /** Unsafe version of: {@link #AdjustWindowRectEx} */
-    public static int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle) {
+    public static int nAdjustWindowRectEx(long _GetLastError, long lpRect, int dwStyle, int bMenu, int dwExStyle) {
         long __functionAddress = Functions.AdjustWindowRectEx;
-        return nAdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle, __functionAddress);
+        return nAdjustWindowRectEx(_GetLastError, lpRect, dwStyle, bMenu, dwExStyle, __functionAddress);
     }
 
     /**
      * Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
      * {@link #CreateWindowEx} function to create a window whose client area is the desired size.
      *
-     * @param lpRect    a pointer to a {@link RECT} structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
-     *                  function returns, the structure contains the coordinates of the top-left and bottom-right corners of the window to accommodate the desired client
-     *                  area.
-     * @param dwStyle   the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style.
-     * @param bMenu     indicates whether the window has a menu
-     * @param dwExStyle the extended window style of the window whose required size is to be calculated
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param lpRect        a pointer to a {@link RECT} structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
+     *                      function returns, the structure contains the coordinates of the top-left and bottom-right corners of the window to accommodate the desired client
+     *                      area.
+     * @param dwStyle       the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style.
+     * @param bMenu         indicates whether the window has a menu
+     * @param dwExStyle     the extended window style of the window whose required size is to be calculated
      */
     @NativeType("BOOL")
-    public static boolean AdjustWindowRectEx(@NativeType("LPRECT") RECT lpRect, @NativeType("DWORD") int dwStyle, @NativeType("BOOL") boolean bMenu, @NativeType("DWORD") int dwExStyle) {
-        return nAdjustWindowRectEx(lpRect.address(), dwStyle, bMenu ? 1 : 0, dwExStyle) != 0;
+    public static boolean AdjustWindowRectEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPRECT") RECT lpRect, @NativeType("DWORD") int dwStyle, @NativeType("BOOL") boolean bMenu, @NativeType("DWORD") int dwExStyle) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nAdjustWindowRectEx(memAddressSafe(_GetLastError), lpRect.address(), dwStyle, bMenu ? 1 : 0, dwExStyle) != 0;
     }
 
     // --- [ GetWindowRect ] ---
 
     /** Unsafe version of: {@link #GetWindowRect} */
-    public static native int nGetWindowRect(long hWnd, long lpRect, long __functionAddress);
+    public static native int nGetWindowRect(long _GetLastError, long hWnd, long lpRect, long __functionAddress);
 
     /** Unsafe version of: {@link #GetWindowRect} */
-    public static int nGetWindowRect(long hWnd, long lpRect) {
+    public static int nGetWindowRect(long _GetLastError, long hWnd, long lpRect) {
         long __functionAddress = Functions.GetWindowRect;
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowRect(hWnd, lpRect, __functionAddress);
+        return nGetWindowRect(_GetLastError, hWnd, lpRect, __functionAddress);
     }
 
     /**
      * Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the
      * upper-left corner of the screen.
      *
-     * @param hWnd   a handle to the window
-     * @param lpRect a pointer to a {@link RECT} structure that receives the screen coordinates of the upper-left and lower-right corners of the window
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window
+     * @param lpRect        a pointer to a {@link RECT} structure that receives the screen coordinates of the upper-left and lower-right corners of the window
      */
     @NativeType("BOOL")
-    public static boolean GetWindowRect(@NativeType("HWND") long hWnd, @NativeType("LPRECT") RECT lpRect) {
-        return nGetWindowRect(hWnd, lpRect.address()) != 0;
+    public static boolean GetWindowRect(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPRECT") RECT lpRect) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetWindowRect(memAddressSafe(_GetLastError), hWnd, lpRect.address()) != 0;
     }
 
     // --- [ MoveWindow ] ---
 
     /** Unsafe version of: {@link #MoveWindow} */
-    public static native int nMoveWindow(long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint, long __functionAddress);
+    public static native int nMoveWindow(long _GetLastError, long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint, long __functionAddress);
+
+    /** Unsafe version of: {@link #MoveWindow} */
+    public static int nMoveWindow(long _GetLastError, long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint) {
+        long __functionAddress = Functions.MoveWindow;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return nMoveWindow(_GetLastError, hWnd, X, Y, nWidth, nHeight, bRepaint, __functionAddress);
+    }
 
     /**
      * Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner
      * of the screen. For a child window, they are relative to the upper-left corner of the parent window's client area.
      *
-     * @param hWnd     a handle to the window
-     * @param X        the new position of the left side of the window
-     * @param Y        the new position of the top of the window
-     * @param nWidth   the new width of the window
-     * @param nHeight  the new height of the window
-     * @param bRepaint indicates whether the window is to be repainted. If this parameter is TRUE, the window receives a message. If the parameter is FALSE, no repainting
-     *                 of any kind occurs. This applies to the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
-     *                 window uncovered as a result of moving a child window.
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window
+     * @param X             the new position of the left side of the window
+     * @param Y             the new position of the top of the window
+     * @param nWidth        the new width of the window
+     * @param nHeight       the new height of the window
+     * @param bRepaint      indicates whether the window is to be repainted. If this parameter is TRUE, the window receives a message. If the parameter is FALSE, no repainting
+     *                      of any kind occurs. This applies to the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
+     *                      window uncovered as a result of moving a child window.
      */
     @NativeType("BOOL")
-    public static boolean MoveWindow(@NativeType("HWND") long hWnd, int X, int Y, int nWidth, int nHeight, @NativeType("BOOL") boolean bRepaint) {
-        long __functionAddress = Functions.MoveWindow;
+    public static boolean MoveWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int X, int Y, int nWidth, int nHeight, @NativeType("BOOL") boolean bRepaint) {
         if (CHECKS) {
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nMoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint ? 1 : 0, __functionAddress) != 0;
+        return nMoveWindow(memAddressSafe(_GetLastError), hWnd, X, Y, nWidth, nHeight, bRepaint ? 1 : 0) != 0;
     }
 
     // --- [ GetWindowPlacement ] ---
 
     /** Unsafe version of: {@link #GetWindowPlacement} */
-    public static native int nGetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
+    public static native int nGetWindowPlacement(long _GetLastError, long hWnd, long lpwndpl, long __functionAddress);
 
     /** Unsafe version of: {@link #GetWindowPlacement} */
-    public static int nGetWindowPlacement(long hWnd, long lpwndpl) {
+    public static int nGetWindowPlacement(long _GetLastError, long hWnd, long lpwndpl) {
         long __functionAddress = Functions.GetWindowPlacement;
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowPlacement(hWnd, lpwndpl, __functionAddress);
+        return nGetWindowPlacement(_GetLastError, hWnd, lpwndpl, __functionAddress);
     }
 
     /**
      * Retrieves the show state and the restored, minimized, and maximized positions of the specified window.
      *
-     * @param hWnd    a handle to the window
-     * @param lpwndpl a pointer to the {@link WINDOWPLACEMENT} structure that receives the show state and position information.
-     *                
-     *                <p>Before calling {@code GetWindowPlacement}, set the length member to {@link WINDOWPLACEMENT#SIZEOF}. {@code GetWindowPlacement} fails if
-     *                {@code lpwndpl->length} is not set correctly.</p>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window
+     * @param lpwndpl       a pointer to the {@link WINDOWPLACEMENT} structure that receives the show state and position information.
+     *                      
+     *                      <p>Before calling {@code GetWindowPlacement}, set the length member to {@link WINDOWPLACEMENT#SIZEOF}. {@code GetWindowPlacement} fails if
+     *                      {@code lpwndpl->length} is not set correctly.</p>
      */
     @NativeType("BOOL")
-    public static boolean GetWindowPlacement(@NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT *") WINDOWPLACEMENT lpwndpl) {
-        return nGetWindowPlacement(hWnd, lpwndpl.address()) != 0;
+    public static boolean GetWindowPlacement(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT *") WINDOWPLACEMENT lpwndpl) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetWindowPlacement(memAddressSafe(_GetLastError), hWnd, lpwndpl.address()) != 0;
     }
 
     // --- [ SetWindowPlacement ] ---
 
     /** Unsafe version of: {@link #SetWindowPlacement} */
-    public static native int nSetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
+    public static native int nSetWindowPlacement(long _GetLastError, long hWnd, long lpwndpl, long __functionAddress);
 
     /** Unsafe version of: {@link #SetWindowPlacement} */
-    public static int nSetWindowPlacement(long hWnd, long lpwndpl) {
+    public static int nSetWindowPlacement(long _GetLastError, long hWnd, long lpwndpl) {
         long __functionAddress = Functions.SetWindowPlacement;
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowPlacement(hWnd, lpwndpl, __functionAddress);
+        return nSetWindowPlacement(_GetLastError, hWnd, lpwndpl, __functionAddress);
     }
 
     /**
      * Sets the show state and the restored, minimized, and maximized positions of the specified window.
      *
-     * @param hWnd    a handle to the window
-     * @param lpwndpl a pointer to the {@link WINDOWPLACEMENT} structure that specifies the new show state and window positions.
-     *                
-     *                <p>Before calling {@code SetWindowPlacement}, set the {@code length} member of the {@code WINDOWPLACEMENT} structure to {@link WINDOWPLACEMENT#SIZEOF}.
-     *                {@code SetWindowPlacement} fails if the length member is not set correctly.</p>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window
+     * @param lpwndpl       a pointer to the {@link WINDOWPLACEMENT} structure that specifies the new show state and window positions.
+     *                      
+     *                      <p>Before calling {@code SetWindowPlacement}, set the {@code length} member of the {@code WINDOWPLACEMENT} structure to {@link WINDOWPLACEMENT#SIZEOF}.
+     *                      {@code SetWindowPlacement} fails if the length member is not set correctly.</p>
      */
     @NativeType("BOOL")
-    public static boolean SetWindowPlacement(@NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT const *") WINDOWPLACEMENT lpwndpl) {
-        return nSetWindowPlacement(hWnd, lpwndpl.address()) != 0;
+    public static boolean SetWindowPlacement(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT const *") WINDOWPLACEMENT lpwndpl) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nSetWindowPlacement(memAddressSafe(_GetLastError), hWnd, lpwndpl.address()) != 0;
     }
 
     // --- [ IsWindowVisible ] ---
@@ -1801,162 +1898,213 @@ public class User32 {
     // --- [ SetWindowLongPtr ] ---
 
     /** Unsafe version of: {@link #SetWindowLongPtr} */
-    public static native long nSetWindowLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
+    public static native long nSetWindowLongPtr(long _GetLastError, long hWnd, int nIndex, long dwNewLong, long __functionAddress);
 
-    /**
-     * Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
-     *
-     * @param hWnd      a handle to the window and, indirectly, the class to which the window belongs
-     * @param nIndex    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-     *                  of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
-     * @param dwNewLong the replacement value
-     *
-     * @return the previous value at the given {@code index}
-     */
-    @NativeType("LONG_PTR")
-    public static long SetWindowLongPtr(@NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
+    /** Unsafe version of: {@link #SetWindowLongPtr} */
+    public static long nSetWindowLongPtr(long _GetLastError, long hWnd, int nIndex, long dwNewLong) {
         long __functionAddress = Functions.SetWindowLongPtr;
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowLongPtr(hWnd, nIndex, dwNewLong, __functionAddress);
+        return nSetWindowLongPtr(_GetLastError, hWnd, nIndex, dwNewLong, __functionAddress);
+    }
+
+    /**
+     * Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window and, indirectly, the class to which the window belongs
+     * @param nIndex        the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
+     *                      of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
+     * @param dwNewLong     the replacement value
+     *
+     * @return the previous value at the given {@code index}
+     */
+    @NativeType("LONG_PTR")
+    public static long SetWindowLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nSetWindowLongPtr(memAddressSafe(_GetLastError), hWnd, nIndex, dwNewLong);
     }
 
     // --- [ GetWindowLongPtr ] ---
 
     /** Unsafe version of: {@link #GetWindowLongPtr} */
-    public static native long nGetWindowLongPtr(long hWnd, int nIndex, long __functionAddress);
+    public static native long nGetWindowLongPtr(long _GetLastError, long hWnd, int nIndex, long __functionAddress);
 
-    /**
-     * Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
-     *
-     * @param hWnd   a handle to the window and, indirectly, the class to which the window belongs
-     * @param nIndex the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-     *               of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
-     */
-    @NativeType("LONG_PTR")
-    public static long GetWindowLongPtr(@NativeType("HWND") long hWnd, int nIndex) {
+    /** Unsafe version of: {@link #GetWindowLongPtr} */
+    public static long nGetWindowLongPtr(long _GetLastError, long hWnd, int nIndex) {
         long __functionAddress = Functions.GetWindowLongPtr;
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowLongPtr(hWnd, nIndex, __functionAddress);
+        return nGetWindowLongPtr(_GetLastError, hWnd, nIndex, __functionAddress);
+    }
+
+    /**
+     * Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window and, indirectly, the class to which the window belongs
+     * @param nIndex        the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
+     *                      of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
+     */
+    @NativeType("LONG_PTR")
+    public static long GetWindowLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetWindowLongPtr(memAddressSafe(_GetLastError), hWnd, nIndex);
     }
 
     // --- [ SetClassLongPtr ] ---
 
     /** Unsafe version of: {@link #SetClassLongPtr} */
-    public static native long nSetClassLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
+    public static native long nSetClassLongPtr(long _GetLastError, long hWnd, int nIndex, long dwNewLong, long __functionAddress);
+
+    /** Unsafe version of: {@link #SetClassLongPtr} */
+    public static long nSetClassLongPtr(long _GetLastError, long hWnd, int nIndex, long dwNewLong) {
+        long __functionAddress = Functions.SetClassLongPtr;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return nSetClassLongPtr(_GetLastError, hWnd, nIndex, dwNewLong, __functionAddress);
+    }
 
     /**
      * Replaces the specified value at the specified offset in the extra class memory or the {@link WNDCLASSEX} structure for the class to which the specified
      * window belongs.
      *
-     * @param hWnd      a handle to the window and, indirectly, the class to which the window belongs
-     * @param nIndex    the value to be replaced. To set a value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid
-     *                  values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of
-     *                  extra class memory, a value of 16 would be an index to the third integer. To set a value other than the {@link WNDCLASSEX} structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
-     * @param dwNewLong the replacement value
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window and, indirectly, the class to which the window belongs
+     * @param nIndex        the value to be replaced. To set a value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid
+     *                      values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of
+     *                      extra class memory, a value of 16 would be an index to the third integer. To set a value other than the {@link WNDCLASSEX} structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
+     * @param dwNewLong     the replacement value
      *
      * @return if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
      *         
-     *         <p>If the function fails, the return value is zero. To get extended error information, call {@link WinBase#getLastError}.</p>
+     *         <p>If the function fails, the return value is zero. To get extended error information, call {@link WinBase#GetLastError}.</p>
      */
     @NativeType("LONG_PTR")
-    public static long SetClassLongPtr(@NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
-        long __functionAddress = Functions.SetClassLongPtr;
+    public static long SetClassLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
         if (CHECKS) {
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nSetClassLongPtr(hWnd, nIndex, dwNewLong, __functionAddress);
+        return nSetClassLongPtr(memAddressSafe(_GetLastError), hWnd, nIndex, dwNewLong);
     }
 
     // --- [ GetClassLongPtr ] ---
 
     /** Unsafe version of: {@link #GetClassLongPtr} */
-    public static native long nGetClassLongPtr(long hWnd, int nIndex, long __functionAddress);
+    public static native long nGetClassLongPtr(long _GetLastError, long hWnd, int nIndex, long __functionAddress);
 
-    /**
-     * Retrieves the specified value from the {@link WNDCLASSEX} structure associated with the specified window.
-     *
-     * @param hWnd   a handle to the window and, indirectly, the class to which the window belongs
-     * @param nIndex the value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be
-     *               retrieved. Valid values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or
-     *               more bytes of extra class memory, a value of 16 would be an index to the third integer. To retrieve any other value from the {@link WNDCLASSEX}
-     *               structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
-     */
-    @NativeType("LONG_PTR")
-    public static long GetClassLongPtr(@NativeType("HWND") long hWnd, int nIndex) {
+    /** Unsafe version of: {@link #GetClassLongPtr} */
+    public static long nGetClassLongPtr(long _GetLastError, long hWnd, int nIndex) {
         long __functionAddress = Functions.GetClassLongPtr;
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetClassLongPtr(hWnd, nIndex, __functionAddress);
+        return nGetClassLongPtr(_GetLastError, hWnd, nIndex, __functionAddress);
+    }
+
+    /**
+     * Retrieves the specified value from the {@link WNDCLASSEX} structure associated with the specified window.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          a handle to the window and, indirectly, the class to which the window belongs
+     * @param nIndex        the value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be
+     *                      retrieved. Valid values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or
+     *                      more bytes of extra class memory, a value of 16 would be an index to the third integer. To retrieve any other value from the {@link WNDCLASSEX}
+     *                      structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
+     */
+    @NativeType("LONG_PTR")
+    public static long GetClassLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetClassLongPtr(memAddressSafe(_GetLastError), hWnd, nIndex);
     }
 
     // --- [ SetLayeredWindowAttributes ] ---
 
     /** Unsafe version of: {@link #SetLayeredWindowAttributes} */
-    public static native int nSetLayeredWindowAttributes(long hwnd, int crKey, byte bAlpha, int dwFlags, long __functionAddress);
+    public static native int nSetLayeredWindowAttributes(long _GetLastError, long hwnd, int crKey, byte bAlpha, int dwFlags, long __functionAddress);
 
-    /**
-     * @param hwnd    a handle to the layered window. A layered window is created by specifying {@link #WS_EX_LAYERED} when creating the window with the {@link #CreateWindowEx}
-     *                function or by setting {@link #WS_EX_LAYERED} via {@link #SetWindowLongPtr} after the window has been created.
-     * @param crKey   the transparency color key (0x00bbggrr) to be used when composing the layered window. All pixels painted by the window in this color will be
-     *                transparent.
-     * @param bAlpha  the alpha value used to describe the opacity of the layered window. When {@code bAlpha} is 0, the window is completely transparent. When
-     *                {@code bAlpha} is 255, the window is opaque.
-     * @param dwFlags an action to be taken. One or more of:<br><table><tr><td>{@link #LWA_COLORKEY}</td><td>{@link #LWA_ALPHA}</td></tr></table>
-     */
-    @NativeType("BOOL")
-    public static boolean SetLayeredWindowAttributes(@NativeType("HWND") long hwnd, @NativeType("COLORREF") int crKey, @NativeType("BYTE") byte bAlpha, @NativeType("DWORD") int dwFlags) {
+    /** Unsafe version of: {@link #SetLayeredWindowAttributes} */
+    public static int nSetLayeredWindowAttributes(long _GetLastError, long hwnd, int crKey, byte bAlpha, int dwFlags) {
         long __functionAddress = Functions.SetLayeredWindowAttributes;
         if (CHECKS) {
             check(hwnd);
         }
-        return nSetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags, __functionAddress) != 0;
+        return nSetLayeredWindowAttributes(_GetLastError, hwnd, crKey, bAlpha, dwFlags, __functionAddress);
+    }
+
+    /**
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hwnd          a handle to the layered window. A layered window is created by specifying {@link #WS_EX_LAYERED} when creating the window with the {@link #CreateWindowEx}
+     *                      function or by setting {@link #WS_EX_LAYERED} via {@link #SetWindowLongPtr} after the window has been created.
+     * @param crKey         the transparency color key (0x00bbggrr) to be used when composing the layered window. All pixels painted by the window in this color will be
+     *                      transparent.
+     * @param bAlpha        the alpha value used to describe the opacity of the layered window. When {@code bAlpha} is 0, the window is completely transparent. When
+     *                      {@code bAlpha} is 255, the window is opaque.
+     * @param dwFlags       an action to be taken. One or more of:<br><table><tr><td>{@link #LWA_COLORKEY}</td><td>{@link #LWA_ALPHA}</td></tr></table>
+     */
+    @NativeType("BOOL")
+    public static boolean SetLayeredWindowAttributes(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hwnd, @NativeType("COLORREF") int crKey, @NativeType("BYTE") byte bAlpha, @NativeType("DWORD") int dwFlags) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nSetLayeredWindowAttributes(memAddressSafe(_GetLastError), hwnd, crKey, bAlpha, dwFlags) != 0;
     }
 
     // --- [ LoadIcon ] ---
 
     /** Unsafe version of: {@link #LoadIcon} */
-    public static native long nLoadIcon(long instance, long iconName, long __functionAddress);
+    public static native long nLoadIcon(long _GetLastError, long instance, long iconName, long __functionAddress);
 
     /** Unsafe version of: {@link #LoadIcon} */
-    public static long nLoadIcon(long instance, long iconName) {
+    public static long nLoadIcon(long _GetLastError, long instance, long iconName) {
         long __functionAddress = Functions.LoadIcon;
-        return nLoadIcon(instance, iconName, __functionAddress);
+        return nLoadIcon(_GetLastError, instance, iconName, __functionAddress);
     }
 
     /**
      * Loads the specified icon resource from the executable (.exe) file associated with an application instance.
      *
-     * @param instance a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be {@code NULL} when a standard icon is
-     *                 being loaded.
-     * @param iconName the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param instance      a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be {@code NULL} when a standard icon is
+     *                      being loaded.
+     * @param iconName      the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
      */
     @NativeType("HICON")
-    public static long LoadIcon(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer iconName) {
+    public static long LoadIcon(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer iconName) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2(iconName);
         }
-        return nLoadIcon(instance, memAddress(iconName));
+        return nLoadIcon(memAddressSafe(_GetLastError), instance, memAddress(iconName));
     }
 
     /**
      * Loads the specified icon resource from the executable (.exe) file associated with an application instance.
      *
-     * @param instance a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be {@code NULL} when a standard icon is
-     *                 being loaded.
-     * @param iconName the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param instance      a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be {@code NULL} when a standard icon is
+     *                      being loaded.
+     * @param iconName      the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
      */
     @NativeType("HICON")
-    public static long LoadIcon(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence iconName) {
+    public static long LoadIcon(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence iconName) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16(iconName, true);
             long iconNameEncoded = stack.getPointerAddress();
-            return nLoadIcon(instance, iconNameEncoded);
+            return nLoadIcon(memAddressSafe(_GetLastError), instance, iconNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1965,41 +2113,47 @@ public class User32 {
     // --- [ LoadCursor ] ---
 
     /** Unsafe version of: {@link #LoadCursor} */
-    public static native long nLoadCursor(long instance, long cursorName, long __functionAddress);
+    public static native long nLoadCursor(long _GetLastError, long instance, long cursorName, long __functionAddress);
 
     /** Unsafe version of: {@link #LoadCursor} */
-    public static long nLoadCursor(long instance, long cursorName) {
+    public static long nLoadCursor(long _GetLastError, long instance, long cursorName) {
         long __functionAddress = Functions.LoadCursor;
-        return nLoadCursor(instance, cursorName, __functionAddress);
+        return nLoadCursor(_GetLastError, instance, cursorName, __functionAddress);
     }
 
     /**
      * Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.
      *
-     * @param instance   a handle to an instance of the module whose executable file contains the cursor to be loaded.
-     * @param cursorName the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param instance      a handle to an instance of the module whose executable file contains the cursor to be loaded.
+     * @param cursorName    the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
      */
     @NativeType("HCURSOR")
-    public static long LoadCursor(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer cursorName) {
+    public static long LoadCursor(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer cursorName) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2(cursorName);
         }
-        return nLoadCursor(instance, memAddress(cursorName));
+        return nLoadCursor(memAddressSafe(_GetLastError), instance, memAddress(cursorName));
     }
 
     /**
      * Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.
      *
-     * @param instance   a handle to an instance of the module whose executable file contains the cursor to be loaded.
-     * @param cursorName the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param instance      a handle to an instance of the module whose executable file contains the cursor to be loaded.
+     * @param cursorName    the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
      */
     @NativeType("HCURSOR")
-    public static long LoadCursor(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence cursorName) {
+    public static long LoadCursor(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence cursorName) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16(cursorName, true);
             long cursorNameEncoded = stack.getPointerAddress();
-            return nLoadCursor(instance, cursorNameEncoded);
+            return nLoadCursor(memAddressSafe(_GetLastError), instance, cursorNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2053,7 +2207,17 @@ public class User32 {
     // --- [ RegisterTouchWindow ] ---
 
     /** Unsafe version of: {@link #RegisterTouchWindow} */
-    public static native int nRegisterTouchWindow(long hWnd, int ulFlags, long __functionAddress);
+    public static native int nRegisterTouchWindow(long _GetLastError, long hWnd, int ulFlags, long __functionAddress);
+
+    /** Unsafe version of: {@link #RegisterTouchWindow} */
+    public static int nRegisterTouchWindow(long _GetLastError, long hWnd, int ulFlags) {
+        long __functionAddress = Functions.RegisterTouchWindow;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(hWnd);
+        }
+        return nRegisterTouchWindow(_GetLastError, hWnd, ulFlags, __functionAddress);
+    }
 
     /**
      * Registers a window as being touch-capable.
@@ -2063,42 +2227,50 @@ public class User32 {
      * application can call {@code RegisterTouchWindow} any number of times for the same window if it desires to change the modifier flags. A window can be
      * marked as no longer requiring touch input using the {@link #UnregisterTouchWindow} function.</p>
      *
-     * @param hWnd    the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
-     *                window.
-     * @param ulFlags a set of bit flags that specify optional modifications. This field may contain 0 or one or more of:<br><table><tr><td>{@link #TWF_FINETOUCH}</td><td>{@link #TWF_WANTPALM}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
+     *                      window.
+     * @param ulFlags       a set of bit flags that specify optional modifications. This field may contain 0 or one or more of:<br><table><tr><td>{@link #TWF_FINETOUCH}</td><td>{@link #TWF_WANTPALM}</td></tr></table>
      *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean RegisterTouchWindow(@NativeType("HWND") long hWnd, @NativeType("ULONG") int ulFlags) {
-        long __functionAddress = Functions.RegisterTouchWindow;
+    public static boolean RegisterTouchWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("ULONG") int ulFlags) {
         if (CHECKS) {
-            check(__functionAddress);
-            check(hWnd);
+            checkSafe(_GetLastError, 1);
         }
-        return nRegisterTouchWindow(hWnd, ulFlags, __functionAddress) != 0;
+        return nRegisterTouchWindow(memAddressSafe(_GetLastError), hWnd, ulFlags) != 0;
     }
 
     // --- [ UnregisterTouchWindow ] ---
 
     /** Unsafe version of: {@link #UnregisterTouchWindow} */
-    public static native int nUnregisterTouchWindow(long hWnd, long __functionAddress);
+    public static native int nUnregisterTouchWindow(long _GetLastError, long hWnd, long __functionAddress);
 
-    /**
-     * Registers a window as no longer being touch-capable.
-     *
-     * @param hWnd the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window.
-     *
-     * @since Windows 7 (desktop apps only)
-     */
-    @NativeType("BOOL")
-    public static boolean UnregisterTouchWindow(@NativeType("HWND") long hWnd) {
+    /** Unsafe version of: {@link #UnregisterTouchWindow} */
+    public static int nUnregisterTouchWindow(long _GetLastError, long hWnd) {
         long __functionAddress = Functions.UnregisterTouchWindow;
         if (CHECKS) {
             check(__functionAddress);
             check(hWnd);
         }
-        return nUnregisterTouchWindow(hWnd, __functionAddress) != 0;
+        return nUnregisterTouchWindow(_GetLastError, hWnd, __functionAddress);
+    }
+
+    /**
+     * Registers a window as no longer being touch-capable.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hWnd          the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window.
+     *
+     * @since Windows 7 (desktop apps only)
+     */
+    @NativeType("BOOL")
+    public static boolean UnregisterTouchWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nUnregisterTouchWindow(memAddressSafe(_GetLastError), hWnd) != 0;
     }
 
     // --- [ IsTouchWindow ] ---
@@ -2139,7 +2311,7 @@ public class User32 {
      *                message as indicated in the message {@code WPARAM}. If {@code cInputs} is less than the number of touch points, the function will still succeed and
      *                populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
      */
-    public static native int nGetTouchInputInfo(long hTouchInput, int cInputs, long pInputs, int cbSize, long __functionAddress);
+    public static native int nGetTouchInputInfo(long _GetLastError, long hTouchInput, int cInputs, long pInputs, int cbSize, long __functionAddress);
 
     /**
      * Unsafe version of: {@link #GetTouchInputInfo}
@@ -2148,54 +2320,67 @@ public class User32 {
      *                message as indicated in the message {@code WPARAM}. If {@code cInputs} is less than the number of touch points, the function will still succeed and
      *                populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
      */
-    public static int nGetTouchInputInfo(long hTouchInput, int cInputs, long pInputs, int cbSize) {
+    public static int nGetTouchInputInfo(long _GetLastError, long hTouchInput, int cInputs, long pInputs, int cbSize) {
         long __functionAddress = Functions.GetTouchInputInfo;
         if (CHECKS) {
             check(__functionAddress);
             check(hTouchInput);
         }
-        return nGetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize, __functionAddress);
+        return nGetTouchInputInfo(_GetLastError, hTouchInput, cInputs, pInputs, cbSize, __functionAddress);
     }
 
     /**
      * Retrieves detailed information about touch inputs associated with a particular touch input handle.
      *
-     * @param hTouchInput the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
-     *                    not valid. Note that the handle is not valid after it has been used in a successful call to {@link #CloseTouchInputHandle} or after it has been passed to
-     *                    {@link #DefWindowProc}, {@link #PostMessage}, {@link #SendMessage} or one of their variants.
-     * @param pInputs     a pointer to an array of {@link TOUCHINPUT} structures to receive information about the touch points associated with the specified touch input handle
-     * @param cbSize      the size, in bytes, of a single {@link TOUCHINPUT} structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
-     *                    fails with {@code ERROR_INVALID_PARAMETER}.
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hTouchInput   the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
+     *                      not valid. Note that the handle is not valid after it has been used in a successful call to {@link #CloseTouchInputHandle} or after it has been passed to
+     *                      {@link #DefWindowProc}, {@link #PostMessage}, {@link #SendMessage} or one of their variants.
+     * @param pInputs       a pointer to an array of {@link TOUCHINPUT} structures to receive information about the touch points associated with the specified touch input handle
+     * @param cbSize        the size, in bytes, of a single {@link TOUCHINPUT} structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
+     *                      fails with {@code ERROR_INVALID_PARAMETER}.
      *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean GetTouchInputInfo(@NativeType("HTOUCHINPUT") long hTouchInput, @NativeType("PTOUCHINPUT") TOUCHINPUT.Buffer pInputs, int cbSize) {
-        return nGetTouchInputInfo(hTouchInput, pInputs.remaining(), pInputs.address(), cbSize) != 0;
+    public static boolean GetTouchInputInfo(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput, @NativeType("PTOUCHINPUT") TOUCHINPUT.Buffer pInputs, int cbSize) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetTouchInputInfo(memAddressSafe(_GetLastError), hTouchInput, pInputs.remaining(), pInputs.address(), cbSize) != 0;
     }
 
     // --- [ CloseTouchInputHandle ] ---
 
     /** Unsafe version of: {@link #CloseTouchInputHandle} */
-    public static native int nCloseTouchInputHandle(long hTouchInput, long __functionAddress);
+    public static native int nCloseTouchInputHandle(long _GetLastError, long hTouchInput, long __functionAddress);
 
-    /**
-     * Closes a touch input handle, frees process memory associated with it, and invalidates the handle.
-     *
-     * @param hTouchInput the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
-     *                    not valid. Note that the handle is not valid after it has been used in a successful call to {@link #CloseTouchInputHandle} or after it has been passed to
-     *                    {@link #DefWindowProc}, {@link #PostMessage}, {@link #SendMessage} or one of their variants.
-     *
-     * @since Windows 7 (desktop apps only)
-     */
-    @NativeType("BOOL")
-    public static boolean CloseTouchInputHandle(@NativeType("HTOUCHINPUT") long hTouchInput) {
+    /** Unsafe version of: {@link #CloseTouchInputHandle} */
+    public static int nCloseTouchInputHandle(long _GetLastError, long hTouchInput) {
         long __functionAddress = Functions.CloseTouchInputHandle;
         if (CHECKS) {
             check(__functionAddress);
             check(hTouchInput);
         }
-        return nCloseTouchInputHandle(hTouchInput, __functionAddress) != 0;
+        return nCloseTouchInputHandle(_GetLastError, hTouchInput, __functionAddress);
+    }
+
+    /**
+     * Closes a touch input handle, frees process memory associated with it, and invalidates the handle.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hTouchInput   the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
+     *                      not valid. Note that the handle is not valid after it has been used in a successful call to {@link #CloseTouchInputHandle} or after it has been passed to
+     *                      {@link #DefWindowProc}, {@link #PostMessage}, {@link #SendMessage} or one of their variants.
+     *
+     * @since Windows 7 (desktop apps only)
+     */
+    @NativeType("BOOL")
+    public static boolean CloseTouchInputHandle(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nCloseTouchInputHandle(memAddressSafe(_GetLastError), hTouchInput) != 0;
     }
 
     // --- [ MonitorFromWindow ] ---

@@ -83,8 +83,6 @@ public final class ThreadLocalUtil {
     - (minor) JVMTI has the ability to intercept JNI functions with SetJNIFunctionTable. This interacts badly with the jniNativeInterface copies, but it should
     be easy to workaround (attaching the agent at startup, making sure no contexts are current when the agent is attached, clearing and setting again the
     capabilities instance).
-
-    Since 3.3.1: the JNIEnv copies are now also used for storing/retrieving the thread-local errno/LastError values.
     */
 
     /** The global JNIEnv. */
@@ -168,10 +166,7 @@ public final class ThreadLocalUtil {
 
     private static native long getFunctionMissingAbort();
 
-    private static native long nsetupEnvData(int functionCount);
-    public static long setupEnvData() {
-        return nsetupEnvData(JNI_NATIVE_INTERFACE_FUNCTION_COUNT);
-    }
+    private static native long setupEnvData(int functionCount);
 
     public static void setCapabilities(long capabilities) {
         // Get thread's JNIEnv
@@ -184,7 +179,7 @@ public final class ThreadLocalUtil {
             }
         } else {
             if (env_p == JNI_NATIVE_INTERFACE) {
-                setupEnvData();
+                setupEnvData(JNI_NATIVE_INTERFACE_FUNCTION_COUNT);
                 env_p = memGetAddress(env_pp);
             }
             memPutAddress(env_p + CAPABILITIES_OFFSET, capabilities);
@@ -207,10 +202,12 @@ public final class ThreadLocalUtil {
                 throw new IllegalStateException("setFunctionMissingAddresses has been called already");
             }
             if (currentTable != NULL) {
-                // check reserved0 to see if this Native Image or EspressoVM. EspressoVM will not have the reserved NULL here.
-                if (memGetAddress(JNI_NATIVE_INTERFACE) == RESERVED_NULL) {
+                // check reserved0 to see if this Native Image or EspressoVM.
+                if (memGetAddress(JNI_NATIVE_INTERFACE) == RESERVED_NULL) { // NativeImage
                     // silently abort on Native Image, the global JNIEnv object lives in read-only memory by default. (see #875)
                     return;
+                } else { // EspressoVM
+                    System.err.println("[LWJGL] [ThreadLocalUtil] Unsupported JVM detected, this may result in a crash. Please inform LWJGL developers.");
                 }
             }
 

@@ -41,7 +41,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         "CRYPTPROTECTMEMORY_BLOCK_SIZE".."16"
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "CryptProtectData",
         """
         The {@code CryptProtectData} function performs encryption on the data in a ##DATA_BLOB structure.
@@ -50,6 +50,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         decryption usually must be done on the same computer.
         """,
 
+        CaptureCallState.GetLastError.param,
         DATA_BLOB.p("pDataIn", "a pointer to a ##DATA_BLOB structure that contains the plaintext to be encrypted"),
         nullable..LPCWSTR(
             "szDataDescr",
@@ -89,7 +90,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         )
     )
 
-    SaveLastError..IgnoreMissing..BOOL(
+    IgnoreMissing..BOOL(
         "CryptProtectMemory",
         """
         Encrypts memory to prevent others from viewing sensitive information in your process.
@@ -98,6 +99,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         viewing it when the process is paged out to the swap file. Otherwise, the password is in plaintext and viewable by others.
         """,
 
+        CaptureCallState.GetLastError.param,
         typedef(void.p, "LPVOID")("pDataIn", "a pointer to the block of memory to encrypt"),
         AutoSize("pDataIn")..DWORD(
             "cbDataIn",
@@ -114,7 +116,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "CryptUnprotectData",
         """
         The {@code CryptUnprotectData} function decrypts and does an integrity check of the data in a ##DATA_BLOB structure.
@@ -123,6 +125,7 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         encryption and decryption must be done on the same computer.
         """,
 
+        CaptureCallState.GetLastError.param,
         DATA_BLOB.p("pDataIn", "a pointer to a ##DATA_BLOB structure that holds the encrypted data"),
         Check(1)..nullable..LPWSTR.p(
             "ppszDataDescr",
@@ -162,10 +165,11 @@ val Crypt32 = "Crypt32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         )
     )
 
-    SaveLastError..IgnoreMissing..BOOL(
+    IgnoreMissing..BOOL(
         "CryptUnprotectMemory",
         "The {@code CryptUnprotectMemory} function decrypts memory that was encrypted using the #CryptProtectMemory() function.",
 
+        CaptureCallState.GetLastError.param,
         typedef(void.p, "LPVOID")("pDataIn", "a pointer to the block of memory to decrypt"),
         AutoSize("pDataIn")..DWORD(
             "cbDataIn",

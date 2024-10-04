@@ -31,28 +31,27 @@ val unistd = "UNISTD".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "_SC_IOV_MAX".enum("", "60")
     )
 
-    SaveErrno..int(
+    int(
         "close",
-        """
+        "",
 
-        """,
-
+        CaptureCallState.errno.param,
         int("fd", "")
     )
 
-    SaveErrno..long(
+    long(
         "sysconf",
-        """
+        "",
 
-        """,
-
+        CaptureCallState.errno.param,
         int("name", "")
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "read",
         "",
 
+        CaptureCallState.errno.param,
         int("fd", ""),
         void.p("buf", ""),
         AutoSize("buf")..size_t("count", "")

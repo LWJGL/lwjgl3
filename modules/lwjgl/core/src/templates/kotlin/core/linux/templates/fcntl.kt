@@ -672,7 +672,7 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         )
     )
 
-    SaveErrno..int(
+    int(
         "open",
         """
         Given a {@code pathname} for a file, {@code open()} returns a file descriptor, a small, nonnegative integer for use in subsequent system calls
@@ -681,6 +681,7 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         The file descriptor returned by a successful call will be the lowest-numbered file descriptor not currently open for the process.
         """,
 
+        CaptureCallState.errno.param,
         charUTF8.const.p("pathname", ""),
         int("flags", ""),
         mode_t("mode", "", ModeBits, LinkMode.BITFIELD),
@@ -688,7 +689,7 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         returnDoc = "the new file descriptor, or -1 if an error occurred (in which case, {@code errno} is set appropriately)."
     )
 
-    SaveErrno..int(
+    int(
         "openat",
         """
         The {@code openat()} system call operates in exactly the same way as {@code open(2)}, except for the differences described in this manual page.
@@ -702,6 +703,7 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         If {@code pathname} is absolute, then {@code dirfd} is ignored.
         """,
 
+        CaptureCallState.errno.param,
         int("dirfd", ""),
         charUTF8.const.p("pathname", ""),
         int("flags", ""),
@@ -710,17 +712,18 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         returnDoc = "a new file descriptor on success. On error, -1 is returned and {@code errno} is set to indicate the error."
     )
 
-    SaveErrno..int(
+    int(
         "creat",
         """
         Equivalent to {@code open()} with {@code flags} equal to {@code O_CREAT|O_WRONLY|O_TRUNC}.
         """,
 
+        CaptureCallState.errno.param,
         charUTF8.const.p("pathname", ""),
         mode_t("mode", "", ModeBits, LinkMode.BITFIELD)
     )
 
-    SaveErrno..int(
+    int(
         "fcntl",
         """
         Performs one of the operations determined by {@code cmd} on the open file descriptor {@code fd}.
@@ -736,23 +739,26 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         {@code EINVAL}, indicating that the kernel does not recognize this value.
         """,
 
+        CaptureCallState.errno.param,
         int("fd", ""),
         int("cmd", "", commands)
     )
 
-    SaveErrno..NativeName("fcntl")..int(
+    NativeName("fcntl")..int(
         "fcntli",
         "#fcntl() overload that takes a third argument of type {@code int}.",
 
+        CaptureCallState.errno.param,
         int("fd", ""),
         int("cmd", "", commands),
         int("arg", "")
     )
 
-    SaveErrno..NativeName("fcntl")..int(
+    NativeName("fcntl")..int(
         "fcntlp",
         "#fcntl() overload that takes a third argument of type {@code void *}.",
 
+        CaptureCallState.errno.param,
         int("fd", ""),
         int("cmd", "", commands),
         opaque_p("arg", "")

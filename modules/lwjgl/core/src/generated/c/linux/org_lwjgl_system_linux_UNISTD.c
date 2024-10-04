@@ -17,28 +17,31 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_close(JNIEnv *__env, jclass clazz, jint fd) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_nclose(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint fd) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)close(fd);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_sysconf(JNIEnv *__env, jclass clazz, jint name) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_nsysconf(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint name) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jlong)sysconf(name);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_nread(JNIEnv *__env, jclass clazz, jint fd, jlong bufAddress, jlong count) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_nread(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint fd, jlong bufAddress, jlong count) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     void *buf = (void *)(uintptr_t)bufAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jlong)read(fd, buf, (size_t)count);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 

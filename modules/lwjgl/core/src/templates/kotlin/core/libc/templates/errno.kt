@@ -64,26 +64,9 @@ val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
         wrong. Its value is significant only when the return value of the call indicated an error (i.e., -1 from most system calls; -1 or #NULL from most
         library functions); a function that succeeds is allowed to change errno.
 
-        <b>LWJGL note</b>: This function cannot be used after another JNI call to a function, because the last error resets before that call returns. For this
-        reason, LWJGL stores the last error in thread-local storage, you can use #getErrno() to access it.
+        <b>LWJGL note</b>: This function cannot be used after another JNI call to a function, because {@code errno} resets before that call returns. LWJGL adds
+        a virtual output parameter to functions that may set {@code errno}, which may be used to capture its value.
         """,
         void()
     )
-
-    Code(
-        nativeCall = """${t}EnvData *envData = (EnvData *)(*__env)->reserved2;
-${t}return envData == RESERVED_NULL ? 0 : envData->errnum;"""
-    )..int(
-        "getErrno",
-        """
-        Returns the integer variable {@code errno}, which is set by system calls and some library functions in the event of an error to indicate what went
-        wrong. Its value is significant only when the return value of the call indicated an error (i.e., -1 from most system calls; -1 or #NULL from most
-        library functions); a function that succeeds is allowed to change errno.
-
-        <b>LWJGL note</b>: This method has a meaningful value only after another LWJGL JNI call. It does not return {@code errno} from errno.h, but the
-        thread-local error code stored by a previous JNI call.
-        """,
-        void()
-    )
-
 }

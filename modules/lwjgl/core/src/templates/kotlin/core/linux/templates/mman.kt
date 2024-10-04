@@ -223,7 +223,7 @@ val mman = "MMAN".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         )
     )
 
-    SaveErrno..opaque_p(
+    opaque_p(
         "mmap",
         """
         Creates a new mapping in the virtual address space of the calling process.
@@ -244,6 +244,7 @@ val mman = "MMAN".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         After the {@code mmap()} call has returned, the file descriptor, {@code fd}, can be closed immediately without invalidating the mapping.
         """,
 
+        CaptureCallState.errno.param,
         nullable..opaque_p("addr", ""),
         size_t("length", ""),
         int(
@@ -259,7 +260,7 @@ val mman = "MMAN".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "on success, returns a pointer to the mapped area. On error, the value #MAP_FAILED is returned, and {@code errno} is set to indicate the error."
     )
 
-    SaveErrno..int(
+    int(
         "munmap",
         """
         Deletes the mappings for the specified address range, and causes further references to addresses within the range to generate invalid memory
@@ -272,6 +273,7 @@ val mman = "MMAN".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         pages.
         """,
 
+        CaptureCallState.errno.param,
         void.p("addr", ""),
         AutoSize("addr")..size_t("length", ""),
 

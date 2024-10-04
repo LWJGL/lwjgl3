@@ -16,7 +16,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.demo.system.linux.liburing.BenchBase.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.LibCErrno.*;
 import static org.lwjgl.system.libc.LibCString.*;
 import static org.lwjgl.system.linux.FCNTL.*;
 import static org.lwjgl.system.linux.UNISTD.*;
@@ -58,18 +57,18 @@ public class HelloLibURing {
 
         int registeredFiles;
 
-        LibURingContainer() {
+        LibURingContainer(MemoryStack stack) {
             uring = IOURing.malloc();
 
-            try (MemoryStack stack = stackPush()) {
-                IOURingParams params = IOURingParams.calloc(stack);
+            try (MemoryStack frame = stack.push()) {
+                IOURingParams params = IOURingParams.calloc(frame);
                 params.flags(IORING_SETUP_CQSIZE | IORING_SETUP_SQPOLL);
                 params.sq_thread_idle(1000);
                 params.cq_entries(QUEUE_DEPTH);
 
-                int errno = io_uring_queue_init_params(QUEUE_DEPTH, uring, params);
-                if (errno != 0) {
-                    throw new IllegalStateException("Failed io_uring_queue_init_params: " + strerror(errno));
+                int init = io_uring_queue_init_params(QUEUE_DEPTH, uring, params);
+                if (init != 0) {
+                    throw new IllegalStateException("Failed io_uring_queue_init_params: " + strerror(-init));
                 }
 
                 /*System.out.println("io_uring features: (supported by current kernel)");
@@ -118,48 +117,53 @@ public class HelloLibURing {
     private static void benchLibURing(String filePath, int fileLength) {
         ByteBuffer buffer = memAlignedAlloc(PAGE_SIZE, fileLength);
 
-        try (LibURingContainer container = new LibURingContainer()) {
-            try (MemoryStack stack = stackPush()) {
-                IOVec.Buffer IOVECS = IOVec.malloc(1, stack);
+        try (
+            MemoryStack stack = stackPush();
+            LibURingContainer container = new LibURingContainer(stack)
+        ) {
+            IntBuffer errno = stack.mallocInt(1);
+
+            try (MemoryStack frame = stack.push()) {
+                IOVec.Buffer IOVECS = IOVec.malloc(1, frame);
                 IOVECS.get(0)
                     .iov_base(buffer)
                     .iov_len(buffer.capacity());
 
-                int errno = io_uring_register_buffers(container.uring, IOVECS);
-                if (errno != 0) {
-                    throw new IllegalStateException("Failed to register buffers: " + strerror(-errno));
+                int register = io_uring_register_buffers(container.uring, IOVECS);
+                if (register != 0) {
+                    throw new IllegalStateException("Failed to register buffers: " + strerror(-register));
                 }
             }
 
-            benchLibURingInner(filePath, fileLength, container, buffer);
+            benchLibURingInner(filePath, fileLength, container, errno, buffer);
             if (benchHashCode(buffer) != REFERENCE_HASHCODE) {
                 throw new IllegalStateException();
             }
 
             for (int i = 0; i < WARMUP_ITERS; i++) {
-                benchLibURingInner(filePath, fileLength, container, buffer);
+                benchLibURingInner(filePath, fileLength, container, errno, buffer);
             }
 
             long t = System.nanoTime();
             for (int i = 0; i < BENCH_ITERS; i++) {
-                benchLibURingInner(filePath, fileLength, container, buffer);
+                benchLibURingInner(filePath, fileLength, container, errno, buffer);
             }
             t = System.nanoTime() - t;
             System.out.println("liburing:\n\t" + (t / BENCH_ITERS));
 
-            int errno = io_uring_unregister_buffers(container.uring);
-            if (errno != 0) {
-                System.err.println("Failed to unregister buffers: " + strerror(-errno));
+            int unregister = io_uring_unregister_buffers(container.uring);
+            if (unregister != 0) {
+                System.err.println("Failed to unregister buffers: " + strerror(-unregister));
             }
         } finally {
             memAlignedFree(buffer);
         }
     }
 
-    private static void benchLibURingInner(String filePath, int fileLength, LibURingContainer container, ByteBuffer buffer) {
-        int fileFD = open(filePath, O_RDONLY, 0);
+    private static void benchLibURingInner(String filePath, int fileLength, LibURingContainer container, IntBuffer errno, ByteBuffer buffer) {
+        int fileFD = open(errno, filePath, O_RDONLY, 0);
         if (fileFD < 0) {
-            throw new IllegalStateException("Failed to open file: " + getErrno());
+            throw new IllegalStateException("Failed to open file: " + errno.get(0));
         }
         container.registerFile(fileFD);
 
@@ -183,9 +187,10 @@ public class HelloLibURing {
                     io_uring_prep_read_fixed(sqe, 0, block, offset, 0);
                     io_uring_sqe_set_flags(sqe, IOSQE_FIXED_FILE | IOSQE_ASYNC);
                     io_uring_sqe_set_data(sqe, memAddress(block));
-                    int errno = io_uring_submit(container.uring);
-                    if (errno < 1) {
-                        throw new IllegalStateException("Failed io_uring_submit: " + strerror(-errno));
+
+                    int submit = io_uring_submit(container.uring);
+                    if (submit < 1) {
+                        throw new IllegalStateException("Failed io_uring_submit: " + strerror(-submit));
                     }
 
                     offset += block.limit();
@@ -203,9 +208,10 @@ public class HelloLibURing {
                     IOURingCQE cqe;
                     try (MemoryStack stack = stackPush()) {
                         PointerBuffer pp = stack.mallocPointer(1);
-                        int errno = io_uring_wait_cqe(container.uring, pp);
-                        if (errno != 0) {
-                            throw new IllegalStateException("Failed io_uring_wait_cqe: " + strerror(-errno));
+
+                        int wait = io_uring_wait_cqe(container.uring, pp);
+                        if (wait != 0) {
+                            throw new IllegalStateException("Failed io_uring_wait_cqe: " + strerror(-wait));
                         }
                         cqe = IOURingCQE.create(pp.get(0));
                     }
@@ -226,8 +232,8 @@ public class HelloLibURing {
         /*if (io_uring_unregister_files(container.uring) != 0) {
             throw new IllegalStateException("Failed to unregister file: " + strerror(getErrno()));
         }*/
-        if (close(fileFD) != 0) {
-            System.err.println("Failed to close file fd: " + strerror(getErrno()));
+        if (close(errno, fileFD) != 0) {
+            System.err.println("Failed to close file fd: " + strerror(errno.get(0)));
         }
     }
 }

@@ -9,11 +9,12 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_Socket_socket(JNIEnv *__env, jclass clazz, jint __domain, jint __type, jint __protocol) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_Socket_nsocket(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint __domain, jint __type, jint __protocol) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)socket(__domain, __type, __protocol);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 

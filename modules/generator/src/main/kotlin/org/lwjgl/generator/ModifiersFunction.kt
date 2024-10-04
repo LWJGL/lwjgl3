@@ -116,7 +116,37 @@ class Code(
     )
 }
 
-val SaveErrno = Code(nativeAfterCall = "${t}saveErrno();")
+enum class CaptureCallState(val param: Parameter, val code: Code) {
+    @Suppress("EnumEntryName")
+    errno(
+        Check(1)..nullable..Parameter(int.p, "_errno", "optionally returns the {@code errno} value after this function is called"),
+        Code(nativeAfterCall = "${t}if (_errno != NULL) *_errno = errno;")
+    ),
+    GetLastError(
+        Check(1)..nullable..Parameter(
+            IntegerType("DWORD", PrimitiveMapping.INT).p,
+            "_GetLastError",
+            "optionally returns the result of {@code GetLastError()} after this function is called"
+        ),
+        Code(nativeAfterCall = "${t}if (_GetLastError != NULL) *_GetLastError = GetLastError();")
+    );
+
+    companion object {
+        internal fun apply(func: Func): Func {
+            if (func.parameters.isNotEmpty()) {
+                when (func.parameters[0]) {
+                    errno.param        -> errno.code..func
+                    GetLastError.param -> GetLastError.code..func
+                }
+            }
+            return func
+        }
+
+        internal fun matches(param: Parameter) =
+            param === errno.param ||
+            param === GetLastError.param
+    }
+}
 
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 

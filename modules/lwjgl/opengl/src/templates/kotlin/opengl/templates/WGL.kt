@@ -55,20 +55,22 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         "SWAP_UNDERLAY15"..0x40000000
     )
 
-    SaveLastError..HGLRC(
+    HGLRC(
         "CreateContext",
         """
         Creates a new OpenGL rendering context, which is suitable for drawing on the device referenced by device. The rendering context has the same pixel
         format as the device context.
         """,
 
+        CaptureCallState.GetLastError.param,
         HDC("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
     )
 
-    SaveLastError..HGLRC(
+    HGLRC(
         "CreateLayerContext",
         "Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.",
 
+        CaptureCallState.GetLastError.param,
         HDC("hdc", "the device context for a new rendering context"),
         int(
             "layerPlane",
@@ -82,10 +84,11 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "CopyContext",
         "Copies selected groups of rendering states from one OpenGL rendering context to another.",
 
+        CaptureCallState.GetLastError.param,
         HGLRC("src", "the source OpenGL rendering context whose state information is to be copied"),
         HGLRC("dst", "the destination OpenGL rendering context to which state information is to be copied"),
         UINT(
@@ -97,29 +100,32 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "DeleteContext",
         "Deletes a specified OpenGL rendering context.",
 
+        CaptureCallState.GetLastError.param,
         HGLRC("context", "handle to an OpenGL rendering context that the function will delete")
     )
 
-    SaveLastError..HGLRC(
+    HGLRC(
         "GetCurrentContext",
         "Obtains a handle to the current OpenGL rendering context of the calling thread.",
-        void()
+
+        CaptureCallState.GetLastError.param
     )
 
-    SaveLastError..HDC(
+    HDC(
         "GetCurrentDC",
         "Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread.",
         void()
     )
 
-    SaveLastError..PROC(
+    PROC(
         "GetProcAddress",
         "Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.",
 
+        CaptureCallState.GetLastError.param,
         LPCSTR(
             "proc",
             """
@@ -129,13 +135,14 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "MakeCurrent",
         """
         Makes a specified OpenGL rendering context the calling thread's current rendering context. All subsequent OpenGL calls made by the thread are drawn on
         the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
         """,
 
+        CaptureCallState.GetLastError.param,
         nullable..HDC("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
         nullable..HGLRC(
             "hglrc",
@@ -147,10 +154,11 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "ShareLists",
         "Enables multiple OpenGL rendering contexts to share a single display-list space.",
 
+        CaptureCallState.GetLastError.param,
         HGLRC("hglrc1", "the OpenGL rendering context with which to share display lists."),
         HGLRC(
             "hglrc2",

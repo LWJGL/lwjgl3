@@ -832,7 +832,8 @@ class NativeClass internal constructor(
         require(_functions.put(name, func) == null) {
             "The $name function is already defined in ${this@NativeClass.className}."
         }
-        return func
+
+        return CaptureCallState.apply(func)
     }
 
     fun customMethod(method: String) {

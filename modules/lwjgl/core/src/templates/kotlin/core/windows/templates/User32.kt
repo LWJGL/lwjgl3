@@ -920,20 +920,22 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2".."-4L"
     )
 
-    NativeName("RegisterClassExW")..SaveLastError..ATOM(
+    NativeName("RegisterClassExW")..ATOM(
         "RegisterClassEx",
         "Registers a window class for subsequent use in calls to the #CreateWindowEx() function.",
 
+        CaptureCallState.GetLastError.param,
         WNDCLASSEX.const.p(
             "lpwcx",
             "a ##WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
         )
     )
 
-    NativeName("UnregisterClassW")..SaveLastError..BOOL(
+    NativeName("UnregisterClassW")..BOOL(
         "UnregisterClass",
         "Unregisters a window class, freeing the memory required for the class.",
 
+        CaptureCallState.GetLastError.param,
         LPCTSTR(
             "lpClassName",
             """
@@ -946,10 +948,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         nullable..HINSTANCE("hInstance", "a handle to the instance of the module that created the class")
     )
 
-    NativeName("CreateWindowExW")..SaveLastError..HWND(
+    NativeName("CreateWindowExW")..HWND(
         "CreateWindowEx",
         "Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
+        CaptureCallState.GetLastError.param,
         DWORD("dwExStyle", "the extended window style of the window being created"),
         nullable..LPCTSTR(
             "lpClassName",
@@ -979,7 +982,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "DestroyWindow",
         """
         Destroys the specified window. The function sends #WM_DESTROY and #WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus
@@ -990,6 +993,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         parent or owner window. The function first destroys child or owned windows, and then it destroys the parent or owner window.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window to be destroyed")
     )
 
@@ -1052,13 +1056,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         HWND("hWnd", "handle to the window to be updated")
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "SetWindowPos",
         """
         Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
         The topmost window receives the highest rank and is the first window in the Z order.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window"),
         nullable..HWND(
             "hWndInsertAfter",
@@ -1072,24 +1077,26 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         UINT("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
     )
 
-    NativeName("SetWindowTextW")..SaveLastError..BOOL(
+    NativeName("SetWindowTextW")..BOOL(
         "SetWindowText",
         """
         Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
         However, {@code SetWindowText} cannot change the text of a control in another application.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window or control whose text is to be changed"),
         LPCTSTR("lpString", "the new title or control text")
     )
 
-    val GetMessage = NativeName("GetMessageW")..SaveLastError..BOOL(
+    val GetMessage = NativeName("GetMessageW")..BOOL(
         "GetMessage",
         """
         Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
         retrieval. Unlike GetMessage, the #PeekMessage() function does not wait for a message to be posted before returning.
         """,
 
+        CaptureCallState.GetLastError.param,
         LPMSG("lpMsg", "a pointer to an ##MSG structure that receives message information from the thread's message queue"),
         nullable..HWND(
             "hWnd",
@@ -1135,13 +1142,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "WaitMessage",
         """
         Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
         return until a new message is placed in the thread's message queue.
         """,
-        void()
+
+        CaptureCallState.GetLastError.param
     )
 
     NativeName("DispatchMessageW")..LRESULT(
@@ -1151,13 +1159,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         MSG.const.p("lpmsg", "a pointer to a structure that contains the message.")
     )
 
-    NativeName("PostMessageW")..SaveLastError..BOOL(
+    NativeName("PostMessageW")..BOOL(
         "PostMessage",
         """
         Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
         to process the message.
         """,
 
+        CaptureCallState.GetLastError.param,
         nullable..HWND(
             "hWnd",
             """
@@ -1176,13 +1185,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         LPARAM("lParam", "additional message-specific information")
     )
 
-    NativeName("SendMessageW")..SaveLastError..BOOL(
+    NativeName("SendMessageW")..BOOL(
         "SendMessage",
         """
         Sends the specified message to a window or windows. The {@code SendMessage} function calls the window procedure for the specified window and does not
         return until the window procedure has processed the message.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND(
             "hWnd",
             """
@@ -1199,13 +1209,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         LPARAM("lParam", "additional message-specific information")
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "AdjustWindowRectEx",
         """
         Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
         #CreateWindowEx() function to create a window whose client area is the desired size.
         """,
 
+        CaptureCallState.GetLastError.param,
         LPRECT(
             "lpRect",
             """
@@ -1219,24 +1230,26 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         DWORD("dwExStyle", "the extended window style of the window whose required size is to be calculated")
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "GetWindowRect",
         """
         Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the
         upper-left corner of the screen.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window"),
         LPRECT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "MoveWindow",
         """
         Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner
         of the screen. For a child window, they are relative to the upper-left corner of the parent window's client area.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window"),
         int("X", "the new position of the left side of the window"),
         int("Y", "the new position of the top of the window"),
@@ -1260,10 +1273,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "WPF_ASYNCWINDOWPLACEMENT"..0x0004
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "GetWindowPlacement",
         "Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window"),
         Input..WINDOWPLACEMENT.p(
             "lpwndpl",
@@ -1276,10 +1290,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         )
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "SetWindowPlacement",
         "Sets the show state and the restored, minimized, and maximized positions of the specified window.",
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window"),
         WINDOWPLACEMENT.const.p(
             "lpwndpl",
@@ -1323,10 +1338,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         HWND("hWnd", "a handle to the window to bring to the top of the Z order")
     )
 
-    NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..SaveLastError..LONG_PTR(
+    NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..LONG_PTR(
         "SetWindowLongPtr",
         "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
         int(
             "nIndex",
@@ -1341,10 +1357,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         returnDoc = "the previous value at the given {@code index}"
     )
 
-    NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..SaveLastError..LONG_PTR(
+    NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..LONG_PTR(
         "GetWindowLongPtr",
         "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
         int(
             "nIndex",
@@ -1356,13 +1373,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         )
     )
 
-    NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..SaveLastError..LONG_PTR(
+    NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..LONG_PTR(
         "SetClassLongPtr",
         """
         Replaces the specified value at the specified offset in the extra class memory or the ##WNDCLASSEX structure for the class to which the specified
         window belongs.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
         int(
             "nIndex",
@@ -1379,14 +1397,15 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         """
         if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
 
-        If the function fails, the return value is zero. To get extended error information, call #getLastError().
+        If the function fails, the return value is zero. To get extended error information, call #GetLastError().
         """
     )
 
-    NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..SaveLastError..LONG_PTR(
+    NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..LONG_PTR(
         "GetClassLongPtr",
         "Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 
+        CaptureCallState.GetLastError.param,
         HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
         int(
             "nIndex",
@@ -1407,10 +1426,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "LWA_ALPHA"..0x00000002
     )
 
-    SaveLastError..BOOL(
+    BOOL(
         "SetLayeredWindowAttributes",
         "",
 
+        CaptureCallState.GetLastError.param,
         HWND(
             "hwnd",
             """
@@ -1435,10 +1455,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         DWORD("dwFlags", "an action to be taken", "#LWA_COLORKEY #LWA_ALPHA", LinkMode.BITFIELD)
     )
 
-    NativeName("LoadIconW")..SaveLastError..HICON(
+    NativeName("LoadIconW")..HICON(
         "LoadIcon",
         "Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
+        CaptureCallState.GetLastError.param,
         nullable..HINSTANCE(
             "instance",
             """
@@ -1449,10 +1470,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         LPCTSTR("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
     )
 
-    NativeName("LoadCursorW")..SaveLastError..HCURSOR(
+    NativeName("LoadCursorW")..HCURSOR(
         "LoadCursor",
         "Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
 
+        CaptureCallState.GetLastError.param,
         nullable..HINSTANCE("instance", "a handle to an instance of the module whose executable file contains the cursor to be loaded."),
         LPCTSTR("cursorName", "the name of the cursor resource to be loaded or", StandardCursors, LinkMode.SINGLE_CNT)
     )
@@ -1631,7 +1653,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "TOUCHINPUTMASKF_CONTACTAREA"..0x0004
     )
 
-    IgnoreMissing..SaveLastError..BOOL(
+    IgnoreMissing..BOOL(
         "RegisterTouchWindow",
         """
         Registers a window as being touch-capable.
@@ -1642,6 +1664,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         marked as no longer requiring touch input using the #UnregisterTouchWindow() function.
         """,
 
+        CaptureCallState.GetLastError.param,
         HWND(
             "hWnd",
             """
@@ -1658,10 +1681,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         since = "Windows 7 (desktop apps only)"
     )
 
-    IgnoreMissing..SaveLastError..BOOL(
+    IgnoreMissing..BOOL(
         "UnregisterTouchWindow",
         "Registers a window as no longer being touch-capable.",
 
+        CaptureCallState.GetLastError.param,
         HWND(
             "hWnd",
             "the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window."
@@ -1689,10 +1713,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         since = "Windows 7 (desktop apps only)"
     )
 
-    IgnoreMissing..SaveLastError..BOOL(
+    IgnoreMissing..BOOL(
         "GetTouchInputInfo",
         "Retrieves detailed information about touch inputs associated with a particular touch input handle.",
 
+        CaptureCallState.GetLastError.param,
         HTOUCHINPUT(
             "hTouchInput",
             """
@@ -1724,10 +1749,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         since = "Windows 7 (desktop apps only)"
     )
 
-    IgnoreMissing..SaveLastError..BOOL(
+    IgnoreMissing..BOOL(
         "CloseTouchInputHandle",
         "Closes a touch input handle, frees process memory associated with it, and invalidates the handle.",
 
+        CaptureCallState.GetLastError.param,
         HTOUCHINPUT(
             "hTouchInput",
             """

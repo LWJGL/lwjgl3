@@ -6,7 +6,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.*;
 import org.lwjgl.system.*;
-import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
 import javax.annotation.*;
@@ -151,9 +150,7 @@ public final class GL {
 
                 @Override
                 public long getFunctionAddress(ByteBuffer functionName) {
-                    long address = GetProcAddress == NULL ? NULL : Platform.get() == Platform.WINDOWS
-                        ? nwglGetProcAddress(memAddress(functionName), GetProcAddress) // save LastError
-                        : callPP(memAddress(functionName), GetProcAddress);
+                    long address = GetProcAddress == NULL ? NULL : callPP(memAddress(functionName), GetProcAddress);
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && DEBUG_FUNCTIONS) {
@@ -490,6 +487,8 @@ public final class GL {
         long  hwnd      = NULL;
         long  hglrc     = NULL;
         try (MemoryStack stack = stackPush()) {
+            IntBuffer pi = stack.mallocInt(1);
+
             WNDCLASSEX wc = WNDCLASSEX.calloc(stack)
                 .cbSize(WNDCLASSEX.SIZEOF)
                 .style(CS_HREDRAW | CS_VREDRAW)
@@ -501,17 +500,21 @@ public final class GL {
                 User32.Functions.DefWindowProc
             );
 
-            classAtom = RegisterClassEx(wc);
+            classAtom = RegisterClassEx(pi, wc);
             if (classAtom == 0) {
-                throw new IllegalStateException("Failed to register WGL window class");
+                windowsThrowException("Failed to register WGL window class", pi);
             }
 
-            hwnd = check(nCreateWindowEx(
+            hwnd = nCreateWindowEx(
+                memAddress(pi),
                 0, classAtom & 0xFFFF, NULL,
                 WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
                 0, 0, 1, 1,
                 NULL, NULL, NULL, NULL
-            ));
+            );
+            if (hwnd == NULL) {
+                windowsThrowException("Failed to create WGL window", pi);
+            }
 
             hdc = check(GetDC(hwnd));
 
@@ -520,35 +523,37 @@ public final class GL {
                 .nVersion((short)1)
                 .dwFlags(PFD_SUPPORT_OPENGL); // we don't care about anything else
 
-            int pixelFormat = ChoosePixelFormat(hdc, pfd);
+            int pixelFormat = ChoosePixelFormat(pi, hdc, pfd);
             if (pixelFormat == 0) {
-                windowsThrowException("Failed to choose an OpenGL-compatible pixel format");
+                windowsThrowException("Failed to choose an OpenGL-compatible pixel format", pi);
             }
 
-            if (DescribePixelFormat(hdc, pixelFormat, pfd) == 0) {
-                windowsThrowException("Failed to obtain pixel format information");
+            if (DescribePixelFormat(pi, hdc, pixelFormat, pfd) == 0) {
+                windowsThrowException("Failed to obtain pixel format information", pi);
             }
 
-            if (!SetPixelFormat(hdc, pixelFormat, pfd)) {
-                windowsThrowException("Failed to set the pixel format");
+            if (!SetPixelFormat(pi, hdc, pixelFormat, pfd)) {
+                windowsThrowException("Failed to set the pixel format", pi);
             }
 
-            hglrc = check(wglCreateContext(hdc));
-            wglMakeCurrent(hdc, hglrc);
+            hglrc = check(wglCreateContext(null, hdc));
+            if (!wglMakeCurrent(pi, hdc, hglrc)) {
+                windowsThrowException("Failed to make context current", pi);
+            }
 
             return createCapabilitiesWGL(hdc);
         } finally {
             if (hglrc != NULL) {
-                wglMakeCurrent(NULL, NULL);
-                wglDeleteContext(hglrc);
+                wglMakeCurrent(null, NULL, NULL);
+                wglDeleteContext(null, hglrc);
             }
 
             if (hwnd != NULL) {
-                DestroyWindow(hwnd);
+                DestroyWindow(null, hwnd);
             }
 
             if (classAtom != 0) {
-                nUnregisterClass(classAtom & 0xFFFF, WindowsLibrary.HINSTANCE);
+                nUnregisterClass(NULL, classAtom & 0xFFFF, WindowsLibrary.HINSTANCE);
             }
         }
     }

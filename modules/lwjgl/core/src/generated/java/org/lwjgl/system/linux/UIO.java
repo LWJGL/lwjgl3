@@ -5,7 +5,14 @@
  */
 package org.lwjgl.system.linux;
 
+import javax.annotation.*;
+
+import java.nio.*;
+
 import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to &lt;sys/uio.h&gt;. */
 public class UIO {
@@ -42,60 +49,94 @@ public class UIO {
 
     // --- [ readv ] ---
 
-    public static native long nreadv(int __fd, long __iovec, int __count);
+    /** Unsafe version of: {@link #readv} */
+    public static native long nreadv(long _errno, int __fd, long __iovec, int __count);
 
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long readv(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
-        return nreadv(__fd, __iovec.address(), __count);
+    public static long readv(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nreadv(memAddressSafe(_errno), __fd, __iovec.address(), __count);
     }
 
     // --- [ writev ] ---
 
-    public static native long nwritev(int __fd, long __iovec, int __count);
+    /** Unsafe version of: {@link #writev} */
+    public static native long nwritev(long _errno, int __fd, long __iovec, int __count);
 
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long writev(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
-        return nwritev(__fd, __iovec.address(), __count);
+    public static long writev(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nwritev(memAddressSafe(_errno), __fd, __iovec.address(), __count);
     }
 
     // --- [ preadv ] ---
 
-    public static native long npreadv(int __fd, long __iovec, int __count, long __offset);
+    /** Unsafe version of: {@link #preadv} */
+    public static native long npreadv(long _errno, int __fd, long __iovec, int __count, long __offset);
 
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long preadv(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
-        return npreadv(__fd, __iovec.address(), __count, __offset);
+    public static long preadv(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return npreadv(memAddressSafe(_errno), __fd, __iovec.address(), __count, __offset);
     }
 
     // --- [ pwritev ] ---
 
-    public static native long npwritev(int __fd, long __iovec, int __count, long __offset);
+    /** Unsafe version of: {@link #pwritev} */
+    public static native long npwritev(long _errno, int __fd, long __iovec, int __count, long __offset);
 
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long pwritev(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
-        return npwritev(__fd, __iovec.address(), __count, __offset);
+    public static long pwritev(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return npwritev(memAddressSafe(_errno), __fd, __iovec.address(), __count, __offset);
     }
 
     // --- [ process_vm_readv ] ---
 
     /** Unsafe version of: {@link #process_vm_readv} */
-    public static native long nprocess_vm_readv(int __pid, long __lvec, long __liovcnt, long __rvec, long __riovcnt, long __flags);
+    public static native long nprocess_vm_readv(long _errno, int __pid, long __lvec, long __liovcnt, long __rvec, long __riovcnt, long __flags);
 
-    /** Read from another process' address space. */
+    /**
+     * Read from another process' address space.
+     *
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     */
     @NativeType("ssize_t")
-    public static long process_vm_readv(@NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
-        return nprocess_vm_readv(__pid, __lvec.address(), __liovcnt, __rvec.address(), __riovcnt, __flags);
+    public static long process_vm_readv(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nprocess_vm_readv(memAddressSafe(_errno), __pid, __lvec.address(), __liovcnt, __rvec.address(), __riovcnt, __flags);
     }
 
     // --- [ process_vm_writev ] ---
 
     /** Unsafe version of: {@link #process_vm_writev} */
-    public static native long nprocess_vm_writev(int __pid, long __lvec, long __liovcnt, long __rvec, long __riovcnt, long __flags);
+    public static native long nprocess_vm_writev(long _errno, int __pid, long __lvec, long __liovcnt, long __rvec, long __riovcnt, long __flags);
 
-    /** Write to another process' address space. */
+    /**
+     * Write to another process' address space.
+     *
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     */
     @NativeType("ssize_t")
-    public static long process_vm_writev(@NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
-        return nprocess_vm_writev(__pid, __lvec.address(), __liovcnt, __rvec.address(), __riovcnt, __flags);
+    public static long process_vm_writev(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nprocess_vm_writev(memAddressSafe(_errno), __pid, __lvec.address(), __liovcnt, __rvec.address(), __riovcnt, __flags);
     }
 
 }

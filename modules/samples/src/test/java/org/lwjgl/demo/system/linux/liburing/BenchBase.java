@@ -4,6 +4,8 @@
  */
 package org.lwjgl.demo.system.linux.liburing;
 
+import org.lwjgl.system.*;
+
 import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
@@ -11,7 +13,6 @@ import java.nio.file.*;
 import java.util.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.LibCErrno.*;
 import static org.lwjgl.system.libc.LibCString.*;
 import static org.lwjgl.system.linux.FCNTL.*;
 import static org.lwjgl.system.linux.UNISTD.*;
@@ -157,24 +158,28 @@ final class BenchBase {
     }
 
     private static void benchLibCInner(String filePath, ByteBuffer buffer) {
-        int fileFD = open(filePath, O_RDONLY, 0);
-        if (fileFD < 0) {
-            throw new IllegalStateException("Failed to open file: " + strerror(getErrno()));
-        }
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            IntBuffer errno = stack.mallocInt(1);
 
-        long b;
-        while (0 < (b = read(fileFD, buffer))) {
-            buffer.position(buffer.position() + (int)b);
-        }
+            int fileFD = open(errno, filePath, O_RDONLY, 0);
+            if (fileFD < 0) {
+                throw new IllegalStateException("Failed to open file: " + strerror(errno.get(0)));
+            }
 
-        if (b == -1) {
-            throw new IllegalStateException("Failed to read file: " + strerror(getErrno()));
-        }
+            long b;
+            while (0 < (b = read(errno, fileFD, buffer))) {
+                buffer.position(buffer.position() + (int)b);
+            }
 
-        buffer.clear();
+            if (b == -1) {
+                throw new IllegalStateException("Failed to read file: " + strerror(errno.get(0)));
+            }
 
-        if (close(fileFD) != 0) {
-            System.err.println("Failed to close file fd: " + strerror(getErrno()));
+            buffer.clear();
+
+            if (close(errno, fileFD) != 0) {
+                System.err.println("Failed to close file fd: " + strerror(errno.get(0)));
+            }
         }
     }
 

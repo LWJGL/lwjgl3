@@ -24,7 +24,7 @@ val socket = "Socket".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "SHUT_RDWR".enum("No more receptions or transmissions.")
     )
 
-    SaveErrno..int(
+    int(
         "socket",
         """
         Create a new socket of type {@code __type} in domain {@code __domain}, using protocol {@code __protocol}.
@@ -32,6 +32,7 @@ val socket = "Socket".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         If {@code __protocol} is zero, one is chosen automatically.  
         """,
 
+        CaptureCallState.errno.param,
         int("__domain", ""),
         int("__type", ""),
         int("__protocol", ""),

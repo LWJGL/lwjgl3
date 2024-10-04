@@ -9,55 +9,61 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nopen(JNIEnv *__env, jclass clazz, jlong pathnameAddress, jint flags, jint mode) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nopen(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jlong pathnameAddress, jint flags, jint mode) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     char const *pathname = (char const *)(uintptr_t)pathnameAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)open(pathname, flags, (mode_t)mode);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nopenat(JNIEnv *__env, jclass clazz, jint dirfd, jlong pathnameAddress, jint flags, jint mode) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nopenat(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint dirfd, jlong pathnameAddress, jint flags, jint mode) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     char const *pathname = (char const *)(uintptr_t)pathnameAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)openat(dirfd, pathname, flags, (mode_t)mode);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_ncreat(JNIEnv *__env, jclass clazz, jlong pathnameAddress, jint mode) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_ncreat(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jlong pathnameAddress, jint mode) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     char const *pathname = (char const *)(uintptr_t)pathnameAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)creat(pathname, (mode_t)mode);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_fcntl(JNIEnv *__env, jclass clazz, jint fd, jint cmd) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nfcntl(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint fd, jint cmd) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)fcntl(fd, cmd);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nfcntli(JNIEnv *__env, jclass clazz, jint fd, jint cmd, jint arg) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nfcntli(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint fd, jint cmd, jint arg) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)fcntl(fd, cmd, arg);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nfcntlp(JNIEnv *__env, jclass clazz, jint fd, jint cmd, jlong argAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_FCNTL_nfcntlp(JNIEnv *__env, jclass clazz, jlong _errnoAddress, jint fd, jint cmd, jlong argAddress) {
+    int *_errno = (int *)(uintptr_t)_errnoAddress;
     void *arg = (void *)(uintptr_t)argAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)fcntl(fd, cmd, arg);
-    saveErrno();
+    if (_errno != NULL) *_errno = errno;
     return __result;
 }
 

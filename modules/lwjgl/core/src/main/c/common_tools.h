@@ -24,7 +24,7 @@ DISABLE_WARNINGS()
 ENABLE_WARNINGS()
 
 // Per-thread data, stored in a platform-specific thread-local.
-// Present in threads that had Callback invocations, saveErrno/saveLastError calls, OpenGL(ES) contexts made current.
+// Present in threads that had Callback invocations or OpenGL(ES) contexts made current.
 // Clean up is automatic via DllMain notifications (on Windows) or pthread destructors (on Linux/OSX).
 typedef struct EnvData_ {
     // true if AttachCurrentThreadAsDaemon was used to attach to a foreign thread (on a callback invocation).
@@ -34,50 +34,15 @@ typedef struct EnvData_ {
     // NOTE: points to JavaThread::_jni_environment (jdk/src/hotspot/share/runtime/thread.hpp), which is itself a pointer to the JNINativeInterface struct.
     JNIEnv* env;
     // The JNIEnv copy for the current thread.
-    // Not NULL in threads where saveErrno/saveLastError has been called, or an OpenGL(ES) context has been made current.
-    //   * env->reserved2 points to this EnvData instance.
-    //   * env->reserved3 may point to the GL(ES)Capabilities function array.
-    // The above two enable access to thread-local data without a TL lookup.
+    // Not NULL in threads where an OpenGL(ES) context has been made current.
+    //   * env->reserved3 points to the GL(ES)Capabilities function array.
+    // This enables access to thread-local data without a TL lookup.
     // NOTE: Stored separately instead of dereferencing env, because JavaThread instances may already be corrupted on thread detach.
     JNIEnv envCopy;
-    // errno for the current thread. Must be stored before a JNI function returns (may change between JNI method calls).
-    jint errnum;
-#ifdef LWJGL_WINDOWS
-    // GetLastError() for the current thread. Must be stored before a JNI function returns (may change between JNI method calls).
-    jint LastError;
-#endif
 } EnvData;
 
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
 extern JNIEnv* getEnv(jboolean* async);
-
-extern void* RESERVED_NULL;
-
-// Upcalls are used to create EnvData, because these macros will be used in non-core modules too.
-/*
- * method (any module)                                             -> ThreadLocalUtil::setupEnvData upcall (core module)
- *  \                                                             /                                       \
- *   -> nfunction downcall (any module) -> saveErrno/saveLastError                                         -> nsetupEnvData downcall (core module)
- */
-#define saveErrno() \
-    jint errnum = errno; \
-    EnvData *envData = (EnvData *)(*__env)->reserved2; \
-    if (envData == RESERVED_NULL) { \
-        jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
-        envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
-    } \
-    envData->errnum = errnum;
-
-#ifdef LWJGL_WINDOWS
-    #define saveLastError() \
-        jint LastError = (jint)GetLastError(); \
-        EnvData *envData = (EnvData *)(*__env)->reserved2; \
-        if (envData == RESERVED_NULL) { \
-            jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
-            envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
-        } \
-        envData->LastError = LastError;
-#endif
 
 #if defined(LWJGL_WINDOWS) || (defined(LWJGL_MACOS) && defined(LWJGL_arm64))
     #define VA_LIST_CAST(param) (va_list)(uintptr_t)param##Address

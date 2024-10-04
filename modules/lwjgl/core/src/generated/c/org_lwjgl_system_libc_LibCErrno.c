@@ -13,10 +13,4 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCErrno_errno(JNIEnv *__env,
     return (jint)errno;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCErrno_getErrno(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    EnvData *envData = (EnvData *)(*__env)->reserved2;
-    return envData == RESERVED_NULL ? 0 : envData->errnum;
-}
-
 EXTERN_C_EXIT

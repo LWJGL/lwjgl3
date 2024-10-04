@@ -6,8 +6,6 @@ package core.windows
 
 import org.lwjgl.generator.*
 
-val SaveLastError = Code(nativeAfterCall = "${t}saveLastError();")
-
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
 val VOID = "VOID".void

@@ -4,15 +4,15 @@
  */
 package org.lwjgl.system.windows;
 
-import static org.lwjgl.system.windows.WinBase.*;
+import java.nio.*;
 
 public final class WindowsUtil {
 
     private WindowsUtil() {
     }
 
-    public static void windowsThrowException(String msg) {
-        throw new RuntimeException(msg + " (error code = " + getLastError() + ")");
+    public static void windowsThrowException(String msg, IntBuffer GetLastError) {
+        throw new RuntimeException(msg + " (error code = " + GetLastError.get(GetLastError.position()) + ")");
     }
 
 }

@@ -70,12 +70,12 @@ public class Crypt32 {
     // --- [ CryptProtectData ] ---
 
     /** Unsafe version of: {@link #CryptProtectData} */
-    public static native int nCryptProtectData(long pDataIn, long szDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut, long __functionAddress);
+    public static native int nCryptProtectData(long _GetLastError, long pDataIn, long szDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut, long __functionAddress);
 
     /** Unsafe version of: {@link #CryptProtectData} */
-    public static int nCryptProtectData(long pDataIn, long szDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut) {
+    public static int nCryptProtectData(long _GetLastError, long pDataIn, long szDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut) {
         long __functionAddress = Functions.CryptProtectData;
-        return nCryptProtectData(pDataIn, szDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut, __functionAddress);
+        return nCryptProtectData(_GetLastError, pDataIn, szDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut, __functionAddress);
     }
 
     /**
@@ -84,6 +84,7 @@ public class Crypt32 {
      * <p>Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data. In addition, the encryption and
      * decryption usually must be done on the same computer.</p>
      *
+     * @param _GetLastError    optionally returns the result of {@code GetLastError()} after this function is called
      * @param pDataIn          a pointer to a {@link DATA_BLOB} structure that contains the plaintext to be encrypted
      * @param szDataDescr      a string with a readable description of the data to be encrypted.
      *                         
@@ -103,11 +104,12 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectData(@NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") ByteBuffer szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptProtectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") ByteBuffer szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkNT2Safe(szDataDescr);
         }
-        return nCryptProtectData(pDataIn.address(), memAddressSafe(szDataDescr), memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
+        return nCryptProtectData(memAddressSafe(_GetLastError), pDataIn.address(), memAddressSafe(szDataDescr), memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
     }
 
     /**
@@ -116,6 +118,7 @@ public class Crypt32 {
      * <p>Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data. In addition, the encryption and
      * decryption usually must be done on the same computer.</p>
      *
+     * @param _GetLastError    optionally returns the result of {@code GetLastError()} after this function is called
      * @param pDataIn          a pointer to a {@link DATA_BLOB} structure that contains the plaintext to be encrypted
      * @param szDataDescr      a string with a readable description of the data to be encrypted.
      *                         
@@ -135,12 +138,15 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectData(@NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") CharSequence szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptProtectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") CharSequence szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16Safe(szDataDescr, true);
             long szDataDescrEncoded = szDataDescr == null ? NULL : stack.getPointerAddress();
-            return nCryptProtectData(pDataIn.address(), szDataDescrEncoded, memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
+            return nCryptProtectData(memAddressSafe(_GetLastError), pDataIn.address(), szDataDescrEncoded, memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -155,7 +161,7 @@ public class Crypt32 {
      *                 
      *                 <p>The number of bytes must be a multiple of the {@link #CRYPTPROTECTMEMORY_BLOCK_SIZE} constant.</p>
      */
-    public static native int nCryptProtectMemory(long pDataIn, int cbDataIn, int dwFlags, long __functionAddress);
+    public static native int nCryptProtectMemory(long _GetLastError, long pDataIn, int cbDataIn, int dwFlags, long __functionAddress);
 
     /**
      * Unsafe version of: {@link #CryptProtectMemory}
@@ -164,12 +170,12 @@ public class Crypt32 {
      *                 
      *                 <p>The number of bytes must be a multiple of the {@link #CRYPTPROTECTMEMORY_BLOCK_SIZE} constant.</p>
      */
-    public static int nCryptProtectMemory(long pDataIn, int cbDataIn, int dwFlags) {
+    public static int nCryptProtectMemory(long _GetLastError, long pDataIn, int cbDataIn, int dwFlags) {
         long __functionAddress = Functions.CryptProtectMemory;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return nCryptProtectMemory(pDataIn, cbDataIn, dwFlags, __functionAddress);
+        return nCryptProtectMemory(_GetLastError, pDataIn, cbDataIn, dwFlags, __functionAddress);
     }
 
     /**
@@ -178,23 +184,27 @@ public class Crypt32 {
      * <p>For example, use the {@code CryptProtectMemory} function to encrypt memory that contains a password. Encrypting the password prevents others from
      * viewing it when the process is paged out to the swap file. Otherwise, the password is in plaintext and viewable by others.</p>
      *
-     * @param pDataIn a pointer to the block of memory to encrypt
-     * @param dwFlags this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param pDataIn       a pointer to the block of memory to encrypt
+     * @param dwFlags       this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectMemory(@NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
-        return nCryptProtectMemory(memAddress(pDataIn), pDataIn.remaining(), dwFlags) != 0;
+    public static boolean CryptProtectMemory(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nCryptProtectMemory(memAddressSafe(_GetLastError), memAddress(pDataIn), pDataIn.remaining(), dwFlags) != 0;
     }
 
     // --- [ CryptUnprotectData ] ---
 
     /** Unsafe version of: {@link #CryptUnprotectData} */
-    public static native int nCryptUnprotectData(long pDataIn, long ppszDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut, long __functionAddress);
+    public static native int nCryptUnprotectData(long _GetLastError, long pDataIn, long ppszDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut, long __functionAddress);
 
     /** Unsafe version of: {@link #CryptUnprotectData} */
-    public static int nCryptUnprotectData(long pDataIn, long ppszDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut) {
+    public static int nCryptUnprotectData(long _GetLastError, long pDataIn, long ppszDataDescr, long pOptionalEntropy, long pvReserved, long pPromptStruct, int dwFlags, long pDataOut) {
         long __functionAddress = Functions.CryptUnprotectData;
-        return nCryptUnprotectData(pDataIn, ppszDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut, __functionAddress);
+        return nCryptUnprotectData(_GetLastError, pDataIn, ppszDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut, __functionAddress);
     }
 
     /**
@@ -203,6 +213,7 @@ public class Crypt32 {
      * <p>Usually, the only user who can decrypt the data is a user with the same logon credentials as the user who encrypted the data. In addition, the
      * encryption and decryption must be done on the same computer.</p>
      *
+     * @param _GetLastError    optionally returns the result of {@code GetLastError()} after this function is called
      * @param pDataIn          a pointer to a {@link DATA_BLOB} structure that holds the encrypted data
      * @param ppszDataDescr    a pointer to a string-readable description of the encrypted data included with the encrypted data.
      *                         
@@ -222,11 +233,12 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptUnprotectData(@NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPWSTR *") PointerBuffer ppszDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptUnprotectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPWSTR *") PointerBuffer ppszDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
         if (CHECKS) {
+            checkSafe(_GetLastError, 1);
             checkSafe(ppszDataDescr, 1);
         }
-        return nCryptUnprotectData(pDataIn.address(), memAddressSafe(ppszDataDescr), memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
+        return nCryptUnprotectData(memAddressSafe(_GetLastError), pDataIn.address(), memAddressSafe(ppszDataDescr), memAddressSafe(pOptionalEntropy), pvReserved, memAddressSafe(pPromptStruct), dwFlags, pDataOut.address()) != 0;
     }
 
     // --- [ CryptUnprotectMemory ] ---
@@ -238,7 +250,7 @@ public class Crypt32 {
      *                 
      *                 <p>The number of bytes must be a multiple of the {@link #CRYPTPROTECTMEMORY_BLOCK_SIZE} constant.</p>
      */
-    public static native int nCryptUnprotectMemory(long pDataIn, int cbDataIn, int dwFlags, long __functionAddress);
+    public static native int nCryptUnprotectMemory(long _GetLastError, long pDataIn, int cbDataIn, int dwFlags, long __functionAddress);
 
     /**
      * Unsafe version of: {@link #CryptUnprotectMemory}
@@ -247,23 +259,27 @@ public class Crypt32 {
      *                 
      *                 <p>The number of bytes must be a multiple of the {@link #CRYPTPROTECTMEMORY_BLOCK_SIZE} constant.</p>
      */
-    public static int nCryptUnprotectMemory(long pDataIn, int cbDataIn, int dwFlags) {
+    public static int nCryptUnprotectMemory(long _GetLastError, long pDataIn, int cbDataIn, int dwFlags) {
         long __functionAddress = Functions.CryptUnprotectMemory;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return nCryptUnprotectMemory(pDataIn, cbDataIn, dwFlags, __functionAddress);
+        return nCryptUnprotectMemory(_GetLastError, pDataIn, cbDataIn, dwFlags, __functionAddress);
     }
 
     /**
      * The {@code CryptUnprotectMemory} function decrypts memory that was encrypted using the {@link #CryptProtectMemory} function.
      *
-     * @param pDataIn a pointer to the block of memory to decrypt
-     * @param dwFlags this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param pDataIn       a pointer to the block of memory to decrypt
+     * @param dwFlags       this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean CryptUnprotectMemory(@NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
-        return nCryptUnprotectMemory(memAddress(pDataIn), pDataIn.remaining(), dwFlags) != 0;
+    public static boolean CryptUnprotectMemory(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nCryptUnprotectMemory(memAddressSafe(_GetLastError), memAddress(pDataIn), pDataIn.remaining(), dwFlags) != 0;
     }
 
 }

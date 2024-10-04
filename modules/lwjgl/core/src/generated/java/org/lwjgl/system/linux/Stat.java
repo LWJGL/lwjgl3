@@ -5,6 +5,8 @@
  */
 package org.lwjgl.system.linux;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -24,25 +26,30 @@ public class Stat {
 
     // --- [ stat ] ---
 
-    public static native int nstat(long __file, long __buf);
+    /** Unsafe version of: {@link #stat} */
+    public static native int nstat(long _errno, long __file, long __buf);
 
-    public static int stat(@NativeType("char const *") ByteBuffer __file, @NativeType("struct stat *") long __buf) {
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
+    public static int stat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer __file, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             checkNT1(__file);
             check(__buf);
         }
-        return nstat(memAddress(__file), __buf);
+        return nstat(memAddressSafe(_errno), memAddress(__file), __buf);
     }
 
-    public static int stat(@NativeType("char const *") CharSequence __file, @NativeType("struct stat *") long __buf) {
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
+    public static int stat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence __file, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             check(__buf);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(__file, true);
             long __fileEncoded = stack.getPointerAddress();
-            return nstat(__fileEncoded, __buf);
+            return nstat(memAddressSafe(_errno), __fileEncoded, __buf);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -50,13 +57,16 @@ public class Stat {
 
     // --- [ fstat ] ---
 
-    public static native int nfstat(int __fd, long __buf);
+    /** Unsafe version of: {@link #fstat} */
+    public static native int nfstat(long _errno, int __fd, long __buf);
 
-    public static int fstat(int __fd, @NativeType("struct stat *") long __buf) {
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
+    public static int fstat(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             check(__buf);
         }
-        return nfstat(__fd, __buf);
+        return nfstat(memAddressSafe(_errno), __fd, __buf);
     }
 
 }

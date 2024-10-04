@@ -29,48 +29,53 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "RWF_APPEND".enum("per-IO #O_APPEND", 0x00000010),
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "readv",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", "")
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "writev",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", "")
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "preadv",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", ""),
         off_t("__offset", "")
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "pwritev",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", ""),
         off_t("__offset", "")
     )
 
-    /*SaveErrno..ssize_t(
+    /*ssize_t(
         "preadv2",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", ""),
@@ -78,10 +83,11 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         int("__flags", "")
     )*/
 
-    /*SaveErrno..ssize_t(
+    /*ssize_t(
         "pwritev2",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         iovec.const.p("__iovec", ""),
         int("__count", ""),
@@ -89,10 +95,11 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         int("__flags", "")
     )*/
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "process_vm_readv",
         "Read from another process' address space.",
 
+        CaptureCallState.errno.param,
         pid_t("__pid", ""),
         iovec.const.p("__lvec", ""),
         unsigned_long_int("__liovcnt", ""),
@@ -101,10 +108,11 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         unsigned_long_int("__flags", "")
     )
 
-    SaveErrno..ssize_t(
+    ssize_t(
         "process_vm_writev",
         "Write to another process' address space.",
 
+        CaptureCallState.errno.param,
         pid_t("__pid", ""),
         iovec.const.p("__lvec", ""),
         unsigned_long_int("__liovcnt", ""),

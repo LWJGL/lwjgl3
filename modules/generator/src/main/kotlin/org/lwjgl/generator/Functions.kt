@@ -81,7 +81,8 @@ class Func(
     private fun getNativeParams(
         withExplicitFunctionAddress: Boolean = true,
         withJNIEnv: Boolean = false,
-        withAutoSizeResultParams: Boolean = true
+        withAutoSizeResultParams: Boolean = true,
+        withCaptureCallState: Boolean = true
     ) = parameters.asSequence()
         .let { p -> if (withExplicitFunctionAddress) p else p.filter { it !== EXPLICIT_FUNCTION_ADDRESS } }
         .let { p -> if (withJNIEnv) p else p.filter { it !== JNI_ENV } }
@@ -90,6 +91,7 @@ class Func(
         else
             p.filter { !((it.has<Virtual>() && !it.has<AutoSizeResultParam>()) || (it.isAutoSizeResultOut && hideAutoSizeResultParam)) }
         }
+        .let { p -> if (withCaptureCallState) p else p.filter { !(it === parameters[0] && CaptureCallState.matches(it)) } }
 
     /** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
     internal inline fun <reified T> getReferenceParam(reference: String)
@@ -176,7 +178,7 @@ class Func(
     internal val hasArrayOverloads
         get() = !has<OffHeapOnly>() && this.parameters
             .count { it.isAutoSizeResultOut }
-            .let { autoSizeResultOutParams -> this.parameters.asSequence().any { it.has<MultiType>() || it.isArrayParameter(autoSizeResultOutParams) } }
+            .let { autoSizeResultOutParams -> this.parameters.asSequence().any { (it.has<MultiType>() || it.isArrayParameter(autoSizeResultOutParams)) && !(it === this.parameters[0] && CaptureCallState.matches(it)) } }
 
     private val ReturnValue.javaMethodType
         get() = this.nativeType.let {
@@ -1874,7 +1876,7 @@ class Func(
         if (nativeClass.callingConvention !== CallingConvention.DEFAULT)
             print("APIENTRY ")
         print("*${nativeName}PROC) (")
-        val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)
+        val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true, withCaptureCallState = false)
         if (nativeParams.any()) {
             printList(nativeParams) {
                 it.toNativeType(nativeClass.binding)
@@ -1957,7 +1959,7 @@ class Func(
             getNativeParams(withExplicitFunctionAddress = false)
                 .filter { it.nativeType.castAddressToPointer }
                 .forEach {
-                    val variableType = it.toNativeType(nativeClass.binding, pointerMode = true)
+                    val variableType = it.toNativeType(if (nativeClass.binding == null || (it === parameters[0] && CaptureCallState.matches(it))) null else nativeClass.binding, pointerMode = true)
 
                     print(t)
                     if (it.nativeType is FunctionType && variableType.contains("(*)")) {
@@ -2061,7 +2063,7 @@ class Func(
                     print("(*$JNIENV)->")
                 print(nativeName)
                 if (!has<Macro> { !function }) print('(')
-                printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) { param ->
+                printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true, withCaptureCallState = false)) { param ->
                     param.nativeType.let {
                         val name = param.name
                         if (it is StructType) {

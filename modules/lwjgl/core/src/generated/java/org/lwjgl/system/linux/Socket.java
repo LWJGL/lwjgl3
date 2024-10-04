@@ -5,7 +5,14 @@
  */
 package org.lwjgl.system.linux;
 
+import javax.annotation.*;
+
+import java.nio.*;
+
 import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to &lt;sys/socket.h&gt;. */
 public class Socket {
@@ -34,13 +41,23 @@ public class Socket {
 
     // --- [ socket ] ---
 
+    /** Unsafe version of: {@link #socket} */
+    public static native int nsocket(long _errno, int __domain, int __type, int __protocol);
+
     /**
      * Create a new socket of type {@code __type} in domain {@code __domain}, using protocol {@code __protocol}.
      * 
      * <p>If {@code __protocol} is zero, one is chosen automatically.</p>
      *
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     *
      * @return a file descriptor for the new socket, or -1 for errors
      */
-    public static native int socket(int __domain, int __type, int __protocol);
+    public static int socket(@Nullable @NativeType("int *") IntBuffer _errno, int __domain, int __type, int __protocol) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nsocket(memAddressSafe(_errno), __domain, __type, __protocol);
+    }
 
 }

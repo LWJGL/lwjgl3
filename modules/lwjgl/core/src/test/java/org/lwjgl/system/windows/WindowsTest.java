@@ -9,6 +9,7 @@ import org.testng.annotations.*;
 
 import java.nio.*;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.Crypt32.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsLibrary.*;
@@ -19,7 +20,7 @@ public class WindowsTest {
 
     public void testLWJGLInstance() {
         assertEquals(
-            GetModuleHandle(Library.JNI_LIBRARY_NAME),
+            GetModuleHandle(null, Library.JNI_LIBRARY_NAME),
             HINSTANCE
         );
     }
@@ -28,17 +29,17 @@ public class WindowsTest {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             ByteBuffer buffer = stack.calloc(4 * CRYPTPROTECTMEMORY_BLOCK_SIZE);
 
-            assertTrue(CryptProtectMemory(buffer, CRYPTPROTECTMEMORY_SAME_PROCESS));
-            assertTrue(CryptUnprotectMemory(buffer, CRYPTPROTECTMEMORY_SAME_PROCESS));
+            assertTrue(CryptProtectMemory(null, buffer, CRYPTPROTECTMEMORY_SAME_PROCESS));
+            assertTrue(CryptUnprotectMemory(null, buffer, CRYPTPROTECTMEMORY_SAME_PROCESS));
         }
     }
 
     public void testDefWindowProc() {
-        long user32 = GetModuleHandle("User32.dll");
-        assertTrue(user32 != 0);
+        long user32 = GetModuleHandle(null, "User32.dll");
+        assertTrue(user32 != NULL);
 
-        long dwp = GetProcAddress(user32, "DefWindowProcW");
-        assertTrue(dwp != 0);
+        long dwp = GetProcAddress(null, user32, "DefWindowProcW");
+        assertTrue(dwp != NULL);
     }
 
 }

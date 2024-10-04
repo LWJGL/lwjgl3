@@ -1782,7 +1782,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         "SOCKET_URING_OP_SETSOCKOPT".enum,
     ).noPrefix()
 
-    SaveErrno..NativeName("__sys_io_uring_setup")..int(
+    NativeName("__sys_io_uring_setup")..int(
         "setup",
         """
         The {@code io_uring_setup()} system call sets up a submission queue (SQ) and completion queue (CQ) with at least {@code entries} entries, and returns a
@@ -1794,6 +1794,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         Closing the file descriptor returned by {@code io_uring_setup(2)} will free all resources associated with the {@code io_uring} context.
         """,
 
+        CaptureCallState.errno.param,
         unsigned("entries", ""),
         io_uring_params.p("p", "used by the application to pass options to the kernel, and by the kernel to convey information about the ring buffers"),
 
@@ -1808,7 +1809,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         """
     )
 
-    SaveErrno..NativeName("__sys_io_uring_register")..int(
+    NativeName("__sys_io_uring_register")..int(
         "register",
         """
         The {@code io_uring_register()} system call registers resources (e.g. user buffers, files, eventfd, personality, restrictions) for use in an
@@ -1818,6 +1819,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         application memory, greatly reducing per-I/O overhead.
         """,
 
+        CaptureCallState.errno.param,
         int("fd", "the file descriptor returned by a call to #setup()"),
         unsigned("opcode", "", "REGISTER_\\w+"),
         nullable..opaque_p("arg", ""),
@@ -1826,10 +1828,11 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         returnDoc = "on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly."
     )
 
-    SaveErrno..NativeName("__sys_io_uring_enter2")..int(
+    NativeName("__sys_io_uring_enter2")..int(
         "enter2",
         "",
 
+        CaptureCallState.errno.param,
         int("fd", ""),
         unsigned("to_submit", ""),
         unsigned("min_complete", ""),
@@ -1838,7 +1841,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         int("sz", "")
     )
 
-    SaveErrno..NativeName("__sys_io_uring_enter")..int(
+    NativeName("__sys_io_uring_enter")..int(
         "enter",
         """
         {@code io_uring_enter()} is used to initiate and complete I/O using the shared submission and completion queues setup by a call to #setup().
@@ -1859,6 +1862,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         requires later use of a particular SQE entry, it will have made a private copy of it.
         """,
 
+        CaptureCallState.errno.param,
         int("fd", "the file descriptor returned by #setup()"),
         unsigned("to_submit", "the number of I/Os to submit from the submission queue"),
         unsigned("min_complete", ""),

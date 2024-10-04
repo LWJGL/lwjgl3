@@ -5,6 +5,8 @@
  */
 package org.lwjgl.system.linux;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -679,7 +681,7 @@ public class FCNTL {
     // --- [ open ] ---
 
     /** Unsafe version of: {@link #open} */
-    public static native int nopen(long pathname, int flags, int mode);
+    public static native int nopen(long _errno, long pathname, int flags, int mode);
 
     /**
      * Given a {@code pathname} for a file, {@code open()} returns a file descriptor, a small, nonnegative integer for use in subsequent system calls
@@ -687,15 +689,17 @@ public class FCNTL {
      * 
      * <p>The file descriptor returned by a successful call will be the lowest-numbered file descriptor not currently open for the process.</p>
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      *
      * @return the new file descriptor, or -1 if an error occurred (in which case, {@code errno} is set appropriately).
      */
-    public static int open(@NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int open(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             checkNT1(pathname);
         }
-        return nopen(memAddress(pathname), flags, mode);
+        return nopen(memAddressSafe(_errno), memAddress(pathname), flags, mode);
     }
 
     /**
@@ -704,16 +708,20 @@ public class FCNTL {
      * 
      * <p>The file descriptor returned by a successful call will be the lowest-numbered file descriptor not currently open for the process.</p>
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      *
      * @return the new file descriptor, or -1 if an error occurred (in which case, {@code errno} is set appropriately).
      */
-    public static int open(@NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int open(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(pathname, true);
             long pathnameEncoded = stack.getPointerAddress();
-            return nopen(pathnameEncoded, flags, mode);
+            return nopen(memAddressSafe(_errno), pathnameEncoded, flags, mode);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -722,7 +730,7 @@ public class FCNTL {
     // --- [ openat ] ---
 
     /** Unsafe version of: {@link #openat} */
-    public static native int nopenat(int dirfd, long pathname, int flags, int mode);
+    public static native int nopenat(long _errno, int dirfd, long pathname, int flags, int mode);
 
     /**
      * The {@code openat()} system call operates in exactly the same way as {@code open(2)}, except for the differences described in this manual page.
@@ -735,15 +743,17 @@ public class FCNTL {
      * 
      * <p>If {@code pathname} is absolute, then {@code dirfd} is ignored.</p>
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      *
      * @return a new file descriptor on success. On error, -1 is returned and {@code errno} is set to indicate the error.
      */
-    public static int openat(int dirfd, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int openat(@Nullable @NativeType("int *") IntBuffer _errno, int dirfd, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             checkNT1(pathname);
         }
-        return nopenat(dirfd, memAddress(pathname), flags, mode);
+        return nopenat(memAddressSafe(_errno), dirfd, memAddress(pathname), flags, mode);
     }
 
     /**
@@ -757,16 +767,20 @@ public class FCNTL {
      * 
      * <p>If {@code pathname} is absolute, then {@code dirfd} is ignored.</p>
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      *
      * @return a new file descriptor on success. On error, -1 is returned and {@code errno} is set to indicate the error.
      */
-    public static int openat(int dirfd, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int openat(@Nullable @NativeType("int *") IntBuffer _errno, int dirfd, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(pathname, true);
             long pathnameEncoded = stack.getPointerAddress();
-            return nopenat(dirfd, pathnameEncoded, flags, mode);
+            return nopenat(memAddressSafe(_errno), dirfd, pathnameEncoded, flags, mode);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -775,37 +789,46 @@ public class FCNTL {
     // --- [ creat ] ---
 
     /** Unsafe version of: {@link #creat} */
-    public static native int ncreat(long pathname, int mode);
+    public static native int ncreat(long _errno, long pathname, int mode);
 
     /**
      * Equivalent to {@code open()} with {@code flags} equal to {@code O_CREAT|O_WRONLY|O_TRUNC}.
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      */
-    public static int creat(@NativeType("char const *") ByteBuffer pathname, @NativeType("mode_t") int mode) {
+    public static int creat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, @NativeType("mode_t") int mode) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             checkNT1(pathname);
         }
-        return ncreat(memAddress(pathname), mode);
+        return ncreat(memAddressSafe(_errno), memAddress(pathname), mode);
     }
 
     /**
      * Equivalent to {@code open()} with {@code flags} equal to {@code O_CREAT|O_WRONLY|O_TRUNC}.
      *
-     * @param mode one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      */
-    public static int creat(@NativeType("char const *") CharSequence pathname, @NativeType("mode_t") int mode) {
+    public static int creat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence pathname, @NativeType("mode_t") int mode) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(pathname, true);
             long pathnameEncoded = stack.getPointerAddress();
-            return ncreat(pathnameEncoded, mode);
+            return ncreat(memAddressSafe(_errno), pathnameEncoded, mode);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
     // --- [ fcntl ] ---
+
+    /** Unsafe version of: {@link #fcntl} */
+    public static native int nfcntl(long _errno, int fd, int cmd);
 
     /**
      * Performs one of the operations determined by {@code cmd} on the open file descriptor {@code fd}.
@@ -820,39 +843,51 @@ public class FCNTL {
      * supports a particular operation is to invoke {@code fcntl()} with the desired {@code cmd} value and then test whether the call failed with
      * {@code EINVAL}, indicating that the kernel does not recognize this value.</p>
      *
-     * @param cmd one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static native int fcntl(int fd, int cmd);
+    public static int fcntl(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nfcntl(memAddressSafe(_errno), fd, cmd);
+    }
 
     // --- [ fcntli ] ---
 
     /** Unsafe version of: {@link #fcntli} */
-    public static native int nfcntli(int fd, int cmd, int arg);
+    public static native int nfcntli(long _errno, int fd, int cmd, int arg);
 
     /**
      * {@link #fcntl} overload that takes a third argument of type {@code int}.
      *
-     * @param cmd one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static int fcntli(int fd, int cmd, int arg) {
-        return nfcntli(fd, cmd, arg);
+    public static int fcntli(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd, int arg) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nfcntli(memAddressSafe(_errno), fd, cmd, arg);
     }
 
     // --- [ fcntlp ] ---
 
     /** Unsafe version of: {@link #fcntlp} */
-    public static native int nfcntlp(int fd, int cmd, long arg);
+    public static native int nfcntlp(long _errno, int fd, int cmd, long arg);
 
     /**
      * {@link #fcntl} overload that takes a third argument of type {@code void *}.
      *
-     * @param cmd one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static int fcntlp(int fd, int cmd, @NativeType("void *") long arg) {
+    public static int fcntlp(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd, @NativeType("void *") long arg) {
         if (CHECKS) {
+            checkSafe(_errno, 1);
             check(arg);
         }
-        return nfcntlp(fd, cmd, arg);
+        return nfcntlp(memAddressSafe(_errno), fd, cmd, arg);
     }
 
 }

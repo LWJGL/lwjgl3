@@ -7,6 +7,8 @@ package org.lwjgl.system.windows;
 
 import javax.annotation.*;
 
+import java.nio.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -151,39 +153,43 @@ public class GDI32 {
     // --- [ ChoosePixelFormat ] ---
 
     /** Unsafe version of: {@link #ChoosePixelFormat} */
-    public static native int nChoosePixelFormat(long hdc, long pixelFormatDescriptor, long __functionAddress);
+    public static native int nChoosePixelFormat(long _GetLastError, long hdc, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #ChoosePixelFormat} */
-    public static int nChoosePixelFormat(long hdc, long pixelFormatDescriptor) {
+    public static int nChoosePixelFormat(long _GetLastError, long hdc, long pixelFormatDescriptor) {
         long __functionAddress = Functions.ChoosePixelFormat;
         if (CHECKS) {
             check(hdc);
         }
-        return nChoosePixelFormat(hdc, pixelFormatDescriptor, __functionAddress);
+        return nChoosePixelFormat(_GetLastError, hdc, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
      * Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.
      *
+     * @param _GetLastError         optionally returns the result of {@code GetLastError()} after this function is called
      * @param hdc                   the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}
      * @param pixelFormatDescriptor a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format
      */
-    public static int ChoosePixelFormat(@NativeType("HDC") long hdc, @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
-        return nChoosePixelFormat(hdc, pixelFormatDescriptor.address());
+    public static int ChoosePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nChoosePixelFormat(memAddressSafe(_GetLastError), hdc, pixelFormatDescriptor.address());
     }
 
     // --- [ DescribePixelFormat ] ---
 
     /** Unsafe version of: {@link #DescribePixelFormat} */
-    public static native int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor, long __functionAddress);
+    public static native int nDescribePixelFormat(long _GetLastError, long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #DescribePixelFormat} */
-    public static int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor) {
+    public static int nDescribePixelFormat(long _GetLastError, long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor) {
         long __functionAddress = Functions.DescribePixelFormat;
         if (CHECKS) {
             check(hdc);
         }
-        return nDescribePixelFormat(hdc, pixelFormat, bytes, pixelFormatDescriptor, __functionAddress);
+        return nDescribePixelFormat(_GetLastError, hdc, pixelFormat, bytes, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
@@ -191,6 +197,7 @@ public class GDI32 {
      * {@link PIXELFORMATDESCRIPTOR} structure pointed to by pixelFormatDescriptor with that pixel format data. The return value is the maximum pixel format
      * index of the device context.
      *
+     * @param _GetLastError         optionally returns the result of {@code GetLastError()} after this function is called
      * @param hdc                   the device context
      * @param pixelFormat           index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes.
      * @param bytes                 the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
@@ -199,8 +206,11 @@ public class GDI32 {
      *                              the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is {@code NULL}, the function writes no data to the
      *                              structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
      */
-    public static int DescribePixelFormat(@NativeType("HDC") long hdc, int pixelFormat, @NativeType("UINT") int bytes, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
-        return nDescribePixelFormat(hdc, pixelFormat, bytes, memAddressSafe(pixelFormatDescriptor));
+    public static int DescribePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @NativeType("UINT") int bytes, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nDescribePixelFormat(memAddressSafe(_GetLastError), hdc, pixelFormat, bytes, memAddressSafe(pixelFormatDescriptor));
     }
 
     /**
@@ -208,79 +218,105 @@ public class GDI32 {
      * {@link PIXELFORMATDESCRIPTOR} structure pointed to by pixelFormatDescriptor with that pixel format data. The return value is the maximum pixel format
      * index of the device context.
      *
+     * @param _GetLastError         optionally returns the result of {@code GetLastError()} after this function is called
      * @param hdc                   the device context
      * @param pixelFormat           index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes.
      * @param pixelFormatDescriptor a {@link PIXELFORMATDESCRIPTOR} structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
      *                              the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is {@code NULL}, the function writes no data to the
      *                              structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
      */
-    public static int DescribePixelFormat(@NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
-        return nDescribePixelFormat(hdc, pixelFormat, PIXELFORMATDESCRIPTOR.SIZEOF, memAddressSafe(pixelFormatDescriptor));
+    public static int DescribePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nDescribePixelFormat(memAddressSafe(_GetLastError), hdc, pixelFormat, PIXELFORMATDESCRIPTOR.SIZEOF, memAddressSafe(pixelFormatDescriptor));
     }
 
     // --- [ GetPixelFormat ] ---
 
     /** Unsafe version of: {@link #GetPixelFormat} */
-    public static native int nGetPixelFormat(long hdc, long __functionAddress);
+    public static native int nGetPixelFormat(long _GetLastError, long hdc, long __functionAddress);
 
-    /**
-     * Obtains the index of the currently selected pixel format of the specified device context.
-     *
-     * @param hdc the device context of the currently selected pixel format index returned by the function
-     */
-    public static int GetPixelFormat(@NativeType("HDC") long hdc) {
+    /** Unsafe version of: {@link #GetPixelFormat} */
+    public static int nGetPixelFormat(long _GetLastError, long hdc) {
         long __functionAddress = Functions.GetPixelFormat;
         if (CHECKS) {
             check(hdc);
         }
-        return nGetPixelFormat(hdc, __functionAddress);
+        return nGetPixelFormat(_GetLastError, hdc, __functionAddress);
+    }
+
+    /**
+     * Obtains the index of the currently selected pixel format of the specified device context.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param hdc           the device context of the currently selected pixel format index returned by the function
+     */
+    public static int GetPixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nGetPixelFormat(memAddressSafe(_GetLastError), hdc);
     }
 
     // --- [ SetPixelFormat ] ---
 
     /** Unsafe version of: {@link #SetPixelFormat} */
-    public static native int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor, long __functionAddress);
+    public static native int nSetPixelFormat(long _GetLastError, long hdc, int pixelFormat, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #SetPixelFormat} */
-    public static int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor) {
+    public static int nSetPixelFormat(long _GetLastError, long hdc, int pixelFormat, long pixelFormatDescriptor) {
         long __functionAddress = Functions.SetPixelFormat;
         if (CHECKS) {
             check(hdc);
         }
-        return nSetPixelFormat(hdc, pixelFormat, pixelFormatDescriptor, __functionAddress);
+        return nSetPixelFormat(_GetLastError, hdc, pixelFormat, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
      * Sets the pixel format of the specified device context to the format specified by the pixelFormat index.
      *
+     * @param _GetLastError         optionally returns the result of {@code GetLastError()} after this function is called
      * @param hdc                   the device context whose pixel format the function attempts to set
      * @param pixelFormat           index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes.
      * @param pixelFormatDescriptor a {@link PIXELFORMATDESCRIPTOR} structure that contains the logical pixel format specification. The system's metafile component uses this structure
      *                              to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
      */
     @NativeType("BOOL")
-    public static boolean SetPixelFormat(@NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
-        return nSetPixelFormat(hdc, pixelFormat, memAddressSafe(pixelFormatDescriptor)) != 0;
+    public static boolean SetPixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nSetPixelFormat(memAddressSafe(_GetLastError), hdc, pixelFormat, memAddressSafe(pixelFormatDescriptor)) != 0;
     }
 
     // --- [ SwapBuffers ] ---
 
     /** Unsafe version of: {@link #SwapBuffers} */
-    public static native int nSwapBuffers(long dc, long __functionAddress);
+    public static native int nSwapBuffers(long _GetLastError, long dc, long __functionAddress);
 
-    /**
-     * Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.
-     *
-     * @param dc a device context. If the current pixel format for the window referenced by this device context includes a back buffer, the function exchanges the
-     *           front and back buffers.
-     */
-    @NativeType("BOOL")
-    public static boolean SwapBuffers(@NativeType("HDC") long dc) {
+    /** Unsafe version of: {@link #SwapBuffers} */
+    public static int nSwapBuffers(long _GetLastError, long dc) {
         long __functionAddress = Functions.SwapBuffers;
         if (CHECKS) {
             check(dc);
         }
-        return nSwapBuffers(dc, __functionAddress) != 0;
+        return nSwapBuffers(_GetLastError, dc, __functionAddress);
+    }
+
+    /**
+     * Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.
+     *
+     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
+     * @param dc            a device context. If the current pixel format for the window referenced by this device context includes a back buffer, the function exchanges the
+     *                      front and back buffers.
+     */
+    @NativeType("BOOL")
+    public static boolean SwapBuffers(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long dc) {
+        if (CHECKS) {
+            checkSafe(_GetLastError, 1);
+        }
+        return nSwapBuffers(memAddressSafe(_GetLastError), dc) != 0;
     }
 
 }

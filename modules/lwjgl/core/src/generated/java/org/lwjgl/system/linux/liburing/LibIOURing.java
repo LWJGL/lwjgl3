@@ -5,7 +5,14 @@
  */
 package org.lwjgl.system.linux.liburing;
 
+import javax.annotation.*;
+
+import java.nio.*;
+
 import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to <a href="https://github.com/axboe/liburing">io_uring</a>, a Linux-specific API for asynchronous I/O.
@@ -1772,7 +1779,7 @@ public class LibIOURing {
     // --- [ io_uring_setup ] ---
 
     /** Unsafe version of: {@link #io_uring_setup setup} */
-    public static native int nio_uring_setup(int entries, long p);
+    public static native int nio_uring_setup(long _errno, int entries, long p);
 
     /**
      * The {@code io_uring_setup()} system call sets up a submission queue (SQ) and completion queue (CQ) with at least {@code entries} entries, and returns a
@@ -1783,7 +1790,8 @@ public class LibIOURing {
      * 
      * <p>Closing the file descriptor returned by {@code io_uring_setup(2)} will free all resources associated with the {@code io_uring} context.</p>
      *
-     * @param p used by the application to pass options to the kernel, and by the kernel to convey information about the ring buffers
+     * @param _errno optionally returns the {@code errno} value after this function is called
+     * @param p      used by the application to pass options to the kernel, and by the kernel to convey information about the ring buffers
      *
      * @return a new file descriptor on success.
      *         
@@ -1792,14 +1800,17 @@ public class LibIOURing {
      *         
      *         <p>On error, {@code -1} is returned and {@code errno} is set appropriately.</p>
      */
-    public static int io_uring_setup(@NativeType("unsigned") int entries, @NativeType("struct io_uring_params *") IOURingParams p) {
-        return nio_uring_setup(entries, p.address());
+    public static int io_uring_setup(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("unsigned") int entries, @NativeType("struct io_uring_params *") IOURingParams p) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nio_uring_setup(memAddressSafe(_errno), entries, p.address());
     }
 
     // --- [ io_uring_register ] ---
 
     /** Unsafe version of: {@link #io_uring_register register} */
-    public static native int nio_uring_register(int fd, int opcode, long arg, int nr_args);
+    public static native int nio_uring_register(long _errno, int fd, int opcode, long arg, int nr_args);
 
     /**
      * The {@code io_uring_register()} system call registers resources (e.g. user buffers, files, eventfd, personality, restrictions) for use in an
@@ -1808,27 +1819,36 @@ public class LibIOURing {
      * <p>Registering files or user buffers allows the kernel to take long term references to internal data structures or create long term mappings of
      * application memory, greatly reducing per-I/O overhead.</p>
      *
+     * @param _errno optionally returns the {@code errno} value after this function is called
      * @param fd     the file descriptor returned by a call to {@link #io_uring_setup setup}
      * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_PBUF_STATUS REGISTER_PBUF_STATUS}</td></tr><tr><td>{@link #IORING_REGISTER_NAPI REGISTER_NAPI}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td><td>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</td><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
      *
      * @return on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly.
      */
-    public static int io_uring_register(int fd, @NativeType("unsigned") int opcode, @NativeType("void *") long arg, @NativeType("unsigned") int nr_args) {
-        return nio_uring_register(fd, opcode, arg, nr_args);
+    public static int io_uring_register(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int opcode, @NativeType("void *") long arg, @NativeType("unsigned") int nr_args) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nio_uring_register(memAddressSafe(_errno), fd, opcode, arg, nr_args);
     }
 
     // --- [ io_uring_enter2 ] ---
 
-    public static native int nio_uring_enter2(int fd, int to_submit, int min_complete, int flags, long sig, int sz);
+    /** Unsafe version of: {@link #io_uring_enter2 enter2} */
+    public static native int nio_uring_enter2(long _errno, int fd, int to_submit, int min_complete, int flags, long sig, int sz);
 
-    public static int io_uring_enter2(int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig, int sz) {
-        return nio_uring_enter2(fd, to_submit, min_complete, flags, sig, sz);
+    /** @param _errno optionally returns the {@code errno} value after this function is called */
+    public static int io_uring_enter2(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig, int sz) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nio_uring_enter2(memAddressSafe(_errno), fd, to_submit, min_complete, flags, sig, sz);
     }
 
     // --- [ io_uring_enter ] ---
 
     /** Unsafe version of: {@link #io_uring_enter enter} */
-    public static native int nio_uring_enter(int fd, int to_submit, int min_complete, int flags, long sig);
+    public static native int nio_uring_enter(long _errno, int fd, int to_submit, int min_complete, int flags, long sig);
 
     /**
      * {@code io_uring_enter()} is used to initiate and complete I/O using the shared submission and completion queues setup by a call to {@link #io_uring_setup setup}.
@@ -1848,6 +1868,7 @@ public class LibIOURing {
      * even if the actual IO submission had to be punted to async context, which means that the SQE may in fact not have been submitted yet. If the kernel
      * requires later use of a particular SQE entry, it will have made a private copy of it.</p>
      *
+     * @param _errno    optionally returns the {@code errno} value after this function is called
      * @param fd        the file descriptor returned by {@link #io_uring_setup setup}
      * @param to_submit the number of I/Os to submit from the submission queue
      * @param flags     one or more of:<br><table><tr><td>{@link #IORING_ENTER_GETEVENTS ENTER_GETEVENTS}</td><td>{@link #IORING_ENTER_SQ_WAKEUP ENTER_SQ_WAKEUP}</td><td>{@link #IORING_ENTER_SQ_WAIT ENTER_SQ_WAIT}</td><td>{@link #IORING_ENTER_EXT_ARG ENTER_EXT_ARG}</td><td>{@link #IORING_ENTER_REGISTERED_RING ENTER_REGISTERED_RING}</td></tr></table>
@@ -1877,8 +1898,11 @@ public class LibIOURing {
      *         <p>Errors that occur not on behalf of a submission queue entry are returned via the system call directly. On such an error, -1 is returned and
      *         {@code errno} is set appropriately.</p>
      */
-    public static int io_uring_enter(int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig) {
-        return nio_uring_enter(fd, to_submit, min_complete, flags, sig);
+    public static int io_uring_enter(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig) {
+        if (CHECKS) {
+            checkSafe(_errno, 1);
+        }
+        return nio_uring_enter(memAddressSafe(_errno), fd, to_submit, min_complete, flags, sig);
     }
 
 }

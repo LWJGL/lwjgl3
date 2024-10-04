@@ -16,18 +16,20 @@ val sys_stat_h = "Stat".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") 
 
     // TODO:
 
-    SaveErrno..int(
+    int(
         "stat",
         "",
 
+        CaptureCallState.errno.param,
         charUTF8.const.p("__file", ""),
         stat.p("__buf", "")
     )
 
-    SaveErrno..int(
+    int(
         "fstat",
         "",
 
+        CaptureCallState.errno.param,
         int("__fd", ""),
         stat.p("__buf", "")
     )

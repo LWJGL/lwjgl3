@@ -38,7 +38,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getFunctionMissing
 }
 
 extern EnvData* tlsCreateEnvDataWithCopy(JNIEnv* env);
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_nsetupEnvData(JNIEnv *env, jclass clazz, jint functionCount) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_setupEnvData(JNIEnv *env, jclass clazz, jint functionCount) {
     UNUSED_PARAM(clazz)
 
     void *envCopy = malloc(functionCount * sizeof(void *));
