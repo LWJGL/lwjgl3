@@ -941,7 +941,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             """
             a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
             registered by a previous call to the #RegisterClassEx() function. System classes, such as dialog box controls, cannot be unregistered. If this
-            parameter is an atom, it must be a class atom created by a previous call to the #RegisterClassEx() function. The atom must be in the low-order
+            parameter is an atom, it must be a class atom created by a previous call to the {@code RegisterClassEx} function. The atom must be in the low-order
             word of {@code lpClassName}; the high-order word must be zero.
             """
         ),
@@ -956,7 +956,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         DWORD("dwExStyle", "the extended window style of the window being created"),
         nullable..LPCTSTR(
             "lpClassName",
-            "a null-terminated string or a class atom created by a previous call to the #RegisterClassEx(WNDCLASSEX) function."
+            "a null-terminated string or a class atom created by a previous call to the {@code RegisterClassEx} function."
         ),
         nullable..LPCTSTR(
             "lpWindowName",

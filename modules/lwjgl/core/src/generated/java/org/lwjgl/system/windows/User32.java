@@ -1150,7 +1150,7 @@ public class User32 {
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param lpClassName   a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
      *                      registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
-     *                      parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
+     *                      parameter is an atom, it must be a class atom created by a previous call to the {@code RegisterClassEx} function. The atom must be in the low-order
      *                      word of {@code lpClassName}; the high-order word must be zero.
      * @param hInstance     a handle to the instance of the module that created the class
      */
@@ -1169,7 +1169,7 @@ public class User32 {
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param lpClassName   a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
      *                      registered by a previous call to the {@link #RegisterClassEx} function. System classes, such as dialog box controls, cannot be unregistered. If this
-     *                      parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClassEx} function. The atom must be in the low-order
+     *                      parameter is an atom, it must be a class atom created by a previous call to the {@code RegisterClassEx} function. The atom must be in the low-order
      *                      word of {@code lpClassName}; the high-order word must be zero.
      * @param hInstance     a handle to the instance of the module that created the class
      */
@@ -1204,7 +1204,7 @@ public class User32 {
      *
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param dwExStyle     the extended window style of the window being created
-     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
+     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@code RegisterClassEx} function.
      * @param lpWindowName  the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
      * @param dwStyle       the style of the window being created
      * @param x             the initial horizontal position of the window
@@ -1232,7 +1232,7 @@ public class User32 {
      *
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param dwExStyle     the extended window style of the window being created
-     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@link #RegisterClassEx(WNDCLASSEX)} function.
+     * @param lpClassName   a null-terminated string or a class atom created by a previous call to the {@code RegisterClassEx} function.
      * @param lpWindowName  the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar.
      * @param dwStyle       the style of the window being created
      * @param x             the initial horizontal position of the window
