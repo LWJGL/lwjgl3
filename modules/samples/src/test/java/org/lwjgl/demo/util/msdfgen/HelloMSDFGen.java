@@ -68,6 +68,8 @@ public class HelloMSDFGen {
 
             nmsdf_ft_font_destroy(font);
             msdf_ft_deinit(ft);
+
+            msdf_ft_get_load_callback().free();
         }
     }
 

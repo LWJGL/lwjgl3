@@ -162,7 +162,7 @@ public final class BlendishDemo {
         System.out.println("Downloading Blender icons...");
         long t = System.nanoTime();
 
-        ByteBuffer iconsSVG = downloadSVG("https://raw.githubusercontent.com/sobotka/blender/master/release/datafiles/blender_icons.svg");
+        ByteBuffer iconsSVG = downloadSVG("https://raw.githubusercontent.com/VCVRack/oui-blendish/refs/heads/master/blender_icons.svg");
 
         System.out.format("\t%dms\n", (System.nanoTime() - t) / 1000 / 1000);
 
@@ -186,6 +186,13 @@ public final class BlendishDemo {
         nsvgRasterize(rast, svg, 0, 0, 1, image, w, h, w * 4);
         premultiplyAlpha(image, w, h, w * 4);
         bndSetIconImage(nvgCreateImageRGBA(vg, w, h, NVG_IMAGE_PREMULTIPLIED, image));
+
+        memFree(image);
+
+        nsvgDeleteRasterizer(rast);
+        nsvgDelete(svg);
+
+        memFree(iconsSVG);
     }
 
 }

@@ -465,7 +465,7 @@ public final class HelloVulkan {
                     .pfnUserCallback(dbgFunc)
                     .pUserData(NULL);
 
-                inst_info.pNext(dbgCreateInfo.address());
+                inst_info.pNext(dbgCreateInfo);
             }
 
             int err = vkCreateInstance(inst_info, null, pp);
