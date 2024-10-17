@@ -4,6 +4,7 @@
  */
 package org.lwjgl.generator
 
+import org.lwjgl.generator.JNI.generateJavaFFM
 import java.io.*
 import java.lang.reflect.*
 import java.nio.*
@@ -94,7 +95,7 @@ fun main(args: Array<String>) {
                 fun <T : GeneratorTarget> generateRegistered(typeName: String, targets: Iterable<T>) {
                     targets.forEach {
                         try {
-                            generateSimple(it)
+                            generateSimple(it) { it.generateJava() }
                         } catch (e: Exception) {
                             throw RuntimeException("Uncaught exception while generating $typeName: ${it.packageName}.${it.className}", e)
                         }
@@ -110,7 +111,10 @@ fun main(args: Array<String>) {
                         JNI.register(it)
                 }
 
-                submit { generateSimple(JNI) }
+                submit {
+                    generateSimple(JNI) { it.generateJava() }
+                    generateSimple(JNI, version = "25", forceSkipNative = true) { it.generateJavaFFM() }
+                }
 
                 latch.await()
             }
@@ -306,8 +310,13 @@ class Generator(private val moduleRoot: String) {
             nativeClass.nativeDirectivesWarning()
     }
 
-    internal fun generateSimple(target: GeneratorTarget) {
-        val modulePath = "$moduleRoot/${target.module.path}"
+    internal fun generateSimple(
+        target: GeneratorTarget,
+        forceSkipNative: Boolean = false,
+        version: String = "",
+        generate: (GeneratorTarget.(PrintWriter) -> Unit)
+    ) {
+        val modulePath = "$moduleRoot/${target.module.path}$version"
         val packageKotlin = target.module.packageKotlin
         val pathKotlin = "$modulePath/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
 
@@ -326,10 +335,10 @@ class Generator(private val moduleRoot: String) {
         //println("GENERATING: ${target.packageName}.${target.className}")
 
         generateOutput(target, outputJava, lmt) {
-            it.generateJava()
+            generate(it)
         }
 
-        if (target is GeneratorTargetNative && !target.skipNative) {
+        if (target is GeneratorTargetNative && !target.skipNative && !forceSkipNative) {
             generateNative(target) {
                 generateOutput(target, it) { out ->
                     out.generateNative()

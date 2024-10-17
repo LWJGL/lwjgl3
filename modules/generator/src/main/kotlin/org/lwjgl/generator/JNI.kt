@@ -10,6 +10,9 @@ import java.util.concurrent.*
 /** Deduplicates JNI signatures from bindings and generates the org.lwjgl.system.JNI class. */
 object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
 
+    // TODO: store the deduplicated signatures in a versioned file to avoid surprising changes when a module is disabled
+    // TODO: ignore the cached signatures with a build flag
+
     private val signatures = ConcurrentHashMap<Signature, Unit>()
     private val signaturesArray = ConcurrentHashMap<SignatureArray, Unit>()
 
@@ -83,6 +86,107 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                     .mapIndexed { i, param -> "${param.nativeMethodType} param$i" }
                     .joinToString(", ", postfix = ", "))
             println("long $FUNCTION_ADDRESS);")
+        }
+
+        println("\n$t// Array API\n")
+
+        sortedSignaturesArray.forEach {
+            print("${t}public static native ${it.returnType.nativeMethodType} ${it.signature}(")
+            if (it.arguments.isNotEmpty())
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> if (param is ArrayType<*>) "${param.mapping.primitive} @Nullable [] param$i" else "${param.nativeMethodType} param$i" }
+                    .joinToString(", ", postfix = ", "))
+            println("long $FUNCTION_ADDRESS);")
+        }
+        println("\n}")
+    }
+
+    fun PrintWriter.generateJavaFFM() {
+        javaImport(
+            "org.lwjgl.system.ffm.*",
+            "java.lang.foreign.*",
+            "java.lang.invoke.*",
+            "static org.lwjgl.system.ffm.FFM.*",
+        )
+        generateJavaPreamble()
+        print("""public final class JNI {
+
+    @FFMFunctionAddress
+    private interface JNIBindings {""")
+        sortedSignatures.forEach {
+            print("\n$t${t}${if (it.returnType.isPointer) "@FFMPointer " else ""}${it.returnType.nativeMethodType} ${it.signature}(MemorySegment __functionAddress")
+            if (it.arguments.isNotEmpty()) {
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> "${if (param.isPointer) "@FFMNullable @FFMPointer " else ""}${param.nativeMethodType} param$i" }
+                    .joinToString(", ", prefix = ", "))
+            }
+            print(");")
+        }
+    print("""
+    }
+
+    /*
+    private static final TraceConsumer TRACER = (method, returnValue, args) -> {
+        var prefix = method.getDeclaringClass().getAnnotation(FFMPrefix.class);
+        if (prefix != null) {
+            System.err.print(prefix.value());
+        }
+        System.err.println(method.getName() + '(' + Stream.of(args)
+            .skip(1)
+            .map(JNI::render)
+            .collect(Collectors.joining(", ")) + ")" + (returnValue == null ? "" : " : " + render(returnValue)));
+    };
+
+    private static String render(Object value) {
+        if (value instanceof MemorySegment segment) {
+            return "0x" + Long.toHexString(segment.address()) + (segment.byteSize() == 0 ? "" : (" [" + (segment.byteSize() == Long.MAX_VALUE ? "?" : segment.byteSize()) + "]"));
+        } else {
+            return value.toString();
+        }
+    }*/
+
+    /*private static int count;
+    private static long lastT = System.nanoTime();
+    private static final TraceConsumer TRACER = (_, _, _) -> {
+        count++;
+        long t = System.nanoTime();
+        if (t - lastT > 1_000_000_000L) {
+            System.err.println("JNI calls: " + count + "/s");
+            lastT = t;
+            count = 0;
+        }
+    };*/
+
+    private static final JNIBindings jni = ffmGenerate(
+        JNIBindings.class,
+        ffmConfigBuilder(MethodHandles.lookup())
+            //.withCriticalOverride(_ -> true)
+            //.withTracing(TRACER)
+            .build()
+    );
+
+    private JNI() {}
+
+    // Pointer API
+
+""")
+        sortedSignatures.forEach {
+            print("${t}public static ${it.returnType.nativeMethodType} ${it.signature}(")
+            if (it.arguments.isNotEmpty())
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> "${param.nativeMethodType} param$i" }
+                    .joinToString(", ", postfix = ", "))
+            print("long $FUNCTION_ADDRESS) { ")
+            if (it.returnType.mapping !== TypeMapping.VOID) {
+                print("return ")
+            }
+            print("jni.${it.signature}(MemorySegment.ofAddress(__functionAddress)")
+            if (it.arguments.isNotEmpty()) {
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> "param$i" }
+                    .joinToString(", ", prefix = ", "))
+            }
+            println("); }")
         }
 
         println("\n$t// Array API\n")
