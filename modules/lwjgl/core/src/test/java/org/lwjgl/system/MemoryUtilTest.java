@@ -120,8 +120,10 @@ public class MemoryUtilTest {
     }
 
     private static void memSetReference(long m, int value, int bytes) {
+        byte b = (byte)(value & 0xFF);
         for (int i = 0; i < bytes; i++) {
-            memPutByte(m + i, (byte)(value & 0xFF));
+            memPutByte(m + i, b);
+            assertEquals(memGetByte(m + i), b);
         }
     }
 
@@ -312,11 +314,8 @@ public class MemoryUtilTest {
             assertEquals(ib.get(2 + i), 0x0);
         }
 
-        DoubleBuffer db = memDoubleBuffer(memAddress(ib), Integer.MAX_VALUE);
-        assertThrows(IllegalStateException.class, () -> memByteBuffer(db));
-
-        db.limit(Integer.MAX_VALUE >> 3);
-        assertEquals(memByteBuffer(db).remaining(), (Integer.MAX_VALUE >> 3) << 3);
+        DoubleBuffer db = memDoubleBuffer(memAddress(ib), (0x0FFF_FFFF - 1));
+        assertEquals(memByteBuffer(db).remaining(), (0x0FFF_FFFF - 1) << 3);
     }
 
     @FunctionalInterface

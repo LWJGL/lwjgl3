@@ -40,7 +40,7 @@ import static org.lwjgl.system.ffm.BCUtil.*;
  *     <li>Class-File API (JEP 457, JDK 24): Used to generate bytecode at runtime, without 3rd-party dependencies.</li>
  * </ul>
  *
- * <p>The {@link #generate} method is designed to be relatively cheap. The instance returned is lightweight and its methods are never materialized, unless
+ * <p>The {@link #ffmGenerate} method is designed to be relatively cheap. The instance returned is lightweight and its methods are never materialized, unless
  * actually used by the application. More specifically:</p>
  * <ul>
  *    <li>A minimal class is generated that implements the input interface.</li>
