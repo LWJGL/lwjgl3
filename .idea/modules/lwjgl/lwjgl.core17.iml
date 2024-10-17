@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/core/META-INF/versions/17" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/core17">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/core17/src/main/java" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lwjgl.core11" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+  </component>
+</module>

@@ -17,7 +17,7 @@ import static org.lwjgl.system.APIUtil.*;
 public final class MathUtil {
 
     static {
-        apiLog("Java 10 multiplyHigh enabled");
+        apiLog("Java 11 multiplyHigh enabled");
     }
 
     private MathUtil() {
@@ -75,12 +75,8 @@ public final class MathUtil {
      */
     public static long mathMultiplyHighU64(long x, long y) {
         long result = multiplyHigh(x, y);
-        if (x < 0) {
-            result += y;
-        }
-        if (y < 0) {
-            result += x;
-        }
+        result += (y & (x >> 63));
+        result += (x & (y >> 63));
         return result;
     }
 

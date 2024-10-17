@@ -28,9 +28,7 @@ final class MultiReleaseTextDecoding {
 
         if (DEBUG) {
             // The implementation below does no codepoint validation.
-            byte[] bytes = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_BYTE.get() : new byte[length];
-            memByteBuffer(source, length).get(bytes, 0, length);
-            return new String(bytes, 0, length, StandardCharsets.UTF_8);
+            return jdkFallback(source, length);
         }
 
         char[] string = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_CHAR.get() : new char[length];
@@ -68,6 +66,12 @@ final class MultiReleaseTextDecoding {
         }
 
         return new String(string, 0, Math.min(i, length));
+    }
+
+    private static String jdkFallback(long source, int length) {
+        byte[] bytes = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_BYTE.get() : new byte[length];
+        memByteBuffer(source, length).get(bytes, 0, length);
+        return new String(bytes, 0, length, StandardCharsets.UTF_8);
     }
 
 }

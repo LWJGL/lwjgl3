@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 final class MultiReleaseTextDecoding {
 
     static {
-        apiLog("Java 9 text decoding enabled");
+        apiLog("Java 11 text decoding enabled");
     }
 
     private MultiReleaseTextDecoding() {

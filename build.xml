@@ -459,38 +459,29 @@
             <include name="**"/>
         </lwjgl.javac>
 
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/10" if:set="jdk10"/>
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/16" if:set="jdk16"/>
-        <delete file="${bin.lwjgl}/core/META-INF/versions/9/module-info.class" quiet="true" if:set="jdk9"/>
-        <lwjgl.javac9 destdir="${bin.lwjgl}/core/META-INF/versions/9" taskname="javac: Core - Java 9" if:set="jdk9">
+        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/11" if:set="jdk11"/>
+        <delete file="${bin.lwjgl}/core/META-INF/versions/11/module-info.class" quiet="true" if:set="jdk11"/>
+        <lwjgl.javac11 destdir="${bin.lwjgl}/core/META-INF/versions/11" taskname="javac: Core - Java 11" if:set="jdk11">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core"/>
                 <pathelement path="${lib}/java/jsr305.jar"/>
             </classpath>
             <src>
-                <pathelement path="${module.lwjgl}/core/src/main/java9"/>
+                <pathelement path="${module.lwjgl}/core11/src/main/java"/>
             </src>
             <include name="**"/>
-        </lwjgl.javac9>
-        <lwjgl.javac10 destdir="${bin.lwjgl}/core/META-INF/versions/10" taskname="javac: Core - Java 10" if:set="jdk10">
+        </lwjgl.javac11>
+
+        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/17" if:set="jdk17"/>
+        <lwjgl.javac17 destdir="${bin.lwjgl}/core/META-INF/versions/17" taskname="javac: Core - Java 17" if:set="jdk17">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core"/>
             </classpath>
             <src>
-                <pathelement path="${module.lwjgl}/core/src/main/java10"/>
+                <pathelement path="${module.lwjgl}/core17/src/main/java"/>
             </src>
             <include name="**"/>
-        </lwjgl.javac10>
-        <lwjgl.javac16 destdir="${bin.lwjgl}/core/META-INF/versions/16" taskname="javac: Core - Java 16" if:set="jdk16">
-            <classpath>
-                <pathelement path="${bin.lwjgl}/core"/>
-            </classpath>
-            <src>
-                <pathelement path="${module.lwjgl}/core/src/main/java16"/>
-            </src>
-            <include name="**"/>
-        </lwjgl.javac16>
+        </lwjgl.javac17>
 
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
@@ -591,9 +582,8 @@
         <mkdir dir="${bin.extract}"/>
         <kotlinc moduleName="extract" output="${bin.extract}" printVersion="true" unless:set="extract-uptodate">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
             </classpath>
@@ -618,9 +608,8 @@
     <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
         <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.extract}"/>
                 <pathelement path="${test.resources}"/>
@@ -881,16 +870,15 @@
             <!-- Benchmarks -->
             <include name="org/lwjgl/jmh/**"/>
             <exclude name="org/lwjgl/jmh/Hashing*" unless:true="${test.hashing}"/>
-            <exclude name="org/lwjgl/jmh/VarHandle*" unless:set="jdk9"/>
+            <exclude name="org/lwjgl/jmh/VarHandle*" unless:set="jdk11"/>
         </lwjgl.javac>
     </target>
 
     <target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
         <testng haltonfailure="true" outputDir="${bin.test.html}" taskname="Tests">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
@@ -928,9 +916,8 @@
 
         <java classname="${class}" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/16" if:set="core.java16"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${bin.samples}"/>
@@ -991,7 +978,7 @@
 
     <!-- Includes all modules for javadoc.lwjgl.org -->
     <target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-compile-generator,-build-version">
-        <echo message="It is recommended to generate JavaDoc on JDK 10 or higher." unless:set="jdk10" taskname="Warning"/>
+        <echo message="It is recommended to generate JavaDoc on JDK 17 or higher." unless:set="jdk17" taskname="Warning"/>
         <delete dir="${bin.javadoc}"/>
 
         <path id="javadoc.sources">
@@ -1027,9 +1014,9 @@
             <arg line="-Xdoclint:html,reference,syntax" unless:set="nodoclint"/>
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
             <arg line="-notimestamp"/>
-            <arg value="-html5" if:set="jdk9"/>
+            <arg value="-html5" if:set="jdk11"/>
             <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
-            <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
+            <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
         </javadoc>
         <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.javadoc}"/>
 
@@ -1148,7 +1135,7 @@
                     <attribute name="Implementation-Version" value="${revision}"/>
                     <attribute name="Implementation-Vendor" value="lwjgl.org"/>
                     <attribute name="LWJGL-Platform" value="@{platform}" if:true="${platform-attrib}"/>
-                    <attribute name="Multi-Release" value="true" if:set="jdk9"/>
+                    <attribute name="Multi-Release" value="true" if:set="jdk11"/>
                 </manifest>
                 <content/>
             </jar>
@@ -1173,7 +1160,7 @@
             <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" platform="@{path}" title="@{title}" unless:set="platform.skip">
                 <fileset dir="${release}/${module}" includes="META-INF/@{path}/${module.path}/*.@{type}*"/>
                 <fileset dir="${release}/${module}/native" includes="@{path}/${module.path}/*.@{type}*"/>
-                <fileset dir="${release}/${module}/native/@{path}" includes="META-INF/versions/9/module-info.class" if:set="jdk9"/>
+                <fileset dir="${release}/${module}/native/@{path}" includes="META-INF/versions/11/module-info.class" if:set="jdk11"/>
                 <content/>
             </lwjgl-jar>
         </sequential>
@@ -1278,7 +1265,7 @@
                     fork="true"
                     failonerror="true"
                     taskname="module-info-gen :: native :: ${module}"
-                    if:set="jdk9"
+                    if:set="jdk11"
                 >
                     <jvmarg value="-Dmodule.name.source=${module.name}"/>
                     <jvmarg value="-Dmodule.name.release=${module}"/>
@@ -1421,9 +1408,9 @@
                 <arg line="-Xdoclint:html,reference,syntax"/>
                 <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
                 <arg line="-notimestamp"/>
-                <arg value="-html5" if:set="jdk9"/>
+                <arg value="-html5" if:set="jdk11"/>
                 <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
-                <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
+                <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
             </javadoc>
             <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
@@ -1439,9 +1426,9 @@
             <quiet>
                 <copy
                     file ="${module.lwjgl}/@{name}/src/main/resources/module-info.java"
-                    todir="${module.lwjgl}/@{name}/src/generated/java/META-INF/versions/9"
+                    todir="${module.lwjgl}/@{name}/src/generated/java/META-INF/versions/11"
                     quiet="true"
-                    if:set="jdk9"
+                    if:set="jdk11"
                 />
             </quiet>
             <jar destfile="${release}/${module}/${module}-sources.jar" level="9">
@@ -1462,7 +1449,7 @@
     </macrodef>
 
     <target name="-check-release-jdk">
-        <fail message="The JAVA8_HOME environment variable is not set." if:set="jdk9">
+        <fail message="The JAVA8_HOME environment variable is not set." if:set="jdk11">
             <condition>
                 <not><isset property="env.JAVA8_HOME"/></not>
             </condition>
@@ -1470,13 +1457,13 @@
 
         <local name="input"/>
         <input
-            message="It is recommended to build LWJGL releases on JDK 16 or higher. Continue with current JDK?"
+            message="It is recommended to build LWJGL releases on JDK 17 or higher. Continue with current JDK?"
             validargs="y,n"
             defaultvalue="n"
             addproperty="input"
-            unless:set="jdk16"
+            unless:set="jdk17"
         />
-        <fail message="Cancelled" unless:set="jdk16">
+        <fail message="Cancelled" unless:set="jdk17">
             <condition>
                 <equals arg1="n" arg2="${input}"/>
             </condition>
@@ -1531,7 +1518,7 @@
             fork="true"
             failonerror="true"
             taskname="module-info-gen :: java"
-            if:set="jdk9"
+            if:set="jdk11"
         >
             <jvmarg value="-Dmodule.name.list=${module.list}"/>
             <jvmarg value="-Dmodule.version=${module.version}"/>
@@ -1542,14 +1529,11 @@
         <!-- CORE -->
         <sequential>
             <quiet>
-                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
-                    <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
+                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/11" if:set="jdk11">
+                    <fileset dir="${module.lwjgl}/core11/src/main/java" includes="**"/>
                 </copy>
-                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
-                    <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
-                </copy>
-                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/16" if:set="jdk16">
-                    <fileset dir="${module.lwjgl}/core/src/main/java16" includes="**"/>
+                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/17" if:set="jdk17">
+                    <fileset dir="${module.lwjgl}/core17/src/main/java" includes="**"/>
                 </copy>
                 <copy todir="${bin.lwjgl}/core/META-INF/native-image/org.lwjgl/lwjgl">
                     <fileset dir="config/native-image/META-INF/native-image" includes="**" excludes="resource-config.json"/>

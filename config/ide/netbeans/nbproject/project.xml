@@ -616,16 +616,16 @@ auxiliary.show.customizer.message=<message>
                 <source-level>1.8</source-level>
             </compilation-unit>
             <compilation-unit>
-                <package-root>modules/lwjgl/core/src/main/java10</package-root>
-                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/core/src/main/java9</classpath>
-                <built-to>bin/classes/lwjgl/core/META-INF/versions/10</built-to>
-                <source-level>1.8</source-level>
+                <package-root>modules/lwjgl/core11/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java</classpath>
+                <built-to>bin/classes/lwjgl/core/META-INF/versions/11</built-to>
+                <source-level>11</source-level>
             </compilation-unit>
             <compilation-unit>
-                <package-root>modules/lwjgl/core/src/main/java9</package-root>
-                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java</classpath>
-                <built-to>bin/classes/lwjgl/core/META-INF/versions/9</built-to>
-                <source-level>1.8</source-level>
+                <package-root>modules/lwjgl/core17/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/core11/src/main/java</classpath>
+                <built-to>bin/classes/lwjgl/core/META-INF/versions/17</built-to>
+                <source-level>17</source-level>
             </compilation-unit>
             <compilation-unit>
                 <package-root>modules/lwjgl/cuda/src/generated/java</package-root>

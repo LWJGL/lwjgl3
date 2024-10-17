@@ -188,24 +188,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="core.java23"><isset property="core.java24"/></condition>
     <condition property="core.java22"><isset property="core.java23"/></condition>
     <condition property="core.java21"><isset property="core.java22"/></condition>
-    <condition property="core.java20"><isset property="core.java21"/></condition>
-    <condition property="core.java19"><isset property="core.java20"/></condition>
-    <condition property="core.java18"><isset property="core.java19"/></condition>
-    <condition property="core.java17"><isset property="core.java18"/></condition>
-    <condition property="core.java16"><isset property="core.java17"/></condition>
-    <condition property="core.java15"><isset property="core.java16"/></condition>
-    <condition property="core.java14"><isset property="core.java15"/></condition>
-    <condition property="core.java13"><isset property="core.java14"/></condition>
-    <condition property="core.java12"><isset property="core.java13"/></condition>
-    <condition property="core.java11"><isset property="core.java12"/></condition>
-    <condition property="core.java10"><isset property="core.java11"/></condition>
-    <condition property="core.java9"> <isset property="core.java10"/></condition>
+    <condition property="core.java17"><isset property="core.java21"/></condition>
+    <condition property="core.java11"><isset property="core.java17"/></condition>
 
-    <property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
-    <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
+    <property name="jni.headers" location="${java.home}/include" if:set="jdk11"/>
+    <property name="jni.headers" location="${java.home}/../include" unless:set="jdk11"/>
     <condition property="set-boot-class-path">
         <and>
-            <isset property="jdk9"/>
+            <isset property="jdk11"/>
             <isset property="env.JAVA8_HOME"/>
         </and>
     </condition>
@@ -223,25 +213,17 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac9">
+    <presetdef name="lwjgl.javac11">
         <javac sourcepath="" debug="yes" encoding="UTF-8">
-            <compilerarg line="--release 9"/>
+            <compilerarg line="--release 11"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac10">
+    <presetdef name="lwjgl.javac17">
         <javac sourcepath="" debug="yes" encoding="UTF-8">
-            <compilerarg line="--release 10"/>
-            <compilerarg value="-Xlint:all"/>
-            <compilerarg value="-XDignore.symbol.file"/>
-        </javac>
-    </presetdef>
-
-    <presetdef name="lwjgl.javac16">
-        <javac sourcepath="" debug="yes" encoding="UTF-8">
-            <compilerarg line="--release 16"/>
+            <compilerarg line="--release 17"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>

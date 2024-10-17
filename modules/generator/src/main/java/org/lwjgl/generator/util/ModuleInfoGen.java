@@ -146,7 +146,7 @@ public final class ModuleInfoGen implements AutoCloseable {
                 module.compile(gen, moduleVersion);
             }
 
-            // Move module-info classes to <module>/META-INF/versions/9
+            // Move module-info classes to <module>/META-INF/versions/11
             for (String module : moduleNames) {
                 Path source = Paths.get("bin", "classes", "lwjgl", module, "module-info.class");
                 Path target = source.resolveSibling(METAINF);
@@ -201,7 +201,7 @@ public final class ModuleInfoGen implements AutoCloseable {
                                                     Stream.of(module.name),
                                                     module.dependencies.stream().map(it -> it.name)
                                                 )
-                                                .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
+                                                .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/11")
                                                 .collect(Collectors.joining(File.pathSeparator)),
                                             architecture,
                                             outputPath,

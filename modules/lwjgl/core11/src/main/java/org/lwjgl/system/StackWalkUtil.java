@@ -15,7 +15,7 @@ final class StackWalkUtil {
     private static final StackWalker STACKWALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
     static {
-        apiLog("Java 9 stack walker enabled");
+        apiLog("Java 11 stack walker enabled");
     }
 
     private StackWalkUtil() {

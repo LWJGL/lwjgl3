@@ -10,7 +10,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 final class MultiReleaseMemCopy {
 
     static {
-        apiLog("Java 16 memcpy enabled");
+        apiLog("Java 17 memcpy enabled");
     }
 
     private MultiReleaseMemCopy() {
