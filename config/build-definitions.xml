@@ -9,6 +9,27 @@ Defines global properties and useful macros.
 This script is included in /build.xml and /config/update-dependencies.xml.
 -->
 <project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
+    <property name="bin.ant" location="bin/classes/ant" relative="true"/>
+
+    <!-- Compile custom Ant tasks -->
+    <mkdir dir="bin/classes/ant"/>
+    <javac
+        sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8" includeantruntime="false" nowarn="true"
+
+        destdir="bin/classes/ant"
+        classpath="${ant.core.lib}"
+
+        srcdir="modules/ant/src/main/java"
+        includes="org/lwjgl/**"
+
+        taskname="javac: Custom Ant Tasks"
+    />
+
+    <!-- Define custom Ant tasks -->
+    <taskdef name="logLevel" classname="org.lwjgl.SetLogLevel" classpath="${bin.ant}"/>
+    <taskdef name="bindingConfig" classname="org.lwjgl.BindingConfig" classpath="${bin.ant}"/>
+    <taskdef name="detectJDKVersion" classname="org.lwjgl.DetectJDKVersion" classpath="${bin.ant}"/>
+
     <property environment="env"/>
 
     <!--
@@ -104,13 +125,11 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <property name="module.lwjgl" location="modules/lwjgl" relative="true"/>
 
-    <property name="src.ant" location="modules/ant/src/main" relative="true"/>
     <property name="src.extract" location="modules/extract/src/main" relative="true"/>
     <property name="src.generator" location="modules/generator/src/main" relative="true"/>
 
     <property name="test.resources" location="modules/samples/src/test/resources" relative="true"/>
 
-    <property name="bin.ant" location="bin/classes/ant" relative="true"/>
     <property name="bin.extract" location="bin/classes/extract" relative="true"/>
     <property name="bin.generator" location="bin/classes/generator" relative="true"/>
     <property name="bin.javadoc" location="bin/javadoc" relative="true"/>
@@ -157,32 +176,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <property name="lib.native" location="${lib}/native/${platform}/${build.arch}" relative="true"/>
 
-    <!--
-    Detect version of JDK running the Ant build.
-
-    VNUM = [1-9][0-9]*((\.0)*\.[1-9][0-9]*)*
-    PRE = [a-zA-Z0-9]+
-    java.version = $VNUM(\-$PRE)?
-    -->
-    <local name="java.version.regex"/>
-    <property name="java.version.regex" value="((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/> <!-- without the major number -->
-
-    <condition property="jdk24">                             <matches string="${java.version}" pattern="^24${java.version.regex}$"/>     </condition>
-    <condition property="jdk23"><or><isset property="jdk24"/><matches string="${java.version}" pattern="^23${java.version.regex}$"/></or></condition>
-    <condition property="jdk22"><or><isset property="jdk23"/><matches string="${java.version}" pattern="^22${java.version.regex}$"/></or></condition>
-    <condition property="jdk21"><or><isset property="jdk22"/><matches string="${java.version}" pattern="^21${java.version.regex}$"/></or></condition>
-    <condition property="jdk20"><or><isset property="jdk21"/><matches string="${java.version}" pattern="^20${java.version.regex}$"/></or></condition>
-    <condition property="jdk19"><or><isset property="jdk20"/><matches string="${java.version}" pattern="^19${java.version.regex}$"/></or></condition>
-    <condition property="jdk18"><or><isset property="jdk19"/><matches string="${java.version}" pattern="^18${java.version.regex}$"/></or></condition>
-    <condition property="jdk17"><or><isset property="jdk18"/><matches string="${java.version}" pattern="^17${java.version.regex}$"/></or></condition>
-    <condition property="jdk16"><or><isset property="jdk17"/><matches string="${java.version}" pattern="^16${java.version.regex}$"/></or></condition>
-    <condition property="jdk15"><or><isset property="jdk16"/><matches string="${java.version}" pattern="^15${java.version.regex}$"/></or></condition>
-    <condition property="jdk14"><or><isset property="jdk15"/><matches string="${java.version}" pattern="^14${java.version.regex}$"/></or></condition>
-    <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^13${java.version.regex}$"/></or></condition>
-    <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^12${java.version.regex}$"/></or></condition>
-    <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^11${java.version.regex}$"/></or></condition>
-    <condition property="jdk10"><or><isset property="jdk11"/><matches string="${java.version}" pattern="^10${java.version.regex}$"/></or></condition>
-    <condition property= "jdk9"><or><isset property="jdk10"/><matches string="${java.version}" pattern= "^9${java.version.regex}$"/></or></condition>
+    <detectJDKVersion/>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
     <condition property="core.java23"><isset property="core.java24"/></condition>
@@ -204,9 +198,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.native" location="bin/${platform}/${build.arch}" relative="true"/>
 
     <import file="build-bindings.xml"/>
+    <bindingConfig/>
 
     <presetdef name="lwjgl.javac">
-        <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8">
+        <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8" includeantruntime="false">
             <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar"' if:set="set-boot-class-path"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
@@ -214,7 +209,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </presetdef>
 
     <presetdef name="lwjgl.javac11">
-        <javac sourcepath="" debug="yes" encoding="UTF-8">
+        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 11"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
@@ -222,7 +217,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </presetdef>
 
     <presetdef name="lwjgl.javac17">
-        <javac sourcepath="" debug="yes" encoding="UTF-8">
+        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 17"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>

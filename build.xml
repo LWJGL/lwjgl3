@@ -27,22 +27,6 @@
 
         <mkdir-symlink dir="bin"/>
 
-        <!-- Compile custom Ant tasks -->
-        <mkdir dir="${bin.ant}"/>
-        <lwjgl.javac
-            destdir="${bin.ant}"
-            classpath="${ant.core.lib}"
-
-            srcdir="${src.ant}/java"
-            includes="org/lwjgl/**"
-
-            taskname="javac: Custom Ant Tasks"
-        />
-
-        <taskdef name="logLevel" classname="org.lwjgl.SetLogLevel" classpath="${bin.ant}"/>
-        <taskdef name="bindingConfig" classname="org.lwjgl.BindingConfig" classpath="${bin.ant}"/>
-        <bindingConfig/>
-
         <ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
         <taskdef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>
