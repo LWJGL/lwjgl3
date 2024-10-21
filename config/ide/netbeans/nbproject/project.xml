@@ -628,6 +628,12 @@ auxiliary.show.customizer.message=<message>
                 <source-level>17</source-level>
             </compilation-unit>
             <compilation-unit>
+                <package-root>modules/lwjgl/core21/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/core21/src/main/java</classpath>
+                <built-to>bin/classes/lwjgl/core/META-INF/versions/21</built-to>
+                <source-level>21</source-level>
+            </compilation-unit>
+            <compilation-unit>
                 <package-root>modules/lwjgl/cuda/src/generated/java</package-root>
                 <classpath mode="compile">modules/lwjgl/cuda/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
                 <built-to>bin/classes/lwjgl/cuda</built-to>
