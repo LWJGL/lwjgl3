@@ -44,7 +44,7 @@ final class MemoryManage {
                 Class<?> allocatorClass = Class.forName(className);
                 return (MemoryAllocator)allocatorClass.getConstructor().newInstance();
             } catch (Throwable t) {
-                if (Checks.DEBUG && allocator != null) {
+                if (Checks.DEBUG && (allocator != null || !(t instanceof ClassNotFoundException))) {
                     t.printStackTrace(DEBUG_STREAM);
                 }
                 apiLog(String.format("Warning: Failed to instantiate memory allocator: %s. Using the system default.", className));
