@@ -151,8 +151,11 @@ public final class ThreadLocalUtil {
             case JNI_VERSION_21:
                 jniCallCount = 232;
                 break;
+            case JNI_VERSION_24:
+                jniCallCount = 233;
+                break;
             default:
-                jniCallCount = 232;
+                jniCallCount = 233;
                 DEBUG_STREAM
                     .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
         }
