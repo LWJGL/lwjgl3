@@ -418,6 +418,11 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_LAUNCH_PARAMS getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -480,6 +480,11 @@ public class AIMatrix4x4 extends Struct<AIMatrix4x4> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected AIMatrix4x4 getElementFactory() {
             return ELEMENT_FACTORY;
         }

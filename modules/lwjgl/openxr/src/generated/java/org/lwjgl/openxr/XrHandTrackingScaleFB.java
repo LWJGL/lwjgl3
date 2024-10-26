@@ -309,6 +309,11 @@ public class XrHandTrackingScaleFB extends Struct<XrHandTrackingScaleFB> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrHandTrackingScaleFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

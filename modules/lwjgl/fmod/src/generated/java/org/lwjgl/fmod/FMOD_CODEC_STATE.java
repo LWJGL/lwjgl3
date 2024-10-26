@@ -312,6 +312,11 @@ public class FMOD_CODEC_STATE extends Struct<FMOD_CODEC_STATE> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_CODEC_STATE getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -335,6 +335,11 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_STUDIO_USER_PROPERTY getElementFactory() {
             return ELEMENT_FACTORY;
         }

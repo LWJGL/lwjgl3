@@ -274,6 +274,11 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_topology_membind_support getElementFactory() {
             return ELEMENT_FACTORY;
         }

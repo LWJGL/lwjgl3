@@ -317,6 +317,11 @@ public class SECURITY_ATTRIBUTES extends Struct<SECURITY_ATTRIBUTES> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SECURITY_ATTRIBUTES getElementFactory() {
             return ELEMENT_FACTORY;
         }

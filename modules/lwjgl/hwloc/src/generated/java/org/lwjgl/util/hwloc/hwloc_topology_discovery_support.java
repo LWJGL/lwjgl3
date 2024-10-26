@@ -184,6 +184,11 @@ public class hwloc_topology_discovery_support extends Struct<hwloc_topology_disc
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_topology_discovery_support getElementFactory() {
             return ELEMENT_FACTORY;
         }

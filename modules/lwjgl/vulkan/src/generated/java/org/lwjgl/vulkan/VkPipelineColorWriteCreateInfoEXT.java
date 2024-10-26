@@ -335,6 +335,11 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineColorWriteCreateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

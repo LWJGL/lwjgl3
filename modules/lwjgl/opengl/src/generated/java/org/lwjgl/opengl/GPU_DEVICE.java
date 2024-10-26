@@ -305,6 +305,11 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected GPU_DEVICE getElementFactory() {
             return ELEMENT_FACTORY;
         }

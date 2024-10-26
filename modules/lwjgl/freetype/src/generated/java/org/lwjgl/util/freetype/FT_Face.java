@@ -393,6 +393,11 @@ public class FT_Face extends Struct<FT_Face> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Face getElementFactory() {
             return ELEMENT_FACTORY;
         }

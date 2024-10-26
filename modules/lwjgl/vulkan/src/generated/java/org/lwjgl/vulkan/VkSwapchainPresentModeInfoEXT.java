@@ -335,6 +335,11 @@ public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentMode
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSwapchainPresentModeInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -287,6 +287,11 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct<VkQueueFamilyCh
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkQueueFamilyCheckpointProperties2NV getElementFactory() {
             return ELEMENT_FACTORY;
         }

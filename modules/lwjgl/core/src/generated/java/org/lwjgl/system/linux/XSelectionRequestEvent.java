@@ -414,6 +414,11 @@ public class XSelectionRequestEvent extends Struct<XSelectionRequestEvent> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XSelectionRequestEvent getElementFactory() {
             return ELEMENT_FACTORY;
         }

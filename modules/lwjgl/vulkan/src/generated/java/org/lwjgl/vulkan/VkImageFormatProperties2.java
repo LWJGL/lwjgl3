@@ -334,6 +334,11 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageFormatProperties2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

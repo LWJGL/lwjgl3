@@ -253,6 +253,11 @@ public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkRenderPassAttachmentBeginInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

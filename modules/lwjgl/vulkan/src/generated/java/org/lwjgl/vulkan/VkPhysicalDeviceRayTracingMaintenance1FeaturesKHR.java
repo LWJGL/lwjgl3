@@ -317,6 +317,11 @@ public class VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR extends Struct<Vk
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

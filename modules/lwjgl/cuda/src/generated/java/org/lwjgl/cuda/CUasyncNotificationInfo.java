@@ -265,6 +265,11 @@ public class CUasyncNotificationInfo extends Struct<CUasyncNotificationInfo> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUasyncNotificationInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

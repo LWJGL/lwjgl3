@@ -254,6 +254,11 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkConformanceVersionKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -203,6 +203,11 @@ public class FT_Size_Metrics extends Struct<FT_Size_Metrics> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Size_Metrics getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -280,6 +280,11 @@ public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VmaDetailedStatistics getElementFactory() {
             return ELEMENT_FACTORY;
         }

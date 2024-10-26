@@ -282,6 +282,11 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrColor3f getElementFactory() {
             return ELEMENT_FACTORY;
         }

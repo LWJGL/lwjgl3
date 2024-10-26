@@ -318,6 +318,11 @@ public class XrSpatialAnchorsDeleteCompletionDetailsML extends Struct<XrSpatialA
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSpatialAnchorsDeleteCompletionDetailsML getElementFactory() {
             return ELEMENT_FACTORY;
         }

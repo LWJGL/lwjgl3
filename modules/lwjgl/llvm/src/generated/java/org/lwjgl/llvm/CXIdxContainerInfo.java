@@ -240,6 +240,11 @@ public class CXIdxContainerInfo extends Struct<CXIdxContainerInfo> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CXIdxContainerInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

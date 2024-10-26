@@ -475,6 +475,11 @@ public class XSetWindowAttributes extends Struct<XSetWindowAttributes> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XSetWindowAttributes getElementFactory() {
             return ELEMENT_FACTORY;
         }

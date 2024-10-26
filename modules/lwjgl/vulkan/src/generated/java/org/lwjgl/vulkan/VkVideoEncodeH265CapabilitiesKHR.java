@@ -437,6 +437,11 @@ public class VkVideoEncodeH265CapabilitiesKHR extends Struct<VkVideoEncodeH265Ca
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoEncodeH265CapabilitiesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

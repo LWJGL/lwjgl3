@@ -475,6 +475,11 @@ public class StdVideoAV1SequenceHeaderFlags extends Struct<StdVideoAV1SequenceHe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1SequenceHeaderFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

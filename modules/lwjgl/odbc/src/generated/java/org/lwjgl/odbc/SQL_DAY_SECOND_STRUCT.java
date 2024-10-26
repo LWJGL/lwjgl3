@@ -328,6 +328,11 @@ public class SQL_DAY_SECOND_STRUCT extends Struct<SQL_DAY_SECOND_STRUCT> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_DAY_SECOND_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

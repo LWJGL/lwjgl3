@@ -146,6 +146,11 @@ public class MLCoordinateFrameUID extends Struct<MLCoordinateFrameUID> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected MLCoordinateFrameUID getElementFactory() {
             return ELEMENT_FACTORY;
         }

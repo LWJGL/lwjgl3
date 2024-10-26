@@ -531,6 +531,11 @@ public class StdVideoEncodeH264WeightTable extends Struct<StdVideoEncodeH264Weig
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoEncodeH264WeightTable getElementFactory() {
             return ELEMENT_FACTORY;
         }

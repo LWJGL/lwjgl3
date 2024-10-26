@@ -253,6 +253,11 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkFramebufferAttachmentsCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

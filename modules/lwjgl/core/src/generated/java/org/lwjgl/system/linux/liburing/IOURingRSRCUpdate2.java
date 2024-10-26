@@ -307,6 +307,11 @@ public class IOURingRSRCUpdate2 extends Struct<IOURingRSRCUpdate2> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected IOURingRSRCUpdate2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

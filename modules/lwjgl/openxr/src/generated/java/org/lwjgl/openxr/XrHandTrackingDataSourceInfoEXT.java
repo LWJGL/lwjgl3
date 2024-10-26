@@ -328,6 +328,11 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrHandTrackingDataSourceInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

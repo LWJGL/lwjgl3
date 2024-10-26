@@ -279,6 +279,11 @@ public class RenderModel extends Struct<RenderModel> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected RenderModel getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -306,6 +306,11 @@ public class XrFrameEndInfoML extends Struct<XrFrameEndInfoML> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrFrameEndInfoML getElementFactory() {
             return ELEMENT_FACTORY;
         }

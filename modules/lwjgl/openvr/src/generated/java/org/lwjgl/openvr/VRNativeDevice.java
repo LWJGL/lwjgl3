@@ -275,6 +275,11 @@ public class VRNativeDevice extends Struct<VRNativeDevice> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VRNativeDevice getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -254,6 +254,11 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceFeatures2KHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

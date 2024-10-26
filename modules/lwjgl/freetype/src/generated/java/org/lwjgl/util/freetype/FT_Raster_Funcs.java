@@ -326,6 +326,11 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Raster_Funcs getElementFactory() {
             return ELEMENT_FACTORY;
         }

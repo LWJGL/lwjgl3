@@ -428,6 +428,11 @@ public class XrCompositionLayerCylinderKHR extends Struct<XrCompositionLayerCyli
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrCompositionLayerCylinderKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

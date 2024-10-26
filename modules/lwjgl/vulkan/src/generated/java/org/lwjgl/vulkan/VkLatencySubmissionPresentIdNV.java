@@ -293,6 +293,11 @@ public class VkLatencySubmissionPresentIdNV extends Struct<VkLatencySubmissionPr
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkLatencySubmissionPresentIdNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

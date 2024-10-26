@@ -298,6 +298,11 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrInteractionProfileState getElementFactory() {
             return ELEMENT_FACTORY;
         }

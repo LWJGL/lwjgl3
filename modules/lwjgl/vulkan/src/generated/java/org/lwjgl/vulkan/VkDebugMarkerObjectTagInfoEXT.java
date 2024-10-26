@@ -394,6 +394,11 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDebugMarkerObjectTagInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

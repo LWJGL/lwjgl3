@@ -333,6 +333,11 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceSurfaceInfo2KHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -266,6 +266,11 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_PARAMETER_3DATTRIBUTES getElementFactory() {
             return ELEMENT_FACTORY;
         }

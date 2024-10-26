@@ -321,6 +321,11 @@ public class NkBuffer extends Struct<NkBuffer> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected NkBuffer getElementFactory() {
             return ELEMENT_FACTORY;
         }

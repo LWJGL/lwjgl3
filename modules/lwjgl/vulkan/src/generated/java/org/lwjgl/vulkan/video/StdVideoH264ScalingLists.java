@@ -335,6 +335,11 @@ public class StdVideoH264ScalingLists extends Struct<StdVideoH264ScalingLists> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH264ScalingLists getElementFactory() {
             return ELEMENT_FACTORY;
         }

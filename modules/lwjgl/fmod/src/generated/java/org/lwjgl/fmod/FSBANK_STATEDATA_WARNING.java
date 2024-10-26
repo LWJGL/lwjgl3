@@ -276,6 +276,11 @@ public class FSBANK_STATEDATA_WARNING extends Struct<FSBANK_STATEDATA_WARNING> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FSBANK_STATEDATA_WARNING getElementFactory() {
             return ELEMENT_FACTORY;
         }

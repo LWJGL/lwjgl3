@@ -278,6 +278,11 @@ public class hb_color_stop_t extends Struct<hb_color_stop_t> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_color_stop_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

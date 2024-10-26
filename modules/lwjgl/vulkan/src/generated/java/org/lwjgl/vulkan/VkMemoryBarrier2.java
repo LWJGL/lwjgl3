@@ -468,6 +468,11 @@ public class VkMemoryBarrier2 extends Struct<VkMemoryBarrier2> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkMemoryBarrier2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

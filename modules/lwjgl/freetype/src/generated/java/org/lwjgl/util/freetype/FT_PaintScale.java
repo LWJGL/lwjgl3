@@ -176,6 +176,11 @@ public class FT_PaintScale extends Struct<FT_PaintScale> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintScale getElementFactory() {
             return ELEMENT_FACTORY;
         }

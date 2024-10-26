@@ -263,6 +263,11 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Palette_Data getElementFactory() {
             return ELEMENT_FACTORY;
         }

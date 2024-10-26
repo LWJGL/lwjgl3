@@ -310,6 +310,11 @@ public class UIVec2 extends Struct<UIVec2> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected UIVec2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

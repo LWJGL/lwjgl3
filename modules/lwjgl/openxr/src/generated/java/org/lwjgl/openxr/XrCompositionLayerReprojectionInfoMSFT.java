@@ -300,6 +300,11 @@ public class XrCompositionLayerReprojectionInfoMSFT extends Struct<XrComposition
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrCompositionLayerReprojectionInfoMSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

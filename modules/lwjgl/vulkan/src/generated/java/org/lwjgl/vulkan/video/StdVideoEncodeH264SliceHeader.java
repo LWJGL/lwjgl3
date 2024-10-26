@@ -386,6 +386,11 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoEncodeH264SliceHeader getElementFactory() {
             return ELEMENT_FACTORY;
         }

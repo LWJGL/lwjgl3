@@ -341,6 +341,11 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkIndirectCommandsLayoutTokenEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

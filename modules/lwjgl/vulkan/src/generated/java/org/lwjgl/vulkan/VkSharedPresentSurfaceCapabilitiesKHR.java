@@ -302,6 +302,11 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct<VkSharedPresen
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSharedPresentSurfaceCapabilitiesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -246,6 +246,11 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupportEXT extends VkDe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDescriptorSetVariableDescriptorCountLayoutSupportEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

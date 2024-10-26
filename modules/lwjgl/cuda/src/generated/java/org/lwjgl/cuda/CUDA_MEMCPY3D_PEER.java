@@ -638,6 +638,11 @@ public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_MEMCPY3D_PEER getElementFactory() {
             return ELEMENT_FACTORY;
         }

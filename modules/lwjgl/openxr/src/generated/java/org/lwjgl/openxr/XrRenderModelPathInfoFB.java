@@ -319,6 +319,11 @@ public class XrRenderModelPathInfoFB extends Struct<XrRenderModelPathInfoFB> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrRenderModelPathInfoFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

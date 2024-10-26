@@ -227,6 +227,11 @@ public class VkShaderRequiredSubgroupSizeCreateInfoEXT extends VkPipelineShaderS
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkShaderRequiredSubgroupSizeCreateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

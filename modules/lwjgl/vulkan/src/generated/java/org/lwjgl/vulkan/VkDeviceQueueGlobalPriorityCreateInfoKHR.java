@@ -294,6 +294,11 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDeviceQueueGlobalPriorityCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

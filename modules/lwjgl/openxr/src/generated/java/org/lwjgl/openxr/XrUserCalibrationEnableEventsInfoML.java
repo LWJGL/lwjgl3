@@ -295,6 +295,11 @@ public class XrUserCalibrationEnableEventsInfoML extends Struct<XrUserCalibratio
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrUserCalibrationEnableEventsInfoML getElementFactory() {
             return ELEMENT_FACTORY;
         }

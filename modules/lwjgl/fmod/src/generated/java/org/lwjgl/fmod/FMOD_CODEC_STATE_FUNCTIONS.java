@@ -363,6 +363,11 @@ public class FMOD_CODEC_STATE_FUNCTIONS extends Struct<FMOD_CODEC_STATE_FUNCTION
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_CODEC_STATE_FUNCTIONS getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -168,6 +168,11 @@ public class FT_Incremental_Metrics extends Struct<FT_Incremental_Metrics> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Incremental_Metrics getElementFactory() {
             return ELEMENT_FACTORY;
         }

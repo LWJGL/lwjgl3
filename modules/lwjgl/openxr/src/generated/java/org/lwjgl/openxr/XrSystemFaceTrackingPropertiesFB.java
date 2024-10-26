@@ -291,6 +291,11 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct<XrSystemFaceTrackin
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSystemFaceTrackingPropertiesFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

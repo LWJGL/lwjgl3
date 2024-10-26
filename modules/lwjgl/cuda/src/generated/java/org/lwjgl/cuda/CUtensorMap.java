@@ -260,6 +260,11 @@ public class CUtensorMap extends Struct<CUtensorMap> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUtensorMap getElementFactory() {
             return ELEMENT_FACTORY;
         }

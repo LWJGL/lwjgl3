@@ -303,6 +303,11 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoSessionParametersUpdateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

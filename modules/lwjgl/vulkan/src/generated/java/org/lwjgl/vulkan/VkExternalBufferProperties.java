@@ -306,6 +306,11 @@ public class VkExternalBufferProperties extends Struct<VkExternalBufferPropertie
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkExternalBufferProperties getElementFactory() {
             return ELEMENT_FACTORY;
         }

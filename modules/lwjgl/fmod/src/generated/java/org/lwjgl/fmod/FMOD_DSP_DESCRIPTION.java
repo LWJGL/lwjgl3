@@ -643,6 +643,11 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_DESCRIPTION getElementFactory() {
             return ELEMENT_FACTORY;
         }

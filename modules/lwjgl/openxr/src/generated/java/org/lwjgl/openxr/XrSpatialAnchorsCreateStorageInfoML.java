@@ -287,6 +287,11 @@ public class XrSpatialAnchorsCreateStorageInfoML extends Struct<XrSpatialAnchors
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSpatialAnchorsCreateStorageInfoML getElementFactory() {
             return ELEMENT_FACTORY;
         }

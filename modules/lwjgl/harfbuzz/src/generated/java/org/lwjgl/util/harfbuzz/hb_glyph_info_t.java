@@ -300,6 +300,11 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_glyph_info_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

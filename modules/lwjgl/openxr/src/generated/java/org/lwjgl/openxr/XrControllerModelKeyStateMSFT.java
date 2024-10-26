@@ -303,6 +303,11 @@ public class XrControllerModelKeyStateMSFT extends Struct<XrControllerModelKeySt
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrControllerModelKeyStateMSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

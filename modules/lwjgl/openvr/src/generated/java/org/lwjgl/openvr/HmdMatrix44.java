@@ -276,6 +276,11 @@ public class HmdMatrix44 extends Struct<HmdMatrix44> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected HmdMatrix44 getElementFactory() {
             return ELEMENT_FACTORY;
         }

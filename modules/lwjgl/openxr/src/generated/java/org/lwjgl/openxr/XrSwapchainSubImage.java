@@ -302,6 +302,11 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSwapchainSubImage getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -320,6 +320,11 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrMarkerDetectorCreateInfoML getElementFactory() {
             return ELEMENT_FACTORY;
         }

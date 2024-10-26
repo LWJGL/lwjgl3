@@ -293,6 +293,11 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected OVRPoseStatef getElementFactory() {
             return ELEMENT_FACTORY;
         }

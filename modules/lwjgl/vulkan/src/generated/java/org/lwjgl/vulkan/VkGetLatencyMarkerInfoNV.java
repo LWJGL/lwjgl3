@@ -314,6 +314,11 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkGetLatencyMarkerInfoNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

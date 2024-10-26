@@ -150,6 +150,11 @@ public class FT_List extends Struct<FT_List> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_List getElementFactory() {
             return ELEMENT_FACTORY;
         }

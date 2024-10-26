@@ -493,6 +493,11 @@ public class CUDA_RESOURCE_DESC extends Struct<CUDA_RESOURCE_DESC> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_RESOURCE_DESC getElementFactory() {
             return ELEMENT_FACTORY;
         }

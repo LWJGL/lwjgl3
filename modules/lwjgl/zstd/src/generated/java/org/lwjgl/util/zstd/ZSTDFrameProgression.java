@@ -287,6 +287,11 @@ public class ZSTDFrameProgression extends Struct<ZSTDFrameProgression> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected ZSTDFrameProgression getElementFactory() {
             return ELEMENT_FACTORY;
         }

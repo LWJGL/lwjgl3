@@ -257,6 +257,11 @@ public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShad
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceFloat16Int8FeaturesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

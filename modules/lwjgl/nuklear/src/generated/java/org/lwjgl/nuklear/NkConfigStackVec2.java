@@ -155,6 +155,11 @@ class NkConfigStackVec2 extends Struct<NkConfigStackVec2> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected NkConfigStackVec2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

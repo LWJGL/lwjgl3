@@ -642,6 +642,11 @@ public class VkImageMemoryBarrier2 extends Struct<VkImageMemoryBarrier2> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageMemoryBarrier2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

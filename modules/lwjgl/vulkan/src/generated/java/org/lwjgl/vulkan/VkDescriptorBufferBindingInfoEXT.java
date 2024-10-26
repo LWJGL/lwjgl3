@@ -330,6 +330,11 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDescriptorBufferBindingInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

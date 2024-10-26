@@ -350,6 +350,11 @@ public class VkVertexInputBindingDescription2EXT extends Struct<VkVertexInputBin
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVertexInputBindingDescription2EXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

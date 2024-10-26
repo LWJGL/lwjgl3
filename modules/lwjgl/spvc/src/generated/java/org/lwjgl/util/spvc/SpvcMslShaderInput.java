@@ -302,6 +302,11 @@ public class SpvcMslShaderInput extends Struct<SpvcMslShaderInput> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SpvcMslShaderInput getElementFactory() {
             return ELEMENT_FACTORY;
         }

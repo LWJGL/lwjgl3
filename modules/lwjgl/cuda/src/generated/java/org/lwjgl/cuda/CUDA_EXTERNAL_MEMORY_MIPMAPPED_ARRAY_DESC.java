@@ -331,6 +331,11 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct<CUDA_EXTER
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC getElementFactory() {
             return ELEMENT_FACTORY;
         }

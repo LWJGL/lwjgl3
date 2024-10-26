@@ -411,6 +411,11 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected AISkeletonBone getElementFactory() {
             return ELEMENT_FACTORY;
         }

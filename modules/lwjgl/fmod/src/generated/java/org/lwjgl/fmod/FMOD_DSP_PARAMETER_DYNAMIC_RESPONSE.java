@@ -279,6 +279,11 @@ public class FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE extends Struct<FMOD_DSP_PARAMET
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE getElementFactory() {
             return ELEMENT_FACTORY;
         }

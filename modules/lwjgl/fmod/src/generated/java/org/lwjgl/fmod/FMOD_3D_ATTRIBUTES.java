@@ -298,6 +298,11 @@ public class FMOD_3D_ATTRIBUTES extends Struct<FMOD_3D_ATTRIBUTES> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_3D_ATTRIBUTES getElementFactory() {
             return ELEMENT_FACTORY;
         }

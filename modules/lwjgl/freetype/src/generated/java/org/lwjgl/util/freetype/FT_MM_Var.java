@@ -260,6 +260,11 @@ public class FT_MM_Var extends Struct<FT_MM_Var> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_MM_Var getElementFactory() {
             return ELEMENT_FACTORY;
         }

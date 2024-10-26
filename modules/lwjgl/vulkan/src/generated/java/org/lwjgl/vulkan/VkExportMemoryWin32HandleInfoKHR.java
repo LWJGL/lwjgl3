@@ -389,6 +389,11 @@ public class VkExportMemoryWin32HandleInfoKHR extends Struct<VkExportMemoryWin32
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkExportMemoryWin32HandleInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -266,6 +266,11 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected IOVec getElementFactory() {
             return ELEMENT_FACTORY;
         }

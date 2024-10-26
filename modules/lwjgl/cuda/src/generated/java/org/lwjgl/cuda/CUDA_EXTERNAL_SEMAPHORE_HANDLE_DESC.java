@@ -365,6 +365,11 @@ public class CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC extends Struct<CUDA_EXTERNAL_SE
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC getElementFactory() {
             return ELEMENT_FACTORY;
         }

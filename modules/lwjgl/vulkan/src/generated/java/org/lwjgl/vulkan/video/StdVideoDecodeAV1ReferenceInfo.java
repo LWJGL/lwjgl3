@@ -329,6 +329,11 @@ public class StdVideoDecodeAV1ReferenceInfo extends Struct<StdVideoDecodeAV1Refe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoDecodeAV1ReferenceInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

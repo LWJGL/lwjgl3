@@ -229,6 +229,11 @@ public class XrExtent3DfEXT extends XrExtent3Df {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrExtent3DfEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

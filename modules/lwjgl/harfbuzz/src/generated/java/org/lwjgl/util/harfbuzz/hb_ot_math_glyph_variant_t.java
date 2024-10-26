@@ -266,6 +266,11 @@ public class hb_ot_math_glyph_variant_t extends Struct<hb_ot_math_glyph_variant_
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_ot_math_glyph_variant_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

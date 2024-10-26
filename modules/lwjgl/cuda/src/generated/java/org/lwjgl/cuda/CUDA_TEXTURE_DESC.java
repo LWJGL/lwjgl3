@@ -447,6 +447,11 @@ public class CUDA_TEXTURE_DESC extends Struct<CUDA_TEXTURE_DESC> implements Nati
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_TEXTURE_DESC getElementFactory() {
             return ELEMENT_FACTORY;
         }

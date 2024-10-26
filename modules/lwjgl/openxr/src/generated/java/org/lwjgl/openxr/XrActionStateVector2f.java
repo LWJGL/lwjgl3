@@ -344,6 +344,11 @@ public class XrActionStateVector2f extends Struct<XrActionStateVector2f> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrActionStateVector2f getElementFactory() {
             return ELEMENT_FACTORY;
         }

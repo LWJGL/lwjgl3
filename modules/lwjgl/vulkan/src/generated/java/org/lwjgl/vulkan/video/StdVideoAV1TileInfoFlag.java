@@ -250,6 +250,11 @@ public class StdVideoAV1TileInfoFlag extends Struct<StdVideoAV1TileInfoFlag> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1TileInfoFlag getElementFactory() {
             return ELEMENT_FACTORY;
         }

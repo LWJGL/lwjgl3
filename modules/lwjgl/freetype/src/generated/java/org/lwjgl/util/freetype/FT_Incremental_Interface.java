@@ -279,6 +279,11 @@ public class FT_Incremental_Interface extends Struct<FT_Incremental_Interface> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Incremental_Interface getElementFactory() {
             return ELEMENT_FACTORY;
         }

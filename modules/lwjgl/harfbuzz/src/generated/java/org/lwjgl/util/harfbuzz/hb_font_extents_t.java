@@ -337,6 +337,11 @@ public class hb_font_extents_t extends Struct<hb_font_extents_t> implements Nati
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_font_extents_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -238,6 +238,11 @@ public class CID_FaceDict extends Struct<CID_FaceDict> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CID_FaceDict getElementFactory() {
             return ELEMENT_FACTORY;
         }

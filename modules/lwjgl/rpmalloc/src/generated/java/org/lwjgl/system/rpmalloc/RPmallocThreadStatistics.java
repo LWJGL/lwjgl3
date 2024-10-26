@@ -321,6 +321,11 @@ public class RPmallocThreadStatistics extends Struct<RPmallocThreadStatistics> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected RPmallocThreadStatistics getElementFactory() {
             return ELEMENT_FACTORY;
         }
@@ -550,6 +555,11 @@ public class RPmallocThreadStatistics extends Struct<RPmallocThreadStatistics> i
             }
     
             @Override
+            protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+                return new Buffer(address, container, mark, position, limit, capacity);
+            }
+    
+            @Override
             protected span_use getElementFactory() {
                 return ELEMENT_FACTORY;
             }
@@ -772,6 +782,11 @@ public class RPmallocThreadStatistics extends Struct<RPmallocThreadStatistics> i
             @Override
             protected Buffer self() {
                 return this;
+            }
+    
+            @Override
+            protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+                return new Buffer(address, container, mark, position, limit, capacity);
             }
     
             @Override

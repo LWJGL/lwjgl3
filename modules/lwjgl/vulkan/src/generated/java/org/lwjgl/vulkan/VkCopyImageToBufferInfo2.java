@@ -435,6 +435,11 @@ public class VkCopyImageToBufferInfo2 extends Struct<VkCopyImageToBufferInfo2> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkCopyImageToBufferInfo2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -187,6 +187,11 @@ public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Bitmap_Size getElementFactory() {
             return ELEMENT_FACTORY;
         }

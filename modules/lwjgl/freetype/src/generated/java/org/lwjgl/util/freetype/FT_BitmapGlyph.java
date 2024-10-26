@@ -167,6 +167,11 @@ public class FT_BitmapGlyph extends Struct<FT_BitmapGlyph> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_BitmapGlyph getElementFactory() {
             return ELEMENT_FACTORY;
         }

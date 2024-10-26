@@ -362,6 +362,11 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPE
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_ARRAY_SPARSE_PROPERTIES getElementFactory() {
             return ELEMENT_FACTORY;
         }

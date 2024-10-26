@@ -147,6 +147,11 @@ public class hwloc_location_u extends Struct<hwloc_location_u> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_location_u getElementFactory() {
             return ELEMENT_FACTORY;
         }

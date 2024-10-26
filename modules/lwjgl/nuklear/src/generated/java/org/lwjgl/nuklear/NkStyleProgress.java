@@ -540,6 +540,11 @@ public class NkStyleProgress extends Struct<NkStyleProgress> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected NkStyleProgress getElementFactory() {
             return ELEMENT_FACTORY;
         }

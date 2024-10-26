@@ -364,6 +364,11 @@ public class FMOD_DSP_STATE extends Struct<FMOD_DSP_STATE> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_STATE getElementFactory() {
             return ELEMENT_FACTORY;
         }

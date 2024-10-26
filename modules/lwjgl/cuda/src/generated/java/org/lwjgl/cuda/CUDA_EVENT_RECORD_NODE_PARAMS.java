@@ -250,6 +250,11 @@ public class CUDA_EVENT_RECORD_NODE_PARAMS extends Struct<CUDA_EVENT_RECORD_NODE
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_EVENT_RECORD_NODE_PARAMS getElementFactory() {
             return ELEMENT_FACTORY;
         }

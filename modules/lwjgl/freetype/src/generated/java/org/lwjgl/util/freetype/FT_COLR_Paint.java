@@ -334,6 +334,11 @@ public class FT_COLR_Paint extends Struct<FT_COLR_Paint> implements NativeResour
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_COLR_Paint getElementFactory() {
             return ELEMENT_FACTORY;
         }

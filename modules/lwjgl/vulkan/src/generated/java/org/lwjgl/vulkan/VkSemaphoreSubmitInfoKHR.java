@@ -250,6 +250,11 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSemaphoreSubmitInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

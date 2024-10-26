@@ -226,6 +226,11 @@ public class FTC_SBit extends Struct<FTC_SBit> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FTC_SBit getElementFactory() {
             return ELEMENT_FACTORY;
         }

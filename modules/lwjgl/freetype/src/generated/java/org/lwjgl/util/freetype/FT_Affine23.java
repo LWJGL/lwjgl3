@@ -185,6 +185,11 @@ public class FT_Affine23 extends Struct<FT_Affine23> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Affine23 getElementFactory() {
             return ELEMENT_FACTORY;
         }

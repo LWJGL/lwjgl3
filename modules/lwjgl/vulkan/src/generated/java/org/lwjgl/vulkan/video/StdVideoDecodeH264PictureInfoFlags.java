@@ -311,6 +311,11 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH26
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoDecodeH264PictureInfoFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

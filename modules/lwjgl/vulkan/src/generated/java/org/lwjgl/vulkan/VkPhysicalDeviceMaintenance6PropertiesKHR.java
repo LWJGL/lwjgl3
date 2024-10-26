@@ -305,6 +305,11 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceMaintenance6PropertiesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -464,6 +464,11 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct<XrSwapchainStateSa
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSwapchainStateSamplerOpenGLESFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

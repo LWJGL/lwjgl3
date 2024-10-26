@@ -298,6 +298,11 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Size getElementFactory() {
             return ELEMENT_FACTORY;
         }

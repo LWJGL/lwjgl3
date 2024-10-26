@@ -267,6 +267,11 @@ public class FT_SfntName extends Struct<FT_SfntName> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_SfntName getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -147,6 +147,11 @@ public class hwloc_memory_page_type_s extends Struct<hwloc_memory_page_type_s> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_memory_page_type_s getElementFactory() {
             return ELEMENT_FACTORY;
         }

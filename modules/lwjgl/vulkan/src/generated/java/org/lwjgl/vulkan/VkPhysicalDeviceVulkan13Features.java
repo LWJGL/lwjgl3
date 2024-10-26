@@ -553,6 +553,11 @@ public class VkPhysicalDeviceVulkan13Features extends Struct<VkPhysicalDeviceVul
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceVulkan13Features getElementFactory() {
             return ELEMENT_FACTORY;
         }

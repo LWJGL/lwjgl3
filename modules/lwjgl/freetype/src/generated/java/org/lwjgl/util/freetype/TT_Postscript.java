@@ -212,6 +212,11 @@ public class TT_Postscript extends Struct<TT_Postscript> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected TT_Postscript getElementFactory() {
             return ELEMENT_FACTORY;
         }

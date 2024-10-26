@@ -428,6 +428,11 @@ public class VkImportFenceWin32HandleInfoKHR extends Struct<VkImportFenceWin32Ha
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImportFenceWin32HandleInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

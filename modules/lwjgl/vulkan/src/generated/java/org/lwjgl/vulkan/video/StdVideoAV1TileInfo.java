@@ -398,6 +398,11 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1TileInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

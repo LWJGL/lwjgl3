@@ -229,6 +229,11 @@ public class XrColor3fKHR extends XrColor3f {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrColor3fKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

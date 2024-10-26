@@ -362,6 +362,11 @@ public class VkDebugReportCallbackCreateInfoEXT extends Struct<VkDebugReportCall
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDebugReportCallbackCreateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

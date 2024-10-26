@@ -502,6 +502,11 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected IOURingSQ getElementFactory() {
             return ELEMENT_FACTORY;
         }

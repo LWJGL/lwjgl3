@@ -285,6 +285,11 @@ public class VkVideoEncodeH264FrameSizeKHR extends Struct<VkVideoEncodeH264Frame
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoEncodeH264FrameSizeKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

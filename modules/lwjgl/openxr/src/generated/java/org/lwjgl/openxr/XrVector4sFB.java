@@ -315,6 +315,11 @@ public class XrVector4sFB extends Struct<XrVector4sFB> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrVector4sFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

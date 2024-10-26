@@ -139,6 +139,11 @@ public class FT_PaintColrLayers extends Struct<FT_PaintColrLayers> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintColrLayers getElementFactory() {
             return ELEMENT_FACTORY;
         }

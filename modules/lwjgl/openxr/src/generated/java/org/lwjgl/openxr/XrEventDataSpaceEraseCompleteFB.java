@@ -338,6 +338,11 @@ public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEras
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrEventDataSpaceEraseCompleteFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

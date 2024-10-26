@@ -312,6 +312,11 @@ public class VkVideoCodingControlInfoKHR extends Struct<VkVideoCodingControlInfo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoCodingControlInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

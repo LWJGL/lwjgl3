@@ -402,6 +402,11 @@ public class StdVideoH265VideoParameterSet extends Struct<StdVideoH265VideoParam
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH265VideoParameterSet getElementFactory() {
             return ELEMENT_FACTORY;
         }

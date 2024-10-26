@@ -307,6 +307,11 @@ public class XrSessionCreateInfoOverlayEXTX extends Struct<XrSessionCreateInfoOv
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSessionCreateInfoOverlayEXTX getElementFactory() {
             return ELEMENT_FACTORY;
         }

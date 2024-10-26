@@ -370,6 +370,11 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_var_int_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -262,6 +262,11 @@ public class FMOD_DSP_PARAMETER_ATTENUATION_RANGE extends Struct<FMOD_DSP_PARAME
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_PARAMETER_ATTENUATION_RANGE getElementFactory() {
             return ELEMENT_FACTORY;
         }

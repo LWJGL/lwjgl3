@@ -264,6 +264,11 @@ public class CUDA_POINTER_ATTRIBUTE_P2P_TOKENS extends Struct<CUDA_POINTER_ATTRI
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_POINTER_ATTRIBUTE_P2P_TOKENS getElementFactory() {
             return ELEMENT_FACTORY;
         }

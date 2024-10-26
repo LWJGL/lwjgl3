@@ -287,6 +287,11 @@ public class StdVideoH265VpsFlags extends Struct<StdVideoH265VpsFlags> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH265VpsFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

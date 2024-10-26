@@ -190,6 +190,11 @@ public class FT_Var_Axis extends Struct<FT_Var_Axis> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Var_Axis getElementFactory() {
             return ELEMENT_FACTORY;
         }

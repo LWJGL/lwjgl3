@@ -595,6 +595,11 @@ public class StdVideoDecodeAV1PictureInfoFlags extends Struct<StdVideoDecodeAV1P
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoDecodeAV1PictureInfoFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

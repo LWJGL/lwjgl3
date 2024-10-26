@@ -147,6 +147,11 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CXTUResourceUsageEntry getElementFactory() {
             return ELEMENT_FACTORY;
         }

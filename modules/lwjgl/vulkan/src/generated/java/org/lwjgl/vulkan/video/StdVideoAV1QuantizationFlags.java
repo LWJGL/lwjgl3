@@ -271,6 +271,11 @@ public class StdVideoAV1QuantizationFlags extends Struct<StdVideoAV1Quantization
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1QuantizationFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

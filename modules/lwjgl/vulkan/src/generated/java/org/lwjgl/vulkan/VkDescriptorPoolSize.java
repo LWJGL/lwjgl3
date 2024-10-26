@@ -311,6 +311,11 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDescriptorPoolSize getElementFactory() {
             return ELEMENT_FACTORY;
         }

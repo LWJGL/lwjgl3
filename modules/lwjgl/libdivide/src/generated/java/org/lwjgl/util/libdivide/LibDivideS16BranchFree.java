@@ -265,6 +265,11 @@ public class LibDivideS16BranchFree extends Struct<LibDivideS16BranchFree> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected LibDivideS16BranchFree getElementFactory() {
             return ELEMENT_FACTORY;
         }

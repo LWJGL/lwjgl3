@@ -336,6 +336,11 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrEventDataUserPresenceChangedEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

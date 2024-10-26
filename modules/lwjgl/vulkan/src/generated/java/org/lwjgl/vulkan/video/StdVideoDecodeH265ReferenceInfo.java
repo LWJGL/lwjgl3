@@ -265,6 +265,11 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct<StdVideoDecodeH265Re
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoDecodeH265ReferenceInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

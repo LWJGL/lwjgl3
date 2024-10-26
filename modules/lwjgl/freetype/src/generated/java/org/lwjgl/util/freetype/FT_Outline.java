@@ -268,6 +268,11 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Outline getElementFactory() {
             return ELEMENT_FACTORY;
         }

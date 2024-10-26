@@ -327,6 +327,11 @@ public class XrControllerModelPropertiesMSFT extends Struct<XrControllerModelPro
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrControllerModelPropertiesMSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -149,6 +149,11 @@ public class FT_ColorIndex extends Struct<FT_ColorIndex> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_ColorIndex getElementFactory() {
             return ELEMENT_FACTORY;
         }

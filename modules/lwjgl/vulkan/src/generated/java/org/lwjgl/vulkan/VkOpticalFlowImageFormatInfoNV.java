@@ -295,6 +295,11 @@ public class VkOpticalFlowImageFormatInfoNV extends Struct<VkOpticalFlowImageFor
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkOpticalFlowImageFormatInfoNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

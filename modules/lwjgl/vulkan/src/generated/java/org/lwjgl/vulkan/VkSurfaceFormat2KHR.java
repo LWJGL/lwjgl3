@@ -319,6 +319,11 @@ public class VkSurfaceFormat2KHR extends Struct<VkSurfaceFormat2KHR> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSurfaceFormat2KHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

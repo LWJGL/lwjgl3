@@ -554,6 +554,11 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_OUTPUT_DESCRIPTION getElementFactory() {
             return ELEMENT_FACTORY;
         }

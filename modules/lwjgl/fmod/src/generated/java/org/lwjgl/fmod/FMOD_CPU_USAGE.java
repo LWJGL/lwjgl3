@@ -318,6 +318,11 @@ public class FMOD_CPU_USAGE extends Struct<FMOD_CPU_USAGE> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_CPU_USAGE getElementFactory() {
             return ELEMENT_FACTORY;
         }

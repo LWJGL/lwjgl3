@@ -312,6 +312,11 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrExternalCameraOCULUS getElementFactory() {
             return ELEMENT_FACTORY;
         }

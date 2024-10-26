@@ -339,6 +339,11 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDescriptorGetInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

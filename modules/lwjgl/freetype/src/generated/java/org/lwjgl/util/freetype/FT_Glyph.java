@@ -163,6 +163,11 @@ public class FT_Glyph extends Struct<FT_Glyph> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Glyph getElementFactory() {
             return ELEMENT_FACTORY;
         }

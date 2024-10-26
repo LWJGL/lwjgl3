@@ -252,6 +252,11 @@ public class MeshoptMeshlet extends Struct<MeshoptMeshlet> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected MeshoptMeshlet getElementFactory() {
             return ELEMENT_FACTORY;
         }

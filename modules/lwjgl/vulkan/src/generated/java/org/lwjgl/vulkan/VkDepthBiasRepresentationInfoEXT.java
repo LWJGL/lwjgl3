@@ -313,6 +313,11 @@ public class VkDepthBiasRepresentationInfoEXT extends Struct<VkDepthBiasRepresen
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDepthBiasRepresentationInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

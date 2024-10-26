@@ -335,6 +335,11 @@ public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH264PpsFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

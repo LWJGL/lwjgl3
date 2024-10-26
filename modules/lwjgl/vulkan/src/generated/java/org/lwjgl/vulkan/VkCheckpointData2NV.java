@@ -299,6 +299,11 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkCheckpointData2NV getElementFactory() {
             return ELEMENT_FACTORY;
         }

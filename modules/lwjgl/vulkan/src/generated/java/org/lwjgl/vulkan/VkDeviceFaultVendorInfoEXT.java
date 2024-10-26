@@ -299,6 +299,11 @@ public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEX
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDeviceFaultVendorInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

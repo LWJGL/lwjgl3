@@ -306,6 +306,11 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected IOURingRestriction getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -384,6 +384,11 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrTriangleMeshCreateInfoFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

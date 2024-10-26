@@ -270,6 +270,11 @@ public class XrSystemTrackingProperties extends Struct<XrSystemTrackingPropertie
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSystemTrackingProperties getElementFactory() {
             return ELEMENT_FACTORY;
         }

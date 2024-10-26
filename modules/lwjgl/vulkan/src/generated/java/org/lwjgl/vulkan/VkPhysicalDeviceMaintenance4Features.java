@@ -304,6 +304,11 @@ public class VkPhysicalDeviceMaintenance4Features extends Struct<VkPhysicalDevic
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceMaintenance4Features getElementFactory() {
             return ELEMENT_FACTORY;
         }

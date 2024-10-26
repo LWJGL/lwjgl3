@@ -364,6 +364,11 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct<VkWin32SurfaceCreateInfo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkWin32SurfaceCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

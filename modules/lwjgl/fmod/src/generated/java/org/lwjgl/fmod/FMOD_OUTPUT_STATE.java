@@ -350,6 +350,11 @@ public class FMOD_OUTPUT_STATE extends Struct<FMOD_OUTPUT_STATE> implements Nati
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_OUTPUT_STATE getElementFactory() {
             return ELEMENT_FACTORY;
         }

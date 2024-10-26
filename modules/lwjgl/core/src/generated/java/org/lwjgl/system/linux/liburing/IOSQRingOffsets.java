@@ -363,6 +363,11 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected IOSQRingOffsets getElementFactory() {
             return ELEMENT_FACTORY;
         }

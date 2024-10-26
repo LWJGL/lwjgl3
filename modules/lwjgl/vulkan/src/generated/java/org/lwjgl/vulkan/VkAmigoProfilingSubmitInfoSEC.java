@@ -304,6 +304,11 @@ public class VkAmigoProfilingSubmitInfoSEC extends Struct<VkAmigoProfilingSubmit
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkAmigoProfilingSubmitInfoSEC getElementFactory() {
             return ELEMENT_FACTORY;
         }

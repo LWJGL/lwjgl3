@@ -282,6 +282,11 @@ public class XrSceneOrientedBoxBoundMSFT extends Struct<XrSceneOrientedBoxBoundM
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSceneOrientedBoxBoundMSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

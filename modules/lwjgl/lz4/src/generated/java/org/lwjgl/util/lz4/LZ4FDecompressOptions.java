@@ -322,6 +322,11 @@ public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected LZ4FDecompressOptions getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -238,6 +238,11 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected PS_FontInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

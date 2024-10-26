@@ -331,6 +331,11 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrBoundary2DFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

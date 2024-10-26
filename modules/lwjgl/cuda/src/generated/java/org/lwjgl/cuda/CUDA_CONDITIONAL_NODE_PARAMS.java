@@ -320,6 +320,11 @@ public class CUDA_CONDITIONAL_NODE_PARAMS extends Struct<CUDA_CONDITIONAL_NODE_P
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_CONDITIONAL_NODE_PARAMS getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -359,6 +359,11 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct<VkPipelineInp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineInputAssemblyStateCreateInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

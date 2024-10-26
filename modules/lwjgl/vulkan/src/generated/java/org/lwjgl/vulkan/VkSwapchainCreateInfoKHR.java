@@ -646,6 +646,11 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSwapchainCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

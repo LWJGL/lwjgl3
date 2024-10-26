@@ -295,6 +295,11 @@ public class StdVideoAV1FilmGrainFlags extends Struct<StdVideoAV1FilmGrainFlags>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1FilmGrainFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

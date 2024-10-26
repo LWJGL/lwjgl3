@@ -282,6 +282,11 @@ public class NkVec2 extends Struct<NkVec2> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected NkVec2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

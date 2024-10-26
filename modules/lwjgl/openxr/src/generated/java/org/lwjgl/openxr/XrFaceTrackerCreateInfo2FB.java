@@ -340,6 +340,11 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrFaceTrackerCreateInfo2FB getElementFactory() {
             return ELEMENT_FACTORY;
         }

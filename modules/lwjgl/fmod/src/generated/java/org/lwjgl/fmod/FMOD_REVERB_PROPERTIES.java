@@ -402,6 +402,11 @@ public class FMOD_REVERB_PROPERTIES extends Struct<FMOD_REVERB_PROPERTIES> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_REVERB_PROPERTIES getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -250,6 +250,11 @@ public class StdVideoAV1TimingInfoFlags extends Struct<StdVideoAV1TimingInfoFlag
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1TimingInfoFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

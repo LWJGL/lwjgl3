@@ -323,6 +323,11 @@ public class FMOD_DSP_METERING_INFO extends Struct<FMOD_DSP_METERING_INFO> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_DSP_METERING_INFO getElementFactory() {
             return ELEMENT_FACTORY;
         }

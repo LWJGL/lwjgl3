@@ -315,6 +315,11 @@ public class VkImageSwapchainCreateInfoKHR extends Struct<VkImageSwapchainCreate
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageSwapchainCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

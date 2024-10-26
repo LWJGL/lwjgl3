@@ -336,6 +336,11 @@ public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkTilePropertiesQCOM getElementFactory() {
             return ELEMENT_FACTORY;
         }

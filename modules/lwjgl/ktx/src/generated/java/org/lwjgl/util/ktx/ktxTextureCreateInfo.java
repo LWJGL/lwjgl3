@@ -421,6 +421,11 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected ktxTextureCreateInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

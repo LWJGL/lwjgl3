@@ -300,6 +300,11 @@ public class FT_GlyphSlot extends Struct<FT_GlyphSlot> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_GlyphSlot getElementFactory() {
             return ELEMENT_FACTORY;
         }

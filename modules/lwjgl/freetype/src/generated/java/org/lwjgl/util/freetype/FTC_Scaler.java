@@ -186,6 +186,11 @@ public class FTC_Scaler extends Struct<FTC_Scaler> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FTC_Scaler getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -529,6 +529,11 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrHandTrackingMeshFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

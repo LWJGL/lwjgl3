@@ -347,6 +347,11 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDeviceGroupDeviceCreateInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

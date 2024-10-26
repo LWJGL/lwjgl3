@@ -280,6 +280,11 @@ public class EpollData extends Struct<EpollData> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected EpollData getElementFactory() {
             return ELEMENT_FACTORY;
         }

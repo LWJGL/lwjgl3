@@ -394,6 +394,11 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct<VkBindImageMemoryDe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkBindImageMemoryDeviceGroupInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

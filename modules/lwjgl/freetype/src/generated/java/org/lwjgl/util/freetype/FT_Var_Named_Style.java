@@ -163,6 +163,11 @@ public class FT_Var_Named_Style extends Struct<FT_Var_Named_Style> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Var_Named_Style getElementFactory() {
             return ELEMENT_FACTORY;
         }

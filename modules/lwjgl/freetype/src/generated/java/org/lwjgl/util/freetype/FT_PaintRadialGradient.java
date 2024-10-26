@@ -173,6 +173,11 @@ public class FT_PaintRadialGradient extends Struct<FT_PaintRadialGradient> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintRadialGradient getElementFactory() {
             return ELEMENT_FACTORY;
         }

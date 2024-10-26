@@ -285,6 +285,11 @@ public class XrSystemMarkerUnderstandingPropertiesML extends Struct<XrSystemMark
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSystemMarkerUnderstandingPropertiesML getElementFactory() {
             return ELEMENT_FACTORY;
         }

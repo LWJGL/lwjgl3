@@ -300,6 +300,11 @@ public class XrSystemFacialTrackingPropertiesHTC extends Struct<XrSystemFacialTr
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSystemFacialTrackingPropertiesHTC getElementFactory() {
             return ELEMENT_FACTORY;
         }

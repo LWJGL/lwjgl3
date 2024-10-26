@@ -348,6 +348,11 @@ public class hb_ot_var_axis_info_t extends Struct<hb_ot_var_axis_info_t> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_ot_var_axis_info_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

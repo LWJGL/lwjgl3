@@ -358,6 +358,11 @@ public class SQL_TIMESTAMP_STRUCT extends Struct<SQL_TIMESTAMP_STRUCT> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_TIMESTAMP_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

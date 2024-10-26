@@ -298,6 +298,11 @@ public class SQL_DATE_STRUCT extends Struct<SQL_DATE_STRUCT> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_DATE_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

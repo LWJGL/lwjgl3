@@ -288,6 +288,11 @@ public class ZSTDParameters extends Struct<ZSTDParameters> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected ZSTDParameters getElementFactory() {
             return ELEMENT_FACTORY;
         }

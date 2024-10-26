@@ -200,6 +200,11 @@ public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CXIdxEntityRefInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

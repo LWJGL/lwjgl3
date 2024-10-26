@@ -331,6 +331,11 @@ public class XrHolographicWindowAttachmentMSFT extends Struct<XrHolographicWindo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrHolographicWindowAttachmentMSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

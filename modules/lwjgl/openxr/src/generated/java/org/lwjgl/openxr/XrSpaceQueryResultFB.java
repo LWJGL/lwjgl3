@@ -162,6 +162,11 @@ public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSpaceQueryResultFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

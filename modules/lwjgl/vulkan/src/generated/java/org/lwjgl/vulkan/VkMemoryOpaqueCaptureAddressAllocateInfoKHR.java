@@ -232,6 +232,11 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfoKHR extends VkMemoryOpaqueC
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkMemoryOpaqueCaptureAddressAllocateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

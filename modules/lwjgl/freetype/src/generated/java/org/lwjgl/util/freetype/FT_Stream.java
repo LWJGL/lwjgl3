@@ -363,6 +363,11 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Stream getElementFactory() {
             return ELEMENT_FACTORY;
         }

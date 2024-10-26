@@ -307,6 +307,11 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct<VkP
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

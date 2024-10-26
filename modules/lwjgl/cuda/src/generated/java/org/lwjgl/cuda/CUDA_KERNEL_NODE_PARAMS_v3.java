@@ -424,6 +424,11 @@ public class CUDA_KERNEL_NODE_PARAMS_v3 extends Struct<CUDA_KERNEL_NODE_PARAMS_v
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_KERNEL_NODE_PARAMS_v3 getElementFactory() {
             return ELEMENT_FACTORY;
         }

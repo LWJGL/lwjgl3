@@ -410,6 +410,11 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH264PictureParameterSet getElementFactory() {
             return ELEMENT_FACTORY;
         }

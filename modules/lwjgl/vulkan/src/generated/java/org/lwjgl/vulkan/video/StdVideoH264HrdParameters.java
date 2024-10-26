@@ -441,6 +441,11 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH264HrdParameters getElementFactory() {
             return ELEMENT_FACTORY;
         }

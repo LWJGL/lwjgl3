@@ -284,6 +284,11 @@ public class LibDivideS64 extends Struct<LibDivideS64> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected LibDivideS64 getElementFactory() {
             return ELEMENT_FACTORY;
         }

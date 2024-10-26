@@ -314,6 +314,11 @@ public class VkDisplayPowerInfoEXT extends Struct<VkDisplayPowerInfoEXT> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDisplayPowerInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

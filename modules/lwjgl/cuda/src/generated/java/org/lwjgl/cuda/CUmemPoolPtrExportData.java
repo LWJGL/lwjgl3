@@ -257,6 +257,11 @@ public class CUmemPoolPtrExportData extends Struct<CUmemPoolPtrExportData> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUmemPoolPtrExportData getElementFactory() {
             return ELEMENT_FACTORY;
         }

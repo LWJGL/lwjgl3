@@ -384,6 +384,11 @@ public class VkPushConstantsInfoKHR extends Struct<VkPushConstantsInfoKHR> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPushConstantsInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

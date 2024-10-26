@@ -163,6 +163,11 @@ public class FT_MM_Axis extends Struct<FT_MM_Axis> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_MM_Axis getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -327,6 +327,11 @@ public class VRTextureWithDepth extends Struct<VRTextureWithDepth> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VRTextureWithDepth getElementFactory() {
             return ELEMENT_FACTORY;
         }

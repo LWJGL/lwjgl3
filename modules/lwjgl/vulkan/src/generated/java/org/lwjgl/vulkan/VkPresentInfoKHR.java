@@ -442,6 +442,11 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPresentInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

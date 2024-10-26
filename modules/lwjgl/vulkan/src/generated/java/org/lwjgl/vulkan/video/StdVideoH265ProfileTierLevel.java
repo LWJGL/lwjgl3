@@ -280,6 +280,11 @@ public class StdVideoH265ProfileTierLevel extends Struct<StdVideoH265ProfileTier
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH265ProfileTierLevel getElementFactory() {
             return ELEMENT_FACTORY;
         }

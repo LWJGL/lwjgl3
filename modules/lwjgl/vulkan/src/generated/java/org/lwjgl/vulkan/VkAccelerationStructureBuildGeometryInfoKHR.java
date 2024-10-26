@@ -455,6 +455,11 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkAccelerationStructureBuildGeometryInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

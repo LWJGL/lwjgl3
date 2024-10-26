@@ -248,6 +248,11 @@ public class CUDA_ARRAY_MEMORY_REQUIREMENTS extends Struct<CUDA_ARRAY_MEMORY_REQ
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_ARRAY_MEMORY_REQUIREMENTS getElementFactory() {
             return ELEMENT_FACTORY;
         }

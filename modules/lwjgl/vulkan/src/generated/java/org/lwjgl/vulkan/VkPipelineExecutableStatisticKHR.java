@@ -345,6 +345,11 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineExecutableStatisticKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

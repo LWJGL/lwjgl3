@@ -293,6 +293,11 @@ public class VkPhysicalDeviceFrameBoundaryFeaturesEXT extends Struct<VkPhysicalD
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceFrameBoundaryFeaturesEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

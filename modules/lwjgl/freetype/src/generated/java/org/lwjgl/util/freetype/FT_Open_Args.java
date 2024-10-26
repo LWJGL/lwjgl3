@@ -370,6 +370,11 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Open_Args getElementFactory() {
             return ELEMENT_FACTORY;
         }

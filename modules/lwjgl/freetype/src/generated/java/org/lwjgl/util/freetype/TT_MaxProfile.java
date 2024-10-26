@@ -266,6 +266,11 @@ public class TT_MaxProfile extends Struct<TT_MaxProfile> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected TT_MaxProfile getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -349,6 +349,11 @@ public class CUDA_MEMSET_NODE_PARAMS_v2 extends Struct<CUDA_MEMSET_NODE_PARAMS_v
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_MEMSET_NODE_PARAMS_v2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

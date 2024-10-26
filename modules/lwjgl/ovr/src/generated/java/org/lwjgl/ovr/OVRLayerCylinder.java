@@ -410,6 +410,11 @@ public class OVRLayerCylinder extends Struct<OVRLayerCylinder> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected OVRLayerCylinder getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -310,6 +310,11 @@ public class SpvcMslShaderInterfaceVar2 extends Struct<SpvcMslShaderInterfaceVar
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SpvcMslShaderInterfaceVar2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

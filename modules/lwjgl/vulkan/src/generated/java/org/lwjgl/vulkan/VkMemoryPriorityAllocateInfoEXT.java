@@ -319,6 +319,11 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct<VkMemoryPriorityAllo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkMemoryPriorityAllocateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

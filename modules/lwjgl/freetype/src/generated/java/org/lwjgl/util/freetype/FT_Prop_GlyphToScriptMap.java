@@ -153,6 +153,11 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Prop_GlyphToScriptMap getElementFactory() {
             return ELEMENT_FACTORY;
         }

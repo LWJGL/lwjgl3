@@ -329,6 +329,11 @@ public class FMOD_OUTPUT_OBJECT3DINFO extends Struct<FMOD_OUTPUT_OBJECT3DINFO> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_OUTPUT_OBJECT3DINFO getElementFactory() {
             return ELEMENT_FACTORY;
         }

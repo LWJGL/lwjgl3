@@ -309,6 +309,11 @@ public class VkDeviceMemoryOverallocationCreateInfoAMD extends Struct<VkDeviceMe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDeviceMemoryOverallocationCreateInfoAMD getElementFactory() {
             return ELEMENT_FACTORY;
         }

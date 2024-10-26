@@ -148,6 +148,11 @@ public class FT_Prop_IncreaseXHeight extends Struct<FT_Prop_IncreaseXHeight> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Prop_IncreaseXHeight getElementFactory() {
             return ELEMENT_FACTORY;
         }

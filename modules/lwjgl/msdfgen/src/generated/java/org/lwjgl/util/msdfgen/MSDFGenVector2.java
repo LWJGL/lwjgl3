@@ -263,6 +263,11 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected MSDFGenVector2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

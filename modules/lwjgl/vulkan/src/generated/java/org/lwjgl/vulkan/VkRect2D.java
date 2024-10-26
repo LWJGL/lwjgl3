@@ -291,6 +291,11 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkRect2D getElementFactory() {
             return ELEMENT_FACTORY;
         }

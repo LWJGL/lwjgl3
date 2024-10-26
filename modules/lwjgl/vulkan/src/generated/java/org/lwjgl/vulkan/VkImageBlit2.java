@@ -397,6 +397,11 @@ public class VkImageBlit2 extends Struct<VkImageBlit2> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageBlit2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -321,6 +321,11 @@ public class SQL_INTERVAL_STRUCT extends Struct<SQL_INTERVAL_STRUCT> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_INTERVAL_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

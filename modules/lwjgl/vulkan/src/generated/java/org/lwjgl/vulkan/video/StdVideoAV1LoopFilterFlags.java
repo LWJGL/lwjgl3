@@ -271,6 +271,11 @@ public class StdVideoAV1LoopFilterFlags extends Struct<StdVideoAV1LoopFilterFlag
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1LoopFilterFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -363,6 +363,11 @@ public class VkPipelineBinaryCreateInfoKHR extends Struct<VkPipelineBinaryCreate
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineBinaryCreateInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -287,6 +287,11 @@ public class VkSubpassResolvePerformanceQueryEXT extends Struct<VkSubpassResolve
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSubpassResolvePerformanceQueryEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -276,6 +276,11 @@ public class FSBANK_STATEDATA_FAILED extends Struct<FSBANK_STATEDATA_FAILED> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FSBANK_STATEDATA_FAILED getElementFactory() {
             return ELEMENT_FACTORY;
         }

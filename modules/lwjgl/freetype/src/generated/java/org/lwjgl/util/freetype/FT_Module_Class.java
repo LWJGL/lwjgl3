@@ -394,6 +394,11 @@ public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Module_Class getElementFactory() {
             return ELEMENT_FACTORY;
         }

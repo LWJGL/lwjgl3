@@ -377,6 +377,11 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct<VkCo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkCommandBufferInheritanceViewportScissorInfoNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -330,6 +330,11 @@ public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH265DecPicBufMgr getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -476,6 +476,11 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH264SequenceParameterSetVui getElementFactory() {
             return ELEMENT_FACTORY;
         }

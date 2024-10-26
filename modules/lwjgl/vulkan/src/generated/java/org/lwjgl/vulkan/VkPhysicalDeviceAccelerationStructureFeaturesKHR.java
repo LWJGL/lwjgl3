@@ -353,6 +353,11 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct<VkP
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceAccelerationStructureFeaturesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -408,6 +408,11 @@ public class VkAcquireNextImageInfoKHR extends Struct<VkAcquireNextImageInfoKHR>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkAcquireNextImageInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

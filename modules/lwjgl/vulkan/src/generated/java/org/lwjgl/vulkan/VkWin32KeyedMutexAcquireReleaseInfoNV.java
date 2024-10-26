@@ -427,6 +427,11 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct<VkWin32KeyedMu
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkWin32KeyedMutexAcquireReleaseInfoNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

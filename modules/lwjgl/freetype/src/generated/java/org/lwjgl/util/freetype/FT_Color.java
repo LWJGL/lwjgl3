@@ -296,6 +296,11 @@ public class FT_Color extends Struct<FT_Color> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Color getElementFactory() {
             return ELEMENT_FACTORY;
         }

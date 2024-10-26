@@ -321,6 +321,11 @@ public class VkAccelerationStructureCaptureDescriptorDataInfoEXT extends Struct<
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkAccelerationStructureCaptureDescriptorDataInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

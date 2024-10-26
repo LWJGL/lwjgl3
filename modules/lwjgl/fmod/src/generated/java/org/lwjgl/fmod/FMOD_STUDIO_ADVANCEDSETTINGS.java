@@ -354,6 +354,11 @@ public class FMOD_STUDIO_ADVANCEDSETTINGS extends Struct<FMOD_STUDIO_ADVANCEDSET
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_STUDIO_ADVANCEDSETTINGS getElementFactory() {
             return ELEMENT_FACTORY;
         }

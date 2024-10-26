@@ -427,6 +427,11 @@ public class VkSubmitInfo2 extends Struct<VkSubmitInfo2> implements NativeResour
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSubmitInfo2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

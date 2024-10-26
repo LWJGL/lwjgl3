@@ -255,6 +255,11 @@ public class VkDisplayModePropertiesKHR extends Struct<VkDisplayModePropertiesKH
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDisplayModePropertiesKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

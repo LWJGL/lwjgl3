@@ -283,6 +283,11 @@ public class XrSwapchainImageReleaseInfo extends Struct<XrSwapchainImageReleaseI
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSwapchainImageReleaseInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -255,6 +255,11 @@ public class XXH128Hash extends Struct<XXH128Hash> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XXH128Hash getElementFactory() {
             return ELEMENT_FACTORY;
         }

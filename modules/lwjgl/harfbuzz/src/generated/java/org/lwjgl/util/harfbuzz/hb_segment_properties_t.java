@@ -295,6 +295,11 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_segment_properties_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

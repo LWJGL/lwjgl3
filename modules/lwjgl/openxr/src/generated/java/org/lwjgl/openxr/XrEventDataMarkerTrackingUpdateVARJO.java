@@ -330,6 +330,11 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct<XrEventDataMark
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrEventDataMarkerTrackingUpdateVARJO getElementFactory() {
             return ELEMENT_FACTORY;
         }

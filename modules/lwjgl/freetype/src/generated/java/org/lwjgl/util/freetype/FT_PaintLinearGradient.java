@@ -163,6 +163,11 @@ public class FT_PaintLinearGradient extends Struct<FT_PaintLinearGradient> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintLinearGradient getElementFactory() {
             return ELEMENT_FACTORY;
         }

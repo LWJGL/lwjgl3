@@ -369,6 +369,11 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageResolve2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

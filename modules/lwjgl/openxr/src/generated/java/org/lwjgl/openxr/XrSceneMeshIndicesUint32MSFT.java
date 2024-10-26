@@ -327,6 +327,11 @@ public class XrSceneMeshIndicesUint32MSFT extends Struct<XrSceneMeshIndicesUint3
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrSceneMeshIndicesUint32MSFT getElementFactory() {
             return ELEMENT_FACTORY;
         }

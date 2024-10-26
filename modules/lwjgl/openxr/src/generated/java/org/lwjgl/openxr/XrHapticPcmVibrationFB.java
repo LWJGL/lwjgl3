@@ -386,6 +386,11 @@ public class XrHapticPcmVibrationFB extends Struct<XrHapticPcmVibrationFB> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrHapticPcmVibrationFB getElementFactory() {
             return ELEMENT_FACTORY;
         }

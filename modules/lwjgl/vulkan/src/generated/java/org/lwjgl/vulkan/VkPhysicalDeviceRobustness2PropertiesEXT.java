@@ -296,6 +296,11 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct<VkPhysicalD
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceRobustness2PropertiesEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

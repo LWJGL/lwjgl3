@@ -391,6 +391,11 @@ public class StdVideoAV1CDEF extends Struct<StdVideoAV1CDEF> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoAV1CDEF getElementFactory() {
             return ELEMENT_FACTORY;
         }

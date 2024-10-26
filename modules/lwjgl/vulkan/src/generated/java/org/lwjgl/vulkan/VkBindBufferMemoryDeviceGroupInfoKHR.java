@@ -253,6 +253,11 @@ public class VkBindBufferMemoryDeviceGroupInfoKHR extends VkBindBufferMemoryDevi
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkBindBufferMemoryDeviceGroupInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

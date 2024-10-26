@@ -337,6 +337,11 @@ public class VkSemaphoreCreateInfo extends Struct<VkSemaphoreCreateInfo> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSemaphoreCreateInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

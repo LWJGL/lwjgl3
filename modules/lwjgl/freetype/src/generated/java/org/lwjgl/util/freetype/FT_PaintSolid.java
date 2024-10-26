@@ -139,6 +139,11 @@ public class FT_PaintSolid extends Struct<FT_PaintSolid> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintSolid getElementFactory() {
             return ELEMENT_FACTORY;
         }

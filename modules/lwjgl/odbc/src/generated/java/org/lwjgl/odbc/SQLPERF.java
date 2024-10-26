@@ -748,6 +748,11 @@ public class SQLPERF extends Struct<SQLPERF> implements NativeResource {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQLPERF getElementFactory() {
             return ELEMENT_FACTORY;
         }

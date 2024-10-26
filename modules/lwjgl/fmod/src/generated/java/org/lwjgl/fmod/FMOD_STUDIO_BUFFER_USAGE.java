@@ -266,6 +266,11 @@ public class FMOD_STUDIO_BUFFER_USAGE extends Struct<FMOD_STUDIO_BUFFER_USAGE> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_STUDIO_BUFFER_USAGE getElementFactory() {
             return ELEMENT_FACTORY;
         }

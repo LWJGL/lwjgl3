@@ -254,6 +254,11 @@ public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VmaAllocationInfo2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

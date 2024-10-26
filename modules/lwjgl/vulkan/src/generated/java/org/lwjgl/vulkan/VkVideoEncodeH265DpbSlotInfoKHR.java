@@ -336,6 +336,11 @@ public class VkVideoEncodeH265DpbSlotInfoKHR extends Struct<VkVideoEncodeH265Dpb
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoEncodeH265DpbSlotInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

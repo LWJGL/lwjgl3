@@ -343,6 +343,11 @@ public class XrActionStateBoolean extends Struct<XrActionStateBoolean> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrActionStateBoolean getElementFactory() {
             return ELEMENT_FACTORY;
         }

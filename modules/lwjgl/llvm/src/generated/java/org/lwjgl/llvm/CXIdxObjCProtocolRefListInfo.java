@@ -148,6 +148,11 @@ public class CXIdxObjCProtocolRefListInfo extends Struct<CXIdxObjCProtocolRefLis
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CXIdxObjCProtocolRefListInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

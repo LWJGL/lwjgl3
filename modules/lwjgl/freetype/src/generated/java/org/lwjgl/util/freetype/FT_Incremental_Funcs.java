@@ -291,6 +291,11 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Incremental_Funcs getElementFactory() {
             return ELEMENT_FACTORY;
         }

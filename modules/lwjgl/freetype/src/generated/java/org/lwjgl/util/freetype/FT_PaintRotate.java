@@ -167,6 +167,11 @@ public class FT_PaintRotate extends Struct<FT_PaintRotate> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_PaintRotate getElementFactory() {
             return ELEMENT_FACTORY;
         }

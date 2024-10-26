@@ -144,6 +144,11 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct<VkRenderPassCrea
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkRenderPassCreationFeedbackInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

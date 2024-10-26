@@ -291,6 +291,11 @@ public class XrEyeGazeSampleTimeEXT extends Struct<XrEyeGazeSampleTimeEXT> imple
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrEyeGazeSampleTimeEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

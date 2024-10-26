@@ -259,6 +259,11 @@ public class StdVideoH265PredictorPaletteEntries extends Struct<StdVideoH265Pred
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoH265PredictorPaletteEntries getElementFactory() {
             return ELEMENT_FACTORY;
         }

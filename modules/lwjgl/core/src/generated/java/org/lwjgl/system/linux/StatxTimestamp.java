@@ -273,6 +273,11 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StatxTimestamp getElementFactory() {
             return ELEMENT_FACTORY;
         }

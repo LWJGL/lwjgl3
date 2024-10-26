@@ -350,6 +350,11 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_Raster_Params getElementFactory() {
             return ELEMENT_FACTORY;
         }

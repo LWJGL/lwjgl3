@@ -162,6 +162,11 @@ public class VkDrmFormatModifierProperties2EXT extends Struct<VkDrmFormatModifie
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDrmFormatModifierProperties2EXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

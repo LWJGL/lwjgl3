@@ -332,6 +332,11 @@ public class SQL_NUMERIC_STRUCT extends Struct<SQL_NUMERIC_STRUCT> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_NUMERIC_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -408,6 +408,11 @@ public class VkVideoDecodeH265SessionParametersAddInfoKHR extends Struct<VkVideo
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoDecodeH265SessionParametersAddInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

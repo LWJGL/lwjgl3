@@ -159,6 +159,11 @@ public class LZ4Stream extends Struct<LZ4Stream> {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected LZ4Stream getElementFactory() {
             return ELEMENT_FACTORY;
         }

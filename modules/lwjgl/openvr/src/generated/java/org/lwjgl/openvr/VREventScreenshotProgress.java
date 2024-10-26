@@ -138,6 +138,11 @@ public class VREventScreenshotProgress extends Struct<VREventScreenshotProgress>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VREventScreenshotProgress getElementFactory() {
             return ELEMENT_FACTORY;
         }

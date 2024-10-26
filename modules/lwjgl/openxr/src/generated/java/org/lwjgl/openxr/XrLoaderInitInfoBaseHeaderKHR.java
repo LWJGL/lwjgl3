@@ -277,6 +277,11 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XrLoaderInitInfoBaseHeaderKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

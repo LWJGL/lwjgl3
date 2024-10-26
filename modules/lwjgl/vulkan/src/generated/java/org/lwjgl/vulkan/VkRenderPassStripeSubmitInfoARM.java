@@ -330,6 +330,11 @@ public class VkRenderPassStripeSubmitInfoARM extends Struct<VkRenderPassStripeSu
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkRenderPassStripeSubmitInfoARM getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -328,6 +328,11 @@ public class VkViewportSwizzleNV extends Struct<VkViewportSwizzleNV> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkViewportSwizzleNV getElementFactory() {
             return ELEMENT_FACTORY;
         }

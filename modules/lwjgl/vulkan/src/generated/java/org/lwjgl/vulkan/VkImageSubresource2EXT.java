@@ -235,6 +235,11 @@ public class VkImageSubresource2EXT extends VkImageSubresource2KHR {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageSubresource2EXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

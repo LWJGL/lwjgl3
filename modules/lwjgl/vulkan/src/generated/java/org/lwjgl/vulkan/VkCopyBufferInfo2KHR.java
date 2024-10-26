@@ -246,6 +246,11 @@ public class VkCopyBufferInfo2KHR extends VkCopyBufferInfo2 {
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkCopyBufferInfo2KHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -345,6 +345,11 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct<VkSemaphoreGetWin32
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSemaphoreGetWin32HandleInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

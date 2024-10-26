@@ -302,6 +302,11 @@ public class RPmallocGlobalStatistics extends Struct<RPmallocGlobalStatistics> i
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected RPmallocGlobalStatistics getElementFactory() {
             return ELEMENT_FACTORY;
         }

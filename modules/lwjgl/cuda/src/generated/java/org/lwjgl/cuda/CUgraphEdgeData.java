@@ -295,6 +295,11 @@ public class CUgraphEdgeData extends Struct<CUgraphEdgeData> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUgraphEdgeData getElementFactory() {
             return ELEMENT_FACTORY;
         }

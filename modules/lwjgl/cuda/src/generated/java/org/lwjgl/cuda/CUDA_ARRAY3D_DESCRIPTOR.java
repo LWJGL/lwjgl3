@@ -343,6 +343,11 @@ public class CUDA_ARRAY3D_DESCRIPTOR extends Struct<CUDA_ARRAY3D_DESCRIPTOR> imp
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUDA_ARRAY3D_DESCRIPTOR getElementFactory() {
             return ELEMENT_FACTORY;
         }

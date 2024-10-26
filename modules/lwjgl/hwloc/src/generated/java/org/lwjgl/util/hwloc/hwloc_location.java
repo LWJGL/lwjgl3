@@ -231,6 +231,11 @@ public class hwloc_location extends Struct<hwloc_location> implements NativeReso
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_location getElementFactory() {
             return ELEMENT_FACTORY;
         }

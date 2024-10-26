@@ -342,6 +342,11 @@ public class VkMemoryAllocateFlagsInfo extends Struct<VkMemoryAllocateFlagsInfo>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkMemoryAllocateFlagsInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

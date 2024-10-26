@@ -301,6 +301,11 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct<VkDeviceMemor
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkDeviceMemoryOpaqueCaptureAddressInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

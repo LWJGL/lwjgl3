@@ -251,6 +251,11 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkImageMemoryRequirementsInfo2KHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

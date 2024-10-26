@@ -367,6 +367,11 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected XSelectionClearEvent getElementFactory() {
             return ELEMENT_FACTORY;
         }

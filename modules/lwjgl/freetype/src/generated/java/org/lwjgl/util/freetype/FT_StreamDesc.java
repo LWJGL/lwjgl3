@@ -254,6 +254,11 @@ public class FT_StreamDesc extends Struct<FT_StreamDesc> implements NativeResour
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FT_StreamDesc getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -351,6 +351,11 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct<VkPip
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineColorBlendAdvancedStateCreateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -344,6 +344,11 @@ public class AIExportFormatDesc extends Struct<AIExportFormatDesc> implements Na
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected AIExportFormatDesc getElementFactory() {
             return ELEMENT_FACTORY;
         }

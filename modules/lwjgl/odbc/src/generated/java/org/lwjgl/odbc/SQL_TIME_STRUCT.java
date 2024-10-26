@@ -298,6 +298,11 @@ public class SQL_TIME_STRUCT extends Struct<SQL_TIME_STRUCT> implements NativeRe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_TIME_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

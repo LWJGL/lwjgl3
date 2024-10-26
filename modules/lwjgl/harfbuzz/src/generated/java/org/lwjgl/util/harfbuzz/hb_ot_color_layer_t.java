@@ -268,6 +268,11 @@ public class hb_ot_color_layer_t extends Struct<hb_ot_color_layer_t> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_ot_color_layer_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -287,6 +287,11 @@ public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hb_aat_layout_feature_selector_info_t getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -321,6 +321,11 @@ public class LLVMOpInfoSymbol1 extends Struct<LLVMOpInfoSymbol1> implements Nati
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected LLVMOpInfoSymbol1 getElementFactory() {
             return ELEMENT_FACTORY;
         }

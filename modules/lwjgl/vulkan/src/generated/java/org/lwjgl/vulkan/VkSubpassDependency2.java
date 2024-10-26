@@ -455,6 +455,11 @@ public class VkSubpassDependency2 extends Struct<VkSubpassDependency2> implement
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkSubpassDependency2 getElementFactory() {
             return ELEMENT_FACTORY;
         }

@@ -320,6 +320,11 @@ public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescIN
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CLMotionEstimationDescINTEL getElementFactory() {
             return ELEMENT_FACTORY;
         }

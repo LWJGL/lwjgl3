@@ -240,6 +240,11 @@ public class CUexecAffinitySmCount extends Struct<CUexecAffinitySmCount> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected CUexecAffinitySmCount getElementFactory() {
             return ELEMENT_FACTORY;
         }

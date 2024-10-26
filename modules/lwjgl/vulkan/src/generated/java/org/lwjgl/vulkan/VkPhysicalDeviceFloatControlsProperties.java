@@ -431,6 +431,11 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct<VkPhysicalDe
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPhysicalDeviceFloatControlsProperties getElementFactory() {
             return ELEMENT_FACTORY;
         }

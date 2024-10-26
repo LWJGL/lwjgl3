@@ -251,22 +251,8 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      *
      * @return the new buffer
      */
-    @SuppressWarnings("unchecked")
     public SELF slice() {
-        SELF slice;
-        try {
-            slice = (SELF)UNSAFE.allocateInstance(this.getClass());
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(slice, ADDRESS, address + Integer.toUnsignedLong(position) * sizeof());
-        UNSAFE.putInt(slice, BUFFER_MARK, -1);
-        UNSAFE.putInt(slice, BUFFER_LIMIT, remaining());
-        UNSAFE.putInt(slice, BUFFER_CAPACITY, remaining());
-        UNSAFE.putObject(slice, BUFFER_CONTAINER, container);
-
-        return slice;
+        return create(address + Integer.toUnsignedLong(position) * sizeof(), container, -1, 0, remaining(), remaining());
     }
 
     /**
@@ -279,7 +265,6 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      *
      * @return the sliced buffer
      */
-    @SuppressWarnings("unchecked")
     public SELF slice(int offset, int capacity) {
         int position = this.position + offset;
         if (offset < 0 || this.limit < offset) {
@@ -290,20 +275,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
             throw new IllegalArgumentException();
         }
 
-        SELF slice;
-        try {
-            slice = (SELF)UNSAFE.allocateInstance(this.getClass());
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(slice, ADDRESS, address + Integer.toUnsignedLong(position) * sizeof());
-        UNSAFE.putInt(slice, BUFFER_MARK, -1);
-        UNSAFE.putInt(slice, BUFFER_LIMIT, capacity);
-        UNSAFE.putInt(slice, BUFFER_CAPACITY, capacity);
-        UNSAFE.putObject(slice, BUFFER_CONTAINER, container);
-
-        return slice;
+        return create(address + Integer.toUnsignedLong(position) * sizeof(), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -316,23 +288,8 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      *
      * @return the new buffer
      */
-    @SuppressWarnings("unchecked")
     public SELF duplicate() {
-        SELF dup;
-        try {
-            dup = (SELF)UNSAFE.allocateInstance(this.getClass());
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(dup, ADDRESS, address);
-        UNSAFE.putInt(dup, BUFFER_MARK, mark);
-        UNSAFE.putInt(dup, BUFFER_POSITION, position);
-        UNSAFE.putInt(dup, BUFFER_LIMIT, limit);
-        UNSAFE.putInt(dup, BUFFER_CAPACITY, capacity);
-        UNSAFE.putObject(dup, BUFFER_CONTAINER, container);
-
-        return dup;
+        return create(address, container, mark, position, limit, capacity);
     }
 
     // -- Bulk get operations --
@@ -415,6 +372,8 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
     // -----------------------------
 
     protected abstract SELF self();
+
+    protected abstract SELF create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity);
 
     protected final int nextGetIndex() {
         if (position < limit) {

@@ -321,6 +321,11 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkPipelineViewportDepthClampControlCreateInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }

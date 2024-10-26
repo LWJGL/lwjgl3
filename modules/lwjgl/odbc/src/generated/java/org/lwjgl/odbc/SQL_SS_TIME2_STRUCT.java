@@ -313,6 +313,11 @@ public class SQL_SS_TIME2_STRUCT extends Struct<SQL_SS_TIME2_STRUCT> implements 
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected SQL_SS_TIME2_STRUCT getElementFactory() {
             return ELEMENT_FACTORY;
         }

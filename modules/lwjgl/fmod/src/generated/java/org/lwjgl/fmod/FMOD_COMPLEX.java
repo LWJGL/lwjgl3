@@ -263,6 +263,11 @@ public class FMOD_COMPLEX extends Struct<FMOD_COMPLEX> implements NativeResource
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected FMOD_COMPLEX getElementFactory() {
             return ELEMENT_FACTORY;
         }

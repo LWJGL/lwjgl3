@@ -397,6 +397,11 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected StdVideoEncodeH264PictureInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

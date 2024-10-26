@@ -176,6 +176,11 @@ public class JAWTX11DrawingSurfaceInfo extends Struct<JAWTX11DrawingSurfaceInfo>
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected JAWTX11DrawingSurfaceInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

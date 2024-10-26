@@ -393,6 +393,11 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkBindImageMemoryInfo getElementFactory() {
             return ELEMENT_FACTORY;
         }

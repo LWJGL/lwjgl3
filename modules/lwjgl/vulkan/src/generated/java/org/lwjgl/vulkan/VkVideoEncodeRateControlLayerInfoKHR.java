@@ -366,6 +366,11 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoEncodeRateControlLayerInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

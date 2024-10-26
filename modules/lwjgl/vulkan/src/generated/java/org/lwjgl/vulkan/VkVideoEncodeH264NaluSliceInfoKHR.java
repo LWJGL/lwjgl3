@@ -341,6 +341,11 @@ public class VkVideoEncodeH264NaluSliceInfoKHR extends Struct<VkVideoEncodeH264N
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected VkVideoEncodeH264NaluSliceInfoKHR getElementFactory() {
             return ELEMENT_FACTORY;
         }

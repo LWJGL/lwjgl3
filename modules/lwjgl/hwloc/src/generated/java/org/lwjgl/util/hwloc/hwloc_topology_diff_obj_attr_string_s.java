@@ -180,6 +180,11 @@ public class hwloc_topology_diff_obj_attr_string_s extends Struct<hwloc_topology
         }
 
         @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
         protected hwloc_topology_diff_obj_attr_string_s getElementFactory() {
             return ELEMENT_FACTORY;
         }
