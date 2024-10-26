@@ -166,7 +166,7 @@ public final class APIUtil {
         if (buffer != null && memAddress(buffer) == mappedAddress && buffer.capacity() == capacity) {
             return buffer;
         }
-        return mappedAddress == NULL ? null : wrap(BUFFER_BYTE, mappedAddress, capacity).order(NATIVE_ORDER);
+        return mappedAddress == NULL ? null : wrapBufferByte(mappedAddress, capacity);
     }
 
     public static long apiGetBytes(int elements, int elementShift) {
