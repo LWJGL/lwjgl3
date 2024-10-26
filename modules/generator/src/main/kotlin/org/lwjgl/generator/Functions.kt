@@ -1035,7 +1035,7 @@ class Func(
                     }
                 )
                 if (isNullTerminated) {
-                    print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    print("NT${returns.nativeType.charMapping.bytes}")
                 }
                 if (returnsNull) {
                     print("Safe")
@@ -1119,7 +1119,7 @@ class Func(
         if (hasFinally) {
             if (code.javaFinally.any { TRY_FINALLY_RESULT_REFERENCE.containsMatchIn(it.code) }) {
                 val returnsObject = returns.nativeType is WrappedPointerType
-                val returnType = if (returnsObject) (returns.nativeType as WrappedPointerType).className else returns.nativeMethodType
+                val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType
 
                 println("$t${t}$returnType $RESULT = ${if (returnsObject) "null" else "NULL"};") // TODO: support more types if necessary
             }
@@ -1151,7 +1151,7 @@ class Func(
         printParams: PrintWriter.() -> Unit
     ) {
         val returnsObject = returns.nativeType is WrappedPointerType
-        val returnType = if (returnsObject) (returns.nativeType as WrappedPointerType).className else returns.nativeMethodType
+        val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType
 
         if (hasFinally)
             print(t)
@@ -1798,7 +1798,7 @@ class Func(
                     }
                 )
                 if (isNullTerminated) {
-                    builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    builder.append("NT${returns.nativeType.charMapping.bytes}")
                 } else if (returnsNull) {
                     builder.append("Safe")
                 }

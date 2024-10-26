@@ -2060,7 +2060,7 @@ ${validations.joinToString("\n")}
                 if (it.has<PointerSetter>()) {
                     val pointerSetter = it.get<PointerSetter>()
                     pointerSetter.types.forEach { type ->
-                        val hasOverrideAnnotation = overrides && alias != null && alias[member].let { member ->
+                        val hasOverrideAnnotation = overrides && alias[member].let { member ->
                             member.has<PointerSetter>() && member.get<PointerSetter>().types.contains(type)
                         }
                         if (pointerSetter.prepend) {

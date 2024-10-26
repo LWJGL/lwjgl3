@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../bin/classes/templates" />
+    <output-test url="file://$MODULE_DIR$/../../bin/classes/templates" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/assimp/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/assimp/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/bgfx/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/bgfx/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/core/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/core/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/cuda/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/cuda/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/egl/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/egl/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/fmod/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/fmod/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/freetype/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/freetype/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/glfw/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/glfw/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/harfbuzz/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/harfbuzz/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/hwloc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/hwloc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/jawt/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/jawt/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/jemalloc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/jemalloc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/ktx/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/ktx/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/libdivide/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/libdivide/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/llvm/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/llvm/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/lmdb/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/lmdb/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/lz4/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/lz4/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/meow/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meow/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/nanovg/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/nanovg/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/nfd/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/nfd/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/nuklear/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/nuklear/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/odbc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/odbc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/openal/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/openal/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/opencl/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opencl/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/opengl/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opengl/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/opengles/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opengles/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/openvr/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/openvr/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/openxr/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/openxr/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/opus/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opus/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/ovr/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/ovr/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/par/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/par/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/remotery/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/remotery/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/sse/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/sse/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/stb/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/stb/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/tinyexr/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/tinyexr/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/tinyfd/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/tinyfd/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/tootle/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/tootle/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/vma/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/vma/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/vulkan/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/vulkan/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/xxhash/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/xxhash/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/yoga/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/yoga/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/zstd/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/zstd/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="module" module-name="generator" />
+  </component>
+</module>

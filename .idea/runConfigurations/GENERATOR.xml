@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="GENERATOR" type="Application" factoryName="Application" singleton="true">
     <option name="MAIN_CLASS_NAME" value="org.apache.tools.ant.launch.Launcher" />
-    <module name="generator_templates" />
+    <module name="templates" />
     <option name="PROGRAM_PARAMETERS" value="generate" />
     <method v="2">
       <option name="Make" enabled="true" />
